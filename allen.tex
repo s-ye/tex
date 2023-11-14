@@ -1,0 +1,321 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{scribe}
+\usepackage{listings}
+\usepackage{quiver}
+\usepackage{tikz}
+
+
+
+\begin{document}
+
+Songyu Ye 
+
+sy459@cornell.edu
+
+\today
+\section{Sept 18 - First look at toric varieties}
+
+We consider the following polytopes and their associated toric varieties.
+\begin{example}
+    \[\begin{tikzcd}
+	\bullet_a & \bullet_b
+	\arrow[no head, from=1-1, to=1-2]
+\end{tikzcd}\]
+The associated toric variety is $\Proj \C[a,b] \cong \P^1$. However there is more data in this diagram. In particular, there is a corresponding map of line bundles that is part of the data.
+\[\begin{tikzcd}
+	{\text{id}^*(\mathcal O(1)) \cong \mathcal O(1)} & {\mathcal O(1)} \\
+	{\mathbb{P}^1} & {\mathbb{P}^1}
+	\arrow[from=1-2, to=2-2]
+	\arrow["{\text{id}}", from=2-1, to=2-2]
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+\end{tikzcd}\] In particular this comes from the map of rings $\C[x,y]\to\C[x,y]$.
+\end{example}
+
+\begin{example}
+    \[\begin{tikzcd}
+	\bullet_x & \bullet_y & \bullet_z
+	\arrow[no head, from=1-1, to=1-2]
+	\arrow[no head, from=1-2, to=1-3]
+\end{tikzcd}\]
+The associated toric variety is also $\Proj \C[x,y,z]/\langle xz - y^2\rangle \cong \P^1$. However, there is also the data of how $\P^1$ embeds into ambient space. In this case, we have the ring map $\C[x,y,z]\to\C[x,y,z]/\langle xz - y^2\rangle$ which gives us an embedding $\P^1\to\P^2$ in which $\P^1\subset \P^2$ as a conic.
+
+\hfill
+
+Pulling back the line bundle $\mc O(1)_{\P^2}$ along the inclusion we get 
+\[\begin{tikzcd}
+	{??} & {\mathcal O(1)_{\mathbb{P}^2}} \\
+	{\mathbb{P}^1} & {\mathbb{P}^2}
+	\arrow[from=1-2, to=2-2]
+	\arrow["{\text{id}}", from=2-1, to=2-2]
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+\end{tikzcd}\] As it turns out, we should be getting $\mc O(2)_{\P^1}$. This of course has to do with the fact that we are embedding $\P_1\subset \P^2$ as a conic. In particular, we can do some dimension counting (of some vector space of monomials, I think $\Sym^k(V)$) and a complete classification of the line bundles over projective space (there are not that many).
+\end{example}
+
+\begin{fact}
+In general, we have that \begin{align*}
+    \Gamma(\P V,O(k))\cong\Sym^k(V)
+\end{align*} where $\Sym^k(V)$ is $V^{\otimes k}$ modded out by action of the symmetric group $S^k$. In particular, if we choose a basis $x_1,\dots,x_n$ for $V$, we can identify a basis of $\Sym^k(V)$ with monomials of degree $k$ (the symmetry allows me to commute the tensor powers past each other and write it as a monomial). Thus $\dim\Sym^k(V) = \binom{n+k-1}{k}$.
+\end{fact}
+
+\begin{example}
+In Example 1.2, we have $\dim V = 2$ and $k = 2$. There are 3 monomials of degree 2 in variables $a$ and $b$, namely $a^2,ab,b^2$. Somehow the number 3 was important in this example, which is how we knew it was supposed to be $\mc O(2)_{\P^1}$
+\end{example}
+
+
+\begin{example}
+    \[\begin{tikzcd}
+	& \bullet & \bullet & \bullet \\
+	\bullet & \bullet & \bullet
+	\arrow[no head, from=2-1, to=2-2]
+	\arrow[no head, from=2-2, to=2-3]
+	\arrow[no head, from=2-3, to=1-4]
+	\arrow[no head, from=2-1, to=1-2]
+	\arrow[no head, from=1-2, to=1-3]
+	\arrow[no head, from=1-3, to=1-4]
+\end{tikzcd}\]
+This toric variety is the product of the two previous examples, in particular it is $\P^1\times\P^1\hookrightarrow\P^5$ (there are six lattice points). On the level of rings there is a map \begin{align*}
+    \C[a,b,c,d,e,f]\to \C[a,b,c,d,e,f] / \langle \text{parallelograms}\rangle
+\end{align*}
+We can get the line bundle over this toric variety as follows. Pullback the line bundles along the projection maps.
+\[\begin{tikzcd}
+	& {\pi_1^*(\mathcal{L}_1)} && {\pi_2^*(\mathcal{L}_2)} \\
+	{\mathcal{L}_1} && {X\times Y} && {\mathcal{L}_2} \\
+	& X && Y
+	\arrow[from=2-3, to=3-2]
+	\arrow[from=2-3, to=3-4]
+	\arrow[from=2-1, to=3-2]
+	\arrow[from=2-5, to=3-4]
+	\arrow[from=1-4, to=2-3]
+	\arrow[from=1-4, to=2-5]
+	\arrow[from=1-2, to=2-1]
+	\arrow[from=1-2, to=2-3]
+\end{tikzcd}\]
+Then form $L_1 \boxtimes L_2= \pi_1^*(\mathcal{L}_1) \otimes\pi_2^*(\mathcal{L}_2) $. Recall that the tensor product of two vector bundles is the fiberwise tensor product of vector spaces.
+\end{example}
+\begin{fact}
+    The faces of the polytope are in correspondence with the $T$-orbits.
+\end{fact}
+\red{Serre twisting sheaf, tautological line bundle, Fubini-Study metric, Delzant Theorem, Spherical Variety}
+\red{algebraic vector bundle vs. geometric vector bundle, cocycle condition and transition maps}
+\red{Why do we care about classification of vector bundles over a variety? What does their classification tell us about the variety? There are topological $K$-groups which concern the classification of vector bundles which are interesting to algebraic geometers?}
+\section{Sept 25 - toric varieties}
+We will probably follow Fulton's \textit{Toric Varieties}
+\red{want to ask Allen about Hirzebruch surfaces}
+\section{Oct 2 - Blowups}
+\begin{theorem}
+If $S = \Spec k[x_1,\dots,x_n]/I$ and $R = Spec k[x_1,\dots,x_n]/J$ subschemes of affine space and $I\leq J$, i.e. we have $J = I + \langle g_1,\dots,g_n \rangle$ then there exists affine space $V,W$ and $e\subset V\times W$ so that $R = S \cap (0\times W)$.
+\end{theorem}
+\begin{proof}
+\red{include graphic}    
+\end{proof}
+If we have $J\hookrightarrow A \twoheadrightarrow B$ so $B\cong A/J$ we get a map $\Spec B\hookrightarrow \Spec A$. We can consider the descending chain $A\geq J\geq J^2\dots \geq J^n\geq \dots$ and form \begin{align*}
+    A\oplus tJ\oplus t^2J^2\dots \subset A[t]
+\end{align*} Taking $\Proj$ of the left hand side (prime homogeneous ideals) gives us the \textbf{blowup of $\Spec A$ along $\Spec A/J$}. There is a map to $\Spec A$ called the blowdown map where I take a prime homogeneous ideal and intersect with $A$ to get a prime ideal of $A$. 
+
+\section{Oct 16 - Toric Surfaces}
+We start with the following correspondence:\begin{theorem}
+    There is a correspondence between smooth toric surfaces (2 complex dimensional) $M^4$ and "smooth" polygons $P\subset\R^2$. In particular, the vertices of $P$ are anywhere, the edges of $P$ are in lattice directions, and for each vertex, the primitive normal vectors (or equivalently primative tangent vectors) to each adjacent edge span $\Z^2$.
+\end{theorem}
+
+\hfill
+
+Given a smooth polygon $P$ as above we can build our toric surface as follows. Form the topological space $T^2\times P/\sim$ where $(s,p)\sim(t,q)$ if $p=q\in\partial P$ and $s^{-1}t\in T_F$ for $F$ vertex or edge, where $T_F = T^2$ if $F$ is a vertex and $T_F =$ image of $\R v_i$ under the map $\R^2\to\R^2/\Z^2\cong T^2$ if $F$ is an edge and $v$ is the normal vector to $F$, in particular $T_F$ is a circle.
+
+\hfill
+
+It is not clear at all that what you get is a complex manifold or a variety. One can also do this construction using geometric invariant theory.
+
+\begin{example}
+    If $P = I$ the interval then $M_P = S^2$.
+\end{example}
+
+Detour into the land of low-dimensional topology for a second. We want to compute the intersection form of this 4-manifold. \red{I guess algebraic geometers also care about this but I learned this stuff from Tara} We do this as follows. We have an obvious map $\pi:M_P\to P$ which is well-defined since we only identified points with $p = q$.
+
+\begin{theorem}
+    The composition $f:M_P\to P\to\R$ is Morse, where $P\to \R$ is projection onto any affine subspace which is not parallel to the normal vectors $v_i$. In particular, the critical points of $F$ are precisely $\pi^{-1}(\text{vertices of $P$})$ and the index is twice the \red{the number of edges pointing down}. In particular we have exactly one c.p of index $0$, $n-2$ c.p of index $2$, one c.p of index $4$. Moreover we can compute the self-intersection numbers of the spheres on the boundary via \begin{align*}
+        d_i = e(v(S^2_i)) = \det[v_{i-1},v_{i+1}]
+    \end{align*} where $e$ is for Euler class. \red{There is some relevant theorem that ?-bundles over ? are completely determined by their Euler class, whatever that is}
+\end{theorem}
+\red{Wow there is a lot of content in this theorem. Hopefully Tara can unpack some of this.}
+
+Now let us thing about $H^2(M_P)$. We claim that $[S^2_i]$ for $i=1,\dots,n-2$ is a basis for $H^2(M)$. \red{I just realized I don't feel really comfortable about computations with homology or the idea of Poincare duality or homology classes of embedded surfaces, I should probably reconcile this with Nikhil at some point. } Then with respect to this basis we have that the intersection \begin{align*}
+    Q_m = \begin{bmm}
+        d_1 & 1 & \\
+        1 & d_2 & 1 \\
+         & 1 & d_3 & 1 \\
+         &  & 1 & d_4 & \dots \\
+        \vdots
+    \end{bmm}
+\end{align*} We get $1$ in the super/sub diagonal because adjacent spheres intersect in precisely one point, the point in the fiber over the vertex in which the two edges intersect. The diagonal is precisely the self-intersection numbers of the spheres.
+\begin{example}
+    A right triangle with legs $1,1$ corresponds to $\C\P^2$. If I apply a corner chop operation ("toric blowup") to one of the two corners not opposite the hypotenuse, then this gives me the blowup $\tilde{\C\P^2}$. It is an example of Hirzebruch surface \red{can add some stuff from Fulton Hirzebruch surfaces} and in particular it is an $S^2$-bundle over $S^2$.
+\end{example}
+
+\begin{example}
+This example, we took a first look at K3-surfaces. Start with $T^4 = (S^1)^4$ and consider the involution $\sigma:T^4\to T^4$ defined on each on $S^1\subset \C$ by complex conjugation. Then $T^4/\sigma$ is not a manifold, but has 16 $\Z/2$-singularities. We say that $\T^4/\sigma$ is an orbifold.
+\end{example}
+
+
+After speaking with Tara, I spoke with Allen. Let's see what we can get out of what he said.
+
+Consider the following symplectic point of view. We have $(T^*A,\omega)$ is naturally a symplectic manifold \red{um check this in Lee}. Now let $A$ be a group. Then \begin{align*}
+    T^*A = A\times T^*_eA = A \times \mf A^*
+\end{align*} the dual of the lie algebra. Now let $A = T^n$ and we see that \begin{align*}
+    T^*T^n =  T^n\times\mf t = T^n \times \R^n
+\end{align*} and we have the inclusion $T^n\times P \hookrightarrow T^n \times \R^n$. Now we can compute \begin{align*}
+    T_{(t,p)}(T^*A) &= T_tT\oplus T_p\mf t \\
+    &\cong t\oplus t^*
+\end{align*} and one can put a symplectic pairing on this space. Then the point is that the restriction of this symplectic form may be degenerate once we restrict $T\times P \hookrightarrow T\times \R^n$. The solution? We collapse the vectors which are null with respect to the sympletic form on the manifold with corners. Note that we can actually do this construction with any manifold with corners, but most of the tijme the resulting quotient space will fair basic nice properties, e.g. Hausdorff.
+
+\begin{example}
+    This is a nonexample. One can consider a pyramid with a square base $\subset \R^3$ and the point is that this $P$ is not smooth because it has 4 edges meeting at the top which is too many (the resulting quotient manifold will not have a neighborhood homeomorphic to $U\subset\R^4$).
+\end{example}
+
+\red{Make sure to ask about toric blowups. Allen had those diagrams up with the Hopf fibration}
+\red{"Kirby moves"}
+
+\section{CoxLittleSheanck}
+Let $F\subset\C^n$ be a closed algebraic subvariety. Which should be the basic functions on V? Since we are doing algebraic geometry, we should consider the polynomials on $\C$. There are two ways to go from $\C^n$ to $V$. One can consider those functions that are restrictions of polynomials or those functions that are locally restrictions of polynomials. Fortunately these two notions agree. Such a function is called regular on V.
+
+A rational function $f$ is called regular at $f\in V$ if there are polynomials $g$ and $h$ such that $f = g/h$ and $h(v) \neq 0$. A rational function is called regular on V if it is regular at each point. One can see that a regular rational function is a regular function.
+
+Elements of $\mc O(V)$ are functions that are locally quotients of polynomials, e.g functions from $V$ to $k$ that are locally rational. What this equality in the case where $\mc O(V)$ is affine is saying is that functions that are locally rational on an affine variety are globally polynomials.
+
+Let $F\subset\C^n$ be an algebraic variety and $v\in V$. $V$is said to be normal at $v\in V$ if every rational function bounded in some neighborhood of $v$ is regular at $v$. $V$ is called normal if it is normal at every point. In particular if $V$ is normal at $v$, then a rational function is regular at $v$ iff it is continuous at $v$. \red{Wow this seems like some really deep complex geometry stuff. Why is this the same as saying that we have this integrally closed condition?}
+
+Riemann's extension theorem says that $\C$ is normal. From this it follows that smooth points are normal in all dimensions.
+
+\begin{definition}
+    A normal variety is one whose local rings are integrally closed in their fraction fields.
+\end{definition}
+\begin{fact}
+    A variety is normal if it is covered by open affine $V$ which are normal. This is because in general, we have for all $U\subset V$ open \begin{align*}
+        \mc O_{U,p} = \mc O_{V,p}
+    \end{align*}
+\end{fact}
+\begin{fact}
+    An affine variety $V$ is normal if and only if $\Gamma(V)$ is normal.
+\end{fact}
+\begin{proof}
+    We have that \begin{align*}
+        \mc O_X(X) = \bigcap_{p\in X}\mc O_{X,p}
+    \end{align*} and the intersection of integrally closed rings will be integrally closed. Conversely, if $\Gamma(V)$ is normal, then so is each localization $\Gamma(V)_S$. These are commutative algebra statements that need to be checked.
+\end{proof}
+
+\begin{fact}
+    An irreducible affine variety $V$ has a normalization $V' = \Spec\C[V]'$ where \begin{align*}
+        \C[V]' = \set{\alpha\in\C(V)\st\alpha \text{integral over $\C[V]$}}
+    \end{align*} the integral closure of the coordinate ring of $V$. One can show that this is integrally closed as the name would suggest and moreover finitely generated as a $\C$-algebra and hence $V'$ is a normal affine variety, called the normalization of $V$. There is a canonical map $V'\to V$ induced by the inclusion of rings $V'\to V$ which is a birational isomorphism. Moreover, the normalization satisfies the universal property that any other normal variety $Z$ and dominant map $Z\to V$ factors uniquely through $V'\to V$.
+\end{fact}
+
+\begin{proposition}
+    A smooth irreducible affine variety $V$ is normal.
+\end{proposition}
+\begin{proof}
+    Need to see that $\mc O_{V,p}$ is normal whenever $p$ is smooth. This comes from commutative algebra: $p$ smooth is equivalent to $\mc O_{V,p}$ is a regular local ring, every regular local ring is a UFD, and every UFD is normal.  
+\end{proof}
+
+\section{Meeting 11/6}
+We talked about Hironaka's result on the resultion of singularities. The statement is as follows (one can look in Kollar's book or this AMS article https://www.ams.org/journals/bull/2003-40-03/S0273-0979-03-00982-0/S0273-0979-03-00982-0.pdf for a quick discussion): 
+
+\begin{theorem}
+    Let $X$ be a reduced scheme over a field of characteristic zero. We have \begin{align*}
+        X_{sing}\hookrightarrow X \hookleftarrow X_{reg}
+    \end{align*} Then there exists a regular scheme $\tilde{X}$ and a birational proper map $\tilde{X}\to X$ so that $X_{reg}\hookrightarrow \tilde{X}$ is an open immersion and moreover the pullback $X_{sing}\times_X \tilde{X}$ is a simple (intersection is connected) normal crossing (union of smooth things where the intersections look like hyperplane) divisor (codimension 1 subvariety)
+\end{theorem}
+
+\begin{definition}
+    For $X$ scheme and $P\in X$, we have the Zariski cotangent space at $P$ which we define to be $m_p/m_p^2$ where $m_p\subset \mc O_{X,P}$ is the maximal ideal of the local ring $O_{X,P}$. Morally we are looking at germs of functions which vanish at $P$ and then modding out by $m_p^2$ to kill off any of the nonlinear terms.
+\end{definition}
+
+\begin{example}
+    Consider a blue $\Z^2$ sitting inside black $\Z^2$ so that the quotient is of order 2. Then in the picture, I have a normal scheme with 2 tori acting, the smaller lattice acts faithfully and the bigger lattice corresponds to a 2:1 map $T_2\to T_1$. In particular we have \begin{align*}
+        0\to blue \to black\to \{1,-1\}\to 0
+    \end{align*} and we can take $\Hom(-,\C^*)$ we get \begin{align*}
+        0\to \{\pm 1\}^* \to T \to T/\{\pm 1\}^*\to 0
+    \end{align*} sequence of tori.
+\end{example}
+
+\begin{definition}
+    Normalization is a universal map $\tilde X\to X$ which is finite and biractional (meaning that the fibers are finite and the map is proper). For toric varieties what this means is to throw in all of the lattice points which are differences of guys in your semigroup. This corresponds to thinking about the integral closure.
+
+    \hfill
+
+    We also have the seminormalization which fits in between the two guys \begin{align*}
+        \tilde X\to X_{semi}\to X 
+    \end{align*} which we ask that hte map $X_{semi}\to X$ is further a bijection.
+\end{definition}
+
+\section{Allen}
+There are a package of theorems about localization in equivariant cohomology which I care about: For "good spaces" (e.g. reductive groups acting on algebraic varieties) we have \begin{enumerate}
+    \item the map $H^*_GX\to H^*X$ is a surjection
+    \item the map $H^*_GX\to H^*_GX^T$ is an injection
+    \item the integration formula when $X^G $finite\begin{align*}
+        \int_X\alpha = \sum_{p\in X^G}
+    \end{align*}
+\end{enumerate}
+
+\begin{example}
+    We have the polytopal pictures for the Hirzebruch surface $F_1$, these pictures live inside $\mf t^*$ which allow us to give a generators-relations presentation of the surface \begin{align*}
+        H^*_T(F_1) = \Z[\upsilon_1,\dots,\upsilon]/\ideal{\upsilon_1\upsilon_3,\upsilon_2,\upsilon_4}
+    \end{align*} The presentation of this ring looks different if we instead insist on thinking of $H_T^*(F_1)$ as an algebra over $H_T^*(*)$ in which case we would have some new variables $X,Y$ so that $X = \upsilon_2 - \upsilon_4$ and $Y = \upsilon_1 - \upsilon_3 - \upsilon_2$, in particular you should think of $X$, $Y$ as directions in $\mf t^*$ which are telling us coefficients on $\upsilon_i$ via dotting.
+\end{example}
+
+\begin{example}
+    Let's think about a simpler example. We have $\C\P^1$ which has moment polytope given by an interval, whose endpoints we label $a$ and $b$. The localization theorem tells us that \begin{align*}
+        H_T^*(\P^1) = \Z[a,b]/\ideal{ab}
+    \end{align*} with $\deg a = \deg b = 2$ since $a$ and $b$ do not touch. Moreover that this ring injects into $H_T^*(\P^{1,T}) = H_T^* \oplus H_T^* = \Z[y]\oplus\Z[y]$. The injection sends $a$ to $(y,0)$ and $b$ to $(0,-y)$ based on the weights on the action and degree consideration. 
+
+    \hfill
+    
+    \red{We remarked earlier that it is not quite correct to think of this cohomology theory as having $\Z$-coefficients, in particular we should think of our ring as an algebra over $H^*_T$}
+
+    \hfill
+
+    In this case there is an obvious diagonal map $H_T^*\to H_T^*(\P^{1,T}) \cong H_T^* \oplus H_T^*$ and this map factors through $H_T^*(\P^1)$ if and only if $Y$ maps to something in $H_T^*(\P^1)$ which then maps to $(Y,Y)$ we quickly see that the only option is $Y\mapsto a-b$. Then we get the presentation of the cohomology \begin{align}
+        H_T^*(\P^1) \cong H_T^*[a,b]/\ideal{ab,a-b-y}
+    \end{align}
+
+\end{example}
+
+\begin{example}
+    Returning to the Hirzebruch surface example, we see from corner chopping that $F_1$ is the blowup of $\P^2$ and if we blowup the vertex point $c$, we have this pretty picture \begin{align*}
+        F_1 = \set{(p,l) \st p,c\in l} 
+    \end{align*} and this maps to $\P^1$ by projection. In the polytopal picture, you can visualize this map as collapsing the trapezoid onto the bottom base.
+\end{example}
+
+\begin{example}
+    Recall that $\Sym(\mf t^*) \cong H_T^*$ and the isomorphism comes from I will take a weight $\lambda \in \mf t^* \mapsto c_1(L)$ where $L$ is the line bundle over a point corresponding to the 1-dimensional representation in which $T$ acts on $\C$ by $\lambda$. More generally, this is a really stupid instance (I think where $G = B = T$) of Borel Weil Theorem which according to Allen is about the following commutative square. % https://q.uiver.app/#q=WzAsNCxbMSwwLCJLX0cocHQpIl0sWzAsMCwiS19HKEcvQikiXSxbMCwxLCJcXG1hdGhmcmFre3R9XioiXSxbMSwxLCJIX0cocHQpIl0sWzEsMF0sWzAsM10sWzIsM10sWzIsMV1d
+\[\begin{tikzcd}
+	{K_G(G/B)} & {K_G(pt)} \\
+	{\mathfrak{t}^*} & {H_G(pt)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-1, to=1-1]
+\end{tikzcd}\] 
+\end{example} where the left arrow and the top arrow are corresponding to Borel-Weil.
+
+\begin{example}
+    At the end we started talking about loop spaces of compact group, such as $SU(2)$ as in the HHH paper. \red{In particular it is a sympletic manifold and there is an $S^1$ action given by acting by free loops and then recentering. Unfortunately it is not Hamiltonian but there is something we can do ...? } Namely we can look at the universal central extension for whic h
+
+    \hfill
+
+    Inthe HHH paper we are thinking about the problem of developing a GKM theory for the homogenous spaces of loop groups. Tara obtains these very nice pictures of the moment polytope in the HHH paper. In particular, if we go on the heuristic that cohomology classes are about finite codimension submanifolds and homology classes are about finite dimensional manifolds, then we can start thinking about \red{the pictures in the case that we are thinking about submanifolds which are neither finite dimension or codimension. This is something that Allen said he didn't understand the computations for. What is an example of what you were thinking about?}
+\end{example}
+
+\begin{example}
+    The moment polytope for $\C\P^\infty$ is a ray going in the positive real direction. There is an $S^1$ action on $\P(\bigoplus_{n\in\N}\C_n)$. Cap product makes $H^*_{S^1}(\C\P^\infty)$ into a module over $H_*^{S^1}(\C\P^\infty)$. Inside the equivariant homology we have the class of $\P\C_3$ which we can expand in point classes to get $(0,0,0,1,0,\dots)$. Now consider the homology class of $\P(\C_3\oplus\C_4)$. How do we expand this in a basis? We need to invert some elements, and then we get that it expands as $(0,0,0,1/L, 1/R,0,\dots)$ where $L$ is a left arrow and $R$ is a right arrow.
+\end{example}
+\begin{center}
+    \includegraphics[angle = 270,scale = .1]{img/IMG_0892.jpeg}
+\end{center}
+
+\section{Theory of principal G bundles and characteristic classes}
+
+\end{document}
