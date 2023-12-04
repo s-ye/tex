@@ -7,6 +7,9 @@
 /quiver.sty
 /references.synctex.gz
 /references.tex
+/realanalysis.synctex.gz
+/realanalysis.tex
+/realanalysis.pdf
 /resume.synctex.gz
 /resume.tex
 /scribe.sty
@@ -14,3 +17,11 @@
 /tara.synctex.gz
 /.vscode
 /.DS_Store
+/ml.pdf
+/ml.synctex.gz
+/ml.tex
+/references.pdf
+
+
+/.gz
+/.tex
