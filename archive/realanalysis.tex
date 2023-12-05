@@ -1,0 +1,222 @@
+\documentclass{scrartcl}
+\usepackage{psetconfig}
+\usepackage{bookmark}
+\usepackage{scribe}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fill in the appropriate information below
+\clearpairofpagestyles
+\ihead{Songyu Ye}
+\ohead{MATH 6110} 
+\chead{\textbf{Problem Set 6}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\begin{problem}{3.24}
+Suppose $F$ is an increasing function on $[a,b]$. \begin{enumerate}
+    \item Prove that we can write \begin{align*}
+        F = F_A + F_C + F_J
+    \end{align*} where $F_A$ is absolutely continuous, $F_C$ is continuous but $F'_C(x)= 0$ for a.e. x, and $F_J$ is a jump function.
+    \item Each component of the decomposition is unique up to an additive constant.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+We can without loss of generality assume that $F$ is bounded on $[a,b]$.
+Indeed, if $F$ is unbounded, we can consider the restriction of $F$ to $[a,b]\cap [-n,n]$ for $n\in\N$
+and apply the following argument to each restriction. 
+Then we can take the union of the decompositions of each restriction to obtain a decomposition of $F$.
+
+Then knowing that $f$ is bounded and increasing, we can apply Lemma 3.13 to conclude the
+existence of a decomposition $F = F_i + F_j$ where 
+$F_i$ is increasing continuous and $F_j$ is a jump function.
+
+Since $F_i$ is increasing it is of bounded variation, and hence by Corollary 3.7
+it is locally integrable on $[a,b]$. Therefore 
+we get another decomposition 
+\begin{align*}
+    F_i = F_C + F_A
+\end{align*} where \begin{align*}
+    F_A(x) &= \int_a^x F'(t)dt \\
+    F_C(x) &= F_i - F_A
+\end{align*} Then we can verify the following claims:
+\begin{enumerate}
+    \item $F_A$ is absolutely continuous. This is because $F_A$ is the integral of a locally integrable function.
+    \item $F_C$ is continuous. This is because $F_C$ is the difference of two continuous functions.
+    \item $F_C'(x) = 0$ for a.e. $x$. This follows from the Lebesgue differentiation theorem and the fact that $F_C$ is the difference of two increasing functions.
+\end{enumerate}
+
+Thus we have shown the existence of the decomposition $F = F_A + F_C + F_J$.
+Let us now verify the uniqueness of the decomposition.
+
+Suppose $F = F_A' + F_C' + F_J'$ is another decomposition. For notation, let $\Delta_A = F_A - F'_A$
+and similarly for the other components $C,J$. Then we have \begin{align*}
+    F_A' + F_C' + F_J' = F_A + F_C + F_J
+\end{align*} and hence we have \begin{align*}
+    \Delta_J = F_J - F_J' = F_A' + F_C' - F_A - F_C 
+\end{align*} and the left hand side is a jump function, and the right hand side is continuous.
+ Therefore we see that $\Delta_j = C_j$.
+
+We also have\begin{align*}
+    \Delta_A = F_A' - F_A = F_C - F_C' + F_J - F_J'
+\end{align*} Since $F_A$ are absolutely continuous, the left hand side is. 
+Then we can observe further that the left hand side is differentiable a.e. 
+and thus an application of the Lebesgue integration theorem tells us that \begin{align*}
+    \Delta_A(x) - \Delta_A(a) &= \int_a^x (F_C - F_C' + F_J - F_J')'(t)dt \\
+    &= \int_a^x(F_A -F_A')'(t)dt = 0
+\end{align*} and so we see that $\Delta_A$ is a constant function.
+
+Finally we have \begin{align*}
+    \Delta_C = \Delta_A + \Delta_J = C_A + C_J
+\end{align*} and so we see that $\Delta_C$ is a constant function.
+This concludes the proof of uniqueness.
+\end{solution}
+
+\begin{problem}{3.29}
+    Let $\Gamma = \set{z(t)\st a\leq t \leq b}$ be a curve and suppose it satisfies Lipschitz with exponent $1/2\leq \alpha\leq 1$. Show that 
+    $m(\Gamma^\delta) = O(\delta^{2-1/\alpha})$ for $0<\delta\leq 1$.
+\end{problem}
+
+\begin{solution}
+This proof is not complete, but here is a sketch of how I am sort of considering attacking the problem. I also verify the claim in the case $\alpha = 1$ as a sanity check.
+
+
+Let $\delta \in (0,1)$ arbitrary and reparametrize the curve $z:[9,1]\to\R^2$ and then partition the interval $0\leq t_0 < t_1 < \dots < t_n = 1$ so tha $t_{i+1} - t_i = c$. Then by the Lipschitz
+condition we can see that \begin{align*}
+    \abs{z(t_{i+1}- t_i)} \leq Ac^\alpha
+\end{align*} Now consider balls of radius $\delta$ centered at each of the points $z(t_i)$. These balls cover a set $S\subset \R^2$ which is clearly contained in $\Gamma^\delta$.
+Now I want to make some sort of statement that for a proper choice of $c$ which will certainly have to depend on $\delta$, $S = K_\delta$.
+
+\hfill
+
+Now if we did not know that $z$ was Lipschitz, this could not possibly be true unless we took a ball at every point along the curve. This is because for example to cover the $\Gamma^\delta$
+corresponding to when $\Gamma$ is a straight line (i.e. this coincides with the case that $\alpha$ = 1) we need to take a ball at every point. In fact if we do not, then we can find a point $p$ which is not in the union of the balls but
+which is distance $\delta$ away from the curve, namely the point distance $\delta$ away from the missing point along the curve in the direction of a normal vector to the curve.
+
+\hfill 
+
+With this Lipschitz condition we hope for a statement of the following nature. 
+
+\textbf{Claim:} For an appropriate choice of $c$, then any $p\in\R^2$ which satisfies $d(p,z(t_i)) > \delta$ for all $t_i$ implies that $d(p,\Gamma) > \delta$.
+
+If I am able to show this and actually get my hands on such a $c$ then one could proceed by actually computing the measure of the cover corresponding to such a choice
+of $c$ and then see if it is in fact $O(\delta^{2-1/\alpha})$. This is where I sort of got stuck. 
+
+\hfill
+
+Here is a sort of sanity check that I carried out for the case $\alpha = 1$.
+
+One can convince themself that $\alpha = 1$ as a global Lipschitz constant actually implies that $z$ is in fact linear and therefoore we can see that $\Gamma^\delta$ is in fact
+just a rectangle with half circle ends, we can compute the measure of this and see that it is in fact $O(\delta) = O(\delta^{2-1/1})$.
+\end{solution}
+
+\begin{problem}{2}
+    Suppose $I_1, I_2, \cdots$ are disjoint open intervals in $\R$. Then there are two finite subcollections 
+    $\set{I_1', I_2', \cdots, I_{k_1}'}$ and $\set{I_1'', I_2'', \cdots, I_{k_2}''}$ such that \begin{align*}
+        \bigcup_{i=1}^\infty I_i = \bigcup_{j=1}^{k_1} I_{1,j}' \cup \bigcup_{j=1}^{k_2} I_{2,j}''
+    \end{align*} and each subcollection consists of disjoint intervals.
+
+    Hint: Choose $I_1'$ to be an interval whose left end-point is as far left as possible. Discard all intervals contained in $I_1'$.
+     If the remaining intervals are disjoint from $I_1'$, select again an interval as far to the left as possible, and call it  $I_2'$.
+     Otherwise choose an interval that intersects $I_1'$ , but reaches out to the right as far as possible, and call this interval $I_2'$.
+     Repeat this procedure.
+\end{problem}
+
+\begin{solution}
+We proceed as the hint suggests, and choose $I_1'$ to be an interval whose left end-point is as far left as possible.
+Discard all intervals contained in $I_1'$ and call the remaining intervals $I_1, I_2, \cdots,I_{k_1}$.
+If the remaining intervals are disjoint from $I_1'$, select again an interval as far to the left as possible, and call it  $I_2'$ and repeat.
+Otherwise choose an interval that intersects $I_1'$ , but reaches out to the right as far as possible, and call this interval $I_1''$.
+Discard all intervals contained in $I_1''$ and repeat.
+
+Now we can verify some properties of the construction. In particular we can observe that
+\begin{enumerate}
+    \item $I_1', I_2', \cdots$ are disjoint intervals. This is because we choose $I_1', I_2', \cdots$ to be intervals that are as far left as possible and we've removed all the ones in between.
+    \item $I_1'', I_2'', \cdots$ are disjoint from $I_1'', I_2'', \cdots,I_{k_2}$. This is for the same reason as above.
+    \item There are only fintely many $I_1', I_2', \cdots$ and $I_1'', I_2'', \cdots$. This is because we can only choose $I_1', I_2', \cdots$ and $I_1'', I_2'', \cdots$ finitely many times.
+    \item The $I_1', I_2', \cdots$ and $I_1'', I_2'', \cdots$ cover, in particular \begin{align*}
+        \bigcup_{i=1}^\infty I_i = \bigcup_{j=1}^{n_1} I_{1,j} \cup \bigcup_{j=1}^{n_2} I_{2,j}
+    \end{align*}
+\end{enumerate}
+Therefore we have verified the desired properties of the construction.
+\end{solution}
+
+\begin{problem}{7}
+    Consider the function 
+    \begin{align*}
+        f_1(x) = \sum_{n=0}^\infty 2^{-n}e^{2\pi\cdot i2^nx}
+    \end{align*} \begin{enumerate}
+        \item Prove that $f_1$ satisfies $\abs{f_1(x)-f_1(y)}\leq A_\alpha\abs{x-y}^\alpha$ for all $x,y\in\R$ and for each $\alpha\in(0,1)$.
+        \item $f$ is nowhere differentiable, hence not of bounded variation.
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+We compute \begin{align*}
+    \abs{f_1(x) - f_1(y)} &\leq \sum_{n=0}^\infty 2^{-n}\abs{e^{2\pi\cdot i2^nx} - e^{2\pi\cdot i2^ny}} \\
+    &= \sum_{n=0}^\infty 2^{-n}\abs{e^{2\pi\cdot i2^nx} - e^{2\pi\cdot i2^ny}}^{1-\alpha} \abs{e^{2\pi\cdot i2^nx} - e^{2\pi\cdot i2^ny}}^{\alpha} \\
+    &\leq \sum_{n\geq 0}2^{-n}2^{1-\alpha}\abs{2\pi i 2^n}\abs{x-y}^\alpha \\
+    &= 2^{1-\alpha}\abs{2\pi i}\abs{x-y}^\alpha \sum_{n\geq 0}2^{-\alpha n} \\
+    &= A_\alpha\abs{x-y}^\alpha
+\end{align*} where the second inequality is by the mean value theorem.
+Specifically the mean value theorem applied to the function $f(t) = \exp(2\pi i2^nt)$ on the interval $[x,y]$ tells us that \begin{align*}
+    \abs{e^{2\pi\cdot i2^nx} - e^{2\pi\cdot i2^ny}} &\leq \abs{2\pi\cdot i2^n(x-y)} \\
+    &\leq \abs{2\pi\cdot i2^n(x-y)}
+\end{align*}
+Therefore we indeed see that $f_1$ satisfies $\abs{f_1(x)-f_1(y)}\leq A_\alpha\abs{x-y}^\alpha$ for all $x,y\in\R$ and for each $\alpha\in(0,1)$.
+
+Now we show that $f_1$ is nowhere differentiable. 
+
+Suppose $f_1$ is differentiable at $x_0$. Then we have \begin{align*}
+    \lim_{x\to x_0}\frac{f_1(x)-f_1(x_0)}{x-x_0} &= \lim_{x\to x_0}\sum_{n=0}^\infty 2^{-n}\frac{e^{2\pi\cdot i2^nx} - e^{2\pi\cdot i2^nx_0}}{x-x_0} \\
+    &= \sum_{n=0}^\infty 2^{-n}2\pi\cdot i2^nx_0  \\
+    &= 2\pi\cdot i\sum_{n=0}^\infty 2^{-n}2^nx_0 \\
+    &= 2\pi\cdot i\sum_{n=0}^\infty x_0 \\
+    &= \infty
+\end{align*} so $f_1$ is not differentiable at $x_0$. Since $x_0$ is arbitrary, $f_1$ is nowhere differentiable.
+\end{solution}
+
+
+\newpage
+
+\begin{problem}{7.1}
+Consider the linear map defined on functions of $d$ variables with values in functions on $d+1$ variables
+given by \begin{align*}
+    Tf(x,t) = \sum_{k,l\st k\leq 0, k+l\geq 0}2^{-(k+l)d}\langle f, 1_{[0,2^k]^d}\rangle 1_{[0,2^k]^d}(x)1_{[0,4^l]}(t)
+\end{align*}
+Prove that $T$ is a bounded linear operator from $L^p(\R^d)$ to $L^{p}(\R^{d+1})$ as long
+as $p > 2(d+1)/d$.
+\end{problem}
+\begin{solution}
+Let us see that $Tf$ is bounded linear operator. It is clear that $Tf$ is a linear operator. Let us see that $T$ is bounded.
+The computations will also show that $Tf$ is $p$-integrable if $f$ is $p$ integrable. From the generalized Minkowski inequality we have \begin{align*}
+    ||Tf||_p &\leq \sum_{k,l\st k\leq 0, k+l\geq 0}||2^{-(k+l)d}\langle f,1_{[0,2^k]^d}\rangle1_{[0,2^k]^d}(x)1_{[0,4^l]}(t)||\\
+    &\leq \sum_{k,l\st k\leq 0, k+l\geq 0}|2^{-(k+l)d}\langle f,1_{[0,2^k]^d}\rangle|||1_{[0,2^k]^d}(x)1_{[0,4^l]}(t)|| \\
+    &\leq\sum_{k,l\st k\leq 0, k+l\geq 0}2^{-(k+l)d}|\langle f,1_{[0,2^k]^d}\rangle|||1_{[0,2^k]^d}(x)1_{[0,4^l]}(t)|| 
+\end{align*} Recall that $||fg||_1 \leq ||f||_p||f||_q$ for $1/p + 1/q = 1$. This implies that 
+\begin{align*}
+    ||Tf||_p &\leq \sum_{k,l\st k\leq 0, k+l\geq 0}2^{-(k+l)d}||f||_p||1_{[0,2^k]^d}||_q||1_{[0,2^k]^d}(x)1_{[0,4^l]}(t)|| \\
+    &\leq\sum_{k,l\st k\leq 0, k+l\geq 0} 2^{-(k+l)d} 2^{kd/q}||1_{[0,2^k]^d}(x)1_{[0,4^l]}(t)||  \\
+    &\leq\sum_{k,l\st k\leq 0, k+l\geq 0}2^{-(k+l)d} 2^{kd/q} 2^{l(d+2)/p}
+\end{align*} and thus it is enough to obtain a bound on the sum \begin{align*}
+    \sum_{k,l\st k\leq 0, k+l\geq 0}2^{-(k+l)d} 2^{kd/q} 2^{l(d+2)/p}
+\end{align*} We can rewrite this sum \begin{align*}
+    \sum_{k,l\st k\leq 0, k+l\geq 0}2^{-(k+l)d} 2^{kd/q} 2^{l(d+2)/p} &= \sum_{k,l\st k\leq 0, k+l\geq 0}2^{l(d+2)/p - ld - kd/q} \\
+    &= \sum_{k,l\st k\leq 0, k+l\geq 0}2^{-dl - kd/p + (d+2)l/p}\\
+\end{align*} where the simplification comes from the fact that $1/p + 1/q = 1$. Thus 
+we can rewrite this as \begin{align*}
+\sum_{k,l\st k\leq 0, k+l\geq 0}2^{-dl - kd/p + (d+2)l/p}
+&\leq \sum_{k,l\st k\leq 0, k+l\geq 0}2^{-dl - (d/2(d+1)\varepsilon)((d+2)l - kd)} \\
+    &\leq  \sum_{k,l\st k\leq 0, k+l\geq 0}2^{-dl - (d/2(d+1)\varepsilon)(2(d+1)l)} \\
+    &\leq\sum_{k,l\st k\leq 0, k+l\geq 0}2^{-dl - (d/2(d+1)\varepsilon)((d+2)l - kd)} \\
+    &= \sum_{k,l\st k\leq 0, k+l\geq 0}2^{-2(d+1)l\varepsilon} \\
+\end{align*} where $\varepsilon = p/d$ for shorthand. Then we can see that this sum is finite if $2(d+1)\varepsilon > 1$.
+In particular by geometric sum formulas we can bound 
+\begin{align*}
+    \sum_{k,l\st k\leq 0, k+l\geq 0}2^{-2(d+1)l\varepsilon} &= \sum_{k\leq 0}\frac{2^{2(d+1)k\varepsilon}}{1- 2^{2(d+1)\varepsilon}}\\
+    &= \frac{1}{1-2^{2(d+1)\varepsilon}}^2\\
+    &< \infty
+\end{align*} provided that $p > 2(d+1)/d$ as desired.
+
+\end{solution}
+\end{document}
