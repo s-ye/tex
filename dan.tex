@@ -1,0 +1,1583 @@
+ \documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{scribe}
+\usepackage{listings}
+\usepackage{quiver}
+\usepackage{tikz}
+
+
+
+\begin{document}
+
+Songyu Ye 
+
+sy459@cornell.edu
+
+\today
+\section{Varieties and Schemes}
+\begin{definition}
+An affine variety is a Zariski closed irreducible subset of $\A^n$. A quasi-affine variety is an open subset of an affine variety. A projective variety is a Zariski closed irreducible subset of $\P^n$. A quasi-projective variety is an open subset of a projective variety.
+\end{definition}
+\begin{definition}
+A ringed space is a topological space $X$ with a sheaf of rings, called the structure sheaf of $X$ and denoted $\mathcal{O}_X$. The ring $\mc{O}_X(U)$ is often denoted $\Gamma(U,\mc{O}_X)$. The stalk of a sheaf at $x\in X$ is defined as \begin{align}
+    \lim_{U\ni x}\mc{O}_X(U)
+\end{align} where the limit is taken over all open sets containing $x$. Elements of the stalk are just germs of functions at $\mfp$. A locally ringed space is a ringed space in which all stalks are local rings. An affine scheme is a locally ringed space which is isomorphic to $\Spec R$. 
+\end{definition}
+
+$X = \Spec R$ has the following structure sheaf. Recall the Zariski topology on $X$ has the basic open sets given by $X_f = \{\mathfrak{p} \in X \st f\not\in\mfp\}$ (here we are thinking of $R$ as giving us functions on $X$ via $r\in R\mapsto \big(r(\mfp) = r + \mfp \in R/\mfp\big)$. Moreover we have $X_f\cong \Spec R_f$ (\textcolor{red}{as affine schemes?})
+
+\hfill
+
+We see that the stalk $\mc{O}_\mfp$ is precisely the local ring $R_\mfp$ \red{why?}
+
+\begin{definition}
+The\textbf{ stalk bundle of the structure sheaf} is the map given by projection onto the first factor.
+\[\begin{tikzcd}
+	{\coprod_{\mathfrak{p}\in X}R_{\mathfrak{p}}} & X
+	\arrow[from=1-1, to=1-2]
+\end{tikzcd}\]
+The sections of the stalk bundle form a ring under pointwise addition and multiplication. Put $\Gamma(X_f,\mc{O}_X) = R_f$. Indeed each $a = r/f^m\in R_f$ defines $X_f\to \coprod_{\mathfrak{p}\in X}R_{\mathfrak{p}}$ a section of the stalk bundle over $X_f$ as follows. Define $\sigma_a(\mfp) = (\mfp,a)$. Observe that this is only a section on the open set $X_f$ as we crucially need $f\not\in\mfp$.
+\end{definition}
+
+\begin{remark}
+Let $X = \Spec R$ be an affine variety. Then $\Gamma(X,O_X) = O_X = R$. This is what we mean when we say that the elements of a ring are functions on their $\Spec$. \red{In particular, thinking about them as functions in the obvious way, ... I am still unhappy with the remark Given some $r\in R$, I need a map $r:X\to \coprod_{\mfp \in X}R_{\mfp}$}
+\end{remark}
+
+\begin{definition}
+Let $Y$ be a quasiaffine (quasiprojective) variety. We say that the map $f:Y\to k$ is regular at a point $P\in Y$ if there exists a neighborhood $U\ni p$ and $g,h\in k[x_1,\dots,x_n]$ (homogeneous of the same degree $g,h\in k[x_0,\dots,x_n]$) so that $f\vert_U = g/h$ and $h$ is nowhere zero on $U$. When the target is specifically $\A^1$, we say that $f:Y\to\A^1$ is a \red{\textbf{regular function}} if $f$ is regular at every point of $Y$.
+\end{definition}
+\begin{definition}
+A variety over $k$ is any affine, quasiaffine, projective, or quasiprojective variety (\red{what exactly is a variety? something which is locally affine variety}). A morphism of varieties $\phi:X\to Y$ is a map so that for open sets $V\subset Y$ and all regular functions $f:V\to k$ the composition $f\circ\phi:\phi^{-1}(V) \to k$ is regular. 
+\end{definition}
+
+\begin{proposition}
+Equivalently one can define a morphism of varieties as follows. Let $\phi:V_1\to V_2$ a map of affine varieties. Then $\phi$ is a morphism (i.e. regular) if it is expressible by polynomials.
+
+Let $\phi:V_1\to V_2$ a map of varieties. Then $\phi$ is a morphism (i.e. regular) $\phi$ is continuous and $V_2$ has an open cover $\mc{U}_i$ by affine varieties and $V_1$ has an open cover $\mc{V}_{j_i}$ by affine varieties refining $\mc{U}_i$ so that $f\vert_{V_{j_i}}:V_{j_i}\to U_i$ is a morphism.
+\end{proposition}
+
+\begin{remark}
+A morphism of algebraic varieties agrees with what you would get if you worked out the definition of morphism of locally ringed spaces.
+\end{remark}
+
+\begin{definition}
+Let $Y$ be a variety and let $\mc{O}_Y$ denote the \textbf{ring of regular functions on $Y$}. Very explicitly we have \begin{align*}
+    \mc O_Y := \set{f:Y\to\A^1 \text{\red{ regular function}}}
+\end{align*}If $P$ is a point of $Y$, we denote $\mc{O}_{Y,P}$ to denote \textbf{germs of regular functions at $P$}. Notice that $\mc O_P$ is a local ring with maximal ideal the germs of functions who vanish at $P$. Indeed if $f$ does not vanish at $P$, then $1/f$ is regular in some neighborhood of $P$. The residue field is isomorphic to $k$.
+\end{definition}
+
+\red{Varieties are schemes, they are locally isomorphic to $\Spec R$ and I already know the structure sheaf on $\Spec R$}
+
+\begin{definition}
+Let $Y$ be a variety and define the function field $K(Y)$ as follows. Form pairs $(U,f)$ where $U\subset Y$ open and $f:U\to k$ regular. Mod out by the equivalence relation $(U,f) \sim (V,g)$ if $f = g$ on $U\cap V$. We then have inclusions \begin{align*}
+    \mc O_Y \subset \mc O_{Y,P} \subset K(Y)
+\end{align*} given by restriction of functions. We think about $\mc O_Y$ and $\mc O_{Y,P}$ as subrings of $K(Y)$.
+\end{definition}
+
+\begin{theorem}
+Let $Y$ be an affine variety with affine coordinate ring $A(Y)$. Then \begin{enumerate}[(a)]
+    \item $\mc O_Y \cong A(Y)$
+    \item For each $P\in Y$ let $\mathfrak{m}_P\subset A(Y)$ denote the ideal of functions vanishing at $P$. Then $P\mapsto \mathfrak{m}_P$ gives a 1-1 correspondence between points in $Y$ and maximal ideals in $A(Y)$. 
+    \item For each $P$, we have $\mc O_{Y,P}\cong A(Y)_{\mathfrak{m}_P}$ and $\dim \mc O_{Y,P} = \dim Y$
+    \item $K(Y)$ is isomorphic to the quotient field of $A(Y)$.
+\end{enumerate}     
+\end{theorem}
+
+\begin{remark}
+This remark is in response to the question asked by myself previously: \textcolor{red}{Why should we use Spec over Specm then?} Neither one is better than the other when you think of them as a set. Consider the example of $\C[x,y]$. The maximal ideals are all of the points of $\C^2$. The prime ideals are the points of $\C^2$ and one prime ideal for each irreducible curve $f(x,y) = 0$ and then one prime ideal for the generic point.
+
+\hfill
+
+The point is that only one of them is a scheme however. \red{Why does Specm fail to be a scheme?}
+\end{remark}
+
+\section{Coordinate ring and ring of regular functions}
+
+In this section we give a proof of the following fact. The coordinate ring of an affine variety is isomorphic to the ring of regular functions.
+
+We will start with the following definition of regular function.
+\begin{definition}
+Let $U\subset X$ open and let $p\in U$ any point. We say that a function $f:U\to K$ is regular at $p$ if $f\vert_V = g/h$ some rational function for $V\subset U$ open.
+\end{definition}
+
+\red{Regular functions were bothering me for quite a while. The reason being it was defined in all of these different settings and in equivalent ways, one involving polynomials and another involving rationals}
+
+\hfill 
+
+\begin{theorem}
+\textbf{(Weak Nullstellensatz):} Let $K$ an algebraically closed field. Then all maximal ideals in the polynomial ring $K[x_1,\dots,x_n]$ are of the form $\ideal{x_1-a_1,\dots,x_n-a_n}$
+\end{theorem}
+
+\begin{theorem}
+\textbf{(Strong Nullstellensatz):} Let $K$ an algebraically closed field and
+
+$f_1,\dots,f_n,g\in K[x_1,\dots,x_n] = R$. Then either:\begin{enumerate}
+    \item $f_1,\dots,f_n$ have a common zero at a point where $g\neq 0$.
+    \item There are polynomials $g_1,\dots,g_n\in K[x_1,\dots,x_n]$ and $r\geq 1$ so that\begin{align*}
+        g_1f_1 + \dots + g_nf_n = g^r
+    \end{align*}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{theorem}
+\textbf{(Hilbert's Nullstellensatz:)} Let $K$ an algebraically closed field. Then $I(V(I)) = \sqrt{I}$
+\end{theorem}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}
+Let $X$ be an affine variety over $K$ and let $U = U_f\subset X$ be a principal open set \[U_f = \{x\in X \vert f(x)\neq 0\}\] where $f\in K[x_1,\dots,x_n]$. Then the ring of regular functions on $U_f$ is isomorphic to the localization $A(X)[1/f]$. In particular $\mc O(X)\cong A(X)$.
+\end{lemma}
+
+\begin{proof}
+For any regular function $g:U\to K$, one can produce an open cover $\set{V_\alpha}$ of $U$ by basic open sets so that $g\vert_{V_\alpha} = h_\alpha/k_\alpha$ some rational function. Since $X$ is Noetherian (this follows from Hilbert's basis theorem), we can pass to a finite cover (in particular recall that $X$ is Noetherian if and only if every open subset of $X$ is compact) and we can assume that each $V_\alpha$ is irreducible.
+
+\hfill 
+
+We know that $V_\alpha = U_{t_\alpha}$. After multiplying by $t_\alpha$ we can assume that $h_\alpha$ and $k_\alpha$ vanish outside of $V_\alpha$. Now observe that the common zero locus of the $k_\alpha$ cannot intersect $U_f$, in particular it must be contained inside the zero locus of $f$.
+
+\hfill
+
+Thus we can apply the strong Nullstellensatz to write \begin{align*}
+    f^r = \sum_\alpha l_\alpha k_\alpha
+\end{align*}
+Define $h = \sum_\alpha l_\alpha h_\alpha$. I claim that $h = f^r\cdot g$. It is enough to check that this holds true for every principal open set in the cover. In $V_\beta$ we have that \begin{align*}
+    h\cdot k_\beta &= \sum_\alpha l_\alpha h_\alpha k_\beta\\
+    &= \sum_\alpha l_\alpha h_\beta k_\alpha\\
+    &= h_\beta\cdot f^r
+\end{align*} so $h = f^r \cdot g$ on $V_\beta$ as desired. In the second step we need the claim that $h_\alpha k_\beta = h_\beta k_\alpha$ on $V_\beta$. This is the case since we certainly have the equality on their intersection $V_\alpha \cap V_\beta$, which is dense inside $V_\beta$. Since the function is continuous, the equality extends to all of $V_\beta$.
+
+\hfill 
+
+The above discussion shows the following fact: the map \begin{align*}
+    K[x_1,\dots,x_n][1/f]\to \mc O(U_f)
+\end{align*} given by $g/f^n\to g/f^n$ is surjective. The kernel is $I(V)[1/f]$ and thus we get by an isomorphism theorem\begin{align*}
+    \mc O(U_f) \cong A(X)[1/f]
+\end{align*} as desired.
+\end{proof}
+
+\begin{lemma}
+There is a contravariant functor $A$ from Affine Varieties to Commutative Rings. To an affine variety $X$, we assign the ring $A(X) = \mc O_X$. Given a morphism of algebraic varieties $f:X\to Y$, we get a map $A(Y)\to A(X)$ given by $\phi \mapsto \phi\circ f$.
+\end{lemma}
+\begin{remark}
+Recall that in general we want morphisms of varieties to preserve regular functions. In Affine Variety, the morphisms are the polynomial maps. This is precisely the right notion since if we have a morphism of affine varieties $f:X\to Y$, then each of the component functions of $f$ is regular and then by the theorem, we know that the component function $f_i$ is polynomial.
+\end{remark}
+
+\begin{definition}
+Let $\mc F:\mc C\to \mc D$ be a functor. The essential image of $\mc F$ are those objects in $D$ which are isomorphic to an object in the image of $\mc F$.
+\end{definition}
+
+\begin{fact}
+$\mc F:\mc C\to \mc D$ is an equivalence of categories if and only if $F$ is essentially surjective and fully faithful.
+\end{fact}
+
+\begin{theorem}
+    The functor $A$ is an equivalence of categories between the category of affine varieties over $K$ and the category of finitely generated algebras over $K$, without nilpotents.
+\end{theorem}
+\begin{proof}
+We want to see that $A$ is essentially surjective and fully faithful. Let $B$ be a finitely generated reduced $K$-algebra and pick generators $b_1,\dots,b_n$. Then there is a surjection \begin{align*}
+    K[x_1,\dots,x_n]\to A
+\end{align*} sending $x_i\to b_i$. The kernel $I$ is radical since $A$ has no nilpotents. Let $X = V(I)$. Then the coordinate ring of $X$ is isomorphic to $B$ by construction, so $A$ is essentially surjective.
+
+\hfill
+
+$A$ gives us a map $\Hom(X,Y)$ and $\Hom(\mc O_Y,\mc O_X)$. Fixing embeddings $X\subset \A^n$ and $Y\subset \A^m$, $A$ naturally defines a map $\Hom(X,Y)\to\Hom(A(X),A(Y))$ (just by composition, remember that elements of the coordinate ring can naturally be regarded as regular functions to $\A^1$)
+
+\hfill
+
+We will define an inverse mapping $B:\Hom(A(Y),A(X))\to\Hom(X,Y)$ by \begin{align*}
+    B(\alpha)(p) = (r_1(p),\dots,r_n(p))
+\end{align*} where $r_i = \alpha(y_i)$ and $y_i$ are the coordinates on $Y$. We need to see that $B(\alpha)(p) \in Y$. If $g\in I(Y)$ then \begin{align*}
+    g(B(\alpha)(p)) &= g((r_1(p),\dots,r_n(p))) \\
+    &= g((\alpha(y_1)(p),\dots,\alpha(y_n)(p))) \\
+    &= \alpha(g)(p) \texty{since $\alpha$ is map of $k$ algebras and $g$ polynomial} \\
+    &= 0
+\end{align*} 
+
+\hfill
+
+Finally let us check that these guys are inverses. Given a morphism $f:X\to Y$, let $\alpha = A(f)$ and suppose that $f$ has components $f = (f_1,\dots,f_n)$. Then $\alpha(y_i) = y_i\circ f = f_i$ and it follows that $B(\alpha) = BA(f) = f$.
+
+\hfill 
+
+Now suppose that $\alpha:A(Y)\to A(X)$ is a map of $k$-algebras. Then $B(\alpha) = (f_1,\dots,f_n)$ where $f_i = \alpha(y_i)$. In this case $A(f)(y_i) = f_i$. Since $y_1,\dots,y_n$ generate $A(Y)$ we get $AB(\alpha) = \alpha$.
+\end{proof}
+
+\section{Meeting with Sara}
+\begin{definition}
+$\P^1$ over a scheme $S$ is a proper flat morphism $f:X\to S$ so that every fiber $f^{-1}(s) \cong \P^1$ (what does $\cong$ mean?) Now define the family of 4 points on $\P^1$ as follows. Points in this $\P^1$ are sections $\sigma:S\to X$. Then there is a tautological (universal) family over the scheme $S$ given by $S\times\P^1\to S$ and the four points are the $0$ section, the $1$ section, the $\infty$ section and the identity.
+\end{definition}
+These questions are about the Hoskins notes.
+\red{Can you give another example kind of similar to this?}
+
+\hfill
+
+\red{When we talk about affine varieties over a field, are they secretly schemes over another scheme?}
+
+\hfill 
+
+\red{very confused by $\mc O(1)$ and $\mc O(d)$ and the following relationship. $O(d) = \bigoplus O(1)$ and $O(d)$ is obtained by doing some degree shift and then $O(d)$ is the homogeneous polynomials of degree $d$ in $n+1$ variables}
+
+\hfill
+
+\red{Why is the way of defining equivalence of line bundles in that manner incorrect?}
+
+
+\section{Vector bundles}
+\begin{definition}
+\textbf{(Proposition)} A real (topological) vector bundle of rank $k$ over a topological space $M$ is a continuous map $\pi:E\to M$ so that for all $m\in M$,\begin{enumerate}
+    \item The fiber $E_m$ is equipped with the structure of a real vector space
+    \item There is a neighborhood $U$ and "local trivialization" $\phi:\pi^{-1}(U)\to U\times \R^k$ homeomorphism which for each $x\in U$ maps the fiber $E_x$ to $\set{x}\times\R^k$ via linear isomorphism.
+\end{enumerate}
+
+A real (topological) vector bundle of rank $k$ over a topological space $M$ is a continuous map $\pi:E\to M$ so that there exists an open cover $\set{U_\alpha}$ and "local trivializations" $\phi_\alpha:\pi^{-1}(U_\alpha)\to U_\alpha\times\R^k$ so that \begin{enumerate}
+    \item Each $\phi_\alpha$ is a homeomorphism which for each $x\in U_\alpha$ maps $\pi^{-1}(x)\to \set{x}\times\R^k$
+    \item For each $\alpha,\beta$ the transition map $\phi_{\beta}\circ\phi_\alpha^{-1}:(U_{\alpha\beta})\times\R^k\to(U_{\alpha\beta}\times\R^k$ has the form \begin{align*}
+        \phi_{\beta}\circ\phi_\alpha(x,v) = (x,g_{\alpha\beta}(x)v
+    \end{align*} where $g_{\alpha\beta}(x)$ is a linear map for every $x\in g_{\alpha\beta}$.
+\end{enumerate}
+
+As it given the data of the second definition, there is a unique way of making the fibers $E_m$ a vector space, namely by defining \begin{align*}
+    x +_\alpha y = \phi_\alpha^{-1}(m,x_\alpha + y_\alpha)
+\end{align*} where $\phi_\alpha(v) = (m,v_\alpha)$.
+These operations are well-defined and do not depend on choice of chart because we said that $g_{\alpha\beta}$ is linear.
+\end{definition}
+
+\red{I ran into this definition of $\mc O(k)$ and I wanted to understand it in light of this definition.}
+\red{How does changing the choice of transition map affect the geometry of the bundle? i.e. the local trivializations? It's like the difference between knowing them exactly and knowing them up to scale}
+\begin{definition}
+We denote by $\mc O(k)$ the line bundle on $\P^n$ that is trivial on each affine
+chart $U_i$ and whose transition functions are $g_{ij} = (x_i/x_j)^k$. \red{Thus the tautological line bundle is isomorphic to $\mc O(-1)$.}
+\end{definition}
+\red{why is this definition equivalent to the direct sum one, or the shifting the grading one, or the fact that it is generated by the homogenous polynomials of degree $k$ in $n+1$ variables. }
+\begin{example}
+The tautological line bundle over projective space has local trivializations given by the formulas as follows. Let $U\subset \P^n$ open subset corresponding to $x_1 \neq 0$. Then there is a local trivialization $U\times \C \to \pi^{-1}(U)$ \begin{align*}.
+([x_0,\dots,x_n],c) \mapsto ([x_0,\dots,x_n], c/x_1\cdot [x_0,\dots,x_n])
+\end{align*}
+\end{example}
+\red{however the point is that there are different ways you can identify $\C$ with the fiber in particular, $\mc O_k$ the point is that the identification seems to be $x\to x^k$, but then we are losing the linear structure??
+Followup: the point is that vector bundles in the context of topological spaces are different than vector bundles over a scheme. In algebraic geometry we have this correspondence between coherent locally-free sheaves and vector bundles over a scheme. So when we write $\mc O(k)$ we can make sense of it as a line bundle but also as the ring of global functions.
+}
+
+\begin{example}
+Important example of structure groups. If a bundle reduces to structure group  $\GL(\R,k)^+$, i.e is isomorphic to a bundle with said structure group, we say that the bundle is oriented. Example the Mobius bundle $E = I\times \R/(0,t)\sim(1,-t)$ is not oriented. One sees using using the theory of classifying maps and classifying spaces.
+\end{example}
+
+\red{recall that a classifying space is a moduli space to an algebraic topologist.}
+
+For the rest of the section let $M$ be Hausdorff and paracompact, equivalently  every open cover of $M$ admits a partition of unity subordinate to $\set{U_\alpha}$.
+
+\begin{definition}
+    A preclassifying map for a vector bundle $E\to M$ is a map $E\to \R^N$ for some $N$ so that the restriction of $F$ to each fiber $E_m$ is linear and injective.
+\end{definition}
+
+\begin{definition}
+    A vector bundle $E\to M$ is of finite type if there exists a finite collection of local trivializations.
+\end{definition}
+
+\begin{proposition}
+    Every finite-type vector bundle over a Hausdorff paracompact space has a preclassifying map.
+\end{proposition}
+\begin{remark}
+    We use Hausdorff paracompact to get ahold of partitions of unity which allow us to construct the preclassifying map. We need to know that the vector bundle is finite type in order to get $N < \infty$ where $E\to \R^n$
+\end{remark}
+
+\begin{definition}
+    If $F_1,F_2:E\to\R^n$ are two pre-classifying maps we say $F_1$ and $F_2$ are isotopoic if they are homotopic through pre-classifying maps.
+
+    \hfill
+
+        We say that they are stably isotopic if $I_{N_1,N}\circ F_1$ and $I_{N_2,N}\circ F_2$ are isotopic for some $N > N_1,N_2$.
+\end{definition}
+\begin{example}
+    Give an example of a pair of pre-classifying maps for the same vector bundle $E$ which are not isotopic.
+\end{example}
+\begin{theorem}
+    All pre-classifying maps for the same vector bundle are stably isotopic.
+\end{theorem}
+\begin{remark}
+    Use the $1-t,t$ trick a bunch.
+\end{remark}
+If we have a pre-classifying map, then by construction we can forget some information and just worry about the linear subspace to which each fiber $E_m$ correpsonds to, i.e each pre-classifying map gives us a \textbf{classifying map} $F:E\to\Gr(n,k)$. There is a tautological bundle $\gamma_k(\R^n)$ over $\Gr(n,k)$. One can carefully check that the obvious construction is indeed a bundle, one just needs to get their hands on a local trivialization.
+
+\red{what should it be morally?}
+\red{ask Isaac questions about the pullback and the preclssifying, classifying map business}
+\red{also ask him about the filtration stuff coming up for AG seminar}
+
+\hfill
+
+\begin{theorem}
+Let $M$ be a paracompact Hausdorff space. Then there is a well-defined surjective map \begin{align*}
+    \Phi:\set{\text{isomorphism classes of finite-type rank $k$ vector bundles over $M$}}\to \\
+    \set{\text{stable homotopy classes of maps $f: M\to \Gr(n,k)$}}
+\end{align*} where $\Phi([E])$ is defined to be the stable homotopy class of any classifying map for $E$.
+\end{theorem}
+
+The point of reading this section was that we wanted to see an important example of a classifying map. In particular, this example is saying that the moduli space for the moduli problem of rank $k$ finite-type vector bundles over $M$ is precisely the Grassmannian $\Gr(n,k)$. Moreover we examined the tautological line bundle over the Grassmannian $\gamma$
+
+\section{Vector bundles, failure of moduli problem, Dan in Lounge}
+Here's something we can say. \red{There is an equivalence of categories between topological vector bundles over a scheme $S$ and locally free coherent $\mc O_X$ modules on $S$.} This is something that ought to be investigated.
+
+
+A vector bundle on $\P^1$ is the data of vector bundles on two copies of $\A^1$, namely $x\neq 0 $ and $x\neq \infty$ and the gluing data $\in\GL_n\A_1$
+
+$\mc O(1)\oplus \mc O(-1) \oplus \dots \oplus$ has nontrivial automorphisms.
+
+\begin{theorem}
+    (Grothendieck) Every vector bundle on $\P^1$ is a direct sum of $\mc O(k)$ uniquely.
+\end{theorem}
+We thought about the following examples.
+\begin{enumerate}[(a)]
+    \item $T\mapsto \set{\text{vector bundles over $T$}} / \cong$ In particular we had the following \red{equalizer} diagram on the board :% https://q.uiver.app/#q=WzAsMyxbMCwwLCJGKFgpIl0sWzEsMCwiXFxwcm9kX2lGKFVfaSkiXSxbMiwwLCJcXHByb2Rfe2ksan1GKFVfaVxcY2FwIFVfaikiXSxbMCwxXSxbMSwyXSxbMSwyXSxbMSwyLCIiLDAseyJvZmZzZXQiOi0xfV1d
+\[\begin{tikzcd}
+	{F(X)} & {\prod_iF(U_i)} & {\prod_{i,j}F(U_i\cap U_j)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=1-3]
+	\arrow[shift left, from=1-2, to=1-3]
+\end{tikzcd}\] 
+Also we observed that the presheaf $\Sch^{\op}\to\Set$ sending $T\mapsto\Bun(T)$ fails to be a sheaf. This is because the sheaf axiom amounts to the map $F(X)\to\prod_i F(U_i)$ is injective, but this is not the case because I can produce something nontrivial in $F(X)$ which is trivial in every $F(U_i)$. This is because we can produce a local trivialization on which $\zeta\vert_U$ is trivial for all $U$.
+
+\red{But somehow this is supposed to be resolved when we pass to this rigid notion of equivalence.}
+
+    \item $T\mapsto \set{\text{vector bundles over $T\times X$}} / \cong$
+    \item $T\mapsto \set{\text{vector bundles over $T\times X$}} / \cong_\otimes$ Dan said this is the \red{rigidification of a moduli problem}, we do this to get rid of the stupid automorphisms $G_m\subset \Aut(\zeta)$ for our vector bundle $\zeta$. This is supposed to be the interesting case I guess, Dan calls this the family of vector bundles on $X$. The point is that \begin{align*}
+        T \mapsto Map(X,Y) \sim T\times X\to Y
+    \end{align*} that these should be the same thing (\red{whatever topology that guy has on the left})
+\end{enumerate}
+In particular we have that $\Bun(X\times T)$ and $\Bun(T)$ is not a scheme. This is closely related to the fact that the assignment in example (a) is not a sheaf. Here's why: if $X$ is a scheme, then $h_X: T\mapsto \Hom(T,X)$ is necessarily a sheaf, therefore we cannot have a fine moduli space for this moduli problem
+
+\section{Algebraic groups and some exercises - Dan's office}
+First we have the following exercises: \begin{enumerate}
+    \item Explicitly show how $\GL_1,\GL_1\times\GL_1,\GL_2$ are as group schemes.
+    \item Write down some (all) linear representations of $\GL_2$, $\GL_1$, and $\GL_1\times\GL_1$. \red{is there any additional data that exists because you told me that you want $\GL_2$ to be a group scheme?}
+    \red{the word weight space was also mentioned}
+    \blue{After asking Dan, it seems that the answer is that it isn't a matter of more data but rather like more conditions since we are restricting to thinking about algebraic things. For example, we considered a representation of $S^1$ coming from Fourier analysis, I think it was $L^2(S^1)$ and there the key fact is that as an algebraic group representation, we have that every irrep had some finiteness property involving the subreps, whereas as a represntation of the Lie group $S^1$ this property was no longer true or something like that.}
+    \item Find an interesting projective variety in $\P(V)$ for some linear representation of $GL_2$ that is invariant under the $ GL_2$ action
+
+
+\end{enumerate}
+We are interested in $\GL_2$ as a group scheme. The word affine algebraic group is related to this. 
+
+\hfill
+
+A torus is something which s isomorphic as a group scheme to $(\C^\times)^n$. We also write $G_m = \C^\times$ because the construction not needing to have to refer to a ground field (or something like that I'm not 100 percent sure). A polynomial is something which lives in $\Sym(V^*)$
+
+\hfill
+
+To classify all the linear representations of $\GL_2$ observe that $\GL_2$ has a two dimensional torus living inside of it.
+
+\hfill
+
+We only care about the zero locus of finitely many homogeneous polynomials. We care about group actions on projective varieties.
+
+\begin{example}
+   Let $V$ be a vector space, I can form $\P(V)$ and $G=\GL_n$ naturally acts on $V$ descends to an action of $\P(V)$. \red{I asked why we don't think about $\P\GL_n$ which naturally acts on projective space} 
+   
+   \hfill 
+   
+   The example to consider is the action of $\GL_2$ on $\C_2\oplus\C(\det)$ where $\C(\det)$ is the $1$-diml representation defined by $g\cdot v = \det(g) v$ (this is a character, i.e. a 1-dimensional representation because $\det$ is multiplicative). Then we see that scaling, i.e $g = \lambda I$ we have $g\cdot[(v,z)] = [(\lambda v,\lambda^2 z)]$ so acting by the scalar matrices does not preserve linearity.
+   
+   
+   \hfill
+   
+   \red{The point is that to every representation of $X\subset \P(V)$ factors through $\P\GL$, basically $\P\GL$ has less representations.}
+\end{example}
+
+We are interested in reductive algebraic groups. We say a group acts on a projective variety $X = V(f_1,\dots,f_n)$ if $f_1(g\cdot x) = 0$ for all $x\in X$. We care about when does $g\cdot x\in X$ for all $g\in G,x\in X$? Three ways this can happen are \begin{align*}
+    f_i(g\cdot v) = f_i(v) \\
+    f_i(g\cdot v) = \chi_i(g)f_i(v) \\
+    f_i(g_v) = \sum a_j(g)f_j(v)
+\end{align*} 
+\red{"A scheme is a sheaf that can be covered by a representable $f$"}
+
+\section{Affine group schemes (Waterhouse)}
+The story begins by fixing a ring of constants $k$. This is because we want to be able to talk about polynomial rings over a constant field and their solutions, and this inevitably leads us to thinking about $k$-algebras.
+
+\hfill
+
+Now suppose we have a family of polynomials over $k$ and we are thinking about their solution set. Consider the quotient algebra $A = k[x_1,\dots,x_n]/\ideal{f_1,\dots,f_n}$. This by construction has \red{the most general solution} to the given polynomials. 
+
+\begin{fact}
+Let $R$ be a $k$-algebra. Any $k$-algebra homomorphism $A\to R$ gives us a way to solve the polynomials $f_1,\dots,f_n$ over $R$. This correspondence is in fact bijective, the reason is by construction (any solution would necessarily give rise to a homomorphism $k[x_1,\dots,x_n]$ which necessarily factors through $A$.
+\end{fact}
+
+\hfill
+
+This is nicely summarized and rephrased in the following statement:
+\begin{theorem}
+If $F:\kAlg\to \Set$ is a functor where $F$ is given by the solution of polynomial equations, then there exist a $k$-algebra $A$ and a natural correspondence $F\cong \Hom_k(A,R)$
+\end{theorem}
+
+\begin{definition}
+    We say that $F$ is representable and $A$ is the representing object. \red{affine group scheme} is a representable functor $\kAlg\to\Grp$
+\end{definition}
+
+\begin{lemma}
+\textbf{(Yoneda):} Let $E,F$ be Set-valued functors represented by $k$-algebras $A$ and $B$. Then the natural transformations $E\to F$ are in correspondence with $k$-alg maps $B\to A$. In the language of abstract nonsense, the functor $\Hom:\kAlg\to\Fun^{op}(\kAlg,\Set)$ given by $A\mapsto \Hom_k(A,-)$ is fully faithful.
+\end{lemma}
+\begin{remark}
+The ideas that go into this are very similar to the ones which show that representing objects are unique.
+\end{remark}
+\begin{corollary}
+The map $E\to F$ is a natural isomorphism if and only if $B\to A$ is an isomorphism.
+\end{corollary}
+We care because unlike specific families of equations, two representing algebras cannot give \textbf{essentially} the same functor unless they themselves are \textbf{essentially} the same. \red{is the word essentially being used technically here?}
+
+\hfill
+
+Now we return to the issue of what it means to ask that $R\mapsto \Hom_k(A,R) =: \Gamma$ is a group valued functor. It means that we have these maps $\Gamma\times\Gamma\to\Gamma$ (multiplciation), $\{e\}\to\Gamma$ (unit), and $\Gamma\to\Gamma$ (inverse). These maps should be natural and there are three diagrams that should commute. The multiplication is the most important of the three.
+
+\hfill
+
+\red{How does this relate to the story we had about algebraic groups? We said that an algebraic group $G$ was $\Spec A$ for some $k$-algebra $A$ with the data of these multiplication maps which are supposed to be morphisms of schemes.}
+
+\hfill
+
+Now say $G$ is represented by $A$ so that $G\times G$ is represented by $A\otimes A$ (this is a fact in general that the fiber product is represented by the tensor product (in this specific pair of categories)). Then by Yoneda making $G$ a group functor is the same as equipping $A$ with the following maps.
+
+\begin{align*}
+    \text{comult } \Delta:A\to A\otimes A \\
+    \text{counit (augm.) }\varepsilon:A\to k \\
+    \text{coinv (antipode) }S:A\to A
+\end{align*} and again there are 3 diagrams which should commute. The most important one is called coassociativity and can be written down as $(\Delta\otimes\id)\circ \Delta = (\id\otimes\Delta)\circ \Delta$
+
+Also note that $k$ is the representing object of a point (in the \red{augmentation} map)
+
+\red{augmentation is like the relative singular homology augmentation map}
+
+\hfill
+\begin{theorem}
+    Affine group schemes over $k$ correspond to Hopf algebras over $k$.
+\end{theorem}
+
+There's a way of understanding all of the data. There is this correspondence between the following data \begin{enumerate}
+    \item \textbf{Affine groups} Representable functor $G:\kAlg\to\Set$ and $m:G\times G\to G$ so that (equivalently) \begin{enumerate}
+        \item $m:G\times G\to G$ such that $m(R)$ is a multiplication on $G(R)$
+        \item There exist natural transformations $e$ and $\inv{\cdot}$
+        \item $G$ factors through $\Grp$
+    \end{enumerate}
+    \item \textbf{Groups in} $\kAlg$.  $k$-algebra $A$ with map $\Delta:A\to A\otimes A$ so that (equivalently) \begin{enumerate}
+        \item For all $k$-algebras $R$ the map \begin{align*}
+            (f,g)\mapsto (f,g)\circ \Delta\in \Hom(A,R)
+        \end{align*} is a multiplication on $\Hom(A,R)$
+        \item $A$ is a Hopf algebra, i.e. there exist $k$-algebra homomorphisms $\varepsilon$ and $S$, necessarily unique.
+    \end{enumerate}
+    \item \textbf{Affine group schemes} The data $(G,m:G\times G\to G)$ where $G$ is an affine scheme over $k$ so that equivalently \begin{enumerate}
+        \item for all $k$ algebras $R$ the map $m(R):G(R)\times G(R)\to G(R)$ is a group structure on the set $G(R)$
+        \item There exist morphisms $e:*\to G$ and $\inv{\cdot}:G\to G$
+        \item for all $k$-schemes $S$ the map $m(S):G(S)\times G(S)\to G(S)$ is a group structure on the set $G(S)$
+    \end{enumerate}
+    In the last point, we are using the Yoneda embedding and thinking about $G$ as $\Hom(\cdot,G)$. In particular we have functors $G(R) = \Hom(\Spec R,G)$ and $G(S) = \Hom(S,G)$, "the $S$-points of $G$".
+
+    \hfill
+
+    Going from 2 to 1 is the Yoneda embedding, going from 1 to 2 is you look at the canonical coordinate ring $\mc O(G)$ defined to be natural transformations $\Hom(G,\A^1)$ where $\A^1$ is the forgetful functor $\kAlg\to\Set$. Going from 2 to 3 is taking Spec, Going from 3 to 2 look at the coordinate ring of the scheme.
+\end{enumerate}
+
+
+\begin{example}
+We unravel the comultiplication on $\GL_2$. So morally we know that these guys are matrices $\begin{bmatrix}
+    a & b\\
+    c & d
+\end{bmatrix}$ and that formally this matrix in $\GL_2R$ for some $R$ k-algebra, corresponds to $\phi\in\Hom_{k}(A,R)$ where $A = k[x_{11},x_{12},x_{21},x_{22},\det^{-1}]$ and $\phi(x_{11}) = a,\phi(x_{12}) = b,\dots$. 
+
+\hfill 
+
+Now suppose that we have $f,g\in\Hom_k(A,R)$ and now we want to know how to muliply them. If we had a comultiplication map $\Delta:A\to A\otimes A$ then the composite $(f\otimes g)\Delta:A\to A\otimes A\to R$, well this map should be the product of $f$ and $g$. But since $f,g$ are matrices we know what this product should look like in coordinates. With this understanding we can write \begin{align*}
+    \Delta(x_{11}) &= x_{11}\otimes x_{11} + x_{12}\otimes x_{21} \\
+    \vdots
+\end{align*} One can check that this indeed defines a comultiplication structure on $A$ and thus we have presented $\GL_2$ as a group scheme.
+\end{example}
+
+\section{Dan Oct 6}
+
+
+Recall the Yoneda embedding ("functor of points"): I can fully faithfully think of a scheme $X$ as a map $X:\Sch^{\op} \to\Set$. Inside the category of all schemes, I have rings which include as affine schemes. The point of Dan's remark was that $X$ is determined by its value on $\Ring \cong \Aff \Sch^{\op}$. I think the point was a remark about the covering of a category by a functor (or a category or smth like that).
+
+\hfill
+
+As a consequence, if we think about reduced affine varieties over $\C$ we see that the coordinate wing is in fact the ring of functions of some space: \begin{align*}
+    A\hookrightarrow \Fun(X,\C)
+\end{align*} In the case that $A$ is a f.g $\C$-alg the Nullstenllensatz implies that $A/\mf m\cong\C$ and thus \begin{align*}
+    \phi: A\to 
+    \phi: a\in A\mapsto (\bar a)_{\mf m} \in \prod_m A/\mf m 
+\end{align*} and we see that $\phi\in \Fun(\Spec A(\C), \C)$. The injectivity follows from the reduced-ness: \begin{align*}
+    \ker\phi &= \bigcap_{\mf m} \mf m\\
+    &= J(A) \texty{by definition}\\
+    &= N(A) \texty{this is using some result for sure} \\
+    &= \bigcap_{\mf p}\mf p \texty{also a fact}
+\end{align*} where $N(A)$ by definition is the nilradical, i.e. the ideal of the nilpotent elements of $A$ and $J(A)$ is the Jacobson radical.
+\begin{remark}
+    \red{This is just what I transcribed from the office hour. I am not entirely happy with it. It is definitely not complete.}
+\end{remark}
+
+\hfill
+
+Here's what I think is going on but it doesn't really pattern match exactly with the above notes. If you have some $a\in A$, you can form $\phi_a\in\Hom(\Specm A,\C)$ which sends $\mf m \in\Specm A\mapsto a/\mf m \in \C$. And then this is an inclusion for the reason that Dan gave.
+
+\section{Meeting with Marcelo Oct 12}
+During the Wednesday meeting with Sara we said what it means to have a representation of a affine group scheme. In particular, if $G$ is an affine algebraic group and $V$ is a fixed $k$-module, then a representation of $G$ on $V$ is a natural transformation $G\times X\to X$ where $X(R) = V\otimes_k R$ is a functor $X:\kAlg\to\Set$ and moreover the map $X(R)\to X(R)$ is $R$-linear for each $g\in G$.
+
+\hfill 
+
+We also defined what it means to have a comodule over a Hopf algebra. In particular, $\rho:V\to V\times A$ is a comodule if we have $(\id\otimes\Delta)\circ\rho = (\rho\otimes\id)\circ\rho$ and $(\id\otimes\varepsilon)\circ\rho = \id_V$. These diagrams say that the group action is associative and that $1$ acts by the identity.
+
+\hfill 
+
+We thought about the following theorem: \begin{theorem}
+    Representations of $G$ on $V$ are in correspondence with Hopf comodules $\rho:V\to V\otimes A$ over $A$.
+\end{theorem} In particular this theorem allowed us to see that all 1-dimensional representations of $\Gm$ are, on the Hopf algebra side, given by $X\mapsto X^n$.
+
+\hfill 
+
+Then Marcelo and I talked about Hopf Algebras on Thursday. See the references he gave. In particular there were a few main takeaways:\begin{fact}
+    There is an equivalence of categories between rational $G$-modules and Hopf comodules over $A$.
+\end{fact} In particular we need to think hard about where this finiteness condition is coming in. I think it comes from the following related facts:\begin{fact}
+    The canonical morphism $\Hom_k(S,k)\otimes\Hom(T,k)\to \Hom(S\times T,k)$ is injective. Moreover, it has image those maps $h:S\times T\to k$ for which $\langle h_t:S\to k \st t\in T
+    \rangle$ is a finite dimensional $k$-vector space.
+\end{fact} This is true because elements of the tensor product are finite sums.
+\begin{fact}
+Let $k$ be a field, $A$ a Hopf algebra. Every comodule $V$ for $A$ is a directed union of finite-dimensional subcomodules.
+\end{fact}
+We say that an affine group scheme $G$ is \textbf{algebraic} if its representing algebra is finitely generated.
+\begin{corollary}
+    Every affine group scheme $G$ over a field is an inverse limit of algebraic affine group schemes
+\end{corollary}
+\red{I think it would be nice to hear Dan talk about some of these finiteness properties. I think I am a little confused.}
+
+\section{Rational $G$-modules, Hopf comodules, and reps of Tori} Fix $V$ $k$-module. Last time, we saw that there is an equivalence of categories between natural maps $G\times X\to X$ of affine group schemes $G = \Hom(A,\cdot)$ where $X = V \otimes \cdot$ and comodules over $A$. There is another way of understanding representations of affine algebraic groups. 
+
+\begin{definition}
+    Given any comodule $\rho:V\to V\otimes A$ over $A$ we get equations \begin{align}
+    \rho(v_j) = \sum v_i\otimes \alpha_{ij}
+\end{align} where $\alpha_{ij}\in A$. Basically, the $\alpha_{ij}$ are formed by gathering on the $v_i$ coefficientThe matrix $\alpha$ is called the \textbf{invariant matrix} for $A$ afforded by the basis $\set{v_i}$ for $\rho$ \red{pay attention to how this data also appears in $G$-modules}. Using the comodule axioms, one can deduce that \begin{align*}
+    \Delta(\alpha_{ij}) = \sum \alpha_{ih}\otimes\alpha_{hj}
+\end{align*}
+\end{definition}
+
+\begin{definition}
+    Let $G$ be an abstract group and $M$ some $k$-vector space. Suppose further that $M$ is a $G$-module. Then we say that $M$ is a rational $G$-module if every $m\in M$ is contained in a finite dimensional submodule of $M$ ($M$ is said to be locally finite) and the following condition.
+
+\hfill 
+
+Let $\alpha\in M^*, m\in M$ and consider the map $\alpha\vert m:G\to k$ given by $\alpha\vert m(x) = \alpha(x\cdot m)$. This gives us a map $T:M^*\times M\to k^G$ where $k^G$ is the algebra of functions $G\to k$. Inside $k^G$ there is the subalgebra $k[G]$ of rational function $G\to k$, i.e. morphisms, and the condition is that $\im T \subset k[G]$.
+
+\hfill
+
+Another way to understand this condition is as follows. Let $G$ an algebraic group. We say that $M$ has a rational $k$-structure if $M$ has a basis $\set{v_i}$ so that the map $\alpha_{ij}:x\mapsto x\cdot v_i \mapsto \pi_j(x\cdot v_i)$ projecting onto the $v_j$ coordinate is a rational function $G\to k$ for all $v_i$ and all $x\in G$. Then $M$ is a rational $G$-module if it has this rational structure and it is locally finite. \red{this is where the data of the matrix $\alpha$ appears in the $G$-module definition}
+\end{definition}
+\begin{remark}
+    Starting with a rational $G$-module $M$, we can always get ahold of this column finite $\alpha$. Therefore given a rational $G$-module $M$, we can equip $M$ with the structure of a comodule $\rho:M\to M\otimes A$ using the data of the matrix $\alpha$. In particular $M$ naturally also has an action of $A = k[G]$ along with this data $\rho$.
+\end{remark}
+
+If $M$ is rational, then the matrix $\alpha_{ij}$ is column finite and in particular it is the invariant matrix of some comodule $V$ over our representing coalgebra $A$. In the case that $G$ is an algebraic group, then $A\cong k[G]$ is the coordinate ring of $G$. It will naturally have a coalgebra structure because $G$ has a multiplication map.
+
+\begin{theorem}
+    There is an equivalence of categories between rational $G$-modules and comodules over $A$.
+\end{theorem}
+In short, the data of the matrix $\alpha$ is the key to going back and forth between these two different ideas. Given a rational $G$-module $M$, equip it with an $A$-action by \red{i dont know} along with a $\rho:M\to M\otimes A$ \red{(we saw how to do this in particular this is where the data $\alpha$ is used.)} To go the other way, if we have $M$ an $A$-comodule, pick a basis of $M$ and get its invariant matrix $\alpha$. Then $M$ can be made into a $G$-module via the formula (2).
+
+\hfill
+
+Why is understanding this finiteness condition important? In particular there are many $G$-modules one could come up with which are not locally finite, again recall Dan's example of the representation of $S^1$ on $L^2(S^1)$. 
+
+In particular we also ran into the fundamental theorem of coalgebras: \begin{theorem}
+    Every coalgebra $C$ is a sum of its finite-dimensional subcoalgebras.
+\end{theorem}
+\begin{proof}
+    It is enough to show that every $c\in C$ is contained in a finite dimensional subcoalgebra. For general vector spaces $X,Y$ and for $u\in X\otimes Y$ we can expand (having chosen a basis for $X$ and $Y$) \begin{align*}
+        u &= \sum_{i,j} a_{ij} x_{i}\otimes y_{j} \\
+        &= \sum_{j} X_j \otimes y_j \\
+        &= \sum_i x_j\otimes Y_i
+    \end{align*} where capital letters mean we have gathered all the terms and all but finitely many $a_{ij}$ are zero. Then we can define vector subspaces \begin{align*}
+        L(u) &= \ideal{X_j} \\
+        R(u) &= \ideal{Y_i} 
+    \end{align*} Basically what we are doing here is just gathering terms either on the left or right and looking at their span. Note that $U\subset M$ is a subset of a comodule then $L(\rho(U))$ is the subcomodule generated by $U$.  We see that $L(\rho(m)) = \ideal{m_k}_k$ and $\rho(m_k) = m_k\otimes x^k$ is closed under $\rho$ so indeed it is a subcomodule. Also observe that for each $u$, $L$ and $R$ are finite dimensional subspaces since tensors are finite sums. 
+    
+    \hfill
+    
+    Now let $\rho:M\to M\otimes C$ be any right comodule with basis $\set{m_i}$. We already have written down the formula for $c_{ij}\in C$, in particular we have \begin{align*}
+        \rho(c_{ij}) = \sum_{t}c_{it}\otimes c_{tj}
+    \end{align*} where $c_{ij}$ are the invariant factors of $\rho$ with respect to the basis $\set{m_i}$. 
+    
+    \hfill
+    
+    Then consider $M = L(\Delta(c))$ and consider $cf(M) = R(\rho(M))$ (we call $cf(M)$ the coefficient space of $M$). By definition, one can see that $cf(M)$ is a subcoalgebra. $M$ being finite dimensional, as is $\rho(M)$ and hence $cf(M)$ as well. Moreover, one can show using the counitary axiom that $c\in cf(M)$.
+\end{proof}
+
+\section{Reconciliation}
+Recall what Dan said on Friday Oct 13. Every scheme $X$ can be considered a functor "of points" $\Sch^{\op} \to\Set$ by the Yoneda embedding. \red{In fact it should really be $\Sch^{\op} \to\Gpd$ where $\Gpd$ is better than set because it is a 2-category} Moreover, we have $\Ring\cong\Aff\subset\Sch$ and since a scheme is locally affine, the point is that \begin{align*}
+    \Sch\hookrightarrow\Fun(\Sch^{\op},\Set)\hookrightarrow\Fun(\Ring,\Set)
+\end{align*} The first inclusion is \begin{align*}
+    X\mapsto\Hom(\cdot,X)
+\end{align*} and the second map is induced by $R\mapsto\Spec R$. In summary, we see that every scheme $X$ gives us $\Ring\to\Set$ taking $R\mapsto\Hom(\Spec R,X)$ and moreover this embedding is fully faithful. \textbf{Warning: not every $\Ring\to\Set$ is represented by a scheme.}
+
+\hfill
+
+Another clarifying remark: one can think of points in $\Spec R$ as maps to fields $R\to K$ since the image will always be an integral domain. 
+
+\begin{example}
+Consider representations of $\mf G_m$. We see that these are in correspondence with comodules $\rho:M\to M\otimes A$ over $A = k[x,1/x]$. We write as a vector space decomposition\begin{align*}
+    M\otimes A = \bigoplus_{i\in\Z} M\otimes x^j
+\end{align*} Expanding $\rho(m)$ in a basis and applying coassociativity we find that \begin{align*}
+    \rho(m) &= \sum_{k} m_k\otimes x^{k} \texty{finitely many nonzero, $m_k\in M$}\\
+    (\id\circ\Delta)(\rho(m)) &= \sum_k m_k\otimes x^k\otimes x^k \\
+    (\rho\circ\id)(\rho(m)) &= \sum_k \rho(m_k)\otimes x^k \\
+\implies \rho(m_k) &= m_k\otimes x^k \texty{for those nonzero $m_k$}
+\end{align*} and moreover by counitality we get \begin{align*}
+    (\id\otimes\varepsilon)(\rho(m)) = m = \sum m_k\varepsilon(x^k) = \sum m_k
+\end{align*} so we see that the comodule $M$ decomposes as a direct sum of subcomodules \begin{align*}
+    M = \bigoplus M_k
+\end{align*} where $M_k = \set{m\in M \st \rho(m) = m\otimes x^k}$. This is the same as saying that $\mf G_m$ acts on $M_k$ via $x\cdot m = x^km$. This gets us the following statement that every linear representation of $\mf G_m$ is a direct sum of its weight spaces. We also see that $M$ also has the structure of a $\Z$-graded vector space. Moreover each $M_k$ is a sum of irreducible representations, those irreps $\subset M$ for which $\mf G_m$ acts with weight $k$. 
+\end{example}
+
+\section{Representation of Tori}
+A torus $T$ is a compact connected Lie group that is abelian. 
+\begin{proposition}
+Let $T$ torus, $\mf t$ its Lie algebra. Then $\exp:\mf t \to T$ is a homomorphism and its kernel is a lattice. Therefore $T\cong (\R/\Z)^r\cong \T^r$ where $r=\dim T$.
+\end{proposition}
+\begin{proof}
+    $\exp$ is a homomorphism because $T$ is abelian. The kernel $\Lambda$ is discrete because $\exp$ is a local homeomorphism and $\Lambda$ is cocompact since $T$ is compact. Thus $\Lambda$ is a lattice.
+\end{proof}
+Let $G$ be a Lie group. A maximal torus of $G$ is torus $T\subset G$ which is not contained in any other torus. There is a very powerful theorem about maximal tori when $G$ is compact connected. \begin{theorem}
+    If $G$ is a compact connected Lie group and $T$ is a maximal torus of $G$, then any element of $G$ is conjugate to an element of $T$.
+\end{theorem}
+In particular we can get a lot of mileage out of this theorem.
+\begin{corollary}
+    All maximal tori in $G$ are conjugate.
+\end{corollary}
+\begin{corollary}
+    All maximal tori have the same dimension, known as the rank of $G$.
+\end{corollary}
+
+\begin{corollary}
+    A maximal torus in $G$ is a maximal abelian subgroup but the converse need not hold.
+\end{corollary}
+
+\begin{corollary}
+    The maximal tori in $G$ are exactly the Lie subgroups corresponding to the maximal abelian subalgebras of $\mf g$ (Cartan subalgebra)
+\end{corollary}
+
+\red{we took the route via normal forms}
+
+\begin{corollary}
+    The exponential map for $G$ is surjective.
+\end{corollary}
+
+\begin{corollary}
+    If $G$ has dimension $n$ and rank $r$ then $n-r$ is even.
+\end{corollary}
+
+One can show that all irreducible representations of abelian groups are $1$-dimensional via Schur's lemma. A weight of $T$ is a Lie group homomorphism $T\to U(1)$. Equivalently it is a $1$-dimensional representation of $T$. 
+
+\begin{fact}
+    One can show using Lie theory that every weight of $T^n$ is given by $t\mapsto t_1^{k_1}\dots t_n^{k_n}$ for $k\in\Z^n$. This coincides with what we conputed in the algebraic group story.
+\end{fact}
+
+\red{how is the Lie theory of $\GL_n$ related to the theory of $\GL_n$ as an algebraic group? As a algebraic group $\GL_n$ has additional structure, it is a variety.}
+
+\hfill 
+
+\red{When does an algebraic group have the property that every representation is the direct sum of irreducible representations?}
+
+\begin{definition}
+    Let $G$ an algebraic group. A character of $G$ is a morphism of algebraic groups $G\to \mf G_m$, the set of which is denoted $X^*(G)$. A cocharacter of $G$ (also known as a one-parameter subgroup) is a morphism of algebraic groups $\mf G_m\to G$, the set of which is denoted $X_*(G)$. 
+\end{definition}
+To a character $\chi$ and $V$ a rational representation of $G$, we can consider the "weight space" \[V_\chi = \set{v\in V\st g\cdot v = \chi(g)v}\] This is a submodule of $V$. We have the following result:\begin{lemma}
+    \textbf{(Dedekind's Lemma)} Let $G$ any group. \begin{enumerate}
+        \item $X(G):=\Hom_{Group}(G,\mf G_m)$ is a linearly independent subset of $k^G$ the set of all functions on $G$. Note that we have defined $X \neq X^*$, in particular $X^*\subset X$ those group characters which are also morhpisms of algebriac varieties. \red{why do we have to add this in order to get the below direct sum decomposition?}
+        \item For any $G$-module $V$ we have a direct sum decomposition \begin{align*}
+            V = \bigoplus_{\chi\in X(G)}V_\chi
+        \end{align*}
+    \end{enumerate}
+\end{lemma} The first statement implies the second provided that we see why we can write \begin{align*}
+    V = \sum_{v\in X(G)}V_\chi
+\end{align*} \red{I don't see why this is the case for arbitrary groups} In the case of algebraic groups however, the above expansion as a sum comes from the counitality.
+
+\begin{corollary}
+    $X^*(G)$ is linearly independent in $k[G]$ the ring of regular (polynomial) functions on $G$.
+\end{corollary}
+\begin{definition}
+    We say that an algebraic group $G$ is diagonalizable if every $g\in G$ is semisimple. This means that $g =g_s$ in the Jordan decomposition for $G$. This has to do with the Jordan decomposition on $\GL_n$ inducing Jordan decomposition on every closed subgroup of $\GL_n$.
+\end{definition}
+\begin{theorem}
+    \textbf{Structure theorem of diagonalisable groups:} Let $G$ be an algebraic group. The following properties are equivalent. \begin{enumerate}
+        \item $G$ is commutative and $G = G_s$
+        \item $G$ is diagonalizable 
+        \item The group $X^*(G)$ is abelian of finite type and spans (and therefore forms a basis of) $k[G]$.
+        \item Any representation $V$ of $G$ is a direct sum of representations of dimension $1$
+    \end{enumerate}
+\end{theorem}
+\begin{proposition}
+    Let $G$ be a diagonalized algebraic group, then the following are equivalent.\begin{enumerate}
+        \item The group $G$ is a torus.
+        \item The group $G$ is connected.
+        \item The group $X^*(G)$ is a free abelian group.
+    \end{enumerate}
+\end{proposition}
+
+\section{Toward rational reps of $\GL_n$}
+\begin{theorem}
+    Every rational representation of $\GL_n$ decomposes into a direct sum of irreducible representations, i.e. rational representations are semisimple.
+\end{theorem}
+\begin{proof}
+    Let $V$ be a rational representation of $\GL_n$. Pick a Hermitian form on $V$. Define a new Hermitian form $\langle,\rangle$ by he formula \begin{align*}
+        \langle v,w\rangle = \int_{U_n}\langle gv, gw\rangle dg
+    \end{align*} where $dg$ is the \red{Haar measure} on $U_n$ (compact!). \red{Show that this form is $\GL_n$ invariant using the hint that $U_n$ is Zariski dense in $\GL_n$. Let $W$ be a $\GL_n$ subrepresentation of $V$ and let $W'$ be its orthogonal complement under $\langle,\rangle$. Show that $W'$ is also a $\GL_n$ subrepresentation and that $V = W\oplus W'$. Show that $V$ decomposes as a direct sum of irreducible rperesentations}.
+\end{proof}
+
+\begin{theorem}
+Let $V$ be an irreducible rational representation of $\GL_n$. \begin{enumerate}
+    \item There exists a unique weight $\lambda$ of $V$ that is higher than all other weights; it is called the highest weight of $V$.
+    \item The highest weight space $V_\lambda$ is 1-dimensional.
+    \item The highest weight determines $V$ up to isomorphism.
+\end{enumerate}
+\end{theorem}
+The proof of this theorem is in Fulton Harris.
+
+\red{If we take this route, we will extensive use our understanding of the representations of the Lie algebras $\mf{gl}_n$ and $\mf{sl}_n$. We should use Dan's hint that $T^2\subset \GL_n$}
+
+\hfill
+
+Let $W$ be a representation of $\GL_n$ and define $\chi_W(g) = \tr(\rho(g))$. Every matrix in $\GL_n$ in conjugate to a matrix in JCF. Therefore $\chi_W$ is determined by its values on matrices in Jordan canonical form. One observes that the diagonalizable elements form a dense subset of $\GL_n(C)$ and so for any rational representation $\chi_W$ is determined by its values on the diagonal matrices.
+
+\hfill
+
+\blue{I am a little worried about the topologies here}
+
+It is not true that every element in $\GL_2$ is conjugate to an element in our maximal torus $T^2\subset\GL_2$. However, it is true that the orbit of $T^2$ under conjugation forms a dense subset of $\GL_2$ (analytic topology). Let $g\in\GL_2$ and $\rho:\GL_2\to \GL(V)$ be a rational representation of $\GL_2$. Then being rational \red{(there are two ways I have of understanding rational, are they the same?)} we can see that $\rho$ acts continuously with respect to the analytic topology. 
+
+\hfill
+
+
+\red{This "theorem" is not true, we now know that there needs to be this symmetry about the $y=x$ line.
+I leave it here for pedagogy.}
+\begin{theorem}
+    Let $\tau:\T^2\to\GL(V)$ be a rational representation of the diagonal matrices $T^2\subset\GL_2$. Then there exists a unique rational representation $\tilde\tau:\GL_2\to\GL(V)$ so that $\tilde\tau\vert_{\T^2} = \tau$.
+\end{theorem}
+\begin{proof}
+   Suppose there were such a finite dimensional rational $\GL_2$ representation $\tilde\tau:\GL_2\to\GL_V$. Then $V\vert_{\T^2}$ is a $\T^2$-representation and we have a decomposition \begin{align*}
+    V\vert_{\T^2} = \bigoplus_{(a,b)\in\Z^2}V_{a,b} = \bigoplus_{\chi\in X^*(G)}V_\chi
+\end{align*} Note that $V_{a,b}$ are $\T^2$ representations. Now suppose that $g\in \GL_2$ and let $v\in V$, write \begin{align*}
+    v = \sum_{\chi}v_\chi
+\end{align*} so that \begin{align*}
+    \tilde\tau(g)v &= \tilde\tau(g)\sum_\chi \cdot v_\chi \\
+    &= \sum_\chi \tilde\tau(g)v_\chi \\
+    &= \sum_\chi \tau(D)v_\chi
+\end{align*} the action of $g$ is completely determined. Now we are done since we have a function $\tilde\rho$ which is determined on a dense open subset of $\GL_2$ and so there is a unique continuous extension to all of $\GL_2$, which we will call $\tilde\rho$. We need to check that $\rho$ is a morphism of algebraic groups. We only need to check for $g$ not diagonalizable.
+
+\hfill
+
+Suppose that $g$ is not diagonalizable, in $\GL_2$ this means very explicitly that \begin{align*}
+    g\sim \begin{bmatrix}
+        \lambda & 1 \\
+        0 & \lambda
+    \end{bmatrix}
+\end{align*} where $\lambda \neq 0$.
+By continuity we get that \begin{align*}
+    \lim_{i\to\infty} g_i \cdot v_\chi = g\cdot v_\chi
+\end{align*} for any sequence $\set{g_i}$ with $\lim_{i\to\infty}g_i\to g$.
+Pick $g_i$ diagonalizable (we can only do this because the orbit of $\T^2$ under conjugation is analytically dense inside $\GL_2$) and we see that (having defined $\tilde\tau$ on all the diagonalizable $g_i$) \begin{align*}
+    \tilde\tau(g)v_\chi = \lim_{i\to\infty}\tilde\tau(g_i) v_\chi
+\end{align*} We need to see that this is well defined. In particular, as we have defined it its not clear that the $\tilde\tau(g_i)$ has a limit since it is acting by the diagonal matrix that is actually conjugate to $g_i$. The point is the entries of $\tilde\tau(g_i)$ are the eigenvalues of $g_i$ which are continuous functions of the entries of $g_i$. Moreover we can compute that \begin{align*}
+    \tilde\tau(g)v_\chi = \chi(\lambda I)v_\chi  = \lambda^nv_\chi
+\end{align*} where $n = k_1 + k_2$ is the sum of the entries of the weight vector corresponding to $\chi$. In this expression, we see that the action is rational. Generally we see that will have $\tilde\tau(g)v_\chi = \chi(g_{ss})v_\chi$. 
+
+\hfill 
+
+We need to see that the action respects products, i.e $\tilde\tau(gh) = \tilde\tau(gh)$. One sees this by writing \begin{align*}
+    g = \begin{bmatrix}
+        \lambda & 1 \\
+        0 & \lambda
+    \end{bmatrix} \\
+    h = \begin{bmatrix}
+        \mu & 1 \\
+        0 & \mu
+    \end{bmatrix}
+\end{align*} and see that \begin{align*}
+    gh = \begin{bmatrix}
+        \lambda\mu & \lambda + \mu \\
+        0 & \lambda\mu
+    \end{bmatrix}
+\end{align*} and so indeed we see that it is a morphism of algebraic groups.
+\end{proof}
+
+\section{Meeting today}
+\begin{remark}
+    \textbf{Warning:} The proof that I wrote down is incorrect. The statement is true however. The issue is that we run into is that we cannot write \begin{align*}
+    \tilde\tau(g) = \tilde\tau(D)
+\end{align*} as it is not true that the operators will commute. 
+\end{remark}
+
+\begin{definition}
+    A constructible set is a finite union of locally closed sets. (A set is locally closed if it is the intersection of an open set and closed set). There is a more elaborate definition but we don't need to worry about it (they are equivalent for most schemes and all algebraic varieties). 
+\end{definition}
+
+\begin{fact}
+    The image of the map $\GL_2\times T\to \GL_2$ sending $g,h\to ghg^{-1}$ is a constructible set of $\GL_2$. Constructible sets are Zariski dense if and only if it is analytically dense.
+\end{fact}
+We also talked about Chevalley complexification of compact Lie groups. In particular complexification is a recipe of taking compact Lie groups and turning them into complex reductive groups.
+
+\begin{remark}
+    If $G$ is a compact Lie group, the *-algebra (algebra with involution) $A$ of matrix coefficients of finite-dimensional unitary representations is a uniformly dense *-subalgebra of $C(G)$, the *-algebra of complex-valued continuous functions on $G$. It is naturally a Hopf algebra with comultiplication given $\Delta f(g,h) = f(gh)$.
+
+    \hfill 
+
+The characters of $A$ are the *-homomorphisms of $A$ into $\C$. They can be identified with the point evaluations $f\mapsto f(g)$ for $g\in G$ and the comultiplication allows the group structure on $G$ to be recovered. 
+The homomorphisms of $A $ into $ C$ also form a group. It is a complex Lie group and can be identified with the complexification $G_\C$ of $G$. 
+The *-algebra $A$ is generated by the matrix coefficients of any faithful representation $\sigma $ of $ G$. 
+It follows that $\sigma$ defines a faithful complex analytic representation of $G_\C$.
+
+\end{remark}
+
+\section{Group acting on scheme}
+We have the following observation. If $G$ an algebraic group acts on $V$ variety, then there is an induced action on $O(V)$ where we define for $g\in G$ and $f\in O(V)$ \begin{align*}
+    g\cdot f(x) = f(\inv{g}\cdot x)
+\end{align*} Notice that in this definition we are really using the fact that elements of the coordinate ring are precisely those regular functions $V\to \C$. The fact that $G$ acts on $V$ implies that $g\cdot f$ is also a regular function on $V$ and so this is indeed an action.
+
+\hfill
+
+Now let's try to make the same definition for an affine scheme of finite type $X = \Spec A$. 
+
+$X = \Spec A$ has underlying set the set of prime ideals of $A$. We can also think of the points of $X$ as corresponding to closed irreducible subvarieties of $V(I)$, the variety (not necessarily irreducible) corresponding to the vanishing ideal of $I$. 
+
+\hfill
+
+\textbf{One idea: }$A$ is a finitely generated $k$-algebra so pick generators $a_1,\dots,a_k$. We get a surjection $k[x_1,\dots,x_n]\to A$ with some kernel $I$, $I$ is finitely generated because polynomial rings are Noetherian by Hilbert basis theorem. Thus we get \begin{align*}
+    A \cong k[x_1,\dots,x_n]/I
+\end{align*} this isomorphism coming precisely from a choice of generators. 
+
+Using this isomorphism we can say that if $G$ acts on $X = \Spec A$ there is an induced action on $A$ if we think of $x_1,\dots,x_n$ as coordinates on the space. However the point is that only the maximal ideals are of the form $x = (x_1,\dots,x_n)$. \red{For example, there are prime ideals $\mf p\in \Spec\C[x,y]$ of the form $\set{f(x,y)=0}$ for $f\in\C[x,y]$ irreducible. Do we have "coordinates on Spec" that account for these type of points? I don't see another way to define the induced action.}
+
+\hfill 
+
+Another thing worth remarking is that this construction requires a choice of generators. The next idea actually does not require a choice of generators.
+
+\hfill
+
+\textbf{Another idea:
+}
+As above, we need to think of elements of the structure sheaf $\mc O_X(X) = A$ as functions on $X$. Recall the etale space construction. There is a map $\rho:E\to X$ so that for all $U\subset X$ open, $O_X(U)\cong \Gamma_\rho(U)$, \textbf{continuous} sections $U\to E$ of $E$. In particular this allows us to think of the structure sheaf $O_X(X)$ as maps $X\to E$ and basically the point is that now we can do the same construction as above. 
+
+\section{Toward the affine GIT quotient}
+Hilbert's 14th problem asked if $G$ is an affine algebraic group acting on $A$ a finitely generated $k$-algebra, is the ring of invariants $A^G$ finitely generated. Nagata showed that in the case that $G$ is reductive or linearly reductive, then the answer is yes. 
+
+\begin{definition}
+    An affine algebraic group $G$ is \begin{enumerate}
+        \item \textbf{linearly reductive} if every finite fd $\rho:G\to\GL(V)$ is a direct sum of irreps.
+        \item \textbf{geometrically reductive} if every $\rho:G\to \GL(V)$ and $v\in V$ has a $G$-invariant nonconstant homogenous $f\in \mc O(V)$ so that $f(v)\neq 0$.
+        \end{enumerate}
+\end{definition}
+\begin{example} $G_a$ is not geometrically reductive. Consider $\rho:G_a\to \GL_2$
+    \begin{align*}
+        \rho(a) = \begin{bmatrix}
+            1 & a\\
+            0 & 1
+        \end{bmatrix}
+    \end{align*} The condition that $f(g\cdot v) = f(v)$ implies $f(x,y) = f(x+ay,y)$ for all $a$ and so we see that $f$ does not use any $x$ terms.
+     The point $(x,0)$ has the property that every $\cG_a$-invariant homogenous polynomial vanishes at $v$. 
+\end{example}
+Now let $G$ be an affine algebraic group and let $\rho:G\to \GL(V)$ be a linear action. There is a coaction $\rho^*:V\to \mc O(G)\otimes V$ which we get as follows. Consider the image $r(a)$ of the universal element $a\in G(\mc O(G))$, we get an element $r(a) \in \End(V\otimes \mc O(G))$, which the restriction $V\to V\otimes \mc O(G)$ is the coaction. Explicitly, if I have a basis $\set{e_i}$ for $V$ and $\set{r_{ij}}$ some elements in $\mc O(G)$, then the map \begin{align*}
+    \rho(e_i) = \sum e_j \otimes r_{ij}
+\end{align*} is a coaction if and only if \begin{align*}
+    \Delta(r_{ij}) &= \sum_{l} r_{il}\otimes r_{lj} \\
+    \varepsilon(r_{ij}) &= \delta_{ij}
+\end{align*} In this case, we get a representation of $G$ on $V$ by just declare that $g$ acts by the matrix $r_{ij}(g)$. In summary we have \begin{theorem}
+    Let $G$ an affine algebraic group and $V$ $k$-vector space. If $G\times V\to V$ is a rational action then the map $\rho^*:V\to V\otimes \mc O(G)$ defined by $\rho^*(m) = \sum m_0\otimes m_1$ where $x\cdot m = \sum m_1(x)m_0$ is a coaction.
+\end{theorem}
+
+\begin{definition}
+    We say $G$ is unipotent if every nontrivial representation $\rho$ has nonzero $G$ invariant vector. This is equivalent to saying that every $\rho$ has a basis in whic $\rho(G)\subset B$ where $B$ is upper triangular matrices which have 1s on the diagonal. This is also equivalent to every $g\in G$ is unipotent for $G$ smooth.
+
+    \hfill
+
+    We say that $G$ is reductive if $G$ is smooth and every smooth unipotent normal algebraic subgroup is trivial.
+\end{definition}
+\begin{definition} The radical of $G$ is the identity component of its maximal normal solvable subgroup. The unipotent radical of $G$ is the set of unipotent elements in the radical of $G$. 
+\end{definition}
+\begin{example}
+    $\GL_n$ is reductive. Let $U$ be a nontrivial smooth connected unipotent normal subgroup and let $g\in U$ nontrivial. We will produce $g'$ so that $g'\in U$ and $gg'\not\in U$, thus deriving a contradiction. $U$ being normal, we can say $g$ is in Jordan form and $U$ being unipotent, $g$ will have some $1$s along the superdiagonal. Now without loss of generality suppose $g = \begin{bmatrix}
+        \lambda & 1\\
+        0 & \lambda
+    \end{bmatrix}$ (also $\lambda = 1$). Then we can conjugate by $\begin{bmatrix}
+        0 & 1\\
+        1 & 0 
+    \end{bmatrix}$ to get the matrix $\begin{bmatrix}
+        \lambda & 0\\
+        1 & \lambda
+    \end{bmatrix}$ whose product with $g$ is not unipotent.
+\end{example}
+\begin{example}
+    Tori are linearly reductive. $G_a$ is not geometrically reductive.
+\end{example}
+\begin{theorem}
+    (Weyl, Nagata, Mumford, Haboush)
+    \begin{enumerate}
+        \item Every linearly reductive group is geometrically reductive.
+        \item In characteristic 0, every reductive group is linearly reductive.
+        \item A smooth affine algebraic group is reductive iff its geometrically reductive
+        \item For affine group schemes over characteristic zero, reductive, linearly reductive, and geometrically reductive coincide.
+    \end{enumerate}
+\end{theorem}
+\begin{fact}
+    Every compact connected lie group has a complexification which is complex reductive. Moreover this is a 1-1 correspondense up to isomorphism.
+\end{fact}
+\begin{theorem}
+    (Nagata) Let $G$ geometrically reductive acting rationally on $A$ a finitely generated $k$-algebra. Then $A^G$ is finitely generated.
+\end{theorem}
+\begin{theorem}
+    (Hilbert Mumford) Let $G$ linearly reductive acting rationally on $A$ a finitely generated $k$-algebra. Then $A^G$ is finitely generated.
+\end{theorem}
+\begin{proof}
+    The main ingredient to this proof is something called the Reynolds operator.
+    \begin{lemma}
+        There exists a projection $R:A\to A$ projecting $A$ onto $A^G$. Moreover, if $u:A\to A'$ is map of rational $G$-representations, then the Reynolds operators for $A,A'$ commute with $u$.
+    \end{lemma}
+\end{proof}
+\begin{theorem}
+    Let $G$ be a reductive algebraic group, $X$ affine variety. Then \begin{enumerate}
+        \item $\mc O(X)^G$ is finitely generated.
+        \item Let $f_1,\dots,f_n$ generators of $\mc O(X)^G$. Then the image of the morphism \begin{align*}
+            f:X&\to\C^n \\
+            f(x) &= (f_1(x),\dots,f_n(x))
+        \end{align*} is closed and does not depend on choice of $f_1,\dots,f_n$.
+        \item Denote $\pi:X\to X//G$. Then every $G$ invariant morphism $X\to Y$ factors uniquely $X//G\to Y$.
+        \item Any closed $G$-stable $Y\subset X$, the induced map $Y//G\to X//G$ is a closed immerson. If I have another $Y'$ then $\pi(Y\cap Y') = \pi(Y) \cap \pi(Y')$
+        \item Each fiber contains a unique closed $G$-orbit.
+        \item If $X$ is irreducible (or normal) then so is $X//G$.
+    \end{enumerate}
+\end{theorem}
+
+
+\section{Finishing $\GL_2$}
+We concluded our discussion of representations of $\GL_2$ with the following classification. I have an obvious $\GL_2$ representation by 
+asking that $\GL_2$ act on the space of polynomials of degree $N$ by \begin{align*}
+    \rho(g)f(x) = f(g^{-1}x)
+\end{align*}
+and moreover I have these characters $\chi_a(g) = \det(g)^a$ for $a\in\Z$. We can tensor these together
+and we have the following representations of $\GL_2$ \begin{align*}
+    \rho_{a,b} = \rho\otimes \chi_{a,b}
+\end{align*}
+
+\begin{theorem}
+    Every irreducible representation of $\GL_2$ is isomorphic to $\rho_{a,b}$ for some $a,b\in\Z$.
+\end{theorem}
+
+Why should is theorem true? One route is via Lie theory. \red{I will write this up later}
+
+Dan explained a way via algebraic groups. If we have a representation $V$ of $\GL_2$ then we can 
+restrict to a representation of $\T^2$ and from a previous classification, we know that we get a decomposition \begin{align*}
+    V &= \bigoplus_{\chi:T^2\to \C^\times}V_\chi \\
+    &= \bigoplus_{(a,b)\in\Z^2}V_{a,b}
+\end{align*}
+Now observe that if we allow \begin{align*}
+    g = \begin{bmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{bmatrix} 
+\end{align*}then we can see that \begin{align*}
+    g^2 &= 1 \\
+    g\begin{bmatrix}
+        a & 0\\
+        0 & b
+    \end{bmatrix}\inv{g} &= \begin{bmatrix}
+        b & 0\\
+        0 & a
+    \end{bmatrix}\\
+\end{align*} from which we can see that $V_\chi \cong V_{w\chi}$. This observation allows us to single
+out the $x= y$ line in the plane and we can say that we will always have a weight on/above the line. Then 
+if you believe in the theorem of the highest weight, we can say that for each weight $\lambda$ above this line 
+(i.e. dominant integral weights) there is a unique irreducible representation with highwest weight $\lambda$.
+In this case, when I say highest, I am going to use this adhoc definition of "farthest away from the line".
+
+\hfill
+
+Then it is clear why these representations are all of the irreducible ones. Every $\lambda$ above the line can
+be translated by tensoring with determinant until it sits on the $y$-axis.
+
+\hfill
+
+
+More concretely there is this related calculation which is supposed avoid sort of the 
+Lie theory machinery. Put
+ \begin{align*}
+    g_t := \begin{bmatrix}
+        1 & t \\
+        0 & 1
+    \end{bmatrix} = \exp(t\begin{bmatrix}
+        0 & 1 \\
+        0 & 0
+    \end{bmatrix}) = \sum_{i\geq 0 }\frac{t^i}{i!}E^i
+\end{align*} where $E = \begin{bmatrix}
+    0 & 1 \\
+    0 & 0
+\end{bmatrix}$ and now we can compute \begin{align*}
+    g_t \cdot x^n &= g_t
+    \cdot v_{n,0} \\
+    &= (x+ty)^n \\
+    &= \sum_{i=0}^n \binom{n}{i}t^i v_{n-i,i}
+\end{align*} Recall that if we have a representation $V$ of the Lie group $G$ we can get 
+a Lie algebra representation by taking the derivative at the identity. In particular for $x\in \mf g$
+the action is \begin{align*}
+    x\cdot v := \frac{d}{dt}\bigg\vert_{t=0}\exp(tx)\cdot v
+\end{align*} So in this case we see that \begin{align*}
+    E\cdot v_{n,0} = \frac{d}{dt}\bigg\vert_{t=0}\sum_{i=0}^n \binom{n}{i}t^i v_{n-i,i} = nv_{n-1,1}
+\end{align*} $E\in $ is our going down operator.
+
+\section{Onto territories and moduli of singularities}
+Consider the normalization of a singular curve $C$. This is a map $p:\tilde C\to C$ where $p$ is generically 
+isomorphism, $\tilde{C}$ is normal (in particular smooth).
+\begin{example}
+    The standard example $\C[x^2,x^3]\subset \C[x]$. The normalization is $\A^1$.
+\end{example}
+The point is that $\tilde{C}$ is not always $\A^1$ but the data of $\tilde{C}\to C$ is \red{should be?}
+determined by $\tilde C$, $p_1,\dots,p_n\in \tilde C$ mapping to the singular point
+and a subalgebra $\hat{O}_{C,p(p_i)}\subset\hat{O}_{\tilde{C},p_i} \cong \C[[t]]$ \red{what is the generator? is it some homology class?}. In particular, we end up asking for
+$A\subset\C[[t]]$ where the hat means completion. Morally we are thinking about germs of functions and the 
+of subrings amounts to thinking about pulling back functions.
+
+\hfill 
+
+For us the normalization $\tilde C$ will always be $\P^1$ but non canonically, it will ultimately involve
+a choice of representation of $\GL_2$.
+\begin{remark}
+    It is possible to reconstruct the curve from the local rings. In particular
+    there exists a projective smooth curve with such local rings if and only if the completion looks like the power series ring.
+\end{remark}
+
+So now we are thinking about the moduli problem $\mc M$ of normalizations $\tilde C\to C$ where $C$ is a connected curve
+of genus 0. In this case, the points are not marked but we still have distinguished points correspodnding
+to the singularities of $C$.
+
+There is a related moduli problem $X$ of normalizations $\P^1\to C$. In this case, $X$ has the canonical $\P\GL_2$ action
+and we have two hopes \begin{enumerate}
+    \item $X$ is a projective variety 
+    \item $\mc M \cong X/\P\GL_2$ as a quotient stack. 
+\end{enumerate}
+
+Dan referred to a variety called the "local version of this problem." In this case, we are worried about
+the condition that $\dim_\C \C[[t]]/A < \infty$ which is equivalent to saying that $\dim A = 1$ and $Frac(A) = Frac(\C[[t]])$
+
+The condition implies (maybe?) that $t^n\cdot C[[t]]\subset A$ for some $n$ and so we see \begin{align*}
+0 \subset \tilde A =  A/(t^n\cdot \C[[t]]) \subset \C[[t]]/(t^n\cdot \C[[t]])
+\end{align*} is contained in an $n$-dimensional vector space. Let $m = \dim \tilde{A}$. The $m$ dimensional
+subspaces of $\C[[t]]/(t^n\cdot \C[[t]])$ are parametrized by $\Gr(m,n)$ and the condition
+that $A$ is a subalgebra defines an algebraic subvariety of this Grassmannian as follows. This is for the following reason:
+
+\begin{center}
+    \includegraphics*[scale = .5]{img/Screenshot 2023-11-09 at 12.38.22 AM.png}
+\end{center}
+
+\begin{remark}
+    Finally we remarked that $\Aut(\P^1,*) = \begin{bmatrix}
+        * & * \\
+        0 & *
+    \end{bmatrix}$ should act on this moduli space. The action $1/t\mapsto 1 + 1/t$ corresponds
+    to $t\mapsto t/(t+1)$ which is actually a polynomial since we can expand in series and notice that $t^n = 0$
+\end{remark}
+
+\section{More about curves and territories}
+\begin{definition}
+    A \textbf{curve} is a connected projective variety of dimension 1.
+\end{definition}
+
+To topologists, curves actually look like real surfaces. To an algebraic geometer, curves are 1 dimensional and we draw them as such.
+The loopiness of a curve is supposed to reflect its genus.
+
+A curve $C$ is locally a union of affines. A special fact about curves is that $C\backslash\set{*}$ is already affine. 
+So write $C = \bigcup U_i = \bigcup \Spec A_i$. We can consider the normalization of a curve which is obtained by 
+taking the integral closure $A_i\subset \tilde{A}_i$. So we get a map $\tilde U_i\to U_i$ and we can glue these 
+maps together to get a map $\tilde C\to C$.
+
+\begin{example}
+    Let $C = \mf G_m$ be the 1-torus. Then $\tilde C = \C$.
+\end{example}
+
+\begin{example}
+    \red{The normalization of any singular curve is smooth.} This is because if a variety is normal, then the singular locus is 
+    codimension 2 or higher.
+\end{example}
+
+\begin{example}
+    The normalization of $\P^1$ is $\P^1$. We are interested in curves whose normalization is precisely $\P^1$. 
+    This is because we are able to have an interesting GIT discussion in this setting, precisely because $\P^1$ has 
+    autormorphism group $\P\GL_2$. In particular Dan believes that positive dimensional stablizers will have interesting 
+    classification results.
+\end{example}
+
+In our case the $A_i$ will be domains (recall the fact that for $X$ affine $O_X$ is domain 
+if and only if $X$ is reduced and irreducible).
+
+Let $\pi:\tilde C\to C$ be the normalization map. Then $\pi$ is a finite map 
+(i.e. $\tilde A_i$ is a finite $A_i$ module). However, the data of a normalization map is more than just a finite map,
+we also need to know that $\pi$ is generically isomorphism (this is because where $C$ is smooth, $\pi$ is an isomorphism).
+ \begin{align*}
+    \tilde A_i \cong k[t][1/f] \cong \mc O_{\A^1\backslash\set{pts}}
+\end{align*}
+
+More precisely \begin{align*}
+    &\pi:\tilde C\to C\\
+    &\pi^*:\mc O_C\to \pi_*\mc O_{\tilde C} \\
+    &A_i\hookrightarrow \tilde A_i
+\end{align*} is an isomorphism over dense open subset of $C$.
+
+Thus we are led to think about the question:
+
+\red{What are the $A\subset k[t]$ so that $k[t]$ is a finite module over $A$?}
+
+\begin{example}
+    This is an example of a finite map which is not something that we want. The map \begin{align*}
+        k[t^2]\hookrightarrow k[t]\twoheadrightarrow Q\to 0
+    \end{align*} in particular $Q$ fails to be finite dimensional. In the language of sheaf theory, it is 
+    not finitely supported as a sheaf.
+\end{example}
+
+\begin{example}
+    $k[t^2,t^3]\hookrightarrow k[t]\twoheadrightarrow k\cdot t \to 0$ is a good example. In this case,
+    the dimesnion of this quotient is locally constant (this is part of what we mean by family).
+\end{example}
+
+So ultimately we want to understand subalgebras $A\subset k[[t]]$ so that $\dim k[[t]]/A = d$. Observe that we have a map \begin{align*}
+    q:k[[t]]\twoheadrightarrow k[[t]]/\ideal{t^n} := R_n
+\end{align*} and $q$ induces a correspondence between subalgebras of $A$ which contain $t^n$ and subalgebras of $R_n$.
+We need to see that every such subalgebra of $k[[t]]$ of finite corank contains $\ideal{t^n}$ for some $n$, or equivalently
+that the sequence $A_i\hookrightarrow A_{i+1}$ where $A_i$ is the set of codimension $d$ subalgebras of $k[[t]]$, stablizes.
+This is not clear.
+
+Once we know that this is the case, we can consider for fixed $d$ and varying $n$, the inclusion of corank $d$ subalgebras of $R_n$
+into $\Gr(n-d,R_n)$ the space of linaer subspaces of corank $d$ of $R_n$. Ishii tells that this is a projective variety.
+
+\begin{example}
+    Let $n = 4$ and $d = 2$. Then we are thinking about subalgebras $A\subset \C\oplus \dots \oplus \C\cdot t^4$ of codimension 2.
+    Let $A = \ideal{1,f(t)}$ and since we only care about $f$ up to the ideal it generates with $1$ we may assume that $f(0) = 0$, so 
+    $f = at + bt^2 + ct^3$. Now the condition that $A$ is closed under moltiplication becomes $f^2 = a^2t^2 + 2abt^3$ which is supposed 
+    to be a multiple of $f$ since there are no constant terms, thus we can conclude that $a = 0$. The Grassmannian is parametrized by $a,b,c$ not all zero 
+    identified by scaling and the space of subalgebras is parametrized by $b,c$ not both zero, identified by scaling. Thus we see that the
+    space of subalgebras is $\P^1\subset \P^2$.
+\end{example}
+
+\begin{example}
+    One should think about seeing how this sequence stablizies as we take $n$ large. One can also think about varying $d$. One can also consider the 
+    action of $B = \begin{bmatrix}
+        z & * \\
+        0 & \inv{z}
+    \end{bmatrix}$ for $z\neq 0$ on this territory. The problem Dan gave us is to describe the action. One can also consider the actions
+    of $\C[t]/\ideal{t^n}$ by $\mf G_m$ given by scaling and the automorphism $1/t\mapsto c + 1/t$.
+\end{example}
+
+\newpage
+
+\section{More about territories}
+\red{Why are we thinking about the dimension of this space of algebra homomorphisms? We are thinking about maps
+which are preserving the multiplciation correct?}
+\red{What does this all have to do with singular curves whose normalizations are $\P^1$?}
+
+First some notation:
+
+\begin{definition}
+    Let $A$ be a Noetherian $k$-algebra. Consider the set of subalgebras $B\subset A$ 
+    whose quotients $A/B$ are of dimension $d$.  We denote this set by $\Ter^d A$.
+\end{definition}
+
+\begin{definition}
+
+    Fix an ideal $I\subset A$ and consider the set of subalgebras $B\subset A$ such that $A/B$ is of dimension $d$ and $I\subset B$.
+    We denote this set by $\Ter^{d,I}_A$.
+
+\end{definition}
+
+\begin{definition}
+    If $A$ is a local $k$-algebra with maximal ideal $M$,
+    we denote the set of subalgebras $B\subset A$ such that $A/B$ is of dimension $d$ and $M^r\subset B$ by $\Ter^{d,r}_A$.
+\end{definition}
+
+We are interested in the power series ring $A = k[[t]]$ (which is local with maximal ideal $\ideal{t}$).
+In particular this ring has an obvious valuation $\nu:A\to\N^{\geq 0}$, in particular this function
+has the key property that $\nu(fg) = \nu(f) + \nu(g)$.
+
+
+
+\begin{theorem}
+    [Ishii] If $A$ is an Artinian $k$-algebra, then $\Ter^d A$ is a projective scheme. More precisely, 
+    if we define the functors $F_n:\Sch_k\to \Set$ by \begin{align*}
+        F^d_A(S) = \set{B \mid B\subset A\otimes_k \mc O_S \text{ subalgebra of codimension }d}
+    \end{align*} then $F^d_A$ is representable by a projective scheme, which we denote by $\Ter^d_A$.
+\end{theorem}
+
+\red{We are only going to worry about the $k$ points of this scheme.}
+
+\begin{proposition}
+    [Ishii] The reduced structure of $\Ter^{d,r} A$ does not depend on $r$ for $r\geq 2d$.
+\end{proposition}
+
+\begin{definition}
+    We will denote the aforementioned reduced scheme by $\ter^d A$.
+\end{definition}
+
+In our setting we will only ever worry about the $k$-points of $\ter^d k[[x]]$. In this setting when 
+we only consider the power series ring over $k$, we can actually see that the $k$-points of $\Ter^{d,r}A$
+does not depend on $A$ for $r\geq 2d$ (in particular it is already equal to its reduced structure).
+
+
+
+
+\begin{proposition}
+    The $k$-points of the projective scheme $\Ter^{d,r}_{k[[x]]}$ stabilizes for $r\geq 2d$.
+\end{proposition}
+
+\begin{proof}
+    Let $B\subset k[[t]]$ be a subalgebra of codimension $d$. Consider
+\begin{align*}
+    H_B = \set{\nu(f) \mid f\in B\backslash\set{0}} \subset \N^{\geq 0 }
+\end{align*} This is a semigroup, i.e $H_B\subset \N$ and $H_B$ is closed under addition since valuation 
+is multiplicative. Moreover, it has finitely many gaps because $B$ is finite codimension, in particular
+I claim that $d\geq \# (\N\backslash H_B)$. This is because the set of vectors $\set{t^i\mid i\not\in H_B}$ is linearly independent
+in $k[[t]]/B$. This is because if we had a linear dependence relation \begin{align*}
+    b = \sum_{i\not\in H_B} a_it^i \in B
+\end{align*} then $\nu(b) = \min\{\N\backslash H_B\}$ and this is a contradiction because then $\nu(b)$ is not a gap. Therefore, $\# (\N^{\geq 0}\backslash H_B) \leq d$. 
+
+\hfill
+
+This implies that $\set{2d,2d+1,\dots}\subset H$. To see this, let $k\geq 2$ be the smallest nonzero member of $H$
+and suppose that the largest gap of $H$ is not less than $2d$.
+
+\hfill 
+
+Then $LG,LG-k,\dots, LG-mk$ (stopping before the last term is $<k$) are gaps of $H$ as are $1,\dots, k-1$
+and these are all seperate gaps. Therefore the number of gaps satisfies:
+\begin{align*}
+    \# (\N\backslash H_B) &\geq \ceil{\frac{LG}{k}} - 1 + k - 1 \\
+    &\geq \frac{LG}{k} + k - 2\\
+    &\geq 2\sqrt{LG} - 2 \text{\quad AM-GM inequality}\\
+    &\geq 2\sqrt{2d} - 2 \\
+    &> d\text{\quad for all $d \geq 2$}
+\end{align*} The cases $d = 1$ can be easily checked. 
+This implies the inclusion $\ideal{t^{2d}}\subset B$ because for $n\geq \text{conductor}$,
+we have the existence of \begin{align*}
+    r_n = x^n + \text{ higher order stuff }  &\in B \\
+    r_{n+1} = x^{n+1} + \text{ higher order stuff } &\in B \\
+    \vdots
+\end{align*} and then for any $p\in\ideal{t^n}$ we can write $p = \sum_{i\geq n} a_ir_i$ by just
+looking at the appropriate coefficients. Thus $B$ comes from $\Ter^{d,2d}_{k[[t]]}$.
+\end{proof}
+
+\begin{exercise}
+    Why does this argument break down for subalgebras of $S[t]/(t^n)$ when S is a non-reduced k-algebra?
+    \red{The point is that Ishii's theorem is about the limit of the \textbf{reduced structures}, in particular
+    the claim should not be true in general if you just think about the limit of the schemes.}
+\end{exercise}
+
+\begin{proof}
+    The problem is that valuation no longer need be additive, in particular for $f,g\in S[t]$ we can only say that 
+    $\nu(fg) \geq \nu(f) + \nu(g)$.
+\end{proof}
+
+
+
+\begin{exercise}
+    Consider the Grassmannian of codimension d subspaces of $R_n := k[t]/(t^n)$.
+    Can you describe it via its plucker embedding into a projective space? 
+    In other words, what are the plucker coordinates of a codimension d subspace $A \subset R_n$?
+\end{exercise}
+
+\begin{proof}
+    Let $V$ be an $n$-dimensional vector space. We can put projective coordinates on the Grassmannian as follows. Consider the map \begin{align*}
+        \pi:\Mat(d,n)\to \P(\bigwedge^d V)
+    \end{align*} given by sending a matrix to its Plucker coordinates (defined below). Then the image of $\pi$ is the Grassmannian,
+    in particular we know that the map factors $\Gr(d,V)\to \P(\bigwedge^d V)$ and the resulting 
+    map is injective by the following proposition.
+\end{proof}
+
+\begin{proposition}
+    Consider all $d\times d$ minors $D_\sigma(X)$ of $X\in \Mat(d,n)$, where $\sigma\in\binom{n}{d}$.
+    Then the list of coordinates $(x_\sigma)$ of $\pi(X)$ up to scale identifies the rowspan
+    of $X$ uniquely. The list of coordinates $(x_\sigma)$ of $\pi(X)$ are called 
+    the Plucker coordinates of $X$.
+\end{proposition}
+
+\begin{proof}
+    If $X_1$ and $X_2$ have the same rowspan, then there exists $A\in \GL_d$ such that $X_1 = X_2A$.
+    Then $D_\sigma(X_1) = D_\sigma(X_2A) = D_\sigma(X_2)\det A$. Conversely if $D_\sigma(X_1) = \lambda D_\sigma(X_2)$ for all $\sigma$, then pick some $\sigma$
+    for which both sides are not zero, and then replace $X_1$ by and $\inv{X_{1,\sigma}}X_1$ and 
+    $X_2$ by $\inv{X_{2,\sigma}}X_2$. Note that the row spans are preserved. Moreover $X_1$ and $X_2$ have same set of minors and they both have $I_d$ in their $\sigma$-columns.
+    Now we can extract entries of $X_1$ and $X_2$ by looking at appropriate minors involving $d-1$ columns of the 
+    identity matrix and the mystery column whose entries we want to extract. Doing this will then tell us that $X_1 = X_2$
+    so indeed they have the same row span.
+\end{proof}
+
+\begin{exercise}
+    Let $B \subset \SL_2\C$ Borel subgroup, i.e. matrices of the form \[\begin{bmatrix}
+        z & u \\
+        0 & \inv{z}
+    \end{bmatrix}\] 
+    Describe the action of B by algebra automorphisms of $R_n$.
+\end{exercise}
+
+\begin{proof}
+We have the standard action of $\SL_2\C$ on $\P^1$ given by \begin{align*}
+    \begin{bmatrix}
+        a & b \\
+        c & d
+    \end{bmatrix}\cdot [x:y] = [ax + by: cx + dy]
+\end{align*} and we can see that the action of $B$ is given by \begin{align*}
+    \begin{bmatrix}
+        z & u \\
+        0 & \inv{z}
+    \end{bmatrix}\cdot [x:y] = [zx + uy: \inv{z}x]
+\end{align*} Notice that $B$ is the stablizer of the point $0 = [1:0]$ and that the action of $B$ stablizes
+the affine chart $x\neq 0$. On this chart $U = \Spec k[t]$, we see that $B$ acts by \begin{align*}
+    \begin{bmatrix}
+        z & u \\
+        0 & \inv{z}
+    \end{bmatrix}\cdot [1:t] = [z + ut: \inv{z}t]
+\end{align*} and since $B$ stabilizes $0$ we get an action of $B$ on the stalk at $0$ 
+\red{(Why are we getting an action on the stalk in general? In this example, we sort of
+knew that we were going to get an action on the stalk because we had coordinates for the action
+but what's going on in general?)}, which is
+precisely $k[t]_{t}$ the localization of $k[t]$ at $t$. $B$ acts on this local algebra by 
+\begin{align*}
+    B\cdot t &= \frac{\inv{z}t}{z + ut} \\
+    &= z^{-2}t\cdot \frac{1}{1 + \frac{u}{z}t} \\
+    &= z^{-2}t\cdot \sum_{i\geq 0} \frac{(-1)^i}{z^i}u^it^i \text{ \quad here we really need to be working
+    in the localization }\\
+    &= \sum_{i\geq 1} (-1)^{i+1}u^{i-1}z^{-i-1}t^i
+\end{align*} and there is an induced action on $k[t]/(t^n)$ given by \begin{align*}
+    B\cdot t &= \sum_{1\leq i\leq n-1} (-1)^{i+1}u^{i-1}z^{-i-1}t^i
+\end{align*}\end{proof}
+
+\begin{example}
+    For $n=3$ we get the map $\phi:B\to \Aut(k[t]/\ideal{t^3})$ given by \begin{align*}
+        \phi(z,u) = \begin{bmatrix}
+            1 & 0 & 0 \\
+            0 & z^{-2} & 0 \\
+            0 & -uz^{-3} & z^{-4}
+        \end{bmatrix}
+    \end{align*}
+    One should check that this is indeed a map of groups.
+\end{example}
+
+\begin{exercise}Describe the action on the Grassmannian $\Gr_d(R_n$) of d-dimensional quotients of $R_n$.\end{exercise}
+Before we think about the general case, let's do an example.
+\begin{example}
+    Consider $3$ dimensional subspaces of $k[t]/\ideal{t^4}$. Then the corresponding action on the 
+    Grassmannian can be computed as follows. We have some $4\times 3$ matrix which we are 
+    thinking of as up to row span and then we apply our action: \begin{align*}
+        \begin{bmatrix}
+            1 & 0 & 0 & 0\\
+            0 & z^{-2} & 0 & 0\\
+            0 & -uz^{-3} & z^{-4} & 0 \\
+            0 & u^2z^{-4} & -uz^{-5} & z^{-6}
+        \end{bmatrix}\begin{bmatrix}
+            a & b & c \\
+            d & e & f \\
+            g & h & i \\
+            j & k & l
+        \end{bmatrix} &= \\ \begin{bmatrix}
+            a & b & c \\
+            dz^{-2} & ez^{-2} & fz^{-2} \\
+            -duz^{-3} + gz^{-4} & -euz^{-3} + hz^{-4} & -fuz^{-3} + iz^{-4} \\
+            u^2z^{-4}d - uz^{-5}g + z^{-6}j & u^2z^{-4}e - uz^{-5}h + z^{-6}k & u^2z^{-4}f - uz^{-5}i + z^{-6}l
+        \end{bmatrix}
+    \end{align*}
+    Now let's take a look at what happened to the Plucker coordinates:
+    \begin{align*}
+        D_{123} &\to z^{-6}D_{123} \\
+        D_{124} &\to -uz^{-7}D_{123} + z^{-8}D_{124}\\
+        D_{134} &\to u^2z^{-8}D_{123} - uz^{-9}D_{124} + z^{-10}D_{134}\\
+        D_{234} &\to z^{-12}D_{234}
+    \end{align*}
+\end{example}
+
+Now it becomes more clear what is going on. In general now, if I am thinking about 
+$d$-dimensional subspaces of $k[t]/\ideal{t^n}$, then the action of $B$ is given by
+\begin{align*}
+    D_{\sigma} \to \sum_{\tau\leq \sigma} \alpha_{\sigma,\tau}D_\tau \texty{if $\sigma_1 = 1$} \\
+    D_{\sigma} \to  \sum_{\tau\leq \sigma,\tau_1\neq 1} \alpha_{\sigma,\tau}D_\tau \texty{if $\sigma_1 \neq 1$}
+\end{align*} where $\alpha_{\sigma,\tau}$ is a monomial in $z,u$. In particular if we stare at it, we see that
+the coefficient \begin{align*}
+    \alpha_{\sigma,\tau} = \prod_{1\leq i \leq d} (-1)^{\delta_i}u^{\delta_i}z^{-2(i-1)-\delta_i}
+\end{align*} where $\delta_i = \tau_i - \sigma_i$.
+\begin{exercise}
+    The Plucker coordinates can be chosen to be eigenvectors for the action of the diagonal matrices $\Gm \subset B$. 
+    Given a codimension d subspace $A \subset R_n$, find the lowest and highest weight among all plucker coordinates that are non-vanishing on $A$ 
+    (regarded as a point of $Gr_d(R_n)$).
+\end{exercise}
+
+\begin{proof}
+    Put $u=0$ in the previous calculation. It is clear that $D_{12\dots d}$ is the lowest eigenvector
+    and $D_{(n-d+1)(n-d+2)\dots n}$ is the highest eigenvector. 
+    They have weights $0 + 2 + \dots + (2d-2) = d(d-1)$
+    and $2(n-d) + \dots + 2(n-1) = 2nd - d(d+1) = d(2n-d-1)$ respectively.
+\end{proof}
+
+
+\begin{remark}
+    Following these exercises, we will be able to say which subalgebras are semistable, using the HM criterion.
+     (This doesn't usually apply in the non-reductive group setting, but it's worth asking anyway here. 
+     Once we get to the global moduli problem, we will be able to apply the HM criterion more honestly.)
+\end{remark}
+
+\section{Nice writeup for GL2}
+We want to understand the rational representations of $\GL(2,\C)$ as an algebraic group. We can classify the irreducible ones by their restriction to tori. In particular 
+we know that rational representations of tori as algebraic groups decompose into weight spaces for the character action. Thus we get ahold of the weight lattice. 
+
+Specifically these are integers that are indexing the action of the maximal Cartan subalgebra $\mf h \subset \gl(2,\C)$. There is a symmetry around the line $y=x$. This reflects the theory 
+of the highest weight for $\sl(2,\C)$. Tensoring by the determinant allows us to span the rest of the lattice. This stems from the following circumstance. For any Lie algebra $\mf g$ we can 
+consider a maximal solvable subalgebra $\rad \mf g$ (note the sum of two solvable subalgebras is solvable). Then there is a short exact sequence (not necessarily split) \begin{align*}
+    0\to \rad\mf g\to \mf g \to \mf g_{ss} \to 0
+\end{align*} where $\mf g$ is semisimple. This means that $\mf g$ decomposes as a direct sum of simple Lie algebras. We want to reduce to the case of $\mf g$ semisimple because 
+we have a classification theory of complex semisimple Lie algebras, namely by abstract root systems and Dynkin diagrams.
+
+Then we have the following proposition:
+\begin{proposition}
+    If $V$ is a finite dimensional irrep of $\mf g$, then $V \cong V_0 \otimes L$ where $V_0$ is a irreducible representation of $\mf g_{ss}$ and $L$ is one dimensional.
+\end{proposition}
+Also note, that the key idea involved in passing backwards from representations of $G$ to representations of $\mf g$ is the condition that $G$ is connected, so in that case we can recover what is happening 
+everywhere simply by understanding what is happening near the identity.
+
+Finally we can make some remarks about territories. 
+
+\subsection{Characters of tori}
+In this section we examine the following statement (which doesn't make sense yet):
+\begin{theorem}
+    Let $T$ be a torus of rank $n$ and $\chi$ character of $T$. 
+    Then $\chi(t_1,\dots,t_n) = (t_1)^{a_1}\dots (t_n)^{a_n}$ for some $a_i\in \Z$.
+\end{theorem}
+We can make sense of this statement in a bunch of ways. If you are a topologist,
+you might want to think of $T \cong S^1 \times \dots \times S^1$ real tori and in this case, 
+characters can be thought of 1-dimensional irreducible representations of $S^1$ (recall every
+finite dimensional irrep of an abelian group is $1$ dimensional). This is the same 
+as asking for continuous group maps $T\to S^1$ (because the image of $S^1\to \GL(1,\C)$ is maximal compact connected). Then the statement 
+is clear because all characters of $S^1$ are of the form $x\mapsto \exp(2\pi in x)$ for $n\in \N$ (look 
+at the universal covering map).
+
+\hfill
+
+If you are an algebraic geometer, you might worry about complex tori, which are products of $\C^* \cong S^1\times \R^{x}_{>0}$ and
+we have an isomorphism $\R\cong \R^x_{>0}$ given by $z\mapsto \log z$. In this case, you can consider
+characters of $\C^*$ as continuous group homomorphisms $\C^*\to\C^*$ (1-dimensional representations of $\C^*$) and you really want to restrict to maps $z\mapsto z^n$ for $n\in \Z$. 
+
+\red{However, it is not clear why to me we disallow maps of the form $z \mapsto z^n/\abs{z}$. If you simply 
+ask for continuous group homomorphisms $\C^*\to \C^*$, then don't you end up with this map? No!! In fact it will
+not be continous because you will pick up an $\arg z$ term which will then be discontinous along the positive real axis.}
+
+
+Why do I care? I want to talk about the weight lattice, so in particular I need to know that the weights
+form a lattice (a lattice is a free finitely genearated abelian group). Later on I want to talk 
+about the weight lattice of a maximal torus $ T\subset \GL_2$. The theory of the highest weight tells us
+that we can also identify this lattice with the $\Z$-span of the "fundamental weights."
+
+\subsection{Fundamental weights}
+
+\subsection{The root system for $\mf{gl}_2$}
+We begin by decomposing the adjoint representation of $\mf{gl}_2$ into eigenspaces for the action of $\mf h$. Observe that we have \begin{align*}
+    [\begin{bmatrix}
+        a & 0 \\
+        0 & b
+    \end{bmatrix},E] = \begin{bmatrix}
+        0 & a-b \\
+        0 & 0
+    \end{bmatrix} = (a-b)E \\
+    [\begin{bmatrix}
+        a & 0 \\
+        0 & b
+    \end{bmatrix},F] = \begin{bmatrix}N
+        0 & 0 \\
+        b-a & 0
+    \end{bmatrix} = (b-a)F
+\end{align*} Define $\alpha \in \mf h^*$ by $\alpha(\begin{bmatrix}
+    a & 0 \\
+    0 & b
+\end{bmatrix}) = a-b$. Then we can rewrite our formulas as \begin{align*}
+    [h,E] = \alpha(h)E \\
+    [h,F] = -\alpha(h)F
+\end{align*} and we can further observe $[\mf h,\mf h] = 0$ and $[E,F] = \begin{bmatrix}
+    1 & 0 \\
+    0 & -1
+\end{bmatrix}$. Now let $V$ be a finite dimensional representation of $\mf{gl}(2,\C)$. 
+Then we can decompose $V$ into eigenspaces for the action of $\mf h$ and obtain the following 
+direct sum decomposition: \begin{align*}
+    V = \bigoplus_{\lambda\in \mf h^*} V_\lambda
+\end{align*} where $V_\lambda = \set{v\in V \mid hv = \lambda(h)v \text{ for all } h\in \mf h}$.
+\begin{remark}
+    Note that if we allow $V = \gl(2,\C)$, then we saw via direct compuation above that $\gl(2,\C) = \mf h \oplus \mf g_\alpha \oplus \mf g_{-\alpha}$
+    where $\mf g_\alpha = \set{x\in \mf g \st [h,x] = \alpha(h)x}$ is nothing more than the linear span of $E$, likewise $F$ for $\mf g_{-\alpha}$.
+\end{remark}
+To obtain this decomposition in general, we need to know that commuting diagonalizable operators are simultaneously diagonalizable. If $A$ and $B$ commute 
+and are diagonalizable, then we see that $BAx = ABx = \lambda Ax$
+and so $A$ preserves the eigenspaces of $B$. Being diagonalizable $B$ has 1-dimensional eigenspaces and
+so $A$ actually sends a basis element of the $B$ eigenspace to a scalar multiple of itself. 
+This means that any eigenbasis of $B$ is also an eigenbasis of $A$ and so $A$ and $B$ are simultaneously diagonalizable.
+
+Let $\lambda\in\mf h^*$ so that $V_\lambda$ is non-zero. Then a similar calculation shows that
+all of the weights of $V_\lambda$ are related via integer translates of $\alpha$. Thus we want to 
+understand the weights of $V_\lambda$ for $\lambda\in \mf h^*$ modulo integer translates of $\alpha$.
+
+It is the case that the weights that are appear are precisely the ones which are integral. This is
+tautological until I tell you what integral means. 
+
+
+\newpage
+
+\begin{thebibliography}{99}
+
+\bibitem{hartshorne}
+Hartshorne, R. (1977). \textit{Algebraic Geometry}. Springer.
+
+\bibitem{waterhouse}
+Waterhouse, W. C. (1996). \textit{Introduction to Affine Group Schemes}. Springer.
+
+\bibitem{hochschilds}
+Hochschild, G. (1961). \textit{Basic Theory of Algebraic Groups and Lie Algebras}. Springer.
+
+\bibitem{chin}
+Chin, W. (2019). \textit{A Brief Introduction to Coalgebra Representation Theory}.
+
+\bibitem{santos}
+Santos, F. (2012). \textit{Algebraic Groups}.
+
+\bibitem{orr}
+Orr, M. (Blog). \textit{https://www.martinorr.name/blog/}.
+
+\bibitem{milne}
+Milne, J. S. (2017). \textit{Algebraic Groups: The Theory of Group Schemes of Finite Type over a Field}. Cambridge University Press.
+
+\bibitem{hoskins}
+Hoskins, T. (Lecture Notes). \textit{https://www.maths.ed.ac.uk/~thoskins/teaching/alggroups/}.
+
+\bibitem{isaac}
+Isaac, S. (Lecture Notes). \textit{https://www.math.ubc.ca/~isaac/math340/vectorbundle.pdf}.
+
+\bibitem{green}
+Green, J. A. (1965). \textit{Locally Finite Representations}.
+
+\bibitem{uchicago}
+University of Chicago (Lecture Notes). \textit{https://classes.cs.uchicago.edu/archive/2003/spring/38600-1/Lec4.pdf}.
+
+\bibitem{umich}
+University of Michigan (Course Notes). \textit{https://dept.math.lsa.umich.edu/~speyer/668/CourseNotes.pdf}.
+
+\bibitem{uoregon}
+University of Oregon (Lecture Notes). \textit{https://pages.uoregon.edu/belias/WARTHOG/infcomm/LectureNotes/Lecture7Notes.pdf}.
+
+% \bibitem{luminy}
+% Brion, M. (Lecture Notes). \textit{https://www-fourier.ujf-grenoble.fr/~mbrion/notes_luminy.pdf}.
+
+\bibitem{fultonharris}
+Fulton, W., \& Harris, J. (1991). \textit{Representation Theory: A First Course}. Springer.
+
+% \bibitem{usc}
+% University of Southern California (Lecture Notes). \textit{https://dornsife.usc.edu/assets/sites/618/docs/Algebraic_Groups.pdf}.
+
+\end{thebibliography}
+\end{document}
+

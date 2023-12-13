@@ -1,0 +1,89 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{scribe}
+\usepackage{listings}
+\usepackage{quiver}
+\usepackage{tikz}
+
+
+
+\begin{document}
+
+% \section{brainstorming}
+% I've been interested in these cool invariants like equivariant cohomology and Borel construction and characteristic classes (Euler class and Chern vector bundles) and Serre spectral sequence, these invariants that you actually work with in your papers and I would really love to learn more about.
+% \begin{enumerate}
+%     \item I was looking at these papers. There's a lot of things I don't understand, but also a lot of things that I found very exciting. I liked looking at the pictures. I thought things were very concrete and they involved a lot of cool machinery that I've sort of been learning about in my coursework that I found very interesting.
+%     \item I want to learn about the equivariant cohomology of toric surfaces.
+%     \item https://arxiv.org/pdf/1507.05972.pdf
+%     \item https://arxiv.org/abs/1912.05647 
+%     \item https://arxiv.org/pdf/0710.5295.pdf
+% \end{enumerate}
+
+% \section{Email to Tara}
+% This semester, I happened to be learning GIT with Dan Halpern-Leistner and learning about toric varieties with Allen. We also talked about toric surfaces in the seminar. Lately I've been getting very interested in the story of quotients in symplectic/algebraic geometry and their cohomology. In terms of what I understand, I have some graduate coursework in algebraic geometry, Lie theory, algebraic topology, but not so much experience with symplectic geometry.
+
+% I was looking at a couple of your papers. 
+
+% From your survey paper in 2007, I'm interested in the technique of using localization to compute equivariant cohomology, pictorial representations of equivariant cohomology classes.
+
+% Some algebraic geometry stuff that you wrote down that was interesting to me:
+
+% "Brion has proved an analogue for the equivariant Chow groups for non- singular projective varieties with (algebraic) torus actions [Br] Knutson and Rosu have established the result in rational equivariant K- theory [KR, Appendix]. Harada and Landweber have used the work mentioned in Item E to give a careful proof for the integral K-theory of Hamiltonian T -spaces satisfying Assumptions 1 and 2 [HL]. Braden and MacPherson studied singular projective varieties with torus actions, and their equivariant intersection cohomology [BM]."
+
+% I also looked at section 5 of your 2019 paper where you look at generators and relations presentation of the equivariant cohomology modules in the minimal models. I didn't understand but I liked the pictures and the computations and would also be interested in learning more.
+
+% Basically, I'm interested in learning more about all of this heavy machinery but I also want to get my hands dirty and be able to compute stuff. 
+
+\section{Meeting with Tara}
+Let $T = S^1\times \dots \times S^1$ compact torus. We have equivariant cohomology $H^*_T(M)$ which is a cohomology theory telling us about $T$ acting on $M$. It is a "generalized" cohomology theory, i.e. $H_T^*(*) \neq $ ground ring, in particular we can compute \begin{align*}
+    H^*_{S^1}(*) = H^*(X/S^1)
+\end{align*} where $X$ is some contractible space with free $S^1$-action. Well, $S^1$ acts on $S^1,S^3,S^5,\dots$ and so we can let $X = S^{2\infty -1}$ and then $X = S^\infty/ S^1 = \C\P^\infty$. One can show that all such $X$ are homotopy equivalent and so this definition ("homotopy quotient", "Borel construction") and so we see that \begin{align*}
+    H^*_{S^1}(*) = \Z[x]
+\end{align*} with $\deg x = 2$ and moreover we can do the same construction to get that \begin{align*}
+    H^*_{T}(*) = \Z[x_1,\dots,x_n] \cong \Sym(\mf t^*)
+\end{align*} where $\mf t = \Lie(T)$ and we identify $\mf t^*\cong\R^n$. 
+
+\hfill
+
+Consider the map $i:M^T\to M$ which is trivially $T$-equivariant. We get a reverse map on $T$-equivariant cohomology \begin{align*}
+    i^*:H^*_T(M) \to H_T^*(M^T) \cong M^*_T(*)\otimes H^*(M^T) \text{ \red{thm}}
+\end{align*} This map is injective \red{thm}. Sometimes we can describe $\im(i^*)$ in the case of toric varieties and flag varieties. \red{This is what we are computing with the pictures} 
+
+\hfill
+
+\begin{theorem}
+    There is a 1-1 correspondence between compact toric sympletic manifolds $M^{2n}$ and rational (edges point in lattice directions) regular ($n$ vertices at each vertex) smooth (edge vectors form $\Z$-basis for lattice) polytopes $\Delta\subset\R^n$. The forward direction is look at the image of the moment map. The other way, what we can do is given the data of the hyperplanes $\set{\lambda_i,a_i}$ the normal vectors gives us $1\to K\to T^n\to T\to 1$, and we can form $M_\Delta = \C^d // K$.
+
+\end{theorem}
+Then the moment map $\mu:M\to\mf t^*$, we can look at the level set of some particular $\alpha$ (coming from a choice of hyperplanes) and then $\mu^{-1}(\alpha) \subset M$ induces $k_T:H^*_T(M)\to H^*_T(\mu^{-1}(\alpha))$ \red{sometimes (thm)} $\cong H^*(\mu^{-1}(*)) = H^*(M_\Delta)$ and Kirwan showed that this map $k_T$ is in fact a surjection. Then there is a diagram 
+\[\begin{tikzcd}
+	{H^*_T(\C^d)} & {H^*_T(M_\Delta)} \\
+	{H^*_K(\C^d)} & {H^*_K(M_\Delta)}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}\] and the theorem is that the kernel of this surjection is generated by two sorts of relations, relations coming from the choice of embedding of polytope \red{should be related to the choice of linearization in the GIT story} and relations generated by all of the monomials corresponding to the facets which don't intersect \red{here we are viewing T-invt submanifolds as cohomology classes}
+
+\begin{example}
+    Consider the moment polytope given by a square. The equivariant cohomology of $\C\P^2\times\C\P^2$ is given by \begin{align*}
+        H_T^*(M) \cong \Z[x_1,\dots,x_4]/\ideal{x_1x_3,x_2x_4,x_1-x_3,x_2-x_4} 
+    \end{align*} which we see is actualy equal to the ordinary cohomology of $\C\P^2\times\C\P^2$. 
+\end{example}
+
+\begin{example}
+Consider the Hirzebruch surface which has moment polytope looking like trapezoid. Then Tara is able to compute the equivariant cohomology \begin{align*}
+    H_T^*(M) \cong \Z[x_1,\dots,x_4]/\ideal{x_1x_3,x_2x_4,x_1-x_3-x_2,x_4-px_2} 
+\end{align*} Those linear relations are coming from looking at the sum of the normal vectors.
+\end{example}
+
+The machinery that allows us to compute these things are these sort of localization theorems of Atiyah-Bott in equivariant cohomology. We have this integration formula that Tara wrote down on the board: \begin{align*}
+    \pi_*\alpha = \sum_F \frac{\pi_*(\alpha\vert_F)}{e_T(\nu(F\subset M))}
+\end{align*} We used this formula in the two examples to compute something.
+
+\red{keywords: localization theorems of equivariant cohomology}
+
+\section{email tara, allen}
+\end{document}
