@@ -3,8 +3,6 @@
 /.DS_Store
 /ml.pdf
 /references.pdf
-
-
-/.gz
-/.tex
-/.sty
+*.gz
+*.tex
+*.sty
