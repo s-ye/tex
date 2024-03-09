@@ -1,0 +1,56 @@
+% \bib, bibdiv, biblist are defined by the amsrefs package.
+\begin{bibdiv}
+\begin{biblist}
+
+\bib{borel}{book}{
+      author={Borel, Armand},
+       title={Linear algebraic groups},
+   publisher={Springer-Verlag},
+     address={New York},
+}
+
+\bib{bourbaki}{book}{
+      author={Bourbaki, Nicolas},
+       title={Lie groups and lie algebras: chapters 1-3},
+   publisher={Springer-Verlag},
+     address={Berlin},
+}
+
+\bib{fulton}{book}{
+      author={Fulton, William},
+       title={Young tableaux: with applications to representation theory and geometry},
+   publisher={Cambridge University Press},
+     address={Cambridge},
+}
+
+\bib{fulton-harris}{book}{
+      author={Fulton, William},
+      author={Harris, Joe},
+       title={Representation theory: a first course},
+   publisher={Springer-Verlag},
+     address={New York},
+}
+
+\bib{lee}{book}{
+      author={Lee, John~M.},
+       title={Introduction to smooth manifolds},
+   publisher={Springer-Verlag},
+     address={New York},
+}
+
+\bib{milne}{book}{
+      author={Milne, James~S.},
+       title={Algebraic groups: the theory of group schemes of finite type over a field},
+   publisher={Cambridge University Press},
+     address={Cambridge},
+}
+
+\bib{waterhouse}{book}{
+      author={Waterhouse, William~C.},
+       title={Introduction to affine group schemes},
+   publisher={Springer-Verlag},
+     address={Berlin-New York},
+}
+
+\end{biblist}
+\end{bibdiv}
