@@ -1,0 +1,215 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\begin{document}
+Songyu Ye
+
+\today
+
+This is a note for my talk with Mike Stillman on 5/2/2024. We are talking about the Chow ring of projective bundles and some
+applications thereof.
+
+\section{Introduction}
+\begin{definition}
+	A projective bundle on a scheme $X$ is a fiber bundle $\pi:\cE\to X$ where every $x\in X$ has a
+	Zariski open set for which $\pi^{-1}(U)\cong U\times \P^n$ for some $n$.
+\end{definition}
+
+To every vector bundle over $X$ we can associate a projective bundle by
+"projectivizing the fiber". Formally we define \begin{align*}
+	\P\cE := \Proj_X(\Sym \cE^*)
+\end{align*}
+to be the projective bundle associated to $\cE$. The projective bundle $\P\cE$
+comes with a tautological line bundle $\cO_{\P\cE}(-1) \subset \pi^*\cE$, whose fiber over $x\in \P\cE$
+are the points $v\in \cE_x$ such that $v\in x$.
+
+\hfill
+
+$\P\cE$ comes with the following universal property: Consider
+any other projective bundle $p:Y\to X$. Then maps $Y\to \P\cE$ are in bijection
+with line subbundles $\cL\subset p^*\cE$. Given a map $f:Y\to \P\cE$, the corresponding
+line subbundle is the pullback of $\cO_{\P\cE}(-1)$ along $f$. Conversely,
+given a line subbundle $\cL\subset p^*\cE$, the corresponding map $Y\to \P\cE$ is the
+map $y\mapsto [\cL_y] \in \P\cE$ is the fiber $\cL_y\subset \cE_{p(y)}$.
+
+\section{Defining projective bundles}
+One can ask the question if every projective bundle arises as the projectivization of a vector bundle.
+The answer is yes. Moreover, one cannot recover $\cE$ from $\P\cE$ as a vector bundle,
+one can only recover it up to twist by a line bundle. We prove these claims now.
+
+\hfill
+
+Consider the bundle $\cE^*$ and its pullback $\pi^*\cE^*$. There is a surjection
+$\pi^*\cE^*\to \cO_{\P\cE}(1)$ coming from dualizing the inclusion of tautological
+bundle. Concretely this map over a fiber $(x,\zeta) \in \P\cE$ takes a linear form on
+$\cE_x$ to the restriction of that form to $\zeta\subset \cE_x$. Therefore,
+global sections $\sigma$ of $\cE^*$ give rise to sections $\tilde\sigma$
+of $\cO_{\P\cE}(1)$. The total space of $\cO_{\P\cE}(1)$ is over each $(x,\zeta)\in \P\cE$
+are the linear functionals on $\zeta$.
+
+\hfill
+
+Say $\cE^*$ has a global section $\sigma$. We consider the zero locus of $\tilde\sigma$.
+Over $\P\cE$ the zero locus will meet generic fiber in a hyperplane, except for when
+$\sigma$ is zero. In this case, the zero locus will meet the whole fiber.
+
+\hfill
+
+This allows us to characterize projective bundles as follows:
+
+\begin{theorem}
+	Let $\pi: Y\to X$ smooth morphism of projective schemes whose
+	scheme-theoretic fibers are all $\cong \P^r$. TFAE:
+	\begin{enumerate}
+		\item $Y$ is the projective bundle associated to a vector bundle $\cE$ over $X$.
+		\item $Y$ is a projective bundle over $X$.
+		\item There is a line bundle $\cL$ on $Y$ whose restriction to each fiber
+		      is isomorphic to $\cO_{\P^r}(1)$.
+		\item There is a Cartier divisor $D\subset Y$ intersecting a general fiber
+		      of $\pi$ in a hyperplane.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	(1)$\Rightarrow$(2),(3) is clear.
+
+	\hfill
+
+	(3)$\iff$(4) is true. Given a divisor $D$, the corresponding line bundle restricted to
+	a general fiber is $\cO_{\P^r}(1)$ and then by flatness the same is true for all fibers.
+	Conversely, given a line bundle $\cL$ as in part (c) we can tensor with the
+	pullback of an ample line bundle from $X$ to get a nonzero global section of $\cL$,
+	whose zero locus is the desired divisor.
+
+	\hfill
+
+	(2)$\Rightarrow$(4): Trivialize over $U$ and choose a hyperplane $H\subset \P^r$ and take
+	$D$ the closure of $U\times H$ in $U\times \P^r$.
+
+	\hfill
+
+	(3)$\Rightarrow$(1):
+\end{proof}
+
+\section{Chow ring of projective bundles}
+We now compute the Chow ring of a projective bundle. The statement is as follows:
+
+\begin{theorem}
+	Let $\cE$ rank $r+1$ vector bundle on smooth projective scheme $X$ and let
+	$\zeta = c_1(\cO_{\P\cE}(1)) \in A^1(X)$. Then the Chow ring of $\P\cE$ is
+	\begin{align*}
+		A(\P\cE) = \Z[\zeta]/(\zeta^{r+1} + c_1(\cE)\zeta^r + \cdots + c_r(\cE))
+	\end{align*}
+	In particular the pullback map $\pi^*: A^*(X) \to A^*(\P\cE)$ is injective and
+	there is an isomorphism of groups $A(X)^{r+1} \cong A(\P\cE)$ via \begin{align*}
+		(a_0,\ldots,a_r) \mapsto \pi^*(a_0)\zeta^r + \cdots + \pi^*(a_r)
+	\end{align*}
+\end{theorem}
+
+The fact that the pullback map is injective rests on the following claim which I don't
+quite understand:
+
+\begin{lemma}
+	We have \begin{align*}
+		\pi_*(\zeta^i\pi^*(a)) = \begin{cases}
+			                         a & i = r \\
+			                         0 & i < r
+		                         \end{cases}
+	\end{align*}
+\end{lemma}
+
+One argues this using the push-pull/projection formula, which I am not sure
+why is true:
+
+\begin{theorem}
+	For $f:X\to Y$ a morphism of ringed spaces and $\cF$ a sheaf of $\cO_X$-modules,
+	$\cG$ locally free of finite rank, there is a natural isomorphism \begin{align*}
+		f_*(\cF\otimes f^*\cG) \cong f_*(\cF)\otimes \cG
+	\end{align*}
+\end{theorem}
+
+\begin{remark}
+	What is this theorem really saying?
+	One interpretation that sort of made sense to me from reading online is
+	in terms of differential forms and thinking about the pushforward of a form as
+	integration along the fiber.
+\end{remark}
+
+With the projection formula we conclude that \begin{align*}
+	\pi_*(\zeta^i\pi^*(a)) = \pi_*(\zeta^i)a
+\end{align*} and $\pi_*(\zeta^i) = 0$ for $i < r$ because of dimension reasons.
+In particular the pushforward of a cycle along a proper map is a cycle
+of the same dimension. This is by definition because Fulton defines \begin{align*}
+	\pi_*([V]) := \deg(V/W)[W]
+\end{align*} where $V$ closed subvariety, $W = f(V)$ and $\deg(V/W)$ is the degree of the
+field extension, which is put to zero if $\dim W \neq \dim V$.
+
+\begin{remark}
+	The projection formula is about sheaves, but here we are talking about the Chow ring.
+	Why should the way that pushforward is defined for sheaves agree with the
+	way that pushforward is defined for cycles?\end{remark}
+
+Finally we have $\pi_*(\zeta^r) = 1$. It is a multiple $m$ of the fundamental class of $X$.
+Consider $\eta$ the class of a point in $X$. It pulls back to the class of a fiber
+$[\P\cE_x]$. Intersecting both sides with $\eta$ we get that \begin{align*}
+	m = \deg(\pi_*(\zeta^r)\cdot \eta) = \deg(\zeta^r\cdot \pi^*(\eta)) = 1
+\end{align*} since the restriction of $\zeta$ to a fiber is the class of a hyperplane.
+
+\hfill
+
+The rest of the proof is quite techincal. First one shows that subvarieties of $\P\cE$ can 
+be expanded in terms of the $\zeta^i$. This is similar to the computation for 
+$\P^n$ where we can expand a subvariety in terms of the hyperplane class.
+Then one shows that $\zeta^{r+1}$ can be 
+expanded in terms of the lower powers of $\zeta$ and there can only be one relation
+because of the additive presentation of the Chow ring. Finally one writes down the relation 
+by looking at Chern classes of the exact sequence \begin{align*}
+    0\to \cO_{\P\cE}(-1) \to \pi^*\cE \to \cQ \to 0
+\end{align*} \red{The hard part is the first step and to be honest,
+I omit the proof because I don't quite understand it.}
+
+\section{Example: rational normal scrolls}
+
+\begin{claim}
+    Every vector bundle on $\P^1$ is a direct sum of line bundles.
+\end{claim}
+
+\begin{remark}
+    I quite like the proof of this fact.
+\end{remark}
+
+\begin{proof}
+    An exact sequence of vector bundles \begin{align*}
+        0 \to \cE \to \cF \xrightarrow{\alpha} \cG \to 0
+    \end{align*} splits iff $\alpha$ has a right section. This is the case iff
+    the following sequence is exact \begin{align*}
+        0 \to \Hom(\cG,\cE) \to \Hom(\cG,\cF) \to \Hom(\cG,\cG) \to 0
+    \end{align*}
+    and this is the case if and only if $H^1(\Hom(\cG,\cE)) = H^1(\cG^*\otimes \cE) = 0$.
+
+    Suppose $\cE$ is a rank 2 vector bundle on $\P^1$ of degree $d$.
+    By Riemann Roch we have \begin{align*}
+        h^0(\cE) \geq d + 2
+    \end{align*}
+    so there exists a nonzero global section of $\cE$ vanishing at $m\geq d/2$ points
+    of $\P^1$. 
+
+    Therefore $\cO_{\P^1}(m) \subset \cE$ and we have \begin{align*}
+        0 \to \cO_{\P^1}(m) \to \cE \to \cO_{\P^1}(m-d) \to 0
+    \end{align*} and since $2m - d\geq 0$ we get that $H^1(\cO_{\P^1}(2m-d)) = 0$
+    and the sequence splits.
+
+    Inductively we have \begin{align*}
+        0 \to \cO_{\P^1}(m) \to \cE \to \cF \to 0
+    \end{align*} where $m$ is the maximal degree
+    of a subline bundle and where $\cF$ splits as a direct sum of line bundles $\cL_i
+    \cong \cO_{\P^1}(m_i)$ with $m_i \leq m$. Thus the sequence splits.
+\end{proof}
+
+\end{document}

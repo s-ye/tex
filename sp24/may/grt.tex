@@ -1,0 +1,80 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\begin{document}
+Songyu Ye
+
+\today
+
+This is a note from my discussion with Allen on May 10, 2024. Today we 
+discussed some various things from GRT.
+
+\section{Affine Grassmannian}
+Let $S$ be the standard lattice.
+Recall we have the affine Grassmannian $\Gr_G = G(\C((t)))/G(\C[t])$ and a
+stratification by open cells \begin{align*}
+    \Gr^\lambda
+\end{align*} consisting of those $\lambda$s for which our nilpotent operator \begin{align*}
+    t\vert_{t^{-b}S/L}
+\end{align*} has Jordan form $\lambda + b(1, 1, \ldots, 1)$.
+
+\begin{theorem}
+    [Lusztig] The intersection cohomology $IH^*(\Gr^\lambda)$ is isomorphic to $V_\lambda$
+    as a representation of $G^\vee$.
+\end{theorem}
+
+\begin{example}
+    When $G = G^\vee = \GL(n)$ and $\lambda = \omega_k$ we end up with the 
+    classical statement \begin{align*}
+        IH^*(\Gr^{\omega_k}) &= H^*(\Gr(k,n)) \\
+        H^*(\Gr(k,n)) &\cong V_{\omega_k}
+    \end{align*}
+\end{example}
+\section{Tannakian reconstruction}
+
+\section{Intersection cohomology}
+Some motivation is coming from analysis. In analysis we have $L^1$ functions and
+$L^\infty$ functions and the latter in fact forms a ring, the former forming a 
+module over this ring. One should think of this as $L^1$ is about 
+homology and $L^\infty$ is about cohomology. Moreover $L^1$ functions have a pushforward to a
+point, called integrate the function. 
+
+\hfill
+
+Now consider the role of $L^2$ functions. They form an inner product space and establish
+Poincare duality, where we can pair $L^1$ functions with $L^\infty$ functions.
+This is the intersection cohomology with "middle perversity".
+
+\hfill
+
+\begin{remark}
+    Historically there are other perversities but the middle perversity gets the most mileage.
+\end{remark}
+
+Algebraic varieties can be stratified by smooth manifolds. The intersection cohomology
+is defined in terms of a particular stratification, with the property that if I take 
+two stratifications and take their refinement, I will get the same answer.
+The way one can think of it is as singular chains where the simplices are transverse
+to the stratification.
+
+\begin{example}
+    Consider the toric variety corresponding to the moment polytope the Pyramid of Gyza tilting
+    on one side about to tip over. Picking a one-parameter subgroup corresponds to 
+    projeccting the moment polytope onto the height. Consider the attracting sets of this one parameter subgroup.
+
+    \hfill
+
+    Bialynicki-Birula decomposition says that the attracting set forms a basis for the
+    equivariant cohomology of the toric variety. However we have this singular point, whose 
+    attracting set is reducible, it is the union of two copies of $\P^2$ along $\P^1$. 
+    Indeed the homology of the toric variety is five dimensional, corresponding to the 
+    five attracting sets. However the intersection cohomology is six dimensional, corresponding
+    to breaking up the reducible attracting set into two pieces.
+\end{example}
+\end{document}

@@ -1,0 +1,216 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\begin{document}
+Songyu Ye
+
+\today
+
+\hfill
+
+We want to understand the following statement.
+
+\begin{theorem}
+    Let $(M,\omega)$ be a symplectic manifold. Suppose that $[\omega]$ is integral. Then 
+there exists a "prequantization" line bundle $\cL \to M$ with $c_1(\cL) = [\omega]$ and a Hermitian connection $\alpha$
+whose corresponding curvature form is $\omega$. Moreover $\cL$ is unique up to isomorphism 
+(but still requires a particular choice). 
+\end{theorem}
+
+\section{Vector bundles and connections}
+\subsection{Parallel transport}
+One way to think about a connection is to consider parallel transport. You want to 
+be able to differentiate sections of a vector bundle along paths. When we are dealing with functions,
+we can form the directional derivative  \begin{align*}
+    ds(x)X = \lim_{t\to 0}\frac{s(\gamma(t)) - s(\gamma(0))}{t}
+\end{align*} for any smooth path $\gamma$ representing the tangent vector $X\in T_xM$ 
+and this expression gives us a linear map $ds(x):T_xM\to E_x$.
+
+\hfill 
+
+However if $E$ is a nontrivial bundle, then this expression does not make sense because the
+ summands live in different fibers. There is unfortunately no natural way to 
+ compare vectors in different fibers. Therefore we need to introduce additional structure to 
+ be able to compare these fibers.
+
+
+\hfill
+
+For a general vector bundle $E\to M$, we want to associate, to a path $\gamma$ in $M$, a smooth family of 
+parallel transport isomorphisms $P^t_\gamma: E_{\gamma(0)}\to E_{\gamma(t)}$ such that \begin{itemize}
+    \item $P^0_\gamma = \id$
+    \item $P^t_{\gamma_1\cdot\gamma_2} = P^t_{\gamma_2}\circ P^t_{\gamma_1}$
+\end{itemize} for any paths $\gamma_1,\gamma_2$ and $t\in\R$.
+
+\hfill
+
+Such a choice would allow us to define the directional ("covariant") derivative of a section $s$ along a path $\gamma$ 
+as before. We shuold require that \begin{itemize}
+    \item The directional derivative depends only on $s$ and $X\in T_xM$, not the particular 
+    choice of $\gamma$.
+    \item The map $\nabla s(x):T_xM\to E_x$ is $\C$-linear.
+\end{itemize}
+This will give us the richest notion of a connection on a vector bundle.
+\subsection{Connections}
+In this section, we consider $M$ a real manifold and $\pi:E\to M$ complex vector bundle.
+Let $\cA^i(E) = \Omega^i(M) \otimes E$ denote the sheaf of smooth $i$-forms with values in $E$.
+\begin{definition}
+    A \textbf{connection} on $E$ 
+    is a $\C$-linear map of sheaves
+    $\nabla:\cA^0(E)\to\cA^1(E)$ satisfying the Leibniz rule
+    \begin{align*}
+        \nabla(fs) = df\otimes s + f\nabla s
+    \end{align*}
+\end{definition}
+We can interpret this definition in the sense of parallel transport. Given 
+a section $s\in\cA^0(E)$, we can differentiate it along a path $\gamma$ to get another 
+section of $E$, i.e. $\nabla:\Gamma(E)\to \Gamma(\Hom(TM,E))$.
+\begin{theorem}
+    The space of all connections $\cA(E)$ is an affine space modelled on $\cA^1(\End E)$. In particular \begin{itemize}
+        \item $\cA(E)$ is nonempty
+        \item For any two connections $\nabla_1,\nabla_2$ the difference $\nabla_1-\nabla_2$ 
+        is a global section of $\cA^1(\End E)$.
+        \item $(\nabla + a)s := \nabla s + as$ is a connection whenever $\nabla$ is a connection and 
+        $a\in\cA^1(\End E)$.
+    \end{itemize}
+\end{theorem}
+The idea of a connection generalizes the exterior differential to sections of general vector bundles. 
+However, a connection need not satisfy $\nabla^2 = 0$ in general. The obstruction for a connection
+define a differential is measured by its curvature. We explain this now.
+
+\subsection{Curvature}
+
+A connection $\nabla:\cA^0(E)\to \cA^1(E)$ induces "differentials" \begin{align*}
+    \nabla:\cA^i(E)\to\cA^{i+1}(E)
+\end{align*} given by the formula \begin{align*}
+    \nabla(\alpha\otimes s) = d\alpha\otimes s + (-1)^i\alpha\wedge\nabla s
+\end{align*}
+
+\begin{definition}
+    The \textbf{curvature} $F_\nabla$ of a connection $\nabla$ is the composition \begin{align*}
+        F_\nabla := \nabla^2:\cA^0(E)\to\cA^2(E)
+    \end{align*} In particular $F_\nabla$ is a global section of $\cA^2(\End E)$. This is because 
+    the curvature homomorphism is $\cA^0$-linear.
+\end{definition}
+
+\begin{example}
+    Consider the connections on the trivial bundle $M\times \C^r$. If $\nabla = d$ is the
+    trivial connection then $F_\nabla = 0$. 
+
+    \hfill 
+
+    Any other connection is of the form $\nabla = d + A$ where $A$ is a matrix of 1-forms. For a section
+    $s$ we compute \begin{align*}
+        F_\nabla(s) &= (d+A)(d+A)(s) \\
+        &= d^2s + dAs + Ads + AAs \\
+        &= d(A)s + A\wedge As
+    \end{align*} and therefore \begin{align*}
+        F_\nabla = dA + A\wedge A
+    \end{align*}
+    For line bundles we get that $F_\nabla = dA$ is an ordinary 2-form.
+\end{example}
+
+\section{Toric symplectic manifolds}
+\subsection{Motivation}
+Recall the statement we were originally interested in: 
+
+\begin{theorem}
+Let $(M,\omega)$ be a symplectic manifold. Suppose that $[\omega]$ is integral. Then 
+there exists a "prequantization" line bundle $\cL \to M$ with $c_1(\cL) = [\omega]$ and a Hermitian connection $\alpha$
+whose corresponding curvature form is $\omega$. Moreover $\cL$ is unique up to isomorphism 
+(but still requires a particular choice). 
+\end{theorem}
+
+Now suppose I have a toric symplectic manifold. Delzant's theorem tells us that these are classified
+up to equivariant symplectomorphism by smooth integral lattice polytopes. 
+
+\hfill
+
+The data of a polytope determines a line bundle on our toric manifold, which is the prequantization line bundle.
+General theory tells us how to get ahold of this line bundle abstractly. It tells us to look at the
+integral cohomology class of the symplectic form and then take a line bundle whose first Chern class is this
+integral cohomology class (there is also a connection whose curvature is the symplectic form).
+
+\subsection{Construction}
+However there is a way to get ahold of this line bundle more concretely using toric geometry. Begin with a
+Delzant polytope $\Delta$ in $\R^n$ with $N$ facets and $v_1,\dots,v_N$ normal vectors to the facets. Then 
+$\Delta$ is cut out by inequalities \begin{align*}
+    \langle v_i,x\rangle \geq \lambda_i
+\end{align*} where we assume all the $\lambda_j$ are integers ("$M$ is prequantizable"). There are maps \begin{align*}
+    \pi:\R^N\to\R^n
+\end{align*} and the induced map \begin{align*}
+    \pi: \R^N/\Z^N\to\R^n/\Z^n
+\end{align*} of tori, which give rise to the following short exact sequences. \begin{align*}
+    1\to K \to \T^N \to \T^n \to 1
+\end{align*} \begin{align*}
+    0\to k \to \R^N\to \R^n\to 0
+\end{align*} Complexifying, we get \begin{align*}
+    1\to K_\C \to T_\C^N \to T_\C^n \to 1 
+\end{align*} Let $F_i$ denote the facets of $\Delta$ and for any $z = (z_1,\dots,z_N)\in\C^n$ let $F_z := \cap_{z_i = 0}F_i$.
+Consider the set \begin{align*}
+    U = \{z\in\C^n: F_z \neq \emptyset\}
+\end{align*} Then the quotient $M = U/K_\C$ is a manifold with an action of $T_\C^N/K_\C = T_\C^n$. It 
+is a toric variety because this construction is secretly taking a projective GIT quotient.
+
+\begin{remark}
+    There is a surjective map from $X^{ss}$ to $X//G$. Two points in $X^{ss}$ lie in the same fiber of this map if and only if the closures of their 
+    $G$-orbits intersect. In this case, the $K_\C$ orbits are closed. See Proudfoot's notes on toric varieties for more.
+\end{remark}
+
+\begin{proposition}
+    The line bundle $\cL = U \times_{K_C} \C$ where $K_\C$ acts on $\C$ with 
+    weight $\nu = L(-\lambda)$ is a prequantization line bundle for $M = U/K_\C$. Note that $\nu \in k^*$ is the 
+    dual Lie algebra of $K_\C$.
+\end{proposition}
+
+See Hamilton.
+
+\begin{theorem}
+    With the setup above, we have \begin{align*}
+        \dim H^0(M,\cL) = \#(\text{integer points in }\Delta)
+    \end{align*}
+\end{theorem}
+
+\begin{proof}
+    A holomorphic section of $\cL$ over $M$ corresponds to a $K_\C$-equivariant holomorphic function $f:U\to \C$. 
+    Such $f$ extends to all of $\C^N$ because of Hartogs theorem (A holomorphic function on $\C^N$ for $N>1$ canont have 
+    an isolated singularity and therefore cannot have a singularity on a submanifold of codimension $\geq 2$).
+
+    \hfill
+
+    Write such a function as its Taylor series so that \begin{align*}
+        f = \sum_{\alpha\in\N^n} c_\alpha z^\alpha
+    \end{align*} Consider the equivariance one term at a time. 
+    Thinking about the monomial $f(z) = z^I$ we 
+    see that \begin{align*}
+        f(k\cdot z) &= f(i(k)\cdot z) = (i(k)\cdot z)^I = i(k)^Iz^I = k^{i^*(I)}z^I \\
+        k\cdot f(z) &= k^{\nu}z^I
+    \end{align*} and therefore a basis for the space of equivariant functions $f:U\to \C$ 
+    is given by the monomials corresponding to lattice points in $\Delta$.
+\end{proof}
+
+\section{Origami}
+Meeting with Tara
+\begin{itemize}
+    \item When does a toric origami manifold admit the structure of a complex manifold?
+    In this case, we suspect that it should also come with the structure of a complex 
+    algebraic variety. 
+\end{itemize}
+
+\begin{remark}
+    When does a locally free sheaf on a variety correspond to a vector bundle with flat connection?
+\end{remark}
+
+\section{References}
+\begin{itemize}
+    \item THE QUANTIZATION OF A TORIC MANIFOLD IS GIVEN BY THE INTEGER LATTICE POINTS IN THE MOMENT
+    POLYTOPE MARK D. HAMILTON
+    \item Proudfoot's notes on toric varieties
+\end{itemize}
+\end{document}

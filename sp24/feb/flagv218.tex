@@ -1,0 +1,208 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\begin{document}
+Songyu Ye
+
+\today
+
+\hfill
+
+This is a note regarding the talk I gave at the flag variety reading group on Feb 16, 2024.
+Most of this talk comes from 2.3 and 3.1 of Cox, Little, Schenck's book. There is a little stuff I borrowed
+from Proudfoot toric varieties.
+
+\section{Last time}
+Fix $V$ vector space and $V_\Z$ lattice.
+
+Last time we considered the following correspondence:
+
+\hfill
+
+The correspondence between rational convex polytopes which are smooth and simple: \begin{itemize}
+	\item simple meaning the number of edges at each vertex $= \dim V$
+	\item smooth meaning the outward pointing edge vectors form a $\Z$-basis for $V_\Z$ at each point
+\end{itemize} and smooth toric varieties with a particular embedding into projective space.
+
+\hfill
+
+I want to emphasize that the polytope specifically specifies the data of the embedding into projective space.
+
+\section{Today}
+Let's demonstrate this with an example.
+
+\begin{example}
+	Consider the ratinoal normal scroll $S_{a,b}$ where we will take $a,b = 2,4$.
+	The lattice polytope and fan look like \begin{center}
+		\includegraphics[scale = .4]{/Users/songye03/Desktop/math_tex/img/rns.png}
+	\end{center}
+	This defines a map $\C^* \times \C^* \to \P^{4+2+1}$ by the following \begin{align*}
+		(s,t)\mapsto [1,s,s^2,t,st,s^2t,s^3t,s^4t]
+	\end{align*} and the rational normal scroll in question is the closure of the image of this map. We can write this down
+	by looking at the map $\C^*\times \P^1 \to \P^7$ \begin{align*}
+		(s,\mu,\lambda)\mapsto [\lambda,s\lambda, s^2\lambda, \mu, s\mu, s^2\mu, s^3\mu, s^4\mu]
+	\end{align*} When $\lambda = 0$ we get the rational normal curve $[0,0,0,1,s,s^2,s^3,s^4]$, and when $\mu = 0$
+	we get the rational normal curve $[1,s,s^2,0,0,0,0,0]$. In between is some rational homotopy.
+
+	\hfill
+
+	Note that the polytope tells us how to embed the variety into projective space, but we do not get this information
+	from the fan. In particular there are many polytopes which give the same fan, corresponding to different choices of
+	$a,b$ so that $b-a = 2$ in this case.
+
+	\hfill
+
+	Note that this toric variety is in fact not smooth at the top right vertex of the polytope.
+\end{example}
+
+\begin{example}
+	Consider the polytope and fan of the weighted projective space $\P(1,1,2)$ \begin{center}
+		\includegraphics[scale = .4]{/Users/songye03/Desktop/math_tex/img/Screenshot 2024-02-18 at 10.42.28 PM.png}
+	\end{center}
+	It is not smooth by looking at the top vertex of the triangle. The polytope describes the map \begin{align*}
+		\C^*\times\C^* \mapsto \P^3 \\
+		(s,t) \mapsto [1,s,s^2,t]
+	\end{align*}
+	Take closure. $\P(1,1,2) = V(x_0x_2 - x_1^2) \subset \P^3$ is not smooth at $[0,0,0,1]$.
+\end{example}
+\section{Gluing data}
+First I will describe how one generally assembles abstract varieties from affine ones,
+and then I will describe how fans contain this data.
+
+\begin{example}
+	Put together $\P^n$ from $n+1$ copies of $\A^n$ via gluing. Morally these guys represent the $n+1$
+	charts of $\P^n$ obtained by putting $x_i = 1$ for each $i$.
+
+	\hfill
+
+	I have $n+1$ copies of affine space \begin{align*}
+		U_i = \Spec \C[x_0/x_i,\dots,\hat{x_i/x_i}, \dots,x_n/x_i]
+	\end{align*} and for each $i,j$ I have to identify their intersections \begin{align*}
+		\Spec \C[x_0/x_i,\dots,\hat{x_i/x_i}, \dots,x_n/x_i][(x_j/x_i)^{-1}] & \to \Spec [x_0/x_j,\dots,\hat{x_j/x_j}, \dots,x_n/x_j][(x_i/x_j)^{-1}] \\
+		(x_j/x_i)^{-1}                                                       & \mapsto (x_i/x_j)^{-1}                                                 \\
+		x_k/x_i                                                              & \mapsto (x_k/x_j)/(x_i/x_j)
+	\end{align*}
+\end{example}
+This example motivates the following definition of how to glue an abstract variety from affine ones.
+
+\hfill
+
+The data of an abstract variety is \begin{itemize}
+	\item a collection of affine varieties $V_\alpha$
+	\item open sets $V_{\beta\alpha} \subset V_\alpha$
+	\item isomorphisms $g_{\beta\alpha}: V_{\beta\alpha} \to V_{\alpha\beta}$ for each $\alpha,\beta$
+\end{itemize} and the maps satisfy the following conditions \begin{itemize}
+	\item $g_{\beta\alpha} = g_{\alpha\beta}^{-1}$
+	\item $g_{\beta\alpha}(V_{\beta\alpha}\cap V_{\gamma\alpha}) = V_{\alpha\beta}\cap V_{\gamma\beta}$
+	\item $g_{\gamma\alpha} = g_{\gamma\beta}\circ g_{\beta\alpha}$ on $V_{\beta\alpha}\cap V_{\gamma\alpha}$
+\end{itemize} Then the abstract variety is the quotient of the disjoint union of the $V_\alpha$ by the equivalence relation \begin{align*}
+	X             & = \coprod V_\alpha/\sim                              \\
+	x\in V_\alpha & \sim y\in V_\beta \text{ if } x = g_{\beta\alpha}(y)
+\end{align*} and $X$ is given the quotient topology.
+
+\begin{remark}
+	Note that $X$ has an affine open cover $U_\alpha = \set{[a]\in X \st a\in V_\alpha} \cong V_\alpha$.
+\end{remark}
+\begin{example}
+	[Blowup of $\A^2$ at the origin] The data is \begin{align*}
+		V_0 = \Spec \C[u,v]            \\
+		V_1 = \Spec \C[w,z]            \\
+		V_{01} = \Spec \C[w,z,\inv{z}] \\
+		V_{10} = \Spec \C[u,v,\inv{v}] \\
+		g_{01}:V_{10} \to V_{01} \text{ is given by } u\mapsto wz, v\mapsto \inv{z}
+	\end{align*}
+	Then we can identify $X \cong V(x_0Y - x_1X)\subset \P^1\times \A^2$ with coordinates $[x_0,x_1]$ and $(X,Y)$. One can see this
+	by taking two affine charts of $X$ via $x_0 = 1$ and $x_1 = 1$ and then checking that hte induced gluing map is the same as the one
+	we have written down.
+\end{example}
+
+\begin{example}
+	The lattice hexagon \begin{center}
+		\includegraphics[scale = .4]{/Users/songye03/Desktop/math_tex/img/Screenshot 2024-02-18 at 11.21.48 PM.png}
+	\end{center} defines for us a smooth toric variety. Which one is it?
+
+	\hfill
+
+	Using our understanding of \red{corner chopping corresponding to blowups. Why? } we can see that this variety is the
+	blowup of $\P^1 \times \P^1$ at two different points.  In particular if we blow up $\P^1\times \P^1$ with coordinates $[x_0;x_1],[y_0;y_1]$ at $(0,0)$ and $(\infty,\infty)$
+	then we get the toric variety corresponding to the hexagon. One way of writing this down is looking at the four affine charts corresponding to
+	setting each of the pairs of coordinates to be $1$. On the affine chart $x_0 = y_0 = 1$ we have the blowup of $\A^2$ at the origin
+	we replace $\C[x_1,y_1] \to \C[x_1,y_1,X_1,Y_1]/\ideal{x_1Y_1 - y_1X_1}$. On the affine chart $x_1 = y_1 = 1$ we do the same thing
+	and then we glue them together.
+
+	\hfill
+
+	\red{Note that I told you about a way of covering it with four affine charts. The fan is telling me six.}
+
+	\hfill
+
+	\red{Also one can embed this into $\P^3$ as the set of determinant zero $2\times 2$ matrices. Is there a clear polytopal picture?}
+
+	We can also embed this into $\P^6$. Label each of the lattice points of the hexagon (including the interior)
+	by $a,b,c,d,e,f,g$ and then start writing down all of the relations they satisfy. In this case they are generated in
+	degree $2$ (the problem of claiming this for general smooth polytopes has stood open for about fourty years now) and so
+	this embeds into $\P^6$.
+\end{example}
+
+\section{Fans}
+Fans contain gluing data. I'll state the formal things (which I don't understand too well) and then do an example.
+
+\begin{definition}
+	A fan $\Sigma$ is a collection of cones in $N_\R$ such that \begin{itemize}
+		\item each $\sigma$ is a strongly convex (i.e. $0$ is a face) rational (recall the lattice)
+		      polyhedral cone (looks like $\set{\sum r_iv_i \st r_i\geq 0}$ for some $v_i\in N$)
+		\item each face of a cone in $\Sigma$ is also in $\Sigma$
+		\item the intersection of any two cones in $\Sigma$ is a face of each
+
+	\end{itemize}
+\end{definition}
+
+Recall each cone $\sigma\in \Sigma$ gives us an affine toric variety $U_\sigma = \Spec \C[\sigma^\vee\cap M]$ where we defined \begin{align*}
+    \sigma^\vee = \set{m\in M_\R \st \langle m,n\rangle \geq 0 \text{ for all } n\in \sigma}
+\end{align*}
+Let $\tau\subset \sigma$ face. Then we can write $\tau = \sigma \cap H_m$ where $m\in \sigma^\vee$
+and $H_m = \set{u\in N_\R \st \langle u,m\rangle = 0}$ is
+the hyperplane defined by $m$. The equality \begin{align*}
+    S_\tau = S_\sigma + \Z(-m)
+\end{align*} implies $\C[S_\tau] = C[S_\sigma]_{\chi^m}$ where $\chi^m$ is the character of $T$ given by $m$.
+
+\hfill
+
+If $\tau = \sigma_1 \cap \sigma_2$ then $\sigma_1 \cap H_m = \tau = \sigma_2 \cap H_{-m}$ for some 
+$m\in \sigma_1^\vee\cap \sigma_2^\vee \cap M$. So we get \red{gluing data} \begin{align*}
+    U_{\sigma_1} \supset (U_{\sigma_1})_{\chi^m} = U_\tau = (U_{\sigma_2})_{\chi^{-m}} \subset U_{\sigma_2}
+\end{align*}
+
+\hfill
+
+We will demonstrate what's going on with an example.
+
+\begin{example}
+    Consider the fan of the simplex \begin{center}
+        \includegraphics[scale = .4]{/Users/songye03/Desktop/math_tex/img/Screenshot 2024-02-18 at 11.47.48 PM.png}
+    \end{center} 
+    \red{Look at the outward edge vectors}
+    We have the affine open charts 
+    \begin{align*}
+        U_{\sigma_0} = \Spec \C[x,y] \\
+        U_{\sigma_1} = \Spec \C[y,\inv{xy}] \\
+        U_{\sigma_2} = \Spec \C[\inv{y},x\inv{y}]
+    \end{align*} and the gluing data \red{shared edge vector, pointing outward}
+    \begin{align*}
+        \C[x,y]_{x} \cong \C[x^{-1},\inv{x}y]_{\inv{x}} \\
+        \C[x,y]_{y} \cong \C[y^{-1},x\inv{y}]_{\inv{y}}\\
+        \C[\inv{x},\inv{x}y]_{\inv{x}y} \cong  \Spec \C[\inv{y},x\inv{y}]_{x\inv{y}}
+    \end{align*}
+\end{example}
+
+\section{Remark}
+I'm beginning to understand the wonderful thing about toric geometry. You get coordinates for everything and things are very hands on.
+Isaac once told me to appreciate the things that are very concrete and this semester I feel as though
+having concrete things to look at is very important. I am liking this reading course more than I used to.
+\end{document}

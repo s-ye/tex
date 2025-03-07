@@ -1,0 +1,164 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Rep theory of real reductive groups}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+Notes for a talk for Dan. Basic introduction to real reductive groups, Harish-Chandra modules, and Kazhdan-Lusztig-Vogan polynomials.
+Perhaps details about Langlands correspondence. 
+We will write from Trapa's slideshow, Milicic's notes, and "Unitary Representations of Real Reductive Groups" by Trapa, Vogan et al.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+We are interested in complex representations of real reductive groups.
+If you have such a group $G$ which acts smoothly on a space $X$, then one gets an (infinite-dimensional!) 
+representation of $G$ on the space of (whatever adjective you like) functions $X \to \C$. Starting with Gelfand,
+the general idea is to decompose Hilbert spaces of functions on
+$X$, and reassemble this information to make deductions about
+$X$. The holy grail is to understand the irreducible unitary representations of $G_\R$.
+
+
+\hfill
+
+Harish-Chandra succeeded in decomposing $L^2(G_\R)$ into something called tempered representations. So inside the unitary 
+dual of $G_\R$ there is a subset of representations called tempered representations. \begin{align*}
+    \hat{G}_\R^{temp} \subset \hat{G}_\R^{unitary}
+\end{align*} More generally we can look at congruence subgroups $\Gamma$ of $G_\R$ and
+look at the representations which appear in $L^2(\Gamma \backslash G_\R)$. We call this packet of representations the 
+\red{automorphic dual} of $G_\R$.
+
+\hfill
+
+Harish-Chandra found something larger than the unitary dual which is more tractable, called \red{Harish-Chandra modules}.
+Given an irreducible unitary representation $\pi$ of $G_\R$, we can differentiate at the identity and 
+complexify to get a representation of the complexified Lie algebra $\mf g_\C$, in particular of the enveloping algebra $U(\mf g_\C)$.
+
+\hfill
+
+However some information is lost! For this reason we must keep track of the restriction of $\pi$ to a maximal compact subgroup $K_\R$ of $G_\R$.
+
+\begin{enumerate}
+    \item \red{The Langlands classification and Langlands parameters are about classifying the Harish-Chandra modules of $G_\R$. Can you
+    please explain this story to me, and how it relates to the calculations carried out in the Atlas project?}
+    \item \red{Category $\cO$ and quivers}
+\end{enumerate}
+
+\section{After meeting}
+We have to read chapter 9 and 10 from Helgason.
+
+\hfill
+
+Recall the original statement that I first became interested in. 
+Let $G$ be a complex reductive group and pick a Borel subgroup $B$.
+
+\begin{theorem}
+    The category of $B$-equivariant regular 
+    holonomic $D$-modules on $G/B$ is equivalent to category $\cO_0$.
+\end{theorem}
+
+Dan puts this in a larger perspective, in the context of the 
+representation theory of real reductive groups. In particular let 
+$G_\R$ be a real reductive group, and $K_\R$ a maximal compact subgroup. 
+Let $\mf g = \Lie(G_\R)$.
+
+\begin{definition}
+    A Harish-Chandra module is a finitely generated $U(\mf g)$-module $M$ which carries a compatible action of $K_\R$.
+    The action of $K_\R$ is compatible with the action of $U(\mf g)$ in the sense that 
+    \begin{align*}
+        k \cdot (u \cdot m) = u \cdot (k \cdot m)
+    \end{align*} for all $k \in K_\R$, $u \in U(\mf g)$, and $m \in M$.
+
+    Moreover, the action must be \red{locally finite $K$-action}, in 
+    the sense that every $m \in M$ is contained in a finite dimensional $K$-stable subspace of $M$.
+
+    We also insist on \red{finite dimensional $K$-types}, meaning that the module $M$ decomposes
+    as a direct sum of finite dimensional ireducble representations.
+\end{definition}
+
+\begin{definition}
+    A Harish-Chandra module is called \red{admissible} if we further insist
+    that the isotopic $K$ components appear with finite multiplicity.
+\end{definition}
+
+Here comes a really deep theorem.
+
+\begin{theorem}
+    There is an equivalence of categories \begin{align*}
+        K_\R-\Mod \cong \text{admissible $\mf g,K_\R$ modules with trivial central character}
+    \end{align*}
+\end{theorem} Let the right hand category be denoted by $\text{Admiss}$.
+The point is that simple objects 
+in $\text{Admiss}$
+can be realized as local systems on orbit 
+closures of $K_\R$-orbits in $G/B$. \red{Note that 
+$K_\R$ acts on $G/B$ with finitely many orbits! This is the 
+secret sauce in some sense.}
+
+\hfill
+
+Then the Kazhdan-Lusztig polynomials, whose coefficients
+are the dimensions of the appropriate intersection 
+cohomology groups, when evaluated at $1$ give the
+multiplicities of the simple objects in $\text{Admiss}$ appearing
+in some other representation. This is because the other representation carries a filtration, 
+and each graded piece of the K-L polynomial gives the multiplicities
+appearing in the corresponding graded piece of the filtration, so 
+the signed count gives the total multiplicity.
+
+\begin{remark}
+    Dan said that this part of the story is quite elementary. The hard 
+    part which was state of the art at the time, was actually computing
+    these intersection cohomology groups and finding out that they 
+    are dimensions of $\Ext$ groups between the simples. This 
+    somehow involved Weil conjectures, using finite field geometry 
+    to get stuff about complex geometry.
+\end{remark}
+
+\begin{remark}
+    Another point Dan made was about this notion of direct sum and direct
+    integral, these ideas used to write down what the 
+    "simple" modules should be. In particular, the point is that for 
+    a real reductive group like $\R$, the $L^2$-space is a direct integral
+    of irreducible unitary representations. This 
+    is the subject of Fourier analysis.
+\end{remark}
+
+The real reductive group case covers the complex case, because
+given a complex reductive group $G$ with a Borel subgroup $B$,
+we can consider the real group $G\times G$ with an action of the 
+maximal compact subgroup $K = B \times B$. Then 
+we just interpret the left hand side as $\cD$-modules on $G/B$, and 
+the right hand side as Category $\cO_0$.
+
+\hfill
+
+I will finish with a closing remark from Dan. 
+"Harish-Chandra devoted his life to finding an explicit 
+formula for characters of irreducible unitary representations
+of real reductive groups. We use his theorems every day."
+
+
+
+\end{document}

@@ -1,0 +1,123 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\begin{document}
+Songyu Ye
+
+\today
+
+\hfill
+
+\section{Introduction}
+Let $G$ connected reductive group over $\C$ and $X$ smooth $G$
+variety. There is an infinitesimal action of $G$ on $X$ given by the
+Lie algebra $\mf g$ of $G$.
+\begin{align*}
+    \mf g \to \Gamma(X,T_X) \\
+    U(\mf g) \to \Gamma(X,\cD_X)
+\end{align*} and a localization functor \begin{align*}
+    U(\mf g)-mod \to D(X)
+\end{align*}
+which takes a representation $V$ to the $D$ module $D(X)\otimes_{U(\mf g)} V$ on $X$.
+
+\hfil 
+
+In BB localization, $X$ is the flag variety and the localization functor is not a equivalence
+but it becomes an equivalence once we restrict to those modules by which the center of $U(\mf g)$ 
+acts trivially.
+
+\section{Peter Weyl}
+
+Recall the Peter-Weyl theorem: 
+
+\begin{align*}
+    \C[G] \cong \bigoplus_{\lambda} V_{\lambda} \otimes V_{\lambda}^*
+\end{align*} where the sum is over all fd representations of $G$.
+There is a filtration on this ring via dominance order: \begin{align*}
+    \C[G]_{\leq \mu} = \bigoplus_{\lambda \leq \mu} V_{\lambda} \otimes V_{\lambda}^*
+\end{align*} There is an algebra homomorphism \begin{align*}
+    \mu: U(\mf g) \otimes U(\mf g) \to D_G
+\end{align*} given by inclusion of left and right differential operators
+so that the image of $\mu = U(\mf g) \otimes_{Z(U(\mf g))} U(\mf g)$. Also this map gives an induced filtration on 
+$D_G$: \begin{align*}
+    D_{G,\leq\mu} = \im\mu\cdot O(G)_{\leq\mu}
+\end{align*}
+
+\begin{example}
+    $G = \SL_2$ so that we are $\C[a,b,c,d]/(ad-bc-1)$ and the filtration
+    in question is by degree. Then we have the map \begin{align*}
+        U(\mf sl_2) \otimes U(\mf sl_2) \to D_{\SL_2}
+    \end{align*} given by \begin{align*}
+        X\otimes 1 &\mapsto X \\
+        1\otimes E &\mapsto -a^2E + c^2F + acH \quad \text{\red{check reference}}\\
+        \vdots
+    \end{align*}
+\end{example}
+and can check that the Casimir goes to the same place whether you put it on the left or right.
+
+\section{Horocycle and Vinberg semigroup}
+
+$B^-$ opposite borel $B\cap B^- = T$ torus. 
+$N$ unipotent radical of $B$ and $N^-$ unipotent radical of $B^-$.
+$Z$ center of $G$.
+$G_ad$ adjoint group of $G$.
+$T_ad = T/Z$.
+
+\begin{definition}
+    The horocycle space is \begin{align*}
+        Y = G/N\times_T N^-\backslash G
+    \end{align*} has an action of $G\times G \times T$ 
+    and is a principle $T$ bundle over \begin{align*}
+        G/B\times G/B^- 
+    \end{align*}
+\end{definition}
+ The affine closure of $Y$ is $\Spec \gr O(G)$.
+
+ \begin{proposition}
+    [Vinberg] There is a smooth $G\times G\times T$ variety $V_\circ$
+    which fits the following diagram. 
+    % https://q.uiver.app/#q=WzAsNixbMSwwLCJWX1xcY2lyYyJdLFsyLDAsIkdcXHRpbWVzX3taKEcpfSBUIl0sWzIsMSwiXFxtYXRoYmJ7Q14qfV5yIl0sWzEsMSwiXFxtYXRoYmJ7QX1eciJdLFswLDEsIjAiXSxbMCwwLCJZIl0sWzAsM10sWzEsMF0sWzIsM10sWzEsMl0sWzQsM10sWzUsNF0sWzUsMF1d
+\[\begin{tikzcd}
+	Y & {V_\circ} & {G\times_{Z(G)} T} \\
+	0 & {\mathbb{A}^r} & {\mathbb{C^*}^r}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-2]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-3, to=2-2]
+\end{tikzcd}\]
+ \end{proposition} where $\pi$ is flat with smooth fibers, all maps are $G\times G\times T$ equivariant,
+ where $G\times G$ acts on $\A^r$ trivially
+and the action of $G\times G\times T$ on $V_\circ$ is free and 
+the quotient by $T$ gives precisely the wonderful compactification.
+
+\begin{example}
+    Back to $\SL_2$: The horocycle space \begin{align*}
+        Y = \C^2-0 \times \C^2-0 /\C^* = \text{rank $1$ matrices}
+    \end{align*} has a map to $\P^1\times \P^1$ given by kernel and image.
+
+    The diagram looks like % https://q.uiver.app/#q=WzAsNixbMCwwLCJZIl0sWzEsMCwiTV97MiwyfS0wIl0sWzEsMSwiQyJdLFswLDEsIjAiXSxbMiwwLCJHTF8yIl0sWzIsMSwiXFxtYXRoYmJ7Q31eKiJdLFswLDFdLFsxLDIsImRldCIsMl0sWzAsM10sWzMsMl0sWzQsMV0sWzUsMl0sWzQsNV1d
+    \[\begin{tikzcd}
+        Y & {M_{2,2}-0} & {GL_2} \\
+        0 & C & {\mathbb{C}^*}
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow["det"', from=1-2, to=2-2]
+        \arrow[from=1-3, to=1-2]
+        \arrow[from=1-3, to=2-3]
+        \arrow[from=2-1, to=2-2]
+        \arrow[from=2-3, to=2-2]
+    \end{tikzcd}\]
+\end{example}
+
+\subsection{Construction}
+
+\end{document}

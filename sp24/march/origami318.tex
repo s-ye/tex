@@ -1,0 +1,91 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\begin{document}
+Songyu Ye
+
+These are notes from my meeting with Tara on March 18.
+
+\section{Example of $S^4$ and the conjecture}
+
+\begin{example}
+    Cohomology of $T^2$ on $S^4$. The moment polytope is two right triangles identified along the hypotenuse. 
+    In particular if we let $a,b$ denote the classes of degree
+    $2$ and $c,d$ denote the classes of degree $4$, then the relations are $ab = c + d$ and $cd = 0$.
+    Note that when one sets $a = b = 0$, then this is precisely the ordinary cohomology of $S^4$.
+
+    \hfill
+
+    As a module over $H_T^*(pt)$, we can find generators and relations as follows. The moment graph
+    tells us that we are considering pairs of polynomials $(f,g)\in \Z[x,y]$ such that $xy\vert f-g$.
+
+    \hfill
+
+    This can be presented as a module over the polynomial ring $\Z[x,y]$ with generators \begin{align*}
+        x &= (x,x) \\
+        y &= (y,y) \\
+        c &= (xy,0)
+    \end{align*} and the relation is precisely $c(xy-c) = 0$. Then setting $x = y = 0$ gives us the ordinary cohomology of $S^4$.
+\end{example}
+
+\begin{conjecture}
+    The cohomology of a toric origami manifold can be presentated as follows. There is a 
+    free generator for each face of the moment polytope (of all dimensions) and the relations are given by the
+    components of the intersections of the faces.
+\end{conjecture}
+
+\section{MMP}
+We talked about the minimal model program for toric manifolds. In particular there is the following result for 
+four manifolds with a circle action. 
+
+\begin{theorem}
+    Suppose $M$ is a compact four manifold with a circle action. Then $M$ is equivariantly 
+    diffemorphic to one of the following: \begin{itemize}
+        \item $\C\P^2$
+        \item $S^2\times S^2$
+        \item $H_k$ where $k$ is even or odd
+        \item $S^2\times \Sigma_g$ where $\Sigma_g$ is a Riemann surface of genus $g$
+        \item $S^2 \tilde \times\Sigma_g$ some bundle
+    \end{itemize}
+    In the case of effective Hamiltonian actions, the only possibilities are $\C\P^2$, $S^2\times S^2$, Hirzebruch surfaces,
+    and the $k$-fold blowups of any of those guys at fixed points. The proof of this classification is by Delzant polytopes and
+    corner chopping. 
+\end{theorem}
+\red{Also topological blowup corresponds to connet sum with $\C\P^2$}
+Tara mentioned some hope for a classification of toric origami manifolds in dimension four via similar lines. 
+In particular we would have to consider how corner chopping interacts with templates.
+
+\hfill
+
+In particular observe how in the following example, we can see that the $S^4$ connect sum $\C\P^2$ is a toric origami manifold, 
+which came from corner chopping at a single vertex on a single polytope. One can wonder what happens if you corner chop on the glued polytope.
+
+
+\section{Computation for $S^4$ connect sum $\C\P^2$} 
+We discussed a verification of the above conjecture for some other examples such as $S^4$ connect sum $\C\P^2$.
+In particular we also tried to compute its intersection form. \red{Note that some care is required because as we pass over the fold, 
+we change orientation}
+\begin{example}
+    Tara told us that the following four manifold is $S^4$ connect sum $\C\P^2$ (or potentially with reversed orientation). 
+    The polytopal picture is two right triangles, one blown up at the right identified along the hypotenuse.
+
+    \hfill
+
+    The computation of the intersection form using the ABBV formula tells us that (up to orientation) the self intersection number of the 3 obvious spheres is $1,1,1$ 
+    (\red{note that they are all cohomoogous because the betti numbers of this manifold are $1,0,1,0,1$})   
+\end{example}
+
+\section{Next step}
+\begin{itemize}
+    \item Learn more about the ABBV formula and see Tara's references
+    \item Verify the conjecture for other examples of toric origami manifolds. In particular perhaps one way of showing the conjecture
+    is by observing that imposing such relations and then setting degree 2 = 0 recovers the ordinary cohomology. This worked in our particular example
+    for $S^4$ but the issue is that we don't know the ordinary cohmology of the other examples. 
+\end{itemize}
+\end{document}

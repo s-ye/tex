@@ -1,0 +1,218 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\begin{document}
+Songyu Ye
+
+\today
+
+\hfill
+
+This is a note regarding what I understand about toric origami manifolds in preparation for my meeting with Tara.
+
+\section{Introduction}
+
+The object of study are origami manifolds and in particular toric origami manifolds. These are smooth manifolds equipped with a closed form which
+is almost nondegenarate in the sense that the degeneracy is well behaved.
+
+\begin{definition}
+    Let $M,\omega$ be a smooth manifold and $\omega$ closed form. We say that a $(M,\omega)$ is 
+    a folded symplectic form if $\omega^n$ vanishes transversally on a submanifold $Z$. If this is the case,
+    then \red{$Z = (\omega^n)^{-1}(0)$ is necessarily an embedded submanifold of codimension $1$} and is called the fold locus.
+\end{definition}
+
+If we are in this case, $i^*\omega$ has a $1$-dimensional kernel at each point of $Z$. This gives us a line field on $Z$ 
+called the null foliation.
+
+\begin{definition}
+    Foliation
+\end{definition}
+
+\begin{definition}
+    Further assume that the null foliation is fibrating, i.e. there is a fiber bundle $Z\to B$ over a compact base with orientable $S^1$-fibers.
+    Then we say that $(M,\omega)$ is an origami manifold.
+\end{definition}
+
+\section{Examples}
+
+\begin{example}
+    $\R^{2n}$ can be equipped with the following closed form \begin{align*}
+        \omega = x_1 dx_1 \wedge dy_1 + \sum_{i=2}^n dx_i\wedge dy_i
+    \end{align*}
+    The top power of this form is \begin{align*}
+        \omega^n = x_1 dx_1 \wedge dy_1 \wedge dx_2 \wedge dy_2 \wedge \cdots \wedge dx_n \wedge dy_n
+    \end{align*} which vanishes along the codimension $1$ submanifold $Z = \{x_1 = 0\}$.
+    \red{This is not origami because the null foliation is not fibrating.}
+\end{example}
+
+\begin{example}
+    Consider the unit sphere $S^{2n}\subset \R^{2n+1}$ with coordinates $(x_1,y_1,\ldots,x_n,y_n,h)$. The form \begin{align*}
+        \omega = dx_1 \wedge dy_1 + \dots + dx_n \wedge dy_n = r_1dr_1\wedge d\theta_1 + \dots + r_n dr_n \wedge d\theta_n
+    \end{align*} is folded \red{why does the top power of this form vanish?} along $h=0$, a copy of $S^{2n-1}$. The \red{null foliation is the Hopf foliation because} \begin{align*}
+        i_{\frac{\partial}{\partial\theta} + \dots + \frac{\partial}{\partial\theta}}\omega = -r_1dr_1 - \dots - r_n dr_n
+    \end{align*} vanishes on $Z$. Hence the null fibration is $S^1\to S^{2n-1}\to S^{2n-1}/S^1 = \C\P^{n-1}$.
+
+    \hfill
+
+    In particular this example is origami.
+\end{example}
+
+\begin{example}
+    This example carries over to $\R\P^{2n} = S^{2n}/Z_2$ with the form \begin{align*}
+        \omega = dx_1 \wedge dy_1 + \dots + dx_n \wedge dy_n
+    \end{align*} is $\Z_2$ invariant and therefore descends to a form on $\R\P^{2n}$. The fold locus is $[x_1,y_1,\dots,x_n,y_n,0]$
+    a copy of $\R\P^{2n-1}$. The null foliation is the $\Z_2$ quotient
+    of the Hopf foliation and it looks like $S^1\to \R\P^{2n-1}\to \C\P^{n-1}$.
+
+    \hfill
+
+    In particular this example is origami.
+\end{example}
+
+The notion of a moment map depends only on $\omega$ being closed. Therefore, we can 
+still make sense of torus actions on origami manifolds which are Hamiltonian and effective.
+
+\begin{example}
+    There is a $T^2$ action on $S^4 \subset \C^2\oplus \R$
+    rotating the first two coordinates which makes it into a toric origami manifold. 
+    The moment map \begin{align*}
+        \mu(z_1,z_2,h) = (|z_1|^2, |z_2|^2)
+    \end{align*} and the image is two overlapping copies of a triangle.
+    \begin{center}
+        \includegraphics[scale = .5]{/Users/songye03/Desktop/math_tex/img/s4.png}
+    \end{center}
+        
+    The fold locus is the preimage of the hypontenuse which is a copy of $S^3$.
+    The null fibration is happening over the hypotenuse and the fibers are $S^1$.
+
+    \red{Note that if we sort of cut along the fold and take closures,
+    we get two copies of $\C\P^2$ glued along a copy of $\C\P^1$. This 
+    motivates the classification of toric origami manifolds by templates.}
+
+    \hfill 
+
+    \red{What does the moment image for $\R\P^4$ look like?}
+\end{example}
+
+\section{Cutting and radial blowups}
+Cutting is analagous to the blowdown map in algebraic geometry. The fold $Z$ is analagous 
+to the exceptional divisor. 
+
+\hfill
+
+Example 2.4 demonstrated a very simple example of how we should classify toric origami manifolds.
+The idea is to cut along the fold locus and take closures. In this way 
+we obtain a collection of toric symplectic manifolds and we need to keep track of
+the gluing data. This is the fashion in which origami templates classify toric origami manifolds.
+
+\hfill
+
+Consider the closures of the connected components of $M\backslash Z$ and collapse the fibers of the
+null fibration. The result is a disconnected collection of symplectic manifolds $M_i$,
+collectively referred to as the symplectic cut space of $M$. We need to 
+keep track of which components were connected before we cut. In particular if the circle fibers of $Z_0$ a connected component of $Z$ are orbits
+for a circle subgroup of $T$ then $\Phi(Z_0)$ is a facet of the moment polytopes of 
+neighboring components of $M\backslash Z$. This is the origami template.
+
+\begin{example}
+    The symplectic cut space of a torus is the union of two $\C\P^1$s.
+    \begin{center}
+        \includegraphics[scale = .5]{/Users/songye03/Desktop/math_tex/img/Screenshot 2024-03-01 at 8.06.53 PM.png}
+    \end{center}
+    \red{How can we see this on the level of moment images?}
+
+    The moment image/origami template looks like \begin{center}
+        \includegraphics[scale = .3]{/Users/songye03/Desktop/math_tex/img/Screenshot 2024-03-01 at 8.23.34 PM.png}
+    \end{center}
+
+\end{example}
+
+\begin{definition}
+    An origami template is a graph $G = (V,E)$ along with maps \begin{align*}
+        \Psi_V:V \to D_n \\
+        \Psi_E:E \to E_n
+    \end{align*} where $D_n$ is the set of 
+    Delzant polytopes in $\R^n$ and $E_n$ is the set of subsets of $\R^n$ which are
+    facets in some Delzant polytope. 
+\end{definition}
+
+\begin{example}
+\red{This example is confusing me because I thought that the Hirzebruch surface 
+was a toric symplectic manifold. Why is it folded and why does the moment graph
+look like that as opposed to a trapezoid? How does one make sense of the GKM conditions?
+}
+\begin{center}
+        \includegraphics[scale = .5]{/Users/songye03/Desktop/math_tex/img/Screenshot 2024-03-01 at 8.27.26 PM.png}
+    \end{center}
+\end{example}
+
+To read off the GKM conditions I am supposed to look at the moment image of the $1$-skeleton. 
+But now in our situation there are multiple polytopes and gluing data and now I 
+am not sure how to read off the GKM conditions.
+
+\begin{example}
+    For example, these templates are giving me a lot of different polytopes and gluing data.
+    What exactly is moment image here, i.e. the fixed points and the $1$-dimensional orbits?
+    \begin{center}
+        \includegraphics[scale = .5]{/Users/songye03/Desktop/math_tex/img/Screenshot 2024-03-01 at 8.31.54 PM.png}
+    \end{center}
+    Also what are these manifolds?
+\end{example}
+
+\red{In general what is the procedure to take a template and produce a toric origami manifold?
+For example, what does the toric origami manifold corresponding to the template where I have 3 triangles
+glued along their hypontenuse look like?}
+
+\section{Questions}
+Holm and Ana showed that when the fold is 
+coorinentable meaning that it admits an orientable neighborhood, and when the template graph is acyclic,
+then the origami manifold has cohomology concentrated in even degree 
+and is therefore $GKM$.
+
+\hfill
+
+We are interested in questions regarding rigidity and realization for this
+fixed family of toric origami manifolds.
+
+\hfill
+
+Lots of things are known.
+
+The homeomorphism type of toric manifolds is completely determined by
+the integral cohomology ring in complex dimensions $1$ and $2$.
+
+If you consider the family of toric symplectic manifolds, then there are also some results. 
+For example people know many things about Bott manifolds. $B_n$ is diffeomorphic to $(S^2)^n$ if
+they have isomorphic integral homology.
+
+\hfill
+
+Is there any hope of making any sort of statement like above for the family of toric origami manifolds?
+For example, if you are a toric origami manifold and you have the same integral cohomology ring as $M$
+then are you $M$? It seems like one would have to look in dimension $6$.
+
+\section{After the meeting}
+I met with Tara on 3/4 and we discussed the above. She remarked the following.
+
+\hfill
+
+The problem that I am interested in reminds her of the work that she did with Liat Kessler. In particular they were studying circle actions on 4 manifolds, 
+in particular they had an $n-1$ torus acting on a $2n$-manifold. They showed rigidity results in those case by exhibiting a diffeomorphism whenever two cohomology rings
+had the same generator and relations presentation. In general she remarked that understanding GKM data is often not that good because it exhibits the cohomology ring 
+as a \textbf{subring} and it is generally quite difficult to understand the cohomology ring as a subring, it is much better to understand it presented with generators and relations.
+
+\hfill
+
+To this avail, she pointed me toward tools that one uses to identify geometric meaning in the cohomology ring, in particular Chern classes. 
+She said that her hope was that perhaps one can visibly read off Chern classes and that this would help determine the rigidity of toric origami manifolds.
+
+\hfill
+
+She pointed me toward several resources in this regard. Her notes from Spring 2012 Bernstein Seminar and this paper by Andrzej Weber.
+\end{document}

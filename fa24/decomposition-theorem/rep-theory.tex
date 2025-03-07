@@ -1,0 +1,296 @@
+The language of perverse sheaves and D-modules are critical 
+in modern methods of geometric representation theory. 
+For example, applications of perverse sheaf methods played an essential
+ role in the proof of the Kazhdan-Lusztig conjecture
+ by Beilinson-Bernstein and Brylinski-Kashiwara
+, Lusztig’s construction of canonical bases in quantum groups, and the work of Beilinson-Drinfeld on 
+the Geometric Langlands conjecture. 
+Historically, these tools have also proved very effective in the study of a 
+central object in geometric representation theory called the affine Grassmannian. 
+
+\subsection{Springer correspondence}
+\subsubsection{Springer resolution}
+The Springer correspondence is a way of realizing 
+the irreducible representations of the Weyl group in a geometric way. In particular 
+Springer realizes the group algebra \begin{align*}
+    \Q[W] \cong H^{BM}_{2\dim \tilde N}{\tilde N\times_N \tilde N}
+\end{align*} where the right hand side 
+has a canonical basis given by the irreducible components.
+
+\hfill
+
+Let $G/B$ be the flag variety for a connected reductive algebraic group. 
+The Lie algebras are $\mf g$ and $\mf b$. If $x\in G$ and $xB\inv{x} = B$ 
+then $x\in B$ and so we can identify $G/B$ with the set of subgroups of $G$
+which are conjugate to $B$, or equivalently the set of all subalgebras of $\mf g$
+that are conjugate to $\mf b$, that is \textbf{the variety of all Borel subalgebras} of $\mf g$.
+
+\hfill
+
+Let $\cN\subset \mf g$ be 
+the cone of nilpotent elements and let \begin{align*}
+    \tilde \cN = \set{(x,\mf b)\in \cN\times G/B \st x\in \mf b}
+\end{align*}
+
+\begin{lemma}
+    The projection $\tilde \cN \to G/B$ gives an isomorphism of bundles $\tilde \cN \cong T^*G/B$
+\end{lemma}
+
+\begin{proof}
+    The tangent space to $G/B$ at the identity is $\mf g/\mf b$ so its dual space is \begin{align*}
+        T^*_I(G/B) = \set{\phi:\mf g \to \C \st \phi(\mf b) = 0}
+    \end{align*} The Killing form $\mf g \times \mf g \to \C$ given by
+    $x,y\mapsto \tr(\ad x \circ \ad y)$ is nondegenerate and we pair $\mf g$ with $\mf g^*$ 
+    to get \begin{align*}
+        T^*_I(G/B) = \set{x\in \mf g \st \langle x,\mf b\rangle = 0} = \mf n
+    \end{align*} is the nilradical of $\mf b$. So for each Borel subgroup $A\subset G$, 
+    the cotangent space $T^*_{A}(G/B)$ is the nilradical of $\text{Lie}(A)$, is exactly 
+    the fiber of $\tilde \cN$ over $A$.
+\end{proof}
+
+The \textbf{Springer resolution} is the map $\pi:\tilde \cN \to \cN$
+ given by projection.
+Therefore $\tilde \cN$ carries a natural holomorphic symplectic form (i.e. a 2,0 form)
+and the Springer resolution map is semismall. One constructs an action of $W$ on 
+$\pi_*\Q_{\tilde \cN}[\dim \tilde \cN]$ and then extends it to an algebra homomorphism 
+$\Q[W] \to \End_{\cD_{\cN}}(\pi_*\Q_{\tilde \cN}[\dim \tilde \cN])$
+which is isomorphic to the desired BM homology group. To construct the initial action,
+one observes that there is a special $W$-fibration and then one pushes this action 
+of $W$ on the fiber around. 
+
+\hfill
+
+There is the Chevalley map $q:\mf g\to \mf t/W$ which sends a 
+matrix to the roots of its characterstic polynomial. Consider $\mf t_{rs}$
+the regular semisimple elements of $\mf t$, obtained by ripping out the 
+root hyperplanes, and consider a dominant chamber $\mf t_{rs}/W$.
+Consider $\mf g_{rs} = q^{-1}(\mf t_{rs}/W)$ and 
+\begin{align*}
+    \tilde{\mf g}  &= \set{(x,\mf b)\in \mf g\times G/B \st x\in \mf b} \\
+    \tilde{\mf g_{rs}} &= \pi^{-1}(g_{rs})
+\end{align*} 
+Then the map $\tilde{\mf g_{rs}} \to \mf g_{rs}$ is a $W$-fibration and 
+the map $\tilde g \to \mf g$ is small. Associated to the $W$-covering is 
+a local system \begin{align*}
+    L = \pi'_*\Q_{\tilde g_{rs}}
+\end{align*} where $\pi'$ is the restriction of $\pi$ to $\tilde g_{rs}$.
+Then they extend to an action of $W$ on intersection cohomology and pushforward perverse
+sheaves along the small map.
+
+\begin{remark}
+    The image of the root hyperplanes is the discriminant variety of all polynomials
+    with multiple roots. The complement of the union of root hyperplanes is 
+    the \textbf{configuration space of $n$ ordered points} in $\C$ with $\pi_1 = $ the \textbf{
+        colored braid group
+    } The complement of the image is the configuration space on $n$ unordered points and
+    has $\pi_1$ = \textbf{braid group}.
+\end{remark}
+
+\subsubsection{Algebra of correspondences}
+There is a general construction described in \cite{ginzburg} 
+which he advertises as a method of geometrically constructing 
+representations of finite dimensional algebras. The idea is to
+introduce the convolution product on Borel Moore homology, which is 
+supposed to generalize the convolution of functions. 
+
+\begin{definition}
+    Let $M_1,M_2,M_3$ connected oriented smooth manifolds and let $Z_{12}\subset M_1\times M_2$
+    and $Z_{23}\subset M_2\times M_3$ be closed subsets. The \textbf{composition} of
+    $Z_{12}$ and $Z_{23}$ is the set \begin{align*}
+        Z_{12}\circ Z_{23} = \set{(x_1,x_3)\in M_1\times M_3 \st \exists x_2\in M_2 \text{ s.t. } (x_1,x_2)\in Z_{12} \text{ and } (x_2,x_3)\in Z_{23}}
+    \end{align*}
+    The \textbf{convolution in Borel-Moore homology} generalizes 
+    this to cycles and is defined as follows:
+    \begin{align*}
+        H^{BM}_i(Z_{12}) \times H^{BM}_j(Z_{23}) \to H^{BM}_{i+j}(Z_{12}\circ Z_{23})
+        c_1,c_2 \mapsto c_1 * c_2
+    \end{align*} where 
+    \begin{align*}
+        c_1 * c_2 := \pi_{13*}(\pi_{12}^*c_1 \cap \pi_{23}^*c_2)
+    \end{align*}
+\end{definition}
+
+The convolution product is associative. Now let $\mu:M\to N$ a proper map 
+of complex varieties and consider $M_1 = M_2 = M_3 = M$ and $Z = Z_{12} = Z_{23} 
+= M\times_N M$. Then we get convolution maps \begin{align*}
+    H^{BM}_*(Z) \times H^{BM}_*(Z) \to H^{BM}_{*}(Z)
+\end{align*} The convolution product is not graded, but it does preserve the 
+middle dimension. If $\dim_C M = n$ then the convolution product
+\begin{align*}
+    H^{BM}_{2n}(Z) \times H^{BM}_{2n}(Z) \to H^{BM}_{2n}(Z)
+\end{align*} and we call this \textbf{middle dimensional subalgebra} $H(Z)$.
+
+\subsubsection{Sheaf theory applied to the convolution algebra}
+The convolution product makes $H^{BM}_*(Z)$ into an algebra. 
+It turns out that we can express the algebra structure as 
+the Ext algebra of a particular generator. Let $\cC_M$ be the constant 
+perverse sheaf on $M$ i.e. $\cC_M = \C_M[\dim M]$ extended along irreducible
+components.
+
+\begin{proposition}
+    There is a (not necessarily grading preserving) natural algebra 
+    isomorphism \begin{align*}
+        H^{BM}_*(Z) \to \Ext^*_{D^bN}(\mu_*\cC_M,\mu_*\cC_M)
+    \end{align*} 
+\end{proposition}
+
+Assume that $\mu:M\to N$ is productive and that $N$ is stratified
+ so that the restriction maps are all locally trivial topological fibrations.
+ We can study the convolution algebra by analyzing the pushforward
+ $\mu_*\cC_M$ of the constant sheaf on $M$. Applying the 
+ decomposition theorem we find that \begin{align*}
+    H^{BM}_*(Z) &\cong \bigoplus_{k\in \Z} \Ext^k_{D^bN}(\mu_*\cC_M,\mu_*\cC_M) \\
+    &= \bigoplus_{i,j,k\in\Z,\phi,\psi} \Hom_\C(L_\phi(i),L_\psi(j))\otimes \Ext^k_{D^bN}(IC_\phi[i],IC_\psi[j]) \\
+    &= \bigoplus_{i,j,k\in\Z,\phi,\psi} \Hom_\C(L_\phi(i),L_\psi(j))\otimes \Ext^k_{D^bN}(IC_\phi,IC_\psi) \text{ reindexing}
+ \end{align*}
+where $L_\psi$ is the multiplicity space of the decomposition of $\mu_*\cC_M$ into irreducible 
+IC sheaves.
+\red{Now it is a fact that $\Ext^k_{D^bN}(IC_\phi,IC_\psi)$ vanishes if $k<0$}
+Also $\Hom(IC_\phi,IC_\psi)$ is nonzero only if $\phi = \psi$. Therefore 
+we find that \begin{align*}
+    H^{BM}_*(Z) \cong \bigoplus_\phi \End_C(L_\phi) \oplus \big(\bigoplus_{k>0,\phi,\psi} \Hom_\C{L_\phi,L_\psi}\otimes
+    \Ext^k_{D^bN}(IC_\phi,IC_\psi)\big)
+\end{align*} The first summand is semisimple and the second $H^{BM}_*(Z)^+$ is nilpotent because
+it is concentrated in degrees $k>0$. Moreover, this nilpotent ideal is the radical 
+of our algebra because 
+\begin{align*}
+    H^{BM}_*(Z) / H^{BM}_*(Z)^+ = \bigoplus_\phi \End_C(L_\phi)
+\end{align*} is semisimple. The composition \begin{align*}
+    H^{BM}_*(Z) \to H^{BM}_*(Z) / H^{BM}_*(Z)^+ \cong \bigoplus_\phi \End_C(L_\phi) \twoheadrightarrow \End_C(L_\phi)
+\end{align*} yields an irreducible representation of the algebra $H^{BM}_*(Z)$ on the vector space $L_\psi$.
+\begin{theorem}
+    The nonzero members of the collection $\set{L_\phi}$ are the 
+    irreducible representations of the algebra $H^{BM}_*(Z)$.
+\end{theorem}
+
+\subsubsection{Semi-small maps}
+When $\mu$ is semismall then the previous calculation becomes nicer 
+since the shifts go away. In particular, we have the following: 
+\begin{theorem}
+    \begin{enumerate}
+        \item Let $\cC_M$ be the constant perverse sheaf on $M$. If $\mu$ is semismall
+        then $\mu_*\cC_M$ is a perverse sheaf and we have a decomposition without shifts \begin{align*}
+            \mu_*\cC_M = \bigoplus_{N_\phi,\chi_\phi} L_\phi \otimes IC_\phi
+        \end{align*} where $\phi = (N_\phi,\chi_\phi)$ is a pair of a stratum
+        a local system on the stratum. Furthermore, $H(Z)$ is a
+        subalgebra of $H^{BM}_*(Z)$ and \begin{align*}
+            H(Z) \cong \bigoplus_\phi \End_C(L_\phi)
+        \end{align*}
+        \item Let $H(M_x)$ denote the top 
+        Borel-Moore homology of the fiber $\mu^{-1}(x)$. For any 
+        stratum $N_\alpha$, $x\mapsto H(M_x)$ is a local system on $N_\alpha$.
+        If $x\in N_\phi,\chi_\phi$ then \red{the corresponding 
+        multiplicity space is given by the isotopy invariants of the
+        top cohomology of the fiber}. \begin{align*}
+            L_\phi = H(M_x)^{\pi_1(N_\alpha,x)}
+        \end{align*}
+    \end{enumerate}
+\end{theorem}
+\subsubsection{Applying the machinery to the Springer resolution}
+In this section we explain the following setup and theorem.
+Set $Z = \tilde \cN\times_\cN \tilde \cN$ the Steinberg variety.
+If $x\in \cN$ then $M_x$ is formed by pairs $(x,\mf b)$ where $\mf b$ 
+runs over the subset $\cB_x$ of $x$ invariant Borel subalgebras. Equivalently 
+any element $x\in \mf g$ induces a vector field on $G/B$ and $\cB_x$ is the
+zeros of this vector field.
+
+\hfill 
+
+Let $G(x)$ be the centralizer of $x$ in $G$, $A(x) = G(x)/G(x)_0$ the isotopy
+group acting on the connected components. Let $A(x)^*$ denote the set of isomorphism classes
+of $A(x)$-representations occuring in the BM homology groups $H_{top}(M_x)$.
+The main techincal result known as "Springer construction of Weyl groups"
+is the following:
+
+\begin{theorem} [Geometric Construction of $W$]
+    \begin{enumerate}
+        \item $H(Z) \cong \C[W]$
+        \item The collection $\{H(M_x)_\phi\}$ as $(x,\phi)$ runs over $G$ conjugacy
+        classes of points in $\cN$ and $\phi\in A(x)^*$ is a complete set of irreducible
+        representations of $W$.
+    \end{enumerate}
+\end{theorem}
+
+\subsubsection{Fourier transform}
+We introduce the main tool of the construction, the Fourier transform
+on perverse sheaves (or D-modules). 
+
+\subsection{Schubert varieties and Kazhdan Lustzig polynomials}
+Let $G$ be an algebraic group. The Kazhdan Lustzig polynomials are a family of polynomials defined for
+two Weyl group elements $v,w$ in a Weyl group $W$ with a system of 
+generators $S$. 
+
+\begin{definition}
+    The \textbf{Hecke algebra} $\cH$ is the algebra of $B$-bi-invariant 
+    functions of $G(\F_q)$.
+    The algebra structure is given by normalized convolution.
+    It has a basis consisting of functions \[\phi_w = \id_{BwB} \text{ for } w\in W\]
+\end{definition}
+
+\hfill
+
+\begin{lemma}
+    If $s\in S$ is a simple reflection and $w\in W$ then we have the following relations
+    \begin{align*}
+        \phi_w * \phi_{w'} &= \phi_{ww'} \text{ if } l(ww') = l(w) + l(w') \\
+        \phi_s * \phi_s &= (q-1)\phi_s + q\phi_1 \\
+        \phi_s * \phi_w &= (q-1)\phi_w + q\phi_{sw} \text{ if } l(ws) = l(w) + 1
+    \end{align*}
+\end{lemma}
+
+We have the "standard" description of Hecke algebra
+\begin{proposition}
+$\cH$ is the free $\Z[q,\inv q]$-module with basis $\set{\phi_w}_{w\in W}$ and relations
+\begin{align*}
+    \phi_s\phi_w = \phi_{sw} \text{ if } l(sw) = l(w) + 1 \\
+    (\phi_s - q)(\phi_s + 1) = 0
+\end{align*}   
+If $q = 1$, then this is the group algebra $\Z[W]$. 
+\end{proposition}
+The convention is to use $q^{\half}$ and $q^{-\half}$ as the formal parameters.
+Each $\phi_w$ is invertible and the algebra admits an involution \begin{align*}
+    i(q^{\half}) = q^{-\half} \text{ and } i(\phi_w) = \phi_{\inv w}^{-1}
+\end{align*}
+
+\begin{theorem}
+    [Kazhdan-Lusztig] For each $w$ there is a unique $c_w\in \cH$ and 
+    a uniquely determined polynomial $P_{yw}$ with $y\leq w$ so that $i(c_w) = c_w$ and
+    $P_{ww} = 1$ and $P_{yw}(q)$ has degree less than $\half(l(w) - l(y)-1)$ when $y<w$ and 
+    \begin{align*}
+        c_w = q^{-l(w)/2}\sum_{y\leq w} P_{yw}(q)\phi_y
+    \end{align*}
+\end{theorem}
+Kazhdan and Lusztig conjectured that the coefficients 
+of the polynomials $P_{yw}(q)$ are nonnegative integers and that in the 
+Grothendieck group of Verma modules \begin{align*}
+    [L_w] = \sum_{y\leq w} (-1)^{l(w)-l(y)}P_{yw}(1)[M_y]
+\end{align*}
+The second conjecture became known as the \textbf{Kazhdan-Lustzig conjecture} and 
+was proven by Beilinson-Bernstein and Brylinski-Kashiwara independently. The
+interpretation of $c_w$ and $P_{yw}$ in terms of intersection cohomology was critical 
+to the proof.
+\begin{theorem}
+    Set for any $v\leq w$ the number $h^i(\bar X_w)_v = \dim \cH^i(\IC_{\bar X_w})_v$.
+    Then \begin{align*}
+        P_{v,w}(q) = \sum_i h^i(\bar X_w)_v q^i
+    \end{align*} is a polynomial in $q$ with nonnegative integer coefficients.
+\end{theorem}
+
+\subsection{Geometric Satake Isomorphism}
+\begin{theorem}
+    The category $\cP_{\cO}$ is equivalent to the category of
+    representations of the Langlands dual group $^L G$, as categories with tensor and fiber structures.
+
+\end{theorem}
+
+There is a bilinear functor $\star:\cP_{\cO}\times \cP_{\cO} \to \cP_{\cO}$ with compatible
+commutativity, associativity restraints, and a fiber functor which respects the tensor product.
+In fact, one defines the desired functor geometrically so that $H$, the operation
+of taking cohomology, is the fiber functor. Therefore 
+the equivalence is between \begin{align*}
+    (\cP_{\cO},\star,H) \cong (\Rep(^L G), \otimes, \text{Forget})
+\end{align*}
+The $G(\cO)$ orbits of the affine Grassmannian are indexed by dominant coweights $\lambda$.
+A shadow of the geometric Satake isomorphism is the statement that the 
+intersection cohomology of the $\lambda$-orbit is the irreducible representation of $^L G$
+with highest weight $\lambda$.

@@ -1,0 +1,121 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Soergel bimodules}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+Notes on Soergel bimodules. See "Soergel Calculus" by Elias and Williamson and notes about 
+perverse sheaves on the flag variety by Riche.
+\end{abstract}
+
+\tableofcontents
+\section{Hecke algebra}
+Recall Bruhat decomposition. Let $G$ be a reductive group over $\C$ 
+with Borel subgroup $B$ and maximal torus $T$. 
+Let $W$ be the Weyl group of $G$. Then $G$ has a Bruhat decomposition
+\begin{align*}
+G = \coprod_{w\in W} BwB
+\end{align*} Orbit closures $\overline{BwB}$ are called Schubert varieties.
+
+\hfill
+
+The Hecke algebra is the algebra of $B\times B$-invariant functions on $G$ under
+normalized convolution. It therefore has a basis $\{T_w\}_{w\in W}$ where $T_w$ is the 
+characteristic function of $BwB$. In 1979, Kazhdan and Lusztig defined another basis $\{C_w\}_{w\in W}$
+which enjoys many remarkable positivity properties.
+
+\hfill 
+
+According to Grothendieck's function-sheaf dictionary, the Hecke 
+algebra should be categorified by some category of $B$-biinvariant sheaves on $G$.
+The \textbf{Hecke category} is the additive subcategory of semisimple complexes \begin{align*}
+    \cH \subset D^b_{B\times B}(G)
+\end{align*} The objects of $\cH$ are direct sums of 
+the various intersection complexes $IC(\overline{BwB})$. These are the simple equivariant
+intersection cohomology complexes. There is a monoidal structure on $D^b_{B\times B}(G)$
+ given by convolution which preserves $\cH$. The Grothendieck group $[\cH]$ of $\cH$ is an algebra 
+ over $\Z[v^{\pm 1}]$ where $v$ acts by shift. 
+ 
+ \begin{theorem}
+    $[\cH]$ is isomorphic to the Hecke algebra. The simple objects
+    of $\cH$ are the intersection complexes supported on Schubert varieties. The map takes 
+    $IC(\overline{BwB})$ to the Kazhdan Lusztig basis element $C_w$. Explicitly, we have
+    the Kazhdan-Lusztig polynomial $P_{x,y}(q)$ defined by
+    \begin{align*}
+        P_{v,w}(q) = \sum_i (-1)^i \dim \cH^i(IC_w)_v q^i
+    \end{align*} and the Kazhdan-Lusztig basis element $C_w$ can be written in the standard
+     basis as \begin{align*}
+            C_w = q^{-\ell(w)/2}\sum_{v\leq w} P_{v,w}(q) T_v
+     \end{align*}
+ \end{theorem}
+
+\section{Soergel bimodules}
+Recall that a Coexter group is a group which has a presentation of the form
+\begin{align*}
+    \langle s_1,\ldots,s_n | s_i^2 = 1, (s_is_j)^{m_{ij}} = 1\rangle
+\end{align*} where $m_{ij}\geq 2$ are symmetric. Weyl groups are Coxeter groups, but 
+so are affine Weyl groups and other cool groups.
+
+\hfill
+
+The hypercohomology of any complex in $D^b_{B\times B}(G)$ naturally 
+carries an action of $H^*_{B\times B} = R \otimes_C R$ where $R = \Rep(T)$. Since 
+$R$ is commutative, this extends to make the hypercohomology a bimodule over $R$.
+Therefor we get a functor from $\mathbb{H}^\cdot: D^b_{B\times B}(G) \to R\text{-bimod}$.
+
+\begin{theorem}
+    [Soergel] This functor is fully faithful and monoidal.
+\end{theorem} Therefore the Hecke category is equivalent to its essential image.
+We can also calculate that \begin{align*}
+    \mathbb{H}^\cdot(IC(\overline{BsB})) = \cM_s := R \otimes_{R^s} R
+\end{align*} where $R^s$ is the $s$-invariant subring of $R$ ($W$ acts by permuting the variables)
+and $s$ is a simple reflection in $W$ (soon to be generalized to an arbitrary Coxeter group).
+
+\hfill
+
+Soergel proves that the essential image is the smallest full additive monoidal Karoubian subcategory of $R\text{-bimod}$ containing
+the $\cM_s$. This is the category of \textbf{Soergel bimodules}. This story works 
+for any Coexter system. Specifically for Weyl groups, Soergel's "categorification theorem" follows from 
+the decomposition theorem applied to Bott Samelson resolutions of Schubert varieties.
+It is suprising that Soergel makes it work for any Coxeter group because there is 
+no underlying geometric context.
+
+\section{Thoughts}
+I don't understand precisely Soergel bimodules are related to category $\cO$ 
+and perverse sheaves on the flag variety.
+\begin{enumerate}
+    \item Is it true that the Hecke category can also be described as the (maybe $B$-equivariant)
+    perverse sheaves on the flag variety with respect to the Schubert stratification?
+    \item If so, can I find a quiver and relations for which the Hecke category of a general 
+    Coxeter group is the category of representations of the path algebra of that quiver modulo those relations?
+    \item One reason why people are interested in finding these 
+    geometric categorifications of these algebras is because the category of perverse sheaves enjoys
+    very nice properities. In particular the simple objects carry Hodge structures, satisfy Hard Lefschetz, 
+    and have Verdier duals. People are interested in making sense of these properties purely in the context
+    of representation theory.
+\end{enumerate}
+
+\section{Soergel modules from bimodules}
+Going from Soergel bimodules to Soergel modules morally is the same as 
+going from $H^*_B(G/B)$ to $H^*(G/B)$. 
+\end{document}

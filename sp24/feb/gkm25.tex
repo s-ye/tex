@@ -1,0 +1,125 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+
+
+\begin{document}
+Songyu Ye
+
+\today
+
+\hfill
+
+This is my plan for research this week.
+
+\section{Tools for solving the problem}
+\subsection{Toric degeneration}
+\begin{definition}
+	A toric degeneration of a projective variety $V$ is a flat morphism $\phi: X\to \A^1$ which
+	trivializes away from the fiber over $0$ in $\A^1$ \begin{align*}
+		X\setminus \phi^{-1}(0) \cong V\times \A^1\setminus 0
+	\end{align*}
+\end{definition}
+We should really consider toric degenerations which are $T$-equivariant meaning that 
+the action on the central fiber is an extension of the torus action on $X$.
+
+\hfill
+
+One place toric degenrations come from is valuations.
+
+\hfill
+
+\red{Why should I care?}
+
+\subsection{Intersection theory}
+The matter at hand is to expand the class of a subvariety in the geometric basis for cohomology.
+We know that the cohomology ring of the flag variety has a geometric basis given by the Schubert classes.
+There is this classical result which sort of characterizes the geometry of this basis.
+
+\begin{theorem}
+	Let $X = G/B$ be the flag variety. Then
+	\begin{enumerate}
+		\item The bases $\{[X_w]\}$ and $\{[X^v = X_{w_0v}]\}$ are dual to each other for the Poincare pairing.
+		\item For any subvariety $Y\subset X$ there is an expansion \begin{align*}
+			      [Y] = \sum_{w\in W}a^w(Y) [X_w]
+		      \end{align*} where $a^w(Y) = \langle [Y], [X^w]\rangle = \#(Y\cap gX^w)$ for general $g\in G$.
+		\item There are nonnegative structure constants for the expansion \begin{align*}
+			      [X_v^{w_0w}]= [X_v][X^w] = \sum_{u\in W}c_{vw}^u[X^u]
+		      \end{align*}
+	\end{enumerate}
+	Moreover the map $f:G/B\to G/P$ induces a map on cohomology which sends any Schubert class $[X_{wP}]$ to
+	the Schubert class $[X_{ww_{0,P}}]$ where $w\in W^P$.
+\end{theorem}
+
+Recall that $W^P$ parametrizes the coset space $W/W_P$ where $W_P = S_n/S_{d_1}\times \cdots \times S_{d_k}$
+where $G/P = \Fl(d_1,\dots,d_k)$ where the indexing of the flag variety denotes the step. In particular
+$\Fl(1,\dots,1)$ is the full flag variety. The elements of $W^P$ are the minimal length coset representatives,
+the unique permutation so that $w(1)<w(2)<\cdots<w(d_1)$, $w(d_1+1)<w(d_1+2)<\cdots<w(d_1+d_2)$, and so on.
+
+\hfill
+
+It looks like that this theorem should tell us how to expand the class of any subvariety.
+This is not the case because we do not even know how to expand $[X_v^{w_0w}]$ in the Schubert basis.
+This is the object of Schubert calculus and it is one of the oldest problems in algebraic combinatorics.
+
+\hfill
+
+For the wonderful compactification, Brion tells us about his geometric basis.
+
+\begin{theorem}
+    $A_{T\times T}^*(X)$ has a basis given by the classes \begin{align*}
+        X(\omega,\tau) = [\overline{B\times B^-(\omega,\tau)z_\Phi}]
+    \end{align*} where $\Phi = \set{\alpha\in\Sigma \st \tau(\alpha)\in R^+}$ and $z_\Phi$ is the basepoint of the $G\times G$ orbit corresponding
+    to $\Phi$. The restriction to $G\times B^-\times G/B$ is equal to \begin{align*}
+        (D_\omega \otimes D_\tau) \prod_{\alpha\in\Sigma\backslash\Phi}c^{T\times T}(\alpha,-\alpha)\sum_{w\in W_P(\Phi)}[\overline{B^-wB}/B\times \overline{Bw_{0,P}B}/B]
+    \end{align*}
+\end{theorem}
+where $c^{T\times T}:X^*(T\times T)\to A_{T\times T}^*(G/B\times G/B)$ is the characteristic map.
+
+So the $T\times T$-equivariant cohomology ring of the wonderful compactification
+has a geometric basis given by certain $B\times B^-$ orbit closures, in particular the ones which
+contain $T\times T$ fixed point.
+
+\hfill
+
+Our hope is to expand the class of a given $B\times B^-$ orbit closure intersect $B^-\times B$ orbit closure
+in terms of the geometric basis. There is a subproblem of expanding the class of a 
+general $B\times B^-$ orbit closure in terms of the geometric basis. Of course this should be very hard
+but we hope to reduce the problem to the Schubert calculus for $G/B$.
+
+\subsection{GKM}
+A thing that one might try is to write down Brion's basis explicitly in terms of GKM data.
+Then one can try to write down what an arbitrary $B\times B^-$ orbit closure intersect $B^-\times B$ orbit closure
+looks like in terms of GKM data. If we can do this, then we can try to expand these classes 
+on the GKM side.
+
+\hfill
+
+I don't even know how to do this for $\overline{\PGL(2)}$. We should talk to Tara about the computation.
+
+\subsection{Basis of anticanonical divisors}
+The canonical bundle of a nonsingular algebraic variety $V$ 
+is the line bundle $\Omega^n = \omega$, the $n$th exterior power of the cotangent bundle $\Omega$ on $V$.
+In particular over the complex numbers it is the determinant bundle of the holomorphic cotangent
+bundle $\Omega$ on $V$. \red{Bundles have classes}
+
+\hfill
+
+Therefore the canonical bundle defines a divisor class, denoted the \red{canonical class}.
+
+\begin{definition}
+    An anticanonical divisor is any divisor class $-K$ with $K$ canonical.
+\end{definition}
+
+\hfill
+
+One thing that we worried about is that the boundary divisors of the Richardson stratification
+are anticanonical in the Richardson variety. \red{Why does this matter?}
+
+\end{document}

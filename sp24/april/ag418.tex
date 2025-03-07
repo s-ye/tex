@@ -1,0 +1,186 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\begin{document}
+Songyu Ye
+
+These are notes from my meeting with Mike on April 18, 2024.
+We are talking about 27 lines on a cubic surface and the geometry
+of the Fano scheme.
+
+\section{Enumerative problem}
+Given a cubic surface $X \subset \P^3$, we can ask how many lines
+are contained in $X$. The answer is gotten by computing the
+degree of a particular Chern class. If you believe that
+that number is the answer, then the difficulty lies in
+interpreting this number. What geometry does this number
+really mean?
+
+\section{Fano scheme}
+We study the following object which parametrizes $k$-planes
+on a hypersurface $X$ in $\P^n$. Let $f$ be a degree $d$ polynomial and
+$X = V(f)$. The Fano scheme $F_k(X) \subset G(k,n)$
+is the scheme that parametrizes
+$k$-planes contained in $X$. It has a scheme structure because
+on an open chart of the Grassmannian $G(k,n)$ we have coordinates
+given by the row span of the matrix \begin{align*}
+	\begin{bmatrix}
+		I & A
+	\end{bmatrix}
+\end{align*} where $A$ is a $n-k \times k+1$ matrix. Using these coordinates,
+we can identify each $[L] \in G(k,n)$ with $\P^k$, say with coordinates
+$s_0, \ldots, s_k$. Then on the above open set $U$,
+the Fano scheme corresponding to a hypersurface $V(f)$ is cut
+out by the vanishing of the coefficients of the pullback of $f$ to $U$. In particular
+there will be $\binom{k+d}{d}$ equations cutting out the Fano scheme locally. This is
+because we are asking that all coefficients on monomials of degree $d$ in $k+1$ variables
+vanish.
+
+\section{The Chern class computation}
+Recall the very nice thing about Chern classes that we like.
+
+\begin{proposition}
+    The top Chern class of a vector bundle $\cE$ is equal to the class of $V(\sigma)$
+    where $\sigma$ is any global section of $\cE$.
+\end{proposition}
+
+The following proposition relates the class 
+of the Fano scheme to the Chern class of a particular vector bundle.
+
+\begin{proposition}
+    Consider the tautological vector bundle $\cS$ on $G(k,\P V)$. Let $g$
+    be a degree $d$ form on $\P V$. Then $g$ gives rise to a global section $\sigma_g$ of 
+    the vector bundle $\Sym^d \cS^*$ whose zero locus is $F_k(V(g))$. In particular,
+    the class of the Fano scheme $F_k(V(g))$ is equal to the top ( $= \binom{k+d}{k}$) Chern class
+    of $\Sym^d \cS^*$ \red{whenever $F_k(V(g))$ has the right dimension. What goes wrong?}.
+\end{proposition}
+
+Now consider the following computation. Recall for $G(1,3)$ we have \begin{align*}
+    c(\cS^*) = 1 + \sigma_1 + \sigma_{1,1}
+\end{align*} We proved this using degeneraci loci. In particular global sections of
+$\cS^*$ are linear forms and their degeneracy loci correspond to incidence conditions. 
+Which ones? Precisely those ones above.
+
+\hfill
+
+$\Sym^3\cS^*$ has rank $4$ since $\cS^*$ has rank $2$, so therefore we are after 
+$c_4(\Sym^3\cS^*)$. We can compute this by the splitting principle. We have \begin{align*}
+    c(\cS^*) = 1 + \sigma_1 + \sigma_{1,1} = (1+\alpha)(1+\beta)
+\end{align*} from which it follows that \begin{align*}
+    c_4(\Sym^3\cS^*) &= (1+3\alpha)(1 + 2\alpha + \beta)(1 + \alpha + 2\beta)(1 + 3\beta) \\
+    &= 9\alpha\beta(2(\alpha + \beta)^2 + \alpha\beta) \\
+    &= 9\sigma_{1,1}(2\sigma_1^2 + \sigma_{1,1}) \\
+    &= 27 \sigma_{2,2}^2 
+\end{align*} and $\sigma_{2,2}$ is the class of a point.
+This computation really makes clear why one would care about Schubert calculus 
+and the cohomology of Grassmannians. It wasn't always so clear to me before.
+
+\begin{remark}
+    What did we just compute above? We showed that on a cubic surface $X$, 
+    there are 27 lines provided one counts them with multiplicity.
+\end{remark}
+The next step is to show that $F_1(X)$ is dimension $0$ and reduced. Then 
+we can say that the 27 lines are distinct. This is a nontrivial fact and it miraculously
+follows from a bunch of hard work to understand the geometry of the Fano scheme.
+
+\section{The geometry of the Fano scheme}
+Enumerative questions become geometric questions about the parameter space. The
+following computation will show that $F_1(X)$ is dimension $0$ and reduced.
+
+\begin{proposition}
+    Let $X\subset \P^n$ smooth and let $L$ be a $k$-plane on $X$. Then 
+    $T_{[L]}F_k(X) = H^0(N_{L/X})$.
+\end{proposition} In particular $\dim F_k(X) \leq h^0(N_{L/X})$ with 
+equality if $F_k(X)$ is smooth at $[L]$. We will prove this in the next section but
+first we will finish the example of the cubic surface.
+
+\hfill
+
+Recall the adjunction formula (written as line bundles) which says that for $Y\subset X$ smooth 
+divisor of a smooth variety \begin{align*}
+    \omega_Y = \omega_X \otimes \cL = \omega_X \otimes \cO_X(Y)\vert_Y
+\end{align*} where $\cL$ is the line bundle associated to $Y$.
+
+\hfill
+
+Recall Riemann Roch: For a line bundle $\cL$ on a curve $X$ of genus $g$ we have 
+\begin{align*}
+    h^0(\cL) - h^0(K_X \otimes \cL^{-1}) = \deg \cL + 1 - g
+\end{align*} This is something which I have blacked boxed but 
+it should quickly follow from Serre duality and the adjunction formula.
+
+\hfill
+
+Letting $\cL = \cO_X$ gives that $h^0(X,K) = g$. Letting $\cL = K$ gives $\deg K = 2g-2$.
+Putting everything together and considering the case of $C\subset S$ smooth genus $g$ 
+curve on a smooth surface, we get that \begin{align*}
+    g = \frac{C^2 + K_S\cdot C}{2} + 1
+\end{align*}
+
+\hfill
+
+Further let $C = L$ line on degree $d$ surface $S$. 
+Use adjunction for $S\subset \P^3$ to compute \begin{align*}
+    K_S = K_{\P^3} + S\vert_S = -4\zeta + d\zeta
+\end{align*} We finally get \begin{align*}
+    0 = \frac{L^2 + d - 4}{2} +1
+\end{align*} from which it follows that $L^2 = 2 - d$. When $d = 3$ we get that $L^2 = -1$.
+
+Finally, recall that \red{the following things are true}: Let $C\subset X$ 
+be a smooth curve on a smooth surface.
+\begin{itemize}
+    \item The self intersection $C^2$ is the degree of the normal bundle $N_{C/X}$. 
+    This is a matter of definition but it feels like still there should be something
+    to be explained here.
+    \item More generally if $Y\subset X$ is a Cartier divisor on a variety of 
+    dimension $k$ the class $[Y^2] = c_1(N_{Y/X})$ in $A_{k-2}(Y)$.
+\end{itemize}
+If you believe this then returning to our previous discussion
+we have that $N_{L/X}$ is a line bundle of negative degree so $h^0(N_{L/X}) = 0$.
+Therefore $F_1(X)$ is dimension $0$ and reduced.
+
+\section{Proof of the proposition}
+We will identify both sides with deformations.
+
+\begin{definition}
+    A deformation of a closed subscheme $Y\subset X$ over $T$ with a 
+    distinguished point $\Spec k \in T$ is a flat family $\cY\subset X\times T$
+    whose fiber over $\Spec k$ is $Y$. We say $\cY$ is first order if $T = T_m = 
+    \Spec k[\epsilon_1,\ldots,\epsilon_m]/(\epsilon_1^2,\ldots,\epsilon_m^2)$
+    for some $m$. 
+\end{definition}
+ 
+By the universal property of the Hilbert scheme we can identify maps $T_m\to H_X$ sending $0$ to 
+$[Y]$ with first order deformations of $Y$ in $X$ over $T_m$. Taking $m=1$ for any scheme $Z$,
+we can identify $\Hom_{z}(T_1,Z)$ with the Zariski tangent space $T_{[z]}Z$. Affinely we are considering
+$\Hom(k[X], k[\epsilon]/(\epsilon^2))$ where $k[X]$ is the coordinate ring. Such maps look like 
+$h(f) = h_0(f) + \epsilon h_1(f)$ where $h_0$ is the map $f\mapsto f(z)$ and $h_1$ is the map which 
+corresponds to a derivation. In conclusion, there are corrrespondences between 
+flat families of $X$ over $T_m$ with fiber $Y$ and $\Hom_[Y](T_m,X)$ and when $m=1$
+this gives isomorphims between $T_{[Y]}H_X$ and $H^0(N_{Y/X})$.
+
+\begin{remark}
+    The word "flat" is about geometry, at least when the base is reduced. It tells us that all fibers 
+    have the same discrete invariants in particular Hilbert polynomial. It means that
+    all the fibers look roughly the same. A nonexample is the blowdown map $\tilde\P^2\to \P^2$.
+\end{remark}
+
+
+On the level of modules, the normal bundle is about 
+$\Hom_{R/I}(I/I^2,R/I)$ where $I$ is the ideal of $Y$ in $X$. Note that maps $I\to R/I$ are
+the same as maps $I/I^2\to R/I$ because $I^2$ is in the kernel. 
+This globalizes to 
+$\cN_{Y/X} = \Hom_{\cO_Y}(\cI_Y/\cI_Y^2,\cO_Y)$. Mike did this very nice example where
+we took $I = \ideal{x^3 + y^3 + z^3 + w^3}$ and $J = \ideal{x+y,z+w}$, thinking about lines on a
+cubic surface, and we showed that there are no first order deformations of $J$ in $I$,
+by looking at $\Hom_{I/J}(J/J^2,I/J)$. In particular the tangent space is the normal bundle 
+is zero dimensional. \red{I might have the details wrong here but the computation
+in Macaulay2 was very nice and explicit.}
+\end{document}
+

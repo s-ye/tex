@@ -1,0 +1,301 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+
+
+\begin{document}
+Songyu Ye
+
+\today
+\section{Canonical generators for equivariant cohomology}
+I'm trying to understand the following idea. If I have a $T$-invariant subvariety $Y\subset X$ then
+this defines a class $[Y]$ in the $T$-equivariant cohomology $H_T^*(X)$. The idea is that we can then
+view them inside the ring $H_T^*(X^T)$ as lists of polynomials indexed by the $T$-fixed points.
+
+\hfill
+
+The ring $H_T^*(X^T)$ has canonical generators also indexed by the $T$-fixed points given by
+the Bialynicki-Birula decomposition. The idea is that every fixed point $p$ gives rise to an attracting set
+$X_p$ which is a $T$-invariant subvariety, and then we can pullback the class $[X_p]$ to $X^T$ and this gives
+us a canonical generator.
+
+\hfill
+
+This decomposition also gives us a partial order on the fixed points,
+where we say that $v\leq w$ if $X_v\subset \overline{X_w}$. For the flag variety in $\GL(n)$ with the torus action of
+conjugation, the fixed points are indexed by the Weyl group $S^n$ and the partial order is given by the Bruhat order.
+
+\hfill
+
+There is this related idea of looking at the $B$-orbits on $X$. It seems that there is a
+relationship between the $B$-orbits and the attracting sets of the $T$-fixed points. They are both defining
+elements in the $T$ equivariant cohomology rings of $X$ and there are results saying that they both form a basis.
+
+\red{Should they be the same? In fact why is one even studying the $B$-orbits? We are
+	interested in the $T$-equivariant cohomology ring, so why are we looking at the $B$-orbits.
+	Because $B$ deformation retracts onto $T$?}
+
+\hfill
+
+Tymoczko describes an algorithm for realizing canonical generators for $H_T^*(X)$
+in the ring $H_T^*(X^T)$. The algorithm is as follows. Recall the partial order observed above.
+
+\hfill
+
+Fix $v\in X^T$. I will describe the canonical generator $S_v$ associated to $v$. For all $u<v$ the generator restricts
+to $0$. Now consider $w\in X^T$ so that every $u<w$ is known. Then $S_v\vert_w$ is the minimal degree guy that
+satisfies all the relations, in particular it should be zero whenever possible (except for when $w = v$ in which
+case we insist that it is not zero).
+
+\hfill
+
+The claim is that the output of this algorithm is the pullback of the class $[X_v]$ to $X^T$. This output is
+unique up to a scalar whenever the moment graph can be drawn in the plane so that hte vertex $v$ lies above its neighbor $u$ if and only if $v$ has more
+downward edges than $u$.
+
+\hfill
+
+One question is what does it even mean to restrict a class of the cell decomposition
+to a fixed point? If $X_v$ is a cell (one of the basis elements for the $T$-equivariant cohomology ring) then
+when I restrict it to $w$ I should get a polynomial in the weights of $T$. What data does this even mean?
+
+\section{Example}
+Consider the $T\times T$ action on $\overline{\PGL(2)} \cong \P^3$. There are two $G\times G$ orbits,
+the open one and the closed one corresponding to taking no simple roots or taking all of the simple roots.
+
+\hfill
+
+Now we can ask about the $B\times B^-$ orbits in each. In the open orbit $\cong \PGL(2)$ this is precisely
+the Bruhat decomposition. \begin{align*}
+	\PGL(2) = B\begin{bmatrix}
+		           * & 0 \\
+		           0 & *
+	           \end{bmatrix}B^- \cup B\begin{bmatrix}
+		                                  0 & * \\
+		                                  * & 0
+	                                  \end{bmatrix}B^-
+\end{align*}
+In the closed orbit $\cong \P^1\times \P^1$, recall that every projective $2\times 2$ matrix of rank $1$ is just a row
+vector times a column vector (projectively) \begin{align*}
+	M = r\cdot c
+\end{align*} and so thinking about the $B\times B^-$ orbits \begin{align*}
+	BMB^- = (Br)(cB^-)
+\end{align*} and so there are four $B\times B^-$-orbits, the product of the situations when \begin{align*}
+	r = \begin{bmatrix}
+		    0 & 1
+	    \end{bmatrix}, \begin{bmatrix}
+		                   1 & *
+	                   \end{bmatrix} \quad \text{ and } \quad c = \begin{bmatrix}
+		                                                              0 \\ 1
+	                                                              \end{bmatrix}, \begin{bmatrix}
+		                                                                             1 \\ *
+	                                                                             \end{bmatrix}
+\end{align*}
+So there are four orbits which I will denote \begin{align*}
+	{\infty\times\infty},{\infty\times \A^1}, {\A^1\times \infty}, {\A^1\times \A^1}
+\end{align*} Previously I said that there were maps \begin{align*}
+	H_T^*(X)\to H_T^*(\P^1\times \P^1)\to H_T^*(X^{T\times T})
+\end{align*} and we know that the second map is an injection. The first map
+is supposed to correspond to take the $B\times B^-$ orbits in the open orbit, take their closures,
+and see which $B\times B^-$ orbits in the closed orbit appear. If you are a $B\times B^-$ orbit in the
+closed orbit, then the first map is the identity on the class of your closure. But then the first map is not
+injective as it is supposed to be. \red{I've gone wrong somewhere.} There are more $B\times B^-$ orbits in $X$ than
+there are $T\times T$ fixed points. Is it just the case that the $B\times B^-$ orbits do not form a basis,
+but perhaps they are only generators.
+
+\hfill
+
+Let's continue with the calculation by writing down generators in the GKM ring. What are the attracting sets?
+
+\hfill
+
+We can just use the algorithm: The GKM graph with labels looks like \begin{center}
+	\begin{tikzpicture}
+		\begin{tikzpicture}[scale=2]
+			\draw (0,0) rectangle (4,4); % Draw the square
+
+			% Label the edges
+			\node at (2,4) [above] {$t_2$};
+			\node at (2,0) [below] {$t_2$};
+			\node at (0,2) [left] {$t_1$};
+			\node at (4,2) [right] {$t_1$};
+
+			\draw (0,0) -- (4,4) node[midway, above, pos=0.7] {$t_1 - t_2$}; % Draw the first diagonal and label it
+			\draw (0,4) -- (4,0) node[midway, below, pos=0.7] {$t_1 + t_2$}; % Draw the second diagonal and label it
+
+			\node at (0,0) [below left] {$\begin{bmatrix}
+						0 & 0 \\
+						* & 0 \\
+					\end{bmatrix}$};
+			\node at (4,4) [above right] {$\begin{bmatrix}
+						0 & * \\
+						0 & 0 \\
+					\end{bmatrix}$};
+			\node at (0,4) [above left] {$\begin{bmatrix}
+						* & 0 \\
+						0 & 0 \\
+					\end{bmatrix}$};
+			\node at (4,0) [below right] {$\begin{bmatrix}
+						0 & 0 \\
+						0 & * \\
+					\end{bmatrix}$};
+		\end{tikzpicture}
+	\end{tikzpicture}
+\end{center}
+The partial ordering on these guys looks like \begin{center}
+	\begin{tikzpicture}[rotate=-45]
+		\draw (0,0) rectangle (2,2);
+		\node at (0,0) [below left] {$\begin{bmatrix}
+					0 & 0 \\
+					* & 0 \\
+				\end{bmatrix}$};
+		\node at (2,0) [below right] {$\begin{bmatrix}
+					0 & 0 \\
+					0 & * \\
+				\end{bmatrix}$};
+		\node at (2,2) [above right] {$\begin{bmatrix}
+					0 & * \\
+					0 & 0 \\
+				\end{bmatrix}$};
+		\node at (0,2) [above left] {$\begin{bmatrix}
+					* & 0 \\
+					0 & 0 \\
+				\end{bmatrix}$};
+	\end{tikzpicture}
+\end{center}
+The algorithm says that the canonical generators are
+\begin{align*}
+	X_{\begin{bmatrix}
+		   * & 0 \\
+		   0 & 0 \\
+	   \end{bmatrix}} & = \begin{tikzpicture}[scale = 1/2]
+		                      \draw (0,0) rectangle (2,2);
+		                      \node at (0,0) [below left] {};
+		                      \node at (2,0) [below right] {};
+		                      \node at (2,2) [above right] {};
+		                      \node at (0,2) [above left] {$t_1t_2(t_1 + t_2)$};
+	                      \end{tikzpicture} \\
+	X_{\begin{bmatrix}
+				   0 & * \\
+				   0 & 0 \\
+			   \end{bmatrix}} & = \begin{tikzpicture}[scale = 1/2]
+		                      \draw (0,0) rectangle (2,2);
+		                      \node at (0,0) [below left] {};
+		                      \node at (2,0) [below right] {};
+		                      \node at (2,2) [above right] {$t_1(t_1 - t_2)$};
+		                      \node at (0,2) [above left] {$t_1(t_1 + t_2)$};
+	                      \end{tikzpicture}   \\
+	X_{\begin{bmatrix}
+				   0 & 0 \\
+				   * & 0
+			   \end{bmatrix}} & = \begin{tikzpicture}[scale = 1/2]
+		                      \draw (0,0) rectangle (2,2);
+		                      \node at (0,0) [below left] {$t_2$};
+		                      \node at (2,0) [below right] {$0$};
+		                      \node at (2,2) [above right] {$t_1$};
+		                      \node at (0,2) [above left] {$t_1 + t_2$};
+	                      \end{tikzpicture}   \\
+	X_{\begin{bmatrix}
+				   0 & 0 \\
+				   0 & * \\
+			   \end{bmatrix}
+	}                  & = \begin{tikzpicture}[scale = 1/2]
+		                       \draw (0,0) rectangle (2,2);
+		                       \node at (0,0) [below left] {$1$};
+		                       \node at (2,0) [below right] {$1$};
+		                       \node at (2,2) [above right] {$1$};
+		                       \node at (0,2) [above left] {$1$};
+	                       \end{tikzpicture}                 \\
+\end{align*}
+It felt like I had to make ad hoc choices along the way. For example it feels like rows 2 and 3 are symmetric in Bruhat order 
+so they should either both be degree 2 or both be degree 1. However we know the Betti numbers of $\C\P^3$.
+\red{waht should the betti numbers of other wonderful compactifications be? Schubert calculus seems
+to be really stupid in the case that all of the Betti numbers are 1}
+\hfill
+
+To continue this calculation we can think about what is happening with the $B\times B^-$ orbits. 
+
+\section{$B$ orbits and $T$ attracting sets}
+Indeed there is a corresponense that I was concerned about. First an example.
+
+\begin{example}[Allen]
+    \begin{center}
+        \includegraphics[scale = .5]{/Users/songye03/Desktop/math_tex/img/Screenshot 2024-01-23 at 2.13.19 AM.png}
+    \end{center}
+    The point is that in this case the $B$ orbits on $\GL(n)/B$ are precisely in correspondense with the fixed points
+    of the torus action on the flag variety, and moreover the $B$ orbits are the attracting sets of the fixed points.
+\end{example}
+   
+In general, we appeal to more facts about the Bialynicki-Birula decomposition.
+
+\hfill
+
+Recall the setup. We have a connected reductive algebraic group $G$ with a maximal torus $T$ and Borel $B$, fixed.
+Let $X$ be smooth projective variety with an action of $G$ so $X$ has finitely many $G$-orbits.
+
+\hfill
+
+For a one parameter subgroup $\lambda: \C^*\to T$ we can consider the attracting set for $y\in X^T$ \begin{align*}
+    X^\lambda(y) = \{x\in X: \lim_{t\to 0} \lambda(t)\cdot x = y\}
+\end{align*} 
+
+\hfill
+
+If we choose $\lambda$ in the interior of the Weyl chamber, then $X_\lambda(y)$ is $B$
+-stable. For sufficiently general $\lambda$, then $X^{\C^*} = X^T$. This is because we can think of $X$
+as sitting in some projective space $\P(V)$ and then $T$ acts on $V$ via characters \begin{align*}
+    V = \bigoplus_{\chi\in X^*(T)} V_\chi
+\end{align*}. Now let $\lambda$ sufficiently general so that $\langle \lambda, \chi\rangle \neq 0$ for all $\chi$
+which appear. Therefore $\lambda$ and $T$ induce the same eigendecomposition of $V$ and so a point $x\in \P(V)$
+is fixed by one if and only if it is fixed by the other.
+
+We say that a $G$-variety is spherical if it is normal and some Borel $B$ has an open dense orbit.
+We say that a spherical $G$-variety with open $G$-orbit $X^0_G$ is toroidal if the closure of every 
+$B$-stable divisor in $X^0_G$ contains no $G$-orbit.
+
+\hfill
+
+Complete symmetric spaces and toric varieties are toroidal.
+\begin{theorem}
+    Let $X$ be a toroidal complete $G$-variety. Then the intersection of any cell $X^\lambda(y)$ with any
+    $G$-orbit is empty or a single $B$-orbit.
+\end{theorem}
+
+\section{Our story}
+We have the torus $T\times T$ acting on the wonderful compactification $\overline \PGL(2)$. The fixed points are 
+indexed by elements of $S_2\times S_2$ and they tell us how to decompose the wonderful compactification
+into cells. The attracting sets are the $B\times B^-$ orbits. However there are attacting sets
+which do not contain $T\times T$ fixed points. \red{So it is not true that the map }
+\begin{align*}
+    H_T^*(\overline \PGL(2))\to H_T^*(\P^1\times \P^1)
+\end{align*} \red{is injective.}
+
+\section{Loop group of $\SU(2)$}
+Is there a hope of doing Schubert calculus in the loop group of $\SU(2)$? 
+What indexes the fixed points? What are the attracting sets? Is there a corresponding Bialynicki-Birula decomposition?
+
+\hfill
+
+There is a corresponding notion of Bruhat decomposition and Schubert varieties in Kac Moody groups.
+People have also studied the closure patterns of these decompositions. Have people thought
+about the equivariant cohomology of these things? One can start with the paper of Billig and Dyer.
+
+\section{Affine flag varieties and their Schubert calculus}
+A good place to start thinking about these questions is the paper of Braden and MacPherson. We should read this 
+and be prepared to talk with Tara on Thursday about it.
+
+\section{References}
+\begin{itemize}
+    \item https://mathoverflow.net/questions/358450/bialynicki-birula-decompositions-and-fixed-points
+    \item https://mathoverflow.net/questions/284894/bialynicki-birula-decomposition-and-moment-polytopes-graphs
+\end{itemize}
+\end{document}
+
+
+

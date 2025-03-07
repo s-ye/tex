@@ -1,0 +1,243 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scribe notes style file      
+%
+% This file should be called scribe.sty
+%
+% Your main LaTeX file should look like this:
+%
+%   \documentclass[12pt]{article}
+%   \usepackage{scribe}
+%
+%   \Scribe{YOUR NAME}
+%   \Lecturer{Anupam Gupta OR Ryan O'Donnell}
+%   \LectureNumber{N}
+%   \LectureDate{DATE}
+%   \LectureTitle{A TITLE FOR THE LECTURE}
+%
+%   \begin{document}
+%   \MakeScribeTop
+%
+%   \section{SECTION NAME}
+%
+%   NOTES GO HERE
+%
+%   \section{ANOTHER SECTION NAME}
+%
+%   MORE NOTES GO HERE
+%
+%   etc.
+%
+%   \bibliographystyle{abbrv}           % if you need a bibliography
+%   \bibliography{mybib}                % assuming yours is named mybib.bib
+%
+%   \end{document}
+%
+%
+% A .bib file is a text file containing a sequence like...
+% 
+%   @article{ADR82,
+%     author = "Alain Aspect and Jean Dalibard and G{\'e}rard Roger",
+%     title = "Experimental Test of {B}ell's Inequalities Using Time-Varying Analyzers",
+%     journal = "Phys.\ Rev.\ Lett.",
+%     volume = 49,
+%     number = 25,
+%     pages = "1804--1807",
+%     year = 1982
+%   }
+%
+%   @inproceedings{Fei91,
+%     author = "Uriel Feige",
+%     title = "On the success probability of the two provers in one round proof systems",
+%     booktitle = "Proc.\ 6th Symp.\ on Structure in Complexity Theory (CCC)",
+%     pages = "116--123",
+%     year = 1991
+%   }
+%
+%
+%
+% For your LaTeX files, there are some macros you may want to use below...
+\usepackage[shortlabels]{enumitem}
+\usepackage{/Users/songye03/Desktop/math_tex/style/macros}
+
+\oddsidemargin 0in \evensidemargin 0in \marginparwidth 40pt
+\marginparsep 10pt \topmargin 0pt \headsep 0in \headheight 0in
+\textheight 8.5in \textwidth 6.5in \brokenpenalty=10000
+
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{latexsym}
+\usepackage{epsfig}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{xspace}
+\usepackage{times}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz-cd}
+\usepackage{color}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+ 
+\definecolor{codegreen}{rgb}{0.3,0.6,0.4}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+
+
+
+
+
+
+% Define your custom theorem styles
+\usepackage{xcolor}
+
+\definecolor{mycolor}{RGB}{0,0,255} % Blue color
+
+\newtheoremstyle{examples}% name
+  {10pt}% space above
+  {10pt}% space below
+  {\itshape}% body font
+  {}% indent amount
+  {\color{blue}\bfseries}% theorem head font (blue color)
+  {.}% punctuation after theorem head
+  {.5em}% space after theorem head
+  {}% theorem head spec (can be left empty, meaning 'normal')
+
+
+\newtheoremstyle{results}% name
+  {10pt}% space above
+  {10pt}% space below
+  {\itshape}% body font
+  {}% indent amount
+  {\color{teal}\bfseries}% theorem head font (blue color)
+  {.}% punctuation after theorem head
+  {.5em}% space after theorem head
+  {}% theorem head spec (can be left empty, meaning 'normal')
+
+\newtheoremstyle{definitions}% name
+  {10pt}% space above
+  {10pt}% space below
+  {\itshape}% body font
+  {}% indent amount
+  {\color{purple}\bfseries}% theorem head font (blue color)
+  {.}% punctuation after theorem head
+  {.5em}% space after theorem head
+  {}% theorem head spec (can be left empty, meaning 'normal')
+
+\newtheoremstyle{special}% name
+  {10pt}% space above
+  {10pt}% space below
+  {\itshape}% body font
+  {}% indent amount
+  {\color{red}\bfseries}% theorem head font (blue color)
+  {.}% punctuation after theorem head
+  {.5em}% space after theorem head
+  {}% theorem head spec (can be left empty, meaning 'normal')
+
+
+% Set the theorem styles
+
+\theoremstyle{results}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+
+
+
+\theoremstyle{special}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{examples}
+\newtheorem{example}[theorem]{Example}
+
+
+
+\theoremstyle{definitions}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+
+
+
+
+
+
+% Setting the theorem style back to plain in case theorems are defined in the main file
+\theoremstyle{plain}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Feel free to ignore the rest of this file
+
+
+\def\ScribeStr{??}
+\def\LecStr{??}
+\def\LecNum{??}
+\def\LecTitle{??}
+\def\LecDate{??}
+\newcommand{\Scribe}[1]{\def\ScribeStr{Scribe: #1}}
+\newcommand{\Scribes}[1]{\def\ScribeStr{Scribes: #1}}
+\newcommand{\Lecturer}[1]{\def\LecStr{Lecturer: #1}}
+\newcommand{\Lecturers}[1]{\def\LecStr{Lecturers: #1}}
+\newcommand{\LectureNumber}[1]{\def\LecNum{#1}}
+\newcommand{\LectureDate}[1]{\def\LecDate{#1}}
+\newcommand{\LectureTitle}[1]{\def\LecTitle{#1}}
+
+\newdimen\headerwidth
+
+\newcommand{\MakeScribeTop}{
+\noindent
+\begin{center}
+  \framebox{
+    \vbox{
+      \headerwidth=\textwidth
+      \advance\headerwidth by -0.22in
+      \hbox to \headerwidth {\hfill ELE2742 / ENG1467 \ \ - \ \ PUC-Rio, \ 2019.1 }
+      \vspace{4mm}
+      \hbox to \headerwidth {{\Large \hfill Lecture \LecNum: {\LecTitle} \hfill}}
+      \vspace{2mm}
+      \hbox to \headerwidth {\hfill \LecDate \hfill}
+      \vspace{2mm}
+      \hbox to \headerwidth {{\it \LecStr \hfill \ScribeStr}}
+      }
+    }
+\end{center}
+\vspace*{4mm}}

@@ -1,0 +1,196 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Nearby Vanishing Cycles and Gluing Perverse Sheaves}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+These are a second set of notes on perverse sheaves, specifically taking a look at the nearby and vanishing cycles functors, gluing perverse sheaves, and 
+perverse sheaves on $(\C,0)$ and square matrices with the rank stratification. 
+We are following \cite{beilinson}, \cite{reich}, and \cite{braden}. There
+is a connection with representation theory which I am interested in 
+exploring about Soergel bimodules and quiver represntations.
+
+\end{abstract}
+\tableofcontents
+
+\section{Goals}
+We want to understand the following result of Beilinson:
+
+\begin{proposition}
+Let $X$ be a small disk around $0$ in $\A^1$. Then the category $\Perv(X)$ 
+of perverse sheaves on $X$ with singularities at $0$ only is equivalent to the 
+category of representations of the quiver \begin{center}
+\begin{tikzcd}
+V_1 \ar[r, shift left, "v"] & V_2 \ar[l, shift left, "u"]
+\end{tikzcd}
+\end{center} with the relations that $I - uv$ and $I - vu$ are invertible.
+\end{proposition}
+Let $j:Z \hookrightarrow X$ be a closed inclusion and $i:U \hookrightarrow X$ 
+the open complement and $f:X\to \A^1$. Beilinson shows that the category $\Perv(X)$ is equivalent to
+the category $\Perv_f(Z,U)$ of "gluing data of perverse sheaves on $Z$ and $U$".
+
+\hfill
+
+Let $X \subset \A^1$ be a complex disk around $0$. 
+Then $\Perv(Z) = \Perv(\set{0}) = \Vect$ and $\Perv{U}$ is vector spaces 
+with an automorphism (monodromy), and the \textbf{unipotent nearby cycles functor} $\psi_f$ 
+for the map $f:X \subset A^1$ takes a perverse sheaf on $U$ to a perverse sheaf on $Z$.
+Beilinson computes this functor to be the one which takes $(V,T)$ to $(W,T)$
+where $W$ is the maximal subspace of $V$ on which $T$ acts nilpotently.
+
+\hfill
+
+Therefore, the category $\Perv_f(Z,U)$ is equivalent to the category of data
+$V_0', V_1', \phi, u, v$ where $V_0', V_1'$ are vector spaces, 
+$\phi$ an automorphism of $V_1$ and $u,v$ are maps \begin{align*}
+    v:V_0' \xleftrightarrow{} \psi(V_1', I -\phi):u
+\end{align*} so that $vu = I - \phi$. Then the equivalence is given by \begin{align*}
+    V_0' &= \psi_f(V_0,uv) \\
+    V_1' &= V_1 \\
+    \phi &= I - vu\\
+    u &= u\\
+    v &= v
+\end{align*}
+The invertibility of $I - vu$, $I-uv$ is about the image
+of the functor being those vector spaces for which the prescribed maps are
+acting \textbf{maximally} unipotently.
+
+\section{Nearby Cycles}
+Let $f:X \to \A^1$ so that $Z = f^{-1}(0)$.
+Given $i,j$ the open and closed inclusions of $Z,U$ into $X$, we have 
+the \textbf{nearby cycles} functor $R\psi_f:\Perv(U) \to \Perv(Z)$ defined as follows. 
+Let $u:\tilde \Gm \to \Gm$ be the universal cover and let $\tilde U = U \times_{\Gm} \tilde \Gm$.
+Then $R\psi_f$ is the derived functor \begin{align*}
+    R\psi_f = R(i^*j^*v_*v^*)
+\end{align*} Note that $v$ is not an algebraic map, but
+nonetheless Deligne proved that the nearby cycles functor preserves
+constructibility.
+
+\begin{lemma}
+The nearby cycles functor $R\psi_f$ decomposes 
+$R\psi_f = R\psi_f^{un} \oplus R\psi_f^{\geq 1}$ where for any choice of generator $t$
+of $\pi_1\Gm$, we have $1-t$ acts nilpotently on $R\psi_f^{un}(A^*_U)$
+for any complex $A^*_U$ and is an automorphism of $R\psi_f^{\geq 1}(A^*_U)$.
+\end{lemma}
+
+The unipotent piece is called the \textbf{unipotent nearby cycles} functor.
+One can show that $R\psi_f^{un}[-1]$ acts on perverse sheaves 
+and we denote this functor $\Psi_f^{un}$.
+ 
+\section{Vanishing Cycles}
+
+\section{Cellular perverse sheaves and the representation theory of category $\cO$}
+\subsection{Category $\cO$ and quivers}
+The story starts with the BGG Category $\cO$ and Soergel's results about the 
+endomorphism ring of projective modules in $\cO$. In particular, we have the following 
+phenomenom which we will try to relate to what comes next.
+\subsection{Cellular perverse sheaves}
+Suppose $K$ is a finite simiplicial complex, which we will 
+identify with its geometric realization $|K|$. Given a perversity $p$, 
+there are two types of integers, the $*$ for which $k\in *$ if $p(k) = p(k-1)$ and 
+the $!$ for which $k\in !$ if $p(k) = p(k-1) -1$. MacPherson defines the \textbf{
+perverse dimension
+} of a $d$-simplex $\sigma$ to be \begin{align*}
+    \delta(\sigma) = -p(d) \text{ if } \sigma \in * \text{ and } \delta(\sigma) = -p(d)-d \text{ if } \sigma \in !
+\end{align*}
+
+\begin{definition}
+    A \textbf{cellular perverse sheaf} $S$ on the simplicial complex $K$ is a 
+    rule which assigns to each simplex $\sigma$ a vector space $S_{\sigma}$ and
+    "attaching homomorphisms" $s_{\sigma,\tau}:S_{\sigma} \to S_{\tau}$ whenever $\sigma \iff \tau$
+    and $\delta(\sigma) = \delta(\tau)$, so that the resulting sequence \begin{align*}
+        \xrightarrow[d]{} \bigoplus_{\delta(\sigma) = r} S_{\sigma} \xrightarrow[d]{} \bigoplus_{\delta(\sigma) = r-1} S_{\sigma} \xrightarrow[d]{} \cdots
+    \end{align*} Equivalently, this is saying that whenever $\delta(\sigma) = r +1$ and $\delta(\tau) = r-1$ then 
+    we have \begin{align*}
+        \sum_{\delta(\theta) = r, \sigma \iff \theta \iff \tau} s_{\sigma,\theta} \circ s_{\theta,\tau} = 0
+    \end{align*}
+\end{definition}
+There is a cohomology functor $T:\Perv(K) \to \Perv^{\Delta}(K)$ which is an equivalence 
+between the categories of perverse sheaves on $K$ with repsect to the triangulation $K$
+and cellular perverse sheaves on $K$.
+
+\hfill
+
+Given a simplicial complex, there is a quiver whose vertices are the simplices of $K$ and whose
+arrows are the elementary relations $\sigma > \tau$ with $\delta(\sigma) = \delta(\tau) +1$.
+Form the corresponding path algebra $F$ of the quiver and consider the two-sided ideal $J$ 
+generated by the elements \begin{align*}
+    \sum_{\delta(\theta) = r, \sigma \iff \theta \iff \tau} s_{\sigma,\theta} \circ s_{\theta,\tau}
+\end{align*}
+
+\begin{theorem}
+    The category $\Perv(K)$ with respect to the triangulation of $K$ is equivalent to the
+    category of modules over the ring $F/J$.
+\end{theorem}
+
+\subsection{Vybornov's theorem}
+Classically, the problem of computing an explicit quiver for $\cO_{0}$ was posed by Gelfand
+and solved by Vybornov. Vybornov constructs a sequence of "IC modules" which are computing 
+perverse sheaves, but then he proves that $d^2 = 0$ and 
+this complex imposes a bunch of relations on the quiver, of the above shape.
+\section{DG categories}
+Recall that the bounded derived construcible category is a 
+triangulated category and carries truncation functors, the 
+heart of the t-structure being the perverse sheaves which form an abelian category.
+
+\hfill
+
+Because of some abstract nonsense about triangulated categories,
+there is an equivalence of categories between the heart of a t-structure, i.e.
+the perverse sheaves, and the differential graded category of the 
+endomorphisms of a particular "generator."
+
+\hfill
+
+Because of this, you can always consider the category of perverse sheaves
+on a space wrt a stratification as the category of finite length "dg" modules
+over a "dg" quiver, and this "dg" quiver is an ordinary quiver precisely when the 
+nonzero cohomology vanishes. Yuri referred to this as 
+these sort of Bondal-Kapranov type results. See \cite{bondal-kapranov}.
+
+\hfill
+
+Many of the calculations for quivers, i.e. hyperplane arrangements and
+rank stratifications, can be thought of as doing hard work to understand this 
+endomorphism algebra of a generator. \red{There is also another 
+endomorphism algebra I've been thinking about which is the endomorphism algebra
+of the antidominant projective in category $\cO$.}
+
+\hfill
+
+Yuri also talked about the Artin representation, his attempt to generalize it, 
+exotic solutions to the coCartesian Yang-Baxter equation \red{maybe work on this and
+which ones extend to the Gelfand MacPherson Vilonen action}, its 
+connection to Ng's result, and why he thinks there should be a more general 
+result about the homotopy theory of spaces. Finally we also 
+thought about the perverse sheaves on the knot complement in $\R^3$ \red{open question,
+what's happening in $S^3$, its different topologically 
+because $\pi_2$ is nontrivial in the $S^3$ knot 
+complement}. 
+
+\section{References}
+\bibliography{refs}{}
+% need refs.bib file
+\bibliographystyle{plain}
+
+\end{document}

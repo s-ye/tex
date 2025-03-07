@@ -1,0 +1,486 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{listings}
+\usepackage{tikz}
+
+
+\begin{document}
+Songyu Ye
+
+\today
+\section{Introduction}
+In this note, we discuss representations of complex tori and $\GL(2,\C)$ as algebraic groups. 
+
+\section{Representations of Tori}
+\subsection{Real tori}
+Before people thought about $\Gm(\C)$ as an algebraic group, people thought about $S^1$ as a Lie group.
+In this setting, one can ask about the finite dimensional complex representations of $S^1$.
+
+\hfill 
+
+One can also show that all finite dimensional representations of $S^1$ are decomposable, i.e.
+can be written as a direct sum of irreducible representations. Thus it is enough to just consider the irreducible representations of $S^1$.
+
+\hfill 
+
+By Schur's Lemma they are all $1$-dimensional and therefore are indexed by characters $\chi: S^1\to \C^*$.
+Since $S^1$ is compact, its image in $\C^*$ must also be compact, and moreover
+it is connected and contains the identity. Therefore, the image of $\chi$ must lie in $S^1$.
+
+
+\begin{proposition}
+All characters of $S^1$ are isomorphic to $\chi_n: S^1\to S^1$ given by $z\mapsto z^n$ for $n\in \Z$.
+\end{proposition}
+
+\begin{proof}
+    One can prove by making use of the universal covering map $\exp: \R\to S^1$.
+    Given a character $\chi: S^1\to S^1$, we can lift it to a map $\tilde \chi: S^1\to \R$.
+    Since $\chi$ is a group map, it carries $1$ to $1$, and the fiber over $1$ under $\exp$ is $\Z$.
+\end{proof}
+
+In general, a real torus $T$ is a real Lie group whihch is isomorphic to the product of $n$ circles, 
+in which case we say that $T$ has rank $n$. Since characters for $S^1\times\cdots\times S^1$ are the same as products of characters for $S^1$, 
+all characters of $T$ are indexed by $\Z^n$. Explicitly if $T$ has rank $n$, then a character $\chi: T\to S^1$ is given by a tuple of integers $(n_1,\ldots, n_k)$, and the character is given by
+\begin{align*}
+    (z_1,\ldots, z_k)\mapsto z_1^{n_1}\cdots z_k^{n_k}
+\end{align*}
+From our discussion above, we have the following classification statement for representations of real tori as Lie groups.
+
+\begin{theorem}
+    Let $T$ be a real torus of rank $n$. Then every finite dimensional representation $V$ of $T$ is isomorphic 
+    to a direct sum of $1$-dimensional irreducible representations with some multiplicities.
+    \begin{align*}
+        V \cong \bigoplus_{\chi\in \Z^n} W_\chi^{\oplus n_\chi}
+    \end{align*} where $W_\chi$ denotes the unique $1$-dimensional irreducible representation for which $T$ acts by $\chi$.
+\end{theorem}
+
+In particular, we can decompose $V$ into eigenspaces for the action of $T$. \begin{align*}
+    V \cong \bigoplus_{\chi\in\Z^n} V_\chi
+\end{align*} where $V_\chi = \set{v\in V \st t\cdot v = \chi(t)v \text{ for all $v\in V$}}$. This is
+referred to as the \textbf{weight space decomposition} of $V$ and we refer to the $\chi$ which appear in 
+the decomposition as the \textbf{weights} of $V$. 
+We say that $v\in V_\chi$ is a \textbf{weight vector} of weight $\chi$.
+
+
+\subsection{Complex tori}
+We want an analagous story in algebraic geometry. To get ahold of such a story, 
+we need the following framework.
+\begin{definition}
+    An \textbf{algebraic group} $G$ over $\C$ is an algebraic variety over $\C$ with a group structure
+    so that the multipliation map $G\times G\to G$ and inversion map $G\to G$ are morphisms
+    of algebraic varieties.
+\end{definition}
+
+\begin{definition}
+    A \textbf{morphism of algebraic groups} $G\to H$ is a morphism of algebraic varieties that is also a group homomorphism.
+\end{definition}
+
+\begin{definition}
+    Let $G$ be an algebraic group. A \textbf{rational representation} of $G$ is a morphism of algebraic groups
+    $G\to \GL(V)$ for some vector space $V$ (for us $V$ will always be finite dimensional over $\C$). 
+\end{definition}
+
+We will consider complex tori $T = \Gm(\C)\times\cdots\times\Gm(\C)$.
+This is an algebraic group because $T$ is the zero locus of 
+the polynomial equations \begin{align*}
+    T = \Spec \C[x_1^{\pm 1},\ldots, x_n^{\pm 1}] := \Spec\big(\C[x_1,\dots,x_n,y_1,\dots,y_n]/(x_1y_1-1,\dots,x_ny_n-1)\big)
+\end{align*} This is a group in the familiar way, 
+and it is clear that the group law is indeed a morphism of algebraic varieties. The rest of this section will discuss 
+the finite dimensional rational representations of $T$ as an algebraic group.
+
+\begin{example}
+    $\GL(n,\C)$ is a familiar group which can be endowed with the structure of an algebraic group.
+    $\GL(n,\C)$ is the zero locus of the polynomial equations
+    \begin{align*}
+        \GL(n,\C) = \Spec \big(\C[x_{ij},\inv{\det}]\big) := \Spec\big(\C[x_{ij},t]/(\det(x_{ij})t-1)\big)
+    \end{align*} This variety becomes a group in the familiar way,
+    and it is clear that the group law is indeed a morphism of algebraic varieties.
+\end{example}
+
+
+
+
+\begin{theorem}\label{thm:ratrep}
+    Let $T$ be a complex torus of rank $n$.
+    Then every finite dimensional rational representation of $T$ 
+    decomposes into the direct sum of weight spaces for the action of $T$.
+    \begin{align*}
+        V \cong \bigoplus_{\chi\in \Z^n} V_\chi
+    \end{align*} where $V_\chi = \set{v\in V \st t\cdot v = \chi(t)v \text{ for all $v\in V$}}$
+    and $\chi:T\to\GL(1,\C)$ is identified with tuples of integers $(n_1,\ldots, n_k)$ as before.
+\end{theorem}
+We will give an proof of this theorem after we introduce the language of Hopf algebras.
+\subsection{Hopf algebras}
+\begin{definition}\label{def:hopf}
+    Let $A$ be a $\C$-algebra. Then we say $A$ is a \textbf{Hopf algebra} if there are maps \begin{align*}
+        \text{comultiplication\quad}\Delta: A &\to A\otimes A \\
+        \text{counit (augmentation)\quad}\epsilon: A &\to \C \\
+        \text{coinverse (antipode)\quad}S: A &\to A
+    \end{align*}
+    so that the following diagrams commute:
+    \begin{center}
+        \begin{tikzcd}
+            A \arrow[r, "\Delta"] \arrow[d, "\Delta"] & A\otimes A \arrow[d, "\Delta\otimes \id"] \\
+            A\otimes A \arrow[r, "\id\otimes \Delta"] & A\otimes A\otimes A
+        \end{tikzcd} \\
+
+        \begin{tikzcd}
+            A \arrow[r, "\Delta"] \arrow[d, "\id"] & A\otimes A \arrow[d, "\epsilon\otimes \id"] \\
+            A \arrow[r, "\cong"] & \C\otimes A
+        \end{tikzcd} \\
+        
+        \begin{tikzcd}
+            A \arrow[r, "\Delta"] \arrow[d, "\epsilon"] & A\otimes A \arrow[d, "S \otimes \id"] \\
+            \C \arrow[r, ""] & A
+        \end{tikzcd}
+
+    \end{center}
+\end{definition}
+This definition seemingly comes from nowhere, but the following observation will make them more natural
+(the names also will make more sense!).
+
+\hfill
+
+Let $G$ be an algebraic group and $\mc O(G)$ its ring of regular functions. Then the multipliation,
+inversion, and identity maps \begin{align*}
+    \mu: G\times G &\to G \\
+    \iota: G &\to G \\
+    e: \Spec \C &\to G
+\end{align*}
+induce maps on the coordinate rings
+\begin{align*}
+    \Delta: \mc O(G) &\to \mc O(G)\otimes \mc O(G) \\
+    \epsilon: \mc O(G) &\to \C \\
+    S: \mc O(G) &\to \mc O(G)
+\end{align*} where we made the identification $\mc O(G\times G) \cong \mc O(G)\otimes \mc O(G)$.
+Because the group axioms hold, these maps satisfy the commutative diagrams above, and therefore
+$\mc O(G)$ has the structure of a Hopf algebra.
+
+\begin{remark}
+    These maps can be worked out very explicitly. In particular the points of $G$ are in correspondence with the elements of $\Hom_{\kAlg}(\cO(G),\C)$.
+    The correspondence is very explicitly given by $g\mapsto \ev_g$ where $\ev_g: \cO(G)\to \C$ is the evaluation map. 
+    The key idea is that for an arbitrary algebraic group $G$ and two points $x,y$ of $G$,
+     $f,g: \cO(G)\to \C$ the corresponding morphisms of $\C$-algebras, then the composition $(f\otimes g)\circ \Delta$ is again a map $\cO(G)\to \cO(G)\otimes \cO(G)\to \C$.
+    The condition that we ask from comultiplication is precisely that the composition $(f\otimes g)\circ \Delta$
+    corresponds to the product $xy\in G$.
+\end{remark}
+
+\begin{example}
+Recall that
+    \begin{align*}
+        \cO(\Ga(\C)) &= \C[x]
+    \end{align*} where $\Ga(\C)$ is the additive group of $\C$. 
+    Let $f,g\in \Hom_{\kAlg}(\cO(G),\C)$ with $f(x) = a$ and $g(x) = b$. 
+    We want to find a map $\Delta: \cO(\Ga(\C))\to \cO(\Ga(\C))\otimes \cO(\Ga(\C))$ so that
+    \begin{align*}
+        ((f\otimes g)\circ \Delta)(X) = (a+b)
+    \end{align*}
+    We write down the map $\Delta$ explicitly as
+    \begin{align*}
+        \Delta(X) = X\otimes 1 + 1\otimes X
+    \end{align*} and notice that it does the job. We see that $\Delta$ then must be the 
+    comultiplication map for $\Ga(\C)$ because such map is unique, given the prescribed group law on $\Ga(\C)$.
+\end{example}
+
+\begin{example}
+    By the same token, we can work out the Hopf algebra structure for $\Gm(\C)$ to be
+    \begin{align*}
+        \Delta(x) &= x\otimes x \\
+        \epsilon(x) &= 1 \\
+        S(x) &= \inv{x}
+    \end{align*}
+\end{example}
+
+\begin{example}
+    Consider the example of $\GL(2,\C)$ as an algebraic group. The Hopf algebra structure is given by
+    \begin{align*}
+        \Delta(x_{ij}) &= \sum_{k=1}^2 x_{ik}\otimes x_{kj} \\
+        \epsilon(x_{ij}) &= \delta_{ij} \\
+        S(x_{ij}) &= M_{ij}
+    \end{align*} where \begin{align*}
+        M = \begin{bmatrix}
+            x_{11} & x_{12} \\
+            x_{21} & x_{22}
+        \end{bmatrix}^{-1} = \frac{1}{\det(M)}\begin{bmatrix}
+            x_{22} & -x_{12} \\
+            -x_{21} & x_{11}
+        \end{bmatrix}
+    \end{align*}
+\end{example}
+
+\hfill
+
+Now we want to translate the representation theory of algebraic groups $G$ into the language of comodules over Hopf algebras.
+\begin{theorem}
+    Let $G$ be an algebraic group. Then rational representations $V$ of $G$ 
+    correspond to linear maps $\rho: V\to V\otimes \mc O(G)$ so that the following diagrams commute:
+    \begin{center}
+        \begin{tikzcd}
+            V \arrow[r, "\rho"] \arrow[d, "\rho"] & V\otimes \mc O(G) \arrow[d, "\rho\otimes \id"] \\
+            V\otimes \mc O(G) \arrow[r, "\id\otimes \Delta"] & V\otimes \mc O(G)\otimes \mc O(G)
+        \end{tikzcd} \\
+
+        \begin{tikzcd}
+            V \arrow[r, "\rho"] \arrow[d, "\id"] & V\otimes \mc O(G) \arrow[d, "\id\otimes \epsilon"] \\
+            V \arrow[r, "\cong"] & V\otimes \C
+        \end{tikzcd} \\
+    \end{center}
+\end{theorem}
+\begin{proof}
+    [Sketch of proof] The first diagram says that the action of $G$ on $V$ is associative 
+    and the second diagram says that $e\in G$ acts by the identity transformation on $V$. 
+    These are precisely the conditions that say that $V$ is a representation of $G$.
+\end{proof}
+We refer the reader to \cite{waterhouse} for a more detailed discussion of this theorem.
+
+\begin{definition}
+    $\rho$ is called a \textbf{comodule structure} on $V$.
+\end{definition}
+
+\begin{example}
+    Consider the action of $\Gm(\C)$ on $\C^2$ given by
+    \begin{align*}
+        t\cdot (a,b) = (ta, t^{-1}b)
+    \end{align*} This is a rational representation of $\Gm(\C)$ which we can write as 
+    \begin{align*}
+        \tau:\Gm(\C) &\to \GL(2,\C) \\
+        t &\mapsto \begin{bmatrix}
+            t & 0 \\
+            0 & \inv{t}
+        \end{bmatrix}
+    \end{align*} This induces a comodule structure on $\C^2$ given by the map $\rho: \C^2\to \C^2\otimes \mc O(\Gm(\C))$ given by
+    \begin{align*}
+        \rho(a) &= a\otimes x \\
+        \rho(b) &= b\otimes \inv{x}
+    \end{align*} where $x$ is the coordinate function on $\Gm(\C)$.
+\end{example}
+
+\subsection{Weight space decomposition}
+We are now ready to give a proof of Theorem \ref{thm:ratrep} using the language of Hopf algebras.
+\begin{proof}
+    [Proof of \ref{thm:ratrep}] Let $V$ be a finite dimensional rational representation of $T$ 
+    and let $\rho: V\to V\otimes \mc O(T)$ be the corresponding comodule structure. We write as a vector space 
+    decomposition \begin{align*}
+        V \otimes \mc O(T) \cong \bigoplus_{m\in\Z^n} V\otimes \C\cdot x^m
+    \end{align*} Expanding $\rho(v)$ in terms of this basis, we find that \begin{align*}
+        \rho(v) &= \sum_{m\in\Z^n} v_m\otimes x^m \texty{finitely many nonzero $m_k$} \\
+        \implies (\id \otimes \Delta)(\rho(v)) &= \sum_{m\in\Z^n} v_m\otimes x^m\otimes x^m \\
+        \implies (\rho\otimes \id)(\rho(v)) &= \sum_{m\in\Z^n} \rho(v_m)\otimes x^m \\
+        \implies \rho(v_m) &= v_m\otimes x^m \texty{for those nonzero $v_m$}
+    \end{align*} The second step comes from our computation that $\Delta(x_i) = x_i\otimes x_i$ for $x_i\in \cO(T) \cong \C[x_i^{\pm 1}]_{1\leq i \leq n}$
+    and the fact that $\Delta$ is an coalgebra homomorphism. The claim that $\Delta$ is a 
+    morphism of coalgebras is not immediate, but it ultimately reduces to the statement that, if $B$ is
+    a $k$-algebra, then the multiplciation map $B\otimes B\to B$ is a morphism of $k$-algebras if and only if $B$ is commutative.
+    We are working with (co)commutative (co)algebras, so this is not an issue. The fourth step comes from equating the second and third left hand sides.
+
+    \hfill 
+
+    Finally, we apply the second diagram in \ref{def:hopf} to get \begin{align*}
+        (\id\otimes \epsilon)(\rho(v)) = v = \sum_{m\in\Z^n} v_m\epsilon(x^m) = \sum_{m\in\Z^n} v_m
+    \end{align*} Thus we see that the comodule $V$ decomposes as a direct sum of subcomodules \begin{align*}
+        V &= \bigoplus_{m\in\Z^n} V_m
+    \end{align*} where $V_m := \set{v\in V \st \rho(v) = v\otimes x^m}$. This is precisely saying that $T$ acts on $V_m$ by the character $\chi_m: T\to \Gm(\C)$ given by $t\mapsto t^m$.
+\end{proof}
+
+\section{Representations of $\GL(2,\C)$}
+
+\subsection{Reducibility}
+We saw in Section 2 that every rational representation of $T$ decomposes into a direct sum of irreducible representations,
+and that the irreducible representations are indexed by $\Z^n$. As it turns out, rational representations of $\GL(2,\C)$
+also decompose into a direct sum of irreducible representations. The standard way of showing this is via 
+Weyl's Unitary Trick. We refer the reader to \cite{milne} for a proof of this fact.
+
+
+\subsection{Highest weight vectors}
+To obtain the classification statement, we need to introduce highest weight vectors.
+Let $T\subset \GL(2,\C)$ be the subgroup of diagonal matrices and $B \subset \GL(2,\C)$ be the subgroup of upper triangular matrices.
+These ad hoc definitions will work for us, but in general $T$ is a \textbf{maximal torus} and $B$ is a \textbf{Borel subgroup} of $\GL(2,\C)$.
+\begin{definition}
+    Let $V$ be a finite dimensional rational representation of $\GL(2,\C)$. A \textbf{highest weight vector} $v\in V$ is 
+    a weight vector so that $B\cdot v = \C^*\cdot v$. 
+\end{definition}
+
+
+
+\begin{example}
+$\GL(2,\C)$ has a standard representation on $\C^2$ given by the matrix multiplication map. This action
+is transitive on the nonzero vectors, so $\C^2$ is irreducible. If one considers the torus action $T\subset \GL(2,\C)$
+then we see that $\C^2$ decomposes into a direct sum of weight spaces \begin{align*}
+    \C^2 \cong \C\cdot e_1 \oplus \C\cdot e_2
+\end{align*} where $e_1$ and $e_2$ are standard basis with weights $(1,0)$ and $(0,1)$ respectively.
+\end{example}
+
+\begin{example}
+Since $\GL(2,\C)$ acts on $\C^2$, it also acts on $(\C^2)^{\otimes n}$ for $n\in \Z_{\geq 0}$ via \begin{align*}
+    g\cdot (v_1\otimes \cdots \otimes v_n) = (gv_1\otimes \cdots \otimes gv_n)
+\end{align*} This is known as the \textbf{tensor product representation} of $\GL(2,\C)$. We can further 
+quotient by the submodule generated by vectors of the form \begin{align*}
+    v_1\otimes \cdots \otimes v_i \otimes v_{i+1} \otimes \cdots \otimes v_n - v_1\otimes \cdots \otimes v_{i+1} \otimes v_i \otimes \cdots \otimes v_n
+\end{align*} for $1\leq i \leq n-1$. This is known as the \textbf{symmetric power representation} of $\GL(2,\C)$, denoted by $\Sym^n\C^2$.
+Choosing a basis $e_1,e_2$ for $\C^2$ gives a basis for $\Sym^n\C^2$ given by \begin{align*}
+    \set{e_1^ke_2^{n-k} \st 0\leq k \leq n}
+\end{align*} and the action of $\GL(2,\C)$ on $\Sym^n\C^2$ is given by \begin{align*}
+g\cdot e_1^ke_2^{n-k} = (ge_1)^k(ge_2)^{n-k}
+\end{align*} Setting $g\in T$ we see that $e_1^ke_2^{n-k}$ is a weight vector with weight $(k,n-k)$. One 
+can quickly check that $\Sym^n\C^2$ is irreducible for all $n\in \Z_{\geq 0}$.
+\end{example}
+
+\begin{example}
+    We have a familiar $1$-dimensional representation of $\GL(2,\C)$ given by the determinant map. The determinant of a diagonal matrix is the product of its diagonal entries,
+    and so this representaion has weight $(1,1)$. We will denote 
+    the $k$th power of the determinant map by $\det^k$ for $k\in\Z$. This is a $1$-dimensinal representation with weight $(k,k)$.
+\end{example}
+
+We are now ready to state the classification theorem for finite dimensional rational irreducible representations of $\GL(2,\C)$.
+\begin{theorem}
+Every finite dimensional rational irreducible representation of $\GL(2,\C)$ is isomorphic to \begin{align*}
+    \Sym^n\C^2 \otimes \det{}^k
+\end{align*} for some $n\in \Z_{\geq 0}$ and $k\in \Z$.
+\end{theorem}
+We will prove this theorem by considering the weights that appear in the weight space decomposition of $V\vert_{T}$, where $T\subset \GL(2,\C)$ is the subgroup of diagonal matrices.
+
+\hfill 
+
+In particular we appeal to the following facts from representation theory.
+\begin{theorem}\label{thm:hw}
+    \begin{enumerate}
+        \item A finite dimensional rational representation $V$ of $\GL(2,\C)$ is irreducible if and only if it has a unique highest weight vector.
+        In this case it makes sense to talk about the \text{highest weight} of $V$, defined as the weight corresponding to the highest weight vector.
+        \item Two finite dimensional rational irreducible representations of $\GL(2,\C)$ are isomorphic if and only if they have the same highest weight.
+        \item Let $V$ be a finite dimensional irreducible rational representation of $\GL(2,\C)$ with highest weight vector $v$. Then the highest weight of $V$ is contained in the set \begin{align*}
+            \set{(a,b)\in \Z^2 \st a\geq b }
+        \end{align*}
+        \item Every such weight above is a highest weight for some irreducible representation of $\GL(2,\C)$.
+    \end{enumerate}
+\end{theorem}
+
+We will give a short discussion of the proof of these theorems in the case of $\GL(n,\C)$, collectively referred to as the theorems of the highest weight.
+This theorem holds in great generality for other algebraic groups such as $\SL(n,\C)$ and $\SO(n)$ and in general for representations of complex semisimple Lie algebras,
+but in order to make sense of such a theorem, one has to find the right way to define the notion of a highest weight vector.
+In the case of $\GL(2,\C)$, I boldly asserted that a highest weight vector is a weight vector $v$
+ so that $B\cdot v = \C^*\cdot v$. This is not the most general definition, but it is the
+right definition for $\GL(2,\C)$.
+
+\hfill 
+
+The proof in full generality is quite technical and we refer the reader to \cite{milne} for a more detailed discussion.
+
+\hfill
+
+The theorems of the highest weight immediately implies the classification theorem for finite dimensional rational irreducible representations of $\GL(2,\C)$.
+In particular let $V$ be a finite dimensional rational irreducible representation of $\GL(2,\C)$ with highest weight $(a,b)$. Then
+by looking at the highest weights (observe that if $v$ is a weight vector for $V$ with weight $\mu$ and 
+$w$ is a weight vector for $W$ with weight $\nu$, then $v\otimes w$ is a weight vector for $V\otimes W$ with weight $\mu + \nu$)
+, we see that $V \cong \Sym^{a-b}\C^2 \otimes \det{}^{b}$. 
+
+
+\subsection{Theorem of the highest weight}
+In this section we will discuss \ref{thm:hw} in the case of $\GL(2,\C)$.
+
+\hfill
+
+One of the main ingredients in the proof of \ref{thm:hw} is considering the induced action of $\gl(2,\C)$ on $V$,
+where $\gl(2,\C)$ is the Lie algebra of $\GL(2,\C)$. Recall that \begin{align*}
+    \gl(2,\C) = \Mat(2,\C)
+\end{align*} is a vector space equipped with a bracket operation given by the commutator. $\gl(2,\C)$
+can be identified with the tangent space of $\GL(2,\C)$ at the identity matrix. We can then consider the action of $\gl(2,\C)$ on $V$ given by \begin{align*}
+    X\cdot v = \frac{d}{dt}\bigg\vert_{t=0} \exp(tX)\cdot v
+\end{align*} where $\exp: \gl(2,\C)\to \GL(2,\C)$ is the exponential map. In particular this map is the differential of the action of $\GL(2,\C)$ on $V$.
+
+\hfill
+
+Studying the action of $\gl(2,\C)$ on $V$ is equivalent to studying the action of $\GL(2,\C)$ on $V$ because $\GL(2,\C)$ is connected.
+This is a general principal which reflects the fact that any map of Lie groups $G\to H$ is determined by its differential at the identity.
+Using the exponential map, we can get ahold of the following lemma.
+\begin{lemma}
+    A subspace $W$ of a representation of $\GL(2,\C)$ is a subrepresentation if and only if $W$ stable under the action of $\gl(2,\C)$.
+\end{lemma}
+This discussion justifies our passing from the study of $\GL(2,\C)$ to the study of $\gl(2,\C)$.
+
+\hfill
+
+Just as we obtained a decomposition of $V$ as a $\GL(2,\C)$ into eigenspaces for the action of $T$,
+there is an analagous decomposition for the action of $\gl(2,\C)$. 
+The object which replaces our maximal torus $T\subset\GL(2,\C)$ is the \textbf{Cartan subalgebra} $\mf h\subset \gl(2,\C)$.
+For us, $\mf h$ will be the subspace of diagonal matrices in $\gl(2,\C)$. In general, $\mf h$ is a maximal abelian subalgebra of $\gl(2,\C)$.
+
+We can obtain a decomposition of $V$ into eigenspaces for the action of $\mf h$: \begin{align*}
+    V &= \bigoplus_{\chi\in \mf h^*} V_\chi
+\end{align*} where $V_\chi = \{v\in V \st X\cdot v = \chi(X)v \text{ for all $X\in \mf h$}\}$. Moreover
+$\gl(2,\C)$ acts on itself via the bracket (adjoint representation) and we can 
+decompose this action \begin{align*}
+    \gl(2,\C) &\cong \mf h \oplus \mf g_{\alpha} \oplus \mf g_{-\alpha} \\
+    &\cong \mf h \oplus \C e_1 \oplus \C e_2
+\end{align*} where $\alpha(\begin{bmatrix}
+    d_1 & 0 \\
+    0 & d_2
+\end{bmatrix}) = d_1 - d_2$ and \begin{align*}
+    e_1 &= \begin{bmatrix}
+        0 & 1 \\
+        0 & 0
+    \end{bmatrix}\\
+    e_2 &= \begin{bmatrix}
+        0 & 0 \\
+        1 & 0
+    \end{bmatrix}
+\end{align*} One can check that \begin{align*}
+    [\mf h, e_1] &= \alpha(\mf h)e_1 \\ [\mf h, e_2] &= -\alpha(\mf h)e_2
+\end{align*} The weights which appear in the adjoint representation of $\gl(2,\C)$ are called the \textbf{roots}.
+We will say $\alpha$ is a positive root and $-\alpha$ is a negative root, $\C e_1$ and $\C e_2$ the corresponding positve and negative root spaces.
+Then a weight vector $v\in V$ is a highest weight vector if and only if $e_1\cdot v = 0$.
+
+\hfill
+
+We care about roots of the adjoint representation for the following reason. Let $V$ be a finite dimensional rational representation of $\gl(2,\C)$.
+Decompose $V$ into eigenspaces for the action of $\mf h$ as before: \begin{align*}
+    V = \bigoplus_{\chi \in \mf h^*} V_\chi
+\end{align*} Now we know how $\mf h$ acts on $V$, we need to investigate the action of $e_1$ and $e_2$. As it turns out,
+$e_1$ and $e_2$ are operators which translate between the weight spaces. 
+Specifically, let $v$ be an weight vector for the action of $\mf h$ with weight $\chi$. 
+Then $e_1\cdot v$ is a weight vector with weight $\chi + \alpha$. Indeed for $X\in \mf h$ we have (recall the action of the Lie algebra respects brackets) 
+\begin{align*}
+    X\cdot e_1v &= e_1 \cdot Xv + [X,e_1]\cdot v \\
+    &= \chi(X)e_1v + \alpha(X)e_1v
+\end{align*} 
+
+A priori, we know nothing about the weights of $V$. Now we know that all of the weights of $V$ are translates of each other by the roots of 
+$\gl(2,\C)$. Now let $\mu$ be any weight which appears in the decomposition of $V$. Then we can consider the transtates \begin{align*}
+    \mu + \Z\alpha
+\end{align*} and since $V$ is finite dimensional, only finitely many of the weight spaces of $V$ corresponding to these weights are nonzero. 
+Recall we picked a postive system, so now it makes to talk about the highest weight (it is the weight $\chi$ so that all of the weights $\chi + \N\alpha$ 
+correspond to empty weight spaces).
+
+\hfill
+
+If $V$ is an irreducible representation then a highest weight vector must span its root space. This is because
+if $v$ is a highest weight vector, then one can show that the subspace generated by $v$, $e_2\cdot v$, $e_2^2\cdot v$, $\ldots$ is a subrepresentation.
+It follows that an irreducible representation can have only one highest weight vector (up to scale).
+
+\hfill
+
+There are many facts which I omitted and many details that I have brushed over in this discussion. We encourage
+the reader to look in \cite{fulton-harris} or \cite{fulton} for a more detailed discussion of the proof of the theorems of the highest weight, 
+and more generally the classification of complex semisimple Lie algebras.
+
+
+\begin{thebibliography}{9}
+
+\bibitem{waterhouse}
+Waterhouse, W. C. (1996). \textit{Introduction to Affine Group Schemes}. Springer.
+
+\bibitem{milne}
+Milne, J. S. (2017). \textit{Algebraic Groups: The Theory of Group Schemes of Finite Type over a Field}. Cambridge University Press.
+
+
+\bibitem{fulton-harris}
+Harris, J., \& Fulton, W. (1991). \textit{Representation theory: A first course}. Springer.
+
+\bibitem{fulton}
+Fulton, W. (1997). \textit{Young tableaux: with applications to representation theory and geometry}. Cambridge university press.
+
+\end{thebibliography}
+\end{document}

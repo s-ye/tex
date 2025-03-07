@@ -1,0 +1,137 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\begin{document}
+Songyu Ye
+
+\today
+
+\hfill
+
+This is a note from my meeting with Allen on March 25, 2024.
+I included my notes from after the meeting with Allen, and notes from my meeting with Tara are also in this document.
+
+\section{Introduction}
+We were considering $\tilde X = \Spec R$ where \begin{align*}
+    R = \bigoplus_\lambda H^0(\bar G, \cL_\lambda)
+\end{align*} As it turns out this actually has a name, it is called Vinberg's Enveloping Monoid.
+Let $G$ be our semisimple adjoint group and $\tilde G$ be the simply connected cover of $G$.
+Then $\tilde X$ is the enveloping monoid of $\tilde G$.
+
+\section{Enveloping monoid}
+Let $M'$ be an algebraic normal irreducible monoid with unit group $G'$. $G'$ acts by left
+and right translation. Suppose that $G$ is reductive and semisimple and $G$ is the commutator of $G'$. 
+The quotient $A' = M'//G\times G$ exists and is a commutative monoid of unit group the torus $G'/G$.
+The quotient map is called the abelianization of $M'$. $M'$ is said to be very flat if the abelianization is
+a flat morphism with reduced irreducible fibers.
+
+\hfill
+
+Given a semisimple group $G$, the category of very flat monoids who has $G$ the commutator of the unit group admits
+a terminal object $M^+$. This terminal object is the enveloping monoid of $G$ and
+has an abelianization $M^+\to A^+$ of affine space of dimension equal to the rank of $G$. 
+Every very flat monoid $M\in \text{VF}(G)$ is a fibered product of $A'\to A^+$ and $M^+$.
+
+\hfill
+
+Now suppose that $G$ is semisimple simply connected and let $G^+ = T\times G/Z$ where $Z$
+is the diagonal embedding. We can extend $\rho_i:G\to \GL(V_i)$ to $\rho_i^+:G^+\to \GL(V_i)$ via
+the formula \begin{align*}
+    \rho_i^+(t, g) = \omega_i(w_0t^{-1})\rho_i(g)
+\end{align*}
+We can also extend the root $\alpha_i$ to $G^+$ via the formula \begin{align*}
+    \alpha_i^+(t, g) = \alpha_i(t)
+\end{align*} Then we have a map \begin{align*}
+    (\alpha^+, \rho^+):G^+\to \Gm^r \times \prod \GL(V_i)
+\end{align*}
+whose closure in $\Ga^r\times \prod\End(V_i)$ is the enveloping monoid of $G$ and the closure in 
+$\Ga^r\times \prod\End(V_i) \backslash 0$ is the semistable locus. The 
+quotient of $M^+_{ss}$ by the free actino of $T$ is the wonderful compactification of $G_{ad}$.
+
+\section{Examples}
+\begin{example}
+    $G = \SL_2$ and $G^+ = \SL_2\times \Gm/\{\pm 1\}$. The map \begin{align*}
+        \omega_1(w\cdot \diag(t, t^{-1})) = t \\
+        \alpha_1(\diag(t, t^{-1})) = t^2 \\
+        (\alpha^+, \rho^+):\SL_2\times \Gm/\{\pm 1\}\to \Gm\times \GL_2 \\
+        \diag(t, t^{-1}),g \mapsto (t^2, \diag(t, t)\cdot g)
+    \end{align*}
+    is a monoid in $\A^5$ cut out by $\det g = t$.
+\end{example}
+
+
+\begin{example}
+    \red{This example is wrong, what is the torus of $\SL_3$...?}
+    $G = \SL_3$ so that $G^+ = \SL_3\times \diag(t,\inv{t},1)/\mu_3$. We have the standard representation and 
+    its dual. We have \begin{align*}
+        w_0t^{-1} = \diag(1,t,\inv{t}) \\
+        \omega_1(w_0t^{-1}) = 1\\
+        \omega_2(w_0t^{-1}) = t\\
+        \alpha_1(\diag(t,\inv{t},1)) = t^2\\
+        \alpha_2(\diag(t,\inv{t},1)) = \inv{t}\\
+        (t,g)\mapsto (M,tM^{-T},t^2,\inv{t})
+    \end{align*} which stasfies the relations on $\A^9\times\A^9\times \A\times \A$ coordinates $A,B,c,d$ 
+    \begin{align*}
+        AB^T = A^TB = cdI \\
+        \Lambda^2 A = dB \\
+        \Lambda^2 B = cA
+    \end{align*}
+\end{example}
+
+
+\section{After meeting Allen}
+I explained the Vinberg monoid to Allen. We toyed around with the $\SL_3$ example and in particular the equations
+for the Vinberg monoid. He typed some things into Macaulay2 and we found that the equations are indeed the 
+defining equations for the Vinberg monoid.
+
+\hfill
+
+He insisted that the bottom equations would imply the top equations whenever $c,d$ are not both zero (this 
+is because of Cramer's rule). He then showed me a really stupid way to prove Cramer's rule. The point is that we 
+need the first set of equations in the case that $c,d$ are zero, this is something which often happens when one
+ takes the closure of the image of a map.
+
+\begin{center}
+    \includegraphics[scale = .12]{/Users/songye03/Desktop/math_tex/img/IMG_1880.JPG}
+\end{center}
+
+The stuff in black is a recipe for degenerating to a toric variety. What toric variety is it going to be?
+Allen sort of just read it off but basically it is the toric variety associated to the fibered product of two 
+Gelfand-Tsetlin patterns. This has appeared before in another context, see the red marker.
+
+\begin{center}
+    \includegraphics[scale = .12]{/Users/songye03/Desktop/math_tex/img/IMG_1879.JPG}
+\end{center}
+
+Therefore, we are interested in the following cone and the following questions.
+
+\section{Tara}
+Tara insisted that we investigate the matter of orientation in the computation of intersection form. 
+She believes that the answer has to be in Tu's book. That book also has homework problems.
+
+\hfill
+
+There is the following remark. If we have a $T^2$ acting on simply connected closed $4$ manifold, then these are 
+completely classified [see the paper she sent us]. Moreover, simply connected tells us that the odd cohomology is zero and therefore, all of the
+cohomology is captured in $H^2$ and in particular the intersection form. This motivates 
+why Tara is interested in the intersection form.
+
+\section{Getting gapped}
+
+
+\section{References}
+\begin{itemize}
+    \item Very flat reductive monoids Rittatore
+    \item On reductive algebraic semigroups Vinberg
+    \item Semigroups and basic functions Ngo Bao Chau
+\end{itemize}
+
+
+\end{document}

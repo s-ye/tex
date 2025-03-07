@@ -1,0 +1,236 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\begin{document}
+Songyu Ye
+
+\today
+
+\hfill
+
+This is a note for the talk with Mike Stillman on March 7, 2024.
+
+We are talking about Cartier divisors, line bundles, and Chern classes.
+
+Next time we are talking about the adjunction formula and the normal bundle sequence, as well
+as some examples for product of projective spaces.
+\section{Introduction}
+There seem to be many words floating around for the same ideas. This note tries to 
+reconcile the different terminologies. In particular, we will discuss the following identifications:
+\begin{itemize}
+    \item Cartier divisor, line bundles, and Weil divisors
+    \item Chern classes, Picard group, Chow ring, and divisor class group
+\end{itemize}
+
+\section{Chern classes}
+This exposition will closely follow Chapter 5 of Eisenbud and Harris's book \textit{Intersection Theory}.
+\subsection{The first Chern class of a line bundle}
+\begin{definition}
+    Let $\cL$ be a line bundle on a variety $X$. Let $\tau$ be a rational section of $\cL$ and 
+    consider $\div(\tau)$, the divisor of zeros and poles of $\tau$.
+    The first Chern class $c_1(\cL)\in A^1(X)$ is defined to be the class of $\div(\tau)$ in the Chow ring $A^*(X)$.
+\end{definition}
+
+More precisely trivialize $\cL$ over an open cover $\{U_i\}$. Then locally we can identify the rational section
+$\tau$ with a rational function $f_i \in K(U_i)$. Write $f_i = g_i/h_i$ where 
+$g_i,h_i \in \cO_X(U_i)$. Locally we can define the divisor \begin{align*}
+    \div(f_i) = \div(g_i) - \div(h_i)
+\end{align*}
+where we know what the divisor of a regular function $g\in \cO_X(U)$ is via \begin{align*}
+    \div(g) = \sum_{Y\subset U} \ord_Y(g) [Y]
+\end{align*} sum over all irreducible closed subvarieties $Y\subset U$ of codimension 1.
+
+\hfill
+
+\red{Why is it enough to look at just one open subset $U$?}
+Although this is happening locally, this procedure defines a global divisor class $[\div(\tau)]\in A^1(X)$. This is because
+$K(X) = K(U_i)$ and the transition functions between two affine open charts corresponds to multiplication by a unit, 
+which does not contribute any zeros or poles.
+
+\begin{remark}
+    Note that even though we are able to locally 
+    identify a rational section with a rational function, we do not know how to talk about 
+    the value of a rational section at a point. This is because two different trivializations correspond to 
+    multiplying by a unit, and therefore the value of a rational function at a point is not well-defined. However by the same
+    token it does make sense to always talk about the zeros and poles of a rational section.
+\end{remark}
+
+Moreover, we need to check that another choice of rational section $\tau'$ gives the same divisor class. This is because
+$\tau/\tau'$ is in fact a rational function and therefore $\div{\tau}$ and $\div{\tau'}$ are rationally equivalent.
+
+\hfill 
+
+\red{Why is $\tau/\tau'$ a rational function?} It's because it makes sense to talk about the value of $\tau/\tau'$ at a point.
+In particular, if we have two trivializations, then transitioning corresponds to multiplying the numerator and denominator
+by the same unit and so the value of the fraction at a point is well-defined.
+
+\hfill
+
+Therefore we have stated the definition of the first Chern class of a line bundle.
+\subsection{Intuition for Chern classes}
+Chern classes are about undertanding the cohomology of the degeneracy (dependency) locus of some general
+collection of sections of a vector bundle.
+
+\begin{example}
+    Let $\cL$ be a line bundle on a variety $X$. Then $c_1(\cL) = 0$ if and only if $\cL$ has a nowhere vanishing section.
+    This is tautological. A choice of rational section $\tau$ has no zeros or poles, so it is defined 
+    globally and nowhere vanishing, thus producing a trivialization of $\cL$.
+\end{example}
+We extend the above intuition as follows. Suppose that $\cE$ is a rank $r$ vector bundle on a variety $X$ which is globally generated. This means that 
+there is a map $\cO_X^{\oplus r} \to \cE$ which is surjective on the stalks (\red{beware: this is not
+the same as being surjective on global sections}). Then $\cE$ is trivial if and only if there exist
+$r$ eerywhere independent global sections. Pick a general collection of $r$ global sections $\tau_0,\dots, \tau_{r-1}$
+of $\cE$. The determinantal section $\tau_0\wedge \cdots \wedge \tau_{r-1}$ is a global section of $\bigwedge^r \cE$
+and its divisor of zeros is the degeneracy locus of the collection of sections $\tau_0,\dots, \tau_{r-1}$ where
+the sections are linearly dependent. 
+
+\begin{definition}
+    The first Chern class of a vector bundle $\cE$ is defined to be the first Chern class of the line bundle
+    $\bigwedge^r \cE$.
+\end{definition}
+
+[The indexing is wrong here but use top and 1 to calibrate it] More generally if $\cE$ is globally generated, we can consider for any $i$ the scheme where
+$r-i$ general sections of $\cE$ are linearly dependent, defined by the vanishing of 
+the determinantal section $\tau_0\wedge \cdots \wedge \tau_{r-i-1} \in \bigwedge^{r-i} \cE$.
+
+\hfill 
+
+We want to know that this condition cuts out a subscheme of codimension $i$ in $X$. This is indeed true for 
+a general collection of sections. For example, consider the degernacy locus of a single section of $\cE$, locally 
+this is the data of functions $f_1,\dots,f_r$. Then the principal ideal theorem says that the codimension of each component
+of $V(\tau)$ is at most $r$. Moreover, if $\cE$ is globally generated and $\tau$ is a general section,
+then $f_{i+1}$ does not vanish identically where $f_1,\dots,f_i$ do, so the codimension is exactly $r$.
+
+\hfill
+
+In general we have the following theorem.
+\begin{theorem}
+    Let $\cE$ be a globally generated vector bundle of rank $r$ on a variety $X$. Then the degeneracy locus of a general
+    collection of $r-i$ sections of $\cE$ is a subscheme of codimension $i$ in $X$.
+\end{theorem}
+
+\subsection{Chern classes in full generality}
+The following discussion is about the most important properties of Chern classes.
+\begin{theorem}
+    There is a unique way of assigning to each vector bundle $\cE$ on a smooth quasiprojective variety $X$ 
+    a class $c(\cE) = 1 + c_1(\cE) + c_2(\cE) + \cdots$ in the Chow ring $A^*(X)$ such that the following hold:
+    \begin{enumerate}
+        \item The class of a line bundle $c_1(\cL)$ is $1 + c_1(\cL)$.
+        \item If $\tau_0,\dots,\tau_{r-1}$ are global sections of $\cE$ and the degernacy locus $D$ has codimension $i$
+        then $c_i(\cE) = [D] \in A^i(X)$.
+        \item \textbf{Whitney sum formula} A short exact sequence of vector bundles \begin{align*}
+            0 \to \cE' \to \cE \to \cE'' \to 0
+        \end{align*} induces the relation \begin{align*}
+            c(\cE) = c(\cE')c(\cE'') \in A(X)
+        \end{align*}
+        \item \textbf{Functoriality} If $f:X\to Y$ is a morphism of smooth quasiprojective varieties
+        and $\cE$ is a vector bundle on $X$, then $c(f^*\cE) = f^*c(\cE)$.
+    \end{enumerate}
+\end{theorem}
+
+An immediate result of this characterization of Chern classes is that we can quickly write down 
+Chern classes for vector bundles which are sums of line bundles, or more generally admit
+filtrations whose quotients are line bundles. In this case \begin{align*}
+    c(\cE) = c(\cL_1)\cdots c(\cL_r) = (1+c_1(\cL_1))\cdots (1+c_1(\cL_r))
+\end{align*} so $c_i(\cE)$ is the i-th elementary symmetric polynomial in the $c_1(\cL_i)$.
+
+\section{Projective bundles and the construction of Chern classes}
+Projective bundles are what we use to construct Chern classes, and they also lead to the splitting principle.
+\begin{definition}
+    Let $\cE$ be a vector bundle on a scheme $X$. The projectivization of $\cE$ is the morphism \begin{align*}
+        \pi_{\cE}:\Proj(\Sym^*(\cE)) \to X
+    \end{align*} In particular the fiber over a point $x\in X$ is the set of all lines in the vector space $\cE_x$.
+\end{definition}
+The bundle $\pi:\P\cE\to X$ has a tautological line bundle $\cS_\cE \to \P\cE$ whose fiber
+over a point $(x,l) \in \P\cE$ is the line $l\subset \cE_x$. The following theorem
+is the key to constructing Chern classes.
+
+\begin{theorem}
+    Let $X$ smooth and $\cE, \P\cE$ as above. Let $\zeta$ be the first Chern class of the dual $\cS_\cE^*$
+    of the tautological line bundle. Then \begin{itemize}
+        \item The flat pullback map $\pi^*:A^*(X) \to A^*(\P\cE)$ is injective.
+        \item $\zeta$ satisfies a unique monic polynomial 
+        $f(\zeta)$ of degree $\rank(\cE)$ with coefficients in $\pi^*(A^*(X))$.
+    \end{itemize}
+\end{theorem}
+Therefore one defines the Chern classes of $\cE$ to be the coefficients of the polynomial $f(\zeta)$. 
+In particular the $i$-th Chern class $c_i(\cE)$ is the coefficient of $\zeta^{\rank(\cE)-i}$. 
+\red{Stop here and ask why this theorem should be true}
+
+\begin{theorem}
+    [Splitting principle] Any identity among Chern classes of bundles that is 
+    true for direct sums of line bundles is true in general.
+\end{theorem}
+
+This is because every vector bundle on a smooth variety admits a filtration whose successive quotients are line bundles.
+The proof of this is by looking at the tautological subbundle and the quotient bundle.
+
+\subsection{Corollaries of splitting}
+\begin{corollary}
+    Chern classes above the rank of a vector bundle are zero.
+\end{corollary}
+\begin{corollary}
+    The Chern class of the dual of a vector bundle $c_i(\cE^*) = (-1)^i c_i(\cE)$.
+\end{corollary}
+\section{Examples}
+\begin{example}
+    [Line bundles on projective space]
+Let $\cO_{\P^n}(1)$ be the tautological line bundle on $\P^n$. Then \begin{align*}
+    c(\cO_{\P^n}(1)) = 1 + c_1(\cO_{\P^n}(1)) = 1 + \zeta
+\end{align*} where $\zeta$ is the class of a hyperplane in $\P^n$. Similarly
+\begin{align*}
+    c(\cO_{\P^n}(m)) = 1 + m\zeta
+\end{align*}
+and the way that I think about this is that I'm thinking about the zero locus of a section of $\cO_{\P^n}(m)$, which 
+is a hypersurface of degree $m$. We know that this is rationally equivalent to $m$ hyperplanes. \red{This doesn't
+quite make sense for $m$ negative so we have to take duals.} 
+
+\hfill
+
+We can continue and consider the tautological line bundle and quotient bundle on $\P^n$. They fit into
+the short exact sequence \begin{align*}
+    0 \to \cS_{\P^n} = \cO_{\P^n}(-1) \to \cO_{\P^n} \otimes V \to \cQ_{\P^n} \to 0
+\end{align*} from which we compute \begin{align*}
+    c(\cQ) = \frac{c(\cO_{\P^n})}{c(\cO_{\P^n}(-1))} = \frac{1}{1-\zeta} = 1 + \zeta + \zeta^2 + \cdots + \zeta^n
+\end{align*}
+\end{example}
+
+\begin{example}
+    [Tangent bundle of projective space]
+    We need to understand the Euler exact sequence \begin{align*}
+        0 \to \cO_{\P^n} \to \cO_{\P^n}(1)^{\oplus n+1} \to \cT_{\P^n} \to 0
+    \end{align*} from which we compute \begin{align*}
+        c(\cT_{\P^n}) = (1 + \zeta)^{n+1}
+    \end{align*}  
+    The Euler sequence is about vector fields on $\P^n$. 
+    If $V$ is an $n$-dimensional vector space $U = V\setminus \{0\}$, and $q:U\to \P V$ is the quotient map, then
+    \begin{align*}
+        T_vU = T_vV = V \\
+        dq_v:TU_v\to T_{q(v)}\P V
+    \end{align*} has kernel $\ideal{v}$ so we can identify $V/\ideal{v}$ with $T_{q(v)}\P V$.
+    However this identification depends on a choice of representative for $v$ because \begin{align*}
+        dq_{\lambda v} = dq_v/\lambda
+    \end{align*} However if we scale by a linear functional, then we have a natural idnetification \begin{align*}
+        \ideal{v}^* \otimes V/\ideal{v} \cong T_{q(v)}\P V
+    \end{align*} which fits into a global identification \begin{align*}
+        \cT_{\P V} \cong \cO_{\P V}(1) \otimes \cQ \cong \Hom(\cS,\cQ)
+    \end{align*} 
+    Put it another way, if $x_0,\dots,x_n$ are coordinates on $V$ 
+    then the vector field $\partial /\partial x_i$ is not a vector feild on $\P V$ but $x_i \partial/\partial x_i$ is.
+    Thus there is a map $\cO_{\P V}(1)\otimes V \to \cT_{\P V}$ whose kernel is generated by the Euler field \begin{align*}
+        x_0\frac{\partial}{\partial x_0} + \cdots + x_n\frac{\partial}{\partial x_n}
+    \end{align*} This is the kernel because of the identity for homogenous polynomials of degree $d$ \begin{align*}
+        1/d\cdot \sum x_i \frac{\partial p}{\partial x_i} = p
+    \end{align*} Thus we get the Euler sequence above.
+\end{example}
+
+\begin{example}
+    [Normal bundle sequence and adjunction formula]
+\end{example}
+\end{document}

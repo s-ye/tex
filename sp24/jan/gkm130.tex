@@ -1,0 +1,120 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+
+
+\begin{document}
+Songyu Ye
+
+\today
+
+\hfill
+
+\section{Brion 1998}
+We are interested in studying the $B\times B^-$ orbits on the wonderful compactification $\overline G$
+of a semisimple algebraic group $G$.
+
+\hfill
+
+Brion characterizes them in the following way (see references). The following result is for
+any regular $G\times G$-equivariant completion $X$ of $G$. For a parabolic subgroup $P$,
+let $W_P$ be the Weyl group of $P$, and let 
+$W^P = \set{w\in W\mid \ell(vw)\geq \ell(v) \text{ for all } v\in W}$ system of representatives 
+of the cosets of $W/W_P$.
+
+\hfill 
+
+Now let $Y$ be a $B\times B^-$ orbit on $\overline G$. Consider the orbit $G\times G\cdot Y$. We can associate 
+this to a subset of the simple roots $I\subset \Sigma$. Recall that each $G\times G$ orbit $Z$ has 
+a unique basepoint $z$ so that $B\times B^-\cdot z$ is open in $Z$ and $Z$ is the limit of a $1$-parameter 
+subgroup of $T$. Then one can write every $B\times B^-$ orbit as \begin{align*}
+    \overline{B\times B^-(\omega,\tau)z}
+\end{align*} where $\omega\in W$ and $\tau \in W^P$ are uniquely determined.
+
+\hfill
+
+In the case that $X = \bar G$ Brion has the following theorem (Section 3.3). 
+
+\begin{theorem}
+    $A_{T\times T}^*(X)$ has a basis given by the classes \begin{align*}
+        X(\omega,\tau) = [\overline{B\times B^-(\omega,\tau)z_\Phi}]
+    \end{align*} where $\Phi = \set{\alpha\in\Sigma \st \tau(\alpha)\in R^+}$ and $z_\Phi$ is the basepoint of the $G\times G$ orbit corresponding
+    to $\Phi$. The restriction to $G\times B^-\times G/B$ is equal to \begin{align*}
+        (D_\omega \otimes D_\tau) \prod_{\alpha\in\Sigma\backslash\Phi}c^{T\times T}(\alpha,-\alpha)\sum_{w\in W_P(\Phi)}[\overline{B^-wB}/B\times \overline{Bw_{0,P}B}/B]
+    \end{align*}
+\end{theorem}
+where $c^{T\times T}:X^*(T\times T)\to A_{T\times T}^*(G/B\times G/B)$ is the characteristic map.
+
+\section{Schubert calculus and divided difference operators in the flag variety}
+There is a left and right action of $W$ on classes \begin{align*}
+    (w\cdot p)\vert_v := w\cdot (p\vert_{wv})
+    (p\cdot w)\vert_v := p\vert_{vw}
+\end{align*} The restriction of a class is a polynomial and $w$ acts by simply 
+permuting the variables. The left action is a ring morphism but the right action 
+is an algebra automorphism. One can check the GKM conditions to see that they are again classes.
+
+\hfill
+
+One defines left and right divded difference operators for $\alpha$ a simple root: \begin{align*}
+    \partial_\alpha p &:= \frac{p - s_\alpha\cdot p}{\alpha} \\
+    \partial^\alpha p &:= \frac{p - p\cdot s_\alpha}{c_{-\alpha}}
+\end{align*} where $c_{-\alpha}$ is a class (check GKM conditions) defined by \begin{align*}
+    c_{-\alpha}\vert_v = w\cdot (-\alpha)
+\end{align*} Geometrically $c_{-\alpha}$ is the equivariant first Chern class of the Borel Weil
+line bundle associated to $-\alpha$. One can show that \begin{align*}
+    \partial_\alpha S_w &= S_{s_\alpha w} \text{ if } \ell(s_\alpha w) = \ell(w) + 1 \\
+    \partial^\alpha S_w &= S_{ws_\alpha} \text{ if } \ell(ws_\alpha) = \ell(w) + 1
+\end{align*}
+In particular these operators $\partial_\alpha, \partial^\alpha$ act on $H_T^*(G/B)$ and preserve the Schubert basis.
+One thinks of them as acting on polynomials when you pull them back into $H_T^*((G/B)^T) = H_T^*(S_n)$. 
+
+\hfill
+
+The right divided difference operator is a $H_T^*$ module homomorphism, obtained by composing pushforward
+and pullback of the map $G/B\to G/P_\alpha$.
+
+\section{Wonderful compactification}
+The maps of interest (in particular all the fixed points lie in the closed orbit) are \begin{align*}
+    X^{T\times T}\hookrightarrow G/B^-\times G/B \hookrightarrow X
+\end{align*} giving us \begin{align*}
+    H_{T\times T}^*(X) \hookrightarrow H_{T\times T}^*(G/B^-\times G/B) \hookrightarrow H_{T\times T}^*(X^{T\times T})
+\end{align*}
+
+\hfill
+
+Brion tells us that the first module is has a basis given by the classes of the $B\times B^-$ orbits,
+and he tells us how to expand them in terms of the canonical basis in the second module.
+The second module has a basis given by the classes \begin{align*}
+    \Omega(w,\tau) = [\overline{BwB^-}/B^- \times \overline{B^-\tau B}/B]
+\end{align*}
+The second module is where we can make sense of the divided difference operators.
+The third module is where we want to compute things, so the divided difference operators
+should manifest themselves as operations on polynomials. They should be helpful tools for the following question perhaps.
+
+\hfill
+
+One thing we can ask for a theorem for the wonderful compactification like the following one for the flag variety.
+The analagous statement would be a combinatorial characterization of
+the localization of a $B\times B^-$ orbit closure to a particular $(\pi,\rho) \in S_n\times S_n$)
+
+\begin{theorem}
+    Let $I$ be a reduced expression for $w\in W$. Then for each $v\in W$ \begin{align*}
+        s_v\vert_w = \sum_{J\subset I}\prod_I(\hat{\alpha_i}^{[i\in J]}r_i)\cdot 1
+    \end{align*}
+\end{theorem}
+In particular this is stronger than asking for the structure constants.
+
+\begin{thebibliography}{99}
+    \bibitem{Brion}
+    Brion, M. (1998). The behaviour at infinity of the Bruhat decomposition. Commentarii Mathematici Helvetici, 73(1), 137-174.
+
+    \bibitem{knutson2003}
+    Knutson, A. (2003) A Schubert calculus recurrence from the noncomplex W-action on G/B. Journal of Algebraic Combinatorics, 17(2), 173-178.
+\end{thebibliography}
+\end{document}

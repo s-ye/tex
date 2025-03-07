@@ -1,0 +1,116 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+
+
+\begin{document}
+Songyu Ye
+
+\today
+
+This is what Allen and I talked about on Feb 2.
+
+\section{Flag variety}
+In the flag variety we have a distinguished basis for cohomology, the Schubert basis. They form a stratification but
+a better one is the Richardson stratification which is given by \begin{align*}
+    X_w^v =  X_w \cap W^v
+\end{align*} the intersection of the Schubert variety $B_-wB/B$ with the opposite Schubert variety $BwB/B$. 
+One can think about the boundary components of the stratification, for Schubert varieties this is precisely
+\begin{align*}
+    \partial X_w = \bigcup X_s \st X_v \subsetneq X_w = X_w - X_w^o
+\end{align*} and one can make the analagous definition for the Richardson stratification.
+
+\hfill
+
+The good thing about the Richardson stratification is that it is the boundary divisors $\partial X_w^v$ are \red{anticanonical} in $X_w^v$.
+There was remark made about the top exterior power of the contangent bundle on a smooth projective variety.
+
+\hfill 
+
+There was another remark about the adjunction theorem which tells us that if "$\partial X = D \cup E$" where $D$ is some irreducible component
+and $E$ is the rest, then $D\cap E$ is anticanonical in $E$.
+
+\hfill
+
+\begin{example}
+    Consider full flags in $\C^3$. There is a toric degeneration of $\Fl(3)$ to a toric variety and there are pieces and
+    if you follow the pieces through the degeneration, then you figure out that some of the pieces break up and 
+    are become reducible.
+
+    \red{See the picture below. I honestly can't tell you what is going on}
+
+    \begin{center}
+        \includegraphics[scale = .2]{/Users/songye03/Desktop/math_tex/img/DBD1E5FE-1CDD-43D2-996D-4237AF35E42E_1_102_o.jpeg}
+    \end{center}
+\end{example}
+The Richardson varieties no longer form a basis for the cohomology in particular there are too many of them. 
+It is the object of Schubert calculus to expand them. This is hard so we will take it as a black box, and
+we will try to obtain results in terms of this result.
+
+
+\section{For the wonderful compactification}
+One thing that Allen expressed interest in is a toric degeneration for $\bar G$.
+
+\hfill
+
+Parallel to the Schubert basis is Brion's basis which is certain $B\times B_-$ orbit closures indexed
+by $W\times W$. The analogy of the Richardson stratification is the anticanonical stratification,
+which is given by $B\times B_-$ orbit closures intersected with $B_-\times B$ orbit closures.
+
+\hfill
+
+The matter of Schubert calculus for $\bar G$ concerns the question of expanding the anticanonical basis
+in terms of the Brion basis. This is a hard question because it is necessarily a superset of 
+Schubert calculus for $G/B$. The hope is to reduce the problem to the Schubert calculus for $G/B$.
+
+\hfill
+
+But in between these two stratifications is a third guy which is just all of the $B\times B_-$ orbit closures.
+These are indexed by $P,W,W^P$ by Springer and then later by Chen-Dyer, and they live as a 
+subset of the Weyl group of something called \red{Nakajima Dynkin diagrams, see the photo above} The elements correspond
+to choices of
+ \begin{align*}
+    W\times\text{ some funny stuff which commutes with everything except its neighbors} \times W
+ \end{align*}
+
+
+\hfill
+
+The anticanonical stratification is indexed by elements of a particular subset of the Weyl group of two Nakajima Dynkin
+diagrams glued together along the teeth.
+
+\hfill
+
+There's the theorem of He-K-Lu (unpublished) which tells us how to take a $B\times B_-$ orbit closure and localize it
+to a fixed point corresponding to $W\times W$. It is a formula which invokes the AJS/Billey formula, something
+which we know how to compute. Allen will send me the paper at some point.
+
+\hfill
+
+\begin{example}
+    We have the following anticanonical stratification for $\bar G$.
+    \begin{center}
+        \includegraphics[scale = .5]{/Users/songye03/Desktop/math_tex/img/Screenshot 2024-02-02 at 2.04.23 PM.png}
+    \end{center}
+    The stratification in this case is really stupid because all of the strata are cut out by linear equations, except for the
+    $\P^1\times \P^1$.
+\end{example}
+\red{Ask Allen about the Gelfant Setlin degeneration}
+
+\section{References}
+\begin{itemize}
+    \item He-Lu indexed the anticanonical stratification
+    \item Springer and then Chen-Dyer indexed the $B\times B_-$ orbit closures
+    \item Brion has the basis for the cohomology
+\end{itemize}
+
+\end{document}
+
+
+

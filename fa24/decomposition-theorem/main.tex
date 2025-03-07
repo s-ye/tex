@@ -1,0 +1,515 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\DeclareMathOperator{\Th}{Th}
+
+\begin{document}
+
+
+\lhead{Songyu Ye} % Change this to your name
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Perverse sheaves and the decomposition theorem}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+    These are notes on the decomposition theorem for perverse sheaves. 
+\end{abstract}
+
+\tableofcontents
+
+ 
+
+
+
+\section{Classical}
+We want to understand the decomposition theorem for perverse sheaves. The classical
+precursors to this theorem include the theorems of Lefschetz, Hodge, Deligne, and the invariant cycle theorems.
+We discuss them here below. Let $X$ be a smooth projective variety over $\C$ and let $D = X \cap H$ be 
+the intersection of $X$ with a generic hyperplane.
+
+\subsection{Gysin maps}
+The discussion of the Lefschetz hyperplane theorem is based on Totaro's PCMI notes (\cite{totaro} 
+should do just as well) and \cite{griffiths-harris}. In general, suppose we have $i:X\to Y$ the inclusion of a
+closed submanifold into a smooth manifold and we have an orientation of the normal 
+bundle $N_{X/Y}$. 
+
+\hfill
+
+Then we have the Gysin map $i_*:H^*(X)\to H^{*+d}(Y)$ where $d$ is the codimension of $X$ in $Y$.
+The Gysin map is formally defined as follows. The map of pairs $(Y,\emptyset)\to (Y,Y\backslash X) \cong
+\Th_X N_{X/Y}$ induces a map \begin{align*}
+    i_*:H^*(X) &\to H^{*+d}(\Th_X N_{X/Y}) \to H^{*+d}(Y)\
+\end{align*} where the first map is the Thom isomorphism.
+Recall that the Thom space of a vector bundle $E$ is disk bundle $D(E)$ of $E$ with the boundary
+sphere bundle $S(E)$ collapsed to a point. The Thom isomorphism is the map $H^*(E)\to H^{*+d}(\Th E)$
+given by cupping with the Thom class. The Thom class $u \in H^d(E,E\backslash 0)$ makes 
+$H^*(E,E\backslash 0)$ into a free $H^*(E)$-module.
+
+\hfill 
+
+There is also the push-pull formula which says that the map \begin{align*}
+    i^*i_*:H^*(X) &\to H^{*+d}(X)\
+\end{align*} is equal to \begin{align*}
+    i^*i_* = c_d(N_{X/Y})\cup = [X]\vert_X\cup
+\end{align*} In particular, an ample line bundle $L$ on $X$ gives a divisor $D$ in $X$ and
+the Gysin map for the divisor $i:D\to X$ is given by $i_* = c_1(L)\cup = [D] \cup$.
+The pull-push formula for $i_*i^*: H^*(Y) \to H^{*+d}(Y)$ is similarly
+ given by $i_*i^* = c_d(N_{X/Y})\cup = [D]\cup$.
+
+\begin{remark}
+    The intuition behind this map is, given a class $\alpha \in H^i(X)$ represented by 
+a submanifold $Z$, we are embedding $Z$ in the normal bundle $N_{X/Y}$ via the zero section,
+and capping with Chern classes is about looking at the homology class of 
+the intersection of the embedded $Z$ with general sections of $N_{X/Y}$.
+\end{remark}
+
+The Gysin maps satisfy very special properties when we have smooth projective varieties.
+\begin{theorem}
+    [Lefschetz hyperplane theorem] The restriction map $H^i(X)\to H^i(D)$ is an isomorphism for 
+    $i < n-1 $ and injective for $i = n-1$.
+\end{theorem}
+
+\begin{theorem}
+    [Hard Lefschetz] 
+    The $i$-fold product $\cup c_1(L)^i:H^{j-i}(X)\to H^{j+i}(X)$ is 
+    an isomorphism for $j < n-2i$ and injective for $j = n-2i$.
+\end{theorem}
+
+\begin{remark}
+    Hyperplane line bunldes are positive are ample and satisfy Hard Lefschetz.
+\end{remark}
+\subsection{Hodge theory}
+The cohomology of a smooth projective variety $X$ is very special 
+compared to that of general manifolds. In particular $H^*(X)$ has a Hodge structure
+which we will state some of the consequences of here.
+
+\hfill 
+
+We consider complex valued $i$-forms on $X$ with $p$ holomorphic 
+coordinates and $q$
+anti-holomorphic coordinates. There are differential operators 
+\begin{align*}
+    \partial: \Omega^{p,q}(X) &\to \Omega^{p+1,q}(X)\\
+    \bar{\partial}: \Omega^{p,q}(X) &\to \Omega^{p,q+1}(X)
+\end{align*} which satisfy $\partial^2 = 0$ and
+$\bar{\partial}^2 = 0$ and $\partial\bar{\partial} + \bar{\partial}\partial = 0$.
+There is the Hodge decomposition \begin{align*}
+    H^i(X,\C) = \bigoplus_{p+q = i} H^{p,q}(X)
+\end{align*} where 
+\begin{align*}
+    H^{p,q}(X) = \ker \bar{\partial} / \im \bar{\partial}
+\end{align*} is the Dolbeault cohomology. There is also the 
+Dolbeault isomorphism \begin{align*}
+    H^{p,q}(X) \cong H^q(X,\Omega^p)
+\end{align*} where $\Omega^p$ is the sheaf of holomorphic $p$-forms on $X$.
+
+\subsection{Proof of the Lefschetz hyperplane theorem}
+We follow the proof of the Lefschetz hyperplane theorem in \cite{griffiths-harris}.
+I have to rename some things. Let $M$ be a smooth projective variety of dimension $n$ and let $V$ be a
+hyperplane section in $M$, i.e. a positive line bundle. There are short exact sequences of sheaves \begin{align*}
+    0 \to \Omega^p_M(-V) \to \Omega^p_M \xrightarrow{r} \Omega^p_M\vert_V \to 0 \\
+    0 \to \Omega^{p-1}_V(-V) \to \Omega^p_M\vert_V \xrightarrow{i} \Omega^p_V \to 0
+\end{align*}
+It is enough to show that 
+\begin{align*}
+    H^q(\Omega^p_M) \cong H^q(\Omega^p_V)
+\end{align*} when $p+q < n-1$ and that the map \begin{align*}
+    H^q(M,\Omega^p_M) \xrightarrow{r^*} H^q(M,\Omega^p_M\vert_V) \to H^q(V,\Omega^p_M\vert V) \xrightarrow{i^*} H^q(V,\Omega^p_V)
+\end{align*} is injective when $p+q = n-1$.
+\begin{proof}
+    Look at the long exact sequence in cohomology associated to the short exact sequence of sheaves. 
+    The desired properties are equivalent to the vanishing of the cohomology groups $H^q(\Omega^p_M(-V))$ and
+    $H^q(\Omega^{p-1}_V(-V))$ for $p+q \leq n$. This follows from the Kodaira vanishing theorem.
+\end{proof}
+
+\begin{theorem}
+    [Kodaira vanishing theorem] Let $L$ be a positive line bundle on a smooth projective variety $M$.
+    Then $H^q(M,\Omega^p_M(L)) = 0$ for $p+q \geq n$. The dual statement is \begin{align*}
+        H^q(M,\Omega^p_M(-L)) = 0
+    \end{align*} for $p+q \leq n$.
+\end{theorem}
+
+\begin{remark}
+    The definition of positive line bundle and the Kodaira vanishing theorem will be black-boxed.
+\end{remark}
+
+\section{Sheaves and derived categories}
+This section is also based on \cite{cataldo-migliorini}.
+
+\subsection{Derived category}
+On a space $X$, we consider the category where the objects are 
+complexes of sheaves on $X$ and the morphisms are morphisms of complexes.
+There are quasi-isomorphisms of complexes which are those which induce isomorphisms on 
+cohomology sheaves. 
+
+\hfill
+
+The derived category $D(X)$ is obtained by inverting quasi-isomorphisms (this is not precise!).
+Different complexes of sheaves which give the same cohomology theories are identified in $D(X)$.
+Given a complex of sheaves $K$, one can produce an injective resolution $K\to I$ where $I$ is a
+complex of sheaves with injective components and $K\to I$ is a quasi-isomorphism. 
+
+\begin{definition}
+    The \textbf{cohomology 
+groups}$H^i(K)$ of $K$ are defined as the cohomology of the complex $\Gamma(X,I)$.
+Beware that these are different than
+the cohomology sheaves, which are the "cohomology objects" in $D(X)$.
+\end{definition}
+
+
+\hfill
+
+More generally, the derived category is important because it admits derived functors. A map 
+$f:X\to Y$ of spaces induces a map $f_*:D(X)\to D(Y)$ of derived categories. Given 
+a bounded below complex of sheaves $K$ on $X$, choose an injective resolution $K\to I$.
+The pushforward complex $f_*I$ is a complex of sheaves on $Y$ so that \begin{align*}
+    H^i(U,f_*I) \cong H^i(f^{-1}(U),I)
+\end{align*}
+and is well defined up to canonical isomorphism in $D^+(Y)$, denoted $Rf_*K$.
+
+\begin{remark}
+    When $f:X\to *$ is a map to a point, the derived pushforward $Rf_*K$ sends $K$ to the
+    cohomology of $K$.
+\end{remark}
+
+\subsection{Constructible sheaves}
+\begin{definition}
+    A subset $V \subset Z$ of a complex variety is \textbf{constructible} if it is a finite
+    sequence of unions, intersections, or complements of algebraic subvarieties of $Z$.
+
+    \hfill
+
+    A \textbf{local system} on $Z$ is a locally constant sheaf with finite-dimensional stalks.
+
+    \hfill
+
+    A complex of sheaves $K$ on $Z$ is \textbf{constructible} if $Z$ has 
+    a decomposition into constructible subsets $Z = \bigsqcup Z_i$ such that
+    each of the cohomology sheaves $\cH^i(K\vert_{Z_i})$ is a local system.
+
+    \hfill
+
+
+    The \textbf{constructible bounded derived category} $\cD_Z$ 
+    is defined to be the full subcategory of the bounded derived category $D_b(Z)$
+    whose objects are the constructible complexes. 
+
+\hfill
+
+    A \textbf{perverse sheaf} is a constructible complex with certain restrictions 
+    on the dimension of the support of its stalk cohomology 
+    and of its stalk cohomology with compact supports.
+    These restrictions are called the support and 
+    co-support conditions, respectively.
+\end{definition}
+\begin{remark}
+    These definitions are right because we get a category in which 
+    we have very many nice properties, in particular
+    Verdier duality, six-functor formalism, etc.
+\end{remark}
+In the derived category, we can embed sheaves as complexes 
+concentrated in degree zero, and the image of 
+this embedding is characterized by the property that $\cH^i(K) = 0$ for $i\neq 0$.
+Every constructible complex $K$ comes with a canonical collection of perverse
+sheaves called the \textbf{perverse cohomology sheaves} $^{\mf{p}} \cH^i(K)$ of $K$
+which are characterized among the constructible complexes by $^{\mf{p}} \cH^i(K) = 0$
+for every $i\neq 0$. 
+
+\subsection{Intersection complex}
+Perverse sheaves are interesting objects besides their role in developing 
+intersection cohomology. The intersection complex is a fundamental example of a perverse
+sheaf, in the sense that every perverse sheaf is a finite iterated extension
+ of intersection complexes.
+
+\begin{definition}
+    Given a complex algebraic variety $Y$ and a local system $L$ defined 
+    on a smooth open subset $U\subset Y$, the \textbf{intersection complex}
+    $\IC_Y(L)$ is a constructible complex of sheaves, unique up to 
+    canonical isomorphism in $D_Y$ so that $\IC(L)\vert_U = L$ and the 
+    support and cosupport conditions hold: \begin{align*}
+        \dim\set{y\in Y \st \cH^i_y(\IC(L)) \neq 0} < - i \text{ if $i>-n$} \\
+        \dim\set{y\in Y \st \cH^i_{c,y}(\IC(L)) \neq 0} < i \text{ if $i < n$}
+    \end{align*} where the $c$ denotes compactly-supported cohomology stalks.
+    The intersection cohomology of $Y$ with coefficients in $L$ is defined to be
+    the cohomology of the complex $\IC_Y(L)$ up to a shift: \begin{align*}
+        IH^{i+n}(Y,L) := \cH^{i}(\IC_Y(L))
+    \end{align*}
+\end{definition}
+
+\subsection{Intersection complex of the link of an affine cone}
+Recall that a complex projective manifold has hard Lefschetz.
+
+\begin{definition}
+    The \textbf{primitive cohomology} is \begin{align*}
+    P^{n-k}(X) = \ker \cup c_1^{k+1}: H^{n-k}(X) \to H^{n+k+2}(X)
+\end{align*} 
+\end{definition}
+It is precisely which classes die after 
+you cup too one many times with the hyperplane class. There is the Lefschetz
+decomposition \begin{align*}
+    H^mX = \sum_k L^k P^{n-2k}
+\end{align*} Hard Lefschetz says that there is a map $\mf{sl}_2 \to \End H^*(X)$
+where $L$ acts as a lowering operator for the $\mf{sl}_2$ action, $H$ acts on $H^{n-i}(X)$
+by weight i, and \red{there is a raising operator given by 
+the restriction to the harmonic forms of the the formal adjoint of $\omega \wedge \cdot$}
+In this setup, the primitive vectors are precisely the highest weight vectors.
+
+\hfill
+
+Another way to think about it is as follows: the primitive cohomology in dimension $n-k$
+is the classes corresponding to submanifolds of dimension $n+k$ which have empty
+intersection with $k+1$ generic hyperplanes. These are precisely classes which do not 
+meet some $n-k-1$-dimensional linear subspace of $\C\P^n$. When $k=0$, this is 
+precisely those $n$-dimensional submanifolds which live in the $\C^n$ part of $\C\P^n$.
+
+\hfill
+
+See \href{https://mathoverflow.net/questions/14667/intuition-for-primitive-cohomology}{this 
+math overflow post}.
+
+\hfill 
+
+Given a smooth projective manifold $E^{n-1}\subset \C\P^{N}$ take its affine cone
+$Y^n \subset \C^{N+1}$ and consider $\cL$ the link of the cone, defined
+as the intersection of $Y$ with a small sphere centered at the cone point.
+The link $\cL$ is a smooth oriented 
+compact manifold of real dimension $2n-1$ and $S^1$-fibers over $E$.
+
+Its cohomology is equal to \begin{align*}
+    H^j(\cL) = P^j(E) \texty{ for } j\leq n-1 \\
+    H^{n-1+j}(\cL) = P^{n-j}(E) \texty{ for } 0\leq j\leq n
+\end{align*}
+
+The intersection cohomology groups equal \begin{align*}
+    IH^j(\cL) = P^j(E) \texty{ for } j\leq n-1 \\
+    IH^j(\cL) = 0 \texty{ for } j > n-1
+\end{align*}
+
+With compact supports:
+\begin{align*}
+    IH^{2n-j}_c(\cL) =H_j(\cL) \texty{ for } 0\leq j\leq n-1 \\
+    IH^{n-j}_c(\cL) = 0 \texty{ for } j > n-1
+\end{align*}
+
+\red{I don't know how to compute any of these groups.}
+
+Poincare duality is the isomorphism \begin{align*}
+    IH^j(\cL) \cong IH^{2n-j}_c(\cL)
+\end{align*}
+
+\begin{remark}
+    A major motivation behind the introduction of intersection
+    cohomology is the failure of Poincare duality for singular spaces.
+    Note that in this example the link is smooth, so we have Poincare duality.
+\end{remark}
+
+\section{Decomposition Theorem}
+The decomposition theorem for perverse sheaves is a very 
+important result and computational tool. First we state it and then we do 
+some examples.
+
+\begin{theorem}
+    [Decomposition Theorem]
+    Let $f:X\to Y$ be a proper map of complex algebraic varieties. Then
+    there is an isomorphism in the constructible bounded derived category $D_Y$ \begin{align*}
+        Rf_*\IC_X \cong \bigoplus_{i\in \Z} ^{\mf{p}}\cH^i(Rf_*\IC_X)[i]
+    \end{align*} where the sum is finite and the summands are the perverse cohomology sheaves.
+    The perverse sheaves are semisimple: \begin{align*}
+        ^{\mf{p}}\cH^i(Rf_*\IC_X) = \bigoplus_\beta \IC_{\bar{S_\beta}}(L_\beta)
+    \end{align*} where $L_\beta$ are local systems on the smooth open sets 
+    $S_\beta \subset Y$. 
+    In other words, there is a \red{"essentially unique"} 
+    decomposition into triples $(Y_a,L_a,d_a)$ so that \begin{align*}
+        Rf_*\IC_X \cong \bigoplus_a \IC_{\bar{Y_a}}(L_a)[\dim X - \dim Y_a - d_a]
+    \end{align*} where \begin{enumerate}
+        \item $Y_a$ are \red{locally closed, smooth, irreducible subvarieties}
+        \item $L_a$ are local systems on $Y_a$
+        \item $d_a$ are integers
+    \end{enumerate}
+\end{theorem}
+
+\begin{example}
+    Let $Y$ be the projective cone over a Riemann surface $\Sigma$ of genus $g$.
+    The Betti numbers of $Y$ are $1,0,1,2g,1$ and the IH Betti numbers are $1,2g,1,2g,1$.
+
+    \hfill 
+
+    Blowing up $Y$ at the vertex $X\to Y$ and we can apply the decomposition theorem to the
+    proper map $X\to Y$. The decomposition theorem says that \begin{align*}
+        0 \to \IC_Y \to f_*\Q_X[2] \to H^2(\Sigma)[0]\to 0
+    \end{align*}
+\end{example}
+
+\section{First look at perverse sheaves}
+Let $K\in\cD_Y$ be a constructible complex on the variety $Y$. 
+Recall that this means $K$ has cohomology sheaves which are all constructible.
+Recall that the \textbf{support} of a sheaf is the closure of the set of points 
+with nontrivial stalks. 
+
+\begin{definition}
+    We say $K$ satisfies 
+    the \textbf{support condition} if the support of the cohomology sheaves
+    \begin{align*}
+        \dim{\Supp \cH^{-i}(K)} \leq i \text{ for all } i\in \Z
+    \end{align*} has the right dimension. We say $K$
+    satisfies the \textbf{cosupport condition} if the support of the compactly supported
+    cohomology sheaves \begin{align*}
+        \dim{\Supp \cH^{i}_c(K)} \leq i \text{ for all } i\in \Z
+    \end{align*} has the right dimension.
+    \red{This is equivalent to the support condition for the Verdier dual complex $K^\vee$.
+    Quite reminiscent of Poincare duality.}
+
+    \hfill
+
+    We say $K$ is \textbf{perverse} if it satisfies both the support and cosupport conditions.
+    The cateogry of perverse sheaves is denoted $\cP_Y$ and is a full subcategory of 
+    the constructible bounded derived category $\cD_Y$.
+\end{definition}
+
+\begin{remark}
+    What do perverse sheaves in the context of 
+    spaces which are not algebraic varieties look like?
+    This is largely an aside toward what perverse sheaves 
+    and knot contact homology.
+\end{remark}
+
+\begin{example}
+    Let $C$ be a Riemann surface of genus $g$ and consider the map 
+    $\P^1\times C \to X$ which collapses $0\times C$ to a point. Then this map
+    is semismall but nonalgebraic, in particular the decomposition theorem does not hold, but
+    the pushforward $f_*\Q_{\P^1\times C}$ is a perverse sheaf.
+\end{example}
+
+\subsection{Perverse sheaves and decomposition theorem for toric varieties}
+A polytope $P$ is simplicial if all its faces are simplices. Given
+a simplicial polytope, the toric variety $X_P$ who has moment polytope equal to 
+the dual of $P$ is smooth. Under this correpsondence, subdivisions of $P$ (defined as
+a collection $K$ of polytopes whose union is the boundary of $P$ and the intersection of
+any two elements in $K$ is in $K$) 
+correspond to subdivisions of the fan of $X_P$ correspond to corner chops of the dual of $P$. In 
+particular, any subdivision $\tilde P$ of $P$ gives rise to a proper equivariant 
+birational map $X_{\tilde P} \to X_P$. One can then apply the 
+decomposition theorem to this map.
+
+\hfill 
+
+Given a fan one constructs a convex polytope $P$ by intersecting the fan with a 
+ball centered at the origin and then flattening the faces. If the 
+moment polytope is simple, then the fan polytope is simplicial.
+
+\begin{definition}
+    Given a simplicial polytope $P$, there is a face vector $(f_0,f_1,\cdots,f_d)$
+    where $f_i$ is the number of $i$-dimensional faces of $P$. Consider the 
+    \textbf{h-polynomial} \begin{align*}
+        h_P(t) &= (t-1)^d + f_0(t-1)^{d-1} + f_1(t-1)^{d-2} + \cdots + f_{d-1}(t-1) + f_d \\
+        &- \sum h_i(P) t^i
+    \end{align*} 
+    and the \textbf{g-polynomial} \begin{align*}
+        g_P(t) &= h_0 + (h_1 - h_0)t + (h_2 - h_1)t^2 + \cdots + (h_d - h_{d-1})t^d \\
+        &= \sum g_i(P)t^i
+    \end{align*} where $h_i(P)$ and $g_i(P)$ are the coefficients of the h-polynomial and g-polynomial.
+\end{definition}
+
+\begin{proposition}
+    The coefficient $h_i$ computes the Betti number $b_{2i}$ of the toric variety $X_P$.
+\end{proposition}
+
+\begin{proposition}
+    The coefficient $g_l$ equal to the dimension of 
+    the primitive cohomology in degree $2l$.
+\end{proposition}
+
+The proof of these statements and their generalizations 
+to intersection cohomology can be found in \cite{goresky}.
+Poincare duality and Hard Lefschetz therefore become statements about 
+the face vector of a simplicial polytope $P$.
+
+\hfill
+
+When the polytope is not simplicial, the toric variety is singular and therefore 
+we expect interesting statements about the intersection cohomology of the toric variety
+in terms of the combinatorics of the polytope. Indeed the following is true.
+
+\begin{definition}
+    If $P$ is a polytope of dimension $d$ and $h,g$ have been defined for all 
+    polytopes of dimension $<d$, we define \begin{align*}
+        h_P(t) = \sum_{F<P}g(F,t)(t-1)^{d-1-\dim F}
+    \end{align*} where $F$ is a proper face, including the empty face $\emptyset$ for 
+    which $g(\emptyset,t) = h(\emptyset,t) = 1$ and $\dim \emptyset = -1$. $g$
+    is defined from $h$ as before.
+\end{definition}
+
+\begin{proposition}
+    The coefficients of these polynomials compute
+    the intersection cohomology and the primitive 
+    intersection cohomology of the toric variety $X_P$.
+\end{proposition}
+
+\begin{remark}
+    There are a bunch of interesting calculations in the text that
+    I don't have the details for. In particular they claim that if you take
+    the cube and subdivide it along barycenters of all the faces, let $f$
+    be the corresponding map, then we have \begin{align*}
+        ^\mf{p}\cH^{\pm 1}(f_*\Q_{X_\text{cube}})[3] = \sum \Q_{p_i}
+    \end{align*}
+\end{remark}
+
+\subsection{Semismall maps}
+In the case of semismall maps the decomposition theorem takes a 
+particularly simple form. An important example of a semismall map is the resolution of the 
+nilpotent cone (Springer resolution stuff)
+
+\begin{definition}
+    A \textbf{stratification} for $f:X\to Y$ is a 
+    decomposition of $Y$ into locally closed smooth subsets 
+    so that $f^{-1}(Y_i) \to Y$ is topologically locally trivial fibration. 
+\end{definition}
+
+The relationship to perverse sheaves is immediate. \begin{proposition}
+    If $X$ smooth connected variety of dimension $n$ and 
+    $f:X\to Y$ proper surjective map of varieties. Say $Y$ has
+    a stratification $Y = \bigsqcup Y_i$ and let $y_i\in Y_i$, $d_i = 
+    \dim f^{-1}(Y_i) - \dim Y_i$. Then the following are equivalent \begin{itemize}
+        \item $f_*\Q_X$ is a perverse sheaf
+        \item $\dim X \times_Y X \leq n$
+        \item $\dim Y_i + 2d_i \leq n$ for all $i$
+    \end{itemize}
+A map which satisfies these conditions is called \textbf{semismall}.
+A stratum is \textbf{relevant} if equality holds in the third condiiton.
+\end{proposition}
+In other words, if the map has been stratified, then for each stratum $S\subset Y$ the dimension of 
+the fiber over $S$ is at most $\half \codim S$, and it is small 
+if the inequality is strict.
+
+\begin{proposition}
+    If $\pi:X\to Y$ is small, then the intersection 
+    cohomology of $Y$ is canonically isomorphic to the
+    cohomology of $X$.
+\end{proposition}
+
+\section{Perverse sheaves in representation theory}
+\input{rep-theory.tex}
+\section{Closer look at perverse sheaves}
+\input{perv-sheaves.tex}
+
+\section{Appendix A: Spectral Sequences}
+\input{homological-alg.tex}
+
+\bibliography{refs}{}
+\bibliographystyle{plain}
+
+\end{document}

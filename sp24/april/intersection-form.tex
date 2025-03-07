@@ -1,0 +1,86 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\begin{document}
+Songyu Ye
+
+This is a note on the intersection form of 4 manifolds and
+in particular on complex projective surfaces.
+
+\section{Introduction}
+The intersection form of a compact oriented topological
+4-manifold $X$ is an invariant that effectively captures the
+cohomological information of $X$.
+
+\hfill
+
+Restrict to the case where $X$ is closed and simply connected. In this case,
+$H^0$ and $H^4$ are $\Z$, $H^{\text{odd}}$ is $0$ because $\pi_1(X)$ is trivial and
+Poincare duality. Moreover $H^2$ is free abelian because
+\begin{align*}
+	H_2(X) \cong H^2(X) \cong \Hom_{\Z}(H_2(X), \Z)
+\end{align*}
+
+\begin{theorem}
+	[Freedman] If $X$ is a simply connected smooth 4 manifold, then
+	its homeomorphism type is determined by its intersection form.
+\end{theorem}
+
+\section{Intersection form}
+The intersection form is a bilinear form on $H^2(X)$ (or $H_2(X)$ via
+Poincare duality) defined by \begin{align*}
+	Q_X(\alpha, \beta) = \alpha \cdot \beta \cap [X]
+\end{align*}
+
+When $X$ is a smooth manifold, $Q_X$ has the following geometric interpretation.
+We say that a class $\alpha \in H_2(X)$ is represented by a
+embedded surface $S$ if $\alpha$ is the image of the fundamental class
+under the inclusion map $i: S \to X$.
+
+\hfill
+
+The integer $Q_X(\alpha, \beta)$ is the intersection number of representatives
+for the homology classes $\alpha$ and $\beta$.
+
+\begin{remark}
+	In particular whenever $X$ is closed,
+	oriented, smooth 4 manifold, then every element of $H_2(X)$ is represented by an embedded
+	surface.
+    
+    \hfill
+    
+    This is because we can identify elements of $H_2(X)$ with isomorphism classes
+	of line bundles on $X$ with structure group $U(1)$ (call this group $\cL(X)$). In particular we know that \begin{align*}
+		H_2(X) = [X,K(\Z,2)]
+	\end{align*} and \begin{align*}
+		\cL(X) = [X,BU(1)]
+	\end{align*} and both of these spaces $K(\Z,2)$ and $BU(1)$ are homotopy
+	equivalent to $\C\P^\infty$.
+
+    \hfill
+
+    Then if $\alpha$ is a homology class, let $\cL_\alpha$ the corresponding line bundle
+    and then the representing submanifold is precisely the zero locus of a generic section
+    of $\cL_\alpha$.
+\end{remark}
+
+To understand the intersection number, choose the
+representatives so that the intersections are transverse. 
+Observe that the orientations on the
+representatives of $\alpha$ and $\beta$ induce an orientation on their intersection,
+so we can assign a sign to each point of thier intersection. In particular
+concatenate positive bsaes for the tangent spaces at the intersection points
+to get an orientation for intersection.
+
+
+
+
+\section{Surfaces in projective space}
+
+\end{document}

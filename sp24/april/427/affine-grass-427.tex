@@ -1,0 +1,307 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\begin{document}
+Songyu Ye
+\today
+
+\hfill
+
+This is a note on the new project I am beginning with Allen because it seems like the previous project
+has died.
+
+\section{Motivation for the affine Grassmannian}
+Before we start we consider a motivating example. Consider the space 
+$\GL(n,\Q)/\GL(n,\Z)$, which we realize as the homogenous space of lattices $A$ in $\Q^n$ for which $A\cap \Z^n$
+is finite index inside both $A$ and $\Z^n$. This amounts to the condition that $\Q \otimes_Z A \cong \Q^n$.
+This comes equipped with a map to $\Q^*/\Z^* \cong \Q^+$ given by the determinant, which sends a lattice to
+its volume.
+
+\begin{definition}
+    The affine Grassmannian is the space $\Gr_G = \GL_n(\C((t)))/\GL_n(\C[[t]])$ where
+    $\C((t))$ is the field of formal Laurent series (where we only allow
+    finitely many negative terms) and $\C[[t]]$ is the ring of formal power series.
+\end{definition}
+
+\begin{center}
+    \includegraphics[scale = .1]{/Users/songye03/Desktop/math_tex/img/IMG_2046.JPG}
+\end{center}
+We realize this space as the space of "lattices" $A$ in $\C((t))^n$ for which $A$ is a $C[[t]]$-submodule
+of $\C((t))^n$ and $A/A\cap \C[[t]]^n$ and $\C[[t]]^n/A\cap \C[[t]]^n$ are a finite dimensional $\C$-vector spaces.
+
+\hfill
+
+This space comes equipped with a map to $\C((t))^*/\C[[t]]^* \cong \Z$ given by the order, which sends a coset
+to the order of its determinant, equal to the difference of the two indices. The order is a discrete invariant
+and since the affine Grassmannian is a homogenous space, we see that it is disconnected with components corresponding to 
+different orders. Moreover we can draw pictures of elements in the affine Grassmannian 
+by drawing an individual lattice by the orders of its basis elements, with everything to the right 
+shaded because of the proerpty of being a $C[[t]]$-submodule.
+
+\hfill
+
+In particular we see that there is a filtration by $a,b$ so that the set of lattices \begin{align}
+    z^a \C[[t]]^n \leq A \leq z^b \C[[t]]^n
+\end{align} is a finite dimensional variety. In particular although the affine Grassmannian is 
+infinite dimensional, it is a union of finite dimensional varieties. In particular any given 
+calculation is finite dimensional.
+
+\begin{remark}
+    The affine Grassmannian is an example of something called an \red{ind-scheme},
+    an object which is a filtered colimit of schemes where the 
+    transition maps are closed embeddings. Suppose you wanted to tell me
+    a vector bundle on an ind-scheme. Morally this should be a vector
+    bundle on each of the finite dimensional pieces, which is compatible
+    with the transition maps. 
+\end{remark}
+
+\section{Deformation retract of the loop group}
+Consider $K$ a maximal compact subgroup of a complex reductive group $G$ (i.e. $U(n)$ in $GL(n,\C)$).
+Consider $\Omega K$ the space of smooth loops in $K$ based at the identity. \begin{align}
+    \Omega K = \Map_{\cdot}(S^1,K)
+\end{align} which is a homogenous space for the space of free loops $\Map(S^1,K)$ by the action of
+the constant loops. The loop space $\Omega K$ is a topological group with the pointwise multiplication
+of loops. It has an action of $K$ by conjugation.
+
+\begin{remark}
+    Allen says although it is both a group and a space, in this context we want to largely
+    think about it as a space.
+\end{remark}
+
+One can try to apply Morse theory to $\Omega K$ to try to understand its topology. This is 
+in fact what Bott did and let to the discovery of Morse-Bott theory. Recall for any 
+Riemannian manifold $M$, there is a map $LM \to \R_{\geq 0}$ given by \begin{align}
+    \gamma \mapsto \int_{S^1} \|\gamma'(t)\|^2 dt
+\end{align} called the \red{action functional}. This is a Morse function on $LM$ for generic
+choice of metric. Recall in traditional Morse theory, isolated nondegenerate critical points
+yield a cell decomposition of the manifold. However, when we apply this recipe to $\Omega K$ 
+we find that \begin{align}
+    (\Omega K)_{\text{crit}} = \Hom_{\text{gp}}(S^1,K)
+\end{align} Moreover given such a group homomorphism, one can conjugate it by $K$ to lie in $T$
+the maximal torus of $K$. Thus we see that the critical points of the action functional are
+\begin{align*}
+    \Hom_{\text{gp}}(S^1,K) = \coprod_{\text{dominant coweights $\lambda$}} K \cdot t^\lambda
+\end{align*} where $t^\lambda$ is the loop corresponding to the coweight $\lambda$ and 
+moreover one can show that \begin{align*}
+    K \cdot t^\lambda \cong G/P(\lambda)
+\end{align*} so in particular we see that the critical points are not isolated.
+Hence we need to use Morse-Bott theory to understand the topology of $\Omega K$.
+
+\section{Morse Bott theory}
+The point of Morse-Bott theory is that when the critical points of a Morse function are not isolated,
+but rather form a submanifold, one can still say something about the topology of the manifold.
+In particular we get a decomposition of the manifold into vector bundles over the critical submanifolds.
+
+\begin{example}
+    Consider the torus sitting as a donut on the table. The height function now has two critical circles
+    which are the top and bottom of the donut. Then we see that the torus admits a decomposition as line bundles 
+    over those two circles with the fibers identified appropriately.
+\end{example}
+
+\begin{example}
+    Consider the torus balancing on its side, the standard height function has 4 critical points and indeed 
+    recovers the decomposition of the torus as a cell complex. Consider if we 
+    pinch the top of the torus toward infinity. Then when we run the Morse machine, we only get $0$-cell,
+    and $2$ 1-cells. The point is we only get something homotopic to that which we started with.
+\end{example}
+Running the machine, we get that the Morse-Bott cell of the critical submanifold $K \cdot t^\lambda$ is equal to \begin{align*}
+    G(\C((t)))\cdot t^\lambda \twoheadrightarrow G\cdot t^\lambda \cong G/P(\lambda)
+\end{align*} The closure of this guy we will call the \red{affine Schubert cell} $\Gr^\lambda$.
+\begin{center}
+    \includegraphics[scale = .1]{/Users/songye03/Desktop/math_tex/img/IMG_2047.JPG}
+\end{center}
+In this way we see that the affine Grassmannian $\Gr_G$ is a deformation retract of the loop group $\Omega K$.
+
+\hfill
+
+We can draw the various $G/P(\lambda)$ with the jellyfish picture, where downwards is about which 
+cells are in the closure of which other cells.
+
+\section{Langlands dual group}
+As in the finite dimensional case there is a stratificaaiton \begin{align*}
+    \Gr^\lambda = \coprod_{\mu \leq \lambda} \Gr^\mu_o
+\end{align*} dominance order. Studying the $T$-fixed points we find that \begin{align*}
+    \text{weights in $V_\lambda$ for $\prescript{L}{}{G}$}= (\Gr^\lambda)^T = \coprod_{\mu \leq \lambda} \big((\Gr^\mu_o)^T = W\cdot t^\mu\big)
+\end{align*}
+
+\begin{example}
+    For representations of $\SL(3)$ we have a dominant weight $\lambda$. Apply the Weyl group, take 
+    the convex hull, and all of the weights in the interior are of course weights of the representation.
+    What the above is saying is that the weights of the interior are those corresponding to the Weyl group 
+    orbits through all of the $\mu$ for which $\mu \leq \lambda$ (in the Langlands dual group setting).
+\end{example}
+
+However one thing that one also wants to know is the dimension of the weight space $\mu$. For that we have the theorem: \begin{theorem}
+    [Mirkovic-Vilonen] The dimension of the weight space $\mu$ is equal 
+    to the number of components of the attracting set of $t^\mu$ in $\Gr^\lambda$.
+\end{theorem}
+
+\begin{example}
+    Take the pyramid of Gaza and tilt it on one of its base points, so that the square base is 
+    facing away from you. \red{??}
+\end{example}
+\section{Things that have to be learned}
+\begin{enumerate}
+    \item Morse theory and Morse-Bott theory
+    \item Affine Grassmannian
+\end{enumerate}
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\begin{document}
+Songyu Ye
+\today
+
+\hfill
+
+This is a note on the new project I am beginning with Allen because it seems like the previous project
+has died.
+
+\section{Motivation for the affine Grassmannian}
+Before we start we consider a motivating example. Consider the space 
+$\GL(n,\Q)/\GL(n,\Z)$, which we realize as the homogenous space of lattices $A$ in $\Q^n$ for which $A\cap \Z^n$
+is finite index inside both $A$ and $\Z^n$. This amounts to the condition that $\Q \otimes_Z A \cong \Q^n$.
+This comes equipped with a map to $\Q^*/\Z^* \cong \Q^+$ given by the determinant, which sends a lattice to
+its volume.
+
+\begin{definition}
+    The affine Grassmannian is the space $\Gr_G = \GL_n(\C((t)))/\GL_n(\C[[t]])$ where
+    $\C((t))$ is the field of formal Laurent series (where we only allow
+    finitely many negative terms) and $\C[[t]]$ is the ring of formal power series.
+\end{definition}
+
+\begin{center}
+    \includegraphics[scale = .1]{/Users/songye03/Desktop/math_tex/img/IMG_2046.JPG}
+\end{center}
+We realize this space as the space of "lattices" $A$ in $\C((t))^n$ for which $A$ is a $C[[t]]$-submodule
+of $\C((t))^n$ and $A/A\cap \C[[t]]^n$ and $\C[[t]]^n/A\cap \C[[t]]^n$ are a finite dimensional $\C$-vector spaces.
+
+\hfill
+
+This space comes equipped with a map to $\C((t))^*/\C[[t]]^* \cong \Z$ given by the order, which sends a coset
+to the order of its determinant, equal to the difference of the two indices. The order is a discrete invariant
+and since the affine Grassmannian is a homogenous space, we see that it is disconnected with components corresponding to 
+different orders. Moreover we can draw pictures of elements in the affine Grassmannian 
+by drawing an individual lattice by the orders of its basis elements, with everything to the right 
+shaded because of the proerpty of being a $C[[t]]$-submodule.
+
+\hfill
+
+In particular we see that there is a filtration by $a,b$ so that the set of lattices \begin{align}
+    z^a \C[[t]]^n \leq A \leq z^b \C[[t]]^n
+\end{align} is a finite dimensional variety. In particular although the affine Grassmannian is 
+infinite dimensional, it is a union of finite dimensional varieties. In particular any given 
+calculation is finite dimensional.
+
+\begin{remark}
+    The affine Grassmannian is an example of something called an \red{ind-scheme},
+    an object which is a filtered colimit of schemes where the 
+    transition maps are closed embeddings. Suppose you wanted to tell me
+    a vector bundle on an ind-scheme. Morally this should be a vector
+    bundle on each of the finite dimensional pieces, which is compatible
+    with the transition maps. 
+\end{remark}
+
+\section{Deformation retract of the loop group}
+Consider $K$ a maximal compact subgroup of a complex reductive group $G$ (i.e. $U(n)$ in $GL(n,\C)$).
+Consider $\Omega K$ the space of smooth loops in $K$ based at the identity. \begin{align}
+    \Omega K = \Map_{\cdot}(S^1,K)
+\end{align} which is a homogenous space for the space of free loops $\Map(S^1,K)$ by the action of
+the constant loops. The loop space $\Omega K$ is a topological group with the pointwise multiplication
+of loops. It has an action of $K$ by conjugation.
+
+\begin{remark}
+    Allen says although it is both a group and a space, in this context we want to largely
+    think about it as a space.
+\end{remark}
+
+One can try to apply Morse theory to $\Omega K$ to try to understand its topology. This is 
+in fact what Bott did and let to the discovery of Morse-Bott theory. Recall for any 
+Riemannian manifold $M$, there is a map $LM \to \R_{\geq 0}$ given by \begin{align}
+    \gamma \mapsto \int_{S^1} \|\gamma'(t)\|^2 dt
+\end{align} called the \red{action functional}. This is a Morse function on $LM$ for generic
+choice of metric. Recall in traditional Morse theory, isolated nondegenerate critical points
+yield a cell decomposition of the manifold. However, when we apply this recipe to $\Omega K$ 
+we find that \begin{align}
+    (\Omega K)_{\text{crit}} = \Hom_{\text{gp}}(S^1,K)
+\end{align} Moreover given such a group homomorphism, one can conjugate it by $K$ to lie in $T$
+the maximal torus of $K$. Thus we see that the critical points of the action functional are
+\begin{align*}
+    \Hom_{\text{gp}}(S^1,K) = \coprod_{\text{dominant coweights $\lambda$}} K \cdot t^\lambda
+\end{align*} where $t^\lambda$ is the loop corresponding to the coweight $\lambda$ and 
+moreover one can show that \begin{align*}
+    K \cdot t^\lambda \cong G/P(\lambda)
+\end{align*} so in particular we see that the critical points are not isolated.
+Hence we need to use Morse-Bott theory to understand the topology of $\Omega K$.
+
+\section{Morse Bott theory}
+The point of Morse-Bott theory is that when the critical points of a Morse function are not isolated,
+but rather form a submanifold, one can still say something about the topology of the manifold.
+In particular we get a decomposition of the manifold into vector bundles over the critical submanifolds.
+
+\begin{example}
+    Consider the torus sitting as a donut on the table. The height function now has two critical circles
+    which are the top and bottom of the donut. Then we see that the torus admits a decomposition as line bundles 
+    over those two circles with the fibers identified appropriately.
+\end{example}
+
+\begin{example}
+    Consider the torus balancing on its side, the standard height function has 4 critical points and indeed 
+    recovers the decomposition of the torus as a cell complex. Consider if we 
+    pinch the top of the torus toward infinity. Then when we run the Morse machine, we only get $0$-cell,
+    and $2$ 1-cells. The point is we only get something homotopic to that which we started with.
+\end{example}
+Running the machine, we get that the Morse-Bott cell of the critical submanifold $K \cdot t^\lambda$ is equal to \begin{align*}
+    G(\C((t)))\cdot t^\lambda \twoheadrightarrow G\cdot t^\lambda \cong G/P(\lambda)
+\end{align*} The closure of this guy we will call the \red{affine Schubert cell} $\Gr^\lambda$.
+\begin{center}
+    \includegraphics[scale = .1]{/Users/songye03/Desktop/math_tex/img/IMG_2047.JPG}
+\end{center}
+In this way we see that the affine Grassmannian $\Gr_G$ is a deformation retract of the loop group $\Omega K$.
+
+\hfill
+
+We can draw the various $G/P(\lambda)$ with the jellyfish picture, where downwards is about which 
+cells are in the closure of which other cells.
+
+\section{Langlands dual group}
+As in the finite dimensional case there is a stratificaaiton \begin{align*}
+    \Gr^\lambda = \coprod_{\mu \leq \lambda} \Gr^\mu_o
+\end{align*} dominance order. Studying the $T$-fixed points we find that \begin{align*}
+    \text{weights in $V_\lambda$ for $\prescript{L}{}{G}$}= (\Gr^\lambda)^T = \coprod_{\mu \leq \lambda} \big((\Gr^\mu_o)^T = W\cdot t^\mu\big)
+\end{align*}
+
+\begin{example}
+    For representations of $\SL(3)$ we have a dominant weight $\lambda$. Apply the Weyl group, take 
+    the convex hull, and all of the weights in the interior are of course weights of the representation.
+    What the above is saying is that the weights of the interior are those corresponding to the Weyl group 
+    orbits through all of the $\mu$ for which $\mu \leq \lambda$ (in the Langlands dual group setting).
+\end{example}
+
+However one thing that one also wants to know is the dimension of the weight space $\mu$. For that we have the theorem: \begin{theorem}
+    [Mirkovic-Vilonen] The dimension of the weight space $\mu$ is equal 
+    to the number of components of the attracting set of $t^\mu$ in $\Gr^\lambda$.
+\end{theorem}
+
+\begin{example}
+    Take the pyramid of Gaza and tilt it on one of its base points, so that the square base is 
+    facing away from you. \red{??}
+\end{example}
+\section{Things that have to be learned}
+\begin{enumerate}
+    \item Morse theory and Morse-Bott theory
+    \item Affine Grassmannian
+\end{enumerate}
+\end{document}

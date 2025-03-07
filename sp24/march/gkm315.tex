@@ -1,0 +1,101 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\begin{document}
+Songyu Ye
+
+These are notes from my meeting with Allen on March 15.
+
+
+\section{Toric origami manifolds}
+
+Today I asked Allen to weigh in on the project that I am working on with Tara.
+In particular we talked about $T^2$ acting on $S^4$. 
+
+\subsection{Equivariantly formal}
+
+\begin{center}
+    \includegraphics[scale = .38]{/Users/songye03/Desktop/math_tex/img/allen-conjecture.png}
+\end{center}
+
+Equivariantly formal is about when the cohomology of a fiber bundle is not the tensor product of the cohomology of the fiber and the base (i.e.
+the Kunneth theorem is true).
+
+\hfill 
+
+The counterexample is the Hopf fibration. In particular we compared the Betti numbers of $S^2\times S^1$ and $S^3$ and
+we found that $1,1,1,1$ is not the same as $1,0,0,1$. He explained that in the \red{Serre spectral sequence}, the middle cohomology groups kill each other.
+
+\hfill 
+
+\red{Leray Hirsch} says that when the map upstairs induces a surjection on cohomology then the Kunneth theorem is true. 
+This is the case toric varieties for example, is because we are thinking about subvarieties
+and we can find a representative which is T invariant by taking limits of the varieties.
+
+\begin{example}
+    We considered $S^1$ acting on $\C\P^1$ and the injection on equivariant cohomology to the two fixed points.
+    Allen said he was maybe worried about the orientation changing since the folding
+    hypersurface seperates the north and south poles. We decided that it was ultimately not worth worrying about.
+\end{example}
+
+\begin{example}
+    Cohomology of $T^2$ on $S^4$. In particular if we let $a,b$ denote the classes of degree
+    $2$ and $c,d$ denote the classes of degree $4$, then the relations are $ab = c + d$ and $cd = 0$.
+    Note that when one sets $a = b = 0$, then this is precisely the ordinary cohomology of $S^4$.
+
+    \hfill
+
+    As a module over $H_T^*(pt)$, we can find generators and relations as follows. The moment graph
+    tells us that we are considering pairs of polynomials $(f,g)\in \Z[x,y]$ such that $xy\vert f-g$.
+
+    \hfill
+
+    This can be presented as a module over the polynomial ring $\Z[x,y]$ with generators \begin{align*}
+        x &= (x,x) \\
+        y &= (y,y) \\
+        c &= (xy,0)
+    \end{align*} and the relation is precisely $c(xy-c) = 0$. Then setting $x = y = 0$ gives us the ordinary cohomology of $S^4$.
+\end{example}
+
+We want to make sense of Danilov's theorem for these origami manifolds. In particular Tara and Allen seem
+to believe that the following statement is true:
+
+\begin{conjecture}
+    The cohomology of a toric origami manifold can be presentated as follows. There is a 
+    free generator for each face of the moment polytope (of all dimensions) and the relations are given by the
+    components of the intersections of the faces.
+\end{conjecture}
+
+We started talking about basic elements in posets.
+The thing about our situation as opposed to the study of 
+toric varieties is that the poset isn't simplicial, i.e. edges are not uniquely determined by their faces.
+
+\section{Representation theory}
+In the last five minutes, Allen insisted that we talk about representation theory.
+Recall we are considering the following setup of $\bar{G}$.
+
+\begin{center}
+    \includegraphics[scale = .4]{/Users/songye03/Desktop/math_tex/img/reptheory.png}
+\end{center}
+
+Recall the above decomposition of $H^0(\bar{G},\cL_\lambda)$ into representations of $G\times G$.
+
+We had the ring on the board.
+We need to write down the kernel of the surjection from the Sym to the elements in degree 1, i.e fundamental weights.
+This in turn will us the equations in affine space which cut out the image of the embedding of $\bar{G}$.
+
+\hfill
+
+$2\mu = 2222220000$
+$\mu + \lambda = 22211111$
+and the operation we are thinking about is subtract from $i$, add to $i+1$. \red{Composing these allows us 
+to have the most general operation of subtracting from $i$ and adding to $j$ for $i < j$.}
+
+\end{document}
+

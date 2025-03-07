@@ -1,0 +1,97 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\begin{document}
+Songyu Ye
+
+\today
+
+\hfill
+
+This is what Allen and I talked about on 2/16/2024.
+
+\hfill
+
+There is the work of Kogan and Miller which was later followed up by the work of Miller 
+and Sturmfels. In general, we are continuing to think about the story of 
+toric generations of wonderful compactifications of semisimple adjoint groups.
+
+\section{Flag variety}
+
+We need to start with previous work on the degeneration
+of the flag variety to the toric variety corresponding to the Gelfand-Cetlin polytope.
+
+
+\subsection{Grobner}
+The reference for this section is Miller and Sturmfels 2005.
+
+\hfill
+
+SAGBI stands for subalgebra analogue to Gröbner bases for ideals. Recall 
+the associated graded construction which one can apply to a ring with a given filtration.
+If we have \begin{align*}
+    R = I_0 \supset I_1 \supset \cdots
+\end{align*} then we can form the associated graded ring \begin{align*}
+    \gr R = \bigoplus_{i \geq 0} I_i/I_{i+1}.
+\end{align*} and if $I$ is a homogeneous ideal in a graded 
+polynomial ring, then $\gr I\subset \gr R$
+is an ideal. The point is that in general, when one applies the construction 
+to a prime ideal in a polynomial ring, $\gr I$ is generally prime. 
+\subsection{SAGBI}
+One way to think about fixing the story is to consider instead subalgebras
+of our polynomial ring. Now we are thinking about when $\gr I$ is Noetherian.
+
+\hfill
+
+We don't have many examples of when this happens, but we do have an important one
+which is in the story of the flag variety.
+
+\subsection{Flag variety}
+We have the following diagram \begin{center}
+    \begin{tikzcd}
+        \GL_n \arrow[d,"/B"] & \rightarrow & M_n \arrow[d,"/B"]\\
+        \GL_n/B & \GL_n/N \arrow[l, "/T"] \arrow[r, "i"] & M_n//N := \Spec \C[x_{ij}]^{1\times N}
+    \end{tikzcd}
+\end{center}
+The first fundamental theorem of invariant theory tells us what 
+$\C[x_{ij}]^{1\times N}$ is. In particular we are consider rightward column operations except we are not 
+allowed to do the operation of adding a multiple of one column to another or scale columns.
+
+Thus, for $\lambda \in \binom{[n]}{k}$, we have the invariant \begin{align*}
+    p_\lambda = \det(\text{first $k$ columns and $\lambda$ rows})
+\end{align*}
+The first fundamental theorem tells us that these $p_\lambda$ in fact generate all of the
+invariants. There are quadratic relations which are called the Plucker relations.
+
+Then we have a degeneration which takes $p_\lambda$ to its diagonal term, and this turns out
+to be a toric degeneration. The relations in the degernation can be written very nicely \begin{align*}
+    p_\lambda p_\mu - p_{\lambda \cup \mu}p_{\lambda \cap \mu} = 0
+\end{align*}
+
+Allen remarks that the key ingredient in this story 
+is the $T$-bundle $G/B \to G/N$. This is in fact a product of circle bundles, 
+from the generators of the nef cone. Now we are ready to think about the
+wonderful compactification.
+\section{Wonderful compactification}
+The anagalous thing we should think about is the bundle \begin{align*}
+    \bigoplus \text{line bundles corresponding to edges of the nef cone} \to \bar G
+\end{align*}
+\begin{center}
+    \includegraphics[scale = .5]{/Users/songye03/Desktop/math_tex/img/Screenshot 2024-02-16 at 5.53.52 PM.png}
+\end{center}
+
+\section{References}
+\begin{itemize}
+    \item THE TOTAL COORDINATE RING OF A WONDERFUL VARIETY
+    MICHEL BRION
+    \item RIGIDITY OF WONDERFUL GROUP COMPACTIFICATIONS UNDER
+    FANO DEFORMATION
+    BAOHUA FU AND QIFENG LI
+\end{itemize}
+\end{document}

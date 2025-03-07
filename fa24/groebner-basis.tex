@@ -1,0 +1,1062 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+% define problem environment
+\usepackage{xcolor} % For text color
+\usepackage{amsthm} % For theorem-like environments
+
+\newcounter{algorithm}
+\newenvironment{algorithm}[1][Algorithm]{%
+    \refstepcounter{algorithm}% Increment the algorithm counter
+    \noindent\textbf{\color{orange}#1~\thealgorithm:}%
+}{}
+
+\newcounter{problem}
+\newenvironment{problem}[1][Problem]{%
+	\refstepcounter{problem}% Increment the problem counter
+	\noindent\textbf{\color{magenta}#1~\theproblem: }%
+}{}
+
+
+% Define the Solution environment
+\newenvironment{solution}
+    {\renewcommand{\qedsymbol}{}\begin{proof}[Solution]}
+    {\end{proof}}
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Computational Algebra}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+	We prepare notes about Groebner basis and their applications. We will use Macaulay2 to solve problems related to ideals, varieties, and Groebner bases. These notes are based on the book `Ideals, Varieties, and Algorithms' by Cox, Little, and O'Shea, and were prepared for the final exam of Math 4370 at Cornell University, taught by Professor Rachel Webb.
+\end{abstract}
+
+\tableofcontents
+
+\section{Groebner bases}
+Let $k$ be an algebraically closed field.
+We have the following result about Gr\"obner bases, essentially because of their property of unique division.
+
+\begin{proposition}
+	Fix a monomial ordering on \( k[x_1, \dots, x_n] \) and let \( I \subseteq k[x_1, \dots, x_n] \) be an ideal.
+
+	\begin{enumerate}
+		\item Every \( f \in k[x_1, \dots, x_n] \) is congruent modulo \( I \) to a unique polynomial \( r \) which is a \( k \)-linear combination of the monomials in the complement of \(\langle \mathrm{LT}(I) \rangle\).
+		\item The elements of \( \{x^\alpha \mid x^\alpha \notin \langle \mathrm{LT}(I) \rangle \} \) are ``linearly independent modulo \( I \),'' i.e., if we have
+		      \[
+			      \sum_\alpha c_\alpha x^\alpha \equiv 0 \mod I,
+		      \]
+		      where the \( x^\alpha \) are all in the complement of \( \langle \mathrm{LT}(I) \rangle \), then \( c_\alpha = 0 \) for all \( \alpha \).
+	\end{enumerate}
+\end{proposition}
+
+In particular this implies that we can calculate $\dim R/I$ by counting the number of monomials not in $\langle \mathrm{LT}(I) \rangle$.
+\begin{theorem}[Finiteness Theorem]
+	Let \( I \subseteq k[x_1, \dots, x_n] \) be an ideal and fix a monomial ordering on \( k[x_1, \dots, x_n] \). The following are equivalent:
+	\begin{enumerate}
+		\item[(i)] For each \( i \), \( 1 \leq i \leq n \), there is some \( m_i \geq 0 \) such that \( x_i^{m_i} \in \langle \mathrm{LT}(I) \rangle \).
+		\item[(ii)] Let \( G \) be a Gr\"obner basis for \( I \). Then for each \( i \), \( 1 \leq i \leq n \), there is some \( m_i \geq 0 \) such that \( x_i^{m_i} = \mathrm{LM}(g) \) for some \( g \in G \).
+		\item[(iii)] The set \( \{x^\alpha \mid x^\alpha \notin \langle \mathrm{LT}(I) \rangle \} \) is finite.
+		\item[(iv)] The \( k \)-vector space \( k[x_1, \dots, x_n]/I \) is finite-dimensional.
+		\item[(v)] \( V(I) \subseteq k^n \) is a finite set.
+	\end{enumerate}
+
+\end{theorem}
+\subsection{Ideal membership}
+The existence of a Gr\"obner basis also allows us to determine whether a polynomial is in an ideal.
+
+\begin{algorithm}[Algorithm for ideal membership]
+
+	\textbf{Input:} An ideal \( I \subseteq k[x_1, \ldots, x_n] \), a polynomial \( f \in k[x_1, \ldots, x_n] \).
+
+	\textbf{Output:} Determine whether \( f \in I \).
+
+	\textbf{Steps:}
+	\begin{enumerate}
+		\item Compute a Gr\"obner basis \( G \) for \( I \).
+		\item Use the division algorithm to divide \( f \) by \( G \).
+		\item If the remainder is zero, then \( f \in I \). Otherwise, \( f \notin I \).
+	\end{enumerate}
+\end{algorithm}
+
+\begin{problem}
+Is $x^{11} - x$ in the ideal $I = \langle xy^3 - x^2,x^3y^2-y \rangle$?
+\end{problem}
+
+\begin{solution}
+
+	We compute a Gr\"obner basis for the ideal given using the grevlex order:
+	\begin{verbatim}
+        R = QQ[x,y,z]
+        G = gens gb ideal(x*y^3 - x^2, x^3*y^2 - y)
+        \end{verbatim}
+
+	The Gr\"obner basis found by the computation is:
+	\[
+		G = \{ y^4 - x^2y, \, xy^3 - x^2, \, x^4 - y^2, \, x^3y^2 - y \}.
+	\]
+
+	Then we use the division algorithm to divide $x^{11} - x$ by the Gr\"obner basis:
+	\begin{verbatim}
+            divisionAlgo(x^11 - x, flatten entries G)
+        \end{verbatim}
+
+	The output of this computation shows that the remainder is $y^3 - x$, which is not zero. Since the remainder is nonzero, this demonstrates that $x^{11} - x$ is \textbf{not} in the ideal $I$.
+
+	\paragraph{Answer:} No.
+\end{solution}
+
+\section{Elimination theory}
+Recall these theorems from the book:
+
+\begin{theorem}[The Elimination Theorem]
+	Let \( I \subseteq k[x_1, \ldots, x_n] \) be an ideal and let \( G \) be a Gr\"obner basis of \( I \) with respect to lexicographic order where \( x_1 > x_2 > \cdots > x_n \). Then, for every \( 0 \leq l \leq n \), the set
+	\[
+		G_l = G \cap k[x_{l+1}, \ldots, x_n]
+	\]
+	is a Gr\"obner basis of the \( l \)-th elimination ideal \( I_l \).
+\end{theorem}
+
+\begin{proof}
+	Fix \( l \) between \( 0 \) and \( n \). Since \( G_l \subseteq I_l \) by construction, it suffices to show that
+	\[
+		\langle \mathrm{LT}(I_l) \rangle = \langle \mathrm{LT}(G_l) \rangle
+	\]
+	by the definition of Gr\"obner basis. One inclusion is obvious, and to prove the other inclusion \( \langle \mathrm{LT}(I_l) \rangle \subseteq \langle \mathrm{LT}(G_l) \rangle \), we need only to show that the leading term \( \mathrm{LT}(f) \), for an arbitrary \( f \in I_l \), is divisible by \( \mathrm{LT}(g) \) for some \( g \in G_l \). To prove this, note that \( f \) also lies in \( I \), which tells us that \( \mathrm{LT}(f) \) is divisible by \( \mathrm{LT}(g) \) for some \( g \in G \) since \( G \) is a Gr\"obner basis of \( I \). Since \( f \in I_l \), this means that \( \mathrm{LT}(g) \) involves only the variables \( x_{l+1}, \ldots, x_n \). Now comes the crucial observation: since we are using lexicographic order with \( x_1 > \cdots > x_n \), any monomial involving \( x_1, \ldots, x_l \) is greater than all monomials in \( k[x_{l+1}, \ldots, x_n] \), so that \( \mathrm{LT}(g) \in k[x_{l+1}, \ldots, x_n] \) implies \( g \in G_l \). This shows that \( g \in G_l \), and the theorem is proved.
+\end{proof}
+
+\begin{theorem}[The Extension Theorem]
+	Let \( I = \langle f_1, \ldots, f_s \rangle \subseteq \mathbb{C}[x_1, \ldots, x_n] \) and let \( I_1 \) be the first elimination ideal of \( I \). For each \( 1 \leq i \leq s \), write \( f_i \) in the form
+	\[
+		f_i = c_i(x_2, \ldots, x_n) x_1^{N_i} + \text{terms in which } x_1 \text{ has degree } < N_i,
+	\]
+	where \( N_i \geq 0 \) and \( c_i \in \mathbb{C}[x_2, \ldots, x_n] \) is nonzero. Suppose that we have a partial solution \( (a_2, \ldots, a_n) \in V(I_1) \). If \( (a_2, \ldots, a_n) \notin V(c_1, \ldots, c_s) \), then there exists \( a_1 \in \mathbb{C} \) such that \( (a_1, a_2, \ldots, a_n) \in V(I) \).
+\end{theorem}
+
+\begin{theorem}[The Closure Theorem]
+	Let \( V = V(f_1, \ldots, f_s) \subseteq \mathbb{C}^n \) and let \( I_l \) be the \( l \)-th elimination ideal of \( \langle f_1, \ldots, f_s \rangle \). Then:
+	\begin{enumerate}
+		\item \( V(I_l) \) is the smallest affine variety containing \( \pi_l(V) \subseteq \mathbb{C}^{n-l} \).
+		\item When \( V \neq \emptyset \), there is an affine variety \( W \subseteq V(I_l) \) such that \( V(I_l) \setminus W \subseteq \pi_l(V) \).
+	\end{enumerate}
+\end{theorem}
+
+\begin{problem}
+Solve the following system of polynomial equations using the theory of elimination ideals:
+\[
+	x^2 + 2y^2 = 2, \quad x^2 + xy + y^2 = 2.
+\]
+\end{problem}
+
+\begin{solution}
+	We create a polynomial ring with the lex order:
+	\begin{verbatim}
+    R = QQ[x, y, MonomialOrder => Lex]
+    \end{verbatim}
+	so that we can compute elimination ideals. We next compute a Gr\"obner basis:
+	\begin{verbatim}
+    gens gb ideal(x^2 + 2*y^2 - 2, x^2 + x*y + y^2 - 2)
+    \end{verbatim}
+
+	The output is:
+	\[
+		3y^3 - 2y, \quad x^2y - y^2, \quad x^2 + 2y^2 - 2.
+	\]
+
+	It follows that the first elimination ideal (where we eliminate \(x\)) is generated by \(3y^3 - 2y\). Solving the equation \(3y^3 - 2y = 0\) yields solutions:
+	\[
+		y = 0, \quad y = \sqrt{\frac{2}{3}}, \quad y = -\sqrt{\frac{2}{3}}.
+	\]
+
+	\begin{itemize}
+		\item If \(y = 0\), the first two polynomials in the Gr\"obner basis vanish, and the last tells us that \(x = \sqrt{2}\) or \(x = -\sqrt{2}\).
+		\item If \(y = \sqrt{\frac{2}{3}}\) or \(y = -\sqrt{\frac{2}{3}}\), the second equation in the Gr\"obner basis tells us that \(x = y\). One can check that this is also consistent with the last equation.
+	\end{itemize}
+
+	Therefore, the solutions are:
+	\[
+		(\sqrt{2}, 0), \quad (-\sqrt{2}, 0), \quad \left(\sqrt{\frac{2}{3}}, \sqrt{\frac{2}{3}}\right), \quad \left(-\sqrt{\frac{2}{3}}, -\sqrt{\frac{2}{3}}\right).
+	\]
+\end{solution}
+
+\section{Families of varieties}
+\subsection{Implicit and parametric representations}
+\begin{theorem}[Polynomial Implicitization]
+	If \( k \) is an infinite field, let \( F : k^m \to k^n \) be the function determined by the polynomial parametrization:
+	\[
+		x_i = f_i(t_1, \ldots, t_m), \quad 1 \leq i \leq n.
+	\]
+	Let \( I \) be the ideal
+	\[
+		I = \langle x_1 - f_1, \ldots, x_n - f_n \rangle \subseteq k[t_1, \ldots, t_m, x_1, \ldots, x_n],
+	\]
+	and let \( I_m = I \cap k[x_1, \ldots, x_n] \) be the \( m \)-th elimination ideal. Then \( V(I_m) \) is the smallest variety in \( k^n \) containing \( F(k^m) \).
+\end{theorem}
+
+\begin{proof}
+	By Equation (4) above and Lemma 1 of \S2, \( F(k^m) = \pi_m(V) \subseteq V(I_m) \). Thus \( V(I_m) \) is a variety containing \( F(k^m) \). To show it is the smallest, suppose that \( h \in k[x_1, \ldots, x_n] \) vanishes on \( F(k^m) \). We show that \( h \in I_m \) as follows. Divide \( h \) by \( x_1 - f_1, \ldots, x_n - f_n \) using lexicographic order with \( x_1 > \cdots > x_n > t_1 > \cdots > t_m \). This gives an equation:
+	\[
+		h(x_1, \ldots, x_n) = q_1 \cdot (x_1 - f_1) + \cdots + q_n \cdot (x_n - f_n) + r(t_1, \ldots, t_m),
+	\]
+	since \( \mathrm{LT}(x_j - f_j) = x_j \). Given any \( a = (a_1, \ldots, a_m) \in k^m \), we substitute \( t_i = a_i \) and \( x_i = f_i(a) \) into the above equation to obtain:
+	\[
+		0 = h(f_1(a), \ldots, f_n(a)) = 0 + \cdots + 0 + r(a).
+	\]
+	It follows that \( r(a) = 0 \) for all \( a \in k^m \). Since \( k \) is infinite, Proposition 5 of Chapter 1, \S1 implies that \( r(t_1, \ldots, t_m) \) is the zero polynomial. Thus we obtain:
+	\[
+		h(x_1, \ldots, x_n) = q_1 \cdot (x_1 - f_1) + \cdots + q_n \cdot (x_n - f_n) \in I \cap k[x_1, \ldots, x_n] = I_m.
+	\]
+	Now suppose that \( Z = V(h_1, \ldots, h_s) \subseteq k^n \) is a variety of \( k^n \) such that \( F(k^m) \subseteq Z \). Then each \( h_i \) vanishes on \( F(k^m) \) and hence lies in \( I_m \) by the previous paragraph. Thus \( V(I_m) \subseteq V(h_1, \ldots, h_s) = Z \). This proves that \( V(I_m) \) is the smallest variety of \( k^n \) containing \( F(k^m) \).
+\end{proof}
+\begin{algorithm}[Implicitization Algorithm for Polynomial Parametrizations]
+
+	\textbf{Input:} Polynomials \( f_1, \ldots, f_n \in k[t_1, \ldots, t_m] \) defining a map
+	\( x_i = f_i(t_1, \ldots, t_m) \) for \( 1 \leq i \leq n \).
+
+	\textbf{Output:} The smallest variety \( V(I_m) \subseteq k^n \) containing the image of the parametrization.
+
+	\textbf{Steps:}
+	\begin{enumerate}
+		\item Define the ideal:
+		      \[
+			      I = \langle x_1 - f_1, \ldots, x_n - f_n \rangle \subseteq k[t_1, \ldots, t_m, x_1, \ldots, x_n].
+		      \]
+
+		\item Choose a lexicographic monomial order such that:
+		      \[
+			      t_1 > t_2 > \cdots > t_m > x_1 > x_2 > \cdots > x_n.
+		      \]
+
+		\item Compute a Gröbner basis \( G \) for the ideal \( I \) with respect to the chosen monomial order.
+
+		\item Extract the elimination ideal:
+		      \[
+			      I_m = I \cap k[x_1, \ldots, x_n],
+		      \]
+		      by selecting the elements of \( G \) that do not involve \( t_1, \ldots, t_m \).
+
+		\item The variety \( V(I_m) \), defined by the elimination ideal \( I_m \), is the smallest variety in \( k^n \) containing the image of the parametrization \( F(k^m) \).
+	\end{enumerate}
+\end{algorithm}
+
+We have a similar result for rational parametrizations.
+
+\begin{theorem}[Rational Implicitization]
+	If \( k \) is an infinite field, let \( F : k^m \setminus W \to k^n \) be the function determined by the rational parametrization \eqref{7}. Let \( J \) be the ideal
+	\[
+		J = \langle g_1 x_1 - f_1, \dots, g_n x_n - f_n, 1 - g y \rangle \subseteq k[y, t_1, \dots, t_m, x_1, \dots, x_n],
+	\]
+	where \( g = g_1 \cdot g_2 \cdots g_n \) and \( W = V(g) \). Also let \( J_{1+m} = J \cap k[x_1, \dots, x_n] \) be the \((1+m)\)-th elimination ideal. Then \( V(J_{1+m}) \) is the smallest variety in \( k^n \) containing \( F(k^m \setminus W) \).
+\end{theorem}
+
+\begin{algorithm}[Implicitization Algorithm for Rational Parametrizations]
+
+	\textbf{Input:} Polynomials \( f_1, g_1, \ldots, f_n, g_n \in k[t_1, \ldots, t_m] \), defining a rational map
+	\( x_i = f_i / g_i \) for \( 1 \leq i \leq n \).
+
+	\textbf{Output:} The smallest variety \( V(J_{1+m}) \subseteq k^n \) containing the image of the parametrization.
+
+	\textbf{Steps:}
+	\begin{enumerate}
+		\item Introduce a new variable \( y \) and define the ideal:
+		      \[
+			      J = \langle g_1 x_1 - f_1, \ldots, g_n x_n - f_n, 1 - g y \rangle,
+		      \]
+		      where \( g = g_1 \cdots g_n \).
+
+		\item Choose a lexicographic monomial order such that:
+		      \[
+			      y > t_1 > t_2 > \cdots > t_m > x_1 > x_2 > \cdots > x_n.
+		      \]
+
+		\item Compute a Gröbner basis \( G \) for the ideal \( J \) with respect to the chosen monomial order.
+
+		\item Extract the elimination ideal:
+		      \[
+			      J_{1+m} = J \cap k[x_1, \ldots, x_n],
+		      \]
+		      by selecting the elements of \( G \) that do not involve \( y, t_1, \ldots, t_m \).
+
+		\item The variety \( V(J_{1+m}) \), defined by the elimination ideal \( J_{1+m} \), is the smallest variety in \( k^n \) containing the parametrization.
+	\end{enumerate}
+\end{algorithm}
+
+\begin{problem}
+Consider the parametric set defined by the equations:
+\[
+	x = \frac{2t}{1 + u^2 + t^2}, \quad
+	y = \frac{2tu}{1 + t^2 + u^2}, \quad
+	z = \frac{t^2 - u^2 - 1}{1 + t^2 + u^2}.
+\]
+Find equations for the smallest variety \( V \) containing the parametrized set.
+\end{problem}
+
+\begin{solution}
+	We create a polynomial ring with the variables, the parameters, and one additional parameter \( v \), making sure to put all the parameters first and use the Lex order:
+	\begin{verbatim}
+    R = QQ[u, t, v, x, y, z, MonomialOrder => Lex]
+    \end{verbatim}
+
+	Next, we compute a Gr\"obner basis for the system corresponding to the original equations after clearing denominators, plus one additional equation that guarantees the denominators will be nonzero:
+	\begin{verbatim}
+    gens gb ideal(
+        x * (1 + u^2 + t^2) - 2 * t, 
+        y * (1 + t^2 + u^2) - 2 * t * u, 
+        z * (1 + t^2 + u^2) - (t^2 - u^2 - 1), 
+        v * (1 + t^2 + u^2) - 1
+    )
+    \end{verbatim}
+
+	The output is:
+	\[
+		x^2 + y^2 + z^2 - 1, \quad
+		2xv + 2zv + x^2v + y^2v + z^2v - 1, \quad
+		2y + 2zv - t^2x + v - t^2 - x.
+	\]
+
+	This Gr\"obner basis has only one equation without any \( t, u, \) or \( v \) variables in it. This equation defines the smallest variety containing the parametrized set:
+	\[
+		\boxed{V(x^2 + y^2 + z^2 - 1)}.
+	\]
+\end{solution}
+
+\subsection{Envelopes}
+
+Suppose we have a family of plane curves given by the equation
+\begin{align*}
+	F = (x - t)^2 + (y-t^2)^2 = 4 = 0
+\end{align*} This is a family of circles centered at \((t, t^2)\) with radius 2. The envelope of this family is the curve that is tangent to each of these circles. \begin{definition}
+	The \textbf{envelope} of a family of plane curves is the variety defined by the equations \begin{align*}
+		F = 0, \quad \frac{\partial F}{\partial t} = 0
+	\end{align*}
+	where \(F\) is the equation of the family of curves.
+\end{definition}
+
+\begin{problem}
+Find an equation for the smallest variety containing the envelope of the family of plane curves given by
+\[
+	F = (x - t)^2 - y + t = 0.
+\]
+(Alternate formulation: you may be asked to find the singular points of a variety.)
+\end{problem}
+
+\begin{solution}
+	The derivative of \(F\) with respect to \(t\) is:
+	\[
+		\frac{\partial F}{\partial t} = -2x + 2t + 1.
+	\]
+	By definition of the envelope, to find the smallest variety containing it, we need to eliminate \(t\) from the equations:
+	\[
+		F = 0, \quad \frac{\partial F}{\partial t} = 0.
+	\]
+
+	To do this, we use the polynomial ring with lex order:
+	\begin{verbatim}
+    R = QQ[t, x, y, MonomialOrder => Lex]
+    \end{verbatim}
+
+	And then compute a Gr\"obner basis:
+	\begin{verbatim}
+    gens gb ideal((x - t)^2 - y + t, -2*x + 2*t + 1)
+    \end{verbatim}
+
+	The output is:
+	\[
+		4x - 4y - 1, \quad 4t - 4y + 1.
+	\]
+
+	The only element of the Gr\"obner basis that does not depend on \(t\) is:
+	\[
+		4x - 4y - 1.
+	\]
+
+	So the smallest variety containing the envelope is:
+	\[
+		y = x - \frac{1}{4}.
+	\]
+
+	\paragraph{Answer:} \(y = x - \frac{1}{4}\).
+\end{solution}
+
+
+
+\section{Radical ideals}
+\begin{definition}
+	Let \( I \) be an ideal in a commutative ring \( R \). The \textbf{radical} of \( I \), denoted \( \sqrt{I} \), is the set of all elements \( r \in R \) such that \( r^n \in I \) for some \( n \geq 1 \). We say that \( I \) is a \textbf{radical ideal} if \( I = \sqrt{I} \).
+\end{definition}
+\subsection{Big theorems}
+\begin{theorem}[Weak Nullstellensatz]
+	Let $I$ be an ideal in $k[x_1, \ldots, x_n]$. Then $I \subsetneq k[x_1, \ldots, x_n]$ if and only if $V(I) \neq \emptyset$.
+\end{theorem}
+
+\begin{proof}
+	Given $a\in k$ and $f\in k[x_1, \ldots, x_n]$, we can consider $\bar{f} = f(x_1, \ldots, x_{n-1},a )$ and the ideal $\bar I$ generated by $\bar f$ for all $f\in I$. Then one shows that if $k$ is algebraically closed and $I \in k[x_1, \ldots, x_n]$ is a proper ideal, then there
+	exists $a\in k$ such that $\bar I \neq k[x_1, \ldots, x_{n-1}]$.
+	This, by induction implies that we end up with a proper ideal of $k$ after restricting finite number of times, and therefore is equal to $\langle 0 \rangle$.
+\end{proof}
+
+\begin{theorem}[Hilbert's Nullstellensatz]
+	If $f, f_1, \ldots, f_s \in k[x_1, \ldots, x_n]$, then
+	\[
+		f \in I(V(f_1, \ldots, f_s)) \quad \text{if and only if} \quad f^m \in \langle f_1, \ldots, f_s \rangle \quad \text{for some integer } m \geq 1.
+	\]
+\end{theorem}
+
+\begin{proof}
+	Consider the ideal
+	\[
+		\tilde{I} = \langle f_1, \ldots, f_s, 1 - yf \rangle \subseteq k[x_1, \ldots, x_n, y],
+	\]
+	where $f, f_1, \ldots, f_s$ are as above. We claim that
+	\[
+		V(\tilde{I}) = \emptyset.
+	\]
+
+	To see this, let $(a_1, \ldots, a_n, a_{n+1}) \in k^{n+1}$. Either:
+	\begin{itemize}
+		\item $(a_1, \ldots, a_n)$ is a common zero of $f_1, \ldots, f_s$, or
+		\item $(a_1, \ldots, a_n)$ is not a common zero of $f_1, \ldots, f_s$.
+	\end{itemize}
+
+	In the first case, $f(a_1, \ldots, a_n) = 0$, since $f$ vanishes at any common zero of $f_1, \ldots, f_s$. Thus, the polynomial $1 - yf$ takes the value $1 - a_{n+1}f(a_1, \ldots, a_n) = 1 \neq 0$ at the point $(a_1, \ldots, a_n, a_{n+1})$. In particular, $(a_1, \ldots, a_n, a_{n+1}) \notin V(\tilde{I})$. In the second case, for some $i$, $1 \leq i \leq s$, we must have $f_i(a_1, \ldots, a_n) \neq 0$. Thinking of $f_i$ as a function of $n+1$ variables, which does not depend on the last variable, we again conclude that $(a_1, \ldots, a_n, a_{n+1}) \notin V(\tilde{I})$. Now apply the Weak Nullstellensatz to conclude that $1 \in \tilde{I}$.
+	\[
+		1 = \sum_{i=1}^s p_i(x_1, \ldots, x_n, y)f_i + q(x_1, \ldots, x_n, y)(1 - yf),
+	\]
+	for some polynomials $p_i, q \in k[x_1, \ldots, x_n, y]$. Now set $y = 1/f(x_1, \ldots, x_n)$. Then relation (2) above implies that:
+	\[
+		1 = \sum_{i=1}^s p_i(x_1, \ldots, x_n, 1/f)f_i.
+	\]
+
+	Multiply both sides of this equation by a power $f^m$, where $m$ is chosen sufficiently large to clear all the denominators. This yields:
+	\[
+		f^m = \sum_{i=1}^s A_i f_i,
+	\]
+	for some polynomials $A_i \in k[x_1, \ldots, x_n]$, which is what we had to show.
+\end{proof}
+
+Another formulation of the Nullstellensatz is the following:
+\begin{theorem}[Nullstellensatz]
+	Let $I$ be an ideal in $k[x_1, \ldots, x_n]$. Then $I(V(I)) = \sqrt{I}$.
+\end{theorem}
+In particular, there is a one-to-one correspondence between radical ideals and algebraic sets.
+
+\begin{remark}
+	There are a number of questions one can ask about computations for radical ideals. In particular, \begin{enumerate}
+		\item Radical generators: Given an ideal, how can we find a set of generators for the radical of the ideal?
+		\item Radical ideal: Given a set of generators for an ideal, how can we determine if the ideal is radical?
+		\item Radical membership: Given a radical ideal, how can we determine if a given polynomial is in the ideal?
+	\end{enumerate}
+	These answers are all known, but only the last one is in the scope of this course.
+	\red{Deeper theory about saturation and primary decomposition is required.}
+\end{remark}
+
+\subsection{Radical ideal problem}
+We have the following partial result toward this direction.
+\begin{lemma}
+	Let \(I \subset \mathbb{C}[x_1, \ldots, x_n]\) be an ideal such that \(V(I)\) is finite. If \(p_i\) is the unique generator of \(I \cap \mathbb{C}[x_i]\), define \(\overline{p}_i\) to be
+	\[
+		\overline{p}_i = \frac{p_i}{\gcd(p_i, p_i')},
+	\]
+	where \(p_i'\) is the \(x_i\)-derivative of \(p_i\). Then
+	\[
+		\sqrt{I} = I + \langle \overline{p}_1, \ldots, \overline{p}_n \rangle.
+	\]
+\end{lemma}
+
+\subsection{Radical membership problem}
+The radical membership test follows from the Hilbert Nullstellensatz.
+\begin{proposition}[Radical Membership]
+	Let $I = \langle f_1, \ldots, f_s \rangle \subseteq k[x_1, \ldots, x_n]$ be an ideal. Then $f \in \sqrt{I}$ if and only if the constant polynomial $1$ belongs to the ideal
+	\[
+		\tilde{I} = \langle f_1, \ldots, f_s, 1 - yf \rangle \subseteq k[x_1, \ldots, x_n, y],
+	\]
+	in which case $\tilde{I} = k[x_1, \ldots, x_n, y]$.
+\end{proposition}
+
+\begin{algorithm}[Radical Membership Test]
+
+	\textbf{Input:} An ideal \( I = \langle f_1, \ldots, f_s \rangle \subseteq k[x_1, \ldots, x_n] \) and a polynomial \( f \in k[x_1, \ldots, x_n] \).
+
+	\textbf{Output:} Determine whether \( f \in \sqrt{I} \) (i.e., whether \( f^m \in I \) for some \( m \geq 1 \)).
+
+	\textbf{Steps:}
+	\begin{enumerate}
+		\item Extend the ring \( k[x_1, \ldots, x_n] \) by adding a new variable \( y \).
+
+		\item Define the ideal:
+		      \[
+			      \tilde{I} = \langle f_1, \ldots, f_s, 1 - yf \rangle \subseteq k[x_1, \ldots, x_n, y].
+		      \]
+
+		\item Compute a Gröbner basis \( G \) for \( \tilde{I} \) with respect to a lexicographic order where \( y \) is greater than all \( x_i \) (i.e., \( y > x_1 > x_2 > \cdots > x_n \)).
+
+		\item Check if \( 1 \) is in the Gröbner basis \( G \):
+		      \begin{itemize}
+			      \item If \( 1 \in G \), then \( f \in \sqrt{I} \).
+			      \item Otherwise, \( f \notin \sqrt{I} \).
+		      \end{itemize}
+	\end{enumerate}
+
+\end{algorithm}
+
+\begin{problem}
+Is $x^{11} - x$ in the radical of the ideal $I = \langle xy^3 - x^2,x^3y^2-y \rangle$?
+\end{problem}
+
+\begin{solution}
+	We create a polynomial ring with an extra variable \( t \):
+	\begin{verbatim}
+    R = QQ[x, y, z, t]
+    \end{verbatim}
+
+	Then we compute a Gr\"obner basis for the ideal generated by \( I \), plus an additional equation:
+	\begin{verbatim}
+    G = gens gb ideal(x*y^3 - x^2, x^3*y^2 - y, (x^11 - x)*t - 1)
+    \end{verbatim}
+
+	The output of this computation shows that the answer is \( (1) \). This means that the ideal is the whole polynomial ring, and therefore \( x^{11} - x \) is in the radical of \( I \).
+
+	\paragraph{Answer:} Yes.
+\end{solution}
+
+\section{Product and intersection of ideals}
+\begin{itemize}
+	\item The product of two ideals \( I \) and \( J \) is the ideal generated by all products of elements of \( I \) and \( J \).
+	\item The intersection of two ideals \( I \) and \( J \) is the ideal generated by all elements that are in both \( I \) and \( J \).
+	\item We always have \( IJ \subseteq I \cap J \).
+\end{itemize}
+
+\begin{theorem}
+	Let \( I, J \) be ideals in \( k[x_1, \ldots, x_n] \). Then
+	\[
+		I \cap J = (tI + (1 - t)J) \cap k[x_1, \ldots, x_n].
+	\]
+\end{theorem}
+
+\begin{proof}
+	Suppose \( f \in I \cap J \). Since \( f \in I \), we have \( t \cdot f \in tI \). Similarly, \( f \in J \) implies \( (1 - t) \cdot f \in (1 - t)J \). Thus, \( f = t \cdot f + (1 - t) \cdot f \in tI + (1 - t)J \).  Conversely take \( f \in (tI + (1 - t)J) \cap k[x_1, \ldots, x_n] \). Then \( f(x) = g(x, t) + h(x, t) \), where \( g(x, t) \in tI \) and \( h(x, t) \in (1 - t)J \). First, set \( t = 0 \). Since every element of \( tI \) is a multiple of \( t \), we have \( g(x, 0) = 0 \). Thus, \( f(x) = h(x, 0) \) and hence \( f(x) \in J \). The same argument above shows that \( f(x) \in I \). Therefore, \( f \in I \cap J \), and this completes the proof.
+\end{proof}
+
+\begin{algorithm}[Algorithm for Computing Intersections of Ideals]
+
+	\textbf{Input:} Ideals \( I = \langle f_1, \ldots, f_r \rangle \) and \( J = \langle g_1, \ldots, g_s \rangle \) in \( k[x_1, \ldots, x_n] \).
+
+	\textbf{Output:} A Gröbner basis of \( I \cap J \).
+
+	\textbf{Steps:}
+	\begin{enumerate}
+		\item Define the ideal:
+		      \[
+			      K = \langle tf_1, \ldots, tf_r, (1 - t)g_1, \ldots, (1 - t)g_s \rangle \subseteq k[x_1, \ldots, x_n, t],
+		      \]
+		      where \( t \) is an auxiliary variable.
+
+		\item Choose a lexicographic monomial order such that:
+		      \[
+			      t > x_1 > x_2 > \cdots > x_n.
+		      \]
+
+		\item Compute a Gröbner basis \( G \) for the ideal \( K \) with respect to the chosen monomial order.
+
+		\item Extract the elements of \( G \) that do not involve the variable \( t \). These elements will form a Gröbner basis for \( I \cap J \).
+
+		\item Return the Gröbner basis of \( I \cap J \).
+	\end{enumerate}
+
+\end{algorithm}
+
+\begin{problem}
+Define polynomials \( f = x^2y \) and \( g = xy^2 \). Compute:
+\begin{enumerate}
+	\item[(a)] The ideal \( \langle f \rangle \cap \langle g \rangle \).
+	\item[(b)] The least common multiple of \( f \) and \( g \).
+	\item[(c)] The greatest common divisor of \( f \) and \( g \).
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	The intersection will be the first elimination ideal of \( \langle tf, (1-t)g \rangle \), where the variable \( t \) is greatest. We compute a Gr\"obner basis:
+	\begin{verbatim}
+    R = QQ[t, x, y, MonomialOrder => Lex]
+    gens gb ideal(t*x^2*y, (1-t)*x*y^2)
+    \end{verbatim}
+
+	The output is:
+	\[
+		x^2y^2, \quad txy^2 - x^2y^2, \quad tx^2y^2.
+	\]
+
+	The only term of the answer that does not depend on \( t \) is \( x^2y^2 \). Therefore:
+	\begin{itemize}
+		\item The intersection of \( \langle f \rangle \) and \( \langle g \rangle \) is \( \langle x^2y^2 \rangle \).
+		\item The least common multiple (LCM) is the generator of the intersection of \( \langle f \rangle \) and \( \langle g \rangle \), so the LCM is \( x^2y^2 \).
+		\item The greatest common divisor (GCD) is the product of the two polynomials, divided by the LCM, so the GCD is \( xy \).
+	\end{itemize}
+\end{solution}
+
+%
+\section{Graph algorithms and integer programming}
+\subsection{Chromatic number}
+
+\begin{theorem}
+	Let \(G\) be a graph with \(n\) vertices, let \(f_G \in \mathbb{C}[x_1, \ldots, x_n]\) be the graph polynomial
+	\begin{align*}
+		f_G = \prod_{(i, j) \in E} (x_i - x_j),
+	\end{align*} and let
+	\begin{align*}
+		I_k = \langle x_1^k - 1, \ldots, x_n^k - 1 \rangle.
+	\end{align*}
+	Then \(G\) is \(k\)-colorable if and only if \(f_G \notin I_k\).
+\end{theorem}
+
+\begin{proof}
+	If \(f_G \not\in I_k\), that means there is an assignment of \(k\)-th roots of unity to \(x_1, x_2, \ldots, x_n\) such that no edge \((i, j) \in E\) has \(x_i = x_j\). Thus, \(G\) is \(k\)-colorable. Conversely, if \(G\) is \(k\)-colorable, then there is an assignment of \(k\)-th roots of unity to \(x_1, x_2, \ldots, x_n\) such that no edge \((i, j) \in E\) has \(x_i = x_j\). Thus, \(f_G \not\in I_k\).
+\end{proof}
+
+
+
+\begin{problem}
+Let \(G\) be a graph with \(n\) vertices, let \(f_G \in \mathbb{C}[x_1, \ldots, x_n]\) be the graph polynomial, and let \begin{align*}
+	I_k = \langle x_1^k - 1, \ldots, x_n^k - 1 \rangle.
+\end{align*}
+
+\begin{enumerate}
+	\item Show that the number of ways to color \(G\) with \(k\) colors, where two vertices of the same color \textbf{ARE allowed} to be adjacent, is equal to the number of points in \(V(I)\), and that this number is equal to \(n^k\).
+	\item Show that the number of ways to color \(G\) with \(k\) colors, where two vertices of the same color \textbf{ARE NOT allowed} to be adjacent, is equal to the number of points in:
+	      \[
+		      V(I + \langle f_G \cdot t - 1 \rangle) \quad \text{in } \mathbb{A}_{\mathbb{C}}^{n+1}.
+	      \]
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}
+		\item Both sets correspond to picking a root of unity freely at each vertex, there are $n^k$ such many ways.
+		\item Combinatorially, this corresponds to picking a root of unity freely at each vertex, and then checking that no two adjacent vertices have the same color. This is equivalent to checking that $f_G \cdot t - 1$ is not in $I_k$. Thus, the number of ways to color $G$ with $k$ colors is the number of points in $V(I + \ideal{f_G \cdot t - 1})$.
+	\end{enumerate}
+\end{solution}
+
+\subsection{Minimal vertex cover}
+
+\begin{problem}
+Let \(G\) be a graph and let \(J\) be its cover ideal. That is \begin{align*}
+	J = \bigcap_{\{i, j\} \in E} \langle x_i, x_j \rangle.
+\end{align*}
+
+\begin{enumerate}
+	\item Show that \(J\) is a monomial ideal and its generators are in bijection with vertex covers.
+	\item Use the method in part (1) to find all the vertex covers of the Moser spindle (the graph in A27). Use Macaulay2 for all computer algebra computations.
+
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}
+		\item $J$ is the intersection of a bunch of monomial ideals. To show that its generators are in bijection with vertex covers, we note that the generators of $J$ are the monomials corresponding to the vertices in the vertex cover. In particular, each edge \(\{x_i, x_j\}\) requires at least one of \(x_i\) or \(x_j\) to be in a vertex cover.
+		      \begin{itemize}
+			      \item The ideal \(\langle x_i, x_j \rangle\) corresponds to this requirement: one of these two variables must be in the vertex cover.
+			      \item Taking the intersection over all edges ensures that all edges are covered, giving the cover ideal.
+		      \end{itemize}
+		\item We find that the vertex covers of the Moser spindle are as follows.
+		      The ideal in question can be generated by the following monomials: \begin{align*}
+			      \langle x_2 x_4 x_6 x_7, x_1 x_3 x_5 x_7, x_1 x_2 x_4 x_6, x_2 x_3 x_4 x_5 x_7, x_1 x_3 x_4 x_5 x_6 \rangle
+		      \end{align*} so there are $5$ vertex covers corresponding to the generators of the ideal.
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+Consider the pentagon graph with only the boundary edges. Find the minimal vertex covers of this graph. Find the maximal independent sets of this graph (recall that the complement of an independent set is a vertex cover and vice versa).
+\end{problem}
+
+\begin{solution}
+	We create a polynomial ring with one variable for each vertex:
+	\[
+		R = \mathbb{Q}[a, b, c, d, e]
+	\]
+	Then, we create the cover ideal by intersecting the ideals corresponding to each edge and compute a Gröbner basis:
+	\[
+		J = \text{intersect}(\text{ideal}(a, b), \text{ideal}(b, c), \text{ideal}(c, d), \text{ideal}(d, e), \text{ideal}(e, a)).
+	\]
+
+	The Gröbner basis computation is performed using the following Macaulay2 code:
+	\begin{verbatim}
+R = QQ[a, b, c, d, e]
+J = intersect(ideal(a, b), ideal(b, c), ideal(c, d),
+ideal(d, e), ideal(e, a))
+gens gb J
+\end{verbatim}
+
+	The output of the Gröbner basis computation is:
+	\[
+		\text{gens gb } J = \{b \cdot d \cdot e, \, b \cdot c \cdot e, \, a \cdot c \cdot e, \, a \cdot c \cdot d, \, a \cdot b \cdot d\}.
+	\]
+
+	Thus, there are five minimal vertex covers:
+	\[
+		\text{ANSWER: } \{b, d, e\}, \, \{b, c, e\}, \, \{a, c, e\}, \, \{a, c, d\}, \, \{a, b, d\}.
+	\]
+\end{solution}
+
+\begin{problem}
+A summer camp hires instructors. Each class needs both instructors present to run. For each of the following questions, explain how the answer is either the chromatic number, the size of a minimal vertex cover, or the size of a maximal independent set in an appropriate graph.
+
+\begin{enumerate}
+	\item Safety regulations prohibit any instructor from teaching more than one class at the camp (due to fatigue). What is the maximal number of classes the camp can offer?
+	\item Regulations change and instructors are allowed to teach any number of classes. Given that no instructor can teach two different classes at the same time, what is the minimum number of time slots needed for the camp to offer all six classes?
+	\item The camp wants to distribute radios to a subset of the instructors so that each class will have at least one radio present (in case there is a need for emergency communications). What is the minimum number of radios needed?
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}
+		\item Let $G$ be the graph with vertices corresponding to valid instructor-class pairs, and edges corresponding to pairs with the same instructor or same class. Then the chromatic number of $G$ is the maximal number of classes the camp can offer.
+		\item Let $H$ be the graph with vertices corresponding to classes and instructors, with edges corresponding to valid instructor-class pairs. Then the size of a minimal vertex cover of $H$ is the minimum number of time slots needed for the camp to offer all six classes.
+		\item Let $G$ as above. A maximum independent set of $G$ corresponds to a set of instructor-class pairs such that no two pairs share an instructor or class. The size of a maximal independent set of $G$ is the minimum number of radios needed.
+	\end{enumerate}
+\end{solution}
+\subsection{Integer programming}
+
+
+\begin{problem}
+Compute the number of solutions to the following integer programming feasibility problem:
+\[
+	\begin{aligned}
+		x_1 + x_2 + x_3 + x_5 + 2x_6 & = 2,                                 \\
+		x_2 + x_4 + x_7              & = 1,                                 \\
+		x_3 + x_4 + x_8              & = 1,                                 \\
+		x_i                          & \in \{0, 1\}, \quad i = 1, \dots, 8.
+	\end{aligned}
+\]
+\end{problem}
+
+\begin{solution}
+	We apply Proposition 7 on p.253 of Cox-Little-O'Shea to the ideal \begin{align*}
+		J = \langle f_i, g_j \rangle_{i=1, \dots, 3, j=1, \dots, 8} \quad \text{with} \quad \begin{aligned}
+			                                                                                    f_1 & = x_1 + x_2 + x_3 + x_5 + 2x_6 - 2, \\
+			                                                                                    f_2 & = x_2 + x_4 + x_7 - 1,              \\
+			                                                                                    f_3 & = x_3 + x_4 + x_8 - 1,              \\
+			                                                                                    g_1 & = x_1^2 - x_1,                      \\
+			                                                                                    g_2 & = x_2^2 - x_2,                      \\
+			                                                                                    g_3 & = x_3^2 - x_3,                      \\
+			                                                                                    g_4 & = x_4^2 - x_4,                      \\
+			                                                                                    g_5 & = x_5^2 - x_5,                      \\
+			                                                                                    g_6 & = x_6^2 - x_6,                      \\
+			                                                                                    g_7 & = x_7^2 - x_7,                      \\
+			                                                                                    g_8 & = x_8^2 - x_8.
+		                                                                                    \end{aligned}
+	\end{align*}
+	which will give us the number of complex solutions. However, all the complex solutions will be real in this case because $x_i \in \{0, 1\}$ for $i = 1, \dots, 8$. Thus, we can count the number of real solutions to the integer programming feasibility problem by counting the number of complex solutions to the ideal $J$. We count that the answer is 16.
+\end{solution}
+
+\begin{problem}
+Consider the integer programming problem:
+\[
+	\text{maximize } x_1 + x_2 + x_3
+\]
+subject to:
+\[
+	\begin{aligned}
+		x_1 + 2x_2 + 4x_3 & = 8,  \\
+		3x_1 + 7x_2 + x_3 & = 14.
+	\end{aligned}
+\]
+
+\begin{enumerate}
+	\item[(1)] Use Macaulay2 to show that this problem has no solution when \( x_i \in \{0, 1\} \) for \( i = 1, 2, 3 \).
+	\item[(2)] Use Macaulay2 to solve the integer programming problem with the constraints \( x_i \geq 0 \) (but we no longer require \( x_i \in \{0, 1\} \)). Use the method of replacing constraints of the form \( x(x - 1) \) by constraints of the form \( x(x - 1)(x - 2) \dots (x - n) \).
+	\item[(3)] Use Macaulay2 to solve the integer programming problem with the constraints \( x_i \geq 0 \) (but we no longer require \( x_i \in \{0, 1\} \)). Use the method of introducing extra variables and representing each \( x_i \) in binary form.
+	\item[(4)] Use Macaulay2 to solve the integer programming problem:
+	      \[
+		      \text{maximize } x_1 + x_2 + x_3
+	      \]
+	      subject to:
+	      \[
+		      \begin{aligned}
+			      x_1 + 2x_2 + 4x_3 & = 8,                       \\
+			      3x_1 + 7x_2 + x_3 & \leq 14,                   \\
+			      x_i               & \geq 0, \quad i = 1, 2, 3.
+		      \end{aligned}
+	      \]
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}
+		\item We have the following Macaulay2 code:
+
+		      \begin{verbatim}
+    R = QQ[x1, x2, x3, MonomialOrder => Lex]
+    I = ideal(x1 + 2*x2 + 4*x3 - 8, 3*x1 + 7*x2 + x3 - 14,
+    x1^2 - x1, x2^2 - x2, x3^2 - x3)
+    isEmpty = (I == ideal(1))
+    \end{verbatim}
+		      and we find that \texttt{isEmpty} is \texttt{true}.
+		\item We have the following Macaulay2 code:
+
+		      \begin{verbatim}
+    -- Define the polynomial ring with variables x1, x2, x3
+    R = QQ[x1, x2, x3, MonomialOrder => Lex]
+    
+    -- Define the linear constraints
+    f1 = x1 + 2*x2 + 4*x3 - 8
+    f2 = 3*x1 + 7*x2 + x3 - 14
+    
+    -- Define the polynomial constraints for integer values
+    
+    p1 = x1 * (x1 - 1) * (x1 - 2) * (x1 - 3) * (x1 - 4)
+    
+    
+    p2 = x2 * (x2 - 1) * (x2 - 2)
+    
+    
+    p3 = x3 * (x3 - 1) * (x3 - 2)
+    
+    -- Create the ideal representing the system of equations
+    I = ideal(f1, f2, p1, p2, p3)
+    
+    -- Decompose the ideal to find all possible solutions
+    solutions = decompose I
+	\end{verbatim}
+		      and we find that there is one solution $(2,1,1)$.
+
+		\item We have the following Macaulay2 code:
+		      \begin{verbatim}
+    R = QQ[b10, b11, b20, b21, b30, b31, MonomialOrder => Lex]
+    
+    x1 = b10 + 2*b11
+    x2 = b20 + 2*b21
+    x3 = b30 + 2*b31
+    
+    f1 = x1 + 2*x2 + 4*x3 - 8
+    f2 = 3*x1 + 7*x2 + x3 - 14
+    
+    p1 = b10^2 - b10
+    p2 = b11^2 - b11
+    p3 = b20^2 - b20
+    p4 = b21^2 - b21
+    p5 = b30^2 - b30
+    p6 = b31^2 - b31
+    
+    objective = x1 + x2 + x3
+    
+    I = ideal(f1, f2, p1, p2, p3, p4, p5, p6)
+    
+    solutions = decompose I
+    
+    \end{verbatim} which gives us the optimal solution $(2,1,1)$ with a maximum value of 4.
+		\item We have the following Macaulay2 code:
+		      \begin{verbatim}
+    
+    R = QQ[x1, x2, x3, s, MonomialOrder => Lex]
+    
+    -- Define the constraints
+    f1 = x1 + 2*x2 + 4*x3 - 8              
+    f2 = 3*x1 + 7*x2 + x3 + s - 14        
+    
+    -- Define polynomial constraints for integer values
+    p1 = x1 * (x1 - 1) * (x1 - 2) * (x1 - 3) * (x1 - 4)  
+    p2 = x2 * (x2 - 1) * (x2 - 2)                       
+    p3 = x3 * (x3 - 1) * (x3 - 2)                         
+    p4 = s * (s - 1)                                      
+    
+    -- Define the objective function
+    objective = x1 + x2 + x3
+    
+    -- Combine all constraints into a single ideal
+    I = ideal(f1, f2, p1, p2, p3, p4)
+    
+    -- Decompose the ideal to find all solutions
+    solutions = decompose I
+    
+	\end{verbatim}
+		      and we find that the optimal solution is $(4,0,1)$ with a maximum value of 5.
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Solve part 4 of the above problem with a single back substitution.
+\end{problem}
+
+\begin{solution}
+	We begin by turning the inequality constraint into an equality constraint by introducing a slack variable:
+\[
+3x_1 + 7x_2 + x_3 + s = 14, \quad 0 \leq s \leq 14
+\]
+
+We will represent the slack variable with binary variables. From the constraint, it is clear that \(s \leq 14\), so we can write:
+\[
+s = s_0 + 2s_1 + 4s_2 + 8s_3
+\]
+where each \(s_i\) is either \(0\) or \(1\). We now have the constraints:
+\[
+x_1 + 2x_2 + 4x_3 = 8
+\]
+\[
+3x_1 + 7x_2 + x_3 + s_0 + 2s_1 + 4s_2 + 8s_3 = 14
+\]
+
+Where \(x_i \geq 0\) and each \(x_i\) is either \(0\) or \(1\). From the two constraints, we see that in fact \(x_1 = 0, 1, 2, 3, \text{ or } 4\); \(x_2 = 0, 1, 2\); and \(x_3 = 0, 1, \text{ or } 2\). 
+
+
+To solve the problem with a single back substitution, we need to introduce one more variable \(v\) equal to the output of the cost function and add this constraint to the ideal. Note that the $x$ and the $v$ come last because we want to get equations with those variables isolated, i.e. we elimiate the $s$. We have the following Macaulay2 code:
+
+
+\begin{verbatim}
+R = QQ[s0, s1, s2, s3, x1, x2, x3, v, MonomialOrder => Lex]
+
+I = ideal(x1 + x2 + x3 - v,
+          x1 + 2*x2 + 4*x3 - 8, 
+          3*x1 + 7*x2 + x3 + s0 + 2*s1 + 4*s2 + 8*s3 - 14,
+          x1*(x1-1)*(x1-2)*(x1-3)*(x1-4),
+          x2*(x2-1)*(x2-2),
+          x3*(x3-1)*(x3-2),
+          s0*(s0-1),
+          s1*(s1-1),
+          s2*(s2-1),
+          s3*(s3-1))
+gens gb I
+\end{verbatim}
+
+The Gröbner basis returned is:
+\[
+\begin{aligned}
+	v^3 - 11v^2 + 38v - 40, \quad & 6x^3 - v^2 + 9v - 26, \\
+	2x^2 + v^2 - 7v + 10, \quad & 3x_1 - v^2 + 3v - 2, \\
+	6s_3 - v^2 + 9v - 20, \quad & 6s_2 - v^2 + 9v - 20, \\
+	s_1, \quad & 3s_0 - v^2 + 6v - 8
+\end{aligned}
+\]
+
+We factor the first polynomial:
+\[
+v^3 - 11v^2 + 38v - 40 = (v-5)(v-4)(v-2)
+\]
+
+The largest root is \(v=5\), so this is the maximum value of the cost function. We can find when it is achieved using back substitution:
+\begin{align*}
+6x_3 - 25 + 45 - 26 & \implies x_3 = 1 \\
+2x_2 + 25 - 35 + 10 & \implies x_2 = 0 \\
+3x_1 - 25 + 15 - 2 & \implies x_1 = 4
+\end{align*}
+
+\textbf{Answer:} The optimum value \(5\) of the cost function is achieved when \((x_1, x_2, x_3) = (4, 0, 1)\).
+\end{solution}
+
+\section{Groebner degeneration and flatness}
+We will now discuss the concept of Groebner degeneration through the lens of flatness with a specific example. \red{There might be some issues with the general proof.}
+\begin{definition}
+	An $S$-module $M'$ is \textbf{flat} $\otimes_S M'$ is an exact functor on the category of $S$-modules.
+\end{definition}
+
+Let $I = \ideal{xy^3-x^2,x^3y^2-y} \subset R = \C[x,y]$. Buchberger's algorithm gives a Groebner basis for the ideal: \begin{align*}
+	G = \set{x^3y^2-y,x^4-y^2,xy^3-x^2,y^4-xy}
+\end{align*} so that $\init I = \ideal{x^4,x^3y^2,xy^3,y^4}$.
+
+\begin{claim}[Groebner degeneration]
+	There is a flat family $T \to \A^1$ with generic fiber isomorphic to $\Spec R/I$ and special fiber
+	isomorphic to $\Spec R/\init I$.
+\end{claim}
+
+\begin{lemma}
+	An $S$-module $M'$ is flat if and only if every
+	relation in $M'$ comes from a relation in $S$. Specifically, if we have \begin{align*}
+		\sum_i s_i m'_i = 0
+	\end{align*} then there exist $n_i\in M'$ and $t_{ij}\in S$ such that \begin{align*}
+		m'_i = \sum_j t_{ij} n_j \\
+		\sum_i s_i t_{ij} = 0
+	\end{align*}
+\end{lemma}
+\begin{proof}
+	Wikipedia.
+\end{proof}
+
+Consider the map $\C[t] \to M = \C[x,y,t]/\ideal{x^4+tr_1,x^3y^2+tr_2,xy^3+tr_3,y^4+tr_4}$ where
+$r_i$ are the non-leading terms in the Groebner basis $G$. I claim that the $\Spec$ of this map
+is the desired family. It remains to check that $M$ is a flat $\C[t]$-module.
+
+\begin{theorem}
+	Let $I$ be an ideal in $\C[x_1,\ldots,x_n]$. Every $f\in \C[x_1,\ldots,x_n]$ is congruent modulo $I$
+	to a unique $r\in \C[x_1,\ldots,x_n]$ such that $r$ is a $\C$-linear combination of monomials not in $I$.
+	Moreover, the monomials not in $\init I$ are linearly independent modulo $I$. In particular if we have \begin{align*}
+		\sum_i s_i m_i = 0
+	\end{align*} where $m_i$ are monomials not in $\init I$, then $s_i = 0$.
+\end{theorem}
+
+\red{The problem with the calculation that comes next is that Groebner bases
+	are only about division over $\C$ not over $\C[t]$. I am sure that this is fixable
+	but I am not sure exactly how I should fiddle with the argument.}
+
+\begin{corollary}
+	The monomials not in $\init I$ form a $\C$-basis for $\C[x_1,\dots,x_n]/I$.
+\end{corollary}
+
+Now we will finish by checking that $M$ is a flat $\C[t]$-module. Suppose we have a nontrivial
+relation in $M$: \begin{align*}
+	\sum_i s_i(t)m_i(x,y,t) \in \ideal{x^4+tr_1,x^3y^2+tr_2,xy^3+tr_3,y^4+tr_4}
+\end{align*} where the $s_i$ are in $\C[t]$ and the $m_i \in M$. By Theorem 1.4 we can
+write each $m_i$ as a $\C$-linear combination of monomials $n_j$ not in $\init I$. \begin{align*}
+	m_i = \sum_j t_{ij} n_j(x,y,z)
+\end{align*} where the $t_{ij}$ are in $\C$. Then we plug back in and we see that \begin{align*}
+	\sum_j  \bigg(\sum_i s_i(t) t_{ij}\bigg) n_j(x,y,t) \in \ideal{x^4+tr_1,x^3y^2+tr_2,xy^3+tr_3,y^4+tr_4}
+\end{align*} but recall that the $n_j$ are linearly independent modulo $I$ so we must have all the
+coefficients are zero. This is precisely the criterion of flatness.
+
+\section{Affine vs. projective flatness}
+
+\begin{remark}
+	If the total space of a family $T\to \A^1$ is projective, then
+	one can check flatness by checking that the fibers have the same Hilbert polynomial.
+\end{remark} \red{Is this fact related to Groebner degenerations?}
+
+\begin{definition}
+	Let $I \subset \C[x_1,\ldots,x_n]$ be an ideal. The affine Hilbert function of $I$ is the function
+	$s\in\N\mapsto \dim \C[x_1,\ldots,x_n]_{\leq s}/I_{\leq s}$ is the number of
+	monomials of degree at most $s$ not in $I$.
+\end{definition}
+
+\begin{proposition}
+	\begin{enumerate}
+		\item The affine Hilbert function $h^a_I$ of $I$ is eventually a polynomial.
+		\item The affine Hilbert polynomial of $I$ is equal to the affine Hilbert polynomial of $\init I$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{definition}
+	Let $I \subset \C[x_0,\dots,x_n]$ be a homogeneous ideal. The Hilbert function of $I$ is the function
+	$s\mapsto \dim \C[x_0,\dots,x_n]_s/I_s$.
+\end{definition}
+
+\begin{proposition}
+	\begin{enumerate}
+		\item The Hilbert function $h_I$ of $I$ is eventually a polynomial.
+		\item The Hilbert polynomial of $I$ is equal to the Hilbert polynomial of $\init I$.
+		\item $h_I(s) = h_I^a(s) - h_I^a(s-1)$.
+		\item $h_I(s) = h_J^a(s)$ where $J\subset k[x_1,\dots,x_n]$ and $I \subset k[x_0,\dots,x_n]$ is its
+		      homogenization with respect to $x_0$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{corollary}
+	The dimension of the affine cone over a projective variety is one more than the dimension of the projective variety.
+	The dimension of the projective closure of an affine variety is equal to the dimension of the affine variety.
+\end{corollary}
+
+
+\end{document}

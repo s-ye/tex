@@ -1,0 +1,272 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+
+
+\begin{document}
+Songyu Ye
+
+\today
+
+\hfill
+
+These are remarks about intersection theory. 
+
+For a long time, algebraic geometers had ad hoc procedures of making sense of intersection multiplicities.
+It is intuitive that one should count some points with multiplicity in order to get the right answer,
+but Fulton and MacPherson really laid out groundwork for making sense of these things in the 1970s.
+
+\section{Introduction}
+If $A,B\subset X$ are subvarieties their intersection product should reflect geometry.
+Let's consider two extreme cases.
+
+\hfill
+
+If $A$ and $B$ intersect properly, meaning that $\codim A + \codim B = \codim (A\cap B)$, then we have 
+\begin{align*}
+    A\cdot B = \sum_{\text{irreducible components}} \text{intersection multiplicity}\cdot C
+\end{align*}
+\red{This is why one should care about stratifications. What are the irreducible components of $A\cap B$?
+Well, if you have a stratification, you can just look at the poset}
+
+\hfill
+
+In the other case if $A = B$ then one has the self intersection formula, which tells us that $A\cdot A$ is the 
+top Chern class of the normal bundle of $A$ in $X$.
+
+\hfill
+
+In general we want formulas for the intersection  product $A\cdot B$ as rational equivalence classes of cycles
+on $A\cap B$. This is the subject of Fulton's \textit{Schubert Varieties and Degeneracy Loci}.
+
+\section{The hard work}
+\begin{definition}
+    If $f,g\in K[x,y]$ are plane curves $F,G$ the intersection scheme $Z$ is the subscheme of $\A^2$ corresponding to the ideal 
+    $\langle f,g\rangle$. The intersection multiplicity of $Z$ at a point $p$ is the dimension of the local ring $\O_{Z,p}$
+    as a $K$-vector space.
+\end{definition}
+
+Let $V\subset X$ be a subvariety of codimension $1$. Then $A = O_{V,X}$ is a local ring of dimension $1$.
+
+\hfill
+
+Recall that $O_{V,X}$ is the set of equivalence classes of pairs $(U,f)$ where $U$ is an open set in $X$ with 
+$V\cap U = \emptyset$ and $f:U\to K$ is a regular function. 
+
+\hfill
+
+Recall that a regular function on an affine variety is a map $f:X\to K$ which is locally a quotient of polynomials.
+A regular function on an abstract variety is the result of gluing regular functions on affine open sets.
+
+\hfill
+
+Recall that the field of rational functions on $X$ is the set of equivalence classes of pairs $(U,f)$ where $U$ is an open set in $X$
+and $f:U\to K$ is a regular function.
+
+\hfill
+
+Consider $A$. It is a local ring with maximal ideal $m = \set{[f]\st f\vert_V = 0}$.
+It is a discrete valuation ring if $V$ is a smooth subvariety of $X$. The prime ideals of $A$ correspond to 
+the irreducible subvarieties of $X$ containing $V$.
+
+\hfill
+
+For a given $r\in A$ we define the order of vanishinging of $r$ along $V$ as \begin{align*}
+    \ord_V(r) = \ell_A(A/r)
+\end{align*} the length of $A/r$ as an $A$-module, this is defined as $1 + $ 
+the length of a maximal chain of submodules.
+
+When $A$ is regular (i.e. $V$ is smooth) then $A$ is a discrete valuation ring and $\ord_V$ agrees
+with the discrete valuation. 
+
+\hfill
+
+In particular recall the following, see Hartshorne.
+\begin{itemize}
+    \item When $A$ is a dimension $1$ local ring, it is a $DVR$ if and only if it is regular 
+    \item Regular is defined as $\dim_k m/m^2 = \dim A$.
+    \item Affine $Y$ is nonsingular at $p$ if and only if $\cO_{Y,p}$ is a regular local ring.
+\end{itemize}
+
+For any rational function $r\in K(X)^*$ we define its order by 
+writing it as a fraction $f/g$ for $f,g\in A$ (\red{one can always do this}) defining \begin{align*}
+    \ord_V(r) = \ord_V(f) - \ord_V(g)
+\end{align*}
+In particular we are interested in $\ord$ to be a homomorphism \begin{align*}
+    \ord(rs) = \ord(r) + \ord(s)
+\end{align*} for $r,s\in K(X)^*$.
+For a fixed $r\in K(X)^*$ there are only finitely many codimension $1$ subvarieties $V$ so that 
+$\ord_V(r)\neq 0$ (\red{See Fulton appendix}).
+
+\section{Cycles}
+Let $X$ be a variety. A $K$-cycle on $X$ is a formal $\Z$-sum \begin{align*}
+    Z = \sum n_i Z_i
+\end{align*} where $Z_i\subset X$ is a subvariety of dimension $k$. For any $k+1$-dimensional 
+variety $W$ of $X$, any $r\in K(W)^*$ we have a divisor (\red{homotopy}) \begin{align*}
+    [\div(r)] = \sum_{\text{codim }1} \ord_V(r) [V]
+\end{align*} Then we say that a $K$-cycle $\alpha$ is \textbf{rationally equivalent} to $0$ if there is a
+there exist finitely many $k+1$-dimensional subvarieties $W_i$ and rational functions $r_i\in K(W_i)^*$ so that
+\begin{align*}
+    \alpha = \sum_i [\div(r_i)]
+\end{align*}
+The $k$th Chow group of $X$ is the group of $K$-cycles modulo rational equivalence and 
+is denoted $A_k(X)$. We can put the Chow groups together to form the Chow ring $A_*(X)$.
+
+\hfill
+
+\red{Here come some deep results which I don't understand yet.}
+
+\hfill
+
+If $f:X\to Y$ is proper then subvarieties $V\subset X$ are sent to subvarieties $W = f(V)\subset Y$.
+There is an induced embedding $K(W)\hookrightarrow K(V)$ which is a finite field extension if $W$ has the same 
+dimension as $V$ (in this case $W,V$ have the same transcendence degree). Put \begin{align*}
+    \deg(V/W) = [K(V):K(W)] \text{ if } \dim V = \dim W
+\end{align*} and $0$ otherwise and define the pushfoward of a proper map \begin{align*}
+    f_*:Z_k(X)\to Z_k(Y) \\
+    f_*[V] = \deg(V/W)[W]
+\end{align*}
+Then the fact is that $f_*$ preserves rationally equivalent to $0$.
+
+\section{Another persective}
+The Chow group of $X$ is the group of cycles of $X$ modulo rational equivalence. Another way of thinking about 
+rational equivalence is the following.
+
+\begin{definition}
+    $Z_1,Z_2$ are rationally equivalent if there exist rationally parametrized family of cycles 
+    interpolating between them, i.e. a cycle on $\P^1\times X$ so that the fibers over $t_1,t_2$ are 
+    $Z_1,Z_2$. The group of cycles rationally equivalent to $0$ is then generated by the differences \begin{align*}
+        [\Phi \cap {t_0}\times X] - [\Phi\cap {t_1}\times X]
+    \end{align*} for any subvariety $\Phi\subset \P^1\times X$ not contained in a fiber.
+\end{definition}
+
+\begin{remark}
+    What makes Chow groups usefeul is that under good conditions, the rational
+    equivalence class of $A\cap B$ depends only on the rational equivalence classes of $A$ and $B$.
+\end{remark}
+
+$A(X)$ is a ring under the intersection product. 
+\begin{theorem}
+    Let $X$ be a smooth quasi-projective variety. Then there exists a unique 
+    product structure on $A(X)$ so that if $A$ and $B$ are generically transverse,
+    then \begin{align*}
+        [A]\cdot [B] = [A\cap B]
+    \end{align*}
+    This makes $A(X) = \bigoplus A^c(X)$ into an associative ring graded by codimension.
+\end{theorem}
+
+\subsection{Via divisors}
+If $X$ affine, $f\in \cO_X$ nonzero, then the irredducible components of the subscheme cut out by $f$ 
+are all of codim $1$ (Krull's Principal Ideal Theorem) so to this subscheme we associate a cycle $[\div(f)]$.
+
+\hfill
+
+If $X$ is not affine we can pick $U\subset X$ open affine $K(X) = K(U)$. This is 
+because rational functions are just regular functions on an open subset, and
+$V\subset X$ open and $f=g$ on $U$ open. Then we use the fact that if two functions 
+agree on an open set then they are equal on $X$ wherever they are defined.
+
+\hfill
+
+In particular we get a divisor $\div(f\vert_U)$ on each $U$ and they agree on overlaps, 
+so we get $\div(\alpha)$ on $X$ itself.
+
+\hfill
+
+These two notions agree [Fulton 1984]
+
+\begin{example}
+    2 points on a curve are birationally equivalent if and only if the curve is 
+    birational to $\P^1$.
+\end{example}
+
+\section{Yet another perspective}
+Ravi Vakil has an intersection theory course website which is very good for intuition
+and examples. In particular he points out where the difficult parts lie.
+
+\hfill
+
+\subsection{Chow groups}
+\begin{itemize}
+    \item Two points on $\P^1$ are defined to be rationally equivalent
+    \item If $\pi: X\to Y$ flat, then there is a pullbaack. If $\dim X - \dim Y = d$
+    then the map $\pi^*:H_n(Y)\to H_{n+d}(X)$.
+    \item If $\pi:X\to Y$ is proper (which implies that the image of closed is closed)
+    then we have a pushforward $\pi_*:H_n(X)\to H_n(Y)$.
+\end{itemize}
+
+What should multiplicity of scheme theoretic intersection be?
+
+\begin{example}
+    [Two planes in $\P^4$] Put coordinates $a,b,c,d,e$ and consider two planes
+    $X_1 = \langle a,b\rangle$ and $X_2 = \langle c,d\rangle$.
+    Then $X_1\cup X_2 = \langle a,b\rangle\cup \langle c,d\rangle = \langle a,b,c,d\rangle$
+    should have degree two ("number of points of intersection with arbitrary linear subspace")
+    
+    \hfill
+
+    How should we count this? Let $P = \langle a- c,b-d\rangle$ be a third plane. Then 
+    $P$ meets each of $X_1,X_2$ in a point as long as $\dim X\cap P = 0$. But if $P$ passes through
+    $X_1\cap X_2$ then we have trouble. Let's see why.
+
+    \hfill
+
+    Work on affine open chart $e = 1$. The ring in question is $k[a,b,c,d]$. The planes 
+    $X_1$ and $X_2$ correspond to ideals $\langle a,b\rangle$ and $\langle c,d\rangle$. 
+    Then we consider the ring \begin{align*}
+        k[a,b,c,d]/\langle a,b,c,d\rangle \cup \langle a-c, b-d\rangle \cong k[a,b]/\langle ab,a^2,b^2\rangle
+    \end{align*} The problem is that this ring is $3$-diml as a vector space over $k$. What's the fix?
+
+    \hfill
+
+    The current formula says that we should look at \begin{align*}
+        \dim_k R/I_1\otimes R/I_2
+    \end{align*} But Serre says that $\otimes$ is not exact. It is only right exact and there is cohomology
+\begin{align*}
+    &\rightarrow \Tor^2(M,A) \rightarrow \Tor^2(M,B) \rightarrow \Tor^2(M,C) \\
+    &\rightarrow \Tor^1(M,A) \rightarrow \Tor^1(M,B) \rightarrow \Tor^1(M,C) \\
+    &\rightarrow M\otimes A \rightarrow M\otimes B \rightarrow M\otimes C \rightarrow 0 \\
+\end{align*}
+Instead Serre says you should look at the Tor groups.
+\begin{align*}
+    \chi = \sum (-1)^i \dim \Tor_i(R/I_1,R/I_2)
+\end{align*} and this is the right answer.
+
+\hfill
+
+Cohen Macauley is about higher Tor groups vanishing.
+\end{example}
+
+A common thing to do is to localize at the generic point of a subvariety $X$ of a scheme $Y$.
+What this means is that we consider rational functions on $Y$ defined on a dense open subset of $X$,
+of dimension $ = \dim Y - \dim X$.
+
+\hfill
+
+Recall that the points of $Y$ correspond to irreducible subvariety of $Y$, and the closed 
+points correspond to the "old points" of $Y$. 
+
+\hfill
+
+Moreover points of $\Spec O_{X,Y}$ correspond to prime ideals correspond to irreducible subvarieties
+of $Y$ containing $X$. The maximal ideal corresponds to $X$ itself.
+
+\begin{example}
+    What is the order of vanishing of $y/x$ at $0$ in $y^2 = x^3$?
+    What about $y^2 = x^3 + x^2$?
+    Note that these guys are singular.
+\end{example}
+
+\section{References}
+\begin{itemize}
+    \item Fulton's \textit{Intersection Theory}
+    \item Eisenbud Harris \textit{3264 and all that}
+    \item Ravi Vakil's Course Website
+\end{itemize}
+\end{document}

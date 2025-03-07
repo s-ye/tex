@@ -1,0 +1,157 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\begin{document}
+Songyu Ye
+
+\today
+
+\hfill
+
+I attended a "Singularities in Ann Arbor" lecture series in May 2024. Here are some notes about things from the conference. The speakers 
+were as follows: 
+\begin{itemize}
+    \item \textbf{Eva Elduque}: Hodge structures
+    \item \textbf{Javier Fernández de Bobadilla}: Symplectic geometry
+    \item \textbf{Claudiu Raicu}: D-modules and group actions 
+    \item \textbf{Christian Schnell}: Intersection cohomology in the example of secant varieties
+\end{itemize}
+
+I enjoyed Claudiu and Christian's talks the most. In particular, I left the conference with a strong interest in the interplay between
+D-modules, perverse sheavees, intersection cohomology, and representation theory. In this note, I will talk about these ideas 
+and some foundations leading up to geometric representation theory.
+
+\section{$\cD$-modules and group actions}
+Let $X = \A^n$ and $S = \cO_X = \C[x_1, \ldots, x_n]$. For the purposes of this note, we will only work 
+in this setting. 
+
+\begin{definition}
+    The Weyl algebra $\cD_X$ is the ring of differential operators on $X$. It is generated over $\cO_X$ by the
+    elements $\partial_1, \ldots, \partial_n$ subject to the relations \begin{align*}
+        [\partial_i, \partial_j] = 0, \quad [\partial_i, x_j] = \delta_{ij}.
+    \end{align*}
+    Note that $\cD_X$ is non-commutative.
+\end{definition}
+
+The Weyl algebra $\cD_X$ comes with a filtration by "order of the differential operator". Specifically let $E = \End_\C{\cO_X}$ and let \begin{align*}
+    \cD_X^0 &= \cO_X \\
+    \cD_X^i &= \set{\phi\in E \st [\phi, \cD_X^0] \subseteq \cD_X^{i-1}} 
+\end{align*} Then $\cD_X = \bigcup_{i\geq 0} \cD_X^i$ and $\cD_X^i\cD_X^j \subseteq \cD_X^{i+j}$. 
+To get ahold of a commutative object, one can also consider the associated graded \begin{align*}
+    \gr \cD_X = \bigoplus_{i\geq 0} \cD_X^i/\cD_X^{i-1}.
+\end{align*} 
+\begin{proposition}
+    For general smooth varieties $X$ the associated graded is the 
+    ring of functions on the cotangent bundle of $X$ \begin{align*}
+        \gr \cD_X \cong \cO_{T^*X}
+    \end{align*}
+\end{proposition}
+
+\begin{example}
+    $X = \A^n$ then $\gr \cD_X = \cO_{T^*X} = \C[x_1, \ldots, x_n, \xi_1, \ldots, \xi_n]$.
+\end{example}
+
+\section{Modules over the Weyl algebra}
+Consider finitely generated left $\cD_X$-modules $M$.
+Suppose $M$ is filtered by $F^\bullet M$ such that $\cD_X^iF^jM \subseteq F^{i+j}M$. 
+Then we can consider the associated graded \begin{align*}
+    \gr M = \bigoplus_{i\geq 0} F^iM/F^{i-1}M.
+\end{align*} \begin{definition}
+    We say that $F^\bullet M$ is a good filtration if $\gr M$ is a finitely generated $\gr \cD_X$-module.
+\end{definition}
+
+\begin{example}
+    Good filtrations exist. If $m_1, \ldots, m_r$ generate $M$ as a $\cD_X$-module,
+    then we can take $F^iM$ to be the submodule $\cD_X^i\cdot m_1 + \ldots + \cD_X^i\cdot m_r$.
+\end{example}
+
+\begin{definition}
+    The characteristic variety of $M$ is the supported of $\gr^{F^\bullet} M$ in $T^*X$
+    with respect to any good filtration $F^\bullet M$. It is 
+    a subvariety of $T^*X$. The support of $M$ satisfies 
+    \begin{align*}
+        \pi(\Ch(M)) = \supp(M)
+    \end{align*} where $\pi: T^*X\to X$ is the projection.
+    We say that \begin{align*}
+        \dim M := \dim \Ch(M)
+    \end{align*}
+\end{definition}
+
+\begin{theorem}
+    Bernstein's inequality: Let $M$ be a finitely generated $\cD_X$-module where $X = \A^n$. Then \begin{align*}
+        \dim M \leq n
+    \end{align*} 
+\end{theorem}
+
+\begin{definition}
+    If $\dim M = n$ then we say that $M$ is holonomic.
+\end{definition}
+
+\begin{example}
+    $\cD_X$ is not holonomic unless $X = \A^0$.
+\end{example}
+
+\begin{example}
+    $\cO_X$ is holonomic.
+\end{example}
+
+\begin{example}
+    Let $M = \cD_X/\ideal{x\partial - \alpha}$ where $\alpha\in \C$. Then $M$ is holonomic.
+\end{example}
+
+The following are true: \begin{itemize}
+    \item Any submodule, quotient, or extension of a holonomic module is holonomic.
+    \item Holonimic modules have finite length.
+    \item localization of holonomic modules are holonomic.
+\end{itemize}
+
+In general, a large class of holonomic $\cD_X$-modules come from the following construction
+of local cohomology. 
+
+\begin{definition}
+    Pick a generating set for an ideal \begin{align*}
+        I = \ideal{f_1, \ldots, f_r}
+    \end{align*} and let $M$ be an $S$-module. Form the Cech complex \begin{align*}
+        0 \to M \to \bigoplus_{i=1}^r M_{f_i} \to \bigoplus_{i,j} M_{f_if_j} \to \ldots
+    \end{align*} and consider the $j$th cohomology of this complex, denoted
+    $H^j_I(M)$. It turns out that the cohomology groups only depend on the 
+    zero locus $V(I)$ and not on the choice of generators.
+
+    \hfill
+
+    By the facts above, if $M$ is holonomic, then $H^j_I(M)$ is holonomic.
+\end{definition}
+
+\begin{example}
+    $H^0_I(M) = \set{m\in M \st I^N\cdot m = 0 \text{ for some } N}$ is holonomic.
+\end{example}
+
+\begin{example}
+    A very important example of a holonomic module 
+    is the Dirac module $\delta_0 = \cD_X/\ideal{x_1, \ldots, x_n}$. This can also be expressed as \begin{align*}
+        \delta_0 &= H^n_{(x_1, \ldots, x_n)}(\cO_X) \\
+        &= \bigoplus_{\text{all } a_i\geq 0} \C \frac{1}{x_1^{a_1 + 1}\cdots x_n^{a_n + 1}}
+    \end{align*} as a vector space.
+
+    \hfill 
+
+    $\delta_0$ is a simple $\cD_X$-module and in fact is the closure of conormal bundle 
+    $\bar{T^*_{0}X}$.
+\end{example}
+
+\begin{definition}
+    The Fourier transform of $\cD_X$ is the antiinvolution \begin{align*}
+        \cF: \cD_X \to \cD_X
+    \end{align*} given by \begin{align*}
+        x_i \mapsto \partial_i, \quad \partial_i \mapsto -x_i.
+    \end{align*}
+    The Fourier transform of a $\cD_X$-module $M$ is the $\cD_X$-module $\cF(M)$ 
+    given by restriction of scalars along $\cF$.
+\end{definition}
+\end{document} 

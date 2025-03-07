@@ -1,0 +1,132 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\begin{document}
+Songyu Ye
+
+\today
+
+This is what Allen and I talked about on Feb 7.
+
+\section{Gelfand Cetlin}
+Consider the irreducible representation of $\GL(n)$ with highest weight $\lambda \in \Z^n$ where 
+$\lambda_1\geq \cdots \geq \lambda_n$. One can consider $V_\lambda$ as a $\GL(n-1)$ representation
+and decompose it into irreducible representations of $\GL(n-1)$. Which irreps appear and with what
+multiplicity? This is the Gelfand Cetlin problem.
+
+\hfill
+
+The answer is given by the Gelfand Cetlin patterns. In particular, \begin{align*}
+    V_\lambda = \bigoplus_{\mu} (V_\mu \otimes \C_{\sum\lambda - \sum\mu})
+\end{align*} where the sum is over all $\mu$ such that $\lambda_1\geq \mu_1\geq \lambda_2\geq \mu_2\geq \cdots \geq \lambda_n$.
+Remarkable each such $\mu$ shows up and it shows up with multiplicity one.
+
+One can keep going all the way down to $\GL(1)$. The irreps which appear correspond to the 
+different ways of filling out a Gelfand Cetlin pattern.
+
+\begin{example}
+    The simplest example is when $n=3$. In this case we have the following picture:
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,0) -- (4,0);
+            \draw (4,0) -- (2,3.46);
+            \draw (2,3.46) -- (0,0);
+            
+            % Nodes along the bottom edge
+            \node at (0,0) [below] {$\lambda_1$};
+            \node at (2,0) [below] {$\lambda_2$};
+            \node at (4,0) [below] {$\lambda_3$};
+
+            % Nodes along the halfway line 
+            \node at (1,1.73) [above] {$\mu_1$};
+            \node at (3,1.73) [above] {$\mu_2$};
+
+            % Nodes at the top
+            \node at (2,3.46) [above] {$\nu_1$};
+        \end{tikzpicture}
+    \end{center}
+    We think about all the possible ways to fill out this diagram with the corresponding
+    inequalities. There is a corresponding moment polytope which is the convex hull of the
+    patterns and it looks like 
+    \begin{center}
+    \includegraphics[scale = .6]{img/Screenshot 2024-02-08 at 1.19.40 PM.png}
+    \end{center}
+    The numbers denote the size of the fiber once you project onto the board. 
+    The interesting thing to note about the moment polytope on the left is
+    that it represents a singular toric variety. Remember that the condition 
+    that we are looking for is that each vertex has the same number of edges
+    coming out of it. This is not the case for the moment polytope on the left.
+
+    \hfill
+
+    The moment polytope has the problem that there is a central vertex with 4 edges, 
+    it looks like a pyramid corresponding to the singularity $ad - bc = 0$. Another way of understanding 
+    the problem is that there are secret conditions, once you know that you are on the left and right face,
+    then you must be actually at the vertex itself instead of knowing you are at an edge.
+\end{example}
+
+There is something in symplectic geometry known as the Thimm trick which we can use in representation theory to
+extend group actions on vector spaces.
+
+\hfill
+
+The input data is a group $K$ acting on our vector space $V$. We can decompose $V$ into 
+\red{isotopic components} \begin{align*}
+    V = \bigoplus_{\lambda \in \mf{t}_T^*} V_\lambda
+\end{align*} Then we get an action of another torus $T$ where $T$ acts on each component $V_\lambda$ by the character
+$\lambda$. This is the Thimm trick. This action of $T$ is not related to the action of $K$ but they commute and so we get an action of 
+$K\times T$ on $V$. If we repeat this process with $\GL(n)$ acting on $V$, then we are 
+supposed to end up with an action of $T^{\binom{n}{2}}$ on $V$. \red{This is the Gelfand Cetlin action?}
+
+\hfill
+
+In algebraic geometry, if we have a group $G$ acting on a ring $R$, then we 
+can consider $R$ as a $G$-vector space and again break it up into isotopic components \begin{align*}
+    R = \bigoplus_{\lambda \in \mf{t}_T^*} I_\lambda
+\end{align*} Then one makes the definition
+\begin{align*}
+    R_\lambda = \bigoplus_{\rho} I_{\lambda - \rho}
+\end{align*} where $\rho$ is sums of the positive roots.
+In this way we get that $R_\lambda R_\mu \subseteq R_{\lambda + \mu}$ and so we define \begin{align*}
+    \gr R = \bigoplus_{\lambda} (R_\lambda/\sum_\alpha R_{\lambda - \alpha})
+\end{align*} Each summand is isomorphic to $I_\lambda$. We get an action of $G\times T$.
+
+\begin{example}
+    \red{Vinberg asymptotic cone}
+    Consider the action of $\SL(2)\times \SL(2)$ acting on $\SL(2)$ by left and right multiplication.
+    We are considering the ring \begin{align*}
+        R = \C[\SL(2)] &= \C[a,b,c,d]/(ad - bc - 1) \\
+        &= \bigoplus_\lambda V_\lambda \otimes V_{\lambda}^* \\
+        &= \bigoplus_n \Sym_n(\C^2) \otimes \Sym_n(\C^2)
+    \end{align*} the map $\gr: R\to \C[a,b,c,d]/(ad - bc)$ the degeneration 
+    to a singular toric variety. In particular we just forgot the degree $0$ part.
+\end{example}
+
+In general we want to consider the situation \begin{align*}
+    \Proj \bigoplus_n V_{n\lambda} = \Fl(n) \leftarrow \mf{L}_\lambda
+\end{align*} and we are supposed to apply the same deeneration trick \begin{align*}
+    \Fl(n)\to \gr_{n-1}\Fl(n)\to \gr_{n-2}\gr_{n-1}\Fl(n) \to \dots \to 
+\end{align*} and eventually we are supposed to end up with the toric variety
+of the Gelfand Cetlin polytope correspodnign to $\lambda$.
+
+\hfill
+
+$\Proj \bigoplus_n V_{n\lambda}$ is supposed to be able to be presented as some polynomial ring,
+i.e. we are supposed to have a surjection $\Sym(V_\lambda) \twoheadrightarrow \Proj \bigoplus_n V_{n\lambda}$
+and in fact it is true that the kernel is generated in degree $2$.
+
+\hfill
+
+The question is we have an action $\PGL(n)\times\PGL(n)$ on $\bar\PGL(n)\hookrightarrow\Gr(\dim \mf g, \mf g\oplus\mf g)$
+and we want to use these tricks to degenerate $\bar\PGL(n)$ to a toric variety with the action of $T^{\binom{n+1}{2}}\times T^{\binom{n+1}{2}}$.
+
+\hfill
+
+The question is what is the polytope.
+\end{document}

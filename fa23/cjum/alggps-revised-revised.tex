@@ -1,0 +1,993 @@
+%%% template.tex
+%%% This is a template for making up an AMS-LaTeX file
+%%% Version of February 12, 2011
+%%%---------------------------------------------------------
+%%% The following command chooses the default 10 point type.
+%%% To choose 12 point, change it to
+%%% \documentclass[12pt]{amsart}
+\documentclass{amsart}
+\usepackage{cite}
+%%% The following command loads the amsrefs package, which will be
+%%% used to create the bibliography:
+\usepackage[lite]{amsrefs}
+
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{latexsym}
+% shortcuts for symbol names that are too long to type
+\newcommand{\eps}{\epsilon}
+\newcommand{\lam}{\lambda}
+\renewcommand{\l}{\ell}
+\newcommand{\la}{\langle}
+\DeclareMathOperator{\gr}{gr}
+\newcommand{\ra}{\rangle}
+\newcommand{\wh}{\widehat}
+\newcommand{\wt}{\widetilde}
+\newcommand{\red}[1]{\textcolor{red}{{#1}}}
+\newcommand{\blue}[1]{\textcolor{blue}{{#1}}}
+\newcommand{\ideal}[1]{\langle{#1}\rangle}
+\newcommand{\st}{\ \vert \ }
+
+
+
+% calligraphic letters
+\newcommand{\cA}{{\mathcal{A}}}
+\newcommand{\cB}{{\mathcal{B}}}
+\newcommand{\cC}{{\mathcal{C}}}
+\newcommand{\cD}{{\mathcal{D}}}
+\newcommand{\cE}{{\mathcal{E}}}
+\newcommand{\cF}{{\mathcal{F}}}
+\newcommand{\cG}{{\mathcal{G}}}
+\newcommand{\cH}{{\mathcal{H}}}
+\newcommand{\cI}{{\mathcal{I}}}
+\newcommand{\cJ}{{\mathcal{J}}}
+\newcommand{\cK}{{\mathcal{K}}}
+\newcommand{\cL}{{\mathcal{L}}}
+\newcommand{\cM}{{\mathcal{M}}}
+\newcommand{\cN}{{\mathcal{N}}}
+\newcommand{\cO}{{\mathcal{O}}}
+\newcommand{\cP}{{\mathcal{P}}}
+\newcommand{\cQ}{{\mathcal{Q}}}
+\newcommand{\cR}{{\mathcal{R}}}
+\newcommand{\cS}{{\mathcal{S}}}
+\newcommand{\cT}{{\mathcal{T}}}
+\newcommand{\cU}{{\mathcal{U}}}
+\newcommand{\cV}{{\mathcal{V}}}
+\newcommand{\cW}{{\mathcal{W}}}
+\newcommand{\cX}{{\mathcal{X}}}
+\newcommand{\cY}{{\mathcal{Y}}}
+\newcommand{\cZ}{{\mathcal{Z}}}
+
+\newcommand{\floor}[1]{\ensuremath{\left\lfloor#1\right\rfloor}}
+\newcommand{\ceil}[1]{\ensuremath{\left\lceil#1\right\rceil}}
+
+\renewcommand{\qed}{\quad\qedsymbol}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Bun}{Bun}
+\DeclareMathOperator{\Sch}{Sch}
+\DeclareMathOperator{\Fl}{Fl}
+\DeclareMathOperator{\Rad}{Rad}
+\DeclareMathOperator{\Aff}{Aff}
+\DeclareMathOperator{\Ring}{Ring}
+\DeclareMathOperator{\kAlg}{kAlg}
+\DeclareMathOperator{\Grp}{Grp}
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\Set}{Set}
+\DeclareMathOperator{\op}{op}
+\DeclareMathOperator{\id}{id}
+\newcommand{\bigp}[1]{\bigg(#1\bigg)}
+\newcommand{\bigb}[1]{\bigg[#1\bigg]}
+% for vector projections
+\newcommand{\vectorproj}[2][]{\textit{proj}_{\vect{#1}}\vect{#2}}
+\newcommand{\vect}{\mathbf}
+
+%create indicator function
+\newcommand{\ind}[1]{\mathbbm{1}_{#1}}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Pic}{Pic}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\ev}{ev}
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\spann}{Span}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Fr}{Fr}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\Gpd}{Gpd}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\rank}{rank}
+
+
+\newcommand{\del}[2]{\frac{\partial #1}{\partial #2}}
+
+% prevent line break in inline mode
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+\setlength{\parindent}{0pt}
+
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\H}{\mathbb{H}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\K}{\mathbb{K}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\Y}{\mathbb{Y}}
+\newcommand{\Z}{\mathbb{Z}}
+
+
+\newcommand{\Gm}{\mf G_m}
+\renewcommand{\div}{\text{div}}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\SU}{SU}
+\newcommand{\Ga}{\mf G_a}
+\DeclareMathOperator{\Spec}{Spec}
+% \newcommand{\sl}{\mf{sl}}
+\newcommand{\mfp}{\mathfrak{p}}
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\newcommand{\mb}[1]{\mathbb{#1}}
+\DeclareMathOperator{\Specm}{Specm}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Ch}{Ch}
+
+\DeclareMathOperator{\so}{\mf{so}}
+\DeclareMathOperator{\gl}{\mf{gl}}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\PGL}{PGL}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Ad}{Ad}
+% \renewcommand{\sl}{\mf{sl}}
+\DeclareMathOperator{\su}{\mf{su}}
+
+
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\Ter}{Ter}
+\DeclareMathOperator{\ter}{ter}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Der}{Der}
+
+% real analysis
+\newcommand{\inv}[1]{{#1}^{-1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\abs}[1]{\lvert #1\vert}
+\newcommand{\set}[1]{\{#1\}}
+
+%Evaluated at limits x=a and x=b, a < b%
+\newcommand{\evat}[2]{\bigg\vert_{#1}^{#2}}
+%half%
+\newcommand{\half}{\frac{1}{2}}
+
+%text for annotation equations%
+\newcommand{\texty}[1]{\text{\quad #1}}
+
+
+%%% The following command defines the standard names for all of the
+%%% special symbols in the AMSfonts package, listed in
+%%% http://www.ctan.org/tex-archive/info/symbols/math/symbols.pdf
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+
+%%% The following commands allow you to use \Xy-pic to draw
+%%% commutative diagrams.  (You can omit the second line if you want
+%%% the default style of the nodes to be \textstyle.)
+\usepackage[all,cmtip]{xy}
+\let\objectstyle=\displaystyle
+
+%%% If you'll be importing any graphics, uncomment the following
+%%% line.  (Note: The spelling is correct; the package graphicx.sty is
+%%% the updated version of the older graphics.sty.)
+% \usepackage{graphicx}
+
+
+
+%%% This part of the file (after the \documentclass command,
+%%% but before the \begin{document}) is called the ``preamble''.
+%%% This is where we put our macro definitions.
+
+%%% Comment out (or delete) any of these that you don't want to use.
+
+
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%% The Theorem environments:
+%%%
+%%%
+%%% The following commands set it up so that:
+%%% 
+%%% All Theorems, Corollaries, Lemmas, Propositions, Definitions,
+%%% Remarks, Examples, Notations, and Terminologies  will be numbered
+%%% in a single sequence, and the numbering will be within each
+%%% section.  Displayed equations will be numbered in the same
+%%% sequence. 
+%%% 
+%%% 
+%%% Theorems, Propositions, Lemmas, and Corollaries will have the most
+%%% formal typesetting.
+%%% 
+%%% Definitions will have the next level of formality.
+%%% 
+%%% Remarks, Examples, Notations, and Terminologies will be the least
+%%% formal.
+%%% 
+%%% Theorem:
+%%% \begin{thm}
+%%% 
+%%% \end{thm}
+%%% 
+%%% Corollary:
+%%% \begin{cor}
+%%% 
+%%% \end{cor}
+%%% 
+%%% Lemma:
+%%% \begin{lem}
+%%% 
+%%% \end{lem}
+%%% 
+%%% Proposition:
+%%% \begin{prop}
+%%% 
+%%% \end{prop}
+%%% 
+%%% Definition:
+%%% \begin{defn}
+%%% 
+%%% \end{defn}
+%%% 
+%%% Remark:
+%%% \begin{rem}
+%%% 
+%%% \end{rem}
+%%% 
+%%% Example:
+%%% \begin{ex}
+%%% 
+%%% \end{ex}
+%%% 
+%%% Notation:
+%%% \begin{notation}
+%%% 
+%%% \end{notation}
+%%% 
+%%% Terminology:
+%%% \begin{terminology}
+%%% 
+%%% \end{terminology}
+%%% 
+%%%       Theorem environments
+
+% The following causes equations to be numbered within sections
+\numberwithin{equation}{section}
+
+% We'll use the equation counter for all our theorem environments, so
+% that everything will be numbered in the same sequence.
+
+%       Theorem environments
+
+\theoremstyle{plain} %% This is the default, anyway
+\newtheorem{theorem}[equation]{Theorem}
+\newtheorem{cor}[equation]{Corollary}
+\newtheorem{lemma}[equation]{Lemma}
+\newtheorem{proposition}[equation]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[equation]{Definition}
+
+\theoremstyle{remark}
+\newtheorem{remark}[equation]{Remark}
+\newtheorem{example}[equation]{Example}
+\newtheorem{notation}[equation]{Notation}
+\newtheorem{terminology}[equation]{Terminology}
+
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+\begin{document}
+
+%%% In the title, use a double backslash "\\" to show a linebreak:
+%%% Use one of the following two forms:
+%%% \title{Text of the title}
+%%% or
+%%% \title[Short form for the running head]{Text of the title}
+\title{Representations of complex tori and $\GL(2,\C)$}
+
+
+%%% If there are multiple authors, they're described one at a time:
+%%% First author: \author{} \address{} \curraddr{} \email{} \thanks{}
+%%% Second author: \author{} \address{} \curraddr{} \email{} \thanks{}
+%%% Third author: \author{} \address{} \curraddr{} \email{} \thanks{}
+\author{Songyu Ye} \email{sy459@cornell.edu}
+
+%%% In the address, show linebreaks with double backslashes:
+\address{}
+
+%%% Current address is optional.
+% \curraddr{}
+
+%%% Email address is optional.
+% \email{}
+
+
+%%% If there's a second author:
+% \author{}
+% \address{}
+% \curraddr{}
+% \email{}
+
+
+%%% To have the current date inserted, use \date{\today}:
+\date{\today}
+
+%%% To include an abstract, uncomment the following two lines and type
+%%% the abstract in between them:
+\begin{abstract}
+	Groups and their representations have been studied for a long time. One can extend the
+	notion of a group by asking for the group axioms to hold in other categories. A group in
+	the category of smooth manifolds is a Lie group, and a group in the category of algebraic varieties
+	is an algebraic group. In this paper, we discuss the representation theory of algebraic groups,
+	in particular complex tori and $\GL(2,\C)$.
+\end{abstract}
+
+
+\maketitle
+
+%%% To include a table of contents, uncomment the following line:
+% \tableofcontents
+
+
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%% Start the body of the paper here!  E.G., maybe use:
+%%% \section{Introduction}
+%%% \label{sec:intro}
+
+%%% For a numbered display, use
+%%% \begin{equation}
+%%%   \label{something}
+%%%   The display goes here
+%%% \end{equation}
+%%% and you can refer to it as \eqref{something}.
+
+%%% For an unnumbered display, use
+% \begin{equation*}
+
+% \end{equation*}
+
+%%% To import a graphics file, you must have said
+%%% \usepackage{graphicx}
+%%% in the preamble (i.e., before the \begin{document}).
+%%% Putting it into a figure environment enables it to float to the
+%%% next page if there isn't enough room for it on the current page.
+%%% The \label command must come after the \caption command.
+% \begin{figure}[h]
+%   \includegraphics{filename}
+%   \caption{Some caption}
+%   \label{somelabel}
+% \end{figure}
+
+\section{Introduction}
+The theme of this expository paper is to compare and contrast group objects in the settings of smooth manifolds and algebraic varieties.
+In particular, we begin by discussing the representation theory of tori in the smooth setting, and from our discussion
+it will become clear that some tools of Lie theory are not available to us in the algebraic setting. We remedy this
+by introducing different tools. One such tool we will introduce is the notion
+of a Hopf algebra, which axiomatizes the structure of the coordinate ring of an 
+algebraic group. With a clear understanding of what is and is not available to us,
+we then discuss the representation theory of $(\C^*)^n$ and $\GL(2,\C)$ in the algebraic setting.
+
+\section{Representations of Tori}
+\subsection{Real tori}
+In this section we study the representations of tori in the category of smooth manifolds. In particular,
+this means that the objects we are considering are smooth manifolds and the morphisms are smooth maps.
+A real torus $T$ is a real Lie group which is isomorphic to the product of $n$ circles.
+We say that $T$ has rank $n$.
+
+\hfill
+
+Let us first consider the case of $T = S^1$. We want to classify the finite dimensional representations of $S^1$.
+It turns out that all finite dimensional representations of $S^1$ are decomposable, i.e.
+can be written as a direct sum of irreducible representations.
+
+\begin{proposition}
+	Let $K$ be a compact Lie group and let $\rho:K\to\GL(V)$ be a finite dimensional complex representation.
+	Then $\rho$ is completely reducible.
+\end{proposition}
+
+\begin{proof}
+	[Sketch of proof] The idea is to replicate the proof of Maschke's Theorem for finite groups.
+	Choose any inner product $\langle\cdot,\cdot\rangle$ on $V$ and average over the group action to get a $K$-invariant inner product
+	on $V$. In particular put \begin{align*}
+		\langle v,w\rangle_{\text{avg}} = \frac{1}{\abs{K}}\int_K \langle \rho(k)v,\rho(k)w\rangle dk
+	\end{align*}
+	The existence of this inner product
+	allows us to conclude that the orthogonal complement of a $K$-invariant subspace is also $K$-invariant.
+	Inducting on the dimension of $V$ allows us to completely decompose $V$ into irreducible representations.
+\end{proof}
+
+We refer the reader to chapter 9 of \cite{fulton-harris} for more detailed discussion.
+
+\hfill
+
+Thus it is enough to just consider the irreducible representations of $S^1$.
+By Schur's Lemma (in particular $S^1$ is abelian) they are all $1$-dimensional and
+therefore are indexed by characters $\chi: S^1\to \C^*$.
+Since $S^1$ is compact, its image in $\C^*$ must also be compact, and moreover
+it is connected and contains the identity. Therefore, the image of $\chi$ must lie in $S^1$.
+
+
+\begin{proposition}
+	All characters of $S^1$ are isomorphic to $\chi_n: S^1\to S^1$ given by $z\mapsto z^n$ for $n\in \Z$.
+\end{proposition}
+
+\begin{proof}
+	Use the universal covering map $\exp: \R\to S^1$.
+	Given a character $\chi: S^1\to S^1$, we can lift it to a map $\tilde \chi: S^1\to \R$.
+	Since $\chi$ is a group homomorphism, it carries $1$ to $1$, and the fiber over $1$ under $\exp$ is $\Z$.
+\end{proof}
+
+Since characters for $S^1\times\cdots\times S^1$ are the same as products of characters for $S^1$,
+all characters of $T$ are indexed by $\Z^n$. Explicitly if $T$ has rank $n$, then a character $\chi: T\to S^1$ is given by a tuple of integers $(n_1,\ldots, n_k)$, and the character is given by
+\begin{align*}
+	(z_1,\ldots, z_k)\mapsto z_1^{n_1}\cdots z_k^{n_k}
+\end{align*}
+From our discussion above, we have the following classification statement for representations of real tori as Lie groups.
+
+\begin{theorem}
+	Let $T$ be a real torus of rank $n$. Then every finite dimensional representation $V$ of $T$ is isomorphic
+	to a direct sum of $1$-dimensional irreducible representations with some multiplicities.
+	\begin{align*}
+		V \cong \bigoplus_{\chi\in \Z^n} W_\chi^{\oplus n_\chi}
+	\end{align*} where $W_\chi$ denotes the unique $1$-dimensional irreducible representation for which $T$ acts by $\chi$.
+\end{theorem}
+
+In particular, we can decompose $V$ into eigenspaces for the action of $T$. \begin{align*}
+	V \cong \bigoplus_{\chi\in\Z^n} V_\chi
+\end{align*} where $V_\chi = \set{v\in V \st t\cdot v = \chi(t)v \text{ for all $v\in V$ and $t\in T$}}$. This is
+referred to as the \textbf{weight space decomposition} of $V$ and we refer to the $\chi$ which appear in
+the decomposition as the \textbf{weights} of $V$.
+We say that $v\in V_\chi$ is a \textbf{weight vector} of weight $\chi$.
+
+
+\subsection{Complex tori}
+We want an analagous story in algebraic geometry. To do so we establish the following framework.
+Specifically we are now dealing with the category of algebraic varieties over $\C$, where the objects are algebraic varieties
+and the morphisms are morphisms of algebraic varieties. 
+\begin{definition}
+	An \textbf{algebraic group} $G$ over $\C$ is an algebraic variety over $\C$ with a group structure
+	so that the multipliation map $G\times G\to G$ and inversion map $G\to G$ are morphisms
+	of algebraic varieties.
+\end{definition}
+
+\begin{definition}
+	A \textbf{morphism of algebraic groups} $G\to H$ is a morphism of algebraic varieties that is also a group homomorphism.
+\end{definition}
+
+\begin{definition}
+	Let $G$ be an algebraic group. A \textbf{rational representation} of $G$ is a morphism of algebraic groups
+	$G\to \GL(V)$ for some vector space $V$ (for us $V$ will always be finite dimensional over $\C$).
+\end{definition}
+
+We will consider complex algebraic tori $T = \C^* \times \dots \times \C^*$.
+This is an algebraic group because $T$ is the zero locus of
+the polynomial equations \begin{align*}
+	T &= \Spec \C[x_1^{\pm 1},\ldots, x_n^{\pm 1}] \\
+	&:= \Spec\big(\C[x_1,\dots,x_n,y_1,\dots,y_n]/(x_1y_1-1,\dots,x_ny_n-1)\big)
+\end{align*} This is a group in the familiar way,
+and it is clear that the group law is indeed a morphism of algebraic varieties. The rest of this section will discuss
+the finite dimensional rational representations of $T$ as an algebraic group.
+
+\begin{remark}
+	Why do we consider real tori as Lie groups and complex algebraic tori as algebraic groups? One good reason is that the real tori 
+	are not complex algebraic varieties. For example there are no polynomials over $\C$ which define $S^1\times S^1$ as a complex algebraic variety.
+	Moreover, as Lie groups, the complex torus is the complexification of the real torus.
+\end{remark}
+
+\begin{example}
+	$\GL(n,\C)$ is a familiar group which can be endowed with the structure of an algebraic group.
+	$\GL(n,\C)$ is the zero locus of the polynomial equations
+	\begin{align*}
+		\GL(n,\C) = \Spec \big(\C[x_{ij},\inv{\det}]\big) := \Spec\big(\C[x_{ij},t]/(\det(x_{ij})t-1)\big)
+	\end{align*} This variety becomes a group in the familiar way,
+	and it is clear that the group law is indeed a morphism of algebraic varieties.
+\end{example}
+
+The following theorem classifies
+the finite dimensional rational representations of $T$ as an algebraic group.
+The story is precisely that of the smooth manifold setting, but we introduce the language of Hopf algebras to demonstrate this.
+
+\begin{theorem}\label{thm:ratrep}
+	Let $T$ be a complex torus of rank $n$.
+	Then every finite dimensional rational representation of $T$
+	is isomorphic
+	to a direct sum of $1$-dimensional irreducible representations with some multiplicities.
+	\begin{align*}
+		V \cong \bigoplus_{\chi\in \Z^n} W_\chi^{\oplus n_\chi}
+	\end{align*} where $W_\chi$ denotes the unique $1$-dimensional irreducible representation for which $T$ acts by $\chi$.
+\end{theorem}
+We will give an proof of this theorem after we introduce the language of Hopf algebras.
+
+\subsection{Hopf algebras}
+The notion of a Hopf algebra axiomatizes
+the structure of the ring of regular functions on an algebraic group.
+In particular let $G$ be an algebraic group and $\mc O(G)$ its ring of regular functions.
+Then the multipliation,
+inversion, and identity maps \begin{align*}
+	\mu: G\times G & \to G \\
+	\iota: G       & \to G \\
+	e: \Spec \C    & \to G
+\end{align*}
+induce maps on the coordinate rings
+\begin{align*}
+	\Delta: \mc O(G)   & \to \mc O(G)\otimes \mc O(G) \\
+	\epsilon: \mc O(G) & \to \C                       \\
+	S: \mc O(G)        & \to \mc O(G)
+\end{align*} where we made the identification $\mc O(G\times G) \cong \mc O(G)\otimes \mc O(G)$.
+Because the group axioms hold, these maps satisfy the following conditions and equip
+$\mc O(G)$ with the structure of a Hopf algebra.
+\begin{definition}\label{def:hopf}
+	Let $A$ be a $\C$-algebra. Then we say $A$ is a \textbf{Hopf algebra} if there are maps \begin{align*}
+		\text{comultiplication\quad}\Delta: A        & \to A\otimes A \\
+		\text{counit (augmentation)\quad}\epsilon: A & \to \C         \\
+		\text{coinverse (antipode)\quad}S: A         & \to A
+	\end{align*}
+	so that the following diagrams commute:
+	\begin{center}
+		\begin{tikzcd}
+			A \arrow[r, "\Delta"] \arrow[d, "\Delta"] & A\otimes A \arrow[d, "\Delta\otimes \id"] \\
+			A\otimes A \arrow[r, "\id\otimes \Delta"] & A\otimes A\otimes A
+		\end{tikzcd} \\
+		\vspace{5mm}
+		\begin{tikzcd}
+			A \arrow[r, "\Delta"] \arrow[d, "\id"] & A\otimes A \arrow[d, "\epsilon\otimes \id"] \\
+			A \arrow[r, "\cong"] & \C\otimes A
+		\end{tikzcd} \\
+		\vspace{5mm}
+		\begin{tikzcd}
+			A \arrow[r, "\Delta"] \arrow[d, "\epsilon"] & A\otimes A \arrow[d, "S \otimes \id"] \\
+			\C \arrow[r, ""] & A
+		\end{tikzcd}
+
+	\end{center}
+\end{definition}
+
+
+
+\begin{remark}
+	These maps can be worked out very explicitly. In particular the points of $G$ are in correspondence with the elements of $\Hom_{\kAlg}(\cO(G),\C)$.
+	The correspondence is very explicitly given by $g\mapsto \ev_g$ where $\ev_g: \cO(G)\to \C$ is the evaluation map.
+	The key idea is that for an arbitrary algebraic group $G$ and two points $x,y$ of $G$, writing
+	$f_x,f_y: \cO(G)\to \C$ the corresponding morphisms of $\C$-algebras, then the composition $(f_x\otimes f_y)\circ \Delta$ is again a map $\cO(G)\to \cO(G)\otimes \cO(G)\to \C$.
+	The condition that we ask from comultiplication is precisely that the composition $(f_x\otimes f_y)\circ \Delta$
+	corresponds to the product $xy\in G$. In particular, the group law on $G$ uniquely determines the comultiplication map on $\cO(G)$.
+\end{remark}
+
+\begin{example}
+	Recall that
+	\begin{align*}
+		\cO(\Ga(\C)) & = \C[x]
+	\end{align*} where $\Ga(\C)$ is the additive group of $\C$.
+	Let $f,g\in \Hom_{\kAlg}(\cO(G),\C)$ with $f(x) = a$ and $g(x) = b$.
+	We want to find a map $\Delta: \cO(\Ga(\C))\to \cO(\Ga(\C))\otimes \cO(\Ga(\C))$ so that
+	\begin{align*}
+		((f\otimes g)\circ \Delta)(X) = (a+b)
+	\end{align*}
+	We write down the map $\Delta$ explicitly as
+	\begin{align*}
+		\Delta(X) = X\otimes 1 + 1\otimes X
+	\end{align*} and notice that it does the job. We see that $\Delta$ then must be the
+	comultiplication map for $\Ga(\C)$ because such a map is unique (see the above remark), given the prescribed group law on $\Ga(\C)$.
+\end{example}
+
+\begin{example}
+	By the same token, we can work out the Hopf algebra structure for $\C^*$ to be
+	\begin{align*}
+		\Delta(x)   & = x\otimes x \\
+		\epsilon(x) & = 1          \\
+		S(x)        & = \inv{x}
+	\end{align*}
+\end{example}
+
+\begin{example}
+	Consider the example of $\GL(2,\C)$ as an algebraic group. The Hopf algebra structure is given by
+	\begin{align*}
+		\Delta(x_{ij})   & = \sum_{k=1}^2 x_{ik}\otimes x_{kj} \\
+		\epsilon(x_{ij}) & = \delta_{ij}                       \\
+		S(x_{ij})        & = M_{ij}
+	\end{align*} where \begin{align*}
+		M = \begin{bmatrix}
+			    x_{11} & x_{12} \\
+			    x_{21} & x_{22}
+		    \end{bmatrix}^{-1} = \frac{1}{\det(M)}\begin{bmatrix}
+			                                          x_{22}  & -x_{12} \\
+			                                          -x_{21} & x_{11}
+		                                          \end{bmatrix}
+	\end{align*}
+\end{example}
+
+\hfill
+
+Now we want to translate the representation theory of algebraic groups $G$
+into the language of comodules over Hopf algebras.
+\begin{theorem}
+	Let $G$ be an algebraic group. Then rational representations $V$ of $G$
+	correspond to linear maps $\rho: V\to V\otimes \mc O(G)$ so that the following diagrams commute:
+	\begin{center}
+		\begin{tikzcd}
+			V \arrow[r, "\rho"] \arrow[d, "\rho"] & V\otimes \mc O(G) \arrow[d, "\rho\otimes \id"] \\
+			V\otimes \mc O(G) \arrow[r, "\id\otimes \Delta"] & V\otimes \mc O(G)\otimes \mc O(G)
+		\end{tikzcd} \\
+		\vspace{5mm}
+		\begin{tikzcd}
+			V \arrow[r, "\rho"] \arrow[d, "\id"] & V\otimes \mc O(G) \arrow[d, "\id\otimes \epsilon"] \\
+			V \arrow[r, "\cong"] & V\otimes \C
+		\end{tikzcd} \\
+	\end{center}
+\end{theorem}
+\begin{proof}
+	[Sketch of proof] The first diagram says that the action of $G$ on $V$ is associative
+	and the second diagram says that $e\in G$ acts by the identity transformation on $V$.
+	These are precisely the conditions that say that $V$ is a representation of $G$.
+\end{proof}
+We refer the reader to \cite{waterhouse} for a more detailed discussion of this theorem.
+
+\begin{definition}
+	$\rho$ is called a \textbf{comodule structure} on $V$.
+\end{definition}
+
+\begin{example}
+	Consider the action of $\C^*$ on $\C^2$ given by
+	\begin{align*}
+		t\cdot (a,b) = (ta, t^{-1}b)
+	\end{align*} This is a rational representation of $\C^*$ which we can write as
+	\begin{align*}
+		\tau:\C^* & \to \GL(2,\C)          \\
+		t            & \mapsto \begin{bmatrix}
+			                       t & 0       \\
+			                       0 & \inv{t}
+		                       \end{bmatrix}
+	\end{align*} This induces a comodule structure on $\C^2$ given by the map $\rho: \C^2\to \C^2\otimes \mc O(\C^*)$ 
+	\begin{align*}
+		\rho(a) & = a\otimes x       \\
+		\rho(b) & = b\otimes \inv{x}
+	\end{align*} where $x$ is the coordinate function on $\C^*$.
+\end{example}
+
+\subsection{Weight space decomposition}
+We are now ready to give a proof of Theorem \ref{thm:ratrep} using the language of Hopf algebras.
+\begin{proof}
+	[Proof of \ref{thm:ratrep}] Let $V$ be a finite dimensional rational representation of $T$
+	and let $\rho: V\to V\otimes \mc O(T)$ be the corresponding comodule structure. Recall that
+	\[\cO(T)\cong \C[x_1,\dots,x_n,\inv{x_1},\dots,\inv{x_n}]\] We write as a vector space
+	decomposition \begin{align*}
+		V \otimes \mc O(T) \cong \bigoplus_{m\in\Z^n} V\otimes \C\cdot x^m
+	\end{align*} Expanding $\rho(v)$ in terms of this basis, we find that \begin{align*}
+		\rho(v)                                & = \sum_{m\in\Z^n} v_m\otimes x^m \texty{finitely many nonzero $m_k$} \\
+		\implies (\id \otimes \Delta)(\rho(v)) & = \sum_{m\in\Z^n} v_m\otimes x^m\otimes x^m                          \\
+		\implies (\rho\otimes \id)(\rho(v))    & = \sum_{m\in\Z^n} \rho(v_m)\otimes x^m                               \\
+		\implies \rho(v_m)                     & = v_m\otimes x^m \texty{for those nonzero $v_m$}
+	\end{align*} The second step comes from our computation that
+	$\Delta(x_i) = x_i\otimes x_i$
+	and the fact that $\Delta$ is a coalgebra homomorphism. The claim that $\Delta$ is a
+	morphism of coalgebras is not immediate, but it ultimately reduces to the statement that, if $B$ is
+	a $k$-algebra, then the multiplication map $B\otimes B\to B$ is a morphism of $k$-algebras if and only if $B$ is commutative.
+	We are working with (co)commutative (co)algebras, so this is not an issue. The fourth step comes from equating the second and third left hand sides.
+
+	\hfill
+
+	Finally, we apply the second diagram in \ref{def:hopf} to get \begin{align*}
+		(\id\otimes \epsilon)(\rho(v)) = v = \sum_{m\in\Z^n} v_m\epsilon(x^m) = \sum_{m\in\Z^n} v_m
+	\end{align*} Thus we see that the comodule $V$ decomposes as a direct sum of subcomodules \begin{align*}
+		V & = \bigoplus_{m\in\Z^n} V_m
+	\end{align*} where $V_m := \set{v\in V \st \rho(v) = v\otimes x^m}$. This is precisely saying that $T$ acts on $V_m$ by the character $\chi_m: T\to \C^*$ given by $t\mapsto t^m$.
+	Moreover, picking a basis for each $V_m$ gives a decomposition of $V$ into a direct sum of $1$-dimensional irreducible representations.
+	\begin{align*}
+		V \cong \bigoplus_{m\in\Z^n} W_m^{\oplus n_m}
+	\end{align*} where $W_m$ is the unique $1$-dimensional irreducible representation for which $T$ acts by $\chi_m$.
+\end{proof}
+
+\section{Representations of $\GL(2,\C)$}
+
+\subsection{Reducibility}
+We saw in Section 2 that every rational representation of $T$ decomposes into a direct sum of irreducible representations,
+and that the irreducible representations are indexed by $\Z^n$.
+
+\hfill
+
+It turns out that rational representations of $\GL(2,\C)$
+also decompose into a direct sum of irreducible representations. This is
+because we can apply Weyl's unitary trick again. We consider $U(2)\subset \GL(2,\C)$, the subgroup of unitary matrices.
+This is a compact subgroup which is also Zariski dense in $\GL(2,\C)$. We can then apply the same averaging trick
+to obtain an inner product on $V$ which will actually be $\GL(2,\C)$-invariant, because $U(2)$ is Zariski dense in $\GL(2,\C)$.
+
+\hfill 
+
+We refer the reader to chapter 9 of \cite{fulton-harris} for more detailed discussion.
+
+
+\subsection{Highest weight vectors}
+To completely classify the rational representations of $\GL(2,\C)$, we need to introduce highest weight vectors.
+Let $T\subset \GL(2,\C)$ be the subgroup of diagonal matrices and $B \subset \GL(2,\C)$ be the subgroup of upper triangular matrices.
+These ad hoc definitions will work for us, but in general $T$ is a \textbf{maximal torus} and $B$ is a \textbf{Borel subgroup} of $\GL(2,\C)$.
+\begin{definition}
+	Let $V$ be a finite dimensional rational representation of $\GL(2,\C)$. A \textbf{highest weight vector} $v\in V$ is
+	a weight vector so that $B\cdot v = \C^*\cdot v$. A \textbf{highest weight} is a weight which
+	corresponds to a highest weight vector.
+\end{definition}
+
+\begin{example}
+	$\GL(2,\C)$ has a standard representation on $\C^2$ given by the matrix multiplication map. This action
+	is transitive on the nonzero vectors, so $\C^2$ is irreducible. If one considers the torus action $T\subset \GL(2,\C)$
+	then we see that $\C^2$ decomposes into a direct sum of weight spaces \begin{align*}
+		\C^2 \cong \C\cdot e_1 \oplus \C\cdot e_2
+	\end{align*} where $e_1$ and $e_2$ are standard basis with weights $(1,0)$ and $(0,1)$ respectively.
+	$(1,0)$ is the unique highest weight, and the corresponding weight space is one dimensional. The standard
+	representation of $\GL(2,\C)$ is irreducible.
+\end{example}
+
+\begin{example}
+	Since $\GL(2,\C)$ acts on $\C^2$, it also acts on $(\C^2)^{\otimes n}$ for $n\in \Z_{\geq 0}$ via \begin{align*}
+		g\cdot (v_1\otimes \cdots \otimes v_n) = (gv_1\otimes \cdots \otimes gv_n)
+	\end{align*} This is known as the \textbf{tensor product representation} of $\GL(2,\C)$. We can further
+	quotient by the submodule generated by vectors of the form \begin{align*}
+		v_1\otimes \cdots \otimes v_i \otimes v_{i+1} \otimes \cdots \otimes v_n - v_1\otimes \cdots \otimes v_{i+1} \otimes v_i \otimes \cdots \otimes v_n
+	\end{align*} for $1\leq i \leq n-1$. This is known as the \textbf{symmetric power representation} of $\GL(2,\C)$, denoted by $\Sym^n\C^2$.
+	Choosing a basis $e_1,e_2$ for $\C^2$ gives a basis for $\Sym^n\C^2$ given by \begin{align*}
+		\set{e_1^ke_2^{n-k} \st 0\leq k \leq n}
+	\end{align*} and the action of $\GL(2,\C)$ on $\Sym^n\C^2$ is given by \begin{align*}
+		g\cdot e_1^ke_2^{n-k} = (ge_1)^k(ge_2)^{n-k}
+	\end{align*} Setting $g\in T$ we see that $e_1^ke_2^{n-k}$ is a weight vector with weight $(k,n-k)$. One
+	can quickly check that $\Sym^n\C^2$ is irreducible for all $n\in \Z_{\geq 0}$. One can also check
+	that the highest weight vector is $e_1^n$ and it has highest weight $(n,0)$.
+\end{example}
+
+\begin{example}
+	We have a familiar $1$-dimensional representation of $\GL(2,\C)$ given by the determinant map. The determinant of a diagonal matrix is the product of its diagonal entries,
+	and so this representation has weight $(1,1)$. We will denote
+	the $k$th power of the determinant map by $\det^k$ for $k\in\Z$. This is a $1$-dimensional representation with weight $(k,k)$.
+\end{example}
+
+We are now ready to state the classification theorem for finite dimensional rational irreducible representations of $\GL(2,\C)$.
+\begin{theorem}
+	Every finite dimensional rational irreducible representation of $\GL(2,\C)$ is isomorphic to \begin{align*}
+		\Sym^n\C^2 \otimes \det{}^k
+	\end{align*} for some $n\in \Z_{\geq 0}$ and $k\in \Z$.
+\end{theorem}
+We will prove this theorem by considering the weights that appear in the weight space decomposition of $V\vert_{T}$, where $T\subset \GL(2,\C)$ is the subgroup of diagonal matrices.
+
+\hfill
+
+In particular we appeal to the following facts from representation theory,
+collectively referred to as the \textbf{theorems of the highest weight}.
+\begin{theorem}\label{thm:hw}
+	\hfill
+	\begin{enumerate}
+		\item A finite dimensional rational representation $V$ of $\GL(2,\C)$ is irreducible if and only if it has a unique highest weight vector.
+		      In this case it makes sense to talk about the \text{highest weight} of $V$, defined as the weight corresponding to the highest weight vector.
+		\item Two finite dimensional rational irreducible representations of $\GL(2,\C)$ are isomorphic if and only if they have the same highest weight.
+		\item Let $V$ be a finite dimensional irreducible rational representation of $\GL(2,\C)$ with highest weight vector $v$. Then the highest weight of $V$ is contained in the set \begin{align*}
+			      \set{(a,b)\in \Z^2 \st a\geq b }
+		      \end{align*}
+		\item Every such weight above is a highest weight for some irreducible representation of $\GL(2,\C)$.
+	\end{enumerate}
+\end{theorem}
+
+We will give a short discussion of the proof of these theorems in the case of $\GL(n,\C)$.
+
+\begin{remark}
+	This theorem holds in great generality. Analagous 
+    statements are true for other algebraic groups such as $\SL(n,\C)$ and $\SO(n)$ as well as representations of complex semisimple Lie algebras,
+	but in order to make sense of such a theorem, one has to find the right notion of Borel subgroups and
+	highest weight vector.
+\end{remark}
+
+The proof in full generality is quite technical and we refer the reader to \cite{milne} for a more detailed discussion.
+
+\hfill
+
+The theorems of the highest weight immediately imply the classification theorem for finite dimensional rational irreducible representations of $\GL(2,\C)$.
+In particular let $V$ be a finite dimensional rational irreducible representation of $\GL(2,\C)$ with highest weight $(a,b)$. Then
+by looking at the highest weights (observe that if $v$ is a weight vector for $V$ with weight $\mu$ and
+$w$ is a weight vector for $W$ with weight $\nu$, then $v\otimes w$ is a weight vector for $V\otimes W$ with weight $\mu + \nu$),
+ we see that $V \cong \Sym^{a-b}\C^2 \otimes \det{}^{b}$.
+
+
+\section{Theorems of the highest weight}
+In this section we will discuss some aspects of Theorem \ref{thm:hw} in the case of $\GL(2,\C)$,
+in both the smooth setting and the algebraic setting.
+
+\subsection{The smooth setting}
+The exposition in this section follows Chapter 8 of \cite{fulton}.
+One of the main ingredients in the proof of \ref{thm:hw} is considering the induced action of $\gl(2,\C)$ on $V$,
+where $\gl(2,\C)$ is the Lie algebra of $\GL(2,\C)$. Recall that \begin{align*}
+	\gl(2,\C) = \Mat(2,\C)
+\end{align*} is a vector space equipped with a bracket operation given by the commutator. $\gl(2,\C)$
+can be identified with the tangent space of $\GL(2,\C)$ at the identity matrix. We can then consider the action of $\gl(2,\C)$ on $V$ given by \begin{align*}
+	X\cdot v = \frac{d}{dt}\bigg\vert_{t=0} \exp(tX)\cdot v
+\end{align*} where $\exp: \gl(2,\C)\to \GL(2,\C)$ is the exponential map. In particular this map is the differential of the action of $\GL(2,\C)$ on $V$.
+
+\hfill
+
+Studying the action of $\gl(2,\C)$ on $V$ is equivalent to studying the action of $\GL(2,\C)$ on $V$ because $\GL(2,\C)$ is simply
+connected. This is a general principal which reflects the fact that any map of Lie groups $G\to H$
+with $G$ simply connected is determined by its differential at the identity. Then one can show the following lemma:
+\begin{lemma}\label{lemma:liealg}
+	A subspace $W$ of a representation of $\GL(2,\C)$ is a subrepresentation if and only if $W$ is stable under the action of $\gl(2,\C)$.
+\end{lemma}
+We refer the reader to Chapter 3 of \cite{bourbaki} for a proof of this lemma.
+This discussion justifies our passing from the study of $\GL(2,\C)$ to the study of $\gl(2,\C)$.
+
+\hfill
+
+Just as we obtained a decomposition of $V$ as a $\GL(2,\C)$ into eigenspaces for the action of $T$,
+there is an analagous decomposition for the action of $\gl(2,\C)$.
+The object which replaces our maximal torus $T\subset\GL(2,\C)$ is the \textbf{Cartan subalgebra} $\mf h\subset \gl(2,\C)$.
+For us, $\mf h$ will be the subspace of diagonal matrices in $\gl(2,\C)$. In general, $\mf h$ is a maximal abelian subalgebra of $\gl(2,\C)$.
+
+\hfill
+
+We can obtain a decomposition of $V$ into eigenspaces for the action of $\mf h$: \begin{align*}
+	V & = \bigoplus_{\chi\in \mf h^*} V_\chi
+\end{align*} where $V_\chi = \{v\in V \st X\cdot v = \chi(X)v \text{ for all $X\in \mf h$}\}$. Moreover
+$\gl(2,\C)$ acts on itself via the bracket (adjoint representation) and we can
+decompose this action \begin{align*}
+	\gl(2,\C) & \cong \mf h \oplus \mf g_{\alpha} \oplus \mf g_{-\alpha} \\
+	          & \cong \mf h \oplus \C e \oplus \C f
+\end{align*} where $\alpha\bigg(\begin{bmatrix}
+			d_1 & 0   \\
+			0   & d_2
+		\end{bmatrix}\bigg) = d_1 - d_2$ and \begin{align*}
+	e & = \begin{bmatrix}
+		      0 & 1 \\
+		      0 & 0
+	      \end{bmatrix} \\
+	f & = \begin{bmatrix}
+		      0 & 0 \\
+		      1 & 0
+	      \end{bmatrix}
+\end{align*} One can check that for all $h\in \mf h$ we have  \begin{align*}
+	[h, e] & = \alpha(h)e \\ [h, f] &= -\alpha(h)f
+\end{align*} The weights which appear in the adjoint representation of $\gl(2,\C)$ are called the \textbf{roots}.
+We will say $\alpha$ is a \textbf{positive root} and $-\alpha$ is a \textbf{negative root}, $\C e$ and $\C f$ the corresponding positive and negative root spaces.
+Then a weight vector $v\in V$ is a highest weight vector if and only if $e\cdot v = 0$.
+
+\hfill
+
+We care about roots of the adjoint representation for the following reason. Let $V$ be a finite dimensional rational representation of $\gl(2,\C)$.
+Decompose $V$ into eigenspaces for the action of $\mf h$ as before: \begin{align*}
+	V = \bigoplus_{\chi \in \mf h^*} V_\chi
+\end{align*} Knowing how $\mf h$ acts on $V$, we now need to investigate the action of $e$ and $f$. As it turns out,
+$e$ and $f$ are operators which translate between the weight spaces.
+Specifically, let $v$ be an weight vector for the action of $\mf h$ with weight $\chi$.
+Then $e\cdot v$ is a weight vector with weight $\chi + \alpha$. Indeed for $X\in \mf h$ we have (recall the action of the Lie algebra respects brackets)
+\begin{align*}
+	X\cdot ev & = e \cdot Xv + [X,e]\cdot v \\
+	          & = \chi(X)ev + \alpha(X)ev
+\end{align*}
+
+A priori, we know nothing about the weights of $V$. Now we know that all of the weights of $V$ are translates of each other by the roots of
+$\gl(2,\C)$. Now let $\mu$ be any weight which appears in the decomposition of $V$. Then we can consider the translates \begin{align*}
+	\mu + \Z\alpha
+\end{align*} and since $V$ is finite dimensional, only finitely many of the weight spaces of $V$ corresponding to these weights are nonzero.
+Recall we picked a positive system, so now it makes to talk about the highest weight (it is the weight $\chi$ so that all of the weights $\chi + \N\alpha$
+correspond to empty weight spaces).
+
+\hfill
+
+If $V$ is an irreducible representation then a highest weight vector must span its root space. This is because
+if $v$ is a highest weight vector, then one can show that the subspace generated by $v$, $f\cdot v$, $f^2\cdot v$, $\ldots$ is a subrepresentation.
+It follows that an irreducible representation can have only one highest weight vector (up to scale).
+
+\subsection{The algebraic setting}
+In order to justify the passage from $\GL(2,\C)$ to $\gl(2,\C)$, we made use of the exponential map.
+This is not available in the category of varieties. However we can still make sense of the Lie algebra of an algebraic group
+and the induced action of the Lie algebra on a vector space.
+To do so we need to pass to the Zariski tangent space of a variety.
+
+\begin{definition}
+	Let $A$ be a local ring and $\mf m$ its maximal ideal. The residue field $k$ of $A$ is the field $A/\mf m$ and
+	the \textbf{Zariski cotangent space} of $A$ is the $k$-vector space $\mf m/\mf m^2$. The
+	\textbf{Zariski tangent space} of $A$ is the dual vector space $\Hom_k(\mf m/\mf m^2,k)$.
+	If $X$ is a variety and $p\in X$, then we define the \textbf{ Zariski tangent space of $X$ }at $p$
+	to be the Zariski tangent space of $\cO_{X,p}$.
+\end{definition}
+
+
+To make sense of this definition, we need to borrow a little motivation from the theory of differentiable manifolds.
+If $M$ is a smooth manifold, tangent vectors at a point $p\in M$ are in one-to-one correspondence
+with derivations of the ring of germs of smooth functions at $p$, i.e. $\R$-linear maps $\cO_{M,p}\to \R$ which satisfy the Leibniz rule
+\begin{align*}
+	D(fg) = f(p)Dg + g(p)Df
+\end{align*} for all $f,g\in \cO_{M,p}$. 
+We refer to chapter 3 of \cite{lee} for a more detailed discussion of this point of view.
+
+\hfill
+
+\begin{proposition}
+	Let $X$ be a variety over a field $k$ and let $p\in X$. Consider
+    the local ring $\cO_{X,x}$ and its maximal ideal $\mf m$. Let $k(p)$
+    be the residue field of $\cO_{X,p}$. It coincides with $k$.
+	There is an isomorphism \begin{align*}
+		\Hom_k(\mf m/\mf m^2,k) & \cong \Der_k(\cO_{X,p},k(x))
+	\end{align*}
+\end{proposition}
+
+\begin{proof}
+	A derivation is precisely the data of a $k$-linear map $\mf m \to k$ which satisfies the Leibniz rule.
+	This extends to a $k$-linear map $\cO_{X,p}\to k$ by precomposing with $f\mapsto f - f(p)$.
+	Moreover $\mf m^2$ maps to zero because if $f(p) = g(p) = 0$ then \begin{align*}
+		D(fg) = f(p)Dg + g(p)Df = 0
+	\end{align*} Therefore, a derivation induces an element of the tangent space of $X$ at $p$.
+
+	\hfill
+
+	Conversely if we have a $k$-linear map $\mf m/\mf m^2\to k$, precompose with the quotient map to get
+	$D:\mf m\to k$. Then we have to show that $D$ satisfies the Leibniz rule. This is a straightforward computation.
+	Let $f,g\in \cO_{X,p}$. Then $(f-f(p))(g-g(p)) \in \mf m^2$ and so \begin{align*}
+		0 = D((f-f(p))(g-g(p))) & = D(fg - f(p)g - fg(p) + f(p)g(p)) \\
+		\implies D(fg)          & = f(p)Dg + g(p)Df
+	\end{align*} since constants derive to zero and so $D$ is a derivation.
+    It is clear that these two maps are inverses of each other.
+\end{proof}
+
+Now we can make sense of the Lie algebra of an algebraic group.
+\begin{definition}
+	Let $G$ be an algebraic group. The \textbf{Lie algebra} of $G$, denoted $\mf g$
+	is the Zariski tangent space of $G$ at the identity.
+\end{definition}
+
+Note that if $\alpha: G\to W$ is a morphism of varieties, then there is an induced
+map $\cO(W) \to \cO(G)$ on coordinate rings, and this map is local in the sense that
+$\cO_{W,\alpha(p)}\to \cO_{G,p}$ is a local ring homomorphism for all $p\in G$. Geometrically
+this is saying that if a regular function on $W$ vanishes at a point $\alpha(p)$,
+then its pullback to $G$ vanishes at $p$.
+
+\hfill
+
+In particular we see that a morphism of varieties $\alpha$ has a differential $d\alpha$ which takes
+a derivation $D:\cO_{W,\alpha(p)}\to k$ to a derivation $d\alpha(D):\cO_{G,p}\to k$. Letting $W = \GL(V)$
+we see that the differential of the action of $G$ on $V$ gives us a Lie algebra representation (in the sense that
+it respects the bracket) of $\mf g$ on $V$.
+
+\hfill
+
+Then again one proves that Lemma \ref{lemma:liealg} holds in the algebraic setting and
+so we have reduced to the study of the action of $\mf g$ on $V$. A reference for this
+proof can be found in Chapter 1 of \cite{borel}.
+We can then proceed as in the smooth setting to prove Theorem \ref{thm:hw}.
+
+%%% -------------------------------------------------------------------
+%%% -------------------------------------------------------------------
+%%% This is where we create the bibliography.
+
+\bibliography{refs}{}
+\bibliographystyle{plain}
+
+\end{document}

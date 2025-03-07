@@ -1,0 +1,46 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{scribe}
+\usepackage{listings}
+\usepackage{quiver}
+\usepackage{tikz}
+
+
+\begin{document}
+Songyu Ye
+
+\today
+\section{Introduction}
+Collection of things I had on my notepad that should be written down before I throw away
+\section{Math}
+We have the invariants and coinvariants functor \begin{align*}
+    V\mapsto V^{\mf g}\\
+    V\mapsto V\otimes_{\mf g} \C \cong V/\mf g V
+\end{align*} and their derived functors denoted $H^k(\mf g, V)$ and $H_k(\mf g, V)$. We have free resolutions
+
+We compute them by taking projective and injective resolutions for $V$, which arise from
+the following construction. We have the Koszul resolution \begin{align*}
+    0 \leftarrow \C \leftarrow X_0 \leftarrow X_1 \leftarrow \cdots
+\end{align*} where $X_i = U(\mf g)\otimes \Lambda^i \mf g$. This is a free resolution of $\C$ as a $U(\mf g)$-module. 
+We can apply the functors $\cdot \otimes_\C V$ and $\Hom_\C(\cdot, V)$ to get projective and injective resolutions for $V$,
+which are known as the \textbf{standard projective resolution} and \textbf{standard injective resolution} respectively.
+
+This cohomology theory satisfies Poincare duality:
+\begin{theorem}
+    If $\mf g$ is finite dimensional of dimension $N$ and $V$ is a finite dimensional $\mf g$-module, then
+    \begin{align*}
+        H^k(\mf g, V^*) &\cong H_{n}(\mf g, V)^* \\
+        H^k(\mf g, V) &\cong H_{N-n}(\mf g, V\otimes_\C (\Lambda^N \mf g)^*)
+    \end{align*}
+\end{theorem}
+\begin{proof}
+    One builds a map on the level of chain complexes and the map looks like \begin{align*}
+        \Lambda^n\mf g \otimes_\C V \otimes_\C (\Lambda^N \mf g)^* \to \Hom_\C(\Lambda^{N-n}\mf g, V)
+        (\zeta,v,\varepsilon)\mapsto \lambda_{\zeta,v,\varepsilon} \\
+        \lambda_{\zeta,v,\varepsilon}(\gamma) = \varepsilon(\zeta \wedge \gamma )v
+    \end{align*}
+\end{proof}
+
+\end{document}

@@ -1,0 +1,1291 @@
+Let $G$ act smoothly on a smooth complex algerbaic variety $X$. Let $E$ be a $G$-equivariant vector bundle on $X$.
+There is a linearized action of $\mf g$ on the space of sections of $E$. First we will explain this when $E = TX$ is the tangent bundle.
+
+\begin{theorem}
+	There is a map $\exp:\mf g \to G$ which takes $X = [\gamma] \in \mf g$ to $\gamma(1) \in G$ where $\gamma:\R \to G$ is the unique one-parameter subgroup of $G$ with tangent vector $X$ at $1$.
+\end{theorem}
+Therefore, given an element $X \in \mf g$, we can define a vector field $X_X$ on $X$ by
+how it acts on a function $f\in C^\infty(X)$:
+\begin{align*}
+	X_X(f)(p) = \frac{d}{dt} f(\exp(tX)p)|_{t=0} = \lim_{h\to 0} \frac{f(\exp(hX)p) - f(p)}{h}
+\end{align*}
+Another way of thinking about it is the map $\gamma(t)\cdot p:\R\to X$ is a path in $X$ whose tangent vector at time $0$ is precisely $X_X$.
+This gives $\mf g$ acting on vector fields via bracket with $X_X$.
+
+\hfill
+
+Now let $E$ be a $G$-equivariant vector bundle on $X$. Given
+$X\in \mf g$ we can define a section of $E$ by
+\begin{align*}
+	E_p \ni X_E(p) = \lim_{h\to 0} \frac{E_{\exp(hX)p} - E_p}{h}
+\end{align*} but we crucially need to know how to transport $E_p$ to $E_{\exp(hX)p}$.
+This is where the notion of a connection comes in. Basically we have a canonical choice of
+connection because there is an action of $G$ on the total space of $E$ compatible with the projection to $X$.
+
+\hfill
+
+Morally an action of $G$ on $X$ is a map $G\to \Aut(X)$ which we can differentiate to get a map
+$\mf g \to \Der(\cO_X)$. Vector bundles on $X$ correspond to $\cO_X$-modules, i.e. maps $\cO_X
+	\to \Gamma(X,E)$, and so given $X\in \mf g$ we get a map $\cO_X\to \cO_X \to \Gamma(X,E)$, i.e.
+we have an automorphism of the total space of $E$ which gets an an action on the sections.
+
+\hfill
+
+\textbf{What is the appropraite analog for the universal enveloping algebra for derivations of $\cO_X$?}
+The answer is the ring of differential operators $\cD_X$ on $X$.
+
+\subsection{Distributions}
+Ultimately our goal is to define the pushforward of a $\cD$-module along a map of varieties.
+The trouble with this is that we like to think of the
+ring of differential operators as acting on functions, but functions don't pushforward. The correct
+thing to let the ring of differential operators act on is distributions. In fact,
+this parity is precisely the distinction between the left (functions) and right (distributions) $\cD$-modules.
+
+
+\begin{example}
+	\red{This is uncertain.}
+	"Distributions are things which one can integrate functions against.
+	Therefore, to specify a distribution, it suffices to specify how it integrates functions. For us,
+	algebraic distributions will be the sections of top exterior power of the cotangent bundle."
+
+	\hfill
+
+	Another thing that you might hear is that distributions
+	on a smooth manifold are smooth subbundles of $TM$. This makes sense because if you want to integrate
+	a function $f$ over a manifold $M$, you integrate the $n$-form $f\,dx_1\wedge \cdots \wedge dx_n$ over
+	the $n$-manifold. In fact, all of the $n$-forms on an oriented $n$-manifold look like this.
+	"The top exterior power of the cotangent bundle is trivial on an oriented manifold." This gives an
+	explanation why $\Omega_X$ is called the "canonical bundle" of $X$.
+
+	\hfill
+
+	There is a corresponding subbundle of $TX$ of corank $1$ given by the tangent bundle of the
+	hypersurface $f=0$. This is the "delta function" supported on the hypersurface $f=0$ and is the
+	corresponding smooth subbundle alluded to above.
+\end{example}
+
+\subsection{Pushforward}
+Left $\cD$-modules are about functions. Right $\cD$-modules are about distributions.
+We can go from functions to distributions by tensoring with the top exterior power of the cotangent bundle
+(or its dual).
+
+\hfill
+
+Let $X\to Y$ be a closed embedding of smooth varieties. We want to define the pushforward
+of a right $\cD_X$-module to a right $\cD_Y$-module. For simplicity we
+introduce an object called the transfer module.
+
+\begin{definition}
+	The \red{transfer $\cD_X$-module} is defined by \begin{align*}
+		\cD_{X\to Y} = f^*\cD_Y = \cO_X\otimes_{f^{-1}\cO_Y} \cD_Y
+	\end{align*}
+\end{definition}
+where the $m_i$ are local coordinates, and the $\partial_i$ are the corresponding derivations.
+As an $\cO_X$-module, it coincides with the standard pullback of $\cD_Y$ as an $\cO_Y$-module.
+It carries a left $\cD_X$-module structure by the rule \begin{align*}
+	\theta \cdot (a\otimes f^{-1}(m)) = \theta(a)\otimes f^{-1}(m) + a\sum_i \theta(f^{-1}(m_i)\otimes \partial_i m)
+\end{align*} and a right $f^{-1}\cD_Y$-module structure as well.
+
+\red{We need to define the pushforward for right $\cD_X$ modules because distributions push forward.}
+\begin{definition}
+	There is also a \red{transfer $\inv{f}(\cD_Y)$-$\cD_X$ bimodule going
+		the other way} $\cD_{Y \leftarrow X}$ defined as \begin{align*}
+		\cD_{Y\leftarrow X} = \Omega_X\otimes_{\cO_X} \otimes_{f^{-1}\cO_Y} \inv{f}\Omega_Y^{-1}
+	\end{align*}
+\end{definition}
+This allows us to define the pushforward of a left $\cD_X$-module to a left $\cD_Y$-module.
+\begin{definition}
+	For \red{pushforward of left $\cD$-modules }we define \begin{align*}
+		f_*M = f_*(\cD_{Y\leftarrow X}\otimes_{\cD_X} M)
+	\end{align*}
+\end{definition}
+\red{Pushforward of $\cD$-modules is left exact (maybe?)}
+
+
+\begin{definition}
+	Let $f:X\to Y$ be a smooth map of smooth varieties.
+	Let $M$ be a right $\cD_X$-module. The \textbf{pushforward} $f_*M$ is defined to be the tensor product
+	$M\otimes_{\cD_X} \cD_{X\to Y}$. It is a right $\cD_Y$-module.
+\end{definition}
+
+\subsection{Pullback}
+
+\begin{definition}
+	To define the pullback we start with the pullback of $\cO$-modules. \begin{align*}
+		f^*N = \cO_X\otimes_{f^{-1}\cO_Y} N
+	\end{align*} It turns out to carry a left $\cD_X$-module structure in the same way as the transfer module.
+	By the associatitivity of tensor product,
+	we can also write it as \begin{align*}
+		f_*N = \cD_{X\to Y}\otimes_{\cD_Y} N
+	\end{align*} and therefore we have a right exact functor \begin{align*}
+		f^*:\cD_Y\Mod \to \cD_X\Mod
+	\end{align*}
+\end{definition}
+
+\subsection{Correspondence between left and right $\cD$-modules}
+A differential operator $P(x,\partial) = \sum_{\alpha} a_\alpha(x)\partial^\alpha$ has a formal adjoint
+$P^t(x,\partial)$ which is defined by \begin{align*}
+	P^t(x,\partial) = \sum_{\alpha} (-\partial)^\alpha a_\alpha(x)
+\end{align*} which satisfies $(PQ)^t = Q^tP^t$. The left action of differential operators on
+functions is given by differentiation. The right action of diffrential operators distributions is given by
+acting by the formal adjoint \begin{align*}
+	(a(p)dx_1 \wedge \cdots \wedge dx_n)\cdot X := (P^t(X)a(p))(dx_1\wedge \cdots \wedge dx_n)
+\end{align*}
+
+\section{Deriving things}
+\subsection{$\cD$-affineness}
+\begin{definition}
+	$X$ is \textbf{$\cD$-affine} if every quasicoherent $\cD_X$-module is the
+	"twiddleification" of a $\Gamma(X,\cD_X)$-module.
+\end{definition}
+Every affine variety is $\cD$-affine. Projective spaces and
+the flag variety for a reductive group are $\cD$-affine.
+
+\begin{remark}
+	Spaces which are $\cD$-affine are not necessarily $\cD^{op}$-affine. For example,
+	\begin{align*}
+		\Gamma(\P^1,\cD_{\P^1})      & = U(\mf{sl}_2)/Z(U(\mf{sl}_2)) \text{\red{ would like more explicitly}} \\
+		\Gamma(\P^1,\cD_{\P^1}^{op}) & = \Gamma(\P^1,\Omega_{\P^1}) = 0
+	\end{align*} since the anticanonical sheaf of $\P^1$ is negative.
+\end{remark}
+
+\begin{proposition}
+	\begin{enumerate}
+		\item $\cD_X$ is a coherent sheaf of rings.
+		\item $\cD_X$-modules are coherent if and ony if they are quasicoherent over $\cO_X$ and
+		      finitely generated over $\cD_X$.
+		\item $\cD_X$-modules are coherent if and only if they are integrable connections (need
+		      locally freeness) in which case taking $\Spec$ gets us a vector bundle with integrable
+		      connection over our variety $X$.
+	\end{enumerate}
+\end{proposition}
+
+\subsection{Derived pullback}
+Recall that $f^*:\cD_Y\Mod \to \cD_X\Mod$ is a right exact functor. Therefore,
+homological algebra tells we get left derived functors $Lf^*:D(\cD_Y\Mod) \to D(\cD_X\Mod)$.
+Assume that our varieties are quasiprojective. Then this guarentees that
+the following story works:
+
+\begin{proposition}
+	Let $M$ be a quasicoherent $\cD_X$-module. Then there
+	exist two resolutions
+	\begin{align*}
+		\cdots \to F_1 \to F_0 \to M \to 0 \\
+		0 \to P_n \to \cdots \to P_0 \to M \to 0
+	\end{align*} where the $F_i$ are locally free and the $P_i$ are locally projective.
+\end{proposition}
+The existence of finite projective resolutions tells us that $Lf^*$ restricts to the bounded
+derived category $D^b(\cD_Y\Mod) \to D^b(\cD_X\Mod)$.
+
+
+\begin{proposition}
+	$Lf^*$ moreover preserves quasicoherent cohomology sheaves. It does not
+	preserve coherent cohomology sheaves because you can pick up infinite rank.
+\end{proposition}
+
+\begin{definition}
+	The shifted derived pullback is defined by \begin{align*}
+		Lf^\dagger M = Lf^*[\dim X - \dim Y]
+	\end{align*} is more natural in the Riemann Hilbert correspondence.
+\end{definition}
+
+\begin{proposition}
+	Let $f:X\to Y$ be a smooth map of smooth varieties and $M\in \Mod(\cD_Y)$. Then
+	$Lf^*M$ has no higher cohomology. If $M$ is coherent, then the nonzero part (at most 1)
+	$Lf^*M$ is coherent.
+\end{proposition}
+
+Recall that a map $i:X\to Y$ of varieties
+makes $\cO_X$ into a $i^{-1}\cO_Y$-module and that
+the inverse image functor in the category of $\cO_Y$-modules is defined by \begin{align*}
+	i^*\cG := i^{-1}\cG \otimes_{i^{-1}\cO_Y} \cO_X
+\end{align*} because $i^{-1}\cG$ is a sheaf of $i^{-1}\cO_Y$-modules and
+we have a ring homomorphism $i^{-1}\cO_Y \to \cO_X$ coming from the adjoint to $i_*\cO_X \to \cO_Y$.
+In particular, if we have $f:\Spec A \to \Spec B$ then $f^*M = M\otimes_B A$.
+
+\begin{definition}
+	Define the inverse image functor for $\cD$-modules by \begin{align*}
+		i^\natural : \Mod(\cD_Y) \to \Mod(\cD_X)
+	\end{align*} by the formula \begin{align*}
+		i^\natural M = \Hom_{i^{-1}\cD_Y}(\cD_{Y\leftarrow X},\inv{i}M)
+	\end{align*}
+\end{definition}
+Recall the shifted inverse image functor $i^\dagger  = Li^*[\dim X - \dim Y]$.
+
+\begin{proposition}
+	$i^\natural$ is left exact. For closed embeddings $i$ we have $i^\dagger M\cong Ri^\natural M$.
+\end{proposition}
+
+\subsection{Derived pushforward}
+There are functors \begin{align*}
+	D^b(\cD_X) \to D^b(f^{-1}\cD_Y) \to D^b(\cD_Y\Mod)
+\end{align*}
+which take $M \mapsto \cD_{Y\leftarrow X}\otimes_{\cD_X}^L M$ and $N\mapsto Rf_*N$ respectively.
+Their composition is \textbf{the derived directed image }denoted \begin{align*}
+	\int_f M: D^b(\cD_X) \to D^b(\cD_Y)
+\end{align*} We state some of the properties of this functor.
+\begin{proposition}
+	\hfill
+	\begin{enumerate}
+		\item $\int_f$ preserves quasicoherence, and if $f$ is proper, it preserves coherence.
+		\item $\int_f = Rj^*$ if $j$ open.
+		\item The direct image is locally exact. In particular if $i:X\to Y$ closed and $M\in\Mod(\cD_X)$ then
+		      $\int_f^i := H^i(\int_f M)$ is zero for all $i\neq 0$ and $\int_f^0$ is quasicoherent if $M$ is.
+		\item $i^\natural$ and $\int_f$ are adjoints.
+	\end{enumerate}
+\end{proposition}
+
+\subsection{Kashiwara's equivalence}
+For closed embedding $X\to Y$ we saw that $\int_f^0$ is exact and $\int_f^0 M$ is a $\cD_Y$-module
+supported on $X$. \red{Let the category of such $\cD_Y$-modules be denoted $\Mod^X(\cD_Y)$.}
+
+\begin{theorem}
+	[Kashiwara's equivalence] The functor $\int_f^0$ induces an equivalence of categories \begin{align*}
+		\Mod_{qc,c}(\cD_X) \to \Mod^X_{qc,c}(\cD_Y)
+	\end{align*}
+	with quasiinverse $i^\natural$.
+\end{theorem}
+
+\subsection{Base change theorem}
+The following story really captures the essence of derived categories. Let \begin{align*}
+	Z \xrightarrow{i} X \xleftarrow{j} U
+\end{align*} be complements and $F$ an injective sheaf of $X$. There is a short exact sequence \begin{align*}
+	0 \to \Gamma_Z F \to F \to j_*j^{-1}F \to 0
+\end{align*} which gives a distinguished triangle in the derived category for every $F^\bullet \in D^b(\C_X)$
+\begin{align*}
+	R\Gamma_Z(F^\bullet) \to F^\bullet \to Rj_*j^{-1}F^\bullet \to +1
+\end{align*}
+\red{We have the following abstract nonsense.}
+\begin{proposition}
+	\hfill
+	\begin{enumerate}
+		\item For $M^\bullet \in D^b_{qc}(D_X)$ we have a canonical distinguished triangle \begin{align*}
+			      R\Gamma_Z(M^\bullet) \to M^\bullet \to \int_j j^\dagger M^\bullet \to +1
+		      \end{align*}
+		\item $Z$ smooth and $M\in D^b_{qc}(D_U)$ then \begin{align*}
+			      i^\dagger\int_j M = 0
+		      \end{align*}
+		\item Z smooth and $M^\bullet\in D^b_{qc}(D_X)$ then \begin{align*}
+			      R\Gamma_Z(M^\bullet) = \int_i i^\dagger M
+		      \end{align*}
+	\end{enumerate}
+\end{proposition}
+\section{Coherent $\cD$-modules}
+Coherent $\cD$-modules can be studied with the geometry of $T^*X$.
+\subsection{Characterstic cycles}
+If $M$ is a coherent $\cD_X$ module, choose a good filtration on it and then
+$\gr^F M$ is a coherent $\pi^*\cO_{T^*X}$-module.
+
+\begin{definition}
+	Let $\tilde{\gr^F M} = \gr^F M\otimes_{\pi^{-1}\cO_{T^*X}} \cO_{T^*X}$. The support of this module
+	is $\Ch(M)$ \red{the characterstic variety of $M$}. It does not depend on the choice of good filtration.
+\end{definition}
+
+\begin{remark}
+	We can also take cycle invariants, which also do not depend on the choice of good filtration. Explicitly,
+	let $C$ be a irreducible component of the characteristic variety of $M$. Then the cycle invariant comes from taking the
+	multiplicity of the component $C$ as follows.
+
+	\hfill
+
+	Pick an open set $U$ so that $\overline{C\cap U} = C$. \red{$U$ is a rational coordinate chart.} $C\cap U$ is closed
+	in $U$ so take its defining ideal $\mf p$. Then we
+	have a local ring $\cO_U(U)_{\mf p}$ and a module over this local ring $M_{\mf p}$.
+	They are the stalks of $ \cO_X$ and $M$ at the generic point of $C$ respectively. By commutative algebra,
+	the length of $M_{\mf p}$ as a module over $\cO_U(U)_{\mf p}$ is finite and defined as the multiplicity of $C$.
+\end{remark}
+
+\begin{example}
+	When $M$ is an integrable connection, the following are equvialent:
+	\begin{enumerate}
+		\item $M$ is an integrable connection.
+		\item $M$ is coherent over $\cO_X$
+		\item $\Ch(M) = $ zero section of $T^*X$.
+	\end{enumerate}
+\end{example}
+
+\subsection{Holonomic $\cD$-modules}
+\begin{definition}
+	A $\cD_X$-module $M$ is \textbf{holonomic} if $\dim \Ch(M) = \dim X$ is as large as possible.
+\end{definition}
+Character varietyies of holonomic $\cD$-modules are $\C^*$ invariant Lagrangian subvarieties of $T^*X$.
+\begin{example}
+	Integrable connections are holonomic.
+\end{example}
+\begin{example}
+	Let $i:X\to Y$ be closed smooth subvariety. Let \begin{align*}
+		B_{X\vert Y} := \int_i^0 \cO_X \in \Mod^X_{qc}(D_Y)
+	\end{align*}
+	Then $B_{X\vert Y}$ is holonomic and $\Ch(B_{X\vert Y}) = T^*_XY$ the conormal bundle of $X$ in $Y$.
+	When $X = *$ we can apply Kashiwara equivalence to get that \begin{align*}
+		\Mod_{qc}^*(D_Y) \cong \Vect_\C \\
+		B_{*\vert Y} \iff \C
+	\end{align*} which implies that objects in the left hand side are direct sums of $B_{*\vert Y}$.
+\end{example}
+
+\subsection{Duality functors}
+We begin with a motivating example. Let $X = \C$
+and $M = \cD_X/\cD_XP$ where $P\neq 0$. There is a short exact sequence \begin{align*}
+	0 \to \cD_X \xrightarrow{P} \cD_X \to M \to 0
+\end{align*} which gives \begin{align*}
+	0 \to \Hom_{\cD_X}(M,\cD_X) \to D_X \xrightarrow{P} D_X \to \Ext^1_{\cD_X}(M,\cD_X) \to 0
+\end{align*} and so we see that \begin{align*}
+	\Ext^0(M,\cD_X) = \Hom_{\cD_X}(M,\cD_X) = 0 \\
+	\Ext^1(M,\cD_X) = D_X/PD_X
+\end{align*} Sidechanging $\Ext^1$ gives us the left $\cD$-module $D_X/P^*D_X$.
+
+\red{$\Ext^1$ is more suited to be called the dual than $\Ext^0$}. In general,
+if $n = \dim X$ and $M$ is a holonomic $\cD_X$-module, then \begin{align*}
+	\Ext^n_{\cD_X}(M,\cD_X)
+\end{align*} is the only nonzero $\Ext$ group and the left $\cD_X$-module \begin{align*}
+	\D M := \Ext^n_{\cD_X}(M,\cD_X) \otimes \Omega_X^{-1}
+\end{align*} is also holonomic. For a non-holonomic $M$, the other $\Ext$ groups are generally nonzero
+and therefore $\D$ is defined in the derived category:
+
+\begin{definition} We define the \red{duality functors}
+	\begin{align*}
+		\D: D^-(\cD_X) \to D^+(\cD_X)^{op} \\
+		\D M := R\Hom_{\cD_X}(M,\cD_X) \otimes \Omega_X^{-1}[\dim X]
+	\end{align*}
+\end{definition}
+\begin{example}
+	We have the example $H^k(\D \cD_X) = D_X\otimes \Omega_X^{-1}$ if $k = -\dim X$ and $0$ otherwise.
+\end{example}
+\begin{example}
+	$ \D B_{X\vert Y} = B_{Y\vert X}$
+\end{example}
+\begin{example}
+	$\D M = \Hom_{\cO_X}(M,\cO_X)$ if $M$ is an integrable connection.
+\end{example}
+\begin{proposition}
+	If $X$ is a smooth variety and $M$ is a coherent $\cD_X$-module, then \begin{align*}
+		\Ch(M) = \bigcup_{d_X\leq i\geq 0} \Ch(\Ext^i_{\cD_X}(M,\cD_X)\otimes_{\cO_X}\Omega_X^{-1})
+	\end{align*} In particular $\Ch(M) = \Ch(\D M)$ if $M$ is holonomic.
+\end{proposition}
+
+\section{Holonomic $\cD$-modules}
+Holonomic $\cD$-modules enjoy very nice properties. We learned about all of the
+previous functors and constructions in order to construct examples of holonomic $\cD$-modules.
+
+\subsection{Basic results}
+\begin{proposition}
+	\begin{enumerate}
+		\item
+	\end{enumerate}
+	An exact sequence of coherent $\cD_X$-modules \begin{align*}
+		0 \to M' \to M \to M'' \to 0
+	\end{align*} implies that $M$ is holonomic if and only if $M$ and $M''$ are holonomic.
+\end{proposition}
+
+\begin{proposition}
+	Let $M$ be a holonomic $\cD_X$-module. Then there
+	exists an open $U\subset X$ for which $M|_U$ is coherent over $\cO_U$.
+	In other words, $M$ is generically a integrable connection.
+\end{proposition}
+
+\begin{definition}
+	Let $D^b_h(\cD_X)$ be the full subcategory of $D^b(\cD_X)$ consisting of complexes with
+	holonomic cohomology sheaves.
+\end{definition}
+
+\begin{remark}
+	Beilinson proved that you can consider the category with holonomic $\cD$-modules as objects and the answer is the same.
+	\begin{align*}
+		D^b_h(\cD_X) \cong D^b(\Mod_h(\cD_X))
+	\end{align*}
+\end{remark}
+
+\begin{proposition}
+	Duality preserves holonomicity. In particular,
+	\begin{align*}
+		\D_X:\Mod_h(\cD_X) \to \Mod_h(\cD_X)^{op} \\
+		\D_X: D^b_h(\cD_X) \to D^b_h(\cD_X)^{op}
+	\end{align*} are equivalences of categories.
+\end{proposition}
+
+Recall for morphism $f:X\to Y$ of smooth varieties we have the \red{direct and inverse image} functors \begin{align*}
+	\int_f: D^b_{qc}(D_X) \to D^b_{qc}(D_Y) \\
+	f^\dagger: D^b_{qc}(D_Y) \to D^b_{qc}(D_X)
+\end{align*}
+
+Moreover, we have proper pushforward and smooth pullback of coherent $\cD$-modules (but not for general maps!)
+Remarkably however, holonomicity is preserved by these functors for general maps.
+
+\begin{theorem}
+	Let $f:X\to Y$ be a morphism of smooth varieties. Then \begin{align*}
+		\int_f: D^b_h(D_X) \to D^b_h(D_Y) \\
+		f^\dagger: D^b_h(D_Y) \to D^b_h(D_X)
+	\end{align*}
+\end{theorem}
+
+\begin{proof}
+	It is enough to prove that $\int_f$ preserves holonomicity when $f$ is the projection $\C^n\to \C^{n-1}$. We will explain this
+	in a bunch of steps because it is not obvious at all.
+
+	\hfill
+
+	First, it's true for closed embeddings. In particular if $i:X\to Y$ is a closed embedding, then
+	\begin{align*}
+		M^\bullet\in D^b_h(\cD_X) \iff \int_i M^\bullet \in D^b_h(\cD_Y)
+	\end{align*} This is not hard. Then we factor $f$ as a composition of a closed embedding and a projection by using
+	its graph. Now we just have to show the claim for projections. Reduce to local arguments and
+	then we see that it is enough to prove the claim for $\C^n\to \C^{n-1}$.
+
+	\hfill
+
+	Finally the claim about pushforwards implies the claim about pullbacks generally.
+\end{proof}
+
+It remains to prove that the pushforward along the projection $\C^n\to \C^{n-1}$ preserves holonomicity.
+
+\subsection{Holonomicity of modules over the Weyl algebra}
+Let $D_n$ be the Weyl algebra in $n$ variables.
+\begin{definition}
+	Let $N$ be a $D_n$-module. The \red{Fourier transform} of $N$ is the $D_n$-module $\hat N$ which is the same abelian group,
+	but the generators $x_i,\partial_i \in D_n$ act differently.
+	\begin{align*}
+		x_i \cdot f = -\partial_i f \\
+		\partial_i \cdot f = x_i f
+	\end{align*} is an involution.
+\end{definition}
+\begin{proposition}
+	Let $p:\C^n\to \C^{n-1}$ be the projection and $i:\C^{n-1}\to \C^n$ the zero section. Then \begin{align*}
+		H^k\int_p M \cong H^k Li^*\hat{M}
+	\end{align*}
+	for any $k$ and any $D_n$-module $M$.
+\end{proposition}
+
+\begin{proposition}\label{prop:fourier_transform_holonomic}
+	A coherent $D_n$ module is holonomic if and only if its Fourier transform is.
+\end{proposition}
+
+\begin{proposition}\label{prop:holonomicity_pushforward}
+	Let $j:\C^*\times\C^n\to\C^{n+1}$ the inclusion. If $M$ is a holonomic $D_n$-module then so is \begin{align*}
+		H^0\int_j j^\dagger M
+	\end{align*}
+\end{proposition}
+These propositions, which we will prove next, immediately imply the theorem. The distinguished triangle
+\begin{align*}
+	\int_i i^\dagger M \to M \to \int_j j^\dagger M \to +1
+\end{align*} gives an exact sequence \begin{align*}
+	0 \to H^0\int_i i^\dagger M \to M \to H^0\int_j j^\dagger M \to H^1\int_i i^\dagger M \to 0
+\end{align*} and note that $H^0\int_j j^\dagger M$ is holonomic by the proposition. Therefore, $i^\dagger M$ is holonomic
+because $H^0$ and $H^1$ are (holonomicity behaves really well under extension).
+
+\subsection{Hilbert series}
+This section is devoted to the proof of the above propositions.
+Fix the Bernstein filtration on $D_n$ (filtered by degree of symbols) and we define a notion of a \red{good filtration} on a $D_n$-module $M$ with
+respect to the Bernstein filtration.
+
+\hfill
+
+Any finitely generated $D_n$ module has a good filtration with respect to the Bernstein filtration.
+\red{The advantage is that for a good filtration on $M$ with respect to the Bernstein filtration,
+	every $F^iM$ is finite dimensional over $\C$.} Therefore we can apply results on Hilbert polynomials to the associated graded $\gr^B D_n$
+module.
+
+\begin{proposition}
+	The function \begin{align*}
+		i \mapsto \dim_\C F^iM
+	\end{align*} is eventually polynomial and will be denoted $\chi(M,F)$.
+	The highest degree term is $d$ and the leading coefficient is $m/d!$. The integers $d$ and $m$
+	do not depend on the choice of the good filtration $F$.
+\end{proposition}
+\red{$d$ is the dimension and $m$ is the multiplicity.}
+
+$d$ is also the dimension of the characterstic variety of $M$ in this case.
+\begin{proposition}
+	If you find an integer $c$ so that \begin{align*}
+		\dim_C F^iM \leq c/n! i^n + O(i^{n-1})
+	\end{align*} then $M$ is holonomic and $m(M)\leq c$.
+\end{proposition}
+
+\begin{proof}
+	[Proof of Proposition \ref{prop:fourier_transform_holonomic}]
+	$N$ and $\hat N$ have the same Hilbert polynomial.
+\end{proof}
+
+\begin{proof}
+	[Proof of Proposition \ref{prop:holonomicity_pushforward}]
+	Let $N = \Gamma(\C^n,M)$ and note that $\Gamma(\C^n,H^0\int_j j^\dagger M)$ is
+	isomorphic to the localization $N_{x_i} = \C[x,x_i^{-1}]\otimes_{\C[x]} N$.
+	Hence it is sufficient to show that the localization is
+	holonomic. Kashiwara does this by pickiing a filtration on $N_{x_i}$ and then
+	finding an integer $c$ as in the proposition above.
+\end{proof}
+
+\subsection{Exceptional functors}
+Let $f:X\to Y$ be a morphism of smooth algebraic varieties.
+\begin{definition}
+	We have the \red{exceptional pushforward and pullback} \begin{align*}
+		\int_{f!} := \D_Y\circ \int_f \circ \D_X : D^b_h(\cD_X) \to D^b_h(\cD_Y) \\
+		f^\star := \D_X\circ f^\dagger \circ \D_Y : D^b_h(\cD_Y) \to D^b_h(\cD_X)
+	\end{align*}
+\end{definition}
+
+\begin{theorem}
+	There exists a morphism of functors \begin{align*}
+		\int_{f!}\to \int_f: D^b_h(\cD_X) \to D^b_h(\cD_Y)
+	\end{align*} which is an isomorphism if $f$ is proper. \red{This is some compactly supported thing
+		in the spirit of Borel Moore homology and Poincare duality.}
+\end{theorem}
+
+\subsection{Stratifications and minimal extensions}
+\begin{theorem}
+	The following conditions on $M^\bullet \in D^b_c(\cD_X)$ are equivalent:
+	\begin{enumerate}
+		\item $M^\bullet$ is holonomic.
+		\item There eexists a decreasing sequence \begin{align*}
+			      X = X_0 \supset X_1 \supset \cdots \supset X_m \subset X_{m+1} = \emptyset
+		      \end{align*} of closed subsets of $X$ so that $X_r\setminus X_{r+1}$ is smooth and
+		      all of the cohomology sheaves $H^k(i_r^\dagger M^\bullet)$ are integrable connections,
+		      where $i_r:X_r\setminus X_{r+1}\to X$ is the inclusion.
+		\item For any $x\in X$ all of the cohomology groups $H^k(i_x^\dagger M^\bullet)$ are finite dimensional where
+		      $i_x:\{x\}\to X$ is the inclusion.
+	\end{enumerate}
+\end{theorem}
+\red{ $M$ coherent is called simple if it contains no coherent $\cD$-submodules other than $M$ or $0$. }Since
+the holonomic $\cD$-modulse form an Artinian category, we have a Jordan Holder series for each coherent $M$.
+We will construct simple holonomic $\cD$-modules from integrable connections on locally
+closed subvarieties using functors introduced in the previous section, and all of them are of this type.
+This construction corresponds under RH correspondence to the minimal DGM extension
+in the category of perverse sheaves.
+
+\begin{definition}
+	Let $f:X\to Y$ be the inclusion of a locally closed smooth subvariety
+	and assume that $f$ is an affine map. Recall that there is a map
+	\begin{align*}
+		\int_{f!}M \to \int_f M
+	\end{align*} which is an isomorphism if $f$ is proper.
+	We call the image of this map the \red{minimal extension} $L(Y,M)$ of $M$.
+\end{definition}
+
+\begin{theorem}
+	\hfill
+	\begin{enumerate}
+		\item  Let $Y$ be a locally closed smooth connected subvariety of $X$
+		      so that $i:Y\to X$ is an affine map. Let $M$ be a
+		      simple holonomic $\cD_Y$-module. Then $L(Y,M)$ is a simple holonomic
+		      $\cD_X$-module and it is the unique simple submodule of $\int_i M$.
+		\item Any simple holonomic $\cD_X$-module is isomorphic to $L(Y,M)$ for some
+		      locally closed smooth connected subvariety $Y$ of $X$ and some simple holonomic $\cD_Y$-module $M$.
+		\item Two such pairs $(Y,M)$ and $(Y',M')$ give isomorphic simple holonomic $\cD_X$-modules if and only if
+		      $\overline Y = \overline Y'$ and $M\cong M'$ on an open dense subset of $Y\cap Y'$.
+	\end{enumerate}
+\end{theorem}
+
+\section{Analytic $\cD$-modules}
+Let $f:X\to Y$ be a morphism of complex manifolds. All the previous theory can be carried out in the analytic category.
+\subsection{Solution complex and de Rham functors}
+For $M^\bullet \in D^b(\cD_X)$ we have the \red{solution complex} \begin{align*}
+	\Sol(M^\bullet) = R\Hom_{\cD_X}(M^\bullet,\cO_X)
+\end{align*} which gives a functor \begin{align*}
+	D^b(\cD_X) \to D^b(\C_X)^{op}
+\end{align*}
+
+We have the \red{de Rham complex} \begin{align*}
+	\DR(M^\bullet) = \cO_X\otimes_{\cD_X} M^\bullet
+\end{align*} which gives a functor \begin{align*}
+	D^b(\cD_X) \to D^b(\C_X)
+\end{align*} The motivation for introducing the solutino complex
+comes from linear PDEs. For a coherent $\cD_X$-module $M$, the sheaf $\Hom_{\cD_X}(M,\cO_X)$ is the sheaf of solutions
+to the system of linear PDEs defined by $M$.
+
+\begin{proposition}
+	For $M^\bullet \in D^b_c(\cD_X)$ we have \begin{align*}
+		\DR_X(M^\bullet) \cong \Sol_X(\D_X M^\bullet)[\dim X]
+	\end{align*}
+\end{proposition}
+The two complexes are related via duality but the functor $\DR_X$ has
+the advantage that it can be computer using a resoplution of the right
+$\cD_X$-module $\Omega_X$. We have a locally free resolution
+\begin{align*}
+	0 \to \Omega_X^0 \otimes_{\cO_X} \cD_X \to \dots \to \Omega_X^{\dim X} \otimes_{\cO_X} \cD_X \to \Omega_X \to 0
+\end{align*} For $M\in\Mod(\cD_X)$ the object
+$\DR_X(M)[-\dim X]$ is represented in the derived category by the complex \begin{align*}
+	\Omega_X^0\otimes_{\cO_X} M \to \dots \to \Omega_X^n\otimes_{\cO_X} M
+\end{align*} has differential \begin{align*}
+	d^p: \Omega_X^p\otimes_{\cO_X} M \to \Omega_X^{p+1}\otimes_{\cO_X} M \\
+	d^p(\omega\otimes s) = d\omega\otimes s + \sum_i dx_i \wedge \omega \otimes \partial_i s
+\end{align*} where $x_i,\partial_i$ are local coordinates on $X$.
+
+\subsection{Integrable connections and local systems}
+Suppose $M$ is an integrable connection of rank $m$. Consider
+the $0$th cohomology sheaf $L$ of the solution complex $\Sol(M)$.
+Then $L$ coincides with the kernel of the sheaf homomorphism \begin{align*}
+	d^0 = \nabla: M = \Omega_X^0 \otimes_{\cO_X} M  \to \Omega_X^1 \otimes_{\cO_X} M
+\end{align*} which is
+the sheaf of horizontal sections of $M$. \begin{align*}
+	M^{\nabla} =  \set{s\in M \st \nabla s = 0} = \set{s\in M \st \Theta_X s = 0}
+\end{align*} It is a locally free $\C_X$ module of rank $m$ by the classical Frobenius theorem.
+
+\begin{definition}
+	A locally free $\C_X$ module of finite rank is a \textbf{local system} on $X$.
+	Let $\Loc(X)$ be the category of local systems on $X$.
+\end{definition}
+
+Using the local system $L$, we can define an integrable connection $M$
+by $M = \cO_X\otimes_{\C_X} L$. I still have to tell you what the operator is: \begin{align*}
+	\nabla = d\otimes \id_L : M = \cO_X\otimes_{\C_X} L \to \Omega_X^1\otimes_{\cO_X} \cO_X\otimes_{\C_X} L = \Omega_X^1\otimes_{\cO_X} M
+\end{align*} Passing to $\Omega_X^\bullet$ with similarly defined differentials
+in the tensor product, we study
+the higher cohomology groups $H^i(\Omega_X^\bullet\otimes_{\cO_X} M)$. All of the higher ones
+vanish by the \red{holomorphic Poincare lemma} and therefore we get an isomorpism \begin{align*}
+	\Omega_X^\bullet\otimes_{\cO_X} M \cong M^\nabla
+\end{align*}
+
+This gives a functor \begin{align*}
+	H^{-\dim X}(\DR_X(\cdot)): \Conn(X) \to \Loc(X)
+\end{align*} which is an equivalence of categories.
+
+\begin{remark}
+	Given an integrable connection $M$, pick coordinates locally. Then $\nabla$
+	looks like the standard derivative operator, and so $\nabla s = 0$ is the condition
+	that $s$ is constant function. Locally there is a vector space of constant functions
+	of dimension $\rank m$. This is precisely the correspondence
+	between integrable connections and local systems. $\nabla$ is flat meaning it
+	has no curvature and therefore, the transport of sections along paths depends
+	only on the homotopy class of the path. Therefore, you can study how sections
+	of $M$ vary along homotopy classes of loops in $X$.
+
+	\hfill
+
+	This is called the \red{monodromy representation} of $M$.\begin{align*}
+		\pi_1(X) \to \Aut(L)
+	\end{align*}
+\end{remark}
+\subsection{Kashiwara constructibility theorem}
+\begin{theorem}[Kashiwara]
+	The solution complex $\Sol_X(M)$ of a holonomic $\cD_X$-module $M$
+	is a construtable complex, i.e. all of its cohomology sheaves are
+	constructible.
+\end{theorem}
+
+
+\section{Meromorphic connections}
+We begin a study of meromorphic connections and Deligne's Riemann-Hilbert correspondence.
+
+\subsection{Meromorphic connections}
+We start from the classical theory of ODEs. We are considering open
+neighborhoods of $0\in \C$ as a complex manifold. Let \begin{align*}
+	\cO = (\cO_\C)_0 = \text{ convergent power series at } 0 = \C\{x\} \\
+	K = \text{ quotient field of } \cO = \C\{x\}[x^{-1}]
+\end{align*}
+
+Let $A(x)\in M_n(K)$ and consider the system of ODEs \begin{align*}
+	\frac{d}{dx}\hat{u}(x) = A(x)\hat{u}(x)
+\end{align*} where $\hat{u}(x)\in M_n(K)$ is a column vector. Given an invertible
+$T\in \GL_n(K)$ we can change the basis of $A$ and rewrite the system as \begin{align*}
+	\frac{d}{dx}\hat{v}(x) = (T^{-1}A(x)T - T^{-1}\frac{d}{dx}T)\hat{v}(x)
+\end{align*} and so we say that
+two systems are equivalent if they are related by a such a transformation.
+
+\hfill
+
+\red{Let $\tilde K$ denote the ring of possibly multivalued
+	holomorphic functions defined on a punctured disk $B_\varepsilon^*$ for sufficiently small $\varepsilon$.}
+We say that $\hat{u}$ is a solution of the system if $\hat{u} \in \tilde K^n$.
+
+\begin{definition}
+	Let $M$ be a finite dimensional $K$-vector space with a $\C$-linear map
+	$\nabla: M\to M$. Then $M,\nabla$ is a \textbf{meromorphic connection} if
+	\begin{align*}
+		\nabla(fu) = \frac{df}{dx}u + f\nabla u
+	\end{align*} for all $f\in K$ and $u\in M$. It is enough to check that
+	this holds for $f\in \cO$.
+	A morphism of meromorphic connections is a $K$-linear map $M\to N$ commuting with $\nabla$.
+\end{definition}
+Meromorphic connections naturally form an abelian category. Given
+a meromorphic connection $M,\nabla$ the vector spcae $M$ is a left $(\cD_\C)_0$-module
+by the action $\partial u = \nabla u$. Note that $\nabla$ also extends uniquely to an element of
+$\End_\C(\tilde K \otimes_K M)$. We say that $u\in \tilde K\otimes_K M$ is a \red{
+	horizontal section} if $\nabla u = 0$.
+
+\hfill
+
+Let $M$ be a meromorphic connection and choose a $K$-basis $e_1,\dots,e_n$ of $M$. Then
+the change of basis matrix with respect to $\nabla$ is: \begin{align*}
+	\nabla e_j = \sum_i A_{ij}e_i
+\end{align*} \red{"the connection matrix"}
+The condition $\nabla u = 0$ for $u = \sum_i u_i e_i \in \tilde K \otimes_K M$ is equivalent
+to the system of ODEs \begin{align*}
+	\frac{d}{dx}u = A(x)u
+\end{align*} for the connection matrix $A$.
+\subsection{Regular singularities}
+Set $S^\varepsilon_{a,b} = \set{x\in \C\st |x| < \varepsilon, a < \theta < b}$
+an open angular sector of the universal cover of $\C^*$. We say that
+a function $f\in \tilde K$ has moderate growth (also called Nilsson class) at $x=0$
+if it satisfies the following condition.
+
+\begin{center}
+	For every $a,b$ and $\varepsilon$ so that $f$ is defined on $S^\varepsilon_{a,b}$, \\
+	there is a constant $C>0$ and $N>>0$ so that $|f(x)|\leq C|x|^{-N}$ for all $x\in S^\varepsilon_{a,b}$.
+\end{center}
+
+\red{Denote such functions by $\tilde K_{\text{mod}}$.
+}
+\subsubsection{Important example}
+The system of ODEs \begin{align*}
+	\frac{d}{dx}u = \frac{A}{x}u
+\end{align*} for $A\in M_n(K)$ has a set of solutions $u\in\tilde K^n$
+which is in fact a $\C$-vector space of dimension $n$.
+We can take $n$ linearly indepdent solutions $u_1,\dots,u_n$ and call the matrix
+$S = (u_1,\dots,u_n)$ the \red{fundamental matrix solution} of the system. \red{Since
+	the analytic continuation of $S(x)$ along a cirlce around $0$ is again a solution matrix}
+there exists some $G\in \GL_n(\C)$ so that $S(x) = S(0)G$ for all $x\in \C^*$. $G$
+is called the \red{monodromy matrix} of the system.
+
+\begin{theorem}
+	The following three conditions on the ODE system are equivalent:
+	\begin{enumerate}
+		\item The system is equivalent to a system like \begin{align*}
+			      \frac{d}{dx}u = \frac{A(x)}{x}u
+		      \end{align*} for $A(x)\in M_n(\cO)$.
+		\item The system is equivalent to a system like \begin{align*}
+			      \frac{d}{dx}u = \frac{A}{x}u
+		      \end{align*} with $\C$-entries.
+		\item All solutions in $\tilde K^n$ belong to $\tilde K_{\text{mod}}^n$.
+	\end{enumerate}
+\end{theorem}
+
+We expand on what it means for the analytic continuation to introduce monodromy.
+
+\begin{example}
+	The most basic example is
+	\begin{align*}
+		A = 1/x\begin{pmatrix}
+			       1 & 0 \\
+			       0 & 1
+		       \end{pmatrix}
+	\end{align*}
+	The solutions are $u_1 = x$ and $u_2 = x$ and so the fundamental matrix solution is
+	\begin{align*}
+		S(x) = \begin{pmatrix}
+			       x & 0 \\
+			       0 & x
+		       \end{pmatrix}
+	\end{align*} The monodromy matrix is $G = \begin{pmatrix}
+			1 & 0 \\
+			0 & 1
+		\end{pmatrix}$ because nothing happens when you go around $0$. See the
+	next example for a more interesting case with the details that I didn't write here.
+\end{example}
+
+\begin{example}
+	Consider taking \begin{align*}
+		A(x) = 1/x\begin{pmatrix}
+			          1 & 1 \\
+			          0 & 1
+		          \end{pmatrix}
+	\end{align*} The off-diagonal entries introduce $\log$ terms into the fundamental
+	matrix solution and therefore we pick up monodromy. In particular, we can solve
+	this ODE with seperation of variables to get \begin{align*}
+		u_1 = C_1x + C_2x\log x \\
+		u_2 = C_2x
+	\end{align*} so we have a fundamental solution matrix \begin{align*}
+		S(x) = \begin{pmatrix}
+			       x & x\log x \\
+			       0 & x
+		       \end{pmatrix}
+	\end{align*} Now we will be very explicit about the analytic continuation. Write
+	$x = |x|e^{i\theta}$ and let $\theta$ vary from $0$ to $2\pi$. We have in general \begin{align*}
+		S(x) = \begin{pmatrix}
+			       |x|e^{i\theta} & |x|e^{i\theta}\log |x| + i\theta |x|e^{i\theta} \\
+			       0              & |x|e^{i\theta}
+		       \end{pmatrix}
+	\end{align*}
+	Going from $0$ to $2\pi$, the solution matrix goes from \begin{align*}
+		S(x) = \begin{pmatrix}
+			       x & x\log x \\
+			       0 & x
+		       \end{pmatrix}
+	\end{align*} to \begin{align*}
+		S(x) = \begin{pmatrix}
+			       x & x\log x + 2\pi ix \\
+			       0 & x
+		       \end{pmatrix}
+	\end{align*} which tells us the monodromy matrix is \begin{align*}
+		G = \begin{pmatrix}
+			    1 & 2\pi i \\
+			    0 & 1
+		    \end{pmatrix}
+	\end{align*}
+\end{example}
+
+\subsubsection{Definition of regularity}
+Let $\theta = x\nabla = x\partial$.
+
+\begin{definition}
+	We say that a meromorphic connection $M,\nabla$ is \red{regular singular} at $x=0$ if
+	there exists a finitely generated $\cO$-submodule $L\subset M$ which is stable under $\theta$
+	and generates $M$ over $K$. Such an $L$ is called an $\cO$-lattice.
+\end{definition}
+
+\begin{lemma}
+	Any $\cO$-lattice $L$ is a free $\cO$-module of rank $\dim_K M$.
+\end{lemma} In particular, a meromorphic connection is regular if
+and only if there exists a $K$-basis $e_1,\dots,e_n$ of $M$ so that
+the associated ODE is of the form \begin{align*}
+	\frac{d}{dx}u = \frac{A(x)}{x}u
+\end{align*} for $A(x)\in M_n(\cO)$. Equivalently
+if \begin{align*}
+    \frac{d}{dx}u = \frac{A}{x}u
+\end{align*} for $A\in M_n(\C)$.
+
+\begin{remark}
+    Recall that the affine Grassmannian can be thought of 
+    the space of lattices where $c\O = k[x_1,\dots,x_n]$ and 
+    $K \C((x_1,\dots,x_n))$. In this case we are thinking about 
+    regular singularities for the divisor which is the union of 
+    all coordinate hyperplanes.
+
+    \hfill
+
+    Note that the set of regular weights in $\mf t^*$
+    is precisely corresponding to ripping out the union of coordinate
+    hyperplanes in $\mf t^*$.
+\end{remark}
+
+\begin{proposition}
+	A meromorphic connection is regular iff all of its horizontal
+	sections are in $\tilde K_{\text{mod}} \otimes_K M$.
+\end{proposition}
+
+\begin{proposition}
+	For a meromorphic connection $M,\nabla$ at $x=0$, the following are equivalent:
+	\begin{enumerate}
+		\item $M,\nabla$ is regular.
+		\item For any $u\in M$ there exists $L\ni u$ finitely generated over $\cO$
+		      so that $\theta L\subset L$.
+		\item For any $u\in M$ there exists a polynomial \begin{align*}
+			      F(t) = t^m + a_{m-1}t^{m-1} + \cdots + a_0
+		      \end{align*} so that $F(\theta)u = 0$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{remark}
+	Regularity is a notion which comes from the theory of linear ODEs. In particular
+	if we consider a second-order linear differential equation of the form \begin{align*}
+		\frac{d^2}{dx^2}u + p(x)\frac{d}{dx}u + q(x)u = 0
+	\end{align*} then the point $x=0$ is called a regular singular point if $xp(x)$ and $x^2q(x)$
+	are holomorphic at $0$. The solutions of the ODE are then well-behaved
+	and can be written as power series or generalized series involving logarithms.
+
+	\hfill
+
+	A regular $\cD$-module is then a generalization of this, which includes the $\cD$-modules
+	which arise from linear ODEs with regular singularities.
+\end{remark}
+
+\begin{proposition}
+	An exact sequence of meromorphic connections \begin{align*}
+		0 \to M' \to M \to M'' \to 0
+	\end{align*} implies that $M$ is regular if and only if $M'$ and $M''$ are regular.
+	If $M,N$ are regular, then so is $M\otimes_K N$ and $\Hom(M,N)$.
+\end{proposition}
+\subsection{For a general algebraic curve}
+The ring $\cO = \C\{x\}$ is replaced by the stalk $\cO_{C,p}$
+where $C$ is a smooth algebraic curve and $p\in C$. The field $K$ is replaced by the
+quotient field of $\cO_{C,p}$. $\cO_p$ is a DVR and in particular a PID.
+
+\begin{definition}
+	\hfill
+	\begin{enumerate}
+		\item Let $M$ be a finite dimensional $K_{C,p}$-vector space with a $\C$-linear map
+		      \begin{align*}
+			      \nabla: M\to \Omega^1_{C,p}\otimes_{\cO_{C,p}} M \cong (K_{C,p}\otimes_{\cO_{C,p}} \Omega^1_{C,p})\otimes_{K_{C,p}} M
+		      \end{align*}
+		      The pair $M,\nabla$ is a \red{algebraic meromorphic connection} at $p\in C$ if \begin{align*}
+			      \nabla(fu) = df\otimes u + f\nabla u \quad (\text{ for all } f\in K_{C,p}, u\in M)
+		      \end{align*}
+		\item A morphism is a $K_{C,p}$-linear map $\phi:M\to N$ so that $\nabla\circ\phi = (\id\otimes\phi)\circ\nabla$.
+	\end{enumerate}
+\end{definition}
+Algebraic meromorphic connections at $p\in C$ naturally form an abelian category.
+Choose a local coordinate $x\in \cO_{C,p}$ so that $K_{C,p} = \cO_{C,p}[x^{-1}]$.
+Then we can identify $\Omega^1_{C,p}$ with $\cO_{C,p}$ via $f \iff f dx$
+and an algebraic meromorphic connection at $p\in C$ is a finite dimensional $K_{C,p}$-vector space
+endowed with a $\C$-linear map \begin{align*}
+	\nabla: M\to M
+\end{align*} which satisfies \begin{align*}
+	\nabla(fu) = \frac{df}{dx}u + f\nabla u \quad (\text{ for all } f\in K_{C,p}, u\in M)
+\end{align*}
+
+
+\begin{definition}
+	An algebraic meromorphic connection $M,\nabla$ at $p\in C$ is \red{regular} if
+	there exists a finitely generated $\cO_{C,p}$-submodule $L\subset M$ which is stable
+	under $\theta = x\nabla$ for any (and all) local coordinate $x \in \cO_{C,p}$ at $p$.
+	$L$ is called an $\cO_{C,p}$-lattice.
+\end{definition}
+This definition is about being regular at a point $p\in C$. We now globalize this definition.
+Let $M$ be an integrable connection on an algerbaic curve $C$. Take
+a smooth completion $j:C\to \overline C$, unique up to isomorphism because
+$C$ is a curve. $j$ is an affine map so pushforward is exact and we have $j_*M$.
+Since $M$ is locally free over $\cO_C$ it is free on a nontrivial Zariski open $U = C\setminus V$
+where $V$ is finitely many points.
+Hence $j_(M)\vert_{\overline C \setminus V}$ is a locally free $j_*\cO_C\vert_{\overline C\setminus V}$-module.
+In particular $j_*M$ is locally free over $j_*\cO_C$. Let $p\in \overline C \setminus C$ and then
+the stalk $(j_*M)_p$ is a $K_{\overline C,p}$-vector space. The stalk is a $\cD_{\overline C,p}$-module
+and is naturally endowed with a structure of an algebraic meromorphic connection at
+$p\in \overline C$ via  $\nabla(m) = dx \otimes \partial m$ where $x$ is a local coordinate at $p$.
+We call this $\cD_{\overline C}$-module \red{the algebraic meromorphic extension of $M$.}
+\begin{definition}
+	Let $M$ be an integrable connection on a smooth algebraic curve $C$.
+	For a boundary point $p\in \overline{C} \setminus C$ we say that $M$ has
+	regular singularity at $p$ if the algerbaic meromorphic connection $(j_*M)_p$ is regular.
+
+	\hfill
+
+	An integrable connection $M$ on $C$ is \red{regular} if it has regular singularities at all boundary points.
+\end{definition}
+
+Recall that a holonomic $\cD$-module is generically an integrable connection. In dimension $1$
+the converse is also true. Therefore we define regularity for holonomic $\cD$-modules
+specifically for $C$ a smooth algebraic curve.
+
+\begin{definition}
+	A holonomic $\cD$-module $M$ on a smooth algebraic curve $C$ is \red{regular} if
+	there is an open dense $C_0$ so that $M\vert_{C_0}$ is a regular integrable connection.
+	An object $M^\bullet \in D^b_h(\cD_C)$ is regular if all of its cohomology sheaves are regular.
+\end{definition}
+
+\begin{lemma}
+	Let $f:C\to C'$ dominant (i.e. the image is dense) and $M$ a holonomic $\cD_C$-module.
+	Then $f^\dagger M$ is regular if and only if $M$ is regular.
+	Then $\int_f N$ is regular if $N$ is regular.
+\end{lemma}
+
+
+\subsection{Deligne's (classical) Riemann-Hilbert correspondence}
+\subsubsection{Regularity in general}
+Let $X$ be a complex manifold and $D$ divisor. Let $\cO_X(D)$ be the sheaf of meromorphic functions
+on $X$ which are holomorpihc on $Y = X\setminus D$ and have poles along $D$.
+Let $h\in \cO_X$ be a local defining equation for $D$ so that $\cO_X(D) = \cO_X(h^{-1})$
+is a coherent sheaf of rings.
+
+\begin{definition}
+	Let $M$ be a coherent $\cO_X(D)$-module with a $\C$-linear map \begin{align*}
+		\nabla: M\to \Omega^1_X\otimes_{\cO_X} M
+	\end{align*} so that \begin{align*}
+		\nabla(fu) = df\otimes u + f\nabla u \quad (\text{ for all } f\in \cO_X(D), u\in M)
+		[\nabla_\theta, \nabla_\theta'] = [\nabla_\theta, \nabla_{\theta'}] \quad (\text{ for all } \theta,\theta'\in \Theta_X)
+	\end{align*}
+	The pair $M,\nabla$ is a \red{meromorphic connection} on $X$ with poles along $D$.
+\end{definition}
+Let $\Conn(X,D)$ be the category of meromorphic connections on $X$ with poles along $D$.
+Set $B = $ open unit disk in $\C$. For a morphism $i:B\to X$ so that $i^{-1}D = \set{0}$,
+the stalk $(i^*M)_0$ is a meromorphic connection in one variable as studied in the $\A^1$ case.
+
+\begin{definition}
+	A meromorphic connection $M,\nabla$ on $X$ with poles along $D$ is \red{regular} if
+	$(i^*M)_0$ is regular for all $i:B\to X$ so that $i^{-1}D = \set{0}$.
+\end{definition}
+Let $\Conn^{reg}(X,D)$ be the category of regular meromorphic connections along $D$.
+
+\begin{definition}
+	A meromorphic connection on $X$ along $D$ is \red{effective}
+	if it is generated as an $\cO_X(D)$-module by a coherent $\cO_X$-submodule.
+\end{definition}
+
+Any regular mromorphic connection is effective.
+
+\subsubsection{Logarithmic poles}
+Let $D$ be a normal crossing divisor. Say that $D$ is locally defined
+by $x_1\cdots x_r = 0$ in local coordinates $x_1,\dots,x_n$. Let $p\in D$
+and denote $D_k$ the irreducible components of $D$ defined by $x_k = 0$.
+
+\hfill
+
+Let $M$ be a meromorphic connection on $X$ with poles along $D$.
+We also assume that there exists a holomorpihc vector bundle $L$ on $X$ so that
+$M = L\otimes_{\cO_X} \cO_X(D)$ as a $\cO_X(D)$-module. Therefore, in an approapriate
+basis $e_1,\dots,e_n$ for $L$ we have \begin{align*}
+	\nabla e_i = \sum_j A^k_{ij}e_j \otimes dx_k
+\end{align*}
+where $A^k_{ij} \in \cO_X(D) = \cO_X[x_1^{-1},\dots,x_n^{-1}]$. Then \red{we
+	further assume that the functions $x_k A_{ij}$ are holomorphic}. In this case
+we say that $M$ along $D$ has a logarithmic pole with respect to the lattice $L$ at $p$.
+Inf this is the case at all points of $D$ then we say that $M$ has logarithmic poles along $D$
+with respect to $L$.
+
+\hfill
+
+Let $M$ be a meromorphic connection on $X$ with poles along $D$, wiht logarithmic poles
+with respect to $L$ along $D$. Take basis $e_i$ of $L$ and consider the $A^k$ matrices from before. Let $B^k = x_k A^k$.
+By hypothesis $B^k$ are holomorphic and so we consider its restriction $B^k\vert_{D_k} \in M_n(\cO_{D_k})$.
+Then $B^k\vert_{D_k}$ defines a canonical section $\Res^L_{D_k}\nabla$ of the vector bundle $\End_{\cO_{D_k}}(L\vert_{D_k})$.
+This is called the \red{residue} of $\nabla$ along $D_k$ with respect to $L$.
+
+\hfill
+
+We care about logarithmic poles from a regularity standpoint.
+
+\begin{proposition}
+	Let $M$ be a meromorphic connection which has a logarithmic pole along $D$ wiht
+	repsect to a lattice $L$. Then $M$ is regular.
+\end{proposition}
+
+\begin{remark}
+	What is the difference between a integrable connection and a meromorphic connection?
+	It is worth considering this quesiton because in the next section, we will be extending
+	integrable connections along divisors at the cost of
+	them becoming meromorphic connections.
+
+	\hfill
+
+	Recall that integrable connections are about parallel transport of sections of a vector bundle.
+	The requirement that the connection is flat means that the transport of sections along paths
+	is independent of the path. This is in fact a hallmark. Given an integrable connection, its
+	horizontal sections are the solutions to a system of linear ODEs. The corresponding system of
+	ODEs is nonsingular. For a meromorphic connection, the corresponding system of ODEs is
+	allowed to have singularities. Regularity is about the singularities being "finite dimensional"
+	in some sense.
+
+\end{remark}
+
+\begin{remark}
+	\textbf{Meromorphic Connections: Away from the Divisor}
+	\begin{itemize}
+		\item Away from the divisor, the meromorphic connection behaves similarly to a \textit{regular connection}. That is, it smoothly defines how the sections of the bundle evolve as you move along different directions on the manifold.
+
+		\item For a vector bundle \( E \) over a complex manifold \( X \) with coordinates \( z_1, z_2, \dots, z_n \), the connection locally looks like:
+		      \[
+			      \nabla = d + A(z),
+		      \]
+		      where \( A(z) \) is a matrix of holomorphic functions, and \( d \) is the exterior derivative that captures how sections change infinitesimally.
+
+		\item In this region, the connection is \textit{holomorphic} and behaves like a flat or integrable connection if the curvature vanishes.
+	\end{itemize}
+
+	\textbf{Meromorphic Connections: Near the Divisor}
+	\begin{itemize}
+		\item \textit{Geometrically}, near a divisor (which is typically defined by \( D = \{ z_1 = 0 \} \) locally), the connection takes on a different character. The presence of a \textit{pole} along the divisor means that sections of the bundle can exhibit singular behavior as you approach \( D \). However, this singularity is controlled or regular in the case of a regular meromorphic connection.
+
+		\item The local form of a meromorphic connection near a divisor might look like:
+		      \[
+			      \nabla = d + \frac{A(z)}{z_1} dz_1 + B(z) dz_2 + \cdots,
+		      \]
+		      where \( A(z) \) is a matrix of holomorphic functions. The term \( \frac{A(z)}{z_1} dz_1 \) indicates the presence of a \textit{pole} along \( z_1 = 0 \) (the divisor \( D \)).
+	\end{itemize}
+\end{remark}
+
+\subsubsection{What does ODEs and $\cD$-module language really mean?}
+Recall that earlier I told you the following theorem:
+
+\begin{theorem}
+	Holonomic $\cD$-modules are generically integrable connections.
+\end{theorem}
+What does this really mean? Recall that given a linear ODE \begin{align*}
+	P(x,\partial) u = 0
+\end{align*} we can form the corresponding $\cD$-module $M = \cD/\cD P$.
+
+\hfill
+
+We say that a linear ODE is holonomic if
+its solution space is finite dimensional.
+The point is that this means that the ODE is highly constrained and
+therefore so should the corresponding characteristic variety.
+
+\hfill
+
+In the context of linear ODEs, a regular singular point is defined as a point where the ODE has specific controlled behavior. For a second-order linear ODE of the form:
+
+\[
+	y'' + p(x)y' + q(x)y = 0,
+\]
+
+a point \( x_0 \) is a regular singular point if the coefficients \( p(x) \) and \( q(x) \) have certain pole behaviors:
+
+\begin{itemize}
+	\item The function \( p(x) \) can have a pole of order at most 1 at \( x_0 \).
+	\item The function \( q(x) \) can have a pole of order at most 2 at \( x_0 \).
+\end{itemize}
+
+Recall that we defined regularity as follows:
+A meromorphic connection \( \nabla \) on a sheaf \( \mathcal{M} \) is
+said to be regular at \( x = 0 \) if there exists a
+finitely generated \( \mathcal{O} \)-submodule \( L \) of \( \mathcal{M} \) such that
+$L$ is stable under the action of the Euler operator $\theta$ and 
+generates \( \mathcal{M} \) over the field \( K \) (the field of fractions of \( \mathcal{O} \)).
+\red{Therefore, being regular is about having solutions exhibit controlled growth near singular points.}
+
+\hfill
+
+Reminder! We also proved an equivalent criterion for regularity
+in the context of meromorphic connections over $\C$:
+
+\begin{theorem}
+	A meromorphic connection $M,\nabla$ is regular
+	if and only if there exists a finite $K$-basis $e_i$ for $M$ the associated
+	ODE is of the form \begin{align*}
+		\frac{d}{dx}u = \frac{A}{x}u
+	\end{align*} for $A(x)\in M_n(\C)$.
+\end{theorem}
+
+\begin{remark}
+	\red{The following is speculation.} From the above theorem and our characterization
+	of regular holonomic ODEs, I suspect that all of the regular
+	holonomic $\cD$-modules on $\A^1_\C$ are of the form \begin{align*}
+		\cD/\cD (x\partial - \lambda)
+	\end{align*}
+\end{remark}
+
+\begin{remark}
+	An ODE system corresponds to an integrable connection if it is flat and has
+	no monodromy. \red{This is different than a meromorphic connection!}
+	A meromorphic connection can have singularities without specific restrictions.
+
+\end{remark}
+
+\subsubsection{Extending integrable connections along normal crossing divisors}
+\begin{theorem}
+    Let $D$ be a normal crossing divisor on a complex manifold $X$.
+    Let $Y = X\setminus D$ and fix a section $\tau:\C/\Z\to \C$ of the 
+    projection $\C\to \C/\Z$. Let $M$ be a integrable connection on $Y$.
+    There exists an extension $L_\tau$ of $M$ as a vector bundle on $X$ 
+    satisfying the following conditions: \begin{itemize}
+        \item The $\C$-linear morphism $\nabla_M:M \to \Omega^1_Y\otimes M$
+        can be uniquely extended to a $\C$-linear morphism 
+        $\nabla:\cO_X(D) \otimes_{\cO_X} L_\tau \to \Omega^1_X\otimes_{\cO_X} L_\tau$
+        so that $(\cO_X(D)\otimes_{\cO_X} L_\tau,\nabla)$ is a meromorphic connection
+        with a logarithmic pole along $D$ with respect to $L_\tau$.
+        \item For any irreducible component $D'$ of $D$ the eigenvalues of the residue
+        $\Res_{D'}^{L_\tau}\nabla$ of $\cO_X(D)\otimes_{\cO_X} L_\tau$ along $D'$
+        are contained in $\tau(\C/\Z) \subset \C$.
+    \end{itemize}
+Moreover $L_\tau$ is unique up to isomorphism.
+\end{theorem}
+
+Now we want to extend to a general divisor $D$. We do this 
+and I skip a lot of things and then we get the main result:
+
+\begin{theorem}
+    [Deligne] Let $X$ be a complex manifold and $D$ a divisor. Let $Y = X\setminus D$. THen 
+    the restriction functor \begin{align*}
+        \Conn^{reg}(X,D) \to \Conn^(Y) \cong \Loc(Y)
+    \end{align*} is an equivalence of categories.
+\end{theorem}
+
+For a general algebraic variety we have the following definition:
+\begin{definition}
+    An integrable connection $M$ on $X$ is called \red{regular} if for every morphism 
+    $i_C:C\to X$ from a smooth algebraic curve $C$ the pullback $i_C^*M$ is regular.
+\end{definition}
+
+\begin{theorem}
+    [Deligne] Let $X$ be a smooth algebraic variety. Then the functor \begin{align*}
+        M \mapsto M^{an}
+    \end{align*} is an equivalence of categories \begin{align*}
+        \Conn^{reg}(X) \to \Conn(X^{an})
+    \end{align*}
+\end{theorem}
+It turns out that when $X$ is a smooth projective variety \begin{align*}
+    \Conn(X) \cong \Conn(X^{an})
+\end{align*}
+These statements are all about Serre GAGA.
+
+\section{The Riemann-Hilbert correspondence}
+\subsection{Regularity in full generality}
+\begin{definition}
+    Let $X$ be a smooth algebraic variety. A holonomic $\cD$-module $M$ on $X$ is called
+    \red{regular} if any composition factor of $M$ is isomorphic to the 
+    minimal extension $L(Y,N)$ of some regular integrable connnection $N$ 
+    on a locally closed smooth subvariety $Y\subset X$ so that the inclusion 
+    $Y\hookrightarrow X$ is affine.
+
+    \hfill
+
+    We denote $\Mod_{rh}(\cD_X)$ the full subcategory of $\Mod_h(\cD_X)$
+    consisting of regular holonomic $\cD$-modules. We denote $D^b_{rh}(\cD_X)$
+    the full subcategory of $D^b_h(\cD_X)$ consisting of complexes with regular
+    holonomic cohomology sheaves.
+\end{definition}
+
+This agrees with our definition for curves. Any simple holonomic $\cD_C$-module
+is of the form $L(Y,N)$ where $Y$ is a single point or a connected nonempty open subset
+of $C$ and $N$ is a regular integrable connection on $Y$.
+
+\hfill
+
+We come to some big results.
+\begin{theorem}
+    Let $X$ smooth algebraic variety.
+    \begin{enumerate}
+        \item The duality functor $\D_X$ preserves $D^b_{rh}(\cD_X)$.
+        \item Let $f:X\to Y$ be a morphism of smooth algebraic varieties.
+        Then $\int_f,\int_{f^!},f^\dagger, f^\star$ preserve $D^b_{rh}(\cD_X)$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+    [Curve testing criterion] Let $X$ be a smooth algebraic variety. The 
+    following about $M^\bullet \in D^b_h(\cD_X)$ are equivalent:
+    \begin{enumerate}
+        \item $M^\bullet$ is regular.
+        \item For any locally closed embedding $i_C:C\to X$ from a smooth algebraic curve $C$
+        the pullback $i_C^\dagger M^\bullet \in D^b_h(\cD_C)$ is regular.
+        \item For any morphism $k:C\to X$ from a smooth algebraic curve $C$ 
+        $k^\dagger M^\bullet \in D^b_h(\cD_C)$ is regular.
+    \end{enumerate}
+\end{theorem}
+
+\subsection{The Riemann-Hilbert correspondence}
+Recall that for a smooth algebraic variety $X$ we have the duality functors \begin{align*}
+    \D_X: D^b_h(\cD_X) \to D^b_h(\cD_X)^{op} \\
+    \D_X(M^\bullet) = R\Hom_{\cD_X}(M^\bullet,\cD_X) \\
+    \textbf{D}_X: D^b_c(X) \to D^b_c(X)^{op}  \\
+    \textbf{D}_X(M^\bullet) = R\Hom_{\C_X}(M^\bullet,\omega_X^\bullet)
+\end{align*} where $D^b_c(X)$ is the bounded derived category
+ of constructible sheaves on $X$, \textbf{D} is Verdier duality.
+
+All of the functors $\D_X,\int_f,\int_{f^!},f^\dagger,f^\star$ preserve regular holonomic $\cD$-modules.
+We also know that \begin{align*}
+    \textbf{D}_X \DR_X(M^\bullet) = \DR_X(\D_X(M^\bullet)) \quad \text{ for } M^\bullet \in D^b_{h}(\cD_X)
+\end{align*}
+i.e. DR commutes with duality. It turns out that it also commutes with the inverse and 
+direct image functors. 
+
+\begin{theorem}
+    Let $f:X\to Y$ be a morphism of smooth algebraic varieties. Then
+    Then \begin{align*}
+        \DR_Y \circ \int_f \cong Rf_* \circ \DR_X:D^b_{rh}(\cD_X) \to D^b_{c}(Y) \\
+        \DR_Y \circ \int_{f^!} \cong Rf_! \circ \DR_X:D^b_{rh}(\cD_X) \to D^b_{c}(Y) \\
+        \DR_X \circ f^\dagger \cong f^! \circ \DR_Y:D^b_{rh}(\cD_Y) \to D^b_{c}(X) \\
+        \DR_X \circ f^\star \cong f^{-1} \circ \DR_Y:D^b_{rh}(\cD_Y) \to D^b_{c}(X)
+    \end{align*}
+\end{theorem}
+
+\begin{theorem}
+    [Riemann-Hilbert correspondence] Let $X$ be a smooth algebraic variety.
+    The DR functor is an equivalence of categories \begin{align*}
+        \DR_X:D^b_{rh}(\cD_X) \to D^b_c(X)
+    \end{align*}
+\end{theorem}
+The solution functor \begin{align*}
+    \Sol_X:D^b_{rh}(X) \to D^b_c(X)^{op}
+\end{align*} is an equivalence of categories as well.
+Passing to the full subcategory $\Mod_{rh}(\cD_X)$ we get 
+perverse sheaves which receive the image of the DR functor.
+
+\begin{theorem}
+    The DR functor induces an equivalence of categories \begin{align*}
+        \DR_X:\Mod_{rh}(\cD_X) \to Perv(\C_X)
+    \end{align*}
+\end{theorem}
+
+\begin{remark}
+    Let $Y \subset X$ algebraic subvariety and consider a local 
+    system $L$ on $U^{an}$ for open dense subset $U$ of the 
+    regular part of $Y$. Then 
+    we can associate to it an intersection complex $IC_X(L)^{\bullet}$
+    on $X$ which is a perverse sheaf which is irreducible and whose
+    support is contained in $Y$. Consider the regular integrable 
+    connection $M$ on $U$ which corresponds to $L$.
+    Then \begin{align*}
+        \DR_X L(U,M) \cong \IC_L
+    \end{align*}
+\end{remark}
+
+
+
