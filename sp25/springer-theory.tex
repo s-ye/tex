@@ -1,0 +1,80 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Springer theory}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+Notes on Chapter 3 of Chriss-Ginzburg's book.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+Springer theory is about geometric constructions of representations of the Weyl group. In particular we aim to define a $W$-action on $H_*(B_x)$, where $B_x$ is the Springer fiber $\mu^{-1}(x)$ for each $x\in \mf g$.
+
+\section{The actors}
+\begin{claim}
+    Recall that we say a subalgebra of a semisimple Lie algebra $\mf g$ is solvable if its derived series terminates at 0. This means that \begin{align*}
+        \mf b = \mf b_0 \supset \mf b_1 \supset \cdots \supset \mf b_n = 0  
+    \end{align*} where $\mf b_{i+1} = [\mf b_i, \mf b_i]$.
+A Borel subalgebra $\mf b$ is a maximal solvable subalgebra. 
+
+Then the key fact is when $G$ is connective reductive (so that $\mf g$ is semisimple), the flag manifold $G/B$ also parametrizes the set of Borel subalgebras of $\mf g$. $G$ acts on the set of Borel subalgebras by conjugation (the Adjoint $\Ad$ action). This action is transitive and for a fixed Borel subground $B_0$ with Lie algebra $\mf b_0$, the stabilizer of $\mf b_0$ is preicsely $B_0$.
+\end{claim}
+\begin{definition}
+    Let $\tilde{\mf g} = \set{(x,\mf b) \in \mf g \times G/B \st x\in \mf b}$ and write $\pi: \tilde{\mf g} \to G/B$ and $\mu: \tilde{\mf g} \to \mf g$ for the projections. 
+\end{definition}
+The projection $\pi$ makes $\tilde{\mf g}$ a $G$-equivariant vector bundle over $G/B$ with fiber $\mf b$. The other projection $\mu$ is more complicated.
+
+Recall that an element $x\in \mf g$ is \emph{nilpotent} if $\ad x: \mf g \to \mf g$ is nilpotent. The set of nilpotent elements in $\mf g$ is denoted by $\mathcal{N}$ and is called the \emph{nilpotent cone}. In particular it is a closed $\Ad G$-invariant subvariety of $\mf g$ and is closed under dilation by $\C^\times$.
+
+Denote by \begin{align*}
+     \tilde{\mathcal{N}} = \mu^{-1}(\mathcal{N}) = \set{(x,\mf b) \in \mathcal{N} \times G/B \st x\in \mf b}
+\end{align*} Fix a Borel subalgebra $\mf b_0$ and consider the fiber of the projection onto the second factor. These are the nilpotent elements of $\mf b_0$. But it is clear that the operator $\ad x$ is nilpotent if and only if $x$ has no Cartan component in the decomposition $\mf b_0 = \mf h \oplus \mf n$ where $\mf h$ is the Cartan subalgebra and $\mf n := [\mf b_0,\mf b_0]$ is the nilradical of $\mf b_0$. It follows that the projection $\tilde{\mathcal{N}} \to G/B$ is a vector bundle with fiber $\mf n$. Moreover the projection makes $\tilde{\mathcal{N}}$ a $G$-equivariant vector bundle over $G/B$. \begin{align*}
+    \tilde{\mathcal{N}} \cong G \times_B \mf n
+\end{align*} In particular $\tilde{\mathcal{N}}$ is a smooth variety, whereas $\mathcal{N}$ is singular.
+
+\begin{claim}
+    There is a natural $G$-equivariant isomorphism $\tilde{\mathcal{N}} \cong T^*G/B$. 
+\end{claim}
+
+\begin{proof}
+
+Recall that we can identify the cotangent space at the point $B$ with $(\mf g/\mf b)^* = \mf b^\perp$. Therefore we have a natural isomorphism $T^*G/B \cong G\times_B \mf b^\perp$.
+
+Using the Killing form, we get an isomorphism $\mf g \cong \mf g^*$ under which the annihilator $\mf b^\perp$ gets idenitified with the annihilator of $\mf b$ in $\mf g$ with respect to the invariant form. The latter is equal to $\mf n$, the nilradical of $\mf b$. 
+
+We have previously identified $\tilde{\mathcal{N}}$ with $G\times_B \mf n$. 
+\end{proof}
+
+\begin{proposition}
+    The projection $\mu: \tilde{\mathcal{N}} = T^*G/B \to \mathcal{N}$ is the moment map for the Hamiltonian $G$-action on $T^*G/B$ arising from the $G$-action on $G/B$. Moreover $\mu$ is surjective.
+\end{proposition}
+This map is known as the \emph{Springer resolution} and is indeed a resolution of singularities.
+
+
+\end{document}

@@ -1,0 +1,204 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Bundles, sequences, and isomorphisms in algebraic geometry}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+A standard toolkit that I really should have internalized by now. Tools are highlighted via examples.
+\end{abstract}
+
+\tableofcontents
+
+\section{Bundles}
+\subsection{Conormal bundle}
+Let $i: Y \to X$ be a closed embedding of smooth varieties. The conormal bundle $N^*_{Y/X}$ can be defined in two equivalent ways, and their equivalence becomes clear when we consider the conormal exact sequence.
+
+\begin{enumerate}
+    \item $N^*_{Y/X} = \mathcal{I}_Y/\mathcal{I}_Y^2$ where $\mathcal{I}_Y$ is the ideal sheaf of $Y$ in $X$ (i.e. the sheaf of functions on $X$ which vanish on $Y$).
+    \item $N^*_{Y/X}$ is the vector bundle over $Y$ whose fiber at a point $y\in Y$ is those linear functionals on $T_pX$ which vanish on $T_pY$.
+\end{enumerate}
+
+\subsection{Normal bundle}
+The normal bundle $N_{Y/X}$ is the dual of the conormal bundle, and can be defined in two equivalent ways.
+\begin{enumerate}
+    \item $N_{Y/X} = T_X\vert_Y / T_Y$ where $T_X\vert_Y$ is the tangent bundle of $X$ restricted to $Y$. Geometrically, at each point $y\in Y$, the fiber of $N_{Y/X}$ is the space of directions perpendicular to $Y$ at $p$. It is all the directions in which one can move away from $Y$ while remaining in $X$.
+    \item $N_{Y/X} = (N^*_{Y/X})^* = (\mathcal{I}_Y/\mathcal{I}_Y^2)^*$ is the dual of the conormal bundle.
+    \end{enumerate}
+
+In particular there is the normal exact sequence
+\begin{align*}
+    0 \to T_Y \to T_X\vert_Y \to N_{Y/X} \to 0
+\end{align*} which is dual to the conormal exact sequence.
+
+\subsection{Relative cotangent bundle}
+For a morphism $\pi:X\to B$ of smooth varieties, the relative cotangent bundle $\Omega^1_{X/B}$ is defined as the sheaf of relative Kähler differentials. It can be defined 
+\begin{enumerate}
+    \item via the exact sequence
+    \begin{align*}
+        0 \to \pi^*\Omega^1_B \to \Omega^1_X \to \Omega^1_{X/B} \to 0
+    \end{align*} In particular we identify differential forms which differ only by pullbacks from the base.
+    \item For affine pieces $\Spec(A) \subset X$ mapping to $\Spec(R)\subset B$ we have \begin{align*}
+        \Omega^1_{X/B}\vert_{\Spec(A)} = \widetilde{\Omega^1_{A/R}} 
+    \end{align*} where $\Omega^1_{A/R}$ is the $A$-module of Kähler differentials of $A$ over $R$.
+\end{enumerate} 
+
+Geometrically $\Omega^1_{X/B}$ captures the vertical directions of differentiation, that is those which move with the fibers of $\pi$ rather than across different fibers. A section of $\Omega^1_{X/B}$ can be thought of as a differential form on $X$ that vanishes when applied to vector fields that are tangent to the directions of the base.
+
+For a point $b\in B$ with fiber $X_b = \pi^{-1}(b)$, we have a natural isomorphism \begin{align*}
+    \Omega^1_{X/B}\vert_{X_b} \cong \Omega^1_{X_b}
+\end{align*} so this bundle glues together the cotangent bundles of the fibers.
+
+\begin{remark}
+    When $\pi$ is a smooth morphism, the relative cotangent bundle is locally free of rank $\dim X - \dim B$.
+
+    When $\pi$ is the closed immersion of a subvariety $Y\subset X$, the relative cotangent bundle is precisely the conormal bundle $N^*_{Y/X}$.
+\end{remark}
+\subsection{Relative canonical bundle}
+Recall that the canonical bundle $K_X$ of a smooth variety $X$ is the top exterior power of the cotangent bundle $\Omega^1_X$. For a morphism $\pi:X\to B$ of smooth varieties, the relative canonical bundle $K_{X/B}$ is defined as the top exterior power of the relative cotangent bundle $\Omega^1_{X/B}$. 
+
+Recall the fundamental exact sequence for the relative cotangent bundle: \begin{align*}
+    0 \to \pi^*\Omega^1_B \to \Omega^1_X \to \Omega^1_{X/B} \to 0
+\end{align*} Taking determinants yields the following formula for the relative canonical bundle: \begin{align*}
+    K_{X/B} = K_X \otimes (\pi^*K_B)^*
+\end{align*} 
+
+\begin{remark}
+    The relative canonical bundle is also known as the relative dualizing sheaf for its role in Serre duality.
+\end{remark}
+
+\begin{example}[Hyperelliptic curves]
+\label{ex:hyperelliptic-curves}
+    Recall that a hyperelliptic curve is defined by an equation of the form \begin{align*}
+        y^2 = f(x)
+        \end{align*} To say that curve has genus $g$ is precisely the condition that $f$ is a polynomial of degree $2g+1$ or $2g+2$ and has distinct roots. This follows from the Riemann-Hurwitz formula.
+\end{example}
+
+\begin{theorem}[Riemann-Hurwitz formula] Let $\pi:X\to B$ be a morphism of smooth projective curves. Then we have \begin{align*}
+        2g_X - 2 = (\deg \pi )(2g_B - 2) + \sum_{x\in X} (e_x - 1)
+    \end{align*} where $g_X$ and $g_B$ are the genera of $X$ and $B$ respectively, and $e_x$ is the ramification index of the point $x$. Note that all but finitely many points in $X$ have ramification index 1. 
+\end{theorem}
+
+\begin{definition}
+    A \emph{rational function} $f$ on an algebraic variety $X$ is a morphism $f:X\to \mathbb{P}^1$ defined on an open subset of $X$. The field of rational functions on an irreducible variety $X$ is denoted $K(X)$ and is precisely the field of fractions of the ring of regular functions on any nonempty open affine subset of $X$.
+    
+    Recall that linear equivalence is an equivalence relation on divisors, and that a divisor $D$ is said to be linearly equivalent to $D'$ if $D-D'$ is the divisor of a rational function, i.e. if there is a rational function $f$ such that $D-D' = (f)$.
+\end{definition}
+
+\begin{remark}
+    Recall that the degree of a principal divisor $(f)$ is always zero, i.e. the number of zeros of $f$ minus the number of poles of $f$ is zero. 
+
+This is rigorously formalated in the following sense. We can define the degree of a finite morphism from a complete $f:X\to \P^1$ by looking at the dimenison of the field extension $K(X)/f^*K(\P^1)$. Then we can establish that the number of points in any fiber, counted with multiplicity, is equal to the degree of the extension. Then it is clear by looking at the fiber of zero and infinity that for a rational function, the number of zeros is always equal to the number of poles.
+\end{remark}
+
+\begin{theorem}
+    [Riemann-Hurwitz for divisors] For a finite morphism $f:X\to Y$ of smooth projective curves, we have
+    \begin{align*}
+        K_X \sim f^*K_Y + R
+    \end{align*} where $\sim$ is linear equivalence and $R$ is the ramification divisor of $f$ \begin{align*}
+        R := \sum_{x\in X} (e_x - 1) x
+    \end{align*}
+    Taking degrees gives the Riemann-Hurwitz formula for morphisms of curves.
+\end{theorem}
+
+\begin{remark}
+    We remark on the ideas behind this formula. If $\omega$ is a local meromorphic differential on $Y$, then $f^*\omega$ is a local meromorphic differential on $X$. This pullback acquires additional zeros precisely at the raminification points, with multiplicities corresponding to the ramification index. Locally at a ramification point where $f$ looks like $t = s^{e_x}$ we can explicitly compute \begin{align*}
+        dt = e_x s^{e_x-1} ds
+    \end{align*} so the pullback contributes extra zeros with multiplicity $e_x-1$ at each ramification point. These must be subtracted off to get a divisor linearly equivalent to $K_X$.
+\end{remark}
+
+\begin{example}[Continuing Example \ref{ex:hyperelliptic-curves}]
+A hyperelliptic curve $y^2 = f(x)$ has a double cover to $\mathbb{P}^1$ given by the map $(x,y)\mapsto x$. Each 
+branch point has ramification index 2. When $f$ has degree $2g+1$, each of the $2g+1$ roots of $f$ gives a branch point, and moreover the map is ramified at infinity. To see this, we can use local coordinates at $\infty$ by putting $x = 1/s$ and $y = t/s^{g+1}$ so that $s = 0$ corresponds to the point at infinity. Then the equation becomes \begin{align*}
+    (t/s^{g+1})^2 = (1/s)^{2g+1} + {\text{lower order terms}}
+    \end{align*} and multiplying through by $s^{2g+2}$ gives \begin{align*}
+        t^2 = s + {\text{higher order terms in $s$}}
+    \end{align*} which is a smooth curve at $s=0$. Thus the curve is ramified at infinity with ramification index 2. When $s=0$, we get $t^2=0$ which indeed has ramification index 2.
+
+For $f$ of degree $2g+2$, we can carry about the same local calculation and end up with \begin{align*}
+    t^2 = a + {\text{higher order terms in $s$}}
+\end{align*} from which we see that there is no ramification at infinity. Therefore, in both cases we have that there are $2g+2$ branch points, and the Riemann-Hurwitz formula gives the genus of the curve as $g$.
+
+\end{example}
+
+\begin{example}[Relative canonical bundle of a family of hyperelliptic curves]
+
+    Consider the family of hyperelliptic curves \begin{align*}
+        y^2 = x^5 + tx^3 + x
+    \end{align*} where $t\in \mathbb{A}^1 \backslash {\pm 2}$. Note that these are precisely the $t$ for which the curve is smooth. We have this family of hyperelliptic curves $\mathcal{C} \to B$.
+
+    Via coordinate change $x = X/Z$ and $y = Y/Z^3$, we can view our family as a double cover of $\mathbb{P}^1$ \begin{align*}
+        \phi: \mathcal{C} \to \mathbb{P}^1 \times B
+    \end{align*} The double cover $\phi$ is ramified along the divisor where $Y=0$, in particular along \begin{align*}
+        X^5 + tX^3Z^2 + XZ^4 = 0
+    \end{align*}
+    Now apply the Riemann-Hurwitz formula for divisors fiber by fiber to write \begin{align*}
+        \omega_{\mathcal{C}/B} \cong \phi^*\omega_{\mathbb{P}^1\times B/B} \otimes \cO_{\mathcal{C}}(R)
+    \end{align*} Since $\P^1$ has canonical bundle $\cO(-2)$, the relative canonical sheaf is nothing more than \begin{align*}
+        \omega_{\P^1\times B/B} = \cO_{\P^1\times B}(-2)
+    \end{align*} Since $\phi^*(\cO_{\P^1\times B}(-2)) = \cO_{\mathcal{C}}(-2\phi^{-1}(H))$ where $H$ is the family of hyperplane class on $\P^1 \times B$, we get \begin{align*}
+        \omega_{\mathcal{C}/B} \cong \cO_{\mathcal{C}}(-2\phi^{-1}(H) + R)
+    \end{align*} Here we invoked the general fact that pullback induces an isomorphism of line bundles for $f:X\to Y$ a finite morphism of smooth varieties.
+    \begin{align*}
+        f^*(\cO_Y(D)) \cong \cO_X(f^{-1}(D))
+    \end{align*}
+    Finally we can verify that our answer for the relative canonical sheaf is correct by restricting to a particular fiber. Over any fiber, the ramification divisor is precisely the ramification points, of which there are six, corresponding to the five roots of $x^5 + tx^3 + x$ and the point at infinity. Since $\phi$ is a double cover, $\phi^{-1}(H)$ has degree two, and so the difference has total degree $6-4 = 2$ which is precisely the degree of the canonical divisor on a smooth curve of genus 2. 
+\end{example}
+
+
+\section{Exact sequences}
+The normal exact sequence is almost tautological, but the conormal exact sequence is more subtle and requires some explanation.
+\subsection{Conormal exact sequence}
+The conormal exact sequence relates the differential forms on a variety to the differential forms on a subvariety, together with the conormal bundle. For any closed embedding of smooth varieties $i: Y \to X$, there is a conormal exact sequence
+\begin{align*}
+    0 \to \mathcal{I}_Y/\mathcal{I}_Y^2 \to i^*\Omega^1_X \to \Omega^1_Y \to 0
+\end{align*} which arises as follows. 
+\begin{enumerate}
+    \item The ideal sheaf $\mathcal{I}_Y$ consists of functions on $X$ which vanish on $Y$, and while these functions vanish on $Y$, their differentials do not necessarily vanish on $Y$. 
+    \item The embedding map $\phi: \mathcal{I}_Y / \mathcal{I}_Y^2 \to i^*\Omega^1_X$ takes a function $f\in \mathcal{I}_Y$, forms its differential $df$, and then restricts $df$ to $Y$. This is well-defined when passing to the quotient because if $f,g\in \mathcal{I}_Y$ then
+\begin{align*}
+    d(fg) = df \cdot g + f \cdot dg
+\end{align*} whence the LHS restricts to zero on $Y$.
+    \item This map is injective because if $df$ restricts to zero on $Y$, then we can show that $f$ is in $\mathcal{I}_Y^2$. For a function $f\in \mathcal{I}_Y$, we can write it in terms of the generators of the ideal $\mathcal{I}_Y$. Take local coordinates $x_1,\ldots,x_n,y_1,\ldots,y_m$ so that $Y$ is defined by $y_1,\ldots,y_m$. Then we have \begin{align*}
+        f = \sum_{i=1}^m f_i(x,y) y_i
+    \end{align*}
+    and we can compute the differential
+    \begin{align*}
+        df = \sum_{i=1}^m df_i \cdot y_i + f_i \cdot dy_i
+    \end{align*} When restricted to $Y$ this becomes \begin{align*}
+        df\vert_Y = \sum_{i=1}^m f_i(x,0) \cdot dy_i
+    \end{align*} and since $df\vert_Y = 0$, we have that $f_i(x,0) = 0$ so $f\in \mathcal{I}_Y^2$.
+
+    \item The quotient map is nothing more than the statement that the differential of a function on $X$ when restricted to $Y$ becomes a differential form on $Y$. In particular, for $\omega\in i^*\Omega^1_X$ and $v\in T_Y$ we define the map \begin{align*}
+        \rho: i^*\Omega^1_X \to \Omega^1_Y \quad \text{by} \quad \rho(\omega)(v) = \omega(v)
+        \end{align*} The kernel is precisely the image of the conormal bundle because \begin{enumerate}
+            \item A one-form $\omega \in i^*\Omega^1_X$ is in the kernel of $\rho$ if and only if $\omega(v) = 0$ for all $v\in T_Y$. This is equivalent to saying that $\omega$ vanishes on the tangent space to $Y$ at every point. Such one-forms can be locally expressed as linear combinations of differntials of functions which vanish on $Y$ and therefore \begin{align*}
+                \ker \rho = \im \phi
+            \end{align*}
+        \end{enumerate}
+\end{enumerate}
+
+\end{document}
