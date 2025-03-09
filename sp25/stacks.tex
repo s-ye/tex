@@ -28,13 +28,583 @@
 
 
 \begin{abstract}
-A reading of Algebraic spaces and stacks by Olsson.
+    A reading of Algebraic spaces and stacks by Olsson, supplemented by notes from the Chicago BunG seminar.
 \end{abstract}
 
 \tableofcontents
-\section{Introduction}
-We should try to understand the following theorem.
+\section{Goals}
+We should try to understand the following results.
+\begin{proposition}
+    The stack $*/G$, defined as the sheafification of $(*/G)^{naive}$, represents the following moduli problem:
+    \begin{align*}
+        (*/G)(X) = \text{Groupoid of principal $G$-torsors over $X$}.
+    \end{align*}
+\end{proposition}
+
+\begin{proposition}
+    There is an equivalence of categories:
+    \begin{align*}
+        \QCoh(BG) \leftrightarrow \QCoh^G(pt) \leftrightarrow \Rep(G).
+    \end{align*}
+\end{proposition}
 \begin{theorem}[Theorem 4.1.2 in book]
     For any morphism of schemes $X\to Y$, the functor $h_X$ is a sheaf in the fppf topology (and therefore also in the etale topology) on the category of Y-schemes.
 \end{theorem}
+
+
+\section{Introduction}
+We begin by recalling vector bundles and Cech cohomology. A rank $n$ vector bundle $E$ over a topological space $X$ is a topological space $E$ together with a continuous map $\pi: E \to X$ such that:
+\begin{enumerate}
+    \item For each $x \in X$, the fiber $\pi^{-1}(x)$ has the structure of an $n$-dimensional vector space.
+    \item For each $x \in X$, there is open $U$ of $x$ and a homeomorphism $\varphi: \pi^{-1}(U) \to U \times \mathbb{R}^n$ such that:
+          \begin{itemize}
+              \item $\pi = \text{pr}_1 \circ \varphi$ where $\text{pr}_1: U \times \mathbb{R}^n \to U$ is the projection.
+              \item For each $y \in U$, the restriction $\varphi|_{\pi^{-1}(y)}: \pi^{-1}(y) \to \{y\} \times \mathbb{R}^n$ is a linear isomorphism.
+          \end{itemize}
+\end{enumerate}
+
+In particular, vector bundles can be glued together from local data using transition functions. Given an open cover $\{U_i\}_{i \in I}$ of $X$, a vector bundle can be specified by transition functions $g_{ij}: U_i \cap U_j \to \text{GL}_n(\mathbb{R})$ satisfying the cocycle condition:
+\begin{align*}
+    g_{ij} \cdot g_{jk} = g_{ik} \quad \text{on} \quad U_i \cap U_j \cap U_k
+\end{align*}
+
+This naturally leads us to Čech cohomology, which provides a framework for understanding when local data can be glued to form global structures. For a sheaf $\mathcal{F}$ on $X$ and open cover $\mathcal{U} = \{U_i\}_{i \in I}$, we define the Čech complex:
+\begin{align*}
+    \check{C}^0(\mathcal{U}, \mathcal{F}) \to \check{C}^1(\mathcal{U}, \mathcal{F}) \to \check{C}^2(\mathcal{U}, \mathcal{F}) \to \cdots
+\end{align*} where
+\begin{align*}
+    \check{C}^k(\mathcal{U}, \mathcal{F}) = \prod_{i_0 < i_1 < \cdots < i_k} \mathcal{F}(U_{i_0} \cap \cdots \cap U_{i_k})
+\end{align*} and the coboundary map is given by:
+\begin{align*}
+    (\delta s)_{i_0, \ldots, i_{k+1}} = \sum_{j=0}^{k+1} (-1)^j s_{i_0, \ldots, \hat{i_j}, \ldots, i_{k+1}}|_{U_{i_0} \cap \cdots \cap U_{i_{k+1}}}
+\end{align*}
+In particular, a $1$-cochain is an arbitrary collection of sections $s_{ij} \in \mathcal{F}(U_i \cap U_j)$, a $1$-cocycle is a collection of sections $s_{ij}$ exactly satisfying the cocycle condition, and a $1$-coboundary is a collection of sections of the form $s_i - s_j$ for some $s_i \in \mathcal{F}(U_i)$ and $s_j \in \mathcal{F}(U_j)$.
+
+The cohomology of this complex gives the Čech cohomology groups $\check{H}^i(\mathcal{U}, \mathcal{F})$. We obtain the Cech cohomology groups $\check{H}^i(X, \mathcal{F})$ by taking the direct limit over all open covers of $X$. In particular, $\check{H}^1(X, \text{GL}_n)$ classifies rank $n$ vector bundles on $X$, where $\GL_n$ is the sheaf of functions $X \to \GL_n(\mathbb{R})$.
+
+The key takeaway is that isomorphism classes of vector bundles on $X$ are classified by elements of $\check{H}^1(X, \text{GL}_n)$, and that this cohomology group captures symmetries of the fiber $\Aut(V) = \GL_n(\mathbb{R})$ and how these symmetries can be glued together to form a global object. Classically $\Bun_{\GL_n}(X)$ has also been denoted by $\mathfrak{H}^1(X, \GL_n)$. These concepts will be generalized as we develop the theory of stacks and algebraic spaces.
+
+\section{An example: $B\Z_2$}
+\subsection{Category theory}
+\begin{definition}
+    Let $\cal C, \cal D$ be categories and $F,G: \cal C \to \cal D$ be functors. A \textbf{natural transformation} $\eta: F \to G$ is a collection of morphisms $\eta_X: F(X) \to G(X)$ for each object $X \in \cal C$ such that for any morphism $f: X \to Y$ in $\cal C$, the following diagram commutes:
+    \begin{center}
+        \begin{tikzcd}
+            F(X) \arrow[r, "F(f)"] \arrow[d, "\eta_X"'] & F(Y) \arrow[d, "\eta_Y"] \\
+            G(X) \arrow[r, "G(f)"'] & G(Y)
+        \end{tikzcd}
+    \end{center}
+    A natural transformation is an \textbf{isomorphism} if each $\eta_X$ is an isomorphism in $\cal D$.
+\end{definition}
+
+\begin{definition}
+    Let $\cal C, \cal D$ be categories. A functor $F: \cal C \to \cal D$ is an \textbf{equivalence} if there exists a functor $G: \cal D \to \cal C$ and natural isomorphisms $\mu: G \circ F \to \text{id}_{\cal C}$ and $\nu: F \circ G \to \text{id}_{\cal D}$.
+\end{definition}
+
+\begin{proposition}
+    Let $\cal C, \cal D$ be categories. A functor $F: \cal C \to \cal D$ is an equivalence if and only if it is full, faithful, and essentially surjective. This means that \begin{itemize}
+        \item Full: For any $X,Y \in \cal C$, the map $\Hom_{\cal C}(X,Y) \to \Hom_{\cal D}(F(X), F(Y))$ is surjective.
+        \item Faithful: For any $X,Y \in \cal C$, the map $\Hom_{\cal C}(X,Y) \to \Hom_{\cal D}(F(X), F(Y))$ is injective.
+        \item Essentially surjective: For any $Z \in \cal D$, there exists $X \in \cal C$ such that $F(X) \simeq Z$ where $\simeq$ denotes isomorphism in $\cal D$.
+    \end{itemize}
+\end{proposition}
+
+\begin{definition}[Fiber Product of Groupoids]
+    If $A$, $B$, and $C$ are groupoids, and $F : A \rightarrow C$ and $G : B \rightarrow C$ are functors, then the fiber product $A \times_C B$ is the groupoid defined as follows:
+
+    \begin{itemize}
+        \item \textbf{Objects:} Triples $(a, b, \phi)$ where $a \in \text{Ob}(A)$, $b \in \text{Ob}(B)$, and $\phi : F(a) \stackrel{\sim}{\rightarrow} G(b)$ is an isomorphism in $C$
+
+        \item \textbf{Morphisms:} A morphism $(a, b, \phi) \rightarrow (a', b', \phi')$ consists of a pair $(\varphi, \psi)$ of isomorphisms $\varphi : a \stackrel{\sim}{\rightarrow} a'$, $\psi : b \stackrel{\sim}{\rightarrow} b'$ so that
+              \begin{center}
+                  \begin{tikzcd}
+                      F(a) \arrow[r, "\phi"] \arrow[d, "F(\varphi)"'] & F(b) \arrow[d, "G(\psi)"] \\
+                      F(a') \arrow[r, "\phi'"'] & F(b').
+                  \end{tikzcd}
+              \end{center}
+    \end{itemize}
+\end{definition}
+
+\begin{example}
+    The fiber product of $* \times_{(*/G)} *$, where $*$ is the trivial groupoid, is given by:
+    \begin{center}
+        \begin{tikzcd}
+            G \arrow[r] \arrow[d] & * \arrow[d] \\
+            * \arrow[r] & */G.
+        \end{tikzcd}
+    \end{center}
+    where $G$ represents the set of elements of the group $G$ thought of as a set in $\textbf{Gpd}$. This follows directly from the construction of fiber products described above.
+\end{example}
+
+
+
+\subsection{Main example}
+Consider the group $\Z_2 = \Z/2\Z$ with the discrete topology. We will answer the question: for a topological space $T$, what are the $T$-points of $B\Z_2 = */\Z_2$, i.e. a map $T \to B\Z_2$? It turns out that these correspond to principal $\Z_2$-torsors on $T$, i.e. a space $P$ with a free transitive action of $\Z_2$ with a map $P \to T$ that is $\Z_2$-equivariant.
+
+Our first guess to define the functor of points of $B\Z_2$, which we shall call $(*/\mathbb{Z}_2)^{\text{naive}} : \text{Top} \to \text{Gpd}$, is given by
+$(*/\mathbb{Z}_2)^{\text{naive}}(T) = \text{Maps}(T, *)/\text{Maps}(T, \mathbb{Z}_2) = */\text{Maps}(\mathbb{Z}_2^{\pi_0(T)})$. This is almost right; however, this functor into groupoids does not actually define a sheaf.
+
+To see this, let $T = S^1$. We see that $(*/\mathbb{Z}_2)^{\text{naive}}(S^1) = */\text{Maps}(S^1, \mathbb{Z}_2) = */\mathbb{Z}_2$, where the latter is thought of as just the groupoid. Now, a sheaf is characterized by the property that compatible local sections patch uniquely into global sections. Cover $S^1$ by two open arcs $U_0$ and $U_1$
+such that $U_0 \cup U_1 = S^1$, and such that $U_0 \cap U_1$ consists of two disconnected arcs $A \sqcup B$.
+
+We see that
+\begin{align}
+    (*/\mathbb{Z}_2)^{\text{naive}}(U_0) & = */\mathbb{Z}_2, \\
+    (*/\mathbb{Z}_2)^{\text{naive}}(U_1) & = */\mathbb{Z}_2
+\end{align}
+
+and
+\begin{align}
+    (*/\mathbb{Z}_2)^{\text{naive}}(U_0 \cap U_1) = */(\mathbb{Z}_2 \times \mathbb{Z}_2),
+\end{align}
+
+since $U_0 \cap U_1 = A \sqcup B$ has two disconnected components. The restrictions $\text{res}_{U_0 \cap U_1}^{U_0}$ and
+$\text{res}_{U_0 \cap U_1}^{U_1}$ both correspond to the diagonal embedding $\Delta : */\mathbb{Z}_2 \to */(\mathbb{Z}_2 \times \mathbb{Z}_2)$. Therefore, if $(*/\mathbb{Z}_2)^{\text{naive}}$ were to be a sheaf, we need that \begin{align*}
+    */\mathbb{Z}_2^{\text{naive}}(S^1) = */\mathbb{Z}_2 \times_{*/(\mathbb{Z}_2 \times \mathbb{Z}_2)} */\mathbb{Z}_2
+\end{align*} where this fiber product is taken in the category of groupoids.
+
+We can check that the objects of the category $*/\mathbb{Z}_2 \times_{*/(\mathbb{Z}_2 \times \mathbb{Z}_2)} */\mathbb{Z}_2$ are given by triples $(*,*,g)$ where $g \in \mathbb{Z}_2 \times \Z_2$. Morphisms from $(\ast, \ast, g)$ to $(\ast, \ast, g')$ are pairs of isomorphisms $\phi: *_A \to *_A$ and $\psi: *_B \to *_B$ so that \begin{center}
+    \begin{tikzcd}
+        *_C \arrow[r, "g_C"] \arrow[d, "F(\varphi)"'] & *_C \arrow[d, "G(\psi)"] \\
+        *_C \arrow[r, "g'_C"'] &  *_C
+    \end{tikzcd}
+\end{center} in particular pairs of elements $\phi \in \Delta_{\Z/2}$ and $\psi \in \Delta_{\Z/2}$ so that $\phi g = g' \psi$.
+\begin{enumerate}
+    \item Consider the morphisms from $(e,e)$ to $(e,e)$. If $\psi = \phi = \Delta(e)$ then \begin{align*}
+              (e,e) * \Delta(e) = (e,e) = (e,e) * \Delta(e)
+          \end{align*} If $\psi = \phi = \Delta(g)$ then similarly \begin{align*}
+              (e,e) * \Delta(g) = (g,g) = (e,e) * \Delta(g)
+          \end{align*} However if $\psi = \Delta(e)$ and $\phi = \Delta(g)$ then \begin{align*}
+              (e,e) * \Delta(g) = (g,g) \neq (e,e) = (e,e) * \Delta(e)
+          \end{align*} and similarly if $\psi = \Delta(g)$ and $\phi = \Delta(e)$.
+    \item The morphisms from $(g,g)$ to $(g,g)$ are similar.
+    \item The morphisms from $(e,e)$ to $(g,g)$ are $\phi = \Delta(g), \psi = \Delta(e)$ and $\phi = \Delta(e), \psi = \Delta(g)$. Likewise for the morphisms from $(g,g)$ to $(e,e)$.
+    \item There are no morphisms from $(e,g)$ to $(e,e)$.
+\end{enumerate} So one connected component of the fiber product is the following category $\cal C$. It has two objects $(e,e)$ and $(g,g)$ and \begin{align*}
+    \Hom((e,e),(e,e)) = \Hom((g,g),(g,g)) = \{(e,e), (g,g)\} \\
+    \Hom((e,e),(g,g)) = \Hom((g,g),(e,e)) = \{(e,g), (g,e)\}
+\end{align*} This category is equivalent to the groupoid $*/\Z_2$. There is a functor $F:\cal{C} \to $ $*/\mathbb{Z}_2$ which we will define as follows. We send all objects to $*$ and \begin{align*}
+    (e,e)\in \Hom((e,e),(e,e)) \mapsto e \in \Hom(*,*) \\
+    (g,g)\in \Hom((e,e),(e,e)) \mapsto g \in \Hom(*,*) \\
+    (e,e)\in \Hom((g,g),(g,g)) \mapsto e \in \Hom(*,*) \\
+    (g,g)\in \Hom((g,g),(g,g)) \mapsto g \in \Hom(*,*) \\
+    (e,g)\in \Hom((e,e),(g,g)) \mapsto e \in \Hom(*,*) \\
+    (g,e)\in \Hom((e,e),(g,g)) \mapsto g \in \Hom(*,*) \\
+    (e,g)\in \Hom((g,g),(e,e)) \mapsto e \in \Hom(*,*) \\
+    (g,e)\in \Hom((g,g),(e,e)) \mapsto g \in \Hom(*,*)
+\end{align*} In terms of compatibilty, since we have that $(g,g) = (e,g) \circ (g,e)$ as a morphism from $(e,e)$ to $(g,g)$ to $(e,e)$ which maps to $g$, we must insist that $(e,g) \mapsto e $ and $(g,e) \mapsto g$ or vice versa. The functoriality constraints manifest themselves in this form.
+
+The functor $G:*/\Z_2 \to \cal C$ is defined in the following way. \begin{align*}
+    * \mapsto (e,e) \\
+    e \mapsto (e,e) \\
+    g \mapsto (g,g)
+\end{align*} Finally it remains to check that $F$ and $G$ define an equivalence of categories, in particular that $F \circ G \simeq \text{id}_{*/\Z_2}$ and $G \circ F \simeq \text{id}_{\cal C}$. Certainly the first equivalence is clear. As for the second equivalence, I will give a natural transformation $\mu: H = GF \to \text{id}_{\cal C}$ which will in fact be a natural isomorphism. In particular, for the objects $(e,e)$ and $(g,g)$ we define the following morphisms \begin{align*}
+    \mu_{(e,e)}: H(e,e) \to \id(e,e) \\
+    \mu_{(g,g)}: H(g,g) \to \id(g,g)
+\end{align*} by \begin{align*}
+    \mu_{(e,e)}: (e,e) \to (e,e) \quad \mu_{(e,e)} = (e,e) \\
+    \mu_{(g,g)}: (e,e) \to (g,g) \quad \mu_{(g,g)} = (e,g)
+\end{align*} These are clearly isomorphisms. The naturality of $\mu$ is tedious to check but straightforward. Alternatively, we can verify that $F: \cal C \to */\Z_2$ is an equivalence by checking that it is full, faithful, and essentially surjective. In fact, after writing this, I realize that this is the easier way to check that $F$ is an equivalence.
+
+This establishes that the fiber product $*/\Z_2 \times_{*/(\Z_2 \times \Z_2)} */\Z_2$ is a disjoint union of two copies of $*/\Z_2$. On the other hand, we have already seen that $(*/\Z_2)^{\text{naive}}(S^1) = */\Z_2$. Therefore, the naive functor $(*/\Z_2)^{\text{naive}}$ is not a sheaf. Thus we need to sheafify/stackify this functor to obtain the correct functor of points of $B\Z_2$. This regards the naive functor as true “only locally”, and builds the general functor by gluing
+these local functors. This is the true definition of the functor of points of $B\Z_2$.
+
+\subsection{Topological interpretation}
+In the topological setting, we can define the stack $*/\mathbb{Z}_2$ directly. Recall that for any
+space $T$, we have the corresponding fundamental groupoid $\pi_{\leq 1}(T)$. Then we can define:
+\begin{align}
+    (*/\mathbb{Z}_2)(T) = \text{Fun}(\pi_{\leq 1}(T), */\mathbb{Z}_2),
+\end{align}
+where the isomorphisms are given by natural isomorphisms of functors. This is automatically
+a sheaf, and it tells us why the naive $*/\mathbb{Z}_2$ did not work for $S^1$: the fundamental group of
+$S^1$ is nontrivial. On the other hand, for simply connected test spaces $T$, the naive functor
+does indeed give the correct groupoid.
+
+Given a general space $X$, we use a good cover of $X$; i.e., one for which all
+the open sets and finite intersections of the open sets in the cover are contractible. (In fact,
+we can relax this constraint: we need only have all single, double, and triple intersections in
+our open cover be \textbf{simply-connected}.)
+
+Gluing two sections $\pi_{\leq 1}(U_i \cap U_j) \to */\mathbb{Z}_2$ and $\pi_{\leq 1}(U_j \cap U_j) \to */\mathbb{Z}_2$ (which we imagine to be coming from $\pi_{\leq 1}(U_i) \to */\mathbb{Z}_2$ and $\pi_{\leq 1}(U_j) \to */\mathbb{Z}_2$, respectively) is the same as providing a natural transformation between these two functors $\pi_{\leq 1}(U_i \cap U_j) \to */\mathbb{Z}_2$. Since $\pi_{\leq 1}(U_i \cap U_j)$ is equivalent to trivial category $*$, we see that this is the same as an isomorphism $* \to *$ in $*/\mathbb{Z}_2$; i.e., and element $\mathbb{Z}_2$, which we call $g_{ji}$. We see that the $g_{ji}$ must satisfy a cocycle condition, and that two cocycles correspond to the same family if the usual
+coboundary equivalence holds. Thus we have that \begin{align*}
+    (*/Z_2)(X) = \text{Groupoid of 2-point families over } X
+\end{align*}
+
+\subsection{$BG$ in generality (note we have not defined stacks yet)}
+\begin{proposition}
+    The stack $*/G$, defined as the sheafification of $(*/G)^{\text{naive}}$, represents the following moduli problem:
+    \begin{center}
+        $(*/G)(X) = \text{Groupoid of principal } G\text{-torsors over } X$.
+    \end{center}
+\end{proposition}
+
+\begin{definition}
+    Let $G$ be an algebraic group. The classifying stack $BG = */G$ is the stack whose $S$-points are $BG(S) = \text{groupoid of principal } G\text{-bundles on } S$.
+\end{definition}
+For exactly the formal reasons outlined above (in the topological setting), this is the sheafification of
+\begin{center}
+    $(*/G)^{\text{naive}} : S \mapsto */G(S)$.
+\end{center}
+We note that there is a canonical map of stacks
+\begin{center}
+    \begin{tikzcd}
+        * \arrow[d] \\
+        */G.
+    \end{tikzcd}
+\end{center}
+For an arbitrary test-scheme $S$, the composition of the map $S \to *$ with the vertical quotient map must provide us with a particular isomorphism class of $G$-torsor over $S$: this is simply the trivial $G$-torsor. And given a torsor $P$ over $S$ and the bottom map is the corresponding map $S \to */G$, we have a Cartesian diagram:
+\begin{center}
+    \begin{tikzcd}
+        P \arrow[r] \arrow[d] & * \arrow[d] \\
+        S \arrow[r, "P"] & */G.
+    \end{tikzcd}
+\end{center}
+
+Because any isomorphism class of torsor can thus be "pulled back" from the torsor $* \to */G$ along a map $S \to */G$, we say that $* \to */G$ is the "universal $G$-torsor."
+
+\section{Quotient stacks}
+\begin{definition}
+    Let $G$ be an algebraic group acting on a scheme $X$. The action groupoid $X/G$ is the category whose objects are the points of $X$ and morphisms from $x$ to $y$ are the elements of $G$ such that $gx = y$.
+\end{definition} Note that the isomorphism classes of the action groupoid are in bijection with
+the orbits of $G $ on $X$. There is a canonical map $X/G \to */G$ which is obvious on the level of groupoids.
+
+\begin{definition}
+    We define the quotient stack $X/G: \Sch \to \Gpd$ by \begin{align*}
+        (X/G)(S) = \text{sheafification of the presheaf } S \mapsto X(S)/G(S)
+    \end{align*}
+\end{definition}
+From the moduli perspective, we have to ask: what family over $S$ is parameterized by $(X/G)(S)$ for a test scheme $S$? We can answer this question as follows.
+
+The first thing we notice is that the map $X \rightarrow *$ should induce a canonical map $X/G \rightarrow */G$. Thus an $S$-point of $S \rightarrow X/G$ induces by composition an $S$-point $S \rightarrow */G$; i.e., a $G$-torsor $P$ over $S$.
+
+Now, say we have a $G$-torsor $P$ over $S$. We can form the fiber product:
+
+\begin{center}
+    \begin{tikzcd}
+        X \times^G P \arrow[r] \arrow[d] & X/G \arrow[d] \\
+        S \arrow[r, "P"] & */G
+    \end{tikzcd}
+\end{center}
+
+We call the stack $X \times^G P$ the $X$-bundle associated to $P$, or the associated bundle of $P$ with
+fiber $X$. In particular, there is the following correspondence:
+
+\begin{proposition}
+    There is a canonical bijection between:
+
+    \begin{enumerate}
+        \item Maps from a scheme $S$ to the quotient stack $X/G$
+        \item Sections of the associated bundle $S \to X \times^G P$
+        \item $G$-equivariant maps from $P$ to $X$
+    \end{enumerate} where $P$ is thd principal $G$-bundle on $S$ corresponding to $S \to X/G \to */G$.
+\end{proposition}
+
+A map $f: S \to X/G$ in the context of stacks corresponds to a principal $G$-bundle $P$ on $S$ together with a $G$-equivariant map $\phi: P \to X$. Given a $G$-equivariant map $\phi: P \to X$, we can construct a section $\sigma: S \to X \times^G P$ of the associated bundle as follows:
+
+For each point $s \in S$, define $\sigma(s) = [\phi(p), p]$ where $p$ is any point in the fiber $P_s$ and $[\phi(p), p]$ denotes the equivalence class in $X \times^G P$. The $G$-equivariance of $\phi$ ensures this is well-defined regardless of which $p \in P_s$ we choose.
+
+
+Conversely, given a section $\sigma: S \to X \times^G P$ where $\sigma(s) = [x_s, p_s]$ for each $s \in S$, we can define a $G$-equivariant map $\phi: P \to X$ as follows:
+
+For any $p \in P$ with $p \in P_s$ for some $s \in S$, we have $p = p_s \cdot g$ for some $g \in G$. We define $\phi(p) = g^{-1} \cdot x_s$. The properties of the associated bundle ensure this is well-defined and $G$-equivariant.
+
+This motivates the following definition:
+\begin{definition}
+    Let an algebraic group $G$ act on a scheme $X$. Then the quotient stack $X/G$ is the functor $\text{Sch} \to \text{Gpd}$ given by
+    \begin{align*}
+        (X/G)(S) = \text{Groupoid of principal $G$-torsors $P$ with a $G$-equivariant map $P \to X$}.
+    \end{align*}
+\end{definition}
+
+\section{Formalities}
+\subsection{Grothendieck Topologies}
+
+\begin{definition}[Grothendieck Topology]
+    A Grothendieck topology $J$ on a category $\mathcal{C}$ assigns to each object $U$ in $\mathcal{C}$ a collection $J(U)$ of families of morphisms $\{f_i: U_i \to U\}_{i \in I}$ (called covering families or sieves) satisfying:
+
+    \begin{enumerate}
+        \item \textbf{Stability under isomorphism}: If $\{f_i: U_i \to U\}_{i \in I} \in J(U)$ and $g: V \to U$ is an isomorphism, then $\{f_i \circ g^{-1}: U_i \to V\}_{i \in I} \in J(V)$.
+
+        \item \textbf{Stability under base change}: If $\{f_i: U_i \to U\}_{i \in I} \in J(U)$ and $g: V \to U$ is any morphism, then the family of pullbacks $\{V \times_U U_i \to V\}_{i \in I} \in J(V)$.
+
+        \item \textbf{Transitivity}: If $\{f_i: U_i \to U\}_{i \in I} \in J(U)$ and for each $i \in I$, we have
+
+              $\{g_{ij}: V_{ij} \to U_i\}_{j \in J_i} \in J(U_i)$, then the composite family $\{f_i \circ g_{ij}: V_{ij} \to U\}_{i \in I, j \in J_i} \in J(U)$.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Site]
+    A site is a category $\mathcal{C}$ equipped with a Grothendieck topology.
+\end{definition}
+\begin{example}
+    Let $\mathcal{C}$ be the category of open sets in a topological space $X$, with inclusions as morphisms. We can define a Grothendieck topology by declaring a family $\{U_i \hookrightarrow U\}_{i \in I} \in J(U)$ if and only if $\bigcup_{i \in I} U_i = U$. This is called the \textbf{small classified site}.
+
+    If $X$ is a scheme, we can do the same thing with the category of Zariski open sets. This is called the \textbf{small Zariski site}.
+\end{example}
+
+\begin{example}
+    Let $X$ be a scheme, and let $\mathcal{C}$ be the category of $X$-schemes. For $(U \to X) \in \mathcal{C}$ define $\text{Cov}(U)$ to be the set of collections of $X$-morphisms $\{U_i \to U\}_{i \in I}$ for which each $U_i \to U$ is an open embedding and $U = \bigcup_{i \in I} U_i$. Then $\text{Cov}$ defines a Grothendieck topology on $\mathcal{C}$, called the \textbf{big Zariski topology} on the category of $X$-schemes.
+\end{example}
+\begin{remark}
+    Recall the small classical site for a topological space $X$. The key observation is that the notion of a sheaf on $X$ depends only on the underlying category of opens and the distinguished collections of maps $\{U_i \to U\}$ which are coverings. This abstraction allows us to generalize the concept of sheaves beyond topological spaces to any category equipped with a notion of "covering," which is precisely what a Grothendieck topology provides.
+
+    In other words, once we have defined a Grothendieck topology on a category, we can define and work with sheaves in exactly the same way as we do for topological spaces, without requiring any underlying topological structure. This allows us to work with sheaves on schemes, algebraic spaces, and stacks using various topologies (Zariski, étale, fppf, etc.).
+\end{remark}
+\begin{definition}[Sheaf on a Site]
+    Let $(\mathcal{C}, J)$ be a site. A presheaf $F: \mathcal{C}^{op} \to \mathbf{Sets}$ is a sheaf if for every covering family $\{f_i: U_i \to U\}_{i \in I} \in J(U)$, the following sequence is exact:
+    \begin{align*}
+        F(U) \to \prod_{i \in I} F(U_i) \rightrightarrows \prod_{i,j \in I} F(U_i \times_U U_j)
+    \end{align*}
+    where the two parallel arrows represent the two natural projections.
+\end{definition}
+
+
+
+\subsection{Zariski, étale, fppf, and fpqc}
+
+\begin{definition}
+    If $A$ is a ring and $M$ is an $A$-module, then $M$ is called of \textbf{finite presentation} if there exists an exact sequence
+    \[
+        A^r \to A^s \to M \to 0
+    \]
+    for some integers $r$ and $s$. Note that in the case when $A$ is noetherian, this is equivalent to $M$ being finitely generated (as the kernel of any surjection $A^s \to M$ is automatically finitely generated), but in general $M$ being of finite presentation is a stronger condition than being finitely generated.
+
+    If $A \to B$ is a ring homomorphism, then we say that $B$ is of \textbf{finite presentation over $A$} (or that $B$ is a \textbf{finitely presented $A$-algebra}) if there exists a surjection
+    \[
+        \pi : A[X_1,\ldots,X_s] \to B
+    \]
+    with kernel $\operatorname{Ker}(\pi)$ a finitely generated ideal in $A[X_1,\ldots,X_s]$. If $A$ is noetherian this is equivalent to $B$ being a finitely generated $A$-algebra, but in general $B$ being of finite presentation is a stronger condition than being finitely generated.
+
+    Let $X$ be a scheme. A quasi-coherent sheaf $\mathcal{F}$ on $X$ is called \textbf{locally finitely presented} if for every affine open subset $\operatorname{Spec}(B) \subset X$ the module $\Gamma(\operatorname{Spec}(B), \mathcal{F})$ is a finitely presented $B$-module.
+
+    Note that if $X$ is locally noetherian then a quasi-coherent sheaf is locally finitely presented if and only if it is coherent.
+
+    In the case when $Y$ is noetherian, the morphism $f$ is locally of finite presentation if and only if $f$ is locally of finite type, and finitely presented if and only if of finite type.
+
+\end{definition}
+
+Let $\mathbf{Sch}$ denote the category of schemes. Before defining the following Grothendieck topologies (Zariski, étale, fppf, and fpqc), we recall several types of morphisms in algebraic geometry.
+
+\begin{definition}
+    Let $f: X \to Y$ be a morphism of schemes.
+    \begin{enumerate}
+        \item $f$ is \textbf{flat} if for every point $x \in X$, the induced map on local rings $\mathcal{O}_{Y,f(x)} \to \mathcal{O}_{X,x}$ makes $\mathcal{O}_{X,x}$ into a flat $\mathcal{O}_{Y,f(x)}$-module.
+
+        \item $f$ is \textbf{locally of finite presentation} if $Y$ can be covered by affine open subsets $V_i = \operatorname{Spec} B_i$ such that for each $i$, $f^{-1}(V_i)$ can be covered by affine open subsets $U_{ij} = \operatorname{Spec} A_{ij}$ where each $A_{ij}$ is a finitely presented $B_i$-algebra.
+        \item $f$ is \textbf{locally of finite type} if $Y$ can be covered by affine open subsets $V_i = \operatorname{Spec} B_i$ such that for each $i$, $f^{-1}(V_i)$ can be covered by affine open subsets $U_{ij} = \operatorname{Spec} A_{ij}$ where each $A_{ij}$ is a finitely generated $B_i$-algebra.
+
+        \item $f$ is \textbf{quasi-compact} if for every quasi-compact open subset $V \subseteq Y$, the preimage $f^{-1}(V)$ is quasi-compact.
+
+        \item $f$ is \textbf{faithfully flat} if $f$ is flat and surjective.
+
+        \item $f$ is \textbf{unramified} if it is locally of finite presentation and the relative cotangent sheaf $\Omega_{X/Y}$ vanishes.
+
+        \item $f$ is \textbf{étale} if it is flat and unramified, or equivalently, if it is flat, locally of finite presentation, and has relative dimension 0.
+        \item $f$ is \textbf{of finite presentation} (or a \textbf{finitely presented morphism}) if $f$ is locally of finite presentation and quasi-compact and quasi-separated (recall that by definition a morphism of schemes $f : X \to Y$ is quasi-separated if the diagonal morphism is quasi-compact).
+    \end{enumerate}
+\end{definition}
+
+
+\subsection{Zariski Topology}
+
+\begin{definition}
+    The \textbf{Zariski topology} $J_{\textrm{Zar}}$ on $\mathbf{Sch}$ is defined as follows: A family of morphisms $\{f_i: U_i \to U\}_{i \in I}$ is a Zariski covering if:
+    \begin{enumerate}
+        \item Each $f_i$ is an open immersion.
+        \item The images of the $f_i$ collectively cover $U$, i.e., $\cup_{i \in I} f_i(U_i) = U$.
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    The Zariski topology corresponds most closely to the classical notion of a topological covering and is the coarsest of the four topologies discussed here. For an affine scheme $\operatorname{Spec}(R)$, a standard Zariski covering arises from a set of elements $\{f_i\}$ generating the unit ideal in $R$, giving the covering $\{\operatorname{Spec}(R_{f_i}) \to \operatorname{Spec}(R)\}$.
+\end{remark}
+
+\subsection{Étale Topology}
+
+\begin{definition}
+    The \textbf{étale topology} $J_{\textrm{ét}}$ on $\mathbf{Sch}$ is defined as follows: A family of morphisms $\{f_i: U_i \to U\}_{i \in I}$ is an étale covering if:
+    \begin{enumerate}
+        \item Each $f_i$ is étale.
+        \item The family is jointly surjective, i.e., $\cup_{i \in I} f_i(U_i) = U$.
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Let $X$ be a scheme. The following are equivalent for a morphism $f: Y \to X$:
+    \begin{enumerate}
+        \item $f$ is étale.
+        \item $f$ is flat, locally of finite presentation, and for every $y \in Y$, the fiber $Y_{\kappa(f(y))}$ is a disjoint union of spectra of finite separable field extensions of $\kappa(f(y))$.
+        \item $f$ is locally of finite presentation and formally étale, meaning that for every affine $X$-scheme $Z$ and every nilpotent closed subscheme $Z_0 \subset Z$, the induced map \[\operatorname{Hom}_X(Z, Y) \to \operatorname{Hom}_X(Z_0, Y)\] is bijective.
+    \end{enumerate}
+\end{proposition}
+
+\begin{example}
+    If $L/K$ is a finite separable field extension, then $\operatorname{Spec}(L) \to \operatorname{Spec}(K)$ is an étale morphism. More generally, if $R$ is a ring and $S$ is a finite étale $R$-algebra, then $\operatorname{Spec}(S) \to \operatorname{Spec}(R)$ is an étale covering.
+\end{example}
+
+\subsection{fppf Topology}
+
+\begin{definition}
+    The \textbf{fppf topology} (fidèlement plat et de présentation finie) $J_{\textrm{fppf}}$ on $\mathbf{Sch}$ is defined as follows: A family of morphisms $\{f_i: U_i \to U\}_{i \in I}$ is an fppf covering if:
+    \begin{enumerate}
+        \item Each $f_i$ is flat and locally of finite presentation.
+        \item The family is jointly surjective, i.e., $\cup_{i \in I} f_i(U_i) = U$.
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    The fppf topology further refines the étale topology by allowing any flat morphism of finite presentation, not just étale morphisms. This is particularly important for working with non-smooth group schemes, where étale-local triviality may not be sufficient.
+\end{remark}
+
+\begin{example}
+    If $R$ is a ring and $p$ is a prime number, the morphism $\operatorname{Spec}(R[x]/(x^p-a)) \to \operatorname{Spec}(R)$ for $a \in R$ is flat and of finite presentation, but generally not étale in characteristic $p$. Such morphisms may appear in fppf coverings but not in étale coverings.
+\end{example}
+
+\begin{theorem}[Grothendieck]
+    Let $G$ be an affine group scheme of finite type over a scheme $S$. Then any $G$-torsor over $S$ is trivial in the fppf topology.
+\end{theorem}
+
+\subsection{fpqc Topology}
+
+\begin{definition}
+    The \textbf{fpqc topology} (fidèlement plat et quasi-compact) $J_{\textrm{fpqc}}$ on $\mathbf{Sch}$ is defined as follows: A family of morphisms $\{f_i: U_i \to U\}_{i \in I}$ is an fpqc covering if:
+    \begin{enumerate}
+        \item Each $f_i$ is flat and quasi-compact.
+        \item The family is jointly surjective, i.e., $\cup_{i \in I} f_i(U_i) = U$.
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    The fpqc topology is the finest of the four topologies discussed here. It drops the finite presentation requirement from the fppf topology, allowing more general flat morphisms to form coverings. This topology is primarily of theoretical interest and provides the most general framework for descent theory in algebraic geometry.
+\end{remark}
+
+\begin{proposition}
+    Let $G$ be a quasi-compact and quasi-separated group scheme over a scheme $S$. If $P$ is a $G$-torsor over $S$ in the fpqc topology, then $P$ is already a $G$-torsor in the fppf topology.
+\end{proposition}
+The four topologies form a hierarchy of refinements:
+\begin{theorem}
+    For the category $\mathbf{Sch}$ of schemes, the following inclusions hold:
+    \[ J_{\textrm{Zar}} \subset J_{\textrm{ét}} \subset J_{\textrm{fppf}} \subset J_{\textrm{fpqc}} \]
+    That is, every Zariski covering is an étale covering, every étale covering is an fppf covering, and every fppf covering is an fpqc covering.
+\end{theorem}
+
+
+\begin{definition}
+    Let $G$ be a group scheme over a scheme $S$, and let $X$ be an $S$-scheme. A \textbf{principal $G$-bundle} over $X$ is an $X$-scheme $P$ with a right $G$-action $P \times_S G \to P$ such that the morphism $P \to X$ is locally trivial with respect to a given Grothendieck topology $J$ on $\mathbf{Sch}$. That is, there exists a covering $\{U_i \to X\}_{i \in I}$ in $J$ such that $P \times_X U_i \cong U_i \times_S G$ as $G$-schemes over $U_i$ for each $i \in I$.
+\end{definition}
+
+\begin{proposition}
+    Let $G$ be a group scheme over a scheme $S$.
+    \begin{enumerate}
+        \item If $G$ is smooth over $S$, then every principal $G$-bundle that is fppf-locally trivial is also étale-locally trivial.
+        \item If $G$ is finite and étale over $S$, then every principal $G$-bundle that is étale-locally trivial is also Zariski-locally trivial.
+        \item In general, a principal $G$-bundle that is fpqc-locally trivial is also fppf-locally trivial.
+    \end{enumerate}
+\end{proposition}
+
+\begin{theorem}
+    Let $G$ be an affine group scheme of finite type over a field $k$.
+    \begin{enumerate}
+        \item If $G$ is smooth (e.g., if $\operatorname{char}(k) = 0$), then a $G$-torsor is trivial in the étale topology if and only if it is trivial in the fppf topology.
+        \item If $G$ is a special group (e.g., $\mathbb{G}_m$, $\mathbb{G}_a$, or $\textrm{GL}_n$), then a $G$-torsor is trivial in the Zariski topology if and only if it is trivial in the étale topology.
+        \item If $G$ is non-smooth (e.g., $\mu_p$ in characteristic $p$), there may exist $G$-torsors that are trivial in the fppf topology but not in the étale topology.
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+    Let $X$ be a scheme, and let $G$ be a group scheme over $X$.
+    \begin{enumerate}
+        \item The set of isomorphism classes of principal $G$-bundles over $X$ that are trivial in the topology $J$ is in bijection with the first cohomology set $H^1_J(X, G)$.
+        \item For any inclusion of topologies $J \subset J'$, there is a natural map $H^1_J(X, G) \to H^1_{J'}(X, G)$.
+    \end{enumerate}
+\end{theorem}
+
+\section{Stacks}
+
+\begin{definition}[Category fibered in groupoids]
+    A category fibered in groupoids over a category $\mathcal{C}$ is a functor $p: \mathcal{F} \to \mathcal{C}$ such that:
+    \begin{enumerate}
+        \item For every morphism $f: U \to V$ in $\mathcal{C}$ and every object $y \in \mathcal{F}$ with $p(y) = V$, there exists an object $x \in \mathcal{F}$ and a morphism $\phi: x \to y$ in $\mathcal{F}$ such that $p(\phi) = f$.
+
+        \item For every pair of morphisms $\phi: x \to z$ and $\psi: y \to z$ in $\mathcal{F}$ and every morphism $f: p(x) \to p(y)$ in $\mathcal{C}$ such that $p(\psi) \circ f = p(\phi)$, there exists a unique morphism $\chi: x \to y$ in $\mathcal{F}$ such that $\psi \circ \chi = \phi$ and $p(\chi) = f$.
+    \end{enumerate}
+\end{definition}
+
+
+\section{Appendix}
+\subsection{Morphisms of Schemes}
+Other notions for morphisms of schemes that we will not need, but still worth mentioning and defining.
+\begin{definition}
+    Let $f: X \to Y$ be a morphism of schemes.
+    \begin{enumerate}
+        \item $f$ is \textbf{affine} if for every affine open subset $V = \operatorname{Spec}(B) \subset Y$, the preimage $f^{-1}(V)$ is affine. Equivalently, there exists an affine open cover $\{V_i\}$ of $Y$ such that $f^{-1}(V_i)$ is affine for each $i$.
+
+        \item $f: X \to Y$ is \textbf{finite} if for every affine open subset $V = \operatorname{Spec}(B) \subset Y$, the preimage $f^{-1}(V) = \operatorname{Spec}(A)$ where $A$ is a finite $B$-algebra (i.e., $A$ is finitely generated as a $B$-module).
+        \item $f$ is \textbf{of finite type} if it is locally of finite type and quasi-compact.
+
+        \item $f$ is \textbf{quasicompact} if for every quasi-compact open subset $V \subset Y$, the preimage $f^{-1}(V)$ is quasi-compact.
+        \item $f: X \to Y$ is \textbf{separated} if the diagonal morphism $\Delta_f: X \to X \times_Y X$ is a closed immersion.
+        \item $f: X \to Y$ is \textbf{quasi-separated} if the diagonal morphism $\Delta_f: X \to X \times_Y X$ is quasi-compact.
+        \item $f: X \to Y$ is \textbf{proper} if it is separated, of finite type, and universally closed (the image of a closed subset remains closed after any base change).
+        \item $f: X \to Y$ is \textbf{unramified} at a point $x \in X$ if:
+              \begin{enumerate}
+                  \item The extension of residue fields $\kappa(x)/\kappa(f(x))$ is finite and separable.
+                  \item The cotangent space of the fiber at $x$, $\mathfrak{m}_{f(x)}\mathcal{O}_{X,x}/\mathfrak{m}_{f(x)}^2\mathcal{O}_{X,x}$, vanishes.
+              \end{enumerate}
+              It is \textbf{unramified} if it is unramified at every point of $X$.
+        \item A morphism $f: X \to Y$ is \textbf{smooth} of relative dimension $n$ if it is flat, locally of finite presentation, and for each point $x \in X$, the fiber $X_{f(x)}$ is a smooth variety of dimension $n$ over $\kappa(f(x))$.
+        \item A morphism $f: X \to Y$ is an \textbf{open immersion} if it induces a homeomorphism of $X$ onto an open subset of $Y$ and the induced map $f^\sharp: \mathcal{O}_Y|_{f(X)} \to f_*\mathcal{O}_X$ is an isomorphism.
+        \item A morphism $f: X \to Y$ is a \textbf{closed immersion} if it induces a homeomorphism of $X$ onto a closed subset of $Y$ and the induced map $f^\sharp: \mathcal{O}_Y \to f_*\mathcal{O}_X$ is surjective.
+        \item A morphism $f: X \to Y$ is \textbf{quasi-finite} at a point $x \in X$ if there exist open neighborhoods $U$ of $x$ and $V$ of $f(x)$ such that $f|_U: U \to V$ has finite fibers. It is \textbf{quasi-finite} if it is quasi-finite at every point of $X$.
+    \end{enumerate}
+\end{definition}
+
+
+
+\begin{enumerate}
+    \item finite $\Rightarrow$ proper $\Rightarrow$ separated
+    \item finite $\Rightarrow$ affine $\Rightarrow$ quasi-affine
+    \item finite $\Rightarrow$ quasi-finite
+    \item étale $\Rightarrow$ smooth $\Rightarrow$ flat
+    \item étale $\Rightarrow$ unramified
+    \item locally of finite presentation $\Rightarrow$ locally of finite type
+    \item proper + flat + finite type + locally of finite presentation $\Rightarrow$ cohomologically flat
+\end{enumerate}
+
+Properties preserved under composition include: affine, finite, (locally) of finite type, (locally) of finite presentation, quasi-compact, separated, proper, closed immersion, and flat.
+
+Properties preserved under base change include: affine, finite, (locally) of finite type, (locally) of finite presentation, flat, unramified, étale, smooth, open immersion, closed immersion, and proper.
+\subsection{Associated Bundles}
+
+Let $G$ be a group scheme and let $P \to X$ be a principal $G$-bundle over a scheme $X$. Suppose we have a scheme $F$ equipped with a (left) $G$-action. We can construct the associated bundle with fiber $F$, denoted $P \times^G F$, as follows.
+
+Consider the product $P \times F$ with the diagonal $G$-action given by $g \cdot (p, f) = (p \cdot g^{-1}, g \cdot f)$ for $g \in G$, $p \in P$, and $f \in F$. The associated bundle $P \times^G F$ is defined as the quotient of $P \times F$ by this $G$-action:
+\begin{align*}
+P \times^G F = (P \times F)/G
+\end{align*}
+More precisely, $P \times^G F$ can be constructed as the sheafification of the presheaf quotient $(P \times F)/G$ in the appropriate topology (étale, fppf, etc.). This construction yields a bundle $\pi: P \times^G F \to X$ where the fiber over each point $x \in X$ is isomorphic to $F$.
+
+We can also go in the other direction - starting from a bundle with fiber $F$ and constructing a principal bundle. 
+
+\begin{definition}[Frame Bundle]
+Let $\pi: E \to X$ be a bundle whose fibers are isomorphic to a scheme $F$ on which $G$ acts. The \textbf{frame bundle} of $E$, denoted $\text{Fr}_G(E)$, is the $X$-scheme representing the functor that assigns to each $X$-scheme $T$ the set of $G$-equivariant isomorphisms:
+\begin{align*}
+\text{Fr}_G(E)(T) = \{\phi: T \times F \stackrel{\sim}{\to} E \times_X T \text{ (as $T$-schemes) } | \text{ $\phi$ is $G$-equivariant}\}
+\end{align*}
+\end{definition}
+
+\begin{proposition}
+Let $\pi: E \to X$ be a bundle with fiber $F$.
+\begin{enumerate}
+\item The frame bundle $\text{Fr}_G(E)$ is a principal $G$-bundle over $X$.
+\item If $E = P \times^G F$ is an associated bundle for some principal $G$-bundle $P$, then $\text{Fr}_G(E) \cong P$.
+\item For any bundle $E$ with fiber $F$, we have $E \cong \text{Fr}_G(E) \times^G F$.
+\end{enumerate}
+\end{proposition}
+
+This establishes a correspondence between principal $G$-bundles and bundles with fiber $F$ (with $G$-action), showing that these two perspectives are equivalent.
+
+\begin{example}
+Let $E \to X$ be a vector bundle of rank $n$. Then the frame bundle $\text{Fr}_{\text{GL}_n}(E)$ is the principal $\text{GL}_n$-bundle whose fiber at $x \in X$ consists of all bases of the vector space $E_x$. Conversely, given a principal $\text{GL}_n$-bundle $P$, the associated bundle $P \times^{\text{GL}_n} \mathbb{A}^n$ is a vector bundle of rank $n$.
+\end{example}
 \end{document}
