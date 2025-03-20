@@ -380,8 +380,63 @@ This motivates the following definition:
     Note that if $X$ is locally noetherian then a quasi-coherent sheaf is locally finitely presented if and only if it is coherent.
 
     In the case when $Y$ is noetherian, the morphism $f$ is locally of finite presentation if and only if $f$ is locally of finite type, and finitely presented if and only if of finite type.
-
 \end{definition}
+
+
+
+\begin{definition}[Flat Module]
+    Let $R$ be a ring and let $M$ be an $R$-module. We say that $M$ is \textbf{flat} over $R$ if the functor $M \otimes_R -: \text{Mod}_R \to \text{Mod}_R$ is exact.
+
+    Equivalently, $M$ is flat if for every injective homomorphism of $R$-modules $N_1 \to N_2$, the induced map $M \otimes_R N_1 \to M \otimes_R N_2$ is also injective. This is because the functor $M \otimes_R -$ is right exact, so we only need to check that it preserves injections.
+\end{definition}
+\begin{proposition}[Characterizations of Flatness]
+    For an $R$-module $M$, the following are equivalent:
+    \begin{enumerate}
+        \item $M$ is flat over $R$.
+        \item For every ideal $I \subseteq R$, the natural map $I \otimes_R M \to IM$ is an isomorphism.
+        \item For every finitely generated ideal $I \subseteq R$, the natural map $I \otimes_R M \to IM$ is an isomorphism.
+        \item $\text{Tor}_1^R(M, R/I) = 0$ for every ideal $I \subseteq R$.
+        \item $\text{Tor}_1^R(M, N) = 0$ for every $R$-module $N$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    We'll prove the equivalence through a cycle of implications.
+
+    \noindent (5) $\Rightarrow$ (4): This is immediate, as we're restricting to the special case where $N = R/I$.
+
+    \noindent (4) $\Rightarrow$ (3): Let $I \subseteq R$ be a finitely generated ideal. Consider the exact sequence
+    \begin{align*}
+        0 \to I \to R \to R/I \to 0
+    \end{align*}
+    Applying $-\otimes_R M$, we get the long exact sequence for Tor:
+    \begin{align*}
+        \cdots \to \text{Tor}_1^R(R,M) \to \text{Tor}_1^R(R/I,M) \to I \otimes_R M \to R \otimes_R M \to (R/I) \otimes_R M \to 0
+    \end{align*}
+    Since $R$ is free (hence flat), $\text{Tor}_1^R(R,M) = 0$. By assumption (4), $\text{Tor}_1^R(R/I,M) = 0$. Thus, the sequence becomes
+    \begin{align*}
+        0 \to I \otimes_R M \to M \to M/IM \to 0
+    \end{align*}
+    which shows that $I \otimes_R M \cong IM$, as required.
+
+    \noindent (3) $\Rightarrow$ (2): Let $I \subseteq R$ be any ideal. We can write $I$ as the direct limit of its finitely generated subideals: $I = \varinjlim I_\alpha$.
+
+    Since tensor products commute with direct limits, we have:
+    \begin{align*}
+        I \otimes_R M & = (\varinjlim I_\alpha) \otimes_R M                          \\
+                      & \cong \varinjlim (I_\alpha \otimes_R M)                      \\
+                      & \cong \varinjlim I_\alpha M \quad \text{(by assumption (3))} \\
+                      & = IM
+    \end{align*}
+
+    \noindent (2) $\Rightarrow$ (5): The proof of this proposition uses the fact that any module can be built from modules of the form $R/I$ through direct limits and extensions, and $\Tor$ preserves these constructions.
+
+
+    \noindent (5) $\Rightarrow$ (1): This is the definition of flatness. If $\text{Tor}_1^R(M,N) = 0$ for all $R$-modules $N$, then $M \otimes_R -$ is exact, which means $M$ is flat.
+
+    \noindent (1) $\Rightarrow$ (5): If $M$ is flat, then $M \otimes_R -$ is an exact functor, which implies $\text{Tor}_1^R(M,N) = 0$ for all $R$-modules $N$.
+\end{proof}
+
 
 Let $\mathbf{Sch}$ denote the category of schemes. Before defining the following Grothendieck topologies (Zariski, étale, fppf, and fpqc), we recall several types of morphisms in algebraic geometry.
 
@@ -552,6 +607,13 @@ Other notions for morphisms of schemes that we will not need, but still worth me
                   \item The cotangent space of the fiber at $x$, $\mathfrak{m}_{f(x)}\mathcal{O}_{X,x}/\mathfrak{m}_{f(x)}^2\mathcal{O}_{X,x}$, vanishes.
               \end{enumerate}
               It is \textbf{unramified} if it is unramified at every point of $X$.
+        \item A morphism $f: X \to Y$ is \textbf{formally smooth} (resp. \textbf{formally unramified}, \textbf{formally étale}) if for every affine $Y$-scheme $Y' \to Y$ and every closed immersion $Y'_0 \to Y'$ defined by a nilpotent ideal, the map
+              \begin{align*}
+                  \operatorname{Hom}_Y(Y', X) \to \operatorname{Hom}_Y(Y'_0, X)
+              \end{align*}
+              is surjective (resp. injective, bijective).
+
+        \item A morphism $f: X \to Y$ is \textbf{smooth} (resp. \textbf{unramified}, \textbf{étale}) if it is formally smooth (resp. formally unramified, formally étale) and locally of finite presentation.
         \item A morphism $f: X \to Y$ is \textbf{smooth} of relative dimension $n$ if it is flat, locally of finite presentation, and for each point $x \in X$, the fiber $X_{f(x)}$ is a smooth variety of dimension $n$ over $\kappa(f(x))$.
         \item A morphism $f: X \to Y$ is an \textbf{open immersion} if it induces a homeomorphism of $X$ onto an open subset of $Y$ and the induced map $f^\sharp: \mathcal{O}_Y|_{f(X)} \to f_*\mathcal{O}_X$ is an isomorphism.
         \item A morphism $f: X \to Y$ is a \textbf{closed immersion} if it induces a homeomorphism of $X$ onto a closed subset of $Y$ and the induced map $f^\sharp: \mathcal{O}_Y \to f_*\mathcal{O}_X$ is surjective.
@@ -559,6 +621,152 @@ Other notions for morphisms of schemes that we will not need, but still worth me
     \end{enumerate}
 \end{definition}
 
+\begin{theorem}
+    For a morphism of schemes $f: X \to Y$, the following are equivalent:
+    \begin{enumerate}
+        \item $f$ is formally smooth and locally of finite presentation.
+        \item $f$ is flat, locally of finite presentation, and has geometrically regular fibers.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We will prove both implications to establish the equivalence.
+
+    \medskip
+    \noindent \textbf{(1) $\Rightarrow$ (2):} Assume $f$ is formally smooth and locally of finite presentation.
+
+    \medskip
+    \noindent We need to establish that $f$ is flat and has geometrically regular fibers.
+
+    \medskip
+    \noindent \textit{Step 1: Proving flatness.}
+
+    \medskip
+    \noindent Let $x \in X$ be a point and $y = f(x) \in Y$. We need to show that $\mathcal{O}_{X,x}$ is flat as an $\mathcal{O}_{Y,y}$-module. By standard criteria for flatness, it suffices to show that for every finitely generated ideal $I \subset \mathcal{O}_{Y,y}$, the natural map
+    \begin{equation}
+        \varphi: I \otimes_{\mathcal{O}_{Y,y}} \mathcal{O}_{X,x} \to I\mathcal{O}_{X,x}
+    \end{equation}
+    is an isomorphism, or equivalently, that $\text{Tor}_1^{\mathcal{O}_{Y,y}}(\mathcal{O}_{Y,y}/I, \mathcal{O}_{X,x}) = 0$.
+
+    \medskip
+    \noindent Since $f$ is formally smooth, by definition, for every affine $Y$-scheme $Y'$, every closed subscheme $Y'_0 \subset Y'$ defined by a nilpotent ideal $J$, and every $Y$-morphism $g_0: Y'_0 \to X$, there exists a $Y$-morphism $g: Y' \to X$ extending $g_0$.
+
+    \medskip
+    \noindent For our purposes, we consider the specific case where:
+    \begin{align}
+        Y'   & = \text{Spec}(\mathcal{O}_{Y,y}/I^2) \\
+        Y'_0 & = \text{Spec}(\mathcal{O}_{Y,y}/I)
+    \end{align}
+
+    \noindent The ideal $J = I/I^2$ is nilpotent in $\mathcal{O}_{Y,y}/I^2$ with $J^2 = 0$.
+
+    \medskip
+    \noindent The obstruction to lifting $g_0: Y'_0 \to X$ to $g: Y' \to X$ lies in
+    \begin{equation}
+        \text{Ext}^1_{\mathcal{O}_{Y'_0}}(g_0^*L_{X/Y}, I/I^2)
+    \end{equation}
+    where $L_{X/Y}$ is the cotangent complex of $f$.
+
+    \medskip
+    \noindent Since $f$ is formally smooth, this obstruction vanishes for all possible $g_0$. Moreover, as $f$ is locally of finite presentation, the cotangent complex $L_{X/Y}$ is perfect and concentrated in degrees $[-1,0]$.
+
+    \medskip
+    \noindent By deformation theory, there is a connection between these Ext groups and the Tor groups relevant to flatness. Specifically, the vanishing of the obstruction for all $g_0$ implies that
+    \begin{equation}
+        \text{Tor}_1^{\mathcal{O}_{Y,y}}(\mathcal{O}_{Y,y}/I, \mathcal{O}_{X,x}) = 0
+    \end{equation}
+
+    \noindent This is because both groups measure related aspects of deformation theory - the Ext group measures obstructions to extensions, while the Tor group measures the failure of tensoring to preserve exactness.
+
+    \medskip
+    \noindent Technically, this connection is established through the local-to-global spectral sequence relating Ext groups of the cotangent complex to appropriate Tor groups. For a formally smooth morphism, the cotangent complex is quasi-isomorphic to the module of differentials placed in degree 0, which simplifies these relationships.
+
+    \medskip
+    \noindent As this holds for all finitely generated ideals $I \subset \mathcal{O}_{Y,y}$, we conclude that $\mathcal{O}_{X,x}$ is flat over $\mathcal{O}_{Y,y}$. Since this applies to all points $x \in X$, the morphism $f$ is flat.
+
+
+    \red{Yeah I have no idea if this is right or not. It's AI generated.}
+
+    
+    \medskip
+    \noindent \textit{Step 2: Proving geometric regularity of fibers.}
+
+    \medskip
+    \noindent Let $y \in Y$ be a point and $X_y = X \times_Y \text{Spec}(k(y))$ be the fiber over $y$. Let $x \in X_y$ be a point in this fiber. We need to show that for any field extension $K/k(y)$, the scheme $X_y \times_{k(y)} \text{Spec}(K)$ is regular at any point lying over $x$.
+
+    \medskip
+    \noindent Since $f$ is formally smooth, the module of relative differentials $\Omega_{X/Y}$ is locally free. By base change properties, the module of differentials $\Omega_{X_y/k(y)}$ is also locally free at $x$.
+
+    \medskip
+    \noindent Moreover, as $f$ is locally of finite presentation, the fiber $X_y$ is locally of finite type over $k(y)$.
+
+    \medskip
+    \noindent By standard results in algebraic geometry, the formal smoothness of $f$ implies that the formal completion of the local ring $\mathcal{O}_{X_y,x}$ is isomorphic to a power series ring:
+    \begin{equation}
+        \hat{\mathcal{O}}_{X_y,x} \cong k(y)[[t_1, \ldots, t_n]]
+    \end{equation}
+    for some $n \geq 0$.
+
+    \medskip
+    \noindent This power series structure is preserved under field extensions, meaning that for any extension $K/k(y)$, the base change $X_y \times_{k(y)} \text{Spec}(K)$ has local rings whose completions are isomorphic to $K[[t_1, \ldots, t_n]]$. Such rings are regular.
+
+    \medskip
+    \noindent Therefore, the fibers of $f$ are geometrically regular.
+
+    \medskip
+    \noindent \textbf{(2) $\Rightarrow$ (1):} Assume $f$ is flat, locally of finite presentation, and has geometrically regular fibers.
+
+    \medskip
+    \noindent We need to establish that $f$ is formally smooth.
+
+    \medskip
+    \noindent Let $Y'$ be an affine $Y$-scheme, $Y'_0 \subset Y'$ a closed subscheme defined by a nilpotent ideal $J$, and $g_0: Y'_0 \to X$ a $Y$-morphism. We need to show there exists a $Y$-morphism $g: Y' \to X$ extending $g_0$.
+
+    \medskip
+    \noindent We can reduce to the case where $Y' = \text{Spec}(B)$, $Y'_0 = \text{Spec}(B/J)$, and $X = \text{Spec}(A)$ is affine (by working locally on $X$ and $Y$).
+
+    \medskip
+    \noindent The morphism $g_0: Y'_0 \to X$ corresponds to a ring homomorphism $\phi_0: A \to B/J$. We need to construct a ring homomorphism $\phi: A \to B$ such that the composition $A \to B \to B/J$ equals $\phi_0$.
+
+    \medskip
+    \noindent We can proceed by induction on the nilpotency index of $J$. Let's assume first that $J^2 = 0$.
+
+    \medskip
+    \noindent Consider the exact sequence
+    \begin{equation}
+        0 \to J \to B \to B/J \to 0
+    \end{equation}
+
+    \noindent Since $f$ is flat, the homomorphism $A \to B/J$ induced by $g_0$ gives the exact sequence
+    \begin{equation}
+        0 \to J \otimes_{B/J} (A \otimes_R B/J) \to A \otimes_R B \to A \otimes_R B/J \to 0
+    \end{equation}
+    where $R$ is the base ring corresponding to $Y$.
+
+    \medskip
+    \noindent The flatness of $A$ over $R$ and the regularity of fibers ensure that locally, $A \otimes_R B/J$ has a particularly nice structure. The obstruction to lifting $\phi_0$ lies in
+    \begin{equation}
+        \text{Ext}^1_{B/J}(\Omega_{A/R} \otimes_R B/J, J)
+    \end{equation}
+
+    \noindent Because the fibers of $f$ are geometrically regular, this obstruction vanishes. The technical reason is that geometric regularity ensures the cotangent complex has appropriate vanishing properties which, combined with flatness, implies that $\text{Ext}^1$ groups measuring lifting obstructions are zero.
+
+    \medskip
+    \noindent For higher nilpotency indices, we can consider the sequence of ideals
+    \begin{equation}
+        J \supset J^2 \supset J^3 \supset \ldots \supset J^n = 0
+    \end{equation}
+    and apply the same lifting argument inductively to the successive quotients $B/J^{i+1} \to B/J^i$.
+
+    \medskip
+    \noindent At each step, the obstruction to lifting lies in an appropriate $\text{Ext}^1$ group, which vanishes due to the flatness and geometric regularity conditions.
+
+    \medskip
+    \noindent The local finite presentation condition ensures that these local lifts can be patched together to give a global lifting $g: Y' \to X$, establishing that $f$ is formally smooth.
+
+    \medskip
+    \noindent \textbf{Conclusion:} We have shown both implications, (1) $\Rightarrow$ (2) and (2) $\Rightarrow$ (1), thereby proving that the two characterizations of smooth morphisms are equivalent.
+\end{proof}
 
 
 \begin{enumerate}
@@ -580,31 +788,31 @@ Let $G$ be a group scheme and let $P \to X$ be a principal $G$-bundle over a sch
 
 Consider the product $P \times F$ with the diagonal $G$-action given by $g \cdot (p, f) = (p \cdot g^{-1}, g \cdot f)$ for $g \in G$, $p \in P$, and $f \in F$. The associated bundle $P \times^G F$ is defined as the quotient of $P \times F$ by this $G$-action:
 \begin{align*}
-P \times^G F = (P \times F)/G
+    P \times^G F = (P \times F)/G
 \end{align*}
 More precisely, $P \times^G F$ can be constructed as the sheafification of the presheaf quotient $(P \times F)/G$ in the appropriate topology (étale, fppf, etc.). This construction yields a bundle $\pi: P \times^G F \to X$ where the fiber over each point $x \in X$ is isomorphic to $F$.
 
-We can also go in the other direction - starting from a bundle with fiber $F$ and constructing a principal bundle. 
+We can also go in the other direction - starting from a bundle with fiber $F$ and constructing a principal bundle.
 
 \begin{definition}[Frame Bundle]
-Let $\pi: E \to X$ be a bundle whose fibers are isomorphic to a scheme $F$ on which $G$ acts. The \textbf{frame bundle} of $E$, denoted $\text{Fr}_G(E)$, is the $X$-scheme representing the functor that assigns to each $X$-scheme $T$ the set of $G$-equivariant isomorphisms:
-\begin{align*}
-\text{Fr}_G(E)(T) = \{\phi: T \times F \stackrel{\sim}{\to} E \times_X T \text{ (as $T$-schemes) } | \text{ $\phi$ is $G$-equivariant}\}
-\end{align*}
+    Let $\pi: E \to X$ be a bundle whose fibers are isomorphic to a scheme $F$ on which $G$ acts. The \textbf{frame bundle} of $E$, denoted $\text{Fr}_G(E)$, is the $X$-scheme representing the functor that assigns to each $X$-scheme $T$ the set of $G$-equivariant isomorphisms:
+    \begin{align*}
+        \text{Fr}_G(E)(T) = \{\phi: T \times F \stackrel{\sim}{\to} E \times_X T \text{ (as $T$-schemes) } | \text{ $\phi$ is $G$-equivariant}\}
+    \end{align*}
 \end{definition}
 
 \begin{proposition}
-Let $\pi: E \to X$ be a bundle with fiber $F$.
-\begin{enumerate}
-\item The frame bundle $\text{Fr}_G(E)$ is a principal $G$-bundle over $X$.
-\item If $E = P \times^G F$ is an associated bundle for some principal $G$-bundle $P$, then $\text{Fr}_G(E) \cong P$.
-\item For any bundle $E$ with fiber $F$, we have $E \cong \text{Fr}_G(E) \times^G F$.
-\end{enumerate}
+    Let $\pi: E \to X$ be a bundle with fiber $F$.
+    \begin{enumerate}
+        \item The frame bundle $\text{Fr}_G(E)$ is a principal $G$-bundle over $X$.
+        \item If $E = P \times^G F$ is an associated bundle for some principal $G$-bundle $P$, then $\text{Fr}_G(E) \cong P$.
+        \item For any bundle $E$ with fiber $F$, we have $E \cong \text{Fr}_G(E) \times^G F$.
+    \end{enumerate}
 \end{proposition}
 
 This establishes a correspondence between principal $G$-bundles and bundles with fiber $F$ (with $G$-action), showing that these two perspectives are equivalent.
 
 \begin{example}
-Let $E \to X$ be a vector bundle of rank $n$. Then the frame bundle $\text{Fr}_{\text{GL}_n}(E)$ is the principal $\text{GL}_n$-bundle whose fiber at $x \in X$ consists of all bases of the vector space $E_x$. Conversely, given a principal $\text{GL}_n$-bundle $P$, the associated bundle $P \times^{\text{GL}_n} \mathbb{A}^n$ is a vector bundle of rank $n$.
+    Let $E \to X$ be a vector bundle of rank $n$. Then the frame bundle $\text{Fr}_{\text{GL}_n}(E)$ is the principal $\text{GL}_n$-bundle whose fiber at $x \in X$ consists of all bases of the vector space $E_x$. Conversely, given a principal $\text{GL}_n$-bundle $P$, the associated bundle $P \times^{\text{GL}_n} \mathbb{A}^n$ is a vector bundle of rank $n$.
 \end{example}
 \end{document}

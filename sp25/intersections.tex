@@ -1,0 +1,212 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Jacobian varieties}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+    Divisors on algebraic curves, their associated linear systems, and the construction of Jacobian varieties.
+\end{abstract}
+
+\tableofcontents
+\section{Divisors and Line Bundles}
+Let $X$ be a smooth projective curve over an algebraically closed field $k$.
+\subsection{Divisors on Curves}
+
+\begin{definition}[Divisor]
+    Let $X$ be a smooth projective curve over an algebraically closed field $k$. A \textbf{divisor} $D$ on $X$ is a formal finite sum
+    \[D = \sum_{P \in X} n_P \cdot P\]
+    where $n_P \in \Z$ and $n_P = 0$ for all but finitely many points $P \in X$.
+\end{definition}
+
+\begin{definition}[Degree of a Divisor]
+    The \textbf{degree} of a divisor $D = \sum_{P \in X} n_P \cdot P$ is defined as the sum of its coefficients:
+    \[\deg(D) = \sum_{P \in X} n_P\]
+\end{definition}
+
+\begin{definition}[Effective Divisor]
+    A divisor $D = \sum_{P \in X} n_P \cdot P$ is \textbf{effective}, denoted $D \geq 0$, if all coefficients are non-negative, i.e., $n_P \geq 0$ for all $P \in X$.
+\end{definition}
+
+The set of all divisors on $X$ forms an abelian group $\Div(X)$ under addition.
+
+\subsection{Principal Divisors}
+
+\begin{definition}[Principal Divisor]
+    Let $f \in k(X)^*$ be a non-zero rational function on $X$. The \textbf{principal divisor} of $f$, denoted $\div(f)$, is defined as
+    \[\div(f) = \sum_{P \in X} \operatorname{ord}_P(f) \cdot P\]
+    where $\operatorname{ord}_P(f)$ is the order of vanishing of $f$ at $P$ (with zeros counted positively and poles negatively).
+\end{definition}
+
+\begin{proposition}
+    For any rational function $f \in k(X)^*$, the degree of its principal divisor is zero:
+    \[\deg(\div(f)) = 0\]
+\end{proposition}
+
+\begin{remark}
+    Note that principal divisors of rational functions always have degree zero. However principal divisors of general line bundles have degree equal to the degree of the line bundle. This is a point that I often get confused about, and is an important distinction to keep in mind.
+\end{remark}
+
+This fundamental property follows from the fact that a rational function on a complete curve has an equal number of zeros and poles, counting multiplicity.
+
+\begin{definition}[Linear Equivalence]
+    Two divisors $D, E \in \Div(X)$ are \textbf{linearly equivalent}, denoted $D \sim E$, if their difference is a principal divisor, i.e., $D - E = \div(f)$ for some $f \in k(X)^*$.
+\end{definition}
+
+The set of principal divisors $\PDiv(X)$ forms a subgroup of $\Div(X)$. The quotient group \[\Cl(X) = \Div(X)/\PDiv(X)\] is called the \textbf{divisor class group} or \textbf{Picard group} of $X$, denoted $\Pic(X)$.
+
+\subsection{Divisors and Line Bundles}
+
+For each divisor $D$ on $X$, we can associate a line bundle $\mathcal{L}(D)$ defined as follows:
+\begin{definition}[Line Bundle Associated to a Divisor]
+    For a divisor $D = \sum_P n_P \cdot P$ on $X$, the line bundle $\mathcal{L}(D)$ is the sheaf of sections $s$ such that $\div(s) + D \geq 0$.
+\end{definition}
+\begin{theorem}
+    The map $D \mapsto \mathcal{L}(D)$ induces an isomorphism between $\Pic(X)$ and the group of isomorphism classes of line bundles on $X$.
+\end{theorem}
+
+Under this correspondence:
+\begin{itemize}
+    \item $\mathcal{L}(D_1 + D_2) \cong \mathcal{L}(D_1) \otimes \mathcal{L}(D_2)$
+    \item $\mathcal{L}(-D) \cong \mathcal{L}(D)^{-1}$
+    \item $\mathcal{L}(0) \cong \cO_X$ (the structure sheaf)
+\end{itemize}
+
+\begin{definition}[Complete Linear System]
+    The \textbf{complete linear system} associated to a divisor $D$, denoted $|D|$, is the set of effective divisors linearly equivalent to $D$:
+    \[|D| = \{E \in \Div(X) : E \geq 0, E \sim D\}\]
+\end{definition}
+
+\begin{proposition}
+    The complete linear system $|D|$ is isomorphic to $\mathbb{P}(H^0(X, \mathcal{L}(D)))$.
+\end{proposition}
+
+Explicitly, this bijection works as follows:
+\begin{itemize}
+    \item For a non-zero section $s \in H^0(X, \mathcal{L}(D))$, the divisor of zeros $(s)_0$ satisfies $(s)_0 \sim D$.
+    \item For any effective divisor $E \sim D$, there exists a section $s \in H^0(X, \mathcal{L}(D))$, unique up to scalar multiplication, such that $(s)_0 = E$.
+\end{itemize}
+
+\begin{theorem}[Riemann-Roch]
+    Let $X$ be a smooth projective curve of genus $g$, and let $D$ be a divisor on $X$. Then
+    \[l(D) - l(K_X - D) = \deg(D) + 1 - g\]
+    where $K_X$ is the canonical divisor on $X$.
+\end{theorem}
+
+\section{The Abel-Jacobi Map}
+Let $X$ be a smooth projective curve of genus $g$, and let $P_0 \in X$ be a fixed base point.
+
+\begin{definition}[Abel-Jacobi Map]
+    The \textbf{Abel-Jacobi map} $\Phi: X \to \Pic^0(X)$ is defined by
+    \[\Phi(P) = [P - P_0]\]
+    where $[P - P_0]$ denotes the linear equivalence class of the divisor $P - P_0$.
+\end{definition}
+
+This map can be extended to the $n$-fold symmetric product of $X$:
+
+
+
+\begin{definition}[Extended Abel-Jacobi Map]
+    The $n$-th Abel-Jacobi map $\Phi_n: \Sym^n(X) \to \Pic^0(X)$ is defined by
+    \[\Phi_n(P_1, P_2, \ldots, P_n) = [P_1 + P_2 + \cdots + P_n - n \cdot P_0]\]
+\end{definition}
+
+\begin{theorem}
+    When $n \geq g$, the Abel-Jacobi map $\Phi_n: \Sym^n(X) \to \Pic^0(X)$ is surjective.
+\end{theorem}
+
+\begin{proof}
+    Given a divisor class $[D] \in \Pic^0(X)$, we can represent it as $[D' - g \cdot P_0]$ where $\deg(D') = g$. By Riemann-Roch, $l(D') \geq 1$, which implies that the linear system $|D'|$ is non-empty. Therefore, there exists an effective divisor $E = P_1 + P_2 + \cdots + P_g$ linearly equivalent to $D'$. Thus, $[D] = [E - g \cdot P_0]$, which shows that $\Phi_g$ is surjective.
+\end{proof}
+
+\subsection{Analytical Construction over Complex Numbers}
+
+Over the complex numbers, the Abel-Jacobi map has a beautiful analytical interpretation:
+
+\begin{proposition}
+    Let $X$ be a complex curve of genus $g$. Choose a basis $\{\omega_1, \ldots, \omega_g\}$ of holomorphic differentials on $X$. The Abel-Jacobi map can be expressed as
+    \[\Phi(P) = \left(\int_{P_0}^P \omega_1, \int_{P_0}^P \omega_2, \ldots, \int_{P_0}^P \omega_g\right) \mod \Lambda\]
+    where $\Lambda$ is a lattice in $\C^g$ generated by the periods of these differentials along a basis of $H_1(X, \Z)$.
+\end{proposition}
+
+\begin{theorem}[Abel's Theorem]
+    Points $P_1, \ldots, P_n, Q_1, \ldots, Q_n$ on $X$ satisfy
+    \[[P_1 + \cdots + P_n] = [Q_1 + \cdots + Q_n]\]
+    in $\Pic(X)$ if and only if
+    \[\sum_{i=1}^n \Phi(P_i) = \sum_{i=1}^n \Phi(Q_i)\]
+    in $\Jac(X)$.
+\end{theorem}
+
+\section{Jacobian Varieties}
+
+\begin{definition}[Jacobian Variety]
+    The \textbf{Jacobian variety} of a smooth projective curve $X$ of genus $g$ is the group $\Pic^0(X)$ of divisor classes of degree 0. It is denoted $\Jac(X)$.
+\end{definition}
+
+\begin{proposition}
+    The Jacobian $\Jac(X)$ satisfies the following properties:
+    \begin{enumerate}
+        \item It is a smooth projective variety.
+        \item It has a natural structure as an abelian group.
+        \item The group operations are morphisms of varieties.
+        \item Its dimension equals the genus $g$ of $X$.
+        \item Its tangent space at the identity is canonically isomorphic to $H^1(X, \cO_X)$.
+    \end{enumerate}
+    In particular $\Jac(X)$ is an abelian variety of dimension $g$.
+\end{proposition}
+
+
+\begin{example}
+    For a curve $X$ of genus $g = 0$ (e.g., $\mathbb{P}^1$), the Jacobian $\Jac(X)$ is trivial, consisting of just the identity element.
+\end{example}
+
+\begin{example}
+    For a curve $X$ of genus $g = 1$ (an elliptic curve), the Jacobian $\Jac(X)$ is isomorphic to $X$ itself as both a variety and an abelian group.
+\end{example}
+
+\begin{example}
+    For curves of genus $g > 1$, the Jacobian $\Jac(X)$ is a $g$-dimensional abelian variety distinct from $X$.
+\end{example}
+
+\begin{theorem}[Torelli's Theorem]
+    Two smooth projective curves are isomorphic if and only if their Jacobians are isomorphic as principally polarized abelian varieties.
+\end{theorem}
+
+\begin{proposition}
+    A consequence of Example 1.4.3: Let $X$ be a non-singular projective curve of genus $g$ over an algebraically closed field. Then the Picard group $\Pic(X)$ of divisor classes on $X$ is not finitely generated when $g > 0$.
+\end{proposition}
+
+\subsection{The Theta Divisor}
+
+\begin{definition}[Theta Divisor]
+    Let $X$ be a curve of genus $g \geq 2$. The image of \[\Phi_{g-1}: \Sym^{g-1}(X) \to \Jac(X)\] defines an effective divisor $\Theta$ on $\Jac(X)$, called the \textbf{theta divisor}.
+\end{definition}
+
+\begin{theorem}
+    The theta divisor $\Theta$ is ample and defines a principal polarization on $\Jac(X)$.
+\end{theorem}
+
+\end{document}

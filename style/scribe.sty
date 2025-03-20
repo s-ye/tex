@@ -66,7 +66,7 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{amsmath}
-\usepackage{amsthm}
+\RequirePackage{amsthm}
 \usepackage{latexsym}
 \usepackage{epsfig}
 \usepackage{mathtools}
@@ -81,39 +81,36 @@
 
 \usepackage{hyperref}
 \hypersetup{
-    colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=black,
-    urlcolor=black
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=black
 }
- 
+
 \definecolor{codegreen}{rgb}{0.3,0.6,0.4}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
- 
+
 \lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},   
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\footnotesize,
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=2
+  backgroundcolor=\color{backcolour},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\footnotesize,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=left,
+  numbersep=5pt,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2
 }
-
-
-
 
 
 
@@ -124,45 +121,46 @@
 \definecolor{mycolor}{RGB}{0,0,255} % Blue color
 
 \newtheoremstyle{examples}% name
-  {10pt}% space above
-  {10pt}% space below
-  {\itshape}% body font
-  {}% indent amount
-  {\color{blue}\bfseries}% theorem head font (blue color)
-  {.}% punctuation after theorem head
-  {.5em}% space after theorem head
-  {}% theorem head spec (can be left empty, meaning 'normal')
+{10pt}% space above
+{10pt}% space below
+{\itshape}% body font
+{}% indent amount
+{\color{blue}\bfseries}% theorem head font (blue color)
+{.}% punctuation after theorem head
+{.5em}% space after theorem head
+{}% theorem head spec (can be left empty, meaning 'normal')
 
 
 \newtheoremstyle{results}% name
-  {10pt}% space above
-  {10pt}% space below
-  {\itshape}% body font
-  {}% indent amount
-  {\color{teal}\bfseries}% theorem head font (blue color)
-  {.}% punctuation after theorem head
-  {.5em}% space after theorem head
-  {}% theorem head spec (can be left empty, meaning 'normal')
+{10pt}% space above
+{10pt}% space below
+{\itshape}% body font
+{}% indent amount
+{\color{teal}\bfseries}% theorem head font (blue color)
+{.}% punctuation after theorem head
+{.5em}% space after theorem head
+{}% theorem head spec (can be left empty, meaning 'normal')
 
 \newtheoremstyle{definitions}% name
-  {10pt}% space above
-  {10pt}% space below
-  {\itshape}% body font
-  {}% indent amount
-  {\color{purple}\bfseries}% theorem head font (blue color)
-  {.}% punctuation after theorem head
-  {.5em}% space after theorem head
-  {}% theorem head spec (can be left empty, meaning 'normal')
+{10pt}% space above
+{10pt}% space below
+{\itshape}% body font
+{}% indent amount
+{\color{purple}\bfseries}% theorem head font (blue color)
+{.}% punctuation after theorem head
+{.5em}% space after theorem head
+{}% theorem head spec (can be left empty, meaning 'normal')
 
 \newtheoremstyle{special}% name
-  {10pt}% space above
-  {10pt}% space below
-  {\itshape}% body font
-  {}% indent amount
-  {\color{red}\bfseries}% theorem head font (blue color)
-  {.}% punctuation after theorem head
-  {.5em}% space after theorem head
-  {}% theorem head spec (can be left empty, meaning 'normal')
+{10pt}% space above
+{10pt}% space below
+{\itshape}% body font
+{}% indent amount
+{\color{red}\bfseries}% theorem head font (blue color)
+{.}% punctuation after theorem head
+{.5em}% space after theorem head
+{}% theorem head spec (can be left empty, meaning 'normal')
+
 
 
 % Set the theorem styles
@@ -187,10 +185,11 @@
 \newtheorem{example}[theorem]{Example}
 
 
-
 \theoremstyle{definitions}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{notation}[theorem]{Notation}
+
+\theoremstyle{plain} % Setting the theorem style back to plain in case theorems are defined in the main file
 
 
 
@@ -224,20 +223,20 @@
 \newdimen\headerwidth
 
 \newcommand{\MakeScribeTop}{
-\noindent
-\begin{center}
-  \framebox{
-    \vbox{
-      \headerwidth=\textwidth
-      \advance\headerwidth by -0.22in
-      \hbox to \headerwidth {\hfill ELE2742 / ENG1467 \ \ - \ \ PUC-Rio, \ 2019.1 }
-      \vspace{4mm}
-      \hbox to \headerwidth {{\Large \hfill Lecture \LecNum: {\LecTitle} \hfill}}
-      \vspace{2mm}
-      \hbox to \headerwidth {\hfill \LecDate \hfill}
-      \vspace{2mm}
-      \hbox to \headerwidth {{\it \LecStr \hfill \ScribeStr}}
+  \noindent
+  \begin{center}
+    \framebox{
+      \vbox{
+        \headerwidth=\textwidth
+        \advance\headerwidth by -0.22in
+        \hbox to \headerwidth {\hfill ELE2742 / ENG1467 \ \ - \ \ PUC-Rio, \ 2019.1 }
+        \vspace{4mm}
+        \hbox to \headerwidth {{\Large \hfill Lecture \LecNum: {\LecTitle} \hfill}}
+        \vspace{2mm}
+        \hbox to \headerwidth {\hfill \LecDate \hfill}
+        \vspace{2mm}
+        \hbox to \headerwidth {{\it \LecStr \hfill \ScribeStr}}
       }
     }
-\end{center}
-\vspace*{4mm}}
+  \end{center}
+  \vspace*{4mm}}
