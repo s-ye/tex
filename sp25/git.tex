@@ -1,0 +1,257 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Geometric Invariant Theory}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+\end{abstract}
+
+\tableofcontents
+
+\section{Preliminaries}
+\subsection{Line bundles}
+\begin{definition}
+    [Polarized Projective Varieties] A \textbf{polarized projective variety} is a pair $(X, L)$ where $X$ is a projective variety and $L$ is an ample line bundle on $X$.
+\end{definition}
+
+\begin{definition}
+    [Linearization] Let $G$ be a linear algebraic group acting on a projective variety $X$. A \textbf{linearization} of the action is an action of $G$ on the total space of a line bundle $L$ such that the action of $G$ on $X$ is the projection of the action of $G$ on $L$.
+\end{definition}
+
+\begin{remark}
+    Often we have $G$ acting on a projective variety $X \subset \P(V)$ and we really want to know how $G$ acts on $V$. This is precisely the information encoded in the linearization by taking $L = \cO_X(1)$.
+\end{remark}
+\subsection{Unitary trick and polar decomposition}
+Note that we are working over $\C$.
+\begin{definition}
+    Let $X^*$ denote the conjugate transpose of $X$. Recall that \begin{enumerate}
+        \item A matrix $X$ is \textbf{unitary} if $X^*X = XX^* = I$.
+        \item A matrix $X$ is \textbf{Hermitian} if $X^* = X$.
+        \item A matrix $X$ is \textbf{positive definite} if $X$ is Hermitian and all eigenvalues of $X$ are positive.
+    \end{enumerate}
+\end{definition}
+\begin{theorem}[Polar Decomposition for $\GL(n, \C)$]
+    \begin{enumerate}
+        \item The map $B \mapsto e^B$ is a diffeomorphism from the space of Hermitian matrices to the space of positive definite Hermitian matrices.
+        \item Every invertible matrix $X$ is uniquely expressible as \begin{align*}
+                  X = e^B U
+              \end{align*} where $B$ is Hermitian and $U$ is unitary.
+    \end{enumerate}
+\end{theorem}
+Another formulation of the polar decomposition is the statement that if $G$ is a complex reductive group and $K$ its maximal compact subgroup, \begin{align*}
+    G = K \cdot \exp(i \mathfrak{k})
+\end{align*}
+\begin{enumerate}
+    \item When $K = U(n)$ (unitary group):
+          \begin{itemize}
+              \item $\mathfrak{k}$ consists of skew-Hermitian matrices ($X$ where $X^* = -X$)
+              \item $i\mathfrak{k}$ consists of Hermitian matrices ($Y$ where $Y^* = Y$)
+              \item $\exp(i\mathfrak{k})$ gives positive definite Hermitian matrices
+          \end{itemize}
+
+    \item When $K = SU(n)$ (special unitary group):
+          \begin{itemize}
+              \item $\mathfrak{k}$ consists of traceless skew-Hermitian matrices
+              \item $i\mathfrak{k}$ consists of traceless Hermitian matrices
+              \item $\exp(i\mathfrak{k})$ gives positive definite Hermitian matrices with determinant 1
+          \end{itemize}
+
+    \item When $K = SO(n)$ (special orthogonal group):
+          \begin{itemize}
+              \item $\mathfrak{k}$ consists of skew-symmetric matrices
+              \item $i\mathfrak{k}$ consists of symmetric matrices
+              \item $\exp(i\mathfrak{k})$ gives positive definite symmetric matrices
+          \end{itemize}
+\end{enumerate}
+\begin{proof}
+    \begin{enumerate}
+        \item If $B$ has eigenvalues $\lambda_i$, then $e^B$ indeed has eigenvalues $e^{\lambda_i}$. Since $B$ is Hermitian, it has real eigenvalues $\lambda_i$.
+
+        \item Consider $XX^* := X\overline{X}^t$ which is clearly a positive Hermitian matrix. If $X = e^B A$ is decomposed as in 6.1.1, then $XX^* = e^B AA^*e^B = e^{2B}$. So $B$ is uniquely determined. Conversely, by decomposing the space into eigenspaces, it is clear that a positive Hermitian matrix is uniquely of the form $e^{2B}$ with $B$ Hermitian. Hence there is a unique $B$ with $XX^* = e^{2B}$. Setting $A := e^{-B} X$ we see that $A$ is unitary and $X = e^B A$.
+    \end{enumerate}
+\end{proof}
+
+\section{GIT Construction}
+Let $X$ be a projective variety with an action of a reductive group $G$. Pick a linearization so that $G$ acts on each $H^0(\cO_X(r))$. We simply construct the quotient $X/G$ as the projective variety associated to the graded ring \begin{align*}
+    \bigoplus_{r \geq 0} H^0(\cO_X(r))^G
+\end{align*}
+\begin{lemma}
+    The ring $\bigoplus_{r \geq 0} H^0(\cO_X(r))^G$ is finitely generated.
+\end{lemma}
+\begin{proof}
+    Let \[R := \bigoplus_{r} H^0(X, \mathcal{O}(r))\] This ring is finitely generated as a consequence of the projective embedding of $X$, hence it is Noetherian by the Hilbert Basis Theorem.
+    Define $R_+^G := \bigoplus_{r>0} H^0(X, \mathcal{O}(r))^G$, the positively graded part of the invariant ring. Consider the ideal $R \cdot R_+^G$ in $R$ generated by the elements of $R_+^G$. Since $R$ is Noetherian, this ideal is finitely generated. Therefore, there exist finitely many elements $s_0, s_1, \ldots, s_k \in R_+^G$ such that:
+    \[R \cdot R_+^G = R \cdot (s_0, s_1, \ldots, s_k)\]
+    Let $s \in H^0(X, \mathcal{O}(r))^G$ for some $r > 0$ be an arbitrary invariant section. By the previous step, $s$ can be written as:
+    \[s = \sum_{i=0}^k f_i s_i\]
+    where each $f_i \in R$ is of degree $< r$ (to ensure the total degree equals $r$).
+
+    We now use the fact that $G$ is the complexification of the compact Lie group $K$. Since $K$ is compact, it possesses a unique invariant Haar measure that allows us to define an averaging operator:
+    \[Av(f) := \int_K k \cdot f \, dk\]
+    where $dk$ is the normalized Haar measure on $K$. This averaging operator has the crucial property that $Av(f)$ is $K$-invariant for any function $f$. Applying this to our expression for $s$:
+    \[s = \sum_{i=0}^k f_i s_i\]
+    For any $g \in K$, the group action gives:
+    \[g \cdot s = \sum_{i=0}^k g \cdot (f_i s_i) = \sum_{i=0}^k (g \cdot f_i)(g \cdot s_i)\]
+    Since $s$ and all $s_i$ are $G$-invariant (thus $K$-invariant), we have:
+    \[s = \sum_{i=0}^k (g \cdot f_i) s_i\]
+    This equality holds for any $g \in K$. Taking the average over $K$:
+    \[s = \sum_{i=0}^k \left(\int_K g \cdot f_i \, dg \right) s_i = \sum_{i=0}^k Av(f_i) s_i\]
+    The functions $Av(f_i)$ are $K$-invariant by construction. We now need to show they are $G$-invariant.
+
+    By the polar decomposition of $G$, any element $g \in G$ can be uniquely written as:
+
+    \[g = k \cdot \exp(iX)\]
+
+    where $k \in K$ and $X \in \mathfrak{k}$ (the Lie algebra of $K$).
+
+    The action of $G$ on functions extends the action of $K$ in a complex-linear way. This means that if a function is $K$-invariant, the complex-linear extension of the group action ensures that the function is also invariant under $\exp(iX)$ for any $X \in \mathfrak{k}$.
+
+    Consequently, the functions $Av(f_i)$ are not just $K$-invariant but fully $G$-invariant. Each $Av(f_i)$ is of degree $< r$ and is $G$-invariant. By induction on the degree $r$, we may assume that all $G$-invariant elements of degree $< r$ can be generated by the finite set $\{s_0, s_1, \ldots, s_k\}$.
+
+    Therefore, each $Av(f_i)$ can be expressed as a polynomial in the generators $s_j$. Substituting these expressions back:
+
+    \[s = \sum_{i=0}^k Av(f_i) s_i\]
+
+    We obtain that $s$ itself is generated by the finite set $\{s_0, s_1, \ldots, s_k\}$ as an algebra.
+
+    This completes the induction, and we have shown that $\bigoplus_{r} H^0(X, \mathcal{O}(r))^G$ is finitely generated as an algebra by the elements $s_0, s_1, \ldots, s_k$.
+\end{proof}
+
+\section{Semistable and Stable Points}
+By definition, for $r \gg 0$, $X/G$ is just the image of $X$ under the linear system $H^0(\mathcal{O}_X(r))^G$. That is, consider the Kodaira map of $X/G$ (2.4),
+\begin{align*}
+X &\longrightarrow \mathbb{P}((H^0(X, \mathcal{O}(r))^G)^*), \\
+x &\mapsto ev_x \qquad \qquad (ev_x(s) := s(x)),
+\end{align*}
+
+that in coordinates takes $x$ to $(s_0(x) : \ldots : s_k(x)) \in \mathbb{P}^k$ (where the $s_i$ form a basis for $H^0(X, \mathcal{O}(r))^G$).
+
+This is only a rational map, since it is only defined on points for which $ev_x \neq 0$ (equivalently the $s_i(x)$ are not all zero). That is, it is defined on the \emph{semistable points} of $X$:
+
+\begin{definition}[Semistable points]
+    $x \in X$ is \emph{semistable} if and only if there exists $s \in H^0(X, \mathcal{O}(r))^G$ with $r > 0$ such that $s(x) \neq 0$.
+\end{definition}
+
+Points which are not semistable we call \emph{unstable}. Semistable points are those that the $G$-invariant functions "see". The map is well defined on the (Zariski open, though possibly empty) locus $X^{ss} \subseteq X$ of semistable points, and it is clearly constant on $G$-orbits, i.e. it factors through the set-theoretic quotient $X^{ss}/G$. But it may contract more than just $G$-orbits.
+
+\begin{definition}[Stable points]
+    A semistable point $x$ is \emph{stable} if and only if $x$ has finite stabilizer and there is some $s\in \bigoplus_r H^0(X, \mathcal{O}(r))^G$ such that $s(x) \neq 0$ and the action of $G$ on $X_s = \{y \in X \mid s(y) \neq 0\}$ is closed.
+
+    Equivalently, a semistable point $x$ is \emph{stable} if and only if $\bigoplus_r H^0(X, \mathcal{O}(r))^G$ separates orbits near $x$ and the stabiliser of $x$ is finite.
+\end{definition}
+
+
+By "separates orbits near $x$" we mean the following. Since $x$ is semistable, find an $s \in H^0(\mathcal{O}_X(r))^G$ such that $s(x) \neq 0$. So now we work on the open set $U \subset X$ on which $s \neq 0$ and use $s$ to trivialise $\mathcal{O}_U(r)$ (i.e. divide all sections of $\mathcal{O}_U(r)$ by $s$ to consider them as functions). Then we ask that in $U$ any orbit can be distinguished from $G.x$ by $H^0(X, \mathcal{O}(r))^G$. That is, there is an element of $H^0(X, \mathcal{O}(r))^G$ which takes different values on the two orbits, and this should also be true infinitesimally: given a vector $v \in T_x X \setminus T_x(G.x)$, there is an element of $H^0(X, \mathcal{O}(r))^G$ whose derivative down $v$ is nonzero.
+
+\subsection{Topological characterisation of (semi)stability}
+If we work upstairs in the vector space $\mathbb{C}^{n+1} \supset \tilde{X}$ (or equivalently in the total space of $\mathcal{O}_X(-1)$) instead of in the projective space $\mathbb{P}^n \supset X$, we can get the following topological characterisation of (semi)stability. Given our topological discussion about nonclosed orbits at the start of these notes, it is what one might guess, and the best one could possibly hope for. So for $x \in X$, pick $\tilde{x} \in \mathcal{O}_X(-1)$ covering it.
+
+\begin{theorem}[Topological characterisation of (semi)stability]\label{thm:topchar}
+    \begin{enumerate}
+        \item $x$ is semistable $\Longleftrightarrow 0 \notin \overline{G.\tilde{x}}$.
+        \item $x$ is stable $\Longleftrightarrow G.\tilde{x}$ is closed in $\mathbb{C}^{n+1}$ and $\tilde{x}$ has finite stabiliser.
+    \end{enumerate}
+\end{theorem}
+
+When $G.\tilde{x}$ is closed, but not necessarily of full dimension, we call $x$ \textbf{polystable}.
+
+In one direction the theorem is clear. $G$-invariant homogeneous functions of degree $r > 0$ on $\tilde{X}$ are constant on orbits and so also their closures. So if the closure of the orbit of $\tilde{x}$ contains the origin then every such function is zero on $\tilde{x}$ and $x$ cannot be semistable. Similarly if the invariant functions separate orbits around the orbit of $\tilde{x}$ then it is the zero locus of a collection of invariant functions and so closed.
+
+\subsection{The Hilbert-Mumford criterion.}
+The key result is that $x$ is (semi)stable for $G$ if and only if it is (semi)stable \emph{for all one parameter subgroups (1-PSs)} $\mathbb{C}^* < G$. So we may apply Theorem \ref{thm:topchar} each of these 1-PS orbits. We will outline a proof of this remarkable result once we have done some symplectic geometry.
+
+\begin{theorem}[Hilbert-Mumford criterion]
+    Setting $x_0 = \lim_{\lambda \to 0} \lambda.x$, this is a fixed point of the $\mathbb{C}^*$-action, so $\mathbb{C}^*$ acts on the line $\mathcal{O}_{x_0}(-1)$ in $\mathbb{C}^{n+1}$ that $x_0 \in \mathbb{P}^n$ represents. Letting $\rho(x) \in \mathbb{Z}$ denote the weight of this action (i.e. $\mathbb{C}^* \ni \lambda$ acts on $\mathcal{O}_{x_0}(-1)$ as $\lambda^{\rho(x)}$). Then:
+\begin{itemize}
+\item If $\rho(x) < 0$ for all 1-PS then $x$ is stable,
+\item If $\rho(x) \leq 0$ for all 1-PS then $x$ is semistable,
+\item If $\rho(x) > 0$ for some 1-PS then $x$ is unstable.
+\end{itemize}
+\end{theorem}
+
+A fundamental question in geometric invariant theory is whether the invariant functions $\mathcal{O}(X)^G$ separate orbit closures. That is, given two points $x, y \in X$ with $\overline{G \cdot x} \neq \overline{G \cdot y}$, does there exist an invariant function $f \in \mathcal{O}(X)^G$ such that $f(x) \neq f(y)$?
+
+
+Given a reductive algebraic group $G$ acting on a projective variety $X$, the Hilbert-Mumford criterion states that for points $x, y \in X$: $y \in \overline{G \cdot x}$ if and only if there exists a one-parameter subgroup $\lambda: \mathbb{G}_m \rightarrow G$ such that $\lim_{t \rightarrow 0} \lambda(t) \cdot x = y'$ for some $y'$ in the same $G$-orbit as $y$.
+
+\begin{proposition}
+    If two orbit closures $\overline{G \cdot x}$ and $\overline{G \cdot y}$ are distinct, there must exist a one-parameter subgroup $\lambda$ and an invariant function $f$ such that the limits $\lim_{t \rightarrow 0} f(\lambda(t) \cdot x)$ and $\lim_{t \rightarrow 0} f(\lambda(t) \cdot y)$ are different.
+\end{proposition}
+
+\begin{proof}
+If $\overline{G \cdot x} \neq \overline{G \cdot y}$, then by definition, there exists a point in one closure that is not contained in the other. Without loss of generality, let's assume there exists $z \in \overline{G \cdot x}$ such that $z \notin \overline{G \cdot y}$.
+
+Since $X$ is a projective variety, it is separated by regular functions. This means that there exists a regular function $h \in \mathcal{O}(X)$ such that $h(z) \neq 0$ but $h$ vanishes on $\overline{G \cdot y}$.
+
+For a reductive group $G$, we can apply the Reynolds operator $R: \mathcal{O}(X) \rightarrow \mathcal{O}(X)^G$ to $h$. The Reynolds operator is a projection onto the invariant subring, and crucially, $R(h) \neq 0$ if $h \neq 0$.
+
+Let $f = R(h)$ be the resulting invariant function. Since $h$ vanishes on $\overline{G \cdot y}$, the invariant function $f$ also vanishes on $\overline{G \cdot y}$ due to the properties of the Reynolds operator. However, $f$ does not vanish identically on $\overline{G \cdot x}$ since $f(z) \neq 0$.
+
+By the Hilbert-Mumford criterion, $z \in \overline{G \cdot x}$ implies there exists a one-parameter subgroup $\lambda$ and a point $z'$ in the $G$-orbit of $z$ such that:
+\begin{align*}
+\lim_{t \rightarrow 0} \lambda(t) \cdot x = z'
+\end{align*}
+Since $f$ is $G$-invariant, $f(z') = f(z) \neq 0$. Therefore:
+\begin{align*}
+\lim_{t \rightarrow 0} f(\lambda(t) \cdot x) = f(\lim_{t \rightarrow 0} \lambda(t) \cdot x) = f(z') \neq 0
+\end{align*}
+On the other hand, since $f$ vanishes on $\overline{G \cdot y}$:
+\begin{align*}
+\lim_{t \rightarrow 0} f(\lambda(t) \cdot y) = 0
+\end{align*}
+\end{proof}
+
+\begin{remark}
+\textbf{Semistability} requires that the orbit closure is separated from the origin (in the affine cone) by some invariant function.
+
+\textbf{Stability} requires that invariant functions separate the orbit from all nearby orbits, both globally and infinitesimally:
+
+\begin{enumerate}
+\item For any point $y$ near $x$ with $y \not\in G \cdot x$, there exists an invariant function that takes different values on these orbits.
+
+\item At the infinitesimal level, for any tangent vector not tangent to the orbit, there exists an invariant function whose derivative in that direction is non-zero.
+\end{enumerate}
+\end{remark}
+
+
+The relationship between orbit closures and stability culminates in the geometric invariant theory quotient:
+
+\begin{equation}
+X//G = \text{Proj}\left(\bigoplus_{d \geq 0} H^0(X, \mathcal{O}(d))^G\right)
+\end{equation}
+
+This quotient has the following properties:
+
+\begin{itemize}
+\item Points in the quotient correspond to closed orbits in the semistable locus
+
+\item Two semistable points map to the same point if and only if their orbit closures intersect
+
+\item The stable locus $X^s$ admits a geometric quotient $X^s/G$ where points correspond precisely to orbits
+\end{itemize}
+
+\end{document}

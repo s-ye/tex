@@ -12,7 +12,7 @@
 \usepackage{parskip} % Automatically respects blank lines
 \setlength{\parskip}{1em} % Adds more space between paragraphs
 \setlength{\parindent}{0pt} % Removes paragraph indentation
-
+\DeclareMathOperator{\Ass}{Ass}
 
 \begin{document}
 
@@ -188,7 +188,7 @@
 \end{example}
 
 \subsection{Commutative Algebra}
-
+\subsubsection{Associated Primes}
 \begin{definition}
     [Support of a module]
     Let $A$ be a ring and $M$ an $A$-module. The \textit{support} of $M$, denoted $\operatorname{Supp}(M)$, is the set of prime ideals
@@ -201,14 +201,136 @@
     [Annihilator of a module]
     Let $A$ be a ring and $M$ an $A$-module. The \textit{annihilator} of $M$, denoted $\operatorname{Ann}(M)$, is the ideal of elements
     \begin{align*}
-        \operatorname{Ann}(M) & = \{a \in A \mid a \cdot m = 0 \text{ for all } m \in M\} 
+        \operatorname{Ann}(M) & = \{a \in A \mid a \cdot m = 0 \text{ for all } m \in M\}
     \end{align*}
 \end{definition}
 
 \begin{proposition}
     Let $A$ be a ring and $M$ an $A$-module. Then \[\operatorname{Supp}(M) = \operatorname{V}(\operatorname{Ann}(M)) = \{\mathfrak{p} \in \operatorname{Spec}(A) \mid \operatorname{Ann}(M) \subset \mathfrak{p}\}\] In particular, the support of $M$ is a closed subset of $\operatorname{Spec}(A)$.
-
 \end{proposition}
+
+\begin{proof}
+    First we show that if $\Ann(M) \subset \mathfrak{p}$, then $M_{\mathfrak{p}} \neq 0$. Annihilators behave well with respect to localization. \begin{align*}
+        \Ann_{A_{\mathfrak{p}}}(M_{\mathfrak{p}}) & = \{a/s \in A_{\mathfrak{p}} \mid a/s \cdot m/s = 0 \text{ for all } m/s \in M_{\mathfrak{p}}\} \\
+                                                  & = \{a/s \in A_{\mathfrak{p}} \mid a \cdot m = 0 \text{ for all } m \in M\}                      \\
+                                                  & = \Ann(M)A_{\mathfrak{p}} \subset \mathfrak{p}A_{\mathfrak{p}}
+    \end{align*} In particular, $\Ann_{A_{\mathfrak{p}}}(M_{\mathfrak{p}})$ is proper. If $M_{\mathfrak{p}} = 0$, then $\Ann_{A_{\mathfrak{p}}}(M_{\mathfrak{p}}) = A_{\mathfrak{p}}$ would be the whole ring.
+
+    Conversely, if $\Ann_A(M) \not\subset \mathfrak{p}$, then $M_{\mathfrak{p}} = 0$. There exists some $a \in \Ann_A(M)$ such that $a \not\in \mathfrak{p}$. When we localize at $\mathfrak{p}$, $a$ becomes invertible since $a \not\in \mathfrak{p}$. Consider any element $m/s\in M_{\mathfrak{p}}$. We have $a \cdot m = 0$ in $M$, so $a \cdot m/s = 0$ in $M_{\mathfrak{p}}$. But $a$ is invertible, so $m/s = 0$ in $M_{\mathfrak{p}}$. Therefore $M_{\mathfrak{p}} = 0$.
+\end{proof}
+
+\begin{remark}
+    There is a fundamental dictionary between commutative algebra and algebraic geometry:
+    \begin{align*}
+        \mathfrak{p} \in \Supp(M) \iff M_{\mathfrak{p}} \neq 0 \iff \Ann(M) \subset \mathfrak{p} \iff \mathfrak{p} \in \operatorname{V}(\Ann(M))
+    \end{align*}
+\end{remark}
+
+\begin{definition}
+    [Associated Primes] Let $A$ be a ring and $M$ an $A$-module. An associated prime of $M$ is a prime ideal of the form $\operatorname{Ann}(m)$ for some $m \in M$.
+\end{definition}
+
+
+\begin{theorem}[Associated Primes of a Module]\label{thm:associated_primes}
+    If $I$ is an ideal in a Noetherian ring $R$ and $I$ is contained in all associated primes of a finitely generated module $M$, then $I^n M = 0$ for some positive integer $n$.
+\end{theorem}
+
+\begin{proof}
+    \begin{enumerate}
+        \item The associated primes of $M$ are finite in number: $\operatorname{Ass}(M) = \{{\mathfrak p}_1, {\mathfrak p}_2, \ldots {\mathfrak p}_r\}$
+
+        \item The radical of the annihilator equals the intersection of all associated primes:
+              \[\sqrt{\operatorname{Ann}(M)} = {\mathfrak p}_1 \cap {\mathfrak p}_2 \cap \ldots \cap {\mathfrak p}_r\]
+    \end{enumerate}
+    If $I \subseteq {\mathfrak p}_i$ for all $i$, then $I \subseteq \sqrt{\operatorname{Ann}(M)}$. This means every element $f \in I$ satisfies $f^{n_f} \in \operatorname{Ann}(M)$ for some $n_f$. Since $I$ is finitely generated, we can find a uniform $N$ such that $I^N \subseteq \operatorname{Ann}(M)$. Therefore, $I^N M = 0$.
+\end{proof}
+
+To prove the first two statements, we need to turn to the theory of primary decompositions.
+\subsubsection{Primary decompositions}
+Primary decomposition generalizes the unique factorization of integers into prime powers. In a ring, it allows us to express ideals as intersections of simpler ideals called primary ideals.
+
+\begin{definition}[Prime, Primary Ideal]
+    An ideal $\mathfrak{p}$ in a ring $R$ is prime if:
+    \begin{enumerate}[label=(\roman*)]
+        \item $\mathfrak{p} \neq R$
+        \item For any $a, b \in R$, if $ab \in \mathfrak{p}$, then either $a \in \mathfrak{p}$ or $b \in \mathfrak{p}$
+    \end{enumerate}
+
+
+    An ideal $\mathfrak{q}$ in a ring $R$ is primary if:
+    \begin{enumerate}[label=(\roman*)]
+        \item $\mathfrak{q} \neq R$
+        \item For any $a, b \in R$, if $ab \in \mathfrak{q}$ and $a \not\in \mathfrak{q}$, then $b^n \in \mathfrak{q}$ for some positive integer $n$
+    \end{enumerate}
+\end{definition}
+
+Every primary ideal $\mathfrak{q}$ has an associated prime ideal $\mathfrak{p} = \sqrt{\mathfrak{q}}$ (the radical of $\mathfrak{q}$). We say $\mathfrak{q}$ is $\mathfrak{p}$-primary.
+
+\begin{theorem}[Primary Decomposition Theorem]
+    In a Noetherian ring $R$, every ideal $I$ can be expressed as a finite intersection of primary ideals:
+    \[
+        I = \mathfrak{q}_1 \cap \mathfrak{q}_2 \cap \cdots \cap \mathfrak{q}_n
+    \]
+    where each $\mathfrak{q}_i$ is a primary ideal with associated prime $\mathfrak{p}_i = \sqrt{\mathfrak{q}_i}$.
+\end{theorem}
+
+\begin{definition}[Minimal Primary Decomposition]
+    A primary decomposition is called minimal if:
+    \begin{enumerate}[label=(\roman*)]
+        \item The associated primes $\mathfrak{p}_i = \sqrt{\mathfrak{q}_i}$ are all distinct
+        \item No $\mathfrak{q}_i$ can be removed from the intersection without changing the ideal $I$
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    In a minimal primary decomposition, the set of associated primes $\{\mathfrak{p}_1, \mathfrak{p}_2, \ldots, \mathfrak{p}_n\}$ is uniquely determined by the ideal $I$.
+\end{proposition}
+The theory extends naturally to modules over Noetherian rings.
+\begin{theorem}
+    For a submodule $N$ of a module $M$ over a Noetherian ring $R$, we can find a primary decomposition:
+    \[
+        N = N_1 \cap N_2 \cap \cdots \cap N_n
+    \]
+    where each $N_i$ is a $\mathfrak{p}_i$-primary submodule of $M$. This means $M/N_i$ has the property that for each $r \in R$ and $m + N_i \in M/N_i$, if $r(m + N_i) = 0 + N_i$ and $r \not\in \mathfrak{p}_i$, then $(m + N_i)^n = 0 + N_i$ for some $n > 0$.
+\end{theorem}
+
+When considering the zero submodule $(0)$ in $M$, and its minimal primary decomposition \[(0) = N_1 \cap N_2 \cap \cdots \cap N_n\] the associated primes of this decomposition are exactly the associated primes of $M$.
+
+\begin{theorem}
+    In a Noetherian ring, the set of associated primes of a finitely generated module $M$ is finite.
+\end{theorem}
+
+\begin{proof}
+    The finiteness follows directly from:
+    \begin{enumerate}[label=(\arabic*)]
+        \item The Noetherian property ensures every ideal has a finite primary decomposition
+        \item The associated primes of a module $M$ correspond to the primes in the primary decomposition of the zero submodule $(0)$ in $M$
+        \item Therefore, $\Ass(M) = \{\mathfrak{p}_1, \mathfrak{p}_2, \ldots, \mathfrak{p}_r\}$ is finite
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    For a finitely generated module $M$ over a Noetherian ring $R$ with associated primes $\Ass(M) = \{\mathfrak{p}_1, \mathfrak{p}_2, \ldots, \mathfrak{p}_r\}$, the following equality holds:
+    \[
+        \sqrt{\Ann(M)} = \mathfrak{p}_1 \cap \mathfrak{p}_2 \cap \cdots \cap \mathfrak{p}_r
+    \]
+\end{theorem}
+
+\begin{proof}
+    This equality follows from:
+    \begin{enumerate}[label=(\arabic*)]
+        \item The primary decomposition of $(0)$ in $M$ as $(0) = N_1 \cap N_2 \cap \cdots \cap N_r$ where each $N_i$ is $\mathfrak{p}_i$-primary
+
+        \item An element $a \in R$ annihilates $M$ completely if and only if $aM \subseteq N_1 \cap N_2 \cap \cdots \cap N_r = (0)$
+
+        \item If $a \in \mathfrak{p}_1 \cap \mathfrak{p}_2 \cap \cdots \cap \mathfrak{p}_r$, then some power of $a$ lies in each $\mathfrak{q}_i$ (the primary ideals associated with the $N_i$), which means some power of $a$ annihilates $M$, so $a \in \sqrt{\Ann(M)}$
+
+        \item Conversely, if $a \in \sqrt{\Ann(M)}$, then some power of $a$ annihilates $M$, which means $a$ belongs to each $\mathfrak{p}_i$
+    \end{enumerate}
+
+    This establishes the equality $\sqrt{\Ann(M)} = \mathfrak{p}_1 \cap \mathfrak{p}_2 \cap \cdots \cap \mathfrak{p}_r$.
+\end{proof}
+
 
 \subsection{Sheaves}
 
@@ -249,16 +371,77 @@
 \end{definition}
 
 \begin{definition}[Torsion Sheaf]
-    A coherent sheaf $\mathcal{F}$ on a scheme $X$ is called a \textit{torsion sheaf} if its support is a proper closed subset of $X$. Equivalently, for any open affine subset $\Spec(A) \subset X$, the corresponding $A$-module $\Gamma(\Spec(A), \mathcal{F})$ is a torsion $A$-module.
+    A coherent sheaf $\mathcal{F}$ on a scheme $X$ is called a \textit{torsion sheaf} if for any open affine subset $\Spec(A) \subset X$, the corresponding $A$-module $\Gamma(\Spec(A), \mathcal{F})$ is a torsion $A$-module. If $X$ is locally noetherian, then equivalently $\cF$ is a torsion sheaf if its support is a proper closed subset of $X$.
 \end{definition}
+
+\begin{proof}
+    Suppose $\mathcal{F}$ is a coherent sheaf on $X$ with support that is a proper closed subset of $X$. Let $\text{Spec}(A) \subset X$ be an affine open subset. We want to show that $\Gamma(\text{Spec}(A), \mathcal{F})$ is a torsion $A$-module. Since $\text{Supp}(\mathcal{F})$ is a proper closed subset of $X$, its intersection with $\text{Spec}(A)$ is a proper closed subset of $\text{Spec}(A)$. This means there exists a non-zero ideal $I \subset A$ such that $V(I)$ contains $\text{Supp}(\mathcal{F}) \cap \text{Spec}(A)$.
+
+    Algebraically, this means $I$ is contained in all prime ideals $P \in \text{Supp}(\mathcal{F}) \cap \text{Spec}(A)$. The associated primes of $\Gamma(\text{Spec}(A), \mathcal{F})$ are contained in $\text{Supp}(\mathcal{F}) \cap \text{Spec}(A)$, so $I$ is contained in all associated primes of $\Gamma(\text{Spec}(A), \mathcal{F})$. Since $A$ is Noetherian ($X$ has to be locally noetherian), and $I$ is contained in all associated primes of the finitely generated $A$-module $\Gamma(\text{Spec}(A), \mathcal{F})$, by Theorem \ref{thm:associated_primes}, there exists some $n > 0$ such that:
+    \[I^n \cdot \Gamma(\text{Spec}(A), \mathcal{F}) = 0\]
+    This shows that $\Gamma(\text{Spec}(A), \mathcal{F})$ is a torsion $A$-module.
+
+
+    Conversely, suppose for every affine open $\text{Spec}(A) \subset X$, the $A$-module $\Gamma(\text{Spec}(A), \mathcal{F})$ is a torsion module. For each $m \in \Gamma(\text{Spec}(A), \mathcal{F})$, there exists a non-zero element $a_m \in A$ such that $a_m \cdot m = 0$. Let $I$ be the ideal generated by all such $a_m$ for all $m \in \Gamma(\text{Spec}(A), \mathcal{F})$. By construction, $I$ is non-zero and $I \cdot \Gamma(\text{Spec}(A), \mathcal{F}) = 0$. This means $V(I)$ contains $\text{Supp}(\mathcal{F}) \cap \text{Spec}(A)$. Since $I$ is non-zero, $V(I)$ is a proper closed subset of $\text{Spec}(A)$. Therefore, the support of $\mathcal{F}$ restricted to $\text{Spec}(A)$ is a proper closed subset. Since this holds for all affine opens covering $X$, we conclude that $\text{Supp}(\mathcal{F})$ is a proper closed subset of $X$, making $\mathcal{F}$ a torsion sheaf.
+\end{proof}
 
 
 \begin{definition}[Points of a Scheme]
     Let $X = \operatorname{Spec}(A)$ be an affine scheme. The points of $X$ are in one-to-one correspondence with the prime ideals of $A$. Given a prime ideal $\mathfrak{p} \subset A$, we denote the corresponding point by $p_{\mathfrak{p}}$, or simply $p$ when the context is clear.
 \end{definition}
 
+To unpack this example, we recall how to work with the tangent sheaf of an affine variety.
+\begin{definition}
+Let $X$ be a variety over a field $k$. The \textbf{tangent sheaf} of $X$, denoted $\mathcal{T}_X$, is defined as the dual of the sheaf of differentials:
+\begin{equation}
+\mathcal{T}_X = \mathcal{H}om_{\mathcal{O}_X}(\Omega^1_X, \mathcal{O}_X)
+\end{equation}
+\end{definition}
+
+For an affine variety $X = \text{Spec}(R)$ where $R = k[x_1, \ldots, x_n]/I$, the tangent sheaf has a concrete description in terms of derivations.
+
+\begin{proposition}
+Let $X = \text{Spec}(R)$ be an affine variety. Then the global sections of the tangent sheaf correspond to the $R$-module of $k$-derivations of $R$:
+\begin{equation}
+\Gamma(X, \mathcal{T}_X) \cong \text{Der}_k(R, R)
+\end{equation}
+\end{proposition}
+
+\begin{definition}
+A $k$-derivation on a $k$-algebra $R$ is a $k$-linear map $D: R \to R$ satisfying the Leibniz rule:
+\begin{equation}
+D(fg) = fD(g) + gD(f) \quad \text{for all } f,g \in R
+\end{equation}
+\end{definition}
+
+
+\begin{proposition}
+The tangent sheaf $\mathcal{T}_X$ of any variety $X$ is a coherent sheaf of $\mathcal{O}_X$-modules.
+\end{proposition}
+
+\begin{proposition}
+For a smooth variety $X$, the tangent sheaf $\mathcal{T}_X$ is locally free of rank equal to the dimension of $X$.
+\end{proposition}
+
+\subsection{Dual Perspective: The Cotangent Sheaf}
+
+For completeness, we briefly discuss the dual perspective in terms of the cotangent sheaf.
+
+\begin{definition}
+The \textbf{cotangent sheaf} or \textbf{sheaf of differentials} $\Omega^1_X$ of a variety $X$ over $k$ is the sheaf associated to the presheaf $U \mapsto \Omega^1_{\mathcal{O}_X(U)/k}$, where $\Omega^1_{A/k}$ denotes the module of Kähler differentials of a $k$-algebra $A$.
+\end{definition}
+
+\begin{proposition}
+For an affine variety $X = \text{Spec}(R)$ where $R = k[x_1, \ldots, x_n]/I$, the module of Kähler differentials can be described as:
+\begin{equation}
+\Omega^1_{R/k} \cong \frac{R \cdot dx_1 \oplus \cdots \oplus R \cdot dx_n}{\{df \mid f \in I\}}
+\end{equation}
+\end{proposition}
+
+
 
 \section{Examples of Non-Vector Bundle Coherent Sheaves}
+\subsection{Skyscraper Sheaf}
 \begin{example}[Skyscraper Sheaf]
     Let $X$ be a scheme and $p \in X$ a point. The skyscraper sheaf $\mathcal{O}_p$ is a coherent sheaf defined as:
     \[
@@ -269,19 +452,8 @@
     \]
     The residue field $\kappa(p)$ is a module over several rings. In particular, we can see that it is coherent because it is generated by a single element over the ring at hand.
     \begin{itemize}
-        \item It's an $\mathcal{O}_{X,p}$-module via the natural quotient map $\mathcal{O}_{X,p} \to \mathcal{O}_{X,p}/\mathfrak{m}_p$
-              \begin{itemize}
-                  \item Any function germ in $\mathcal{O}_{X,p}$ acts on elements of $\kappa(p)$
-                  \item Elements in $\mathfrak{m}_p$ act by zero
-                  \item Elements outside $\mathfrak{m}_p$ act as non-zero scalars
-              \end{itemize}
-
-        \item It's an $\mathcal{O}_X(U)$-module for any open set $U$ containing $p$
-              \begin{itemize}
-                  \item The action is via the composition $\mathcal{O}_X(U) \to \mathcal{O}_{X,p} \to \kappa(p)$
-                  \item This allows functions defined on $U$ to act on the residue field
-              \end{itemize}
-
+        \item $\mathcal{O}_{X,p}$-module via the natural quotient map $\mathcal{O}_{X,p} \to \mathcal{O}_{X,p}/\mathfrak{m}_p$
+        \item $\mathcal{O}_X(U)$-module for any open set $U$ containing $p$
         \item For affine opens $U = \operatorname{Spec}(A)$ containing $p$, it's an $A$-module
               \begin{itemize}
                   \item If $p$ corresponds to the prime ideal $\mathfrak{p} \subset A$
@@ -298,14 +470,8 @@
 \end{example}
 
 
-\begin{example}[Ideal Sheaf of a Subvariety]
-    Let $L \subset \mathbb{P}^n$ be a line with ideal sheaf $\mathcal{I}_L$. This is a coherent sheaf that fails to be a vector bundle because:
-    \begin{itemize}
-        \item Its rank is not constant: $\operatorname{rank}(\mathcal{I}_L) = 1$ on $\mathbb{P}^n \setminus L$ but $\operatorname{rank}(\mathcal{I}_L) = 0$ along $L$.
-        \item The dimension of $(\mathcal{I}_L)_p \otimes \kappa(p)$ varies: it equals 1 for $p \not\in L$ (as the stalk $(\mathcal{I}_L)_p \cong \mathcal{O}_{\mathbb{P}^n,p}$) but equals 0 for $p \in L$ (as all functions in the ideal vanish at points on $L$).
-    \end{itemize}
-    The exact sequence $0 \to \mathcal{I}_L \to \mathcal{O}_{\mathbb{P}^n} \to \mathcal{O}_L \to 0$ illustrates this behavior.
-\end{example}
+
+\subsection{Tangent sheaf of nodal curve}
 
 \begin{example}[Tangent Sheaf of a Singular Variety]
     For a singular variety $X$, the tangent sheaf $\mathcal{T}_X$ is coherent but not a vector bundle because:
@@ -315,14 +481,83 @@
         \item For example, on a nodal curve, the tangent sheaf at the node has torsion.
     \end{itemize}
 \end{example}
+Consider the nodal curve $X = \Spec R = \Spec k[x,y]/(y^2-x^2)$. The curve $X$ has a singularity (node) at the origin, where the two branches (given by $y = x$ and $y = -x$) intersect. We work with derivations on the quotient ring $R = k[x,y]/(y^2-x^2)$.
 
-\begin{example}[Structure Sheaf of a Singular Variety]
-    Let $X$ be a singular variety with structure sheaf $\mathcal{O}_X$. Though $\mathcal{O}_X$ is always coherent, it fails to be locally free at singular points:
-    \begin{itemize}
-        \item At a singular point $p \in X$, the stalk $\mathcal{O}_{X,p}$ is not a regular local ring.
-        \item For instance, if $X = \{xy = 0\} \subset \mathbb{A}^2$, then at the origin, $\mathcal{O}_{X,(0,0)} \cong k[x,y]/(xy)$, which is not a free module over itself.
-    \end{itemize}
-\end{example}
+\begin{lemma}
+Any $k$-derivation $D$ on the polynomial ring $k[x,y]$ can be written uniquely as
+\begin{equation}
+D = a\frac{\partial}{\partial x} + b\frac{\partial}{\partial y}
+\end{equation}
+for some $a,b \in k[x,y]$, where $\frac{\partial}{\partial x}$ and $\frac{\partial}{\partial y}$ are the standard partial derivatives.
+\end{lemma}
+
+\begin{proof}
+A derivation $D$ on $k[x,y]$ is completely determined by its values on the generators $x$ and $y$. Setting $a = D(x)$ and $b = D(y)$, we can verify that $D = a\frac{\partial}{\partial x} + b\frac{\partial}{\partial y}$ by the Leibniz rule and linearity of $D$.
+\end{proof}
+
+For a derivation on $k[x,y]$ to induce a well-defined derivation on $R = k[x,y]/(y^2-x^2)$, it must preserve the ideal $(y^2-x^2)$. This constrains the possible derivations.
+
+\begin{proposition}
+Let $\bar{x}$ and $\bar{y}$ denote the images of $x$ and $y$ in the quotient ring $R = k[x,y]/(y^2-x^2)$. A $k$-derivation $D$ on $R$ is determined by its values $D(\bar{x}) = \bar{a}$ and $D(\bar{y}) = \bar{b}$, where $\bar{a}, \bar{b} \in R$ are subject to the constraint:
+\begin{equation}
+\bar{y} \cdot \bar{b} = \bar{x} \cdot \bar{a}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Since $\bar{y}^2 = \bar{x}^2$ in $R$, applying the derivation $D$ to both sides and using the Leibniz rule, we get:
+\begin{align}
+D(\bar{y}^2) &= D(\bar{x}^2)\\
+2\bar{y} \cdot D(\bar{y}) &= 2\bar{x} \cdot D(\bar{x})\\
+2\bar{y} \cdot \bar{b} &= 2\bar{x} \cdot \bar{a}
+\end{align}
+Simplifying, we obtain $\bar{y} \cdot \bar{b} = \bar{x} \cdot \bar{a}$.
+\end{proof}
+
+\begin{theorem}
+The tangent sheaf $\mathcal{T}_X$ of the nodal curve $X$ defined by $y^2 = x^2$ can be described as:
+\begin{equation}
+\mathcal{T}_X \cong \{(\bar{a},\bar{b}) \in R \times R \mid \bar{y} \cdot \bar{b} = \bar{x} \cdot \bar{a}\}
+\end{equation}
+where each pair $(\bar{a},\bar{b})$ corresponds to the derivation $D = \bar{a}\frac{\partial}{\partial \bar{x}} + \bar{b}\frac{\partial}{\partial \bar{y}}$.
+\end{theorem}
+
+\begin{remark}
+This description shows that $\mathcal{T}_X$ is a submodule of the free $R$-module $R \times R$, defined by a single linear constraint.
+\end{remark}
+To show that the tangent sheaf is not locally free at the node, we need to identify torsion elements.
+
+\begin{proposition}
+The tangent sheaf $\mathcal{T}_X$ has torsion at the node, proving it is not a free $R$-module.
+\end{proposition}
+
+\begin{proof}
+Consider the element $v = (\bar{y}+\bar{x}, \bar{y}+\bar{x}) \in \mathcal{T}_X$. This corresponds to the derivation $(\bar{y}+\bar{x})\frac{\partial}{\partial \bar{x}} + (\bar{y}+\bar{x})\frac{\partial}{\partial \bar{y}}$.
+
+First, let's verify that $v \in \mathcal{T}_X$ by checking the constraint:
+\begin{align}
+\bar{y}(\bar{y}+\bar{x}) &= \bar{x}(\bar{y}+\bar{x})\\
+\bar{y}^2 + \bar{x}\bar{y} &= \bar{x}\bar{y} + \bar{x}^2
+\end{align}
+
+Using the relation $\bar{y}^2 = \bar{x}^2$, this equation is satisfied.
+
+Now, let's multiply $v$ by the element $f = \bar{y}-\bar{x} \in R$:
+
+\begin{align}
+f \cdot v &= (\bar{y}-\bar{x}) \cdot (\bar{y}+\bar{x}, \bar{y}+\bar{x})\\
+&= ((\bar{y}-\bar{x})(\bar{y}+\bar{x}), (\bar{y}-\bar{x})(\bar{y}+\bar{x}))\\
+&= (\bar{y}^2-\bar{x}^2, \bar{y}^2-\bar{x}^2)
+\end{align}
+
+Since $\bar{y}^2 = \bar{x}^2$ in $R$, we have $f \cdot v = (0,0)$. This demonstrates that $v$ is a non-zero element of the tangent sheaf that is annihilated by the non-zero element $f$, confirming that $\mathcal{T}_X$ has torsion at the node.
+\end{proof}
+
+\begin{remark}[Geometric Interpretation]
+The element $v = (\bar{y}+\bar{x}, \bar{y}+\bar{x})$ corresponds to a derivation that acts as the standard tangent vector along the component $y = x$ but vanishes along the component $y = -x$. The element $f = \bar{y}-\bar{x}$ that annihilates this derivation is precisely the function that defines the component where the derivation doesn't vanish.
+
+This reflects the fact that at the node, we have two distinct tangent directions (corresponding to the two branches of the curve), and a vector field can act along one branch while vanishing along the other. Such vector fields cannot be part of a free basis for the tangent sheaf, as they are annihilated by functions that distinguish between the branches.
+\end{remark}
 
 \section{Exceptional Collections in Derived Categories}
 
