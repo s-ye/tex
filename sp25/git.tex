@@ -41,9 +41,8 @@
 \begin{definition}
     [Linearization] Let $G$ be a linear algebraic group acting on a projective variety $X$. A \textbf{linearization} of the action is an action of $G$ on the total space of a line bundle $L$ such that the action of $G$ on $X$ is the projection of the action of $G$ on $L$.
 \end{definition}
-
 \begin{remark}
-    Often we have $G$ acting on a projective variety $X \subset \P(V)$ and we really want to know how $G$ acts on $V$. This is precisely the information encoded in the linearization by taking $L = \cO_X(1)$.
+    Often we have $G$ acting on a projective variety $X \subset \P(V)$ and we really want to know how $G$ acts on $V$. This is precisely the information of the linearization of $L = \cO_X(1)$.
 \end{remark}
 \subsection{Unitary trick and polar decomposition}
 Note that we are working over $\C$.
@@ -240,10 +239,9 @@ On the other hand, since $f$ vanishes on $\overline{G \cdot y}$:
 
 The relationship between orbit closures and stability culminates in the geometric invariant theory quotient:
 
-\begin{equation}
-X//G = \text{Proj}\left(\bigoplus_{d \geq 0} H^0(X, \mathcal{O}(d))^G\right)
-\end{equation}
-
+\begin{align*}
+    X//G = \text{Proj}\left(\bigoplus_{d \geq 0} H^0(X, \mathcal{O}(d))^G\right)
+\end{align*}
 This quotient has the following properties:
 
 \begin{itemize}
@@ -254,4 +252,29 @@ This quotient has the following properties:
 \item The stable locus $X^s$ admits a geometric quotient $X^s/G$ where points correspond precisely to orbits
 \end{itemize}
 
+\begin{example}[Grassmannians from GIT and symplectic reduction]
+    We have seen how to get $\mathbb{P}^n$ by GIT and symplectic reduction; we can do something similar for Grassmannians.
+    
+    Consider $SL(r, \mathbb{C})$ acting on $\text{Hom}(\mathbb{C}^r, \mathbb{C}^n)$, $r < n$, linearising the induced action on the projectivisation $\mathbb{P}$ of this vector space (we choose the left action of multiplying on the right by $g^{-1}$).
+    
+
+Then $[A] \in \mathbb{P}$ is stable if $A \in \text{Hom}(\mathbb{C}^r, \mathbb{C}^n)$ has full rank $r$, and unstable otherwise.
+
+    If $\text{rank}(A) < r$ then we can pick a splitting $\mathbb{C}^r = \langle v \rangle \oplus W$ with $A(v) = 0$. Then the 1-PS that acts as $\lambda^{r-1}$ on $v$ and $\lambda^{-1}$ on $W$ fixes $[A] \in \mathbb{P}$ and acts on the line $\mathbb{C}.A$ with weight $+1$. Therefore $[A]$ is unstable by the Hilbert-Mumford criterion.
+    
+This 1-PS fixes $[A]$ in projective space because $\lambda \cdot A = \lambda A$ as linear maps so $[\lambda \cdot A] = [A]$ for all $\lambda \in \mathbb{C}^*$. However, its action on the line $\mathbb{C}.A$ is multiplication by $\lambda$, which has weight $+1$, making $[A]$ unstable by the Hilbert-Mumford criterion.
+
+Conversely, if $A$ has full rank then, up to the action of $SL(r, \mathbb{C})$, some multiple of it is the inclusion of the first factor of some splitting $\mathbb{C}^n \cong \mathbb{C}^r \oplus \mathbb{C}^{n-r}$. Diagonalising a given 1-PS, we may assume further that in this basis we have the action
+\begin{align*}
+\text{diag}(\lambda^{\rho_1}, \ldots, \lambda^{\rho_r}), \quad \rho_1 \geq \rho_2 \geq \ldots \geq \rho_r, \quad \sum_i \rho_i = 0.
+\end{align*}
+Ignoring the trivial 1-PS, there is some $p$ such that $\rho_1 = \rho_p > \rho_{p+1}$. Then the limit $[A_0]$ of $[A]$ under this 1-PS is the inclusion of $\mathbb{C}^p$ as the first $p$ basis vectors of $\mathbb{C}^n$, with the 1-PS acting with weight $-\rho_1 < 0$ on $\mathbb{C}.A_0$ (the minus because we are multiplying by the inverse) Therefore $A$ is stable. 
+\end{example}
+
+\section{References}
+\begin{enumerate}
+    \item Richard Thomas, \textit{Notes on Geometric Invariant Theory}
+    \item Huybrechts, Lehn \textit{The Geometry of the Moduli Space of Sheaves}
+    
+\end{enumerate}
 \end{document}
