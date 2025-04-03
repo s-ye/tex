@@ -1,0 +1,1596 @@
+\documentclass[12pt]{article}
+\usepackage{/Users/songye03/Desktop/Math_tex/style/professional-notes}
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+
+\title{Decomposition theorem for perverse sheaves}
+\author{Songyu Ye}
+\date{\today}
+
+\begin{document}
+\notestitle
+
+\begin{abstract}
+    The decomposition theorem for perverse sheaves is a fundamental result in algebraic geometry and topology. It provides a powerful structural description of the derived pushforward of the intersection complex under a proper map of algebraic varieties. Specifically, it states that the derived pushforward decomposes into a direct sum of shifted semisimple perverse sheaves. This result has profound implications for the study of singular spaces, as it generalizes classical theorems like the Hard Lefschetz theorem and the Hodge decomposition to singular varieties.
+\end{abstract}
+
+\tableofcontents
+
+\section{Classical}
+We want to understand the decomposition theorem for perverse sheaves. The classical
+precursors to this theorem include the theorems of Lefschetz, Hodge, Deligne, and the invariant cycle theorems.
+We discuss them here below. Let $X$ be a smooth projective variety over $\C$ and let $D = X \cap H$ be
+the intersection of $X$ with a generic hyperplane.
+
+\subsection{Gysin maps}
+The discussion of the Lefschetz hyperplane theorem is based on \cite{griffiths-harris}. In general, suppose we have $i:X\to Y$ the inclusion of a
+closed submanifold into a smooth manifold and we have an orientation of the normal
+bundle $N_{X/Y}$.
+
+Then we have the Gysin map $i_*:H^*(X)\to H^{*+d}(Y)$ where $d$ is the codimension of $X$ in $Y$. The map of pairs $(Y,\emptyset)\to (Y,Y\backslash X) \cong
+    \Th_X N_{X/Y}$ induces a map \begin{align*}
+    i_*:H^*(X) & \to H^{*+d}(\Th_X N_{X/Y}) \to H^{*+d}(Y)\
+\end{align*} where the first map is the Thom isomorphism.
+Recall that the Thom space of a vector bundle $E$ is disk bundle $D(E)$ of $E$ with the boundary
+sphere bundle $S(E)$ collapsed to a point. The Thom isomorphism is the map $H^*(E)\to H^{*+d}(\Th E)$
+given by cupping with the Thom class. The Thom class $u \in H^d(E,E\backslash 0)$ makes
+$H^*(E,E\backslash 0)$ into a free $H^*(E)$-module.
+
+There is also the push-pull formula which says that the map \begin{align*}
+    i^*i_*:H^*(X) & \to H^{*+d}(X)\
+\end{align*} is equal to \begin{align*}
+    i^*i_* = c_d(N_{X/Y})\cup = [X]\vert_X\cup
+\end{align*} In particular, an ample line bundle $L$ on $X$ gives a divisor $D$ in $X$ and
+the Gysin map for the divisor $i:D\to X$ is given by $i_* = c_1(L)\cup = [D] \cup$.
+The pull-push formula for $i_*i^*: H^*(Y) \to H^{*+d}(Y)$ is similarly
+given by $i_*i^* = c_d(N_{X/Y})\cup = [D]\cup$.
+
+\begin{remark}
+    The intuition behind this map is, given a class $\alpha \in H^i(X)$ represented by
+    a submanifold $Z$, we are embedding $Z$ in the normal bundle $N_{X/Y}$ via the zero section,
+    and capping with Chern classes is about looking at the homology class of
+    the intersection of the embedded $Z$ with general sections of $N_{X/Y}$.
+\end{remark}
+
+The Gysin maps satisfy very special properties when we have smooth projective varieties.
+\begin{theorem}
+    [Lefschetz hyperplane theorem] The restriction map $H^i(X)\to H^i(D)$ is an isomorphism for
+    $i < n-1 $ and injective for $i = n-1$.
+\end{theorem}
+
+\begin{theorem}
+    [Hard Lefschetz]
+    The $i$-fold product $\cup c_1(L)^i:H^{j-i}(X)\to H^{j+i}(X)$ is
+    an isomorphism for $j < n-2i$ and injective for $j = n-2i$.
+\end{theorem}
+
+\begin{remark}
+    Hyperplane line bunldes are positive are ample and satisfy Hard Lefschetz.
+\end{remark}
+\subsection{Hodge theory}
+The cohomology of a smooth projective variety $X$ is very special
+compared to that of general manifolds. In particular $H^*(X)$ has a Hodge structure
+which we will state some of the consequences of here.
+
+We consider complex valued $i$-forms on $X$ with $p$ holomorphic
+coordinates and $q$
+anti-holomorphic coordinates. There are differential operators
+\begin{align*}
+    \partial: \Omega^{p,q}(X)       & \to \Omega^{p+1,q}(X) \\
+    \bar{\partial}: \Omega^{p,q}(X) & \to \Omega^{p,q+1}(X)
+\end{align*} which satisfy $\partial^2 = 0$ and
+$\bar{\partial}^2 = 0$ and $\partial\bar{\partial} + \bar{\partial}\partial = 0$.
+There is the Hodge decomposition \begin{align*}
+    H^i(X,\C) = \bigoplus_{p+q = i} H^{p,q}(X)
+\end{align*} where
+\begin{align*}
+    H^{p,q}(X) = \ker \bar{\partial} / \im \bar{\partial}
+\end{align*} is the Dolbeault cohomology. There is also the
+Dolbeault isomorphism \begin{align*}
+    H^{p,q}(X) \cong H^q(X,\Omega^p)
+\end{align*} where $\Omega^p$ is the sheaf of holomorphic $p$-forms on $X$.
+
+\subsection{Proof of the Lefschetz hyperplane theorem}
+We follow the proof of the Lefschetz hyperplane theorem in \cite{griffiths-harris}.
+I have to rename some things. Let $M$ be a smooth projective variety of dimension $n$ and let $V$ be a
+hyperplane section in $M$, i.e. a positive line bundle. There are short exact sequences of sheaves \begin{align*}
+    0 \to \Omega^p_M(-V) \to \Omega^p_M \xrightarrow{r} \Omega^p_M\vert_V \to 0 \\
+    0 \to \Omega^{p-1}_V(-V) \to \Omega^p_M\vert_V \xrightarrow{i} \Omega^p_V \to 0
+\end{align*}
+It is enough to show that
+\begin{align*}
+    H^q(\Omega^p_M) \cong H^q(\Omega^p_V)
+\end{align*} when $p+q < n-1$ and that the map \begin{align*}
+    H^q(M,\Omega^p_M) \xrightarrow{r^*} H^q(M,\Omega^p_M\vert_V) \to H^q(V,\Omega^p_M\vert V) \xrightarrow{i^*} H^q(V,\Omega^p_V)
+\end{align*} is injective when $p+q = n-1$.
+\begin{proof}
+    Look at the long exact sequence in cohomology associated to the short exact sequence of sheaves.
+    The desired properties are equivalent to the vanishing of the cohomology groups $H^q(\Omega^p_M(-V))$ and
+    $H^q(\Omega^{p-1}_V(-V))$ for $p+q \leq n$. This follows from the Kodaira vanishing theorem.
+\end{proof}
+
+\begin{theorem}
+    [Kodaira vanishing theorem] Let $L$ be a positive line bundle on a smooth projective variety $M$.
+    Then $H^q(M,\Omega^p_M(L)) = 0$ for $p+q \geq n$. The dual statement is \begin{align*}
+        H^q(M,\Omega^p_M(-L)) = 0
+    \end{align*} for $p+q \leq n$.
+\end{theorem}
+
+\begin{remark}
+    The definition of positive line bundle and the Kodaira vanishing theorem will be black-boxed.
+\end{remark}
+
+\section{Sheaves and derived categories}
+This section is also based on \cite{cataldo-migliorini}.
+
+\subsection{Derived category}
+On a space $X$, we consider the category where the objects are
+complexes of sheaves on $X$ and the morphisms are morphisms of complexes.
+There are quasi-isomorphisms of complexes which are those which induce isomorphisms on
+cohomology sheaves.
+
+The derived category $D(X)$ is obtained by inverting quasi-isomorphisms (this is not precise!).
+Different complexes of sheaves which give the same cohomology theories are identified in $D(X)$.
+Given a complex of sheaves $K$, one can produce an injective resolution $K\to I$ where $I$ is a
+complex of sheaves with injective components and $K\to I$ is a quasi-isomorphism.
+
+\begin{definition}
+    The \textbf{cohomology groups} $H^i(K)$ of $K$ are defined as the cohomology of the complex $\Gamma(X,I)$. Beware that these are different than the cohomology sheaves, which are the "cohomology objects" in $D(X)$.
+\end{definition}
+
+More generally, the derived category is important because it admits derived functors. A map
+$f:X\to Y$ of spaces induces a map $f_*:D(X)\to D(Y)$ of derived categories. Given
+a bounded below complex of sheaves $K$ on $X$, choose an injective resolution $K\to I$.
+The pushforward complex $f_*I$ is a complex of sheaves on $Y$ so that \begin{align*}
+    H^i(U,f_*I) \cong H^i(f^{-1}(U),I)
+\end{align*}
+and is well defined up to canonical isomorphism in $D^+(Y)$, denoted $Rf_*K$.
+
+\begin{remark}
+    When $f:X\to *$ is a map to a point, the derived pushforward $Rf_*K$ sends $K$ to the
+    cohomology of $K$.
+\end{remark}
+
+\subsection{Constructible sheaves}
+\begin{definition}
+    A subset $V \subset Z$ of a complex variety is \textbf{constructible} if it is a finite
+    sequence of unions, intersections, or complements of algebraic subvarieties of $Z$.
+
+    A \textbf{local system} on $Z$ is a locally constant sheaf with finite-dimensional stalks.
+
+    A complex of sheaves $K$ on $Z$ is \textbf{constructible} if $Z$ has a decomposition into constructible subsets $Z = \bigsqcup Z_i$ such that each of the cohomology sheaves $\cH^i(K\vert_{Z_i})$ is a local system.
+
+    The \textbf{constructible bounded derived category} $\cD_Z$
+    is defined to be the full subcategory of the bounded derived category $D_b(Z)$
+    whose objects are the constructible complexes.
+
+    A \textbf{perverse sheaf} is a constructible complex with certain restrictions
+    on the dimension of the support of its stalk cohomology
+    and of its stalk cohomology with compact supports.
+    These restrictions are called the support and
+    co-support conditions, respectively.
+\end{definition}
+\begin{remark}
+    These definitions are right because we get a category in which
+    we have very many nice properties, in particular
+    Verdier duality, six-functor formalism, etc.
+\end{remark}
+In the derived category, we can embed sheaves as complexes
+concentrated in degree zero, and the image of
+this embedding is characterized by the property that $\cH^i(K) = 0$ for $i\neq 0$.
+Every constructible complex $K$ comes with a canonical collection of perverse
+sheaves called the \textbf{perverse cohomology sheaves} $^{\mf{p}} \cH^i(K)$ of $K$
+which are characterized among the constructible complexes by $^{\mf{p}} \cH^i(K) = 0$
+for every $i\neq 0$.
+
+\subsection{Intersection complex}
+Perverse sheaves are interesting objects besides their role in developing
+intersection cohomology. The intersection complex is a fundamental example of a perverse
+sheaf, in the sense that every perverse sheaf is a finite iterated extension
+of intersection complexes.
+
+\begin{definition}
+    Given a complex algebraic variety $Y$ and a local system $L$ defined
+    on a smooth open subset $U\subset Y$, the \textbf{intersection complex}
+    $\IC_Y(L)$ is a constructible complex of sheaves, unique up to
+    canonical isomorphism in $D_Y$ so that $\IC(L)\vert_U = L$ and the
+    support and cosupport conditions hold: \begin{align*}
+        \dim\set{y\in Y \st \cH^i_y(\IC(L)) \neq 0} < - i \text{ if $i>-n$} \\
+        \dim\set{y\in Y \st \cH^i_{c,y}(\IC(L)) \neq 0} < i \text{ if $i < n$}
+    \end{align*} where the $c$ denotes compactly-supported cohomology stalks.
+    The intersection cohomology of $Y$ with coefficients in $L$ is defined to be
+    the cohomology of the complex $\IC_Y(L)$ up to a shift: \begin{align*}
+        IH^{i+n}(Y,L) := \cH^{i}(\IC_Y(L))
+    \end{align*}
+\end{definition}
+
+\subsection{Intersection complex of the link of an affine cone}
+Recall that a complex projective manifold has hard Lefschetz.
+
+\begin{definition}
+    The \textbf{primitive cohomology} is \begin{align*}
+        P^{n-k}(X) = \ker \cup c_1^{k+1}: H^{n-k}(X) \to H^{n+k+2}(X)
+    \end{align*}
+\end{definition}
+It is precisely which classes die after
+you cup too one many times with the hyperplane class. There is the Lefschetz
+decomposition \begin{align*}
+    H^mX = \sum_k L^k P^{n-2k}
+\end{align*} Hard Lefschetz says that there is a map $\mf{sl}_2 \to \End H^*(X)$
+where $L$ acts as a lowering operator for the $\mf{sl}_2$ action, $H$ acts on $H^{n-i}(X)$
+by weight i, and there is a raising operator given by
+    the restriction to the harmonic forms of the the formal adjoint of $\omega \wedge \cdot$.
+In this setup, the primitive vectors are precisely the highest weight vectors.
+
+Another way to think about it is as follows: the primitive cohomology in dimension $n-k$
+is the classes corresponding to submanifolds of dimension $n+k$ which have empty
+intersection with $k+1$ generic hyperplanes. These are precisely classes which do not
+meet some $n-k-1$-dimensional linear subspace of $\C\P^n$. When $k=0$, this is
+precisely those $n$-dimensional submanifolds which live in the $\C^n$ part of $\C\P^n$.
+
+Given a smooth projective manifold $E^{n-1}\subset \C\P^{N}$ take its affine cone
+$Y^n \subset \C^{N+1}$ and consider $\cL$ the link of the cone, defined
+as the intersection of $Y$ with a small sphere centered at the cone point.
+The link $\cL$ is a smooth oriented
+compact manifold of real dimension $2n-1$ and $S^1$-fibers over $E$.
+
+Its cohomology is equal to \begin{align*}
+    H^j(\cL) = P^j(E) \texty{ for } j\leq n-1 \\
+    H^{n-1+j}(\cL) = P^{n-j}(E) \texty{ for } 0\leq j\leq n
+\end{align*}
+
+The intersection cohomology groups equal \begin{align*}
+    IH^j(\cL) = P^j(E) \texty{ for } j\leq n-1 \\
+    IH^j(\cL) = 0 \texty{ for } j > n-1
+\end{align*}
+
+With compact supports:
+\begin{align*}
+    IH^{2n-j}_c(\cL) =H_j(\cL) \texty{ for } 0\leq j\leq n-1 \\
+    IH^{n-j}_c(\cL) = 0 \texty{ for } j > n-1
+\end{align*}
+
+Poincare duality is the isomorphism \begin{align*}
+    IH^j(\cL) \cong IH^{2n-j}_c(\cL)
+\end{align*}
+
+\begin{remark}
+    A major motivation behind the introduction of intersection
+    cohomology is the failure of Poincare duality for singular spaces.
+    Note that in this example the link is smooth, so we have Poincare duality.
+\end{remark}
+
+\section{Decomposition Theorem}
+The decomposition theorem for perverse sheaves is a very
+important result and computational tool. First we state it and then we do
+some examples.
+
+\begin{theorem}
+    [Decomposition Theorem]
+    Let $f:X\to Y$ be a proper map of complex algebraic varieties. Then
+    there is an isomorphism in the constructible bounded derived category $D_Y$ \begin{align*}
+        Rf_*\IC_X \cong \bigoplus_{i\in \Z} ^{\mf{p}}\cH^i(Rf_*\IC_X)[i]
+    \end{align*} where the sum is finite and the summands are the perverse cohomology sheaves.
+    The perverse sheaves are semisimple: \begin{align*}
+        ^{\mf{p}}\cH^i(Rf_*\IC_X) = \bigoplus_\beta \IC_{\bar{S_\beta}}(L_\beta)
+    \end{align*} where $L_\beta$ are local systems on the smooth open sets
+    $S_\beta \subset Y$.
+    In other words, there is a "essentially unique"
+    decomposition into triples $(Y_a,L_a,d_a)$ so that \begin{align*}
+        Rf_*\IC_X \cong \bigoplus_a \IC_{\bar{Y_a}}(L_a)[\dim X - \dim Y_a - d_a]
+    \end{align*} where \begin{enumerate}
+        \item $Y_a$ are locally closed, smooth, irreducible subvarieties
+        \item $L_a$ are local systems on $Y_a$
+        \item $d_a$ are integers
+    \end{enumerate}
+\end{theorem}
+
+\begin{example}
+    Let $Y$ be the projective cone over a Riemann surface $\Sigma$ of genus $g$.
+    The Betti numbers of $Y$ are $1,0,1,2g,1$ and the IH Betti numbers are $1,2g,1,2g,1$.
+
+
+
+    Blowing up $Y$ at the vertex $X\to Y$ and we can apply the decomposition theorem to the
+    proper map $X\to Y$. The decomposition theorem says that \begin{align*}
+        0 \to \IC_Y \to f_*\Q_X[2] \to H^2(\Sigma)[0]\to 0
+    \end{align*}
+\end{example}
+
+\section{First look at perverse sheaves}
+Let $K\in\cD_Y$ be a constructible complex on the variety $Y$.
+Recall that this means $K$ has cohomology sheaves which are all constructible.
+Recall that the \textbf{support} of a sheaf is the closure of the set of points
+with nontrivial stalks.
+
+\begin{definition}
+    We say $K$ satisfies
+    the \textbf{support condition} if the support of the cohomology sheaves
+    \begin{align*}
+        \dim{\Supp \cH^{-i}(K)} \leq i \text{ for all } i\in \Z
+    \end{align*} has the right dimension. We say $K$
+    satisfies the \textbf{cosupport condition} if the support of the compactly supported
+    cohomology sheaves \begin{align*}
+        \dim{\Supp \cH^{i}_c(K)} \leq i \text{ for all } i\in \Z
+    \end{align*} has the right dimension.
+
+    We say $K$ is \textbf{perverse} if it satisfies both the support and cosupport conditions.
+    The cateogry of perverse sheaves is denoted $\cP_Y$ and is a full subcategory of
+    the constructible bounded derived category $\cD_Y$.
+\end{definition}
+
+\begin{remark}
+    What do perverse sheaves in the context of
+    spaces which are not algebraic varieties look like?
+    This is largely an aside toward what perverse sheaves
+    and knot contact homology.
+\end{remark}
+
+\begin{example}
+    Let $C$ be a Riemann surface of genus $g$ and consider the map
+    $\P^1\times C \to X$ which collapses $0\times C$ to a point. Then this map
+    is semismall but nonalgebraic, in particular the decomposition theorem does not hold, but
+    the pushforward $f_*\Q_{\P^1\times C}$ is a perverse sheaf.
+\end{example}
+
+\subsection{Perverse sheaves and decomposition theorem for toric varieties}
+A polytope $P$ is simplicial if all its faces are simplices. Given
+a simplicial polytope, the toric variety $X_P$ who has moment polytope equal to
+the dual of $P$ is smooth. Under this correpsondence, subdivisions of $P$ (defined as
+a collection $K$ of polytopes whose union is the boundary of $P$ and the intersection of
+any two elements in $K$ is in $K$)
+correspond to subdivisions of the fan of $X_P$ correspond to corner chops of the dual of $P$. In
+particular, any subdivision $\tilde P$ of $P$ gives rise to a proper equivariant
+birational map $X_{\tilde P} \to X_P$. One can then apply the
+decomposition theorem to this map.
+
+
+
+Given a fan one constructs a convex polytope $P$ by intersecting the fan with a
+ball centered at the origin and then flattening the faces. If the
+moment polytope is simple, then the fan polytope is simplicial.
+
+\begin{definition}
+    Given a simplicial polytope $P$, there is a face vector $(f_0,f_1,\cdots,f_d)$
+    where $f_i$ is the number of $i$-dimensional faces of $P$. Consider the
+    \textbf{h-polynomial} \begin{align*}
+        h_P(t) & = (t-1)^d + f_0(t-1)^{d-1} + f_1(t-1)^{d-2} + \cdots + f_{d-1}(t-1) + f_d \\
+               & - \sum h_i(P) t^i
+    \end{align*}
+    and the \textbf{g-polynomial} \begin{align*}
+        g_P(t) & = h_0 + (h_1 - h_0)t + (h_2 - h_1)t^2 + \cdots + (h_d - h_{d-1})t^d \\
+               & = \sum g_i(P)t^i
+    \end{align*} where $h_i(P)$ and $g_i(P)$ are the coefficients of the h-polynomial and g-polynomial.
+\end{definition}
+
+\begin{proposition}
+    The coefficient $h_i$ computes the Betti number $b_{2i}$ of the toric variety $X_P$.
+\end{proposition}
+
+\begin{proposition}
+    The coefficient $g_l$ equal to the dimension of
+    the primitive cohomology in degree $2l$.
+\end{proposition}
+
+The proof of these statements and their generalizations
+to intersection cohomology can be found in \cite{goresky}.
+Poincare duality and Hard Lefschetz therefore become statements about
+the face vector of a simplicial polytope $P$.
+
+
+
+When the polytope is not simplicial, the toric variety is singular and therefore
+we expect interesting statements about the intersection cohomology of the toric variety
+in terms of the combinatorics of the polytope. Indeed the following is true.
+
+\begin{definition}
+    If $P$ is a polytope of dimension $d$ and $h,g$ have been defined for all
+    polytopes of dimension $<d$, we define \begin{align*}
+        h_P(t) = \sum_{F<P}g(F,t)(t-1)^{d-1-\dim F}
+    \end{align*} where $F$ is a proper face, including the empty face $\emptyset$ for
+    which $g(\emptyset,t) = h(\emptyset,t) = 1$ and $\dim \emptyset = -1$. $g$
+    is defined from $h$ as before.
+\end{definition}
+
+\begin{proposition}
+    The coefficients of these polynomials compute
+    the intersection cohomology and the primitive
+    intersection cohomology of the toric variety $X_P$.
+\end{proposition}
+
+\begin{remark}
+    There are a bunch of interesting calculations in the text that
+    I don't have the details for. In particular they claim that if you take
+    the cube and subdivide it along barycenters of all the faces, let $f$
+    be the corresponding map, then we have \begin{align*}
+        ^\mf{p}\cH^{\pm 1}(f_*\Q_{X_\text{cube}})[3] = \sum \Q_{p_i}
+    \end{align*}
+\end{remark}
+
+\subsection{Semismall maps}
+In the case of semismall maps the decomposition theorem takes a
+particularly simple form. An important example of a semismall map is the resolution of the
+nilpotent cone (Springer resolution stuff)
+
+\begin{definition}
+    A \textbf{stratification} for $f:X\to Y$ is a
+    decomposition of $Y$ into locally closed smooth subsets
+    so that $f^{-1}(Y_i) \to Y$ is topologically locally trivial fibration.
+\end{definition}
+
+The relationship to perverse sheaves is immediate.
+\begin{proposition}
+    If $X$ smooth connected variety of dimension $n$ and $f:X\to Y$ proper surjective map of varieties. Say $Y$ has a stratification $Y = \bigsqcup Y_i$ and let $y_i\in Y_i$, $d_i =
+        \dim f^{-1}(Y_i) - \dim Y_i$. Then the following are equivalent
+    \begin{itemize}
+        \item $f_*\Q_X$ is a perverse sheaf
+        \item $\dim X \times_Y X \leq n$
+        \item $\dim Y_i + 2d_i \leq n$ for all $i$
+    \end{itemize}
+    A map which satisfies these conditions is called \textbf{semismall}.
+    A stratum is \textbf{relevant} if equality holds in the third condiiton.
+\end{proposition}
+In other words, if the map has been stratified, then for each stratum $S\subset Y$ the dimension of
+the fiber over $S$ is at most $\half \codim S$, and it is small
+if the inequality is strict.
+
+\begin{proposition}
+    If $\pi:X\to Y$ is small, then the intersection
+    cohomology of $Y$ is canonically isomorphic to the
+    cohomology of $X$.
+\end{proposition}
+
+\section{Perverse sheaves in representation theory}
+The language of perverse sheaves and D-modules are critical in modern methods of geometric representation theory. For example, applications of perverse sheaf methods played an essential role in the proof of the Kazhdan-Lusztig conjecture by Beilinson-Bernstein and Brylinski-Kashiwara, Lusztig’s construction of canonical bases in quantum groups, and the work of Beilinson-Drinfeld on the Geometric Langlands conjecture. Historically, these tools have also proved very effective in the study of a central object in geometric representation theory called the affine Grassmannian.
+
+\subsection{Springer correspondence}
+\subsubsection{Springer resolution}
+The Springer correspondence is a way of realizing
+the irreducible representations of the Weyl group in a geometric way. In particular
+Springer realizes the group algebra \begin{align*}
+    \Q[W] \cong H^{BM}_{2\dim \tilde N}{\tilde N\times_N \tilde N}
+\end{align*} where the right hand side
+has a canonical basis given by the irreducible components.
+
+Let $G/B$ be the flag variety for a connected reductive algebraic group.
+The Lie algebras are $\mf g$ and $\mf b$. If $x\in G$ and $xB\inv{x} = B$
+then $x\in B$ and so we can identify $G/B$ with the set of subgroups of $G$
+which are conjugate to $B$, or equivalently the set of all subalgebras of $\mf g$
+that are conjugate to $\mf b$, that is \textbf{the variety of all Borel subalgebras} of $\mf g$.
+
+Let $\cN\subset \mf g$ be
+the cone of nilpotent elements and let \begin{align*}
+    \tilde \cN = \set{(x,\mf b)\in \cN\times G/B \st x\in \mf b}
+\end{align*}
+
+\begin{lemma}
+    The projection $\tilde \cN \to G/B$ gives an isomorphism of bundles $\tilde \cN \cong T^*G/B$
+\end{lemma}
+
+\begin{proof}
+    The tangent space to $G/B$ at the identity is $\mf g/\mf b$ so its dual space is \begin{align*}
+        T^*_I(G/B) = \set{\phi:\mf g \to \C \st \phi(\mf b) = 0}
+    \end{align*} The Killing form $\mf g \times \mf g \to \C$ given by
+    $x,y\mapsto \tr(\ad x \circ \ad y)$ is nondegenerate and we pair $\mf g$ with $\mf g^*$
+    to get \begin{align*}
+        T^*_I(G/B) = \set{x\in \mf g \st \langle x,\mf b\rangle = 0} = \mf n
+    \end{align*} is the nilradical of $\mf b$. So for each Borel subgroup $A\subset G$,
+    the cotangent space $T^*_{A}(G/B)$ is the nilradical of $\text{Lie}(A)$, is exactly
+    the fiber of $\tilde \cN$ over $A$.
+\end{proof}
+
+The \textbf{Springer resolution} is the map $\pi:\tilde \cN \to \cN$
+given by projection.
+Therefore $\tilde \cN$ carries a natural holomorphic symplectic form (i.e. a 2,0 form)
+and the Springer resolution map is semismall. One constructs an action of $W$ on
+$\pi_*\Q_{\tilde \cN}[\dim \tilde \cN]$ and then extends it to an algebra homomorphism
+$\Q[W] \to \End_{\cD_{\cN}}(\pi_*\Q_{\tilde \cN}[\dim \tilde \cN])$
+which is isomorphic to the desired BM homology group. To construct the initial action,
+one observes that there is a special $W$-fibration and then one pushes this action
+of $W$ on the fiber around.
+
+
+
+There is the Chevalley map $q:\mf g\to \mf t/W$ which sends a
+matrix to the roots of its characterstic polynomial. Consider $\mf t_{rs}$
+the regular semisimple elements of $\mf t$, obtained by ripping out the
+root hyperplanes, and consider a dominant chamber $\mf t_{rs}/W$.
+Consider $\mf g_{rs} = q^{-1}(\mf t_{rs}/W)$ and
+\begin{align*}
+    \tilde{\mf g}      & = \set{(x,\mf b)\in \mf g\times G/B \st x\in \mf b} \\
+    \tilde{\mf g_{rs}} & = \pi^{-1}(g_{rs})
+\end{align*}
+Then the map $\tilde{\mf g_{rs}} \to \mf g_{rs}$ is a $W$-fibration and
+the map $\tilde g \to \mf g$ is small. Associated to the $W$-covering is
+a local system \begin{align*}
+    L = \pi'_*\Q_{\tilde g_{rs}}
+\end{align*} where $\pi'$ is the restriction of $\pi$ to $\tilde g_{rs}$.
+Then they extend to an action of $W$ on intersection cohomology and pushforward perverse
+sheaves along the small map.
+
+\begin{remark}
+    The image of the root hyperplanes is the discriminant variety of all polynomials
+    with multiple roots. The complement of the union of root hyperplanes is
+    the \textbf{configuration space of $n$ ordered points} in $\C$ with $\pi_1 = $ the \textbf{
+        colored braid group
+    } The complement of the image is the configuration space on $n$ unordered points and
+    has $\pi_1$ = \textbf{braid group}.
+\end{remark}
+
+\subsubsection{Algebra of correspondences}
+There is a general construction described in \cite{chriss-ginsburg}
+which he advertises as a method of geometrically constructing
+representations of finite dimensional algebras. The idea is to
+introduce the convolution product on Borel Moore homology, which is
+supposed to generalize the convolution of functions.
+
+\begin{definition}
+    Let $M_1,M_2,M_3$ connected oriented smooth and $Z_{12}\subset M_1\times M_2$
+    and $Z_{23}\subset M_2\times M_3$ be closed subsets. The \textbf{composition} of
+    $Z_{12}$ and $Z_{23}$ is the set \begin{align*}
+        Z_{12}\circ Z_{23} = \set{(x_1,x_3)\in M_1\times M_3 \st \exists x_2\in M_2 \text{ s.t. } (x_1,x_2)\in Z_{12} \text{ and } (x_2,x_3)\in Z_{23}}
+    \end{align*}
+    The \textbf{convolution in Borel-Moore homology} generalizes
+    this to cycles and is defined as follows:
+    \begin{align*}
+        H^{BM}_i(Z_{12}) \times H^{BM}_j(Z_{23}) \to H^{BM}_{i+j}(Z_{12}\circ Z_{23})
+        c_1,c_2 \mapsto c_1 * c_2
+    \end{align*} where
+    \begin{align*}
+        c_1 * c_2 := \pi_{13*}(\pi_{12}^*c_1 \cap \pi_{23}^*c_2)
+    \end{align*}
+\end{definition}
+
+The convolution product is associative. Now let $\mu:M\to N$ a proper map
+of complex varieties and consider $M_1 = M_2 = M_3 = M$ and $Z = Z_{12} = Z_{23}
+    = M\times_N M$. Then we get convolution maps \begin{align*}
+    H^{BM}_*(Z) \times H^{BM}_*(Z) \to H^{BM}_{*}(Z)
+\end{align*} The convolution product is not graded, but it does preserve the
+middle dimension. If $\dim_C M = n$ then the convolution product
+\begin{align*}
+    H^{BM}_{2n}(Z) \times H^{BM}_{2n}(Z) \to H^{BM}_{2n}(Z)
+\end{align*} and we call this \textbf{middle dimensional subalgebra} $H(Z)$.
+
+\subsubsection{Sheaf theory applied to the convolution algebra}
+The convolution product makes $H^{BM}_*(Z)$ into an algebra.
+It turns out that we can express the algebra structure as
+the Ext algebra of a particular generator. Let $\cC_M$ be the constant
+perverse sheaf on $M$ i.e. $\cC_M = \C_M[\dim M]$ extended along irreducible
+components.
+
+\begin{proposition}
+    There is a (not necessarily grading preserving) natural algebra
+    isomorphism \begin{align*}
+        H^{BM}_*(Z) \to \Ext^*_{D^bN}(\mu_*\cC_M,\mu_*\cC_M)
+    \end{align*}
+\end{proposition}
+
+Assume that $\mu:M\to N$ is productive and that $N$ is stratified
+so that the restriction maps are all locally trivial topological fibrations.
+We can study the convolution algebra by analyzing the pushforward
+$\mu_*\cC_M$ of the constant sheaf on $M$. Applying the
+decomposition theorem we find that \begin{align*}
+    H^{BM}_*(Z) & \cong \bigoplus_{k\in \Z} \Ext^k_{D^bN}(\mu_*\cC_M,\mu_*\cC_M)                                                           \\
+                & = \bigoplus_{i,j,k\in\Z,\phi,\psi} \Hom_\C(L_\phi(i),L_\psi(j))\otimes \Ext^k_{D^bN}(IC_\phi[i],IC_\psi[j])              \\
+                & = \bigoplus_{i,j,k\in\Z,\phi,\psi} \Hom_\C(L_\phi(i),L_\psi(j))\otimes \Ext^k_{D^bN}(IC_\phi,IC_\psi) \text{ reindexing}
+\end{align*}
+where $L_\psi$ is the multiplicity space of the decomposition of $\mu_*\cC_M$ into irreducible
+IC sheaves. It is a fact that $\Ext^k_{D^bN}(IC_\phi,IC_\psi)$ vanishes if $k<0$.
+Also $\Hom(IC_\phi,IC_\psi)$ is nonzero only if $\phi = \psi$. Therefore
+we find that \begin{align*}
+    H^{BM}_*(Z) \cong \bigoplus_\phi \End_C(L_\phi) \oplus \big(\bigoplus_{k>0,\phi,\psi} \Hom_\C{L_\phi,L_\psi}\otimes
+    \Ext^k_{D^bN}(IC_\phi,IC_\psi)\big)
+\end{align*} The first summand is semisimple and the second $H^{BM}_*(Z)^+$ is nilpotent because
+it is concentrated in degrees $k>0$. Moreover, this nilpotent ideal is the radical
+of our algebra because
+\begin{align*}
+    H^{BM}_*(Z) / H^{BM}_*(Z)^+ = \bigoplus_\phi \End_C(L_\phi)
+\end{align*} is semisimple. The composition \begin{align*}
+    H^{BM}_*(Z) \to H^{BM}_*(Z) / H^{BM}_*(Z)^+ \cong \bigoplus_\phi \End_C(L_\phi) \twoheadrightarrow \End_C(L_\phi)
+\end{align*} yields an irreducible representation of the algebra $H^{BM}_*(Z)$ on the vector space $L_\psi$.
+\begin{theorem}
+    The nonzero members of the collection $\set{L_\phi}$ are the
+    irreducible representations of the algebra $H^{BM}_*(Z)$.
+\end{theorem}
+
+\subsubsection{Semi-small maps}
+When $\mu$ is semismall then the previous calculation becomes nicer
+since the shifts go away. In particular, we have the following:
+\begin{theorem}
+    \begin{enumerate}
+        \item Let $\cC_M$ be the constant perverse sheaf on $M$. If $\mu$ is semismall
+              then $\mu_*\cC_M$ is a perverse sheaf and we have a decomposition without shifts \begin{align*}
+                  \mu_*\cC_M = \bigoplus_{N_\phi,\chi_\phi} L_\phi \otimes IC_\phi
+              \end{align*} where $\phi = (N_\phi,\chi_\phi)$ is a pair of a stratum
+              a local system on the stratum. Furthermore, $H(Z)$ is a
+              subalgebra of $H^{BM}_*(Z)$ and \begin{align*}
+                  H(Z) \cong \bigoplus_\phi \End_C(L_\phi)
+              \end{align*}
+        \item Let $H(M_x)$ denote the top
+              Borel-Moore homology of the fiber $\mu^{-1}(x)$. For any
+              stratum $N_\alpha$, $x\mapsto H(M_x)$ is a local system on $N_\alpha$.
+              If $x\in N_\phi,\chi_\phi$ then the corresponding
+                  multiplicity space is given by the isotopy invariants of the
+                  top cohomology of the fiber. 
+            \begin{align*}
+                  L_\phi = H(M_x)^{\pi_1(N_\alpha,x)}
+              \end{align*}
+    \end{enumerate}
+\end{theorem}
+\subsubsection{Applying the machinery to the Springer resolution}
+In this section we explain the following setup and theorem.
+Set $Z = \tilde \cN\times_\cN \tilde \cN$ the Steinberg variety.
+If $x\in \cN$ then $M_x$ is formed by pairs $(x,\mf b)$ where $\mf b$
+runs over the subset $\cB_x$ of $x$ invariant Borel subalgebras. Equivalently
+any element $x\in \mf g$ induces a vector field on $G/B$ and $\cB_x$ is the
+zeros of this vector field.
+
+Let $G(x)$ be the centralizer of $x$ in $G$, $A(x) = G(x)/G(x)_0$ the isotopy
+group acting on the connected components. Let $A(x)^*$ denote the set of isomorphism classes
+of $A(x)$-representations occuring in the BM homology groups $H_{top}(M_x)$.
+The main techincal result known as "Springer construction of Weyl groups"
+is the following:
+
+\begin{theorem} [Geometric Construction of $W$]
+    \begin{enumerate}
+        \item $H(Z) \cong \C[W]$
+        \item The collection $\{H(M_x)_\phi\}$ as $(x,\phi)$ runs over $G$ conjugacy
+              classes of points in $\cN$ and $\phi\in A(x)^*$ is a complete set of irreducible
+              representations of $W$.
+    \end{enumerate}
+\end{theorem}
+
+\subsubsection{Fourier transform}
+We introduce the main tool of the construction, the Fourier transform
+on perverse sheaves (or D-modules).
+
+\subsection{Schubert varieties and Kazhdan Lustzig polynomials}
+Let $G$ be an algebraic group. The Kazhdan Lustzig polynomials are a family of polynomials defined for
+two Weyl group elements $v,w$ in a Weyl group $W$ with a system of
+generators $S$.
+
+\begin{definition}
+    The \textbf{Hecke algebra} $\cH$ is the algebra of $B$-bi-invariant
+    functions of $G(\F_q)$.
+    The algebra structure is given by normalized convolution.
+    It has a basis consisting of functions \[\phi_w = \id_{BwB} \text{ for } w\in W\]
+\end{definition}
+
+
+
+\begin{lemma}
+    If $s\in S$ is a simple reflection and $w\in W$ then we have the following relations
+    \begin{align*}
+        \phi_w * \phi_{w'} & = \phi_{ww'} \text{ if } l(ww') = l(w) + l(w')          \\
+        \phi_s * \phi_s    & = (q-1)\phi_s + q\phi_1                                 \\
+        \phi_s * \phi_w    & = (q-1)\phi_w + q\phi_{sw} \text{ if } l(ws) = l(w) + 1
+    \end{align*}
+\end{lemma}
+
+We have the "standard" description of Hecke algebra
+\begin{proposition}
+    $\cH$ is the free $\Z[q,\inv q]$-module with basis $\set{\phi_w}_{w\in W}$ and relations
+    \begin{align*}
+        \phi_s\phi_w = \phi_{sw} \text{ if } l(sw) = l(w) + 1 \\
+        (\phi_s - q)(\phi_s + 1) = 0
+    \end{align*}
+    If $q = 1$, then this is the group algebra $\Z[W]$.
+\end{proposition}
+The convention is to use $q^{\half}$ and $q^{-\half}$ as the formal parameters.
+Each $\phi_w$ is invertible and the algebra admits an involution \begin{align*}
+    i(q^{\half}) = q^{-\half} \text{ and } i(\phi_w) = \phi_{\inv w}^{-1}
+\end{align*}
+
+\begin{theorem}
+    [Kazhdan-Lusztig] For each $w$ there is a unique $c_w\in \cH$ and
+    a uniquely determined polynomial $P_{yw}$ with $y\leq w$ so that $i(c_w) = c_w$ and
+    $P_{ww} = 1$ and $P_{yw}(q)$ has degree less than $\half(l(w) - l(y)-1)$ when $y<w$ and
+    \begin{align*}
+        c_w = q^{-l(w)/2}\sum_{y\leq w} P_{yw}(q)\phi_y
+    \end{align*}
+\end{theorem}
+Kazhdan and Lusztig conjectured that the coefficients
+of the polynomials $P_{yw}(q)$ are nonnegative integers and that in the
+Grothendieck group of Verma modules \begin{align*}
+    [L_w] = \sum_{y\leq w} (-1)^{l(w)-l(y)}P_{yw}(1)[M_y]
+\end{align*}
+The second conjecture became known as the \textbf{Kazhdan-Lustzig conjecture} and
+was proven by Beilinson-Bernstein and Brylinski-Kashiwara independently. The
+interpretation of $c_w$ and $P_{yw}$ in terms of intersection cohomology was critical
+to the proof.
+\begin{theorem}
+    Set for any $v\leq w$ the number $h^i(\bar X_w)_v = \dim \cH^i(\IC_{\bar X_w})_v$.
+    Then \begin{align*}
+        P_{v,w}(q) = \sum_i h^i(\bar X_w)_v q^i
+    \end{align*} is a polynomial in $q$ with nonnegative integer coefficients.
+\end{theorem}
+
+\subsection{Geometric Satake Isomorphism}
+\begin{theorem}
+    The category $\cP_{\cO}$ is equivalent to the category of
+    representations of the Langlands dual group $^L G$, as categories with tensor and fiber structures.
+
+\end{theorem}
+
+There is a bilinear functor $\star:\cP_{\cO}\times \cP_{\cO} \to \cP_{\cO}$ with compatible
+commutativity, associativity restraints, and a fiber functor which respects the tensor product.
+In fact, one defines the desired functor geometrically so that $H$, the operation
+of taking cohomology, is the fiber functor. Therefore
+the equivalence is between \begin{align*}
+    (\cP_{\cO},\star,H) \cong (\Rep(^L G), \otimes, \text{Forget})
+\end{align*}
+The $G(\cO)$ orbits of the affine Grassmannian are indexed by dominant coweights $\lambda$.
+A shadow of the geometric Satake isomorphism is the statement that the
+intersection cohomology of the $\lambda$-orbit is the irreducible representation of $^L G$
+with highest weight $\lambda$.
+
+\section{Closer look at perverse sheaves}
+
+\subsection{Precise definitions}
+The category of perverse sheaves is defined by relaxing
+the support and cosuppoort conditions for the IC sheaf by one.
+
+\begin{definition}
+    Let $W$ be a $n$-dimensional Whitney stratified space. A \textbf{middle perversity
+        perverse sheaf} on $W$ is a complex of sheaves $A^\bullet$ in the bounded
+    constructible derived category $D^b_c(W)$ such that if $S$ is a stratum of
+    dimension $d$, $A^*$ satisfies the support and cosupport conditions
+    \begin{align*}
+        H^i(j^*_SA^*) = 0 \text{ for all } i > -d/2 \\
+        H^i(j^!_SA^*) = 0 \text{ for all } i < -d/2
+    \end{align*}
+\end{definition}
+
+\begin{definition}
+    A \textbf{perversity} is a function on dimension $p:\Z_{\geq 0}\to \Z_{\geq 0}$
+    such that $p(0) = 0$ \begin{align*}
+        p(d) \geq p(d+1) \geq p(d) - 1
+    \end{align*} Middle perversity is the perversity $p(d) = -d/2$. The
+    category of perverse sheaves with perversity $p$ is those objects in $D^b_c(W)$
+    for which \begin{align*}
+        H^i(j^*_SA^*) = 0 \text{ for all } i > p(\dim S) \\
+        H^i(j^!_SA^*) = 0 \text{ for all } i < p(\dim S)
+    \end{align*}
+\end{definition}
+Each perversity involves its own shift: for a space $W$ of dimension $n$ the stalk
+cohomology of the IC sheaf in the top stratum is nonzero in degree $p(n)$.
+
+\begin{remark}
+    One can check that perversity $0$ corresponds precisely to the
+    category of constructible sheaves (not complexes!, just sheaves).
+\end{remark}
+
+\begin{theorem}
+    The category of middle perverse sheaves forms an abelian
+    subcategory of $D^b_c(X)$ that is preserved by Verdier duality.
+\end{theorem}
+
+\begin{theorem}
+    If $W$ is an algebraic variety, the simple objects
+    are the shifted IC sheaves with irreducible local coefficients of irreducible
+    subvarieties.
+\end{theorem}
+
+\begin{remark}
+    To a $\cD$-module there is a corresponding sheaf of solutions which is constructible. Beilinson, Bernstein, Brylinski, and Kashiwara showed that each Verma modlue can be associated to a certain holonomic $\cD$-module with regular singularities whose sheaf of solutions turns out to be the IC sheaf. However, the category of $\cD$-modules is abelian whereas the constructible derived category is not, so it was conjectured that there is some abelian subcategory of the category which "receives the solution sheaves". This is precisely the category of perverse sheaves with middle perversity!
+\end{remark}
+\subsection{Examples}
+\begin{example}
+    There are some special examples where we have conmbinatorial descriptions of the
+    middle perverse sheaves on an algebraic variety with respect to a
+    stratification. \begin{enumerate}
+        \item $\C^n$ with respect to hyperplane arrangements
+        \item Square matrices with respect to the rank stratification
+        \item The flag variety with respect to the Schubert stratification
+    \end{enumerate}
+    In particular the most simple example is $\C, \{0\}$. The category of perverse
+    sheaves is equivalent to the category of representations of the quiver \begin{center}
+        \begin{tikzcd}
+            \bullet \ar[r, bend left, "\alpha"] & \bullet \ar[l, bend left, "\beta"]
+        \end{tikzcd}
+    \end{center} for which $I-\alpha\beta$ and $I-\beta\alpha$ are invertible.
+\end{example}
+
+\begin{example}
+    Stratify $\P^1$ with a single zero dimensional stratum $N$ the north pole. The
+    support diagram for middle perversity sheaves is
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            i $\backslash$ codim & 0 & 2  \\
+            \hline
+            2                    & c & c  \\
+            \hline
+            1                    &   & cx \\
+            \hline
+            0                    & x & x  \\
+            \hline
+        \end{tabular}
+    \end{center}
+    The columns index codimension of the strata and the rows index the cohomological
+    degree (the convention is $0$ to $n$ as opposed to $-n/2$ to $n/2$). x denotes
+    that there may be nontrivial stalk cohomology sheaves supported along strata
+    of that given codimension. c denotes that the same thing but with compactly supported
+    cohomology stalks.
+
+
+
+    The category of perverse sheaves is equivalent to the category of representations
+    of the quiver \begin{center}
+        \begin{tikzcd}
+            \bullet \ar[r, bend left, "\alpha"] & \bullet \ar[l, bend left, "\beta"]
+        \end{tikzcd}
+    \end{center} for $\alpha\beta = \beta\alpha = I$.
+    In particular there are 5 such indecomposable representations and consequently,
+    5 simple perverse sheaves. They are
+    $\Q_N[-1],\Q_{\P^1},j_!\Q_U, j_*\Q_U$ with the support diagrams
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            i $\backslash$ codim & 0 & 2  \\
+            \hline
+            2                    &   &    \\
+            \hline
+            1                    &   & cx \\
+            \hline
+            0                    &   &    \\
+            \hline
+        \end{tabular}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            i $\backslash$ codim & 0 & 2 \\
+            \hline
+            2                    & c & c \\
+            \hline
+            1                    &   &   \\
+            \hline
+            0                    & x & x \\
+            \hline
+        \end{tabular}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            i $\backslash$ codim & 0 & 2 \\
+            \hline
+            2                    & c & c \\
+            \hline
+            1                    &   & c \\
+            \hline
+            0                    & x &   \\
+            \hline
+        \end{tabular}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            i $\backslash$ codim & 0 & 2 \\
+            \hline
+            2                    & c &   \\
+            \hline
+            1                    &   & x \\
+            \hline
+            0                    & x & x \\
+            \hline
+        \end{tabular}
+    \end{center}
+    and the last one which is not an IC sheaf. It is gotten by taking a closed disk and putting the constant sheaf on the interior
+    and the 0 sheaf on the boundary, except for a point, and then pushing
+    this sheaf forward along the map $D^2\to S^2$ which collapses the boundary. It has
+    stalk cohomology and compactly supported stalk cohomology in degree $1$. Verdier duality
+    interchanges these conditions and so this sheaf is self-dual. The first two sheaves
+    are self-dual as well and the last two are dual to each other. Verdier duality can be seen
+    by reflecting the support diagram across the horizontal axis and swapping $x$ and $c$.
+\end{example}
+
+\subsection{t-structures and perverse sheaves}
+\subsubsection{Motivation: perversity 0 t-structure}
+Let $W$ be a stratified space. The category of perversity 0 complexes
+of sheaves is equivalent to the category of
+constructible ordinary sheaves $\Sh_c(W)$.
+
+\begin{definition}
+    Let $A^*$ be a complex of sheaves on $W$.
+    We have \textbf{truncation functors} $\tau_{\leq r} $ and $ \tau_{\geq r}$ defined by
+    \begin{align*}
+        A^* = A^{r-1} \to A^r \to A^{r+1} \to \cdots               \\
+        \tau_{\leq r}A^* := A^{r-1} \to \ker(d^r) \to 0 \to \cdots \\
+        \tau_{\geq r}A^* := 0 \to \coker(d^{r-1}) \to A^r \to A^{r+1} \to \cdots
+    \end{align*}
+\end{definition}
+
+Then there is a short exact sequence $0\to \tau_{\leq 0}A^* \to A^* \to \tau_{\geq 1}A^* \to 0$
+and the cohomology sheaf of $A^*$ is given by \begin{align*}
+    H^i(A^*) = \tau_{\leq i}\tau_{\geq i}A^*
+\end{align*} In particular we have the following theorem
+which is the version which we can generalize. \begin{theorem}
+    The cohomology functor $H^r: D^b_c(W) \to \Sh_c(W)$ is given
+    by the composition of the trunctation functors.The functor $H^0$ restricts to an equivalence
+    of categories between $\Sh_c(W)$ and the full subcategory of
+    $D^b_c(W)$ consisting of complexes $A^*$ such that $H^i(A^*) = 0$ for $i\neq 0$.
+    This category is Noetherian and Artinian and its simple objects
+    are the sheaves $j_!(\cE)$ where $\cE$ is a simple local system on a single
+    stratum $j:X\to W$.
+\end{theorem}
+
+\subsubsection{General t-structures}
+Fix a perversity $p$ and let $\cP(W)$ be the category of
+perverse sheaves with perversity $p$ on $W$. Then \begin{proposition}
+    There are truncation functors \begin{align*}
+        ^p\tau_{\leq r} : D^b_c(W) \to D^b_c(W) \\
+        ^p\tau_{\geq r} : D^b_c(W) \to D^b_c(W)
+    \end{align*} which take distinguished triangles to exact seuqences and
+    satisfy \begin{align*}
+        ^p\tau_{\leq r}(A^*) = (^p\tau_{\leq 0}(A^*)[r])[-r] \\
+    \end{align*}
+\end{proposition}
+
+\begin{definition}
+    We have the \textbf{perverse cohomology}
+    \begin{align*}
+        ^p H^r(A^*) = ^p\tau_{\leq r}^p\tau_{\geq r}A^*
+    \end{align*}
+\end{definition}
+
+\begin{theorem}
+    The perverse cohomology functor $^pH^r: D^b_c(W) \to \cP(W)$ is given
+    by the composition of the truncation functors.
+    The functor $^pH^0$ restricts to an equivalence
+    of categories between $\cP(W)$ and the full subcategory of
+    $D^b_c(W)$ consisting of complexes $A^*$ such that $^pH^i(A^*) = 0$ for $i\neq 0$.
+    This category is Noetherian and Artinian and its simple objects
+    are the sheaves $Rj_*(\IC_p^*(\cE))$ where
+    $\cE$ is a simple local system on a single stratum $X$ and $j:\bar X\to W$.
+\end{theorem}
+
+\begin{remark}
+    More generally, a $t$-structure on a
+    triangulated category is a pair of strictly full subcategories $\cD^{\geq 0}$
+    and $\cD_{\leq 0}$ satisfying technical
+    conditions as above. In this case, the heart $P = \cD^{\geq 0}\cap \cD_{\leq 0}$
+    is an abelian full subcategory.
+\end{remark}
+
+\subsection{Algebraic varieties and the decomposition theorem}
+\subsubsection{Intersection cohomology}
+Intersection cohomology enjoys many of the same remarkable properties as ordinary
+cohomology for algebraic varieties. In particular, the Lefschetz hyperplane theorem,
+the hard Lefschetz theorem, the Lefschetz decomposition theorem, and the
+Hodge structure all hold for intersection cohomology.
+
+\begin{theorem}
+    Let $W\subset \C\P^N$ projective algebraic variety of dimension $n$.
+    Let $L^j$ be a generic linear subspace of codimension $j$ in $\C\P^N$.
+    If $L^j$ is transverse to each stratum of a Whitney stratification of $W$,
+    then there are natural restriction maps \begin{align*}
+        IH^r(W) \to IH^r(W\cap L^j) \\
+        IH^r(W\cap L^j) \to IH^{r+2j}(W)
+    \end{align*} If $L^1$ is transverse to $W$ then
+    the restriction map is an isomorphism for $r\leq n-2$ and an injection for $r = n-1$.
+    If $j\geq 1$ and $L^j$ transverse to $W$ then the composition
+    \[L^j:IH^{n-j}(W) \to IH^{n-j}(W\cap L^j) \to IH^{n+j}(W)\] is an isomorphism.
+\end{theorem}
+
+\begin{theorem}
+    We have the Leftschetz decomposition which says that \begin{align*}
+        IH^r = \bigoplus_{j\geq 0} L^jIP^{r-2j}
+    \end{align*} where the primitive cohomology
+    $IP^i\subset IH^i$ is the kernel of $\cdot L^{n-i+1}$. Poincare duality \begin{align*}
+        IH^{n+r}(W,\Q) \cong \Hom(IH^{n-r}(W,\Q),\Q)
+    \end{align*} and the Lefschetz isomorphism $L^r: IH^{n-r}(W) \to IH^{n+r}(W)$
+    induce a nondegenerate bilinear pairing on $IH^{n-r}(W)$. The Lefschetz decomposition is orthogonal
+    with respect to this pairing and its signature is described by the Hodge-Riemann bilinear relations.
+\end{theorem}
+
+\subsubsection{Decomposition theorem}
+The decomposition theorem provides insight into the topology of algebraic maps. It was first formulated and proved by Beilinson, Bernstein, and Deligne. Let $f:X\to Y$ be a proper map of algebraic varieties. The decomposition theorems says that
+$Rf_*IC_X$ breaks into a direct sum of intersection complexes of subvarieties of $Y$
+with coefficients in various local systems, with shifts.
+
+\begin{theorem}
+    [Decomposition theorem] Let $f:X\to Y$ be a proper map of algebraic varieties.
+    \begin{enumerate}
+        \item $Rf_*IC^*_X = \bigoplus_i ^p \cH^i(Rf_*IC^*_X)[-i]$ (
+              this says that the push forward sheaf is a direct sum of perverse sheaves,
+              in particular its own perverse cohomology sheaves
+              )
+        \item Each summand is a semisimple perverse sheaf. In particular it is
+              a direct sum of shifted IC sheaves with local coefficients on irreducible
+              subvarieties of $Y$, and it enjoys all of the above properties of intersection
+              cohomology.
+        \item Relative hard-Lefschetz theorem: if $\eta$ is the class of a hyperplane of
+              $X$ then for all $r$ the map $\eta^r:^p\cH^{-r}(Rf_*IC^*_X) \to ^p\cH^{r}(Rf_*IC^*_X)$
+              is an isomorphism.
+    \end{enumerate}
+\end{theorem}
+
+\subsubsection{Example: square pyramid}
+The square pyramid does not correspond to a smooth toric variety because it is singular
+at the tip where the four faces meet. However there is a resolution of singularities
+$\pi:\tilde Y\to Y$ given by corner chopping. We consider the decomposition theorem for this
+map.
+
+The map is an isomorphism except at the singular point whose fiber $\pi^{-1}(y) = \P^1\times \P^1$. The stalk cohomology of the pushforward $R\pi_*\Q_{\tilde Y}$ is $\Q,0,\Q\oplus\Q,0,\Q$ is equal to the cohomology of the fiber. We consider the support diagram
+\begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        i $\backslash$ codim & 0 & 2 & 4 & 6 & $H^*(\pi^{-1}(y))$ \\
+        \hline
+        6                    & c & c & c & c &                    \\
+        \hline
+        5                    &   &   & c & c &                    \\
+        \hline
+        4                    &   &   &   & c & $\Q$               \\
+        \hline
+        3                    &   &   &   & 0 & 0                  \\
+        \hline
+        2                    &   &   &   & x & $\Q\oplus\Q$       \\
+        \hline
+        1                    &   &   &   & x & x                  \\
+        \hline
+        0                    & x & x & x & x & $\Q$               \\
+        \hline
+    \end{tabular}
+\end{center}
+The support condition at the bottom of the table says $\Q[3]$ is part of the IC sheaf.
+The $\Q[-1]$ at the top of the table is not part of the IC sheaf. By duality, neither is one of
+the copies of $\Q$ in the middle. Finally, we can show that the other copy of $\Q$ in the middle
+is part of the IC sheaf. These two terms constitute the primitive cohomology of the fiber.
+
+\section{Appendix A: Spectral Sequences}
+We exposit spectral sequences following \cite{griffiths-harris} and \cite{bott-tu}.
+\subsection{First look}
+Recall that a short exact sequence of chain complexes \begin{align*}
+    0 \to A^* \to B^* \to C^* \to 0
+\end{align*} induces a long exact sequence in cohomology \begin{align*}
+    \cdots \to H^i(A) \to H^i(B) \to H^i(C) \to H^{i+1}(A) \to \cdots
+\end{align*} We can view this as a piece of cohomological data coming from the
+two step filtration of the total complex $B^*$ by $0 \subset A^* \subset B^*$.
+This is the beginning of a spectral sequence.
+
+
+
+The filtration of the total complex descends to a filtration on
+cohomology. In particular each page $E^r$ of the spectral sequence is
+filtered. There is a very special filtration on the $H^*(X,\C)$ of a Kahler manifold
+coming from the Cech to de Rham spectral known as the \textbf{Hodge filtration}.
+\begin{definition}
+    A \textbf{spectral sequence} is a sequence $(E^r,d^r)$ of bigraded abelian groups \begin{align*}
+        E^r = \bigoplus_{p,q} E^{p,q}_r
+    \end{align*} for $r\geq 0$ and differentials \begin{align*}
+        d_r: E^{p,q}_r \to E^{p+r,q-r+1}_r
+    \end{align*} so that $d_r^2 = 0$ and $H^*(E^r,d^r) = E_{r+1}$.
+\end{definition}
+\subsection{Spectral sequence of a filtered complex}
+\begin{proposition}
+    Every filtered complex $K^* = F^0K^* \supset F^1K^* \supset \cdots$ gives rise
+    to a spectral sequence with \begin{align*}
+        E_0^{p,q}      & = F^pK^{p+q}/F^{p+1}K^{p+q}                       \\
+        E_1^{p,q}      & = H^{p+q}(F^pK^*/F^{p+1}K^*) = H^{p+q}(\Gr^p K^*) \\
+        E_\infty^{p,q} & = \Gr^p(H^{p+q}(K^*))
+    \end{align*}
+\end{proposition}
+\begin{proof}
+    We have the differential inherited from $K^*$ \begin{align*}
+        d_0 & : E_0^{p,q} \to E_0^{p,q+1}                                   \\
+        d_0 & : F^pK^{p+q}/F^{p+1}K^{p+q} \to F^pK^{p+q+1}/F^{p+1}K^{p+q+1}
+    \end{align*} Note that the differential only increases the cohomological degree of $K^*$ by 1. We compute the first page \begin{align*}
+        E_1^{p,q} & = \ker d_0 / \im d_0                                                               \\
+                  & = \set{a\in F^pK^{p+q} \st da \in F^pK^{p+q+1}} / d(F^pK^{p+q-1}) + F^{p+1}K^{p+q} \\
+                  & = H^{p+q}(F^pK^*/F^{p+1}K^*)                                                       \\
+                  & = H^{p+q}(\Gr^p K^*)
+    \end{align*} The next differential \begin{align*}
+        d_1: E_1^{p,q} \to E_1^{p+1,q} \\
+        a \mapsto da
+    \end{align*} is well-defined because \begin{align*}
+        da \in \set{b\in F^{p+1}K^{p+q+1} \st db \in F^{p+2}K^{p+q+2}}
+    \end{align*} One can compute the kernel and image of $d_1$ to get the second page,
+    to find that \begin{align*}
+        E_2^{p,q} = \set{a \in F^pK^{p+q} \st da \in F^{p+2}K^{p+q+1}} / d(F^{p-1}K^{p+q-1}) + F^{p+1}K^{p+q}
+    \end{align*} Take denominator as written intersect the numerator. The general pattern is \begin{align*}
+        E_r^{p,q} = \set{a \in F^pK^{p+q} \st da \in F^{p+r}K^{p+q+1}} / d(F^{p-r+1}K^{p+q-1}) + F^{p+1}K^{p+q}
+    \end{align*} and then one can check that \begin{align*}
+        H^*(E^r,d^r) = E^{r+1}
+    \end{align*} For $r$ sufficiently large we get that \begin{align*}
+        E_\infty^{p,q} & = \set{a\in F^pK^{p+q} \st da = 0} / d(K^{p+q-1}) + F^{p+1}K^{p+q} \\
+                       & = \Gr^p(H^{p+q}(K^*))
+    \end{align*} as desired.
+\end{proof}
+\subsection{Spectral sequence of a double complex}
+Let $K^{*,*}$ be a double complex with differentials \begin{align*}
+    d: K^{p,q} \to K^{p+1,q} \text{ and } \delta: K^{p,q} \to K^{p,q+1}
+\end{align*} so that \begin{align*}
+    d^2 = \delta^2 = 0 \text{ and } d\delta + \delta d = 0
+\end{align*} We form the associated single compex $(K,D)$ with \begin{align*}
+    K^* = \bigoplus_{p+q=n} K^{p,q} \text{ and } D = d + \delta
+\end{align*}
+There are two filtrations on $(K^*,D)$, by rows and columns \begin{align*}
+    F'^pK^n  & = \bigoplus_{i\leq p} K^{i,n-i} \\
+    F''^qK^n & = \bigoplus_{i\leq q} K^{n-i,i}
+\end{align*} and there are two associated spectral sequences, both abuting to
+$H^*(K,D)$. The corresponding $E_2$ pages turn out to be \begin{align*}
+    E'^2_{p,q}  & = H^p_d(H^q_\delta(K^{*,*})) \\
+    E''^2_{p,q} & = H^q_\delta(H^p_d(K^{*,*}))
+\end{align*}
+\begin{example}
+    If you consider the complex of real-valued forms on a manifold \begin{align*}
+        0 \to \Omega^0 \to \Omega^1 \to \cdots \to \Omega^n \to 0
+    \end{align*} and filter it by the limit of all of the "good covers" (intersection
+    of two opens is contractible) of the manifold,
+    then the associated spectral sequence is the Cech to de Rham spectral sequence and
+    realizes the de Rham isomorphism \begin{align*}
+        H^*(X,\R) \cong H^*_{dR}(X)
+    \end{align*}
+\end{example}
+Alternatively we can think about the de Rham isomorphism like this. Recall the
+following lemma:
+
+\begin{lemma}
+    A map of complexes of sheaves which is a quasi-isomorphism
+    (i.e. induces an isomorphism on all cohomology sheaves)
+    induces an isomorphism on hypercohomology.
+\end{lemma} The point is is that this map will induce an
+isomorphism on the associated spectral sequences.
+\begin{example}
+    Again we have the real-valued de-Rham complex \begin{align*}
+        0 \to \Omega^0 \to \Omega^1 \to \cdots \to \Omega^n \to 0
+    \end{align*} and also the trivial complex $\R^*$ \begin{align*}
+        \R \to 0 \to 0
+    \end{align*} The \red{$d$-Poincare lemma} shows that these
+    two complexes have the same cohomology sheaves and therefore inclusion
+    is a quasiisomorphism. Therefore the lemma shows they have
+    the same cohomology. Now consider the two
+    spectral sequences at hand. We have \begin{align*}
+        (E_{\R^*}^{'p,q})_2 = H^p(M,\R) \text{ if $q=0$} \text{ and } 0 \text{ otherwise}
+    \end{align*} so the spectral sequence is trivial and \begin{align*}
+        H^p(M,\R) = \cH^p(M,\R^*)
+    \end{align*} On the other hand we compute $H^q(M,\Omega^*)= 0$ if $q>0$ by
+    partition of unity and
+    \begin{align*}
+        E_{\Omega^*}^{''p,q} = H^p_{dR}(M) \text{ if $q=0$} \text{ and } 0 \text{ otherwise}
+    \end{align*} and so putting everything together we find that \begin{align*}
+        H^p(M,\R) \cong H^p_{dR}(M)
+    \end{align*}
+\end{example}
+\subsection{Leray Spectral Sequence}
+Let $f:X\to Y$ be a continuous map of topological spaces. Recall
+that the $q$-th direct image sheaf $R^q_f\cF$ is the sheaf associated to the presheaf \begin{align*}
+    U \mapsto H^q(f^{-1}(U),\cF)
+\end{align*}
+
+The Leray spectral sequence is a spectral sequence with \begin{align*}
+    E_2^{p,q} = H^p(Y,R^q_f\cF) \\
+    E_\infty \to H^*(X,\cF)
+\end{align*}
+
+This spectral sequence is particularly special when $f:E\to B$ is a fiber bundle
+with fiber $F$. In this case, for the constant sheaf $\Q$ on $E$ we have by
+the Kunneth formula \begin{align*}
+    H^q(\pi^{-1}(U),\Q) \cong H^*(F,\Q)
+\end{align*} which suggests \begin{align*}
+    R^q_f\Q \cong H^*(F,\Q)
+\end{align*} is a constant sheaf on $B$. However this is not so
+because we have to account for the monodromy action of $\pi_1(B)$ on the fibers.
+
+\begin{example}
+    We consider the derivation of the Leray spectral sequence for de Rham cohomology
+    in the case of a fiber bundle. The relevant fact is that \begin{align*}
+        E_2^{p,q} = H^p_{DR}(B,H^q_{DR}(F,\R))
+    \end{align*} where we can interpret the right hand side as
+    the the de Rham cohomology of $B$ with coefficients in the
+    local system $H^q_{DR}(F,\R)$.
+\end{example}
+
+\section{Appendix B: Homological algebra}
+What follows comes from \cite{goresky}.
+\subsection{The four functors $f_*,f^*,f_!,f^!$}
+There is a nice geometrical way to think about these functors which requires
+introducing the leaf space or espace etale of a presheaf.
+
+\begin{definition}
+    Given a presheaf $\cF$ on a topological space $X$, the \textbf{espace etale} $L\cF$
+    is the disjount union of the stalks of $\cF$ \begin{align*}
+        L\cF = \bigsqcup_{x\in X} \cF_x \to X
+    \end{align*} equipped with a topology that is discrete on each $S_x$ and that makes $\pi$ into
+    a local homeomorphism.
+\end{definition}
+
+Given the leaf space, we have the sheafification of $\cF$ given by $U \mapsto \Gamma(U,L\cF)$
+and the presheaf $\cF$ is a sheaf if and only if it is isomorphic to its sheafification.
+
+\begin{definition}
+    Given a continuous map $f:X\to Y$ and a sheaf $\cF$ on $X$ and $\cG$ sheaf on $Y$,
+    we define the \textbf{direct image}
+    $f_*\cF$ on $Y$ by \begin{align*}
+        f_*\cF(U) = \Gamma(f^{-1}(U),\cF)
+    \end{align*} and the \textbf{inverse image} $f^*\cG$ on $X$ by \begin{align*}
+        f^*\cG(U) = \lim_{V\supset f(U)} \cG(V)
+    \end{align*} We also have the \textbf{pushforward with proper support $f_!$ }
+    with sections $\Gamma(U,f_!\cF)$ consisting of all sections $s\in \Gamma(f^{-1}(U),\cF$
+    so that the mapping $\text{closure}(x\in U \st s(x)\neq 0) \to U$ is proper.
+    In particular if $X\to Y$ is the inclusion of a subspace then $f_!\cF(U)$
+    is those sections $s\in \Gamma(U\cap X,\cF)$ with compact support.
+\end{definition}
+\begin{lemma}
+    When $Y$ is locally compact and $X \to Y$ is the inclusion then $f_!\cF = f_*\cF$.
+\end{lemma}
+\subsection{Adjunction}
+Let $f:X\to Y$ be a continuous map of topological spaces and $\cF$ a sheaf on $X$ and $\cG$
+a sheaf on $Y$. Then there are natural maps \begin{align*}
+    f^*f_*\cF\to \cF \text{ and } \cG \to f_*f^*\cG
+\end{align*} To see this for the first one, consider
+an open set $U\subset X$. Then \begin{align*}
+    \Gamma(U,f^*f_*\cF) = \lim_{V\supset f(U)} \Gamma(V,f_*\cF) = \lim_{V\supset f(U)} \Gamma(f^{-1}(V),\cF)
+\end{align*} has a natural map to $\Gamma(U,\cF)$, compatible with restriction.
+For the second one, we have $V\subset Y$ open. If $t$ is a section of $L\cG$ over $V$,
+then the pullback by $f$ is a section of the leaf space of $f^*\cG$, over the set $f^{-1}(V)$.
+Therefore we have a map \begin{align*}
+    \Gamma(V,\cG) \to \Gamma(f^{-1}(V),f^*\cG) = \Gamma(V,f_*f^*\cG)
+\end{align*} compatible with restriction.
+Therefore we have the following adjunction \begin{theorem}
+    There are natural isomorphisms \begin{align*}
+        \Hom(f^*\cG,\cF) \cong \Hom(\cG,f_*\cF)
+    \end{align*}
+\end{theorem}
+\begin{remark}
+    One might ask if there is an adjoint to the functor $f_!$. The answer is a very subtle
+    question and introduces Verdier duality.
+\end{remark}
+
+\subsection{Cohomology}
+\begin{definition}
+    A sheaf $\cF$ is \textbf{injective} if for every $0 \to A \to B$,
+    any morphism $A\to \cF$ can be extended to a morphism $B\to \cF$. That is the diagram \begin{center}
+        \begin{tikzcd}
+            0 \arrow[r] & A \arrow[r] \arrow[d] & B \arrow[dl,dashed] \\
+            & \cF
+        \end{tikzcd}
+    \end{center} commutes.
+    An \textbf{injective resolution} of a sheaf $\cF$ is an exact sequence \begin{align*}
+        0 \to \cF \to I^0 \to I^1 \to \cdots
+    \end{align*} where each $I^i$ is injective sheaf.
+    The \textbf{sheaf cohomology groups} $H^*(X,\cF)$ is the cohomology of the complex \begin{align*}
+        0 \to \Gamma(X,I^0) \to \Gamma(X,I^1) \to \cdots
+    \end{align*} Any other injective resolution of $\cF$ will give the same cohomology groups
+    up to canonical isomorphism. Given a complex of sheaves $\cF^*$ we can also take the
+    cohomology sheaves $\cH^*(\cF^*) := \ker d/\im d$. The stalk of the cohomology sheaf coincides with the cohomology of the stalks. A morphism $f:\cF\to \cG$ of sheaves is a \textbf{quasi-isomorphism} if it induces an isomorphism on all cohomology sheaves. A quasi-isomorphism induces an isomorphism on cohomology groups.
+\end{definition}
+
+\begin{definition}
+    The \textbf{mapping cone} $C(\phi)$ of a map $\phi:\cF^*\to \cG^*$ of complexes of sheaves
+    is the total complex of the double complex corresponding to $\phi$. We often write
+    this as a "magic triangle" \begin{center}
+        \begin{tikzcd}
+            \cF^* \arrow[r,"\phi"] & \cG^* \arrow[r] & \cC(\phi) \arrow[r] & \cF^*[1]
+        \end{tikzcd}
+    \end{center}
+\end{definition}
+
+Mapping cones are interesting because they give rise to long exact sequences in cohomology.
+\begin{lemma}
+    If $\phi$ is injective then there is a natural quasiisomorphism $\coker\phi\cong C(\phi)$.
+    If $\phi$ is surjective then there is a natural quasiisomorphism $C(\phi)\cong \ker\phi[1]$.
+    Moreover there is a long exact sequence on cohomology \begin{align*}
+        \cdots \to \cH^{r-1}(\cG^*) \to \cH^{r-1}(C(\phi)) \to \cH^r(\cF^*) \to \cH^r(\cG^*) \to \cH^r(C(\phi)) \to \cdots
+    \end{align*}
+\end{lemma}
+
+\begin{lemma}
+    Let $C^**$ be a first quadrant double complex with exact rows and so that the zeroth
+    horizontal arrows $d_h^{0q}$ are injections (which is the same as saying we
+    can add an extra zero to the left end of each row). Then the total complex
+    $T$ is exact.
+\end{lemma}
+
+\begin{proof}
+    We will check that the total complex is exact at $T^2$. Let $x = x_{02} + x_{11} + x_{20} \in T^2$
+    and suppose that $dx = 0$. Then \begin{align*}
+        d_v x_{02}            & = 0 \\
+        d_vx_{11} + d_hx_{02} & = 0 \\
+        d_vx_{20} - d_hx_{11} & = 0 \\
+        d_hx_{20}             & = 0
+    \end{align*} and since the bottom row is exact, we have $x_{20} = d_hy_{10}$ for some $y_{10}$.
+    Consider $x'_{11} = x_{11} - d_vy_{10}$. Then \begin{align*}
+        d_hx'_{11} = d_hx_{11} - d_hd_vy_{10} = d_hx_{11} - d_vd_hy_{10} = d_hx_{11} - d_vx_{20} = 0
+    \end{align*} Since the row is exact, we have $x'_{11} = d_hy_{01}$ for some $y_{01}$,
+    and the argument continues. Check that $d(y_{01} + y_{10}) = x$. The
+    argument is the same in the general case.
+\end{proof}
+
+\begin{corollary}
+    Let $C^{**}$ be a first quadrant double complex with exact rows. Let $T^*$
+    be the total complex and $A^r = \ker(d^{0,r}:C^{0,r}\to C^{1,r})$ be the subcomplex of the zeroth
+    column with vertical differential. Then the inclusion $A^* \to T^*$ is a quasiisomorphism.
+\end{corollary}
+
+\begin{proof}
+    Augment $C^{**}$ by putting the complex $A^*$ in the $-1$th column. Then the total
+    complex $S^*$ of the augmented complex is precisely the mapping cone of
+    the inclusion $A^* \to T^*$. Therefore there is a long exact sequence in cohomology \begin{align*}
+        \cdots \to \cH^{r-1}(T^*) \to \cH^{r-1}(S^*) \to \cH^r(A^*) \to \cH^r(T^*) \to \cdots
+    \end{align*} and by the previous lemma, $S^*$ is exact. Therefore the inclusion $A^* \to T^*$
+    is a quasiisomorphism.
+\end{proof}
+
+\begin{remark}
+    What have we done? Given a complex of sheaves $A^*$, take an injective resolution of each
+    sheaf and stack them up to get a double complex. It's not so obvious you can do this
+    but Goresky assures me we can. Then what we are saying is that
+    we can take the total complex and the resulting map $A^* \to T^*$ is a quasiisomorphism.
+\end{remark} Thus we end up with the following definition which works in any abelian category.
+
+\begin{definition}
+    An \textbf{injective resolution} of a complex $A^*$ is a quasi-isomorphism $A^*\to T^*$
+    where each $T^r$ is an injective object. The cohomology $H^r(X,A^*)$ is the cohomology
+    of the complex of global sections of any injective resolution of $A^*$.
+\end{definition}
+
+\begin{example}
+    Consider the resolution of a single sheaf $S$. It is a quasi-isomorphism \begin{center}
+        \begin{tikzcd}
+            0 \arrow[r] & S \arrow[r] \arrow[d] & 0 \arrow[r] & 0 \arrow[r] & \cdots \\
+            0 \arrow[r] & I_0 \arrow[r] & I_1 \arrow[r] & I_2 \arrow[r] & \cdots
+        \end{tikzcd}
+    \end{center}
+    Recall the Poincare lemma which says that closed forms on a smooth manifold are locally, when restricted to
+    a Euclidean ball, exact. The statement about sheaves is that we have a resolution of the
+    constant sheaf by the de Rham complex \begin{center}
+        \begin{tikzcd}
+            0 \arrow[r] & \R \arrow[r] \arrow[d] & 0 \arrow[r] & \cdots \\
+            0 \arrow[r] & \Omega^0 \arrow[r] & \Omega^1 \arrow[r] & \cdots
+        \end{tikzcd}
+    \end{center} which one again proves the de Rham isomorphism $H^r(M,\R) \cong H^r_{dR}(M)$.
+\end{example}
+
+\begin{definition}
+    The Cech cohomology of a sheaf $\cF$ on a topological space $X$ is defined for
+    an open cover $\cU$ of $X$ by the complex \begin{align*}
+        0 \to \cF(X) \to \prod_{U\in \cU} \cF(U) \to \prod_{U,V\in \cU} \cF(U\cap V) \to \cdots
+    \end{align*} The cohomology of this complex is the \textbf{Cech cohomology} $\hat H^*(X,\cF)$.
+\end{definition}
+
+\begin{theorem}
+    Suppose $\cF$ is a sheaf on $X$ and $\cU$ is an open cover of $X$ so that \begin{align*}
+        H^r(U_J,\cF) = 0 \text{ for all $r>0$ and all finite intersections $U_J$}
+    \end{align*} Then there is a canonical isomorphism
+    \begin{align*}
+        H^*(X,\cF) \cong \hat H^*(X,\cF)
+    \end{align*}
+\end{theorem}
+
+The proof of this theorem is via first sheafifying the Cech complex which is functorial, picking an injective resolution of $\cF$ and combining the two to get a double complex. The cohomology of this total complex is equal to both the LHS and RHS of the theorem.
+
+\subsection{Derived categories and derived functors}
+The motto is: derive by taking injective resolutions.
+\subsubsection{First construction}
+\begin{definition}
+    Two morphisms of complexes are \textbf{homotopic} if there is a chain of maps
+    $h^r:A^r\to B^{r-1}$ so that $d_Bh + hd_A = d_A$. Let $[A^*,B^*]$ be the set of homotopy classes
+    of morphisms of complexes.
+    Define the complex of abelian groups \begin{align}
+        \Hom^n(A^*,B^*) = \prod_r \Hom(A^r,B^{r+n})
+    \end{align} with differential $d(f) = d_Bf - (-1)^nf d_A$.
+\end{definition}
+We have the following \begin{align*}
+    H^n(\Hom^*(A^*,B^*)) = [A^*,B^*[n]]
+\end{align*}
+
+\begin{definition}
+
+    The \textbf{bounded homotopy category }$K^b(X)$ of complexes of sheaves on a topological space $X$
+    is the category whose objects are bounded complexes of sheaves
+    and whose morphisms are homotopy classes of maps.
+
+
+
+    The \textbf{bounded derived category} $D^b(X)$ is homotopy category of injective sheaves. Its objects
+    are bounded complexes of injective sheaves and its morphisms are homotopy classes of maps.
+\end{definition}
+
+\begin{remark}
+    In topology, homotopic maps induce the same map on cohomology. In the derived category, the same is true.
+    However, the following lemmas will show that once you restrict your objects to injective complexes,
+    every quasi-isomorphism between injective complexes is in fact a homotopy equivalence.
+    Therefore, this interprets the statement "inverting quasi-isomorphisms" as being the same as
+    restricting to the injective objects.
+\end{remark}
+
+This lemma is where the work happens and then everything else follows.
+\begin{lemma}
+    Let $C^*$ be a bounded complex of sheaves and suppose that all cohomology sheaves are zero.
+    Let $J^*$ be injective. Then any map $C^*\to J^*$ is homotopic to zero.
+\end{lemma}
+The proof is quite standard, but we get a lot out of it:
+
+\begin{corollary}
+    The following hold:
+    \begin{enumerate}
+        \item Suppose $J^*$ is injective and has no cohomology. Then $J$
+              is homotopy equivalent to the zero complex.
+        \item Let $\phi:X^*\to Y^*$ be a quasi-isomorphism of bounded complexes of injective sheaves.
+              Then $\phi$ is a homotopy equivalence.
+        \item Let $A^*\to I^*$ and $B^*\to J^*$ be injective resolutions of complexes $A^*$
+              and $B^*$ and $f:A^*\to B^*$ a map of complexes. There is a lift
+              $\tilde f:I^*\to J^*$ unique up to homotopy.
+        \item $f:A^*\to B^*$ a quasiisomorphism induces an isomorphism on hypercohomology.
+    \end{enumerate}
+    \end{corollary}
+
+    \begin{remark}
+        Injective objects are like CW complexes, and these facts are basically about
+        the homotopy theory of CW complexes. The first statement is Whitehead's theorem.
+    \end{remark}
+    There is a functor $K^b(X) \to D^b(X)$ which sends a complex of sheaves
+    to its "canonical" Godemont injective resolution. If $A^* \to B^*$
+    is a quasi-isomorphism of complexes of sheaves, then it becomes
+    an isomorphism in the derived category.
+
+    \begin{definition}
+        The \textbf{right derived functor} $RT: D^b(X) \to D^b(Y)$ of a functor
+        $T:\Sh(X)\to \cC$ is defined by replacing a complex $A^*$
+        by its injective resolution $I^*$ and applying $T$ to get $TI^*$.
+    \end{definition}
+
+    \begin{remark}
+        We emphasize that the hypercohomology of $R\Hom$ is exactly the group of
+        homomorphisms in the derived category: \begin{align*}
+            H^0(R\Hom(A^*,B^*)) = \Hom_{D^b(X)}(A^*,B^*)
+        \end{align*}
+    \end{remark}
+
+    \subsubsection{Second construction}
+    The derived category can also be interpreted as a quotient
+    category of the category of complexes of sheaves, by inverting
+    quasi-isomorphisms. Let $E^b(X)$ be the category of bounded
+    complexes of sheaves on $X$ with a morphism $A^*\to B^*$ being the data of a diagram \begin{center}
+        \begin{tikzcd}
+            & {C^*} \\
+            {A^*} && {B^*}
+            \arrow["qi", from=1-2, to=2-1]
+            \arrow[from=1-2, to=2-3]
+        \end{tikzcd}
+    \end{center} up to the equivalence relation between two morphisms $C^*_1$ and $C^*_2$ if there is
+    a diagram like \begin{center}
+        \begin{tikzcd}
+            & {C_1} \\
+            A & {C_3} & B \\
+            & {C_2}
+            \arrow[from=1-2, to=2-1]
+            \arrow[from=1-2, to=2-3]
+            \arrow[from=2-2, to=1-2]
+            \arrow["qi"', from=2-2, to=2-1]
+            \arrow[from=2-2, to=2-3]
+            \arrow[from=2-2, to=3-2]
+            \arrow[from=3-2, to=2-1]
+            \arrow[from=3-2, to=2-3]
+        \end{tikzcd}
+    \end{center}
+    and then there is a natural functor $D^b(X) \to E^b(X)$ which is an equivalence of categories.
+
+    \begin{definition}
+        A functor $T:C\to D$ between abelian categories is \textbf{exact}
+        if it preserves exact sequences and \textbf{left exact} if it
+        preserves kernels. An object $X$ is \textbf{$T$-acyclic} if $H^r(TX) = 0$
+        for all $r>0$.
+    \end{definition}
+    The advantage of $T$-acyclic objects is that one can use them in place of injective objects
+    when computing derived functors.
+
+    \begin{lemma}
+        Let $T$ be left exact and $A^* \to X^*$ a quasi-isomorphism of complexes.
+        If $X^r$ is $T$-acyclic for all $r>0$ then $RT(A^*)$ can be computed by
+        the complex $TX^*$.
+    \end{lemma}
+
+    \begin{proof}
+        The proof follows from the fact that if the rows of a double complex are exact, then
+        the total complex is exact. The condition that $X^r$ is $T$-acyclic for all $r>0$ is about
+        the rows of the double complex being exact once you apply $T$ to an injective resolution.
+    \end{proof}
+    \begin{remark}
+        Fine, flabby, soft sheaves are all $\Gamma$-acyclic. Therefore,
+        sheaf cohomology may be computed with any of those resolutions.
+    \end{remark}
+
+
+
+\subsection{Verdier duality}
+Verdier duality is a generalization of Poincaré duality to the setting of sheaf theory on possibly singular spaces. It provides a duality between cohomology and compactly supported cohomology, expressed in terms of derived categories.
+
+\subsubsection{Borel-Moore homology}
+Borel and Moore defined a sheaf $C^*_{BM}$ whose presheaf of sections is the
+"locally finite r dimensional chians in $U$". The cohomology of this sheaf is called the
+\textbf{Borel-Moore homology} $H^*_{BM}(X)$. Moreover,
+the compactly supported cohomology of this sheaf is the same as the singular homology of $X$.
+\begin{align*}
+    H^{-i}_c(X,C^*_{BM}) = H_i(X)
+\end{align*} and the stalk cohomology is the local homology of $X$ at $x$. \begin{align*}
+    H^{-r}_x(X,C^*_{BM}) = H_r(X,X-x)
+\end{align*}
+
+\subsubsection{The dual of a complex}
+Borel and Moore also gave a way to define the dual $\D(S^*)$ of a complex of sheaves $S^*$.
+Unfortunately, the double dual of $S^*$ is not $S^*$. Later
+Verdier discovered another way to interpret the BM dual sheaf theoretically:
+\begin{align*}
+    \D(S^*) = R\Hom^*(S^*,\D^*)
+\end{align*} where $\D^*$ is a universal sheaf called the dualizing complex. Then
+Verdier showed that there is a canonical quasiisomorphism
+in the derived category \begin{align*}
+    S^* \to \D(\D(S^*))
+\end{align*} thereby restoring double duality. When we are talking about $R=\Z$-modules,
+the dualizing complex is precisely $\D^* =  R\Hom^*(\Z,\D^*) = \D(\Z)$ is the
+Borel-Moore dual of the constant sheaf, so it is the sheaf of chains.
+
+\begin{definition}
+    If $f:X\to Y$ is a continuous map and $S^*$ is a complex of sheaves on $Y$
+    define $f^!(S^*) = \D_X(f^*(\D_Y(S^*)))$.
+\end{definition}
+
+\begin{definition}
+    Let $i:Z\to X$ closed subspace and $j:U\to X$ open complement.
+    If $S$ is a sheaf on $X$ define $i^!(S)$ to be the restriction to $Z$ of the
+    presheaf with sectinos supported in $Z$, that is \begin{align*}
+        i^!(S) = i^*(S^Z) \text{ and } S^Z(V) = \set{s\in S(V) \st \supp s \subset Z}
+    \end{align*} Thus if $W\subset Z$ is open then \begin{align*}
+        i^!(S)(W) = \lim_{V\supset W} S(V)
+    \end{align*}
+\end{definition}
+
+\begin{definition}
+    A triangle of morphisms
+    \begin{align*}
+        A^* \to B^* \to C^* \to A^*[1]
+    \end{align*} in $D^b(X)$ is \textbf{distinguished} if it is homotopy equivalent to a mapping cone
+    $C(\phi)$ of a morphism $\phi:A^*\to B^*$. This means that there should be maps between
+    the objects in the two triangles so that the squares commute up to homotopy.
+\end{definition}
+
+\begin{theorem}
+    [Verdier duality] Let $f:X\to Y$ be a
+    stratified mapping between Whitney stratified spaces. Let $A^*,
+        B^*,C^*$ be constructible sheaves of abelian groups of $X,Y,Y$ respectively. Then
+    $f^*,f^!,Rf_*,Rf_!$ take distinguished triangles to distinguished triangles. There
+    are canonical isomorphisms in $D^b_c(X)$ as follows.
+
+    \begin{enumerate}
+        \item $\D\D(A^*) \cong A^*$
+        \item $\D^*_X \cong f^!(\D^*_Y)$
+        \item $f^!(A^*) \cong \D_X(f^*(\D_Y(A^*)))$
+        \item $Rf_!(A^*) \cong \D_Y(Rf_*(\D_X(A^*)))$ so $f^!$ is the dual of $f^*$
+              and $Rf_!$ is the dual of $Rf_*$.
+        \item $f^!R\Hom^*(B^*,C^*) \cong R\Hom^*(f^*B^*,f^!C^*)$
+        \item $Rf_*(R\Hom^*(A^*,f^!B^*)) \cong R\Hom^*(Rf_!A^*,B^*)$ is the statement of Verdier
+              duality. This says that $Rf_!$ and $f^!$ are adjoint just as $Rf_*$ and $f^*$ are adjoint.
+        \item $Rf_*R\Hom^*(f^*B^*,A^*) \cong R\Hom^*(B^*,Rf_!A^*)$
+        \item $Rf_!(R\Hom^*(A^*,f^!B^*)) \cong R\Hom^*(Rf_!A^*,B^*)$
+        \item If $f:X\to Y$ is an open inclusion then $f^!B^* \cong f^*B^*$
+        \item If $f:X\to Y$ closed inclusion then $Rf_!A^* \cong Rf_*A^*$.
+        \item If $f:X\to Y$ inclusion of oriented submanifold and $B^*$ is
+              cohomologically locally constant on $Y$ then $f^!B^* \cong f^*B^*[\dim Y - \dim X]$.
+    \end{enumerate}
+\end{theorem}
+
+\section{References}
+\begin{enumerate}
+    \bibitem{griffiths-harris} P.~A. Griffiths and J.~D. Harris, \emph{Principles of Algebraic Geometry}, Wiley Classics Library, Wiley, New York, 1994. Reprint of the 1978 original. MR1288523.
+
+    \bibitem{cataldo-migliorini} M.~A.~A. de Cataldo and L. Migliorini, \emph{The Decomposition Theorem, Perverse Sheaves and the Topology of Algebraic Maps}, Bulletin of the American Mathematical Society (N.S.), \textbf{46} (2009), no.~4, 535--633. MR2525735.
+
+    \bibitem{goresky} M. Goresky, \emph{Lecture Notes on Sheaves and Perverse Sheaves}, available online at \url{https://www.math.ias.edu/~goresky/}.
+
+    \bibitem{chriss-ginsburg} N.~A. Chriss and V. Ginsburg, \emph{Representation Theory and Complex Geometry}, Modern Birkhäuser Classics, Birkhäuser Boston, Boston, MA, 2010. Reprint of the 1997 edition. MR2838836.
+
+    \bibitem{bott-tu} R.~H. Bott and L.~W. Tu, \emph{Differential Forms in Algebraic Topology}, Graduate Texts in Mathematics, vol.~82, Springer, New York-Berlin, 1982. MR0658304.
+
+\end{enumerate}
+
+\end{document}

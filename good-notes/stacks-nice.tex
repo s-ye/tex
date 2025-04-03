@@ -6,30 +6,25 @@
 \usepackage{bookmark}
 \usepackage{tikz}
 \usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
-\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
 \usepackage{fancyhdr}
-\DeclareMathOperator{\ob}{ob}
 
 \usepackage{parskip} % Automatically respects blank lines
 \setlength{\parskip}{1em} % Adds more space between paragraphs
 \setlength{\parindent}{0pt} % Removes paragraph indentation
+\usepackage{/Users/songye03/Desktop/Math_tex/style/professional-notes}
+
+% Metadata
+\title{Stacks and Moduli Spaces}
+\author{Songyu Ye}
+\date{\today}
 
 \begin{document}
 
-
-\lhead{Songyu Ye}
-\rhead{\today}
-\cfoot{\thepage}
-
-\title{Stacks and Moduli Spaces}
-
-\author{Songyu Ye}
-\date{\today}
-\maketitle
-
+% Custom title
+\notestitle
 
 \begin{abstract}
-    A detailed exploration of the theory of stacks and moduli spaces. We aim to bridge the abstract formalism of stacks with concrete examples, such as moduli spaces of vector bundles and principal bundles. The interplay between algebraic geometry, category theory, and topology is emphasized, showcasing the power of stacks as a unifying framework. Key results, including the Verlinde formula and the classification of principal bundles via loop groups, are discussed in depth.
+    A detailed exploration of the theory of stacks and moduli spaces. We aim to bridge the abstract formalism of stacks with concrete examples, such as moduli spaces of vector bundles and principal bundles. The interplay between algebraic geometry, category theory, and topology is emphasized, showcasing the power of stacks as a unifying framework. Key results, including the Verlinde formula and the classification of principal bundles via loop groups, are discussed.
 \end{abstract}
 
 \tableofcontents
@@ -1273,11 +1268,12 @@ This establishes a correspondence between principal $G$-bundles and bundles with
     Let $E \to X$ be a vector bundle of rank $n$. Then the frame bundle $\text{Fr}_{\text{GL}_n}(E)$ is the principal $\text{GL}_n$-bundle whose fiber at $x \in X$ consists of all bases of the vector space $E_x$. Conversely, given a principal $\text{GL}_n$-bundle $P$, the associated bundle $P \times^{\text{GL}_n} \mathbb{A}^n$ is a vector bundle of rank $n$.
 \end{example}
 
+
 \section{References}
 \begin{enumerate}
     \bibitem{BeauvilleLaszlo1994}
     Beauville, A., and Laszlo, Y.,
-    "Conformal blocks and generalized theta functions,"
+    \textit{Conformal blocks and generalized theta functions},
     \textit{Communications in Mathematical Physics},
     vol. 164, no. 2, pp. 385--419, 1994.
 
@@ -1289,8 +1285,9 @@ This establishes a correspondence between principal $G$-bundles and bundles with
 
     \bibitem{Sorger1999}
     Sorger, C.,
-    "Lectures on moduli of principal $G$-bundles over algebraic curves,"
+    \textit{Lectures on moduli of principal $G$-bundles over algebraic curves},
     in \textit{School on Algebraic Geometry (Trieste, 1999)}, pp. 1--57,
     ICTP Lecture Notes, vol. 1, Abdus Salam International Centre for Theoretical Physics, Trieste, 1999.
 \end{enumerate}
+
 \end{document}
