@@ -1,0 +1,182 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Toric Topology}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+    Abstract
+\end{abstract}
+
+\tableofcontents
+
+\section{Hard Lefschetz and Hodge Riemann for Polytopes}
+\begin{definition}
+    Let $P$ be a convex rational polytope. We say that \begin{enumerate}
+        \item $P$ is \textbf{simplicial} if every face of $P$ is a simplex.
+        \item $P$ is \textbf{simple} if all vertices of $P$ have the same number of edges.
+    \end{enumerate}
+\end{definition}
+$P$ has a dual polytope $P^\circ$, which is defined by
+\[
+    P^\circ = \left\{ y \in \mathbb{R}^d \;\middle|\; \langle x, y \rangle \leq 1 \text{ for all } x \in P \right\}.
+\]
+It turns out that $P$ is simplicial if and only if $P^\circ$ is simple, and vice versa.
+
+\begin{definition}
+    The \textbf{$f$-vector} of a $d$-dimensional polytope $P$ is the sequence
+    \[
+        f(P) = (f_0, f_1, \dots, f_{d-1}),
+    \]
+    where $f_i$ denotes the number of $i$-dimensional faces of $P$.
+\end{definition}
+
+One has the following classical result:
+\begin{theorem}[Dehn-Sommerville Equations]
+    Let \( P \) be a simplicial \( d \)-dimensional convex polytope. For \( 0 \leq k \leq \left\lfloor \frac{d}{2} \right\rfloor \), we have
+    \[
+    \sum_{i = k}^{d - 1} (-1)^i \binom{i + 1}{k + 1} f_i = (-1)^{d - 1} f_k.
+    \]
+\end{theorem}
+    
+    \begin{definition}
+        Define the \( h \)-vector \( (h_0, h_1, \dots, h_d) \) of \( P \) via the identity:
+        \[
+        \sum_{i=0}^d h_i t^{d - i} = \sum_{i = 0}^d f_{i - 1} (t - 1)^{d - i}.
+        \]
+    \end{definition}
+
+Then the Dehn--Sommerville equations are equivalent to the symmetry:
+\[
+h_i = h_{d - i} \quad \text{for all } 0 \leq i \leq d.
+\]
+
+\begin{definition}
+    We have the $h$ and $f$ polynomials defined as follows (note the strange indexing of the $f$ polynomial):
+    \[
+        h_P(t) = \sum_{i=0}^d h_i t^i, \quad f_P(t) = \sum_{i=0}^d f_{i-1} t^i.
+    \]
+    so by definition we have
+    \[
+        f_P(t+1) = h_P(t).
+    \]
+\end{definition}
+When $P$ is simple, one has the simpler formula \begin{align*}
+    h_k = \sum_{i\geq k} f_i (-1)^{i-k} \binom{i}{k}
+\end{align*}
+
+\begin{definition}
+    Define the \( g \)-\textbf{vector} \( (g_0, g_1, \dots, g_{\lfloor d/2 \rfloor}) \) by
+\[
+g_0 = 1, \quad g_i = h_i - h_{i - 1} \quad \text{for } i \geq 1.
+\]
+\end{definition}
+\begin{theorem}
+[McMullen Conjecture] $h$ is a vector of a simplicial rational convex polytope if and only if it satisfies the following conditions:
+\begin{enumerate}
+    \item \textbf{positivity condition:} $h_0 = 1$.
+    \item \textbf{Poincare duality: }$h_i = h_{d-i}$ for all $i$.
+    \item \textbf{Unimodality: }$h_0 \leq h_1 \leq h_2 \leq \cdots \leq h_{\lfloor d/2 \rfloor}$.
+    \item \textbf{\( g \)-vector condition:} The sequence \( (g_0, g_1, \dots, g_{\lfloor d/2 \rfloor}) \) is an \emph{M-sequence}, i.e., it arises as the Hilbert function of a standard graded Artinian algebra over a field.
+\end{enumerate}
+\end{theorem}
+The necessity of the McMullen conjecture was proven by Billera and Lee, and the sufficiency was proven by Stanley in 1990.
+
+\section{Paul Zinn Justin}
+In the $2n$ case let $v = n+1 \ n+2 \ \dots \ 2n \ 1 \dots n$ and then we can identify \begin{align*}
+    X_w \cap X^v_o = \overline{X_w} = \overline{B_-wB}
+\end{align*}
+and there is the formula for the class of the Matrix Schubert Variety in the $T\times T$-equivariant cohomology of $M_{2n}$ which can be identified with the polynomial ring in $2n$ variables \begin{align*}
+    [\overline{X_w}] = \sum_{\text{pipe dreams}} \prod_{\text{crosses}} x_i - y_j
+\end{align*} 
+which coincides with the AJS-Billey formula, which expresses the class of a Schubert variety $X_w$ localized at a fixed point $v$. How would one prove something like the AJS-Billey formula?
+
+\begin{enumerate}
+    \item Induction via divided difference operators
+    \item Bott Samelson resolutions (push pull)
+    \item Grobner degeneration [KM'05]
+\end{enumerate}
+\begin{remark}
+    Justin also mentioned a remark here relating the lower-upper scheme and Kazhdan-Lustzig theory.
+\end{remark}
+
+\subsection{CSM classes}
+If $X\subset Y$ is a locally scheme in an ambient complex variety, there is something called $CSM(X) \in H_*^{BM}(Y)$ with the following properties \begin{enumerate}
+    \item If $X = X_1 \coprod X_2$ then $CSM(X) = CSM(X_1) + CSM(X_2)$.
+    \item If $f:Y\to Z$ makes $X$ a bundle over $f(X)$ then CSM classes behave well, have to scale by the compactly supported Euler characterstic of the fiber
+    \item If $X = Y$ is smooth proper, then one has \begin{align*}
+        CSM(Y) = c(TY) \in H^*(Y) \cong H^{BM}_{\dim Y - *}(Y)
+    \end{align*}
+\end{enumerate}
+Also when $Y$ is smooth, one has the SSM class defined \begin{align*}
+    SSM(X\subset Y) := CSM(X)/c(TY)
+\end{align*}
+
+CSM classes were introduced by MacPherson in order to solve the Deligne-Grothendieck conjecture. When $X$ is closed, one can think of CSM classes as a deformation \begin{align*}
+    CSM(X) = [X] + \text{higher order stuff}
+\end{align*}
+
+\section{Allen Knutson}
+\subsection{CSM classes and $\cD$-modules}
+We introduce $\cD$-modules on $M$ as "functions times composites of first order differential operators (coming from vector fields (which can be identified with fiberwise linear functions on the cotangent bundle))." It is a sheaf of noncommutative algebras on $M$ and carries a canonical filtration by order. Its associated graded can be canonically identified with $\cO_{T^*M}$ which is a sheaf of commutative algebras on $M$.
+
+If one has an action of $\cD_M$ on $\cF$, then there is no natural filtration on $\cF$, but one can obtain one by picking generators. The choice of associated graded is a not well defined $\cO_{T^*M}$-module, buyt in fact the support class (with multiplicity) is well defined.
+
+\begin{example}
+    $M = \C$ then $\cD_M = \C[\hat{x},\partial/\partial x]/\ideal{[\partial/\partial x,\hat{x}]} = 1$ and its associated graded is the polynomial ring $\C[q,p]$ with $p$ denoting position and $q$ momentum traditionally. The ring of functions on $\C$ is of course a $\cD$-module with generator $1$, and the annihilator of this generator is precisely the operator $\partial/\partial x$. Therefore we have the $\cD$-module isomorphism \begin{align*}
+        \cO_{\C} \cong \cD_{\C} / \ideal{\partial/\partial x}
+    \end{align*}
+\end{example}
+
+\begin{example}
+    Let $i$ be the inclusion of $0$ into $\C$. Then $i_!\cO_0$ is a $\cD_\C$-module which as a vector space can be identified with $\C[\delta]$ where $\delta$ is the Dirac delta operator. As a $\cD_{\C}$ module, we have \begin{align*}
+        \C[\delta] \cong \cD_{\C}/\ideal{\hat{x}}
+    \end{align*} because $\hat{x}$ is an operator supported away from zero, and $\delta$ is supported only at zero.
+\end{example}
+
+\begin{example}
+    \begin{align*}
+        \cO_{\C^*} \cong \C[x,x^{-1}] 
+    \end{align*} is not finitely generated as a $\C[x]$-module but nonetheless one has \begin{align*}
+        \cO_{\C^*} \cong \C[x,x^{-1}] \cong \cD_\C \inv{x} \cong \cD_{\C}/\ideal{\partial/\partial x \hat{x}}
+    \end{align*}
+\end{example}
+Note that in the three examples, if we pass to $V(\gr)$ then we get $V(p), V(q), V(pq)$ respectively. In general, for every $\cD$-module, one gets the characteristic cycle of the associated graded which carries the following properties: \begin{enumerate}
+    \item it is conical, that is $S^1$ invariant where $S^1$ acts on the cotangent fibers by scaling. This is because we took the associated graded,
+    and being graded is about having a circle action
+    \item it is Lagrangian in reasonable instances.
+\end{enumerate}
+So consider \begin{align*}
+    [cc(\cF)] \in H^*_{\C^*}(T^*M) \cong H^*_{\C^*}(M) \cong H^*(M)[h]
+\end{align*} where $h$ is the variable generating the $S^1$ cohomology of a point. Then there is a theorem of Ginsburg from 86, note that he 
+changed the spelling of his name around this time, which characterizes the CSM class of a smooth locally closed submanifold.
+
+\begin{theorem}
+    If $A\subset M$ smooth and locally closed then $[cc(i_!\cO_A)]_{h=-1} \cdot (-1)^{\dim A} = CSM(A\subset M)$.
+\end{theorem}
+Ginsburg doesn't explicitly formulate it like this but Saba (perhaps spelled wrong) does. This formula is less recursive than the original formulation (recursive in the sense like how Chern class are sometimes defined as the functor with the correct properties).
+
+\end{document}

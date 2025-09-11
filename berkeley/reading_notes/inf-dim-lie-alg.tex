@@ -1,0 +1,1446 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Infinite Dimensional Lie Algebras}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+    These are notes for a reading course supervised by Prof. Richard Borcherds in the Fall of 2025 at UC Berkeley. The main references are \cite{kac} and \cite{pressley-segal}.
+\end{abstract}
+\tableofcontents
+
+\section{Semisimple Lie algebras}
+\subsection{Preliminaries}
+We recall the basic structure theory and representation theory of semisimple Lie algebras, culminating in a discussion of the Weyl character formula. Let $\mf g$ be a semisimple Lie algebra over the complex numbers $\mathbb{C}$. In particular, $\mf g$ need not be finite-dimensional, until we ask it to be. We follow \cite{bump}.
+\begin{definition}
+    Recall that a Lie algebra is solvable if its derived series eventually becomes zero. The derived series is defined by $L^{(0)} = L$, $L^{(1)} = [L,L]$, and $L^{(n+1)} = [L^{(n)}, L^{(n)}]$.
+\end{definition}
+
+\begin{definition}
+    A Lie algebra $L$ is \textbf{semisimple} if and only if its radical (the largest solvable ideal) is zero.
+\end{definition}
+
+\begin{definition}
+    The Killing form of a Lie algebra $L$ is the bilinear form $\kappa(x,y) = \text{tr}(\text{ad}(x)\text{ad}(y))$.
+\end{definition}
+For $H \in \mathfrak{h}$, look at $\operatorname{ad}(H)$. Since $\mathfrak{h}$ consists of simultaneously diagonalizable endomorphisms, $\operatorname{ad}(H)$ is diagonalizable.
+
+Thus we can decompose:
+\[
+    \mathfrak{g} = \mathfrak{h} \;\oplus\; \bigoplus_{\alpha \in \Phi} \mathfrak{g}_\alpha,
+\]
+where
+\[
+    \mathfrak{g}_\alpha = \{ X \in \mathfrak{g} : [H,X] = \alpha(H) X \;\;\forall H\in \mathfrak{h}\}.
+\]
+The nonzero functionals $\alpha \in \mathfrak{h}^*$ are the roots, and $\Phi$ is the root system. The following proposition is the beginning of the story of the geometry of root systems. The nondegeneracy of the Killing form on the Cartan subalgebra allows us to identify $\mathfrak{h}$ with its dual $\mathfrak{h}^*$. In particular, we get an inner product, lengths, angles, and reflections. However, note that the notion of simple, positive, and integral roots does not come from the Killing form.
+
+\begin{proposition}[Humphreys 8.2]
+    The Killing form $\kappa$ is nondegenerate on $\mathfrak{h}$.
+\end{proposition}
+
+\begin{proof}
+
+    Recall that a Lie algebra is semisimple if and only if its Killing form is nondegenerate. One shows that the restriction of the Killing form to the centralizer $L_0 = C_L(\mathfrak{h})$ of $\mathfrak{h}$ in $L$ is nondegenerate. Then one shows that in fact $L_0 = \mathfrak{h}$.
+\end{proof}
+
+Let $\mathfrak{g}$ be a semisimple Lie algebra, $\mathfrak{h}$ a maximal toral subalgebra, $\Phi \subset \mathfrak{h}^*$ the root system, which we partition into positive and negative roots.
+
+Thus we will associate to $\phi \in \mathfrak{h}^*$ an element $t_\phi \in \mathfrak{h}$ such that
+\begin{align*}
+    \kappa(t_\phi, h) = \phi(h) \quad \text{for } h \in \mathfrak{h}.
+\end{align*}
+
+Then we will define an inner product on $\mathfrak{h}^*$ which we will denote
+\begin{align*}
+    (\lambda | \mu) = \kappa(t_\lambda, t_\mu).
+\end{align*}
+
+If $\alpha \in \Phi \cup \{0\}$ we will denote
+\[
+    \mathfrak{g}_\alpha = \{x \in \mathfrak{g} \,|\, [h,x] = \alpha(h)x \text{ for } h \in \mathfrak{h} \}.
+\]
+
+If $\alpha = 0$, then $\mathfrak{g}_\alpha = \mathfrak{h}$. On the other hand, if $\alpha \in \Phi$, then $\mathfrak{g}_\alpha$ is one-dimensional. We have the decomposition
+\begin{align*}
+    \mathfrak{g} = \mathfrak{h} \oplus \bigoplus_{\alpha \in \Phi} \mathfrak{g}_\alpha.
+\end{align*}
+
+By Humphreys Proposition 8.3(c) we have, for $x \in \mathfrak{g}_\alpha$ and $y \in \mathfrak{g}_{-\alpha}$,
+\begin{align*}
+    [x,y] = \kappa(x,y)t_\alpha.
+\end{align*}
+
+We will denote by
+\begin{align*}
+    h_\alpha = \frac{2t_\alpha}{(\alpha|\alpha)}.
+\end{align*}
+
+Thus if $x_\alpha \in \mathfrak{g}_\alpha$ we have $[h_\alpha, x_\alpha] = 2x_\alpha$. If
+\[
+    \alpha^\vee = \frac{2\alpha}{(\alpha|\alpha)}
+\]
+then for $\lambda \in \mathfrak{h}^*$ we have $(\alpha^\vee | \lambda) = \lambda(h_\alpha)$. Either $\alpha^\vee$ or $h_\alpha$ is called a \textbf{coroot}. They are really the same thing if we identify $\mathfrak{h}$ with its double dual $\mathfrak{h}^{**}$. The factor $\tfrac{2}{(\alpha|\alpha)}$ is chosen so that the root vectors $x_\alpha, y_\alpha$ together with $h_\alpha$ form a standard $\mathfrak{sl}_2$-triple, with the eigenvalue of $x_\alpha$ under $h_\alpha$ equal to $2$.
+
+We will denote by $\rho$ half the sum of the positive roots. Humphreys denotes this $\delta$, but the notation $\rho$ is now universally used by everyone. If $\alpha \in \Phi$ we will denote by $r_\alpha$ the reflection
+\[
+    r_\alpha(x) = x - (x|\alpha^\vee)\alpha.
+\]
+
+\begin{remark}
+    Recall that for each root $\alpha$, we have an $\mathfrak{sl}_2$-triple $\{x_\alpha, y_\alpha, h_\alpha\}$. When you restrict the adjoint representation of $\mathfrak{g}$ to this $\mathfrak{sl}_2$, every other root space $\mathfrak{g}_\beta$ becomes a finite-dimensional $\mathfrak{sl}_2$-representation.
+
+    Here's how it works: For a root $\alpha \in \Phi$, we can find $x_\alpha \in \mathfrak{g}_\alpha$, $y_\alpha \in \mathfrak{g}_{-\alpha}$, and $h_\alpha = [x_\alpha, y_\alpha] \in \mathfrak{h}$ satisfying the relations of $\mathfrak{sl}_2$:
+    \begin{align*}
+        [h_\alpha, x_\alpha] & = 2x_\alpha,  \\
+        [h_\alpha, y_\alpha] & = -2y_\alpha, \\
+        [x_\alpha, y_\alpha] & = h_\alpha.
+    \end{align*}
+    So $\mathfrak{s}_\alpha = \langle x_\alpha, y_\alpha, h_\alpha\rangle \cong \mathfrak{sl}_2$ is a subalgebra of $\mathfrak{g}$. The adjoint representation is $\operatorname{ad}: \mathfrak{g} \to \mathfrak{gl}(\mathfrak{g})$ with $\operatorname{ad}(z)(w) = [z, w]$. If we restrict $\operatorname{ad}$ to the subalgebra $\mathfrak{s}_\alpha$, then $\mathfrak{g}$ becomes an $\mathfrak{sl}_2$-module.
+
+    Take another root $\beta \in \Phi$, $\beta \neq \pm\alpha$. For any $H \in \mathfrak{h}$, $[H, \mathfrak{g}_\beta] \subseteq \mathfrak{g}_\beta$, so $\mathfrak{g}_\beta$ is invariant under $\mathfrak{h}$. In particular, under $h_\alpha$, vectors in $\mathfrak{g}_\beta$ have weight $[h_\alpha, x_\beta] = \beta(h_\alpha)\,x_\beta$ for $x_\beta \in \mathfrak{g}_\beta$.
+
+    $x_\alpha$ and $y_\alpha$ act as “raising” and “lowering” operators:
+    \begin{align*}
+        [x_\alpha, \mathfrak{g}_\beta] & \subseteq \mathfrak{g}_{\beta+\alpha}, \\
+        [y_\alpha, \mathfrak{g}_\beta] & \subseteq \mathfrak{g}_{\beta-\alpha}.
+    \end{align*}
+    So if you start with a vector in $\mathfrak{g}_\beta$, repeated commutators with $x_\alpha$ and $y_\alpha$ move you up and down the $\alpha$-string through $\beta$: $\beta, \;\beta+\alpha, \;\beta+2\alpha, \;\dots,\;\beta-q\alpha$.
+
+    Now suppose $\mf g$ is finite dimensional. Then there are only finitely many roots, so this process stops in both directions. Thus the span $\bigoplus_{k} \mathfrak{g}_{\beta+k\alpha}$ is a finite-dimensional representation of $\mathfrak{sl}_2$. It decomposes into irreducible $\mathfrak{sl}_2$-modules, with weights given by integers \[\beta(h_\alpha),\;\beta(h_\alpha)-2,\;\dots,\;\beta(h_\alpha)-2m\]
+
+    From this structure one proves that if $\beta$ is a root, then so is $\beta - \langle \beta,\alpha^\vee \rangle \alpha$, which is exactly the reflection of $\beta$ across the hyperplane orthogonal to $\alpha$. The map
+    \[
+        r_\alpha(x) = x - (x|\alpha^\vee)\alpha
+    \]
+    is literally a reflection in the Euclidean space $V = \mathbb{R}\Phi \subset \mathfrak{h}^*$.
+    One checks that $r_\alpha(\Phi) = \Phi$, i.e. it permutes the set of roots.
+
+    Beware that this argument does not work if $\mathfrak{g}$ is infinite-dimensional. In particular, Kac-Moody algebras have imaginary roots which do not behave like real roots. The reflections $r_\alpha$ for real roots $\alpha$ still exist, but they do not generate a group which permutes all the roots.
+\end{remark}
+
+If $\alpha$ is a simple root, we will also use the notation $s_\alpha$ for $r_\alpha$. We have proved that $s_\alpha$ maps $\alpha$ to its negative and permutes the remaining positive roots. Therefore $s_\alpha(\rho) = \rho - \alpha$ and so
+\begin{align*}
+    (\rho|\alpha^\vee) = 1
+\end{align*}
+for all simple roots $\alpha$.
+
+An element $\lambda$ of $\mathfrak{h}^*$ is called an \textbf{integral weight} if $(\lambda|\alpha^\vee) \in \mathbb{Z}$ for all $\alpha \in \Phi^+$, or equivalently, for all simple roots $\alpha$. The integral weights form a lattice
+\[
+    \Lambda = \{x \in V | (\alpha^\vee|x) \in \mathbb{Z} \text{ for } \alpha \in \Phi^+ \},
+\]
+called the \textbf{weight lattice}. We call $\lambda \in \mathfrak{h}^*$ \textbf{dominant} if $(\lambda|\alpha^\vee) \geq 0$ for all $\alpha \in \Phi^+$ (or equivalently for simple roots $\alpha$). We call $\lambda$ \textbf{strongly dominant} if $(\lambda|\alpha^\vee) > 0$. Thus the special vector $\rho$ is a strongly dominant integral weight.
+
+Here are a couple of important properties of the Weyl group action. Let $V$ be the $\mathbb{R}$-span of $\Phi$ in $\mathfrak{h}^*$. The inner product $(\,|\,)$ makes $V$ into a Euclidean space, and $\mathfrak{h}^* = V + iV$. The set
+\[
+    C^+ = \{ x \in V | (\alpha^\vee|x) > 0 \text{ for } \alpha \in \Phi^+ \}
+\]
+is called the \textbf{positive Weyl chamber}. The dominant weights are the ones in $C^+$.
+
+\begin{proposition}[Fundamental domain]\label{prop:fundamental_domain}
+    The positive Weyl chamber is a fundamental domain for the action of the Weyl group:
+    if $x \in V$ there is a unique element of $C^+$ in the $W$ orbit of $x$.
+\end{proposition}
+
+Recall that there is a partial order (known as dominance order) $\succeq$ on $\mathfrak{h}^*$ defined by
+\[
+    \lambda \succeq \mu \iff \lambda - \mu = \sum_{\alpha \in \Phi^+} n_\alpha \alpha \text{ with } n_\alpha \in \mathbb{Z}_{\geq 0}.
+\]
+\begin{proposition}
+    Let $\lambda$ be a dominant, integral weight and let $w \in W$. Then $\lambda \succeq w\lambda$.
+\end{proposition}
+
+\subsection{Highest weight modules}
+Let $V$ be a $\mathfrak{g}$-module. For $\lambda \in \mathfrak{h}^*$ we denote the \textbf{weight space}
+\[
+    V_\lambda = \{ v \in V \mid h \cdot v = \lambda(h)v \ \text{for } h \in \mathfrak{h} \}.
+\]
+We will say that $V$ is $\mathfrak{h}$-\textbf{diagonalizable} if $V$ is the algebraic direct sum of the $V_\lambda$.
+
+\begin{proposition}
+    If $V$ is $\mathfrak{h}$-diagonalizable, then so is any submodule or quotient module.
+\end{proposition}
+
+\begin{proof}
+    Let $U \subset V$ be a submodule. We must show that an element of $U$ may be expressed as a finite linear sum of $u_\lambda \in U_\lambda$. Since $V$ has a weight space decomposition, we may write $u$ as a sum of $u_\lambda \in V_\lambda$, and the problem is then to show that $u_\lambda \in U$. There exist a finite number of $\lambda_i$ such that
+    \[
+        u = \sum_{i=1}^m u_{\lambda_i},
+    \]
+    and we choose $h \in \mathfrak{h}$ such that the values $\lambda_i(h)$ are all distinct. Then for $j=0,\dots,m-1$
+    \[
+        h^j \cdot u = \sum \lambda_i(h)^j \, u_{\lambda_i} \in \mathfrak{h}.
+    \]
+    The $m \times m$ matrix $\{ \lambda_i(h)^j \}$ is invertible since its determinant is a Vandermonde determinant. Consider the vectors
+    $u, \quad h \cdot u, \quad h^2 \cdot u, \quad \dots, \quad h^{m-1}\cdot u.$ Each is in $U$, and together they form a linear system:
+    \begin{align*}
+        \begin{bmatrix}
+            1                  & 1                  & \cdots & 1                  \\
+            \lambda_1(h)       & \lambda_2(h)       & \cdots & \lambda_m(h)       \\
+            \lambda_1(h)^2     & \lambda_2(h)^2     & \cdots & \lambda_m(h)^2     \\
+            \vdots             & \vdots             &        & \vdots             \\
+            \lambda_1(h)^{m-1} & \lambda_2(h)^{m-1} & \cdots & \lambda_m(h)^{m-1}
+        \end{bmatrix}
+        \begin{bmatrix}
+            u_{\lambda_1} \\ u_{\lambda_2} \\ \vdots \\ u_{\lambda_m}
+        \end{bmatrix} = \begin{bmatrix}
+                            u \\ h\cdot u \\ \vdots \\ h^{m-1}\cdot u
+                        \end{bmatrix}.
+    \end{align*}
+
+    This is a Vandermonde system. The matrix is invertible because the $\lambda_i(h)$ are distinct. Applying the inverse to this shows that each $u_{\lambda_i} \in U$, as required.
+
+    This proves that a submodule of a $\mathfrak{h}$-diagonalizable module is diagonalizable. It follows that the same is true for quotient modules, with $(V/U)_\lambda = V_\lambda / U_\lambda$.
+\end{proof}
+
+We will work exclusively with diagonalizable modules with $\dim(V_\lambda) < \infty$ for all $\lambda \in \mathfrak{h}^*$. We will define the \textbf{support} $\mathrm{supp}(V) = \{ \lambda \in \mathfrak{h}^* \mid V_\lambda \neq 0 \}$.
+
+Let $U(\mathfrak{g})$ be the universal enveloping algebra. Let $\mathfrak{n}^+$ be the nilpotent subalgebra of $\mathfrak{g}$ generated by the $\mathfrak{g}_\alpha$ ($\alpha \in \Phi^+$), and let $\mathfrak{n}^-$ be the subalgebra generated by the $\mathfrak{g}_\alpha$ with $\alpha \in \Phi^-$. Then clearly we have the \textbf{triangular decomposition}
+\[
+    \mathfrak{g} = \mathfrak{n}^- \oplus \mathfrak{h} \oplus \mathfrak{n}^+.
+\]
+
+\begin{lemma}
+    We have $U(\mathfrak{g}) \cong U(\mathfrak{n}^-) \otimes U(\mathfrak{h}) \otimes U(\mathfrak{n}^+)$ in the sense that the multiplication map
+    \[
+        U(\mathfrak{n}^-) \times U(\mathfrak{h}) \times U(\mathfrak{n}^+) \longrightarrow U(\mathfrak{g})
+    \]
+    induces a vector space isomorphism $U(\mathfrak{n}^-) \otimes U(\mathfrak{h}) \otimes U(\mathfrak{n}^+) \longrightarrow U(\mathfrak{g})$.
+\end{lemma}
+
+\begin{proof}
+    This follows from the Poincaré-Birkhoff-Witt theorem (PBW) together with the triangular decomposition. Namely, if $\{x_i\}$ is a basis for $\mathfrak{g}$, then PBW asserts that a basis for $U(\mathfrak{g})$ consists of all elements of the form
+    \[
+        x_1^{k_1} \cdots x_d^{k_d}, \qquad 0 \leq k_i \in \mathbb{Z}.
+    \]
+    Now we take the basis in a particular way, where its first $\tfrac{1}{2}|\Phi|$ elements are a basis for $\mathfrak{n}^-$, the next $\ell$ elements are a basis for $\mathfrak{h}$, and the last $\tfrac{1}{2}|\Phi|$ elements are a basis for $\mathfrak{n}^+$. Then the element $x_1^{k_1}\cdots x_d^{k_d}$ factors uniquely as a product $abc$ where $a$ runs through a basis of $U(\mathfrak{n}^-)$, $b$ runs through a basis of $U(\mathfrak{h})$ and $c$ runs through a basis of $U(\mathfrak{n}^+)$.
+\end{proof}
+
+We will call a vector $v \in V$ a \textbf{highest weight vector} of weight $\lambda$ if $v \in V_\lambda$ and if $x_\alpha v = 0$ for $\alpha \in \Phi^+$. (Humphreys calls such $v$ a \textbf{maximal vector}.) We will call $V$ a \textbf{highest weight module} of weight $\lambda$ if it is generated by a highest weight vector $v \in V_\lambda$. (Humphreys calls a highest weight module a \textbf{standard cyclic module}.)
+
+\begin{proposition}
+    Suppose that $v \in V$ is a highest weight vector. Then the $\mathfrak{g}$-submodule $U(\mathfrak{g})v$ generated by $v$ equals $U(\mathfrak{n}^-)v$. The weight space $V_\mu = 0$ unless $\mu \preceq \lambda$. We have $\dim(V_\lambda) = 1$.
+\end{proposition}
+
+\begin{proof}
+    We note that any element of $U(\mathfrak{n}^+)$ may be written as a constant times an element of the left ideal $U(\mathfrak{n}^+)\mathfrak{n}^+$, but this ideal annihilates $v$, so $U(\mathfrak{n}^+)v = \mathbb{C}v$. Similarly $U(\mathfrak{h})v = \mathbb{C}v$ since $v \in V_\lambda$. By Lemma 4,
+    \[
+        U(\mathfrak{g}) = U(\mathfrak{n}^-)U(\mathfrak{h})U(\mathfrak{n}^+)v = U(\mathfrak{n}^-)v.
+    \]
+
+    Consider the basis $\{x_{-\alpha}\}$ ($\alpha \in \Phi^+$) of $\mathfrak{n}^-$ with $x_{-\alpha} \in \mathfrak{g}_{-\alpha}$. Using a fixed order on $\Phi^+$, the elements $\prod_{\alpha \in \Phi^+} x_{-\alpha}^{k_\alpha}$ are a PBW basis of $U(\mathfrak{n}^-)$. Since $x_{-\alpha}$ maps $V_\mu$ to $V_{\mu-\alpha}$,
+    \[
+        \prod_{\alpha \in \Phi^+} x_{-\alpha}^{k_\alpha} v \in V_\mu,
+        \qquad \mu = \lambda - \sum_{\alpha \in \Phi^+} k_\alpha \alpha,
+    \]
+    so $\mu \preceq \lambda$. Unless all $k_\alpha = 0$, $\mu$ is strictly $\prec \lambda$, so $V_\lambda$ is one-dimensional.
+\end{proof}
+
+\begin{remark}
+    Beware that highest weight modules need not be irreducible. It is true that if a highest weight module is finite dimensional, then it is irreducible and uniquely determined by its highest weight, which must be a dominant integral weight. But infinite-dimensional highest weight modules need not be irreducible, and even if they are irreducible, they need not be uniquely determined by their highest weight.
+\end{remark}
+
+\begin{proposition}
+    Let $V$ be a highest weight module with highest weight $\lambda$. A submodule $U$ of $V$ is proper if and only if $U \cap V_\lambda = 0$.
+\end{proposition}
+
+\begin{proof}
+    Since $\dim(V_\lambda) = 1$, if $U \cap V_\lambda \neq 0$ then $V_\lambda \subseteq U$ and then since $V_\lambda$ generates $V$, it is clear that $U = V$. On the other hand if $U \cap V_\lambda = 0$ then clearly $U$ is proper.
+\end{proof}
+
+\begin{proposition}
+    Let $V$ be a highest weight module with highest weight $\lambda$. Then $V$ has a unique maximal proper submodule. Moreover $V$ has a unique irreducible quotient.
+\end{proposition}
+
+\begin{proof}
+    Let $\Sigma$ be the set of proper submodules of $V$, and let
+    \[
+        W = \sum_{U \in \Sigma} U.
+    \]
+    By Proposition 3 each $U \in \Sigma$ is diagonalizable, so evidently for $\mu \in \mathfrak{h}^*$
+    \[
+        W_\mu = \sum_{U \in \Sigma} U_\mu.
+    \]
+
+    We apply this with $\mu = \lambda$. Since $U \in \Sigma$ is proper, $U_\lambda = 0$ by the previous proposition, and so $W_\lambda = 0$. This shows that $W$ is proper. We have proved that $W$ is the unique maximal proper submodule of $V$, and consequently $V/W$ is the unique irreducible quotient.
+\end{proof}
+
+\begin{theorem}
+    Let $\lambda \in V^*$. There is a highest weight module $M = M(\lambda)$ with highest weight vector $m \in M_\lambda$ with the following universal property. If $V$ is another highest weight module with highest weight $\lambda$ and if $v \in V_\lambda$, then there is a unique $\mathfrak{g}$-module homomorphism $M \to V$ mapping $m \mapsto v$. The map $\xi \mapsto \xi \cdot v$ is vector space isomorphism $U(\mathfrak{n}^-) \to M$.
+\end{theorem}
+
+\begin{proof}
+    Note that since $\mathfrak{h}$ normalizes $\mathfrak{n}^+$, $\mathfrak{b} = \mathfrak{h} \oplus \mathfrak{n}^+$ is a subalgebra of $\mathfrak{g}$, the ``Borel subalgebra.'' As in Lemma 4, $U(\mathfrak{g}) \cong U(\mathfrak{n}^-) \otimes U(\mathfrak{b})$, that is, the multiplication map $U(\mathfrak{n}^-) \times U(\mathfrak{b}) \to U(\mathfrak{g})$ induces a vector space isomorphism $U(\mathfrak{n}^-) \otimes U(\mathfrak{b}) \to U(\mathfrak{g})$. This result is a simple consequence of this fact.
+
+    To elaborate, regarding $\mathbb{C}$ as a one-dimensional abelian Lie algebra, we have a Lie algebra homomorphism $\theta_\lambda : \mathfrak{b} \to \mathbb{C}$ that maps $H \in \mathfrak{h}$ to $\lambda(H)$, and $\mathfrak{n}^+$ to zero. Thus let $H_1, \dots, H_\ell$ be a basis of $\mathfrak{h}$ and $x_\alpha$ ($\alpha \in \Phi^+$) be a basis of $\mathfrak{n}^+$. By the PBW theorem, the elements
+    \[
+        H_1^{k_1} \cdots H_\ell^{k_\ell} \prod_{\alpha \in \Phi^+} x_\alpha^{k_\alpha}
+    \]
+    with $k_i$ and $k_\alpha$ nonnegative integers are a basis for $U(\mathfrak{b})$. It is understood that in the product $\prod x_\alpha^{k_\alpha}$ the roots $\alpha \in \Phi^+$ are taken in a fixed definite order. We then have
+    \[
+        \theta_\lambda \big( H_1^{k_1} \cdots H_\ell^{k_\ell} \prod_{\alpha} x_\alpha^{k_\alpha} \big)
+        = \begin{cases}
+            \prod \lambda(H_i)^{k_i} & \text{if all } k_\alpha = 0, \\
+            0                        & \text{if any } k_\alpha > 0.
+        \end{cases}
+    \]
+
+    Now let $J_\psi$ be the left ideal generated by $\xi - \theta_\lambda(\xi)$ for $\xi \in \mathfrak{b}$. Let
+    \[
+        M = M(\lambda) = U(\mathfrak{g})/J_\psi,
+    \]
+    and let $m$ be the image of $1 \in U(\mathfrak{g})$ in $M(\lambda)$.
+
+    It is clear from the PBW theorem that $H v = \lambda(H)m$ for $H \in \mathfrak{h}$, while $\mathfrak{n}^+ v = 0$, and moreover from $U(\mathfrak{g}) \cong U(\mathfrak{n}^-) \otimes U(\mathfrak{b})$, it is clear that every element of $M(\lambda)$ may be written uniquely as $\eta \cdot v$ for $\eta \in U(\mathfrak{n}^-)$.
+
+    Now let us verify the universal property. Let $V$ be a highest weight module with weight $\lambda$, and let $v_\lambda \in V_\lambda$ be a generator. Then we have a surjective $U(\mathfrak{g})$-module homomorphism
+    \[
+        U(\mathfrak{g}) \to V, \quad \xi \mapsto \xi \cdot v_\lambda,
+    \]
+    and since $\beta \cdot v = \theta_\lambda(\beta)v$ for $\beta \in \mathfrak{b}$, $J_\psi$ is in the kernel. Thus the map factors uniquely through $U(\mathfrak{g})/J_\psi = M(\lambda)$.
+\end{proof}
+
+\begin{corollary}
+    Let $\lambda \in \mathfrak{h}^*$. Up to isomorphism, $\mathfrak{g}$ has a unique irreducible highest weight module $L(\lambda)$ with highest weight $\lambda$.
+\end{corollary}
+
+\begin{proof}
+    Every highest weight module is a quotient of $M(\lambda)$. Since $M(\lambda)$ has a unique irreducible quotient, there is a unique irreducible highest weight module.
+\end{proof}
+
+\begin{remark}
+    The irreducible quotient $L(\lambda)$ might be finite or infinite dimensional. Recall that $\lambda$ is called \textbf{integral} if $\langle \alpha^\vee, \lambda \rangle \in \mathbb{Z}$ for all coroots $\alpha^\vee$, and \textbf{dominant} if $\langle \alpha^\vee, \lambda \rangle \geq 0$. If $\lambda$ is a dominant integral weight, then $L(\lambda)$ is finite-dimensional. On the other hand if $\lambda$ is not integral, $L(\lambda)$ will be infinite dimensional, and unless $\langle \alpha^\vee, \lambda \rangle \in \mathbb{Z}$ for some coroot $\alpha^\vee$, we will actually have $M(\lambda)$ irreducible, and $L(\lambda) = M(\lambda)$.
+\end{remark}
+
+\begin{remark}[Reducible highest weight modules are not unique] Let $\mathfrak{g}$ have two simple roots $\alpha_1, \alpha_2$ (e.g. $\mathfrak{sl}_3$). Fix a weight $\lambda$ such that both integers
+    $\langle \lambda+\rho, \alpha_1^\vee \rangle$, $\quad \langle \lambda+\rho, \alpha_2^\vee \rangle$
+    are positive. Then the Verma module $M(\lambda)$ contains two distinct singular vectors (i.e. highest weight vectors inside $M(\lambda)$ below the top) of weights $s_1\!\cdot\!\lambda$ and $s_2\!\cdot\!\lambda$ (dot action).
+    They generate two different submodules
+    $N_1 = U(\mathfrak{g})\,v_{s_1\cdot\lambda},\qquad
+        N_2 = U(\mathfrak{g})\,v_{s_2\cdot\lambda}$.
+    Now the quotients
+    $M(\lambda)/N_1\quad\text{and}\quad M(\lambda)/N_2$
+    are both highest weight modules of highest weight $\lambda$, both reducible, and not isomorphic (their composition series differ). Hence reducible highest weight modules with the same top weight are not unique.
+\end{remark}
+
+\begin{remark}
+    [Importance of the dot action] The BGG theorem tells us: if $\mu$ is a weight such that $\langle \lambda+\rho,\alpha^\vee\rangle \in \mathbb{Z}_{>0}$, then there exists a singular vector in $M(\lambda)$ of weight $s_\alpha\cdot\lambda := s_\alpha(\lambda+\rho)-\rho$.
+
+    Additionally, in category $\mathcal{O}$, irreducible highest weight modules $L(\lambda)$ can only appear as composition factors of Verma modules $M(\mu)$ if $\lambda$ and $\mu$ are in the same dot-orbit under the Weyl group. The dot action partitions the weight lattice into blocks inside which the category decomposes.
+
+    One can also give an interpretation via Harish-Chandra isomorphism. The center $Z(U(\mathfrak{g}))$ acts on a Verma module $M(\lambda)$ by a character. Harish-Chandra's isomorphism says these central characters are Weyl group invariant under the dot action. In other words, two highest weights $\lambda,\mu$ have the same central character iff they're in the same dot orbit.
+\end{remark}
+
+More precisely, the BGG theorem states:
+\begin{theorem}[BGG theorem]
+    If $\lambda \in \mathfrak{h}^*$, $\alpha$ a positive root, and
+    $m = \langle \lambda+\rho, \alpha^\vee\rangle \in \mathbb{Z}_{>0}$,
+    then there exists a nonzero homomorphism of Verma modules
+    $M(s_\alpha \cdot \lambda) \hookrightarrow M(\lambda)$,
+    where $s_\alpha$ is the reflection in the Weyl group, and the dot action is
+    $w \cdot \lambda = w(\lambda+\rho) - \rho$.
+
+
+    Concretely: inside $M(\lambda)$, there is a singular vector of weight $s_\alpha \cdot \lambda$, which generates a highest weight submodule isomorphic to $M(s_\alpha \cdot \lambda)$. If $w \leq w'$ in Bruhat order, then $M(w \cdot \lambda) \hookrightarrow M(w' \cdot \lambda)$.
+\end{theorem}
+
+\begin{theorem}[Classification of finite-dimensional irreducible modules]\label{thm:fd-classification}
+    Let $V$ be a finite dimensional irreducible module. Then
+    $V \cong L(\lambda)$ where $\lambda$ is a dominant integral weight.
+    Conversely, if $\lambda$ is a dominant integral weight, then $L(\lambda)$
+    is finite-dimensional.
+\end{theorem}
+
+\begin{proof}
+    Assume that $V$ is finite-dimensional. Choose a vector
+    $v \in V_\lambda$ where $\lambda$ is a weight of $V$ that is maximal with
+    respect to $\succ$. If $\alpha \in \Phi^+$ then
+    $x_\alpha v \in V_{\lambda + \alpha}$ so $x_\alpha v = 0$. Therefore $v$
+    is a highest weight vector. Then $V = U(\mathfrak{g})v$ since $V$ is
+    irreducible. We have proved that $V$ is a highest weight module; it is
+    irreducible so $V \cong L(\lambda)$.
+
+    To show that $\lambda$ is a dominant integral weight, let $\alpha$ be a
+    simple positive root. The restriction of $V$ to the $\mathfrak{sl}_2$
+    spanned by $x_\alpha, x_{-\alpha}$ and $h_\alpha$ is finite-dimensional,
+    and $x_\alpha v = 0$. From the classification of finite-dimensional
+    $\mathfrak{sl}_2$-modules, this means that
+    $(\alpha^\vee \mid \lambda) = \lambda(h_\alpha) \in \mathbb{Z}$ is a
+    nonnegative integer. Therefore $\lambda$ is dominant and integral.
+
+    We will omit the slightly tedious proof of the converse, that if $\lambda$ is a dominant integral weight then $L(\lambda)$ is finite-dimensional. For a proof of this see Kac, Lemma 10.1.
+\end{proof}
+
+\begin{corollary}[Weyl]
+    For $V$ an irreducible finite-dimensional $\mathfrak{g}$-module, the highest
+    weight $\lambda$ is a dominant integral weight, and
+    \[
+        V \longleftrightarrow \lambda
+    \]
+    is a bijection between the irreducible highest weight modules and the
+    dominant integral weights.
+\end{corollary}
+
+Now let $\mf g$ be finite dimensional. The Casimir element of the universal enveloping algebra $U(\mathfrak{g})$ may be defined as follows. Let $\{\gamma_i\}$ be a basis of $\mathfrak{g}$ and $\{\gamma^i\}$ the dual basis with respect
+to the Killing form, so $\kappa(\gamma_i, \gamma^j) = \delta_{ij}$. Then
+\[
+    c_{\mathfrak{g}} = \sum_{i=1}^{\dim(\mathfrak{g})} \gamma_i \gamma^i
+\]
+
+\begin{proposition}
+    $c_{\mathfrak{g}}$ is independent of the choice of basis $\{\gamma_i\}$.
+    It lies in the center of $U(\mathfrak{g})$.
+\end{proposition}
+
+\begin{proof}
+    For any finite-dimensional vector space $V$, there is a canonical iso
+    $V \otimes V^* \cong \operatorname{End}(V)$, $v\otimes \phi \mapsto (w \mapsto \phi(w)\,v)$. Under this isomorphism, the element $\sum_i v_i \otimes \phi_i$, where $\{v_i\}$ is a basis and $\{\phi_i\}$ the dual basis, corresponds to the identity map on $V$. This element is independent of the chosen basis (it's just the coordinate expression of the identity endomorphism). Now take $V = \mathfrak{g}$ with the Killing form $\kappa$. So the canonical element $\sum_i \gamma_i \otimes \gamma^i \in \mathfrak{g} \otimes \mathfrak{g}$ corresponds to the identity operator $\operatorname{id}_{\mathfrak{g}}$. Finally push $\Omega$ into $U(\mathfrak{g})$ using multiplication \[c_{\mathfrak{g}} = m(\Omega) = \sum_i \gamma_i \gamma^i\]
+
+    This shows that $c_{\mathfrak{g}}$ is independent of the choice of basis. To see that $c_{\mathfrak{g}}$ is central, let $x \in \mathfrak{g}$. Then
+
+    Write
+    \[
+        [x, \gamma_i] = \sum_j a_{ij} \gamma_j.
+    \]
+    Use $\operatorname{ad}$-invariance of $\kappa$:
+    \[
+        0 = \kappa([x, \gamma_i], \gamma^k) + \kappa(\gamma_i, [x, \gamma^k])
+        = a_{ik} + \kappa(\gamma_i, [x, \gamma^k]).
+    \]
+    If we expand $[x, \gamma^k] = \sum_j b_{kj} \gamma^j$, the relation above gives
+    \[
+        b_{ki} = -a_{ik},
+    \]
+    i.e.
+    \[
+        [x, \gamma^k] = -\sum_i a_{ik} \gamma^i.
+    \]
+    Now compute in $U(\mathfrak{g})$:
+    \begin{align*}
+        [x, c_{\mathfrak{g}}]
+         & = \sum_i [x, \gamma_i] \gamma^i + \sum_i \gamma_i [x, \gamma^i] \texty{by the Leibniz rule} \\
+         & = \sum_{i, j} a_{ij} \gamma_j \gamma^i - \sum_{i, k} a_{ki} \gamma_i \gamma^k.
+    \end{align*}
+    so $[x, c_{\mathfrak{g}}] = 0$.
+\end{proof}
+
+\begin{proposition}
+    Let $h_i$ be a basis of $\mathfrak{h}$ and let $h^i$ be the dual basis of $\mathfrak{h}$
+    with respect to the Killing form, so $\kappa(h_i, h^j) = \delta_{ij}$.
+    Then if $\lambda, \mu \in \mathfrak{h}^*$ we have
+    \[
+        (\lambda | \mu) = \sum_i \lambda(h^i)\mu(h_i).
+    \]
+\end{proposition}
+
+\begin{proof}
+    Recall that the defining property of $t_\mu$ is that
+    \[
+        \kappa(t_\mu, h) = \mu(h) \quad \text{for all } h \in \mathfrak{h}.
+    \]
+    First let us show that
+    \begin{equation}\label{eq:tmu}
+        t_\mu = \sum_i \mu(h_i) h^i.
+    \end{equation}
+    To check this, we pair both sides with $h_j$. We have
+    \[
+        \kappa(t_\mu, h_j) = \mu(h_j) =
+        \kappa\!\left( \sum_i \mu(h_i) h^i,\, h_j \right) = \mu(h_j)
+    \]
+    is exactly the defining property of $t_\mu$. Since the $h_j$ span $\mathfrak{h}$ and $\kappa$ restricted to $\mathfrak{h}$ is nondegenerate, this proves \eqref{eq:tmu}.
+
+    Now \eqref{eq:tmu} implies
+    \[
+        (\lambda|\mu) = \kappa(t_\lambda, t_\mu)
+        = \sum_i \mu(h_i)\kappa(t_\lambda, h^i)
+        = \sum_i \mu(h_i)\lambda(h^i).
+    \]
+    again using the defining property of $t_\mu$.
+\end{proof}
+
+\begin{proposition}
+    Let $V$ be a highest weight module with highest weight $\lambda$.
+    Then the Casimir element $c_{\mathfrak{g}}$ acts by the scalar
+    \[
+        |\lambda + \rho|^2 - |\rho|^2
+    \]
+    on $V$.
+\end{proposition}
+
+\begin{proof}
+    Since $c_{\mathfrak{g}}$ is central in $U(\mathfrak{g})$ it commutes with the action of
+    $\mathfrak{g}$ on any module $V$. Because $V$ is generated by a highest weight vector
+    $v_\lambda \in V_\lambda$, it is sufficient to show that
+    \[
+        c_{\mathfrak{g}} v = (|\lambda + \rho|^2 - |\rho|^2)v
+    \]
+
+    We need to choose dual bases of $\mathfrak{g}$ with respect to the Killing form.
+    For one basis, we choose a basis $h_i$ of $\mathfrak{h} = \mathfrak{g}_0$,
+    and vectors $x_\alpha \in \mathfrak{g}_\alpha$.
+
+    Now we describe the dual basis. We know that the Killing form is nondegenerate on $\mathfrak{h}$,
+    so we find $h^i$ such that $\kappa(h_i,h^j) = \delta_{ij}$.
+    Then we define another set of representatives $y_\alpha \in \mathfrak{g}_\alpha$ so that
+    \[
+        y_\alpha = \frac{x_\alpha}{\kappa(x_\alpha,x_{-\alpha})}
+    \]
+    so that
+    \[
+        \kappa(x_\alpha, y_{-\beta}) = \delta_{\alpha\beta}
+    \]
+
+    Thus we have dual bases $\{h_i, x_\alpha\}$ and $\{h^i, y_{-\alpha}\}$.
+    Then
+    \[
+        c_{\mathfrak{g}} = \sum_i h_i h^i + \sum_{\alpha \in \Phi} x_\alpha y_{-\alpha}.
+    \]
+
+    We want to rewrite this slightly. We write this as
+    \[
+        c_{\mathfrak{g}} = \sum_i h_i h^i + \sum_{\alpha \in \Phi^+} x_\alpha y_{-\alpha}
+        + \sum_{\alpha \in \Phi^+} x_{-\alpha} y_\alpha.
+    \]
+
+
+
+    Now observe that $[x_\alpha,y_{-\alpha}] = t_\alpha$. Certainly $[x_\alpha,y_{-\alpha}] \in \mathfrak{h}$ so write it as $t_\alpha$. Then for $h \in \mathfrak{h}$, we check that $\kappa([x_\alpha,y_{-\alpha}],h) = \alpha(h)$.
+    \begin{align*}
+        \kappa([x_\alpha, y_{-\alpha}], h) = \kappa(x_\alpha, [y_{-\alpha}, h])
+    \end{align*}
+
+    But since $h$ acts on the root vector $y_{-\alpha}$ by $[h,y_{-\alpha}] = -\alpha(h)y_{-\alpha}$, we get $[y_{-\alpha},h] = \alpha(h) y_{-\alpha}$. So $\kappa([x_\alpha,y_{-\alpha}], h) = \kappa(x_\alpha, \alpha(h) y_{-\alpha}) = \alpha(h)\kappa(x_\alpha,y_{-\alpha})$.
+
+    And by construction of $y_{-\alpha}$, $\kappa(x_\alpha,y_{-\alpha})=1$.
+    Thus
+    $\kappa([x_\alpha,y_{-\alpha}],h) = \alpha(h)$.
+
+    That is exactly the defining property of $t_\alpha$. Hence
+    $[x_\alpha,y_{-\alpha}] = t_\alpha$.
+
+    So in the enveloping algebra
+    \[
+        x_\alpha y_{-\alpha} = t_\alpha + y_{-\alpha}x_\alpha.
+    \]
+
+    Thus
+    \[
+        c_{\mathfrak{g}} = \sum_i h_i h^i + \sum_{\alpha \in \Phi^+} t_\alpha
+        + \sum_{\alpha \in \Phi^+} (y_{-\alpha}x_\alpha + x_{-\alpha}y_\alpha).
+    \]
+
+    Since $v_\lambda$ is a highest weight vector it is annihilated by $x_\alpha$ and $y_\alpha$
+    when $\alpha \in \Phi^+$. On the other hand,
+    $Hv_\lambda = \lambda(H)v_\lambda$ for $H \in \mathfrak{h}$, and so
+    \[
+        c_{\mathfrak{g}} v_\lambda
+        = \sum_i \lambda(h_i)\lambda(h^i) + \sum_{\alpha \in \Phi^+} \lambda(t_\alpha).
+    \]
+    The first expression equals $(\lambda|\lambda)$ by the previous proposition, while
+    \[
+        \sum_{\alpha \in \Phi^+} \lambda(t_\alpha)
+        = \sum_{\alpha \in \Phi^+} \langle \lambda, \alpha \rangle
+        = 2(\lambda|\rho).
+    \]
+
+    Thus
+    \[
+        c_{\mathfrak{g}} v_\lambda
+        = \big( (\lambda|\lambda) + 2(\lambda|\rho)\big) v_\lambda
+        = \big( (\lambda+\rho|\lambda+\rho) - (\rho|\rho)\big)v_\lambda,
+    \]
+    as desired.
+\end{proof}
+
+\subsection{Category $\mathcal{O}$ and the Weyl character formula}
+We will now prove the Weyl character formula following Kac. It will be useful to work in the following category of representations, Category $\mathcal{O}$, introduced by Bernstein, Gelfand and Gelfand.
+
+\begin{definition}
+    A module is in Category $\mathcal{O}$ if it is $\mathfrak{h}$-diagonalizable with finite dimensional weight spaces $V_\lambda$, such that there exists a finite set of weights $\{\lambda_1,\dots,\lambda_N\}$ such that $V_\mu = 0$ unless $\mu \preceq \lambda_i$ for some $i$.
+\end{definition}
+
+This category contains all highest weight modules, is closed under finite direct sums, and it contains all submodules and quotient modules of a Category $\mathcal{O}$ module. In particular it is an abelian category with enough projectives and injectives and has a good homological theory. The Verma modules $M(\lambda)$ may or may not be irreducible. We will say a module $V$ is a \textbf{subquotient} of a module $W$ if there are submodules $U \supset Q$ of $W$ such that $U/Q \cong V$. Thus either a submodule or a quotient module is a subquotient.
+
+\begin{proposition}
+    Suppose that $V$ is a highest weight module with weight $\mu$ and $V$ is a subquotient of $M(\lambda)$. Then
+    \[
+        |\lambda + \rho|^2 = |\mu + \rho|^2.
+    \]
+\end{proposition}
+
+\begin{proof}
+    Since $c$ commutes with the action of $\mathfrak{g}$ it must act as a scalar on $M(\lambda)$, and we computed that scalar to be $|\lambda + \rho|^2 - |\rho|^2$. So it acts by the same scalar on any submodule, quotient module or subquotient. Also $c$ acts by the scalar $|\mu + \rho|^2 - |\rho|^2$ on any highest weight module $V$ with highest weight $\lambda$, so
+    \[
+        |\lambda + \rho|^2 - |\rho|^2 = |\mu + \rho|^2 - |\rho|^2.
+    \] as desired.
+\end{proof}
+
+\begin{definition}
+    Let $V$ be a module in Category $\mathcal{O}$. We define the \textbf{character} of $V$ to be the formal expression
+    \[
+        \chi_V = \sum_{\lambda} \dim(V_\lambda) e^\lambda
+    \]
+    where $e^\lambda$ is a formal symbol for $\lambda \in \mathfrak{h}^*$.
+\end{definition}
+
+\begin{proposition}[Character of Verma modules]\label{prop:char-verma}
+    The character of $M(\lambda)$ is
+    \[
+        e^\lambda \prod_{\alpha \in \Phi^+} (1 - e^{-\alpha})^{-1}.
+    \]
+\end{proposition}
+
+\begin{proof}
+    Let $v$ be the highest weight vector. We recall from Theorem~8 that the map
+    \[
+        \xi \mapsto \xi \cdot v
+    \]
+    from $U(\mathfrak{n}^-)$ to $M(\lambda)$ is a vector space isomorphism. So by the PBW theorem a basis of $M(\lambda)$ consists of the vectors
+    \[
+        \left( \prod_{\alpha \in \Phi^+} x_{-\alpha}^{k_\alpha} \right) v, \qquad k_\alpha \geq 0,
+    \]
+    where the positive roots $\Phi^+$ are taken in some fixed definite order. The weight of this vector is
+    \[
+        \lambda - \sum_{\alpha \in \Phi^+} k_\alpha \alpha,
+    \]
+    so
+    \[
+        \chi_V = e^\lambda \prod_{\alpha \in \Phi^+} e^{-k_\alpha \alpha}
+        = e^\lambda \prod_{\alpha \in \Phi^+} (1 - e^{-\alpha})^{-1}.
+    \] as desired.
+\end{proof}
+
+\begin{remark}
+    Note that we get a geometric series at the end because $M(\lambda)$ is a Verma module: it has no relations among the negative root vectors beyond the Lie algebra relations themselves. This is what makes Verma modules universal highest weight modules: you can push down indefinitely.
+\end{remark}
+
+\begin{definition}
+    Let $V$ be a module in Category $\mathcal{O}$. A nonzero vector $v \in V$ is called \textbf{primitive} if there exists a proper submodule $U \subset V$ such that $v \notin U$ but $x_\alpha v \in U$ for all $\alpha \in \Phi^+$ (or equivalently, for all simple roots). We can take $U=0$, so if $x_\alpha v=0$ then $v$ is primitive. In other words, a highest weight vector is a primitive vector. More generally, $v$ being primitive means that the image of $v$ in $V/U$ is a highest weight vector for some proper submodule $U$ of $V$. We will call $\mu$ a \textbf{primitive weight} if $V_\mu$ contains a primitive vector.
+\end{definition}
+
+A primitive vector is like a “hidden” highest weight vector, but visible only in a quotient.
+
+\begin{proposition}
+    Let $V$ be a module in Category $\mathcal{O}$. Then $V$ is generated by its primitive vectors.
+\end{proposition}
+
+\begin{proof}
+    If not, consider the submodule $U$ generated by the primitive vectors. Then $Q = V/U$ would be a nonzero submodule. If we choose a nonzero vector in $Q$ whose weight is maximal with respect to $\preceq$, then its preimage in $V$ would be a primitive vector, which is a contradiction.
+\end{proof}
+
+\begin{proposition}
+    Let $V$ be a module in Category $\mathcal{O}$. Assume that $V$ has only a finite number of weights. Then $V$ has finite length. That is, it has a composition series
+    \[
+        V = V_m \supset V_{m-1} \supset \cdots \supset V_0 = 0
+    \]
+    such that each quotient $V_i/V_{i-1}$ is irreducible, isomorphic to $L(\mu)$, where $\mu$ is a primitive weight of $V$. \textbf{(The quotients $V_i/V_{i-1}$ are called composition factors, and they are independent of the composition series, by the Jordan–Hölder theorem.)}
+\end{proposition}
+
+\begin{proof}
+    We argue by induction on the number of linearly independent primitive vectors.
+
+    Choose a primitive weight $\mu$ that is maximal with respect to $\preceq$. Then clearly a primitive vector $v$ of weight $\mu$ must be a highest weight vector, so $W = U(\mathfrak{g}) \cdot v = U(\mathfrak{n}^-)v$ is a highest weight module. It has a maximal submodule $W'$ and the quotient $Q = W/W'$ is irreducible. Both $V/W$ and $W'$ have fewer independent primitive vectors than $V$ (note that there are finitely many weights and each weight space is finite dimensional since we are in Category $\mathcal{O}$), so by induction they have finite length. Since $V/W$, $W'$ and the irreducible quotient $W/W'$ all have finite length, it follows that $V$ has finite length.
+\end{proof}
+
+\begin{proposition}[Character of irreducible highest weight modules]\label{prop:char-irr}
+    Let $\lambda \in \mathfrak{h}^*$. Then the character $\chi_{L(\lambda)}$ is of the form
+    \begin{align}
+        \chi_{L(\lambda)} = \sum_{\substack{\mu \preceq \lambda \\ |\mu+\rho|^2 = |\lambda+\rho|^2}} c_\mu \chi_{M(\mu)}
+    \end{align}
+    where $c_\lambda = 1$.
+\end{proposition}
+
+\begin{proof}
+    The weight $\mu$ of a primitive vector must satisfy $\mu \preceq \lambda$ and
+    $|\mu+\rho|^2 = |\lambda+\rho|^2$.
+
+    Since the inner product is positive definite, this implies that there are only a finite number of possible weights for primitive vectors (because $|\mu+\rho|^2 = |\lambda+\rho|^2 $ cuts out a sphere, and the lattice of weights intersected with that sphere is finite). $M(\mu)$ has finite length because only finitely many irreducibles can appear as factors, and modules in Category $\mathcal{O}$ have finite dimensional weight spaces. Also the composition factors of $M(\mu)$ must be $L(\nu)$ where $|\nu+\rho|^2 = |\mu+\rho|^2 = |\lambda+\rho|^2$. This is because every composition factor is a highest weight module and every irreducible highest weight module is of the form $L(\nu)$.
+
+    Let $d(\mu,\nu)$ be the multiplicity of such $L(\nu)$. Then
+    \[
+        \chi_{M(\mu)} = \sum_{\substack{\nu \preceq \mu \\ |\nu+\rho|^2 = |\lambda+\rho|^2}}
+        d(\mu,\nu)\chi_{L(\nu)}.
+    \]
+
+    Now the matrix $d(\mu,\nu)$ indexed by pairs $\mu,\nu$ is triangular since
+    $d(\mu,\mu) = 1$ and $d(\mu,\nu) = 0$ unless $\nu \preceq \mu$. So it is invertible and we may write
+    \[
+        \chi_{L(\mu)} = \sum_{\substack{\nu \preceq \mu \\ |\nu+\rho|^2 = |\lambda+\rho|^2}}
+        d'(\mu,\nu)\chi_{M(\nu)}.
+    \]
+
+    Applying this to $\mu = \lambda$ gives (2).
+\end{proof}
+
+We will define the \textbf{Weyl denominator}
+\[
+    \Delta = e^\rho \prod_{\alpha \in \Phi^+} (1 - e^{-\alpha}).
+\]
+
+\begin{lemma}
+    Let $w \in W$ (the Weyl group). Then
+    \[
+        w(\Delta) = \operatorname{sgn}(w)\Delta.
+    \]
+\end{lemma}
+
+\begin{proof}
+    It is sufficient to check this if $w = s_{\alpha_i}$ is a simple reflection. We recall that
+    $s_{\alpha_i}$ maps the simple root $\alpha_i$ to $-\alpha_i$ and it permutes the remaining
+    positive roots. Moreover $s_{\alpha_i}(\rho) = \rho - \alpha_i$. So if we write
+    \[
+        \Delta = e^\rho (1 - e^{-\alpha_i}) \prod_{\substack{\alpha \in \Phi^+ \\ \alpha \neq \alpha_i}}
+        (1 - e^{-\alpha}),
+    \]
+    then $s_i$ maps $e^\rho (1 - e^{-\alpha_i})$ to
+    \[
+        e^{\rho-\alpha_i}(1 - e^{\alpha_i}) = - e^\rho (1 - e^{-\alpha_i}),
+    \]
+    and it fixes the product. Hence $s_i(\Delta) = -\Delta$.
+\end{proof}
+
+\begin{theorem}[Weyl Character Formula]
+    Let $V$ be a finite-dimensional irreducible representation of $\mathfrak{g}$. Thus by Theorem \ref{thm:fd-classification} there is a dominant integral weight $\lambda$ such that $V = L(\lambda)$. We have
+    \[
+        \chi_V = \Delta^{-1} \sum_{w \in W} \operatorname{sgn}(w) e^{w(\lambda + \rho)}
+    \]
+    where $W$ is the Weyl group and
+    \[
+        \Delta = e^{\rho} \prod_{\alpha \in \Phi^+} (1 - e^{-\alpha}).
+    \]
+\end{theorem}
+
+The following argument is due to Kac, improving the proof of BGG.  As an application, Kac extended the applicability of the Weyl character formula for characters of integrable representations of infinite-dimensional Kac-Moody Lie algebras. We will discuss this in more detail in the section, following Chapter 10 of Kac \cite{kac}.
+
+\begin{proof}
+    Using Proposition \ref{prop:char-verma} we may rewrite (2) in the form (note that the $\rho$ in the exponent comes from dividing by $\Delta$)
+    \[
+        \chi_{L(\lambda)} = \sum_{\substack{\mu \preceq \lambda \\ |\mu+\rho|^2 = |\lambda+\rho|^2}} c_{\mu} e^{\mu+\rho} \Delta^{-1}
+    \]
+    It may be simpler to write this as
+    \[
+        \chi_{L(\lambda)} = \sum_{\mu \in P^+} c_{\mu} e^{\mu+\rho} \Delta^{-1}
+    \]
+    and remember that $c_{\mu} = 0$ unless $\mu \preceq \lambda$ and $|\mu + \rho|^2 = |\lambda + \rho|^2$. We claim that if $w \in W$, then
+    \begin{align}
+        c_{\mu} = \operatorname{sgn}(w) c_{w \circ \mu}.
+    \end{align}
+    Indeed, since $\chi_{L(\lambda)}$ is invariant under the action of $W$, and since $w(\Delta) = \operatorname{sgn}(w)\Delta$, we have an identity
+    \[
+        \sum_{\mu \in P^+} c_{\mu} e^{\mu+\rho} \Delta^{-1} = \sum_{\mu \in P^+} \operatorname{sgn}(w)c_{\mu} e^{w(\mu+\rho)} \Delta^{-1}
+    \]
+    and comparing the coefficients of $e^{w \circ \mu} = e^{w(\mu+\rho)-\rho}$ on both sides of this equation gives (2).
+
+    We know that $c_{\lambda} = 1$, since this is part of Proposition \ref{prop:char-irr}. So by (2), we will have terms corresponding to $\mu$ of the form $w \circ \lambda$ and the sum of these terms is
+    \[
+        \Delta^{-1} \sum_{w \in W} c_{w \circ \lambda} e^{w(\lambda+\rho)-\rho} e^{\rho} = \Delta^{-1} \sum_{w \in W} \operatorname{sgn}(w) e^{w(\lambda+\rho)}.
+    \]
+
+    This is the right hand side of the Weyl character formula, so our task is to show that these are the \textbf{only terms}. That is, we must show that $c_\mu = 0$ unless $\mu$ is of the form $w \circ \lambda$ for some $w \in W$.
+
+    Therefore we start with $\mu$ such that $c_\mu \neq 0$. By Proposition \ref{prop:fundamental_domain}, there exists $w \in W$ such that $w(\mu + \rho)$ is dominant. Let $\nu = w \circ \mu = w(\mu + \rho) - \rho$. We will show that $\nu = \lambda$. In any case by (2), $c_\nu \neq 0$ and so $\nu \preccurlyeq \lambda$ and $|\lambda + \rho|^2 = |\nu + \rho|^2$. We write
+    \[
+        \lambda - \nu = \sum_{\alpha \in \Phi^+} k_\alpha \alpha,
+    \]
+    where since $\nu \preccurlyeq \lambda$ we have $k_\alpha \geq 0$. We note the identity, for $a, b \in \mathfrak{h}^*$:
+    \[
+        |a|^2 - |b|^2 = (a+b|a-b).
+    \]
+
+    We apply this and learn that
+    \[
+        |\lambda + \rho|^2 - |\nu + \rho|^2 \;=\;
+        \Bigl( \lambda + \nu + 2\rho \,\Big|\, \sum_{\alpha \in \Phi^+} k_\alpha \alpha \Bigr).
+    \] Now $\lambda$ and $\nu + \rho = w(\mu + \rho)$ are both dominant, so $\lambda + \nu + 2\rho$ is \textbf{strongly dominant} meaning
+    \[
+        (\alpha^\vee \,|\, \lambda + \nu + 2\rho) > 0
+    \]
+    for all positive roots $\alpha$. So $|\lambda + \rho|^2 = |\nu + \rho|^2$ implies that $k_\alpha = 0$ for all $\alpha$ and so $\nu = \lambda$.
+\end{proof}
+
+\section{Infinite-dimensional Lie algebras}
+We begin with some definitions and constructions that will allow us to define Kac-Moody Lie algebras. Then we introduce key tools for studying their representations, such as an invariant bilinear form and the generalized Casimir operator. This will enable us to formulate and prove a version of the Weyl character formula.
+ This section follows \cite{kac}.
+\subsection{Basic definitions}
+\begin{definition}
+    A \textbf{Cartan matrix} is a square integer matrix $A = (a_{ij})$ of rank $l$ such that
+    \begin{itemize}
+        \item $a_{ii} = 2$ for all $i$,
+        \item $a_{ij} \leq 0$ for $i \neq j$,
+        \item $a_{ij} = 0$ if and only if $a_{ji} = 0$.
+    \end{itemize}
+    A \textbf{realization} of a Cartan matrix $A$ is a triple $(\mathfrak{h}, \Pi, \Pi^\vee)$ where $\mathfrak{h}$ is a complex vector space, $\Pi = \{\alpha_1, \dots, \alpha_n\} \subset \mathfrak{h}^*$ and $\Pi^\vee = \{\alpha_1^\vee, \dots, \alpha_n^\vee\} \subset \mathfrak{h}$ are linearly independent sets such that $\alpha_j(\alpha_i^\vee) = a_{ij}$ for all $i,j$ and $\dim(\mathfrak{h}) = 2n - l$.
+\end{definition}
+
+\begin{remark}[Finite-dimensional Cartan matrices]
+    In the finite-dimensional case, the Cartan matrix is invertible and positive definite and $l = n$, so $\dim(\mathfrak{h}) = n$. The set of simple roots $\Pi = {\alpha_1, \dots, \alpha_n}$ is a basis of the real vector space spanned by the roots $E = \mathbb{R}\Phi \subseteq \mathfrak{h}^*$. Similarly, the set of simple coroots $\Pi^\vee = {\alpha_1^\vee, \dots, \alpha_n^\vee}$ is a basis of $E^\vee = \mathbb{R}\Phi^\vee \subseteq \mathfrak{h}$.
+\end{remark}
+
+Denote by $Q$ the root lattice, i.e. the integer span of the simple roots $\Pi$. Let $Q^+ = \sum_{i=1}^n \mathbb{Z}_{\geq 0} \alpha_i$ be the positive cone in $Q$. We write $\beta \geq 0$ if $\beta \in Q^+$ and $\beta > 0$ if $\beta \in Q^+ \setminus \{0\}$. We define a partial order on $\mathfrak{h}^*$ by $\lambda \preceq \mu$ if and only if $\mu - \lambda \geq 0$. The sum of the coefficients of $\beta = \sum_i k_i \alpha_i$ is called the \textbf{height} of $\beta$ and denoted $\operatorname{ht}(\beta) = \sum_i k_i$.
+
+\begin{definition}
+    [Universal Lie algebra associated to a Cartan matrix] Let $A = (a_{ij})$ be an $n \times n$-matrix over $\mathbb{C}$, and let
+    $(\mathfrak{h}, \Pi, \Pi^\vee)$ be a realization of $A$. We introduce
+    an auxiliary Lie algebra $\tilde{\mathfrak{g}}(A)$ with the generators
+    $e_i, f_i \ (i=1,\dots,n)$ and $\mathfrak{h}$, and the following defining relations:
+    \[
+        \begin{aligned}
+            [e_i, f_j] & = \delta_{ij}\alpha_i^\vee         &  & (i,j=1,\dots,n),                     \\
+            [h,h']     & = 0                                &  & (h,h' \in \mathfrak{h}),             \\
+            [h, e_i]   & = \langle \alpha_i, h \rangle e_i,                                           \\
+            [h, f_i]   & = -\langle \alpha_i, h \rangle f_i &  & (i=1,\dots,n;\, h \in \mathfrak{h}).
+        \end{aligned}
+    \]
+
+    By the uniqueness of the realization of $A$ it is clear that
+    $\tilde{\mathfrak{g}}(A)$ depends only on $A$.
+\end{definition}
+
+Denote by $\tilde{\mathfrak{n}}_+$ (resp.\ $\tilde{\mathfrak{n}}_-$) the subalgebra of $\tilde{\mathfrak{g}}(A)$ generated by $e_1,\dots,e_n$ (resp.\ $f_1,\dots,f_n$).
+
+\begin{theorem}[Properties of the universal Lie algebra associated to a Cartan matrix]\label{thm:universal-lie-alg}
+    Let $\tilde {\mathfrak{g}}(A)$ be the Lie algebra associated to a Cartan matrix $A$ with realization $(\mathfrak{h}, \Pi, \Pi^\vee)$.
+    \begin{enumerate}[label=\alph*)]
+        \item $\tilde{\mathfrak{g}}(A) = \tilde{\mathfrak{n}}_- \oplus \mathfrak{h} \oplus \tilde{\mathfrak{n}}_+$ \quad (direct sum of vector spaces).
+
+        \item $\tilde{\mathfrak{n}}_+$ (resp.\ $\tilde{\mathfrak{n}}_-$) is freely generated by $e_1,\dots,e_n$ (resp.\ $f_1,\dots,f_n$).
+
+        \item The map $e_i \mapsto -f_i$, $f_i \mapsto -e_i \ (i=1,\dots,n)$,
+              $h \mapsto -h \ (h\in\mathfrak{h})$, can be uniquely extended to an involution
+              $\tilde{\omega}$ of the Lie algebra $\tilde{\mathfrak{g}}(A)$.
+
+        \item With respect to $\mathfrak{h}$ one has the root space decomposition:
+              \[
+                  \tilde{\mathfrak{g}}(A)
+                  = \left( \bigoplus_{\substack{\alpha \in Q_+ \\ \alpha \neq 0}}
+                  \tilde{\mathfrak{g}}_{-\alpha} \right)
+                  \oplus \mathfrak{h}
+                  \oplus \left( \bigoplus_{\substack{\alpha \in Q_+ \\ \alpha \neq 0}}
+                  \tilde{\mathfrak{g}}_{\alpha} \right),
+              \]
+              where
+              \[
+                  \tilde{\mathfrak{g}}_{\alpha} = \{ x \in \tilde{\mathfrak{g}}(A) \mid [h,x] = \alpha(h)x
+                  \ \text{for all } h \in \mathfrak{h} \}.
+              \]
+              Furthermore, $\dim \tilde{\mathfrak{g}}_{\alpha} < \infty$, and
+              $\tilde{\mathfrak{g}}_{\alpha} \subset \tilde{\mathfrak{n}}_\pm$
+              for $\pm\alpha \in Q_+, \ \alpha \neq 0$.
+
+        \item Among the ideals of $\tilde{\mathfrak{g}}(A)$ intersecting $\mathfrak{h}$ trivially,
+              there exists a unique maximal ideal $\mathfrak{r}$. Furthermore,
+              \[
+                  \mathfrak{r}
+                  = (\mathfrak{r} \cap \tilde{\mathfrak{n}}_-) \oplus (\mathfrak{r} \cap \tilde{\mathfrak{n}}_+)
+                  \quad \text{(direct sum of ideals)}.
+              \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Let $V$ be the $n$-dimensional complex vector space with a basis
+    $v_1, \ldots, v_n$ and let $\lambda$ be a linear function on $\mathfrak{h}$.
+    We define an action of the generators of $\tilde{\mathfrak{g}}(A)$ on the
+    tensor algebra $T(V)$ over $V$ by
+    \begin{align*}
+        \alpha)\quad & f_i(a) = v_i \otimes a \quad \text{for } a \in T(V);                    \\
+        \beta)\quad  & h(1) = \langle \lambda, h \rangle 1, \quad
+        \text{and inductively on $s$,}                                                         \\
+                     & h(v_j \otimes a) = -\langle \alpha_j, h \rangle v_j \otimes a
+        + v_j \otimes h(a)
+        \quad \text{for } a \in T^{s-1}(V), \ j=1,\ldots,n;                                    \\
+        \gamma)\quad & e_i(1) = 0, \quad \text{and inductively on $s$,}                        \\
+                     & e_i(v_j \otimes a) = \delta_{ij}\,\alpha_i^\vee(a) + v_j \otimes e_i(a)
+        \quad \text{for } a \in T^{s-1}(V), \ j=1,\ldots,n.
+    \end{align*}
+
+    This defines a representation of the Lie algebra $\tilde{\mathfrak{g}}(A)$ on the space $T(V)$. To see that, we have to check all of the relations. Provided one does that, the statements of the theorem quickly follow.
+
+    Using the relations it is easy to show by induction on $s$ that a product of $s$
+    elements from the set $\{e_i, f_i (i = 1, \ldots, n); \ h\}$ lies in
+    $\tilde{\mathfrak{n}}_- + \mathfrak{h} + \tilde{\mathfrak{n}}_+$. Let now
+    $u = n_- + h + n_+ = 0$, where $n_\pm \in \tilde{\mathfrak{n}}_\pm$ and
+    $h \in \mathfrak{h}$. Then in the representation $T(V)$ we have
+    \[
+        u(1) = n_-(1) + \langle \lambda, h \rangle = 0.
+    \]
+    It follows that $\langle \lambda, h \rangle = 0$ for every
+    $\lambda \in \mathfrak{h}^*$ and hence $h = 0$.
+
+    Furthermore, using the map $f_i \mapsto v_i$, we see that the tensor algebra $T(V)$ is an associative enveloping algebra of the Lie algebra $\tilde{\mathfrak{n}}_-$. Since $T(V)$ is a free associative algebra, we conclude that $T(V)$ is automatically the universal enveloping algebra $U(\tilde{\mathfrak{n}}_-)$ of $\tilde{\mathfrak{n}}_-$, the map $n_- \mapsto n_-(1)$ being the canonical embedding $\tilde{\mathfrak{n}}_- \hookrightarrow U(\tilde{\mathfrak{n}}_-)$. Hence $n_- = 0$ and we obtain the triangular decomposition of $\tilde{\mathfrak{g}}(A)$, proving a). Moreover, by the Poincaré--Birkhoff--Witt theorem, $\tilde{\mathfrak{n}}_-$ is freely generated by $f_1, \ldots, f_n$. The statement c) is obvious. Now applying $\tilde{\omega}$ we deduce that $\tilde{\mathfrak{n}}_+$ is freely generated by $e_1, \ldots, e_n$, proving b).
+
+    The relations make $e_i, f_i$ weight vectors, $\operatorname{ad} h$ acts diagonally, eigenvectors with distinct eigenvalues are independent. Thus we get the decomposition d). The bound on the weight space dimension comes from the fact that each root space $\tilde{\mathfrak{g}}_\alpha$ is generated by commutators of $\operatorname{ht}(\alpha)$ simple generators. There are at most $n^{\operatorname{ht}(\alpha)}$ such brackets, so $\dim \tilde{\mathfrak{g}}_\alpha \leq n^{\operatorname{ht}(\alpha)}$.
+
+    To prove e), note that for any ideal $i$ of $\tilde{\mathfrak{g}}(A)$ one has (by the proposition to follow)
+    \[
+        i = \bigoplus_{\alpha} \bigl(\tilde{\mathfrak{g}}_{\alpha} \cap i \bigr).
+    \]
+    Hence the sum of ideals which intersect $\mathfrak{h}$ trivially, itself intersects $\mathfrak{h}$ trivially, and the sum of all ideals with this property is the unique maximal ideal $\mathfrak{r}$ which intersects $\mathfrak{h}$ trivially. In particular, we obtain that (e) is a direct sum of vector spaces. But, clearly,
+    \[
+        [f_i, \, \mathfrak{r} \cap \tilde{\mathfrak{n}}_+] \subset \tilde{\mathfrak{n}}_+.
+    \]
+    Hence
+    \[
+        [\tilde{\mathfrak{g}}(A), \, \mathfrak{r} \cap \tilde{\mathfrak{n}}_+]
+        \subset \mathfrak{r} \cap \tilde{\mathfrak{n}}_+;
+    \]
+    similarly,
+    \[
+        [\tilde{\mathfrak{g}}(A), \, \mathfrak{r} \cap \tilde{\mathfrak{n}}_-]
+        \subset \mathfrak{r} \cap \tilde{\mathfrak{n}}_-.
+    \]
+    This shows that (e) is a direct sum of ideals.
+\end{proof}
+
+\begin{proposition}
+    Let $\mathfrak{h}$ be a commutative Lie algebra, $V$ a diagonalizable
+    $\mathfrak{h}$-module, i.e.
+    \begin{equation}\label{1.5.1}
+        V = \bigoplus_{\lambda \in \mathfrak{h}^*} V_\lambda,
+        \qquad
+        V_\lambda = \{ v \in V \mid h(v) = \lambda(h)v \ \text{for all } h \in \mathfrak{h} \}.
+    \end{equation}
+    Then any submodule $U$ of $V$ is graded with respect to the gradation \eqref{1.5.1}.
+\end{proposition}
+
+\begin{proof}
+    Any $v \in V$ can be written in the form
+    \[
+        v = \sum_{j=1}^m v_j, \qquad v_j \in V_{\lambda_j},
+    \]
+    and there exists $h \in \mathfrak{h}$ such that $\lambda_j(h)$
+    ($j=1,\dots,m$) are distinct. We have for $v \in U$:
+    \[
+        h^k(v) = \sum_{j=1}^m \lambda_j(h)^k v_j \in U
+        \qquad (k=0,1,\dots,m-1).
+    \]
+    This is a system of linear equations with a nondegenerate matrix. Hence all $v_j$ lie in $U$. This also shows that the sum in \eqref{1.5.1} is direct because if $v=0$ then all $h^k(v) = 0$ and we can apply the invertible matrix to conclude that all $v_j = 0$.
+\end{proof}
+
+Given a complex $n \times n$-matrix $A$, we can now define the main object
+of our study: the Lie algebra $\mathfrak{g}(A)$.
+\begin{definition}
+    [Kac-Moody algebra]
+    Let $(\mathfrak{h}, \Pi, \Pi^\vee)$ be a realization of $A$ and let
+    $\tilde{\mathfrak{g}}(A)$ be the Lie algebra on generators
+    $e_i, f_i \ (i=1,\dots,n)$ and $\mathfrak{h}$, and the defining relations
+    (1.2.1). By Theorem \ref{thm:universal-lie-alg} the natural map
+    $\mathfrak{h} \to \tilde{\mathfrak{g}}(A)$ is an embedding. Let $\mathfrak{r}$
+    be the maximal ideal in $\tilde{\mathfrak{g}}(A)$ which intersects
+    $\mathfrak{h}$ trivially. We set:
+    \[
+        \mathfrak{g}(A) = \tilde{\mathfrak{g}}(A)/\mathfrak{r}.
+    \]
+    The matrix $A$ is called the \textbf{Cartan matrix} of the Lie algebra $\mathfrak{g}(A)$, and $n$ is called the \textbf{rank} of $\mathfrak{g}(A)$. The Lie algebra $\mathfrak{g}(A)$ whose Cartan matrix is a generalized Cartan matrix is called a \textbf{Kac-Moody algebra}.
+\end{definition}
+
+\begin{remark}[Interpreting the maximal ideal which meets the Cartan subalgebra trivially]
+    It is true but not obvious that the maximal ideal $\mathfrak{r}$ which meets the Cartan subalgebra $\mathfrak{h}$ trivially is generated by the so-called \textbf{Serre relations}:
+
+
+    For $i \neq j$,
+    \[
+        (\mathrm{ad}\, e_i)^{\,1-a_{ij}}(e_j) = 0, \qquad
+        (\mathrm{ad}\, f_i)^{\,1-a_{ij}}(f_j) = 0,
+    \]
+    where $a_{ij}$ are entries of the Cartan matrix.
+    These relations are what turn the free Lie algebras $\tilde{\mathfrak{n}}_\pm$ into the correct nilpotent subalgebras.
+
+    The Serre relations can be understood from the representation theory of $\mathfrak{sl}_2$. Inside $\mathfrak{g}(A)$, consider the subalgebra
+    \[
+        \mathfrak{sl}_2(i) = \langle e_i, f_i, h_i \rangle \cong \mathfrak{sl}_2.
+    \]
+    For fixed $i$, every other generator $e_j$ or $f_j$ is a weight vector for this copy of $\mathfrak{sl}_2$. The Cartan matrix entry $a_{ij} = \langle \alpha_j, \alpha_i^\vee \rangle$ tells you the weight of $e_j$ relative to $\mathfrak{sl}_2(i)$. Thus, $e_j$ generates an $\mathfrak{sl}_2(i)$-submodule.
+
+    But in an $\mathfrak{sl}_2$-representation, if a vector has weight $m$, then applying $e_i$ more than $m$ times kills it. This is exactly what the Serre relation enforces:
+    \[
+        (\mathrm{ad}\, e_i)^{1-a_{ij}}(e_j) = 0
+    \]
+    is the statement that $e_j$ generates an $\mathfrak{sl}_2(i)$-submodule of dimension $(-a_{ij})+1$.
+\end{remark}
+
+
+The quadruple $(\mathfrak{g}(A),\mathfrak{h},\Pi,\Pi^\vee)$ is called the
+\textbf{quadruple associated to the matrix $A$}. Two quadruples
+$(\mathfrak{g}(A),\mathfrak{h},\Pi,\Pi^\vee)$ and
+$(\mathfrak{g}(A_1),\mathfrak{h}_1,\Pi_1,\Pi_1^\vee)$ are called
+\textbf{isomorphic} if there exists a Lie algebra isomorphism
+$\varphi : \mathfrak{g}(A)\to \mathfrak{g}(A_1)$ such that
+$\varphi(\mathfrak{h})=\mathfrak{h}_1$, $\varphi(\Pi^\vee)=\Pi_1^\vee$
+and $\varphi^*(\Pi_1)=\Pi$.
+
+
+We keep the same notation for the images of $e_i,f_i,\mathfrak{h}$ in
+$\mathfrak{g}(A)$. The subalgebra $\mathfrak{h}$ of $\mathfrak{g}(A)$ is
+called the \textbf{Cartan subalgebra}. The elements $e_i,f_i \ (i=1,\dots,n)$
+are called the \textbf{Chevalley generators}. In fact, they generate the
+\textbf{derived subalgebra} $\mathfrak{g}'(A)=[\mathfrak{g}(A),\mathfrak{g}(A)]$.
+Furthermore,
+\[
+    \mathfrak{g}(A) = \mathfrak{g}'(A) + \mathfrak{h}
+\]
+with $\mathfrak{g}(A)=\mathfrak{g}'(A)$ if and only if $\det A \neq 0$.
+
+We set $\mathfrak{h}' = \sum_{i=1}^n \mathbb{C}\alpha_i^\vee$. Then
+$\mathfrak{g}'(A)\cap \mathfrak{h} = \mathfrak{h}'$;
+$\mathfrak{g}'(A)\cap \mathfrak{g}_\alpha = \mathfrak{g}_\alpha$ if $\alpha\neq 0$.
+
+It follows from (1.2.2) that we have the following \textbf{root space decomposition}
+with respect to $\mathfrak{h}$:
+\begin{equation}\label{1.3.1}
+    \mathfrak{g}(A) = \bigoplus_{\alpha \in Q} \mathfrak{g}_\alpha.
+\end{equation}
+Here,
+\[
+    \mathfrak{g}_\alpha = \{ x \in \mathfrak{g}(A) \mid [h,x] = \alpha(h)x
+    \ \text{for all } h \in \mathfrak{h}\}
+\]
+is the \textbf{root space} attached to $\alpha$. Note that
+$\mathfrak{g}_0 = \mathfrak{h}$. The number
+$\mathrm{mult}\,\alpha := \dim \mathfrak{g}_\alpha$ is called the
+\textbf{multiplicity} of $\alpha$. Note that
+\begin{equation}\label{1.3.2}
+    \mathrm{mult}\,\alpha \leq n^{|\mathrm{ht}\,\alpha|}
+\end{equation} by Theorem \ref{thm:universal-lie-alg} d).
+
+An element $\alpha \in Q$ is called a \textbf{root} if $\alpha \neq 0$ and
+$\mathrm{mult}\,\alpha \neq 0$. A root $\alpha > 0$ (resp.\ $\alpha < 0$)
+is called \textbf{positive} (resp.\ \textbf{negative}). It follows from the root space decomposition that every root is either positive or negative. Denote by $\Delta$, $\Delta_+$
+and $\Delta_-$ the sets of all roots, positive and negative roots respectively.
+Then
+\[
+    \Delta = \Delta_+ \,\dot{\cup}\, \Delta_- \qquad \text{(a disjoint union).}
+\]
+
+Sometimes we will write $\Delta(A), Q(A), \dots$ in order to emphasize the
+dependence on $A$.
+
+Let $\mathfrak{n}_+$ (resp.\ $\mathfrak{n}_-$) denote the subalgebra of
+$\mathfrak{g}(A)$ generated by $e_1,\dots,e_n$ (resp.\ $f_1,\dots,f_n$).
+By Theorem \ref{thm:universal-lie-alg} e) and the definition of $\mathfrak{g}(A)$, we have the \emph{triangular decomposition}
+\[
+    \mathfrak{g}(A) = \mathfrak{n}_- \oplus \mathfrak{h} \oplus \mathfrak{n}_+
+    \qquad \text{(direct sum of vector spaces).}
+\] because the ideal $\mathfrak{r}$ is graded and hence respects the triangular decomposition of $\tilde{\mathfrak{g}}(A)$.
+
+Note that $\mathfrak{g}_\alpha \subset \mathfrak{n}_+$ if $\alpha>0$ and
+$\mathfrak{g}_\alpha \subset \mathfrak{n}_-$ if $\alpha<0$. In other words,
+for $\alpha>0$ (resp.\ $\alpha<0$), $\mathfrak{g}_\alpha$ is the linear span
+of the elements of the form
+\[
+    [\dots [[e_{i_1},e_{i_2}],e_{i_3}] \dots e_{i_s}]
+    \quad (\text{resp.\ } [\dots [[f_{i_1},f_{i_2}],f_{i_3}] \dots f_{i_s}]),
+\]
+such that $\alpha_{i_1}+\cdots+\alpha_{i_s} = \alpha$
+(resp.\ $= -\alpha$). It follows immediately that
+\begin{equation}\label{1.3.3}
+    \mathfrak{g}_{\alpha_i} = \mathbb{C}e_i, \qquad
+    \mathfrak{g}_{-\alpha_i} = \mathbb{C}f_i, \qquad
+    \mathfrak{g}_{s\alpha_i} = 0 \quad \text{if } |s|>1.
+\end{equation}
+because for example the $2\alpha_i$ root space is spanned by $[e_i,e_i] = 0$.
+
+Since every root is either positive or negative, \eqref{1.3.3} implies the
+following important fact:
+
+\begin{lemma}{\label{lem:rt-string}}
+    If $\beta \in \Delta_+ \setminus \{\alpha_i\}$, then
+    $$(\beta + \mathbb{Z}\alpha_i)\cap \Delta \subset \Delta_+$$
+\end{lemma}
+\begin{proof}
+    Suppose $\beta\neq \alpha_i$ is positive, but $\beta - q\alpha_i$ is negative for some $q$. Then the string must pass through $\beta - r\alpha_i = 0$ or $-\alpha_i$ at some step $r \leq q$. But the only multiples of $\alpha_i$ that are roots are $\pm \alpha_i$. So the only way to hit a negative root is if the string actually reaches $-\alpha_i$. If $\beta - r\alpha_i = -\alpha_i$, then $\beta = (r-1)\alpha_i$. But $\beta$ is a root and not equal to $\alpha_i$. The only possible multiples of $\alpha_i$ that are roots are $\pm\alpha_i$. So $\beta = (r-1)\alpha_i$ is impossible unless $\beta=\alpha_i$.
+\end{proof}
+
+\begin{remark}[Finiteness of root strings]
+    Using the interpretation of the Serre relations from the representation theory of $\mathfrak{sl}_2$, one sees that these root strings are in fact finite. Look at the subalgebra
+    $\mathfrak{sl}_2(i) = \langle e_i, f_i, h_i \rangle$. For each root $\beta$, the root space $\mathfrak{g}_\beta$ is a weight space of $\mathfrak{sl}_2(i)$ with weight $\langle \beta, \alpha_i^\vee \rangle$. Acting with $\mathrm{ad}\, e_i$ and $\mathrm{ad}\, f_i$ generates a finite-dimensional $\mathfrak{sl}_2$-module, because the Serre relations
+    \[
+        (\mathrm{ad}\, e_i)^{1-a_{ij}}(e_j) = 0, \quad
+        (\mathrm{ad}\, f_i)^{1-a_{ij}}(f_j) = 0
+    \]
+    kill sufficiently long strings.
+
+    Thus the $\alpha_i$-string through $\beta$ has finite length.
+\end{remark}
+
+\begin{lemma}
+    Let $a \in \mathfrak{n}_+$ be such that $[a,f_i] = 0$ for all $i=1,\dots,n$.
+    Then $a=0$. Similarly, for $a \in \mathfrak{n}_-$, if $[a,e_i]=0$ for all
+    $i=1,\dots,n$, then $a=0$.
+\end{lemma}
+
+\begin{proof}
+    Let $a \in \mathfrak{n}_+$ be such that $[a,\mathfrak{g}_{-1}(1)] = 0$.
+    Then it is easy to see that
+    \[
+        \sum_{i,j \geq 0} (\operatorname{ad}\, \mathfrak{g}_1(1))^i
+        (\operatorname{ad}\, \mathfrak{h})^j a
+    \]
+    is a subspace of $\mathfrak{n}_+ \subset \mathfrak{g}(A)$, which is invariant
+    with respect to $\operatorname{ad}\,\mathfrak{g}_1(1)$,
+    $\operatorname{ad}\,\mathfrak{h}$ and
+    $\operatorname{ad}\,\mathfrak{g}_{-1}(1)$ (the condition on $a$ is used only
+    in the last case). Hence if $a \neq 0$, we obtain a nonzero ideal in
+    $\mathfrak{g}(A)$ which intersects $\mathfrak{h}$ trivially. This contradicts
+    the definition of $\mathfrak{g}(A)$.
+\end{proof}
+
+\begin{remark}
+    Sometimes it is useful to consider the Lie algebra $\mathfrak{g}'(A)$ instead
+    of $\mathfrak{g}(A)$. Let us give a more direct construction of
+    $\mathfrak{g}'(A)$. Denote by $\tilde{\mathfrak{g}}'(A)$ the Lie algebra on
+    generators $e_i,f_i,\alpha_i^\vee \ (i=1,\dots,n)$ and defining relations
+    \[
+        [e_i,f_j] = \delta_{ij}\alpha_i^\vee, \qquad
+        [\alpha_i^\vee,\alpha_j^\vee]=0, \qquad
+        [\alpha_i^\vee,e_j] = a_{ij}e_j, \qquad
+        [\alpha_i^\vee,f_j] = -a_{ij}f_j.
+    \]
+
+    Let $Q$ be a free abelian group on generators $\alpha_1,\dots,\alpha_n$.
+    Introduce a $Q$-gradation
+    \[
+        \tilde{\mathfrak{g}}'(A) = \bigoplus_{\alpha} \tilde{\mathfrak{g}}'_\alpha
+    \]
+    setting
+    \[
+        \deg e_i = \alpha_i = -\deg f_i, \qquad
+        \deg \alpha_i^\vee = 0.
+    \]
+
+    There exists a unique maximal $Q$-graded ideal
+    $\mathfrak{r} \subset \tilde{\mathfrak{g}}'(A)$ intersecting
+    $\tilde{\mathfrak{g}}'_0 \ (= \sum_i \mathbb{C}\alpha_i^\vee)$ trivially.
+    Then
+    \[
+        \mathfrak{g}'(A) = \tilde{\mathfrak{g}}'(A)/\mathfrak{r}.
+    \]
+
+    Note that this definition works for an infinite $n$ as well.
+\end{remark}
+
+\begin{remark}
+    In the presentation of $\mathfrak{g}(A)$, you start with a Cartan subalgebra $\mathfrak{h}$ large enough so that you can realize the simple roots $\alpha_i$ and simple coroots $\alpha_i^\vee$ as linear maps. In general,
+    \[
+        \dim \mathfrak{h} = 2n - \operatorname{rank}(A).
+    \]
+    So if $A$ is singular (affine/indefinite type), then $\mathfrak{h}$ strictly contains $\mathfrak{h}' = \mathrm{span}\{\alpha_i^\vee\}$.
+    In the presentation of $\mathfrak{g}'(A)$, you only build in the “minimal Cartan” generated by the simple coroots:
+    \[
+        \mathfrak{h}' = \sum_i \mathbb{C} \alpha_i^\vee.
+    \]
+    If $A$ is invertible (finite type): then $\mathfrak{h} = \mathfrak{h}'$, so $\mathfrak{g}(A) = \mathfrak{g}'(A)$. If $A$ is singular (e.g. affine type): then $\mathfrak{h}$ has more dimensions than $\mathfrak{h}'$, and these extra directions give rise to central elements and sometimes a degree derivation. In this case, $\mathfrak{g}(A) = \mathfrak{g}'(A) \oplus (\mathfrak{h}/\mathfrak{h}')$.
+\end{remark}
+
+\begin{proposition}[Center of a Kac-Moody algebra]
+    The center of the Lie algebra $\mathfrak{g}(A)$ or $\mathfrak{g}'(A)$ is equal to
+    \[
+        \mathfrak{c} := \{ h \in \mathfrak{h} \mid \langle \alpha_i, h \rangle = 0
+        \ \text{for all } i=1,\dots,n \}.
+    \]
+    Furthermore, $\dim \mathfrak{c} = n-\ell$.
+\end{proposition}
+
+\begin{proof}
+    Let $c$ lie in the center; write $c = \sum_i c_i$ with respect to the principal
+    gradation. Then $[c,\mathfrak{g}_{-1}(1)] = 0$ implies
+    $[c_i,\mathfrak{g}_{-1}(1)] = 0$ and hence, by Lemma~1.5, $c_i = 0$ for $i>0$.
+    Similarly, $c_i=0$ for $i<0$. Hence $c \in \mathfrak{h}$ and
+    $[c,e_i] = \langle \alpha_i,c \rangle e_i = 0$ implies that
+    $\langle \alpha_i,c \rangle = 0$ ($i=1,\dots,n$). Conversely, if $c \in \mathfrak{h}$
+    and the latter condition holds, $c$ commutes with all Chevalley generators and, therefore, lies in the center. The simple roots $\alpha_1,\dots,\alpha_n$ are linear functionals on $\mathfrak{h}$. They span a subspace of $\mathfrak{h}^*$ of dimension $\ell = \mathrm{rank}(A)$. Therefore, the common kernel
+    \[
+        \{ h \in \mathfrak{h} : \alpha_i(h)=0 \;\;\forall i\}
+    \]
+    has dimension $n-\ell$.
+
+    Finally, $\mathfrak{c} \subset \mathfrak{h}'$ since in the contrary case, then there would exist some extra element $c \in \mathfrak{h} \setminus \mathfrak{h}'$ that is annihilated by every simple root. That would mean the simple roots $\{\alpha_i\}$ vanish on a larger subspace of $\mathfrak{h}$ than expected, so they would not be linearly independent in $\mathfrak{h}^*$, contradicting the axioms of a realization.
+\end{proof}
+
+\subsection{Invariant bilinear form and Casimir operator}
+\begin{definition}
+    A Cartan matrix $A$ is called \textbf{symmetrizable} if there exists a diagonal matrix $D = \mathrm{diag}(d_1,\dots,d_n)$ with positive entries $d_i$ such that $DA$ is symmetric.
+\end{definition}
+
+Let $A$ be a symmetrizable matrix with a fixed decomposition and let $(\mathfrak{h}, \Pi, \Pi^\vee)$ be a realization of $A$. Fix a complementary subspace $\mathfrak{h}''$ to $\mathfrak{h}' = \sum \mathbb{C}\alpha_i^\vee$ in $\mathfrak{h}$, and define a symmetric bilinear $\mathbb{C}$-valued form $(\,.\mid.\,)$ on $\mathfrak{h}$ by the following two equations:
+\begin{align}
+    (\alpha_i^\vee \mid h) & = \langle \alpha_i, h \rangle \epsilon_i, \quad \text{for } h \in \mathfrak{h},\ i = 1,\ldots,n \\
+    (h' \mid h'')          & = 0, \quad \text{for } h', h'' \in \mathfrak{h}''
+\end{align}
+Since $\alpha_1^\vee, \ldots, \alpha_n^\vee$ are linearly independent and since \begin{equation}
+    (\alpha_i^\vee \mid \alpha_j^\vee) = b_{ij}\,\epsilon_i\epsilon_j,
+    \qquad (i,j=1,\ldots,n)
+\end{equation}
+there is no ambiguity in the definition of $(\,.\mid.\,)$.
+
+\begin{lemma}\label{lem:bilinear-form-nondeg}
+    Let $\mf g(A)$ be the Kac-Moody algebra associated to a symmetrizable matrix $A$. Then the following holds:
+    \begin{enumerate}
+        \item The kernel of the restriction of the bilinear form $(\,.\mid.\,)$ to $\mathfrak{h}'$
+              coincides with $\mathfrak{c}$.
+        \item The bilinear form $(\,.\mid.\,)$ is nondegenerate on $\mathfrak{h}$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    (a) follows from Proposition 1.6.
+    If now for all $h \in \mathfrak{h}$ we have
+    \[
+        0 = \Big(\sum_{i=1}^n c_i \alpha_i^\vee \,\Big|\, h\Big)
+        = \Big\langle \sum_{i=1}^n c_i \epsilon_i \alpha_i,\, h \Big\rangle,
+    \]
+    then
+    \[
+        \sum_{i=1}^n c_i \epsilon_i \alpha_i = 0
+    \]
+    and hence $c_i = 0$, $i=1,\ldots,n$, proving (b).
+\end{proof}
+
+\begin{remark}
+    If $A$ is symmetric, you are in the “simply-laced” world (types $A$, $D$, $E$ or untwisted affine). If $A$ is symmetrizable but not symmetric, you are in the “multiply-laced” world (types $B$, $C$, $F$, $G$ or twisted affine).
+
+    Every symmetrizable GCM gives rise to a Kac-Moody algebra that has:
+    \begin{itemize}
+        \item A symmetric, invariant bilinear form on $\mathfrak{g}$.
+        \item A Weyl group that acts as isometries with respect to this form.
+        \item A root system with well-behaved reflection geometry.
+    \end{itemize}
+
+    If $A$ were not symmetrizable, these structures might not exist at all (the theory gets pathological).
+\end{remark}
+
+Since the bilinear form $(\,.\mid.\,)$ is nondegenerate, we have an isomorphism
+\[
+    \nu : \mathfrak{h} \;\to\; \mathfrak{h}^*
+\]
+defined by
+\[
+    \langle \nu(h), h_1 \rangle = (h \mid h_1),
+    \qquad h,h_1 \in \mathfrak{h},
+\]
+and the induced bilinear form $(\,.\mid.\,)$ on $\mathfrak{h}^*$.
+
+We had defined the bilinear form on $\mathfrak{h}$ by
+$(\alpha_i^\vee \mid h) = \langle \alpha_i, h \rangle \epsilon_i$ for $h \in \mathfrak{h}$, so rewriting gives
+\begin{equation}
+    \nu(\alpha_i^\vee) = \epsilon_i \alpha_i,
+    \qquad i=1,\ldots,n.
+\end{equation}
+Now observe that
+$(\alpha_i \mid \alpha_j) := (\nu^{-1}(\alpha_i) \mid \nu^{-1}(\alpha_j))$. We know that $\nu(\alpha_i^\vee) = \epsilon_i \alpha_i$, so $\nu^{-1}(\alpha_i) = \tfrac{1}{\epsilon_i}\,\alpha_i^\vee$.
+
+Therefore, \begin{align*}
+    (\alpha_i \mid \alpha_j) & = \Big(\tfrac{1}{\epsilon_i}\alpha_i^\vee \;\Big|\; \tfrac{1}{\epsilon_j}\alpha_j^\vee \Big) \\
+                             & = \frac{1}{\epsilon_i \epsilon_j} (\alpha_i^\vee \mid \alpha_j^\vee)                         \\
+                             & = \frac{1}{\epsilon_i \epsilon_j} (b_{ij} \epsilon_i \epsilon_j)                             \\
+                             & = b_{ij}.
+\end{align*}
+where we invoke equation (8) in the last line.
+
+
+\begin{theorem}[Invariant bilinear form on a symmetrizable Kac-Moody algebra]
+    Let $\mathfrak{g}(A)$ be a symmetrizable Lie algebra. Since $A$ is symmetrizable, fix a symmetrization $A = DB$ as above. Then there exists a nondegenerate symmetric bilinear $\mathbb{C}$-valued form
+    $(\,.\mid.\,)$ on $\mathfrak{g}(A)$ such that:
+    \begin{enumerate}[label=\alph*)]
+        \item $(\,.\mid.\,)$ is invariant, i.e.
+              \[
+                  ([x,y]\mid z) = (x \mid [y,z])
+                  \qquad \text{for all } x,y,z \in \mathfrak{g}(A).
+              \]
+        \item $(\,.\mid.\,)|_{\mathfrak{h}}$ is defined by (8) and (9) and is nondegenerate.
+        \item $(\mathfrak{g}_\alpha \mid \mathfrak{g}_\beta) = 0
+                  \quad \text{if } \alpha+\beta \neq 0$.
+        \item $(\,.\mid.\,)|_{\mathfrak{g}_\alpha \oplus \mathfrak{g}_{-\alpha}}$
+              is nondegenerate for $\alpha \neq 0$, and hence
+              $\mathfrak{g}_\alpha$ and $\mathfrak{g}_{-\alpha}$ are
+              nondegenerately paired by $(\,.\mid.\,)$.
+        \item $[x,y] = (x \mid y)\,\nu^{-1}(\alpha)$
+              for $x \in \mathfrak{g}_\alpha$, $y \in \mathfrak{g}_{-\alpha}$,
+              $\alpha \in \Delta$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Consider the principal $\mathbb{Z}$-gradation
+    \[
+        \mathfrak{g}(A) = \bigoplus_{j \in \mathbb{Z}} \mathfrak{g}_j,
+        \qquad
+        \mathfrak{g}(N) = \bigoplus_{j=-N}^N \mathfrak{g}_j
+        \quad \text{for } N=0,1,\ldots
+    \] where $\mf g_j$ is the subspace of roots of height $j$.
+
+    Define a bilinear symmetric form $(\,.\mid.\,)$ on $\mathfrak{g}(0) = \mathfrak{h}$ by (2.1.2) and (2.1.3)
+    and extend it to $\mathfrak{g}(1)$ by
+    \begin{align}
+        (e_i \mid f_j)                             & = \delta_{ij} \epsilon_i \qquad (i,j=1,\ldots,n), \\
+        (\mathfrak{g}_0 \mid \mathfrak{g}_{\pm 1}) & = 0, \qquad
+        (\mathfrak{g}_{\pm 1} \mid \mathfrak{g}_{\pm 1}) = 0.
+    \end{align}
+
+    Then the form $(\,.\mid.\,)$ on $\mathfrak{g}(1)$ satisfies invariance as long as both $[x,y]$ and $[y,z]$ lie in $\mathfrak{g}(1)$. Indeed every bracket between $e_i$, $f_j$ and $h$ remains in $\mathfrak{g}(1)$ and the only nontrivial check is
+    \[
+        ([e_i,f_j]\mid h) = (e_i \mid [f_j,h]) \quad \text{for } h \in \mathfrak{h},
+    \]
+    or, equivalently,
+    \[
+        \delta_{ij}(\alpha_i^\vee \mid h) = \delta_{ij}\epsilon_i \langle \alpha_j,h \rangle,
+    \]
+    which is indeed true.
+
+    Now we extend $(\,.\mid.\,)$ to a bilinear form on the space $\mathfrak{g}(N)$ by induction on $N\geq 1$
+    so that $(\mathfrak{g}_i \mid \mathfrak{g}_j)=0$ if $|i|,|j|\leq N$ and $i+j\neq 0$, and also condition a)
+    is satisfied as long as both $[x,y]$ and $[y,z]$ lie in $\mathfrak{g}(N)$. Suppose this is already defined on $\mathfrak{g}(N-1)$;
+    then we have only to define $(x\mid y)$ for $x \in \mathfrak{g}_{\pm N}, y \in \mathfrak{g}_{\mp N}$.
+    We can write $y = \sum_i [u_i,v_i]$, where $u_i$ and $v_i$ are homogeneous elements of nonzero degree which lie in $\mathfrak{g}(N-1)$.
+    Then $[x,u_i] \in \mathfrak{g}(N-1)$ and we set
+    \[
+        (x \mid y) = \sum_i ([x,u_i] \mid v_i).
+    \]
+
+
+
+
+
+    To show that this is well defined, we prove that if $i,j,s,t \in \mathbb{Z}$ are such that
+    $|i|+|j|=|s|+|t|=N$, $i+j+s+t=0$, $|i|,|j|,|s|,|t|<N$ and $x_i \in \mathfrak{g}_i$,
+    $x_j \in \mathfrak{g}_j$, $x_s \in \mathfrak{g}_s$, $x_t \in \mathfrak{g}_t$, then we have (on $\mathfrak{g}(N-1)$)
+    \[
+        ([[x_i,x_j],x_s]\mid x_t) = (x_i \mid [[x_j,x_s],x_t]).
+    \]
+
+    To explain why this is what we need to check, fix $x\in \mathfrak g_{\pm N}$. Define a bilinear map
+    \[
+        \beta_x:\;\bigoplus_{p+q=\mp N}\; \mathfrak g_p\otimes \mathfrak g_q \;\longrightarrow\; \mathbb C,\qquad
+        \beta_x(u\otimes v):=([x,u]\mid v),
+    \]
+    where $u,v$ are homogeneous, $|p|,|q|<N$.
+
+    There is a bracket map
+    \[
+        L:\;\bigoplus_{p+q=\mp N}\; \mathfrak g_p\otimes \mathfrak g_q \;\longrightarrow\; \mathfrak g_{\mp N},\qquad
+        L(u\otimes v)=[u,v].
+    \]
+
+    Our definition says $(x\mid \cdot)$ on $\mathfrak g_{\mp N}$ should be the linear functional that satisfies
+    \[
+        (x\mid [u,v])=\beta_x(u\otimes v).
+    \]
+    This is well defined iff $\beta_x$ vanishes on $\ker L$; i.e.\ $\beta_x$ depends only on $[u,v]$, not on the particular decomposition. In particular, a choice of decomposition $y=\sum [u_i,v_i]$ corresponds to choosing a preimage of $y$ in $V$. If $\tilde y_1,\tilde y_2$ are two different preimages of the same $y$, then their difference lies in the kernel of $L$: $\tilde y_1-\tilde y_2\in \ker L$.
+    So we need to show that $\beta_x$ vanishes on $\ker L$. The kernel of $L$ is generated by elements of two types:
+    \begin{itemize}
+        \item $u\otimes v + v\otimes u$ (skew-symmetry)
+        \item $[u,v]\otimes w + [v,w]\otimes u + [w,u]\otimes v$ (Jacobi)
+    \end{itemize}
+
+
+    We get skew symmetry from the invariance of the form on $\mathfrak g(N-1)$:
+    \begin{align*}
+        \beta_x(u\otimes v)+\beta_x(v\otimes u)
+         & =([x,u]\mid v)+([x,v]\mid u)    \\
+         & =(x\mid [u,v])+(x\mid [v,u])=0,
+    \end{align*}
+    using invariance of the form on $\mathfrak g(N-1)$ (true by induction) and $[v,u]=-[u,v]$. So $\beta_x$ vanishes on $u\otimes v+v\otimes u$.
+
+    To check Jacobi, consider homogeneous $x_i\in \mathfrak g_i$, $x_j\in \mathfrak g_j$, $x_s\in \mathfrak g_s$, $x_t\in \mathfrak g_t$ with
+    $|i|+|j|=|s|+|t|=N$, $i+j+s+t=0$, and $|i|,|j|,|s|,|t|<N$.
+    The identity quoted in the text,
+    \[
+        ([[x_i,x_j],x_s]\mid x_t)=(x_i\mid [[x_j,x_s],x_t]),
+    \]
+    implies that $\beta_{x_i}$ kills the Jacobi generator:
+    \[
+        \beta_{x_i}([x_j,x_s]\otimes x_t)+\beta_{x_i}([x_s,x_t]\otimes x_j)+\beta_{x_i}([x_t,x_j]\otimes x_s)=0.
+    \]
+
+    Indeed, if we had the identity, then we would have
+    \begin{align*}
+        \beta_{x_i}([x_j,x_s]\otimes x_t)
+         & =([x_i,[x_j,x_s]]\mid x_t)
+        =(x_i\mid [[x_j,x_s],x_t]),   \\
+        \beta_{x_i}([x_s,x_t]\otimes x_j)
+         & =([x_i,[x_s,x_t]]\mid x_j)
+        =(x_i\mid [[x_s,x_t],x_j]),   \\
+        \beta_{x_i}([x_t,x_j]\otimes x_s)
+         & =([x_i,[x_t,x_j]]\mid x_s)
+        =(x_i\mid [[x_t,x_j],x_s]).
+    \end{align*}
+    and adding these three equations gives
+    \[
+        \beta_{x_i}(J)
+        =(x_i\mid \,[[x_j,x_s],x_t]+[[x_s,x_t],x_j]+[[x_t,x_j],x_s]\,)
+        = (x_i\mid 0)=0,
+    \] Thus $\beta_x$ vanishes on the Jacobi-type tensors.
+
+    Now we check the identity sing the invariance of $(\,.\mid.\,)$ on $\mathfrak{g}(N-1)$ and the Lie algebra axioms, we have
+    \begin{align*}
+        ([[x_i,x_j],x_s]\mid x_t)
+         & = (([x_i,x_j],x_s] \mid x_t) - ([ [x_j,x_s],x_i]\mid x_t) \\
+         & = ([x_i,x_j]\mid [x_s,x_t]) + (x_i \mid [[x_j,x_s],x_t])  \\
+         & = (x_i \mid [x_s,[x_j,x_t]]) + ([x_j,x_s]\mid [x_i,x_t])  \\
+         & = (x_i \mid [[x_j,x_s],x_t]),
+    \end{align*}
+    as required. So the identity holds, and hence $\beta_x$ vanishes on $\ker L$. This shows that $(x\mid y)$ is well defined.
+
+    If now $x=\sum_i [u_i',v_i']$, then by definition and by the relation above we have
+    \[
+        (x \mid y) = \sum_i ([x,u_i]\mid v_i)
+        = \sum_i (u_i' \mid [v_i',y]).
+    \]
+    Hence this is independent of the choice of the expressions for $x$ and $y$.
+
+    It is clear from the definition that a) holds on $\mathfrak{g}(N)$ whenever $[x,y]$ and $[y,z]$
+    lie in $\mathfrak{g}(N)$. Hence we have constructed a bilinear form $(\,.\mid.\,)$ on $\mathfrak{g}$
+    such that a) and b) hold. Its restriction to $\mathfrak{h}$ is nondegenerate by Lemma \ref{lem:bilinear-form-nondeg} b).
+
+    The form $(\,.\mid.\,)$ satisfies c) since for $h \in \mathfrak{h}$, $x \in \mathfrak{g}_\alpha$ and $y \in \mathfrak{g}_\beta$ we have, by the invariance property:
+    \[
+        0 = ([h,x]\mid y) + (x \mid [h,y])
+        = (\langle \alpha,h\rangle + \langle \beta,h\rangle)(x \mid y).
+    \]
+
+    The verification of d) is standard. For $x \in \mathfrak{g}_\alpha$, $y \in \mathfrak{g}_{-\alpha}$
+    where $\alpha \in \Delta$, and $h \in \mathfrak{h}$, we have
+    \[
+        ([x,y] - (x \mid y)\nu^{-1}(\alpha) \mid h)
+        = (x \mid [y,h]) - (x \mid y)\langle \alpha,h\rangle = 0.
+    \]
+    Now e) follows from b).
+
+    It follows from b), c) and e) that the bilinear form $(\,.\mid.\,)$ is symmetric.
+    If d) fails, then by c) the form $(\,.\mid.\,)$ is degenerate.
+    Let $\mathfrak{i} = \ker(\,.\mid.\,)$ is an ideal, and by b) we have
+    $\mathfrak{i}\cap \mathfrak{h}=0$, which contradicts the definition of $\mathfrak{g}(A)$.
+\end{proof}
+
+\section{References}
+\begin{enumerate}
+    \bibitem{bump} Bump, D. \textbf{Weyl Character Formula notes}, available at \url{http://sporadic.stanford.edu/Math210C/WCF.pdf}.
+
+    \bibitem{kac} Kac, V. G. \textbf{Infinite Dimensional Lie Algebras}. Cambridge University Press, 1990.
+    \bibitem{pressley-segal} Pressley, A., and Segal, G. \textbf{Loop Groups}. Oxford University Press, 1986.
+\end{enumerate}
+\end{document}

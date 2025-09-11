@@ -1,0 +1,335 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+\usepackage{/Users/songye03/Desktop/Math_tex/style/professional-notes}
+
+% Metadata
+\title{Qualifying Exam notes}
+\author{Songyu Ye}
+\date{\today}
+
+\begin{document}
+
+% Custom title
+\notestitle
+
+\begin{abstract}
+    We begin preparation for the qualifying exam.
+\end{abstract}
+
+\tableofcontents
+\section{Algebraic geometry: Complex algebraic varieties}
+
+\subsection{Complex manifolds}
+\subsection{De Rham and Dolbeault Cohomology}
+\subsection{Complex and Holomorphic Vector Bundles}
+\subsection{Metrics, Connections, and Curvature}
+\subsection{Hodge Theorem}
+\subsection{Lefschetz decomposition}
+\subsection{Line bundles, divisors, and maps to projective space}
+\subsection{Chern classes of line bundles}
+\subsection{The Kodaira Vanishing Theorem}
+\subsection{The Lefschetz Theorem on Hyperplane Sections }
+\subsection{Riemann surfaces and algebraic curves}
+\subsection{The Riemann-Hurwitz Formula }
+\subsection{The Riemann-Roch Formula}
+
+\section{Algebraic geometry: Schemes}
+The primary reference is both volumes of Gortz and Wedhorn. If we decide to be more ambitious, we can just read EGA.
+
+\subsection{Sheaves}
+\subsubsection{Presheaves}
+\begin{definition}
+    A \emph{presheaf} of abelian groups $\cF$ on a space $X$ is a contravariant functor from the poset category of open sets to the category of abelian groups. \begin{align*}
+        \cF:\Open^{\op}(X) \to \Ab
+    \end{align*}
+\end{definition}
+
+
+
+\begin{definition}
+    A presheaf $\mathcal{F}$ on a topological space $X$ is a \emph{sheaf} if it satisfies the following supplementary conditions:
+
+    \begin{enumerate}
+
+        \item[\textbf{Separated}] If $U$ is an open set, if $\{V_{i}\}$ is an open covering of $U$, and if $s \in \mathcal{F}(U)$ is an element such that $\left.s\right|_{V_{i}} = 0$ for all $i$, then $s = 0$;
+
+        \item[\textbf{Gluing}] If $U$ is an open set, if $\{V_{i}\}$ is an open covering of $U$, and if we have elements $s_{i} \in \mathcal{F}(V_{i})$ for each $i$, with the property that for each $i,j$, $\left.s_{i}\right|_{V_{i} \cap V_{j}} = \left.s_{j}\right|_{V_{i} \cap V_{j}}$, then there is an element $s \in \mathcal{F}(U)$ such that $\left.s\right|_{V_{i}} = s_{i}$ for each $i$. 
+    \end{enumerate}
+\end{definition}
+
+\begin{example}[Presheaf which is not a sheaf]
+    Let $X$ be a topological space and $A$ an abelian group. Let $\cF(U) = A$ for all open sets $A$. Then $\cF$ is a presheaf with the obvious restriction maps, however $\cF$ is not a presheaf because if $U,V$ are disjoint open sets then $A = \cF(U \cup V) = \cF(U)\times \cF(V) = A\times A$.
+\end{example}
+
+\begin{example}[Sheaf of functions]
+    Let $X$ be a topological space and for every open set $U\subset X$ let $C(U)$ denote the continuous functions $U\to \R$. Then $C$ is a sheaf because every continuous function on $U$ is completely determined by its restriction to any open cover $U_i$, and because continuous functions on $U_i$ which agree on overlaps $U_{ij}$ glue to continuous functions on $U$.
+\end{example}
+
+The sheafs axioms are laid out so that sheaves behave like continuous functions on a topological space. However, there are many examples of sheaves which are not the the sheaves of functions on a space.
+
+\begin{example}[Skyscraper sheaf]
+    Let $X$ be a topological space. For $x \in X$ and $A$ an abelian group, the \emph{skyscraper sheaf} $i_x(A)$ has:
+    \[
+        i_x(A)(U) =
+        \begin{cases}
+            A & \text{if } x \in U \\
+            0 & \text{otherwise}
+        \end{cases}
+    \]
+\end{example}
+
+\begin{definition}
+    Let $\mathcal{F}$ and $\mathcal{G}$ be sheaves on a topological space $X$. A \textbf{morphism of sheaves} $\varphi: \mathcal{F} \to \mathcal{G}$ is a collection of morphisms
+    \[
+        \varphi_U: \mathcal{F}(U) \to \mathcal{G}(U)
+    \]
+    for each open set $U \subseteq X$, such that:
+    \begin{enumerate}
+        \item The following diagram commutes for every pair of open sets $V \subseteq U$:
+              \[
+                  \begin{tikzcd}
+                      \mathcal{F}(U) \ar[r, "\varphi_U"] \ar[d, "\rho^U_V"'] & \mathcal{G}(U) \ar[d, "\rho^U_V"] \\
+                      \mathcal{F}(V) \ar[r, "\varphi_V"'] & \mathcal{G}(V)
+                  \end{tikzcd}
+              \]
+              where $\rho^U_V$ denotes the restriction maps of both sheaves.
+
+        \item Each $\varphi_U$ is a morphism of abelian groups.
+    \end{enumerate}
+\end{definition}
+
+Equivalently, a sheaf morphism is a natural transformation between the sheaves viewed as functors from the category of open sets of $X$ to some algebraic category.
+
+\subsubsection{Leaf space, exactness, $f_*$ and $\inv{f}$}
+One way to think about the category of sheaves of abelian groups is that it should be very similar to the category of abelian groups. In fact, one takes theorems about abelian groups and tries to prove them for sheaves, or in general for any abelian category. The first question one can ask is about exact sequences.
+
+The naive guess which turns out to be wrong is to declare that a sequence of sheaves of abelian groups \begin{align*}
+    0 \to A \to B \to C \to 0
+\end{align*} is exact if when evaluated for each open set $U$, the corresponding sequence of abelian groups is exact. This definition works for left exactness but turns out to give the wrong notion for surjectivity.
+
+\begin{example}
+    Consider $X = S^1$ and $X_1 = X$ and $X_2 = $ nontrivial double cover of $X$. Let $F_1$ and $F_2$ denote the corresponding sheaves of sections. Then the map $X_2 \to X_1$ is surjective, but the map $F_2(X) \to F_1(X)$ is not surjective. Indeed $F_2(X) = \emptyset$ and $F_1(X) = \set{\id_X}$. 
+
+    Thus we encounter two notions of surjectivity. If we think about all sheaves as the sheaves of sections of some space living over $X$, which we will introduce as the leaf space (or etale space), then morphisms of sheaves correspond fully faithfully to morphisms of leaf spaces. Then there is a local notion of surjectivity, which corresponds to the morphism of leaf spaces being surjective, and a global notion of surjective, corresponding to evaluation on all open sets.
+\end{example}
+
+\begin{definition}
+    Let $\mathcal{F}$ be a sheaf on a topological space $X$. The \emph{leaf space} $L(\mathcal{F})$ is the topological space defined by:
+    \[
+    L(\mathcal{F}) = \bigsqcup_{x \in X} \mathcal{F}_x
+    \]
+    where $\mathcal{F}_x$ denotes the stalk of $\mathcal{F}$ at $x$, equipped with the topology generated by the basis:
+    \[
+    \{ \langle s, U \rangle \mid U \subseteq X \text{ open}, s \in \mathcal{F}(U) \}
+    \]
+    where $\langle s, U \rangle = \{ s_x \in \mathcal{F}_x \mid x \in U \}$ and $s_x$ is the germ of $s$ at $x$.
+    \end{definition}
+    
+    \begin{remark}
+    The projection map $\pi: L(\mathcal{F}) \to X$ sending each germ $s_x$ to $x$ is a local homeomorphism. The original sheaf $\mathcal{F}$ can be recovered as the sheaf of continuous sections of $\pi$.
+    \end{remark}
+
+
+
+The right definition of surjectivity to use is the local notion. By the definition of a leaf space, surjectivity of sheaves is equivalent to surjectivity on all stalks. Another clue that this is the right notion of surjectivity is that the local notion agrees with the notion of epimorphism in the category of sheaves of abelian groups.
+
+Leaf spaces look very strange. For example, you might say that if $X$ is a manifold and $\cF$ is the sheaf of smooth functions on $X$, then the leaf space of $\cF$ is locally homeomorphic to $X$ and therefore is also a manifold. However the issue with this is that the leaf space is non-Hausdorff.
+
+\begin{example}
+    
+\end{example}
+
+
+
+
+\subsection{Schemes: examples, varieties as schemes, subschemes, immersions}
+\subsection{Local properties: smooth morphisms, regular schemes, normal schemes}
+\subsection{Quasicoherent modules}
+\subsection{Representable functors}
+\subsection{Separated morphisms}
+\subsection{Vector bundles}
+\subsection{Affine and proper morphisms}
+\subsection{Projective morphisms}
+\subsection{Flat morphisms and dimension}
+\subsection{Differentials}
+\subsection{Etale and smooth morphisms}
+\subsection{Etale topology}
+\subsection{Sheaf cohomology}
+\subsection{Duality}
+\subsection{Curves}
+
+
+\begin{exercise}[POAC 2.2]
+If $C \subset \mathbb{P}^r$ is a 1-dimensional variety with normalization 
+$\varphi : \widetilde{C} \to C$, and $X \subset \mathbb{P}^r$ is any subscheme that does not contain $C$, we define the multiplicity of intersection $\operatorname{mult}_p(C,X)$ at the point $p \in X \cap C$ to be the sum of the lengths of the finite scheme $\varphi^{-1}(X)$ at the points of $\varphi^{-1}(p)$.
+
+
+\begin{enumerate}
+  \item Show that $C$ is singular at $p$ if and only if 
+  $\operatorname{mult}_p(C,X) \geq 2$ for all $X$ containing $p$. 
+  Show further that if $H \subset \mathbb{P}^r$ is a hyperplane then
+  \[
+    \deg C = \sum_{p \in C} \operatorname{mult}_p(C,H).
+  \]
+
+  \item Show that the degree of the image of $C$ under projection from $p$ 
+  is the degree of $C$ minus $\operatorname{mult}_p(C,H)$ for a general hyperplane $H$.
+\end{enumerate}
+\end{exercise}
+
+\begin{enumerate}
+    \item Let $I_X$ be the ideal sheaf of $X$ in $C$, that is it is a subsheaf of $\mathcal{O}_C$ such that for any open set $U \subseteq C$, $I_X(U)$ is the ideal of $\mathcal{O}_C(U)$ consisting of functions that vanish on $X \cap U$. By definition, we have the formula \begin{align*}
+    \operatorname{mult}_p(C,X) = 
+    \sum_{q \in \varphi^{-1}(p)} \ell(\mathcal{O}_{\phi^{-1}(X),q})
+    = \sum_{q \in \varphi^{-1}(p)} \ell(\mathcal{O}_{\widetilde{C},q}/I_X\mathcal{O}_{\widetilde{C},q}).
+\end{align*} where the last equality follows from the definition of the scheme theoretic pullback. 
+
+Recall that if $f : X \to Y$ is a morphism of schemes and let $Z \hookrightarrow Y$ be a closed subscheme defined by an ideal sheaf $\mathcal I_Z \subset \mathcal O_Y$. Then the scheme-theoretic preimage is $f^{-1}(Z) := X \times_Y Z = \operatorname{Spec}_X\!\big( \mathcal O_X / \mathcal I_Z \mathcal O_X \big)$. So at the sheaf level, $\mathcal O_{f^{-1}(Z)} = \mathcal O_X / \mathcal I_Z \mathcal O_X$.
+
+Recall that the local ring $\mathcal{O}_{\tilde{C},q}$ is a discrete valuation ring and every nonzero ideal in a DVR is principal, generated by a power of a uniformizer $t$.
+
+Let $q_1,\dots,q_s$ be the points of $\widetilde{C}$ over $p$ (the branches). If $s\ge 2$ (multibranch singularity, e.g. a node), then for any $X\ni p$, $\phi^*I_X$ vanishes at each branch, so $\operatorname{ord}_{q_i}(\phi^*I_X)\ge 1$ for all $i$. Hence
+$\operatorname{mult}_p(C,X)=\sum_i \operatorname{ord}_{q_i}(\phi^*I_X)\;\ge\; s\;\ge\;2.$ If $s=1$ (unibranch singularity, e.g. a cusp), let $q$ be the unique point over $p$ with parameter $t$. Locally we have $A = \mathcal O_{C,p} $ is a 1-dimensional Noetherian local ring that is not regular (since $p$ is singular). $R = \mathcal O_{\widetilde C, q}$ is a DVR, with uniformizer $t$. So $A\subset R\subset \mathrm{Frac}(A)$. If $A$ has an element of order 1 in $R$, then $A=R$ is regular, contradicting the singularity of $p$. So $\operatorname{ord}_q(\phi^*I_X)\ge 2$ for all $X\ni p$, hence $\operatorname{mult}_p(C,X)=\operatorname{ord}_q(\phi^*I_X)\ge 2.$
+
+Conversely, if $p$ is nonsingular, then we can take $X = H$ the tangent hyperplane to $C$ at $p$. Then $\phi^*I_H$ has order 1 at the unique point $q$ over $p$, so $\operatorname{mult}_p(C,H)=1.$
+
+Let $L:=\mathcal O_{\mathbf P^r}(1)\vert_C$. A hyperplane $H$ corresponds to a section $s_H\in H^0(C,L)$. Pulling back, $\phi^*s_H\in H^0(\widetilde C,\phi^*L)$ and its divisor is exactly $\phi^{-1}(H)$. Therefore $$\deg C=\deg L=\deg \phi^*L =\deg \operatorname{div}(\phi^*s_H)
+=\sum{p\in C}\operatorname{mult}_p(C,H)$$This holds for any hyperplane $H$ not containing $C$.
+\item 
+\end{enumerate}
+
+\begin{remark}
+    Note that if you take a nodal curve $C\subset \P^2\subset \P^3$ and pick a $\P^1$ which passes through the node transversely, then the resulting intersection is in fact reduced and smooth. For example if you take a nodal curve $(w,\,xy)$ and $(x-\beta w,\; y-\alpha w)$ and $\alpha,\beta\in k$. Then $(w,xy)\;+\;(x-\beta w,\; y-\alpha w)\;=\;(w,x,y)$, I was just suprised that you can start with something singular, intersect with something else and get something smooth. This is the basis of Bertini-type theorems: a general enough hyperplane cut of a singular variety often avoids carrying the singularity forward, unless you cut right along the tangent cone.
+\end{remark}
+\section{Lie theory}
+\subsection{Lie Groups and Algebras}
+\subsubsection{Definitions and Basic Examples}
+\subsubsection{Lie Group-Lie Algebra Correspondence}
+\subsubsection{Matrix Lie Groups and Their Algebras}
+
+\subsection{Structure Theory}
+\subsubsection{Solvable and Nilpotent Lie Algebras}
+\subsubsection{Semisimple Lie Algebras}
+\subsubsection{Cartan Decomposition}
+\subsubsection{Root Systems and Dynkin Diagrams}
+
+\subsection{Representation Theory}
+\subsubsection{Weights and Highest Weight Theory}
+\subsubsection{Finite-Dimensional Representations}
+\subsubsection{Casimir Operators}
+\subsubsection{Peter-Weyl Theorem}
+\subsubsection{Weyl-Kac Character Formula}
+
+\subsection{Kac-Moody Algebras}
+\subsubsection{Affine Lie Algebras}
+\subsubsection{Generalized Cartan Matrices}
+\subsubsection{Root Spaces and Weyl Groups}
+
+\subsection{Kazhdan-Lusztig Theory}
+\subsubsection{Hecke Algebras and Cells}
+\subsubsection{Kazhdan-Lusztig Polynomials}
+\subsubsection{Geometric Interpretation}
+\subsubsection{Representation-Theoretic Connections}
+
+\subsection{Vertex Operator Algebras}
+\subsubsection{Basic Constructions and Examples}
+\subsubsection{Representation Theory}
+\subsubsection{Conformal Field Theory Relations}
+
+\subsection{Combinatorics}
+\subsubsection{Crystal Bases}
+\subsubsection{Tableaux Combinatorics}
+\subsubsection{Symmetric Functions}
+
+\section{Number Theory}
+
+\subsection{Number Fields}
+\subsubsection{Gaussian Integers and Applications}
+Algebraic numbers, algebraic integers and their basic properties.
+
+\subsubsection{Basic Theory of Number Fields}
+Some examples of number fields. Ideals in number fields.
+
+\subsubsection{Unique Factorization}
+Examples of and counterexamples to unique factorization.
+
+\subsection{Multiplicative Structure of Ideals}
+\subsubsection{Unique Factorization of Ideals}
+Proof and significance of Dedekind's theorem.
+
+\subsubsection{Class Groups and Class Numbers}
+Structure and computation of ideal class groups.
+
+\subsubsection{Applications to Diophantine Equations}
+Cases of Fermat's last theorem and related problems.
+
+\subsection{Relative Properties of Number Fields}
+\subsubsection{Prime Decomposition}
+Splitting behavior of primes in extensions.
+
+\subsubsection{Ramification Theory}
+Discriminant, different, and their properties.
+
+\subsubsection{Galois-Theoretic Aspects}
+Decomposition and inertia groups, residue fields.
+
+\subsection{Examples: Special Classes of Fields}
+\subsubsection{Cyclotomic Fields}
+Calculation of invariants and arithmetic properties.
+
+\subsubsection{Quadratic Fields}
+Class numbers, units, and applications.
+
+\subsection{Local Methods}
+\subsubsection{p-adic Numbers and Local Fields}
+Construction and basic properties.
+
+\subsubsection{Hensel's Lemma}
+Applications to solving equations over local fields.
+
+\subsubsection{Ramification in Local Extensions}
+Structure of extensions of local fields.
+\section{References}
+\begin{enumerate}
+    \bibitem{GortzWedhorn2010}
+    Görtz, U., and Wedhorn, T.,
+    \textit{Algebraic Geometry I: Schemes},
+    Springer-Verlag, Wiesbaden, 2020.
+
+    \bibitem{GortzWedhorn2023}
+    Görtz, U., and Wedhorn, T.,
+    \textit{Algebraic Geometry II: Cohomology of Schemes},
+    Springer-Verlag, Wiesbaden, 2023.
+
+    \bibitem{GriffithsHarris1994}
+    Griffiths, P., and Harris, J.,
+    \textit{Principles of Algebraic Geometry},
+    Wiley Classics Library, Wiley, New York, 1994.
+
+    \bibitem{Kac1990}
+    Kac, V. G.,
+    \textit{Infinite Dimensional Lie Algebras},
+    3rd ed., Cambridge University Press, Cambridge, 1990.
+
+    \bibitem{Neukirch1999}
+    Neukirch, J.,
+    \textit{Algebraic Number Theory},
+    Springer-Verlag, Berlin, 1999.
+
+    \bibitem{Varadarajan1984}
+    Varadarajan, V. S.,
+    \textit{Lie Groups, Lie Algebras, and Their Representations},
+    Springer-Verlag, New York, 1984.
+\end{enumerate}
+\end{document}

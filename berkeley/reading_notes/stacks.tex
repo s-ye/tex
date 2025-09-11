@@ -8,7 +8,8 @@
 \usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
 \usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
 \usepackage{fancyhdr}
-\DeclareMathOperator{\ob}{ob}
+\usepackage{hyperref}
+
 
 \usepackage{parskip} % Automatically respects blank lines
 \setlength{\parskip}{1em} % Adds more space between paragraphs
@@ -300,9 +301,7 @@ We introduce formal framework underlying the theory of stacks, beginning with Gr
 
         \item \textbf{Stability under base change}: If $\{f_i: U_i \to U\}_{i \in I} \in J(U)$ and $g: V \to U$ is any morphism, then the family of pullbacks $\{V \times_U U_i \to V\}_{i \in I} \in J(V)$.
 
-        \item \textbf{Transitivity}: If $\{f_i: U_i \to U\}_{i \in I} \in J(U)$ and for each $i \in I$, we have
-
-              $\{g_{ij}: V_{ij} \to U_i\}_{j \in J_i} \in J(U_i)$, then the composite family $\{f_i \circ g_{ij}: V_{ij} \to U\}_{i \in I, j \in J_i} \in J(U)$.
+        \item \textbf{Transitivity}: If $\{f_i: U_i \to U\}_{i \in I} \in J(U)$ and for each $i \in I$, we have \[\{g_{ij}: V_{ij} \to U_i\}_{j \in J_i} \in J(U_i)\] then the composite family $\{f_i \circ g_{ij}: V_{ij} \to U\}_{i \in I, j \in J_i} \in J(U)$.
     \end{enumerate}
 \end{definition}
 
@@ -522,7 +521,6 @@ The four topologies form a hierarchy of refinements:
 \end{proposition}
 
 \section{Stacks}
-
 \begin{definition}[Category fibered in groupoids]
     A category fibered in groupoids over a category $\mathcal{C}$ is a functor $p: \mathcal{F} \to \mathcal{C}$ such that:
     \begin{enumerate}
@@ -564,8 +562,15 @@ If $x \in \operatorname{ob}(\mathcal{X}(U))$ and $f: U' \to U$ it is convenient 
     \end{enumerate}
 \end{definition}
 
+\begin{remark}
+    Any \textbf{k-space} $X$ may be seen as a \textbf{k-stack}, by considering a set as a groupoid (with the identity as the only morphism).
+    Conversely, any \textbf{k-stack} $\mathcal{X}$ such that $\mathcal{X}(R)$ is a discrete groupoid (\textbf{i.e.}, has only the identity as automorphisms)
+    for all affine $k$-schemes $U$, is a \textbf{k-space}.
+\end{remark}
+
+\subsection{Descent datum}
 \begin{definition}[Descent datum, effective descent datum]
-    A \textbf{descent datum} for $\mathcal{X}$ for a covering family $\{ U_i \xrightarrow{\varphi_i} U \}_{i \in I}$ is a system of the form
+    A \textbf{descent datum} for a lax functor $\mathcal{X}$ for a covering family $\{ U_i \xrightarrow{\varphi_i} U \}_{i \in I}$ is a system of the form
     $(x_i, \varphi_{ji})_{i,j \in I}$ with the following properties: each $x_i$ is an object of $\mathcal{X}(U_i)$, and each
     $\varphi_{ji} : x_i|_{U_{ji}} \to x_j|_{U_{ji}}$ is an arrow in $\mathcal{X}(U_{ji})$. Moreover, we have the co-cycle condition
 
@@ -582,12 +587,496 @@ If $x \in \operatorname{ob}(\mathcal{X}(U))$ and $f: U' \to U$ it is convenient 
     \]
     for all $i,j \in I$.
 \end{definition}
+The most classical form of descent data is faithfully flat descent for quasicoherent sheaves.
+\begin{theorem}[Faithfully flat descent]
+    Let $k$ be a field. Then the following hold:
+    \begin{enumerate}
+        \item[(i)] (Faithfully flat descent for morphisms) For any $k$-scheme $Z$ the functor of points
+              \[
+                  \mathrm{Hom}_{(\mathbf{Aff}/k)}(-, Z) : (\mathbf{Aff}/k)^{\mathrm{op}} \to \mathbf{Set}
+              \]
+              is a $k$-space.
+
+        \item[(ii)] (Faithfully flat descent for flat families of quasi-coherent sheaves) For any scheme $Z$, the lax functor $(\mathbf{Aff}/k)^{\mathrm{op}} \to \mathbf{Gpd}$ defined by
+              \[
+                  S \mapsto \{\text{quasi-coherent } \mathcal{O}_{Z \times_k S}\text{-modules flat over } S\} + \{\text{isomorphisms}\}
+              \]
+              is a $k$-stack.
+    \end{enumerate}
+\end{theorem}
+
+More verbosely, we have the following theorem from \cite{descent}.
+\begin{theorem}\label{thm:descent}
+    Let $f: T' \to T$ be a flat morphism of schemes. Assume, further, that $f$ is surjective and either quasi-compact or locally of finite presentation.
+
+    \begin{enumerate}
+        \item[(a)] Let $\mathcal{E}'$ be a quasi-coherent sheaf on $T'$ and $\varphi: p_1^*\mathcal{E}' \to p_2^*\mathcal{E}'$ an isomorphism on $T''$ such that
+              \[
+                  p_{23}^*\varphi \circ p_{12}^*\varphi = p_{13}^*\varphi
+              \]
+              on $T'''$. Then there exists a quasi-coherent sheaf $\mathcal{E}$ on $T$ and an isomorphism $\lambda: f^*\mathcal{E} \to \mathcal{E}'$ on $T'$ satisfying
+              \[
+                  p_2^*\lambda = \varphi \circ p_1^*\lambda
+              \]
+              on $T''$. Moreover the pair consisting of the sheaf $\mathcal{E}$ and the isomorphism $\lambda$ is unique up to canonical isomorphism.
+
+        \item[(b)] With notation as in (a), suppose $(\mathcal{F}', \psi)$ is another descent datum with solution given by $\mathcal{F}$ and $\mu$. Then, for every morphism $h': \mathcal{E}' \to \mathcal{F}'$ on $T'$ satisfying
+              \[
+                  p_2^*h' \circ \varphi = \psi \circ p_1^*h'
+              \]
+              on $T''$, there is a unique morphism $h: \mathcal{E} \to \mathcal{F}$ on $T$ such that $\mu \circ f^*h = h' \circ \lambda$ on $T'$.
+    \end{enumerate}
+\end{theorem}
 
 
-Any \textbf{k-space} $X$ may be seen as a \textbf{k-stack}, by considering a set as a groupoid (with the identity as the only morphism).
-Conversely, any \textbf{k-stack} $\mathcal{X}$ such that $\mathcal{X}(R)$ is a discrete groupoid (\textbf{i.e.}, has only the identity as automorphisms)
-for all affine $k$-schemes $U$, is a \textbf{k-space}.
+\subsection{Effective descent for modules along faithfully flat ring maps}
+The general case of Theorem \ref{thm:descent} will be reduced to the affine case, which amounts to some of the following commutative algebra. No Noetherian or finiteness conditions on either rings or modules are required.
 
+\begin{definition}[Flat and faithfully flat homomorphisms]
+    A homomorphism $A \to A'$ of commutative rings with unit is \textbf{flat} if, for any exact sequence $M_1 \to M_2 \to M_3$ of $A$-modules, the induced sequence $A' \otimes_A M_1 \to A' \otimes_A M_2 \to A' \otimes_A M_3$ (of $A'$-modules) is exact. The homomorphism is called \textbf{faithfully flat} if it is flat and the corresponding map $\operatorname{Spec}(A') \to \operatorname{Spec}(A)$ is surjective.
+\end{definition}
+
+\begin{exercise}
+    \begin{enumerate}
+        \item Show that a flat homomorphism $A \to A'$ is faithfully flat if and only if, for any nonzero $A$-module $M$, $A' \otimes_A M \neq 0$.
+
+        \item Show that a homomorphism $A \to A'$ is faithfully flat if and only if the following condition is satisfied: a sequence $M' \to M \to M''$ of $A$-modules is exact if and only if the sequence $A' \otimes_A M' \to A' \otimes_A M \to A' \otimes_A M''$ is exact.
+    \end{enumerate}
+\end{exercise}
+
+\begin{enumerate}
+    \item Suppose that $A \to A'$ is faithfully flat. We can consider a cyclic submodule of $M$, and it is enough to show that this will be nonzero upon tensoring with $A'$. But every cyclic submodule looks like $A/I$ for some ideal $I = \Ann_A(m)$. Pick a prime containing $I$. Such a prime exists by Zorn's lemma, in particular the set of ideals $\{ J \subseteq A \mid I \subseteq J, J \neq A\}$ has a maximal element, and such a maximal element must be a prime ideal. Let $\mf{p}$ be such a prime ideal containing $I$, and let $\mf q$ be the prime ideal of $A'$ lying over $\mf{p}$. Then \begin{align*}
+    IA' \subseteq \mf{p}A' \subseteq \mf q \neq A',
+\end{align*} so $A'/IA'$ is nonzero. Conversely, we can let $M = k(\mf p)$ be the residue field at a prime $\mf p$ in $A$. Then we see that $M \otimes_A A' \cong A'/\mf{p}A' \neq 0$.
+
+Recall that  $\mathfrak p$ is in the image of $f:\operatorname{Spec}A' \to \operatorname{Spec}A$
+if and only if the fiber $f^{-1}(\mathfrak p)$ is nonempty if and only if $\operatorname{Spec (A'\otimes_A \kappa(\mathfrak p)) \neq \varnothing}$ if and only if $A'\otimes_A \kappa(\mathfrak p)$ is not the zero ring. This is because \[\operatorname{Spec}(A'\otimes_A \kappa(\mathfrak p))
+    \;\cong\; \operatorname{Spec}(A'_{\mathfrak p}/\mathfrak p A'_{\mathfrak p})
+    \;\cong\; \{\text{primes of } A'_{\mathfrak p} \text{ lying over } \mathfrak p A_{\mathfrak p}\} \cong f^{-1}(\mf p)\] Recall that the points of $\Spec A_\mathfrak p$ are in bijection with the primes of $A$ contained in $\mathfrak p$. Therefore, the primes of $A'_{\mathfrak p}$ correspond to primes of $A'$ lying inside $\mathfrak p$ after contraction.
+
+Therefore, the map $\Spec A' \to \Spec A$ is surjective.
+\item Suppose $A\to A'$ is faithfully flat. Then we need that $A' \otimes_A M' \to A' \otimes_A M \to A' \otimes_A M''$ is exact implies that $M' \to M \to M''$ is exact.
+Let $S : N' \longrightarrow N \longrightarrow N''$ be a sequence of $A$-modules, and suppose that
+$$S \otimes A' : M' \otimes A' \xrightarrow{f_M} M \otimes A' \xrightarrow{g_M} M'' \otimes A'$$
+is exact. As $A'$ is flat, the exact functor $\otimes A'$ transforms kernel into kernel and image into image. Thus $\operatorname{Im}(g \circ f) \otimes A' = \operatorname{Im}(g_M \circ f_M) = 0$, and by the assumption we get $\operatorname{Im}(g \circ f) = 0$, i.e.\ $g \circ f = 0$. Hence $S$ is a complex, and if $H(S)$ denotes its homology (at $N$), we have $H(S) \otimes A' = H(S \otimes A') = 0$. Using again the assumption we obtain $H(S) = 0$, which implies that $S$ is exact.
+
+Conversely, suppose that $M' \to M \to M''$ is exact iff $M' \otimes A' \to M \otimes A' \to M'' \otimes A'$ is exact. By definition, $A'$ is flat. We need to see that $\Spec A' \to \Spec A$ is surjective. By the above reasoning, it is enough to show that the localization $A' \otimes_A \kappa(\mathfrak p)$ is nonzero for every prime $\mathfrak p$ of $A$. This follows from tensoring the three term sequence $0 \to \kappa(\mathfrak p) \to 0$. Since $A' \otimes_A \kappa(\mathfrak p) \cong \kappa(\mathfrak p) \otimes_A A' \neq 0$, we conclude that the localization is indeed nonzero.
+\end{enumerate}
+
+
+\begin{exercise}
+    Suppose $A \to A'$ is faithfully flat.
+    \begin{enumerate}
+        \item Show that a homomorphism $M \to N$ of $A$-modules is a monomorphism (resp.\ epimorphism, resp.\ isomorphism) if and only if the homomorphism $A' \otimes_A M \to A' \otimes_A N$ is a monomorphism (resp.\ epimorphism, resp.\ isomorphism).
+        \item Show that an $A$-module $M$ is finitely generated (resp.\ finitely presented, resp.\ flat, resp.\ locally free of finite rank $n$) if and only if the $A'$-module $A' \otimes_A M$ is finitely generated (resp.\ finitely presented, resp.\ flat, resp.\ locally free of finite rank $n$).
+    \end{enumerate}
+\end{exercise}
+Recall the two following facts about faithfully flat morphisms:
+\begin{enumerate}
+    \item[L1] If $0\to K\to M\xrightarrow{f}N$ is exact, then $0\to B\otimes_A K\to B\otimes_A M\xrightarrow{B\otimes f} B\otimes_A N$ is exact (flatness). Dually for cokernels.
+    \item[L2] If $B\otimes_A X=0$ then $X=0$ (faithfulness). More generally, for submodules $N_1,N_2\subseteq M$, $B\otimes_A N_1 = B\otimes_A N_2 \subseteq B\otimes_A M \;\Rightarrow\; N_1=N_2$. In particular, one has submodule detection under faithful flatness. This is because if $A'\otimes N_1 = A'\otimes N_2$, then $A'\otimes(N_1/N_2)=0$. Faithfulness will force $N_1/N_2=0$, i.e. $N_1=N_2$.
+\end{enumerate}
+
+\begin{enumerate}
+    \item Let $f:M\to N$ be an $A$-linear map. If $f$ is mono, then $0\to M\xrightarrow{f}N$ is exact, hence by (L1) $0\to B\otimes M \xrightarrow{B\otimes f} B\otimes N$ is exact, so $B\otimes f$ is mono. Conversely, if $B\otimes f$ is mono, then $\ker(B\otimes f)=B\otimes\ker f=0$ by (L1), hence $\ker f=0$ by (L2), so $f$ is mono. Let $C=\operatorname{coker}(f)$. If $f$ is epi then $C=0$, hence $B\otimes C=0$, so $B\otimes f$ is epi. Conversely, if $B\otimes f$ is epi then $B\otimes C=0$, hence $C=0$ by (L2), so $f$ is epi. $f$ is an iso iff it is both mono and epi; equivalently iff $B\otimes f$ is both mono and epi (by the two bullets), hence an iso.
+    \item
+    \begin{itemize}
+        \item \textbf{Finitely generated}
+
+        \textit{Ascent}. If $M$ is generated by $m_1,\dots,m_r$, then $1\otimes m_i$ generate $B\otimes M$ as a $B$-module.
+
+        \textit{Descent}. Suppose $B\otimes M$ is generated by $y_1,\dots,y_s$. Write each $y_j=\sum_k b_{jk}\otimes n_{jk} $ with $ b_{jk}\in B, n_{jk}\in M$. Let $S=\{n_{jk}\}$ (finite). The map $\phi:A^{|S|}\to M$ sending basis vectors to the elements of S becomes surjective after tensoring with $B$ (its image contains the $y_j$, hence all of $B\otimes M$). Thus $B\otimes\operatorname{coker}\phi=0$, so$ \operatorname{coker}\phi=0$ by (L2). Hence $\phi$ is surjective and $M$ is finitely generated.
+
+\item \textbf{Finitely presented.} 
+
+\textit{Ascent.} If $A^r\xrightarrow{\alpha}A^s\to M\to 0$ is exact with $r,s<\infty$, then tensoring gives $B^r\xrightarrow{B\otimes\alpha}B^s\to B\otimes M\to 0$: finite presentation ascends by flatness. 
+
+\textit{Descent.} Assume $B\otimes M$ is finitely presented. By (a), pick a surjection $\pi:A^s\to M$ whose base change $B^s\to B\otimes M$ is surjective. Let $K=\ker(\pi)$. Then $$K'=\ker(B^s\to B\otimes M)=B\otimes K$$ by flatness. Since $B\otimes M$ is finitely presented, $K'$ is finitely generated over $B$. By (a, descent) applied to the $A$-module $K$, from $B\otimes K$ f.g.\ we conclude $K$ is f.g. Hence $A^s\to M$ has finitely generated kernel, i.e.\ $M$ is finitely presented.
+
+\item \red{\textbf{Flat.}}
+
+\textit{Ascent.} If $M$ is flat over $A$, then $B\otimes M$ is flat over $B$ (tensoring with a flat $B$ preserves exactness). 
+
+\textit{Descent.} Assume $B\otimes M$ is flat over $B$. For any $A$-module $N$ and $i\geq 1$,
+\[
+\operatorname{Tor}_i^A(N,M)\otimes_A B \cong \operatorname{Tor}_i^B(N\otimes_A B, M\otimes_A B)
+\]
+(because $B$ is flat). The RHS is $0$ when $i=1$ by flatness of $B\otimes M$. Hence $\operatorname{Tor}_1^A(N,M)\otimes_A B=0$, and by (L2) we get $\operatorname{Tor}_1^A(N,M)=0$ for all $N$. Thus $M$ is flat.
+
+\item \red{\textbf{Locally free of finite rank $n$.} }
+
+\textit{Ascent.} If $M$ is locally free of rank $n$, then $B\otimes M$ is locally free of rank $n$ (localization commutes with tensor). 
+
+\textit{Descent.} Assume $B\otimes M$ is locally free of rank $n$ over $B$. From (b) and (c), $M$ is finitely presented and flat. Let $\mathfrak{p}\in\Spec A$ and pick $\mathfrak{q}\in\Spec B$ over $\mathfrak{p}$. Then
+\[
+(B\otimes M)\otimes_B \kappa(\mathfrak{q}) \cong M\otimes_A \kappa(\mathfrak{q}) \cong (M\otimes_A \kappa(\mathfrak{p}))\otimes_{\kappa(\mathfrak{p})} \kappa(\mathfrak{q}).
+\]
+The LHS is an $n$-dimensional $\kappa(\mathfrak{q})$-vector space, hence $\dim_{\kappa(\mathfrak{p})}(M\otimes_A \kappa(\mathfrak{p}))=n$. Thus the fiber-rank function $p\mapsto \dim_{\kappa(p)}(M\otimes_A \kappa(p))$ is constantly $n$.
+
+Over the local ring $A_{\mathfrak{p}}$, a finitely presented flat module is free; hence $M_{\mathfrak{p}}\cong A_{\mathfrak{p}}^{\,n}$ for all $\mathfrak{p}$. Therefore $M$ is locally free of rank $n$.
+
+    \end{itemize}
+\end{enumerate}
+
+\begin{lemma}\label{lem:descent}
+    Let $M$ be an $A$-module. If $A \to A'$ is faithfully flat, then
+    \[
+        M \xrightarrow{\gamma} A' \otimes_A M \rightrightarrows A' \otimes_A A' \otimes_A M
+    \]
+    is exact, that is, the canonical homomorphism $\gamma$ maps $M$ isomorphically to the set of elements in $A' \otimes_A M$ that have the same image in $A' \otimes_A A' \otimes_A M$ by the two projection homomorphisms. Equivalently, if one defines a homomorphism $\delta$ from $A' \otimes_A M$ to $A' \otimes_A A' \otimes_A M$ by the formula $\delta(x \otimes u) = 1 \otimes x \otimes u - x \otimes 1 \otimes u$, then the sequence
+    \[
+        0 \to M \xrightarrow{\gamma} A' \otimes_A M \xrightarrow{\delta} A' \otimes_A A' \otimes_A M
+    \]
+    of $A$-modules is exact.
+\end{lemma}
+
+\begin{proof}
+    By the previous exercise, it suffices to show that the sequence becomes exact after tensoring it (on the left) over $A$ by $A'$, i.e., that the sequence
+    \[
+        0 \longrightarrow A' \otimes_A M \xrightarrow{A' \otimes \gamma} A' \otimes_A A' \otimes_A M \xrightarrow{A' \otimes \delta} A' \otimes_A A' \otimes_A A' \otimes_A M
+    \]
+    is exact. Let $\mu: A' \otimes_A A' \to A'$ be the multiplication map, $\mu(x \otimes y) = xy$. The injectivity of the first map $A' \otimes \gamma$ is now immediate, since the mapping $\mu \otimes M: A' \otimes_A A' \otimes_A M \to A' \otimes_A M$ gives a left inverse to it. Suppose an element $\sum x_i \otimes y_i \otimes u_i$ is in the kernel of $A' \otimes \delta$, i.e.
+    \[
+        \sum x_i \otimes 1 \otimes y_i \otimes u_i = \sum x_i \otimes y_i \otimes 1 \otimes u_i.
+    \]
+    Applying $\mu$ to the first two factors yields
+    \[
+        \sum x_i \otimes y_i \otimes u_i = \sum x_i y_i \otimes 1 \otimes u_i,
+    \]
+    and $\sum x_i y_i \otimes 1 \otimes u_i$ is the image of $\sum x_i y_i \otimes u_i$ in $A' \otimes_A A' \otimes_A M$, as required.
+\end{proof}
+
+\begin{remark}
+    The proof of this lemma is a common one in descent theory: one makes a faithfully flat base extension to achieve the situation where the covering map \( T' \to T \) has a section, in which case the assertion proves itself.
+\end{remark}
+
+\begin{lemma}\label{lem:descent_hom}
+If $A \to A'$ is faithfully flat, and $M$ and $N$ are $A$-modules, then the sequence
+\[
+\Hom_A(M,N) \;\to\; \Hom_{A'}(A' \otimes_A M,\, A' \otimes_A N) 
+\;\rightrightarrows\; \Hom_{A' \otimes_A A'}(A' \otimes_A A' \otimes_A M,\, A' \otimes_A A' \otimes_A N)
+\]
+is exact.
+\end{lemma}
+
+\begin{proof}
+The exactness of Lemma A.4, applied to $N$, together with the left exactness of $\Hom$, gives the exactness of
+\[
+\Hom_A(M,N) \;\to\; \Hom_A(M,\, A' \otimes_A N) 
+\;\rightrightarrows\; \Hom_A(M,\, A' \otimes_A A' \otimes_A N).
+\]
+
+Using the identifications 
+\[
+\Hom_A(M,P) \;=\; \Hom_B(B \otimes_A M,\, P)
+\]
+for any homomorphism $A \to B$ and any $B$-module $P$, first for $B = A'$ and then for 
+$B = A' \otimes_A A'$, translates this exact sequence into the exact sequence of the lemma.
+\end{proof}
+
+Now let $M'$ be an $A'$-module. We have, as we recall, projection maps 
+$p_1$ and $p_2$ from $\Spec(A'')$ to $\Spec(A')$, where 
+$A'' = A' \otimes_A A'$. Hence we have pullbacks
+\[
+p_1^*(M') = A'' \otimes_{p_1,A'} M', 
+\qquad 
+p_2^*(M') = A'' \otimes_{p_2,A'} M'.
+\]
+The two pullbacks $p_1^*(M')$ and $p_2^*(M')$ can be identified with 
+$M' \otimes_A A'$ and $A' \otimes_A M'$ respectively, where the actions of 
+$A''$ on these modules are given by
+\[
+(x \otimes y)\cdot(u \otimes z) = xu \otimes yz, 
+\qquad 
+(x \otimes y)\cdot(z \otimes u) = xz \otimes yu,
+\]
+with $x,y,z \in A'$ and $u \in M'$.  
+
+Similarly, the three pullbacks of $M'$ by $q_1, q_2,$ and $q_3$ to $A'''$ can be identified with
+\[
+M' \otimes_A A' \otimes_A A', 
+\qquad 
+A' \otimes_A M' \otimes_A A', 
+\qquad 
+A' \otimes_A A' \otimes_A M',
+\]
+respectively, again with the diagonal actions of $A''' = A' \otimes_A A' \otimes_A A'$.  
+
+Suppose 
+\[
+\varphi : M' \otimes_A A' = p_1^*(M') \;\longrightarrow\; p_2^*(M') = A' \otimes_A M'
+\]
+is an isomorphism of $A''$-modules. This determines, by the three pullbacks $p_{ij}$, isomorphisms
+\[
+\varphi_{ij} = p_{ij}^*(\varphi) : 
+q_i^*(M') = p_{ij}^*(p_1^*(M')) 
+\;\longrightarrow\; 
+p_{ij}^*(p_2^*(M')) = q_j^*(M').
+\]
+
+For example, $\varphi_{12}$ is the map
+\[
+M' \otimes_A A' \otimes_A A' \;\longrightarrow\; A' \otimes_A M' \otimes_A A'
+\]
+that takes $u \otimes x \otimes y$ to $\varphi(u \otimes x) \otimes y$. That is, if
+\[
+\varphi(u \otimes x) = \sum x_i \otimes u_i,
+\]
+then
+\[
+\varphi_{12}(u \otimes x \otimes y) = \sum x_i \otimes u_i \otimes y.
+\]
+Similarly,
+\[
+\varphi_{13}(u \otimes y \otimes x) = \sum x_i \otimes y \otimes u_i,
+\qquad
+\varphi_{23}(y \otimes u \otimes x) = \sum y \otimes x_i \otimes u_i.
+\]
+
+Descent for modules amounts to the following assertion:
+
+\begin{lemma}[Descent for modules]\label{lem:descent_modules}
+Suppose $A \to A'$ is faithfully flat, $M'$ is an $A'$-module, and 
+$\varphi : M' \otimes_A A' \;\to\; A' \otimes_A M'$
+is an isomorphism of $A''$-modules such that 
+$\varphi_{13} = \varphi_{23} \circ \varphi_{12}$ 
+from $q_1^*(M')$ to $q_3^*(M')$.  
+Define the $A$-module $M$ by
+\[
+M \;=\; \{\, u \in M' \mid \varphi(u \otimes 1) = 1 \otimes u \,\}.
+\]
+Then the canonical homomorphism 
+\[
+\lambda : A' \otimes_A M \;\longrightarrow\; M', 
+\qquad x \otimes u \longmapsto x \cdot u,
+\]
+is an isomorphism.
+\end{lemma}
+
+\begin{proof}
+Let $\tau : M' \to A' \otimes_A M'$ be defined by 
+\[
+\tau(u) = 1 \otimes u - \varphi(u \otimes 1).
+\]
+We have an exact sequence
+\[
+0 \;\longrightarrow\; M \;\longrightarrow\; M' \xrightarrow{\;\tau\;} A' \otimes_A M'.
+\]
+Tensoring this on the right with $A'$ over $A$ gives the top row of the following diagram:
+\[
+\begin{tikzcd}
+0 \arrow[r] 
+& M \otimes_A A' \arrow[r] \arrow[d, "\psi"] 
+& M' \otimes_A A' \arrow[r, "\tau \otimes 1"] \arrow[d, "\varphi"] 
+& A' \otimes_A M' \otimes_A A' \arrow[d, "A' \otimes \varphi"] \\
+0 \arrow[r] 
+& M' \arrow[r] 
+& A' \otimes_A M' \arrow[r] 
+& A' \otimes_A A' \otimes_A M'
+\end{tikzcd}
+\]
+The bottom row is the exact sequence from Lemma \ref{lem:descent}, applied to the $A$-module $M'$.  
+The map $\psi$ is defined by $\psi(u \otimes x) = x \cdot u$, and we want to show $\psi$ is an isomorphism.  
+Since the rows are exact, and the right two vertical maps are isomorphisms, this conclusion will follow if we verify that the diagram is commutative.
+
+The left square commutes since, for $u \in M$ and $x \in A'$,  
+\[
+\varphi(u \otimes x) = (1 \otimes x)\varphi(u \otimes 1) = (1 \otimes x)(1 \otimes u) = 1 \otimes x u.
+\]
+To prove that the right diagram commutes, we must show that, for any $u \in M'$ and $x \in A'$, the element $u \otimes x \in M' \otimes_A A'$ has the same image by either route around the square.  
+
+Let $\varphi(u \otimes 1) = \sum y_i \otimes v_i$, with $y_i \in A'$ and $v_i \in M'$. Then
+\[
+\varphi(u \otimes x) = (1 \otimes x)\varphi(u \otimes 1) = \sum y_i \otimes x v_i,
+\]
+so the image of $u \otimes x$ by the lower route is
+\[
+\sum 1 \otimes y_i \otimes x v_i \;-\; \sum y_i \otimes 1 \otimes x v_i.
+\]
+
+On the upper route, $u \otimes x$ maps to the right to 
+\[
+1 \otimes u \otimes x \;-\; \varphi(u \otimes 1) \otimes x 
+= 1 \otimes u \otimes x - \sum y_i \otimes v_i \otimes x,
+\]
+which maps down to
+\[
+1 \otimes \varphi(u \otimes x) - \sum y_i \otimes \varphi(v_i \otimes x)
+= \sum 1 \otimes y_i \otimes x v_i - \sum y_i \otimes \varphi(v_i \otimes x).
+\]
+
+We are therefore reduced to verifying that
+\[
+\sum y_i \otimes \varphi(v_i \otimes x) 
+= \sum y_i \otimes 1 \otimes x v_i.
+\]
+But this is exactly the assertion that $ \varphi_{23}(\varphi_{12}(u \otimes 1 \otimes x)) = \varphi_{13}(u \otimes 1 \otimes x).$
+\end{proof}
+This shows that the module $M$ that we constructed satisfies an isomorphism $\lambda: A' \otimes_A M \to M'$. In order to complete the proof of faithfully flat descent for modules, we must show that the isomorphism $\lambda$ is compatible with the given isomorphism $\varphi: p_1^*(M') \to p_2^*(M')$. That is, we need to know that the descent data for $M$ induced by $\lambda$ is the same as the given descent data $\varphi$. Formally:
+\[
+\varphi \circ p_1^* \lambda \;=\; p_2^* \lambda.
+\]
+
+This amounts to verifying that the diagram
+\[
+\begin{tikzcd}
+A' \otimes_A M \otimes_A A' 
+  \arrow[r, "p_1^* \lambda"] \arrow[d, "\kappa"'] 
+& M' \otimes_A A' 
+  \arrow[d, "\varphi"] \\
+A' \otimes_A A' \otimes_A M 
+  \arrow[r, "p_2^* \lambda"'] 
+& A' \otimes_A M'
+\end{tikzcd}
+\]
+commutes, where 
+\[
+\kappa(x \otimes u \otimes y) = x \otimes y \otimes u.
+\]
+This is because $\kappa$ is the canonical isomorphism from $p_1^*(A' \otimes_A M)$ to $p_2^*(A' \otimes_A M)$, which we have when we know that $M' \cong A' \otimes_A M$.
+
+This amounts to the identity
+\[
+x \otimes \lambda(y \otimes u) 
+\;=\; \varphi\!\bigl(\lambda(x \otimes u) \otimes y \bigr),
+\]
+i.e.
+\[
+x \otimes yu = \varphi(xu \otimes y),
+\]
+or equivalently
+\[
+(x \otimes y)(1 \otimes u) = (x \otimes y)\varphi(u \otimes 1),
+\]
+which follows from the fact that $u \in M$.
+
+Finally, we need to check that a morphism of descent data $h': M' \to N'$ "descends" uniquely to a morphism $h: M \to N$ of $A$-modules. This means that we have $A'$-modules $M'$ and $N'$, with isomorphisms
+\[
+\varphi : M' \otimes_A A' \;\to\; A' \otimes_A M' 
+\qquad\text{and}\qquad
+\psi : N' \otimes_A A' \;\to\; A' \otimes_A N',
+\]
+and we have $A$-modules $M$ and $N$, with isomorphisms 
+\[
+\lambda : A' \otimes_A M \;\to\; M', 
+\qquad
+\mu : A' \otimes_A N \;\to\; N',
+\]
+satisfying $\varphi \circ p_1^*(\lambda) = p_2^*(\lambda)$ and 
+$\psi \circ p_1^*(\mu) = p_2^*(\mu)$. 
+
+We are given a homomorphism 
+\[
+h' : M' \to N'
+\]
+of $A'$-modules, satisfying the identity 
+\[
+p_2^*(h') \circ \varphi = \psi \circ p_1^*(h').
+\]
+We must show that there is a unique homomorphism $h : M \to N$ of $A$-modules such that 
+\[
+\mu \circ (A' \otimes h) = h' \circ \lambda.
+\]
+
+The trick is to package $h'$ into $g' = \mu^{-1} h' \lambda$, show $p_1^*(g') = p_2^*(g')$, and then invoke Lemma \ref{lem:descent_hom} to conclude that $g'$ comes from a unique $A$-linear map $h$.
+
+Set 
+\[
+g' \;=\; \mu^{-1} \circ h' \circ \lambda : A' \otimes_A M \;\to\; A' \otimes_A N.
+\]
+If we show that $p_1^*(g') = p_2^*(g')$, then Lemma~A.5 will produce a unique homomorphism 
+$h : M \to N$ such that $g' = A' \otimes h$. 
+This says that 
+\[
+h' \circ \lambda = \mu \circ (A' \otimes h),
+\]
+as required. 
+
+To conclude the proof, we calculate:
+\begin{align*}
+p_1^*(g') 
+&= p_1^*(\mu^{-1} \circ h' \circ \lambda) \\
+&= p_1^*(\mu)^{-1} \circ p_1^*(h') \circ p_1^*(\lambda) \\
+&= p_2^*(\mu)^{-1} \circ \psi \circ p_1^*(h') \circ p_1^*(\lambda) \\
+&= p_2^*(\mu)^{-1} \circ p_2^*(h') \circ \varphi \circ p_1^*(\lambda) \\
+&= p_2^*(\mu)^{-1} \circ p_2^*(h') \circ p_2^*(\lambda) \\
+&= p_2^*(g'),
+\end{align*}
+as required.
+
+\begin{remark}
+    The overall structure of the proofs in this section is worth noting. First, we proved descent for morphisms in the case of objects pulled back from the base (\ref{lem:descent_hom}). Then we showed that
+every descent datum is effective (\ref{lem:descent_modules}). We saw as a formal consequence that
+descent for morphisms holds in the case of an arbitrary pair of descent data, each
+admitting a solution, and from this that the solution to any descent problem is
+unique up to canonical isomorphism.
+\end{remark}
+
+\subsection{Extending to quasi-coherent sheaves on schemes}
+In this section, we complete the proof of Theorem \ref{thm:descent}. Recall that a morphism $f : T' \to T$ of schemes is \emph{faithfully flat} if it is flat and surjective. It is not enough to assume $f$ is faithfully flat for the conclusions of the theorem to hold, as we'll see below. To pass from the affine case to the case of general schemes we'll need some additional hypothesis on the morphism $f$. In fact, there are two additional hypotheses that we may impose, and either one will suffice to establish descent for objects and morphisms, in the context of quasi-coherent sheaves:
+
+\begin{enumerate}[(i)]
+\item $f$ is \textbf{fpqc}, that is, faithfully flat and \emph{quasi-compact}. 
+We recall this means that the pre-image, under $f$, of any affine open subset of 
+the base is covered by finitely many affine open subsets.
+
+\item $f$ is \textbf{fppf}, that is, faithfully flat and \emph{locally of finite 
+presentation}. The important fact needed here is that every morphism that is 
+flat and locally of finite presentation is open \cite{EGA} IV.2.4.6.
+\end{enumerate}
+
+The notations \textbf{fpqc} and \textbf{fppf} come from the French terminology 
+for the conditions on $f$ (\emph{fidèlement plat, quasi-compact} and 
+\emph{fidèlement plat, de présentation finie}).
+
+As described at the end of the previous section, to prove Theorem \ref{thm:descent}, it suffices to prove descent for morphisms of objects pulled back from the base and to show that every descent datum is effective. In other words, Theorem \ref{thm:descent} follows from the following pair of assertions.
+
+\begin{lemma}[Descent for morphisms]\label{lem:descent_morphisms}
+Assume $f : T' \to T$ is (i) fpqc or (ii) fppf. 
+Let $\mathcal{E}$ and $\mathcal{F}$ be quasi-coherent sheaves on $T$. 
+Then, for every morphism 
+\[
+h' : f^*\mathcal{E} \to f^*\mathcal{F}
+\]
+on $T'$ such that $p_1^*h' = p_2^*h'$ on $T''$, there is a unique morphism 
+\[
+h : \mathcal{E} \to \mathcal{F}
+\]
+on $T$ such that $f^*h = h'$.
+\end{lemma}
+
+\begin{lemma}[Effective descent]\label{lem:effective_descent}
+Assume $f : T' \to T$ is (i) fpqc or (ii) fppf. 
+Let $\mathcal{E}'$ be a quasi-coherent sheaf on $T'$ and 
+\[
+\varphi : p_1^*\mathcal{E}' \;\longrightarrow\; p_2^*\mathcal{E}'
+\]
+an isomorphism on $T''$ such that 
+\[
+p_{23}^*\varphi \circ p_{12}^*\varphi \;=\; p_{13}^*\varphi
+\]
+on $T'''$. Then there exists a quasi-coherent sheaf $\mathcal{E}$ on $T$ 
+and an isomorphism 
+\[
+\lambda : f^*\mathcal{E} \;\longrightarrow\; \mathcal{E}'
+\]
+on $T'$ such that 
+\[
+p_2^*\lambda = \varphi \circ p_1^*\lambda
+\]
+on $T''$.
+\end{lemma}
+
+We will say that a morphism $f : T' \to T$ of schemes has \textbf{descent for morphisms} if it satisfies the conclusion of Lemma \ref{lem:descent_morphisms}, and that it has \textbf{effective descent} if it satisfies the conclusions of both Lemma \ref{lem:descent_morphisms} and Lemma \ref{lem:effective_descent}.
+
+Recall the sheaf gluing theorem for honest open covers of a topological space. If you have sheaves $\mathcal{F}_\lambda$ on each piece of an open cover, and isomorphisms $\theta_{\lambda\mu}$ on overlaps satisfying the cocycle condition, then there exists a unique sheaf $\mathcal{F}$ on $X$ which restricts to the given sheaves, compatible with the $\theta$. In our setting, this theorem reads that quasi-coherent sheaves satisfy effective descent for Zariski open covers. 
+
+We have proved in the previous section that every faithfully flat morphism of affine schemes satisfies effective descent. Moreover, every Zariski open covering satisfies effective descent.
+
+
+
+
+\subsection{Morphisms of $k$-stacks, fiber products, representable morphisms}
 \begin{definition}[Morphism of $k$-stacks]
     A \textbf{1-morphism} \( F : \mathcal{X} \to \mathcal{Y} \) will associate, for every \( U \in \operatorname{ob}(\Aff/k) \), a functor
     \[
@@ -741,8 +1230,12 @@ This motivates the following definition:
     If $G$ is reductive, the algebraic stack $\mathcal{M}_{G,X}$ is smooth, dimension $\dim G(g-1)$.
 \end{proposition}
 
+
+
+
+
 \section{Uniformization}
-The theory of uniformization relates these moduli spaces to loop groups and associated Grassmannians. We introduce the uniformization of moduli stacks of principal $G$-bundles, beginning with the topological perspective and transitioning to the algebraic setting. 
+The theory of uniformization relates these moduli spaces to loop groups and associated Grassmannians. We introduce the uniformization of moduli stacks of principal $G$-bundles, beginning with the topological perspective and transitioning to the algebraic setting.
 \subsection{Topological loop groups}
 Let $X$ be a smooth projective curve over $k$. Let $G$ connected reductive. Then isomorphism classes of topological principal $G$-bundles over $X$ are in bijection with elements of $\pi_1(G)$.
 
@@ -1292,5 +1785,14 @@ This establishes a correspondence between principal $G$-bundles and bundles with
     "Lectures on moduli of principal $G$-bundles over algebraic curves,"
     in \textit{School on Algebraic Geometry (Trieste, 1999)}, pp. 1--57,
     ICTP Lecture Notes, vol. 1, Abdus Salam International Centre for Theoretical Physics, Trieste, 1999.
+
+    \bibitem{descent}
+    \url{https://math.colorado.edu/~casa/seminars/reading/stack_of_curves_21/papers/fultonetalstacks/6AfultonAppDescent.pdf}
+
+    \bibitem{EGA}
+    Grothendieck, A.,
+    \textit{Éléments de géométrie algébrique (EGA)},
+    Publications Mathématiques de l'IHÉS, vol. 4, 1960.
+
 \end{enumerate}
 \end{document}

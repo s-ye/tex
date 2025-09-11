@@ -28,11 +28,10 @@
 
 \tableofcontents
 
-\section{Classical}
-We want to understand the decomposition theorem for perverse sheaves. The classical
-precursors to this theorem include the theorems of Lefschetz, Hodge, Deligne, and the invariant cycle theorems.
-We discuss them here below. Let $X$ be a smooth projective variety over $\C$ and let $D = X \cap H$ be
-the intersection of $X$ with a generic hyperplane.
+\section{Remarkable properties of smooth manifolds}
+In the 20th century, mathematicians discovered spectactular properties of smooth manifolds that came to lead the forefront of mathematical research. In particular, smooth manifolds satisfy Lefschetz theory, Hodge theory, Hirzebruch-Riemann-Roch theory, Atiyah-Singer theory, and can carry multiple differentiable structures. However, the study of perverse sheaves is not very remarkable. Therefore, it is all the more incredible that we have the decomposition thoerem. The classical precursors to this theorem include the theorems of Lefschetz, Hodge, Deligne, and the invariant cycle theorems. 
+
+Let $X$ be a smooth projective variety over $\C$ and let $D = X \cap H$ be the intersection of $X$ with a generic hyperplane.
 
 \subsection{Gysin maps}
 The discussion of the Lefschetz hyperplane theorem is based on \cite{griffiths-harris}. In general, suppose we have $i:X\to Y$ the inclusion of a
@@ -63,11 +62,10 @@ given by $i_*i^* = c_d(N_{X/Y})\cup = [D]\cup$.
     and capping with Chern classes is about looking at the homology class of
     the intersection of the embedded $Z$ with general sections of $N_{X/Y}$.
 \end{remark}
-
 The Gysin maps satisfy very special properties when we have smooth projective varieties.
 \begin{theorem}
     [Lefschetz hyperplane theorem] The restriction map $H^i(X)\to H^i(D)$ is an isomorphism for
-    $i < n-1 $ and injective for $i = n-1$.
+    $i < n-1$ and injective for $i = n-1$.
 \end{theorem}
 
 \begin{theorem}
@@ -77,7 +75,7 @@ The Gysin maps satisfy very special properties when we have smooth projective va
 \end{theorem}
 
 \begin{remark}
-    Hyperplane line bunldes are positive are ample and satisfy Hard Lefschetz.
+    Hyperplane line bundles are positive are ample and satisfy Hard Lefschetz.
 \end{remark}
 \subsection{Hodge theory}
 The cohomology of a smooth projective variety $X$ is very special
@@ -128,9 +126,6 @@ It is enough to show that
     \end{align*} for $p+q \leq n$.
 \end{theorem}
 
-\begin{remark}
-    The definition of positive line bundle and the Kodaira vanishing theorem will be black-boxed.
-\end{remark}
 
 \section{Sheaves and derived categories}
 This section is also based on \cite{cataldo-migliorini}.
@@ -630,8 +625,8 @@ since the shifts go away. In particular, we have the following:
     \end{enumerate}
 \end{theorem}
 \subsubsection{Applying the machinery to the Springer resolution}
-In this section we explain the following setup and theorem.
-Set $Z = \tilde \cN\times_\cN \tilde \cN$ the Steinberg variety.
+
+Let $Z = \tilde \cN\times_\cN \tilde \cN$ the Steinberg variety.
 If $x\in \cN$ then $M_x$ is formed by pairs $(x,\mf b)$ where $\mf b$
 runs over the subset $\cB_x$ of $x$ invariant Borel subalgebras. Equivalently
 any element $x\in \mf g$ induces a vector field on $G/B$ and $\cB_x$ is the
@@ -640,10 +635,9 @@ zeros of this vector field.
 Let $G(x)$ be the centralizer of $x$ in $G$, $A(x) = G(x)/G(x)_0$ the isotopy
 group acting on the connected components. Let $A(x)^*$ denote the set of isomorphism classes
 of $A(x)$-representations occuring in the BM homology groups $H_{top}(M_x)$.
-The main techincal result known as "Springer construction of Weyl groups"
-is the following:
+The main technical result known as 'Springer construction of Weyl groups' is the following:
 
-\begin{theorem} [Geometric Construction of $W$]
+\begin{theorem} [Geometric Construction of $W$] Let $Z = \tilde \cN\times_\cN \tilde \cN$ be the Steinberg variety.
     \begin{enumerate}
         \item $H(Z) \cong \C[W]$
         \item The collection $\{H(M_x)_\phi\}$ as $(x,\phi)$ runs over $G$ conjugacy
@@ -654,7 +648,7 @@ is the following:
 
 \subsubsection{Fourier transform}
 We introduce the main tool of the construction, the Fourier transform
-on perverse sheaves (or D-modules).
+on perverse sheaves (or $\cD$-modules).
 
 \subsection{Schubert varieties and Kazhdan Lustzig polynomials}
 Let $G$ be an algebraic group. The Kazhdan Lustzig polynomials are a family of polynomials defined for

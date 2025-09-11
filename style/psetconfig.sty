@@ -15,6 +15,20 @@
     urlcolor=blue,
 }
 
+\renewcommand{\maketitle}{
+    \begin{center}
+        {\LARGE \textbf{\@title}} \\ % Access stored title
+        \vspace{0.5em}
+        {\large \@author} \\ % Access stored author
+        \vspace{0.5em}
+        {\small \@date} % Access stored date
+    \end{center}
+}
+
+\makeatletter
+\let\psettitle\maketitle
+\makeatother
+
 
 \pagestyle{scrheadings}
 \setlength{\headheight}{13.59999pt}
@@ -27,4 +41,12 @@
 \newenvironment{solution}
     {\textit{Solution:}}
     {}
+
+\newtheorem{proposition}{Proposition}[section]
+\usepackage{/Users/songye03/Desktop/Math_tex/style/macros}
+
+
+\usepackage{parskip}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0pt}
 \endinput

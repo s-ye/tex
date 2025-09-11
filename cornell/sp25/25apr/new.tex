@@ -1,0 +1,79 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsthm, amssymb, mathrsfs}
+\usepackage{hyperref}
+\usepackage{tikz-cd}
+
+\title{Explaining the Identification \( H^1_{\text{\et}}(X, \mathbb{Z}_p) \cong T_p J(-1) \)}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+Let \( X \) be a smooth projective curve over an algebraically closed field \( k \) of characteristic different from \( p \), and let \( J = \operatorname{Pic}^0(X) \cong \operatorname{Jac}(X) \) be its Jacobian.
+
+We aim to explain the canonical isomorphism:
+\[ 
+H^1_{\text{\et}}(X, \mathbb{Z}_p) \cong T_p J(-1)
+\]
+in a way that avoids defining one side in terms of the other.
+
+\section*{1. Étale Cohomology and the Kummer Sequence}
+Consider the Kummer exact sequence of étale sheaves:
+\[
+1 \to \mu_{p^r} \to \mathcal{O}_X^* \xrightarrow{(\cdot)^{p^r}} \mathcal{O}_X^* \to 1
+\]
+This induces a long exact sequence in étale cohomology:
+\[
+H^0(X, \mathcal{O}_X^*) \xrightarrow{(\cdot)^{p^r}} H^0(X, \mathcal{O}_X^*) \to H^1(X, \mu_{p^r}) \to H^1(X, \mathcal{O}_X^*) \xrightarrow{(\cdot)^{p^r}} H^1(X, \mathcal{O}_X^*)
+\]
+If \( k \) is algebraically closed and \( X \) is proper and connected, then \( H^0(X, \mathcal{O}_X^*) = k^* \), and the map \( (\cdot)^{p^r} \colon k^* \to k^* \) is surjective. Hence, the connecting homomorphism
+\[
+\delta \colon H^1(X, \mu_{p^r}) \to \operatorname{Pic}(X)
+\]
+is injective with image equal to \( \operatorname{Pic}(X)[p^r] \), giving an isomorphism:
+\[
+H^1(X, \mu_{p^r}) \cong \operatorname{Pic}(X)[p^r] \cong J[p^r](k)
+\]
+
+\section*{2. Passing to the Limit}
+Taking the inverse limit over \( r \), we obtain:
+\[
+\varprojlim_r H^1(X, \mu_{p^r}) \cong \varprojlim_r J[p^r](k) = T_p J
+\]
+This gives an isomorphism:
+\[
+H^1(X, \mathbb{Z}_p(1)) := \varprojlim_r H^1(X, \mu_{p^r}) \cong T_p J
+\]
+Note: here we define \( \mathbb{Z}_p(1) := \varprojlim_r \mu_{p^r} \), and view this as a sheaf or Galois module with the natural action of \( \mathrm{Gal}(\overline{k}/k) \) (if applicable).
+
+\section*{3. The Tate Twist}
+The Tate twist \( (-1) \) corresponds to tensoring with the sheaf:
+\[
+\mathbb{Z}_p(-1) := \underline{\mathrm{Hom}}(\mathbb{Z}_p(1), \mathbb{Z}_p)
+\]
+This is the dual Galois module to \( \mathbb{Z}_p(1) \). Therefore, we get:
+\[
+H^1(X, \mathbb{Z}_p) \cong H^1(X, \mathbb{Z}_p(1)) \otimes \mathbb{Z}_p(-1)
+\]
+Combining with the earlier identification:
+\[
+H^1(X, \mathbb{Z}_p) \cong T_p J(-1)
+\]
+
+\section*{4. Conclusion}
+We have constructed the isomorphism:
+\[
+H^1_{\text{et}}(X, \mathbb{Z}_p) \cong T_p J(-1)
+\]
+by:
+\begin{itemize}
+  \item Using the Kummer sequence to identify \( H^1(X, \mu_{p^r}) \cong \operatorname{Pic}(X)[p^r] \)
+  \item Taking inverse limits to define \( H^1(X, \mathbb{Z}_p(1)) \cong T_p J \)
+  \item Interpreting the Tate twist as dualizing the cyclotomic Galois module
+\end{itemize}
+This route avoids any circularity and builds the identification from geometric input.
+
+\end{document}

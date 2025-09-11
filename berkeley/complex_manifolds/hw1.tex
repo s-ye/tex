@@ -1,0 +1,127 @@
+\documentclass[12pt]{article}  % or any other class
+\usepackage{/Users/songye03/Desktop/Math_tex/style/psetconfig}         % loads your custom style
+\title{Homework 1}
+\author{Songyu Ye}
+\date{\today}
+
+\begin{document}
+\psettitle
+
+
+\begin{problem}{1}
+Show that the $n$-sheeted Riemann surface of the multi-valued function 
+\[
+w = z^{1/n}, \quad z \in \mathbb{C},
+\]
+is topologically a sphere with 1 puncture.
+\end{problem}
+
+\begin{solution}
+Let $\mathcal{R}=\{(z,w)\in\mathbb C^2:\ w^n=z\}$. $\mathcal{R}$ carries the structure of a Riemann surface so that the projection
+$\pi:\mathcal{R}\to\mathbb{C},\ \pi(z,w)=z$ is holomorphic. Now consider the map \begin{align*}
+    \Phi:\mathbb{C}\longrightarrow \mathcal{R},\qquad \Phi(w)=(w^n,w)
+\end{align*} $\Phi$ is bijective: given $(z,w)\in\mathcal{R}$ we must have $z=w^n$, so the inverse is simply $(z,w)\mapsto w$. $\Phi$ and its inverse are holomorphic because one is given by a polynomial, the other is a projection. Hence $\Phi$ is a biholomorphism. Therefore $\mathcal{R}$ is (as a Riemann surface, hence also topologically) just $\mathbb{C}$. Topologically, $\mathbb{C}$ is a sphere with one point removed (a “punctured sphere”): $\mathbb{C}\simeq \widehat{\mathbb{C}}\setminus\{\infty\}$. Thus the $n$-sheeted Riemann surface of $w=z^{1/n}$ is topologically a sphere with one puncture.
+\end{solution}
+
+\begin{problem}{2}
+Let $f(z)$ be a polynomial of odd degree, with simple zeroes. Identify the topology of the Riemann surface of the double-valued function defined by $w^2 = f(z)$.
+\end{problem}       
+
+\begin{solution}
+    Consider the affine curve $X_{\mathrm{aff}} = \{(z,w)\in\mathbb{C}^2 : w^2 = f(z)\}$. Its projection $\pi_{\mathrm{aff}} : (z,w) \mapsto z$ is a $2$-sheeted branched covering of $\mathbb{C}$ away from the zeros of $f$. We compactify to a projective curve $X = \overline{X_{\mathrm{aff}}} \subset \mathbb{P}^1_z \times \mathbb{P}^1_w$ and extend the projection to $\pi : X \longrightarrow \mathbb{P}^1_z$. The map $\pi$ has degree $2$.
+To study the topology of $X_{\mathrm{aff}}$, we will use the Riemann-Hurwitz formula to compute the genus of $X$ and delete the point(s) over $z=\infty$.
+
+
+
+    If $a$ is a simple zero of $f$, write locally $f(z) = (z-a)u(z)$ with $u(a)\neq 0$. Then $w^2 = (z-a)u(z)$ has a single point of $X$ lying over $z=a$ and the local model is $w^2 = z-a$, so the ramification index is $e=2$. Thus each simple zero gives one branch point of ramification index $2$. There are $d$ of these in $\mathbb{C}$. Put $t=1/z$ as a coordinate near $z=\infty$ and write
+    \[f(z) = z^{d}\,g(1/z) = t^{-d}\,g(t), \qquad g(0)\neq 0\]
+    The equation becomes
+    $w^2 = t^{-d}g(t) \Longleftrightarrow (w\,t^{\frac{d-1}{2}})^2 = t^{-1}g(t)$.
+    Let $u = w\,t^{\frac{d-1}{2}}$. Then $u^2 = t^{-1}g(t)$, so near $t=0$ we have the model $u^2 \sim t^{-1}$. Therefore, there is one point of $X$ over $z=\infty$ and it is ramified of order $2$. Hence the total number of simple branch points is $B = d+1$.
+
+    Apply Riemann-Hurwitz to the degree-$2$ map $\pi : X \to \mathbb{P}^1$:
+    \[
+    2g(X)-2 = 2\cdot(-2) + \sum_{p\in X}(e_p-1).
+    \]
+    Every simple ramification contributes $e_p-1=1$, so
+    \[
+    2g(X)-2 = -4 + B = -4 + (d+1) = d-3.
+    \]
+    Therefore
+    \[
+    g(X) = \frac{d-1}{2}.
+    \]
+
+    The compact Riemann surface $X$ is a closed orientable surface of genus $g = \frac{d-1}{2}$. Recall that there is only one point of $X$ over $z=\infty$. Therefore, $X_{\mathrm{aff}}$ is homeomorphic to $X$ with one point removed. Hence $X_{\mathrm{aff}}$ is homeomorphic to a genus $\frac{d-1}{2}$ surface with one puncture.
+
+\end{solution}
+
+\begin{problem}{3}
+Show that a bijective holomorphic map 
+\[
+f : R \to S
+\] 
+between Riemann surfaces is in fact bi-holomorphic (meaning, the inverse is also holomorphic). Show that two homeomorphic Riemann surfaces need not be bi-holomorphic. \emph{(Hint: Use the unit disk $\Delta$ and the complex plane.)} Show that no two of the following three annuli in $\mathbb{C}$ are bi-holomorphic:
+\begin{align*}
+(a)\ & \{z \mid 0 < |z| < 1\}, \\
+(b)\ & \{z \mid 1 < |z| < 2\}, \\
+(c)\ & \{z \mid 0 < |z| < \infty\}.
+\end{align*}
+\end{problem}
+
+\begin{problem}{4}
+Prove the \emph{Weierstrass division theorem}:  
+Given a polynomial 
+\[
+P(w,z_1,\dots,z_n) = w^n + \sum_{k=0}^{n-1} p_k(z) w^k,
+\] 
+with the functions $p_k(z)$ holomorphic in an open set $V \subset \mathbb{C}^n$ and satisfying $p_k(0)=0$, every germ of holomorphic function $G(w,z)$ near $(w,z)=(0,0)$ can be uniquely expressed as
+\[
+G(w,z) = P(w,z)\cdot Q(w,z) + R(w,z),
+\]
+where $Q(w,z)$ is a holomorphic germ near $0$ and $R(w,z)$ is a polynomial in $w$ of degree $< n$ with coefficients germs of holomorphic functions in $z$ near $z=0$.
+
+To do this, define
+\[
+Q(z,w) = \frac{1}{2\pi i} \oint_\Gamma \frac{G(\zeta, z)}{P(\zeta, z)(\zeta - w)} \, d\zeta
+\]
+for a suitable choice of the line integral over each fixed value of $z$, and show that the difference
+\[
+R(w,z) := G(w,z) - P(w,z)\cdot Q(w,z)
+\]
+is a holomorphic function of $(w,z)$ which is polynomial in $w$ with degree $< n$.  
+\emph{Hint:} You will want to express that difference as a Cauchy integral to get your conclusion.
+\end{problem}
+
+\begin{problem}{5}
+A \emph{Reinhardt domain} $R \subset \mathbb{C}^n$ is an open set such that
+\[
+(z_1,\dots,z_n)\in R \;\Rightarrow\; (qz_1,\dots,qz_n)\in R,\quad \forall q\in\mathbb{C} \text{ with } |q|<1.
+\]
+
+\begin{enumerate}
+\item[(a)] Show that the intersection of finitely many Reinhardt domains is Reinhardt.  
+\item[(b)] Show that if a multi-variable power series centered at $0$ converges at some point 
+$(z_1,\dots,z_n)\in \mathbb{C}^n$, then it converges uniformly in some Reinhardt domain containing $z$.  
+\item[(c)] Prove that the \emph{domain of convergence} of an $n$-variable Taylor series centered at $0$ --- defined as the interior of the set of points where the series converges --- is a Reinhardt domain.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}{6}
+Let $C_1$ and $C_2$ be two circles in the $w$- and $z$-planes in $\mathbb{C}^2$, and $\Delta_{1,2}$ the disks that they bound. Show that a holomorphic function defined in an open set containing 
+\[
+C_1 \times \Delta_2 \;\cup\; \Delta_1 \times C_2
+\]
+has a unique holomorphic extension over $\Delta_1 \times \Delta_2$.  
+\emph{Hint:} Use Cauchy's formula in a way very similar to the one exploited above.
+\end{problem}
+
+\begin{problem}{7}
+Let $F,G$ be two irreducible holomorphic functions in $n>1$ variables defined on an open set $U$, and call their common zero-set $Z$. Using the Weierstrass Preparation Theorem (twice) and Q6, show that any holomorphic function defined on $U\setminus Z$ extends holomorphically over $Z$.
+
+\medskip
+\noindent \textbf{Remark 1.} This is a version of \emph{Hartogs' theorem} for holomorphic functions of several variables; somewhat loosely, the singular set of a holomorphic function defined on ``most of'' an open $U \subset \mathbb{C}^n$ cannot lie in an analytic subset of co-dimension $2$, unless it’s empty. Contrast that with the real function $1/(x^2+y^2)$ on $\mathbb{R}^2$.
+
+\end{problem}
+\end{document}
+\end{document}
