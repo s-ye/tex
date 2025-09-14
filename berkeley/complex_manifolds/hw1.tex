@@ -9,27 +9,29 @@
 
 
 \begin{problem}{1}
-Show that the $n$-sheeted Riemann surface of the multi-valued function 
+Show that the $n$-sheeted Riemann surface of the multi-valued function
 \[
-w = z^{1/n}, \quad z \in \mathbb{C},
+    w = z^{1/n}, \quad z \in \mathbb{C},
 \]
 is topologically a sphere with 1 puncture.
 \end{problem}
 
 \begin{solution}
-Let $\mathcal{R}=\{(z,w)\in\mathbb C^2:\ w^n=z\}$. $\mathcal{R}$ carries the structure of a Riemann surface so that the projection
-$\pi:\mathcal{R}\to\mathbb{C},\ \pi(z,w)=z$ is holomorphic. Now consider the map \begin{align*}
-    \Phi:\mathbb{C}\longrightarrow \mathcal{R},\qquad \Phi(w)=(w^n,w)
-\end{align*} $\Phi$ is bijective: given $(z,w)\in\mathcal{R}$ we must have $z=w^n$, so the inverse is simply $(z,w)\mapsto w$. $\Phi$ and its inverse are holomorphic because one is given by a polynomial, the other is a projection. Hence $\Phi$ is a biholomorphism. Therefore $\mathcal{R}$ is (as a Riemann surface, hence also topologically) just $\mathbb{C}$. Topologically, $\mathbb{C}$ is a sphere with one point removed (a “punctured sphere”): $\mathbb{C}\simeq \widehat{\mathbb{C}}\setminus\{\infty\}$. Thus the $n$-sheeted Riemann surface of $w=z^{1/n}$ is topologically a sphere with one puncture.
+    Let $\mathcal{R}=\{(z,w)\in\mathbb C^2:\ w^n=z\}$. $\mathcal{R}$ carries the structure of a Riemann surface so that the projection
+    $\pi:\mathcal{R}\to\mathbb{C},\ \pi(z,w)=z$ is holomorphic. Now consider the map \begin{align*}
+        \Phi:\mathbb{C}\longrightarrow \mathcal{R},\qquad \Phi(w)=(w^n,w)
+    \end{align*} $\Phi$ is bijective: given $(z,w)\in\mathcal{R}$ we must have $z=w^n$, so the inverse is simply $(z,w)\mapsto w$. $\Phi$ and its inverse are holomorphic because one is given by a polynomial, the other is a projection. Hence $\Phi$ is a biholomorphism. Therefore $\mathcal{R}$ is (as a Riemann surface, hence also topologically) just $\mathbb{C}$. Topologically, $\mathbb{C}$ is a sphere with one point removed (a “punctured sphere”): $\mathbb{C}\simeq \widehat{\mathbb{C}}\setminus\{\infty\}$. Thus the $n$-sheeted Riemann surface of $w=z^{1/n}$ is topologically a sphere with one puncture.
 \end{solution}
 
 \begin{problem}{2}
 Let $f(z)$ be a polynomial of odd degree, with simple zeroes. Identify the topology of the Riemann surface of the double-valued function defined by $w^2 = f(z)$.
-\end{problem}       
+\end{problem}
+
+
 
 \begin{solution}
     Consider the affine curve $X_{\mathrm{aff}} = \{(z,w)\in\mathbb{C}^2 : w^2 = f(z)\}$. Its projection $\pi_{\mathrm{aff}} : (z,w) \mapsto z$ is a $2$-sheeted branched covering of $\mathbb{C}$ away from the zeros of $f$. We compactify to a projective curve $X = \overline{X_{\mathrm{aff}}} \subset \mathbb{P}^1_z \times \mathbb{P}^1_w$ and extend the projection to $\pi : X \longrightarrow \mathbb{P}^1_z$. The map $\pi$ has degree $2$.
-To study the topology of $X_{\mathrm{aff}}$, we will use the Riemann-Hurwitz formula to compute the genus of $X$ and delete the point(s) over $z=\infty$.
+    To study the topology of $X_{\mathrm{aff}}$, we will use the Riemann-Hurwitz formula to compute the genus of $X$ and delete the point(s) over $z=\infty$.
 
 
 
@@ -41,15 +43,15 @@ To study the topology of $X_{\mathrm{aff}}$, we will use the Riemann-Hurwitz for
 
     Apply Riemann-Hurwitz to the degree-$2$ map $\pi : X \to \mathbb{P}^1$:
     \[
-    2g(X)-2 = 2\cdot(-2) + \sum_{p\in X}(e_p-1).
+        2g(X)-2 = 2\cdot(-2) + \sum_{p\in X}(e_p-1).
     \]
     Every simple ramification contributes $e_p-1=1$, so
     \[
-    2g(X)-2 = -4 + B = -4 + (d+1) = d-3.
+        2g(X)-2 = -4 + B = -4 + (d+1) = d-3.
     \]
     Therefore
     \[
-    g(X) = \frac{d-1}{2}.
+        g(X) = \frac{d-1}{2}.
     \]
 
     The compact Riemann surface $X$ is a closed orientable surface of genus $g = \frac{d-1}{2}$. Recall that there is only one point of $X$ over $z=\infty$. Therefore, $X_{\mathrm{aff}}$ is homeomorphic to $X$ with one point removed. Hence $X_{\mathrm{aff}}$ is homeomorphic to a genus $\frac{d-1}{2}$ surface with one puncture.
@@ -57,71 +59,135 @@ To study the topology of $X_{\mathrm{aff}}$, we will use the Riemann-Hurwitz for
 \end{solution}
 
 \begin{problem}{3}
-Show that a bijective holomorphic map 
+Show that a bijective holomorphic map
 \[
-f : R \to S
-\] 
+    f : R \to S
+\]
 between Riemann surfaces is in fact bi-holomorphic (meaning, the inverse is also holomorphic). Show that two homeomorphic Riemann surfaces need not be bi-holomorphic. \emph{(Hint: Use the unit disk $\Delta$ and the complex plane.)} Show that no two of the following three annuli in $\mathbb{C}$ are bi-holomorphic:
 \begin{align*}
-(a)\ & \{z \mid 0 < |z| < 1\}, \\
-(b)\ & \{z \mid 1 < |z| < 2\}, \\
-(c)\ & \{z \mid 0 < |z| < \infty\}.
+    (a)\  & \{z \mid 0 < |z| < 1\},      \\
+    (b)\  & \{z \mid 1 < |z| < 2\},      \\
+    (c)\  & \{z \mid 0 < |z| < \infty\}.
 \end{align*}
 \end{problem}
 
+\begin{solution}
+    The inverse function theorem guarantees that the inverse function $f^{-1}$ is smooth. Moreover, it guarantees that
+    \begin{align*}
+        (f^{-1})'(b) = \frac{1}{f'(f^{-1}(b))}
+    \end{align*}
+    Since $f$ is bijective, it has nonzero derivative everywhere because if it did not, it would look like $z\mapsto z^k$ for some $k\geq 2$ and thus it would fail to be locally bijective. Since it has nonzero derivative everywhere, $(f^{-1})'$ is defined everywhere and is in fact a complex number. Hence $f^{-1}$ is holomorphic. $\Delta$ and $\mathbb{C}$ are homeomorphic but they are not biholomorphic. An explicit homeomorphism is given by the radial map
+    \[
+        \varphi \colon \Delta \to \mathbb{C}, \quad
+        \varphi(re^{i\theta}) = \frac{r}{1-r}\,e^{i\theta}, \quad 0 \le r < 1.
+    \]
+    If there were a biholomorphism the map $\C\to\Delta$ is bounded and entire, hence constant which is a contradiction. Suppose (a) and (c) are biholomorphic. Then the map from $\{z \mid 0 < |z| < \infty\} \to \{z \mid 0 < |z| < 1\}$ could be extended across the origin because it is bounded in a neighborhood of the origin (apply Riemann's removable singularity theorem). So it extends to a bounded entire function and hence must be constant. This is a contradiction. The same argument shows that (b) and (c) are not holomorphic. Finally suppose that (a) and (b) were biholomorphic. A map $F:\{z \mid 0 < |z| < 1\} \to \{z \mid 1 < |z| < 2\}$ again extends holomorphically to $\tilde F$ across zero by Riemann's theorem. Moreover, $\tilde F'(0)\neq 0$ because in a punctured neighborhood of $0$, $\tilde F$ is a biholomorphism. Thus $\tilde F:U \to V$ admits a local holomorphic inverse $G:V\to U$ where $U$ is a neighborhood of $0$ and $V$ is a neighborhood of $\tilde F(0) \in A(1,2)$. But $F$ already has a global holomorphic inverse, call it $\inv{F}$ and so $\inv{F}$ and $G$ must agree on $V$. But $G$ maps $\tilde F(0)$ to $0$ so so must $\inv{F}$ but this is a contradiction.
+\end{solution}
+
 \begin{problem}{4}
-Prove the \emph{Weierstrass division theorem}:  
-Given a polynomial 
+Prove the \emph{Weierstrass division theorem}:
+Given a polynomial
 \[
-P(w,z_1,\dots,z_n) = w^n + \sum_{k=0}^{n-1} p_k(z) w^k,
-\] 
+    P(w,z_1,\dots,z_n) = w^n + \sum_{k=0}^{n-1} p_k(z) w^k,
+\]
 with the functions $p_k(z)$ holomorphic in an open set $V \subset \mathbb{C}^n$ and satisfying $p_k(0)=0$, every germ of holomorphic function $G(w,z)$ near $(w,z)=(0,0)$ can be uniquely expressed as
 \[
-G(w,z) = P(w,z)\cdot Q(w,z) + R(w,z),
+    G(w,z) = P(w,z)\cdot Q(w,z) + R(w,z),
 \]
 where $Q(w,z)$ is a holomorphic germ near $0$ and $R(w,z)$ is a polynomial in $w$ of degree $< n$ with coefficients germs of holomorphic functions in $z$ near $z=0$.
 
 To do this, define
 \[
-Q(z,w) = \frac{1}{2\pi i} \oint_\Gamma \frac{G(\zeta, z)}{P(\zeta, z)(\zeta - w)} \, d\zeta
+    Q(z,w) = \frac{1}{2\pi i} \oint_\Gamma \frac{G(\zeta, z)}{P(\zeta, z)(\zeta - w)} \, d\zeta
 \]
 for a suitable choice of the line integral over each fixed value of $z$, and show that the difference
 \[
-R(w,z) := G(w,z) - P(w,z)\cdot Q(w,z)
+    R(w,z) := G(w,z) - P(w,z)\cdot Q(w,z)
 \]
-is a holomorphic function of $(w,z)$ which is polynomial in $w$ with degree $< n$.  
+is a holomorphic function of $(w,z)$ which is polynomial in $w$ with degree $< n$.
 \emph{Hint:} You will want to express that difference as a Cauchy integral to get your conclusion.
 \end{problem}
+
+\begin{solution}
+    Using Cauchy's integral formula we write \begin{align*}
+        G(w,z) & = \frac{1}{2\pi i}\oint_{\Gamma} \frac{G(\zeta, z)}{\zeta - w} d\zeta
+    \end{align*}
+    from which we can write \begin{align*}
+        R(w,z) = \frac{1}{2\pi i}\oint_{\Gamma}  \frac{G(\zeta, z)P(\zeta,z)}{P(\zeta,z)(\zeta - w)} - \frac{G(\zeta,z)P(w,z)}{P(\zeta,z)(\zeta - w)} d\zeta
+    \end{align*}
+    Now write \begin{align*}
+        P(\zeta,z) - P(w,z) = (\zeta^k - w^k) + \sum_{i=1}^{k-1} p_k(z)(\zeta^i - w^i)
+    \end{align*} which is divisible by $\zeta - w$, and the quotient \begin{align*}
+        \frac{P(\zeta,z) - P(w,z)}{\zeta - w}
+    \end{align*} is a polynomial in $w$ of degree $n-1$. If for a fixed value of $z$, we pick a contour $\Gamma$ in the $w$ plane for which $P(\zeta,z)$ does not vanish on $\Gamma$, then the function $R$ is holomorphic in $w$ and $z$ because it is the contour integral of an integrand, holomorphic in both $w$ and $z$. Since $R$ is holomorphic, we may differentiate $n$ times with respect to $w$ under the integral and we find that the integrand becomes zero, since the integrand is a polynomial in $w$ of degree $n-1$. Therefore, \begin{align*}
+        \frac{d^nR}{dw^n} = 0
+    \end{align*} so $R$ is indeed polynomial of degree $n-1$.
+\end{solution}
 
 \begin{problem}{5}
 A \emph{Reinhardt domain} $R \subset \mathbb{C}^n$ is an open set such that
 \[
-(z_1,\dots,z_n)\in R \;\Rightarrow\; (qz_1,\dots,qz_n)\in R,\quad \forall q\in\mathbb{C} \text{ with } |q|<1.
+    (z_1,\dots,z_n)\in R \;\Rightarrow\; (qz_1,\dots,qz_n)\in R,\quad \forall q\in\mathbb{C} \text{ with } |q|<1.
 \]
 
 \begin{enumerate}
-\item[(a)] Show that the intersection of finitely many Reinhardt domains is Reinhardt.  
-\item[(b)] Show that if a multi-variable power series centered at $0$ converges at some point 
-$(z_1,\dots,z_n)\in \mathbb{C}^n$, then it converges uniformly in some Reinhardt domain containing $z$.  
-\item[(c)] Prove that the \emph{domain of convergence} of an $n$-variable Taylor series centered at $0$ --- defined as the interior of the set of points where the series converges --- is a Reinhardt domain.
+    \item[(a)] Show that the intersection of finitely many Reinhardt domains is Reinhardt.
+    \item[(b)] Show that if a multi-variable power series centered at $0$ in some neighborhood of some point $(z_1,\dots,z_n)\in \mathbb{C}^n$, then it converges uniformly in some Reinhardt domain containing $z$.
+    \item[(c)] Prove that the \emph{domain of convergence} of an $n$-variable Taylor series centered at $0$ --- defined as the interior of the set of points where the series converges --- is a Reinhardt domain.
 \end{enumerate}
 \end{problem}
 
+\begin{solution}
+    \begin{enumerate}
+        \item If $x \in R_i$ then $qx \in R_i$ and in particular $x\in \bigcap R_i$ implies $qx\in \bigcap R_i$ so $\bigcap R_i$ is Reinhardt. The intersection of finitely many open sets is open.
+        \item Let
+              $f(z) = \sum_{\alpha\in \mathbb{N}^n} a_\alpha z^\alpha$
+              be a power series which converges in a neighborhood of some point $z=(z_1,\dots,z_n)$. We want to show that it converges uniformly in some Reinhardt domain containing $z$. Define $b_m = \sum_{|\alpha|=m} a_\alpha z^\alpha$ and group the series by total degree:
+              \begin{align*}
+                  f(z) = \sum_{m=0}^\infty b_m
+              \end{align*}
+
+
+              For a scalar $q\in \mathbb{C}$, consider $F(q) = \sum_{\alpha} a_\alpha (qz)^\alpha$. Observe that \[F(q) = \sum_{m=0}^\infty \Big(\sum_{|\alpha|=m} a_\alpha z^\alpha\Big) q^m = \sum_{m=0}^\infty b_m q^m\] By assumption, the original series converges at $z$. That means $F(1) = \sum_{m=0}^\infty b_m$ converges. For any $r<1$, the series $\sum b_m q^m$ converges absolutely and uniformly on $|q|\leq r$ by the one-variable Weierstrass M-test, since $\sum |b_m|\, r^m < \infty$. Fix $r<1$. Then for all $|q|\leq r$, $F(q) = \sum_{\alpha} a_\alpha (qz)^\alpha$ converges uniformly. In other words, the original $n$-variable series converges uniformly on the set $\Omega_r(z) = \{qz : |q|\leq r\}$. This set $\Omega_r(z)$ is a Reinhardt domain containing $z$.
+            \item Let $X\subset\mathbb{C}^n$ be the set of points where $\sum_\alpha a_\alpha z^\alpha$ converges. Let $Y:=\operatorname{int}X$ be its domain of convergence. We claim that $X$ is Reinhardt. Indeed, if $z\in X$, then as in part (b) the function $F(q)=\sum_{m=0}^\infty b_m q^m$ where $b_m=\sum_{|\alpha|=m} a_\alpha z^\alpha,$ converges at $q=1$, hence has one-variable radius of convergence $R\ge 1$. Therefore $F(q)$ converges for all $|q|<1$, i.e. $|q|<1 \;\Rightarrow\; qz\in X.$ Thus $X$ is stable under common scalings by $|q|<1$. The interior $Y$ is both open and stable under such scalings, hence is a Reinhardt domain as desired.
+    \end{enumerate}
+\end{solution}
+
 \begin{problem}{6}
-Let $C_1$ and $C_2$ be two circles in the $w$- and $z$-planes in $\mathbb{C}^2$, and $\Delta_{1,2}$ the disks that they bound. Show that a holomorphic function defined in an open set containing 
+Let $C_1$ and $C_2$ be two circles in the $w$- and $z$-planes in $\mathbb{C}^2$, and $\Delta_{1,2}$ the disks that they bound. Show that a holomorphic function defined in an open set containing
 \[
-C_1 \times \Delta_2 \;\cup\; \Delta_1 \times C_2
+    C_1 \times \Delta_2 \;\cup\; \Delta_1 \times C_2
 \]
-has a unique holomorphic extension over $\Delta_1 \times \Delta_2$.  
+has a unique holomorphic extension over $\Delta_1 \times \Delta_2$.
 \emph{Hint:} Use Cauchy's formula in a way very similar to the one exploited above.
 \end{problem}
+
+\begin{solution}
+    Suppose $f$ is holomorphic on a neighborhood of $X = (\partial\Delta\times \Delta)\ \cup\ (\Delta\times \partial\Delta)\subset\mathbb{C}^2$. For each fixed $z_2\in\Delta$, the map $\zeta_1\mapsto f(\zeta_1,z_2)$ is holomorphic on a neighborhood of $\partial\Delta$. Define
+    \[
+        F(z_1,z_2) = \frac{1}{2\pi i}\int_{|\zeta_1|=1}\frac{f(\zeta_1,z_2)}{\zeta_1-z_1}\,d\zeta_1, \qquad (z_1,z_2)\in\Delta\times\Delta.
+    \]
+    $F$ is holomorphic on $\Delta\times\Delta$. Moreover, on a neighborhood of $\partial\Delta\times\Delta$ (where $f$ is defined in a full annulus in $\zeta_1$), Cauchy's formula gives $F=f$. Similarly, for each fixed $z_1\in\Delta$ the map $\zeta_2\mapsto f(z_1,\zeta_2)$ is holomorphic near $\partial\Delta$. Define
+    \[
+        G(z_1,z_2) = \frac{1}{2\pi i}\int_{|\zeta_2|=1}\frac{f(z_1,\zeta_2)}{\zeta_2-z_2}\,d\zeta_2.
+    \]
+    Then $G$ is holomorphic on $\Delta\times\Delta$ and $G=f$ on a neighborhood of $\Delta\times\partial\Delta$. On a neighborhood of the torus $\partial\Delta\times\partial\Delta\subset X$, both representations are valid and equal $f$, hence $F=G$ there. By the identity theorem for holomorphic functions on $\Delta\times\Delta$, $F\equiv G$ on all of $\Delta\times\Delta$. Thus this common function extends $f$ holomorphically to the full interior.
+
+    The extension is unique because if $H$ were another holomorphic extension, then $H=F$ on $\partial\Delta\times\Delta$ by the identity theorem applied to the first variable, hence $H=F$ on all of $\Delta\times\Delta$ by the identity theorem applied to the second variable.
+\end{solution}
+
+
 
 \begin{problem}{7}
 Let $F,G$ be two irreducible holomorphic functions in $n>1$ variables defined on an open set $U$, and call their common zero-set $Z$. Using the Weierstrass Preparation Theorem (twice) and Q6, show that any holomorphic function defined on $U\setminus Z$ extends holomorphically over $Z$.
 
 \medskip
 \noindent \textbf{Remark 1.} This is a version of \emph{Hartogs' theorem} for holomorphic functions of several variables; somewhat loosely, the singular set of a holomorphic function defined on ``most of'' an open $U \subset \mathbb{C}^n$ cannot lie in an analytic subset of co-dimension $2$, unless it’s empty. Contrast that with the real function $1/(x^2+y^2)$ on $\mathbb{R}^2$.
-
 \end{problem}
-\end{document}
+
+\begin{solution}
+Let $F,G$ be irreducible holomorphic functions on $U\subset\mathbb{C}^n$, $n>1$, and set $Z=\{F=0\}\cap\{G=0\}$. Fix $p\in Z$ and change coordinates so that $p=0$, with $F$ regular in $w$ and $G$ regular in $z$. By Weierstrass Preparation we may write $F=U_F\cdot P(w;z,t)$ and $G=U_G\cdot Q(z;w,t)$ where $P$ is a Weierstrass polynomial in $w$, $Q$ one in $z$, and $t$ denotes the other coordinates. Thus for small polydisks, the zeros of $F$ in $w$ and of $G$ in $z$ form finite sets of roots varying holomorphically with the parameters. Choosing circles $C_1=\{|w|=r_1\}$ and $C_2=\{|z|=r_2\}$ that avoid these roots (uniformly in $t$), we see that $(C_1\times \Delta_2)\cup (\Delta_1\times C_2)$ is contained in $U\setminus Z$, so $f$ is holomorphic there. By Question~6, $f$ extends holomorphically to $\Delta_1\times \Delta_2$ for each fixed $t$, and the extension depends holomorphically on $t$. Hence $f$ extends to a neighborhood of $p$, and by uniqueness these local extensions glue to give a holomorphic extension of $f$ to all of $U$.
+\end{solution}
+
+
 \end{document}
