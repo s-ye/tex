@@ -20,7 +20,7 @@
 \rhead{\today}
 \cfoot{\thepage}
 
-\title{Title}
+\title{Loop groups}
 
 \author{Songyu Ye}
 \date{\today}
@@ -28,8 +28,1095 @@
 
 
 \begin{abstract}
-Abstract
+    These are reading notes for the book "Loop Groups" by Pressley and Segal.
 \end{abstract}
 
 \tableofcontents
+
+\section{Introduction}
+\begin{definition}[Infinite dimensional Lie groups]
+    An \textbf{infinite dimensional Lie group} is a group $\Gamma$ which is at the
+    same time an infinite dimensional smooth manifold, and is such that
+    the composition law $\Gamma \times \Gamma \to \Gamma$ and the
+    operation of inversion $\Gamma \to \Gamma$ are given by smooth maps.
+    The tangent space to $\Gamma$ at the identity element is its Lie
+    algebra, the bracket being defined by identifying tangent vectors at
+    the identity element with left-invariant vector fields on $\Gamma$.
+    If for each element $\xi$ of the Lie algebra there is a unique
+    one-parameter subgroup
+    \[
+        \gamma_\xi : \mathbb{R} \to \Gamma
+    \]
+    such that $\gamma_\xi'(0) = \xi$, then the exponential map is defined.
+    This is the case in all known examples.
+\end{definition}
+
+\begin{example}
+    The simplest example of an infinite dimensional Lie group is the group $\mathrm{Map}_{\mathrm{cts}}(X; G)$
+    of all continuous maps from a compact space $X$ to a finite dimensional
+    Lie group $G$. (The group law, of course, is pointwise composition in $G$.)
+    The natural topology on $\mathrm{Map}_{\mathrm{cts}}(X; G)$ is the topology
+    of uniform convergence. We see that it is a smooth manifold as follows.
+
+    If $U$ is an open neighbourhood of the identity element in $G$ which is
+    homeomorphic by the exponential map to an open set $\tilde U$ of the Lie
+    algebra $\mathfrak{g}$ of $G$, then
+    \[
+        \mathcal{U} = \mathrm{Map}_{\mathrm{cts}}(X; U)
+    \]
+    is an open neighbourhood of the identity in $\mathrm{Map}_{\mathrm{cts}}(X; G)$
+    which is homeomorphic to the open set
+    \[
+        \tilde{\mathcal{U}} = \mathrm{Map}_{\mathrm{cts}}(X; \tilde U)
+    \]
+    of the Banach space $\mathrm{Map}_{\mathrm{cts}}(X; \mathfrak{g})$. If $f$
+    is any element of $\mathrm{Map}_{\mathrm{cts}}(X; G)$, then
+    \[
+        \mathcal{U}_f = \mathcal{U}\cdot f
+    \]
+    is a neighbourhood of $f$ which is also homeomorphic to $\tilde{\mathcal{U}}$.
+    The sets $\mathcal{U}_f$ provide an atlas which makes
+    $\mathrm{Map}_{\mathrm{cts}}(X; G)$ into a smooth manifold, and in fact into a Lie group: there is no difficulty at all in checking that the transition functions are smooth, or that multiplication and inversion are smooth maps.
+\end{example}
+
+\begin{definition}[Loop groups]
+    Suppose now that $X$ is a finite dimensional compact smooth manifold,
+    and let $\mathrm{Map}(X; G)$ denote the group of \textbf{smooth} maps $X \to G$. The case we are primarily interested in is when $X$ is the circle $S^1$;  then $\mathrm{Map}(X; G)$ is the \textbf{loop group} of $G$, which is denoted by $LG$. We shall think of the circle as consisting interchangeably of real numbers $\theta$ modulo $2\pi$ or of complex numbers $z = e^{i\theta}$ of  modulus one.
+\end{definition}
+
+
+Fix once and for all $G$ a compact connected Lie group. A fundamental property of the loop group $LG$ is the existence of interesting central extensions
+\[
+    \mathbb{T} \;\to\; \widetilde{LG} \;\to\; LG
+\]
+of $LG$ by the circle $\mathbb{T}$. (In other words, $\widetilde{LG}$ is a group
+containing $\mathbb{T}$ in its centre and such that the quotient group
+$\widetilde{LG}/\mathbb{T}$ is $LG$.)
+
+The $\widetilde{LG}$ are
+analogous to the finite-sheeted covering groups of a finite dimensional
+Lie group, in that any projective unitary representation of $LG$ comes
+from a genuine representation of some $\widetilde{LG}$. We recall that a
+projective unitary representation of a group $L$ on a Hilbert space $H$
+is the assignment to each $\lambda \in L$ of a unitary operator
+$U_\lambda : H \to H$ so that
+\[
+    U_\lambda U_{\lambda'} = c(\lambda, \lambda') U_{\lambda\lambda'}
+\]
+holds for all $\lambda, \lambda' \in L$, where $c(\lambda,\lambda')$ is a
+complex number of modulus $1$. $c : L \times L \to \mathbb{T}$ is called the \emph{projective multiplier} or \emph{cocycle} of the representation.
+
+As topological spaces the $\widetilde{LG}$ are fibre bundles over $LG$ with the circle as fibre. Except for the product extension $LG \times \mathbb{T}$ they are non-trivial fibre bundles: that is to say
+$\widetilde{LG}$ is not homeomorphic to the cartesian product
+$LG \times \mathbb{T}$, and there is no continuous cross-section
+$LG \to \widetilde{LG}$. In fact the group extension $\widetilde{LG}$ is
+completely determined by its topological type as a fibre bundle, and
+every circle bundle on $LG$ can be made into a group extension. It is
+interesting that the behaviour of $\mathrm{Map}(X;G)$ when
+$\dim(X) > 1$ is completely different. There are often non-trivial circle
+bundles on $\mathrm{Map}(X;G)$, but if $X$ is simply connected only the flat ones can be made into groups.
+
+When $G$ is a simple and simply connected group, there is a universal central extension among the $\widetilde{LG}$, i.e.\ one of
+which all the others are quotient groups. This is analogous to the
+universal covering group of a finite dimensional group. Any central
+extension $E$ of $LG$ by any abelian group $A$ arises from the universal
+extension $\widetilde{LG}$ by a homomorphism
+$\mathbb{T} \to A$.
+
+$\theta : \mathbb{T} \to A$, in the sense that
+\[
+    E = \widetilde{LG} \times_{\mathbb{T}} A.
+\]
+(The last notation denotes the quotient group of $\widetilde{LG} \times A$ by the subgroup consisting of all elements
+\[
+    \{(z, -\theta(z)) : z \in \mathbb{T}\}.
+\])
+When $G$ is simply connected but not simple there is still a universal central extension, but, as we shall see, it is an extension of $LG$ by the homology group $H_3(G;\mathbb{T})$, a torus whose dimension is the number of simple factors in $G$.
+
+It is worth noticing that the central extensions of $LG$ are closely related to its natural affine action on the space of \emph{connections} in the trivial principal $G$-bundle on the circle. (See (4.3.3).)
+
+\subsection{The Lie algebra extensions}
+
+On the level of Lie algebras the extensions can be defined and classified
+very simply: \red{they correspond precisely to invariant symmetric bilinear
+    forms on $\mathfrak{g}$.} As a vector space
+\[
+    \widetilde{L\mathfrak{g}} = L\mathfrak{g} \oplus \mathbb{R},
+\]
+and the bracket is given by
+\begin{equation} \label{eq:4.2.1}
+    [(\xi,\lambda), (\eta,\mu)] = ([\xi,\eta], \, \omega(\xi,\eta))
+\end{equation}
+for $\xi,\eta \in L\mathfrak{g}$ and $\lambda,\mu \in \mathbb{R}$, where
+$\omega : L\mathfrak{g} \times L\mathfrak{g} \to \mathbb{R}$ is the bilinear map
+\begin{equation} \label{eq:4.2.2}
+    \omega(\xi,\eta) = \frac{1}{2\pi} \int_0^{2\pi} \langle \xi(\theta), \eta'(\theta)\rangle \, d\theta
+\end{equation}
+and $\langle \ , \ \rangle$ is a symmetric invariant form on the Lie algebra
+$\mathfrak{g}$. Recall that if $\mathfrak{g}$ is semisimple then every invariant bilinear form on $\mathfrak{g}$ is symmetric.
+
+\begin{remark}
+    Notice that the bracket \eqref{eq:4.2.1} does not depend on the value of $\lambda$ or $\mu$. In other words, the central $\mathbb{R}$ commutes with everything in $\widetilde{L\mathfrak{g}}$.
+\end{remark}
+
+For the formula \eqref{eq:4.2.1} to define a Lie algebra, $\omega$ must be skew—
+which is clear by integrating by parts in \eqref{eq:4.2.2}—and must satisfy the
+'cocycle condition'
+\begin{equation} \label{eq:4.2.3}
+    \omega([\xi,\eta],\zeta) + \omega([\eta,\zeta],\xi) + \omega([\zeta,\xi],\eta) = 0.
+\end{equation}
+This condition follows from the Jacobi identity in the Lie algebra
+$L\mathfrak{g}$ and the fact that the inner product on $\mathfrak{g}$ is invariant:
+\[
+    \langle [\xi,\eta],\zeta \rangle = \langle \xi,[\eta,\zeta]\rangle.
+\]
+
+There are essentially no other cocycles on $L\mathfrak{g}$ than the $\omega$ given
+by \eqref{eq:4.2.2}. To make this precise, notice that $\omega$ is invariant under
+conjugation by constant loops, i.e.\ $\omega(\xi,\eta) = \omega(g\xi, g\eta)$
+for $g \in G$, where $g\xi, g\eta$ are the adjoint action of $g$ on $\xi,\eta$.
+
+\begin{remark}
+    We elaborate a little on the invariance of $\omega$ under the adjoint action of $G$. Recall that for a Lie algebra $\mathfrak{a}$ with trivial coefficients, a $2$-cocycle is a bilinear form $\omega : \mathfrak{a}\times\mathfrak{a}\to \mathbb{R}$ that is skew-symmetric and satisfies the cocycle condition
+    \[
+        \delta\omega(\xi,\eta,\zeta) =
+        \omega([\xi,\eta],\zeta) + \omega([\eta,\zeta],\xi) + \omega([\zeta,\xi],\eta) = 0.
+    \]
+    On the loop algebra $L\mathfrak{g}$, the group $G$ (constant loops) acts by conjugation:
+    \[
+        (g\cdot \xi)(\theta) = \mathrm{Ad}_g \xi(\theta).
+    \]
+    If we push forward a cocycle $\omega$ by $g$, we get a new cocycle
+    \[
+        (g\cdot \omega)(\xi,\eta) = \omega(g^{-1}\cdot \xi, \, g^{-1}\cdot \eta).
+    \]
+
+    To see that this transformation preserves the cohomology class, we can pass to the infinitesimal adjoint action. In particular, for $\zeta$ in the Lie algebra $\mathfrak{g}$, it is enough to show that
+    \[
+        [\omega] = [\omega + (\zeta\cdot\omega)] \quad\text{in } H^2.
+    \]
+    where the infinitesimal action is given by
+    \[
+        (\zeta\cdot \omega)(\xi,\eta)
+        \;:=\; \left.\frac{d}{dt}\right|_{t=0}\big( \exp(t\zeta)\cdot \omega \big)(\xi,\eta).
+    \]
+    Use $\operatorname{Ad}_{\exp(-t\zeta)} = \exp(-t\,\operatorname{ad}\zeta)
+        = \mathrm{id}-t\,\operatorname{ad}\zeta + o(t)$. Then
+    \begin{align*}
+        (\exp(t\zeta)\cdot \omega)(\xi,\eta)
+         & = \omega\Big((\mathrm{id}-t\,\operatorname{ad}\zeta)\xi,\ (\mathrm{id}-t\,\operatorname{ad}_\zeta)\eta\Big) + o(t) \\
+         & = \omega(\xi,\eta)\;-\; t\,\omega([\zeta,\xi],\eta)\;-\; t\,\omega(\xi,[\zeta,\eta])\;+\;o(t).
+    \end{align*}
+    Differentiating at $t=0$ gives
+    \[
+        (\zeta \cdot \omega)(\xi,\eta)
+        = - \omega([\zeta,\xi],\eta) - \omega(\xi,[\zeta,\eta])
+    \]
+
+    Define the $1$-cochain $\phi_\zeta$ by
+    \[
+        \phi_\zeta(\xi) := \omega(\zeta, \xi).
+    \]
+    With trivial coefficients, the Chevalley–Eilenberg differential on a $1$-cochain is
+    \[
+        (\delta\phi_\zeta)(\xi, \eta) = -\,\phi_\zeta([\xi, \eta]) = -\,\omega(\zeta, [\xi, \eta]).
+    \]
+    Now compare $(\zeta\cdot\omega)$ with $\delta\phi_\zeta$:
+    \begin{align*}
+        (\zeta\cdot\omega)(\xi, \eta) - (\delta\phi_\zeta)(\xi, \eta)
+         & = -\omega([\zeta, \xi], \eta) - \omega(\xi, [\zeta, \eta]) + \omega(\zeta, [\xi, \eta]).
+    \end{align*}
+    Use the $2$-cocycle identity (cyclic sum zero):
+    \[
+        \omega([\zeta, \xi], \eta) + \omega([\xi, \eta], \zeta) + \omega([\eta, \zeta], \xi) = 0.
+    \]
+    Rewrite the last two terms:
+    \[
+        \omega(\zeta, [\xi, \eta]) = -\,\omega([\xi, \eta], \zeta), \qquad
+        \omega(\xi, [\zeta, \eta]) = -\,\omega([\zeta, \eta], \xi).
+    \]
+    Plugging these into the difference gives exactly the negative of the cyclic sum above, hence zero:
+    \[
+        -\omega([\zeta, \xi], \eta) - \omega(\xi, [\zeta, \eta]) + \omega(\zeta, [\xi, \eta]) = 0.
+    \]
+    Therefore,
+    \[
+        (\zeta\cdot\omega) = \delta\phi_\zeta
+    \]
+    is a coboundary, and $[\omega] = [\omega + (\zeta\cdot\omega)]$ in $H^2(L\mathfrak{g};\mathbb{R})$.
+\end{remark}
+
+So the extension defined by $\alpha$ is also given by the invariant cocycle
+\[
+    \int_G g\cdot \alpha \, dg
+\]
+obtained by averaging $\alpha$ over the compact group $G$ because they are in the same cohomology class in $H^2(L\mathfrak{g};\mathbb{R})$. Therefore, every cocycle of $L\mathfrak{g}$ is equivalent in cohomology to a $G$-invariant cocycle. The cocycle identity \eqref{eq:4.2.3} expresses precisely that the cohomology class of the cocycle does not change under an infinitesimal conjugation.
+
+
+\begin{proposition}[Invariant cocycles]\label{prop:invariant_cocycles}
+    If $\mathfrak{g}$ is semisimple then the only continuous $G$-invariant
+    cocycles on the Lie algebra $L\mathfrak{g}$ are those given by
+    \eqref{eq:4.2.2}.
+\end{proposition}
+
+\begin{proof}
+    A cocycle $\alpha : L\mathfrak{g} \times L\mathfrak{g} \to \mathbb{R}$
+    extends to a complex bilinear map
+    $\alpha : L\mathfrak{g}_{\mathbb{C}} \times L\mathfrak{g}_{\mathbb{C}} \to \mathbb{C}$.
+    An element $\xi \in L\mathfrak{g}_{\mathbb{C}}$ can be expanded in a Fourier series
+    $\sum \xi_k z^k$, with $\xi_k \in \mathfrak{g}_{\mathbb{C}}$. By continuity $\alpha$ is
+    completely determined by its values on elements of the form $\xi_p z^p$.
+    Let us write
+    \[
+        \alpha_{p,q}(\xi,\eta) = \alpha(\xi z^p, \eta z^q), \quad \xi,\eta \in \mathfrak{g}_{\mathbb{C}}.
+    \]
+    Then $\alpha_{p,q}$ is a $G$-invariant bilinear map
+    $\mathfrak{g}_{\mathbb{C}} \times \mathfrak{g}_{\mathbb{C}} \to \mathbb{C}$, which is necessarily symmetric, and
+    $\alpha_{p,q} = -\alpha_{q,p}$. The cocycle identity \eqref{eq:4.2.3} translates into the statement
+    \begin{equation} \label{eq:4.2.5}
+        \alpha_{p+q,r} + \alpha_{q+r,p} + \alpha_{r+p,q} = 0
+    \end{equation}
+    for all $p,q,r$. Putting $q=r=0$ we find $\alpha_{p,0}=0$ for all $p$.
+
+    $r = -p-q$ we find
+    \[
+        \alpha_{p+q,-p-q} = \alpha_{p,-p} + \alpha_{q,-q},
+    \]
+    whence
+    \[
+        \alpha_{p,-p} = p \, \alpha_{1,-1}.
+    \]
+    Putting $r = n-p-q$ in (4.2.5) we find
+    \[
+        \alpha_{n-p-q,p+q} = \alpha_{n-p,p} + \alpha_{n-q,q},
+    \]
+    whence
+    \[
+        \alpha_{n-k,k} = k \alpha_{n-1,1}.
+    \]
+    This implies that $\alpha_{p,q} = 0$ if $p+q \neq 0$, for
+    \[
+        n\alpha_{n-1,1} = \alpha_{0,n} = 0.
+    \]
+    Returning to $\xi = \sum \xi_p z^p$ and $\eta = \sum \eta_q z^q$, we have
+    \[
+        \alpha(\xi,\eta) = \sum p \, \alpha_{1,-1}(\xi_p, \eta_{-p})
+        = \frac{i}{2\pi} \int_0^{2\pi} \alpha_{1,-1}(\xi(\theta), \eta'(\theta))\, d\theta,
+    \]
+    which is of the form (4.2.2).
+\end{proof}
+
+Proposition \ref{prop:invariant_cocycles} determines the universal central extension of $L\mathfrak{g}$.
+We can reformulate it in the following way. For any finite dimensional
+Lie algebra $\mathfrak{g}$ there is a universal invariant symmetric bilinear form
+\begin{equation} \label{eq:4.2.6}
+    \langle \ , \ \rangle_K : \mathfrak{g} \times \mathfrak{g} \to K
+\end{equation}
+from which every $\mathbb{R}$-valued form arises by a unique linear map $K \to \mathbb{R}$.
+
+The cocycle $\omega_K$ given by
+\begin{equation} \label{eq:4.2.7}
+    \omega_K(\xi,\eta) = \frac{1}{2\pi} \int_0^{2\pi}
+    \langle \xi(\theta), \eta'(\theta)\rangle_K \, d\theta
+\end{equation}
+defines an extension of $L\mathfrak{g}$ by $K$, which by Proposition (4.2.4) is the
+universal central extension of $L\mathfrak{g}$ when $\mathfrak{g}$ is semisimple.
+For semisimple groups $K$ can be identified with $H^3(\mathfrak{g};\mathbb{R})$,
+because a bilinear form $\langle \ , \ \rangle$ on $\mathfrak{g}$ gives rise to an
+invariant skew $3$-form
+\[
+    (\xi,\eta,\zeta) \mapsto \langle \xi,[\eta,\zeta]\rangle,
+\]
+and all elements of $H^3(\mathfrak{g};\mathbb{R})$ are so obtained. When $\mathfrak{g}$ is simple then $K = \mathbb{R}$.
+
+\begin{remark}
+    If $\mathfrak{g}$ is semisimple, then every invariant symmetric bilinear form on $\mathfrak{g}$ is a multiple of the Killing form. So in that case, the cocycle
+    \[
+        \omega(\xi,\eta) = \frac{1}{2\pi}\int_0^{2\pi} \langle \xi(\theta), \eta'(\theta)\rangle \, d\theta
+    \]
+    is unique up to scalar.
+
+    But in general (if $\mathfrak{g}$ is not simple), the space of invariant symmetric bilinear forms on $\mathfrak{g}$ may have higher dimension. So instead of fixing one $\langle\ ,\ \rangle$, introduce the universal bilinear form:
+    \[
+        \langle\ ,\ \rangle_K : \mathfrak{g} \times \mathfrak{g} \;\to\; K,
+    \]
+    where $K$ is a vector space that “records all possible invariant bilinear forms at once.”
+
+    Concretely: $K = (\text{space of invariant bilinear forms on }\mathfrak{g})^*$.
+    Then for any actual $\mathbb{R}$-valued invariant form $\beta$, there is a unique linear functional $f:K\to \mathbb{R}$ such that
+    \[
+        \beta(x,y) = f(\langle x,y\rangle_K).
+    \]
+
+
+    Using this universal bilinear form, we define a universal cocycle:
+    \[
+        \omega_K(\xi,\eta) = \frac{1}{2\pi}\int_0^{2\pi} \langle \xi(\theta), \eta'(\theta)\rangle_K \, d\theta.
+    \]
+    This cocycle takes values in $K$, not just in $\mathbb{R}$. For any linear functional $f:K\to \mathbb{R}$, composing gives you back an $\mathbb{R}$-valued cocycle. So $\omega_K$ parametrizes all possible central extensions of $L\mathfrak{g}$ by $\mathbb{R}$.
+\end{remark}
+
+\subsection{Extensions of $\mathrm{Map}(X;\mathfrak{g})$}
+
+Before leaving the subject of Lie algebra extensions, it is worth pointing
+out that very little extra work is needed to determine all central extensions of
+$\mathrm{Map}(X;\mathfrak{g})$ for any smooth manifold $X$. We shall indicate briefly
+a proof of the following result, which is a very simple case of a general theory of
+Loday and Quillen relating the cohomology of Lie algebras to Connes's cohomology. We shall content ourselves with the case of a simple Lie
+algebra $\mathfrak{g}$. There is then an essentially unique inner product
+$\langle \ , \ \rangle$.
+
+\begin{proposition}[4.2.8]
+    If $\mathfrak{g}$ is simple then the kernel of universal central extension
+    of $\mathrm{Map}(X;\mathfrak{g})$ is the space
+    $K = \Omega^1(X)/d\Omega^0(X)$ of $1$-forms on $X$ modulo exact $1$-forms.
+    The extension is defined by the cocycle
+    \begin{equation} \label{eq:4.2.9}
+        (\xi,\eta) \mapsto \langle \xi, d\eta \rangle.
+    \end{equation}
+    Equivalently, the extensions of $\mathrm{Map}(X;\mathfrak{g})$ by $\mathbb{R}$
+    correspond to the one-dimensional closed currents $C$ on $X$, the cocycle being
+    given by integrating \eqref{eq:4.2.9} over $C$.
+\end{proposition}
+
+\medskip
+
+Before proving this let us remark that from one point of view it is a
+disappointing result, as it tells us that there are no 'interesting' extensions
+of $\mathrm{Map}(X;\mathfrak{g})$ when $\dim(X) > 1$. More precisely,
+if $f : S^1 \to X$ is any smooth loop in $X$ one can always obtain an extension
+of $\mathrm{Map}(X;\mathfrak{g})$ by pulling back the universal extension of
+$L\mathfrak{g}$ by $f$. Proposition (4.2.8) asserts that any extension is a weighted
+linear combination of extensions of this form. The first 'interesting' cohomology
+class of $\mathrm{Map}(X;\mathfrak{g})$, for a compact $(n-1)$-dimensional manifold $X$,
+is in dimension $n$, and is defined by the cocycle
+\[
+    (\xi_1,\ldots,\xi_n) \mapsto P(\xi_1, d\xi_2,\ldots,d\xi_n),
+\]
+
+\noindent
+\begin{proof}
+    Let us write $\mathrm{Map}(X;\mathfrak{g})$ as
+    $A \otimes \mathfrak{g}$, where $A$ is the ring of smooth functions on $X$.
+    Any $G$-invariant real-valued bilinear form on $A \otimes \mathfrak{g}$ must be of the form
+    \[
+        (f \otimes \xi, \, g \otimes \eta) \mapsto \alpha(f \otimes g) \langle \xi,\eta \rangle,
+    \]
+    where $\alpha : A \otimes A \to \mathbb{R}$ is linear. Such an $\alpha$ can be identified
+    with a distribution with compact support on $X \times X$. The cocycle condition translates
+    into the statement that $\alpha$ vanishes on functions of the form
+    \begin{equation} \label{eq:4.2.10}
+        fg \otimes h + gh \otimes f + hf \otimes g,
+    \end{equation}
+    where $f,g,h$ are smooth functions on $X$. This means that $\alpha(f \otimes g) = 0$
+    when $f$ and $g$ have disjoint support, for then $fg=0$ and one can find $h$ so that
+    $fh=f$ and $gh=0$. Thus the distribution $\alpha$ has support along the diagonal.
+    Proposition (4.2.8) is the assertion that $\alpha(f \otimes g)$ depends only on the
+    $1$-form $fdg$. This in turn reduces to two facts:
+    \begin{enumerate}[(i)]
+        \item $\alpha(f \otimes 1)=0$ for all $f$; and
+        \item $\alpha\vert_{I^2} = 0$, where $I$ is the ideal of functions in $A \otimes A$
+              which vanish on the diagonal.
+    \end{enumerate}
+    Put $h=1$:
+    \[
+        \alpha(fg \otimes 1) + \alpha(g \otimes f) + \alpha(f \otimes g) = 0.
+    \]
+    By (skew), $\alpha(g \otimes f) = -\alpha(f \otimes g)$, so those two cancel and we get
+    \[
+        \alpha(fg \otimes 1) = 0 \quad \forall f,g.
+    \]
+    Since finite sums of products $fg$ span $A$, it follows that
+    \[
+        \alpha(f \otimes 1) = 0 \quad \forall f \in A.
+    \]
+
+    Let $I \subset A \otimes A$ be the ideal of functions vanishing on the diagonal $\Delta = \{(x,x)\}$. It is generated (as an ideal) by the differences $a \otimes 1 - 1 \otimes a$ ($a \in A$). Thus $I^2$ is generated by products
+    \[
+        (a \otimes 1 - 1 \otimes a)\,(b \otimes 1 - 1 \otimes b).
+    \]
+
+    It therefore suffices to check that $\alpha$ vanishes on each such generator. Expand:
+    \[
+        (a \otimes 1 - 1 \otimes a)(b \otimes 1 - 1 \otimes b)
+        = ab \otimes 1 \;-\; a \otimes b \;-\; b \otimes a \;+\; 1 \otimes ab.
+    \]
+    Apply $\alpha$ and use (i) and (skew):
+    \[
+        \alpha(ab \otimes 1) = 0, \quad \alpha(1 \otimes ab) = 0, \quad
+        \alpha(a \otimes b) + \alpha(b \otimes a) = 0.
+    \]
+    Hence
+    \[
+        \alpha\big((a \otimes 1 - 1 \otimes a)(b \otimes 1 - 1 \otimes b)\big) = 0.
+    \]
+    By linearity,
+    \[
+        \alpha|_{I^2} = 0
+    \]
+
+    Define the canonical linear map
+    \[
+        \theta: A \otimes A \longrightarrow \Omega^1(X),\qquad \theta(f \otimes g) = f\,dg.
+    \]
+    A quick check on the generators above shows $\theta(I^2) = 0$:
+    \[
+        \theta\big(ab \otimes 1 - a \otimes b - b \otimes a + 1 \otimes ab\big)
+        = ab\,d1 - a\,db - b\,da + d(ab) = 0.
+    \]
+    So $\theta$ descends to a well-defined map $\bar\theta: I/I^2 \to \Omega^1(X)$, which is the standard isomorphism $I/I^2 \cong \Omega^1(X)$ (Kähler differentials).
+
+    Since $\alpha$ kills $I^2$, there is a unique linear functional
+    \[
+        \Lambda: \Omega^1(X) \longrightarrow \mathbb{R}
+        \quad\text{such that}\quad
+        \alpha(f \otimes g) = \Lambda(f\,dg)
+    \]
+
+    Using $(†)$, compute skew-symmetry:
+    \[
+        0 = \alpha(f \otimes g) + \alpha(g \otimes f)
+        = \Lambda(f\,dg) + \Lambda(g\,df)
+        = \Lambda\big(f\,dg + g\,df\big)
+        = \Lambda\big(d(fg)\big).
+    \]
+    Because $f,g$ were arbitrary, the linear span of $\{d(fg)\}$ is all of $d\Omega^0(X)$. Hence
+    \[
+        \Lambda|_{d\Omega^0(X)} = 0.
+    \]
+    $\Lambda$ factors through the quotient $\Omega^1(X)/d\Omega^0(X)$, so the only data that survives is the class $[\Lambda] \in (\Omega^1/d\Omega^0)^*$.
+\end{proof}
+
+\begin{remark}
+    In the case $X = S^1$, we have $\Omega^1(S^1)/d\Omega^0(S^1) \cong H^1_{\mathrm{dR}}(S^1) \cong \mathbb{R}$ (generated by the period functional $[\alpha] \mapsto \int_{S^1}\alpha$).
+    Taking $\Lambda(\omega) = \frac{1}{2\pi}\int_{S^1}\omega$ gives
+    \[
+        \alpha(f \otimes g) = \frac{1}{2\pi}\int_{S^1} f\,dg,
+        \qquad
+        c(\xi,\eta) = \frac{1}{2\pi}\int_{S^1}\!\langle \xi,\eta'\rangle\,d\theta,
+    \]
+    the standard Kac-Moody cocycle.
+\end{remark}
+
+\subsection{Extensions of $\mathrm{Vect}(S^1)$}
+
+Another calculation that fits in very naturally at this point is that for the
+Lie algebra $\mathrm{Vect}(S^1)$ of smooth vector fields on the circle, i.e.\ the Lie algebra of the group $\mathrm{Diff}(S^1)$. A complex-linear $2$-cocycle
+\[
+    \alpha : \mathrm{Vect}_{\mathbb{C}}(S^1) \times \mathrm{Vect}_{\mathbb{C}}(S^1) \to \mathbb{C},
+\]
+where $\mathrm{Vect}_{\mathbb{C}}(S^1) = \mathrm{Vect}(S^1)\otimes \mathbb{C}$, is determined by the numbers
+\[
+    \alpha_{p,q} = \alpha(L_p,L_q), \qquad L_n = e^{in\theta}\tfrac{d}{d\theta}.
+\]
+Recall the Witt algebra basis
+\[
+    L_n = i e^{in\theta} \tfrac{d}{d\theta}, \quad n \in \mathbb{Z},
+\]
+with brackets
+\[
+    [L_n, L_m] = i(m-n) L_{n+m}.
+\] The bracket identity follows from the definition of the commutator of derivations:
+\[
+    [X,Y] = X(Y(h)) - Y(X(h)) \quad \text{for } h \in C^\infty(M)
+\] and the general formula for brackets of vector fields in one variable:
+\[[f(\theta)\tfrac{d}{d\theta}, g(\theta)\tfrac{d}{d\theta}] = \big(f(\theta)g'(\theta) - g(\theta)f'(\theta)\big)\tfrac{d}{d\theta}.\]
+
+Now check the three vector fields:
+\[
+    L_{-1}, \quad L_0, \quad L_1.
+\]
+The brackets close as
+\[
+    [L_1, L_{-1}] = 2i L_0, \qquad [L_0, L_{\pm 1}] = \mp i L_{\pm 1}.
+\]
+which up to rescaling gives a copy of $\mathfrak{sl}_2(\mathbb{R})$.
+
+The cocycle identity for $(L_0,L_p,L_q)$ shows that the cohomology class of
+$\alpha$ is not changed by rotation, and so we can (by averaging) assume that
+$\alpha$ is itself invariant. Then $\alpha_{p,q}=0$ unless $p+q=0$. If we write
+$\alpha_{p,-p}=\alpha_p$, and notice that $\alpha_{-p}=-\alpha_p$, then the cocycle
+identity gives
+\[
+    (p+2q)\alpha_p - (2p+q)\alpha_q = (p-q)\alpha_{p+q}.
+\]
+This determines all the $\alpha_p$ in terms of $\alpha_1$ and $\alpha_2$. The general
+solution is $\alpha_p = \lambda p^3 + \mu p$. But $\alpha_p = p$ is a coboundary, so the
+value of $\mu$ is unimportant. We have proved
+
+\begin{proposition}[Virasoro cocycle]
+    The most general central extension of $\mathrm{Vect}(S^1)$ by $\mathbb{R}$
+    is described by the cocycle $\alpha$, where
+    \[
+        \alpha\!\left(e^{in\theta}\tfrac{d}{d\theta},\, e^{im\theta}\tfrac{d}{d\theta}\right)
+        = \begin{cases}
+            i\lambda n(n^2-1), & \text{if } n+m=0,      \\
+            0,                 & \text{if } n+m \neq 0,
+        \end{cases}
+    \]
+    for some $\lambda \in \mathbb{R}$.
+\end{proposition}
+
+The representing cocycle given here is characterized by the fact that it is invariant under rotation and vanishes on the subalgebra $\mathfrak{sl}_2(\mathbb{R})$ of
+$\mathrm{Vect}(S^1)$.
+
+\subsection{Adjoint and coadjoint actions of loop groups}
+\begin{proposition}
+    The adjoint action of $L\mf{g}$ on its central extension $\widetilde{L\mathfrak{g}}$ comes from an action of $LG$ given by \begin{align*}
+        (\gamma)\cdot(\xi,\lambda) = (\operatorname{Ad}_\gamma \xi, \lambda - \langle \gamma^{-1}\gamma', \xi \rangle)
+    \end{align*}
+\end{proposition}
+
+\begin{proof}
+    We will differentiate the group action along the one-parameter subgroup $\gamma(t) = \exp(t\eta)$, where $\eta \in L\mathfrak{g}$. Differentiate at $t=0$:
+    \begin{itemize}
+        \item First coordinate:
+              \[
+                  \frac{d}{dt}\Big|_{t=0}\operatorname{Ad}_{\gamma(t)}\xi
+                  = [\eta,\xi].
+              \]
+        \item Second coordinate: use $\gamma(t)^{-1}\gamma'(t)=t\,\eta'+O(t^2)$ (standard Maurer–Cartan expansion along the loop variable), hence
+              \[
+                  \frac{d}{dt}\Big|_{t=0}\!\left(-\big\langle\gamma(t)^{-1}\gamma'(t),\xi\big\rangle\right)
+                  = -\frac{1}{2\pi}\int_0^{2\pi}\!\langle \eta'(\theta),\xi(\theta)\rangle_{\mathfrak g}\,d\theta
+                  = \frac{1}{2\pi}\int_0^{2\pi}\!\langle \eta(\theta),\xi'(\theta)\rangle_{\mathfrak g}\,d\theta,
+              \]
+              where the last equality is by integration by parts (boundary term vanishes by periodicity).
+    \end{itemize}
+
+    Define the Kac-Moody $2$-cocycle
+    \[
+        \omega(\eta,\xi)\;:=\;\frac{1}{2\pi}\int_0^{2\pi}\!\langle \eta(\theta),\xi'(\theta)\rangle_{\mathfrak g}\,d\theta.
+    \]
+    Thus the derivative of the action is
+    \[
+        \frac{d}{dt}\Big|_{t=0}\big(\gamma(t)\cdot(\xi,\lambda)\big)
+        = \big([\eta,\xi],\,\omega(\eta,\xi)\big).
+    \]
+    This is exactly the standard adjoint action of $L\mathfrak g$ on the central extension $\widetilde{L\mathfrak g}=L\mathfrak g\oplus\mathbb R K$:
+    \[
+        \operatorname{ad}_{(\eta,0)}(\xi,\lambda)=\big([\eta,\xi],\,\omega(\eta,\xi)\big),\qquad [K,\cdot]=0.
+    \] as desired.
+\end{proof}
+
+
+\begin{proposition}[Loop group coadjoint action]
+    The coadjoint action of $LG$ on $\widetilde{L\mathfrak g}^{\,*}\cong (L\mathfrak g)^{*}\oplus\mathbb R$ is given by
+    \[
+        \gamma\cdot(\phi,\lambda)=\big(\Ad_\gamma \phi+\lambda\,\gamma'\gamma^{-1},\ \lambda\big).
+    \]
+\end{proposition}
+\begin{proof}
+    Identify $\widetilde{L\mathfrak g}^{\,*}\cong (L\mathfrak g)^{*}\oplus\mathbb R$ with pairing (note that $(\phi,\lambda) \in (\tilde L \mathfrak g \oplus \mathbb R)^*$ and $(\xi,a) \in \tilde L \mathfrak g \oplus \mathbb R$)
+    \[
+        \langle (\phi,\lambda),(\xi,a)\rangle\;=\;\phi(\xi)+\lambda a.
+    \]
+    By definition of coadjoint action,
+    \[
+        \big\langle \gamma\cdot(\phi,\lambda),\,(\xi,a)\big\rangle
+        =\big\langle (\phi,\lambda),\,\gamma^{-1}\cdot(\xi,a)\big\rangle.
+    \]
+    Insert the adjoint formula with $\gamma^{-1}$. Using $(\gamma^{-1})^{-1}(\gamma^{-1})'=\gamma(\gamma^{-1})'=-\,\gamma'\gamma^{-1}$,
+    \[
+        \gamma^{-1}\cdot(\xi,a)
+        =\Big(\Ad_{\gamma^{-1}}\xi,\ a-\big\langle (\gamma^{-1})^{-1}(\gamma^{-1})',\,\xi\big\rangle\Big)
+        =\Big(\Ad_{\gamma^{-1}}\xi,\ a+\langle \gamma'\gamma^{-1},\,\xi\rangle\Big).
+    \]
+    Hence
+    \[
+        \begin{aligned}
+            \big\langle \gamma\cdot(\phi,\lambda),\,(\xi,a)\big\rangle
+             & =\phi\big(\Ad_{\gamma^{-1}}\xi\big)+\lambda\Big(a+\langle \gamma'\gamma^{-1},\,\xi\rangle\Big)         \\
+             & =(\phi\circ\Ad_{\gamma^{-1}})(\xi)\;+\;\lambda a\;+\;\lambda\,\langle \gamma'\gamma^{-1},\,\xi\rangle.
+        \end{aligned}
+    \]
+    Since this holds for all $(\xi,a)$, we read off
+    \[
+        \gamma\cdot(\phi,\lambda)
+        =\big(\phi\circ\Ad_{\gamma^{-1}}+\lambda\,\langle \gamma'\gamma^{-1},\,\cdot\,\rangle,\ \lambda\big).
+    \]
+
+    Using the invariant inner product to identify $(L\mathfrak g)^*\cong L\mathfrak g$, write $\phi(\,\cdot\,)=\langle \phi,\,\cdot\,\rangle$. Then
+    \[
+        \phi\circ\Ad_{\gamma^{-1}}=\langle \Ad_\gamma \phi,\,\cdot\,\rangle,\qquad
+        \langle \gamma'\gamma^{-1},\,\cdot\,\rangle\ \leftrightarrow\ \gamma'\gamma^{-1},
+    \]
+    so the coadjoint action becomes
+    \[
+        \gamma\cdot(\phi,\lambda)=\big(\Ad_\gamma \phi+\lambda\,\gamma'\gamma^{-1},\ \lambda\big).
+    \]
+    as desired. \end{proof}
+
+   \begin{remark}[Reminder about the infinitesimal adjoint and coadjoint actions]
+Let $G$ be compact, connected, and simply connected, with Lie algebra $\mathfrak g$
+and an $\Ad$–invariant inner product $\langle\,,\,\rangle_{\mathfrak g}$.
+For loops we use the $L^2$–pairing
+\[
+\langle \xi,\eta\rangle_{L\mathfrak g}
+:= \frac{1}{2\pi}\int_0^{2\pi}\langle \xi(\theta),\eta(\theta)\rangle_{\mathfrak g}\,d\theta,
+\qquad \xi,\eta\in L\mathfrak g .
+\]
+Define the $2$–cocycle
+\[
+\omega(\eta,\xi)
+:= \frac{1}{2\pi}\int_0^{2\pi}\!\!\langle \eta(\theta),\xi'(\theta)\rangle_{\mathfrak g}\,d\theta.
+\]
+The (Lie–algebra) central extension is
+\[
+\widetilde{L\mathfrak g} \;=\; L\mathfrak g \oplus \mathbb R K,
+\qquad
+[(\eta,aK),(\xi,bK)]
+= \big([\eta,\xi],\;\omega(\eta,\xi)\,K\big).
+\]
+Here $K$ is central, $[K,\cdot]=0$.
+We identify $\widetilde{L\mathfrak g}^{\,*}\cong (L\mathfrak g)^*\oplus\mathbb R$ and,
+via the $L^2$–pairing, $(L\mathfrak g)^*\cong L\mathfrak g$.
+We write the dual pairing as
+\[
+\big\langle (\phi,\lambda),(\xi,aK)\big\rangle
+= \langle \phi,\xi\rangle_{L\mathfrak g} + \lambda a .
+\]
+
+\paragraph{Adjoint (Lie–algebra) action.}
+By definition, $\ad_{(\eta,aK)}(\xi,bK)=[(\eta,aK),(\xi,bK)]$; since $K$ is central,
+\[
+\ad_{(\eta,0)}(\xi,bK) = \big([\eta,\xi],\,\omega(\eta,\xi)\,K\big), \qquad
+\ad_{(0,aK)}(\xi,bK)=0 .
+\]
+Equivalently, the adjoint representation of $\widetilde{L\mathfrak g}$ on itself is
+\[
+\ad_{(\eta,aK)}
+\begin{pmatrix}\xi\\ bK\end{pmatrix}
+=
+\begin{pmatrix}
+[\eta,\xi]\\ \omega(\eta,\xi)\,K
+\end{pmatrix}.
+\]
+
+\paragraph{Coadjoint (Lie–algebra) action.}
+Recall the coadjoint action is defined by
+\[
+\big\langle \ad^*_{X}(\Phi),\,Y\big\rangle
+= \big\langle \Phi,\,[Y,X]\big\rangle
+\qquad (X,Y\in \widetilde{L\mathfrak g},\;\Phi\in \widetilde{L\mathfrak g}^{\,*}),
+\]
+which matches the sign convention that integrates to the group formula in Pressley--Segal.
+Take $X=(\eta,0)$, $Y=(\xi,aK)$, $\Phi=(\phi,\lambda)$:
+\begin{align*}
+\big\langle \ad^*_{(\eta,0)}(\phi,\lambda),\,(\xi,aK)\big\rangle
+&= \big\langle (\phi,\lambda),\,[(\xi,aK),(\eta,0)]\big\rangle\\
+&= \big\langle (\phi,\lambda),\,\big([\xi,\eta],\,\omega(\xi,\eta)K\big)\big\rangle\\
+&= \langle \phi,\,[\xi,\eta]\rangle_{L\mathfrak g} + \lambda\,\omega(\xi,\eta).
+\end{align*}
+Use $\Ad$–invariance of $\langle\,,\,\rangle_{\mathfrak g}$:
+$\langle \phi,[\xi,\eta]\rangle=\langle [\phi,\eta],\xi\rangle$, and integrate by parts
+(using periodicity) for the cocycle term
+\[
+\omega(\xi,\eta) = \frac{1}{2\pi}\int_0^{2\pi}\!\!\langle \xi,\eta'\rangle\,d\theta.
+\]
+Thus
+\[
+\big\langle \ad^*_{(\eta,0)}(\phi,\lambda),\,(\xi,aK)\big\rangle
+= \left\langle [\eta,\phi]+\lambda\,\eta',\,\xi\right\rangle_{L\mathfrak g},
+\]
+which identifies
+\[
+\ad^*_{(\eta,0)}(\phi,\lambda)\;=\;\big([\eta,\phi]+\lambda\,\eta',\;0\big).
+\]
+Since $K$ is central, $\ad^*_{(0,aK)}=0$. Therefore, for general $(\eta,aK)$:
+\[
+\ad^*_{(\eta,aK)}(\phi,\lambda) \;=\; \big([\eta,\phi]+\lambda\,\eta',\;0\big).
+\]
+
+\paragraph{Consistency with the group formula.}
+Let $\gamma(t)=\exp(t\eta)\in LG$. The group–level coadjoint action is
+\[
+\gamma\cdot(\phi,\lambda)
+= \big(\Ad_\gamma\phi+\lambda\,\gamma'\gamma^{-1},\,\lambda\big).
+\]
+Differentiating at $t=0$ gives
+\[
+\frac{d}{dt}\Big|_{0}\big(\Ad_{\gamma(t)}\phi\big)=[\eta,\phi],
+\qquad
+\frac{d}{dt}\Big|_{0}\big(\gamma'(t)\gamma(t)^{-1}\big)=\eta',
+\]
+hence
+\[
+\frac{d}{dt}\Big|_{0}\big(\gamma(t)\cdot(\phi,\lambda)\big)
+= \big([\eta,\phi]+\lambda\,\eta',\,0\big)=\ad^*_{(\eta,0)}(\phi,\lambda),
+\]
+as derived above.
+\end{remark}
+
+
+
+Let us assume that the inner product on $\mathfrak{g}$ is positive-definite.
+Then $L\mathfrak{g}$ is identified with a dense subspace of $(L\mathfrak{g})^*$
+which we shall call the ‘smooth part’ of the dual. We can describe the orbits of
+the action of $LG$ on this in the following way.
+
+For each smooth element $(\phi,\lambda) \in (\widetilde{L\mathfrak{g}})^*$
+with $\lambda \neq 0$ we can find a unique smooth path $f : \mathbb{R} \to G$
+by solving the differential equation
+\begin{equation} \label{eq:4.3.4}
+    f'f^{-1} = \lambda^{-1}\phi
+\end{equation}
+with the initial condition $f(0)=1$.
+
+\begin{definition}[Parallel transport ODE]
+    Define $f:\mathbb R\to G$ by the first-order ODE
+    \begin{equation}\label{eq:ODE}
+        f'(\theta)\,f(\theta)^{-1} \;=\; \lambda^{-1}\,\phi(\theta),
+        \qquad f(0)=\mathbf{1}.
+    \end{equation}
+\end{definition}
+
+\begin{lemma}[Existence and uniqueness]
+    For any smooth $\phi$ and $\lambda\neq 0$, the initial value problem
+    \eqref{eq:ODE} has a unique smooth solution on all of $\mathbb R$. Moreover,
+    \begin{equation}\label{eq:POexp}
+        f(\theta) \;=\; \mathcal P\exp\!\left(\lambda^{-1}
+        \int_0^\theta \phi(s)\,ds\right),
+    \end{equation}
+    where $\mathcal P\exp$ denotes the path-ordered exponential.
+\end{lemma}
+
+Because $\phi$ is periodic in $\theta$ we have
+\[
+    f(\theta+2\pi) = f(\theta)\cdot M_\phi,
+\]
+where $M_\phi = f(2\pi)$. If $(\phi,\lambda)$ is transformed by $\gamma \in LG$
+then $f$ is changed to $\tilde{f}$, where
+\begin{equation} \label{eq:4.3.5}
+    \tilde{f}(\theta) = \gamma(\theta) f(\theta) \gamma(0)^{-1}.
+\end{equation}
+Thus $M_\phi$ is changed to $\gamma(0)M_\phi \gamma(0)^{-1}$. In fact
+\eqref{eq:4.3.4} defines a bijection between $L\mathfrak{g} \times \{\lambda\}$
+and the space of maps $f$ such that $f(0)=1$ and
+$f(\theta+2\pi)=f(\theta)\cdot M$ for some $M \in G$.
+
+\begin{definition}[Monodromy / holonomy]
+    Because $\phi$ is $2\pi$-periodic, there exists a unique $M_\phi\in G$
+    (the \emph{monodromy}) such that
+    \begin{equation}\label{eq:monodromy-eq}
+        f(\theta+2\pi) \;=\; f(\theta)\,M_\phi \qquad (\theta\in\mathbb R),
+    \end{equation}
+    equivalently $M_\phi=f(2\pi)$. In terms of \eqref{eq:POexp},
+    \begin{equation}\label{eq:monodromy-POexp}
+        M_\phi \;=\; \mathcal P\exp\!\left(\lambda^{-1}
+        \int_0^{2\pi}\phi(\theta)\,d\theta\right).
+    \end{equation}
+\end{definition}
+
+\begin{proof}[Proof of \eqref{eq:monodromy-eq}]
+    Let $g(\theta):=f(\theta+2\pi)$. Then
+    \begin{align*}
+        g' g^{-1} & = f'(\theta+2\pi) f(\theta+2\pi)^{-1} \\
+                  & = \lambda^{-1}\phi(\theta+2\pi)       \\
+                  & = \lambda^{-1}\phi(\theta),
+    \end{align*}
+    and $g(0)=f(2\pi)$. By uniqueness for \eqref{eq:ODE}, $g(\theta)=f(\theta)\,f(2\pi)$, giving
+    $f(\theta+2\pi)=f(\theta)M_\phi$ with $M_\phi=f(2\pi)$.
+\end{proof}
+
+\begin{proposition}[Transformation under the $LG$–coadjoint action]
+    Let $\gamma\in LG$. The $LG$–coadjoint action on
+    $(\widetilde{L\mathfrak g})^*$ is
+    \[
+        \gamma\cdot(\phi,\lambda) \;=\; (\operatorname{Ad}_\gamma\phi + \lambda\,\gamma'\gamma^{-1},\,\lambda).
+    \]
+    If $f$ solves \eqref{eq:ODE} for $(\phi,\lambda)$, then
+    \begin{equation}\label{eq:ftilde}
+        \tilde f(\theta) \;:=\; \gamma(\theta)\,f(\theta)\,\gamma(0)^{-1}
+    \end{equation}
+    solves \eqref{eq:ODE} for $(\operatorname{Ad}_\gamma\phi + \lambda\,\gamma'\gamma^{-1},\,\lambda)$
+    and satisfies $\tilde f(0)=\mathbf{1}$.
+    Consequently the monodromy transforms by conjugation:
+    \begin{equation}\label{eq:monodromy-conj}
+        M_{\gamma\cdot\phi} \;=\; \gamma(0)\,M_\phi\,\gamma(0)^{-1}.
+    \end{equation}
+\end{proposition}
+
+\begin{proof}
+    Let $\gamma\in LG$, and suppose $f:\mathbb R\to G$ solves
+    \[
+        f'(\theta)\,f(\theta)^{-1} \;=\; \lambda^{-1}\,\phi(\theta),\qquad f(0)=\mathbf 1.
+    \]
+    Define
+    \[
+        \tilde f(\theta) \;:=\; \gamma(\theta)\,f(\theta)\,\gamma(0)^{-1}.
+    \]
+    We claim that
+    \[
+        \tilde f'(\theta)\,\tilde f(\theta)^{-1}
+        \;=\; \lambda^{-1}\Big(\Ad_{\gamma(\theta)}\phi(\theta)\;+\;\lambda\,\gamma'(\theta)\gamma(\theta)^{-1}\Big),
+    \]
+    so $\tilde f$ solves the ODE corresponding to $(\Ad_\gamma\phi+\lambda\,\gamma'\gamma^{-1},\lambda)$ and satisfies $\tilde f(0)=\mathbf 1$.
+
+    \medskip
+
+    \noindent\textit{Proof.}
+    First compute the derivative:
+    \[
+        \tilde f'(\theta)
+        = \gamma'(\theta)\,f(\theta)\,\gamma(0)^{-1}
+        + \gamma(\theta)\,f'(\theta)\,\gamma(0)^{-1}.
+    \]
+    Next note that
+    \[
+        \tilde f(\theta)^{-1}
+        = \gamma(0)\,f(\theta)^{-1}\,\gamma(\theta)^{-1}.
+    \]
+    Hence
+    \begin{align*}
+        \tilde f'(\theta)\,\tilde f(\theta)^{-1}
+         & = \Big(\gamma' f \gamma(0)^{-1} + \gamma f' \gamma(0)^{-1}\Big)
+        \Big(\gamma(0) f^{-1} \gamma^{-1}\Big)                                 \\
+         & = \gamma' f f^{-1} \gamma^{-1} \;+\; \gamma f' f^{-1} \gamma^{-1}   \\
+         & = \gamma' \gamma^{-1} \;+\; \gamma \big(f' f^{-1}\big) \gamma^{-1}.
+    \end{align*}
+    Insert the original ODE $f' f^{-1} = \lambda^{-1}\phi$:
+    \[
+        \tilde f'\,\tilde f^{-1}
+        = \gamma'\gamma^{-1} +  \lambda^{-1}\,\gamma \phi \gamma^{-1}
+        = \lambda^{-1}\Big(\Ad_\gamma \phi \;+\; \lambda\,\gamma'\gamma^{-1}\Big).
+    \]
+    Finally, $\tilde f(0)=\gamma(0)\,f(0)\,\gamma(0)^{-1}=\mathbf 1$, as required. Also $\tilde f(0)=\gamma(0)\mathbf{1}\gamma(0)^{-1}=\mathbf{1}$. Evaluating at $\theta=2\pi$ and using $\gamma(2\pi)=\gamma(0)$ (loop),
+    \[
+        M_{\gamma\cdot\phi}=\tilde f(2\pi)=\gamma(0)\,f(2\pi)\,\gamma(0)^{-1}
+        =\gamma(0)\,M_\phi\,\gamma(0)^{-1}.
+    \] as desired.
+\end{proof}
+
+\begin{remark}
+    Equation \eqref{eq:POexp} identifies $f$ as the parallel transport for the
+    connection one-form $A=\lambda^{-1}\phi(\theta)\,d\theta$ on the trivial $G$-bundle
+    over $S^1$, and $M_\phi$ as its holonomy around the circle.
+\end{remark}
+
+The following proposition follows from the previous discussion.
+\begin{proposition}[Coadjoint orbits and conjugacy classes]
+    \begin{enumerate}[(i)]
+        \item If $G$ is simply connected and $\lambda \neq 0$ then the orbits of $LG$
+              on the smooth part of $(L\mathfrak{g})^* \times \{\lambda\} \subset (\widetilde{L\mathfrak{g}})^*$
+              correspond precisely to the conjugacy classes of $G$ under the map
+              $(\phi,\lambda) \mapsto M_\phi$.
+        \item The stabilizer of $(\phi,\lambda)$ in $LG$ is isomorphic to the centralizer
+              $Z_\phi$ of $M_\phi$ in $G$ by the map $\gamma \mapsto \gamma(0)$; and
+              $\gamma$ stabilizes $(\phi,\lambda)$ if and only if
+              \[
+                  \gamma(\theta) = f(\theta)\gamma(0)f(\theta)^{-1}.
+              \]
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    The relation $M_{\gamma\cdot(\phi,\lambda)} = \gamma(0)\,M_\phi\,\gamma(0)^{-1}$ shows that $(\phi,\lambda)$ and $(\phi',\lambda)$ are in the same $LG$-orbit implies $M_\phi$ and $M_{\phi'}$ are conjugate in $G$. Conversely, if $M_{\phi'} = g M_\phi g^{-1}$ for some $g \in G$, there exists a loop $\gamma \in LG$ with $\gamma(0) = g$. Then by the previous proposition, $\gamma \cdot (\phi,\lambda)$ has monodromy $M_{\phi'}$.
+
+    The map $(\phi,\lambda) \mapsto M_\phi$ is surjective onto conjugacy classes. Let $C\subset G$ be a conjugacy class. Choose $g\in C$. Pick $X\in\mathfrak g$ with $\exp(2\pi X)=g$ (for compact connected $G$ this is always possible since every element lies in a maximal torus and $\exp:\mathfrak t\to T$ is surjective). Take $\phi(\theta)\equiv -\lambda X$ (constant). Then the solution is $f(\theta)=\exp(\theta X)$, hence $M_\phi=g\in C$.
+
+    we can find $\phi''$ such that $M_{\phi''} = M_{\phi'}$. Thus $(\phi',\lambda)$ and $(\phi'',\lambda)$ have the same monodromy and hence are in the same $LG$-orbit. This establishes the bijection between $LG$-orbits and conjugacy classes in $G$.
+
+    Now we show injectivity of fixed monodromy. Suppose $(\phi,\lambda)$ and $(\phi',\lambda)$ have the same monodromy:
+    $M_\phi=M_{\phi'}=M$.
+    Let $f,f'$ be their ODE solutions with $f(0)=f'(0)=\mathbf 1$. Define
+    $\gamma(\theta):=f'(\theta)\,f(\theta)^{-1}$.
+    Then $\gamma(0)=\mathbf 1$ and, using $f(\theta+2\pi)=f(\theta)M$, $f'(\theta+2\pi)=f'(\theta)M$,
+    $\gamma(\theta+2\pi)=f'(\theta)M\,(f(\theta)M)^{-1}=\gamma(\theta)$,
+    so $\gamma\in LG$. A direct calculation gives (with the "+" convention)
+    \[
+        \gamma\cdot\phi=\Ad_\gamma\phi+\lambda\,\gamma'\gamma^{-1}=\phi'.
+    \]
+    Hence points with the same monodromy lie in the same $LG$-orbit.
+
+    As for the second claim, suppose $\gamma \in LG$ stabilizes $(\phi,\lambda)$. Then by definition of the action, $(\phi,\lambda) = \gamma\cdot(\phi,\lambda)$. This means the transformed ODE solution $\tilde f(\theta) = \gamma(\theta) f(\theta)\gamma(0)^{-1}$ equals the original $f(\theta)$ (since both solve the same ODE with same initial condition). So we must have $f(\theta) = \gamma(\theta) f(\theta)\gamma(0)^{-1}$, or equivalently, $\gamma(\theta) = f(\theta)\gamma(0)f(\theta)^{-1}$. In particular, at $\theta=2\pi$, $\gamma(2\pi) = f(2\pi)\gamma(0)f(2\pi)^{-1}$. But since $\gamma$ is a loop, $\gamma(2\pi) = \gamma(0)$. This forces $\gamma(0) \in Z_G(M_\phi)$, i.e. $\gamma(0)$ lies in the centralizer of $M_\phi$.
+
+    So the stabilizer subgroup of $LG$ maps isomorphically to the centralizer $Z_\phi$ under the map $\gamma \mapsto \gamma(0)$.
+\end{proof}
+
+\begin{remark}
+    In general, the coadjoint action only integrates to an action of the component containing $\gamma$. To guarantee there's no component obstruction (and to integrate the infinitesimal formulas globally), we want $LG$ to be connected. For connected $G$, $\pi_0(LG)\;\cong\;\pi_1(G)$. Thus if $G$ is simply connected, then $LG$ is connected, and the coadjoint action integrates on all of $LG$ with no ambiguity.
+\end{remark}
+
+
+According to Kirillov's idea, the irreducible unitary representations of a
+group $\Gamma$ correspond to the coadjoint orbits $\Omega$ with the property
+
+\begin{quote}
+    (C) if the stabilizer of $\Phi \in \Omega$ is the subgroup $H$ of $\Gamma$
+    then $\Phi$ is the derivative of a character of the identity component of $H$.
+\end{quote}
+
+The group--level central extension is
+$1 \;\to\; \mathbb T \;\to\; \widetilde{LG} \;\to\; LG \;\to\; 1$,
+where $\mathbb T = U(1)$ is the circle. The Lie algebra of this circle is just $\mathbb R K$ with basis element $K$. In the dual $(\widetilde{L\mathfrak g})^*$, the functional $(\phi,\lambda)$ evaluates to
+$\langle (\phi,\lambda), K \rangle = \lambda$.
+
+
+Kirillov's condition (C) says:
+If $H$ is the stabilizer of a coadjoint point $\Phi$, then the restriction $\Phi|_{\mathfrak h}$ must equal the differential of a unitary character of $H^0$. For every $(\phi,\lambda)$, the central subgroup $\mathbb T \subset \widetilde{LG}$ is contained in its stabilizer (since it's central, it fixes everything). So $H^0$ contains $\mathbb T$, and we must check condition (C) on that subgroup.
+
+So we need: the restriction of $\Phi$ to the Lie algebra of $\mathbb T$ (spanned by $K$) must be the differential of some unitary character $\chi:\mathbb T\to U(1)$. The circle group $\mathbb T = \{ e^{i\theta} : \theta\in\mathbb R \}$ has all unitary characters given by $\chi_n(e^{i\theta}) = e^{in\theta}$ for $n\in\mathbb Z$. Differentiate at the identity $(\theta=0)$: $\chi_n'(0) = in$. By definition of $(\phi,\lambda)$,
+$\langle (\phi,\lambda),K\rangle = \lambda$. Condition (C) requires this number $\lambda$ to equal the derivative of some unitary character of $\mathbb T$. Therefore we have $\lambda \in \mathbb Z$.
+
+By the above argument, if $(L\mathfrak{g})^* \times \{\lambda\}$ is allowable then $\lambda$ must be an integer. Then an orbit in the smooth part of the dual corresponds to the
+conjugacy class of an element $g \in G$, which we can assume to belong to a given
+maximal torus $T$. If we choose
+\[
+    \xi \in \mathfrak{t} \subset \mathfrak{g} \subset L\mathfrak{g} \subset (L\mathfrak{g})^*
+\]
+so that $\exp(\lambda^{-1}\xi) = g$, then $(\xi,\lambda)$ belongs to the orbit. This is because one can check that the solution of \eqref{eq:ODE} is $f(\theta) = \exp(\lambda^{-1}\theta \xi)$, which has monodromy $M_\phi = \exp(2\pi \lambda^{-1}\xi) = g$.
+
+
+
+If $g$ is sufficiently generic then its centralizer in $G$ is $T$. Recall that we say an element $g \in G$ (or equivalently $X \in \mathfrak{g}$) is regular if its centralizer has minimal possible dimension. The minimal possible centralizer in a compact Lie group is precisely a maximal torus $T$. Concretely, if $X \in \mathfrak{t}$, then $Z_G(X)$ consists of the torus $T$ plus all root subgroups $\mathfrak{g}_\alpha$ for which $\alpha(X)=0$. If $\alpha(X)=0$ for some root, then the centralizer strictly contains $T$. So for $X$ regular (i.e. $\alpha(X)\neq 0$ for all roots), $Z_G(X)=T$. Therefore, if $g=\exp(X)$ with $X$ regular in $\mathfrak{t}$, then $Z_G(g) = T$.
+
+And the condition (C) amounts to the requirement that $\xi \in \mathfrak{t} \subset \mathfrak{t}^*$ belongs to the lattice $\hat{T}$.
+
+Recall that the stabilizer $H$ of $(\phi,\lambda)$ in $LG$ is isomorphic to $Z_G(g)=T$ by $\gamma\mapsto \gamma(0)$; more concretely, after conjugating by the associated $f$, one may (and we will) work at the representative $(\xi,\lambda)$ with $\xi\in\mathfrak{t}$ constant. Then $H^0 \cong T$ and $\mathfrak{h} \cong \mathfrak{t}$. Condition (C) says that the restriction of $(\xi,\lambda)$ to $\mathfrak{h}\cong\mathfrak{t}$ must be the differential of a character of $T$. The restriction is simply $Y\in\mathfrak{t} \mapsto \langle \xi,Y\rangle\in\mathbb{R}$ (using the fixed invariant inner product to identify $\mathfrak{t}\cong\mathfrak{t}$). This linear form exponentiates to a character of $T$ if and only if it takes integral values on the period lattice $\widehat{T}:=\ker(\exp: \mathfrak{t} \to T)$. That is, $\langle \xi,\eta\rangle \in 2\pi\mathbb{Z}$ for all $\eta\in \widehat{T}$. With our normalization (Pressley-Segal identify $\mathfrak{t}\simeq \mathfrak{t}^*$ using the basic inner product and absorb the $2\pi$ in the definition of $\widehat{T}$), this is precisely the statement $\xi \in \widehat{T}$.
+
+On the other hand, $(\xi,\lambda)$ and $(\tilde{\xi},\lambda)$ belong to the same orbit if  $\tilde{\xi} = w \cdot \xi + \lambda \eta$ for some $\eta \in \hat{T}$ and some $w$ in the Weyl group $W$ of $G$.
+
+\begin{proposition}[Coadjoint orbits satisfying (C)]
+    If $\lambda$ is a non-zero integer then the coadjoint orbits in the smooth part of
+    $(L\mathfrak{g})^* \times \{\lambda\}$ which satisfy the condition (C) correspond
+    to the orbits of the affine Weyl group
+    $W_{\mathrm{aff}} = W \ltimes \hat{T}$ on the lattice $\hat{T}$, where
+    $(w,\eta) \in W_{\mathrm{aff}}$ acts on $\hat{T}$ by
+    \[
+        \xi \mapsto w \cdot \xi + \lambda \eta.
+    \]
+\end{proposition}
+
+\begin{proof}
+    Every orbit contains a representative $(\xi,\lambda)$ with $\xi\in\mathfrak t$,
+    since any conjugacy class of $G$ meets $T$ and the monodromy of $(\xi,\lambda)$
+    is $M_\xi = \exp(2\pi \xi/\lambda)\in T$.
+    Suppose $(\xi,\lambda)$ and $(\tilde\xi,\lambda)$ are in the same orbit.
+    Then there exists $\gamma\in LG$ such that
+    \[
+        \tilde\xi = \Ad_\gamma\xi + \lambda\,\gamma'\gamma^{-1}.
+    \]
+
+    Both $M_\xi$ and $M_{\tilde\xi}$ lie in $T$. Since
+    $M_{\tilde\xi}=\gamma(0)M_\xi\gamma(0)^{-1}$, the endpoint $\gamma(0)$ normalizes $T$.
+    This is because if $(\xi,\lambda)$ and $(\tilde\xi,\lambda)$ are in the same orbit, then their monodromies are conjugate by $\gamma(0)$, but since they both lie in $T$, they are in fact equal and therefore \begin{align*}
+        M_{\tilde\xi} = M_\xi & \implies \gamma(0)M_\xi\gamma(0)^{-1} = M_\xi
+    \end{align*}
+    So $\gamma(0)\in N_G(T)$. Modulo $T$ this determines an element $w\in W$, and the
+    constant loop $\gamma(\theta)\equiv n$ with $n\in N_G(T)$ representing $w$ acts by
+    \[
+        \gamma\cdot(\xi,\lambda) = (w\cdot\xi,\lambda).
+    \]
+
+    There are a second class of loops $\gamma(\theta)$ in $T$ act trivially on $\xi$ but contribute through the cocycle term:
+    \[
+        \Ad_\gamma \xi = \xi, \qquad \gamma'\gamma^{-1}\in \widehat T.
+    \]
+    Concretely, if $\gamma(\theta)=\exp(\theta\eta)$ with $\eta\in\widehat T$,
+    then $\gamma'\gamma^{-1}=\eta$ and
+    \[
+        \gamma\cdot(\xi,\lambda) = (\xi+\lambda\eta,\lambda).
+    \]
+    because of the general formula for the coadjoint action. \[
+        \gamma\cdot(\phi,\lambda) \;=\; (\operatorname{Ad}_\gamma\phi + \lambda\,\gamma'\gamma^{-1},\,\lambda).
+    \]
+This shows that the orbit contains all points of the form
+    $(w\cdot\xi+\lambda\eta,\lambda)$ with $w\in W$ and $\eta\in\widehat T$.
+
+The converse will be treated in the following lemma. This establishes a bijection between orbits and $W_{\mathrm{aff}}$-orbits
+    in $\hat{T}$.
+\end{proof}
+
+
+
+\begin{lemma}[Exhaustion by Weyl and lattice moves]
+Let $G$ be compact, connected and simply connected, $T\subset G$ a maximal
+torus with Lie algebra $\mathfrak t$, Weyl group $W=N_G(T)/T$, and
+$\widehat T=\ker(\exp:\mathfrak t\to T)$. Fix $\lambda\in\mathbb Z\setminus\{0\}$.
+If $(\xi,\lambda)$ and $(\tilde\xi,\lambda)$ with $\xi,\tilde\xi\in\mathfrak t$
+lie in the same $LG$–orbit, then there exist $w\in W$ and $\eta\in\widehat T$
+such that
+\[
+\tilde\xi \;=\; w\!\cdot\xi \;+\; \lambda\,\eta.
+\]
+\end{lemma}
+
+\begin{proof}
+Assume $(\tilde\xi,\lambda)=\gamma\cdot(\xi,\lambda)$ for some $\gamma\in LG$.
+
+Let $M_\xi:=\exp(2\pi\xi/\lambda)\in T$ and $M_{\tilde\xi}:=\exp(2\pi\tilde\xi/\lambda)\in T$
+be their monodromies. The general monodromy formula gives
+\[
+M_{\tilde\xi} \;=\; \gamma(0)\,M_\xi\,\gamma(0)^{-1}.
+\]
+Since $M_\xi,M_{\tilde\xi}\in T$, by the standard conjugacy theorem
+(“$G$–conjugacy on $T$ is $W$–conjugacy”), there exists $n\in N_G(T)$ with
+\[
+M_{\tilde\xi} \;=\; n\,M_\xi\,n^{-1}.
+\]
+Let $w\in W$ be the class of $n$. Replace $\gamma$ by
+\[
+\gamma_1 \;:=\; n^{-1}\gamma \in LG,
+\qquad
+\text{and set}\qquad
+\hat\xi \;:=\; \Ad_{n^{-1}}\tilde\xi \;=\; w^{-1}\!\cdot\tilde\xi \in \mathfrak t.
+\]
+Then $\gamma_1\cdot(\xi,\lambda)=(\hat\xi,\lambda)$ and
+\[
+M_{\hat\xi}
+= \gamma_1(0)\,M_\xi\,\gamma_1(0)^{-1}
+= n^{-1}\gamma(0)\,M_\xi\,\gamma(0)^{-1}n
+= n^{-1}M_{\tilde\xi}n
+= M_\xi.
+\]
+Thus $\xi,\hat\xi\in\mathfrak t$ have \emph{equal} monodromy:
+$\exp(2\pi\hat\xi/\lambda)=\exp(2\pi\xi/\lambda)$.
+
+Consider the solutions
+\[
+f(\theta)=\exp\!\Big(\tfrac{\theta}{\lambda}\xi\Big),\qquad
+\hat f(\theta)=\exp\!\Big(\tfrac{\theta}{\lambda}\hat\xi\Big)\qquad(\in T),
+\]
+and define the $T$–valued loop
+\[
+\delta(\theta)\;:=\;\hat f(\theta)\,f(\theta)^{-1}\in T.
+\]
+Since $T$ is abelian, we have
+\[
+\delta(\theta)=\exp\!\Big(\tfrac{\theta}{\lambda}(\hat\xi-\xi)\Big),
+\qquad
+\delta'(\theta)\,\delta(\theta)^{-1}=\tfrac{1}{\lambda}(\hat\xi-\xi)\in\mathfrak t.
+\]
+Moreover $\delta(2\pi)=1$ because $M_{\hat\xi}=M_\xi$. Hence
+\[
+\eta\;:=\;\tfrac{1}{\lambda}(\hat\xi-\xi)\;\in\;\widehat T,
+\quad\text{and}\quad
+\hat\xi=\xi+\lambda\eta.
+\]
+By the coadjoint action formula,
+\[
+\delta\cdot(\xi,\lambda)=(\xi+\lambda\eta,\lambda)=(\hat\xi,\lambda).
+\]
+Finally, undoing the $n^{-1}$–conjugation gives
+\[
+(\tilde\xi,\lambda)
+=(n\cdot\delta)\cdot(\xi,\lambda)
+=\Big(w\!\cdot(\xi+\lambda\eta),\,\lambda\Big)
+=\Big(w\!\cdot\xi+\lambda\,w\!\cdot\eta,\,\lambda\Big).
+\]
+Since $\widehat T$ is $W$–stable, $w\!\cdot\eta\in\widehat T$; renaming
+$\eta\leftarrow w\!\cdot\eta$ yields the claimed form
+$\tilde\xi=w\!\cdot\xi+\lambda\eta$.
+\end{proof}
+
+\begin{remark}[Rotation action]
+    We can rotate the loop parameter: $(R_\alpha\phi)(\theta) := \phi(\theta+\alpha)$, where $\alpha\in\mathbb T=S^1$. This gives an action of the rotation group $\mathbb T$ on $L\mathfrak g$, hence also on $(\widetilde{L\mathfrak g})^*$.
+
+An orbit $\mathcal O$ is in the smooth part if it is stable under circle rotations. In other words, if rotating the loop parameter can be undone by some $LG$-coadjoint action.
+
+At every point $(\phi,\lambda)\in\mathcal O$, the vector field generating rotations is tangent to the orbit. Equivalently: the infinitesimal variation $\delta_{\mathrm{rot}}\phi = \phi'$ must lie in the tangent space of the orbit. The tangent space at $(\phi,\lambda)$ to the coadjoint orbit is spanned by infinitesimal coadjoint actions: \[T_{(\phi,\lambda)}(\mathcal O) = \{([\eta,\phi] + \lambda \eta',\,0)\;:\; \eta \in L\mathfrak g\}\]
+So for stability we require $\phi' \in \{[\eta,\phi] + \lambda \eta' : \eta\in L\mathfrak g\}$. Thus there must exist some $\eta \in L\mathfrak g$ such that $\phi'(\theta) = [\eta(\theta),\phi(\theta)] + \lambda \eta'(\theta)$.
+
+If $\eta \in L\mathfrak g$ is smooth, then both $[\eta,\phi]$ and $\eta'$ are smooth in $\theta$. Hence $\phi'$ is smooth, which forces $\phi$ to be smooth. Representation-theoretically, this matches the fact that positive energy representations (the ones stable under rotations) correspond to smooth coadjoint orbits.
+\end{remark}
 \end{document}

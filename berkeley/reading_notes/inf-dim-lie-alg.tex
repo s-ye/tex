@@ -30,13 +30,13 @@
 
 
 \begin{abstract}
-    These are notes for a reading course supervised by Prof. Richard Borcherds in the Fall of 2025 at UC Berkeley. The main references are \cite{kac} and \cite{pressley-segal}.
+    These are notes for a reading course supervised by Prof. Richard Borcherds in the Fall of 2025 at UC Berkeley. The main references are \cite{kac}. There is an accompanying set of notes on loop groups, following \cite{pressley-segal}.
 \end{abstract}
 \tableofcontents
-
+Bump \cite{bump} writes that the crown jewel of the theory of semisimple Lie algebras is the Weyl character formula, which gives a closed-form expression for the characters of all irreducible finite-dimensional representations. The proof of this formula uses the Casimir operator, which is constructed using an invariant bilinear form on the Lie algebra. We will generalize these concepts to infinite-dimensional Lie algebras, specifically Kac-Moody algebras.
 \section{Semisimple Lie algebras}
+We recall the basic structure theory and representation theory of semisimple Lie algebras, culminating in a discussion of the Weyl character formula. Let $\mf g$ be a finite dimensional semisimple Lie algebra over the complex numbers $\mathbb{C}$. We follow \cite{bump}.
 \subsection{Preliminaries}
-We recall the basic structure theory and representation theory of semisimple Lie algebras, culminating in a discussion of the Weyl character formula. Let $\mf g$ be a semisimple Lie algebra over the complex numbers $\mathbb{C}$. In particular, $\mf g$ need not be finite-dimensional, until we ask it to be. We follow \cite{bump}.
 \begin{definition}
     Recall that a Lie algebra is solvable if its derived series eventually becomes zero. The derived series is defined by $L^{(0)} = L$, $L^{(1)} = [L,L]$, and $L^{(n+1)} = [L^{(n)}, L^{(n)}]$.
 \end{definition}
@@ -48,9 +48,13 @@ We recall the basic structure theory and representation theory of semisimple Lie
 \begin{definition}
     The Killing form of a Lie algebra $L$ is the bilinear form $\kappa(x,y) = \text{tr}(\text{ad}(x)\text{ad}(y))$.
 \end{definition}
-For $H \in \mathfrak{h}$, look at $\operatorname{ad}(H)$. Since $\mathfrak{h}$ consists of simultaneously diagonalizable endomorphisms, $\operatorname{ad}(H)$ is diagonalizable.
+Recall that there is an big Adjoint representation $\Ad: G \to \GL(\mathfrak{g})$ of a Lie group $G$ on its Lie algebra $\mathfrak{g}$, defined by $\Ad_g(X) = gXg^{-1}$. The differential of this at the identity is the little adjoint representation of the Lie algebra $\mathfrak{g}$ on itself, defined by
+\begin{align*}
+    \operatorname{ad}(X)Y \;=\; \left.\frac{d}{dt}\right|_{t=0}\!\Ad_{\exp(tX)}(Y).
+\end{align*}
+In coordinates, $\operatorname{ad}(X) = [X,Y]$. 
 
-Thus we can decompose:
+Now the key idea is to consider the adjoint representation of $\mf h$ on $\mf g$. Since $\mathfrak{h}$ consists of simultaneously diagonalizable endomorphisms, $\operatorname{ad}(H)$ is diagonalizable. Thus we can decompose:
 \[
     \mathfrak{g} = \mathfrak{h} \;\oplus\; \bigoplus_{\alpha \in \Phi} \mathfrak{g}_\alpha,
 \]
@@ -824,7 +828,7 @@ The following argument is due to Kac, improving the proof of BGG.  As an applica
     for all positive roots $\alpha$. So $|\lambda + \rho|^2 = |\nu + \rho|^2$ implies that $k_\alpha = 0$ for all $\alpha$ and so $\nu = \lambda$.
 \end{proof}
 
-\section{Infinite-dimensional Lie algebras}
+\section{Introduction to infinite-dimensional Lie algebras}
 We begin with some definitions and constructions that will allow us to define Kac-Moody Lie algebras. Then we introduce key tools for studying their representations, such as an invariant bilinear form and the generalized Casimir operator. This will enable us to formulate and prove a version of the Weyl character formula.
 This section follows \cite{kac}.
 \subsection{Basic definitions}
@@ -1229,7 +1233,7 @@ following important fact:
 \end{definition}
 
 Let $A$ be a symmetrizable matrix with a fixed decomposition and let $(\mathfrak{h}, \Pi, \Pi^\vee)$ be a realization of $A$. Fix a complementary subspace $\mathfrak{h}''$ to $\mathfrak{h}' = \sum \mathbb{C}\alpha_i^\vee$ in $\mathfrak{h}$, and define a symmetric bilinear $\mathbb{C}$-valued form $(\,.\mid.\,)$ on $\mathfrak{h}$ by the following two equations:
-\begin{align}
+\begin{align}\label{form-on-h}
     (\alpha_i^\vee \mid h) & = \langle \alpha_i, h \rangle \epsilon_i, \quad \text{for } h \in \mathfrak{h},\ i = 1,\ldots,n \\
     (h' \mid h'')          & = 0, \quad \text{for } h', h'' \in \mathfrak{h}''
 \end{align}
@@ -1273,6 +1277,8 @@ there is no ambiguity in the definition of $(\,.\mid.\,)$.
     \end{itemize}
 
     If $A$ were not symmetrizable, these structures might not exist at all (the theory gets pathological).
+
+    In fact, there is this tension between being symmetrizable and insisting that the Cartan matrix have $2$s on the diagonal. If you drop the condition that the diagonal entries are $2$, then you could avoid worrying about symmetrizability.
 \end{remark}
 
 Since the bilinear form $(\,.\mid.\,)$ is nondegenerate, we have an isomorphism
@@ -1313,7 +1319,11 @@ where we invoke equation (8) in the last line.
                   ([x,y]\mid z) = (x \mid [y,z])
                   \qquad \text{for all } x,y,z \in \mathfrak{g}(A).
               \]
-        \item $(\,.\mid.\,)|_{\mathfrak{h}}$ is defined by (8) and (9) and is nondegenerate.
+        \item $(\,.\mid.\,)|_{\mathfrak{h}}$ is nondegenerate and defined by
+              \begin{align*}
+                  (\alpha_i^\vee \mid h) & = \langle \alpha_i, h \rangle \epsilon_i, \quad \text{for } h \in \mathfrak{h},\ i = 1,\ldots,n \\
+                  (h' \mid h'')          & = 0, \quad \text{for } h', h'' \in \mathfrak{h}''
+              \end{align*}
         \item $(\mathfrak{g}_\alpha \mid \mathfrak{g}_\beta) = 0
                   \quad \text{if } \alpha+\beta \neq 0$.
         \item $(\,.\mid.\,)|_{\mathfrak{g}_\alpha \oplus \mathfrak{g}_{-\alpha}}$
@@ -1474,6 +1484,37 @@ where we invoke equation (8) in the last line.
     It follows from b), c) and e) that the bilinear form $(\,.\mid.\,)$ is symmetric. If d) fails, then by c) the form $(\,.\mid.\,)$ is degenerate. Let $\mathfrak{i} = \ker(\,.\mid.\,)$ is an ideal by invariance, and by b) we have $\mathfrak{i}\cap \mathfrak{h}=0$, which contradicts the definition of $\mathfrak{g}(A)$. Therefore d) holds as well.
 \end{proof}
 
+\begin{remark}[Uniqueness of the invariant bilinear form]
+    Such a form is uniquely determined once you ask for a) and b).
+
+    First you can deduce that $\mf g_\alpha$ and $\mf g_\beta$ are orthogonal unless $\alpha+\beta=0$.
+    Take $x \in \mathfrak{g}_\alpha$, $y \in \mathfrak{g}_\beta$, and $h \in \mathfrak{h}$. Recall the weight-space relation:
+    $[h, x] = \alpha(h)x$, $[h,y] = \beta(h)y$. By invariance,
+        \[
+            ([h,x]\mid y)=(h\mid [x,y]).
+        \]
+        Since $[h,x]=\alpha(h)x$ and $[x,y]\in\mathfrak{g}_{\alpha+\beta}$, we obtain
+        \begin{equation}\label{eq:basic}
+            \alpha(h)\,(x\mid y)=(h\mid z),\qquad z:=[x,y]\in\mathfrak{g}_{\alpha+\beta}.
+        \end{equation}
+        Now take $h'\in\mathfrak{h}$. Using invariance again and $[\mathfrak{h},\mathfrak{h}]=0$,
+        \[
+            0=([h',h]\mid z)=(h'\mid [h,z])=(\alpha+\beta)(h)\,(h'\mid z)\quad\text{for all }h,h'\in\mathfrak{h}.
+        \]
+        If $\alpha+\beta\neq 0$, choose $h$ with $(\alpha+\beta)(h)\neq 0$; then $(h'\mid z)=0$ for all
+        $h'\in\mathfrak{h}$, so in particular $(h\mid z)=0$ for every $h\in\mathfrak{h}$. Returning to
+        \eqref{eq:basic}, we get $\alpha(h)(x\mid y)=0$ for all $h\in\mathfrak{h}$; choosing $h$ with
+        $\alpha(h)\neq 0$ (since $\alpha\neq 0$ on $\mathfrak{g}_\alpha$) yields $(x\mid y)=0$.
+        Hence $(\mathfrak{g}_\alpha\mid\mathfrak{g}_\beta)=0$ unless $\alpha+\beta=0$.
+        
+        
+        Now, take $h \in \mathfrak{h}$. Invariance gives $(h \mid [e_i, f_i]) = ([h, e_i] \mid f_i)$.
+        On the LHS: $[e_i, f_i] = \alpha_i^\vee$, so $(h \mid [e_i, f_i]) = (h \mid \alpha_i^\vee)$. On the RHS: $[h, e_i] = \langle \alpha_i, h \rangle e_i$, so
+        $([h, e_i] \mid f_i) = \langle \alpha_i, h \rangle (e_i \mid f_i)$.
+
+        Thus $(h \mid \alpha_i^\vee) = \langle \alpha_i, h \rangle (e_i \mid f_i)$ which determines how $e_i$ and $f_i$ pair against each other. Using invariance and inducting on height, you can determine how any two root vectors pair against each other.
+        \end{remark}
+
 Suppose that $A = (a_{ij})$ is a symmetrizable generalized Cartan
 matrix. Fix a decomposition
 \[
@@ -1543,88 +1584,613 @@ $\mathfrak g(A)$. By Theorem \ref{thm:invariant-bilinear-form} such a form exist
 satisfying the above is called a \textbf{standard invariant form}.
 
 \subsection{Generalized Casimir operator}
-Let $\mathfrak{g}(A)$ be a Lie algebra associated to a matrix $A$, 
-$\mathfrak{h}$ the Cartan subalgebra, 
-$\mathfrak{g} = \bigoplus_\alpha \mathfrak{g}_\alpha$ the root space decomposition with respect to $\mathfrak{h}$. 
-A $\mathfrak{g}(A)$-module (resp.\ $\mathfrak{g}'(A)$-module) $V$ is called \textbf{restricted} if for every $v\in V$, 
-we have $\mathfrak{g}_\alpha(v)=0$ for all but a finite number of positive roots $\alpha$.  
+Let $\mathfrak{g}(A)$ be a Lie algebra associated to a matrix $A$,
+$\mathfrak{h}$ the Cartan subalgebra,
+$\mathfrak{g} = \bigoplus_\alpha \mathfrak{g}_\alpha$ the root space decomposition with respect to $\mathfrak{h}$.
+A $\mathfrak{g}(A)$-module (resp.\ $\mathfrak{g}'(A)$-module) $V$ is called \textbf{restricted} if for every $v\in V$,
+we have $\mathfrak{g}_\alpha(v)=0$ for all but a finite number of positive roots $\alpha$.
 
 It is clear that every submodule or quotient of a restricted module is restricted, and that the direct sum or tensor product of a finite number of restricted modules is also restricted. Examples of restricted modules will be constructed later (see Exercise 2.9 and Chapter 9).
 
 Assume now that $A$ is symmetrizable and that $(\,.\mid.\,)$ is a bilinear form provided by Theorem \ref{thm:invariant-bilinear-form}.
 
-Given a restricted $\mathfrak{g}(A)$-module $V$, we introduce a linear operator $\Omega$ on the vector space $V$, called the (generalized) \textbf{Casimir operator}, as follows.  
+Given a restricted $\mathfrak{g}(A)$-module $V$, we introduce a linear operator $\Omega$ on the vector space $V$, called the (generalized) \textbf{Casimir operator}, as follows.
 
 First, introduce a linear function $\rho \in \mathfrak{h}^*$ by equations
 \[
-\langle \rho,\alpha_i^\vee \rangle = \tfrac{1}{2}a_{ii} \quad (i=1,\dots,n).
+    \langle \rho,\alpha_i^\vee \rangle = \tfrac{1}{2}a_{ii} \quad (i=1,\dots,n).
 \]
-If $\det A=0$, this does not define $\rho$ uniquely, and we pick any solution. 
+If $\det A=0$, this does not define $\rho$ uniquely, and we pick any solution.
 It follows from (2.1.5) and (2.1.6) that
-\[
-(\rho\mid \alpha_i) = \tfrac{1}{2}(\alpha_i\mid \alpha_i), \qquad (i=1,\dots,n).
-\]
+\begin{equation}\label{eq:rho-action}
+    (\rho\mid \alpha_i) = \tfrac{1}{2}(\alpha_i\mid \alpha_i), \qquad (i=1,\dots,n).
+\end{equation}
 
-Further, for each positive root $\alpha$ we choose a basis $\{e_\alpha^{(i)}\}$ of the space $\mathfrak{g}_\alpha$, 
-and let $\{e_{-\alpha}^{(i)}\}$ be the dual basis of $\mathfrak{g}_{-\alpha}$. 
-We define an operator $\Omega_0$ on $V$ by
+Further, for each positive root $\alpha$ we choose a basis $\{e_\alpha^{(i)}\}$ of the space $\mathfrak{g}_\alpha$,
+and let $\{e_{-\alpha}^{(i)}\}$ be the dual basis of $\mathfrak{g}_{-\alpha}$. Note that the root spaces need not be $1$-dimensional. We define an operator $\Omega_0$ on $V$ by
 \[
-\Omega_0 = 2 \sum_{\alpha\in \Delta_+}\;\sum_i e_{-\alpha}^{(i)}e_\alpha^{(i)}.
+    \Omega_0 = 2 \sum_{\alpha\in \Delta_+}\;\sum_i e_{-\alpha}^{(i)}e_\alpha^{(i)}.
 \]
 One could easily check that this is independent of the choice of bases.
 Since for each $v\in V$, only a finite number of summands $e_{-\alpha}^{(i)}e_\alpha^{(i)}(v)$ are nonzero, $\Omega_0$ is well defined on $V$.
 
-Let $u_1,u_2,\dots$ and $u^1,u^2,\dots$ be dual bases of $\mathfrak{h}$. 
+Let $u_1,u_2,\dots$ and $u^1,u^2,\dots$ be dual bases of $\mathfrak{h}$.
 The generalized Casimir operator is defined by
 \[
-\Omega = 2\nu^{-1}(\rho) + \sum_i u^i u_i + \Omega_0.
+    \Omega = 2\nu^{-1}(\rho) + \sum_i u^i u_i + \Omega_0.
 \]
 
 \begin{remark}
     The generalized Casimir operator $\Omega$ was introduced by Kac. The idea of its definition is borrowed from physics. We take the usual definition of the Casimir operator:
-\[
-\Omega = \sum_{\alpha>0}\;\sum_i 
-\Bigl(e_{-\alpha}^{(i)}e_\alpha^{(i)} + e_\alpha^{(i)}e_{-\alpha}^{(i)}\Bigr) 
-+ \sum_i u_i u^i,
-\]
-we rewrite it by using commutation relations:
-\[
-\Omega = \sum_{\alpha>0} \nu^{-1}(\alpha) 
-+ 2\sum_{\alpha>0}\;\sum_i e_{-\alpha}^{(i)}e_\alpha^{(i)} 
-+ \sum_i u_i u^i,
-\]
-and then replace the first summand, which makes no sense, by a finite   quantity $2\nu^{-1}(\rho)$.
+    \[
+        \Omega = \sum_{\alpha>0}\;\sum_i
+        \Bigl(e_{-\alpha}^{(i)}e_\alpha^{(i)} + e_\alpha^{(i)}e_{-\alpha}^{(i)}\Bigr)
+        + \sum_i u_i u^i,
+    \]
+    we rewrite it by using commutation relations:
+    \[
+        \Omega = \sum_{\alpha>0} \nu^{-1}(\alpha)
+        + 2\sum_{\alpha>0}\;\sum_i e_{-\alpha}^{(i)}e_\alpha^{(i)}
+        + \sum_i u_i u^i,
+    \]
+    and then replace the first summand, which makes no sense, by a finite   quantity $2\nu^{-1}(\rho)$.
 \end{remark}
 
 We record the following simple formula:
-\[
-\sum_i \langle \lambda,u^i \rangle \langle \mu,u_i \rangle = (\lambda\mid \mu),
-\]
+\begin{equation}\label{eq:bilinear-dual}
+    \sum_i \langle \lambda,u^i \rangle \langle \mu,u_i \rangle = (\lambda\mid \mu),
+\end{equation}
 which is clear from
 \[
-\lambda = \sum_i \langle \lambda,u^i\rangle \nu(u_i)
-= \sum_i \langle \lambda,u_i\rangle \nu(u^i).
+    \lambda = \sum_i \langle \lambda,u^i\rangle \nu(u_i)
+    = \sum_i \langle \lambda,u_i\rangle \nu(u^i).
 \]
-
-\medskip
-We make one more simple computation. 
+We make one more simple computation.
 For $x\in \mathfrak{g}_\alpha$ one has
 \[
-\Bigl[\sum_i u^i u_i,\, x\Bigr] 
-= \sum_i \langle \alpha,u^i\rangle x u_i + \sum_i u^i \langle \alpha,u_i\rangle x
-= \sum_i \langle \alpha,u^i\rangle \langle \alpha,u_i\rangle x 
-+ x\Bigl(\sum_i u^i \langle \alpha,u_i\rangle + u_i \langle \alpha,u^i\rangle\Bigr).
+    \Bigl[\sum_i u^i u_i,\, x\Bigr]
+    = \sum_i \langle \alpha,u^i\rangle x u_i + \sum_i u^i \langle \alpha,u_i\rangle x
+    = \sum_i \langle \alpha,u^i\rangle \langle \alpha,u_i\rangle x
+    + x\Bigl(\sum_i u^i \langle \alpha,u_i\rangle + u_i \langle \alpha,u^i\rangle\Bigr).
 \]
 Hence, we have
+\begin{align}\label{eq:commutator-Cartan}
+    \Bigl[\sum_i u^i u_i,\, x\Bigr] = x\bigl((\alpha\mid \alpha) + 2\nu^{-1}(\alpha)\bigr),
+    \qquad x\in \mathfrak{g}_\alpha.
+\end{align}
+
+
+
+\begin{lemma}[Important calculation]\label{lem:important-calculation}
+    If $\alpha,\beta \in \Delta$ and $z \in \mathfrak{g}_{\beta-\alpha}$, then in $\mathfrak{g}(A)\otimes \mathfrak{g}(A)$ we have
+    \[
+        \sum_i e_{-\alpha}^{(i)} \otimes [z,e_\alpha^{(i)}]
+        = \sum_i [e_{-\beta}^{(i)},z] \otimes e_\beta^{(i)}.
+    \]
+\end{lemma}
+
+\begin{proof}
+    We define the bilinear form $(\,.\mid .\,)$ on $\mathfrak{g}(A)\otimes \mathfrak{g}(A)$ by
+    \[
+        (x\otimes y \mid x_1\otimes y_1) = (x\mid x_1)(y\mid y_1).
+    \]
+    Pick $e \in \mathfrak{g}_\alpha$ and $f \in \mathfrak{g}_{-\beta}$.
+    It suffices to check that pairing both sides of the above identity with $e \otimes f$ gives the same result. We have:
+    \begin{align*}
+        \sum_s (e_{-\alpha}^{(s)} \otimes [z,e_\alpha^{(s)}] \mid e\otimes f)
+         & = \sum_s (e_{-\alpha}^{(s)} \mid e)\,([z,e_\alpha^{(s)}]\mid f) \\
+         & = \sum_s (e_{-\alpha}^{(s)} \mid e)(e_\alpha^{(s)} \mid [f,z])  \\
+         & = (e\mid [f,z]),
+    \end{align*}
+    by invariance and the dual basis property. Similarly,
+    \begin{align*}
+        \sum_s ([e_{-\beta}^{(s)},z]\otimes e_\beta^{(s)} \mid e\otimes f)
+         & = \sum_s (e_{-\beta}^{(s)} \mid [z,e])(e_\beta^{(s)}\mid f) \\
+         & = ([z,e]\mid f).
+    \end{align*}
+    Applying again invariance gives the result.
+\end{proof}
+
+\begin{corollary}
+    In the notation of the lemma, we have
+    \[
+        \sum_i [e_{-\alpha}^{(i)},[z,e_\alpha^{(i)}]]
+        = -\sum_i [[z,e_{-\beta}^{(i)}],e_\beta^{(i)}] \quad \text{in } \mathfrak{g}(A),
+    \]
+    and
+    \[
+        \sum_i e_{-\alpha}^{(i)}[z,e_\alpha^{(i)}]
+        = -\sum_i [z,e_{-\beta}^{(i)}]\, e_\beta^{(i)} \quad \text{in } U(\mathfrak{g}(A)).
+    \]
+\end{corollary}
+
+\begin{proof}
+    Apply to the lemma the linear maps from $\mathfrak{g}(A)\otimes \mathfrak{g}(A)$ to $\mathfrak{g}(A)$ and to $U(\mathfrak{g}(A))$, defined by
+    \[
+        x\otimes y \mapsto [x,y],
+        \qquad
+        x\otimes y \mapsto xy,
+    \]
+    respectively.
+\end{proof}
+
+Consider the root space decomposition of $U(\mathfrak{g}(A))$ with respect to $\mathfrak{h}$:
 \[
-\Bigl[\sum_i u^i u_i,\, x\Bigr] = x\bigl((\alpha\mid \alpha) + 2\nu^{-1}(\alpha)\bigr),
-\qquad x\in \mathfrak{g}_\alpha.
+    U(\mathfrak{g}(A)) = \bigoplus_{\beta \in Q} U_\beta, \qquad
+    U_\beta = \{ x \in U(\mathfrak{g}(A)) \mid [h,x] = \langle \beta,h\rangle x \;\;\text{for all } h \in \mathfrak{h}\}.
 \]
+Recall that $\mf g'(A) = [\mf g(A),\mf g(A)]$ is the derived algebra of $\mf g(A)$. Put $U'_\beta = U(\mathfrak{g}'(A)) \cap U_\beta$, so that
+\[
+    U(\mathfrak{g}'(A)) = \bigoplus_\beta U'_\beta.
+\]
+
+\begin{theorem}[\label{thm:Casimir-commutes}]
+    Let $\mathfrak{g}(A)$ be a symmetrizable Lie algebra.
+    \begin{enumerate}[label=\alph*)]
+        \item If $V$ is a restricted $\mathfrak{g}'(A)$-module and $u \in U'_\alpha$, then
+              \[
+                  [\Omega_0,u] = -u\Big( 2(\rho|\alpha) + (\alpha|\alpha) + 2\nu^{-1}(\alpha)\Big).
+              \]
+        \item If $V$ is a restricted $\mathfrak{g}(A)$-module, then $\Omega$ commutes with the action of $\mathfrak{g}(A)$ on $V$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Part b) follows immediately from a) and the earlier formula \ref{eq:commutator-Cartan}. Note that we only have to check the formula for the derived algebra $\mathfrak{g}'(A)$ since \begin{align*}
+        \mf g(A) = \mf g'(A) \oplus \mf h'',
+    \end{align*} where $\mf h''$ is the orthogonal complement of the subspace generated by the coroots $\alpha_i^\vee$ in $\mf h$, and in particular $[\mf h'',\mf g(A)]=0$, i.e.\ $\mf h''$ is central.
+    The following computation shows that (a) implies (b): Let $u \in U'_\alpha$. Then
+    \begin{align*}
+        [\Omega_0,u]                & = -u\big(2(\rho \mid \alpha) + (\alpha \mid \alpha) + 2\nu^{-1}(\alpha)\big) \\
+        \Big[\sum_i u^i u_i, u\Big] & = u\big((\alpha \mid \alpha) + 2\nu^{-1}(\alpha)\big)                        \\
+        [2\nu^{-1}(\rho),u]         & = 2(\rho \mid \alpha)u \quad \text{for } h \in \mathfrak{h}
+    \end{align*}
+    If a) holds for $u \in U'_\alpha$ and $u_1 \in U'_\beta$, then it holds for $uu_1 \in U'_{\alpha+\beta}$. Indeed:
+    \begin{align*}
+        [\Omega_0,uu_1] & = [\Omega_0,u]u_1 + u[\Omega_0,u_1]                                                            \\
+                        & = -u\big(2(\rho|\alpha) + (\alpha|\alpha) + 2\nu^{-1}(\alpha)\big)u_1                          \\
+                        & \quad -uu_1\big(2(\rho|\beta) + (\beta|\beta) + 2\nu^{-1}(\beta)\big)                          \\
+                        & = -uu_1\big(2(\rho|\alpha) + (\alpha|\alpha) + 2\nu^{-1}(\alpha)\big)                          \\
+                        & \quad + 2(\alpha|\beta)u u_1 + 2(\rho|\beta)uu_1 + (\beta|\beta)uu_1 + 2\nu^{-1}(\beta)uu_1    \\
+                        & = -uu_1\big(2(\rho|\alpha+\beta) + (\alpha+\beta|\alpha+\beta) + 2\nu^{-1}(\alpha+\beta)\big).
+    \end{align*}
+
+    Hence, since $e_{\alpha_i}, e_{-\alpha_i}$ ($i=1,\dots,n$) generate $\mathfrak{g}'(A)$, it suffices to check the formula for $u = e_{\alpha_i}$ or $u = e_{-\alpha_i}$. Applying \ref{lem:important-calculation} to $z = e_{\alpha_i}$, we have:
+    \begin{align*}
+        [\Omega_0,e_{\alpha_i}]
+         & = 2 \sum_{\alpha \in \Delta_+} \sum_s \big([e_{-\alpha}^{(s)},e_{\alpha_i}]e_\alpha^{(s)} + e_{-\alpha}^{(s)}[e_\alpha^{(s)},e_{\alpha_i}]\big)                                                  \\
+         & = 2[e_{-\alpha_i},e_{\alpha_i}]e_{\alpha_i}
+        + 2 \sum_{\alpha \in \Delta_+ \setminus \{\alpha_i\}} \bigg(\sum_s [e_{-\alpha}^{(s)},e_{\alpha_i}]e_\alpha^{(s)} + \sum_s e_{-\alpha_i+\alpha}^{(s)}[e_{\alpha-\alpha_i}^{(s)},e_{\alpha_i}]\bigg) \\
+         & = -2\nu^{-1}(\alpha_i)e_{\alpha_i}
+        = -2(\alpha_i|\alpha_i)e_{\alpha_i} - 2e_{\alpha_i}\nu^{-1}(\alpha_i).
+    \end{align*}
+    where the second equality follows from reindexing the second summand (note that we have \ref{lem:rt-string}) and the third equality follows from \ref{lem:important-calculation}.
+    Thanks to \ref{eq:rho-action} this is exactly the formula in part a) for $u = e_{\alpha_i}$. Similarly,
+    \[
+        [\Omega_0,e_{-\alpha_i}] = 2e_{-\alpha_i}[e_{\alpha_i},e_{-\alpha_i}]
+        = 2e_{-\alpha_i}\nu^{-1}(\alpha_i),
+    \]
+    which, by \ref{eq:rho-action}, is the same formula for $u = e_{-\alpha_i}$.
+\end{proof}
+
+\begin{corollary}[Eigenvalue on highest weight modules]\label{cor:Casimir-eigenvalue}
+    If, under the hypotheses of Theorem \ref{thm:Casimir-commutes} b), there exists $v \in V$ such that
+    $e_i(v)=0$ for all $i=1,\dots,n$, and $h(v)=\langle \Lambda,h\rangle v$ for some $\Lambda \in \mathfrak{h}^*$ and all $h \in \mathfrak{h}$, then
+    \[
+        \Omega(v) = (\Lambda+2\rho|\Lambda)v.
+    \]
+    If, furthermore, $U(\mathfrak{g}(A))v=V$, then
+    \[
+        \Omega = (\Lambda+2\rho|\Lambda)I_V.
+    \]
+\end{corollary}
+\begin{proof}
+    Recall that
+    \[
+        \Omega \;=\; 2\,\nu^{-1}(\rho)\;+\;\sum_i u^i u_i\;+\;\Omega_0,
+        \qquad
+        \Omega_0=\sum_{\alpha\in\Delta_+}\sum_s e_{-\alpha}^{(s)}e_{\alpha}^{(s)}.
+    \]
+    Let $v$ be a highest weight vector, i.e.\ $e_i v=0$ for all $i$ and
+    $h\cdot v=\langle\Lambda,h\rangle v$ for all $h\in\mathfrak h$.
+
+    For every $\alpha\in\Delta_+$ we have $e_\alpha^{(s)}v=0$, hence each term in $\Omega_0$ kills $v$, so $\Omega_0 v=0$.
+
+    Since $u_i,u^i\in\mathfrak h$ and $v$ has weight $\Lambda$,
+    \[
+        u_i v=\langle\Lambda,u_i\rangle v,\qquad
+        u^i(u_i v)=\langle\Lambda,u_i\rangle \langle\Lambda,u^i\rangle v.
+    \]
+    Summing over $i$ and using the duality of $\{u_i\}$ and $\{u^i\}$ for $(\cdot|\cdot)$, we obtain (invoking \ref{eq:bilinear-dual}):
+    \[
+        \Big(\sum_i u^i u_i\Big)v
+        =\sum_i \langle\Lambda,u_i\rangle \langle\Lambda,u^i\rangle v
+        =(\Lambda|\Lambda)\,v.
+    \]
+    Again by the weight action,
+    \[
+        (2\nu^{-1}(\rho))\cdot v
+        =2\langle\Lambda,\nu^{-1}(\rho)\rangle v
+        =2(\Lambda|\rho)\,v.
+    \]
+    This proves the first formula. If moreover $V=U(\mathfrak g(A))v$, then by Theorem~\ref{thm:Casimir-commutes}\,b),
+    $\Omega$ commutes with the $\mathfrak g(A)$-action on $V$. Thus for any $x\in U(\mathfrak g(A))$,
+    \[
+        \Omega(xv)=x\,\Omega v
+        =(\Lambda+2\rho|\Lambda)\,xv.
+    \]
+    Since such $xv$ span $V$, it follows that $\Omega$ acts as the scalar $(\Lambda+2\rho|\Lambda)$ on all of $V$, i.e.
+    \[
+        \Omega=(\Lambda+2\rho|\Lambda)\,I_V.
+    \]
+    as desired.
+\end{proof}
+We introduce another central element defined for $\mathfrak g$-modules $V$ which have a certain finiteness property. \red{What is the relation to the generalized Casimir operator?}
+\begin{proposition}
+    Let $\mathfrak g$ be a Lie algebra with an invariant non-degenerate bilinear form $(\cdot \mid \cdot)$, let $\{x_i\}$ and $\{y_i\}$ be dual bases (i.e.\ $(x_i \mid y_j) = \delta_{ij}$), and let $V$ be a $\mathfrak g$-module such that for every pair of elements $u,v \in V$, $x_i(u)=0$ or $y_i(v)=0$ for all but a finite number of $i$. Then the operator
+    \[
+        \Omega_2 := \sum_i x_i \otimes y_i
+    \]
+    is defined on $V \otimes V$ and commutes with the action of $\mathfrak g$.
+\end{proposition}
+
+\begin{proof}
+    We have to show that for every $z \in \mathfrak g$,
+    \[
+        \sum_i \big([z,x_i]\otimes y_i + x_i \otimes [z,y_i]\big) = 0.
+    \]
+
+    Write
+    \[
+        [z,x_i] = \sum_j \alpha_{ij} x_j,\qquad [z,y_i] = \sum_j \beta_{ij} y_j.
+    \]
+    Taking the inner product of the first equation with $y_j$ and of the second with $x_j$, we obtain
+    \[
+        \alpha_{ij} = ([z,x_i]\mid y_j),\qquad \beta_{ji} = ([z,y_i]\mid x_j).
+    \]
+
+    Using invariance of $(\cdot \mid \cdot)$, we deduce
+    \[
+        \alpha_{ij} = (z\mid [x_i,y_j]), \qquad \beta_{ji} = (z\mid [y_i,x_j]).
+    \]
+    Hence
+    \[
+        \alpha_{ij} = -\beta_{ij}.
+    \]
+    This proves the proposition.
+\end{proof}
+
+To conclude this section, we define the compact form of a Kac-Moody algebra. Let $A$ be an $n\times n$ matrix over $\mathbb{R}$. Let
+$(\mathfrak h_\mathbb{R}, \Pi, \Pi^\vee)$ be a realization of the matrix $A$ over $\mathbb{R}$,
+i.e.\ $\mathfrak h_\mathbb{R}$ is a real vector space of dimension $2n-\operatorname{rank}(A)$,
+so that $(\mathfrak h = \mathbb{C}\otimes_\mathbb{R}\mathfrak h_\mathbb{R}, \Pi, \Pi^\vee)$ is the realization of $A$ over $\mathbb{C}$.
+
+\begin{definition}
+    We define the \textbf{compact form} $\mathfrak t(A)$ of $\mathfrak g(A)$ as follows.
+    Let $\omega_0$ be the antilinear automorphism of $\mathfrak g(A)$ determined by
+    \[
+        \omega_0(e_i) = -f_i,\qquad
+        \omega_0(f_i) = -e_i \quad (i=1,\dots,n),\qquad
+        \omega_0(h) = -h \quad (h\in\mathfrak h_\mathbb{R}).
+    \]
+    Then $\mathfrak t(A)$ is defined as the fixed point set of $\omega_0$.
+    This is a real Lie algebra whose complexification is $\mathfrak g(A)$.
+    In the finite-dimensional case, this definition coincides with the usual compact real form.
+\end{definition}
+
+\begin{remark}
+    Let $(\cdot|\cdot)$ be a symmetric bilinear form on $\mathfrak g(A)$.
+    Define a Hermitian form on $\mathfrak g(A)$ by
+    \[
+        (x|y)_0 := -(\omega_0(x)\mid y).
+    \]
+    Then $(\cdot|\cdot)_0$ is nondegenerate on each $\mathfrak g_\alpha$, $\alpha\in\Delta\cup\{0\}$,
+    and satisfies $(\mathfrak g_\alpha|\mathfrak g_\beta)_0 = 0$ if $\alpha\neq \beta$.
+    Moreover, the operators $\operatorname{ad}u$ and $-\operatorname{ad}\,\omega_0(u)$ are adjoint to each other with respect to $(\cdot|\cdot)_0$.
+    In particular, the restriction of $(\cdot|\cdot)$ to $\mathfrak t(A)$ is a nondegenerate invariant $\mathbb R$-bilinear form.
+
+    This is the generalization of the familiar fact that a complex semisimple Lie algebra has a compact real form, and the Killing form restricted there is negative definite.
+\end{remark}
+
+
+\section{Integrable modules}
+We begin this section by recalling the representation theory of $\mathfrak{sl}_2(\mathbb{C})$. Let
+\[
+e = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, 
+\quad 
+h = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}, 
+\quad 
+f = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}
+\]
+be the standard basis of $\mathfrak{sl}_2(\C)$. Then
+\[
+[e,f] = h, 
+\quad [h,e] = 2e, 
+\quad [h,f] = -2f.
+\]
+
+By an easy induction on $k$ we deduce the following relations in the universal enveloping algebra of $\mathfrak{sl}_2(\C)$:
+\begin{align*}
+[h,f^k] &= -2k f^k, \\
+[h,e^k] &= 2k e^k \\ 
+[e,f^k] &= -k(k-1) f^{k-1} + k f^{k-1} h. 
+\end{align*}
+
+\begin{lemma}[Classification of irreducible $\mathfrak{sl}_2(\C)$-modules]\label{lem:sl2-modules}
+\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item Let $V$ be an $\mathfrak{sl}_2(\C)$-module and let $v \in V$ be such that
+\[
+h(v) = \lambda v \qquad \text{for some } \lambda \in \C.
+\]
+Set $v_j = (j!)^{-1} f^j(v)$. Then
+\begin{equation}
+h(v_j) = (\lambda - 2j) v_j. \tag{3.2.3}
+\end{equation}
+If, in addition, $e(v) = 0$, then
+\begin{equation}
+e(v_j) = (\lambda - j + 1)v_{j-1}. \tag{3.2.4}
+\end{equation}
+
+\item For each integer $k \geq 0$ there exists a unique, up to isomorphism, irreducible $(k+1)$-dimensional $\mathfrak{sl}_2(\C)$-module. In some $\C$-basis $\{v_j\}_{j=0}^k$ of the space of this module, the action of $\mathfrak{sl}_2(\C)$ looks as follows:
+\[
+h(v_j) = (k-2j)v_j, 
+\quad f(v_j) = (j+1)v_{j+1}, 
+\quad e(v_j) = (k+1-j)v_{j-1}.
+\]
+Here $j=0,\dots,k$ and we assume that $v_{k+1}=0=v_{-1}$.
+\end{enumerate}
+\end{lemma}
+
+\red{Where does one invoke the fact that we quotiented out by the maximal ideal intersecting $\mathfrak h$ trivially, when deriving the Serre relations?}
+
+\red{How to interpret this number $\langle \lambda, \alpha_i^\vee \rangle$? I feel like I see it a lot.}
+
+
+
+\section{Affine Lie algebras}
+In order to develop the theory of root systems of Kac-Moody algebras we need to know some properties of generalized Cartan matrices. It is convenient to work in a slightly more general situation. Let $A = (a_{ij})$ which satisfies the following three properties:
+\begin{itemize}
+    \item[(m1)] $A$ is indecomposable;
+    \item[(m2)] $a_{ij} \leq 0$ for $i \neq j$;
+    \item[(m3)] $a_{ij} = 0$ implies $a_{ji} = 0$.
+\end{itemize}
+Kac proves the following classification theorem in \cite{kac}.
+\begin{theorem}[Classification of matrices satisfying (m1), (m2), and (m3)]
+Let $A$ be a real $n \times n$ matrix satisfying (m1), (m2), and (m3). Then one and only one of the following three possibilities holds for both $A$ and ${}^t A$:
+\begin{itemize}
+    \item[(Fin)] $\det A \neq 0$; there exists $u > 0$ such that $Au > 0$; $Av \geq 0$ implies $v > 0$ or $v = 0$;
+    \item[(Aff)] $\operatorname{corank} A = 1$; there exists $u > 0$ such that $Au = 0$; $Av \geq 0$ implies $Av = 0$;
+    \item[(Ind)] there exists $u > 0$ such that $Au < 0$; $Av \geq 0$, $v \geq 0$ imply $v = 0$.
+\end{itemize}
+\end{theorem}
+
+\begin{remark}
+    The matrices of type (Fin) are precisely the Cartan matrices of finite-dimensional semisimple Lie algebras. The matrices of type (Aff) are precisely the Cartan matrices of affine Kac-Moody algebras. The matrices of type (Ind) are called indefinite type.
+
+    Borcherds made the remark that nobody has really found a use for the indefinite type matrices. 
+\end{remark}
+
+We continue with another perspective of affine Lie algebras.
+
+\subsection*{Central extensions of $\mathfrak{g}[z,z^{-1}]$}
+
+Let $\mathfrak{g}$ be a simple Lie algebra over $\mathbb{C}$, e.g.\ $\mathfrak{sl}_n$, $\mathfrak{so}_n$ for $n \geq 5$, $\mathfrak{sp}_{2n}$ for $n \geq 4$, exceptional ones, etc.
+
+Fix an invariant inner product $\langle\ ,\ \rangle$ on $\mathfrak{g}$ satisfying
+\[
+\langle x, [y,z]\rangle = \langle [x,y], z\rangle;
+\]
+since $\mathfrak{g}$ is simple, this inner product is unique up to scalar.
+
+Now consider the \emph{loop algebra} $\mathfrak{g}[z,z^{-1}]$. It's called loop because it's “equal” to $T_e LG$, where
+\[
+LG = \{\text{analytic maps } S^1 \to G\}
+\]
+(not precisely; we should really take some completion of $\mathfrak{g}[z,z^{-1}]$, but it's a dense subspace inside of $T_e LG$, which is enough for our purposes). This algebra $\mathfrak{g}[z,z^{-1}]$ is graded: the $n$th graded component is $\mathfrak{g} z^n$, hence the grading is given by operator $z\partial_z$. Hence
+\[
+\mathfrak{g}[z,z^{-1}] = \bigoplus_{n \in \mathbb{Z}} \mathfrak{g}z^n
+\]
+is a graded Lie algebra, with
+\[
+[xz^n, yz^m] = [x,y] z^{n+m}.
+\]
+
+As usual, we care about \emph{central extensions} of this Lie algebra.
+
+Recall that central extensions are classified by $H^2(\mathfrak{g}[z,z^{-1}])$, so we want to compute this cohomology group. We have the Chevalley complex
+\[
+C^\bullet(\mathfrak{g}[z,z^{-1}]) = \Lambda^\bullet(\mathfrak{g}[z,z^{-1}]^*),
+\]
+and it carries an action of $\mathfrak{g}[z,z^{-1}]$ which acts trivially on cohomology. In particular, $\mathfrak{g}$ acts trivially on the cohomology.
+To see this, observe that the subalgebra $\mathfrak g\subset L$ of constant loops acts on $C^\bullet(L)$ by the usual Lie derivative
+$\mathcal L_\xi = \iota_\xi d + d\,\iota_\xi$ (Cartan's homotopy formula), which is chain-homotopic to 0 via the contraction $\iota_\xi$.
+Hence $\mathfrak g$ acts trivially on cohomology so every class has a $\mathfrak g$-invariant representative (Lemma \ref{lem:invariant-representative}).
+
+Thus, to classify $H^2(L)$, we may restrict to $\mathfrak g$-invariant 2-cocycles, modulo coboundaries.
+
+\begin{proposition}[Second cohomology of loop algebra]
+Any cohomology class from $H^2(\mathfrak{g}[z,z^{-1}])$ is uniquely represented by a $\mf g$-invariant cocycle.
+
+Any $\mf g$-invariant 2-cocycle is of the form
+\[
+\sum_{m\neq n} \gamma_{m,n} \omega_{m,n}, \quad 
+\gamma_{m,n} = -\gamma_{n,m} \in \mathbb{C}, \qquad 
+\omega_{m,n}(xz^k, yz^\ell) = \delta_{m=k,n=\ell} \langle x,y\rangle,
+\]
+\end{proposition}
+
+\begin{proof}
+A 1-cochain is a linear functional $\varphi \in L^*$. A coboundary is
+\[
+(d\varphi)(x z^k, y z^\ell) = \varphi([x z^k, y z^\ell]) = \varphi([x,y]z^{k+\ell}).
+\]
+If $\varphi$ is $\mathfrak{g}$-invariant, then its restriction to each $\mathfrak{g}_{r} \simeq \mathfrak{g}$ is a $\mathfrak{g}$-invariant linear functional on the adjoint module $\mathfrak{g}$, which must be zero. 
+
+This is because there are no nonzero invariants in $\mathfrak{g}^*$ for a simple $\mathfrak{g}$. To see this, recall that a linear functional $\lambda \in \mathfrak{g}^*$ is $\mathfrak{g}$-invariant iff
+\[\lambda([x,y]) = 0 \quad \forall x,y \in \mathfrak{g}.\]
+But $[\mathfrak{g},\mathfrak{g}] = \mathfrak{g}$ for simple $\mathfrak{g}$, so $\lambda = 0$.
+
+Therefore $L^{*\mathfrak{g}} = 0$ so invariant 2-cocycles have no nontrivial invariant coboundaries. 
+
+Now suppose you have two invariant 2-cocycles $\omega,\omega'$ that represent the same cohomology class. That means $\omega - \omega' = d\varphi$ for some $\varphi \in C^1(L)$. Then their difference $d\varphi$ is also $\mathfrak g$-invariant, so $d\varphi$ is an invariant coboundary, which must be zero by the above argument. Hence $\omega = \omega'$, i.e. once we restrict to $\mathfrak{g}$-invariant representatives, the class determines the representative uniquely. This proves the first statement.
+
+    Decompose $L$ as a $\mathfrak g$-module:
+\[
+L=\bigoplus_{k\in\mathbb Z}\mathfrak g_k,
+\qquad \mathfrak g_k\simeq \mathfrak g \ \text{(adjoint)}.
+\]
+Let $\omega\in C^2(L)$ be $\mathfrak g$-invariant. Fix degrees $k,\ell$. The bilinear map
+\[
+\omega_{k,\ell}\colon \mathfrak g_k\times \mathfrak g_\ell\to\Bbb C,\qquad
+(x z^k, y z^\ell)\mapsto \omega(x z^k, y z^\ell)
+\]
+is $\mathfrak g$-invariant for the diagonal adjoint action, i.e.
+\[
+\omega_{k,\ell}([\xi,x]z^k,\,y z^\ell)+\omega_{k,\ell}(x z^k,\,[\xi,y]z^\ell)=0
+\quad \forall\,\xi\in\mathfrak g.
+\]
+Since $\mathfrak g$ is simple, the space of $\mathfrak g$-invariant bilinear forms on $\mathfrak g\times\mathfrak g$ is one-dimensional and spanned by the fixed invariant form $\langle\ ,\ \rangle$. Therefore there exist scalars $c_{k,\ell}\in\Bbb C$ with \[\omega(x z^k, y z^\ell)=c_{k,\ell}\,\langle x,y\rangle\qquad(k,\ell\in\mathbb{Z})\] Skew-symmetry of $\omega$ gives $c_{k,\ell}=-c_{\ell,k}$. So every $\mathfrak g$-invariant 2-cochain is encoded by an antisymmetric function
+$c\colon \mathbb Z^2\to\Bbb C$.
+\end{proof}
+
+This still consists of infinitely many parameters. We will whittle it down.
+
+\begin{proposition}
+We have
+\[
+\gamma_{n,m+p} + \gamma_{m,p+n} + \gamma_{p,n+m} = 0.
+\]
+\end{proposition}
+
+\begin{proof}
+We have
+\begin{align*}
+0 &= d\omega(x_1 z^n, x_2 z^m, x_3 z^p) \\
+  &= \omega([x_1,x_2]z^{n+m}, x_3 z^p) 
+   - \omega([x_1,x_3] z^{n+p}, x_2 z^m) 
+   + \omega([x_2,x_3] z^{m+p}, x_1 z^n) \\
+  &= \gamma_{m+p,n} \langle [x_1,x_2], x_3 \rangle 
+   - \gamma_{n+p,m} \langle [x_1,x_3], x_2 \rangle 
+   + \gamma_{n+m,p} \langle [x_2,x_3], x_1 \rangle.
+\end{align*}
+
+Since $\langle \ ,\ \rangle$ is totally antisymmetric, all of the $\langle \ ,\ \rangle$ equal the same constant up to sign (note that
+\[
+\langle [x_1,x_3], x_2\rangle = \langle x_1, [x_3,x_2]\rangle 
+= -\langle x_1, [x_2,x_3]\rangle 
+= -\langle [x_1,x_2], x_3\rangle),
+\]
+hence the above expression is equal to some constant times 
+\[
+\gamma_{p,n+m} + \gamma_{m,p+n} + \gamma_{n,m+p},
+\]
+and choosing the constant to be nonzero we have that this is zero.
+\end{proof}
+
+\begin{corollary}
+$\gamma_{n,-n} = n\gamma_{1,-1} = n\gamma$ and $\gamma_{m,n} = 0$ otherwise. In particular,
+\[
+\dim H^2(\mathfrak{g}[z,z^{-1}]) = 1.
+\]
+\end{corollary}
+
+\begin{proof}
+We have $\gamma_{n,s-n} + \gamma_{m,s-m} = \gamma_{n+m,s-n-m} \implies \gamma_{0,s} = 0$ for all $s$. By induction,
+\[
+-(s-n)\gamma_{1,s-1} = \gamma_{n,s-n} = n \cdot \gamma_{1,s-1} \implies (s-n)\gamma_{1,s-1} = -n\gamma_{1,s-1}
+\implies s \cdot \gamma_{1,s-1} = 0,
+\]
+hence $\gamma_{1,s-1} = 0$ for all $s \neq 0$. This implies the result.
+\end{proof}
+
+\begin{definition}[Affine Kac-Moody Lie algebra]
+Any central extension of $\mathfrak{g}[z,z^{-1}]$ has the form
+\[
+0 \to \mathbb{C}c \to \widehat{\mathfrak{g}} \to \mathfrak{g}[z,z^{-1}] \to 0, 
+\qquad 
+[xz^n, yz^m]_{\widehat{\mathfrak{g}}} = [x,y]_{\mathfrak{g}} z^{n+m} + n \cdot \delta_{n+m=0} \cdot \langle x,y \rangle \cdot c.
+\]
+
+Equivalently,
+\[
+[x(z), y(z)]_{\widehat{\mathfrak{g}}} = [x(z), y(z)]_{\mathfrak{g}} + \operatorname{Res}_{z=0}(x(z), dy(z)) \cdot c.
+\]
+
+Therefore, we define the \textbf{(untwisted) affine Kac--Moody Lie algebra} $\widehat{\mathfrak{g}}$ associated to a simple (finite-dimensional) Lie algebra $\mathfrak{g}$ to be the unique (up to rescaling) nontrivial central extension of the loop space $\mathfrak{g}[z,z^{-1}]$.
+\end{definition}
+
+\red{Is there a way, given a generalized Cartan matrix of affine type, to see that it comes from a simple Lie algebra $\mathfrak{g}$?}
+
+\begin{example}[Affine $\widehat{\mathfrak{sl}}_2$]
+Let $\mathfrak{g} = \mathfrak{sl}_2$. We may consider $\widehat{\mathfrak{sl}}_2$ as a bigraded Lie algebra, with one grading coming from $z\partial_z$, and the other grading coming from $\operatorname{ad} h$.
+
+Then $\widehat{\mathfrak{sl}}_2$ is generated by $h, c, e, f, fz, ez^{-1}$. 
+\end{example}
+
+\section{Appendix A: Lie algebra cohomology}
+
+\begin{lemma}[Invariant representative via averaging]\label{lem:invariant-representative}
+Let $K$ be a compact Lie group acting on a cochain complex $(C^\bullet,d)$ by
+cochain maps (so $k\cdot d = d\,(k\cdot)$ for all $k\in K$). Suppose the induced
+$K$-action on cohomology $H^\bullet(C^\bullet)$ is trivial. Then for every
+cohomology class $[c]\in H^p(C^\bullet)$ there exists a $K$-invariant cocycle
+$c^{\mathrm{av}}\in C^p$ with $dc^{\mathrm{av}}=0$ and $[c^{\mathrm{av}}]=[c]$.
+Equivalently, the inclusion $i:(C^\bullet)^K\hookrightarrow C^\bullet$
+induces a surjection $H^\bullet((C^\bullet)^K)\twoheadrightarrow H^\bullet(C^\bullet)$.
+\end{lemma}
+
+\begin{proof}
+Let $\mu$ be the Haar probability measure on $K$. For $c\in C^p$ define the
+\emph{averaging operator}
+\[
+P(c)\;:=\;\int_{K} k\cdot c\; d\mu(k)\ \in C^p.
+\]
+This Bochner integral is well-defined because $C^p$ is a (Hausdorff) complex
+vector space and $k\mapsto k\cdot c$ is continuous.
+
+\smallskip
+
+\emph{(1) $P$ is a cochain map and projects onto invariants.}
+For any $c\in C^p$,
+\[
+d\,P(c)\;=\;\int_K d(k\cdot c)\,d\mu(k)\;=\;\int_K k\cdot (dc)\,d\mu(k)\;=\;P(dc),
+\]
+so $dP=Pd$. Moreover, for any $k_0\in K$,
+\[
+k_0\cdot P(c)\;=\;\int_K (k_0k)\cdot c\,d\mu(k)\;=\;\int_K k\cdot c\,d\mu(k)\;=\;P(c),
+\]
+using left-invariance of $\mu$. Hence $P(c)\in (C^p)^K$. If $c$ is already
+$K$-invariant then $P(c)=c$, so $P$ is a projection onto $(C^\bullet)^K$.
+
+\smallskip
+
+\emph{(2) $P$ preserves cocycles.}
+If $dc=0$ then $dP(c)=P(dc)=0$, so $c^{\mathrm{av}}:=P(c)$ is again a cocycle.
+
+\smallskip
+
+\emph{(3) $P$ preserves cohomology classes when the $K$-action on cohomology is trivial.}
+By assumption, $[k\cdot c]=[c]$ in $H^p(C^\bullet)$ for every $k\in K$. Using linearity
+of cohomology,
+\[
+[c^{\mathrm{av}}]\;=\;\Big[\int_K k\cdot c\,d\mu(k)\Big]
+\;=\;\int_K [\,k\cdot c\,]\,d\mu(k)
+\;=\;\int_K [c]\,d\mu(k)
+\;=\;[c].
+\]
+Thus $c^{\mathrm{av}}$ is a $K$-invariant cocycle representing the same class as $c$.
+
+Therefore every class in $H^p(C^\bullet)$ has a $K$-invariant representative,
+and the inclusion of invariants induces a surjection on cohomology.
+\end{proof}
 
 
 \section{References}
 \begin{enumerate}
     \bibitem{bump} Bump, D. \textbf{Weyl Character Formula notes}, available at \url{http://sporadic.stanford.edu/Math210C/WCF.pdf}.
+
+    \bibitem{cai} Cai, M. \textbf{Infinite-dimensional Lie algebras}, available at \url{https://merrickcai.com/pdfs_notes/747.pdf}.
 
     \bibitem{kac} Kac, V. G. \textbf{Infinite Dimensional Lie Algebras}. Cambridge University Press, 1990.
     \bibitem{pressley-segal} Pressley, A., and Segal, G. \textbf{Loop Groups}. Oxford University Press, 1986.
