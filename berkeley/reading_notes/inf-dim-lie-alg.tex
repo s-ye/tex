@@ -52,7 +52,7 @@ Recall that there is an big Adjoint representation $\Ad: G \to \GL(\mathfrak{g})
 \begin{align*}
     \operatorname{ad}(X)Y \;=\; \left.\frac{d}{dt}\right|_{t=0}\!\Ad_{\exp(tX)}(Y).
 \end{align*}
-In coordinates, $\operatorname{ad}(X) = [X,Y]$. 
+In coordinates, $\operatorname{ad}(X) = [X,Y]$.
 
 Now the key idea is to consider the adjoint representation of $\mf h$ on $\mf g$. Since $\mathfrak{h}$ consists of simultaneously diagonalizable endomorphisms, $\operatorname{ad}(H)$ is diagonalizable. Thus we can decompose:
 \[
@@ -1490,30 +1490,30 @@ where we invoke equation (8) in the last line.
     First you can deduce that $\mf g_\alpha$ and $\mf g_\beta$ are orthogonal unless $\alpha+\beta=0$.
     Take $x \in \mathfrak{g}_\alpha$, $y \in \mathfrak{g}_\beta$, and $h \in \mathfrak{h}$. Recall the weight-space relation:
     $[h, x] = \alpha(h)x$, $[h,y] = \beta(h)y$. By invariance,
-        \[
-            ([h,x]\mid y)=(h\mid [x,y]).
-        \]
-        Since $[h,x]=\alpha(h)x$ and $[x,y]\in\mathfrak{g}_{\alpha+\beta}$, we obtain
-        \begin{equation}\label{eq:basic}
-            \alpha(h)\,(x\mid y)=(h\mid z),\qquad z:=[x,y]\in\mathfrak{g}_{\alpha+\beta}.
-        \end{equation}
-        Now take $h'\in\mathfrak{h}$. Using invariance again and $[\mathfrak{h},\mathfrak{h}]=0$,
-        \[
-            0=([h',h]\mid z)=(h'\mid [h,z])=(\alpha+\beta)(h)\,(h'\mid z)\quad\text{for all }h,h'\in\mathfrak{h}.
-        \]
-        If $\alpha+\beta\neq 0$, choose $h$ with $(\alpha+\beta)(h)\neq 0$; then $(h'\mid z)=0$ for all
-        $h'\in\mathfrak{h}$, so in particular $(h\mid z)=0$ for every $h\in\mathfrak{h}$. Returning to
-        \eqref{eq:basic}, we get $\alpha(h)(x\mid y)=0$ for all $h\in\mathfrak{h}$; choosing $h$ with
-        $\alpha(h)\neq 0$ (since $\alpha\neq 0$ on $\mathfrak{g}_\alpha$) yields $(x\mid y)=0$.
-        Hence $(\mathfrak{g}_\alpha\mid\mathfrak{g}_\beta)=0$ unless $\alpha+\beta=0$.
-        
-        
-        Now, take $h \in \mathfrak{h}$. Invariance gives $(h \mid [e_i, f_i]) = ([h, e_i] \mid f_i)$.
-        On the LHS: $[e_i, f_i] = \alpha_i^\vee$, so $(h \mid [e_i, f_i]) = (h \mid \alpha_i^\vee)$. On the RHS: $[h, e_i] = \langle \alpha_i, h \rangle e_i$, so
-        $([h, e_i] \mid f_i) = \langle \alpha_i, h \rangle (e_i \mid f_i)$.
+    \[
+        ([h,x]\mid y)=(h\mid [x,y]).
+    \]
+    Since $[h,x]=\alpha(h)x$ and $[x,y]\in\mathfrak{g}_{\alpha+\beta}$, we obtain
+    \begin{equation}\label{eq:basic}
+        \alpha(h)\,(x\mid y)=(h\mid z),\qquad z:=[x,y]\in\mathfrak{g}_{\alpha+\beta}.
+    \end{equation}
+    Now take $h'\in\mathfrak{h}$. Using invariance again and $[\mathfrak{h},\mathfrak{h}]=0$,
+    \[
+        0=([h',h]\mid z)=(h'\mid [h,z])=(\alpha+\beta)(h)\,(h'\mid z)\quad\text{for all }h,h'\in\mathfrak{h}.
+    \]
+    If $\alpha+\beta\neq 0$, choose $h$ with $(\alpha+\beta)(h)\neq 0$; then $(h'\mid z)=0$ for all
+    $h'\in\mathfrak{h}$, so in particular $(h\mid z)=0$ for every $h\in\mathfrak{h}$. Returning to
+    \eqref{eq:basic}, we get $\alpha(h)(x\mid y)=0$ for all $h\in\mathfrak{h}$; choosing $h$ with
+    $\alpha(h)\neq 0$ (since $\alpha\neq 0$ on $\mathfrak{g}_\alpha$) yields $(x\mid y)=0$.
+    Hence $(\mathfrak{g}_\alpha\mid\mathfrak{g}_\beta)=0$ unless $\alpha+\beta=0$.
 
-        Thus $(h \mid \alpha_i^\vee) = \langle \alpha_i, h \rangle (e_i \mid f_i)$ which determines how $e_i$ and $f_i$ pair against each other. Using invariance and inducting on height, you can determine how any two root vectors pair against each other.
-        \end{remark}
+
+    Now, take $h \in \mathfrak{h}$. Invariance gives $(h \mid [e_i, f_i]) = ([h, e_i] \mid f_i)$.
+    On the LHS: $[e_i, f_i] = \alpha_i^\vee$, so $(h \mid [e_i, f_i]) = (h \mid \alpha_i^\vee)$. On the RHS: $[h, e_i] = \langle \alpha_i, h \rangle e_i$, so
+    $([h, e_i] \mid f_i) = \langle \alpha_i, h \rangle (e_i \mid f_i)$.
+
+    Thus $(h \mid \alpha_i^\vee) = \langle \alpha_i, h \rangle (e_i \mid f_i)$ which determines how $e_i$ and $f_i$ pair against each other. Using invariance and inducting on height, you can determine how any two root vectors pair against each other.
+\end{remark}
 
 Suppose that $A = (a_{ij})$ is a symmetrizable generalized Cartan
 matrix. Fix a decomposition
@@ -1896,50 +1896,50 @@ so that $(\mathfrak h = \mathbb{C}\otimes_\mathbb{R}\mathfrak h_\mathbb{R}, \Pi,
 \section{Integrable modules}
 We begin this section by recalling the representation theory of $\mathfrak{sl}_2(\mathbb{C})$. Let
 \[
-e = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, 
-\quad 
-h = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}, 
-\quad 
-f = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}
+    e = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix},
+    \quad
+    h = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix},
+    \quad
+    f = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}
 \]
 be the standard basis of $\mathfrak{sl}_2(\C)$. Then
 \[
-[e,f] = h, 
-\quad [h,e] = 2e, 
-\quad [h,f] = -2f.
+    [e,f] = h,
+    \quad [h,e] = 2e,
+    \quad [h,f] = -2f.
 \]
 
 By an easy induction on $k$ we deduce the following relations in the universal enveloping algebra of $\mathfrak{sl}_2(\C)$:
 \begin{align*}
-[h,f^k] &= -2k f^k, \\
-[h,e^k] &= 2k e^k \\ 
-[e,f^k] &= -k(k-1) f^{k-1} + k f^{k-1} h. 
+    [h,f^k] & = -2k f^k,                       \\
+    [h,e^k] & = 2k e^k                         \\
+    [e,f^k] & = -k(k-1) f^{k-1} + k f^{k-1} h.
 \end{align*}
 
 \begin{lemma}[Classification of irreducible $\mathfrak{sl}_2(\C)$-modules]\label{lem:sl2-modules}
-\leavevmode
-\begin{enumerate}[label=(\alph*)]
-\item Let $V$ be an $\mathfrak{sl}_2(\C)$-module and let $v \in V$ be such that
-\[
-h(v) = \lambda v \qquad \text{for some } \lambda \in \C.
-\]
-Set $v_j = (j!)^{-1} f^j(v)$. Then
-\begin{equation}
-h(v_j) = (\lambda - 2j) v_j. \tag{3.2.3}
-\end{equation}
-If, in addition, $e(v) = 0$, then
-\begin{equation}
-e(v_j) = (\lambda - j + 1)v_{j-1}. \tag{3.2.4}
-\end{equation}
+    \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item Let $V$ be an $\mathfrak{sl}_2(\C)$-module and let $v \in V$ be such that
+              \[
+                  h(v) = \lambda v \qquad \text{for some } \lambda \in \C.
+              \]
+              Set $v_j = (j!)^{-1} f^j(v)$. Then
+              \begin{equation}
+                  h(v_j) = (\lambda - 2j) v_j. \tag{3.2.3}
+              \end{equation}
+              If, in addition, $e(v) = 0$, then
+              \begin{equation}
+                  e(v_j) = (\lambda - j + 1)v_{j-1}. \tag{3.2.4}
+              \end{equation}
 
-\item For each integer $k \geq 0$ there exists a unique, up to isomorphism, irreducible $(k+1)$-dimensional $\mathfrak{sl}_2(\C)$-module. In some $\C$-basis $\{v_j\}_{j=0}^k$ of the space of this module, the action of $\mathfrak{sl}_2(\C)$ looks as follows:
-\[
-h(v_j) = (k-2j)v_j, 
-\quad f(v_j) = (j+1)v_{j+1}, 
-\quad e(v_j) = (k+1-j)v_{j-1}.
-\]
-Here $j=0,\dots,k$ and we assume that $v_{k+1}=0=v_{-1}$.
-\end{enumerate}
+        \item For each integer $k \geq 0$ there exists a unique, up to isomorphism, irreducible $(k+1)$-dimensional $\mathfrak{sl}_2(\C)$-module. In some $\C$-basis $\{v_j\}_{j=0}^k$ of the space of this module, the action of $\mathfrak{sl}_2(\C)$ looks as follows:
+              \[
+                  h(v_j) = (k-2j)v_j,
+                  \quad f(v_j) = (j+1)v_{j+1},
+                  \quad e(v_j) = (k+1-j)v_{j-1}.
+              \]
+              Here $j=0,\dots,k$ and we assume that $v_{k+1}=0=v_{-1}$.
+    \end{enumerate}
 \end{lemma}
 
 \red{Where does one invoke the fact that we quotiented out by the maximal ideal intersecting $\mathfrak h$ trivially, when deriving the Serre relations?}
@@ -1957,18 +1957,18 @@ In order to develop the theory of root systems of Kac-Moody algebras we need to 
 \end{itemize}
 Kac proves the following classification theorem in \cite{kac}.
 \begin{theorem}[Classification of matrices satisfying (m1), (m2), and (m3)]
-Let $A$ be a real $n \times n$ matrix satisfying (m1), (m2), and (m3). Then one and only one of the following three possibilities holds for both $A$ and ${}^t A$:
-\begin{itemize}
-    \item[(Fin)] $\det A \neq 0$; there exists $u > 0$ such that $Au > 0$; $Av \geq 0$ implies $v > 0$ or $v = 0$;
-    \item[(Aff)] $\operatorname{corank} A = 1$; there exists $u > 0$ such that $Au = 0$; $Av \geq 0$ implies $Av = 0$;
-    \item[(Ind)] there exists $u > 0$ such that $Au < 0$; $Av \geq 0$, $v \geq 0$ imply $v = 0$.
-\end{itemize}
+    Let $A$ be a real $n \times n$ matrix satisfying (m1), (m2), and (m3). Then one and only one of the following three possibilities holds for both $A$ and ${}^t A$:
+    \begin{itemize}
+        \item[(Fin)] $\det A \neq 0$; there exists $u > 0$ such that $Au > 0$; $Av \geq 0$ implies $v > 0$ or $v = 0$;
+        \item[(Aff)] $\operatorname{corank} A = 1$; there exists $u > 0$ such that $Au = 0$; $Av \geq 0$ implies $Av = 0$;
+        \item[(Ind)] there exists $u > 0$ such that $Au < 0$; $Av \geq 0$, $v \geq 0$ imply $v = 0$.
+    \end{itemize}
 \end{theorem}
 
 \begin{remark}
     The matrices of type (Fin) are precisely the Cartan matrices of finite-dimensional semisimple Lie algebras. The matrices of type (Aff) are precisely the Cartan matrices of affine Kac-Moody algebras. The matrices of type (Ind) are called indefinite type.
 
-    Borcherds made the remark that nobody has really found a use for the indefinite type matrices. 
+    Borcherds made the remark that nobody has really found a use for the indefinite type matrices.
 \end{remark}
 
 We continue with another perspective of affine Lie algebras.
@@ -1979,28 +1979,40 @@ Let $\mathfrak{g}$ be a simple Lie algebra over $\mathbb{C}$, e.g.\ $\mathfrak{s
 
 Fix an invariant inner product $\langle\ ,\ \rangle$ on $\mathfrak{g}$ satisfying
 \[
-\langle x, [y,z]\rangle = \langle [x,y], z\rangle;
+    \langle x, [y,z]\rangle = \langle [x,y], z\rangle;
 \]
 since $\mathfrak{g}$ is simple, this inner product is unique up to scalar.
 
 Now consider the \emph{loop algebra} $\mathfrak{g}[z,z^{-1}]$. It's called loop because it's “equal” to $T_e LG$, where
 \[
-LG = \{\text{analytic maps } S^1 \to G\}
+    LG = \{\text{analytic maps } S^1 \to G\}
 \]
 (not precisely; we should really take some completion of $\mathfrak{g}[z,z^{-1}]$, but it's a dense subspace inside of $T_e LG$, which is enough for our purposes). This algebra $\mathfrak{g}[z,z^{-1}]$ is graded: the $n$th graded component is $\mathfrak{g} z^n$, hence the grading is given by operator $z\partial_z$. Hence
 \[
-\mathfrak{g}[z,z^{-1}] = \bigoplus_{n \in \mathbb{Z}} \mathfrak{g}z^n
+    \mathfrak{g}[z,z^{-1}] = \bigoplus_{n \in \mathbb{Z}} \mathfrak{g}z^n
 \]
 is a graded Lie algebra, with
 \[
-[xz^n, yz^m] = [x,y] z^{n+m}.
+    [xz^n, yz^m] = [x,y] z^{n+m}.
+\]
+It carries an invariant inner product defined by
+\[
+    \langle xz^n, yz^m \rangle = \delta_{n,-m} \langle x,y \rangle
+\] where $\langle x,y \rangle$ is the invariant inner product on $\mathfrak{g}$. There is also the equivalent residue formulation of this inner product:
+\[
+    \langle x\otimes f(z), y\otimes g(z) \rangle = \langle x,y \rangle \operatorname{Res}_{z=0}\bigg(f(z)g(z)/z dz\bigg).
+\] which is more suitable for generalizations. The choice of inner product on $\mathfrak{g}$ also gives rise to a 2-cocycle on $\mathfrak{g}[z,z^{-1}]$:
+\[
+    \omega(xz^n, yz^m) = n \delta_{n,-m} \langle x,y \rangle.
+\]
+This is a 2-cocycle because it is antisymmetric and satisfies the cocycle condition (Jacobi):
+\[
+    \omega([x,y],z) + \omega([y,z],x) + \omega([z,x],y) = 0.
 \]
 
-As usual, we care about \emph{central extensions} of this Lie algebra.
-
-Recall that central extensions are classified by $H^2(\mathfrak{g}[z,z^{-1}])$, so we want to compute this cohomology group. We have the Chevalley complex
+Recall that central extensions are classified by $H^2(\mathfrak{g}[z,z^{-1}])$, so we want to compute this cohomology group. It turns out that $H^2(\mathfrak{g}[z,z^{-1}]) \cong \mathbb{C}$, and the class of $\omega$ is a generator. In particular, any central extension of $\mathfrak{g}[z,z^{-1}]$ is a multiple of the one defined by $\omega$. We have the Chevalley complex
 \[
-C^\bullet(\mathfrak{g}[z,z^{-1}]) = \Lambda^\bullet(\mathfrak{g}[z,z^{-1}]^*),
+    C^\bullet(\mathfrak{g}[z,z^{-1}]) = \Lambda^\bullet(\mathfrak{g}[z,z^{-1}]^*),
 \]
 and it carries an action of $\mathfrak{g}[z,z^{-1}]$ which acts trivially on cohomology. In particular, $\mathfrak{g}$ acts trivially on the cohomology.
 To see this, observe that the subalgebra $\mathfrak g\subset L$ of constant loops acts on $C^\bullet(L)$ by the usual Lie derivative
@@ -2010,179 +2022,217 @@ Hence $\mathfrak g$ acts trivially on cohomology so every class has a $\mathfrak
 Thus, to classify $H^2(L)$, we may restrict to $\mathfrak g$-invariant 2-cocycles, modulo coboundaries.
 
 \begin{proposition}[Second cohomology of loop algebra]
-Any cohomology class from $H^2(\mathfrak{g}[z,z^{-1}])$ is uniquely represented by a $\mf g$-invariant cocycle.
+    Any cohomology class from $H^2(\mathfrak{g}[z,z^{-1}])$ is uniquely represented by a $\mf g$-invariant cocycle.
 
-Any $\mf g$-invariant 2-cocycle is of the form
-\[
-\sum_{m\neq n} \gamma_{m,n} \omega_{m,n}, \quad 
-\gamma_{m,n} = -\gamma_{n,m} \in \mathbb{C}, \qquad 
-\omega_{m,n}(xz^k, yz^\ell) = \delta_{m=k,n=\ell} \langle x,y\rangle,
-\]
+    Any $\mf g$-invariant 2-cocycle is of the form
+    \[
+        \sum_{m\neq n} \gamma_{m,n} \omega_{m,n}, \quad
+        \gamma_{m,n} = -\gamma_{n,m} \in \mathbb{C}, \qquad
+        \omega_{m,n}(xz^k, yz^\ell) = \delta_{m=k,n=\ell} \langle x,y\rangle,
+    \]
 \end{proposition}
 
 \begin{proof}
-A 1-cochain is a linear functional $\varphi \in L^*$. A coboundary is
-\[
-(d\varphi)(x z^k, y z^\ell) = \varphi([x z^k, y z^\ell]) = \varphi([x,y]z^{k+\ell}).
-\]
-If $\varphi$ is $\mathfrak{g}$-invariant, then its restriction to each $\mathfrak{g}_{r} \simeq \mathfrak{g}$ is a $\mathfrak{g}$-invariant linear functional on the adjoint module $\mathfrak{g}$, which must be zero. 
+    A 1-cochain is a linear functional $\varphi \in L^*$. A coboundary is
+    \[
+        (d\varphi)(x z^k, y z^\ell) = \varphi([x z^k, y z^\ell]) = \varphi([x,y]z^{k+\ell}).
+    \]
+    If $\varphi$ is $\mathfrak{g}$-invariant, then its restriction to each $\mathfrak{g}_{r} \simeq \mathfrak{g}$ is a $\mathfrak{g}$-invariant linear functional on the adjoint module $\mathfrak{g}$, which must be zero.
 
-This is because there are no nonzero invariants in $\mathfrak{g}^*$ for a simple $\mathfrak{g}$. To see this, recall that a linear functional $\lambda \in \mathfrak{g}^*$ is $\mathfrak{g}$-invariant iff
-\[\lambda([x,y]) = 0 \quad \forall x,y \in \mathfrak{g}.\]
-But $[\mathfrak{g},\mathfrak{g}] = \mathfrak{g}$ for simple $\mathfrak{g}$, so $\lambda = 0$.
+    This is because there are no nonzero invariants in $\mathfrak{g}^*$ for a simple $\mathfrak{g}$. To see this, recall that a linear functional $\lambda \in \mathfrak{g}^*$ is $\mathfrak{g}$-invariant iff
+    \[\lambda([x,y]) = 0 \quad \forall x,y \in \mathfrak{g}.\]
+    But $[\mathfrak{g},\mathfrak{g}] = \mathfrak{g}$ for simple $\mathfrak{g}$, so $\lambda = 0$.
 
-Therefore $L^{*\mathfrak{g}} = 0$ so invariant 2-cocycles have no nontrivial invariant coboundaries. 
+    Therefore $L^{*\mathfrak{g}} = 0$ so invariant 2-cocycles have no nontrivial invariant coboundaries.
 
-Now suppose you have two invariant 2-cocycles $\omega,\omega'$ that represent the same cohomology class. That means $\omega - \omega' = d\varphi$ for some $\varphi \in C^1(L)$. Then their difference $d\varphi$ is also $\mathfrak g$-invariant, so $d\varphi$ is an invariant coboundary, which must be zero by the above argument. Hence $\omega = \omega'$, i.e. once we restrict to $\mathfrak{g}$-invariant representatives, the class determines the representative uniquely. This proves the first statement.
+    Now suppose you have two invariant 2-cocycles $\omega,\omega'$ that represent the same cohomology class. That means $\omega - \omega' = d\varphi$ for some $\varphi \in C^1(L)$. Then their difference $d\varphi$ is also $\mathfrak g$-invariant, so $d\varphi$ is an invariant coboundary, which must be zero by the above argument. Hence $\omega = \omega'$, i.e. once we restrict to $\mathfrak{g}$-invariant representatives, the class determines the representative uniquely. This proves the first statement.
 
     Decompose $L$ as a $\mathfrak g$-module:
-\[
-L=\bigoplus_{k\in\mathbb Z}\mathfrak g_k,
-\qquad \mathfrak g_k\simeq \mathfrak g \ \text{(adjoint)}.
-\]
-Let $\omega\in C^2(L)$ be $\mathfrak g$-invariant. Fix degrees $k,\ell$. The bilinear map
-\[
-\omega_{k,\ell}\colon \mathfrak g_k\times \mathfrak g_\ell\to\Bbb C,\qquad
-(x z^k, y z^\ell)\mapsto \omega(x z^k, y z^\ell)
-\]
-is $\mathfrak g$-invariant for the diagonal adjoint action, i.e.
-\[
-\omega_{k,\ell}([\xi,x]z^k,\,y z^\ell)+\omega_{k,\ell}(x z^k,\,[\xi,y]z^\ell)=0
-\quad \forall\,\xi\in\mathfrak g.
-\]
-Since $\mathfrak g$ is simple, the space of $\mathfrak g$-invariant bilinear forms on $\mathfrak g\times\mathfrak g$ is one-dimensional and spanned by the fixed invariant form $\langle\ ,\ \rangle$. Therefore there exist scalars $c_{k,\ell}\in\Bbb C$ with \[\omega(x z^k, y z^\ell)=c_{k,\ell}\,\langle x,y\rangle\qquad(k,\ell\in\mathbb{Z})\] Skew-symmetry of $\omega$ gives $c_{k,\ell}=-c_{\ell,k}$. So every $\mathfrak g$-invariant 2-cochain is encoded by an antisymmetric function
-$c\colon \mathbb Z^2\to\Bbb C$.
+    \[
+        L=\bigoplus_{k\in\mathbb Z}\mathfrak g_k,
+        \qquad \mathfrak g_k\simeq \mathfrak g \ \text{(adjoint)}.
+    \]
+    Let $\omega\in C^2(L)$ be $\mathfrak g$-invariant. In particular, being a 2-cocycle it is alternating. Fix degrees $k,\ell$. The bilinear map
+    \[
+        \omega_{k,\ell}\colon \mathfrak g_k\times \mathfrak g_\ell\to\Bbb C,\qquad
+        (x z^k, y z^\ell)\mapsto \omega(x z^k, y z^\ell)
+    \]
+    is $\mathfrak g$-invariant for the diagonal adjoint action, i.e.
+    \[
+        \omega_{k,\ell}([\xi,x]z^k,\,y z^\ell)+\omega_{k,\ell}(x z^k,\,[\xi,y]z^\ell)=0
+        \quad \forall\,\xi\in\mathfrak g.
+    \]
+    Since $\mathfrak g$ is simple, the space of $\mathfrak g$-invariant bilinear forms on $\mathfrak g\times\mathfrak g$ is one-dimensional and spanned by the fixed invariant form $\langle\ ,\ \rangle$. Therefore there exist scalars $c_{k,\ell}\in\Bbb C$ with \[\omega(x z^k, y z^\ell)=c_{k,\ell}\,\langle x,y\rangle\qquad(k,\ell\in\mathbb{Z})\] Skew-symmetry of $\omega$ gives $c_{k,\ell}=-c_{\ell,k}$. So every $\mathfrak g$-invariant 2-cochain is encoded by an antisymmetric function
+    $c\colon \mathbb Z^2\to\Bbb C$.
 \end{proof}
 
-This still consists of infinitely many parameters. We will whittle it down.
+This still consists of infinitely many parameters. We will whittle it down using the cocycle condition. 
 
 \begin{proposition}
-We have
-\[
-\gamma_{n,m+p} + \gamma_{m,p+n} + \gamma_{p,n+m} = 0.
-\]
+    We have
+    \[
+        \gamma_{n,m+p} + \gamma_{m,p+n} + \gamma_{p,n+m} = 0.
+    \]
 \end{proposition}
 
 \begin{proof}
-We have
-\begin{align*}
-0 &= d\omega(x_1 z^n, x_2 z^m, x_3 z^p) \\
-  &= \omega([x_1,x_2]z^{n+m}, x_3 z^p) 
-   - \omega([x_1,x_3] z^{n+p}, x_2 z^m) 
-   + \omega([x_2,x_3] z^{m+p}, x_1 z^n) \\
-  &= \gamma_{m+p,n} \langle [x_1,x_2], x_3 \rangle 
-   - \gamma_{n+p,m} \langle [x_1,x_3], x_2 \rangle 
-   + \gamma_{n+m,p} \langle [x_2,x_3], x_1 \rangle.
-\end{align*}
+    We have
+    \begin{align*}
+        0 & = d\omega(x_1 z^n, x_2 z^m, x_3 z^p)            \\
+          & = \omega([x_1,x_2]z^{n+m}, x_3 z^p)
+        - \omega([x_1,x_3] z^{n+p}, x_2 z^m)
+        + \omega([x_2,x_3] z^{m+p}, x_1 z^n)                \\
+          & = \gamma_{m+p,n} \langle [x_1,x_2], x_3 \rangle
+        - \gamma_{n+p,m} \langle [x_1,x_3], x_2 \rangle
+        + \gamma_{n+m,p} \langle [x_2,x_3], x_1 \rangle.
+    \end{align*}
 
-Since $\langle \ ,\ \rangle$ is totally antisymmetric, all of the $\langle \ ,\ \rangle$ equal the same constant up to sign (note that
-\[
-\langle [x_1,x_3], x_2\rangle = \langle x_1, [x_3,x_2]\rangle 
-= -\langle x_1, [x_2,x_3]\rangle 
-= -\langle [x_1,x_2], x_3\rangle),
-\]
-hence the above expression is equal to some constant times 
-\[
-\gamma_{p,n+m} + \gamma_{m,p+n} + \gamma_{n,m+p},
-\]
-and choosing the constant to be nonzero we have that this is zero.
+    Since $\langle \ ,\ \rangle$ is totally antisymmetric, all of the $\langle \ ,\ \rangle$ equal the same constant up to sign (note that
+    \[
+        \langle [x_1,x_3], x_2\rangle = \langle x_1, [x_3,x_2]\rangle
+        = -\langle x_1, [x_2,x_3]\rangle
+        = -\langle [x_1,x_2], x_3\rangle),
+    \]
+    hence the above expression is equal to some constant times
+    \[
+        \gamma_{p,n+m} + \gamma_{m,p+n} + \gamma_{n,m+p},
+    \]
+    and choosing the constant to be nonzero we have that this is zero.
 \end{proof}
 
 \begin{corollary}
-$\gamma_{n,-n} = n\gamma_{1,-1} = n\gamma$ and $\gamma_{m,n} = 0$ otherwise. In particular,
-\[
-\dim H^2(\mathfrak{g}[z,z^{-1}]) = 1.
-\]
+    $\gamma_{n,-n} = n\gamma_{1,-1} = n\gamma$ and $\gamma_{m,n} = 0$ otherwise. In particular,
+    \[
+        \dim H^2(\mathfrak{g}[z,z^{-1}]) = 1.
+    \]
 \end{corollary}
 
 \begin{proof}
-We have $\gamma_{n,s-n} + \gamma_{m,s-m} = \gamma_{n+m,s-n-m} \implies \gamma_{0,s} = 0$ for all $s$. By induction,
-\[
--(s-n)\gamma_{1,s-1} = \gamma_{n,s-n} = n \cdot \gamma_{1,s-1} \implies (s-n)\gamma_{1,s-1} = -n\gamma_{1,s-1}
-\implies s \cdot \gamma_{1,s-1} = 0,
-\]
-hence $\gamma_{1,s-1} = 0$ for all $s \neq 0$. This implies the result.
+    We have $\gamma_{n,s-n} + \gamma_{m,s-m} = \gamma_{n+m,s-n-m} \implies \gamma_{0,s} = 0$ for all $s$. By induction,
+    \[
+        -(s-n)\gamma_{1,s-1} = \gamma_{n,s-n} = n \cdot \gamma_{1,s-1} \implies (s-n)\gamma_{1,s-1} = -n\gamma_{1,s-1}
+        \implies s \cdot \gamma_{1,s-1} = 0,
+    \]
+    hence $\gamma_{1,s-1} = 0$ for all $s \neq 0$. This implies the result.
 \end{proof}
 
-\begin{definition}[Affine Kac-Moody Lie algebra]
-Any central extension of $\mathfrak{g}[z,z^{-1}]$ has the form
-\[
-0 \to \mathbb{C}c \to \widehat{\mathfrak{g}} \to \mathfrak{g}[z,z^{-1}] \to 0, 
-\qquad 
-[xz^n, yz^m]_{\widehat{\mathfrak{g}}} = [x,y]_{\mathfrak{g}} z^{n+m} + n \cdot \delta_{n+m=0} \cdot \langle x,y \rangle \cdot c.
-\]
+\begin{definition}[Derived affine Kac-Moody Lie algebra]
+    Any central extension of $\mathfrak{g}[z,z^{-1}]$ has the form
+    \[
+        0 \to \mathbb{C}c \to \widehat{\mathfrak{g}'} \to \mathfrak{g}[z,z^{-1}] \to 0,
+        \qquad
+    [xz^n, yz^m]_{\widehat{\mathfrak{g}'}} = [x,y]_{\mathfrak{g}} z^{n+m} + n \cdot \delta_{n+m=0} \cdot \langle x,y \rangle \cdot c.
+    \]
 
-Equivalently,
-\[
-[x(z), y(z)]_{\widehat{\mathfrak{g}}} = [x(z), y(z)]_{\mathfrak{g}} + \operatorname{Res}_{z=0}(x(z), dy(z)) \cdot c.
-\]
+    Equivalently (terrible abuse of notation since they mean apply the bracket coefficient-wise in the Laurent series),
+    \[
+        [x(z), y(z)]_{\widehat{\mathfrak{g}'}} = [x(z), y(z)]_{\mathfrak{g}} + \operatorname{Res}_{z=0}\langle dx(z), y(z) \rangle \cdot c.
+    \]
 
-Therefore, we define the \textbf{(untwisted) affine Kac--Moody Lie algebra} $\widehat{\mathfrak{g}}$ associated to a simple (finite-dimensional) Lie algebra $\mathfrak{g}$ to be the unique (up to rescaling) nontrivial central extension of the loop space $\mathfrak{g}[z,z^{-1}]$.
+    Therefore, we define $\widehat{\mathfrak{g}'}$ associated to a simple (finite-dimensional) Lie algebra $\mathfrak{g}$ to be the unique (up to rescaling) nontrivial central extension of the loop space $\mathfrak{g}[z,z^{-1}]$.
 \end{definition}
 
-\red{Is there a way, given a generalized Cartan matrix of affine type, to see that it comes from a simple Lie algebra $\mathfrak{g}$?}
+\begin{remark}
+    We will prove that this is the derived subalgebra of an affine Kac-Moody algebra $\widehat{\mathfrak{g}}$ which is obtained by adjoining a derivation $d$ to $\widehat{\mathfrak{g}'}$.
+\end{remark}
 
-\begin{example}[Affine $\widehat{\mathfrak{sl}}_2$]
-Let $\mathfrak{g} = \mathfrak{sl}_2$. We may consider $\widehat{\mathfrak{sl}}_2$ as a bigraded Lie algebra, with one grading coming from $z\partial_z$, and the other grading coming from $\operatorname{ad} h$.
+\begin{example}[Affine $\widehat{\mathfrak{sl}}_2'$]
+    Let $\mathfrak{g} = \mathfrak{sl}_2$. We may consider $\widehat{\mathfrak{sl}}_2'$ as a bigraded Lie algebra, with one grading coming from $z\partial_z$, and the other grading coming from $\operatorname{ad} h$.
 
-Then $\widehat{\mathfrak{sl}}_2$ is generated by $h, c, e, f, fz, ez^{-1}$. 
+    Then $\widehat{\mathfrak{sl}}_2'$ is generated by $h, c, e, f, fz, ez^{-1}$. To see this observe that \begin{align*}
+        [fz,e] = hz, \quad [hz,e] = 2ez
+    \end{align*} and so we have generated $ez$, even though it looks like $fz$ only moves down the $\mf h$-grading. In particular, I'm thinking of $z$ as a left translation and the coefficient $\in \mf g$ as vertical translation.
+
+    In particular we have a triangular decomposition \begin{align*}
+        \widehat{\mathfrak{sl}}_2' & = \widehat{\mathfrak{n}}_- \oplus \widehat{\mathfrak{h}} \oplus \widehat{\mathfrak{n}}_+
+    \end{align*} where \begin{align*}
+        \widehat{\mf h}          & = \mathbb{C}h \oplus \mathbb{C}c                    \\
+        \widehat{\mathfrak{n}}_+ & = \mathbb{C}e \oplus z\mathfrak{sl}_2[z]            \\
+        \widehat{\mathfrak{n}}_- & = \mathbb{C}f \oplus z^{-1}\mathfrak{sl}_2[z^{-1}].
+    \end{align*}
 \end{example}
+
+\begin{definition}[Affine Lie algebra]
+    The \textbf{affine Lie algebra} $\widehat{\mathfrak{g}}$ associated to $\mathfrak{g}$ is obtained by adjoining a derivation $d$, defined by
+    \[
+        [d,\, x \otimes z^n] = n\,x \otimes z^n,
+        \qquad [d,c]=0.
+    \]
+    Thus,
+    \[
+        \widehat{\mathfrak{g}} = L\mathfrak{g} \oplus \mathbb{C}c \oplus \mathbb{C}d.
+    \] and \begin{align*}
+        0 \to \widehat{\mathfrak{g}} \to \widetilde{\mathfrak{g}} \to \mathbb{C}d \to 0.
+    \end{align*}
+\end{definition}
+
+
+
+
+\section{Questions (Sept 17)}
+\begin{enumerate}[A.]
+    \item I understand how to build the loop algebra $L\mathfrak{g}$, but why exactly do we need to pass to its central extension, and then further adjoin the derivation $d$? What breaks if we just work with $L\mathfrak{g}$ itself, or with the central extension $\widehat{\mathfrak{g}'}$?
+    \item Is there a precise sense in which the Casimir operator corresponds to the Laplacian on the loop group, as the finite-dimensional Casimir corresponds to the Laplacian on the compact group?
+    \item The invariant bilinear form often shows up in the definition of line bundles on affine Grassmannians (via central extensions). How should I see this connection starting from the algebraic side?
+    \item In the representation theory of affine Lie algebras, characters are related to modular forms. How early can one see hints of this modularity from the perspective of Lie algebra cohomology or the generalized Casimir?
+    \item Where does the level (the eigenvalue of the central element) start to matter in representation theory? Is it already implicit in the structure of the invariant bilinear form?
+\end{enumerate}
 
 \section{Appendix A: Lie algebra cohomology}
 
 \begin{lemma}[Invariant representative via averaging]\label{lem:invariant-representative}
-Let $K$ be a compact Lie group acting on a cochain complex $(C^\bullet,d)$ by
-cochain maps (so $k\cdot d = d\,(k\cdot)$ for all $k\in K$). Suppose the induced
-$K$-action on cohomology $H^\bullet(C^\bullet)$ is trivial. Then for every
-cohomology class $[c]\in H^p(C^\bullet)$ there exists a $K$-invariant cocycle
-$c^{\mathrm{av}}\in C^p$ with $dc^{\mathrm{av}}=0$ and $[c^{\mathrm{av}}]=[c]$.
-Equivalently, the inclusion $i:(C^\bullet)^K\hookrightarrow C^\bullet$
-induces a surjection $H^\bullet((C^\bullet)^K)\twoheadrightarrow H^\bullet(C^\bullet)$.
+    Let $K$ be a compact Lie group acting on a cochain complex $(C^\bullet,d)$ by
+    cochain maps (so $k\cdot d = d\,(k\cdot)$ for all $k\in K$). Suppose the induced
+    $K$-action on cohomology $H^\bullet(C^\bullet)$ is trivial. Then for every
+    cohomology class $[c]\in H^p(C^\bullet)$ there exists a $K$-invariant cocycle
+    $c^{\mathrm{av}}\in C^p$ with $dc^{\mathrm{av}}=0$ and $[c^{\mathrm{av}}]=[c]$.
+    Equivalently, the inclusion $i:(C^\bullet)^K\hookrightarrow C^\bullet$
+    induces a surjection $H^\bullet((C^\bullet)^K)\twoheadrightarrow H^\bullet(C^\bullet)$.
 \end{lemma}
 
 \begin{proof}
-Let $\mu$ be the Haar probability measure on $K$. For $c\in C^p$ define the
-\emph{averaging operator}
-\[
-P(c)\;:=\;\int_{K} k\cdot c\; d\mu(k)\ \in C^p.
-\]
-This Bochner integral is well-defined because $C^p$ is a (Hausdorff) complex
-vector space and $k\mapsto k\cdot c$ is continuous.
+    Let $\mu$ be the Haar probability measure on $K$. For $c\in C^p$ define the
+    \emph{averaging operator}
+    \[
+        P(c)\;:=\;\int_{K} k\cdot c\; d\mu(k)\ \in C^p.
+    \]
+    This Bochner integral is well-defined because $C^p$ is a (Hausdorff) complex
+    vector space and $k\mapsto k\cdot c$ is continuous.
 
-\smallskip
+    \smallskip
 
-\emph{(1) $P$ is a cochain map and projects onto invariants.}
-For any $c\in C^p$,
-\[
-d\,P(c)\;=\;\int_K d(k\cdot c)\,d\mu(k)\;=\;\int_K k\cdot (dc)\,d\mu(k)\;=\;P(dc),
-\]
-so $dP=Pd$. Moreover, for any $k_0\in K$,
-\[
-k_0\cdot P(c)\;=\;\int_K (k_0k)\cdot c\,d\mu(k)\;=\;\int_K k\cdot c\,d\mu(k)\;=\;P(c),
-\]
-using left-invariance of $\mu$. Hence $P(c)\in (C^p)^K$. If $c$ is already
-$K$-invariant then $P(c)=c$, so $P$ is a projection onto $(C^\bullet)^K$.
+    \emph{(1) $P$ is a cochain map and projects onto invariants.}
+    For any $c\in C^p$,
+    \[
+        d\,P(c)\;=\;\int_K d(k\cdot c)\,d\mu(k)\;=\;\int_K k\cdot (dc)\,d\mu(k)\;=\;P(dc),
+    \]
+    so $dP=Pd$. Moreover, for any $k_0\in K$,
+    \[
+        k_0\cdot P(c)\;=\;\int_K (k_0k)\cdot c\,d\mu(k)\;=\;\int_K k\cdot c\,d\mu(k)\;=\;P(c),
+    \]
+    using left-invariance of $\mu$. Hence $P(c)\in (C^p)^K$. If $c$ is already
+    $K$-invariant then $P(c)=c$, so $P$ is a projection onto $(C^\bullet)^K$.
 
-\smallskip
+    \smallskip
 
-\emph{(2) $P$ preserves cocycles.}
-If $dc=0$ then $dP(c)=P(dc)=0$, so $c^{\mathrm{av}}:=P(c)$ is again a cocycle.
+    \emph{(2) $P$ preserves cocycles.}
+    If $dc=0$ then $dP(c)=P(dc)=0$, so $c^{\mathrm{av}}:=P(c)$ is again a cocycle.
 
-\smallskip
+    \smallskip
 
-\emph{(3) $P$ preserves cohomology classes when the $K$-action on cohomology is trivial.}
-By assumption, $[k\cdot c]=[c]$ in $H^p(C^\bullet)$ for every $k\in K$. Using linearity
-of cohomology,
-\[
-[c^{\mathrm{av}}]\;=\;\Big[\int_K k\cdot c\,d\mu(k)\Big]
-\;=\;\int_K [\,k\cdot c\,]\,d\mu(k)
-\;=\;\int_K [c]\,d\mu(k)
-\;=\;[c].
-\]
-Thus $c^{\mathrm{av}}$ is a $K$-invariant cocycle representing the same class as $c$.
+    \emph{(3) $P$ preserves cohomology classes when the $K$-action on cohomology is trivial.}
+    By assumption, $[k\cdot c]=[c]$ in $H^p(C^\bullet)$ for every $k\in K$. Using linearity
+    of cohomology,
+    \[
+        [c^{\mathrm{av}}]\;=\;\Big[\int_K k\cdot c\,d\mu(k)\Big]
+        \;=\;\int_K [\,k\cdot c\,]\,d\mu(k)
+        \;=\;\int_K [c]\,d\mu(k)
+        \;=\;[c].
+    \]
+    Thus $c^{\mathrm{av}}$ is a $K$-invariant cocycle representing the same class as $c$.
 
-Therefore every class in $H^p(C^\bullet)$ has a $K$-invariant representative,
-and the inclusion of invariants induces a surjection on cohomology.
+    Therefore every class in $H^p(C^\bullet)$ has a $K$-invariant representative,
+    and the inclusion of invariants induces a surjection on cohomology.
 \end{proof}
 
 

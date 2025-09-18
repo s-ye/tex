@@ -1,0 +1,57 @@
+\documentclass[12pt]{article}  % or any other class
+\usepackage{/Users/songye03/Desktop/Math_tex/style/psetconfig}         % loads your custom style
+\title{Homework 1}
+\author{Songyu Ye}
+\date{\today}
+
+\begin{document}
+\psettitle
+
+\begin{problem}{1}
+Let $K = \mathbb{Q}$, $L = \mathbb{Q}(\zeta_p)$, where $\zeta_p$ is a primitive $p$-th root of unity.  
+Set $A = \mathbb{Z}$. Let $B$ be the integral closure of $A$ in $L$.
+
+\begin{enumerate}
+    \item Prove that
+    \[
+        (p) = \prod_{i=1}^{p-1} (1 - \zeta_p^i).
+    \]
+
+    \item Show that $(p) = (1 - \zeta_p)^{p-1}$ as ideals of $B$.  
+    Deduce that $(p)$ is totally ramified in $\mathbb{Q}(\zeta_p)/\mathbb{Q}$.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}{2}
+Keep using the notation from Problem 1.
+
+\begin{enumerate}
+    \item For all positive integers $i$, prove that
+    \[
+        B = \mathbb{Z}[\zeta_p] + (1-\zeta_p)^i B.
+    \]
+
+    \item Show that
+    \[
+        p^m B \subset \mathbb{Z}[\zeta_p]
+    \]
+    for some positive integer $m$.
+
+    \item Conclude from (1) and (2) that $B = \mathbb{Z}[\zeta_p]$.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}{3}
+Let $d$ be a square-free number (positive or negative) such that $d \neq 1$ and $d \equiv 1 \pmod{4}$.  
+Give a numerical condition for each rational prime $p$ to be split, inert, or ramified in $\mathbb{Q}(\sqrt{d})$.
+\end{problem}
+
+\begin{problem}{4}
+Let $A$ be a Dedekind domain and $K$ its fraction field. Show that the following two sets are in bijection:
+\begin{enumerate}
+    \item The set of nonzero prime ideals $\mathfrak{p}$ of $A$.
+    \item The set of discrete valuations $v$ on $K$ which have nonnegative values on $A$,
+\end{enumerate}
+via $\mathfrak{p} \mapsto v_{\mathfrak{p}}$ and $v \mapsto \mathfrak{p}_v := \{ a \in A : v(a) > 0 \}$.
+\end{problem}
+\end{document}
