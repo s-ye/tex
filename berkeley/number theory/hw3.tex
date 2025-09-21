@@ -1,50 +1,223 @@
 \documentclass[12pt]{article}  % or any other class
 \usepackage{/Users/songye03/Desktop/Math_tex/style/psetconfig}         % loads your custom style
-\title{Homework 1}
+\title{Homework 3}
 \author{Songyu Ye}
 \date{\today}
+
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\fp}{\mathfrak{p}}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\OO}{\mathcal{O}}
+
+\newtheorem{theorem}{Theorem}[section]
 
 \begin{document}
 \psettitle
 
+Problem 4 was written up with the help of ChatGPT. I believe I understand the correspondence but I had a hard time writing down why the constructions are inverses of each other. 
 \begin{problem}{1}
-Let $K = \mathbb{Q}$, $L = \mathbb{Q}(\zeta_p)$, where $\zeta_p$ is a primitive $p$-th root of unity.  
+Let $K = \mathbb{Q}$, $L = \mathbb{Q}(\zeta_p)$, where $\zeta_p$ is a primitive $p$-th root of unity.
 Set $A = \mathbb{Z}$. Let $B$ be the integral closure of $A$ in $L$.
 
 \begin{enumerate}
     \item Prove that
-    \[
-        (p) = \prod_{i=1}^{p-1} (1 - \zeta_p^i).
-    \]
+          \[
+              (p) = \prod_{i=1}^{p-1} (1 - \zeta_p^i).
+          \]
 
-    \item Show that $(p) = (1 - \zeta_p)^{p-1}$ as ideals of $B$.  
-    Deduce that $(p)$ is totally ramified in $\mathbb{Q}(\zeta_p)/\mathbb{Q}$.
+    \item Show that $(p) = (1 - \zeta_p)^{p-1}$ as ideals of $B$.
+          Deduce that $(p)$ is totally ramified in $\mathbb{Q}(\zeta_p)/\mathbb{Q}$ (Recall that totally ramified in this context means that the ramification index is equal to the degree of the extension).
 \end{enumerate}
 \end{problem}
+
+\begin{solution}
+    \begin{enumerate}
+        \item Recall the $p$-th cyclotomic polynomial
+              \[
+                \Phi_p(x)=\frac{x^p-1}{x-1}=1+x+\cdots+x^{p-1}=\prod_{i=1}^{p-1}(x-\zeta^i)
+              \]
+
+              where $\zeta$ is a primitive $p$-th root of unity. Evaluate $\Phi_p(x)$ at $x=1$:
+              \[
+                \Phi_p(1)=1+1+\cdots+1=p
+              \]
+
+              On the other hand,
+              \[
+                \Phi_p(1)=\prod_{i=1}^{p-1}(1-\zeta^i)
+              \]
+
+              Therefore, in the ring $B\subset L$,
+              \[
+                p=\prod_{i=1}^{p-1}(1-\zeta^i)
+              \] which implies the equality on the level of ideals.
+
+        \item For any $a$ with $1\le a\le p-1$, $1-\zeta^a=(1-\zeta)\,(1+\zeta+\cdots+\zeta^{a-1})$, so $(1-\zeta)$ divides $(1-\zeta^a)$.
+
+                  Since $\gcd(a,p)=1$, pick $b\in\{1,\dots,p-1\}$ with $ab\equiv1\pmod p$. Because $\zeta^p=1$, we have $\zeta=\zeta^{ab}$. Thus
+                  \[1-\zeta \;=\; 1-(\zeta^a)^b \;=\; (1-\zeta^a)\,(1+\zeta^a+\cdots+(\zeta^a)^{b-1})\]
+                  So $(1-\zeta^a)$ divides $(1-\zeta)$. This shows that $(1-\zeta^a)$ and $(1-\zeta)$ generate the same ideal in $B$.
+
+                  Therefore,
+                      \[
+                          (p)=\prod_{i=1}^{p-1}(1-\zeta^i)=(1-\zeta)^{p-1}
+                      \]
+                      This shows that the ramification index is $p-1$, which is equal to the degree of the extension. Therefore, $(p)$ is totally ramified in $\mathbb{Q}(\zeta_p)/\mathbb{Q}$.
+    \end{enumerate}
+
+
+\end{solution}
 
 \begin{problem}{2}
 Keep using the notation from Problem 1.
 
 \begin{enumerate}
     \item For all positive integers $i$, prove that
-    \[
-        B = \mathbb{Z}[\zeta_p] + (1-\zeta_p)^i B.
-    \]
+          \[
+              B = \mathbb{Z}[\zeta_p] + (1-\zeta_p)^i B.
+          \]
 
     \item Show that
-    \[
-        p^m B \subset \mathbb{Z}[\zeta_p]
-    \]
-    for some positive integer $m$.
+          \[
+              p^m B \subset \mathbb{Z}[\zeta_p]
+          \]
+          for some positive integer $m$.
 
     \item Conclude from (1) and (2) that $B = \mathbb{Z}[\zeta_p]$.
 \end{enumerate}
 \end{problem}
 
+\begin{solution}
+    \begin{enumerate}
+        \item It is enough to check that the equality holds at every localization at a prime ideal $\mathfrak{q}$ of $B$. Let $\pi = 1 - \zeta$ and $\mf p = (\pi)$ be the prime ideal above $p$. Then $\pi$ is a uniformizer of the discrete valuation ring $B_{\mf p}$, and the residue field $B_{\mf p}/\mf p \cong \F_p$ (because $ef = n$ and we showed above that $e=n$).
+
+Suppose $\mf q \neq \mf p$. Then $\pi$ is a unit in $B_{\mf q}$, so the equality holds trivially.
+
+Thus we need to check that \begin{align*}
+    B_{\mf p} &= \mathbb{Z}[\zeta]_{\mf p} + (1-\zeta)^i B_{\mf p} 
+\end{align*}
+for all $i \geq 1$. Consider the inclusion of $\Z[\zeta]_{\mf p}$ into $B_{\mf p}$ followed by the quotient map to the residue field:
+\begin{align*}
+    \Z[\zeta]_{\mf p} &\to B_{\mf p}/\mf p \cong \F_p\\
+    (a/s) &\mapsto a(1)/s(1) \mod p
+\end{align*} 
+where we are thinking of \begin{align*}
+    a &= \sum_{k=0}^{p-2} a_k \zeta^k \in \Z[\zeta]\\   
+    s &= \sum_{k=0}^{p-2} s_k \zeta^k \in \Z[\zeta] \setminus \mf p
+\end{align*} where $s\not\in \mf p$ implies that $s(1) \not\equiv 0 \mod p$, and $f(1)$ means evaluating $f$ at $1$. This map is clearly a surjection between we can just choose $a_k$ so that their sum is any element of $\F_p$, and then choose $s=1$.
+
+Now recall Nakayama's lemma: If $M$ is a finitely generated module over a local ring $R$ with maximal ideal $\mathfrak{m}$, and if a submodule $N\subseteq M$ maps surjectively onto the residue module $M/\mathfrak{m}M$, then $N=M$.
+
+This implies that $\Z[\zeta]_{\mf p} = B_{\mf p}$ and therefore \[
+    B_{\mf p} = \Z[\zeta]_{\mf p} + \pi B_{\mf p}\]
+
+Multipling by $\pi^{i-1}$ gives \[
+    B_{\mf p} = \Z[\zeta]_{\mf p} + \pi^i B_{\mf p}\]
+for all $i\geq 1$. This proves (1).
+    \item By the hint, it is enough to prove that $p^n \Z[\zeta]^* \subset \Z[\zeta]$ for some $n$. Let $e_i = \zeta^i$ be a basis of $\Z[\zeta]$ over $\Z$, and let $f_i$ be the dual basis with respect to the trace form, i.e. $\Tr(e_i f_j) = \delta_{ij}$. Expand the $f$'s in the $e$-basis:
+        \[f_i = \sum_j a_{ij} e_j, \quad a_{ij} \in \Q.\]
+        The matrix $A$ is invertible. Define the matrix
+$G=(G_{ik})_{i,k}$, where \[G_{ik}=\langle e_i,e_k\rangle=\operatorname{Tr}(e_ie_k)\]
+Now compute
+\begin{align*}
+    \delta_{ij}
+    &=\langle e_i,f_j\rangle \\
+    &=\left\langle e_i,\sum_k a_{kj}e_k\right\rangle \\
+    &=\sum_k a_{kj}\,\langle e_i,e_k\rangle \\
+    &=\sum_k G_{ik}\,a_{kj}.
+\end{align*}
+which implies that $AG=I$. Thus $A=G^{-1}$. I claim that \begin{align*}
+    G_{ij}=
+\begin{cases}
+p-1,& i+j\equiv 0\pmod p,\\
+-1,& \text{otherwise}.
+\end{cases}
+\end{align*}
+where the indices $i,j$ run from $0$ to $p-2$. I also claim that from this computation one gets that $\det G = \pm p^{p-2}$. For the moment suppose that we have these two claims. Now observe that $G^{-1} = \frac{1}{\det G}\,\operatorname{adj}(G)$.
+Since $\operatorname{adj}(G)$ has integer entries, all denominators in $G^{-1}$ divide $\det G$. Thus $M^* \subset \frac{1}{\det G} M$, i.e. $|(\det G)| M^* \subset M$ as desired.
+
+It remains to prove the two claims about $G$. For the first claim, we have to show that 
+\begin{align*}
+    \Tr(\zeta^i\zeta^j) = 
+\begin{cases}
+p-1,& i+j\equiv 0\pmod p,\\
+-1,& \text{otherwise}.
+\end{cases}
+\end{align*}
+Let $X$ be the linear operator on $L$ defined by multiplication by $\zeta$, and let $s_i$ be the sequence of numbers $\Tr(X^i)$. Then $s_0 = p-1$ is clear. To calculate $s_i$ for $1\leq i\leq p-1$, note that the trace is going to be equal to coefficient of $\zeta^j$ in $\zeta^i\zeta^j=\zeta^{i+j}$ summed over $j=1,\dots,p-1$. These coefficients are all zero except in one instance when we have $i+j \cong p-1$, in which case the coefficient is $-1$ because we have to expand using the relation. Thus $s_i = -1$ for $1\leq i\leq p-1$. 
+
+To compute the determinant of $G$, recall that we can add multiples of one column to another without changing the determinant. We will demonstrate the $p=5$ case, which will hopefully illustrate the general case. The matrix is \begin{align*}
+    G = \begin{pmatrix}
+        4 & -1 & -1 & -1 \\
+        -1 & -1 & -1 & 4 \\
+        -1 & -1 & 4 & -1 \\
+        -1 & -1 & -1 & -1
+    \end{pmatrix}
+\end{align*}
+Subtracting the second column from the first, third, and fourth columns gives \begin{align*}
+    G \sim \begin{pmatrix}
+        5 & -1 & 0 & 0 \\
+        0 & -1 & 0 & 5 \\
+        0 & -1 & 5 & 0 \\
+        0 & -1 & 0 & 0
+    \end{pmatrix}
+\end{align*}
+and one can quickly check that expanding along the first column gives $\det G = \pm 5^3$. The general case is similar, and one gets $\det G = \pm p^{p-2}$.
+
+\item Let $A:=B/\mathbb{Z}[\zeta_p]$. We have $B=\mathbb{Z}[\zeta_p]+(1-\zeta_p)^iB$ for all $i\ge1$. Mod $\mathbb{Z}[\zeta_p]$ this says $A=(1-\zeta_p)^iA$ for all $i\ge1$. Take $i=p-1$. Recall that we have from the first problem that $(1-\zeta_p)^{p-1}\in pB$.
+Hence $A=(1-\zeta_p)^{p-1}A\subset pA$, so $A=pA$.
+
+We also have $p^{m}B\subset \mathbb{Z}[\zeta_p]$, i.e. $p^{m}A=0$. But $A=pA$ implies $A=p^kA$ for all $k$. Taking $k=m$ gives $A=p^{m}A=0$. Therefore $B/\mathbb{Z}[\zeta_p]=0$, i.e. $B=\mathbb{Z}[\zeta_p]$ as desired.
+    \end{enumerate}
+\end{solution}
+
 \begin{problem}{3}
-Let $d$ be a square-free number (positive or negative) such that $d \neq 1$ and $d \equiv 1 \pmod{4}$.  
+Let $d$ be a square-free number (positive or negative) such that $d \neq 1$ and $d \equiv 1 \pmod{4}$.
 Give a numerical condition for each rational prime $p$ to be split, inert, or ramified in $\mathbb{Q}(\sqrt{d})$.
 \end{problem}
+
+\begin{solution}
+    Recall the Dedekind-Webber theorem.\begin{theorem}[Dedekind-Webber]
+        Let $K$ be a number field and $\mathcal{O}_K$ the ring of algebraic integers in $K$.
+Let $\alpha \in \mathcal{O}_K$ and let $f$ be the minimal polynomial of $\alpha$ over $\mathbb{Z}[x]$.
+For any prime $p$ not dividing the index $[\mathcal{O}_K : \mathbb{Z}[\alpha]]$ of the free
+$\mathbb{Z}[\alpha]$-module $\mathcal{O}_K$, write
+\[
+   f(x) \equiv \pi_1(x)^{e_1}\cdots \pi_g(x)^{e_g} \pmod{p},
+\]
+where $\pi_i(x)$ are monic irreducible polynomials in $\mathbb{F}_p[x]$.
+Then the ideal $(p) = p\mathcal{O}_K$ factors into prime ideals as
+\[
+   (p) = \mathfrak{p}_1^{\,e_1}\cdots \mathfrak{p}_g^{\,e_g},
+\]
+where the residue field degrees satisfy
+\[
+   N(\mathfrak{p}_i) = p^{\deg \pi_i},
+\]
+and $N$ denotes the ideal norm.
+    \end{theorem}
+
+We have $\mathcal{O}_K = \mathbb{Z}[\frac{1+\sqrt{d}}{2}]$ because $d\equiv 1\pmod 4$. The minimal polynomial of $\frac{1+\sqrt{d}}{2}$ is $f(x) = x^2 - x + \frac{1-d}{4}$. The index $[\mathcal{O}_K : \mathbb{Z}[\frac{1+\sqrt{d}}{2}]] = 1$, so the Dedekind-Webber theorem applies to all primes.
+Now consider an odd prime $p$. Recall a double root occurs if and only if $f$ and $f'$ share a root mod $p$.
+Here $f'(x)=2x-1$. 
+So a common root would be $x\equiv \frac{1}{2}\pmod{p}$; evaluate:
+$f\!\left(\frac{1}{2}\right)
+=\frac{1}{4}-\frac{1}{2}+\frac{1-d}{4}
+=-\frac{d}{4}$.
+Thus $f(\frac{1}{2})\equiv0\pmod{p}$ if and only if $p\mid d$.
+Hence $p$ is ramified if and only if $p\mid d$.
+
+Now let $p$ be an odd prime not dividing $d$. Then we can write 
+\[
+4f(x)=(2x-1)^2-d.
+\]
+Over $\mathbb{F}_p$, $f$ has a root iff $(2x-1)^2\equiv d$, i.e. iff $d$ is a square mod $p$.
+Therefore $p$ is split if $d$ is a square mod $p$ and $p$ is inert if $d$ is not a square mod $p$.
+
+Finally consider the prime $p=2$. Reduce $f$ mod 2:
+$f(x)\equiv x^2-x+\frac{1-d}{4}\pmod2$.
+Now $\frac{1-d}{4}\equiv 0 \text{ or }1\pmod2$. If $d\equiv1\pmod8$: $f(x)\equiv x^2-x=x(x-1)$ splits, so 2 splits. If $d\equiv5\pmod8$: $f(x)\equiv x^2-x+1=x^2+x+1$ is irreducible over $\mathbb{F}_2$, so 2 is inert. Also $f'(x)=2x-1\equiv1\pmod2$ never vanishes, so no double root. In particular, 2 does not ramify.
+\end{solution}
 
 \begin{problem}{4}
 Let $A$ be a Dedekind domain and $K$ its fraction field. Show that the following two sets are in bijection:
@@ -54,4 +227,69 @@ Let $A$ be a Dedekind domain and $K$ its fraction field. Show that the following
 \end{enumerate}
 via $\mathfrak{p} \mapsto v_{\mathfrak{p}}$ and $v \mapsto \mathfrak{p}_v := \{ a \in A : v(a) > 0 \}$.
 \end{problem}
+
+
+\begin{solution}
+Let $\fp\ne(0)$ be a prime of $A$. Since $A$ is Dedekind, the localization
+$A_\fp$ is a discrete valuation ring (DVR) with maximal ideal
+$\m_\fp=\fp A_\fp$. Choose a uniformizer $\pi\in\m_\fp$ so that
+$\m_\fp=(\pi)$.
+
+Define $v_\fp:K^\times\to\Bbb Z$ by: for $x\in K^\times$ write uniquely
+$x=u\pi^n$ with $u\in A_\fp^\times$ and $n\in\Bbb Z$, and set $v_\fp(x)=n$
+(and $v_\fp(0)=+\infty$).
+This is a discrete valuation; moreover $v_\fp(a)\ge0$ for every $a\in A$
+(since $A\subset A_\fp$).
+Finally,
+\[
+\fp_{\,v_\fp}=\{a\in A:\ v_\fp(a)>0\}=\{a\in A:\ a\in \m_\fp\cap A\}=\fp.
+\]
+
+Let $v$ be a nontrivial discrete valuation on $K$ with $v(A)\ge0$.
+Let
+\[
+\OO_v:=\{x\in K:\ v(x)\ge0\},\qquad \m_v:=\{x\in K:\ v(x)>0\}
+\]
+be its valuation ring and maximal ideal. Then $\OO_v$ is a DVR with fraction
+field $K$. Since $v(A)\ge0$, we have an inclusion $A\subset\OO_v$ and the
+contraction $\fp_v:=A\cap\m_v=\{a\in A:\ v(a)>0\}$ is a nonzero prime of $A$.
+
+Because $A\subset\OO_v$ and elements of $A\setminus\fp_v$ have valuation $0$,
+the universal property of localization yields a local injective ring map
+\[
+\iota: A_{\fp_v}\hookrightarrow \OO_v .
+\]
+Both $A_{\fp_v}$ and $\OO_v$ are DVRs with fraction field $K$. We claim
+$\iota$ is an isomorphism.
+
+Let $\pi\in K^\times$ be a uniformizer for $\OO_v$, so $v(\pi)=1$ and
+$\pi\OO_v=\m_v$. In any DVR $R$ with valuation $w$, one has 
+$xR = \m_R^{\,w(x)}$ for $x\in K^\times$. Apply this in
+$R=\OO_v$:
+\[
+\pi\,\OO_v=\m_v. \tag{$\ast$}
+\]
+Write in $A_{\fp_v}$:
+\[
+\pi\,A_{\fp_v}=\m_{\fp_v}^{\,n}, \qquad n:=v_{\fp_v}(\pi)\in\Bbb Z_{\ge1},
+\]
+where $v_{\fp_v}$ is the normalized valuation of the DVR $A_{\fp_v}$
+and $\m_{\fp_v}=\fp_vA_{\fp_v}$. Extending ideals from $A_{\fp_v}$ to $\OO_v$
+(through $\iota$) gives
+\[
+\pi\,\OO_v \;=\; (\pi\,A_{\fp_v})\,\OO_v
+\;=\; \big(\m_{\fp_v}\OO_v\big)^{n}.
+\]
+Comparing with $(\ast)$ and using that powers of the unique maximal ideal of a
+DVR are strictly decreasing, we deduce
+\[
+\m_{\fp_v}\OO_v=\m_v\qquad\text{and}\qquad n=1.
+\]
+Hence the local map $\iota$ identifies the maximal ideals and sends a
+uniformizer of $A_{\fp_v}$ to a uniformizer of $\OO_v$; therefore $\iota$ is
+an isomorphism of DVRs. In particular the induced valuations agree on $K$:
+\[
+v_{\,\fp_v}=v.
+\]
+\end{solution}
 \end{document}

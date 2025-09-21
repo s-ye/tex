@@ -2167,17 +2167,22 @@ This still consists of infinitely many parameters. We will whittle it down using
 \end{definition}
 
 
-
-
-\section{Questions (Sept 17)}
+\section{Sept 17 meeting}
+\subsection*{Questions}
 \begin{enumerate}[A.]
-    \item I understand how to build the loop algebra $L\mathfrak{g}$, but why exactly do we need to pass to its central extension, and then further adjoin the derivation $d$? What breaks if we just work with $L\mathfrak{g}$ itself, or with the central extension $\widehat{\mathfrak{g}'}$?
-    \item Is there a precise sense in which the Casimir operator corresponds to the Laplacian on the loop group, as the finite-dimensional Casimir corresponds to the Laplacian on the compact group?
-    \item The invariant bilinear form often shows up in the definition of line bundles on affine Grassmannians (via central extensions). How should I see this connection starting from the algebraic side?
-    \item In the representation theory of affine Lie algebras, characters are related to modular forms. How early can one see hints of this modularity from the perspective of Lie algebra cohomology or the generalized Casimir?
-    \item Where does the level (the eigenvalue of the central element) start to matter in representation theory? Is it already implicit in the structure of the invariant bilinear form?
+    \item I've been thinking about the hierarchy of objects: $L\mathfrak g$ $\to$ central extensions $\to$ full affine Kac–Moody with $d$. Each step seems to be motivated by making the structure better behaved for representation theory.
+        \begin{enumerate}[a)] 
+            \item The loop algebra $L\mathfrak g$ is already a perfectly good infinite-dimensional Lie algebra, realized geometrically as a dense subalgebra of the Lie algebra of the loop group $LG$. Why isn't it sufficient to study its representation theory directly? In what sense are central extensions 'forced upon us' if we want a rich representation theory?
+            \item I see that the affine Kac–Moody algebra arises as the universal central extension of the loop algebra. Is there a structural reason why the extension must be central and abelian, rather than by some nonabelian ideal? In other words, what uniquely characterizes the central extension as the 'correct' enlargement of $L\mathfrak g$ for representation theory?
+            \item Once we accept the central extension, we typically adjoin the degree derivation $d$, defined by $[d, x\otimes z^n]=n\,x\otimes z^n$. Should I think of $d$ as a geometric object, namely the vector field $z\frac{d}{dz}$ on the circle? Is the introduction of $d$ mathematically necessary (e.g. for a nondegenerate invariant bilinear form, or for grading representations), or is it mainly motivated by geometric/physical considerations?
+        \end{enumerate}
+    \item I know that algebraically the invariant form defines the 2-cocycle, hence the central extension and the line bundle on $\mathrm{Gr}_G$. But is there a more geometric explanation of why the bilinear form is the key ingredient? For instance, can one see directly from the geometry of $G$-bundles or determinant line bundles on curves that the form $(\cdot,\cdot)$ is exactly what controls the Picard group of the affine Grassmannian? For example, what exactly does the level of a line bundle correspond to geometrically?
+    \item I understand that the level (the eigenvalue of the central element) is a key invariant of representations of affine Kac-Moody algebras. But where exactly does it start to matter? The line bundle on $\mathrm{Gr}_G$ has a level, and this level determines which representation we get. But is there a more algebraic way to see why the level is important? For instance, if we just look at highest weight modules for $\widehat{\mathfrak g}$, how does the level affect their structure?
 \end{enumerate}
+\subsection*{Answers}
+Professor Borcherds tends to give short answers. First one sees from the combinatorics of Dynkin diagramms that the central extension of the loop algebra is forced upon us. 
 
+He had a lot to say about modular forms and theta functions, in particular the denominator of affine Kac-Moody algebras associated to $\mf g$ is a theta function, which is something similar to a modular form. In fact, he said "theta functions are nothing but modular forms." I asked about theta divisors which can be thought of as square roots of the canonical bundle, and he made a funny joke. He said "Ah yes, God introduced square roots because there's a lot of sign errors floating around, $2^n$ many of them." Then he let me borrow his copy of a book and referred me to Mumford's three volumes on theta functions and abelian varieties.
 \section{Appendix A: Lie algebra cohomology}
 
 \begin{lemma}[Invariant representative via averaging]\label{lem:invariant-representative}
