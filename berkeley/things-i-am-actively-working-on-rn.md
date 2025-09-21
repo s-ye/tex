@@ -1,3 +1,12 @@
+Sept 20:
+- next section of Infinite Dimensional Lie Algebras + Loop Groups
+- Ed Segal paper & DHL paper -> meet with Peng
+
+
+
+-------
+
+
 My top priority to be to learn this stuff for Teleman. There are these 3 preprints of his student Pablo that he sent me.
 
 Stage 1: Stable Curves and Basic Moduli Theory. 
@@ -98,8 +107,6 @@ References:
 - Conformal blocks and generalized theta functions Beauville Laszlo 
 - Conformal blocks and generalized theta functions Kumar 
 - Affine Flag Manifolds and Principal Bundles Schmitt
-- 
-
 
 
 Stage 4: Gauged Gromov–Witten Theory (cohomological aspect), Twisted $K$-Theory and Index Methods. 
