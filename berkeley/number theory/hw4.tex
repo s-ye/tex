@@ -1,0 +1,82 @@
+
+\documentclass[12pt]{article}  % or any other class
+\usepackage{/Users/songye03/Desktop/Math_tex/style/psetconfig}         % loads your custom style
+\title{Homework 4}
+\author{Songyu Ye}
+\date{\today}
+
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\fp}{\mathfrak{p}}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\OO}{\mathcal{O}}
+
+\newtheorem{theorem}{Theorem}[section]
+
+\begin{document}
+\psettitle
+
+\begin{problem}
+Let $p$ be a prime number, and $n$ a positive integer greater than $1$. Find an example for each of the following with brief justifications.
+\begin{enumerate}
+    \item[(1)] A degree $n$ extension of $\mathbb{Q}$ in which $p$ is inert (i.e.\ the ring of integers in the extension possesses a unique prime $\mathfrak{q}$ above $p$, and the inertial degree $f_{\mathfrak{q}/p}$ is equal to $n$).
+    \item[(2)] A degree $n$ extension of $\mathbb{Q}$ in which $p$ is totally ramified.
+\end{enumerate}
+\textit{Hint:} You can apply results of Serre, I.6 after localizing at $p$.
+
+\textit{Remark:} There’s nothing special about $\mathbb{Q}$. The same question can be answered similarly with any global field in place of $\mathbb{Q}$.
+\end{problem}
+
+\begin{solution}
+% leave blank or insert solution later
+\end{solution}
+
+\bigskip
+
+\begin{problem}
+Let $A$ be a Dedekind domain, $K = \mathrm{Frac}(A)$. Let $L/K$ be a finite separable extension with normal closure $M$ of $L$ so that $M$ is Galois over $K$. Let $\mathfrak{p}$ be a prime ideal of $A$. Fix a prime ideal $\mathfrak{t}$ of $M$ above $\mathfrak{p}$. (By convention, this means $\mathfrak{t}$ is a nonzero prime in the integral closure of $A$ in $M$ such that $\mathfrak{t}$ divides $\mathfrak{p}$.) Denote by $D_{\mathfrak{t}}(M/K)$ the decomposition group of $\mathfrak{t}$ in $M/K$.
+\begin{enumerate}
+    \item[(i)] Define a map
+    \[
+        \mathrm{Gal}(M/K) \to \{\text{primes of $L$ above $\mathfrak{p}$}\}, 
+        \qquad \sigma \mapsto \sigma(\mathfrak{t}) \cap L.
+    \]
+    Show that this map induces a bijection
+    \[
+        \mathrm{Gal}(M/L)\backslash \mathrm{Gal}(M/K)/D_{\mathfrak{t}}(M/K) \;\;\tilde{\longrightarrow}\;\; \{\text{primes of $L$ above $\mathfrak{p}$}\}.
+    \]
+    \item[(ii)] Assume that $\mathrm{Gal}(M/K) \simeq S_3$, the symmetric group in 3 variables, that $D_{\mathfrak{t}}(M/K)$ and $\mathrm{Gal}(M/L)$ are order $2$ subgroups of $\mathrm{Gal}(M/K)$ which are equal (not just isomorphic). Use part (i) to verify that $\mathfrak{p}$ does \emph{not} split completely in $L$.
+\end{enumerate}
+\textit{Remark:} The point of (ii) is that when the decomposition group of $\mathfrak{t}$ is not normal in $\mathrm{Gal}(M/K)$, the prime $\mathfrak{t}$ need not split completely in the decomposition field, which is $L$ here. A concrete example for (ii) can be given when
+\[
+    K = \mathbb{Q}, \quad L = \mathbb{Q}(\sqrt[3]{2}), \quad M = \mathbb{Q}(\sqrt[3]{2}, \zeta_3).
+\]
+By the Chebotarev density theorem, or by explicit computation, you can find $\mathfrak{t}$ such that $(\mathfrak{t}, M/K)$ is the unique nontrivial element of $\mathrm{Gal}(M/L)$. Then all the conditions of (ii) are satisfied.
+\end{problem}
+
+\begin{solution}
+% leave blank or insert solution later
+\end{solution}
+
+\bigskip
+
+\begin{problem}[Neukirch Ch.~I.9, Exercise 3]
+Continue the general setup from Problem~2. Assume the following:
+\begin{enumerate}
+    \item[(i)] $L/K$ is solvable, meaning that $\mathrm{Gal}(M/K)$ is a solvable group. (We are not assuming $M=L$.)
+    \item[(ii)] $p = [L:K]$ is a prime number.
+\end{enumerate}
+
+Now let $\mathfrak{p}$ be a prime of $K$ unramified in $L$. If there are two primes $\mathfrak{q}$ and $\mathfrak{q}'$ of $L$ above $\mathfrak{p}$ such that the inertial degrees $f_{\mathfrak{q}}$ and $f_{\mathfrak{q}'}$ are equal to $1$, then show that $\mathfrak{p}$ splits completely in $L/K$.
+
+\textit{Caveat:} The extension degree $p$ has nothing to do with the prime ideal $\mathfrak{p}$ in the problem.
+
+\textit{Hint:} Let $S_p$ denote the symmetric group in $p$ letters acting on $\{1,2,\dots,p\}$. If $G$ is a solvable subgroup of $S_p$ acting transitively on $\{1,2,\dots,p\}$ then every nontrivial element of $G$ fixes at most one element in $\{1,2,\dots,p\}$. (A reference for this fact is given in Neukirch.)
+\end{problem}
+
+\begin{solution}
+% leave blank or insert solution later
+\end{solution}
+
+
+
+\end{document}
