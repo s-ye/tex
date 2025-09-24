@@ -1,0 +1,319 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Finite Gauge Theory and Mednykh's Formula}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+    We construct untwisted Dijkgraaf-Witten theory as an example of a 2-dimensional topological quantum field theory (TQFT) with gauge group a finite group $G$. We then use this TQFT to give a new proof of Mednykh's formula, which relates the number of homomorphisms from the fundamental group of a surface $\Sigma$ to $G$ and the dimensions of the irreducible representations of $G$.
+\end{abstract}
+
+\tableofcontents
+\section{Construction of classical Dijkgraaf--Witten theory}
+Dijkgraaf-Witten theory with gauge group a finite group $G$ is a toy model of Chern-theory, in which $G$ is replaced by a Lie group. It has a single field, which is a principal $G$-bundle on some manifold $M$. Since $G$ is finite, a principal $G$-bundle on $M$ is precisely a $G$-cover, which is in turn precisely a groupoid homomorphism
+\[
+    \Pi_1(M) \;\longrightarrow\; BG
+    \tag{3}
+\]
+from the fundamental groupoid of $M$ to the groupoid $BG$ with one object whose automorphism group is $G$. The category of principal $G$-bundles on $M$ is precisely the functor category
+\[
+    \Pi_1(M) \;\Rightarrow\; BG,
+\]
+and classical Dijkgraaf--Witten theory assigns this functor category to $M$. This category, which is really a groupoid, should be thought of as the ``moduli stack'' $A_G(M)$ of principal $G$-bundles on $M$, since we keep track of automorphisms of bundles.
+
+\begin{example}[Connected $M$]
+    If $M$ connected, there is an equivalent groupoid $\cD$ with objects given by group homomorphisms $\pi_1(M) \to G$. The morphisms between group homomorphisms are given by conjugation in $G$.
+
+    Pick a basepoint. Choose $x_0\in M$. In the fundamental groupoid $\Pi_1(M)$, the endomorphisms of $x_0$ are precisely $\pi_1(M,x_0)$. A functor $F\colon\Pi_1(M)\to BG$ sends objects (points of $M$) to the unique object of $BG$, and sends each morphism (homotopy class of path) to an element of $G=\mathrm{Aut}_{BG}(*)$. In particular, the restriction $\rho_F \;:=\; F\big|_{\mathrm{End}(x_0)}\colon \pi_1(M,x_0)\longrightarrow G$
+    is a group homomorphism, because $F$ preserves composition and inverses. So every object $F$ determines a representation $\rho_F\colon\pi_1(M,x_0)\to G$. A morphism $\eta\colon F\Rightarrow F'$ is a natural transformation, which is determined by the element $\eta_{x_0}\in G$. The naturality square for $\eta$ and any loop $\gamma\in \pi_1(M,x_0)$ given by \[
+        \begin{tikzcd}
+            F(x) \arrow[r,"F(\gamma)"] \arrow[d,"\eta_x"'] & F(x) \arrow[d,"\eta_x"] \\
+            F'(x) \arrow[r,"F'(\gamma)"'] & F'(x)
+        \end{tikzcd}
+    \]
+
+    says that
+    \[\eta_{x_0} \, \rho_F(\gamma) = \rho_{F'}(\gamma)\, \eta_{x_0}\] so $\rho_F$ and $\rho_{F'}$ differ by conjugation in $G$. Note that this conjugation can be thought of as changing the basepoint $x_0 \in M$ to another point $x\in M$, because the conjugation is using the functoriality of $F$ on a path from $x_0$ to $x$. There is another conjugation what one divides out by which is changing the anchor point in the fiber of the principal $G$-bundle over $x_0$.
+
+    Conversely, for each $x\in M$, choose once and for all a path $c_x:x_0\to x$ with $c_{x_0}=\mathrm{id}$. (Any choice will do; different choices produce naturally isomorphic functors.) Given a homotopy class $[\gamma]:x\to y$, form the loop at $x_0$ and define $\ell(\gamma)\ :=\ [\,c_y^{-1}\cdot \gamma \cdot c_x\,]\ \in \pi_1(M,x_0)$.
+    Set
+    $F_\rho([\gamma])\ :=\ \rho\big(\ell(\gamma)\big)\ \in G$.
+    This respects composition:
+    \[F_\rho([\gamma_2\circ\gamma_1])
+        = \rho\!\big([c_z^{-1}\gamma_2\gamma_1 c_x]\big)
+        = \rho\!\big([c_z^{-1}\gamma_2 c_y]\big)\ \rho\!\big([c_y^{-1}\gamma_1 c_x]\big)
+        = F_\rho([\gamma_2])\,F_\rho([\gamma_1])\]
+
+    Suppose $g:\rho\to\rho'$ in $\mathcal{D}$, so $\rho'(\gamma)=g \rho(\gamma) g^{-1}$.
+    Define a natural transformation $\eta:\Psi(\rho)\Rightarrow \Psi(\rho')$ by setting
+    $\eta_x := g \in G$ \quad \text{for all } $x\in M$.
+    Naturality is automatic because
+    \[\eta_y\,\Psi(\rho)(\gamma) = g\,\rho(\ell(\gamma)) = \rho'(\ell(\gamma))\,g = \Psi(\rho')(\gamma)\,\eta_x\] So $F_\rho$ is indeed a functor $\Pi_1(M)\to BG$, and by construction $F_\rho\big|_{\pi_1(M,x_0)}=\rho$.
+
+    This gives an equivalence of groupoids $\cD\to \Pi_1(M)\Rightarrow BG$.
+\end{example}
+
+
+\begin{example}
+    Let $M = S^1$. A principal $G$-bundle on $M$ may then be identified with a homomorphism $\mathbb{Z} \to G$, hence with an element of $G$. In this case $\Pi_1(S^1) \Rightarrow BG$ is the groupoid $G\sslash G$ of elements of $G$ up to conjugation. That is, it is the groupoid whose objects are the elements of $G$ and where the morphisms $g \to h$ are given by elements $a \in G$ such that $a g a^{-1} = h$.
+
+    Where does the conjugation action come from geometrically? Take the canonical generator $\gamma$ of $\pi_1(S^1)$, i.e. the loop that goes once around the circle.
+
+    Lift $\gamma$ starting at $u$ in the fiber over $x_0$. Because of the path lifting property, the lifted path $\tilde\gamma$ is unique and ends at some $u\cdot g$ for a unique $g\in G$. Define this $g$ as the holonomy element associated to $\gamma$ and the choice of $u$.
+
+    So with a fixed choice of $u$, you get a well-defined element $g$. But what if you had chosen a different anchor $u' = u\cdot h$ in the fiber at $x_0$? Lift $\gamma$ starting at $u'$. You'll end at $u' \cdot g' = (u\cdot h)\cdot g' = u\cdot (h g')$. On the other hand, uniqueness of lifts forces this endpoint to agree with the previous one: $u\cdot g$. Therefore $h g' = g h \quad\implies\quad g' = h^{-1} g h$.
+
+    So the holonomy element depends on the choice of anchor up to conjugation.
+\end{example}
+
+Since we only consider compact manifolds $M$, the fundamental group of each connected component of $M$ is finitely generated, hence $\Pi_1(M) \to BG$ is an essentially finite groupoid (a groupoid equivalent to a groupoid with finitely many morphisms).
+
+
+The assignment $M \mapsto A_G(M)$ defined by \begin{align*}
+    M \mapsto A_G(M) & := \Pi_1(M) \Rightarrow BG
+\end{align*}
+is contravariant functor
+\begin{equation} \label{eq:AG-functor}
+    A_G : \mathbf{Man} \to \mathbf{Gpd}
+\end{equation}
+from the category of manifolds to the category of groupoids. It is a composition of two functors, namely the covariant functor
+\[
+    \Pi_1(-) : \mathbf{Man} \to \mathbf{Gpd}
+\]
+and the contravariant functor
+\[
+    (-) \Rightarrow BG : \mathbf{Gpd} \to \mathbf{Gpd}.
+\]
+Since we want to build a TQFT, we would like to extend $A_G$ to cobordisms. This is done as follows. If $M$ is an $n$-dimensional compact oriented manifold with boundary $\overline{X} \sqcup Y$ (so a cobordism $X \to Y$), then $M,X,Y$ together define a cospan
+\begin{equation} \label{eq:cospan-manifolds}
+    \begin{tikzcd}
+        & M & \\
+        X \arrow[ur] & & Y \arrow[ul]
+    \end{tikzcd}
+\end{equation}
+of manifolds. Applying $\Pi_1(-)$ gives a cospan
+\begin{equation} \label{eq:cospan-groupoids}
+    \begin{tikzcd}
+        \Pi_1(X) \arrow[dr] & & \Pi_1(Y) \arrow[dl] \\
+        & \Pi_1(M) &
+    \end{tikzcd}
+\end{equation}
+of groupoids, and applying $(-)\Rightarrow BG$ gives a span
+\begin{equation} \label{eq:span-groupoids}
+    \begin{tikzcd}
+        & A_G(M) \arrow[dl] \arrow[dr] & \\
+        A_G(X) & & A_G(Y)
+    \end{tikzcd}
+\end{equation}
+of groupoids.
+
+There is a category $\mathbf{Span}(\mathbf{FinGpd})$ whose objects are essentially finite groupoids and whose morphisms are (isomorphism classes of) spans of essentially finite groupoids, where composition of spans is given by taking pullbacks as follows:
+
+\begin{equation}\label{eq:pullback-span}
+    \begin{tikzcd}[row sep=2.2em, column sep=2.4em]
+        & & Y_1 \times_{X_2} Y_2 \arrow[ld, "p_1"'] \arrow[rd, "p_2"] & & \\
+        & Y_1 \arrow[ld, "f_1"'] \arrow[rd, "g_1"] & & Y_2 \arrow[ld, "f_2"'] \arrow[rd, "g_2"] & \\
+        X_1 & & X_2 & & X_3
+    \end{tikzcd}
+\end{equation}
+
+The assignment $M \mapsto A_G(M)$ then extends, by the groupoid Seifert-van Kampen theorem, to a (symmetric monoidal) functor
+\begin{equation} \label{eq:AG-functor-extended}
+    A_G : n\mathbf{Cob} \to \mathbf{Span}(\mathbf{FinGpd})
+\end{equation}
+which we might call \textbf{classical (untwisted) Dijkgraaf-Witten theory}.
+
+The point is that one has to check that the assignment is functorial and symmetric monoidal. The justification is that if $M_1:X\to Y$ and $M_2:Y\to Z$ glue along $Y$ to $M_2\circ M_1$, then for inclusions $X\hookrightarrow M_1\hookleftarrow Y$ and $Y\hookrightarrow M_2\hookleftarrow Z$ the groupoid Seifert--van Kampen theorem gives a pushout:
+$\Pi_1(M_2\circ M_1)\ \simeq\ \Pi_1(M_1)\ \amalg_{\Pi_1(Y)}\ \Pi_1(M_2)$.
+Applying $\mathrm{Fun}(-,BG)$ (which is contravariant) turns that pushout into a pullback:
+$A_G(M_2\circ M_1)
+    \;\simeq\;
+    A_G(M_1)\ \times_{A_G(Y)}\ A_G(M_2)$.
+But composition in $\mathbf{Span}(\mathbf{FinGpd})$ is pullback of the middle objects. Hence the span for the glued cobordism equals the pullback of spans—so the assignment is functorial.
+
+To check that the functor is symmetric monoidal, note that $\Pi_1$ sends disjoint unions to coproducts
+\[\Pi_1(X\sqcup X')\cong \Pi_1(X)\amalg \Pi_1(X')\]
+Functors into $BG$ turn coproducts into products:
+\[\mathrm{Fun}(\Pi_1(X)\amalg \Pi_1(X'),BG)
+    \;\cong\;
+    \mathrm{Fun}(\Pi_1(X),BG)\times \mathrm{Fun}(\Pi_1(X'),BG)\]
+Hence $A_G(X\sqcup X')\ \cong\ A_G(X)\times A_G(X')$ and similarly for cobordisms (spans tensor by taking products). The unit $\varnothing$ maps to the terminal groupoid $1=\mathrm{Fun}(\varnothing,BG)$. The symmetry (swap of components) is preserved, so the functor is symmetric monoidal.
+
+\section{Linearization and quantization}
+Quantum (untwisted) Dijkgraaf–Witten theory $Z_G$ is obtained from the classical theory $A_G$ by applying a linearization functor
+\[
+    \mathbb{C}^{(-)} : \mathbf{Span}(\mathbf{FinGpd}) \to \mathbf{FinVect}.
+\]
+This functor is heuristically given by Feynman integrals over “moduli stacks” of principal $G$-bundles and rigorously defined using a push-pull construction as follows.
+
+\begin{remark}[Topological field theory and path integrals]
+    In a quantum field theory, the partition function on a manifold $M$ is heuristically written as
+    \[Z(M) \;=\; \int_{\text{fields on }M} e^{iS(\text{field})}\, \mathcal{D}(\text{field})\]
+
+    The fields are the configurations of the theory (here, principal $G$-bundles on $M$ with connection, if you were in Chern-Simons).
+    $S$ is the action functional and $\mathcal{D}(\text{field})$ is the (heuristic) "measure" on the space of fields.
+
+    In the topological case (finite gauge group, no action term), this integral reduces to "summing over all gauge fields," i.e. over all principal $G$-bundles.
+\end{remark}
+
+\begin{remark}[Moduli stacks instead of sets]
+    Naively try $Z(M) \stackrel{?}{=} \#\{\text{principal $G$-bundles on $M$}\}$.
+    But that's not quite right. To get a correct measure you shouldn't just count isomorphism classes, but rather weight each object by $1/|\mathrm{Aut}(P)|$.
+
+    This leads to the notion of the groupoid cardinality
+    \[\#\!\!\left[\tfrac{\{\text{$G$-bundles on $M$}\}}{\text{iso}}\right]
+        \;=\; \sum_{[P]} \frac{1}{|\mathrm{Aut}(P)|}\]
+    In general if $G$ acts on a set $X$, the groupoid cardinality of the action groupoid $X\sslash G$ is
+    \[\#(X\sslash G) \;=\; \sum_{[x]\in X/G} \frac{1}{|\mathrm{Stab}_G(x)|} \;=\; \frac{|X|}{|G|}.\]
+    This is the correct measure for counting or integrating over moduli stacks. \red{I really don't understand this remark. I need to see an example computation where this weighting gives the right answer.}
+\end{remark}
+
+If $X$ is an essentially finite groupoid, let $\mathbb{C}^X$ denote the space of complex-valued functions on the objects of $X$ such that if there exists a morphism $p : x \to y$ in $X$, then $f(x)=f(y)$. Equivalently, $\mathbb{C}^X$ denotes the space of complex-valued functions on the isomorphism classes $\pi_0(X)$ of objects of $X$. A functor $F : X \to Y$ induces two linear maps between these spaces of functions. One of them is the pullback
+\[
+    F^* : \mathbb{C}^Y \to \mathbb{C}^X
+\]
+given by
+\[
+    (F^*(f))(x) = f(F(x)).
+\]
+
+The other is the pushforward
+\[
+    F_* : \mathbb{C}^X \to \mathbb{C}^Y
+\]
+given by
+\[
+    (F_*(f))(y) = \sum_{x \in \pi_0(X):\,F(x)\cong y} \frac{|\mathrm{Aut}(y)|}{|\mathrm{Aut}(x)|}\, f(x).
+\]
+
+The pushforward is adjoint to the pullback in the following sense. $\mathbb{C}^X$ admits a distinguished linear functional
+\[
+    \int_X : \mathbb{C}^X \ni f \longmapsto \sum_{x \in \pi_0(X)} \frac{f(x)}{|\mathrm{Aut}(x)|} \;\in \mathbb{C},
+\]
+which should be thought of as integration over $X$. The vector space $\mathbb{C}^X$ is also a commutative algebra under pointwise multiplication, and the integral of the identity recovers the groupoid cardinality of $X$. These two structures combine to give an inner product
+\[
+    \langle f,g \rangle_X \;=\; \int_X f(x)g(x)\, dx
+    = \sum_{x \in \pi_0(X)} \frac{f(x)g(x)}{|\mathrm{Aut}(x)|}
+\]
+on $\mathbb{C}^X$, and the pushforward is adjoint to the pullback with respect to this inner product. It should be thought of as integration along fibers.
+
+\begin{remark}
+    [Unwinding the adjointness]
+    We need to check that if $f\in \mathbb{C}^X$ and $g\in \mathbb{C}^Y$, and $F : X \to Y$ is a functor between essentially finite groupoids, then
+     \begin{align*}
+        \langle F^* g, f\rangle_X & = \langle g, F_* f\rangle_Y
+    \end{align*}
+Expanding the LHS gives:
+\[
+\langle F^* g, f\rangle_X
+= \sum_{[x]\in \pi_0(X)} \frac{(F^* g)(x)\, f(x)}{|\Aut(x)|}
+= \sum_{[x]} \frac{g(F(x))\, f(x)}{|\Aut(x)|}.
+\]
+Expanding the RHS gives:
+\begin{align*}
+    \langle g, F_* f\rangle_Y &= \sum_{[y]\in \pi_0(Y)} \frac{g(y)\, (F_* f)(y)}{|\Aut(y)|} \\
+    &= \sum_{[y]} \frac{g(y)}{|\Aut(y)|} \left( \sum_{[x]:F(x)\cong y} \frac{|\Aut(y)|}{|\Aut(x)|}\, f(x) \right) \\
+    &= \sum_{[y]} \sum_{[x]:F(x)\cong y} \frac{g(y)\, f(x)}{|\Aut(x)|}
+\end{align*}
+which is the same as LHS after reindexing the sum over $[x]$. 
+\end{remark}
+Pushforward and pullback allow us to linearize a span of groupoids
+\[
+\begin{tikzcd}
+& Z \arrow[dl, "p"'] \arrow[dr, "q"] & \\
+X & & Y
+\end{tikzcd}
+\]
+by associating to it the composition
+\[
+q_* \circ p^* : \mathbb{C}^X \to \mathbb{C}^Y
+\]
+which explicitly takes the form
+\[
+\big((q_* \circ p^*)(f)\big)(y) \;=\; 
+\sum_{z \in \pi_0(Z)\,:\,q(z)\cong y} \frac{|\Aut(y)|}{|\Aut(z)|}\, f(p(z)).
+\]
+
+This defines a functor $\mathbb{C}^{(-)} : \mathbf{Span}(\mathbf{FinGpd}) \to \mathbf{FinVect}$ which, when composed with $A_G$, gives \textbf{untwisted Dijkgraaf-Witten theory}
+\[
+Z_G = \mathbb{C}^{A_G} : n\mathbf{Cob} \to \mathbf{FinVect}.
+\]
+
+\begin{example}
+Suppose $M$ is a compact oriented $n$-manifold without boundary. Then 
+\[
+Z_G(M) : \mathbb{C} \to \mathbb{C}
+\]
+is multiplication by the groupoid cardinality
+\[
+\sum_{x \in \pi_0(A_G(M))} \frac{1}{|\Aut(x)|}.
+\]
+When $M$ is connected this sum is equal to
+\[
+\frac{|\Hom(\pi_1(M),G)|}{|G|}.
+\]
+\end{example}
+\section{2D TQFT}
+We now restrict our attention to the case $n=2$.
+
+A 2D TQFT is a symmetric monoidal functor
+$Z : 2\mathbf{Cob} \;\to\; \mathbf{Vect}$.
+    •	Objects of $2\mathbf{Cob}$: finite disjoint unions of circles.
+    •	Morphisms: oriented compact surfaces with boundary, viewed as cobordisms between collections of circles.
+
+Under such a functor:
+\begin{itemize}
+    \item $Z(S^1) = A$, a vector space.
+    \item pair of pants (2 in, 1 out): multiplication $m:A\otimes A\to A$,
+    \item pair of pants (1 in, 2 out): comultiplication $\Delta:A\to A\otimes A$,
+    \item cap (no in, 1 out): unit $\eta:\mathbb{C}\to A$,
+    \item cup (1 in, no out): counit $\varepsilon:A\to\mathbb{C}$.
+\end{itemize}
+This structure is exactly a commutative Frobenius algebra. This linear functional $\lambda$ is the trace map of the Frobenius algebra. The nondegeneracy condition on the Frobenius pairing $(a,b)\mapsto \lambda(ab)$ comes precisely from gluing two cups with a pair of pants (geometrically giving a sphere).
+
+In this case 2-dimensional TQFTs have a known classification as follows. If $Z$ is such a TQFT, then $Z(S^1)$ is a commutative Frobenius algebra (an algebra $A$ equipped with a linear functional $\lambda$ such that the bilinear form $\lambda(ab)$ is nondegenerate), and conversely given any commutative Frobenius algebra $A$ there is a unique (up to equivalence) TQFT such that $Z(S^1)\cong A$. The structure maps of $A$ and the axioms they satisfy come from a description of $2\mathbf{Cob}$ in terms of generators and relations; for example, the multiplication in $A$ comes from the pair of pants and the linear functional comes from the cup.
+
+The commutative Frobenius algebra associated to untwisted Dijkgraaf-Witten theory can be explicitly described. We saw above that $A_G(S^1)$ is the groupoid of elements of $G$ up to conjugation. It follows that $Z_G(S^1)$ can be identified with the space of class functions on $G$. The linear functional on $Z_G(S^1)$ is induced by the cap, which, after applying the classical functor $A_G(-)$, gives the span of groupoids
+\[
+\begin{tikzcd}
+& BG \arrow[dl] \arrow[dr] & \\
+G\sslash G & & 1
+\end{tikzcd}
+\]
+where $G\sslash G$, as above, denotes the groupoid of elements of $G$ up to conjugation; $BG$, as above, denotes the groupoid with one object and automorphism group $G$; and $1$ denotes the trivial groupoid. The map $BG \to G\sslash G$ is the inclusion of the identity into $G\sslash G$. Linearizing, we obtain the linear functional
+\[
+Z_G(S^1) \ni f \longmapsto \frac{f(1)}{|G|} \in Z_G(\varnothing) \cong \mathbb{C},
+\]
+where $1$ denotes the identity element of $G$.
+
+The multiplication on $Z_G(S^1)$ is induced by the pair of pants, which, after applying the classical functor $A_G(-)$, gives the span of groupoids
+\[
+\begin{tikzcd}
+& G\times G \sslash G \arrow[dl] \arrow[dr] & \\
+G\sslash G \times G\sslash G & & G\sslash G
+\end{tikzcd}
+\]
+\end{document}
