@@ -410,7 +410,7 @@ Let
 \]
 denote the inclusions.
 
-\begin{remark}
+\begin{remark}[The quotient stack and its open substacks]
     Recall that via the functor of points perspective, its objects are pairs $(P,\phi)$, where $P$ is a principal $\mathbb{C}^*$-bundle and $\phi: P\to V$ is $\mathbb{C}^*$-equivariant.
 
     For a given choice of character $\chi_m$, the semistable locus $V^{ss}(\chi_m)$ is an open subset of $V$. It is open because it is defined by the nonvanishing of some semi-invariant sections. The corresponding GIT quotient is $[V^{ss}(\chi_m)/\mathbb{C}^*]$ as a substack.
@@ -429,7 +429,11 @@ This stacky point of view makes it clear that there are (exact) restriction func
 By $D^b(\mathcal{X})$ we mean the derived category of the category of $\mathbb{C}^*$-equivariant sheaves on $V$. This contains the obvious equivariant line bundles $\mathcal{O}(i)$ associated to the characters of $\mathbb{C}^*$.
 
 \begin{remark}[General fact about open immersions]
-If $j: U \hookrightarrow X$ is an open immersion of schemes, then there is an exact restriction functor $j^*: \mathrm{QCoh}(X) \to \mathrm{QCoh}(U)$. Exactness comes from the fact that restricting a quasi-coherent sheaf to an open set is just tensoring with $\mathcal{O}_U$, which is flat. Passing to derived categories, you still have $j^*: D^b(\mathrm{QCoh}(X)) \to D^b(\mathrm{QCoh}(U))$. The exact same holds in the stack setting: if $\iota: \mathcal{U} \hookrightarrow \mathcal{X}$ is an open immersion of stacks, you get $\iota^*: D^b(\mathcal{X}) \to D^b(\mathcal{U})$.
+If $j: U \hookrightarrow X$ is an open immersion of schemes, then there is an exact restriction functor $j^*: \mathrm{QCoh}(X) \to \mathrm{QCoh}(U)$. This is because $j^*\cF$ has the same stalk as $\cF$ at points of $U$.
+
+Althernatively, exactness comes from the fact that restricting a quasi-coherent sheaf to an open set is just tensoring with $\mathcal{O}_U$, which is flat (in general localisation is flat).
+
+Passing to derived categories, you still have $j^*: D^b(\mathrm{QCoh}(X)) \to D^b(\mathrm{QCoh}(U))$ which has no higher derived functors since $j^*$ is exact. The exact same holds in the stack setting: if $\iota: \mathcal{U} \hookrightarrow \mathcal{X}$ is an open immersion of stacks, you get $\iota^*: D^b(\mathcal{X}) \to D^b(\mathcal{U})$.
 \end{remark}
 
 \begin{remark}[General dictionary for quotient stacks and equivariant geometry]

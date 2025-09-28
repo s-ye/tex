@@ -1,0 +1,658 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Bialynicki-Birula Decomposition}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+We follow the original paper by Bialynicki-Birula and add details wherever I found them helpful.
+\end{abstract}
+
+\tableofcontents
+
+\section{Preliminaries}
+Let $\eta : G \times X \to X$ be an action of an algebraic group scheme $G$ on an algebraic scheme $X$ over an algebraically closed field $k$. The action $\eta$ is said to be \emph{effective} if it satisfies the following condition:  
+if $\eta$ is induced from an action 
+\[
+   \eta_1 : G_1 \times X \longrightarrow X
+\]
+(where $G_1$ is another algebraic group scheme) by a surjective homomorphism 
+\[
+   \varphi : G \longrightarrow G_1,
+\] 
+then $\varphi$ is an isomorphism. Equivalently, an action of a group $G$ on a scheme $X$ is effective (or faithful) if no nontrivial element of $G$ acts as the identity on all of $X$.
+
+An algebraic group scheme $G$ is said to be linearly reductive if every 
+$G$-module is semisimple. If $G$ is an algebraic torus (i.e.\ $G \cong \mathbb{G}_m \times \cdots \times \mathbb{G}_m$) 
+then any $G$-module can be presented as a direct sum of one-dimensional 
+$G$-modules; i.e., for any $G$-module $V$ and a fixed isomorphism 
+$G \cong \mathbb{G}_m \times \cdots \times \mathbb{G}_m = \mathbb{G}_m^n$, 
+where $n$ is an integer, there exists a basis $\{v_i\}_{i\in I}$ of $V$ such that 
+for any $(\lambda_1,\dots,\lambda_n) \in \mathbb{G}_m(k) \times \cdots \times \mathbb{G}_m(k)$ 
+the image of $v_i$ under $(\lambda_1,\dots,\lambda_n)$ equals 
+$\lambda_1^{m_{i1}} \cdots \lambda_n^{m_{in}} v_i$, where $m_{ij}$ are integers.  
+
+We say (again for a fixed $G \cong \mathbb{G}_m \times \cdots \times \mathbb{G}_m$) 
+that the module is \emph{positive} (resp.\ \emph{negative}) if we have
+\begin{enumerate}[(a)]
+\item $m_{ij} \ge 0$ (resp.\ $m_{ij} \le 0$), for all $i,j$.
+\item For every index $i \in I$, there exists $j$ such that $m_{ij} \ne 0$.
+\end{enumerate}
+
+The module is said to be \emph{non-negative} (resp.\ \emph{non-positive}) 
+if (a) is satisfied. We say that the module is \emph{fully definite} 
+(resp.\ \emph{definite}) if there exists an isomorphism 
+$G \cong \mathbb{G}_m \times \cdots \times \mathbb{G}_m$ for which the 
+module is positive (resp.\ non-negative). Equivalently, a module is fully definite (resp.\ definite) if its set of weights lies entirely in some positive (resp.\ non-negative) half-space of $X^*(G)\otimes_\mathbb{Z} \mathbb{R}$.
+
+\medskip
+
+Let $\eta: G \times X \to X$ be an action of a torus $G$ on $X$ and let $a$ 
+be a closed point from $X^G$. We say that the action $\eta$ is 
+\emph{fully definite} (resp.\ \emph{definite}) at a closed point 
+$a \in X^G$ if the $G$-module $T_a(X)$ is fully definite (resp.\ definite).  
+
+It is easy to see that if $X$ is irreducible quasi-affine and the action 
+is definite at a closed point $a \in X^G$ then the $G$-module $k[X]$ 
+is definite. Notice also that (cf.\ Theorem 2.1) if the action is fully definite 
+at $a$ then $a$ is an isolated fixed point of $\eta$, and if $X$ is irreducible 
+and affine and $G = \mathbb{G}_m$ then it is fully definite.
+
+\section{Introduction}
+
+\begin{lemma}[2.1]
+Let $b$ be a non-singular closed point of an algebraic scheme.  
+If $N$ is a $k$-vector space contained in $\mathfrak{m}_b$ such that the canonical map  
+\[
+   \mathfrak{m}_b \;\longrightarrow\; \mathfrak{m}_b / \mathfrak{m}_b^2
+\]
+maps $N$ isomorphically onto $(N + \mathfrak{m}_b^2)/\mathfrak{m}_b^2$, then the local ring 
+$\mathcal{O}_b / N\mathcal{O}_b$ is regular and
+\[
+   (N\mathcal{O}_b + \mathfrak{m}_b^2)/\mathfrak{m}_b^2 \;=\; (N + \mathfrak{m}_b^2)/\mathfrak{m}_b^2.
+\]
+
+Moreover, if $N$ is contained in an ideal $\mathfrak{n}$ such that $\mathcal{O}_b/\mathfrak{n}$ 
+is regular and 
+\[
+   (N\mathcal{O}_b + \mathfrak{m}_b^2)/\mathfrak{m}_b^2 \;=\; (\mathfrak{n} + \mathfrak{m}_b^2)/\mathfrak{m}_b^2,
+\]
+then $N\mathcal{O}_b = \mathfrak{n}$.
+\end{lemma}
+
+\begin{remark}[Reminder on Zariski tangent space]
+    Recall for a $k$-point $a\in X$ with local ring $\mathcal{O}_{X,a}$ and maximal ideal $\mathfrak{m}_a$,
+\[T_a(X)\;=\;\mathrm{Der}_k(\mathcal{O}_{X,a},k)\;\cong\;\mathrm{Hom}_k\!\big(\mathfrak{m}_a/\mathfrak{m}_a^2,\;k\big)\]
+The $G$-action induces a representation on $\mathfrak{m}_a/\mathfrak{m}_a^2$ and then $T_a(X)$ carries the dual representation. If $X$ is smooth at $a$, then $\dim_k T_a(X)=\dim_k(\mathfrak{m}_a/\mathfrak{m}_a^2)$ and both have dimension $\dim X$.
+\end{remark}
+
+\begin{theorem}[2.1]
+Let $G$ be linearly reductive. Suppose that $U_0 \subset U_1$ are $G$-submodules of $T_a(X)$.  
+Let $X_0$ be a $G$-invariant closed irreducible subscheme containing $a$, such that $a$ is non-singular on $X_0$ and $T_a(X_0) = U_0$.  
+Then one may find a closed irreducible $G$-invariant subscheme $X_1$ of $X$ such that $X_0$ is a closed subscheme of $X_1$, $a$ is non-singular on $X_1$, and $T_a(X_1) = U_1$.  
+Moreover, if $X_0$ is reduced then $X_1$ is reduced.
+\end{theorem}
+
+\begin{proof}
+Let $\mathfrak{m}, \mathfrak{n}_0$ be the ideals of $k[X]$ corresponding to $a$ and $X_0$, respectively.  
+Then $\mathfrak{n}_0 \subset \mathfrak{m}$. Moreover, $\mathfrak{m}, \mathfrak{n}_0$ are $G$-submodules of $k[X]$ (recall that $G$ acts on $k[X]$ by $g\cdot f(x) = f(g^{-1}x)$, in particular contragredient action).
+
+Also $\mathfrak{m}\mathcal{O}_a = \mathfrak{m}_a$ (This is just saying the maximal ideal in the local ring is obtained by extending the maximal ideal from the coordinate ring under localization).
+
+We may consider the $G$-submodules $U_0^\perp, U_1^\perp \subset \mathfrak{m}_a / \mathfrak{m}_a^2$. Note that $U_1^\perp \subset U_0^\perp$ since $U_0 \subset U_1$.
+
+The canonical map
+\[
+   \varphi_a : \mathfrak{m}_a \longrightarrow \mathfrak{m}_a / \mathfrak{m}_a^2
+\]
+induces a $G$-homomorphism $\mathfrak{m} \to \mathfrak{m}_a / \mathfrak{m}_a^2$, and $\varphi_a$ maps $\mathfrak{m}$ onto $\mathfrak{m}_a / \mathfrak{m}_a^2$ since $\mathfrak{m}$ generates $\mathfrak{m}_a$.  
+Moreover, $\varphi_a$ sends $\mathfrak{n}_0$ onto $U_0^\perp$.  
+
+Since $G$ is linearly reductive, we can lift the $G$-complement of $U_1^\perp$. Find a $G$-submodule $N_1$ of $\mathfrak{m}$ which satisfies the following property: $N_1 \subset \mathfrak{m}$, and $\varphi_a$ maps $N_1$ isomorphically onto $U_1^\perp$.  
+
+Let $\mathfrak{n}_1$ be the ideal of $k[X]$ defined as the intersection of the radical of $N_1k[X]$ and $\mathfrak{n}_0$.  
+Let $X_1$ be the irreducible component containing the element $a$ of the closed subscheme corresponding to the ideal $\mathfrak{n}_1$.  
+
+\begin{remark}[What is happening here?]
+A linear subspace $U_1 \subset T_a(X)$ corresponds to its annihilator $U_1^\perp \subset \mathfrak{m}_a/\mathfrak{m}_a^2$. So specifying a subspace of tangent directions is equivalent to specifying which cotangent linear forms vanish on it. $N_1 \subset \mathfrak{m} \subset k[X]$ is chosen so that its image in $\mathfrak{m}_a/\mathfrak{m}_a^2$ is $U_1^\perp$. In other words, elements of $N_1$ are global functions vanishing at $a$ whose differentials at $a$ kill exactly the tangent vectors in $U_1$. $N_1$ gives equations that cut out, to first order at $a$, exactly those tangent directions outside $U_1$.
+
+    The point is that we want a closed subscheme of $X$ defined by an ideal $\mathfrak{n}_1 \subset k[X]$ such that locally at $a$, the generators of $\mathfrak{n}_1$ are exactly $N_1$.
+
+                The point is that we want a closed subscheme of $X$ defined by an ideal $\mathfrak{n}_1 \subset k[X]$ such that locally at $a$, the generators of $\mathfrak{n}_1$ are exactly $N_1$. If you only used $N_1$, you’d get an ideal describing a subvariety that locally has tangent space $U_1$. But globally, $N_1 k[X]$ might define something nonreduced or too small. So we take the radical, and intersects with $\mathfrak{n}_0$, to ensure that globally the closed set is reduced, $G$-stable, and still contains $X_0$.
+            \end{remark}
+
+
+
+
+Then $X_1$ satisfies all desired properties.  
+
+In fact, the ideal $\mathfrak{n}_1 \mathcal{O}_a$ is equal to $N_1 \mathcal{O}_a$ and is contained in the ideal $\mathfrak{n}_0 \mathcal{O}_a$. To see this, we start by localizing \begin{align*}
+    \mathfrak n_1 \mathcal O_a
+= \big(\sqrt{N_1 k[X]} \cap \mathfrak n_0\big)\mathcal O_a
+= \sqrt{N_1 k[X]}\mathcal O_a \;\cap\; \mathfrak n_0 \mathcal O_a
+\end{align*}
+
+But since $a$ is in $X_0$, we have $\mathfrak{n}_0 \subset \mathfrak{m}$. After localizing at $a$, $\mathfrak{n}_0\mathcal{O}_a$ is contained in $\mathfrak{m}_a$. Meanwhile, $N_1\subset \mathfrak{m}$, so $N_1\mathcal{O}_a \subset \mathfrak{m}_a$ as well. So we only need to understand $\sqrt{N_1 k[X]}\mathcal{O}_a$.
+
+The general fact $\sqrt{I}\mathcal{O}_a = \sqrt{\,I\mathcal{O}_a\,}$ for any ideal $I \subset k[X]$ implies that $\sqrt{N_1k[X]} \mathcal{O}_a = \sqrt{N_1 \mathcal{O}_a}$. It remains to show that $\sqrt{N_1\mathcal{O}_a} = N_1\mathcal{O}_a$ is already radical.
+
+\begin{remark}[Why is $N_1\mathcal{O}_a$ radical?]
+    We appeal to some standard commutative algebra. Let $(R,\mathfrak{m})$ be a regular local ring of dimension $d$.
+    Choose elements $x_1,\dots,x_d\in\mathfrak{m}$ whose classes $\bar{x}_i$ form a $k$-basis of $\mathfrak{m}/\mathfrak{m}^2$; this is a regular system of parameters.
+
+    For any $0\leq r\leq d$, set $I:=(x_{r+1},\dots,x_d)\subset R$. Then:
+    \begin{enumerate}
+        \item $x_{r+1},\dots,x_d$ is a regular sequence; hence $\operatorname{ht} I = d-r$.
+        \item $R/I$ is regular local of dimension $r$ (indeed $R/I \cong k[[x_1,\dots,x_r]]$ after completion).
+        \item In particular, $R/I$ is a domain, so $I$ is prime; therefore $I$ is radical.
+    \end{enumerate}
+Now we apply this fact to $N_1$. We have a subspace $U_1^\perp \subset \mathfrak{m}_a/\mathfrak{m}_a^2$. Choose lifts $f_{r+1},\dots,f_d \in \mathfrak{m}_a$ whose classes form a $k$-basis of $U_1^\perp$, and then extend to a basis of $\mathfrak{m}_a/\mathfrak{m}_a^2$ by adding $f_1,\dots,f_r$. Because $R=\mathcal{O}_{X,a}$ is regular, $f_1,\dots,f_d$ is a regular system of parameters. 
+Choosing generators $f_{r+1},\dots,f_d\in N_1$ that map to a basis of $U_1^\perp$, we can write that ideal as $(f_{r+1},\dots,f_d)$, so $N_1\mathcal{O}_a = (f_{r+1},\dots,f_d)$. By the lemma above, $R/(N_1\mathcal{O}_a)$ is regular (hence reduced, hence a domain), so $N_1\mathcal{O}_a$ is prime and radical.
+\end{remark}
+
+Therefore:
+\[\mathfrak{n}_1\mathcal{O}_a
+= \sqrt{N_1k[X]}\mathcal{O}_a \cap \mathfrak{n}_0\mathcal{O}_a
+= \sqrt{N_1\mathcal{O}_a}\;\cap\; \mathfrak{n}_0\mathcal{O}_a
+= N_1\mathcal{O}_a \;\cap\; \mathfrak{n}_0\mathcal{O}_a\]
+
+But since $N_1\subset \mathfrak{m}$ was chosen so that $\varphi_a(N_1)=U_1^\perp$ extends $\varphi_a(\mathfrak{n}_0)$, the containment
+$N_1\mathcal{O}_a \subseteq \mathfrak{n}_0\mathcal{O}_a$
+holds. So the intersection just gives
+$\mathfrak{n}_1\mathcal{O}_a = N_1\mathcal{O}_a$. This gives $X_0 \subset X_1$.
+
+Since $N_1$ maps isomorphically onto its image in $\mathfrak{m}_a/\mathfrak{m}_a^2$, $\mathcal{O}_a / N_1\mathcal{O}_a$ is regular. Geometrically: the subscheme $X_1$ defined by $\mathfrak{n}_1$ is smooth at $a$. Therefore the point $a$ is non-singular on $X_1$. Moreover (again by Lemma~2.1),
+\[
+   T_a(X_1) \;=\; \big( (N_1 + \mathfrak{m}_a^2)/\mathfrak{m}_a^2 \big)^\perp 
+   \;=\; \varphi_a(N_1)^\perp 
+   \;=\; U_1^\perp 
+   \;=\; U_1.
+\]
+Since $N_1$ is a $G$-submodule of $k[X]$, $X_1$ is $G$-invariant.  
+Moreover, if $X_0$ is reduced, then the radical of $\mathfrak{n}_0$ is equal to $\mathfrak{n}_0$, hence the radical of $\mathfrak{n}_1$ is equal to $\mathfrak{n}_1$, so $X_1$ is reduced.
+\end{proof}
+
+\begin{theorem}[2.2]
+Let $G, U_0, U_1, X_0$ be as in Theorem~2.1. Moreover assume that 
+$U_0 = \{0\}$ (i.e.\ $X_0 = \{a\}$). Then there exists exactly one 
+$G$-invariant reduced and irreducible closed subscheme $X_1$ such that 
+$a$ is non-singular on $X_1$ and $T_a(X_1) = U_1$ if and only if there exists 
+no non-zero $G$-homomorphism
+\[
+   S^r(U_1) \;\longrightarrow\; T_a(X)/U_1,
+\]
+for any integer $r \ge 1$.
+\end{theorem}
+
+\begin{proof}
+Let $X_1$ be a closed, reduced and irreducible subscheme of $X$ and let 
+$\mathfrak n_1$ be the ideal of $X_1$ in $k[X]$. The subscheme $X_1$ satisfies 
+the conditions given in the theorem if and only if there exists a 
+$G$-submodule $N_1 \subset \mathfrak m$ such that $N_1$ is mapped 
+isomorphically onto $U_1^\perp$ under the map induced by the canonical
+\[
+   \varphi_a : \mathfrak m_a \;\longrightarrow\; \mathfrak m_a / \mathfrak m_a^2,
+   \qquad \text{and } N_1 \mathcal O_a = \mathfrak n_1 \mathcal O_a.
+\]
+In fact if such $N_1$ exists then $X_1$ satisfies the conditions of the theorem 
+($X_1$ is $G$-invariant since $N_1 k[X]$ is a $G$-submodule, $a$ is non-singular 
+on $X_1$ and $T_a(X_1)=U_1$ by Lemma~2.1). On the other hand if $X_1$ satisfies 
+the conditions then $\mathfrak n_1$ is sent by $\varphi_a$ onto $U_1^\perp$, hence 
+we may find a $G$-submodule $N_1 \subset \mathfrak m$ which is mapped 
+isomorphically onto $U_1^\perp$. Then by Lemma~2.1,
+\[
+   N_1 \mathcal O_a = \mathfrak n_1 \mathcal O_a.
+\]
+
+Therefore one may find two different subschemes satisfying the conditions of 
+the theorem if and only if one may find two subspaces $N_1, N_2 \subset \mathfrak m$ 
+satisfying the following conditions:
+\begin{enumerate}
+   \item[(0)] $N_1, N_2$ are $G$-submodules of $k[X]$.
+   \item[(1)] $N_1, N_2$ are mapped by $\varphi_a$ isomorphically onto $U_1^\perp$.
+   \item[(2)] $N_2 \mathcal O_a \neq N_1 \mathcal O_a$.
+\end{enumerate}
+Put $\mathfrak n_1 = N_1 \mathcal O_a$. Then (2) is equivalent to:
+\begin{enumerate}[(2$'$)]
+   \item There exists an integer $n$ such that
+   \[
+      (N_2 + \mathfrak m_a^n)/\mathfrak m_a^n \;\not\subset\; 
+      (\mathfrak n_1 + \mathfrak m_a^n)/\mathfrak m_a^n.
+   \]
+\end{enumerate}
+
+On the other hand we have the following exact sequence of 
+$\mathcal O_a$-modules and $G$-modules
+\[
+0 \;\longrightarrow\; (\mathfrak n_1 + \mathfrak m_a^n)/\mathfrak m_a^n
+   \;\longrightarrow\; \mathfrak m_a/\mathfrak m_a^n 
+   \xrightarrow{\;\psi\;} \mathfrak m_a/(\mathfrak n_1 + \mathfrak m_a^n)
+   \;\longrightarrow\; 0,
+\]
+and $N_1,N_2$ satisfying (0), (1) satisfy (2$'$) if and only if
+\begin{enumerate}[(2$''$)]
+   \item $\psi\big( (N_2+\mathfrak m_a^n)/\mathfrak m_a^n \big) \neq 0$,
+   for some integer $n \ge 1$.
+\end{enumerate}
+
+Moreover we have the following isomorphisms of $G$-modules:
+\[
+   \mathfrak m_a/(\mathfrak n_1 + \mathfrak m_a^n) 
+   \;\cong\; \bigoplus_{r=1}^{n-1} S^r\!\big(\mathfrak m_a/(\mathfrak n_1 + \mathfrak m_a^2)\big)
+   \;\cong\; \bigoplus_{r=1}^{n-1} S^r\!\big(\mathfrak m_a/\mathfrak m_a^2\big) / U_1^\perp,
+\]
+and
+\[
+   (N_2+\mathfrak m_a^n)/\mathfrak m_a^n \;\cong\; U_1^\perp.
+\]
+
+Hence if (0), (1), (2$''$) are satisfied by some $N_1, N_2$ then there exists a 
+non-zero $G$-homomorphism
+\[
+   \tau : U_1^\perp \;\longrightarrow\; \mathfrak m_a/(\mathfrak n_1 + \mathfrak m_a^r),
+\]
+for some integer $r \ge 1$, or equivalently (by duality), there exists a 
+non-zero $G$-homomorphism
+\[
+   S^r(U_1) \;\longrightarrow\; T_a(X)/U_1.
+\]
+
+On the other hand, if such a homomorphism $\tau$ exists and $N_1$ satisfying 
+(0), (1) is chosen, then we may find a non-zero $G$-homomorphism
+\[
+   U_1^\perp \;\longrightarrow\; \mathfrak m_a/(\mathfrak n_1 + \mathfrak m_a^{r+1})
+   \qquad \text{(where $\mathfrak n_1 = N_1 \mathcal O_a$).}
+\]
+Hence we may find a $G$-submodule $N_2'$ of $\mathfrak m_a/\mathfrak m_a^{r+1}$ 
+mapped isomorphically onto $U_1^\perp$ (by the canonical map 
+$\mathfrak m_a/\mathfrak m_a^{r+1} \to \mathfrak m_a/\mathfrak m_a^2$) but not 
+contained in $(\mathfrak n_1 + \mathfrak m_a^{r+1})/\mathfrak m_a^{r+1}$.  
+Then we may find a $G$-submodule $N_2$ of $\mathfrak m$ mapped isomorphically 
+onto $N_2'$ by the canonical map $\mathfrak m \to \mathfrak m_a/\mathfrak m_a^{r+1}$ 
+(since $\mathfrak m$ is mapped onto $\mathfrak m_a/\mathfrak m_a^{r+1}$).  
+Then $N_1, N_2$ satisfy (0), (1), (2$''$), and hence (0), (1), (2).  
+Thus the proof is complete.
+\end{proof}
+
+\begin{corollary}
+Let $G = \mathbb{G}_m$. If $U_1$ is equal to one of the following 
+subspaces of $T_a(X)$: 
+\[
+   T_a(X)^0, \quad T_a(X)^+, \quad T_a(X)^-, \quad 
+   T_a(X)^0 \oplus T_a(X)^+, \quad T_a(X)^0 \oplus T_a(X)^-,
+\]
+then there exists exactly one closed, irreducible and reduced subscheme 
+$X_1$ through $a$ such that $X_1$ is $G$-invariant, $a$ is non-singular 
+on $X_1$ and $T_a(X_1) = U_1$.
+\end{corollary}
+
+\begin{proof}
+Look at the candidate $U_1$'s listed in the corollary. For each of these choices, $S^r(U_1)$ consists only of weight-0, weight positive, or weight negative parts. The quotient $T_a(X)/U_1$ consists of the complementary weights, and there is no nonzero homomorphism of $\mathbb{G}_m$-modules from a pure-weight representation to one of a different weight. So all the Hom spaces vanish and the uniqueness condition in Theorem 2.2 is satisfied.
+\end{proof}
+
+\begin{theorem}[2.3]
+Let $X$ be irreducible and reduced. Let $G$ be an algebraic torus. 
+If the action of $G$ on $X$ is definite at $a \in X^G$ then $X^G$ is irreducible.
+\end{theorem}
+
+\begin{proof}
+Since the action is definite at $a$, $k[X]$ as a $G$-module is definite.  
+Consider the subspace $k[X]^0 \subset k[X]$. Then there exists a 
+$G$-homomorphism of algebras (the map that “throws away” all positive-weight components and keeps only the weight-zero part)
+\[
+   \gamma : k[X] \longrightarrow k[X]^0
+\]
+and $\gamma$ is a homomorphism of the $k$-algebra $k[X]$ onto the 
+$k$-algebra $k[X]^0$ (since $k[X]$ as a $G$-module is definite). It is an algebra homomorphism precisely because the positive-weight part is an ideal (thanks to definiteness).
+
+The kernel of this homomorphism is the complement of $k[X]^0$ in $k[X]$ 
+and this is exactly the ideal defining $X^G$ (Any $f$ in the complement transforms by a nonzero weight, so it can’t take a nonzero constant value on a fixed point of $G$, so it must vanish on $X^G$).
+
+Hence 
+\[
+   k[X]^0 = k[X^G]
+\]
+is an integral domain (because it is a subring of $k[X]$) and $X^G = \mathrm{Spec}(k[X]^0)$ is irreducible.
+\end{proof}
+
+\begin{corollary}
+Let $G$ and $X$ be as in Theorem~2.3. If $\dim X = n$, $\dim G = m$,  $\dim X^G = n-m$, then $X^G$ is irreducible.
+\end{corollary}
+
+\begin{proof}
+Take $a \in X^G$. Then the tangent space at $a$ splits as a $G$-module:
+$T_a(X) = T_a(X^G) \oplus N_a$, where $T_a(X^G)$ is the zero-weight subspace (directions fixed by $G$) and $N_a$ is the "moving" part, sum of nonzero weight spaces.
+
+Since $\dim X^G = n-m$, $\dim N_a = m = \dim G$. I claim that the weight spaces appearing in $N_a$ span the character group $X^*(G)\otimes_\mathbb{Z} \mathbb{R}$. If not, then there exists a nontrivial one-parameter subgroup $\lambda: \mathbb{G}_m \to G$ that kills all the weights appearing in $N_a$. Then $\lambda$ acts trivially on $N_a$, hence on $T_a(X)$. If a whole 1-dimensional subtorus acts trivially on $T_a(X)$, then infinitesimally the fixed locus of $G$ near $a$ has codimension at most $(m-1)$, not $m$. This contradicts the assumption that $\dim X^G = n-m$. So the weights appearing in $N_a$ span $X^*(G)\otimes_\mathbb{Z} \mathbb{R}$.
+
+By changing coordinates on $G \cong (\mathbb{G}_m)^m$, we can assume those weights are the standard coordinate characters $(1,0,\dots,0)$, $(0,1,0,\dots,0)$, $\dots$. This puts us in the definite case. By Theorem 2.3, $X^G$ is irreducible.\end{proof}
+
+Now we state a gluing theorem for local models which says that if two G-schemes look the same infinitesimally at fixed points (same tangent representation), and you’ve already matched up some invariant subschemes through a G-isomorphism, then you can find a third scheme $X_0$ mapping étale-equivariantly into both, such that everything matches on the invariant subschemes. In other words, there is a “common local étale neighborhood” $X_0$ of $a_1$, $a_2$ that identifies the situations.
+
+\begin{theorem}[2.4]
+Let $G$ be linearly reductive and let $G$ act on algebraic schemes $X_1, X_2$.  
+Let $a_i \in X_i^G$ be closed and non-singular on $X_i$, for $i=1,2$.  
+Suppose that the induced actions of $G(k)$ on $T_{a_i}(X_i)$, for $i=1,2$, are isomorphic and assume that there exist $G$-invariant closed subschemes $Y_i \subset X_i$, $i=1,2$, such that
+\begin{enumerate}[(i)]
+  \item $a_i \in Y_i$ and $a_i$ is non-singular on $Y_i$, for $i=1,2$,
+  \item there exists a $G$-isomorphism $\alpha : Y_1 \to Y_2$ such that $\alpha(a_1) = a_2$.
+\end{enumerate}
+Then there exist a scheme $X_0$, an action of $G$ on $X_0$, a $G$-invariant subscheme $Y_0$ of $X_0$, morphisms 
+\[
+   \beta_i : X_0 \to X_i, \quad i=1,2,
+\] 
+and a closed point $a_0 \in X_0$ such that:
+\begin{enumerate}[(a)]
+  \item $\beta_1, \beta_2$ are \'etale,
+  \item $\beta_i^{-1}(Y_i) = Y_0$ and $\beta_i$ maps $Y_0$ isomorphically onto an open subscheme of $Y_i$, for $i=1,2$,
+  \item $\beta_1, \beta_2$ are $G$-morphisms,
+  \item $a_0$ is fixed under the action of $G$ on $X_0$ and $\beta_i(a_0) = a_i$, for $i=1,2$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+We may assume that the $X_i, Y_i$ are non-singular, for $i=1,2$.  
+Consider $X_1 \times X_2$ with the action of $G$ induced by the action on factors.  
+Then $(a_1,a_2)$ is fixed. The tangent space
+\[
+   T_{(a_1,a_2)}(X_1 \times X_2)
+\]
+can be identified with $T_{a_1}(X_1) \oplus T_{a_2}(X_2)$.  
+
+Fix a $G$-isomorphism $\alpha : Y_1 \to Y_2$ such that $\alpha(a_1)=a_2$.  
+Then $\alpha$ induces a $G$-isomorphism 
+\[
+   \alpha^* : T_{a_1}(Y_1) \to T_{a_2}(Y_2).
+\]
+Fix a $G$-isomorphism 
+\[
+   \psi : T_{a_1}(X_1) \to T_{a_2}(X_2)
+\]
+such that $\psi|_{T_{a_1}(Y_1)} = \alpha^*$ (the condition can be satisfied since $G$ is linearly reductive). Then consider the ``diagonal'' 
+\[
+   \Delta \subset T_{a_1}(X_1)\oplus T_{a_2}(X_2),
+\]
+i.e.\ the subset composed of all vectors of the form $(v,\psi(v))$.  
+
+The subscheme $Y_1$ can be $G$-isomorphically immersed into $X_1 \times X_2$ by the map 
+\[
+   i_1 \times i_2 \alpha,
+\]
+where $i_1, i_2$ are the closed immersions $i_1 : Y_1 \to X_1$, $i_2 : Y_2 \to X_2$.  
+Let $Y_0'$ be the obtained closed subscheme of $X_1 \times X_2$. Then $(a_1,a_2)\in Y_0'$, $Y_0'$ is $G$-invariant, and
+\[
+   T_{(a_1,a_2)}(Y_0') \subset \Delta.
+\]
+It follows from Theorem~2.1 that there exists a $G$-invariant closed irreducible subscheme $X'$ of $X_1 \times X_2$ such that $(a_1,a_2)$ is a non-singular point of $X'$, 
+\[
+   T_{(a_1,a_2)}(X') = \Delta, \quad X'\supset Y_0'.
+\]
+Let $\beta_i' : X' \to X_i$ be the projection of $X'$ into the factor $X_i$, for $i=1,2$.  
+Then $\beta_i'$ induces an isomorphism 
+\[
+   T_{(a_1,a_2)}(X') = \Delta \;\to\; T_{a_i}(X_i),
+\]
+and hence $\beta_i'$ is \'etale at $(a_1,a_2)$, for $i=1,2$. Moreover $\beta_i'$ is $G$-invariant.  
+
+\begin{remark}
+    [What do we mean by etale here? What makes $\beta_i'$ etale at $(a_1,a_2)$?]
+    For a morphism of schemes $f: X \to Y$ and a point $x \in X$ with $y=f(x)$, we say $f$ is étale at $x$ if:
+    \begin{enumerate}
+        \item $f$ is flat at $x$, and
+        \item the induced map on residue fields $\kappa(y) \to \kappa(x)$ is a finite separable extension,
+    \end{enumerate}
+    equivalently: if $f$ is smooth of relative dimension $0$.
+
+    If $x \in X$ is a closed point, this boils down to: $f$ is étale at $x$ if and only if the induced map of local rings
+    $\mathcal{O}_{Y,y} \to \mathcal{O}_{X,x}$
+    is a local isomorphism up to completion, or equivalently
+    $T_x(X) \cong T_y(Y)$
+    (isomorphism of tangent spaces at the residue field level) and $\dim X = \dim Y$ near those points. So tangent-space isomorphism is the infinitesimal characterization of being étale.
+\end{remark}
+
+Hence the subset of all points of $X'$ at which $\beta_1', \beta_2'$ are \'etale is non-empty (hence dense) and $G$-invariant. Let $X''$ be the open subscheme determined by the subset, let $\beta_i'' = \beta_i'|_{X''}$, for $i=1,2$, and $a_0=(a_1,a_2)$. Then conditions (a)--(d) are satisfied.
+
+\medskip
+
+Let $Y_i' := (\beta_i'')^{-1}(Y_i)$ and $Y' = Y_1' \cup Y_2'$, then the morphism 
+\[
+   (\beta_i''|_{Y'}) : Y_i' \to Y_i
+\]
+is \'etale ($i=1,2$). Since $Y_i$ is non-singular, $Y_i'$ is non-singular (etale maps are smooth of relative dimension 0). The intersection $Y_1' \cap Y_2'$ is open and dense in $Y_0'$ and since $\dim Y_i' = \dim Y_1 = \dim Y_0'$, we see that $Y_i’ \cap Y_0’$ is full dimensional in $Y_i'$ and closed. \red{It follows that $Y_i'\cap Y_0'$ is the connected component of $Y_i'$ containing $a$.}
+
+Moreover, since $a$ is non-singular on $Y_i$, $Y_i'\cap Y_0'$ is the only irreducible component of $Y_i'$ containing $a$. Take
+\[
+   X_0 := X'' - (Y' - Y_0'), \quad Y_0 := Y' \cap Y_0', \quad \beta_i := \beta_i''|_{X_0}, \quad \beta_i = \beta_i''|_{X_0},
+\]
+then conditions (a)--(d) are satisfied.
+\end{proof}
+
+\begin{theorem}[2.5]
+Let $G$ be an algebraic torus. Let the action of $G$ on $X$ be definite at $a$. Then there exists an open $G$-invariant neighbourhood $U$ of $a$ which is $G$-isomorphic to $(U \cap X^G) \times V$, where $V$ is a finite-dimensional (fully definite) $G$-module and the action of $G$ on $(U \cap X^G) \times V$ is induced by the trivial action of $G$ on $U \cap X^G$ and the linear action on $V$ (determined by the given structure of a $G$-module).
+\end{theorem}
+
+In the proof of the theorem we shall use the following lemmas:
+The first lemma says that once $U_1$ contains a slice over the zero vector in $V$, then it contains the whole cylinder above it.
+\begin{lemma}[2.2]
+Let $G$ be a torus and $V$ a fully definite finite-dimensional $G$-module.  
+For an algebraic scheme $X$ consider the action of $G$ on $X \times V$ induced by the trivial action of $G$ on $X$ and by the action of $G$ on $V$ determined by the $G$-module structure.  
+Then any open $G$-invariant subscheme $U_1$ of $X \times V$ contains $(U_1 \cap (X \times \{0\})) \times V$ (where we identify $X$ and $X \times \{0\}$).
+\end{lemma}
+\begin{proof}
+Assume failure. Suppose $((U_1 \cap (X \times \{0\})) \times V) - U_1 \neq \varnothing$.
+Pick a closed point $c = (x,v)$ in that difference.
+So:
+\begin{itemize}
+\item $x \in U_1 \cap (X \times \{0\})$ (so the basepoint $(x,0)\in U_1$),
+\item but $(x,v)\notin U_1$ for some $v\in V$.
+\end{itemize}
+
+Use $G$-invariance.
+The set $((U_1 \cap (X \times \{0\})) \times V) - U_1$ is closed and $G$-invariant.
+Therefore the whole orbit closure $\overline{G(k)\cdot c}$ is contained in this difference.
+In particular, every limit point of the orbit of $(x,v)$ stays outside $U_1$.
+
+Use definiteness of $V$.
+Because $V$ is a fully definite torus representation, every nonzero vector has an orbit whose closure meets the origin $0\in V$.
+(Geometrically: all weights are positive or all are negative, so scaling by $\lambda\in \mathbb{G}_m$ drives any $v\neq 0$ toward $0$.)
+Thus $\overline{G(k)\cdot c}$ contains some point of the form $(x,0)$.
+
+Contradiction.
+But $(x,0)\in U_1$ by assumption ($x\in U_1 \cap (X\times\{0\})$).
+So we found a point $(x,0)$ that lies both in $U_1$ and in the closed complement of $U_1$. Contradiction.
+
+Therefore the assumption was wrong, and the whole cylinder is contained in $U_1$.
+\end{proof}
+
+\begin{lemma}[2.3]
+Let $G, X, a \in X^G$ be as in Theorem~2.5. Moreover, assume that $X$ is reduced and irreducible.  
+Then there exists a one-dimensional connected reduced group subscheme $G_0 \subset G$ (hence $G_0 \cong \mathbb{G}_m$) such that
+\begin{enumerate}[(a)]
+  \item $X^{G_0} = X^G$,
+  \item the induced action of $G_0$ on $X$ is definite at $a$,
+  \item if the action of $G$ on $X$ is effective then the action of $G_0$ on $X$ is also effective.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Fix an isomorphism $G \cong \mathbb{G}_m \times \cdots \times \mathbb{G}_m = \mathbb{G}_m^n$ and a basis $v_1, \dots, v_r$ of $T_a(X)$ such that for $g=(\lambda_1, \dots, \lambda_n)\in \mathbb{G}_m^n(k)$,
+\[
+   g v_i = \lambda_1^{m_{i1}} \cdots \lambda_n^{m_{in}} v_i, \qquad m_{ij} \geq 0.
+\]
+Let $G_0$ be the diagonal of $G \cong \mathbb{G}_m^n$.  
+Then for any $g=(\lambda, \dots, \lambda)\in G_0(k)$,
+\[
+   g v_i = \lambda^{\sum_j m_{ij}} v_i, \quad i=1,\dots,r.
+\]
+Hence the induced action of $G_0$ on $X$ is definite at $a$ and by Theorem~2.3, $X^{G_0}$ is irreducible.  
+Since $X^{G_0} \subset X^G$ and $\dim X^G = \dim X^{G_0}$ (because $T_a(X)^{G_0} = T_a(X)^G$), it follows that $X^{G_0} = X^G$.
+
+\begin{remark}
+    [Importance of definiteness] For $G$: $v_i$ is invariant iff all $m_{ij}=0$. For $G_0$: $v_i$ is invariant iff $\sum_j m_{ij}=0$. But since all $m_{ij}\ge 0$ (definiteness assumption), $\sum_j m_{ij}=0$ if and only if $m_{ij}=0$ for all $j$. Thus the two conditions are identical and $T_a(X)^G = T_a(X)^{G_0}$.
+\end{remark}
+
+If the action of $G$ is effective then by Lemma~2.4 (below) the induced action on $T_a(X)$ is effective and the sequences $(m_{i1}, \dots, m_{in})$ span $\mathbb{Z} \times \cdots \times \mathbb{Z} = \mathbb{Z}^n$.  
+In particular there exist integers $l_i$, $i=1,\dots,r$, such that
+\[
+   \sum_i l_i (m_{i1}, \dots, m_{in}) = (1,0,\dots,0).
+\]
+Then
+\[
+   \sum_i l_i \Big( \sum_j m_{ij} \Big) = 1
+\]
+and hence the $\gcd$ of $\sum_j m_{ij}$, for $i$ running through $1,\dots,r$, is equal to $1$.  
+Thus the action of $G_0$ is effective.
+\end{proof}
+
+Let $\Omega$ be a fixed universal domain for $k$ (i.e. $\Omega$ is a field extension of $k$ which is algebraically closed and of infinite transcendence degree over $k$).
+
+\begin{remark}
+    [Why do we introduce $\Omega$?] We want to talk about the generic point of $X$ and its stabilizer under $G$. But the generic point is not an ordinary $k$-point of $X$, its local ring is the function field $\kappa(X)$ of $X$ as opposed to a residue field of a closed point, which is a finite extension of $k$. 
+
+    So how do we talk about the stabilizer "at" this point in concrete terms? Instead of working directly over $\kappa(X)$, we enlarge the base field to a very large algebraically closed field $\Omega$ with infinite transcendence degree over $k$.
+
+    We do this because every finitely generated field over $k$ (in particular, $\kappa(X)$) can be embedded into $\Omega$, and that means the generic point of $X$ (which lives over $\kappa(X)$) becomes an $\Omega$-point of $X_\Omega$.
+
+    So now we can think of the "geometric generic point" as an actual point $t \in X(\Omega)$. Once we have a genuine $\Omega$-point $t$, we can talk about its stabilizer subgroup scheme $S_t \subseteq G_\Omega$. This stabilizer is the same as the generic stabilizer, just realized inside a big algebraically closed field.
+
+The stabilizer at the generic point measures the global kernel of the group action. Suppose $g \in G$ fixes the generic point $\eta$. That means $g$ fixes every rational function in $\kappa(X)$. But if $g$ acts trivially on the function field, then $g$ acts trivially on a dense open subset of $X$. Since group actions are continuous (scheme-theoretically regular), this forces $g$ to act trivially on all of $X$.
+
+Thus the stabilizer at the generic point is exactly the subgroup scheme of elements of $G$ that act trivially on all of $X$.
+This is why in the condition in the following lemma is equivalent to “the action is effective.”
+\end{remark}
+
+\begin{lemma}[2.4]
+Let $G$ be linearly reductive and $X$ be irreducible and reduced.  
+Let $a \in X^G$ be a closed point. Then the following conditions are equivalent:
+\begin{enumerate}
+   \item the action of $G$ on $X$ is effective,
+   \item the induced action of $G(k)$ on $k[X]$ is effective,
+   \item the induced action of $G(k)$ on $T_a(X)$ is effective,
+   \item the stabilizer group $S_t \subset G$ at a generic point $t \in X(\Omega)$ is trivial.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+$(1) \Rightarrow (2)$ is obvious.
+$(3) \Rightarrow (4)$ follows from the fact that if an element of $G$ fixes the generic point, it fixes all of $X$, hence also $a$. So the generic stabilizer is always contained in the stabilizer at any closed point — and in particular at $a$.
+$(4) \Rightarrow (1)$ see the above remark.
+
+\red{To prove $(2) \Rightarrow (3)$} notice first that since $G$ is linearly reductive, if the action of $G(k)$ on $T_a(X)$ is not effective, then the action of $G(k)$ on $\cO_a / \mathfrak{m}_a^n$ is not effective, for any integer $n > 0$.
+\end{proof}
+
+\begin{remark}[Elaboration on (2) implies (3)]
+We will sketch why if the action on $T_a(X)$ is not effective, then the action on $k[X]$ is not effective.
+
+Assume some nontrivial subgroup $H\subset G$ acts trivially on $T_a(X)$. Then $H$ acts trivially on $\mathfrak m_a/\mathfrak m_a^2$.
+
+Because $G$ is linearly reductive, the functor "H-invariants" is exact. The $\mathfrak m_a$-adic filtration on the local ring gives graded pieces $\mathrm{gr}_{\mathfrak m_a}(\mathcal O_{X,a}) = \bigoplus_{n\ge 0} \mathfrak m_a^n/\mathfrak m_a^{n+1}$, and each $\mathfrak m_a^n/\mathfrak m_a^{n+1}$ is a quotient of the symmetric power $S^n(\mathfrak m_a/\mathfrak m_a^2)$. Since $H$ acts trivially on $\mathfrak m_a/\mathfrak m_a^2$, it acts trivially on all $S^n(\mathfrak m_a/\mathfrak m_a^2)$, hence on every $\mathfrak m_a^n/\mathfrak m_a^{n+1}$, hence on each finite jet ring $\mathcal O_{X,a}/\mathfrak m_a^n$. By exactness, the successive extensions split $H$-equivariantly, so $H$ acts trivially on the completed local ring $\widehat{\mathcal O}_{X,a}$.
+
+The Krull intersection theorem guarantees that the natural map $\mathcal O_{X,a} \to \widehat{\mathcal O}_{X,a}$ is injective. Therefore the action of $H$ is trivial on $\mathcal O_{X,a}$.
+
+Now suppose $X$ is affine near $a$: $X = \Spec A$, with $a$ corresponding to maximal ideal $\mathfrak m\subset A$. Then $\mathcal O_{X,a} = A_\mathfrak m$.
+
+Since $A$ is finitely generated over $k$, the local ring $A_\mathfrak m$ is generated as a $k$-algebra by finitely many elements of $A$. Pick generators $f_1,\dots,f_r\in A$ whose images generate $A_\mathfrak m$. If $g^*=\mathrm{id}$ on $\mathcal O_{X,a}$, then in particular $g^*(f_i)=f_i$ in the localization for each generator $f_i$.
+
+That means: there exists some neighborhood $U_i$ of $a$ (where denominators used to localize don't vanish) such that $g^*(f_i)=f_i$ as functions on $U_i$. Let $U = \bigcap_{i=1}^r U_i$. This is still a neighborhood of $a$. On $B=\mathcal O_X(U)$, the automorphism $g^*$ and the identity coincide after localization. But localizing at $a$ is injective, so they must already coincide on $B$. Hence $g$ is the identity on $U$.
+
+Therefore, trivial action on $\widehat{\mathcal O}_{X,a}$ forces $H$ to act trivially on a Zariski neighborhood of $a$. If a group element acts as the identity on a nonempty open subset of an irreducible scheme, it acts as the identity everywhere. Thus every $h\in H$ acts trivially on all of $X$, i.e. trivially on $k[X]$.
+\end{remark}
+
+\begin{remark}[Using Luna's étale slice theorem]
+    In the above remark, one can also appeal to Luna's slice theorem, which we state here without proof. However this theorem came after Bialynicki-Birula wrote his paper, and is overkill for our situation.
+\begin{theorem}[Luna's étale slice theorem]
+    Let $G$ be a reductive algebraic group acting on an affine variety $X$ over an algebraically closed field. Pick a point $x \in X$ with stabilizer $H \subseteq G$. Then there exists: a finite-dimensional $H$-representation $V$ (the slice representation, essentially the tangent representation $T_x(X)/T_x(G\cdot x)$), and an étale, $H$-equivariant morphism $(G \times^H V) \longrightarrow X$ sending $[e,0]$ to $x$, such that étale-locally near $x$, the $G$-variety $X$ looks like the homogeneous fiber bundle $G \times^H V$.
+\end{theorem}
+Since $G$ is reductive and $a$ is a fixed point, Luna's étale slice theorem gives a $G$-equivariant étale map from a linear model to $X$: $\phi:(V,0)\longrightarrow (X,a)$, where $V$ is a finite-dimensional $G$-representation whose linear action is the isotropy/tangent representation at $a$; moreover, $\phi$ is étale at $0$ and $G$-equivariant: $\phi\circ g_V = g_X\circ \phi$.
+Since G is reductive and a is a fixed point, Luna’s étale slice theorem (or, for tori, Sumihiro linearization) gives a G-equivariant étale map from a linear model to X, where $V$ is a finite-dimensional $G$-representation whose linear action is the isotropy/tangent representation at $a$; moreover, $\phi$ is étale at $0$ and $G$-equivariant.
+
+Because $\phi$ is étale at $0$, it induces an isomorphism of completed local rings \[\widehat{\mathcal O}_{X,a}\xleftarrow[\cong]{\phi^\#} \widehat{\mathcal O}_{V,0}\] By equivariance, the action of $H$ is trivial on the completion. But on a linear representation, "trivial on the completion" means the matrix is the identity: $\widehat{\mathcal O}_{V,0}\cong k[[x_1,\dots,x_r]]$. The action of $g$ is via the linear map $\rho(g)\in \mathrm{GL}(V)$: $g^{\#}(x_j) = \sum_i (\rho(g))_{ij}\,x_i + (\text{higher order terms})$. For a genuine linear action there are no higher-order terms. If $g^\#=\mathrm{id}$ on $k[[x]]$, then $g^\#(x_j)=x_j$ for all $j$, forcing $\rho(g)=I$. Hence $g$ acts trivially on a Zariski neighborhood of $0$ in $V$, which we identify with a neighborhood of $a$ in $X$ via $\phi$.
+\end{remark}
+
+\begin{definition}
+    Let $Y$ be a scheme over $k$. We say $Y$ is \textbf{geometrically unibranched} if for every point $y \in Y$: (1) the local ring $\mathcal{O}_{Y,y}$ is reduced and has a unique minimal prime (so the germ of $Y$ at $y$ is irreducible), and (2) the normalization of $\mathcal{O}_{Y,y}$ is still local (i.e. has only one maximal ideal).
+\end{definition}
+$Y$ may have singularities, but at each point there is only one "branch" of the variety passing through that point. One can't "split" the normalization into multiple components over that point. Contrast with something like a node (e.g. $xy=0$ in $\mathbb{A}^2$), where two branches meet: that is not unibranched.
+
+\begin{lemma}[2.5]
+Let $G = \mathbb{G}_m$ and $t \in X(\Omega)$.  
+Then the algebraic scheme $\overline{G(\Omega)\cdot t}$ (over $\Omega$) defined as the closure of $G(\Omega)\cdot t$ in $X_\Omega$ is geometrically unibranched.
+\end{lemma}
+
+\begin{proof}
+If $t$ is fixed for the action of $G$ on $X$ then the lemma is obvious.  
+Suppose that $t$ is not fixed. Since $X$ is quasi-affine, $\overline{G(\Omega)\cdot t}$ is also quasi-affine. This is because if $X$ is quasi-affine and $G$ acts on $X$, then every $G$-orbit is quasi-affine (classical fact: a quasi-affine open subset of an affine variety remains quasi-affine, and orbits are locally closed). Thus the normalization of $\overline{G(\Omega)\cdot t}$ is quasi-affine (General fact: the normalization of a quasi-affine scheme is again quasi-affine.)
+
+Since the orbit $G_\circ\Omega t$ is open in $\overline{G(\Omega)\cdot t}$ and is isomorphic to $\Spec \Omega[x,1/x]$, the normalization of $\overline{G(\Omega)\cdot t}$ is either equal to $\overline{G(\Omega)\cdot t}$ (in case $G_\Omega t = G(\Omega)\cdot t$) or is isomorphic to $\Spec \Omega[x]$ (in case $G_\Omega t \neq G(\Omega)\cdot t$).  
+In both cases the map of the normalization onto $\overline{G(\Omega)\cdot t}$ is one-to-one.
+
+In other words, we are starting with orbit $G_\Omega \cdot t$, which is isomorphic to $\Spec \Omega[x,1/x]$. Its closure in a quasi-affine space must be quasi-affine, 1-dimensional, and normalizable to something quasi-affine. There are only two possibilities: stay $\mathbb G_m$ (if the orbit is closed), or compactify to $\mathbb A^1$ (if closure adds one point). \red{Hence the lemma is proved.}
+\end{proof}
+
+\begin{proof}
+[Proof of Theorem~2.5]
+\end{proof}
+
+\begin{corollary}
+Let $G$ be an $n$-dimensional torus and let $\dim X = n$.
+If the action of $G$ on $X$ is effective and there exists a point $a \in X^G$, 
+then $X$ contains an open $G$-invariant neighbourhood of $a$ which is 
+$G$-isomorphic to a $k$-vector space $V$ with a linear action of $G$.
+\end{corollary}
+
+\begin{proof}
+Since the action is effective and $\dim G = \dim X$, for any closed point 
+$a \in X$ the action is fully definite at $a$. Hence $X$ contains an open 
+$G$-invariant neighbourhood of $a$ which is $G$-isomorphic to a $k$-vector 
+space $V$ with the action of $G$ induced by a $G$-module structure.
+\end{proof}
+
+\begin{corollary}
+Any effective action of an $n$-torus $G$ on an 
+$n$-dimensional vector space $V$ is equivalent to a linear action; 
+i.e.\ $V$ with the action of $G$ is $G$-isomorphic to $V$ with an action 
+of $G$ determined by a $G$-module structure on $V$.
+\end{corollary}
+
+\begin{proof}
+\red{Every algebraic torus acting effectively on affine space $\mathbb A^n$ has a fixed point. }Then from the above corollary we obtain that there exists an open 
+$G$-invariant subscheme $U$ which is isomorphic to $V$ with an action of $G$ 
+determined by a $G$-module structure on $V$. No proper open subscheme of $V$ 
+can be isomorphic to $V$, hence $U = V$.
+\end{proof}
+
+\begin{remark}
+Recall the Borel fixed point theorem:
+\begin{theorem}
+    If $G$ is a connected solvable linear algebraic group acting regularly on a non-empty, complete algebraic variety $V$ over an algebraically closed field $k$, then $G$ has a fixed point on $V$.    
+\end{theorem}
+However $V$ is not complete in our situation, so we cannot use this theorem to guarantee the existence of a fixed point.
+\end{remark}
+
+\section{References}
+\begin{enumerate}
+    \item Bialynicki-Birula, A. Some theorems on actions of algebraic groups. Ann. of Math. (2) 98 (1973), 480–497.
+\end{enumerate}
+\end{document}
