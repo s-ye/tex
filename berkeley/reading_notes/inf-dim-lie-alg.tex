@@ -1234,7 +1234,7 @@ following important fact:
 
 \subsection{Invariant bilinear form}
 \begin{definition}
-    A Cartan matrix $A$ is called \textbf{symmetrizable} if there exists a diagonal matrix $D = \mathrm{diag}(d_1,\dots,d_n)$ with positive entries $d_i$ such that $DA$ is symmetric.
+    A Cartan matrix $A$ is called \textbf{symmetrizable} if there exists a diagonal matrix $D = \mathrm{diag}(\varepsilon_1,\dots,\varepsilon_n)$ with positive entries $\varepsilon_i$ such that $DA$ is symmetric.
 \end{definition}
 
 Let $A$ be a symmetrizable matrix with a fixed decomposition and let $(\mathfrak{h}, \Pi, \Pi^\vee)$ be a realization of $A$. Fix a complementary subspace $\mathfrak{h}''$ to $\mathfrak{h}' = \sum \mathbb{C}\alpha_i^\vee$ in $\mathfrak{h}$, and define a symmetric bilinear $\mathbb{C}$-valued form $(\,.\mid.\,)$ on $\mathfrak{h}$ by the following two equations:
@@ -1578,7 +1578,7 @@ We deduce that:
 \[
     \alpha_i^\vee = \frac{2}{(\alpha_i\mid \alpha_i)}\,\nu^{-1}(\alpha_i).
 \]
-Hence we obtain the usual expression for the generalized Cartan matrix:
+Note that the coroots are not exactly the adjoint of the roots under the form, but differ by a positive scaling factor so that the entries of the Cartan matrix come out right. Hence we obtain the usual expression for the generalized Cartan matrix:
 \[
     A=\left(\frac{2(\alpha_i\mid \alpha_j)}{(\alpha_i\mid \alpha_i)}\right)_{i,j=1}^n.
 \]
@@ -1588,17 +1588,17 @@ Hence we obtain the usual expression for the generalized Cartan matrix:
     \begin{itemize}
         \item The canonical pairing $\langle \,.\,,\,.\,\rangle$.
         \item The pairing induced by the bilinear form $(\,.\mid.\,)$
-        \end{itemize}
+    \end{itemize}
     The $\nu$ map identifies these two pairings. In particular, we have
     \[
         \langle \alpha_j, \alpha_i^\vee \rangle = (\nu
         (\alpha_i^\vee) \mid \alpha_j) = \epsilon_i (\alpha_i \mid \alpha_j).
     \] essentially because we defined the invariant pairing on $\mathfrak{h}$ by
-$(\alpha_i^\vee \mid h) = \langle \alpha_i, h \rangle \epsilon_i$ for $h \in \mathfrak{h}$, so rewriting gives
-\begin{align*}
-    \nu(\alpha_i^\vee) = \epsilon_i \alpha_i,
-    \qquad i=1,\ldots,n.
-\end{align*}
+    $(\alpha_i^\vee \mid h) = \langle \alpha_i, h \rangle \epsilon_i$ for $h \in \mathfrak{h}$, so rewriting gives
+    \begin{align*}
+        \nu(\alpha_i^\vee) = \epsilon_i \alpha_i,
+        \qquad i=1,\ldots,n.
+    \end{align*}
     They are related by
     \[
         a_{ij} = \langle \alpha_i, \alpha_j^\vee \rangle = \frac{2(\alpha_i\mid \alpha_j)}{(\alpha_i\mid \alpha_i)}.
@@ -1970,69 +1970,69 @@ By an easy induction on $k$ we deduce the following relations in the universal e
 \end{lemma}
 
 \begin{example}[Deducing the Serre relations]
-Let $\mathfrak{g}(A)$ be a Kac--Moody algebra, $e_i, f_i \ (i=1,\dots,n)$ be
-its Chevalley generators. Set 
-\[
-  \mathfrak{g}_{(i)} = \mathbb{C}e_i + \mathbb{C}\alpha_i^\vee + \mathbb{C}f_i;
-\]
-then $\mathfrak{g}_{(i)}$ is isomorphic to $\mathfrak{sl}_2(\mathbb{C})$, with standard basis 
-$\{e_i, \alpha_i^\vee, f_i\}$.
+    Let $\mathfrak{g}(A)$ be a Kac--Moody algebra, $e_i, f_i \ (i=1,\dots,n)$ be
+    its Chevalley generators. Set
+    \[
+        \mathfrak{g}_{(i)} = \mathbb{C}e_i + \mathbb{C}\alpha_i^\vee + \mathbb{C}f_i;
+    \]
+    then $\mathfrak{g}_{(i)}$ is isomorphic to $\mathfrak{sl}_2(\mathbb{C})$, with standard basis
+    $\{e_i, \alpha_i^\vee, f_i\}$.
 
-We can deduce now the following relations between the Chevalley generators:
-\begin{equation}\label{eq:Serre}
-   (\operatorname{ad} e_i)^{\,1-a_{ij}} e_j = 0, 
-   \qquad
-   (\operatorname{ad} f_i)^{\,1-a_{ij}} f_j = 0, 
-   \quad \text{if } i \neq j.
-\end{equation}
+    We can deduce now the following relations between the Chevalley generators:
+    \begin{equation}\label{eq:Serre}
+        (\operatorname{ad} e_i)^{\,1-a_{ij}} e_j = 0,
+        \qquad
+        (\operatorname{ad} f_i)^{\,1-a_{ij}} f_j = 0,
+        \quad \text{if } i \neq j.
+    \end{equation}
 
-We prove the second relation; the first one follows by making use of the 
-Chevalley involution $\omega$.
+    We prove the second relation; the first one follows by making use of the
+    Chevalley involution $\omega$.
 
-Denote $v = f_j$, $\theta_{ij} = (\operatorname{ad} f_i)^{\,1-a_{ij}} f_j$.  
-Consider $\mathfrak{g}(A)$ as a $\mathfrak{g}_{(i)}$-module by restricting the adjoint representation. We have:
-\[
-  \alpha_i^\vee(v) = -a_{ij} v, 
-  \qquad
-  e_i(v) = 0 \quad \text{if } i \neq j.
-\]
+    Denote $v = f_j$, $\theta_{ij} = (\operatorname{ad} f_i)^{\,1-a_{ij}} f_j$.
+    Consider $\mathfrak{g}(A)$ as a $\mathfrak{g}_{(i)}$-module by restricting the adjoint representation. We have:
+    \[
+        \alpha_i^\vee(v) = -a_{ij} v,
+        \qquad
+        e_i(v) = 0 \quad \text{if } i \neq j.
+    \]
 
-We can now compute \begin{align*}
-    [e_i, \theta_{ij}] & = [e_i, \ad^{1-a_{ij}}(f_i) f_j] \\
-    &= [e_i, f_i^{1-a_{ij}}] f_j + f_i^{1-a_{ij}} [e_i, f_j] \texty{ (by the Leibniz rule)} \\
-    &= [e_i, f_i^{1-a_{ij}}] f_j \\
-    &= (1-a_{ij})\bigl(-a_{ij} - (1-a_{ij})+1 \bigr)(\operatorname{ad} f_i)^{-a_{ij}} f_j\\
-    &= 0 \quad \text{if } i \neq j.
-\end{align*}
-where in the second to last line, we invoked the fact that $[e,f^k] = -k(k-1) f^{k-1} + k f^{k-1} h$ and $h = \alpha_i^\vee$ acts on $f_j$ by $-a_{ij}$.
+    We can now compute \begin{align*}
+        [e_i, \theta_{ij}] & = [e_i, \ad^{1-a_{ij}}(f_i) f_j]                                                       \\
+                           & = [e_i, f_i^{1-a_{ij}}] f_j + f_i^{1-a_{ij}} [e_i, f_j] \texty{ (by the Leibniz rule)} \\
+                           & = [e_i, f_i^{1-a_{ij}}] f_j                                                            \\
+                           & = (1-a_{ij})\bigl(-a_{ij} - (1-a_{ij})+1 \bigr)(\operatorname{ad} f_i)^{-a_{ij}} f_j   \\
+                           & = 0 \quad \text{if } i \neq j.
+    \end{align*}
+    where in the second to last line, we invoked the fact that $[e,f^k] = -k(k-1) f^{k-1} + k f^{k-1} h$ and $h = \alpha_i^\vee$ acts on $f_j$ by $-a_{ij}$.
 
-It is also clear that $e_k$ commutes with $\theta_{ij}$ if $k \neq i, k \neq j$
-(by relations (1.2.1)), and also if $k=j$ but $a_{ij} \neq 0$. Finally, if $k=j$ and $a_{ij}=0$, we have:
-\[
-   [e_j, \theta_{ij}] = [e_j, [f_i,f_j]] = a_{ji} f_i = 0 
-   \quad \text{(by (C3))}.
-\]
+    It is also clear that $e_k$ commutes with $\theta_{ij}$ if $k \neq i, k \neq j$
+    (by relations (1.2.1)), and also if $k=j$ but $a_{ij} \neq 0$. Finally, if $k=j$ and $a_{ij}=0$, we have:
+    \[
+        [e_j, \theta_{ij}] = [e_j, [f_i,f_j]] = a_{ji} f_i = 0
+        \quad \text{(by (C3))}.
+    \]
 
-So, $[e_k, \theta_{ij}] = 0$ for all $k$ and we apply the following lemma to conclude that $\theta_{ij} = 0$.
+    So, $[e_k, \theta_{ij}] = 0$ for all $k$ and we apply the following lemma to conclude that $\theta_{ij} = 0$.
 \end{example}
 \begin{lemma}
-Let $a \in \mathfrak{n}_+$ be such that $[a,f_i] = 0$ for all $i=1,\dots,n$. 
-Then $a=0$. Similarly, for $a \in \mathfrak{n}_-$, if $[a,e_i] = 0$ for all 
-$i=1,\dots,n$, then $a=0$.
+    Let $a \in \mathfrak{n}_+$ be such that $[a,f_i] = 0$ for all $i=1,\dots,n$.
+    Then $a=0$. Similarly, for $a \in \mathfrak{n}_-$, if $[a,e_i] = 0$ for all
+    $i=1,\dots,n$, then $a=0$.
 \end{lemma}
 
 \begin{proof}
-Let $a \in \mathfrak{n}_+$ be such that $[a, \mathfrak{g}_{-1}(1)] = 0$. 
-Then it is easy to see that 
-\[
-   \sum_{i,j \geq 0} (\operatorname{ad}\,\mathfrak{g}_1(1))^i 
-   (\operatorname{ad}\,\mathfrak{h})^j a
-\]
-is a subspace of $\mathfrak{n}_+ \subset \mathfrak{g}(A)$, which is invariant with respect 
-to $\operatorname{ad}\,\mathfrak{g}_1(1)$, $\operatorname{ad}\,\mathfrak{h}$ and 
-$\operatorname{ad}\,\mathfrak{g}_{-1}(1)$ (the condition on $a$ is used only in the last case). 
-Hence if $a \neq 0$, we obtain a nonzero ideal in $\mathfrak{g}(A)$ which intersects 
-$\mathfrak{h}$ trivially. This contradicts the definition of $\mathfrak{g}(A)$.
+    Let $a \in \mathfrak{n}_+$ be such that $[a, \mathfrak{g}_{-1}(1)] = 0$.
+    Then it is easy to see that
+    \[
+        \sum_{i,j \geq 0} (\operatorname{ad}\,\mathfrak{g}_1(1))^i
+        (\operatorname{ad}\,\mathfrak{h})^j a
+    \]
+    is a subspace of $\mathfrak{n}_+ \subset \mathfrak{g}(A)$, which is invariant with respect
+    to $\operatorname{ad}\,\mathfrak{g}_1(1)$, $\operatorname{ad}\,\mathfrak{h}$ and
+    $\operatorname{ad}\,\mathfrak{g}_{-1}(1)$ (the condition on $a$ is used only in the last case).
+    Hence if $a \neq 0$, we obtain a nonzero ideal in $\mathfrak{g}(A)$ which intersects
+    $\mathfrak{h}$ trivially. This contradicts the definition of $\mathfrak{g}(A)$.
 \end{proof}
 \begin{remark}
     Note that in the lemma is where we invoke the fact that we have taken the quotient by the largest ideal intersecting $\mathfrak{h}$ trivially. In particular, this is what allows us to deduce the Serre relations \eqref{eq:Serre}.
@@ -2042,252 +2042,252 @@ $\mathfrak{h}$ trivially. This contradicts the definition of $\mathfrak{g}(A)$.
 \subsection*{Locally nilpotent operators}
 Now we need a general fact about a module $V$ over a Lie algebra $\mathfrak{g}$.
 \begin{definition}
-An element $x\in\mathfrak{g}$ is said to be \textbf{locally nilpotent on $V$}
-if for any $v\in V$ there exists a positive integer $N$ such that $x^{N}(v)=0$.
+    An element $x\in\mathfrak{g}$ is said to be \textbf{locally nilpotent on $V$}
+    if for any $v\in V$ there exists a positive integer $N$ such that $x^{N}(v)=0$.
 \end{definition}
 
 \begin{lemma}[Local nilpotence lemma]\label{lem:local-nilpotence}
-\leavevmode
-\begin{enumerate}[label=(\alph*)]
-\item Let $y_1,y_2,\dots$ be a system of generators of a Lie algebra $\mathfrak{g}$
-and let $x\in\mathfrak{g}$ be such that $(\ad x)^{N_i}y_i=0$ for some positive integers
-$N_i$, $i=1,2,\dots$. Then $\ad x$ is locally nilpotent on $\mathfrak{g}$.
+    \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item Let $y_1,y_2,\dots$ be a system of generators of a Lie algebra $\mathfrak{g}$
+              and let $x\in\mathfrak{g}$ be such that $(\ad x)^{N_i}y_i=0$ for some positive integers
+              $N_i$, $i=1,2,\dots$. Then $\ad x$ is locally nilpotent on $\mathfrak{g}$.
 
-\item Let $v_1,v_2,\dots$ be a system of generators of a $\mathfrak{g}$-module $V$,
-and let $x\in\mathfrak{g}$ be such that $\ad x$ is locally nilpotent on $\mathfrak{g}$
-and $x^{N_i}(v_i)=0$ for some positive integers $N_i$, $i=1,2,\dots$.
-Then $x$ is locally nilpotent on $V$.
-\end{enumerate}
+        \item Let $v_1,v_2,\dots$ be a system of generators of a $\mathfrak{g}$-module $V$,
+              and let $x\in\mathfrak{g}$ be such that $\ad x$ is locally nilpotent on $\mathfrak{g}$
+              and $x^{N_i}(v_i)=0$ for some positive integers $N_i$, $i=1,2,\dots$.
+              Then $x$ is locally nilpotent on $V$.
+    \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-Since $\ad x$ is a derivation of $\mathfrak{g}$, one has the Leibniz formula
-\[
-(\ad x)^k [y,z] \;=\; \sum_{i=0}^{k} \binom{k}{i}
-\big[(\ad x)^i y,\, (\ad x)^{k-i} z\big],
-\]
-proving (a) by induction on the length of commutators in the $y_i$.
-Part (b) follows from the following formula (for $\lambda=\mu=0$):
-\begin{equation}\label{eq:341}
-(x-\lambda-\mu)^k a \;=\; \sum_{s=0}^{k} \binom{k}{s}
-\big((\ad x-\lambda)^s a\big)\,(x-\mu)^{k-s}, \qquad k\ge 0,\ \lambda,\mu\in\mathbb{C},
-\end{equation}
-which holds in any associative algebra. In order to prove \eqref{eq:341}, note
-that $\ad x=L_x-R_x$, where $L_x$ and $R_x$ are the operators of left and right
-multiplication by $x$, and that $L_x$ and $R_x$ commute (by associativity).
-Now we apply the binomial formula to $L_x-\lambda-\mu=(\ad x-\lambda)+(R_x-\mu)$.
-\qedhere
+    Since $\ad x$ is a derivation of $\mathfrak{g}$, one has the Leibniz formula
+    \[
+        (\ad x)^k [y,z] \;=\; \sum_{i=0}^{k} \binom{k}{i}
+        \big[(\ad x)^i y,\, (\ad x)^{k-i} z\big],
+    \]
+    proving (a) by induction on the length of commutators in the $y_i$.
+    Part (b) follows from the following formula (for $\lambda=\mu=0$):
+    \begin{equation}\label{eq:341}
+        (x-\lambda-\mu)^k a \;=\; \sum_{s=0}^{k} \binom{k}{s}
+        \big((\ad x-\lambda)^s a\big)\,(x-\mu)^{k-s}, \qquad k\ge 0,\ \lambda,\mu\in\mathbb{C},
+    \end{equation}
+    which holds in any associative algebra. In order to prove \eqref{eq:341}, note
+    that $\ad x=L_x-R_x$, where $L_x$ and $R_x$ are the operators of left and right
+    multiplication by $x$, and that $L_x$ and $R_x$ commute (by associativity).
+    Now we apply the binomial formula to $L_x-\lambda-\mu=(\ad x-\lambda)+(R_x-\mu)$.
+    \qedhere
 \end{proof}
 
 Applying the binomial formula to $\ad x=L_x-R_x$, we obtain another useful
 formula (in any associative algebra):
 \begin{equation}\label{eq:342}
-(\ad x)^k a \;=\; \sum_{s=0}^{k}(-1)^s \binom{k}{s}\; x^{\,k-s}\, a\, x^{\,s}.
+    (\ad x)^k a \;=\; \sum_{s=0}^{k}(-1)^s \binom{k}{s}\; x^{\,k-s}\, a\, x^{\,s}.
 \end{equation}
 
 \begin{lemma}[Nilpotence of Chevalley generators]\label{lem:Chevalley-nilpotent}
-$\ad e_i$ and $\ad f_i$ are locally nilpotent on $\mathfrak{g}(A)$.
+    $\ad e_i$ and $\ad f_i$ are locally nilpotent on $\mathfrak{g}(A)$.
 \end{lemma}
 
 \begin{proof}
-By the Serre relations \eqref{eq:Serre}, 
-\[
-   (\ad e_i)^{|a_{ij}|+1}x = 0 = (\ad f_i)^{|a_{ij}|+1}x, \qquad 
-   \text{if } x=e_j \text{ or } f_j.
-\]
-Also,
-\[
-   (\ad e_i)^2 h = 0 = (\ad f_i)^2 h, \qquad \text{if } h\in \mathfrak{h}.
-\]
-Now apply Lemma \ref{lem:local-nilpotence}.
+    By the Serre relations \eqref{eq:Serre},
+    \[
+        (\ad e_i)^{|a_{ij}|+1}x = 0 = (\ad f_i)^{|a_{ij}|+1}x, \qquad
+        \text{if } x=e_j \text{ or } f_j.
+    \]
+    Also,
+    \[
+        (\ad e_i)^2 h = 0 = (\ad f_i)^2 h, \qquad \text{if } h\in \mathfrak{h}.
+    \]
+    Now apply Lemma \ref{lem:local-nilpotence}.
 \end{proof}
 
 
 \begin{definition}
     A $\mathfrak{g}(A)$-module $V$ is called \textbf{$\mathfrak{h}$-diagonalizable} if
-\[
-   V = \bigoplus_{\lambda\in\mathfrak{h}^*} V_\lambda,
-   \qquad
-   V_\lambda = \{\,v\in V \mid h(v) = \langle \lambda,h\rangle v
-   \ \text{for } h\in\mathfrak{h}\,\}.
-\]
-As usual, $V_\lambda$ is called a \textbf{weight space}, 
-$\lambda \in \mathfrak{h}^*$ is called a \textbf{weight} if $V_\lambda \neq 0$, 
-and $\dim V_\lambda$ is called the \textbf{multiplicity} of $\lambda$ and is denoted
-by $\operatorname{mult}_V \lambda$. Similarly, one defines an $\mathfrak{h}'$-diagonalizable
-$\mathfrak{g}'(A)$-module, its weights, etc.
+    \[
+        V = \bigoplus_{\lambda\in\mathfrak{h}^*} V_\lambda,
+        \qquad
+        V_\lambda = \{\,v\in V \mid h(v) = \langle \lambda,h\rangle v
+        \ \text{for } h\in\mathfrak{h}\,\}.
+    \]
+    As usual, $V_\lambda$ is called a \textbf{weight space},
+    $\lambda \in \mathfrak{h}^*$ is called a \textbf{weight} if $V_\lambda \neq 0$,
+    and $\dim V_\lambda$ is called the \textbf{multiplicity} of $\lambda$ and is denoted
+    by $\operatorname{mult}_V \lambda$. Similarly, one defines an $\mathfrak{h}'$-diagonalizable
+    $\mathfrak{g}'(A)$-module, its weights, etc.
 
-An $\mathfrak{h}$- (resp. $\mathfrak{h}'$-) diagonalizable module over a Kac--Moody
-algebra $\mathfrak{g}(A)$ (resp. $\mathfrak{g}'(A)$) is called \textbf{integrable} if all $e_i$ and $f_i$ ($i=1,\dots,n$) are locally nilpotent on $V$.
+    An $\mathfrak{h}$- (resp. $\mathfrak{h}'$-) diagonalizable module over a Kac--Moody
+    algebra $\mathfrak{g}(A)$ (resp. $\mathfrak{g}'(A)$) is called \textbf{integrable} if all $e_i$ and $f_i$ ($i=1,\dots,n$) are locally nilpotent on $V$.
 \end{definition}
 
 Note that the underlying module of the adjoint representation of a Kac--Moody algebra is an integrable module by \ref{lem:Chevalley-nilpotent}.
 
 \begin{proposition}[Weights of integrable modules]\label{prop:weights-integrable}
-Let $V$ be an integrable $\mathfrak{g}(A)$-module.
-\begin{enumerate}[label=(\alph*)]
-\item As a $\mathfrak{g}_{(i)}$-module, $V$ decomposes into a direct sum of finite dimensional irreducible 
-$\mathfrak{h}$-invariant modules (hence the action of $\mathfrak{g}_{(i)}$ on $V$ can be ``integrated'' 
-to the action of the group $SL_2(\mathbb{C})$).
+    Let $V$ be an integrable $\mathfrak{g}(A)$-module.
+    \begin{enumerate}[label=(\alph*)]
+        \item As a $\mathfrak{g}_{(i)}$-module, $V$ decomposes into a direct sum of finite dimensional irreducible
+              $\mathfrak{h}$-invariant modules (hence the action of $\mathfrak{g}_{(i)}$ on $V$ can be ``integrated''
+              to the action of the group $SL_2(\mathbb{C})$).
 
-\item Let $\lambda \in \mathfrak{h}^*$ be a weight of $V$ and let $\alpha_i$ be a simple root of $\mathfrak{g}(A)$. 
-Denote by $M$ the set of all $t \in \mathbb{Z}$ such that $\lambda+t\alpha_i$ is a weight of $V$, and let 
-$m_t = \mathrm{mult}_V(\lambda+t\alpha_i)$. Then:
-\begin{enumerate}[label=(\roman*)]
-\item $M$ is the closed interval of integers $[-p,q]$, where $p$ and $q$ are both either nonnegative integers or $\infty$, 
-and $p-q=\langle \lambda,\alpha_i^\vee\rangle$ when both $p$ and $q$ are finite; if $\mathrm{mult}_V\lambda<\infty$, then $p$ and $q$ are finite.
+        \item Let $\lambda \in \mathfrak{h}^*$ be a weight of $V$ and let $\alpha_i$ be a simple root of $\mathfrak{g}(A)$.
+              Denote by $M$ the set of all $t \in \mathbb{Z}$ such that $\lambda+t\alpha_i$ is a weight of $V$, and let
+              $m_t = \mathrm{mult}_V(\lambda+t\alpha_i)$. Then:
+              \begin{enumerate}[label=(\roman*)]
+                  \item $M$ is the closed interval of integers $[-p,q]$, where $p$ and $q$ are both either nonnegative integers or $\infty$,
+                        and $p-q=\langle \lambda,\alpha_i^\vee\rangle$ when both $p$ and $q$ are finite; if $\mathrm{mult}_V\lambda<\infty$, then $p$ and $q$ are finite.
 
-\item $e_i: V_{\lambda+t\alpha_i}\to V_{\lambda+(t+1)\alpha_i}$ is an injection for $t\in[-p,-\tfrac{1}{2}\langle\lambda,\alpha_i^\vee\rangle]$; 
-in particular, the function $t\mapsto m_t$ increases on this interval.
+                  \item $e_i: V_{\lambda+t\alpha_i}\to V_{\lambda+(t+1)\alpha_i}$ is an injection for $t\in[-p,-\tfrac{1}{2}\langle\lambda,\alpha_i^\vee\rangle]$;
+                        in particular, the function $t\mapsto m_t$ increases on this interval.
 
-\item The function $t\mapsto m_t$ is symmetric with respect to $t=-\tfrac{1}{2}\langle\lambda,\alpha_i^\vee\rangle$.
+                  \item The function $t\mapsto m_t$ is symmetric with respect to $t=-\tfrac{1}{2}\langle\lambda,\alpha_i^\vee\rangle$.
 
-\item If both $\lambda$ and $\lambda+\alpha_i$ are weights, then $e_i(V_\lambda)\neq 0$.
-\end{enumerate}
-\end{enumerate}
+                  \item If both $\lambda$ and $\lambda+\alpha_i$ are weights, then $e_i(V_\lambda)\neq 0$.
+              \end{enumerate}
+    \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-We have by the Leibniz rule:
-\begin{equation}\label{eq:361}
-e_i f_i^k(v) = k\bigl(1-k+\langle \lambda,\alpha_i^\vee\rangle\bigr) f_i^{k-1}(v) 
-+ f_i^k e_i(v), \qquad v\in V_\lambda.
-\end{equation}
-We deduce that the subspace
-\[
-U=\sum_{k,m\ge0} f_i^k e_i^m(v)
-\]
-is $(\mathfrak{g}_{(i)}+\mathfrak{h})$-invariant. As $e_i$ and $f_i$ are locally nilpotent on $V$, $\dim U < \infty$.
-By the Weyl complete reducibility theorem applied to the $\mathfrak{g}_{(i)}$-module $U$, the latter decomposes into a direct sum of finite dimensional 
-$\mathfrak{h}$-invariant irreducible $\mathfrak{g}_{(i)}$-modules (cf. Exercise 3.11). So, each $v\in V$ lies in a direct sum of finite dimensional 
-$\mathfrak{h}$-invariant irreducible $\mathfrak{g}_{(i)}$-modules, and (a) follows.
+    We have by the Leibniz rule:
+    \begin{equation}\label{eq:361}
+        e_i f_i^k(v) = k\bigl(1-k+\langle \lambda,\alpha_i^\vee\rangle\bigr) f_i^{k-1}(v)
+        + f_i^k e_i(v), \qquad v\in V_\lambda.
+    \end{equation}
+    We deduce that the subspace
+    \[
+        U=\sum_{k,m\ge0} f_i^k e_i^m(v)
+    \]
+    is $(\mathfrak{g}_{(i)}+\mathfrak{h})$-invariant. As $e_i$ and $f_i$ are locally nilpotent on $V$, $\dim U < \infty$.
+    By the Weyl complete reducibility theorem applied to the $\mathfrak{g}_{(i)}$-module $U$, the latter decomposes into a direct sum of finite dimensional
+    $\mathfrak{h}$-invariant irreducible $\mathfrak{g}_{(i)}$-modules (cf. Exercise 3.11). So, each $v\in V$ lies in a direct sum of finite dimensional
+    $\mathfrak{h}$-invariant irreducible $\mathfrak{g}_{(i)}$-modules, and (a) follows.
 
-For the proof of (b) we use (a) and Lemma \ref{lem:sl2-modules}. Set 
-\[
-U=\sum_{k\in\mathbb{Z}} V_{\lambda+k\alpha_i};
-\]
-this is a $(\mathfrak{g}_{(i)}+\mathfrak{h})$-module, which is a direct sum of finite dimensional irreducible $(\mathfrak{g}_{(i)}+\mathfrak{h})$-modules. 
-Let $p=-\inf M$, $q=\sup M$. Both $p$ and $q$ are nonnegative as $0\in M$. Now all the statements of (b) follow from Lemma 3.2(b), as 
-$\langle \lambda+t\alpha_i,\alpha_i^\vee\rangle=0$ for $t=-\tfrac{1}{2}\langle\lambda,\alpha_i^\vee\rangle$.
+    For the proof of (b) we use (a) and Lemma \ref{lem:sl2-modules}. Set
+    \[
+        U=\sum_{k\in\mathbb{Z}} V_{\lambda+k\alpha_i};
+    \]
+    this is a $(\mathfrak{g}_{(i)}+\mathfrak{h})$-module, which is a direct sum of finite dimensional irreducible $(\mathfrak{g}_{(i)}+\mathfrak{h})$-modules.
+    Let $p=-\inf M$, $q=\sup M$. Both $p$ and $q$ are nonnegative as $0\in M$. Now all the statements of (b) follow from Lemma 3.2(b), as
+    $\langle \lambda+t\alpha_i,\alpha_i^\vee\rangle=0$ for $t=-\tfrac{1}{2}\langle\lambda,\alpha_i^\vee\rangle$.
 \end{proof}
 
-\begin{corollary}
-\leavevmode
-\begin{enumerate}[label=(\alph*)]
-\item If $\lambda$ is a weight of an integrable $\mathfrak{g}(A)$-module $V$ and $\lambda+\alpha_i$ 
-(resp. $\lambda-\alpha_i$) is not a weight, then $\langle \lambda,\alpha_i^\vee\rangle \ge 0$ 
-(resp. $\langle \lambda,\alpha_i^\vee\rangle \le 0$).
+\begin{corollary}[Consequences for weights of integrable modules]\label{cor:weights-integrable}
+    \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item If $\lambda$ is a weight of an integrable $\mathfrak{g}(A)$-module $V$ and $\lambda+\alpha_i$
+              (resp. $\lambda-\alpha_i$) is not a weight, then $\langle \lambda,\alpha_i^\vee\rangle \ge 0$
+              (resp. $\langle \lambda,\alpha_i^\vee\rangle \le 0$).
 
-\item If $\lambda$ is a weight of $V$, then $\lambda - \langle \lambda,\alpha_i^\vee\rangle \alpha_i$ 
-is also a weight of the same multiplicity.
-\end{enumerate}
+        \item If $\lambda$ is a weight of $V$, then $\lambda - \langle \lambda,\alpha_i^\vee\rangle \alpha_i$
+              is also a weight of the same multiplicity.
+    \end{enumerate}
 \end{corollary}
 
 \begin{proof}
 
-Suppose $\lambda$ is a weight. This means $0\in M$.
+    Suppose $\lambda$ is a weight. This means $0\in M$.
 
-If $\lambda+\alpha_i$ is not a weight, then $1\notin M$. Since $M$ is the integer interval $[-p,q]$, the only way this happens is if $q=0$. Then
-$p - q = p - 0 = p = \langle \lambda,\alpha_i^\vee\rangle \ge 0$.
+    If $\lambda+\alpha_i$ is not a weight, then $1\notin M$. Since $M$ is the integer interval $[-p,q]$, the only way this happens is if $q=0$. Then
+    $p - q = p - 0 = p = \langle \lambda,\alpha_i^\vee\rangle \ge 0$.
 
-The multiplicities are symmetric with respect to $t_0 = -\tfrac{1}{2}\langle \lambda,\alpha_i^\vee\rangle$. At $t=0$, the multiplicity is $\mathrm{mult}_V(\lambda)$. Symmetry says $m_t = m_{-\,\langle \lambda,\alpha_i^\vee\rangle - t}$. Plugging $t=0$ gives $\mathrm{mult}_V(\lambda) = m_0 = m_{-\langle \lambda,\alpha_i^\vee\rangle}$.
+    The multiplicities are symmetric with respect to $t_0 = -\tfrac{1}{2}\langle \lambda,\alpha_i^\vee\rangle$. At $t=0$, the multiplicity is $\mathrm{mult}_V(\lambda)$. Symmetry says $m_t = m_{-\,\langle \lambda,\alpha_i^\vee\rangle - t}$. Plugging $t=0$ gives $\mathrm{mult}_V(\lambda) = m_0 = m_{-\langle \lambda,\alpha_i^\vee\rangle}$.
 \end{proof}
 
 \begin{remark}
-Let $V$ be an integrable $\mathfrak{g}'(A)$-module. Then, clearly the proposition and corollary with $\mathfrak{h}$ replaced by $\mathfrak{h}'$, still hold. Furthermore, the local nilpotency of $e_i$ and $f_i$ on $V$ 
-guarantees that $V$ is $\mathfrak{h}_i$-diagonalizable, and hence $\mathfrak{h}'$-diagonalizable provided that $n<\infty$. 
-This follows from a general fact which will be proved later.
+    Let $V$ be an integrable $\mathfrak{g}'(A)$-module. Then, clearly the proposition and corollary with $\mathfrak{h}$ replaced by $\mathfrak{h}'$, still hold. Furthermore, the local nilpotency of $e_i$ and $f_i$ on $V$
+    guarantees that $V$ is $\mathfrak{h}_i$-diagonalizable, and hence $\mathfrak{h}'$-diagonalizable provided that $n<\infty$.
+    This follows from a general fact which will be proved later.
 \end{remark}
 
 
 \begin{remark}[Interpretation of the number $\langle \lambda,\alpha_i^\vee\rangle$]
-    
-There is a lattice $P$ of weights, called the \emph{weight lattice}, which contains all weights of integrable modules. It is defined by
-\[    P = \{\lambda \in \mathfrak{h}^* \mid \langle \lambda, \alpha_i^\vee \rangle \in \mathbb{Z} \text{ for all } i=1,\dots,n\}.
-\]
-It is generated by the \emph{fundamental weights} $\{\omega_i\}_{i=1}^n$ defined by
-\[    \langle \omega_i, \alpha_j^\vee \rangle = \delta_{ij}.
-\] In particular, the fundamental weights are the dual basis to the simple coroots $\{\alpha_i^\vee\}_{i=1}^n$ under the evaluation pairing. Then the number $\langle \lambda, \alpha_i^\vee \rangle$ is the coefficient of $\omega_i$ in the expansion of $\lambda$ in terms of the fundamental weights.
 
-One has to ask why the weights of integrable modules lie in $P$. This is because restricting to each $\mathfrak{sl}_2$-triple forces the eigenvalues of $\alpha_i^\vee$ to be integers, i.e. $\langle \lambda,\alpha_i^\vee\rangle \in \mathbb{Z}$, precisely because of the integrable condition.
+    There is a lattice $P$ of weights, called the \emph{weight lattice}, which contains all weights of integrable modules. It is defined by
+    \[    P = \{\lambda \in \mathfrak{h}^* \mid \langle \lambda, \alpha_i^\vee \rangle \in \mathbb{Z} \text{ for all } i=1,\dots,n\}.
+    \]
+    It is generated by the \emph{fundamental weights} $\{\omega_i\}_{i=1}^n$ defined by
+    \[    \langle \omega_i, \alpha_j^\vee \rangle = \delta_{ij}.
+    \] In particular, the fundamental weights are the dual basis to the simple coroots $\{\alpha_i^\vee\}_{i=1}^n$ under the evaluation pairing. Then the number $\langle \lambda, \alpha_i^\vee \rangle$ is the coefficient of $\omega_i$ in the expansion of $\lambda$ in terms of the fundamental weights.
 
-The root lattice $Q$ is defined to be the integer span of the simple roots $\{\alpha_i\}_{i=1}^n$. It is a sublattice of $P$. In the finite dimensional case, $Q$ has finite index in $P$ of order equal to the determinant of the Cartan matrix. In the infinite dimensional case, $\det A = 0$, so $Q$ has infinite index in $P$.
+    One has to ask why the weights of integrable modules lie in $P$. This is because restricting to each $\mathfrak{sl}_2$-triple forces the eigenvalues of $\alpha_i^\vee$ to be integers, i.e. $\langle \lambda,\alpha_i^\vee\rangle \in \mathbb{Z}$, precisely because of the integrable condition.
+
+    The root lattice $Q$ is defined to be the integer span of the simple roots $\{\alpha_i\}_{i=1}^n$. It is a sublattice of $P$. In the finite dimensional case, $Q$ has finite index in $P$ of order equal to the determinant of the Cartan matrix. In the infinite dimensional case, $\det A = 0$, so $Q$ has infinite index in $P$.
 \end{remark}
 
 \begin{definition}[Weyl group]
-    For each $i=1,\dots,n$ we define the 
-\textbf{fundamental reflection} $r_i$ of the space $\mathfrak{h}^*$ by
-\[
-   r_i(\lambda) = \lambda - \langle \lambda,\alpha_i^\vee\rangle \alpha_i,
-   \qquad \lambda \in \mathfrak{h}^*.
-\]
+    For each $i=1,\dots,n$ we define the
+    \textbf{fundamental reflection} $r_i$ of the space $\mathfrak{h}^*$ by
+    \[
+        r_i(\lambda) = \lambda - \langle \lambda,\alpha_i^\vee\rangle \alpha_i,
+        \qquad \lambda \in \mathfrak{h}^*.
+    \]
 
-It is clear that $r_i$ is a reflection since its fixed point set is  $T_i = \{ \lambda \in \mathfrak{h}^* \mid \langle \lambda,\alpha_i^\vee\rangle=0\}$,
-and $r_i(\alpha_i) = -\alpha_i$.
+    It is clear that $r_i$ is a reflection since its fixed point set is  $T_i = \{ \lambda \in \mathfrak{h}^* \mid \langle \lambda,\alpha_i^\vee\rangle=0\}$,
+    and $r_i(\alpha_i) = -\alpha_i$.
 
-The subgroup $W$ of $GL(\mathfrak{h}^*)$ generated by all fundamental reflections 
-is called the \textbf{Weyl group} of $\mathfrak{g}(A)$. We will write $W(A)$ when 
-necessary to emphasize the dependence on $A$.
+    The subgroup $W$ of $GL(\mathfrak{h}^*)$ generated by all fundamental reflections
+    is called the \textbf{Weyl group} of $\mathfrak{g}(A)$. We will write $W(A)$ when
+    necessary to emphasize the dependence on $A$.
 \end{definition}
 
 \begin{proposition}[Weyl group invariance of weights and roots]\label{prop:Weyl-invariance}
-\leavevmode
-\begin{enumerate}[label=(\alph*)]
-\item Let $V$ be an integrable module for Kac--Moody algebra $\mathfrak{g}(A)$. 
-Then $\mathrm{mult}_V \lambda = \mathrm{mult}_V w(\lambda)$ for every 
-$\lambda \in \mathfrak{h}^*$ and $w\in W$. In particular, the set of weights of $V$ 
-is $W$-invariant.
+    \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item Let $V$ be an integrable module for Kac--Moody algebra $\mathfrak{g}(A)$.
+              Then $\mathrm{mult}_V \lambda = \mathrm{mult}_V w(\lambda)$ for every
+              $\lambda \in \mathfrak{h}^*$ and $w\in W$. In particular, the set of weights of $V$
+              is $W$-invariant.
 
-\item The root system $\Delta$ of $\mathfrak{g}(A)$ is $W$-invariant, and 
-$\mathrm{mult}\,\alpha = \mathrm{mult}\,w(\alpha)$ for every 
-$\alpha \in \Delta$, $w\in W$.
-\end{enumerate}
+        \item The root system $\Delta$ of $\mathfrak{g}(A)$ is $W$-invariant, and
+              $\mathrm{mult}\,\alpha = \mathrm{mult}\,w(\alpha)$ for every
+              $\alpha \in \Delta$, $w\in W$.
+    \end{enumerate}
 \end{proposition}
 
 \begin{proof}The multiplicities $m_t$ in a weight string along a simple root direction are symmetric and behave nicely under reflection. The fundamental reflection $r_i$ exactly encodes this symmetry. It sends
-$\lambda \mapsto \lambda - \langle \lambda,\alpha_i^\vee \rangle \alpha_i$
+    $\lambda \mapsto \lambda - \langle \lambda,\alpha_i^\vee \rangle \alpha_i$
 \end{proof}
 
 The following lemma tells us what happens to the positive roots under a fundamental reflection. In particular, it says that all of the positive roots stay positive except for the simple root corresponding to the reflection, which gets sent to its negative.
 \begin{lemma}\label{lem:3.7}
-If $\alpha \in \Delta_+$ and $r_i(\alpha) < 0$, then $\alpha = \alpha_i$. 
-In other words, $\Delta_+ \setminus \{\alpha_i\}$ is $r_i$-invariant.
+    If $\alpha \in \Delta_+$ and $r_i(\alpha) < 0$, then $\alpha = \alpha_i$.
+    In other words, $\Delta_+ \setminus \{\alpha_i\}$ is $r_i$-invariant.
 \end{lemma}
 
 \begin{proof}
-Follows from Lemma \ref{lem:rt-string}. In particular, the simple reflection $r_i$ reverses the $\alpha_i$-string through $\alpha$ and we know that root strings don't pass through zero unless $\alpha = \alpha_i$.
+    Follows from Lemma \ref{lem:rt-string}. In particular, the simple reflection $r_i$ reverses the $\alpha_i$-string through $\alpha$ and we know that root strings don't pass through zero unless $\alpha = \alpha_i$.
 \end{proof}
 
 \begin{proposition}[3.9]
-The restriction of the bilinear form $(.|.)$ to $\mathfrak{h}^*$ is $W$-invariant.
+    The restriction of the bilinear form $(.|.)$ to $\mathfrak{h}^*$ is $W$-invariant.
 \end{proposition}
 
 \begin{proof}
-    It is a standard fact from linear algebra that reflection with respect to a nonzero vector $\alpha_i$ preserves the bilinear form, provided the form makes $\alpha_i$ non-isotropic (i.e. $(\alpha_i|\alpha_i)\neq 0$). As $|r_i(\alpha_i)|^2 = |-\alpha_i|^2 = |\alpha_i|^2 \neq 0$, it suffices to check that $(\lambda|\alpha_i) = 0$ implies 
-$(r_i(\lambda)|\alpha_i) = 0$. Compute:
-\[
-(r_i(\lambda)|\alpha_i) = (\lambda|\alpha_i) - \langle \lambda, \alpha_i^\vee \rangle (\alpha_i|\alpha_i)
-\]
+    It is a standard fact from linear algebra that reflection with respect to a nonzero vector $\alpha_i$ preserves the bilinear form, provided the form makes $\alpha_i$ non-isotropic (i.e. $(\alpha_i|\alpha_i)\neq 0$). As $|r_i(\alpha_i)|^2 = |-\alpha_i|^2 = |\alpha_i|^2 \neq 0$, it suffices to check that $(\lambda|\alpha_i) = 0$ implies
+    $(r_i(\lambda)|\alpha_i) = 0$. Compute:
+    \[
+        (r_i(\lambda)|\alpha_i) = (\lambda|\alpha_i) - \langle \lambda, \alpha_i^\vee \rangle (\alpha_i|\alpha_i)
+    \]
 
-Now use the formula:
-\[
-\alpha_i^\vee = \frac{2}{(\alpha_i|\alpha_i)}\nu^{-1}(\alpha_i)
-\]
+    Now use the formula:
+    \[
+        \alpha_i^\vee = \frac{2}{(\alpha_i|\alpha_i)}\nu^{-1}(\alpha_i)
+    \]
 
-So
-\[
-\langle \lambda, \alpha_i^\vee \rangle = \frac{2}{(\alpha_i|\alpha_i)} (\lambda|\alpha_i)
-\]
+    So
+    \[
+        \langle \lambda, \alpha_i^\vee \rangle = \frac{2}{(\alpha_i|\alpha_i)} (\lambda|\alpha_i)
+    \]
 
-Plugging back:
-\[
-(r_i(\lambda)|\alpha_i)
-= (\lambda|\alpha_i) - \frac{2}{(\alpha_i|\alpha_i)} (\lambda|\alpha_i)(\alpha_i|\alpha_i)
-= (\lambda|\alpha_i) - 2(\lambda|\alpha_i)
-= -(\lambda|\alpha_i)
-\]
+    Plugging back:
+    \[
+        (r_i(\lambda)|\alpha_i)
+        = (\lambda|\alpha_i) - \frac{2}{(\alpha_i|\alpha_i)} (\lambda|\alpha_i)(\alpha_i|\alpha_i)
+        = (\lambda|\alpha_i) - 2(\lambda|\alpha_i)
+        = -(\lambda|\alpha_i)
+    \]
 
-Therefore if $(\lambda|\alpha_i) = 0$, then $(r_i(\lambda)|\alpha_i)=0$. 
+    Therefore if $(\lambda|\alpha_i) = 0$, then $(r_i(\lambda)|\alpha_i)=0$.
 \end{proof}
 
 
@@ -2295,162 +2295,162 @@ Therefore if $(\lambda|\alpha_i) = 0$, then $(r_i(\lambda)|\alpha_i)=0$.
 We have the following technical lemma about words in the Weyl group. It says that if applying a word $w = r_{i_1}\cdots r_{i_t}$ to a simple root makes it negative, then $wr_i$ is a shorter word than $w$.
 
 \begin{lemma}[Exchange lemma]\label{lem:exchange}
-If $\alpha_i$ is a simple root and 
-\[
-   r_{i_1}\cdots r_{i_t}(\alpha_i) < 0,
-\]
-then there exists $s$ $(1 \leq s \leq t)$ such that
-\begin{equation}\label{eq:3.10.1}
-   r_{i_1}\cdots r_{i_s}\cdots r_{i_t} r_i
-   = r_{i_1}\cdots r_{i_{s-1}} r_{i_{s+1}} \cdots r_{i_t}.
-\end{equation}
+    If $\alpha_i$ is a simple root and
+    \[
+        r_{i_1}\cdots r_{i_t}(\alpha_i) < 0,
+    \]
+    then there exists $s$ $(1 \leq s \leq t)$ such that
+    \begin{equation}\label{eq:3.10.1}
+        r_{i_1}\cdots r_{i_s}\cdots r_{i_t} r_i
+        = r_{i_1}\cdots r_{i_{s-1}} r_{i_{s+1}} \cdots r_{i_t}.
+    \end{equation}
 \end{lemma}
 
 \begin{definition}
-The expression $w = r_{i_1}\cdots r_{i_s} \in W$ is called \textbf{reduced} if $s$ is 
-minimal possible among all representations of $w \in W$ as a product of the $r_i$. 
-Then $s$ is called the \textbf{length} of $w$ and is denoted by $\ell(w)$. 
+    The expression $w = r_{i_1}\cdots r_{i_s} \in W$ is called \textbf{reduced} if $s$ is
+    minimal possible among all representations of $w \in W$ as a product of the $r_i$.
+    Then $s$ is called the \textbf{length} of $w$ and is denoted by $\ell(w)$.
 \end{definition}
 Note that $\det_{\mathfrak{h}^*} r_i = -1$ and hence
 \begin{equation}\label{eq:3.11.1}
-   \det_{\mathfrak{h}^*} w = (-1)^{\ell(w)} \qquad \text{for } w \in W.
+    \det_{\mathfrak{h}^*} w = (-1)^{\ell(w)} \qquad \text{for } w \in W.
 \end{equation}
 
 The following lemma is an important corollary of Lemma \ref{lem:exchange}
 
 \begin{lemma}
-Let $w = r_{i_1}\cdots r_{i_t} \in W$ be a reduced expression and let $\alpha_i$ 
-be a simple root. Then we have
-\begin{enumerate}[label=(\alph*)]
-\item $\ell(wr_i) < \ell(w)$ if and only if $w(\alpha_i) < 0$.
-\item $w(\alpha_{i_t}) < 0$.
-\item If $\ell(wr_i) < \ell(w)$, then there exists $s$, 
-$1 \leq s \leq t$, such that
-\[
-   r_{i_1}\cdots r_{i_s}\cdots r_{i_t} = r_{i_1}\cdots r_{i_{s-1}}\, r_i\, r_{i_{s+1}}\cdots r_{i_t}.
-\]
-\end{enumerate}
+    Let $w = r_{i_1}\cdots r_{i_t} \in W$ be a reduced expression and let $\alpha_i$
+    be a simple root. Then we have
+    \begin{enumerate}[label=(\alph*)]
+        \item $\ell(wr_i) < \ell(w)$ if and only if $w(\alpha_i) < 0$.
+        \item $w(\alpha_{i_t}) < 0$.
+        \item If $\ell(wr_i) < \ell(w)$, then there exists $s$,
+              $1 \leq s \leq t$, such that
+              \[
+                  r_{i_1}\cdots r_{i_s}\cdots r_{i_t} = r_{i_1}\cdots r_{i_{s-1}}\, r_i\, r_{i_{s+1}}\cdots r_{i_t}.
+              \]
+    \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-By Lemma \ref{lem:exchange} (applied to $w$), $w(\alpha_i)<0$ implies that $\ell(wr_i)<\ell(w)$. 
-If now $w(\alpha_i) > 0$, then $wr_i(\alpha_i)<0$ and hence $\ell(w) = \ell(wr_i^2) < \ell(wr_i)$, proving (a). 
-Part (b) follows immediately from (a). 
+    By Lemma \ref{lem:exchange} (applied to $w$), $w(\alpha_i)<0$ implies that $\ell(wr_i)<\ell(w)$.
+    If now $w(\alpha_i) > 0$, then $wr_i(\alpha_i)<0$ and hence $\ell(w) = \ell(wr_i^2) < \ell(wr_i)$, proving (a).
+    Part (b) follows immediately from (a).
 
-Finally, if $\ell(wr_i)<\ell(w)$, then (a) implies $w(\alpha_i)<0$ and applying 
-Lemma \ref{lem:exchange} to $w$ we deduce the exchange condition, multiplying it 
-by $(r_{i_1}\cdots r_{i_{s-1}})^{-1}$ on the left and by $r_i$ on the right.
+    Finally, if $\ell(wr_i)<\ell(w)$, then (a) implies $w(\alpha_i)<0$ and applying
+    Lemma \ref{lem:exchange} to $w$ we deduce the exchange condition, multiplying it
+    by $(r_{i_1}\cdots r_{i_{s-1}})^{-1}$ on the left and by $r_i$ on the right.
 \end{proof}
 
-Now we are in a position to study the geometric properties of the action of the Weyl group. 
-Pick a real realization $(\mathfrak{h}_{\mathbb{R}},\Pi, \Pi^\vee)$ of $A$ so that $(\mathfrak{h}_{\mathbb{R}} \otimes_{\mathbb{R}} \mathbb{C}), \Pi, \Pi^\vee)$ is a realization of $A$ over $\C$. 
+Now we are in a position to study the geometric properties of the action of the Weyl group.
+Pick a real realization $(\mathfrak{h}_{\mathbb{R}},\Pi, \Pi^\vee)$ of $A$ so that $(\mathfrak{h}_{\mathbb{R}} \otimes_{\mathbb{R}} \mathbb{C}), \Pi, \Pi^\vee)$ is a realization of $A$ over $\C$.
 The set
 \[
-   C = \{ h \in \mathfrak{h}_{\mathbb{R}} \mid \langle \alpha_i,h \rangle \geq 0 
-   \ \text{for } i=1,\dots,n \}
+    C = \{ h \in \mathfrak{h}_{\mathbb{R}} \mid \langle \alpha_i,h \rangle \geq 0
+    \ \text{for } i=1,\dots,n \}
 \]
 is called the \textbf{fundamental chamber}. There is a contragradient action of $W$ on $\mf h$ defined by \begin{align*}
-    r_i(h) &= h - \langle \alpha_i,h \rangle \alpha_i^\vee, \qquad h \in \mathfrak{h}
+    r_i(h) & = h - \langle \alpha_i,h \rangle \alpha_i^\vee, \qquad h \in \mathfrak{h}
 \end{align*} which respects the pairing $\langle \cdot, \cdot \rangle$. \begin{align*}
-    \langle r_i(\alpha), h \rangle &= \langle \alpha, r_i(h) \rangle, \qquad \alpha \in \mathfrak{h}^*, h \in \mathfrak{h}.
+    \langle r_i(\alpha), h \rangle & = \langle \alpha, r_i(h) \rangle, \qquad \alpha \in \mathfrak{h}^*, h \in \mathfrak{h}.
 \end{align*} Note that $\mathfrak{h}_{\mathbb{R}}$ is stable under $W$ since $Q^\vee \subset \mathfrak{h}_{\mathbb{R}}$. Therefore we can talk about the sets $w(C)$, $w\in W$, called \textbf{chambers}, and their union
 \[
-   X = \bigcup_{w\in W} w(C)
+    X = \bigcup_{w\in W} w(C)
 \]
 is called the \textbf{Tits cone}. We clearly have the corresponding dual notions of $C^\vee$ and $X^\vee$ in $\mathfrak{h}_{\mathbb{R}}^*$.
 
 \begin{proposition}[Geometry of $W$]\label{prop:geometry-of-W}
-\leavevmode
-\begin{enumerate}[label=(\alph*)]
-\item For $h \in C$, the group $W_h = \{ w \in W \mid w(h) = h \}$ 
-is generated by the fundamental reflections which it contains.
+    \leavevmode
+    \begin{enumerate}[label=(\alph*)]
+        \item For $h \in C$, the group $W_h = \{ w \in W \mid w(h) = h \}$
+              is generated by the fundamental reflections which it contains.
 
-\item The fundamental chamber $C$ is a fundamental domain for the action of $W$ on $X$, 
-i.e.\ any orbit $W\cdot h$ of $h \in X$ intersects $C$ in exactly one point. 
-In particular, $W$ operates simply transitively on chambers.
+        \item The fundamental chamber $C$ is a fundamental domain for the action of $W$ on $X$,
+              i.e.\ any orbit $W\cdot h$ of $h \in X$ intersects $C$ in exactly one point.
+              In particular, $W$ operates simply transitively on chambers.
 
-\item $X = \{ h \in \mathfrak{h}_{\mathbb{R}} \mid \langle \alpha,h \rangle < 0 \ 
-\text{only for a finite number of } \alpha \in \Delta_+ \}$. 
-In particular, $X$ is a convex cone.
+        \item $X = \{ h \in \mathfrak{h}_{\mathbb{R}} \mid \langle \alpha,h \rangle < 0 \
+                  \text{only for a finite number of } \alpha \in \Delta_+ \}$.
+              In particular, $X$ is a convex cone.
 
-\item $C = \{ h \in \mathfrak{h}_{\mathbb{R}} \mid \text{for every } w \in W,\ 
-h-w(h) = \sum_i c_i \alpha_i^\vee \ \text{where } c_i \geq 0 \}$.
+        \item $C = \{ h \in \mathfrak{h}_{\mathbb{R}} \mid \text{for every } w \in W,\
+                  h-w(h) = \sum_i c_i \alpha_i^\vee \ \text{where } c_i \geq 0 \}$.
 
-\item The following conditions are equivalent:
-\begin{enumerate}[label=(\roman*)]
-\item $|W| < \infty$;
-\item $X = \mathfrak{h}_{\mathbb{R}}$;
-\item $|\Delta| < \infty$;
-\item $|\Delta^\vee| < \infty$.
-\end{enumerate}
+        \item The following conditions are equivalent:
+              \begin{enumerate}[label=(\roman*)]
+                  \item $|W| < \infty$;
+                  \item $X = \mathfrak{h}_{\mathbb{R}}$;
+                  \item $|\Delta| < \infty$;
+                  \item $|\Delta^\vee| < \infty$.
+              \end{enumerate}
 
-\item If $h \in X$, then $|W_h| < \infty$ if and only if $h$ lies in the interior of $X$.
-\end{enumerate}
+        \item If $h \in X$, then $|W_h| < \infty$ if and only if $h$ lies in the interior of $X$.
+    \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-Let $w \in W$ and let $w = r_{i_1}\cdots r_{i_s}$ be a reduced expression of $w$. 
-Take $h \in C$ and suppose that $h' = w(h) \in C$. 
-We have $\langle \alpha_i,h \rangle \geq 0$ and therefore 
-$\langle w(\alpha_i),h' \rangle \geq 0$ by the $W$-invariance of the pairing. But by lemma above, $w(\alpha_i)<0$, and hence 
-$\langle w(\alpha_i),h' \rangle \leq 0$ because $h' \in C$. So $\langle w(\alpha_i),h' \rangle = 0$ and $\langle \alpha_i,h \rangle = 0$. 
-Hence $r_i(h) = h$ and both (a) and (b) follow by induction on $\ell(w)$.
+    Let $w \in W$ and let $w = r_{i_1}\cdots r_{i_s}$ be a reduced expression of $w$.
+    Take $h \in C$ and suppose that $h' = w(h) \in C$.
+    We have $\langle \alpha_i,h \rangle \geq 0$ and therefore
+    $\langle w(\alpha_i),h' \rangle \geq 0$ by the $W$-invariance of the pairing. But by lemma above, $w(\alpha_i)<0$, and hence
+    $\langle w(\alpha_i),h' \rangle \leq 0$ because $h' \in C$. So $\langle w(\alpha_i),h' \rangle = 0$ and $\langle \alpha_i,h \rangle = 0$.
+    Hence $r_i(h) = h$ and both (a) and (b) follow by induction on $\ell(w)$.
 
-Set \[X' = \{ h \in \mathfrak{h}_{\mathbb{R}} \mid \langle \alpha,h \rangle < 0 
-\ \text{only for a finite number of } \alpha \in \Delta_+ \}\]
-It is clear that $C \subset X'$ and that $X'$ is $r_i$-invariant. 
-Hence $X' \supset X$. In order to prove the reverse inclusion, let $h \in X'$ 
-and set $M_h = \{ \alpha \in \Delta_+ \mid \langle \alpha,h \rangle < 0 \}$. We need to show that $M_h$ is empty. By definition, $|M_h|$ is finite. If $M_h \neq \emptyset$, then $\alpha_i \in M_h$ 
-for some $i$. But then it follows from Lemma \ref{lem:3.7} that $|M_{r_i(h)}| < |M_h|$. This process must eventually terminate with some $h^{(k)}$ such that $M_{h^{(k)}} = \emptyset$. But $M_{h^{(k)}} = \emptyset$ means $h^{(k)} \in C$. Thus $h^{(k)} \in C$ and $h = w^{-1}(h^{(k)}) \in w^{-1}(C)$, so $h \in W(C) = X$ as desired.
+    Set \[X' = \{ h \in \mathfrak{h}_{\mathbb{R}} \mid \langle \alpha,h \rangle < 0
+        \ \text{only for a finite number of } \alpha \in \Delta_+ \}\]
+    It is clear that $C \subset X'$ and that $X'$ is $r_i$-invariant.
+    Hence $X' \supset X$. In order to prove the reverse inclusion, let $h \in X'$
+    and set $M_h = \{ \alpha \in \Delta_+ \mid \langle \alpha,h \rangle < 0 \}$. We need to show that $M_h$ is empty. By definition, $|M_h|$ is finite. If $M_h \neq \emptyset$, then $\alpha_i \in M_h$
+    for some $i$. But then it follows from Lemma \ref{lem:3.7} that $|M_{r_i(h)}| < |M_h|$. This process must eventually terminate with some $h^{(k)}$ such that $M_{h^{(k)}} = \emptyset$. But $M_{h^{(k)}} = \emptyset$ means $h^{(k)} \in C$. Thus $h^{(k)} \in C$ and $h = w^{-1}(h^{(k)}) \in w^{-1}(C)$, so $h \in W(C) = X$ as desired.
 
-The inclusion $\supset$ of (d) follows from the fact that \begin{align*}
-    h - r_i(h) &= \langle \alpha_i,h \rangle \alpha_i^\vee
-\end{align*} so being in the RHS implies that $\langle \alpha_i,h \rangle \geq 0$ for all $i$, i.e. $h \in C$.
+    The inclusion $\supset$ of (d) follows from the fact that \begin{align*}
+        h - r_i(h) & = \langle \alpha_i,h \rangle \alpha_i^\vee
+    \end{align*} so being in the RHS implies that $\langle \alpha_i,h \rangle \geq 0$ for all $i$, i.e. $h \in C$.
 
 
-We prove the reverse inclusion by induction on $s=\ell(w)$. 
-For $\ell(w)=1$, (d) is the definition of $C$. 
-If $\ell(w)>1$, let $w=r_{i_1}\cdots r_{i_s}$. 
-We have
-\[
-   h-w(h) = (h-r_{i_1}\cdots r_{i_{s-1}}(h)) + r_{i_1}\cdots r_{i_{s-1}}(h-r_{i_s}(h)),
-\]
-and we apply the inductive assumption to the first summand and part (b) of the lemma above for $\Delta^\vee$ to the second summand. In particular, the lemma says that $w(\alpha_{i_s})<0$.
-But $w(\alpha_{i_s})<0$ is equivalent to
-$r_{i_1}\cdots r_{i_{s-1}}(\alpha_{i_s}) > 0$ is a positive root. The second summand is \begin{align*}
-    r_{i_1}\cdots r_{i_{s-1}}(h - r_{i_s}(h)) &= r_{i_1}\cdots r_{i_{s-1}}(\langle \alpha_{i_s}, h \rangle \alpha_{i_s}^\vee) \\
-    &= \langle \alpha_{i_s}, h \rangle r_{i_1}\cdots r_{i_{s-1}}(\alpha_{i_s}^\vee)
-\end{align*} is a nonnegative multiple of a positive coroot, as desired.
+    We prove the reverse inclusion by induction on $s=\ell(w)$.
+    For $\ell(w)=1$, (d) is the definition of $C$.
+    If $\ell(w)>1$, let $w=r_{i_1}\cdots r_{i_s}$.
+    We have
+    \[
+        h-w(h) = (h-r_{i_1}\cdots r_{i_{s-1}}(h)) + r_{i_1}\cdots r_{i_{s-1}}(h-r_{i_s}(h)),
+    \]
+    and we apply the inductive assumption to the first summand and part (b) of the lemma above for $\Delta^\vee$ to the second summand. In particular, the lemma says that $w(\alpha_{i_s})<0$.
+    But $w(\alpha_{i_s})<0$ is equivalent to
+    $r_{i_1}\cdots r_{i_{s-1}}(\alpha_{i_s}) > 0$ is a positive root. The second summand is \begin{align*}
+        r_{i_1}\cdots r_{i_{s-1}}(h - r_{i_s}(h)) & = r_{i_1}\cdots r_{i_{s-1}}(\langle \alpha_{i_s}, h \rangle \alpha_{i_s}^\vee) \\
+                                                  & = \langle \alpha_{i_s}, h \rangle r_{i_1}\cdots r_{i_{s-1}}(\alpha_{i_s}^\vee)
+    \end{align*} is a nonnegative multiple of a positive coroot, as desired.
 
-Now we prove (e). To show (i) $\Rightarrow$ (ii). Pick $\rho\in \mathfrak{h}_{\mathbb{R}}^*$ in the interior of $C^\vee$, e.g. $\rho=\Lambda_1+\cdots+\Lambda_n$. Then
-$\langle \rho,\alpha_i^\vee\rangle>0$ for all $i$.
-Consider the finite set $W\cdot h$ and choose $h'\in W\cdot h$ that maximizes $\langle \rho, h' \rangle$.
-If $h'\notin C$, then for some $i$ we have $\langle \alpha_i,h'\rangle<0$. Reflect:
-\[
-\langle \rho, r_i(h')\rangle
-= \langle \rho, h' - \langle \alpha_i,h'\rangle \alpha_i^\vee\rangle
-= \langle \rho, h'\rangle - \langle \alpha_i,h'\rangle\,\langle \rho,\alpha_i^\vee\rangle
-> \langle \rho,h'\rangle
-\]
-since $\langle \rho,\alpha_i^\vee\rangle>0$ and $\langle \alpha_i,h'\rangle<0$. This contradicts maximality. Hence $\langle \alpha_i,h'\rangle\ge 0$ for all $i$, i.e. $h'\in C$. So every orbit meets $C$; thus $X=\mathfrak{h}_{\mathbb{R}}$.
+    Now we prove (e). To show (i) $\Rightarrow$ (ii). Pick $\rho\in \mathfrak{h}_{\mathbb{R}}^*$ in the interior of $C^\vee$, e.g. $\rho=\Lambda_1+\cdots+\Lambda_n$. Then
+    $\langle \rho,\alpha_i^\vee\rangle>0$ for all $i$.
+    Consider the finite set $W\cdot h$ and choose $h'\in W\cdot h$ that maximizes $\langle \rho, h' \rangle$.
+    If $h'\notin C$, then for some $i$ we have $\langle \alpha_i,h'\rangle<0$. Reflect:
+    \[
+        \langle \rho, r_i(h')\rangle
+        = \langle \rho, h' - \langle \alpha_i,h'\rangle \alpha_i^\vee\rangle
+        = \langle \rho, h'\rangle - \langle \alpha_i,h'\rangle\,\langle \rho,\alpha_i^\vee\rangle
+        > \langle \rho,h'\rangle
+    \]
+    since $\langle \rho,\alpha_i^\vee\rangle>0$ and $\langle \alpha_i,h'\rangle<0$. This contradicts maximality. Hence $\langle \alpha_i,h'\rangle\ge 0$ for all $i$, i.e. $h'\in C$. So every orbit meets $C$; thus $X=\mathfrak{h}_{\mathbb{R}}$.
 
-In order to show (ii) $\Rightarrow$ (iii) take $h$ in the interior of $C$, so $\langle \alpha_i,h\rangle>0$ for all simple $\alpha_i$. Then for every positive root $\alpha$ (a nonnegative combination of simple roots) we have $\langle \alpha, h\rangle>0$, hence
-$\langle \alpha,-h\rangle<0$ $\quad$ for all $\alpha\in\Delta_+$ .
-Since (ii) says $-h\in X$, apply part (c) of this proposition: $X=\{x : \langle \alpha,x\rangle<0$ for only finitely many $\alpha\in\Delta_+\}$. But for $x=-h$ every $\alpha\in\Delta_+$ pairs negatively, so $\Delta_+$ must be finite. Thus $|\Delta|<\infty$.
+    In order to show (ii) $\Rightarrow$ (iii) take $h$ in the interior of $C$, so $\langle \alpha_i,h\rangle>0$ for all simple $\alpha_i$. Then for every positive root $\alpha$ (a nonnegative combination of simple roots) we have $\langle \alpha, h\rangle>0$, hence
+    $\langle \alpha,-h\rangle<0$ $\quad$ for all $\alpha\in\Delta_+$ .
+    Since (ii) says $-h\in X$, apply part (c) of this proposition: $X=\{x : \langle \alpha,x\rangle<0$ for only finitely many $\alpha\in\Delta_+\}$. But for $x=-h$ every $\alpha\in\Delta_+$ pairs negatively, so $\Delta_+$ must be finite. Thus $|\Delta|<\infty$.
 
-(iii) $\Rightarrow$ (i) because The Weyl group $W$ acts on $\Delta$ by permuting roots, so we get a homomorphism $\varphi: W \longrightarrow \mathrm{Sym}(\Delta)$. To conclude $|W|<\infty$, it suffices to show $\varphi$ is injective, because $\mathrm{Sym}(\Delta)$ is finite.
+    (iii) $\Rightarrow$ (i) because The Weyl group $W$ acts on $\Delta$ by permuting roots, so we get a homomorphism $\varphi: W \longrightarrow \mathrm{Sym}(\Delta)$. To conclude $|W|<\infty$, it suffices to show $\varphi$ is injective, because $\mathrm{Sym}(\Delta)$ is finite.
 
-We invoke the fact that
-\begin{equation}\label{eq:3.12.1}
-   \{ w(\alpha) = \alpha \ \text{for } w\in W \text{ and all } \alpha \in \Delta_+ \}
-   \Rightarrow w=1.
-\end{equation}
-To prove \eqref{eq:3.12.1}, note that if a reduced expression $w=r_{i_1}\cdots r_{i_s}$ 
-is nontrivial, then part (b) of the above lemma implies that $w(\alpha_i)<0$, contradiction. 
-The fact that (iv) is equivalent to (i) follows by using the dual root system.
+    We invoke the fact that
+    \begin{equation}\label{eq:3.12.1}
+        \{ w(\alpha) = \alpha \ \text{for } w\in W \text{ and all } \alpha \in \Delta_+ \}
+        \Rightarrow w=1.
+    \end{equation}
+    To prove \eqref{eq:3.12.1}, note that if a reduced expression $w=r_{i_1}\cdots r_{i_s}$
+    is nontrivial, then part (b) of the above lemma implies that $w(\alpha_i)<0$, contradiction.
+    The fact that (iv) is equivalent to (i) follows by using the dual root system.
 
-Finally, to prove (f) we may assume that $h \in C$. Then (f) follows from (a) 
-by applying the equivalence of (e)(i) and (e)(ii) to $W_h$ operating on $\mathfrak{h}/\C h$.
+    Finally, to prove (f) we may assume that $h \in C$. Then (f) follows from (a)
+    by applying the equivalence of (e)(i) and (e)(ii) to $W_h$ operating on $\mathfrak{h}/\C h$.
 \end{proof}
 
 \begin{exercise}
@@ -2479,45 +2479,45 @@ Kac proves the following classification theorem in \cite{kac}.
     Borcherds made the remark that nobody has really found a use for the indefinite type matrices.
 \end{remark}
 
-We proceed to classify all generalized Cartan matrices of finite and affine type. 
-For this it is convenient to introduce the so-called \textbf{Dynkin diagrams}. 
+We proceed to classify all generalized Cartan matrices of finite and affine type.
+For this it is convenient to introduce the so-called \textbf{Dynkin diagrams}.
 \begin{definition}[Dynkin diagram]
-    Let $A=(a_{ij})_{i,j=1}^n$ be a generalized Cartan matrix.  We associate with $A$ a graph $S(A)$, called the \emph{Dynkin diagram} of $A$ as follows. If $a_{ij}a_{ji}\leq 4$ and $|a_{ij}|\geq |a_{ji}|$, the vertices $i$ and $j$ are connected by $|a_{ij}|$ lines, and these lines are equipped with an arrow pointing toward $j$ if $|a_{ij}|>1$. 
-If $a_{ij}a_{ji}>4$, the vertices $i$ and $j$ are connected by a bold-faced line 
-equipped with an ordered pair of integers $|a_{ij}|,|a_{ji}|$. 
+    Let $A=(a_{ij})_{i,j=1}^n$ be a generalized Cartan matrix.  We associate with $A$ a graph $S(A)$, called the \emph{Dynkin diagram} of $A$ as follows. If $a_{ij}a_{ji}\leq 4$ and $|a_{ij}|\geq |a_{ji}|$, the vertices $i$ and $j$ are connected by $|a_{ij}|$ lines, and these lines are equipped with an arrow pointing toward $j$ if $|a_{ij}|>1$.
+    If $a_{ij}a_{ji}>4$, the vertices $i$ and $j$ are connected by a bold-faced line
+    equipped with an ordered pair of integers $|a_{ij}|,|a_{ji}|$.
 \end{definition}
 
-It is clear that $A$ is indecomposable if and only if $S(A)$ is a connected graph. 
-Note also that $A$ is determined by the Dynkin diagram $S(A)$ and an enumeration of its vertices. 
+It is clear that $A$ is indecomposable if and only if $S(A)$ is a connected graph.
+Note also that $A$ is determined by the Dynkin diagram $S(A)$ and an enumeration of its vertices.
 We say that $S(A)$ is of finite, affine, or indefinite type if $A$ is of that type.
 
 \begin{proposition}[Properties of generalized Cartan matrices of finite and affine type]\label{prop:finite-affine}
-Let $A$ be an indecomposable generalized Cartan matrix.
-\begin{enumerate}[label=\alph*)]
-    \item $A$ is of finite type if and only if all its principal minors are positive.
-    \item $A$ is of affine type if and only if all its proper principal minors are positive and $\det A = 0$.
-    \item If $A$ is of finite or affine type, then any proper subdiagram of $S(A)$ is a union of (connected) Dynkin diagrams of finite type.
-    \item If $A$ is of finite type, then $S(A)$ contains no cycles. 
-          If $A$ is of affine type and $S(A)$ contains a cycle, then $S(A)$ is the cycle $A_\ell^{(1)}$ from Table Aff 1.
-    \item $A$ is of affine type if and only if there exists $\delta>0$ such that $A\delta=0$; 
-          such a $\delta$ is unique up to a constant factor.
-\end{enumerate}
+    Let $A$ be an indecomposable generalized Cartan matrix.
+    \begin{enumerate}[label=\alph*)]
+        \item $A$ is of finite type if and only if all its principal minors are positive.
+        \item $A$ is of affine type if and only if all its proper principal minors are positive and $\det A = 0$.
+        \item If $A$ is of finite or affine type, then any proper subdiagram of $S(A)$ is a union of (connected) Dynkin diagrams of finite type.
+        \item If $A$ is of finite type, then $S(A)$ contains no cycles.
+              If $A$ is of affine type and $S(A)$ contains a cycle, then $S(A)$ is the cycle $A_\ell^{(1)}$ from Table Aff 1.
+        \item $A$ is of affine type if and only if there exists $\delta>0$ such that $A\delta=0$;
+              such a $\delta$ is unique up to a constant factor.
+    \end{enumerate}
 \end{proposition}
 In particular, an affine generalized Cartan matrix $A$ satisfies all proper principal minors are positive, $\det A = 0$, and is indecomposable. This means A is “just one step” beyond the finite type: it's rank deficient by one. That's why one gets affine (loop) extensions.
 
 \begin{theorem}[Classification of generalized Cartan matrices of finite and affine type]
-\leavevmode
-\begin{enumerate}[label=\alph*)]
-    \item The Dynkin diagrams of all generalized Cartan matrices of finite type 
-    are listed in Table Fin.
-    
-    \item The Dynkin diagrams of all generalized Cartan matrices of affine type 
-    are listed in Tables Aff~1--3 (all of them have $\ell+1$ vertices).
-    
-    \item The numerical labels in Tables Aff~1--3 are the coordinates of the unique 
-    vector \[\delta = {}^t(a_0,a_1,\dots,a_\ell)\] such that $A\delta=0$ and the $a_i$ 
-    are positive relatively prime integers.
-\end{enumerate}
+    \leavevmode
+    \begin{enumerate}[label=\alph*)]
+        \item The Dynkin diagrams of all generalized Cartan matrices of finite type
+              are listed in Table Fin.
+
+        \item The Dynkin diagrams of all generalized Cartan matrices of affine type
+              are listed in Tables Aff~1--3 (all of them have $\ell+1$ vertices).
+
+        \item The numerical labels in Tables Aff~1--3 are the coordinates of the unique
+              vector \[\delta = {}^t(a_0,a_1,\dots,a_\ell)\] such that $A\delta=0$ and the $a_i$
+              are positive relatively prime integers.
+    \end{enumerate}
 \end{theorem}
 
 \begin{remark}
@@ -2525,94 +2525,96 @@ In particular, an affine generalized Cartan matrix $A$ satisfies all proper prin
 \end{remark}
 
 \begin{proposition}[Characterizations of finite type]\label{prop:finite-char}
-Let $A$ be an indecomposable generalized Cartan matrix. Then the following 
-conditions are equivalent:
-\begin{enumerate}[label=(\roman*)]
-    \item $A$ is a generalized Cartan matrix of finite type;
-    \item $A$ is symmetrizable and the bilinear form $(\,.\mid.\,)_{\mathfrak{h}_\mathbb{R}}$ 
-          is positive-definite;
-    \item $|W| < \infty$;
-    \item $|\Delta| < \infty$;
-    \item $\mathfrak{g}(A)$ is a simple finite-dimensional Lie algebra;
-    \item there exists $\alpha \in \Delta_+$ such that $\alpha+\alpha_i \notin \Delta$ 
-          for all $i=1,\dots,n$.
-\end{enumerate}
+    Let $A$ be an indecomposable generalized Cartan matrix. Then the following
+    conditions are equivalent:
+    \begin{enumerate}[label=(\roman*)]
+        \item $A$ is a generalized Cartan matrix of finite type;
+        \item $A$ is symmetrizable and the bilinear form $(\,.\mid.\,)_{\mathfrak{h}_\mathbb{R}}$
+              is positive-definite;
+        \item $|W| < \infty$;
+        \item $|\Delta| < \infty$;
+        \item $\mathfrak{g}(A)$ is a simple finite-dimensional Lie algebra;
+        \item there exists $\alpha \in \Delta_+$ such that $\alpha+\alpha_i \notin \Delta$
+              for all $i=1,\dots,n$.
+    \end{enumerate}
 \end{proposition}
 
 \begin{figure}[H]
     \centering
-\includegraphics[width=0.8\textwidth]{img/aff1.png}
+    \includegraphics[width=0.8\textwidth]{img/aff1.png}
     \caption{Dynkin diagrams of affine type - part 1}
 \end{figure}
 
 \begin{figure}[H]
-    \centering \includegraphics[width=0.8\textwidth]{img/aff23.png} 
+    \centering \includegraphics[width=0.8\textwidth]{img/aff23.png}
     \caption{Dynkin diagrams of affine type - parts 2 and 3}
 \end{figure}
 
 
 \begin{remark}
-A root of a finite root system $\Delta$ which satisfies condition (vi) of 
-Proposition \ref{prop:finite-char} is called a \textbf{highest root}. It is unique and given by 
-the formula
-\[
-   \theta = \sum_{i=1}^\ell a_i \alpha_i,
-\]
-where $a_i$ are the labels of the extended Dynkin diagram from Table Aff~1.
+    A root of a finite root system $\Delta$ which satisfies condition (vi) of
+    Proposition \ref{prop:finite-char} is called a \textbf{highest root}. It is unique and given by
+    the formula
+    \[
+        \theta = \sum_{i=1}^\ell a_i \alpha_i,
+    \]
+    where $a_i$ are the labels of the extended Dynkin diagram from Table Aff~1.
 \end{remark}
 
 
 
 \begin{remark}
     Kac separates the affine types into three families:
-\begin{enumerate}
-    \item \textbf{Table Aff 1: Untwisted affine types}
-These come from taking a finite-dimensional simple Lie algebra $\dot{\mathfrak{g}}$ and forming the loop algebra
-$$\dot{\mathfrak{g}}\otimes \mathbb{C}[t,t^{-1}] \;\oplus\; \mathbb{C}c \;\oplus\; \mathbb{C}d.$$
-The corresponding Cartan matrix is obtained by adding one extra node (the "affine node") to the Dynkin diagram of $\dot{\mathfrak{g}}$.
-These are the "standard" affine types: $A_\ell^{(1)}$, $B_\ell^{(1)}$, $C_\ell^{(1)}$, ..., $G_2^{(1)}$, $F_4^{(1)}$, $E_6^{(1)}$, $E_7^{(1)}$, $E_8^{(1)}$.
+    \begin{enumerate}
+        \item \textbf{Table Aff 1: Untwisted affine types}
+              These come from taking a finite-dimensional simple Lie algebra $\dot{\mathfrak{g}}$ and forming the loop algebra
+              $$\dot{\mathfrak{g}}\otimes \mathbb{C}[t,t^{-1}] \;\oplus\; \mathbb{C}c \;\oplus\; \mathbb{C}d.$$
+              The corresponding Cartan matrix is obtained by adding one extra node (the "affine node") to the Dynkin diagram of $\dot{\mathfrak{g}}$.
+              These are the "standard" affine types: $A_\ell^{(1)}$, $B_\ell^{(1)}$, $C_\ell^{(1)}$, ..., $G_2^{(1)}$, $F_4^{(1)}$, $E_6^{(1)}$, $E_7^{(1)}$, $E_8^{(1)}$.
 
-    \item \textbf{Table Aff 2: Twisted affine types of order 2}
-These come from folding untwisted diagrams by a diagram automorphism of order 2.
-For example, folding $A_{2\ell-1}^{(1)}$ by an involution produces $C_\ell^{(1)}$, but folding $D_{\ell+1}^{(1)}$ or $E_6^{(1)}$ produces new "twisted" types $A_{2\ell-1}^{(2)}$, $D_{\ell+1}^{(2)}$, $E_6^{(2)}$.
-These correspond to twisted loop algebras:
-$$\dot{\mathfrak{g}}\otimes \mathbb{C}[t,t^{-1}]^\sigma$$
-where $\sigma$ is a diagram automorphism of order 2.
+        \item \textbf{Table Aff 2: Twisted affine types of order 2}
+              These come from folding untwisted diagrams by a diagram automorphism of order 2.
+              For example, folding $A_{2\ell-1}^{(1)}$ by an involution produces $C_\ell^{(1)}$, but folding $D_{\ell+1}^{(1)}$ or $E_6^{(1)}$ produces new "twisted" types $A_{2\ell-1}^{(2)}$, $D_{\ell+1}^{(2)}$, $E_6^{(2)}$.
+              These correspond to twisted loop algebras:
+              $$\dot{\mathfrak{g}}\otimes \mathbb{C}[t,t^{-1}]^\sigma$$
+              where $\sigma$ is a diagram automorphism of order 2.
 
-    \item \textbf{Table Aff 3: Twisted affine types of order 3}
-These arise similarly from folding by a diagram automorphism of order 3 (only possible for $D_4^{(1)}$), producing $D_4^{(3)}$.
-\end{enumerate}
+        \item \textbf{Table Aff 3: Twisted affine types of order 3}
+              These arise similarly from folding by a diagram automorphism of order 3 (only possible for $D_4^{(1)}$), producing $D_4^{(3)}$.
+    \end{enumerate}
 \end{remark}
 
 
 \begin{example}
-    [Affine $\sl_2$] We consider the affine Dynkin diagram $A_1^{(1)}$. It turns out that this corresponds to the affine Lie algebra $\widehat{\mathfrak{sl}}_2$. 
+    [Affine $\sl_2$] We consider the affine Dynkin diagram $A_1^{(1)}$. It turns out that this corresponds to the affine Lie algebra $\widehat{\mathfrak{sl}}_2$.
     \[\widehat{sl}_2 = (sl_2\otimes\mathbb C[t,t^{-1}]) \oplus \mathbb Cc \oplus \mathbb Cd\] which has bracket \begin{align*}
-    [x\otimes t^m, y\otimes t^n] &= [x,y]\otimes t^{m+n} + m\delta_{m,-n}\kappa(x,y)c \\
-    [d, x\otimes t^m] &= m x\otimes t^m \\
-    [c, \widehat{sl}_2] &= 0
-\end{align*} where $\kappa(x,y) = \operatorname{tr}(xy)$ is the Killing form on $\mathfrak{sl}_2$. The Cartan subalgebra is \begin{align*}
-    \widehat{\mathfrak{h}} &= (\mathfrak{h}\otimes 1) \oplus \mathbb{C}c \oplus \mathbb{C}d \\
-    &= \mathbb{C}h \oplus \mathbb{C}c \oplus \mathbb{C}d
-\end{align*} where $\mathfrak{h} = \mathbb{C}h$ is the Cartan subalgebra of $\mathfrak{sl}_2$. If you study the weight spaces which appear in the adjoint representation of $\widehat{\mathfrak{sl}}_2$, you find that the roots are \begin{align*}
-    \Delta &= \{\alpha + n\delta, -\alpha + n\delta, n\delta \mid n \in \mathbb{Z}, n \neq 0\} \\
-    &= \{\pm \alpha + n\delta \mid n \in \mathbb{Z}\} \cup \{n\delta \mid n \in \mathbb{Z}, n \neq 0\}
-\end{align*} where $\alpha \in \mathfrak{h}^*$ is the positive root of $\mathfrak{sl}_2$ and $\delta \in \widehat{\mathfrak{h}}^*$ is the \textbf{null root} defined by \begin{align*}
-    \delta(h) &= 0 \\
-    \delta(c) &= 0 \\
-    \delta(d) &= 1.
-\end{align*} The simple roots are $\alpha_0 = \delta - \alpha$ and $\alpha_1 = \alpha$. It seems to me that $\delta$ and $\alpha$ really should be the simple roots, but the issue is that $\delta$ is not a real root. It doesn't correspond to a reflection and it has no coroot, which is a consequence of the fact that $(\delta \mid \delta) = 0$. 
+        [x\otimes t^m, y\otimes t^n] & = [x,y]\otimes t^{m+n} + m\delta_{m,-n}\kappa(x,y)c \\
+        [d, x\otimes t^m]            & = m x\otimes t^m                                    \\
+        [c, \widehat{sl}_2]          & = 0
+    \end{align*} where $\kappa(x,y) = \operatorname{tr}(xy)$ is the Killing form on $\mathfrak{sl}_2$. The Cartan subalgebra is \begin{align*}
+        \widehat{\mathfrak{h}} & = (\mathfrak{h}\otimes 1) \oplus \mathbb{C}c \oplus \mathbb{C}d \\
+                               & = \mathbb{C}h \oplus \mathbb{C}c \oplus \mathbb{C}d
+    \end{align*} where $\mathfrak{h} = \mathbb{C}h$ is the Cartan subalgebra of $\mathfrak{sl}_2$. If you study the weight spaces which appear in the adjoint representation of $\widehat{\mathfrak{sl}}_2$, you find that the roots are \begin{align*}
+        \Delta & = \{\alpha + n\delta, -\alpha + n\delta, n\delta \mid n \in \mathbb{Z}, n \neq 0\}                \\
+               & = \{\pm \alpha + n\delta \mid n \in \mathbb{Z}\} \cup \{n\delta \mid n \in \mathbb{Z}, n \neq 0\}
+    \end{align*} where $\alpha \in \mathfrak{h}^*$ is the positive root of $\mathfrak{sl}_2$ and $\delta \in \widehat{\mathfrak{h}}^*$ is the \textbf{null root} defined by \begin{align*}
+        \delta(h) & = 0  \\
+        \delta(c) & = 0  \\
+        \delta(d) & = 1.
+    \end{align*} The simple roots are $\alpha_0 = \delta - \alpha$ and $\alpha_1 = \alpha$. It seems to me that $\delta$ and $\alpha$ really should be the simple roots, but the issue is that $\delta$ is not a real root. It doesn't correspond to a reflection and it has no coroot, which is a consequence of the fact that $(\delta \mid \delta) = 0$.
 
-Then one computes the pairings \begin{align*}
-    a_{11} &= \langle \alpha_1, \alpha_1^\vee \rangle & 2 \\
-    a_{00} &= \frac{2(\alpha_0 \mid \alpha_0)}{(\alpha_0 \mid \alpha_0)} \texty{because there's a unique extension of $(\cdot \mid \cdot)$ to $\widehat{\sl_2}$} \\
-    a_{10} &= \frac{2(\alpha_1 \mid \alpha_0)}{(\alpha_1 \mid \alpha_1)} = \frac{2(\alpha \mid \delta - \alpha)}{(\alpha \mid \alpha)} = -2 \\
-\end{align*} because the under the extension of $(\cdot \mid \cdot)$ to $\widehat{\sl_2}$, $\delta$ is orthogonal to everything. By general uniqueness results, this is the only way to extend the Killing form so we didn't cheat. Hence the Cartan matrix is \[
-    A = \begin{pmatrix}
-        2 & -2 \\
-        -2 & 2
-    \end{pmatrix}
-\] which is indeed the Cartan matrix of $A_1^{(1)}$
+    Note that for affine type $A$, one has the imaginary root $\delta$ is always the sum of the simple roots (in particular the labels on the affine Dynkin diagram are all 1's).
+
+    Then one computes the pairings \begin{align*}
+        a_{11} & = \langle \alpha_1, \alpha_1^\vee \rangle                                                                                                            & 2 \\
+        a_{00} & = \frac{2(\alpha_0 \mid \alpha_0)}{(\alpha_0 \mid \alpha_0)} \texty{because there's a unique extension of $(\cdot \mid \cdot)$ to $\widehat{\sl_2}$}     \\
+        a_{10} & = \frac{2(\alpha_1 \mid \alpha_0)}{(\alpha_1 \mid \alpha_1)} = \frac{2(\alpha \mid \delta - \alpha)}{(\alpha \mid \alpha)} = -2                          \\
+    \end{align*} because the under the extension of $(\cdot \mid \cdot)$ to $\widehat{\sl_2}$, $\delta$ is orthogonal to everything. By general uniqueness results, this is the only way to extend the Killing form so we didn't cheat. Hence the Cartan matrix is \[
+        A = \begin{pmatrix}
+            2  & -2 \\
+            -2 & 2
+        \end{pmatrix}
+    \] which is indeed the Cartan matrix of $A_1^{(1)}$
 \end{example}
 
 We elaborate upon this perspective of affine Lie algebras via central extensions of loop algebras and their derivations.
@@ -2708,7 +2710,7 @@ Thus, to classify $H^2(L)$, we may restrict to $\mathfrak g$-invariant 2-cocycle
     $c\colon \mathbb Z^2\to\Bbb C$.
 \end{proof}
 
-This still consists of infinitely many parameters. We will whittle it down using the cocycle condition. 
+This still consists of infinitely many parameters. We will whittle it down using the cocycle condition.
 
 \begin{proposition}
     We have
@@ -2821,181 +2823,754 @@ Let $\alpha \in \Delta^{\mathrm{re}}$; then $\alpha = w(\alpha_i)$ for some $\al
 
 We define a reflection $r_\alpha$ with respect to $\alpha \in \Delta^{\mathrm{re}}$ by
 \[
-    r_\alpha(\lambda) = \lambda - \langle \lambda, \alpha^\vee\rangle \alpha, 
+    r_\alpha(\lambda) = \lambda - \langle \lambda, \alpha^\vee\rangle \alpha,
     \qquad \lambda \in \mathfrak{h}^*.
 \]
-Since $\langle \alpha,\alpha^\vee\rangle = 2$, this is a reflection, and since 
+Since $\langle \alpha,\alpha^\vee\rangle = 2$, this is a reflection, and since
 $r_\alpha = w r_i w^{-1}$ if $\alpha = w(\alpha_i)$, it lies in $W$. Note that $r_\alpha$ is the fundamental reflection $r_i$.
 
 \begin{proposition}[Properties of real roots]\label{prop:real-roots}
-Let $\alpha$ be a real root of a Kac--Moody algebra $\mathfrak{g}(A)$. Then:
-\begin{enumerate}[label=\alph*)]
-    \item $\mathrm{mult}\,\alpha = 1$.
-    \item $k\alpha$ is a root if and only if $k = \pm 1$.
-    \item If $\beta \in \Delta$ then there exist nonnegative integers $p$ and $q$ related by the equation
-    \[
-        p - q = \langle \beta, \alpha^\vee \rangle,
-    \]
-    such that $\beta + k\alpha \in \Delta \cup \{0\}$ if and only if $-p \leq k \leq q$, $k \in \mathbb{Z}$.
-    \item Suppose that $A$ is symmetrizable and let $(.|.)$ be a standard invariant bilinear form on $\mathfrak{g}(A)$. Then
-    \begin{enumerate}[label=(\roman*)]
-        \item $(\alpha|\alpha) > 0$.
-        \item $\alpha^\vee = 2\nu^{-1}(\alpha)/(\alpha|\alpha)$.
-        \item If $\alpha = \sum_i k_i \alpha_i$, then $k_i(\alpha_i|\alpha_i) \in (\alpha|\alpha)\mathbb{Z}$.
+    Let $\alpha$ be a real root of a Kac--Moody algebra $\mathfrak{g}(A)$. Then:
+    \begin{enumerate}[label=\alph*)]
+        \item $\mathrm{mult}\,\alpha = 1$.
+        \item $k\alpha$ is a root if and only if $k = \pm 1$.
+        \item If $\beta \in \Delta$ then there exist nonnegative integers $p$ and $q$ related by the equation
+              \[
+                  p - q = \langle \beta, \alpha^\vee \rangle,
+              \]
+              such that $\beta + k\alpha \in \Delta \cup \{0\}$ if and only if $-p \leq k \leq q$, $k \in \mathbb{Z}$.
+        \item Suppose that $A$ is symmetrizable and let $(.|.)$ be a standard invariant bilinear form on $\mathfrak{g}(A)$. Then
+              \begin{enumerate}[label=(\roman*)]
+                  \item $(\alpha|\alpha) > 0$.
+                  \item $\alpha^\vee = 2\nu^{-1}(\alpha)/(\alpha|\alpha)$.
+                  \item If $\alpha = \sum_i k_i \alpha_i$, then $k_i(\alpha_i|\alpha_i) \in (\alpha|\alpha)\mathbb{Z}$.
+              \end{enumerate}
+        \item Provided that $\pm \alpha \notin \Pi$, there exists $i$ such that
+              \[
+                  |\mathrm{ht}\, r_i(\alpha)| < |\mathrm{ht}\,\alpha|.
+              \]
     \end{enumerate}
-    \item Provided that $\pm \alpha \notin \Pi$, there exists $i$ such that
-    \[
-        |\mathrm{ht}\, r_i(\alpha)| < |\mathrm{ht}\,\alpha|.
-    \]
-\end{enumerate}
 \end{proposition}
 
 \begin{proof}
-All the statements a)--d) are clear if $\alpha$ is a simple root. Now a), b), and c) follow from the fact that the action of the Weyl group preserves root system and root multiplicities \ref{prop:Weyl-invariance}.
+    All the statements a)--d) are clear if $\alpha$ is a simple root. Now a), b), and c) follow from the fact that the action of the Weyl group preserves root system and root multiplicities \ref{prop:Weyl-invariance}.
 
-Statements d)(i) and (ii) follow from the fact that the restriction of the bilinear form to $\mf h^*$ is $W$-invariant. Statement d)(iii) follows from the fact that $\alpha^\vee \in \sum \mathbb{Z}\alpha_i^\vee$ and the following formula:
-\[
-    \alpha^\vee = \sum_i \frac{(\alpha_i|\alpha_i)}{(\alpha|\alpha)}\, k_i \alpha_i^\vee
-\] This formula follows from the identities \begin{align*}
-    \nu^{-1}(\alpha_i) &= \frac{(\alpha_i|\alpha_i)}{2} \, \alpha_i^\vee \\
-    \nu^{-1}(\alpha) &= \sum_i k_i \nu^{-1}(\alpha_i).
-\end{align*} because $\alpha$ is a $\Z$-linear combination of simple roots $\alpha_i$ and apply $\nu^{-1}$ to both sides.
+    Statements d)(i) and (ii) follow from the fact that the restriction of the bilinear form to $\mf h^*$ is $W$-invariant. Statement d)(iii) follows from the fact that $\alpha^\vee \in \sum \mathbb{Z}\alpha_i^\vee$ and the following formula:
+    \[
+        \alpha^\vee = \sum_i \frac{(\alpha_i|\alpha_i)}{(\alpha|\alpha)}\, k_i \alpha_i^\vee
+    \] This formula follows from the identities \begin{align*}
+        \nu^{-1}(\alpha_i) & = \frac{(\alpha_i|\alpha_i)}{2} \, \alpha_i^\vee \\
+        \nu^{-1}(\alpha)   & = \sum_i k_i \nu^{-1}(\alpha_i).
+    \end{align*} because $\alpha$ is a $\Z$-linear combination of simple roots $\alpha_i$ and apply $\nu^{-1}$ to both sides.
 
-Finally, suppose the contrary to e); we may assume that $\alpha > 0$. But then $-\alpha \in C^\vee$ and, by Proposition \ref{prop:geometry-of-W} (d) for the dual root system, $-\alpha + w(\alpha) \geq 0$ for any $w \in W$. Taking $w$ such that $w(\alpha) \in \Pi$, we arrive at a contradiction.
+    Finally, suppose the contrary to e); we may assume that $\alpha > 0$. But then $-\alpha \in C^\vee$, where we recall that the dual cone $C^\vee$ is defined by
+    \[
+        C^\vee = \{ \lambda \in \mathfrak{h}^* \mid \langle \lambda, \alpha_i^\vee \rangle \leq 0 \text{ for all } i \}
+    \] In particular, if $\alpha > 0$, then $-\alpha$ is a nontrivial nonnegative linear combination of simple roots, and therefore pairs nonnegatively with all simple coroots, because the Cartan matrix has nonpositive off-diagonal entries.
+
+    By Proposition \ref{prop:geometry-of-W} (d) for the dual root system, $-\alpha + w(\alpha) \geq 0$ for any $w \in W$. Taking $w$ such that $w(\alpha) \in \Pi$, we arrive at a contradiction.
 \end{proof}
 
 \begin{lemma}\label{lem:5.1.1}
-Suppose that $A$ is symmetrizable. Then the set of all 
-$\alpha = \sum_i k_i \alpha_i \in Q$ such that
-\begin{equation}\label{eq:5.1.2}
-    k_i (\alpha_i|\alpha_i) \in (\alpha|\alpha)\mathbb{Z} 
-    \qquad \text{for all $i$}
-\end{equation}
-is $W$-invariant.
+    Suppose that $A$ is symmetrizable. Then the set of all
+    $\alpha = \sum_i k_i \alpha_i \in Q$ such that
+    \begin{equation}\label{eq:5.1.2}
+        k_i (\alpha_i|\alpha_i) \in (\alpha|\alpha)\mathbb{Z}
+        \qquad \text{for all $i$}
+    \end{equation}
+    is $W$-invariant.
 \end{lemma}
 
 \begin{proof}
-It suffices to check that $r_i(\alpha)$ again satisfies \ref{eq:5.1.2}, i.e. that
-\[
-   \big(k_i - \langle \alpha,\alpha_i^\vee\rangle\big)(\alpha_i|\alpha_i) 
-   \in (\alpha|\alpha)\mathbb{Z}.
-\]
-This is equivalent to
-\begin{equation}\label{eq:5.1.3}
-   2(\alpha|\alpha_i) \in (\alpha|\alpha)\mathbb{Z}
-\end{equation}
-which follows from \ref{eq:5.1.2}
-\[
-   2(\alpha|\alpha_i) 
-   = \sum_j \frac{2(\alpha_j|\alpha_i)}{(\alpha_j|\alpha_j)} 
-       k_j(\alpha_j|\alpha_j)
-   = \sum_j a_{ji}\,k_j(\alpha_j|\alpha_j) 
-   \in (\alpha|\alpha)\mathbb{Z}.
-\]
-as desired.
+    It suffices to check that $r_i(\alpha)$ again satisfies \ref{eq:5.1.2}, i.e. that
+    \[
+        \big(k_i - \langle \alpha,\alpha_i^\vee\rangle\big)(\alpha_i|\alpha_i)
+        \in (\alpha|\alpha)\mathbb{Z}.
+    \]
+    This is equivalent to
+    \begin{equation}\label{eq:5.1.3}
+        2(\alpha|\alpha_i) \in (\alpha|\alpha)\mathbb{Z}
+    \end{equation}
+    which follows from \ref{eq:5.1.2}
+    \[
+        2(\alpha|\alpha_i)
+        = \sum_j \frac{2(\alpha_j|\alpha_i)}{(\alpha_j|\alpha_j)}
+        k_j(\alpha_j|\alpha_j)
+        = \sum_j a_{ji}\,k_j(\alpha_j|\alpha_j)
+        \in (\alpha|\alpha)\mathbb{Z}.
+    \]
+    as desired.
 \end{proof}
 
-Let $A$ be a symmetrizable generalized Cartan matrix, and let $(.|.)$ be a 
-standard invariant bilinear form. Then, given a real root $\alpha$ we 
-have $(\alpha|\alpha) = (\alpha_i|\alpha_i)$ for some simple root $\alpha_i$. 
+Let $A$ be a symmetrizable generalized Cartan matrix, and let $(.|.)$ be a
+standard invariant bilinear form. Then, given a real root $\alpha$ we
+have $(\alpha|\alpha) = (\alpha_i|\alpha_i)$ for some simple root $\alpha_i$.
 
 \begin{definition}
-We call $\alpha$ a \textbf{short} (resp.\ \textbf{long}) real root if 
-$(\alpha|\alpha) = \min_i(\alpha_i|\alpha_i)$ (resp.\ 
-$\max_i(\alpha_i|\alpha_i)$). These are independent of the choice of a standard 
-form (because any two standard forms are proportional). 
+    We call $\alpha$ a \textbf{short} (resp.\ \textbf{long}) real root if
+    $(\alpha|\alpha) = \min_i(\alpha_i|\alpha_i)$ (resp.\
+    $\max_i(\alpha_i|\alpha_i)$). These are independent of the choice of a standard
+    form (because any two standard forms are proportional).
 \end{definition}
-Note that if $A$ is symmetric, then all simple roots and hence all real 
-roots have the same square length. If $A$ is not symmetric and $S(A)$ is equipped 
-with $m$ arrows pointing in the same direction, then there are simple roots of 
-exactly $m+1$ different square lengths since an arrow in $S(A)$ points to a 
-shorter simple root. It follows that if $A$ is a nonsymmetric matrix from Table 
-Fin, then every root is either short or long. Furthermore, if $A$ is a nonsymmetric  matrix from Table Aff, and $A$ is not of type $A_{2\ell}^{(2)}$ with $\ell > 1$, then every real root is either short or long; for the type $A_{2\ell}^{(2)}$ with 
+Note that if $A$ is symmetric, then all simple roots and hence all real
+roots have the same square length. If $A$ is not symmetric and $S(A)$ is equipped
+with $m$ arrows pointing in the same direction, then there are simple roots of
+exactly $m+1$ different square lengths since an arrow in $S(A)$ points to a
+shorter simple root. It follows that if $A$ is a nonsymmetric matrix from Table
+Fin, then every root is either short or long. Furthermore, if $A$ is a nonsymmetric  matrix from Table Aff, and $A$ is not of type $A_{2\ell}^{(2)}$ with $\ell > 1$, then every real root is either short or long; for the type $A_{2\ell}^{(2)}$ with
 $\ell > 1$ there are real roots of three different lengths.
 
 \begin{remark}[Short and long roots]
-    Recall that a root system is called simply laced if all roots have the same length. Equivalently \begin{enumerate}
-        \item The Cartan matrix has all off-diagonal entries either 0 or -1. 
+    Recall that a root system is called \textbf{simply laced} if all roots have the same length. Equivalently \begin{enumerate}
+        \item The Cartan matrix has all off-diagonal entries either 0 or -1.
         \item The Dynkin diagrams have only single edges (no double or triple bonds).
         \item If we restrict to finite or affine types, the only simply laced types are $A_n$, $D_n$, $E_6$, $E_7$, $E_8$ and their affine versions $A_n^{(1)}$, $D_n^{(1)}$, $E_6^{(1)}$, $E_7^{(1)}$, $E_8^{(1)}$.
     \end{enumerate}
 
 \end{remark}
 
-In this chapter, we shall normalize $(.|.)$ such that the $(\alpha_i|\alpha_i)$ 
-are relatively prime positive integers for each connected component of $S(A)$. 
-For example, if $A$ is symmetric, then $(\alpha_i|\alpha_i)=1$ for all $i$, and 
+In this section, we shall normalize $(.|.)$ such that the $(\alpha_i|\alpha_i)$
+are relatively prime positive integers for each connected component of $S(A)$.
+For example, if $A$ is symmetric, then $(\alpha_i|\alpha_i)=1$ for all $i$, and
 all real roots are short (= long).
 
-Denote by 
-$\Delta^{\mathrm{im}}$ and $\Delta^{\mathrm{im}}_+$ the sets of imaginary and 
+Denote by
+$\Delta^{\mathrm{im}}$ and $\Delta^{\mathrm{im}}_+$ the sets of imaginary and
 positive imaginary roots, respectively. By definition,
 \[
-   \Delta = \Delta^{\mathrm{re}} \cup \Delta^{\mathrm{im}}
-   \qquad \text{(disjoint union).}
+    \Delta = \Delta^{\mathrm{re}} \cup \Delta^{\mathrm{im}}
+    \qquad \text{(disjoint union).}
 \]
 It is also clear that
 \[
-   \Delta^{\mathrm{im}} = \Delta^{\mathrm{im}}_+ \cup \big(-\Delta^{\mathrm{im}}_+\big).
+    \Delta^{\mathrm{im}} = \Delta^{\mathrm{im}}_+ \cup \big(-\Delta^{\mathrm{im}}_+\big).
 \]
 
 The following properties of imaginary roots are useful.
 
 \begin{proposition}[Properties of imaginary roots]\label{prop:imaginary-roots}
-\leavevmode
-\begin{enumerate}[label=\alph*)]
-    \item The set $\Delta^{\mathrm{im}}_+$ is $W$-invariant.
-    \item For $\alpha \in \Delta^{\mathrm{im}}_+$ there exists a unique root 
-          $\beta \in -C^\vee$ (i.e.\ $\langle \beta, \alpha_i^\vee \rangle \leq 0$ 
-          for all $i$) which is $W$-equivalent to $\alpha$.
-    \item If $A$ is symmetrizable and $(.|.)$ is a standard invariant bilinear 
-          form, then a root $\alpha$ is imaginary if and only if $(\alpha|\alpha)\leq 0$.
-\end{enumerate}
+    \leavevmode
+    \begin{enumerate}[label=\alph*)]
+        \item The set $\Delta^{\mathrm{im}}_+$ is $W$-invariant.
+        \item For $\alpha \in \Delta^{\mathrm{im}}_+$ there exists a unique root
+              $\beta \in -C^\vee$ (i.e.\ $\langle \beta, \alpha_i^\vee \rangle \leq 0$
+              for all $i$) which is $W$-equivalent to $\alpha$.
+        \item If $A$ is symmetrizable and $(.|.)$ is a standard invariant bilinear
+              form, then a root $\alpha$ is imaginary if and only if $(\alpha|\alpha)\leq 0$.
+    \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-As $\Delta^{\mathrm{im}}_+ \subset \Delta_+ \setminus \Pi$ and the set 
-$\Delta_+\setminus\{\alpha_i\}$ is $r_i$-invariant (by Lemma 1.3), it follows 
-that $\Delta^{\mathrm{im}}_+$ is $r_i$-invariant for all $i$ and hence 
-$W$-invariant, proving a). Let $\alpha \in \Delta^{\mathrm{im}}_+$ and let $\beta$ 
-be an element of minimal height in $W\cdot\alpha \subset \Delta_+$. Then $-\beta 
-\in C^\vee$. Such a $\beta$ is unique in the orbit $W\cdot\alpha$ by Proposition 
-3.12b), proving b). Let $\alpha$ be an imaginary root; we may assume, by b), that 
-$-\alpha \in C^\vee$ (since $(.|.)$ is $W$-invariant). Let 
-$\alpha = \sum_i k_i \alpha_i$, $k_i \geq 0$; then
-\[
-   (\alpha|\alpha) = \sum_i k_i (\alpha|\alpha_i) 
-   = \sum_i \tfrac{1}{2}|\alpha_i|^2\, k_i \langle \alpha, \alpha_i^\vee \rangle 
-   \leq 0
-\]
-by (2.3.3 and 5). The converse holds by Proposition \ref{prop:real-roots} (d).
+    As $\Delta^{\mathrm{im}}_+ \subset \Delta_+ \setminus \Pi$ and the set
+    $\Delta_+\setminus\{\alpha_i\}$ is $r_i$-invariant, it follows
+    that $\Delta^{\mathrm{im}}_+$ is $r_i$-invariant for all $i$ and hence
+    $W$-invariant, proving a). Let $\alpha \in \Delta^{\mathrm{im}}_+$ and let $\beta$
+    be an element of minimal height in $W\cdot\alpha \subset \Delta_+$. Then $-\beta
+        \in C^\vee$. Such a $\beta$ is unique in the orbit $W\cdot\alpha$ because the fundamental chamber $C$ is a fundamental domain for the action of $W$ on $X$, proving b). Let $\alpha$ be an imaginary root; we may assume, by b), that
+    $-\alpha \in C^\vee$ (since $(.|.)$ is $W$-invariant). Let
+    $\alpha = \sum_i k_i \alpha_i$, $k_i \geq 0$; then
+    \[
+        (\alpha|\alpha) = \sum_i k_i (\alpha|\alpha_i)
+        = \sum_i \tfrac{1}{2}|\alpha_i|^2\, k_i \langle \alpha, \alpha_i^\vee \rangle
+        \leq 0
+    \]
+    The converse holds by Proposition \ref{prop:real-roots} (d).
+\end{proof}
+\begin{definition}
+    For $\alpha = \sum_i k_i \alpha_i \in Q$ we define the \textbf{support} of $\alpha$
+    (written $\operatorname{supp}\alpha$) to be the subdiagram of $S(A)$ which consists
+    of the vertices $i$ such that $k_i \neq 0$, and of all the edges joining these
+    vertices.
+\end{definition}
+By the following lemma, $\operatorname{supp}\alpha$ is connected for every root
+$\alpha$.
+\begin{lemma}
+    Let $I_1, I_2 \subset \{1,\dots,n\}$ be disjoint subsets such that
+    $a_{ij} = a_{ji} = 0$ whenever $i \in I_1$, $j \in I_2$.
+    Let
+    \[
+        \beta_s = \sum_{i \in I_s} k_i^{(s)} \alpha_i, \qquad (s=1,2).
+    \]
+    Suppose that $\alpha = \beta_1 + \beta_2$ is a root of the Lie algebra
+    $\mathfrak{g}(A)$. Then either $\beta_1$ or $\beta_2$ is zero.
+\end{lemma}
+\begin{proof}
+    If the submatrices corresponding to $I_1$ and $I_2$ have no edges, the corresponding subalgebras $\mathfrak{g}^{(1)}$ and $\mathfrak{g}^{(2)}$ commute. Then $\mathfrak{g}_\alpha$, the root space for $\alpha$, would have to lie entirely inside one of them.
 \end{proof}
 
+\begin{example}
+    In $A_4$, the simple roots are $\alpha_1, \alpha_2, \alpha_3, \alpha_4$, corresponding to the superdiagonal entries of $5\times 5$ traceless matrices. The positive roots correspond to the upper triangular entries, and one sees that to write a root as a sum of simple roots, one takes the sum of the simple roots corresponding to the entries in the path from one node to another. Thus indeed the support of any root is connected.
+\end{example}
+
+Set:
+\[
+    K = \{\alpha \in Q_+ \setminus \{0\} \mid \langle \alpha, \alpha_i^\vee \rangle
+    \leq 0 \ \text{for all $i$ and $\operatorname{supp}\alpha$ is connected}\}.
+\]
+
+\begin{lemma}[Key lemma on imaginary roots]\label{lem:key-imaginary}
+    In the above notation, $K \subset \Delta^{\mathrm{im}}_+$.
+\end{lemma}
+
+\begin{proof}
+    Let $\alpha = \sum_i k_i \alpha_i \in K$. Set
+    \[
+        \Omega_\alpha = \{\gamma \in \Delta_+ \mid \gamma \leq \alpha\}.
+    \]
+    The set $\Omega_\alpha$ is finite, and it is nonempty because the simple roots which appear in the decomposition of $\alpha$, lie in $\Omega_\alpha$. Let
+    $\beta = \sum_i m_i \alpha_i$ be an element of maximal height in $\Omega_\alpha$.
+    It follows from Corollary \ref{cor:weights-integrable} that
+    \[
+        \operatorname{supp}\beta = \operatorname{supp}\alpha.
+    \]
+    This is because by construction. Suppose that $\operatorname{supp}\beta$ is a proper subset of $\operatorname{supp}\alpha$. $\beta$ was chosen as an element of maximal height in $\Omega_\alpha$, so $\beta + \alpha_i$ cannot also be in $\Omega_\alpha$, i.e. it is not a root. Since $\beta$ is a root and $\beta + \alpha_i$ is not a root, we conclude:
+    $\langle \beta, \alpha_i^\vee \rangle \geq 0$. But recall: $i$ is in the support of $\alpha$, and by hypothesis on $\alpha \in K$, we know
+    $\langle \alpha, \alpha_i^\vee \rangle \leq 0$. So we see that $\langle \beta, \alpha_i^\vee \rangle$ is nonpositive, but we can add some positive multiple of $\alpha_i$ to $\beta$ to get $\alpha$, and the pairing with $\alpha_i^\vee$ will decrease by twice that positive multiple, but at the same time it must remain nonnegative. This is a contradiction.
+
+
+    First, we prove that $\alpha \in \Delta_+$. Suppose the contrary; then
+    $\alpha \neq \beta$. By definition:
+    \[
+        \beta + \alpha_i \notin \Delta_+ \quad \text{if } k_i > m_i.
+    \]
+    Let $A_1$ be the principal submatrix of $A$ corresponding to $\operatorname{supp}\alpha$.
+    If $A_1$ is of finite type, then
+    $\{\alpha \in Q_+ \mid \langle \alpha,\alpha_i^\vee\rangle \leq 0 \ \text{for all $i$}\}=\{0\}$ because $A$ is positive definite,
+    and there is nothing to prove. If $A_1$ is not of finite type, then, by Proposition~4.9,
+    we have
+    \[
+        P := \{j \in \operatorname{supp}\alpha \mid k_j = m_j\} \neq \emptyset.
+    \]
+    Let $R$ be a connected component of the subdiagram
+    $(\operatorname{supp}\alpha)\setminus P$. From the above and Corollary~3.6a) we deduce that
+    \[
+        \langle \beta, \alpha_i^\vee \rangle \geq 0 \quad \text{if } i \in R.
+    \]
+    Set $\beta' = \sum_{i \in R} m_i \alpha_i$. Since $\operatorname{supp}\alpha$ is connected,
+    the previous relations imply
+    \[
+        \langle \beta', \alpha_i^\vee \rangle \geq 0 \ \text{if } i \in R,
+        \qquad \langle \beta', \alpha_j^\vee \rangle > 0 \ \text{for some $j \in R$.}
+    \]
+    Therefore, by Theorem~4.3, the diagram $R$ is of finite type.
+
+    On the other hand, set
+    \[
+        \alpha' = \sum_{i \in R} (k_i - m_i)\alpha_i.
+    \]
+    Since $\operatorname{supp}\alpha'$ is a connected component of $\operatorname{supp}(\alpha-\beta)$,
+    we obtain that
+    \[
+        \langle \alpha', \alpha_i^\vee \rangle
+        = \langle \alpha - \beta, \alpha_i^\vee \rangle \quad \text{for $i \in R$.}
+    \]
+    But $\langle \alpha, \alpha_i^\vee \rangle \leq 0$ since $\alpha \in K$, hence by the above:
+    \[
+        \langle \alpha', \alpha_i^\vee \rangle \leq 0 \quad \text{for $i \in R$.}
+    \]
+    This contradicts the fact that $R$ is of finite type. Thus, we have proved that
+    $\alpha \in \Delta_+$.
+
+    But $2\alpha$ also satisfies all the hypotheses of the lemma; hence $2\alpha \in \Delta_+$ and $\alpha \in \Delta^{\mathrm{im}}_+$.
+\end{proof}
+
+\begin{theorem}[Weyl group orbit of imaginary roots]\label{thm:imaginary-orbits}
+    \[
+        \Delta^{\mathrm{im}}_+ = \bigcup_{w \in W} w(K).
+    \]
+\end{theorem}
+
+\begin{proof}
+    Lemma 5.3 and Proposition 5.2a) prove the inclusion $\supset$. The reverse
+    inclusion holds by Proposition 5.2b) and by the fact that $\operatorname{supp}\alpha$
+    is connected for every root $\alpha$ (by Lemma 1.6).
+\end{proof}
+
+
+\begin{proposition}[Multiples of imaginary roots]\label{prop:multiples-imaginary}
+    If $\alpha \in \Delta^{\mathrm{im}}_+$ and $r$ is a nonzero (rational) number
+    such that $r\alpha \in Q$, then $r\alpha \in \Delta^{\mathrm{im}}$.
+    In particular, $n\alpha \in \Delta^{\mathrm{im}}$ if $n \in \mathbb{Z}\setminus\{0\}$.
+\end{proposition}
+
+\begin{proof}
+    By Proposition 5.2b) we can assume that $\alpha \in -C^\vee \cap Q_+$. Since
+    $\alpha \in \Delta$, it follows that $\operatorname{supp}\alpha$ is connected
+    and hence $\alpha \in K$. Hence $r\alpha \in K$ for $r>0$ and therefore, by Lemma 5.3,
+    $r\alpha \in \Delta^{\mathrm{im}}$.
+\end{proof}
+
+
+\begin{theorem}[Description of imaginary roots]\label{thm:imaginary-roots}
+    Let $A$ be an indecomposable generalized Cartan matrix.
+    \begin{enumerate}[label=\alph*)]
+        \item If $A$ is of finite type, then the set $\Delta^{\mathrm{im}}$ is empty.
+        \item If $A$ is of affine type, then
+              \[
+                  \Delta^{\mathrm{im}}_+ = \{n\delta \mid n=1,2,\dots\},
+              \]
+              where $\delta = \sum_{i=0}^\ell a_i \alpha_i$, and the $a_i$ are the labels of $S(A)$
+              in Table Aff.
+        \item If $A$ is of indefinite type, then there exists a positive imaginary root
+              $\alpha = \sum_i k_i \alpha_i$ such that $k_i>0$ and
+              $\langle \alpha,\alpha_i^\vee\rangle < 0$ for all $i=1,\dots,n$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Recall
+    \[
+        \{\alpha \in Q_+ \mid \langle \alpha,\alpha_i^\vee \rangle \leq 0, \ i=1,\dots,n\}
+    \]
+    is zero for $A$ of finite type, is equal to $\mathbb{Z}\delta$ for $A$ of affine type,
+    and there exists $\alpha=\sum_i k_i\alpha_i$ such that $k_i>0$ and
+    $\langle \alpha,\alpha_i^\vee\rangle <0$ for all $i$ if $A$ is of indefinite type.
+    The theorem now follows from Theorem 5.4.
+\end{proof}
+
+It follows from Proposition 4.7 that if $\alpha$ is a \emph{null-root}, i.e.\
+$\alpha \in \Delta(A)$ is such that $(\alpha|\beta)=0$, then $\operatorname{supp}\alpha$
+is a diagram of affine type which is a connected component of $S(A)$ and
+$\alpha=k\delta$, $k\in\mathbb{Z}$. We proceed to describe the isotropic roots.
+
+\begin{proposition}[Isotropic roots]\label{prop:isotropic-roots}
+    Let $A$ be symmetrizable. A root $\alpha$ is isotropic
+    (i.e.\ $(\alpha|\alpha)=0$) if and only if it is $W$-equivalent to an imaginary root
+    $\beta$ such that $\operatorname{supp}\beta$ is a subdiagram of affine type of $S(A)$
+    (then $\beta=k\delta$).
+\end{proposition}
+
+\begin{proof}
+    Let $\alpha$ be an isotropic root and let $(.|.)$ be a standard bilinear form.
+    We can assume that $\alpha>0$. Then $\alpha \in \Delta^{\mathrm{im}}_+$ by
+    Proposition 5.1d), and $\alpha$ is $W$-equivalent to an imaginary root
+    $\beta \in K$ such that $\langle \beta,\alpha_i^\vee\rangle \leq 0$ for all $i$,
+    by Proposition 5.2b). Let $\beta = \sum_{i\in P} k_i\alpha_i$ and
+    $P=\operatorname{supp}\beta$. Then
+    \[
+        (\beta|\beta) = \sum_{i\in P} k_i(\beta|\alpha_i) = 0,
+    \]
+    where $k_i>0$ and
+    \[
+        (\beta|\alpha_i) = \tfrac{1}{2}|\alpha_i|^2 \langle \beta,\alpha_i^\vee \rangle
+        \leq 0 \quad \text{for } i\in P.
+    \]
+    Therefore $\langle \beta,\alpha_i^\vee\rangle = 0$ for all $i\in P$, and $P$ is a
+    diagram of affine type. Conversely, if $\beta = k\delta$ is an imaginary root for a
+    diagram of affine type, then
+    \[
+        (\beta|\beta) = k^2(\delta|\delta) = k^2 \sum_i a_i(\delta|\alpha_i) = 0,
+    \]
+    since $\langle \delta,\alpha_i^\vee\rangle=0$ for all $i$.
+\end{proof}
+
+\begin{exercise}
+    Show that for $\alpha \in \Delta^{\mathrm{re}}$, one has \begin{align*}
+        [\mathfrak{g}_\alpha, \mathfrak{g}_{-\alpha}] & = \mathbb{C}\alpha^\vee
+    \end{align*}
+    Show that if $A$ is a nonsymmetrizable $3\times 3$ matrix and $\alpha = \alpha_1 + \alpha_2 + \alpha_3$, then $\alpha$ is an imaginary root with $\dim [\mathfrak{g}_\alpha, \mathfrak{g}_{-\alpha}] > 1$.
+\end{exercise}
+
+\begin{solution}[Incomplete]
+    For the first statement, pick $w\in W$ with $w\alpha=\alpha_i$. Let $e_i\in\mathfrak g_{\alpha_i}, f_i\in\mathfrak g_{-\alpha_i}$ be Chevalley generators, so $[e_i,f_i]=\alpha_i^\vee$. Using a representative $n_w$ of $w$ in the Tits group, set
+    \[e_\alpha:=\operatorname{Ad}(n_w^{-1})e_i\in\mathfrak g_\alpha\]\[
+        f_{-\alpha}:=\operatorname{Ad}(n_w^{-1})f_i\in\mathfrak g_{-\alpha}\]
+    Then
+    \[[e_\alpha,f_{-\alpha}]
+        =\operatorname{Ad}(n_w^{-1})[e_i,f_i]
+        =\operatorname{Ad}(n_w^{-1})(\alpha_i^\vee)
+        =(w^{-1}\alpha_i)^\vee=\alpha^\vee\]
+    Hence $[\mathfrak g_\alpha,\mathfrak g_{-\alpha}]$ contains $\mathbb C\alpha^\vee$. On the other hand, $[\mathfrak g_\alpha,\mathfrak g_{-\alpha}]\subset\mathfrak h$ because for $h\in \mf h$ \begin{align*}
+        [h,[x,y]] = [[h,x],y]+[x,[h,y]] = \alpha(h)[x,y]-\alpha(h)[x,y]=0
+    \end{align*} so $h$ acts on $[x,y]$ with eigenvalue $0$, i.e. $[\mathfrak g_\alpha,\mathfrak g_{-\alpha}] \subset \mf h$.
+    Moreover the map $\mathfrak g_\alpha \otimes \mathfrak g_{-\alpha}\;\xrightarrow{[\ ,\ ]}\; \mathfrak h$ has $1$-dimensional domain, so its image is at most one-dimensional.
+
+    \red{I'm still not so clear on what characterizes the Cartan $\mf h$. I know that we have real roots and imaginary roots. Is $\mf h$ precisely the weight zero space? But then what about imaginary roots? Can you characterize it as being generated by all the brackets $[\mathfrak g_\alpha,\mathfrak g_{-\alpha}]$?}
+
+    For the second statement, we need to check that $\alpha$ is a root and $\dim [\mf g_\alpha,\mf g_{-\alpha}]>1$. 
+    
+To see that $\alpha$ is a root, we recall the construction of $\mf g(A)$. Work inside the positive part $\mathfrak{n}_+$ generated by $e_1,e_2,e_3$. Give the free Lie algebra on $\{e_1,e_2,e_3\}$ the multidegree grading $\deg e_i=\epsilon_i\in\mathbb{Z}_{\ge0}^3$. The Serre relators are
+\[(\operatorname{ad}e_i)^{1-a_{ij}}(e_j)=0\qquad(i\neq j)\]
+Each such relator has multidegree $(1-a_{ij})\epsilon_i+\epsilon_j$, i.e. it uses at least two copies of some $e_i$ (since $1-a_{ij}\ge1$, and it is $>1$ unless $a_{ij}=0$). \red{How to interpret the meaning of $a_{ij} = 0$?} In particular, no Serre relator has multidegree $\epsilon_1+\epsilon_2+\epsilon_3$.
+
+Therefore the natural map from the $(1,1,1)$–homogeneous piece of the free Lie algebra to $\mathfrak{n}_+$ is injective: nothing at that multidegree is killed by the ideal generated by the Serre relations. But that homogeneous piece is spanned by the two independent brackets (Jacobi gives one relation among three):
+$X_1:=[e_1,[e_2,e_3]]$, $X_2:=[e_2,[e_1,e_3]]$ $(\text{and }X_3:=[e_3,[e_1,e_2]]=-X_1-X_2)$. Thus $0\neq X_i\in \mathfrak{g}_{\alpha}$ and hence $\alpha$ is a root.
+
+
+Now we verify that $\dim [\mathfrak{g}_\alpha,\mathfrak{g}_{-\alpha}]>1$. Pick nonzero
+\[
+X_1=[e_1,[e_2,e_3]], \quad X_2=[e_2,[e_1,e_3]]\in \mathfrak{g}_\alpha
+\]
+and nonzero 
+\[
+Y_1=[f_1,[f_2,f_3]], \quad Y_2=[f_2,[f_1,f_3]]\in \mathfrak{g}_{-\alpha}.
+\]
+Set
+$H_i:=[X_i,Y_i]\in\mathfrak{h}$ for $i=1,2$. We claim $H_1,H_2$ are linearly independent, so the image $[\mathfrak{g}_\alpha,\mathfrak{g}_{-\alpha}]$ has dimension $\geq2$. We look at their action on the $\mathfrak{h}$-weight spaces $\mathfrak{g}_{\alpha_j}$ $(j=1,2,3)$ and check that they are not proportional.
+
+I don't know how to quickly compute these brackets \begin{align*}
+    [[[e_1,[e_2,e_3]],[f_1,[f_2,f_3]]],e_1]
+\end{align*} and I don't know how to use a computer to do it either. \red{Is there a better way to do the computation or to bypass the computation to do this problem?}
+
+If $A$ were symmetrizable, there would be positive numbers $d_i$ with $d_i a_{ij}=d_j a_{ji}$, and the two rows above would be proportional once restricted to $\ker\alpha=\{(t_1,t_2,t_3)\mid t_1+t_2+t_3=0\}$. But in the nonsymmetrizable case, that proportionality fails: the two eigenvalue triples are not scalar multiples on $\ker\alpha$. Hence $H_1,H_2$ act differently on the three simple root spaces, so they are linearly independent elements of $\ker\alpha$.
+
+Therefore
+$\dim [\mathfrak{g}_\alpha,\mathfrak{g}_{-\alpha}] \geq 2$ as desired.
+\end{solution}
+
+\begin{exercise}
+    Show that $\dim [\mf g_\alpha,\mf g_{-\alpha}] = 1$ for all roots $\alpha \in \Delta$ if and only if $A$ is symmetrizable.
+\end{exercise}
+
+\begin{solution}
+    For symmetrizable Kac-Moody algebras there exists a symmetric invariant nondegenerate bilinear form $(\cdot,\cdot)$ on $\mathfrak{g}$ that pairs $\mathfrak{g}_\alpha$ and $\mathfrak{g}_{-\alpha}$ nondegenerately, and an element $\alpha^\vee\in\mathfrak{h}$ characterized by
+\[
+    (h,\alpha^\vee)=\alpha(h) \quad (\forall\,h\in\mathfrak{h}).
+\]
+Take $x\in\mathfrak{g}_\alpha$, $y\in\mathfrak{g}_{-\alpha}$. By invariance,
+\[
+    ([x,y],h)=(x,[y,h])=(x,\alpha(h)\,y)=\alpha(h)\,(x,y)=(\,(x,y)\,\alpha^\vee,\,h)
+\]
+for all $h\in\mathfrak{h}$. Nondegeneracy on $\mathfrak{h}$ gives
+\[
+    [x,y]=(x,y)\,\alpha^\vee \in \mathbb{C}\,\alpha^\vee.
+\]
+So the image of the bracket $\mathfrak{g}_\alpha\otimes \mathfrak{g}_{-\alpha}\to \mathfrak{h}$ is exactly one-dimensional (spanned by $\alpha^\vee$), for every root $\alpha$ (real or imaginary). Conversely, if $A$ is not symmetrizable, then there exists a root $\alpha$ with $\dim[\mathfrak{g}_\alpha,\mathfrak{g}_{-\alpha}]>1$.
+
+Indeed, nonsymmetrizability first appears in rank 3. Choose a nonsymmetrizable $3\times3$ principal submatrix $A_J$ (possible whenever $A$ is nonsymmetrizable), and let $\mathfrak{g}_J\subset \mathfrak{g}$ be the Kac–Moody subalgebra generated by $\{e_i,f_i,h_i\}_{i\in J}$. In that rank-3 subsystem set
+\[
+\alpha=\alpha_i+\alpha_j+\alpha_k\quad (J=\{i,j,k\}).
+\]
+It follows from the previous exercise that $\alpha$ is a root of $\mathfrak{g}_J$ (hence of $\mathfrak{g}$) and $[\mathfrak{g}_\alpha,\mathfrak{g}_{-\alpha}]\subset \mathfrak{h}_J$ has dimension at least two.
+
+Thus for nonsymmetrizable $A$ there is at least one $\alpha$ with $\dim[\mathfrak{g}_\alpha,\mathfrak{g}_{-\alpha}]>1$, contradicting the hypothesis. Therefore the hypothesis forces $A$ to be symmetrizable.
+\end{solution}
+
+\begin{exercise}
+    If $\dim \mf g(A) = \infty$, then $|\Delta^{\mathrm{re}}| = \infty$.
+\end{exercise}
+
+\begin{solution}
+    By Prop \ref{prop:finite-char}, if $\mf g(A)$ is infinite dimensional, then $W$ is infinite. Suppose $|\Delta^{\mathrm{re}}|<\infty$. Recall that the length of $w$ is equal to the number of positive real roots that $w$ sends to negative roots. Since there are only finitely many real roots, the length of $w$ is bounded above by $|\Delta^{\mathrm{re}}|$. This contradicts the well known fact that an infinite Coxeter group has elements of arbitrarily large length.
+\end{solution}
+
+\begin{remark}[Orbits of the $W$ action on roots]
+    Recall that in for finite semisimple Lie algebras, the Weyl group acts transitively on roots of the same length. To see this, it is enough to show that any positive root $\beta$ is in the $W$-orbit of some simple root. Take any positive root $\beta=\sum_i c_i\alpha_i$ (a linear combination of simple roots with nonnegative integers). 
+Suppose $\beta$ is not simple, then there exists some simple root $\alpha_j$ with $(\beta,\alpha_j)>0$.
+
+This is true because $\Phi$ is finite type so in particular the bilinear form $(\cdot,\cdot)$ is positive definite.
+Suppose $(\beta,\alpha_j)\leq 0$ for every simple root $\alpha_j$. Then
+\[
+(\beta,\beta) = \Big(\beta,\sum_j c_j\alpha_j\Big) = \sum_j c_j(\beta,\alpha_j)\ \leq 0
+\]
+because each coefficient $c_j\geq 0$. But $(\beta,\beta)>0$ since $\beta$ is a nonzero root in a positive definite space. Contradiction. So at least one $j$ has $(\beta,\alpha_j)>0$.
+
+Reflecting $\beta$ across $\alpha_j$:
+\[
+s_j(\beta) = \beta - \langle \beta,\alpha_j^\vee\rangle\alpha_j
+\]
+gives a new root of the same length but smaller height. Iterating this process, you eventually land on a simple root $\alpha_i$.
+
+In affine type, the Weyl group is transitive on real roots of a fixed length. However, I don't know how to show this fact without using the classification, and this exercise comes before Kac tells us what the affine Weyl groups are in each type. This immediately shows that there are infinitely many real roots since the Weyl group is infinite, and in fact shows there are infinitely many real roots of each length. \red{I was thinking about showing that the stabilizer of a real root is of infinite index, but I don't know how to identify the stabilizer of a real root in the affine Weyl group, nor do I know how to how to do it in the finite type case (from the Dynkin diagram say).}
+\end{remark}
+
+\begin{exercise}
+    If $A$ is a matrix of finite or affine type, $\beta \in \Delta$, $\alpha \in \Delta^{\mathrm{re}}$, then the string $\beta + k \alpha$ with $k \in \mathbb{Z}$ contains at most five roots. Show that if $A$ is of indefinite type, then the number of roots in a string can be arbitrarily large.
+\end{exercise}
+
+\begin{solution}
+    Fix a real root $\alpha$. For any root $\beta$, there exist integers $p,q\geq 0$ such that
+\[
+\{\beta+k\alpha : k\in\mathbb Z\}\cap \Delta \;=\; \{\beta-p\alpha, \dots, \beta, \dots, \beta+q\alpha\},
+\]
+and
+\[
+p-q \;=\;\langle \beta, \alpha^\vee\rangle.
+\]
+This is the root string property, proved by embedding the span of $\{\alpha,\beta\}$ in an $\mathfrak{sl}_2$-subalgebra.
+
+So the length of the $\alpha$-string through $\beta$ is
+\[
+p+q+1 \;=\; |\langle \beta, \alpha^\vee\rangle|+1. 
+\]
+The entire string lives in the rank-2 subsystem generated by $\alpha,\beta$. Its Cartan matrix is
+\[
+\begin{pmatrix}
+2 & -m \\ -n & 2
+\end{pmatrix},\qquad
+m=-\langle \alpha,\beta^\vee\rangle,\ n=-\langle \beta,\alpha^\vee\rangle.
+\]
+
+If $A$ is finite or affine, every rank-2 submatrix is finite or affine. This is because every principal submatrix of a positive definite or positive semidefinite matrix is positive definite or positive semidefinite. Note that the converse is not true. In rank 2, finite/affine means $mn \leq 4$ (essentially by the classification of rank-2 Dynkin diagrams). So the possibilities are:
+\begin{itemize}
+    \item $mn=0$: string length $=1$
+    \item $mn=1$ (type $A_2$): string length $\leq 2$
+    \item $mn=2$ (type $B_2$): string length $\leq 3$
+    \item $mn=3$ (type $G_2$): string length $\leq 4$
+    \item $mn=4$ (rank-2 affines): string length $\leq 5$
+\end{itemize}
+So in all finite or affine types, every root string has at most 5 elements. Conversely, $A$ is indefinite, then some $2\times2$ principal submatrix has $mn>4$. For such a pair, $|\langle\beta,\alpha^\vee\rangle|=n$, so the string through $\beta$ in the direction of $\alpha$ has length $n+1$. Since $n$ can be arbitrarily large in indefinite type, the length of root strings is unbounded.
+\end{solution}
+
+\begin{remark}
+    In general, if $m$ and $n$ are arbitrary positive integers, the Kac-Moody algebra associated to the matrix
+    \[\begin{pmatrix}
+        2 & -m \\ -n & 2
+    \end{pmatrix}\]
+    is indefinite if $mn>4$, affine if $mn=4$, and finite if $mn<4$. 
+\end{remark}
+
+
+\section{Affine Weyl group}
+\subsection*{Translations in the Affine Weyl Group}
+
+Motivated by this formula, we introduce the following endomorphism 
+$t_\alpha$ of the vector space $\mathfrak{h}^*$ for $\alpha \in \mathfrak{h}^*$:
+\begin{equation}\label{eq:ta}
+    t_\alpha(\lambda) 
+    = \lambda + \langle \lambda, K \rangle \alpha 
+      - \big( (\langle \lambda,\alpha\rangle 
+      + \tfrac{1}{2}|\alpha|^2 \langle \lambda, K \rangle ) \big)\delta.
+\end{equation}
+\begin{remark}
+    Kac writes that this quadratic term which appears in the definition of $t_\alpha$ "explains" the appearance of theta functions in the theory of affine algebras. This is because when you compute the characters of highest-weight representations of affine Kac-Moody algebras, you sum over the affine Weyl group:
+\[\chi(\lambda) = \sum_{w \in W} \det(w)\, e^{w(\lambda+\rho) - \rho}\]
+and theta functions arise precisely when you sum exponentials of the form \begin{align*}
+    \Theta(\tau, z) = \sum_{\alpha \in \text{lattice}} \exp\!\big(-\tfrac{1}{2}|\alpha|^2 \tau + \langle \alpha, z\rangle\big).
+\end{align*}
+Continuing with the discussion of theta functions, we have the following theorem about genus $1$ Riemann surfaces.
+\end{remark}
+
+\begin{theorem}
+    Let $\theta_1,\dots,\theta_4$ be the four Jacobi theta functions. Then there is a map \begin{align*}
+        E/L \to \mathbb{CP}^3, \quad z \mapsto [\theta_1(z,\tau):\theta_2(z,\tau):\theta_3(z,\tau):\theta_4(z,\tau)]
+    \end{align*} which is a smooth embedding of the complex torus $E=\mathbb{C}/L$ into projective space. It is a degree $4$ map and its image is the intersection of two quadrics.
+\end{theorem}
+
+\red{When we were proving this theorem, we wrote down the first theta function $\theta_1$ and defined the others by half period shifts of $\theta_1$. Is there a reason why we didn't write down more? Borcherds made a remark last time that there are $2^{2g}$ theta divisors on a genus $g$ Riemann surface.}
+
+\red{For example, there's a classical theorem that the vector space of modular forms of weight $k$ for $\SL_2(\mathbb{Z})$ has dimension $k/12$. Should I be thinking of some result along these lines, as to why these are the only four we care about in the genus 1 case?}
+
+\red{So the theta functions are sections of the pullback of $\mathcal{O}(1)$ to $E$. Is there a way to see the affine characters as coming from elliptic curves in some natural way?}
+
+In the case when $m := \langle \lambda, K\rangle \neq 0$ we can rewrite this 
+as follows using (6.2.6):
+\begin{equation}
+    t_\alpha(\lambda) 
+    = m \Lambda_0 + (\overline{\lambda} + m \alpha) 
+      + \frac{1}{2m}\big(|\lambda|^2 - |\overline{\lambda} + m\alpha|^2\big)\delta.
+\end{equation}
+As $\langle \Lambda_0,K\rangle = 1$, we obtain in particular:
+\begin{equation}
+    t_\alpha(\Lambda_0) = \Lambda_0 + \alpha - \tfrac{1}{2}|\alpha|^2 \delta.
+\end{equation}
+Note also that \eqref{eq:ta} implies
+\begin{equation}
+    t_\alpha(\lambda) = \lambda - (\lambda|\alpha)\delta, 
+    \quad \text{if } \langle \lambda, K\rangle = 0.
+\end{equation}
+
+\noindent
+Now we can easily deduce the additivity property of $t_\alpha$:
+\begin{equation}
+    t_\alpha t_\beta = t_{\alpha+\beta}.
+\end{equation}
+Indeed, by the previous formula it is sufficient to check this 
+for $\lambda = \Lambda_0$. Using the above, we compute
+\begin{align*}
+    t_\alpha t_\beta (\Lambda_0) 
+      &= t_\alpha(\Lambda_0 + \beta - \tfrac{1}{2}|\beta|^2 \delta) \\
+      &= \Lambda_0 + \alpha - \tfrac{1}{2}|\alpha|^2 \delta
+         + \beta - \tfrac{1}{2}|\beta|^2 \delta
+         - \big((\beta - \tfrac{1}{2}|\beta|^2\delta | \alpha)\big)\delta \\
+      &= \Lambda_0 + \alpha + \beta - \tfrac{1}{2}|\alpha+\beta|^2 \delta \\
+      &= t_{\alpha+\beta}(\Lambda_0).
+\end{align*}
+
+\noindent
+We also have the compatibility with the finite Weyl group:
+\begin{equation}
+    t_{w(\alpha)} = w t_\alpha w^{-1}, \qquad w \in \dot{W}.
+\end{equation}
+Indeed,
+\[
+    w t_\alpha (w^{-1}(\lambda)) 
+    = w\!\left(w^{-1}(\lambda) + \langle w^{-1}(\lambda), K \rangle \alpha 
+        - \big( (w^{-1}(\lambda)|\alpha) 
+           + \tfrac{1}{2}|\alpha|^2 \langle w^{-1}(\lambda), K\rangle \big)\delta\right),
+\]
+and the claim follows since $w(K)=K$ and $(\cdot|\cdot)$ is $\dot{W}$-invariant.
+
+\medskip
+
+\noindent
+Now we introduce the following important lattice $M \subset \mathfrak{h}^*$.
+Let $\mathbb{Z}(\dot{W}\cdot \theta^\vee)$ denote the lattice in $\mathfrak{h}^*$
+spanned over $\mathbb{Z}$ by the (finite) set $\dot{W}\cdot \theta^\vee$, and set
+\[
+    M = \nu(\mathbb{Z}(\dot{W}\cdot \theta^\vee)).
+\]
+Here is a description of the lattice $M$:
+\begin{equation}
+    M = Q = Q^\vee \quad \text{if $A$ is symmetric or $r > a_0$};
+\end{equation}
+\begin{equation}
+    M = \nu(Q^\vee) = \nu(Q^\vee) \quad \text{otherwise}.
+\end{equation}
+
+\noindent
+Indeed, if $r=1$, then $\theta^\vee$ is a short root of $\Delta^\vee$, hence
+$\dot{W}\cdot \theta^\vee = (\Delta^\vee)_s$. In the finite type case the root
+lattice is spanned over $\mathbb{Z}$ by the short roots, hence 
+$M = \nu(Q^\vee)$, as claimed. Equivalently,
+\[
+    M = Q^\vee \quad (\text{resp.\ } M = \mathbb{Z}\Delta_l)
+    \quad \text{if $r=1$ and $A$ is symmetric (resp.\ nonsymmetric).}
+\]
+Similarly, if $a_0 r = 2$ or $3$, then $\theta^\vee$ is a long root, hence 
+$\dot{W}\cdot \theta^\vee = (\Delta^\vee)_l$, and we get $M=Q^\vee$.
+Finally, for $A_{2\ell}^{(2)}$ one has $\nu(\theta^\vee) = \tfrac{1}{2}\theta$, 
+hence $M=\tfrac{1}{2}\mathbb{Z}\Delta_\ell$, which again agrees with the above.
+
+\medskip
+
+\noindent
+Note the following useful fact:
+\begin{equation}
+    Q^\vee \supset \nu(Q^\vee) \quad \text{if } r=1, 
+    \qquad 
+    Q^\vee \subset \nu(Q^\vee) \quad \text{if } r>1.
+\end{equation}
+
+\medskip
+
+\noindent
+The lattice $M$, considered as an abelian group, operates faithfully on 
+$\mathfrak{h}^*$ by formula \eqref{eq:ta}. We denote the corresponding subgroup
+of $GL(\mathfrak{h}^*)$ by $T$, and call it the \emph{group of translations}.
+\medskip
+
+\begin{proposition}
+    We have $W = \dot{W} \ltimes T$.
+\end{proposition}
+
+\begin{proof}
+By the above, $t_\alpha \in W$ for $\alpha \in \nu(\theta^\vee)$, and 
+$t_{w(\alpha)} \in W$ for $w \in \dot{W}$. 
+Now it follows from additivity that $t_\alpha \in W$ for all $\alpha \in M$. 
+Since $\dot{W}$ is finite and $M$ is a free abelian group, 
+we have $\dot{W}\cap T = 1$. By conjugation invariance, $T$ is a normal 
+subgroup of $W$. Finally, the subgroup of $W$ generated by $T$ and $\dot{W}$ 
+contains all simple reflections, hence coincides with $W$.
+\end{proof}
+
+\subsection*{Big Picture Remarks}
+The operators $t_\alpha$ are the \emph{translations} in the affine Weyl group. 
+They commute with each other and form a free abelian group $T$ generated by 
+a lattice $M$ (essentially a coroot lattice, depending on the type).
+The finite Weyl group $\dot{W}$ normalizes $T$, so the full affine Weyl group 
+splits as a semidirect product:
+\[
+    W \;\cong\; \dot{W} \ltimes T.
+\]
+Thus, the affine Weyl group is ``finite reflections + translations.’’
+This explains why it is infinite (because of the translation subgroup), 
+and why it still has a very rigid structure, acting as symmetries of the 
+affine root system or tessellations of Euclidean space.
+
 \section{Meetings}
-\subsection*{Questions (Sept 17)}
+\subsection*{Questions (Sept 18)}
 \begin{enumerate}[A.]
     \item I've been thinking about the hierarchy of objects: $L\mathfrak g$ $\to$ central extensions $\to$ full affine Kac–Moody with $d$. Each step seems to be motivated by making the structure better behaved for representation theory.
-        \begin{enumerate}[a)] 
-            \item The loop algebra $L\mathfrak g$ is already a perfectly good infinite-dimensional Lie algebra, realized geometrically as a dense subalgebra of the Lie algebra of the loop group $LG$. Why isn't it sufficient to study its representation theory directly? In what sense are central extensions 'forced upon us' if we want a rich representation theory?
-            \item I see that the affine Kac–Moody algebra arises as the universal central extension of the loop algebra. Is there a structural reason why the extension must be central and abelian, rather than by some nonabelian ideal? In other words, what uniquely characterizes the central extension as the 'correct' enlargement of $L\mathfrak g$ for representation theory?
-            \item Once we accept the central extension, we typically adjoin the degree derivation $d$, defined by $[d, x\otimes z^n]=n\,x\otimes z^n$. Should I think of $d$ as a geometric object, namely the vector field $z\frac{d}{dz}$ on the circle? Is the introduction of $d$ mathematically necessary (e.g. for a nondegenerate invariant bilinear form, or for grading representations), or is it mainly motivated by geometric/physical considerations?
-        \end{enumerate}
+          \begin{enumerate}[a)]
+              \item The loop algebra $L\mathfrak g$ is already a perfectly good infinite-dimensional Lie algebra, realized geometrically as a dense subalgebra of the Lie algebra of the loop group $LG$. Why isn't it sufficient to study its representation theory directly? In what sense are central extensions 'forced upon us' if we want a rich representation theory?
+              \item I see that the affine Kac–Moody algebra arises as the universal central extension of the loop algebra. Is there a structural reason why the extension must be central and abelian, rather than by some nonabelian ideal? In other words, what uniquely characterizes the central extension as the 'correct' enlargement of $L\mathfrak g$ for representation theory?
+              \item Once we accept the central extension, we typically adjoin the degree derivation $d$, defined by $[d, x\otimes z^n]=n\,x\otimes z^n$. Should I think of $d$ as a geometric object, namely the vector field $z\frac{d}{dz}$ on the circle? Is the introduction of $d$ mathematically necessary (e.g. for a nondegenerate invariant bilinear form, or for grading representations), or is it mainly motivated by geometric/physical considerations?
+          \end{enumerate}
     \item I know that algebraically the invariant form defines the 2-cocycle, hence the central extension and the line bundle on $\mathrm{Gr}_G$. But is there a more geometric explanation of why the bilinear form is the key ingredient? For instance, can one see directly from the geometry of $G$-bundles or determinant line bundles on curves that the form $(\cdot,\cdot)$ is exactly what controls the Picard group of the affine Grassmannian? For example, what exactly does the level of a line bundle correspond to geometrically?
     \item I understand that the level (the eigenvalue of the central element) is a key invariant of representations of affine Kac-Moody algebras. But where exactly does it start to matter? The line bundle on $\mathrm{Gr}_G$ has a level, and this level determines which representation we get. But is there a more algebraic way to see why the level is important? For instance, if we just look at highest weight modules for $\widehat{\mathfrak g}$, how does the level affect their structure?
 \end{enumerate}
 \subsection*{Answers (Sept 17)}
-Professor Borcherds tends to give short answers. First one sees from the combinatorics of Dynkin diagramms that the central extension of the loop algebra is forced upon us. 
+Professor Borcherds tends to give short answers. First one sees from the combinatorics of Dynkin diagramms that the central extension of the loop algebra is forced upon us.
 
 He had a lot to say about modular forms and theta functions, in particular the denominator of affine Kac-Moody algebras associated to $\mf g$ is a theta function, which is something similar to a modular form. In fact, he said "theta functions are nothing but modular forms." I asked about theta divisors which can be thought of as square roots of the canonical bundle, and he made a funny joke. He said "Ah yes, God introduced square roots because there's a lot of sign errors floating around, $2^n$ many of them." Then he let me borrow his copy of a book and referred me to Mumford's three volumes on theta functions and abelian varieties.
 
 \subsection*{Teleman remarks}
-It turns out that the numerator and denominator in the Kac character formula for representations of $LSU(2)$ are theta functions. 
+It turns out that the numerator and denominator in the Kac character formula for representations of $LSU(2)$ are theta functions. In particular, the Jacobi triple product formula is the Kac character formula for the trivial representation of $LSU(2)$, in particular the character should be $1$, the Kac numerator is the sum and the Kac denominator is the product.
 
-So theta functions can be interpreted as particular sections of line bundles on the moduli stack of elliptic curves. 
+\[
+\prod_{m=1}^\infty 
+\bigl(1 - x^{2m}\bigr)
+\left(1 + x^{2m-1} y^2\right)
+\left(1 + \frac{x^{2m-1}}{y^2}\right)
+\;=\;
+\sum_{n=-\infty}^{\infty} x^{n^2} y^{2n}.
+\]
 
-Where do elliptic curves come from? If you start with a cylinder, interpreted as quantum field theory with some potential (or Hamiltonian, I'm not sure what word he said here), then closing both ends of the cylinder gives you an elliptic curve, and in the TFT story this corresponds to taking the trace, just as the Kac character formula is about taking the trace of your representation. $LSU(2)$ fits into this picture because if your quantum field theory has a pointwise action of $SU(2)$, then you can upgrade to an action of $LSU(2)$ by letting the loop group act on the circle direction of the cylinder.
+So theta functions can be interpreted as particular sections of line bundles on the moduli stack of elliptic curves. Where do elliptic curves come from? 
 
-\section{Appendix A: Lie algebra cohomology}
+One starts by thinking of 2D quantum field theory on a cylinder $S^1 \times [0,T]$. The "time" direction is the interval, and the circular direction is the "space." The partition function of the theory on this cylinder is the matrix element of the evolution operator: it's like 
+\[
+Z_{\text{cyl}} = \langle \psi_{\text{out}} | e^{-T H} | \psi_{\text{in}} \rangle
+\] 
+where $H$ is the Hamiltonian. So a cylinder corresponds to propagation in time.
+
+If you glue the two circular ends together, you get a torus (an elliptic curve). In quantum field theory, "gluing the ends" means instead of fixing in/out states, you sum over them. That is exactly taking a trace:
+\[
+Z_{\text{torus}} = \mathrm{Tr}\big( e^{-T H}\cdot(\text{other insertions})\big).
+\]
+So the torus partition function is a trace over Hilbert space. That's why the Kac character formula, which is a trace, naturally gives functions on elliptic curves (theta functions). If your QFT has a global symmetry by $G$ (say $SU(2)$), then you can act pointwise by $G$ on the space circle.
+
+Then you can upgrade this to a loop group symmetry: maps $S^1 \to G$, acting on the circle direction. In physics language: the current algebra (affine Lie algebra) is the symmetry algebra you get when you "localize" the group symmetry along the circle. This is why $LSU(2)$ naturally acts on the Hilbert space of the theory on the circle.
+
+
+
+
+
+\section{Appendix 1: Theta functions and Riemann surfaces}
+Recently in Professor Teleman's class on complex manifolds, we have been studying the classical theory of elliptic functions in order to construct nonconstant meromorphic functions on a genus $1$ Riemann surface $\C/L$, where $L = \Z \omega_1 \oplus \Z \omega_2$ is a full rank lattice in $\C$, that is $\omega_1/\omega_2 \notin \R$. 
+
+The classical story begins with the Weierstrass $\wp$-function, defined by
+\[\wp(z;L) = \frac{1}{z^2} + \sum_{\omega \in L\setminus\{0\}} \left(\frac{1}{(z-\omega)^2} - \frac{1}{\omega^2}\right)\]
+which has the properties that it is an $L$-periodic meromorphic function on $\C$ with double poles at the lattice points, and that it satisfies the differential equation
+\[(\wp'(z))^2 = 4\wp(z)^3 - g_2\wp(z) - g_3 = 4(z - e_1)(z - e_2)(z - e_3)\]
+where $g_2,g_3$ are constants depending on $L$, given explicitly by \begin{align*}
+    g_2 & = 60\sum_{\omega \in L\setminus\{0\}} \frac{1}{\omega^4} \\
+    g_3 & = 140\sum_{\omega \in L\setminus\{0\}} \frac{1}{\omega^6}
+\end{align*} and $e_i$ are the values of $\wp$ at the half-lattice points $\omega_1/2, \omega_2/2, (\omega_1+\omega_2)/2$. The $e_i$ are distinct as we will show in Prop \ref{prop:wp-map}.
+The convergence is uniform on any compact subset $K \subset \C$, once the terms with poles in $K$ are set aside.
+
+Uniform convergence implies that the series can be differentiated term-by-term, so we get a formula for $\wp'(z)$ given by \begin{align*}
+    \wp'(z) & = -2\sum_{\omega \in L} \frac{1}{(z-\omega)^3}
+\end{align*} is an doubly periodic meromorphic function with triple poles at the lattice points. Moreover, one can see directly from the series expansion that $\wp$ is even and $\wp'$ is odd.
+
+The oddness implies that $\wp'(z)$ vanishes at the half-lattice points. Moreover, one can check that these are simple zeros of $\wp'$, and moreover the only zeros of $\wp'$ modulo $L$. Thus $\wp'$ has only poles at lattice points, each of order 3. In a fundamental parallelogram there is exactly one pole (mod $L$), of total multiplicity 3. This implies the following proposition.
+\begin{proposition}
+    $\wp(z)$ and $\wp'(z)$ define holomorphic maps $\C/L \to \P^1$ of degree $2$ and $3$ respectively.
+\end{proposition}
+We conclude that each of the half-lattice points must be a simple zero of $\wp'$ and moreover that these are all of the zeros, because any meromorphic function has divisor of degree 0.
+
+\begin{proposition}[Properties of the $\wp$-map]\label{prop:wp-map}
+\leavevmode
+\begin{enumerate}[(i)]
+    \item The numbers $e_1,e_2,e_3$ are all distinct.
+    \item For any $a \in \mathbb{C}$ with $a \neq e_1,e_2,e_3$, the equation $\wp(u)=a$ has two simple roots in a fundamental period parallelogram. For the three exceptional values $a=e_i$, it has a single double root.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\leavevmode
+\begin{enumerate}[(i)]
+    \setcounter{enumi}{1}
+    \item General theory of meromorphic functions on a torus shows that we either have two simple roots or one double root. Since a double root corresponds to a zero of the derivative $\wp'$, the claim follows. Note that the two simple roots always differ by a sign modulo $L$, by the parity of $\wp$.
+    
+    \setcounter{enumi}{0}
+    \item Suppose, for contradiction, that $e_1=e_2$. Then $\wp(u)=e_1$ would have a double root at $\tfrac{\omega_1}{2}$ and another double root at $\tfrac{\omega_2}{2}$. This would give too many roots (multiplicity $4$ in a fundamental parallelogram), contradicting the fact that $\wp$ is a double covering of $\mathbb{P}^1$. Hence the $e_i$ are distinct.
+\end{enumerate}
+\end{proof}
+
+
+\section{Appendix 2: Lie algebra cohomology}
 
 \begin{lemma}[Invariant representative via averaging]\label{lem:invariant-representative}
     Let $K$ be a compact Lie group acting on a cochain complex $(C^\bullet,d)$ by

@@ -164,6 +164,15 @@
 {}% theorem head spec (can be left empty, meaning 'normal')
 
 
+\newtheoremstyle{solutions}% name
+{10pt}% space above
+{10pt}% space below
+{\itshape}% body font
+{}% indent amount
+{\color{orange}\bfseries}% theorem head font (blue color)
+{.}% punctuation after theorem head
+{.5em}% space after theorem head
+{}% theorem head spec (can be left empty, meaning 'normal')
 
 % Set the theorem styles
 
@@ -178,18 +187,22 @@
 
 
 \theoremstyle{special}
-\newtheorem{exercise}[theorem]{Exercise}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{observation}[theorem]{Observation}
 \newtheorem{conjecture}[theorem]{Conjecture}
 
 \theoremstyle{examples}
 \newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+
 
 
 \theoremstyle{definitions}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{notation}[theorem]{Notation}
+
+\theoremstyle{solutions}
+\newtheorem{solution}[theorem]{Solution}
 
 \theoremstyle{plain} % Setting the theorem style back to plain in case theorems are defined in the main file
 

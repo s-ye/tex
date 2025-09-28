@@ -28,7 +28,7 @@
 
 
 \begin{abstract}
-    We construct untwisted Dijkgraaf-Witten theory as an example of a 2-dimensional topological quantum field theory (TQFT) with gauge group a finite group $G$. We then use this TQFT to give a new proof of Mednykh's formula, which relates the number of homomorphisms from the fundamental group of a surface $\Sigma$ to $G$ and the dimensions of the irreducible representations of $G$.
+    We construct untwisted Dijkgraaf-Witten theory as an example of a 2-dimensional topological quantum field theory (TQFT) with gauge group a finite group $G$. We then use this TQFT to give proof of Mednykh's formula, which relates the number of homomorphisms from the fundamental group of a surface $\Sigma$ to $G$ and the dimensions of the irreducible representations of $G$.
 \end{abstract}
 
 \tableofcontents
@@ -206,7 +206,7 @@ The other is the pushforward
 \]
 given by
 \[
-    (F_*(f))(y) = \sum_{x \in \pi_0(X):\,F(x)\cong y} \frac{|\mathrm{Aut}(y)|}{|\mathrm{Aut}(x)|}\, f(x).
+    (F_*(f))(y) = \sum_{x \in \pi_0(X):\,F(x)\cong y} \frac{|\mathrm{Aut}(y)|}{|\mathrm{Aut}(x)|}\, f(x)
 \]
 
 The pushforward is adjoint to the pullback in the following sense. $\mathbb{C}^X$ admits a distinguished linear functional
@@ -281,10 +281,12 @@ We now restrict our attention to the case $n=2$.
 
 A 2D TQFT is a symmetric monoidal functor
 $Z : 2\mathbf{Cob} \;\to\; \mathbf{Vect}$.
-    •	Objects of $2\mathbf{Cob}$: finite disjoint unions of circles.
-    •	Morphisms: oriented compact surfaces with boundary, viewed as cobordisms between collections of circles.
+\begin{itemize}
+    \item Objects of $2\mathbf{Cob}$: finite disjoint unions of circles.
+    \item Morphisms: oriented compact surfaces with boundary, viewed as cobordisms between collections of circles.
+\end{itemize}
 
-Under such a functor:
+Under such a functor
 \begin{itemize}
     \item $Z(S^1) = A$, a vector space.
     \item pair of pants (2 in, 1 out): multiplication $m:A\otimes A\to A$,
@@ -296,7 +298,16 @@ This structure is exactly a commutative Frobenius algebra. This linear functiona
 
 In this case 2-dimensional TQFTs have a known classification as follows. If $Z$ is such a TQFT, then $Z(S^1)$ is a commutative Frobenius algebra (an algebra $A$ equipped with a linear functional $\lambda$ such that the bilinear form $\lambda(ab)$ is nondegenerate), and conversely given any commutative Frobenius algebra $A$ there is a unique (up to equivalence) TQFT such that $Z(S^1)\cong A$. The structure maps of $A$ and the axioms they satisfy come from a description of $2\mathbf{Cob}$ in terms of generators and relations; for example, the multiplication in $A$ comes from the pair of pants and the linear functional comes from the cup.
 
-The commutative Frobenius algebra associated to untwisted Dijkgraaf-Witten theory can be explicitly described. We saw above that $A_G(S^1)$ is the groupoid of elements of $G$ up to conjugation. It follows that $Z_G(S^1)$ can be identified with the space of class functions on $G$. The linear functional on $Z_G(S^1)$ is induced by the cap, which, after applying the classical functor $A_G(-)$, gives the span of groupoids
+The commutative Frobenius algebra associated to untwisted Dijkgraaf-Witten theory can be explicitly described. We saw above that $A_G(S^1)$ is the groupoid of elements of $G$ up to conjugation. It follows that $Z_G(S^1)$ can be identified with the space of class functions on $G$. 
+
+\begin{example}[Cap]
+The linear functional on $Z_G(S^1)$ is induced by the cap 
+\[\begin{tikzcd}
+& D^2 \arrow[dl] \arrow[dr] & \\
+S^1 & & \varnothing
+\end{tikzcd}\]
+
+which, after applying the classical functor $A_G(-)$, gives the span of groupoids
 \[
 \begin{tikzcd}
 & BG \arrow[dl] \arrow[dr] & \\
@@ -307,13 +318,126 @@ where $G\sslash G$, as above, denotes the groupoid of elements of $G$ up to conj
 \[
 Z_G(S^1) \ni f \longmapsto \frac{f(1)}{|G|} \in Z_G(\varnothing) \cong \mathbb{C},
 \]
-where $1$ denotes the identity element of $G$.
+where $1$ denotes the identity element of $G$. In particular, the formula
+\[
+f \mapsto \frac{f(1)}{|G|}
+\]
+comes from
+\begin{enumerate}
+    \item Pullback along \(BG \to G\sslash G\): evaluate $f$ at the identity.
+    \item Pushforward along \(BG \to 1\): weight by \(\frac{1}{|G|}\) (the groupoid cardinality of \(BG\)).
+\end{enumerate}
+\end{example}
 
-The multiplication on $Z_G(S^1)$ is induced by the pair of pants, which, after applying the classical functor $A_G(-)$, gives the span of groupoids
+\begin{example}[Pair of pants]
+The multiplication on $Z_G(S^1)$ is induced by the pair of pants, which, after applying the classical functor $A_G(-)$, gives the span of groupoids (note that the pair of pants is homeomorphic to a sphere with three holes has fundamental group the free group on two generators)
 \[
 \begin{tikzcd}
-& G\times G \sslash G \arrow[dl] \arrow[dr] & \\
-G\sslash G \times G\sslash G & & G\sslash G
+& G\times G \sslash G \arrow[dl, "s"'] \arrow[dr, "t"] & \\
+\cX = G\sslash G \times G\sslash G & & G\sslash G = \cY
 \end{tikzcd}
 \]
+where $G$ acts on $G\times G$ by simultaneous conjugation:
+$a\cdot(g,h)=(aga^{-1},aha^{-1})$, and $s$ is restriction to the two incoming boundaries and $t$ is restriction to the outgoing boundary. Explicitly,
+\begin{align*}
+s([(g,h)]) & = ([g],[h]) \\
+t([(g,h)]) & = [gh]
+\end{align*}
+Linearization sends a span to a linear map by pull--push:
+\[m \;=\; t_* \circ s^* \;:\; \mathbb{C}[\mathcal X]\longrightarrow \mathbb{C}[\mathcal Y].\]
+Identify $\mathbb{C}[G\sslash G]$ with class functions on $G$. Write elements of
+$\mathbb{C}[\mathcal X]\cong \mathrm{ClassFns}(G)\otimes \mathrm{ClassFns}(G)$ as $f_1\otimes f_2$.
+\end{example}
+
+\begin{example}[Transposed pair of pants]
+The transposed pair of pants is obtained by flipping the original pair of pants along the diagonal. This gives rise to a new span of groupoids
+\[
+\begin{tikzcd}
+& G\times G \sslash G \arrow[dl, "t"'] \arrow[dr, "s"] & \\
+\cY = G\sslash G  & & G\sslash G \times G\sslash G = \cX
+\end{tikzcd}
+\]
+Computing the push--pull linear map gives the comultiplication
+\begin{align*}
+    (\Delta(f))(h_1,h_2) = \sum_{(h_1’,h_2’): h_i’ \sim h_i}
+\frac{|\mathrm{Aut}(h_1)|\,|\mathrm{Aut}(h_2)|}{|\mathrm{Aut}(h_1’,h_2’)|}
+\,f(h_1’h_2’).
+\end{align*}
+\end{example}
+
+\section{Mednykh's formula}
+We are now ready to prove Mednykh’s formula. First we will prove a more general result.
+Let $Z:\mathbf{2Cob}\to \mathbf{FinVect}$ be a 2\,-dimensional TQFT. Suppose that $Z(S^1)$ is semisimple.
+Then as an algebra it is a finite product of copies of $\mathbb{C}$. If $e_1,\dots,e_n$ denote its primitive
+idempotents, then $Z(S^1)$ is determined up to isomorphism as a commutative Frobenius
+algebra by the values $\lambda(e_1),\dots,\lambda(e_n)$, which are necessarily all nonzero (this is necessary and
+sufficient for $\lambda(ab)$ to be nondegenerate). In particular, these values determine $Z(\Sigma)$ for all
+closed connected orientable surfaces $\Sigma$.
+
+\begin{theorem}\label{thm:mednykh-general}[Mednykh's formula, general version]
+Let $\Sigma$ be a closed connected orientable surface of genus $g$. Then
+\[
+Z(\Sigma)=\sum_{i=1}^n \lambda(e_i)^{\,1-g}. \tag{30}
+\]
+\end{theorem}
+
+\begin{proof}
+We first need to compute the map $Z(S^1)\to Z(S^1)\otimes Z(S^1)$ assigned to the transpose
+of the pair of pants. This map takes the form
+\[
+e_i \longmapsto \sum_{j,k} c^{\,jk}_i\, e_j\otimes e_k \tag{31}
+\]
+for some coefficients $c^{\,jk}_i$. It has the property that composing with either
+$\mathrm{id}\otimes \lambda$ or with $\lambda\otimes \mathrm{id}$ gives the identity; this gives
+\[
+\sum_{j,k} c^{\,jk}_i\, e_j\otimes \lambda(e_k)
+\;=\;
+\sum_{j,k} c^{\,jk}_i\, \lambda(e_j)\otimes e_k
+\;=\; e_i. \tag{32}
+\]
+Since the $\lambda(e_i)$ are all nonzero, it follows that $c^{\,jk}_i=0$ if either $j\neq i$ or $k\neq i$, and
+$c^{\,ii}_i=\dfrac{1}{\lambda(e_i)}$. Hence the map assigned to the transpose of the pair of pants is
+\[
+e_i \longmapsto \frac{e_i\otimes e_i}{\lambda(e_i)}. \tag{33}
+\]
+It follows that the map $\theta: Z(S^1)\to Z(S^1)$ assigned to the composite of the transpose of
+the pair of pants and the pair of pants is
+\[
+e_i \longmapsto \frac{e_i}{\lambda(e_i)}. \tag{34}
+\]
+\end{proof}
+We now observe that the closed orientable surface of genus $g$ can be obtained as the
+composite of $g$ copies of the cobordism $S^1 \to S^1$ given by the composite of the transpose of
+the pair of pants and the pair of pants, together with a cup and a cap. The corresponding
+composition of linear maps is given by
+\[
+1 \longmapsto \sum_i e_i \longmapsto \sum_i \frac{e_i}{\lambda(e_i)^g} \longmapsto \sum_i \lambda(e_i)^{1-g} \tag{35}
+\]
+as desired. \qed
+
+\medskip
+
+To prove Mednykh’s formula it now suffices to compute the numbers $\lambda(e_i)$ for $Z_G(S^1)$.
+We will use the identification with the center of the group algebra $\mathbb{C}[G]$. The primitive
+idempotents here are given by
+\[
+e_V = \frac{\dim V}{|G|} \sum_{g\in G} \chi_V(g)\,g \tag{36}
+\]
+where $V$ is an irreducible complex representation of $G$, and we have
+\[
+\lambda(e_V) = \left(\frac{\dim V}{|G|}\right)^2 \tag{37}
+\]
+so it follows by the above theorem that
+\[
+Z_G(\Sigma) = \sum_V \left(\frac{\dim V}{|G|}\right)^{2-2g}. \tag{38}
+\]
+
+On the other hand, we observed earlier that
+\[
+Z_G(\Sigma) = \frac{|\mathrm{Hom}(\pi_1(\Sigma),G)|}{|G|}. \tag{39}
+\]
+
+Mednykh’s formula follows.
+
+
 \end{document}

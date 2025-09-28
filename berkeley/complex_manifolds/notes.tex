@@ -1,0 +1,76 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Title}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+Abstract
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+\begin{theorem}
+The following categories are equivalent:
+\begin{itemize}
+    \item Compact Riemann surfaces with nonconstant holomorphic maps
+    \item Smooth proper (and hence projective) algebraic curves over $\mathbb{C}$ with nonconstant morphisms
+    \item Field extensions of $\mathbb{C}$ of transcendence degree $1$, of finite degree over $\mathbb{C}(t)$ where $t$ is transcendental over $\mathbb{C}$, with field homomorphisms over $\mathbb{C}$
+\end{itemize}
+
+The correspondence in one direction is:
+\begin{align*}
+    \text{Riemann surface } S &\mapsto \text{ function field } \mathbb{C}(S) \\
+    \text{Holomorphic map } f: S \to S' &\mapsto \text{ field homomorphism } f^*: \mathbb{C}(S') \to \mathbb{C}(S) \\
+\end{align*}
+\end{theorem}
+
+\begin{remark}
+    For curves, smooth and proper implies projective. This is false in higher dimensions.
+\end{remark}
+
+Common to both is the construction of nonconstant meromorphic functions. It suffices to find \begin{itemize}
+    \item A map $f:R \to \P^1$ which realizes $R$ as a branched cover of $\P^1$ (the transcendental part of the function field) \begin{align*}
+        f^*: \mathbb{C}(z) &\hookrightarrow \mathbb{C}(R) \\
+        z &\mapsto f
+    \end{align*}
+    \item A nonconstant meromorphic function $g$ on $S$ which separates the sheets (the finite part of the function field)
+\end{itemize}
+Once you have these functions, consider the set of pairs $\{(f(p), g(p)) : p \in S\} \subset \mathbb{P}^1 \times \mathbb{P}^1$. This is an analytic curve. By a theorem of Riemann (or later by Chow's theorem), an analytic curve in projective space is algebraic. So there exists a nonzero polynomial $P(x,y)$ such that
+\[
+P(f,g) = 0 \quad \text{on } S.
+\]
+Thus, the image of $S$ under $(f,g)$ is contained in the algebraic curve $P(x,y)=0$. Moreover, because $g$ separates the sheets, $(f,g)$ is generically injective, so the map is birational. Hence $S$ and the curve $P(x,y)=0$ have the same function field. So you've now explicitly realized $\mathbb{C}(S) = \mathbb{C}(f,g)$.
+
+\section{}
+We state Riemann's theorem which allows us to pass from the analytic setting to the algebraic setting.
+\begin{theorem}
+    Let $R$ be a compact Riemann surface and $p\in R$. There exists a meromorphic function $f$ with poles of arbitrary order $n$ at $p$ and holomorphic elsewhere, provided that $n$ is sufficiently large.
+\end{theorem}
+
+The method of proof involves constructing holomorphic differentials with poles at $p$, and in fact one can get them to any order of pole $\geq 2$. Then if these differentials are exact, their integrals give a single valued function with pole only at $p$.
+\end{document}
