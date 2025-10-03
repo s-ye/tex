@@ -1,17 +1,18 @@
 \documentclass[12pt]{article}  % or any other class
 \usepackage{/Users/songye03/Desktop/Math_tex/style/psetconfig}         % loads your custom style
-\title{Homework 1}
+\title{Homework 2}
 \author{Songyu Ye}
 \date{\today}
 
+\newenvironment{lemma}{\begin{mdframed}[backgroundcolor=gray!20] \textbf{Lemma}}{\end{mdframed}}
 
 \begin{document}
 \psettitle
 
-\begin{problem}{1 (from RS1)}
+\begin{problem}[1 (from RS1)]
 $\Delta$ is the unit disk, $\Delta^\times = \Delta \setminus \{0\}$.
 \begin{enumerate}
-  \item Prove that a holomorphic map $f:\Delta^\times \to \C$ which has an \emph{essential} (non–pole) singularity at $0$ has dense image in $\C$.
+  \item Prove that a holomorphic map $f:\Delta^\times \to \C$ which has an \emph{essential} (non-pole) singularity at $0$ has dense image in $\C$.
   \item Use this to show that any map $f:\Delta^\times \to \P$ which is never more than $N$-to-$1$, for a fixed number $N$, extends holomorphically to $\Delta$.
   \item Generalize (b) to the case when the target is an arbitrary compact Riemann surface $R$, by invoking Riemann’s theorem which guarantees the existence of meromorphic functions on $R$.
 \end{enumerate}
@@ -19,23 +20,45 @@ $\Delta$ is the unit disk, $\Delta^\times = \Delta \setminus \{0\}$.
 \end{problem}
 
 \begin{solution}
+\begin{enumerate}
+  \item Let $f:\Delta^\times\to\C$ have an essential (non-pole) singularity at 0. If the image is not dense, there is a disc $D(a,r)\subset\C$ that $f$ misses near 0. Then $g(z)=\frac{1}{f(z)-a}$ is holomorphic and $|g(z)|\le r^{-1}$ near 0, hence extends holomorphically to 0 (Riemann's removable singularity theorem). If $g(0)\ne0$, then $f=a+1/g$ extends holomorphically across 0 (removable singularity). If $g(0)=0$, then $1/g$ has a pole at 0, so $f$ has a pole. Either way, the singularity at 0 is not essential. Contradiction. Hence the image of every punctured neighborhood is dense in $\C$.
+
+  \item Assume toward a contradiction that 0 is an essential singularity. Work in the affine chart $\C\subset\P^1$, and fix a regular value $a\in\C$ of $f$ (possible since the critical values are discrete). Set $g(z):=f(z)-a$.
+
+  For $r>0$ small with $g$ having no zeros on $|z|=r$, define the index \[n(r):=\frac{1}{2\pi i}\int_{|z|=r}\frac{g'(z)}{g(z)}\,dz\] which equals the number of solutions of $g(z)=0$ in $|z|<r$, counted with multiplicity (by the argument principle). 
+
+\begin{lemma}
+For every $M\in\N$ there exists $r_M>0$ such that $n(r_M)\ge M$.
+\end{lemma}
+Because 0 is essential, Casorati-Weierstrass gives: for every $\varepsilon\in(0,1)$ and every $r_0>0$ there exists $0<r<r_0$ with $\min_{|z|=r}|g(z)|<\varepsilon$ and $\max_{|z|=r}|g(z)|>\varepsilon^{-1}$. (If not, then on all small circles $|g|$ stays in a compact annulus, and a standard maximum-minimum argument would force $g$ to be bounded away from 0 near 0, making $1/g$ holomorphic there—contradicting that 0 is essential for $g$.)
+
+  Fix $\varepsilon\in(0,1)$ so small that the circle $\{|w|=\varepsilon\}$ contains no critical values of the map $g$ from $|z|=r$ (this is possible by discreteness). Using (*) with that $\varepsilon$, choose $r$ so that along the circle $|z|=r$ the continuous curve $w(t):=g(re^{it})$ intersects $|w|=\varepsilon$ transversely many times and also intersects $|w|=\varepsilon^{-1}$. By continuity, we can arrange $2M$ alternating crossings of $|w|=\varepsilon$ as $t$ runs from 0 to $2\pi$ (inside/outside alternate because $|g|$ attains both $<\varepsilon$ and $>\varepsilon^{-1}$ values on the same circle).
+
+  Each such alternating pair forces the argument of $w(t)$ to increase by at least $2\pi$ around the origin (the curve must go from inside to outside and back, swinging around 0 once; regularity of the crossings and the fact $a$ is a regular value ensure positive orientation). Hence the total change of $\arg g(re^{it})$ over $t\in[0,2\pi]$ is at least $2\pi M$. Therefore the winding number of $g(|z|=r)$ about 0 is $\ge M$, i.e. $n(r)\ge M$. $\square$
+
+  With the Lemma, fix $M:=N+1$. Choose $r$ with $n(r)\ge M$. Then $g(z)=0$ has at least $M=N+1$ solutions in $|z|<r$. That is, the single value $a$ has at least $N+1$ preimages in $\Delta^\times$, contradicting that $f$ is never more than $N$-to-1.
+
+  Thus 0 cannot be essential. The remaining possibilities for a holomorphic map to $\P^1$ are: removable singularity or pole; in either case $f$ extends holomorphically across 0.
+  \item Let $g:R \to \P^1$ be a nonconstant meromorphic function on the compact Riemann surface $R$. Let $f:\Delta^\times \to R$ be a holomorphic map which is never more than $N$-to-1. Then $h:=g\circ f:\Delta^\times \to \P^1$ is also never more than $Nd$-to-$1$, where $d$ is the degree of $g$. By (b), $h$ extends holomorphically to $\Delta$.
+\end{enumerate}
 \end{solution}
 
-\begin{problem}{2}
+\begin{problem}[2 ]
 Identify successive pairs of edges of a $2n$-gon, labelled $a,a,b,b,c,c,\dots$, by matching points on matching edge pairs in \emph{parametric order}. (Equivalently, identify the points $\theta$ and $\theta+\pi/n$ on the boundary of the unit disk.) 
 
 Explain why the surface obtained is homeomorphic to the one obtained by sewing on $n$ M{\"o}bius strips to an $n$-holed sphere, along matching boundaries. 
 
 Which of these gives a Klein bottle?
-
-\emph{Remark.} It’s not hard to show that every closed non–orientable surface is obtained in this way, but please \emph{do not} write a complete proof of that \dots
 \end{problem}
 
 \begin{solution}
+The $2n$-gon with edges $aa\,bb\,cc\cdots$ gives $\#^n \mathbb{RP}^2$. Each $\mathbb{RP}^2$ is "sphere with 1 hole + Möbius band." Taking the connected sum of $n$ such surfaces glues the sphere pieces into a sphere with $n$ holes, and the Möbius bands remain attached.
+
+The case $n=2$ gives a Klein bottle. The polygon for $\R\P^2 \# \R\P^2$ has sides $aabb$. The polygon for the Klein bottle has sides $aba^{-1}b$. We want to show they represent the same surface. By cutting and re-gluing along the diagonal, we can transform the $aabb$ polygon into the $aba^{-1}b$ polygon, showing they are homeomorphic.
 \end{solution}
 
-\begin{problem}{3 (from RS2)}
-Show that any degree $2$ holomorphic map $f:\C/L \to \P$ is a “M{\"o}bius transform of a shifted $\wp$–function’’:
+\begin{problem}[3 (from RS2)]
+Show that any degree $2$ holomorphic map $f:\C/L \to \P$ is a “M{\"o}bius transform of a shifted $\wp$–function":
 \[
   f(u) = \frac{a\wp(u-w)+b}{c\wp(u-w)+d}, \qquad a,b,c,d,w \in \C.
 \]
@@ -45,8 +68,8 @@ Show that any degree $2$ holomorphic map $f:\C/L \to \P$ is a “M{\"o}bius tran
 \begin{solution}
 \end{solution}
 
-\begin{problem}{4 (from RS2)}
-Prove that any two meromorphic functions $f,g$ on a compact Riemann surface are \emph{algebraically related}: $P(f,g)\equiv 0$ for some $2$–variable polynomial $P$.
+\begin{problem}[4 (from RS2)]
+Prove that any two meromorphic functions $f,g$ on a compact Riemann surface are \emph{algebraically related}: $P(f,g)\equiv 0$ for some $2$-variable polynomial $P$.
 
 \emph{Hint.} Recall that a meromorphic function without poles must be constant, and estimate, in terms of $N$, the dimension of the vector space spanned by the functions $f^m g^n$, for $0\le m,n\le N$, to conclude that a linear dependence relation must hold for large $N$.
 \end{problem}
@@ -54,7 +77,7 @@ Prove that any two meromorphic functions $f,g$ on a compact Riemann surface are 
 \begin{solution}
 \end{solution}
 
-\begin{problem}{5}
+\begin{problem}[5]
 \begin{enumerate}
   \item Specializing the period lattice to the limiting case $\omega_1 = \pi$, $\omega_2 \to i\cdot\infty$, show that
   \[

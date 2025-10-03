@@ -1,13 +1,13 @@
-\ProvidesPackage{psetconfig}
+\usepackage{hyperref}
 \usepackage[margin=1in]{geometry} 
 \usepackage{amsmath,amsthm,amssymb,amsfonts, scrlayer-scrpage, color, comment, graphicx, environ}
 \usepackage{xcolor}
 \usepackage{bbm}
+\usepackage{/Users/songye03/Desktop/Math_tex/style/macros}
 \usepackage{tikz-cd}
 \usepackage{mdframed}
 \usepackage[shortlabels]{enumitem}
 \usepackage{indentfirst}
-\usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
@@ -30,11 +30,9 @@
 \makeatother
 
 
-\pagestyle{scrheadings}
-\setlength{\headheight}{13.59999pt}
 
 \newenvironment{problem}[1][Problem]
-    { \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1}}
+    { \begin{mdframed}[backgroundcolor=gray!20] \textbf{Problem #1}}
     {  \end{mdframed}}
 
 % Define solution environment
@@ -48,4 +46,3 @@
 \usepackage{parskip}
 \setlength{\parskip}{1em}
 \setlength{\parindent}{0pt}
-\endinput
