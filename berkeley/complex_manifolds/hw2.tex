@@ -66,6 +66,17 @@ Show that any degree $2$ holomorphic map $f:\C/L \to \P$ is a “M{\"o}bius tran
 \end{problem}
 
 \begin{solution}
+  Because $\deg f=2$, for a generic value $y\in\P^1$ the fiber $f^{-1}(y)=\{u_1,u_2\}$. Define $\tau(u_1)=u_2$ and $\tau(u_2)=u_1$. Standard covering theory shows: $\tau:E\to E$ is a holomorphic involution ($\tau^2=\mathrm{id}$), $f\circ\tau=f$, and the branch points are the fixed points of $\tau$ (there are 4 of them).
+
+  Lift $\tau$ to $\widetilde\tau:\C\to\C$ with $\widetilde\tau(z+L)\equiv\tau(z)+L$. Any holomorphic self-map of $\C$ that descends to the torus has the form $\widetilde\tau(z)=az+b$, where $aL\subseteq L$, $|a|=1$. Since $\tau^2=\mathrm{id}$, we have $a^2=1\Rightarrow a=\pm1$. A degree-2 branched covering must have fixed points, forcing $a=-1$. Hence $\widetilde\tau(z)=-z+t$ with $2t\in L$. Passing to $E$, $\tau$ is the map $u\mapsto -u+w$ where $2w\equiv0$ in $E$.
+
+  Now translate the torus by $w$: define $T_w(u)=u-w$ and replace $f$ by $g:=f\circ T_w$. Then the deck involution becomes $u\mapsto -u$, so $g$ is even: $g(u)=g(-u)$.
+
+  Let $\wp$ be the Weierstrass $\wp$-function for $L$. It is even, has a double pole at 0, and no other poles in a period parallelogram. Every even elliptic function $h$ is a rational function of $\wp$: $h(u)=R(\wp(u))$ for some rational $R\in\C(x)$. This is because the poles of an even elliptic function occur in $\{\pm a_j\}$ with even principal parts. Subtract a polynomial $P(\wp)$ that matches all principal parts at $\pm a_j$; the difference is then an even elliptic function with no poles, hence constant. So $h=P(\wp)+\text{const}=R(\wp)$. Thus, for our $g$ there is $R\in\C(x)$ with $g(u)=R(\wp(u))$.
+
+  The map $\wp:E\to\P^1$ has degree 2 (two points $u,-u$ over a generic value), so $\deg(g)=\deg(R\circ\wp)=\deg(R)\cdot \deg(\wp)=\deg(R)\cdot 2$. But $\deg(g)=\deg(f)=2$. Therefore $\deg(R)=1$.
+  
+  Therefore $R$ is a Möbius transform: $R(x)=\frac{ax+b}{cx+d}$ with $ad-bc\neq0$. Undoing the translation $T_w$, we get $f(u)=\frac{a\wp(u-w)+b}{c\wp(u-w)+d}$ where $a,b,c,d,w\in\C$, $ad-bc\neq0$.
 \end{solution}
 
 \begin{problem}[4 (from RS2)]

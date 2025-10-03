@@ -2039,7 +2039,7 @@ By an easy induction on $k$ we deduce the following relations in the universal e
 \end{remark}
 
 
-\subsection*{Locally nilpotent operators}
+\subsection{Locally nilpotent operators}
 Now we need a general fact about a module $V$ over a Lie algebra $\mathfrak{g}$.
 \begin{definition}
     An element $x\in\mathfrak{g}$ is said to be \textbf{locally nilpotent on $V$}
@@ -2214,6 +2214,7 @@ Note that the underlying module of the adjoint representation of a Kac--Moody al
     The root lattice $Q$ is defined to be the integer span of the simple roots $\{\alpha_i\}_{i=1}^n$. It is a sublattice of $P$. In the finite dimensional case, $Q$ has finite index in $P$ of order equal to the determinant of the Cartan matrix. In the infinite dimensional case, $\det A = 0$, so $Q$ has infinite index in $P$.
 \end{remark}
 
+\subsection{Weyl group, invariance, and geometry}
 \begin{definition}[Weyl group]
     For each $i=1,\dots,n$ we define the
     \textbf{fundamental reflection} $r_i$ of the space $\mathfrak{h}^*$ by
@@ -2453,10 +2454,7 @@ is called the \textbf{Tits cone}. We clearly have the corresponding dual notions
     by applying the equivalence of (e)(i) and (e)(ii) to $W_h$ operating on $\mathfrak{h}/\C h$.
 \end{proof}
 
-\begin{exercise}
-\end{exercise}
-
-\section{Root systems of affine Lie algebras}
+\section{Classification of affine root systems}
 In order to develop the theory of root systems of Kac-Moody algebras we need to know some properties of generalized Cartan matrices. It is convenient to work in a slightly more general situation. Let $A = (a_{ij})$ which satisfies the following three properties:
 \begin{itemize}
     \item[(m1)] $A$ is indecomposable;
@@ -2811,8 +2809,7 @@ This still consists of infinitely many parameters. We will whittle it down using
 \end{definition}
 
 \section{Real and imaginary roots}
-In this chapter we give an explicit description of the root system of a Kac-Moody algebra $\mf g(A)$. Our main instrument is the notion of an
-imaginary root, which has no counterpart in the finite dimensional theory.
+We give an explicit description of the root system of a Kac-Moody algebra $\mf g(A)$. Our main instrument is the notion of an imaginary root, which has no counterpart in the finite dimensional theory.
 
 \begin{definition}[Real root]
     A root $\alpha \in \Delta$ is called \textbf{real} if there exists $w \in W$ such that $w(\alpha)$ is a simple root. Otherwise, $\alpha$ is called \textbf{imaginary}.
@@ -2828,7 +2825,7 @@ We define a reflection $r_\alpha$ with respect to $\alpha \in \Delta^{\mathrm{re
 \]
 Since $\langle \alpha,\alpha^\vee\rangle = 2$, this is a reflection, and since
 $r_\alpha = w r_i w^{-1}$ if $\alpha = w(\alpha_i)$, it lies in $W$. Note that $r_\alpha$ is the fundamental reflection $r_i$.
-
+\subsection{Key properties}
 \begin{proposition}[Properties of real roots]\label{prop:real-roots}
     Let $\alpha$ be a real root of a Kac--Moody algebra $\mathfrak{g}(A)$. Then:
     \begin{enumerate}[label=\alph*)]
@@ -2926,9 +2923,9 @@ $\ell > 1$ there are real roots of three different lengths.
         \item The Dynkin diagrams have only single edges (no double or triple bonds).
         \item If we restrict to finite or affine types, the only simply laced types are $A_n$, $D_n$, $E_6$, $E_7$, $E_8$ and their affine versions $A_n^{(1)}$, $D_n^{(1)}$, $E_6^{(1)}$, $E_7^{(1)}$, $E_8^{(1)}$.
     \end{enumerate}
-
 \end{remark}
 
+\subsection{Weyl group orbits of imaginary roots}
 In this section, we shall normalize $(.|.)$ such that the $(\alpha_i|\alpha_i)$
 are relatively prime positive integers for each connected component of $S(A)$.
 For example, if $A$ is symmetric, then $(\alpha_i|\alpha_i)=1$ for all $i$, and
@@ -2995,7 +2992,7 @@ $\alpha$.
     $\mathfrak{g}(A)$. Then either $\beta_1$ or $\beta_2$ is zero.
 \end{lemma}
 \begin{proof}
-    If the submatrices corresponding to $I_1$ and $I_2$ have no edges, the corresponding subalgebras $\mathfrak{g}^{(1)}$ and $\mathfrak{g}^{(2)}$ commute. Then $\mathfrak{g}_\alpha$, the root space for $\alpha$, would have to lie entirely inside one of them.
+    If the submatrices of $I_1$ and $I_2$ have no edges, the corresponding subalgebras $\mathfrak{g}^{(1)}$ and $\mathfrak{g}^{(2)}$ commute. Then $\mathfrak{g}_\alpha$, the root space for $\alpha$, would have to lie entirely inside one of them.
 \end{proof}
 
 \begin{example}
@@ -3242,10 +3239,7 @@ I don't know how to quickly compute these brackets \begin{align*}
     [[[e_1,[e_2,e_3]],[f_1,[f_2,f_3]]],e_1]
 \end{align*} and I don't know how to use a computer to do it either. \red{Is there a better way to do the computation or to bypass the computation to do this problem?}
 
-If $A$ were symmetrizable, there would be positive numbers $d_i$ with $d_i a_{ij}=d_j a_{ji}$, and the two rows above would be proportional once restricted to $\ker\alpha=\{(t_1,t_2,t_3)\mid t_1+t_2+t_3=0\}$. But in the nonsymmetrizable case, that proportionality fails: the two eigenvalue triples are not scalar multiples on $\ker\alpha$. Hence $H_1,H_2$ act differently on the three simple root spaces, so they are linearly independent elements of $\ker\alpha$.
-
-Therefore
-$\dim [\mathfrak{g}_\alpha,\mathfrak{g}_{-\alpha}] \geq 2$ as desired.
+If $A$ were symmetrizable, there would be positive numbers $d_i$ with $d_i a_{ij}=d_j a_{ji}$, and the two rows above would be proportional once restricted to $\ker\alpha=\{(t_1,t_2,t_3)\mid t_1+t_2+t_3=0\}$. But in the nonsymmetrizable case, that proportionality fails: the two eigenvalue triples are not scalar multiples on $\ker\alpha$. Hence $H_1,H_2$ act differently on the three simple root spaces, so they are linearly independent elements of $\ker\alpha$. Therefore $\dim [\mathfrak{g}_\alpha,\mathfrak{g}_{-\alpha}] \geq 2$ as desired (modulo the proof of the claim).
 \end{solution}
 
 \begin{exercise}
@@ -3352,6 +3346,9 @@ So in all finite or affine types, every root string has at most 5 elements. Conv
 
 
 \section{Affine Algebras: the Normalized Invariant Form, the Root System, and the Weyl Group}
+In this section, we unwind the structure of affine Kac-Moody algebras in more detail. In particular, we describe the root system and the Weyl group of an affine Kac-Moody algebra associated to a finite dimensional simple Lie algebra.
+
+\subsection{Distinguished elements}
 Let $A$ be a generalized Cartan matrix of affine type of order $\ell+1$ 
 (and rank $\ell$), and let $S(A)$ be its Dynkin diagram from Table Aff. 
 Let $a_0,a_1,\dots,a_\ell$ be the numerical labels of $S(A)$ in Table Aff. 
@@ -3366,7 +3363,7 @@ Note that in all cases
 \]
 
 \begin{definition}
-    [Coexeter numbers]The numbers
+    [Coxeter numbers]The numbers
 \[
     h = \sum_{i=0}^\ell a_i,
     \qquad
@@ -3412,7 +3409,7 @@ The element $K$ is called the \textbf{canonical central element}. It is annihila
 \quad \Rightarrow \quad K \in \ker A^\top
 \end{align*} by the defining property of the labels $a_i^\vee$.
 
-Recall the definition of the null root $\delta$:
+Recall the definition of the \textbf{null root} $\delta$:
 \[
     \delta \;=\; \sum_{i=0}^\ell a_i \alpha_i \;\in Q.
 \]
@@ -3455,8 +3452,7 @@ $(\,.\,|\,.\,)$ on the whole Lie algebra $\mathfrak{g}$ such that all the proper
 described by this theorem hold. From now on we fix this form on $\mathfrak{g}$. 
 This is, clearly, a standard form. We call it the \textbf{normalized invariant form}.
 
-To describe the induced bilinear form on $\mathfrak{h}^*$, we define an element 
-$\Lambda_0 \in \mathfrak{h}^*$ by
+To describe the induced bilinear form on $\mathfrak{h}^*$, we define an element, the \textbf{0th fundamental weight} $\Lambda_0 \in \mathfrak{h}^*$ by
 \[
     \langle \Lambda_0, \alpha_i^\vee \rangle = \delta_{0i}
     \quad \text{for } i=0,\dots,\ell;
@@ -3524,7 +3520,7 @@ We set
    & \alpha_0 & \alpha_j \ (j>0) & \delta & \Lambda_0 & \Lambda_j \ (j>0) \\ \hline
 \alpha_0^\vee & 1 & a_{0j} & 0 & 1 & 0 \\ 
 \alpha_i^\vee \ (i>0) & a_{i0} & a_{ij} & 0 & 0 & \delta_{ij} \\
-K & 0 & 0 & 0 & 1 & a_j^\vee \\
+K & 0 & 0 & 0 & a_0^\vee & a_j^\vee \\
 d & 1 & 0 & 1 & 0 & 0
 \end{array}
 \]
@@ -3582,8 +3578,7 @@ Then
 \end{equation} because \begin{align*}
     \langle \rho, K \rangle = \sum_{i=0}^\ell a_i^\vee \langle \rho, \alpha_i^\vee \rangle = \sum_i a_i^\vee = h^\vee
 \end{align*} and $(\rho \mid \Lambda_0) = 0$ because $\nu(d) = a_0 \Lambda_0$ and $\langle \rho, d \rangle = 0$.
-
-
+\subsection{The Root System of an Affine Kac-Moody Algebra}
 Denote by $\mathring{\mathfrak{g}}$ the subalgebra of $\mathfrak{g}$ generated by the $e_i$ and $f_i$ with $i=1,\dots,\ell$. By the results of Chapter~1 it is clear that $\mathring{\mathfrak{g}}$ is a Kac--Moody algebra associated to the matrix $A^{\circ}$ obtained from $A$ by deleting the $0$th row and column. The elements $e_i,f_i \ (i=1,\dots,\ell)$ are the Chevalley generators of $\mathring{\mathfrak{g}}$, and $\mathring{\mathfrak{h}}=\mathring{\mathfrak{g}}\cap \mathfrak{h}$ is its Cartan subalgebra; 
 \[
 \mathring{\Pi}=\{\alpha_1,\dots,\alpha_\ell\} \quad\text{is the root basis}, \qquad
@@ -4043,7 +4038,7 @@ with $W$.
 \]
 \end{remark}
 
-\subsection*{Interpretation of the affine $W$-action}
+\subsection{The fundamental alcove}
 For $s \in \mathbb{R}$ set
 \[
     \mathfrak{h}^*_s = \{\lambda \in \mathfrak{h}^*_\mathbb{R} \mid \langle \lambda, K\rangle = s\}.
@@ -4054,27 +4049,25 @@ Note that
 \]
 and that the hyperplanes $\mathfrak{h}^*_s$ are $W$-invariant. Furthermore, the action of $W$ on $\mathfrak{h}^*_0$ is faithful.
 
-Consider now the affine space $\mathfrak{h}^*_1 \bmod \mathbb{R}\delta$. We should do this because $\delta$ is in the radical of the invariant form and therefore, quotienting by $\delta$ removes the degenerate direction. Since the action of $W$ on $\mathfrak{h}^*_0$ is faithful, its action on $\mathfrak{h}^*_\mathbb{R}/\mathbb{R}\delta \simeq \mathfrak{h}^*_0$ and thus on $\mathfrak{h}^*_1 \bmod \mathbb{R}\delta$ is also faithful. The affine action of $W$ on the affine space $\mathfrak{h}^*_1 \bmod \mathbb{R}\delta$ has the following simple geometrical meaning. We identify $\mathfrak{h}^*_1 \bmod \mathbb{R}\delta$ with $\mathfrak{h}^*_0$ by projection
+Consider now the affine space $\mathfrak{h}^*_1 \bmod \mathbb{R}\delta$. We should do this because $\delta$ is in the radical of the invariant form and therefore, quotienting by $\delta$ removes the degenerate direction. Since the action of $W$ on $\mathfrak{h}^*_0$ is faithful, its action on $\mathfrak{h}^*_\mathbb{R}/\mathbb{R}\delta \simeq \mathfrak{h}^*_0$ and thus on $\mathfrak{h}^*_1 \bmod \mathbb{R}\delta$ is also faithful. The affine action of $W$ on the affine space $\mathfrak{h}^*_1 \bmod \mathbb{R}\delta$ has the following simple geometrical meaning. We identify $\mathfrak{h}^*_1 \bmod \mathbb{R}\delta$ with $\overset{\circ}{\mathfrak{h}^*}$ by projection.
 
-Concretely, any $\lambda\in\mathfrak{h}^*_\mathbb{R}$ can be written uniquely as $\lambda = \bar{\lambda} + m\,\Lambda_0 + s\,\delta$, where $\bar{\lambda}\in\mathfrak{h}^*_0$ and $m,s\in\mathbb{R}$. Then $\langle\lambda,K\rangle = m$ (because $\langle\bar\lambda,K\rangle=0$ and $\langle\delta,K\rangle=0$). So the level-1 hyperplane is $\mathfrak{h}^*_1=\{\lambda:\langle\lambda,K\rangle=1\} = \Lambda_0 + \mathfrak{h}^*_0 + \mathbb{R}\delta$. 
-
-Now mod out by $\mathbb{R}\delta$. In the quotient, every class has a unique representative of the form $\Lambda_0+\bar{\lambda}$ with $\bar{\lambda}\in\mathfrak{h}^*_0$. That gives a canonical identification
-$\mathfrak{h}^*_1/\mathbb{R}\delta \xrightarrow{\sim} \mathfrak{h}^*_0$, sending $[\Lambda_0+\bar{\lambda}+s\delta]$ to $\bar{\lambda}$.
+Concretely, any $\lambda\in\mathfrak{h}^*_\mathbb{R}$ can be written uniquely as $\lambda = \bar{\lambda} + m\,\Lambda_0 + s\,\delta$, where $\bar{\lambda}\in\mathfrak{h}^*_0$ and $m,s\in\mathbb{R}$. Then $\langle\lambda,K\rangle = m$ (because $\langle\bar\lambda,K\rangle=0$ and $\langle\delta,K\rangle=0$). So the level-1 hyperplane is $\mathfrak{h}^*_1=\{\lambda:\langle\lambda,K\rangle=1\} = \Lambda_0 + \mathfrak{h}^*_0 + \mathbb{R}\delta$.  Now mod out by $\mathbb{R}\delta$. In the quotient, every class has a unique representative of the form $\Lambda_0+\bar{\lambda}$ with $\bar{\lambda}\in\overset{\circ}{\mathfrak{h}^*}$. That gives a canonical identification
+$\mathfrak{h}^*_1/\mathbb{R}\delta \xrightarrow{\sim} \overset{\circ}{\mathfrak{h}^*}$, sending $[\Lambda_0+\bar{\lambda}+s\delta]$ to $\bar{\lambda}$.
 
 
-We thus obtain an isomorphism from $W$ onto a group of affine transformations $W_{\mathrm{af}}$ of $\mathfrak{h}^*_0$. We denote this isomorphism by $\mathrm{af}$, so that
+We thus obtain an isomorphism from $W$ onto a group of affine transformations $W_{\mathrm{af}}$ of $\overset{\circ}{\mathfrak{h}^*}$. We denote this isomorphism by $\mathrm{af}$, so that
 \[
     \mathrm{af}(w)(\bar\lambda) = \overline{w(\lambda)} \quad \text{for } \lambda \in \mathfrak{h}^*_1.
 \]
 
-Now we describe the action of $W_{\mathrm{af}}$ on $\mathfrak{h}^*_0$. It is clear that
+Now we describe the action of $W_{\mathrm{af}}$ on $\overset{\circ}{\mathfrak{h}^*_0}$. It is clear that
 \begin{equation} \label{6.6.1}
     \mathrm{af}(w) = w \quad \text{for } w \in \overset{\circ}{W}.
 \end{equation}
 Furthermore,
 \begin{equation} \label{6.6.2}
     \mathrm{af}(r_{\alpha_0})(\lambda) = r_\theta(\lambda) + \nu(\theta^\vee), 
-    \qquad \lambda \in \mathfrak{h}^*_0.
+    \qquad \lambda \in \overset{\circ}{\mathfrak{h}^*}.
 \end{equation}
 Indeed, if $\mu \in \mathfrak{h}^*_1$, then $\langle \mu,K\rangle = 1$, hence
 \[
@@ -4089,10 +4082,10 @@ and
 \]
 So, $\mathrm{af}(r_{\alpha_0})$ is a reflection in the hyperplane
 \[
-    \theta = 1 \quad \text{(i.e., } \{\lambda \in \mathfrak{h}^*_0 \mid (\lambda|\theta)=1\}).
+    \theta = 1 \quad \text{(i.e., } \{\lambda \in \overset{\circ}{\mathfrak{h}^*} \mid (\lambda|\theta)=1\}).
 \]
 
-$r_\theta$ is reflection in the hyperplane $H_\theta = \{\lambda \in \mathfrak{h}_0^* \mid (\lambda|\theta)=0\}$. $r_{\alpha_0}$ is an affine reflection in the hyperplane $H_{\alpha_0} = \{\lambda \in \mathfrak{h}_0^* \mid (\lambda|\theta)=1\}$.
+$r_\theta$ is reflection in the hyperplane $H_\theta = \{\lambda \in \mathfrak{h}_0^* \mid (\lambda|\theta)=0\}$. $r_{\alpha_0}$ is an affine reflection in the hyperplane $H_{\alpha_0} = \{\lambda \in \overset{\circ}{\mathfrak{h}^*} \mid (\lambda|\theta)=1\}$.
 
 These two hyperplanes are parallel (both perpendicular to $ \theta $), but one is shifted by 1 unit in the $\theta$-direction. The product of two reflections in parallel hyperplanes is a translation by twice the perpendicular distance vector between the hyperplanes. Therefore the product $r_{\alpha_0} r_\theta$ is a translation by $\nu(\theta^\vee)$ since $(\nu(\theta^\vee)|\theta) = \langle \theta^\vee, \theta \rangle = 2$. Thus,
 \[t_{\nu(\theta^\vee)} = r_{\alpha_0} r_\theta\]
@@ -4100,12 +4093,12 @@ Therefore
 \[
     \mathrm{af}(t_{\nu(\theta^\vee)})(\lambda) 
     = \mathrm{af}(r_{\alpha_0})(r_\theta(\lambda)) = r_\theta(r_\theta(\lambda)) + \nu(\theta^\vee)
-    = \lambda + \nu(\theta^\vee), \qquad \lambda \in \mathfrak{h}^*_0.
+    = \lambda + \nu(\theta^\vee), \qquad \lambda \in \overset{\circ}{\mathfrak{h}^*}.
 \]
 Hence, by additivity and invariance, we obtain
 \begin{equation} \label{6.6.3}
     \mathrm{af}(t_\alpha)(\lambda) = \lambda + \alpha, 
-    \qquad \lambda \in \mathfrak{h}^*_0, \; \alpha \in M.
+    \qquad \lambda \in \overset{\circ}{\mathfrak{h}^*}, \; \alpha \in M.
 \end{equation}
 So, the group $W_{\mathrm{af}}$ is none other than the so-called affine Weyl group of $\dot{\mathfrak{g}}$.
 
@@ -4119,9 +4112,7 @@ C_{\mathrm{af}} = \{ \lambda \in \overset{\circ}{\mathfrak{h}}^*_{\mathbb{R}} \m
 \end{definition}
 Note that the condition $(\lambda | \theta ) \leq 1$ is equivalent to $(\lambda | \alpha_0) \geq 0$ so that the fundamental alcove is cut out by the affine simple roots $\alpha_0, \alpha_1, \ldots, \alpha_\ell$, just as the fundamental Weyl chamber is cut out by the finite simple roots $\alpha_1, \ldots, \alpha_\ell$ in the finite case.
 
-The affine Weyl group $W$ acts faithfully on $\mathfrak{h}^*_{0,\mathbb{R}}$ (this is the Euclidean slice orthogonal to $\delta$, i.e. the finite-dimensional space where the real roots live).
-
-So in that space, you can cut out alcoves just as in the finite case, but now you need one extra hyperplane $(\lambda|\theta) \leq 1$, corresponding to the affine simple root $\alpha_0 = \delta - \theta$. The following proposition describes the action of $W$ on $\mathfrak{h}^*_{0,\mathbb{R}}$. The reason we care about alcoves is that the weight lattice modulo affine Weyl group is tiled by alcoves, and this gives us an understanding of representation theory.
+The affine Weyl group $W$ acts faithfully on $\overset{\circ}{\mathfrak{h}}^*_{\mathbb{R}}$. So in that space, you can cut out alcoves just as in the finite case, but now you need one extra hyperplane $(\lambda|\theta) \leq 1$, corresponding to the affine simple root $\alpha_0 = \delta - \theta$. The following proposition describes the action of $W$ on $\overset{\circ}{\mathfrak{h}}^*$. The reason we care about alcoves is that the weight lattice modulo affine Weyl group is tiled by alcoves, and this gives us an understanding of representation theory.
 \begin{proposition}[6.6]
 \leavevmode
 \begin{enumerate}[label=\alph*)]
@@ -4158,11 +4149,37 @@ But by Proposition 3.12b), $C^\vee \cap \mathfrak{h}^*_1$ is a fundamental domai
 Now part b) follows from Proposition 3.12a). Finally $W_\lambda \cap T = 1$, since $\mathrm{af}(W_\lambda) = (W_{\mathrm{af}})_{\bar{\lambda}}$ contains no nontrivial translation.
 \end{proof}
 
+\begin{example}
+    [Affine $\sl_2$] Recall that for $\widehat{\sl}_2$, we have $\theta = \alpha_1$, $\alpha_0 = \delta - \alpha_1$, and $\overset{\circ}{\mf h}^*_\mathbb{R} = \mathbb{R}$ with coordinate given by $\lambda \mapsto (\lambda|\alpha_1) = \langle \lambda, \alpha_1^\vee \rangle$. Note that this equality is because evaulating against simple coroots is the same as pairing against simple roots, since $\alpha_1^\vee = \frac{2\alpha_1}{(\alpha_1|\alpha_1)}$ and the Cartan matrix entry $a_{11} = 2$. The fundamental alcove is then \begin{align*}
+    C_{\mathrm{af}} &= \{\lambda \in \mathbb{R} \mid (\lambda|\alpha_1) \geq 0, (\lambda|\theta) \leq 1\} \\
+    &= \{\lambda \in \mathbb{R} \mid 0 \leq (\lambda|\alpha_1) \leq 1\}
+    \end{align*} i.e. the interval $[0,1]$ in our coordinate $(\cdot | \alpha)$. The affine Weyl group $W = \overset{\circ}{W} \ltimes T$ corresponds to reflections across affine hyperplanes \[H_{\alpha,k} = \{\lambda \in \mf h^*_\mathbb{R} \mid (\lambda|\alpha) = k\}\] which is generated by the simple reflections $r_{\alpha_1}$ (reflection across $H_{\alpha_1,0}$) and $r_{\alpha_0}$ (reflection across $H_{\alpha_1,1}$). The group of translations $T$ is generated by $t_{\nu(\alpha_1^\vee)} = r_{\alpha_0} r_{\alpha_1}$.
+
+The reflections are indexed by real roots $\alpha + n\delta$ for $\alpha \in \overset{\circ}{\Delta}$ and $n \in \mathbb{Z}$. In particular, they have the formula \begin{align*}
+    r_{\alpha + n\delta}(\lambda) &= \lambda - \langle \lambda, (\alpha + n\delta)^\vee \rangle (\alpha + n\delta) \\
+    &= \lambda - \langle \lambda, \alpha^\vee \rangle (\alpha + n\delta) \\
+    &= \lambda - (\lambda|\alpha)\alpha - n\langle \lambda, K\rangle \alpha + n(\lambda|\alpha)\delta \\
+    &= \lambda - ((\lambda|\alpha) + n)\alpha
+\end{align*} where we used the fact that we are on the level-1 hyperplane $\langle \lambda, K \rangle = 1$ and projected away the $\delta$-term to get an isomorphism \[\mathfrak{h}^*_1/\mathbb{R}\delta \xrightarrow{\sim} \overset{\circ}{\mathfrak{h}^*}.\] Now we can check on the level of coordinates that \begin{align*}
+    \langle r_{\alpha_1 + n\delta}(\lambda), \alpha_1^\vee \rangle &= \langle \lambda - ((\lambda|\alpha_1) + n)\alpha_1, \alpha_1^\vee \rangle \\
+    &= (\lambda|\alpha_1) - ((\lambda|\alpha_1) + n)(\alpha_1|\alpha_1^\vee) \\
+    &= (\lambda|\alpha_1) - 2((\lambda|\alpha_1) + n) \\
+    &= -(\lambda|\alpha_1) - 2n
+\end{align*}
+So we can identify the reflection associated with $\alpha_1 - n\delta$ as the reflection across the hyperplane $H_{\alpha_1,n} = \{\lambda \mid (\lambda|\alpha_1) = n\}$, in coordinates the map is given by \[x \mapsto -x + 2n.\] 
+
+The translations are indexed by \[M = \nu(\Z(\overset{\circ}{W})\cdot \theta^\vee)\] which in this case is just $\nu(\overset{\circ}{Q}^\vee) = \Z \nu(\alpha_1^\vee) = \Z \alpha_1$. In particular, there are $\Z\alpha_1$ worth of translations given by \begin{align*}
+    t_{m\alpha_1}(\lambda) &= \lambda + m\alpha_1 
+\end{align*} which in our coordinate is just $x \mapsto x + 2m$. 
+
+All together, the affine Weyl group is generated $r_0:x \mapsto -x$ and $r_1:x \mapsto -x + 2$. They satisfy the relations $r_0^2 = r_1^2 = e$. Also $t_m = (r_0 r_1)^m$ for $m \in \Z$ and conjugation by $r_0$ inverts the translation $t_m$. Therefore, the structure is precisely the infinite dihedral group $D_\infty \cong \Z \rtimes \Z/2\Z$.
+\end{example}
+
 \section{Meetings}
 \subsection*{Questions (Sept 18)}
 \begin{enumerate}[A.]
     \item I've been thinking about the hierarchy of objects: $L\mathfrak g$ $\to$ central extensions $\to$ full affine Kac–Moody with $d$. Each step seems to be motivated by making the structure better behaved for representation theory.
-          \begin{enumerate}[a)]
+          \begin{enumerate}[(a)]
               \item The loop algebra $L\mathfrak g$ is already a perfectly good infinite-dimensional Lie algebra, realized geometrically as a dense subalgebra of the Lie algebra of the loop group $LG$. Why isn't it sufficient to study its representation theory directly? In what sense are central extensions 'forced upon us' if we want a rich representation theory?
               \item I see that the affine Kac–Moody algebra arises as the universal central extension of the loop algebra. Is there a structural reason why the extension must be central and abelian, rather than by some nonabelian ideal? In other words, what uniquely characterizes the central extension as the 'correct' enlargement of $L\mathfrak g$ for representation theory?
               \item Once we accept the central extension, we typically adjoin the degree derivation $d$, defined by $[d, x\otimes z^n]=n\,x\otimes z^n$. Should I think of $d$ as a geometric object, namely the vector field $z\frac{d}{dz}$ on the circle? Is the introduction of $d$ mathematically necessary (e.g. for a nondegenerate invariant bilinear form, or for grading representations), or is it mainly motivated by geometric/physical considerations?
