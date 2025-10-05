@@ -60,8 +60,8 @@
 \usepackage{/Users/songye03/Desktop/math_tex/style/macros}
 
 \oddsidemargin 0in \evensidemargin 0in \marginparwidth 40pt
-\marginparsep 10pt \topmargin 0pt \headsep 0in \headheight 0in
-\textheight 8.5in \textwidth 6.5in \brokenpenalty=10000
+\marginparsep 4pt \topmargin 0pt \headsep 0in \headheight 0in
+\textheight 8.5in \textwidth 6.5in \brokenpenalty=4000
 
 \usepackage{amssymb}
 \usepackage{amsfonts}
@@ -123,9 +123,9 @@
 \definecolor{mycolor}{RGB}{0,0,255} % Blue color
 
 \newtheoremstyle{examples}% name
-{10pt}% space above
-{10pt}% space below
-{\itshape}% body font
+{4pt}% space above
+{4pt}% space below
+{\itshape\leftskip=-2em\relax }% <-- body font & INDENT HERE
 {}% indent amount
 {\color{blue}\bfseries}% theorem head font (blue color)
 {.}% punctuation after theorem head
@@ -134,9 +134,9 @@
 
 
 \newtheoremstyle{results}% name
-{10pt}% space above
-{10pt}% space below
-{\itshape}% body font
+{4pt}% space above
+{4pt}% space below
+{\itshape\leftskip=-2em\relax }% <-- body font & INDENT HERE
 {}% indent amount
 {\color{teal}\bfseries}% theorem head font (blue color)
 {.}% punctuation after theorem head
@@ -144,9 +144,9 @@
 {}% theorem head spec (can be left empty, meaning 'normal')
 
 \newtheoremstyle{definitions}% name
-{10pt}% space above
-{10pt}% space below
-{\itshape}% body font
+{4pt}% space above
+{4pt}% space below
+{\itshape\leftskip=-2em\relax }% <-- body font & INDENT HERE
 {}% indent amount
 {\color{purple}\bfseries}% theorem head font (blue color)
 {.}% punctuation after theorem head
@@ -154,9 +154,9 @@
 {}% theorem head spec (can be left empty, meaning 'normal')
 
 \newtheoremstyle{special}% name
-{10pt}% space above
-{10pt}% space below
-{\itshape}% body font
+{4pt}% space above
+{4pt}% space below
+{\itshape\leftskip=-2em\relax }% <-- body font & INDENT HERE
 {}% indent amount
 {\color{red}\bfseries}% theorem head font (blue color)
 {.}% punctuation after theorem head
@@ -165,9 +165,9 @@
 
 
 \newtheoremstyle{solutions}% name
-{10pt}% space above
-{10pt}% space below
-{\itshape}% body font
+{4pt}% space above
+{4pt}% space below
+{\itshape\leftskip=-2em\relax}% <-- body font & INDENT HERE
 {}% indent amount
 {\color{orange}\bfseries}% theorem head font (blue color)
 {.}% punctuation after theorem head
@@ -188,14 +188,10 @@
 
 \theoremstyle{special}
 \newtheorem{remark}[theorem]{Remark}
-\newtheorem{observation}[theorem]{Observation}
-\newtheorem{conjecture}[theorem]{Conjecture}
 
 \theoremstyle{examples}
 \newtheorem{example}[theorem]{Example}
 \newtheorem{exercise}[theorem]{Exercise}
-
-
 
 \theoremstyle{definitions}
 \newtheorem{definition}[theorem]{Definition}
@@ -206,13 +202,6 @@
 
 \theoremstyle{plain} % Setting the theorem style back to plain in case theorems are defined in the main file
 
-
-
-
-
-
-% Setting the theorem style back to plain in case theorems are defined in the main file
-\theoremstyle{plain}
 
 
 

@@ -135,14 +135,11 @@ Since $G$ is linearly reductive, we can lift the $G$-complement of $U_1^\perp$. 
 
 Let $\mathfrak{n}_1$ be the ideal of $k[X]$ defined as the intersection of the radical of $N_1k[X]$ and $\mathfrak{n}_0$.  
 Let $X_1$ be the irreducible component containing the element $a$ of the closed subscheme corresponding to the ideal $\mathfrak{n}_1$.  
-
 \begin{remark}[What is happening here?]
 A linear subspace $U_1 \subset T_a(X)$ corresponds to its annihilator $U_1^\perp \subset \mathfrak{m}_a/\mathfrak{m}_a^2$. So specifying a subspace of tangent directions is equivalent to specifying which cotangent linear forms vanish on it. $N_1 \subset \mathfrak{m} \subset k[X]$ is chosen so that its image in $\mathfrak{m}_a/\mathfrak{m}_a^2$ is $U_1^\perp$. In other words, elements of $N_1$ are global functions vanishing at $a$ whose differentials at $a$ kill exactly the tangent vectors in $U_1$. $N_1$ gives equations that cut out, to first order at $a$, exactly those tangent directions outside $U_1$.
 
-    The point is that we want a closed subscheme of $X$ defined by an ideal $\mathfrak{n}_1 \subset k[X]$ such that locally at $a$, the generators of $\mathfrak{n}_1$ are exactly $N_1$.
-
-                The point is that we want a closed subscheme of $X$ defined by an ideal $\mathfrak{n}_1 \subset k[X]$ such that locally at $a$, the generators of $\mathfrak{n}_1$ are exactly $N_1$. If you only used $N_1$, you’d get an ideal describing a subvariety that locally has tangent space $U_1$. But globally, $N_1 k[X]$ might define something nonreduced or too small. So we take the radical, and intersects with $\mathfrak{n}_0$, to ensure that globally the closed set is reduced, $G$-stable, and still contains $X_0$.
-            \end{remark}
+The point is that we want a closed subscheme of $X$ defined by an ideal $\mathfrak{n}_1 \subset k[X]$ such that locally at $a$, the generators of $\mathfrak{n}_1$ are exactly $N_1$. If you only used $N_1$, you’d get an ideal describing a subvariety that locally has tangent space $U_1$. But globally, $N_1 k[X]$ might define something nonreduced or too small. So we take the radical, and intersects with $\mathfrak{n}_0$, to ensure that globally the closed set is reduced, $G$-stable, and still contains $X_0$.
+\end{remark}
 
 
 
@@ -169,7 +166,7 @@ The general fact $\sqrt{I}\mathcal{O}_a = \sqrt{\,I\mathcal{O}_a\,}$ for any ide
         \item $R/I$ is regular local of dimension $r$ (indeed $R/I \cong k[[x_1,\dots,x_r]]$ after completion).
         \item In particular, $R/I$ is a domain, so $I$ is prime; therefore $I$ is radical.
     \end{enumerate}
-Now we apply this fact to $N_1$. We have a subspace $U_1^\perp \subset \mathfrak{m}_a/\mathfrak{m}_a^2$. Choose lifts $f_{r+1},\dots,f_d \in \mathfrak{m}_a$ whose classes form a $k$-basis of $U_1^\perp$, and then extend to a basis of $\mathfrak{m}_a/\mathfrak{m}_a^2$ by adding $f_1,\dots,f_r$. Because $R=\mathcal{O}_{X,a}$ is regular, $f_1,\dots,f_d$ is a regular system of parameters. 
+Apply this fact to $N_1$. We have a subspace $U_1^\perp \subset \mathfrak{m}_a/\mathfrak{m}_a^2$. Choose lifts $f_{r+1},\dots,f_d \in \mathfrak{m}_a$ whose classes form a $k$-basis of $U_1^\perp$, and then extend to a basis of $\mathfrak{m}_a/\mathfrak{m}_a^2$ by adding $f_1,\dots,f_r$. Because $R=\mathcal{O}_{X,a}$ is regular, $f_1,\dots,f_d$ is a regular system of parameters. 
 Choosing generators $f_{r+1},\dots,f_d\in N_1$ that map to a basis of $U_1^\perp$, we can write that ideal as $(f_{r+1},\dots,f_d)$, so $N_1\mathcal{O}_a = (f_{r+1},\dots,f_d)$. By the lemma above, $R/(N_1\mathcal{O}_a)$ is regular (hence reduced, hence a domain), so $N_1\mathcal{O}_a$ is prime and radical.
 \end{remark}
 
@@ -424,9 +421,7 @@ and hence $\beta_i'$ is \'etale at $(a_1,a_2)$, for $i=1,2$. Moreover $\beta_i'$
         \item $f$ is flat at $x$, and
         \item the induced map on residue fields $\kappa(y) \to \kappa(x)$ is a finite separable extension,
     \end{enumerate}
-    equivalently: if $f$ is smooth of relative dimension $0$.
-
-    If $x \in X$ is a closed point, this boils down to: $f$ is étale at $x$ if and only if the induced map of local rings
+    equivalently: if $f$ is smooth of relative dimension $0$. If $x \in X$ is a closed point, this boils down to: $f$ is étale at $x$ if and only if the induced map of local rings
     $\mathcal{O}_{Y,y} \to \mathcal{O}_{X,x}$
     is a local isomorphism up to completion, or equivalently
     $T_x(X) \cong T_y(Y)$
@@ -450,9 +445,22 @@ Moreover, since $a$ is non-singular on $Y_i$, $Y_i'\cap Y_0'$ is the only irredu
 then conditions (a)--(d) are satisfied.
 \end{proof}
 
+Now we come to the main result of this section, which is an equivariant local product decomposition theorem. It roughly says near a fixed point a, a definite torus action looks locally like a product of the fixed locus $X^G$ and a linear representation $V$.
+
+
 \begin{theorem}[2.5]
 Let $G$ be an algebraic torus. Let the action of $G$ on $X$ be definite at $a$. Then there exists an open $G$-invariant neighbourhood $U$ of $a$ which is $G$-isomorphic to $(U \cap X^G) \times V$, where $V$ is a finite-dimensional (fully definite) $G$-module and the action of $G$ on $(U \cap X^G) \times V$ is induced by the trivial action of $G$ on $U \cap X^G$ and the linear action on $V$ (determined by the given structure of a $G$-module).
 \end{theorem}
+
+\begin{remark}
+   [Analog with differential geometry] In differential geometry, there is a slice theorem for compact Lie group acting smoothly on manifolds. For any $x_0 \in M$, the slice theorem gives you a $G_{x_0}$-invariant submanifold $S \subset M$, called a slice, such that a neighborhood of the orbit $G\cdot x_0$ is diffeomorphic to $G \times_{G_{x_0}} S$, where $G_{x_0}$ is the stabilizer of $x_0$.Moreover, $S$ is transverse to the orbit $G\cdot x_0$, in the sense that \[T_{x_0}M = T_{x_0}(G\cdot x_0) \oplus T_{x_0}S\]
+
+In the special case when $x_0$ is a fixed point, $G_{x_0} = G$ and the slice theorem says that a neighborhood of $x_0$ is diffeomorphic to $G \times_G S \cong S$, where $T_aS$ is the tangent space of $M$ at $x_0$. Hence you can take $S$ to be a small exponential image of $T_aM$.
+
+Choose a $G$-invariant Riemannian metric (possible because $G$ is compact), so the exponential map $\exp_a : T_aM \to M$ is $G$-equivariant near the origin (since $G$ acts by isometries fixing $a$). Therefore the exponential map identifies a $G$-invariant neighborhood of $0\in T_aM$
+with a $G$-invariant neighborhood of $a\in M$.
+
+\end{remark}
 
 In the proof of the theorem we shall use the following lemmas:
 The first lemma says that once $U_1$ contains a slice over the zero vector in $V$, then it contains the whole cylinder above it.
@@ -559,21 +567,17 @@ $(1) \Rightarrow (2)$ is obvious.
 $(3) \Rightarrow (4)$ follows from the fact that if an element of $G$ fixes the generic point, it fixes all of $X$, hence also $a$. So the generic stabilizer is always contained in the stabilizer at any closed point — and in particular at $a$.
 $(4) \Rightarrow (1)$ see the above remark.
 
-\red{To prove $(2) \Rightarrow (3)$} notice first that since $G$ is linearly reductive, if the action of $G(k)$ on $T_a(X)$ is not effective, then the action of $G(k)$ on $\cO_a / \mathfrak{m}_a^n$ is not effective, for any integer $n > 0$.
+$(2) \Rightarrow (3)$ is the nontrivial part. See the remark following this proof for a sketch of why this is true.
 \end{proof}
 
 \begin{remark}[Elaboration on (2) implies (3)]
 We will sketch why if the action on $T_a(X)$ is not effective, then the action on $k[X]$ is not effective.
 
-Assume some nontrivial subgroup $H\subset G$ acts trivially on $T_a(X)$. Then $H$ acts trivially on $\mathfrak m_a/\mathfrak m_a^2$.
+Assume some nontrivial subgroup $H\subset G$ acts trivially on $T_a(X)$. Then $H$ acts trivially on $\mathfrak m_a/\mathfrak m_a^2$. \red{Because $G$ is linearly reductive, the functor "H-invariants" is exact.} The $\mathfrak m_a$-adic filtration on the local ring gives graded pieces $\mathrm{gr}_{\mathfrak m_a}(\mathcal O_{X,a}) = \bigoplus_{n\ge 0} \mathfrak m_a^n/\mathfrak m_a^{n+1}$, and each $\mathfrak m_a^n/\mathfrak m_a^{n+1}$ is a quotient of the symmetric power $S^n(\mathfrak m_a/\mathfrak m_a^2)$. Since $H$ acts trivially on $\mathfrak m_a/\mathfrak m_a^2$, it acts trivially on all $S^n(\mathfrak m_a/\mathfrak m_a^2)$, hence on every $\mathfrak m_a^n/\mathfrak m_a^{n+1}$, hence on each finite jet ring $\mathcal O_{X,a}/\mathfrak m_a^n$. 
 
-Because $G$ is linearly reductive, the functor "H-invariants" is exact. The $\mathfrak m_a$-adic filtration on the local ring gives graded pieces $\mathrm{gr}_{\mathfrak m_a}(\mathcal O_{X,a}) = \bigoplus_{n\ge 0} \mathfrak m_a^n/\mathfrak m_a^{n+1}$, and each $\mathfrak m_a^n/\mathfrak m_a^{n+1}$ is a quotient of the symmetric power $S^n(\mathfrak m_a/\mathfrak m_a^2)$. Since $H$ acts trivially on $\mathfrak m_a/\mathfrak m_a^2$, it acts trivially on all $S^n(\mathfrak m_a/\mathfrak m_a^2)$, hence on every $\mathfrak m_a^n/\mathfrak m_a^{n+1}$, hence on each finite jet ring $\mathcal O_{X,a}/\mathfrak m_a^n$. By exactness, the successive extensions split $H$-equivariantly, so $H$ acts trivially on the completed local ring $\widehat{\mathcal O}_{X,a}$.
+By exactness, the successive extensions split $H$-equivariantly, so $H$ acts trivially on the completed local ring $\widehat{\mathcal O}_{X,a}$. The Krull intersection theorem guarantees that the natural map $\mathcal O_{X,a} \to \widehat{\mathcal O}_{X,a}$ is injective. Therefore the action of $H$ is trivial on $\mathcal O_{X,a}$.
 
-The Krull intersection theorem guarantees that the natural map $\mathcal O_{X,a} \to \widehat{\mathcal O}_{X,a}$ is injective. Therefore the action of $H$ is trivial on $\mathcal O_{X,a}$.
-
-Now suppose $X$ is affine near $a$: $X = \Spec A$, with $a$ corresponding to maximal ideal $\mathfrak m\subset A$. Then $\mathcal O_{X,a} = A_\mathfrak m$.
-
-Since $A$ is finitely generated over $k$, the local ring $A_\mathfrak m$ is generated as a $k$-algebra by finitely many elements of $A$. Pick generators $f_1,\dots,f_r\in A$ whose images generate $A_\mathfrak m$. If $g^*=\mathrm{id}$ on $\mathcal O_{X,a}$, then in particular $g^*(f_i)=f_i$ in the localization for each generator $f_i$.
+Now suppose $X$ is affine near $a$: $X = \Spec A$, with $a$ corresponding to maximal ideal $\mathfrak m\subset A$. Then $\mathcal O_{X,a} = A_\mathfrak m$. Since $A$ is finitely generated over $k$, the local ring $A_\mathfrak m$ is generated as a $k$-algebra by finitely many elements of $A$. Pick generators $f_1,\dots,f_r\in A$ whose images generate $A_\mathfrak m$. If $g^*=\mathrm{id}$ on $\mathcal O_{X,a}$, then in particular $g^*(f_i)=f_i$ in the localization for each generator $f_i$.
 
 That means: there exists some neighborhood $U_i$ of $a$ (where denominators used to localize don't vanish) such that $g^*(f_i)=f_i$ as functions on $U_i$. Let $U = \bigcap_{i=1}^r U_i$. This is still a neighborhood of $a$. On $B=\mathcal O_X(U)$, the automorphism $g^*$ and the identity coincide after localization. But localizing at $a$ is injective, so they must already coincide on $B$. Hence $g$ is the identity on $U$.
 
@@ -582,13 +586,19 @@ Therefore, trivial action on $\widehat{\mathcal O}_{X,a}$ forces $H$ to act triv
 
 \begin{remark}[Using Luna's étale slice theorem]
     In the above remark, one can also appeal to Luna's slice theorem, which we state here without proof. However this theorem came after Bialynicki-Birula wrote his paper, and is overkill for our situation.
+    \begin{adjustwidth}{2em}{0pt}
+\vspace{-\parskip}
+\vspace{-16pt}
 \begin{theorem}[Luna's étale slice theorem]
     Let $G$ be a reductive algebraic group acting on an affine variety $X$ over an algebraically closed field. Pick a point $x \in X$ with stabilizer $H \subseteq G$. Then there exists: a finite-dimensional $H$-representation $V$ (the slice representation, essentially the tangent representation $T_x(X)/T_x(G\cdot x)$), and an étale, $H$-equivariant morphism $(G \times^H V) \longrightarrow X$ sending $[e,0]$ to $x$, such that étale-locally near $x$, the $G$-variety $X$ looks like the homogeneous fiber bundle $G \times^H V$.
 \end{theorem}
+\end{adjustwidth}
 Since $G$ is reductive and $a$ is a fixed point, Luna's étale slice theorem gives a $G$-equivariant étale map from a linear model to $X$: $\phi:(V,0)\longrightarrow (X,a)$, where $V$ is a finite-dimensional $G$-representation whose linear action is the isotropy/tangent representation at $a$; moreover, $\phi$ is étale at $0$ and $G$-equivariant: $\phi\circ g_V = g_X\circ \phi$.
 Since G is reductive and a is a fixed point, Luna’s étale slice theorem (or, for tori, Sumihiro linearization) gives a G-equivariant étale map from a linear model to X, where $V$ is a finite-dimensional $G$-representation whose linear action is the isotropy/tangent representation at $a$; moreover, $\phi$ is étale at $0$ and $G$-equivariant.
 
-Because $\phi$ is étale at $0$, it induces an isomorphism of completed local rings \[\widehat{\mathcal O}_{X,a}\xleftarrow[\cong]{\phi^\#} \widehat{\mathcal O}_{V,0}\] By equivariance, the action of $H$ is trivial on the completion. But on a linear representation, "trivial on the completion" means the matrix is the identity: $\widehat{\mathcal O}_{V,0}\cong k[[x_1,\dots,x_r]]$. The action of $g$ is via the linear map $\rho(g)\in \mathrm{GL}(V)$: $g^{\#}(x_j) = \sum_i (\rho(g))_{ij}\,x_i + (\text{higher order terms})$. For a genuine linear action there are no higher-order terms. If $g^\#=\mathrm{id}$ on $k[[x]]$, then $g^\#(x_j)=x_j$ for all $j$, forcing $\rho(g)=I$. Hence $g$ acts trivially on a Zariski neighborhood of $0$ in $V$, which we identify with a neighborhood of $a$ in $X$ via $\phi$.
+Because $\phi$ is étale at $0$, it induces an isomorphism of completed local rings \[\widehat{\mathcal O}_{X,a}\xleftarrow[\cong]{\phi^\#} \widehat{\mathcal O}_{V,0}\] 
+
+By the same argument as above we again see that $g$ acts trivially on a Zariski neighborhood of $0$ in $V$, which we identify with a neighborhood of $a$ in $X$ via $\phi$.
 \end{remark}
 
 \begin{definition}
@@ -613,7 +623,137 @@ In other words, we are starting with orbit $G_\Omega \cdot t$, which is isomorph
 
 \begin{proof}
 [Proof of Theorem~2.5]
-\end{proof}
+Replacing $X$ by a $G$-invariant reduced and irreducible neighbourhood of~$a$,
+we may restrict considerations to the case where $X$ is reduced and irreducible.
+Moreover, we may assume that the action is effective.
+Let $V$ be the $G$-submodule complement of $T_a(X^G)$ in $T_a(X)$,
+i.e.\ let $T_a(X^G)\oplus V = T_a(X)$.
+Then the $G$-module $V$ is fully definite.
+Apply Theorem~2.4 to the case where
+\[
+   X_1 = X,\qquad 
+   X_2 = X^G\times V
+\]
+(with the action of $G$ induced by the trivial action on $X^G$
+and the action on $V$ determined by the $G$-module structure of~$V$),
+\[
+   Y_1 = X^G \subset X = X_1, \qquad
+   Y_2 = X^G\times\{0\}\subset X_2 = X^G\times V, \qquad
+   a_1=a,\ a_2=(a,0).
+\]
+The assumptions of the theorem are satisfied and hence we may find
+and fix $X_0$, $Y_0$, $\beta_1$, $\beta_2$, $a_0\in X_0$
+satisfying conditions~(a)–(d).
+We shall show that $\beta_1,\beta_2$ are open immersions.
+
+First let us check that this will prove the theorem. If $\beta_2: X_0 \hookrightarrow X_2 = X^G\times V$ is an open immersion, so $\beta_2(X_0)$ is an open subset of $X^G\times V$. Because $\beta_2$ is étale and $G$-equivariant, the set $U_0 := \beta_2(X_0) \cap X_2^G$ is just an open neighbourhood of $a_2$ in $X_2^G$ since $X_2^G = X^G \times \{0\}$. So $U_0 \subset X^G$ is an open neighbourhood of $a$. Here we are invoking the fact that \red{étale maps are open}.
+
+Since $\beta_2(X_0)$ is $G$-invariant (because $\beta_2$ is a $G$-map) and intersects the fixed locus in $U_0$, the product structure of $X_2 = X^G\times V$ forces: $\beta_2(X_0) \supset U_0\times V$. Here we use Lemma~2.2.
+
+Because $\beta_2$ is an isomorphism onto its image, we can identify $X_0' := \beta_2^{-1}(U_0\times V) \subset X_0$. Then $X_0'$ is $G$-isomorphic to $U_0\times V$. Composing with the other open immersion $\beta_1$, define $U := \beta_1(X_0') \subset X$. Then $U$ is an open $G$-invariant neighbourhood of $a$, and $U \simeq_G (U_0\times V)$
+
+Since $\beta_1,\beta_2$ are \'etale it suffices to show
+that they are birational (\red{since an \'etale and birational morphism of algebraic schemes is an open immersion}).
+To prove this we may (and will) assume in the sequel that $G=\mathbb G_m$. In fact, let $G_0\subset G$ be as in Lemma~2.3, then $X^{G_0}=X^G$ and hence $X_0,\beta_1,\beta_2,a_0$ fixed above satisfy conditions~(a)–(d) for $G$ replaced by~$G_0$.
+
+The set $\beta_2(X_0)$ is open and, because it is also $G$-invariant,
+by Lemma~2.2 it contains the non-empty and open subscheme
+\[
+  (\beta_2(X_0)\cap X_2^G)\times V .
+\]
+Let $t\in [\beta_2(X_0)](\Omega)$ be generic over~$k$
+(then $t\in (\beta_2(X_0)\cap X_2^G)\times V(\Omega)$). In particular, this means that $t$ corresponds to the generic point of the open subset $\beta_2(X_0)$ of $X_2$.
+
+The set $\beta_2^{-1}(t)$ is non-empty and finite. It is nonempty because $t$ was chosen inside the image $\beta_2(X_0)$. It is finite because $\beta_2$ is \'etale. \red{Hence it is relative dimension $0$ and its fibers are finite type, zero-dimensional, and reduced.}
+
+
+Write $t = (x,v)$ with $x \in X^G(\Omega)$ and $v \in V(\Omega)$. Because $G$ acts trivially on $X^G$, the $G$-orbit of $t$ is \[G(\Omega)\cdot t = \{(x, g\cdot v) : g\in G(\Omega)\} \subset X_2(\Omega)\] 
+Since $G = \mathbb{G}_m$ acting linearly on $V$ with weights of definite sign, we know that $\lim_{\lambda\to 0} \lambda\cdot v = 0$. That is, all points in $V$ flow to $0$ under the torus action. Therefore, the orbit closure in $V$ is $\overline{G(\Omega)\cdot v} = (G(\Omega)\cdot v) \cup \{0\}$. Lifting this to $X^G \times V$, we get $\overline{G(\Omega)\cdot t} = \big( G(\Omega)\cdot t \big) \cup \big( X^G(\Omega)\times \{0\} \big)$.
+
+Because $V$ is fully definite, all nontrivial one-parameter subgroups of $G$ all contract $V$ toward $0$. Hence $X_2(\Omega) \cap \overline{G(\Omega)\cdot t} = (G(\Omega)\cdot t) \cup \{b\}$.
+
+Consider the map
+\[
+   \beta_2^t := \beta_2^{-1}(G(\Omega)\cdot t)
+      \longrightarrow G(\Omega)\cdot t .
+\]
+Notice that it follows from~(c) that $\beta_2^t(b)$ is composed of exactly one point; denote it by~$b'$.
+Moreover
+\[
+\begin{aligned}
+\beta_2^{-1}(X_2(\Omega)\cap \overline{G(\Omega)\cdot t})
+   &= \beta_2^{-1}(G(\Omega)\cdot t)\cup \beta_2^{-1}(b)
+   = \bigcup_{t_i\in\beta_2^{-1}(t)}(X_0(\Omega)\cap \overline{G(\Omega)\cdot t_i})
+      \cup\{b'\}.
+\end{aligned}
+\]
+(The last equality follows from the fact that $\beta_2'^{-1}(G(\Omega)\cdot t)$
+is closed.)  Hence $b'\in\bigcup_i\overline{G(\Omega)\cdot t_i}$.
+Otherwise $\{b'\}$ would be open, so $\{b'\}$ would be open in
+$\overline{G(\Omega)\cdot t}$, a contradiction.
+Notice that $G(\Omega)\cdot t_i\cap G(\Omega)\cdot t_j=\varnothing$
+for $t_i\neq t_j$ since the isotropy group $S_t$ of the point~$t$
+is trivial.  In fact, if $G(\Omega)\cdot t_i\cap G(\Omega)\cdot t_j\neq\varnothing$
+then $G(\Omega)\cdot t_i=G(\Omega)\cdot t_j$.
+Hence there exists $g\in G(\Omega)$ such that $g(t_i)=t_j$
+and thus
+\[
+   t = \beta_2(g(t_i)) = g(\beta_2(t_i)) = g(t) ,
+\]
+and $g\in S_t(\Omega)$.
+If $t_i\neq t_j$ then $g\neq e\in G(\Omega)$ and hence
+$S_t$ is non-trivial, which by Lemma~2.4 contradicts the assumption
+that the action is effective.
+Hence $b'\in \overline{G(\Omega)\cdot t_i}$ for exactly one~$t_i$
+(by Lemma~2.5 and Proposition~17.5.7, Ch.~IV of~\cite{4}).
+Since $t\in X_2(\Omega)$ is generic (over~$k$) and the property
+$\overline{G(\Omega)\cdot t_0}\cap X_2^G(\Omega)\neq\varnothing$
+holds for any generic (over~$k$) $t_0\in X_2(\Omega)$,
+in particular for any $t_j\in\beta_2'^{-1}(t)$,
+$\overline{G(\Omega)\cdot t_j}\cap X_2^G(\Omega)\neq\varnothing$.
+But
+\[
+\overline{G(\Omega)\cdot t_j}\cap X_2^G(\Omega)
+  = (G(\Omega)\cdot t_j\cup\{b'\})\cap X_2^G(\Omega)
+  = \{b'\},
+\]
+hence $t_j=t_i$ for all $t_j\in\beta_2'^{-1}(t)$
+(by the uniqueness of~$t_i$ proved above).
+Thus $\beta_2'^{-1}(t)$ is a one-element set and therefore
+$\beta_2$ is birational (since $\beta_2$ is also \'etale).
+
+Now consider $\beta_1$.
+Take $u\in X_1(\Omega)$, generic for $X_1$ over~$k$.
+Then $\beta_1^{-1}(u)$ is non-empty and finite.
+Let $u_1,u_2\in\beta_1^{-1}(u)$.
+Then
+\[
+  X_1(\Omega)\cap \overline{G(\Omega)\cdot u_1}
+     = G(\Omega)\cdot u_1\cup\{s_1\},
+  \qquad
+  X_1(\Omega)\cap \overline{G(\Omega)\cdot u_2}
+     = G(\Omega)\cdot u_2\cup\{s_2\},
+\]
+where $s_1,s_2\in X_1^{G^\circ}(\Omega)$
+(because we have shown already that $X_0$ contains an open
+$G$-invariant subscheme which is $G$-isomorphic to
+$U_0\times V$, where $U_0$ is an open neighbourhood of~$a$ in~$X^G$
+and the $G$-module $V$ is fully definite).
+\[
+  G(\Omega)\cdot u_i \subset \beta_1^{-1}(G(\Omega)\cdot u),
+  \quad i=1,2,
+\]
+hence $\beta_1(s_i)=\beta_2(s_i)$ and
+\[
+  X_1(\Omega)\cap \overline{G(\Omega)\cdot u}
+    = G(\Omega)\cdot u\cup\{s_i\}.
+\]
+Moreover, since $\beta_1|_{X_1^{G^\circ}}$ is one-one
+(condition~(b) of Theorem~2.4),
+$s_1=s_2$.
+Therefore $u_1=u_2$ (by an argument as in the first part of the proof,
+where we have shown $t_j=t_i$ for all $t_j\in\beta_2'^{-1}(t)$).
+Since $\beta_1$ is \'etale this shows that $\beta_1$ is birational. \end{proof}
 
 \begin{corollary}
 Let $G$ be an $n$-dimensional torus and let $\dim X = n$.
@@ -644,15 +784,20 @@ can be isomorphic to $V$, hence $U = V$.
 \end{proof}
 
 \begin{remark}
-Recall the Borel fixed point theorem:
-\begin{theorem}
-    If $G$ is a connected solvable linear algebraic group acting regularly on a non-empty, complete algebraic variety $V$ over an algebraically closed field $k$, then $G$ has a fixed point on $V$.    
+   Bialynicki-Birula gets the existence of a fixed point using an argument from one of his earlier papers, \red{which I didn't hunt down}. But the sort of result he needs reminded me of the Borel fixed point theorem.
+\begin{adjustwidth}{2em}{0pt}
+   \vspace{-\parskip} % cancel the paragraph skip
+   \vspace{-16pt}
+\begin{theorem}[Borel fixed point theorem]
+If $G$ is a connected solvable linear algebraic group acting regularly on a non-empty, complete algebraic variety $V$ over an algebraically closed field $k$, then $G$ has a fixed point on $V$.
 \end{theorem}
+\end{adjustwidth}
 However $V$ is not complete in our situation, so we cannot use this theorem to guarantee the existence of a fixed point.
 \end{remark}
 
 \section{References}
 \begin{enumerate}
     \item Bialynicki-Birula, A. Some theorems on actions of algebraic groups. Ann. of Math. (2) 98 (1973), 480–497.
+    \item On the Existence of Slices for Actions of Non-Compact Lie Groups Richard S. Palais
 \end{enumerate}
 \end{document}
