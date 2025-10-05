@@ -31,7 +31,7 @@
 
 
 \begin{abstract}
-    These are notes for a reading course supervised by Prof. Richard Borcherds in the Fall of 2025 at UC Berkeley. The main references are \cite{kac}. There is an accompanying set of notes on loop groups, following \cite{pressley-segal}.
+    These are notes for a reading course supervised by Prof. Richard Borcherds in the Fall of 2025. The main references are \cite{kac}. There is an accompanying set of notes on loop groups, following \cite{pressley-segal}.
 \end{abstract}
 \tableofcontents
 Bump \cite{bump} writes that the crown jewel of the theory of semisimple Lie algebras is the Weyl character formula, which gives a closed-form expression for the characters of all irreducible finite-dimensional representations. The proof of this formula uses the Casimir operator, which is constructed using an invariant bilinear form on the Lie algebra. We will generalize these concepts to infinite-dimensional Lie algebras, specifically Kac-Moody algebras.
@@ -391,7 +391,7 @@ We will call a vector $v \in V$ a \textbf{highest weight vector} of weight $\lam
 \begin{remark}[Reducible highest weight modules are not unique] Let $\mathfrak{g}$ have two simple roots $\alpha_1, \alpha_2$ (e.g. $\mathfrak{sl}_3$). Fix a weight $\lambda$ such that both integers
     $\langle \lambda+\rho, \alpha_1^\vee \rangle, \langle \lambda+\rho, \alpha_2^\vee \rangle$
     are positive. Then the Verma module $M(\lambda)$ contains two distinct singular vectors (i.e. highest weight vectors inside $M(\lambda)$ below the top) of weights $s_1\!\cdot\!\lambda$ and $s_2\!\cdot\!\lambda$ (dot action).
-    They generate two different submodules $N_1 = U(\mathfrak{g})\,v_{s_1\cdot\lambda}, N_2 = U(\mathfrak{g})\,v_{s_2\cdot\lambda}$. Now the quotients $M(\lambda)/N_1$, $M(\lambda)/N_2$ are both highest weight modules of highest weight $\lambda$, both reducible, and not isomorphic (their composition series differ). Hence reducible highest weight modules with the same top weight are not unique.
+    They generate two different submodules \[N_1 = U(\mathfrak{g})\,v_{s_1\cdot\lambda}, \qquad  N_2 = U(\mathfrak{g})\,v_{s_2\cdot\lambda}\] Now the quotients $M(\lambda)/N_1$, $M(\lambda)/N_2$ are both highest weight modules of highest weight $\lambda$, both reducible, and not isomorphic (their composition series differ). Hence reducible highest weight modules with the same top weight are not unique.
 \end{remark}
 
 \begin{remark}
@@ -840,7 +840,7 @@ This section follows \cite{kac}.
         \item $a_{ij} \leq 0$ for $i \neq j$,
         \item $a_{ij} = 0$ if and only if $a_{ji} = 0$.
     \end{itemize}
-    A \textbf{realization} of a Cartan matrix $A$ is a triple $(\mathfrak{h}, \Pi, \Pi^\vee)$ where $\mathfrak{h}$ is a complex vector space, $\Pi = \{\alpha_1, \dots, \alpha_n\} \subset \mathfrak{h}^*$ and $\Pi^\vee = \{\alpha_1^\vee, \dots, \alpha_n^\vee\} \subset \mathfrak{h}$ are linearly independent sets such that $\alpha_j(\alpha_i^\vee) = a_{ij}$ for all $i,j$ and $\dim(\mathfrak{h}) = 2n - l$.
+    A \textbf{realization} of a Cartan matrix $A$ is a triple $(\mathfrak{h}, \Pi, \Pi^\vee)$ where $\mathfrak{h}$ is a complex vector space \[\Pi = \{\alpha_1, \dots, \alpha_n\} \subset \mathfrak{h}^*\]  \[\Pi^\vee = \{\alpha_1^\vee, \dots, \alpha_n^\vee\} \subset \mathfrak{h}\] are linearly independent sets such that $\alpha_j(\alpha_i^\vee) = a_{ij}$ for all $i,j$ and $\dim(\mathfrak{h}) = 2n - l$.
 \end{definition}
 
 \begin{remark}[Finite-dimensional Cartan matrices]
@@ -1234,7 +1234,7 @@ following important fact:
 
 \subsection{Invariant bilinear form}
 \begin{definition}
-    A Cartan matrix $A$ is called \textbf{symmetrizable} if there exists a diagonal matrix $D = \mathrm{diag}(\varepsilon_1,\dots,\varepsilon_n)$ with positive entries $\varepsilon_i$ and a symmetric matrix $B = (b_{ij})$ such that $A = DB$.
+    A Cartan matrix $A$ is called \textbf{symmetrizable} if there exists a diagonal matrix \[D = \mathrm{diag}(\varepsilon_1,\dots,\varepsilon_n)\] with positive entries $\varepsilon_i$ and a symmetric matrix $B = (b_{ij})$ such that $A = DB$.
 \end{definition}
 
 Let $A$ be a symmetrizable matrix with a fixed decomposition and let $(\mathfrak{h}, \Pi, \Pi^\vee)$ be a realization of $A$. Fix a complementary subspace $\mathfrak{h}''$ to $\mathfrak{h}' = \sum \mathbb{C}\alpha_i^\vee$ in $\mathfrak{h}$, and define a symmetric bilinear $\mathbb{C}$-valued form $(\,.\mid.\,)$ on $\mathfrak{h}$ by the following two equations:
