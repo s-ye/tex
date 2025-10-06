@@ -34,7 +34,7 @@ We follow the original paper by Bialynicki-Birula and add details wherever I fou
 \tableofcontents
 
 \section{Preliminaries}
-Let $\eta : G \times X \to X$ be an action of an algebraic group scheme $G$ on an algebraic scheme $X$ over an algebraically closed field $k$. The action $\eta$ is said to be \emph{effective} if it satisfies the following condition:  
+Let $\eta : G \times X \to X$ be an action of an algebraic group scheme $G$ on an algebraic scheme $X$ over an algebraically closed field $k$. The action $\eta$ is said to be \textbf{effective} if it satisfies the following condition:  
 if $\eta$ is induced from an action 
 \[
    \eta_1 : G_1 \times X \longrightarrow X
@@ -56,15 +56,15 @@ the image of $v_i$ under $(\lambda_1,\dots,\lambda_n)$ equals
 $\lambda_1^{m_{i1}} \cdots \lambda_n^{m_{in}} v_i$, where $m_{ij}$ are integers.  
 
 We say (again for a fixed $G \cong \mathbb{G}_m \times \cdots \times \mathbb{G}_m$) 
-that the module is \emph{positive} (resp.\ \emph{negative}) if we have
+that the module is \textbf{positive} (resp.\ \textbf{negative}) if we have
 \begin{enumerate}[(a)]
 \item $m_{ij} \ge 0$ (resp.\ $m_{ij} \le 0$), for all $i,j$.
 \item For every index $i \in I$, there exists $j$ such that $m_{ij} \ne 0$.
 \end{enumerate}
 
-The module is said to be \emph{non-negative} (resp.\ \emph{non-positive}) 
-if (a) is satisfied. We say that the module is \emph{fully definite} 
-(resp.\ \emph{definite}) if there exists an isomorphism 
+The module is said to be \textbf{non-negative} (resp.\ \textbf{non-positive}) 
+if (a) is satisfied. We say that the module is \textbf{fully definite} 
+(resp.\ \textbf{definite}) if there exists an isomorphism 
 $G \cong \mathbb{G}_m \times \cdots \times \mathbb{G}_m$ for which the 
 module is positive (resp.\ non-negative). Equivalently, a module is fully definite (resp.\ definite) if its set of weights lies entirely in some positive (resp.\ non-negative) half-space of $X^*(G)\otimes_\mathbb{Z} \mathbb{R}$.
 
@@ -72,7 +72,7 @@ module is positive (resp.\ non-negative). Equivalently, a module is fully defini
 
 Let $\eta: G \times X \to X$ be an action of a torus $G$ on $X$ and let $a$ 
 be a closed point from $X^G$. We say that the action $\eta$ is 
-\emph{fully definite} (resp.\ \emph{definite}) at a closed point 
+\textbf{fully definite} (resp.\ \textbf{definite}) at a closed point 
 $a \in X^G$ if the $G$-module $T_a(X)$ is fully definite (resp.\ definite).  
 
 It is easy to see that if $X$ is irreducible quasi-affine and the action 
@@ -81,8 +81,8 @@ is definite. Notice also that (cf.\ Theorem 2.1) if the action is fully definite
 at $a$ then $a$ is an isolated fixed point of $\eta$, and if $X$ is irreducible 
 and affine and $G = \mathbb{G}_m$ then it is fully definite.
 
-\section{Introduction}
-
+\section{Local theorems}
+We prepare the proof of Theorem 2.5, which is an analog of the slice theorem for the smooth action of a compact Lie group on a manifold. 
 \begin{lemma}[2.1]
 Let $b$ be a non-singular closed point of an algebraic scheme.  
 If $N$ is a $k$-vector space contained in $\mathfrak{m}_b$ such that the canonical map  
@@ -294,6 +294,13 @@ Then $N_1, N_2$ satisfy (0), (1), (2$''$), and hence (0), (1), (2).
 Thus the proof is complete.
 \end{proof}
 
+\begin{remark}
+   [Interpreting the Hom condition] The uniqueness part of this theorem says that there is exactly one such $G$-invariant smooth subvariety if and only if there are no $G$-invariant polynomial equations of positive degree on $U_1$ valued in the quotient $T_a(X)/U_1$.
+
+   This is because elements of \(\Hom_G(ST^r(U_1), T_a(X)/U_1)\) identify with G-equivariant homogeneous polynomial maps of degree r $P : U_1 \longrightarrow T_a(X)/U_1$. The existence of such a polynomial map implies the existence of a $G$-equivariant polynomial deformation of the “flat” slice $U_1$ inside $T_a(X)$.
+   If one of those spaces is nonzero, you can modify the subvariety by adding a degree-r term, giving a different G-invariant subvariety tangent to $U_1$ at $a$. Thus, the uniqueness condition is equivalent to the nonexistence of such polynomial maps.
+\end{remark}
+
 \begin{corollary}
 Let $G = \mathbb{G}_m$. If $U_1$ is equal to one of the following 
 subspaces of $T_a(X)$: 
@@ -445,7 +452,7 @@ Moreover, since $a$ is non-singular on $Y_i$, $Y_i'\cap Y_0'$ is the only irredu
 then conditions (a)--(d) are satisfied.
 \end{proof}
 
-Now we come to the main result of this section, which is an equivariant local product decomposition theorem. It roughly says near a fixed point a, a definite torus action looks locally like a product of the fixed locus $X^G$ and a linear representation $V$.
+Now we come to the main result of this section, which is an equivariant local product decomposition theorem. It roughly says near a fixed point a, a definite torus action looks locally like a product of the fixed locus $X^G$ and a linear representation $V$. 
 
 
 \begin{theorem}[2.5]
@@ -453,7 +460,7 @@ Let $G$ be an algebraic torus. Let the action of $G$ on $X$ be definite at $a$. 
 \end{theorem}
 
 \begin{remark}
-   [Analog with differential geometry] In differential geometry, there is a slice theorem for compact Lie group acting smoothly on manifolds. For any $x_0 \in M$, the slice theorem gives you a $G_{x_0}$-invariant submanifold $S \subset M$, called a slice, such that a neighborhood of the orbit $G\cdot x_0$ is diffeomorphic to $G \times_{G_{x_0}} S$, where $G_{x_0}$ is the stabilizer of $x_0$.Moreover, $S$ is transverse to the orbit $G\cdot x_0$, in the sense that \[T_{x_0}M = T_{x_0}(G\cdot x_0) \oplus T_{x_0}S\]
+   [Analog with differential geometry] In differential geometry, there is a slice theorem for compact Lie group acting smoothly on manifolds \cite{Palais}. For any $x_0 \in M$, the slice theorem gives you a $G_{x_0}$-invariant submanifold $S \subset M$, called a slice, such that a neighborhood of the orbit $G\cdot x_0$ is diffeomorphic to $G \times_{G_{x_0}} S$, where $G_{x_0}$ is the stabilizer of $x_0$.Moreover, $S$ is transverse to the orbit $G\cdot x_0$, in the sense that \[T_{x_0}M = T_{x_0}(G\cdot x_0) \oplus T_{x_0}S\]
 
 In the special case when $x_0$ is a fixed point, $G_{x_0} = G$ and the slice theorem says that a neighborhood of $x_0$ is diffeomorphic to $G \times_G S \cong S$, where $T_aS$ is the tangent space of $M$ at $x_0$. Hence you can take $S$ to be a small exponential image of $T_aM$.
 
@@ -604,7 +611,7 @@ By the same argument as above we again see that $g$ acts trivially on a Zariski 
 \begin{definition}
     Let $Y$ be a scheme over $k$. We say $Y$ is \textbf{geometrically unibranched} if for every point $y \in Y$: (1) the local ring $\mathcal{O}_{Y,y}$ is reduced and has a unique minimal prime (so the germ of $Y$ at $y$ is irreducible), and (2) the normalization of $\mathcal{O}_{Y,y}$ is still local (i.e. has only one maximal ideal).
 \end{definition}
-$Y$ may have singularities, but at each point there is only one "branch" of the variety passing through that point. One can't "split" the normalization into multiple components over that point. Contrast with something like a node (e.g. $xy=0$ in $\mathbb{A}^2$), where two branches meet: that is not unibranched.
+$Y$ may have singularities, but at each point there is only one "branch" of the variety passing through that point. One can't "split" the normalization into multiple components over that point. Contrast with something like a node (e.g. $xy=0$ in $\mathbb{A}^2$), where two branches meet: that is not unibranched. See the appendix for more details.
 
 \begin{lemma}[2.5]
 Let $G = \mathbb{G}_m$ and $t \in X(\Omega)$.  
@@ -674,23 +681,23 @@ Because $V$ is fully definite, all nontrivial one-parameter subgroups of $G$ all
 
 Consider the map
 \[
-   \beta_2^t := \beta_2^{-1}(G(\Omega)\cdot t)
-      \longrightarrow G(\Omega)\cdot t .
+   \beta_2^t := \beta_2^{-1}(\overline{G(\Omega)\cdot t})
+      \longrightarrow \overline{G(\Omega)\cdot t}
 \]
-Notice that it follows from~(c) that $\beta_2^t(b)$ is composed of exactly one point; denote it by~$b'$.
+Notice that it follows from the equivariance of $\beta_2$ that $\beta_2^{-1}(b)$ is composed of exactly one point. This is because multiple disjoint fixed points mapping to the same one would violate local injectivity of an étale morphism at a fixed point. Denote it by~$b'$.
 Moreover
-\[
-\begin{aligned}
+\begin{align*}
 \beta_2^{-1}(X_2(\Omega)\cap \overline{G(\Omega)\cdot t})
-   &= \beta_2^{-1}(G(\Omega)\cdot t)\cup \beta_2^{-1}(b)
-   = \bigcup_{t_i\in\beta_2^{-1}(t)}(X_0(\Omega)\cap \overline{G(\Omega)\cdot t_i})
+   &= \beta_2^{-1}(G(\Omega)\cdot t)\cup \beta_2^{-1}(b) \\
+   &= \bigcup_{t_i\in\beta_2^{-1}(t)}(X_0(\Omega)\cap {G(\Omega)\cdot t_i}) \cup\{b'\} \\
+   &= \bigcup_{t_i\in\beta_2^{-1}(t)}(X_0(\Omega)\cap \overline{G(\Omega)\cdot t_i})
       \cup\{b'\}.
-\end{aligned}
-\]
-(The last equality follows from the fact that $\beta_2'^{-1}(G(\Omega)\cdot t)$
-is closed.)  Hence $b'\in\bigcup_i\overline{G(\Omega)\cdot t_i}$.
-Otherwise $\{b'\}$ would be open, so $\{b'\}$ would be open in
-$\overline{G(\Omega)\cdot t}$, a contradiction.
+\end{align*}
+The last equality follows from the fact that $\beta_2^{-1}(\overline{G(\Omega)\cdot t})$
+is closed and so we can replace each orbit by its closure. Hence $b'\in\bigcup_i\overline{G(\Omega)\cdot t_i}$.
+Otherwise $\{b'\}$ would be open because it's the complement of a closed set. So $\{b\}$ would be open in
+$\overline{G(\Omega)\cdot t}$ because étale morphisms are open. This is a contradiction because $b$ is a limit point of $G(\Omega)\cdot t$ and cannot be open.
+
 Notice that $G(\Omega)\cdot t_i\cap G(\Omega)\cdot t_j=\varnothing$
 for $t_i\neq t_j$ since the isotropy group $S_t$ of the point~$t$
 is trivial.  In fact, if $G(\Omega)\cdot t_i\cap G(\Omega)\cdot t_j\neq\varnothing$
@@ -704,12 +711,12 @@ and $g\in S_t(\Omega)$.
 If $t_i\neq t_j$ then $g\neq e\in G(\Omega)$ and hence
 $S_t$ is non-trivial, which by Lemma~2.4 contradicts the assumption
 that the action is effective.
-Hence $b'\in \overline{G(\Omega)\cdot t_i}$ for exactly one~$t_i$
-(by Lemma~2.5 and Proposition~17.5.7, Ch.~IV of~\cite{4}).
+Hence $b'\in \overline{G(\Omega)\cdot t_i}$ for exactly one~$t_i$ (by Lemma~2.5). In particular the target curve is unibranched and etale maps preserve the number of branches (we appeal to the appendix), only one of those preimage branches can approach the special point $b'$. Otherwise, the image $\overline{G(\Omega)\cdot t}$ would have multiple branches meeting at $b'$, contradicting geometric unibranchness.
+
 Since $t\in X_2(\Omega)$ is generic (over~$k$) and the property
 $\overline{G(\Omega)\cdot t_0}\cap X_2^G(\Omega)\neq\varnothing$
 holds for any generic (over~$k$) $t_0\in X_2(\Omega)$,
-in particular for any $t_j\in\beta_2'^{-1}(t)$,
+in particular for any $t_j\in\beta_2^{-1}(t)$,
 $\overline{G(\Omega)\cdot t_j}\cap X_2^G(\Omega)\neq\varnothing$.
 But
 \[
@@ -717,10 +724,22 @@ But
   = (G(\Omega)\cdot t_j\cup\{b'\})\cap X_2^G(\Omega)
   = \{b'\},
 \]
-hence $t_j=t_i$ for all $t_j\in\beta_2'^{-1}(t)$
-(by the uniqueness of~$t_i$ proved above).
-Thus $\beta_2'^{-1}(t)$ is a one-element set and therefore
-$\beta_2$ is birational (since $\beta_2$ is also \'etale).
+hence $t_j=t_i$ for all $t_j\in\beta_2^{-1}(t)$. This is because already proved there is exactly one orbit closure among the $\overline{G(\Omega)\cdot t_i}$ that meets $b'$. \red{Thus $\beta_2^{-1}(t)$ is a one-element set and therefore
+$\beta_2$ is birational (since $\beta_2$ is also \'etale).}
+
+\begin{remark}
+   [Degree of an extension of function fields] Let $f : X \to Y$ be a dominant morphism of integral, finite-type $k$-schemes.
+
+   Then $f$ induces an injective field extension $k(Y) \hookrightarrow k(X)$, where $k(X)$ and $k(Y)$ are the function fields (i.e. residue fields at their generic points). The generic fiber $X_\eta := X \times_Y \Spec k(Y)$ has coordinate ring $\mathcal{O}(X_\eta) = \Gamma(X, \mathcal{O}_X) \otimes_{\Gamma(Y,\mathcal{O}_Y)} k(Y)$. If $f$ is finite and dominant, then \[\deg(f) := \text{length}_{k(Y)} (\mathcal{O}(X_\eta)) = [k(X) : k(Y)]\]
+
+   Every algebraic field extension $L/K$ factors as $L/K^{\mathrm{sep}}/K$ where $L/K^{\mathrm{sep}}$ is purely inseparable and $K^{\mathrm{sep}}/K$ is separable.
+   
+   A morphism $f : X \to Y$ is generically separable if $k(X)/k(Y)$ is separable. If the extension is separable, the generic fiber is reduced, and the number of geometric points in it equals $[k(X):k(Y)]$. If the extension is purely inseparable: the generic fiber is non-reduced (fat point), and set-theoretically it may be a single point, but its coordinate ring has nilpotents.
+
+Étale implies unramified + flat implies separable extension of degree equal to fiber size. Hence any étale, generically one-to-one morphism (one-point generic fiber) is birational. 
+
+In characteristic 0, every finite extension is separable, so there's no issue. In characteristic $p>0$, you can have purely inseparable extensions where the generic fiber has one point but the field extension has degree $p^r>1$. For example the extension $k(t)/k(t^p)$, coming from $f:\mathbb{A}^1\to\mathbb{A}^1$, $t\mapsto t^p$. One sees that $[k(t):k(t^p)] = p$, and the generic fiber has one point but is nonreduced.
+\end{remark}
 
 Now consider $\beta_1$.
 Take $u\in X_1(\Omega)$, generic for $X_1$ over~$k$.
@@ -734,7 +753,7 @@ Then
   X_1(\Omega)\cap \overline{G(\Omega)\cdot u_2}
      = G(\Omega)\cdot u_2\cup\{s_2\},
 \]
-where $s_1,s_2\in X_1^{G^\circ}(\Omega)$
+where $s_1,s_2\in X_0^G(\Omega)$
 (because we have shown already that $X_0$ contains an open
 $G$-invariant subscheme which is $G$-isomorphic to
 $U_0\times V$, where $U_0$ is an open neighbourhood of~$a$ in~$X^G$
@@ -752,7 +771,7 @@ Moreover, since $\beta_1|_{X_1^{G^\circ}}$ is one-one
 (condition~(b) of Theorem~2.4),
 $s_1=s_2$.
 Therefore $u_1=u_2$ (by an argument as in the first part of the proof,
-where we have shown $t_j=t_i$ for all $t_j\in\beta_2'^{-1}(t)$).
+where we have shown $t_j=t_i$ for all $t_j\in\beta_2^{-1}(t)$).
 Since $\beta_1$ is \'etale this shows that $\beta_1$ is birational. \end{proof}
 
 \begin{corollary}
@@ -794,10 +813,294 @@ If $G$ is a connected solvable linear algebraic group acting regularly on a non-
 \end{adjustwidth}
 However $V$ is not complete in our situation, so we cannot use this theorem to guarantee the existence of a fixed point.
 \end{remark}
+\section{$\alpha$-fibrations}
+Let $G$ be an algebraic group scheme over $k$ and let $Y$ be an algebraic scheme over $k$. In this section we recall the notion of an $\alpha$-fibration over $Y$ and prove some basic properties of $\alpha$-fibrations.
+\subsection{Definition and basic properties}
+
+Recall that a group scheme $G$ over $k$ is a scheme $G \to \Spec k$ equipped with maps $m : G \times_k G \to G$, $e : \Spec k \to G$, $i : G \to G$ satisfying the group axioms.
+
+Now fix any k-scheme $Y$. We can form the base change of $G$ along $Y \to \Spec k$: $G_Y := G \times_k Y$. This is a scheme over $Y$, and it inherits a group structure relative to $Y$ by base change of the structure morphisms: $m_Y : G_Y \times_Y G_Y \to G_Y$, $e_Y : Y \to G_Y$, $i_Y : G_Y \to G_Y$. Thus, $G_Y$ is a group object in the category of $Y$-schemes — meaning it is a group scheme over $Y$.
+
+Let $X$ be any scheme over $Y$. To give an action of $G_Y = G \times_k Y$ on $X$ (as a $Y$-scheme) means to give a morphism $\mu : G_Y \times_Y X \to X$ satisfying the usual axioms: $\mu(e_Y \times \id_X) = \id_X$, $\mu(m_Y \times \id_X) = \mu(\id_{G_Y} \times \mu)$. All maps are morphisms of $Y$-schemes, i.e. they commute with projection to $Y$.
+
+For a geometric point $y \in Y$ (say with residue field $k(y)$), form the fiber product: $G_y = G \times_k k(y)$, $X_y = X \times_Y \Spec k(y)$. Then the map $\mu$ restricts fiberwise to a map $\mu_y : G_y \times_{k(y)} X_y \to X_y$. So giving a $G_Y$-action on $X$ is the same as giving for each fiber $X_y$ an action of the group scheme $G_y$ (which is just $G$ after base change to $k(y)$), in a way that varies algebraically with $y$.
+
+
+
+\begin{example}
+   Consider $G = \mathbb{G}_m = \Spec k[t, t^{-1}]$, $Y = \Spec k[s]$ (so $Y = \mathbb{A}^1_k$). Then \[G_Y = \mathbb{G}_m \times_k \mathbb{A}^1 = \Spec k[s,t,t^{-1}]\] This is a group scheme over $Y$ via the projection $\Spec k[s,t,t^{-1}] \to \Spec k[s]$. Now take \[X = \mathbb{A}^1_Y = \Spec k[s,x]\]
+
+   Then an action of $G_Y$ on $X$ over $Y$ is a morphism $\mu : \Spec k[s,t,t^{-1},x] \to \Spec k[s,x]$ over $\Spec k[s]$. Equivalently, it's a comorphism $k[s,x] \to k[s,t,t^{-1},x]$ that fixes $s$ and satisfies the group law property. For example, the "weight-2" action $t \cdot x = t^2 x$ corresponds to the comorphism $x \mapsto t^2 x$.
+\end{example} 
+
+Let $V$ be a finite-dimensional $k$-vector space (viewed as an algebraic 
+scheme over $k$) and let 
+\[
+  \alpha : G \longrightarrow \GL(V)
+\]
+be a group homomorphism. Then $\alpha$ determines an action of $G$ on $V$ 
+and a structure of a $G$-module on $V$. 
+
+\begin{definition}[$\alpha$-fibration]
+   A \textbf{trivial $\alpha$-fibration over $Y$} is a $Y$-scheme $V \times Y$ 
+equipped with an action of $G \times Y$ induced by the action of $G$ on $V$ 
+determined by $\alpha$.
+
+We say that a $Y$-scheme $X$ with an action of $G \times Y$ is an 
+\textbf{$\alpha$-fibration over $Y$} if there exists an open covering 
+$\{Y_i\}$ of $Y$ such that $X \times_Y Y_i$ is $Y_i$-isomorphic to a trivial $\alpha$-fibration over $Y_i$ for each $i$.
+\end{definition}
+
+The following proposition roughly says that for an $\alpha$-fibration over the fixed point locus, the local linear model of the G-action near a fixed point is unique.
+
+In particular the fiber representation (the local G-module describing the directions normal to the fixed locus) is uniquely determined. Moreover, if the base is smooth and the fiber representation has no invariants (e.g. a definite torus representation), then any two possible “projections” $X \to X^G$ defining the fibration actually coincide.
+\begin{proposition}[3.1]
+Let $X$ be a quasi-affine algebraic scheme and let $G \times X \to X$ be an action of a linearly reductive algebraic group scheme $G$. Suppose that there exist morphisms $\gamma_i : X \to X^G$ $(i = 1, 2)$ such that $X$ with $\gamma_1$ (resp.\ with $\gamma_2$) and the given action is an $\alpha_1$-fibration (resp.\ $\alpha_2$-fibration), for some homomorphisms $\alpha_i : G \to \GL(V_i)$ $(i = 1, 2)$. Then $\alpha_1$ is equivalent to $\alpha_2$. Moreover, if $X$ is non-singular and there is no non-zero $G$-homomorphism
+\[
+   ST^r(V_1) \longrightarrow k_{\mathrm{triv}}
+\]
+into a trivial one-dimensional $G$-module, where $r$ is a positive integer, then $\gamma_1 = \gamma_2$.
+\end{proposition}
+
+\begin{proof}
+Let $a$ be a closed point of $X^G$. Then $V_1, V_2$ as $G$-modules are isomorphic to $T_a(X)/T_a(X^G)$ and hence $\alpha_1$ is equivalent to $\alpha_2$ (for this part the assumption that $G$ is linearly reductive was not necessary).
+
+To prove the second part, note first that the direct sum complement $U$ of $T_a(X^G)$ in $T_a(X)$ is determined uniquely (since there is no non-zero $G$-homomorphism $ST^r(V_1) \to k_{\mathrm{triv}}$). Hence if there is no non-zero $G$-homomorphism of $ST^r(V_1)$ into a trivial one-dimensional $G$-module, for any positive integer $r$, then by Theorem~2.2 there exists exactly one closed $G$-invariant subscheme $X_a$ of $X$ such that $a$ is non-singular on $X_a$ and $T_a(X_a) \oplus T_a(X^G) = T_a(X)$. Since $\gamma_1^{-1}(a), \gamma_2^{-1}(a)$ both satisfy the condition, $\gamma_1^{-1}(a) = \gamma_2^{-1}(a)$ for any closed point $a \in X^G$. This implies $\gamma_1 = \gamma_2$.
+\end{proof}
+
+\begin{corollary}
+Let $X$, $G$, and $\gamma_1, \gamma_2$ be as in Proposition~3.1. Moreover, assume that $X$ is non-singular, $G$ is a torus, and that $T_a(X)$ as a $G$-module (with the structure determined by the action $G \times X \to X$) is definite for some closed point $a \in X^G$. Then $\gamma_1 = \gamma_2$.
+\end{corollary}
+
+\begin{proof}
+Since $T_a(X)$ as a $G$-module is definite, the $G$-module $T_a(X)/T_a(X^G)$ is fully definite, and the assumptions of the second part of Proposition~3.1 are satisfied.
+\end{proof}
+
+\begin{definition}
+[$G$-fibration]A $Y$-scheme $X$ with an action of $G \times Y$ is said to be a \textbf{$G$-fibration} if there exists an open covering $\{Y_i\}$ of $Y$ such that $X \times_Y Y_i$ is an $\alpha_i$-fibration over $Y_i$, where for every $i$, $\alpha_i$ is a representation
+\[
+   \alpha_i : G \longrightarrow \GL(V_i).
+\]
+If $\dim V_i = n$ for all $i$, then we say that the $G$-fibration is $n$-dimensional.
+\end{definition}
+
+\begin{proposition}[3.2]
+Let a $Y$-scheme $X$ with an action of $G \times Y$ be a $G$-fibration. Then for any connected component $Y'$ of $Y$, the $Y'$-scheme $X \times_Y Y'$ with the induced action of $G \times Y'$ is an $\alpha$-fibration for some homomorphism
+\[
+   \alpha : G \longrightarrow \GL(V).
+\]
+In particular, if $Y$ is connected, then the dimension (and representation type) of any $G$-fibration is well-defined.
+\end{proposition}
+
+\begin{proof}
+   By definition of G-fibration there is an open cover $\{Y_i\}_{i\in I}$ of $Y$ and, for each $i$, a representation 
+   \[\alpha_i: G \longrightarrow \mathrm{GL}(V_i)\]
+   together with a $G\times Y_i$-equivariant isomorphism over $Y_i$,
+   $\phi_i: X\times_Y Y_i \xrightarrow{\sim} Y_i\times V_i$,
+   where the action on the right is induced by $\alpha_i$.
+
+   Fix a connected component $Y'\subset Y$ and refine the cover so that each $U_i:=Y_i\cap Y'$ is open and $Y'=\bigcup_i U_i$ with the index graph connected (i.e. for any $i,j$ there is a chain $i=i_0,i_1,\dots,i_m=j$ with $U_{i_\ell}\cap U_{i_{\ell+1}}\neq\varnothing$).
+
+   For any pair $i,j$ with $U_{ij}:=U_i\cap U_j\neq\varnothing$, we have two $\alpha$-fibration structures on the same $G\times U_{ij}$-scheme $X\times_YY_{ij}$:
+   $X\times_YY_{ij}\cong U_{ij}\times V_i$
+   and
+   $X\times_YY_{ij}\cong U_{ij}\times V_j$,
+   compatible with the given $G\times U_{ij}$-action. Apply Proposition 3.1 to the $Y$-scheme $X\times_YU_{ij}$ with these two structures ($\gamma_i,\gamma_j$ the projections to $U_{ij}$). Proposition 3.1 (first part) yields:
+   $\alpha_i$ and $\alpha_j$ are equivalent representations of $G$,
+   i.e. there exists a $G$-linear isomorphism of $k$-vector spaces $V_i \xrightarrow{\sim} V_j$. In particular,
+   $\dim V_i = \dim V_j$ for all overlapping $i,j$.
+
+   Because $Y'$ is connected and the index graph is connected, by chaining overlaps we deduce that all $\alpha_i$ (with $U_i\neq\varnothing$) are mutually equivalent; in particular all $\dim V_i$ are equal. Fix one index $i_0$ and set
+   $V := V_{i_0}$, $\alpha := \alpha_{i_0}$.
+   For each $i$ choose a $G$-linear isomorphism $\psi_i: V \xrightarrow{\sim} V_i$ (existence follows from equivalence just proved). Then
+   $X\times_Y U_i \xrightarrow{\phi_i} U_i\times V_i
+   \xrightarrow{\mathrm{id}\times \psi_i^{-1}} U_i\times V$
+   exhibits $X\times_Y U_i$ as a trivial $\alpha$-fibration over $U_i$. Hence $X' = X\times_Y Y'$ is an $\alpha$-fibration over $Y'$.
+
+   Finally, since all $\dim V_i$ coincide on a connected component, the dimension of the $G$-fibration is constant on $Y'$; in particular, if $Y$ is connected, the dimension is well defined globally. The same applies to the representation type.
+   \end{proof}
+
+   \section{Decompositions determined by the action of $\mathbb{G}_m$}
+In this section we assume that $k$ is algebraically closed, $G$ is an algebraic one-dimensional torus, i.e. $G = \mathbb{G}_m$, and all considered algebraic schemes are reduced and defined over $k$. Moreover, we assume that $X$ is a non-singular algebraic scheme, $\eta$ is a fixed action of $G$ on $X$, and $X$ can be covered by $G$-invariant quasi-affine open subschemes. If $X$ is projective then the last assumption is a consequence of the preceding ones.
+
+\begin{theorem}[and definition of $X_i^+$, $X_i^-$, $\gamma_i^+$, $\gamma_i^-$]
+Let $X^G = \bigsqcup_{i=1}^r (X^G)_i$ be the decomposition of $X^G$ into connected components. Then, for any $i = 1, \dots, r$, there exists a (unique) locally closed non-singular and $G$-invariant subscheme $X_i^+$ (resp.\ $X_i^-$) of $X$ and a (unique) morphism $\gamma_i^+ : X_i^+ \to (X^G)_i$ (resp.\ $\gamma_i^- : X_i^- \to (X^G)_i$) such that:
+\begin{enumerate}[(a)]
+  \item $(X^G)_i$ is a closed subscheme of $X_i^+$ (resp.\ $X_i^-$), and $\gamma_i^+|_{(X^G)_i}$ (resp.\ $\gamma_i^-|_{(X^G)_i}$) is the identity.
+  \item $X_i^+$ (resp.\ $X_i^-$) with the action of $G$ (induced by the action of $G$ on $X$) and with $\gamma_i^+$ (resp.\ $\gamma_i^-$) is a $G$-fibration over $(X^G)_i$.
+  \item For any closed $a \in (X^G)_i$, $T_a(X_i^+) = T_a(X)^0 \oplus T_a(X)^+$ (resp.\ $T_a(X_i^-) = T_a(X)^0 \oplus T_a(X)^-$).
+\end{enumerate}
+The dimension of the fibration defined in (b) equals $\dim T_a(X)^+$ (resp.\ $\dim T_a(X)^-$) for any closed $a \in (X^G)_i$.
+\end{theorem}
+
+\begin{proof}
+It follows from our assumptions and Theorem~2.1 that for any closed $a \in X^G$ we may find a locally closed irreducible $G$-invariant subscheme $Y_a'$ of $X$ such that $a \in Y_a'$, $a$ is non-singular on $Y_a'$, and $T_a(Y_a') = T_a(X)^0 \oplus T_a(X)^+$ (resp.\ $T_a(Y_a') = T_a(X)^0 \oplus T_a(X)^-$). It follows from Theorem~2.5 that there exist an open subscheme $Y_a$ of $Y_a'$ and a morphism $\gamma_a : Y_a \to Y_a \cap X^G$ such that $Y_a$ is non-singular, $a \in Y_a$, $Y_a$ is $G$-invariant, and $\gamma_a : Y_a \to Y_a \cap X^G$ is isomorphic to a trivial $G$-fibration. Moreover, if $a,b \in X^G$ are closed points, then, by the corollary of Theorem~2.2, $\gamma_a^{-1}(Y_a \cap Y_b \cap X^G) = \gamma_b^{-1}(Y_a \cap Y_b \cap X^G)$, and (by the corollary of Proposition~3.1) $\gamma_a|_{Y_a \cap Y_b} = \gamma_b|_{Y_a \cap Y_b}$. Moreover, for any closed point $c \in Y_a \cap Y_b \cap X^G$ we have $Y_a \cap Y_b \supset \gamma_c^{-1}(Y_a \cap Y_b \cap X^G)$.
+
+Since $(X^G)_i$ is noetherian, we may find a finite set $\{a_1, \dots, a_s\}$ of closed points of $(X^G)_i$ such that
+\[
+   (X^G)_i = \bigcup_{s=1}^i (Y_{a_i} \cap (X^G)_i).
+\]
+Then $X_i^+ = \bigcup_{i=1}^s Y_{a_i}$ (resp.\ $X_i^- = \bigcup_{i=1}^s Y_{a_i}$) is $G$-invariant, locally closed, and there exists $\gamma_i^+ : X_i^+ \to (X^G)_i$ (resp.\ $\gamma_i^- : X_i^- \to (X^G)_i$) determined uniquely by the equalities $\gamma_i^+|_{Y_{a_i}} = \gamma_{a_i}$ (resp.\ $\gamma_i^-|_{Y_{a_i}} = \gamma_{a_i}$). Then $\gamma_i^+$ (resp.\ $\gamma_i^-$) satisfies conditions (a), (b), (c). Uniqueness is evident.
+\end{proof}
+
+\begin{theorem}[4.2]
+Let $X$ be quasi-affine.  
+Let 
+\[
+    X^G = \bigsqcup_{i=1}^r (X^G)_i
+\]
+be the decomposition of $X^G$ into connected components.  
+If $t \in X(k)$, then the $k$-closure of $\overline{G(k)\cdot t}$ is not disjoint from $(X^G)_i$, where $i$ is an integer $1 \le i \le r$, if and only if $t \in X_i^+$ or $t \in X_i^-$.  
+Moreover,
+\[
+    X_i^+ \cap X_i^- = (X^G)_i, \qquad \text{for } i = 1, \dots, r.
+\]
+\end{theorem}
+
+\begin{proof}
+If $t \in X_i^+ \cup X_i^-$ then $\overline{G(k)\cdot t} \cap (X^G)_i \neq \varnothing$.
+
+Suppose now that $a \in \overline{G(k)\cdot t} \cap (X^G)_i$. It follows from Theorem~2.4 that there exist an algebraic scheme $X_0$, an action of $G$ on $X_0$, and $G$-morphisms
+\[
+  \beta_i : X_0 \longrightarrow X, \quad \beta_2 : X_0 \longrightarrow (X^G)_i \times (T_a(X)^+ \oplus T_a(X)^-),
+\]
+with a point $a_0 \in X_0$ such that the conditions (a)--(d) of the theorem are satisfied for $a_1 = a$, $a_2 = (a,0)$, $Y_1 = (X^G)_i$, $Y_2 = (X^G)_i \times \{0\}$. Let $\beta_1^{-1}(t) = \{t_1, \ldots, t_s\}$. Then
+\[
+  \beta_1^{-1}(\overline{G(k)\cdot t}) = \bigcup_{i=1}^s \overline{G(k)\cdot t_i}.
+\]
+
+As in the proof of Theorem~2.4, we infer that exactly one orbit $G(k)\cdot t_i$ has $a_0$ in its $k$-closure. Suppose that $\overline{G(k)\cdot t_1} \supset G(k)\cdot t_1 \cup \{a_0\}$. Then $G(k)\cdot \beta_2(t_1)$ is not closed (since $\beta_2$ is $G$-invariant and continuous, hence preserves closures). Hence \[\beta_2(t_1) \in ((X^G)_i \times T_a(X)^+) \cup ((X^G)_i \times T_a(X)^-)\] because any point $(a,v^+ + v^-)$ with $v^+ \neq 0$ and $v^- \neq 0$ is closed because it has no finite limit points under the $G(k)$-action. Let $Z_i^+$ (resp. $Z_i^-$) be the irreducible component of $\beta_2^{-1}((X^G)_i \times T_a(X)^+)$ (resp. $\beta_2^{-1}((X^G)_i \times T_a(X)^-)$) containing $\beta_1^{-1}((X^G)_i)$. Then, by Theorem~2.2 and conditions (a)--(d), we have
+\[
+  \beta_1(Z_i^+) = X_i^+ \cap \beta_1(X_0), \qquad \beta_1(Z_i^-) = X_i^- \cap \beta_1(X_0).
+\]
+Hence $t \in X_i^+ \cup X_i^-$ (note that $t \in Z_i^+ \cup Z_i^-$ since $\beta_2(t_1) \in (X^G)_i \times (T_a(X)^+ \cup T_a(X)^-)$ and $G(k)\cdot t$ contains the point $a_0$). Moreover, since $(X^G)_i \times T_a(X)^+ \cap T_a(X)^- = (X^G)_i \times \{0\}$, we get
+\[
+  X_i^+ \cap X_i^- = (X^G)_i.
+\] as desired.
+\end{proof}
+
+This lemma guarantees that under completeness assumptions, every non-fixed point lies in a unique attracting and a unique repelling set associated to different connected components of the fixed locus.
+\begin{lemma}[4.1]
+Let 
+\[
+  X^G = \bigsqcup_{i=1}^r (X^G)_i
+\]
+be the decomposition of $X^G$ into connected components.  
+Then for any $t \in X(k) - X^G(k)$ such that $\overline{G(k)\cdot t}$ is complete, 
+there exist two different integers $1 \le i,j \le r$ such that 
+\[
+  \overline{G(k)\cdot t} \cap (X^G)_i \ne \varnothing, 
+  \qquad 
+  \overline{G(k)\cdot t} \cap (X^G)_j \ne \varnothing.
+\]
+Thus $t \in X_i^+ \cup X_i^-$ and $t \in X_j^+ \cup X_j^-$.  
+Moreover, if $t \in X_i^+$ then $t \in X_j^-$, and vice versa.
+\end{lemma}
+
+\begin{proof}
+Since $\overline{G(k)\cdot t}$ is complete, it contains at least one closed point from $X^G$.  
+Hence \red{how do we get into the quasiaffine situation}, by Theorem~4.2, there exists an integer $i$ such that 
+$t \in X_i^+ \cup X_i^-$.  
+Let $t \in X_i^+$.  
+Then $\overline{G(k)\cdot t}$ is not contained in $X_i^+$ since $t \notin X^G$, $\overline{G(k)\cdot t}$ is complete.
+
+Any closed complete $G$-invariant subscheme of $X_i^+$ is contained in $(X^G)_i$. This is because of the following facts: If $Y$ is proper over $k$ and $V$ is affine (of finite type), then every morphism $f: Y \to V$ is proper, hence its image $f(Y)$ is a proper closed subscheme of the affine variety $V$. A scheme that is both proper and affine over $k$ is finite over $k$ (zero-dimensional).
+
+In particular, using the local model we can consider the projection $X_i^+ \to V$ which by the fact is proper and therefore has image a proper closed subscheme of $V$. Since $V$ is a vector space, the only proper closed subscheme that is also $G$-invariant is the origin. Therefore $p(Z)=\{0\}$ and
+$Z \subset (X^G)_i \times \{0\} = (X^G)_i$.
+
+Hence $\overline{G(k)\cdot t}$ contains a point from $(X^G)_j$, where $j \ne i$, 
+and by Theorem~4.2 we have $t \in X_j^+ \cup X_j^-$.  
+One can easily show that in this case in fact $t \in X_j^-$ (this corresponds to the limit at infinity).  Analogously, if $t \in X_i^-$ then $t \in X_j^+$.
+\end{proof}
+
+\begin{definition}[Locally closed decomposition]
+   For any algebraic scheme $X$, a presentation of $X$ as a union $X = \bigcup_{i=1}^r X_i$ is called a \textbf{locally closed decomposition} of $X$ if the $X_i$ are locally closed reduced subschemes of $X$ and $X_i \cap X_j = \varnothing$ for $i \neq j$. The decomposition is called $G$-invariant if each $X_i$ is $G$-invariant.
+\end{definition}
+
+\begin{theorem}[Theorem 4.3]
+Let the scheme $X$ be complete. Let $X^G = \bigsqcup_{i=1}^r (X^G)_i$ be the decomposition into connected components. Then there exists a unique locally closed $G$-invariant decomposition $X = \bigsqcup_{i=1}^r X_i$ (resp. $X = \bigsqcup_{i=1}^r X_i'$) and morphisms $\gamma_i : X_i \to (X^G)_i$ (resp. $\gamma_i' : X_i' \to (X^G)_i$) for $i = 1, \dots, r$ such that:
+
+\begin{enumerate}[(i)]
+\item $(X_i)^G = (X^G)_i$ (resp. $(X_i')^G = (X^G)_i$), for $i = 1, \dots, r$;
+\item Each $X_i$ with $\gamma_i$ (resp. $X_i'$ with $\gamma_i'$) is a $G$-fibration over $(X^G)_i$, for $i = 1, \dots, r$;
+\item For any closed point $a \in (X^G)_i$, one has \[T_a(X_i) = T_a((X^G)_i) \oplus T_a(X)^+\] (resp. $T_a(X_i') = T_a((X^G)_i) \oplus T_a(X)^-$) for $i = 1, \dots, r$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Take $X_i = X_i^+$ (resp. $X_i’ = X_i^-$), $\gamma_i = \gamma_i^+$ (resp. $\gamma_i’ = \gamma_i^-$). Then it follows from the properties of $X_i^+$ and $\gamma_i^+$ (resp. $X_i^-$ and $\gamma_i^-$) contained in Theorem 4.1 and from Lemma 4.1 that the conditions of Theorem~4.3 are satisfied. In particular every closed subscheme of a complete subscheme is complete.
+\end{proof}
+
+
+\begin{definition}
+   The decomposition obtained in Theorem~4.3 using $X_i^+$ is called the \textbf{$(+)$-decomposition} of $X$. The one obtained using $X_i^-$ is called the \textbf{$(-)$-decomposition}.
+
+For any connected component $(X^G)_i$ of $X^G$, define \[N^+((X^G)_i) := \dim T_a(X)^+\]\[N^-((X^G)_i) := \dim T_a(X)^-\] for any closed point $a \in (X^G)_i$. These numbers represent the dimensions of the fibers of the $G$-fibrations $\gamma_i : X_i^+ \to (X^G)_i$ and $\gamma_i' : X_i^- \to (X^G)_i$ respectively.
+
+\end{definition}
+
+\begin{corollary}[Corollary 4.1]
+Assume that the scheme $X$ is complete and irreducible. Then there exists exactly one connected component $(X^G)^+$ (resp. $(X^G)^-$) of $X^G$ such that $N^-((X^G)^+) = 0$ (resp. $N^+((X^G)^-) = 0$).
+\end{corollary}
+
+\begin{proof}
+Take the $(+)$-decomposition (resp. the $(-)$-decomposition) \[X = \bigsqcup_{i=1}^r X_i^+\] (resp. $X = \bigsqcup_{j=1}^r X_j^-$). Since the decomposition is locally closed, there exists exactly one $i$ such that $X_i^+$ (resp. exactly one $j$ such that $X_j^-$) is open in $X$. This is because $X$ is a union of these cells, so one of them must be of dimension $\dim X$ and being locally closed, it is open in its closure which is $X$ since $X$ is irreducible. Uniqueness is clear since irreducible implies that any two non-empty open subsets intersect.
+
+Then $N^-((X^G)_i) = 0$ (resp. $N^+((X^G)_j) = 0$). Hence it suffices to take $(X^G)^+ = (X^G)_i$ (resp. $(X^G)^- = (X^G)_j$).
+\end{proof}
+
+Notice that the connected components $(X^G)^+$ and $(X^G)^-$ of $X^G$ coincide, in the case where $X$ is non-singular, with the irreducible components of $X^G$.
+
+\section{Appendix: Geometrically unibranch}
+We add some remarks on the notion of geometrically unibranch from the Stacks Project \cite{Stacks}.
+\begin{definition}[Branches for local rings, 15.107.6]
+Let $A$ be a local ring with henselization $A^h$ and strict henselization $A^{sh}$.
+The \textbf{number of branches} of $A$ is the number of minimal primes of $A^h$ if finite
+and $\infty$ otherwise.
+The \textbf{number of geometric branches} of $A$ is the number of minimal primes of
+$A^{sh}$ if finite and $\infty$ otherwise.
+\end{definition}
+
+\begin{definition}[Branches for schemes, 28.15.1]
+Let $X$ be a scheme. Let $x \in X$.  
+The \textbf{number of branches of $X$ at $x$} is the number of branches of the local ring
+$\mathcal{O}_{X,x}$. The \textbf{number of geometric branches of $X$ at $x$} is the number of geometric branches
+of the local ring $\mathcal{O}_{X,x}$.
+\end{definition}
+
+\begin{lemma}[33.40.1]
+Let $X$ be a scheme. Assume every quasi-compact open of $X$ has finitely many irreducible components.
+Let $\nu : X^\nu \to X$ be the normalization of $X$. Let $x \in X$.
+\begin{enumerate}
+    \item The number of branches of $X$ at $x$ is the number of inverse images of $x$ in $X^\nu$.
+    \item The number of geometric branches of $X$ at $x$ is
+    \[
+        \sum_{\nu(x^\nu) = x} [\kappa(x^\nu) : \kappa(x)]_s.
+    \]
+\end{enumerate}
+\end{lemma}
+
+\begin{remark}
+   From the lemma, it becomes clear that for schemes over an algebraically closed field of characteristic 0, the number of geometric branches at a point is just the number of preimages in the normalization.
+\end{remark}
+
+\begin{lemma}[37.36.2]
+Let $X$ be a scheme and $x \in X$ a point. Then
+\begin{enumerate}
+    \item the number of branches of $X$ at $x$ is equal to the supremum of the number of irreducible components of $U$ passing through $u$, taken over elementary \'etale neighbourhoods $(U, u) \to (X, x)$
+    \item the number of geometric branches of $X$ at $x$ is equal to the supremum of the number of irreducible components of $U$ passing through $u$, taken over \'etale neighbourhoods $(U, u) \to (X, x)$
+    \item $X$ is unibranch at $x$ if and only if for every elementary \'etale neighbourhood $(U, u) \to (X, x)$
+    there is exactly one irreducible component of $U$ passing through $u$
+    \item $X$ is geometrically unibranch at $x$ if and only if for every \'etale neighbourhood $(U, u) \to (X, x)$
+    there is exactly one irreducible component of $U$ passing through $u$.
+\end{enumerate}
+\end{lemma}
 
 \section{References}
 \begin{enumerate}
-    \item Bialynicki-Birula, A. Some theorems on actions of algebraic groups. Ann. of Math. (2) 98 (1973), 480–497.
-    \item On the Existence of Slices for Actions of Non-Compact Lie Groups Richard S. Palais
+\bibitem{BB} Bialynicki-Birula, A. "Some theorems on actions of algebraic groups." \textit{Annals of Mathematics} 98 (1973), no. 3, 480--497.
+\bibitem{Palais} Palais, R. S. "On the existence of slices for actions of non-compact Lie groups." \textit{Annals of Mathematics} 73 (1961), no. 2, 295--323.
+\bibitem{Stacks} The Stacks Project Authors. "The Stacks Project." \url{https://stacks.math.columbia.edu}, 2023.
 \end{enumerate}
 \end{document}
