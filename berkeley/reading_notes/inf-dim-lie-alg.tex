@@ -2615,199 +2615,6 @@ In particular, an affine generalized Cartan matrix $A$ satisfies all proper prin
     \] which is indeed the Cartan matrix of $A_1^{(1)}$
 \end{example}
 
-We elaborate upon this perspective of affine Lie algebras via central extensions of loop algebras and their derivations.
-
-\subsection*{Central extensions of $\mathfrak{g}[z,z^{-1}]$}
-
-Let $\mathfrak{g}$ be a simple Lie algebra over $\mathbb{C}$, e.g.\ $\mathfrak{sl}_n$, $\mathfrak{so}_n$ for $n \geq 5$, $\mathfrak{sp}_{2n}$ for $n \geq 4$, exceptional ones, etc. Fix an invariant inner product $\langle\ ,\ \rangle$ on $\mathfrak{g}$ satisfying
-\[
-    \langle x, [y,z]\rangle = \langle [x,y], z\rangle;
-\]
-since $\mathfrak{g}$ is simple, this inner product is unique up to scalar.
-
-Now consider the \textbf{loop algebra} $\mathfrak{g}[z,z^{-1}]$. It's called loop because it's “equal” to $T_e LG$, where
-\[
-    LG = \{\text{analytic maps } S^1 \to G\}
-\]
-(not precisely; we should really take some completion of $\mathfrak{g}[z,z^{-1}]$, but it's a dense subspace inside of $T_e LG$, which is enough for our purposes). This algebra $\mathfrak{g}[z,z^{-1}]$ is graded: the $n$th graded component is $\mathfrak{g} z^n$, hence the grading is given by operator $z\partial_z$. Hence
-\[
-    \mathfrak{g}[z,z^{-1}] = \bigoplus_{n \in \mathbb{Z}} \mathfrak{g}z^n
-\]
-is a graded Lie algebra, with
-\[
-    [xz^n, yz^m] = [x,y] z^{n+m}.
-\]
-It carries an invariant inner product defined by
-\[
-    \langle xz^n, yz^m \rangle = \delta_{n,-m} \langle x,y \rangle
-\] where $\langle x,y \rangle$ is the invariant inner product on $\mathfrak{g}$. There is also the equivalent residue formulation of this inner product:
-\[
-    \langle x\otimes f(z), y\otimes g(z) \rangle = \langle x,y \rangle \operatorname{Res}_{z=0}\bigg(f(z)g(z)/z dz\bigg).
-\] which is more suitable for generalizations. The choice of inner product on $\mathfrak{g}$ also gives rise to a 2-cocycle on $\mathfrak{g}[z,z^{-1}]$:
-\[
-    \omega(xz^n, yz^m) = n \delta_{n,-m} \langle x,y \rangle.
-\]
-This is a 2-cocycle because it is antisymmetric and satisfies the cocycle condition (Jacobi):
-\[
-    \omega([x,y],z) + \omega([y,z],x) + \omega([z,x],y) = 0.
-\]
-
-Recall that central extensions are classified by $H^2(\mathfrak{g}[z,z^{-1}])$, so we want to compute this cohomology group. It turns out that $H^2(\mathfrak{g}[z,z^{-1}]) \cong \mathbb{C}$, and the class of $\omega$ is a generator. In particular, any central extension of $\mathfrak{g}[z,z^{-1}]$ is a multiple of the one defined by $\omega$. We have the Chevalley complex
-\[
-    C^\bullet(\mathfrak{g}[z,z^{-1}]) = \Lambda^\bullet(\mathfrak{g}[z,z^{-1}]^*),
-\]
-and it carries an action of $\mathfrak{g}[z,z^{-1}]$ which acts trivially on cohomology. In particular, $\mathfrak{g}$ acts trivially on the cohomology.
-To see this, observe that the subalgebra $\mathfrak g\subset L$ of constant loops acts on $C^\bullet(L)$ by the usual Lie derivative
-$\mathcal L_\xi = \iota_\xi d + d\,\iota_\xi$ (Cartan's homotopy formula), which is chain-homotopic to 0 via the contraction $\iota_\xi$.
-Hence $\mathfrak g$ acts trivially on cohomology so every class has a $\mathfrak g$-invariant representative (Lemma \ref{lem:invariant-representative}).
-
-Thus, to classify $H^2(L)$, we may restrict to $\mathfrak g$-invariant 2-cocycles, modulo coboundaries.
-
-\begin{proposition}[Second cohomology of loop algebra]
-    Any cohomology class from $H^2(\mathfrak{g}[z,z^{-1}])$ is uniquely represented by a $\mf g$-invariant cocycle.
-
-    Any $\mf g$-invariant 2-cocycle is of the form
-    \[
-        \sum_{m\neq n} \gamma_{m,n} \omega_{m,n}, \quad
-        \gamma_{m,n} = -\gamma_{n,m} \in \mathbb{C}, \qquad
-        \omega_{m,n}(xz^k, yz^\ell) = \delta_{m=k,n=\ell} \langle x,y\rangle,
-    \]
-\end{proposition}
-
-\begin{proof}
-    A 1-cochain is a linear functional $\varphi \in L^*$. A coboundary is
-    \[
-        (d\varphi)(x z^k, y z^\ell) = \varphi([x z^k, y z^\ell]) = \varphi([x,y]z^{k+\ell}).
-    \]
-    If $\varphi$ is $\mathfrak{g}$-invariant, then its restriction to each $\mathfrak{g}_{r} \simeq \mathfrak{g}$ is a $\mathfrak{g}$-invariant linear functional on the adjoint module $\mathfrak{g}$, which must be zero.
-
-    This is because there are no nonzero invariants in $\mathfrak{g}^*$ for a simple $\mathfrak{g}$. To see this, recall that a linear functional $\lambda \in \mathfrak{g}^*$ is $\mathfrak{g}$-invariant iff
-    \[\lambda([x,y]) = 0 \quad \forall x,y \in \mathfrak{g}.\]
-    But $[\mathfrak{g},\mathfrak{g}] = \mathfrak{g}$ for simple $\mathfrak{g}$, so $\lambda = 0$.
-
-    Therefore $L^{*\mathfrak{g}} = 0$ so invariant 2-cocycles have no nontrivial invariant coboundaries.
-
-    Now suppose you have two invariant 2-cocycles $\omega,\omega'$ that represent the same cohomology class. That means $\omega - \omega' = d\varphi$ for some $\varphi \in C^1(L)$. Then their difference $d\varphi$ is also $\mathfrak g$-invariant, so $d\varphi$ is an invariant coboundary, which must be zero by the above argument. Hence $\omega = \omega'$, i.e. once we restrict to $\mathfrak{g}$-invariant representatives, the class determines the representative uniquely. This proves the first statement.
-
-    Decompose $L$ as a $\mathfrak g$-module:
-    \[
-        L=\bigoplus_{k\in\mathbb Z}\mathfrak g_k,
-        \qquad \mathfrak g_k\simeq \mathfrak g \ \text{(adjoint)}.
-    \]
-    Let $\omega\in C^2(L)$ be $\mathfrak g$-invariant. In particular, being a 2-cocycle it is alternating. Fix degrees $k,\ell$. The bilinear map
-    \[
-        \omega_{k,\ell}\colon \mathfrak g_k\times \mathfrak g_\ell\to\Bbb C,\qquad
-        (x z^k, y z^\ell)\mapsto \omega(x z^k, y z^\ell)
-    \]
-    is $\mathfrak g$-invariant for the diagonal adjoint action, i.e.
-    \[
-        \omega_{k,\ell}([\xi,x]z^k,\,y z^\ell)+\omega_{k,\ell}(x z^k,\,[\xi,y]z^\ell)=0
-        \quad \forall\,\xi\in\mathfrak g.
-    \]
-    Since $\mathfrak g$ is simple, the space of $\mathfrak g$-invariant bilinear forms on $\mathfrak g\times\mathfrak g$ is one-dimensional and spanned by the fixed invariant form $\langle\ ,\ \rangle$. Therefore there exist scalars $c_{k,\ell}\in\Bbb C$ with \[\omega(x z^k, y z^\ell)=c_{k,\ell}\,\langle x,y\rangle\qquad(k,\ell\in\mathbb{Z})\] Skew-symmetry of $\omega$ gives $c_{k,\ell}=-c_{\ell,k}$. So every $\mathfrak g$-invariant 2-cochain is encoded by an antisymmetric function
-    $c\colon \mathbb Z^2\to\Bbb C$.
-\end{proof}
-
-This still consists of infinitely many parameters. We will whittle it down using the cocycle condition.
-
-\begin{proposition}
-    We have
-    \[
-        \gamma_{n,m+p} + \gamma_{m,p+n} + \gamma_{p,n+m} = 0.
-    \]
-\end{proposition}
-
-\begin{proof}
-    We have
-    \begin{align*}
-        0 & = d\omega(x_1 z^n, x_2 z^m, x_3 z^p)            \\
-          & = \omega([x_1,x_2]z^{n+m}, x_3 z^p)
-        - \omega([x_1,x_3] z^{n+p}, x_2 z^m)
-        + \omega([x_2,x_3] z^{m+p}, x_1 z^n)                \\
-          & = \gamma_{m+p,n} \langle [x_1,x_2], x_3 \rangle
-        - \gamma_{n+p,m} \langle [x_1,x_3], x_2 \rangle
-        + \gamma_{n+m,p} \langle [x_2,x_3], x_1 \rangle.
-    \end{align*}
-
-    Since $\langle \ ,\ \rangle$ is totally antisymmetric, all of the $\langle \ ,\ \rangle$ equal the same constant up to sign (note that
-    \[
-        \langle [x_1,x_3], x_2\rangle = \langle x_1, [x_3,x_2]\rangle
-        = -\langle x_1, [x_2,x_3]\rangle
-        = -\langle [x_1,x_2], x_3\rangle),
-    \]
-    hence the above expression is equal to some constant times
-    \[
-        \gamma_{p,n+m} + \gamma_{m,p+n} + \gamma_{n,m+p},
-    \]
-    and choosing the constant to be nonzero we have that this is zero.
-\end{proof}
-
-\begin{corollary}
-    $\gamma_{n,-n} = n\gamma_{1,-1} = n\gamma$ and $\gamma_{m,n} = 0$ otherwise. In particular,
-    \[
-        \dim H^2(\mathfrak{g}[z,z^{-1}]) = 1.
-    \]
-\end{corollary}
-
-\begin{proof}
-    We have $\gamma_{n,s-n} + \gamma_{m,s-m} = \gamma_{n+m,s-n-m} \implies \gamma_{0,s} = 0$ for all $s$. By induction,
-    \[
-        -(s-n)\gamma_{1,s-1} = \gamma_{n,s-n} = n \cdot \gamma_{1,s-1} \implies (s-n)\gamma_{1,s-1} = -n\gamma_{1,s-1}
-        \implies s \cdot \gamma_{1,s-1} = 0,
-    \]
-    hence $\gamma_{1,s-1} = 0$ for all $s \neq 0$. This implies the result.
-\end{proof}
-
-\begin{definition}[Derived affine Kac-Moody Lie algebra]
-    Any central extension of $\mathfrak{g}[z,z^{-1}]$ has the form
-    \[
-        0 \to \mathbb{C}c \to \widehat{\mathfrak{g}'} \to \mathfrak{g}[z,z^{-1}] \to 0,
-        \qquad
-    [xz^n, yz^m]_{\widehat{\mathfrak{g}'}} = [x,y]_{\mathfrak{g}} z^{n+m} + n \cdot \delta_{n+m=0} \cdot \langle x,y \rangle \cdot c.
-    \]
-
-    Equivalently (terrible abuse of notation since they mean apply the bracket coefficient-wise in the Laurent series),
-    \[
-        [x(z), y(z)]_{\widehat{\mathfrak{g}'}} = [x(z), y(z)]_{\mathfrak{g}} + \operatorname{Res}_{z=0}\langle dx(z), y(z) \rangle \cdot c.
-    \]
-
-    Therefore, we define $\widehat{\mathfrak{g}'}$ associated to a simple (finite-dimensional) Lie algebra $\mathfrak{g}$ to be the unique (up to rescaling) nontrivial central extension of the loop space $\mathfrak{g}[z,z^{-1}]$.
-\end{definition}
-
-\begin{remark}
-    We will prove that this is the derived subalgebra of an affine Kac-Moody algebra $\widehat{\mathfrak{g}}$ which is obtained by adjoining a derivation $d$ to $\widehat{\mathfrak{g}'}$.
-\end{remark}
-
-\begin{example}[Affine $\widehat{\mathfrak{sl}}_2'$]
-    Let $\mathfrak{g} = \mathfrak{sl}_2$. We may consider $\widehat{\mathfrak{sl}}_2'$ as a bigraded Lie algebra, with one grading coming from $z\partial_z$, and the other grading coming from $\operatorname{ad} h$.
-
-    Then $\widehat{\mathfrak{sl}}_2'$ is generated by $h, c, e, f, fz, ez^{-1}$. To see this observe that \begin{align*}
-        [fz,e] = hz, \quad [hz,e] = 2ez
-    \end{align*} and so we have generated $ez$, even though it looks like $fz$ only moves down the $\mf h$-grading. In particular, I'm thinking of $z$ as a left translation and the coefficient $\in \mf g$ as vertical translation.
-
-    In particular we have a triangular decomposition \begin{align*}
-        \widehat{\mathfrak{sl}}_2' & = \widehat{\mathfrak{n}}_- \oplus \widehat{\mathfrak{h}} \oplus \widehat{\mathfrak{n}}_+
-    \end{align*} where \begin{align*}
-        \widehat{\mf h}          & = \mathbb{C}h \oplus \mathbb{C}c                    \\
-        \widehat{\mathfrak{n}}_+ & = \mathbb{C}e \oplus z\mathfrak{sl}_2[z]            \\
-        \widehat{\mathfrak{n}}_- & = \mathbb{C}f \oplus z^{-1}\mathfrak{sl}_2[z^{-1}].
-    \end{align*}
-\end{example}
-
-\begin{definition}[Affine Lie algebra]
-    The \textbf{affine Lie algebra} $\widehat{\mathfrak{g}}$ associated to $\mathfrak{g}$ is obtained by adjoining a derivation $d$, defined by
-    \[
-        [d,\, x \otimes z^n] = n\,x \otimes z^n,
-        \qquad [d,c]=0.
-    \]
-    Thus,
-    \[
-        \widehat{\mathfrak{g}} = L\mathfrak{g} \oplus \mathbb{C}c \oplus \mathbb{C}d.
-    \] and \begin{align*}
-        0 \to \widehat{\mathfrak{g}} \to \widetilde{\mathfrak{g}} \to \mathbb{C}d \to 0.
-    \end{align*}
-\end{definition}
-
 \section{Real and imaginary roots}
 We give an explicit description of the root system of a Kac-Moody algebra $\mf g(A)$. Our main instrument is the notion of an imaginary root, which has no counterpart in the finite dimensional theory.
 
@@ -3696,7 +3503,7 @@ normalize the standard invariant form $(\cdot|\cdot)$ on $\mathfrak{g}(A)$ by th
 (\alpha|\alpha) = 2 \quad \text{if } \alpha \in \overset{\circ}{\Delta}_\ell,
 \tag{6.4.2}
 \end{equation}
-and shall call it the \emph{normalized invariant form}. We deduce from (6.4.1) 
+and shall call it the \textbf{normalized invariant form}. We deduce from (6.4.1) 
 and Proposition 6.4 the following:
 
 \begin{corollary}[6.4]
@@ -4013,7 +3820,7 @@ Note also the following useful fact:
     \overset{\circ}{Q} \subset \nu(\overset{\circ}{Q}^\vee) \quad \text{if $r>1$}.
 \end{equation}
 
-The lattice $M$, considered as an abelian group, operates faithfully on $\mathfrak{h}^*$ by the formula for $t_\alpha$. We denote the corresponding subgroup of $GL(\mathfrak{h}^*)$ by $T$, and call it the \emph{group of translations}.
+The lattice $M$, considered as an abelian group, operates faithfully on $\mathfrak{h}^*$ by the formula for $t_\alpha$. We denote the corresponding subgroup of $GL(\mathfrak{h}^*)$ by $T$, and call it the \textbf{group of translations}.
 
 \begin{proposition}[6.5]
 \[
@@ -4175,7 +3982,1264 @@ The translations are indexed by \[M = \nu(\Z(\overset{\circ}{W})\cdot \theta^\ve
 All together, the affine Weyl group is generated $r_0:x \mapsto -x$ and $r_1:x \mapsto -x + 2$. They satisfy the relations $r_0^2 = r_1^2 = e$. Also $t_m = (r_0 r_1)^m$ for $m \in \Z$ and conjugation by $r_0$ inverts the translation $t_m$. Therefore, the structure is precisely the infinite dihedral group $D_\infty \cong \Z \rtimes \Z/2\Z$.
 \end{example}
 
-\section*{Meetings}
+\section{Affine Algebras as Central Extensions of Loop Algebras}
+Let $\mathfrak{g}$ be a simple Lie algebra over $\mathbb{C}$, e.g.\ $\mathfrak{sl}_n$, $\mathfrak{so}_n$ for $n \geq 5$, $\mathfrak{sp}_{2n}$ for $n \geq 4$, exceptional ones, etc. Fix an invariant inner product $\langle\ ,\ \rangle$ on $\mathfrak{g}$ satisfying
+\[
+    \langle x, [y,z]\rangle = \langle [x,y], z\rangle;
+\]
+since $\mathfrak{g}$ is simple, this inner product is unique up to scalar.
+
+Now consider the \textbf{loop algebra} $\mathfrak{g}[z,z^{-1}]$. It's called loop because it's “equal” to $T_e LG$, where
+\[
+    LG = \{\text{analytic maps } S^1 \to G\}
+\]
+(not precisely; we should really take some completion of $\mathfrak{g}[z,z^{-1}]$, but it's a dense subspace inside of $T_e LG$, which is enough for our purposes). This algebra $\mathfrak{g}[z,z^{-1}]$ is graded: the $n$th graded component is $\mathfrak{g} z^n$, hence the grading is given by operator $z\partial_z$. Hence
+\[
+    \mathfrak{g}[z,z^{-1}] = \bigoplus_{n \in \mathbb{Z}} \mathfrak{g}z^n
+\]
+is a graded Lie algebra, with
+\[
+    [xz^n, yz^m] = [x,y] z^{n+m}.
+\]
+It carries an invariant inner product defined by
+\[
+    \langle xz^n, yz^m \rangle = \delta_{n,-m} \langle x,y \rangle
+\] where $\langle x,y \rangle$ is the invariant inner product on $\mathfrak{g}$. There is also the equivalent residue formulation of this inner product:
+\[
+    \langle x\otimes f(z), y\otimes g(z) \rangle = \langle x,y \rangle \operatorname{Res}_{z=0}\bigg(f(z)g(z)/z dz\bigg).
+\] which is more suitable for generalizations. The choice of inner product on $\mathfrak{g}$ also gives rise to a 2-cocycle on $\mathfrak{g}[z,z^{-1}]$:
+\[
+    \omega(xz^n, yz^m) = n \delta_{n,-m} \langle x,y \rangle.
+\]
+This is a 2-cocycle because it is antisymmetric and satisfies the cocycle condition (Jacobi):
+\[
+    \omega([x,y],z) + \omega([y,z],x) + \omega([z,x],y) = 0.
+\]
+
+Recall that central extensions are classified by $H^2(\mathfrak{g}[z,z^{-1}])$, so we want to compute this cohomology group. It turns out that $H^2(\mathfrak{g}[z,z^{-1}]) \cong \mathbb{C}$, and the class of $\omega$ is a generator. In particular, any central extension of $\mathfrak{g}[z,z^{-1}]$ is a multiple of the one defined by $\omega$. We have the Chevalley complex
+\[
+    C^\bullet(\mathfrak{g}[z,z^{-1}]) = \Lambda^\bullet(\mathfrak{g}[z,z^{-1}]^*),
+\]
+and it carries an action of $\mathfrak{g}[z,z^{-1}]$ which acts trivially on cohomology. In particular, $\mathfrak{g}$ acts trivially on the cohomology.
+To see this, observe that the subalgebra $\mathfrak g\subset L$ of constant loops acts on $C^\bullet(L)$ by the usual Lie derivative
+$\mathcal L_\xi = \iota_\xi d + d\,\iota_\xi$ (Cartan's homotopy formula), which is chain-homotopic to 0 via the contraction $\iota_\xi$.
+Hence $\mathfrak g$ acts trivially on cohomology so every class has a $\mathfrak g$-invariant representative (Lemma \ref{lem:invariant-representative}).
+
+Thus, to classify $H^2(L)$, we may restrict to $\mathfrak g$-invariant 2-cocycles, modulo coboundaries.
+
+\begin{proposition}[Second cohomology of loop algebra]
+    Any cohomology class from $H^2(\mathfrak{g}[z,z^{-1}])$ is uniquely represented by a $\mf g$-invariant cocycle.
+
+    Any $\mf g$-invariant 2-cocycle is of the form
+    \[
+        \sum_{m\neq n} \gamma_{m,n} \omega_{m,n}, \quad
+        \gamma_{m,n} = -\gamma_{n,m} \in \mathbb{C}, \qquad
+        \omega_{m,n}(xz^k, yz^\ell) = \delta_{m=k,n=\ell} \langle x,y\rangle,
+    \]
+\end{proposition}
+
+\begin{proof}
+    A 1-cochain is a linear functional $\varphi \in L^*$. A coboundary is
+    \[
+        (d\varphi)(x z^k, y z^\ell) = \varphi([x z^k, y z^\ell]) = \varphi([x,y]z^{k+\ell}).
+    \]
+    If $\varphi$ is $\mathfrak{g}$-invariant, then its restriction to each $\mathfrak{g}_{r} \simeq \mathfrak{g}$ is a $\mathfrak{g}$-invariant linear functional on the adjoint module $\mathfrak{g}$, which must be zero.
+
+    This is because there are no nonzero invariants in $\mathfrak{g}^*$ for a simple $\mathfrak{g}$. To see this, recall that a linear functional $\lambda \in \mathfrak{g}^*$ is $\mathfrak{g}$-invariant iff
+    \[\lambda([x,y]) = 0 \quad \forall x,y \in \mathfrak{g}.\]
+    But $[\mathfrak{g},\mathfrak{g}] = \mathfrak{g}$ for simple $\mathfrak{g}$, so $\lambda = 0$.
+
+    Therefore $L^{*\mathfrak{g}} = 0$ so invariant 2-cocycles have no nontrivial invariant coboundaries.
+
+    Now suppose you have two invariant 2-cocycles $\omega,\omega'$ that represent the same cohomology class. That means $\omega - \omega' = d\varphi$ for some $\varphi \in C^1(L)$. Then their difference $d\varphi$ is also $\mathfrak g$-invariant, so $d\varphi$ is an invariant coboundary, which must be zero by the above argument. Hence $\omega = \omega'$, i.e. once we restrict to $\mathfrak{g}$-invariant representatives, the class determines the representative uniquely. This proves the first statement.
+
+    Decompose $L$ as a $\mathfrak g$-module:
+    \[
+        L=\bigoplus_{k\in\mathbb Z}\mathfrak g_k,
+        \qquad \mathfrak g_k\simeq \mathfrak g \ \text{(adjoint)}.
+    \]
+    Let $\omega\in C^2(L)$ be $\mathfrak g$-invariant. In particular, being a 2-cocycle it is alternating. Fix degrees $k,\ell$. The bilinear map
+    \[
+        \omega_{k,\ell}\colon \mathfrak g_k\times \mathfrak g_\ell\to\Bbb C,\qquad
+        (x z^k, y z^\ell)\mapsto \omega(x z^k, y z^\ell)
+    \]
+    is $\mathfrak g$-invariant for the diagonal adjoint action, i.e.
+    \[
+        \omega_{k,\ell}([\xi,x]z^k,\,y z^\ell)+\omega_{k,\ell}(x z^k,\,[\xi,y]z^\ell)=0
+        \quad \forall\,\xi\in\mathfrak g.
+    \]
+    Since $\mathfrak g$ is simple, the space of $\mathfrak g$-invariant bilinear forms on $\mathfrak g\times\mathfrak g$ is one-dimensional and spanned by the fixed invariant form $\langle\ ,\ \rangle$. Therefore there exist scalars $c_{k,\ell}\in\Bbb C$ with \[\omega(x z^k, y z^\ell)=c_{k,\ell}\,\langle x,y\rangle\qquad(k,\ell\in\mathbb{Z})\] Skew-symmetry of $\omega$ gives $c_{k,\ell}=-c_{\ell,k}$. So every $\mathfrak g$-invariant 2-cochain is encoded by an antisymmetric function
+    $c\colon \mathbb Z^2\to\Bbb C$.
+\end{proof}
+
+This still consists of infinitely many parameters. We will whittle it down using the cocycle condition.
+
+\begin{proposition}
+    We have
+    \[
+        \gamma_{n,m+p} + \gamma_{m,p+n} + \gamma_{p,n+m} = 0.
+    \]
+\end{proposition}
+
+\begin{proof}
+    We have
+    \begin{align*}
+        0 & = d\omega(x_1 z^n, x_2 z^m, x_3 z^p)            \\
+          & = \omega([x_1,x_2]z^{n+m}, x_3 z^p)
+        - \omega([x_1,x_3] z^{n+p}, x_2 z^m)
+        + \omega([x_2,x_3] z^{m+p}, x_1 z^n)                \\
+          & = \gamma_{m+p,n} \langle [x_1,x_2], x_3 \rangle
+        - \gamma_{n+p,m} \langle [x_1,x_3], x_2 \rangle
+        + \gamma_{n+m,p} \langle [x_2,x_3], x_1 \rangle.
+    \end{align*}
+
+    Since $\langle \ ,\ \rangle$ is totally antisymmetric, all of the $\langle \ ,\ \rangle$ equal the same constant up to sign (note that
+    \[
+        \langle [x_1,x_3], x_2\rangle = \langle x_1, [x_3,x_2]\rangle
+        = -\langle x_1, [x_2,x_3]\rangle
+        = -\langle [x_1,x_2], x_3\rangle),
+    \]
+    hence the above expression is equal to some constant times
+    \[
+        \gamma_{p,n+m} + \gamma_{m,p+n} + \gamma_{n,m+p},
+    \]
+    and choosing the constant to be nonzero we have that this is zero.
+\end{proof}
+
+\begin{corollary}
+    $\gamma_{n,-n} = n\gamma_{1,-1} = n\gamma$ and $\gamma_{m,n} = 0$ otherwise. In particular,
+    \[
+        \dim H^2(\mathfrak{g}[z,z^{-1}]) = 1.
+    \]
+\end{corollary}
+
+\begin{proof}
+    We have $\gamma_{n,s-n} + \gamma_{m,s-m} = \gamma_{n+m,s-n-m} \implies \gamma_{0,s} = 0$ for all $s$. By induction,
+    \[
+        -(s-n)\gamma_{1,s-1} = \gamma_{n,s-n} = n \cdot \gamma_{1,s-1} \implies (s-n)\gamma_{1,s-1} = -n\gamma_{1,s-1}
+        \implies s \cdot \gamma_{1,s-1} = 0,
+    \]
+    hence $\gamma_{1,s-1} = 0$ for all $s \neq 0$. This implies the result.
+\end{proof}
+
+\begin{definition}[Derived affine Kac-Moody Lie algebra]
+    Any central extension of $\mathfrak{g}[z,z^{-1}]$ has the form
+    \[
+        0 \to \mathbb{C}c \to \widehat{\mathfrak{g}'} \to \mathfrak{g}[z,z^{-1}] \to 0,
+        \qquad
+    [xz^n, yz^m]_{\widehat{\mathfrak{g}'}} = [xz^n,yz^m]_{\mf g} + \omega(xz^n,yz^m)c
+    \]
+    where $\omega$ is any 2-cocycle on $\mf g[z,z^{-1}]$. Suppose we make two choices of $\omega$ and are given an isomorphism $\phi:\mf g_1 \to \mf g_2$ which preserves the central element $c$. 
+    
+    Choosing splittings $\iota_1: \mathbb{C}c \oplus \mathfrak{g} \to \mathfrak{g}_1$ and $\iota_2: \mathbb{C}c \oplus \mathfrak{g} \to \mathfrak{g}_2$ for these extensions, we obtain the two-cocycles $\omega_1$ and $\omega_2$. Define a linear map $f: \mathfrak{g} \to \mathbb{C}$ as the composition of $\iota_1$, $\phi$ and the projection $\mathfrak{g}_2 \to \mathbb{C}c$ induced by $\iota_2$. A straightforward calculation gives $\omega_2(x,y) = \omega_1(x,y) + f([x,y])$. In particular, central extensions are classified up to isomorphism by $H^2(\mathfrak{g}[z,z^{-1}])$, which we showed is one-dimensional and representatives can be chosen to be $\mathfrak{g}$-invariant.
+
+    Therefore, we define $\widehat{\mathfrak{g}'}$ associated to a simple (finite-dimensional) Lie algebra $\mathfrak{g}$ to be the unique (up to rescaling) nontrivial central extension of the loop space $\mathfrak{g}[z,z^{-1}]$.
+\end{definition}
+
+    We will see that this is the derived subalgebra of an affine Kac-Moody algebra $\widehat{\mathfrak{g}}$ which is obtained by adjoining a derivation $d$ to $\widehat{\mathfrak{g}'}$.
+
+\begin{example}[Affine $\widehat{\mathfrak{sl}}_2'$]
+    Let $\mathfrak{g} = \mathfrak{sl}_2$. We may consider $\widehat{\mathfrak{sl}}_2'$ as a bigraded Lie algebra, with one grading coming from $z\partial_z$, and the other grading coming from $\operatorname{ad} h$.
+
+    Then $\widehat{\mathfrak{sl}}_2'$ is generated by $h, c, e, f, fz, ez^{-1}$. To see this observe that \begin{align*}
+        [fz,e] = hz, \quad [hz,e] = 2ez
+    \end{align*} and so we have generated $ez$, even though it looks like $fz$ only moves down the $\mf h$-grading. In particular, I'm thinking of $z$ as a left translation and the coefficient $\in \mf g$ as vertical translation.
+
+    In particular we have a triangular decomposition \begin{align*}
+        \widehat{\mathfrak{sl}}_2' & = \widehat{\mathfrak{n}}_- \oplus \widehat{\mathfrak{h}} \oplus \widehat{\mathfrak{n}}_+
+    \end{align*} where \begin{align*}
+        \widehat{\mf h}          & = \mathbb{C}h \oplus \mathbb{C}c                    \\
+        \widehat{\mathfrak{n}}_+ & = \mathbb{C}e \oplus z\mathfrak{sl}_2[z]            \\
+        \widehat{\mathfrak{n}}_- & = \mathbb{C}f \oplus z^{-1}\mathfrak{sl}_2[z^{-1}].
+    \end{align*}
+\end{example}
+
+\begin{definition}[Affine Lie algebra]
+    The \textbf{affine Lie algebra} $\widehat{\mathfrak{g}}$ associated to $\mathfrak{g}$ is obtained by adjoining a derivation $d$, defined by
+    \[
+        [d,\, x \otimes z^n] = n\,x \otimes z^n,
+        \qquad [d,c]=0.
+    \]
+    Thus,
+    \[
+        \widehat{\mathfrak{g}} = L\mathfrak{g} \oplus \mathbb{C}c \oplus \mathbb{C}d.
+    \] and \begin{align*}
+        0 \to \widehat{\mathfrak{g}} \to \widetilde{\mathfrak{g}} \to \mathbb{C}d \to 0.
+    \end{align*}
+\end{definition}
+\subsection{Formulas for loop algebras}
+Let $\mathcal{L} = \mathbb{C}[t, t^{-1}]$ be the algebra of Laurent polynomials in~$t$.
+Recall that the residue of a Laurent polynomial
+\[
+P = \sum_{k \in \mathbb{Z}} c_k t^k
+\]
+(where all but a finite number of $c_k$ are~$0$) is defined by
+\[
+\operatorname{Res} P = c_{-1}.
+\]
+This is a linear functional on~$\mathcal{L}$ defined by the properties
+\[
+\operatorname{Res}\, t^{-1} = 1, 
+\qquad 
+\operatorname{Res} \frac{dP}{dt} = 0.
+\]
+
+Define a bilinear $\mathbb{C}$-valued function $\varphi$ on~$\mathcal{L}$ by
+\[
+\varphi(P,Q) = \operatorname{Res} \frac{dP}{dt} \, Q.
+\]
+
+Then it is easy to check the following two properties:
+\begin{align}
+\varphi(P,Q) &= -\varphi(Q,P), \tag{7.1.1}\\[4pt]
+\varphi(PQ,R) + \varphi(QR,P) + \varphi(RP,Q) &= 0,
+\qquad (P,Q,R \in \mathcal{L}). \tag{7.1.2}
+\end{align}
+
+Consider the \textbf{loop algebra}
+\[
+\mathcal{L}(\overset{\circ}{\mathfrak{g}}) := \mathcal{L} \otimes_{\mathbb{C}} \overset{\circ}{\mathfrak{g}}.
+\]
+This is an infinite-dimensional complex Lie algebra with the bracket $[\, ,\, ]_0$ defined by
+\[
+[P \otimes x,\, Q \otimes y]_0 = PQ \otimes [x,y] \qquad (P,Q \in \mathcal{L};\; x,y \in \overset{\circ}{\mathfrak{g}}).
+\]
+It may be identified with the Lie algebra of regular rational maps $\mathbb{C}^\times \to \overset{\circ}{\mathfrak{g}}$, so that the element $\sum_i (t^i \otimes x_i)$ corresponds to the mapping
+\[
+z \longmapsto \sum_i z^i x_i.
+\]
+Fix a nondegenerate invariant symmetric bilinear $\mathbb{C}$-valued form $(\,.\mid.\,)$ on $\overset{\circ}{\mathfrak{g}}$; such a form exists (e.g.\ by Theorem~2.2) and is unique up to a constant multiple.  
+We extend this form by linearity to an $\mathcal{L}$-valued bilinear form $(\,.\mid.\,)_t$ on $\mathcal{L}(\overset{\circ}{\mathfrak{g}})$ by
+\[
+(P \otimes x \mid Q \otimes y)_t = PQ (x \mid y).
+\]
+Also, we extend every derivation $D$ of the algebra $\mathcal{L}$ to a derivation of the Lie algebra $\mathcal{L}(\overset{\circ}{\mathfrak{g}})$ by
+\[
+D(P \otimes x) = D(P) \otimes x.
+\]
+
+Now we can define a $\mathbb{C}$-valued $2$-cocycle on the Lie algebra $\mathcal{L}(\overset{\circ}{\mathfrak{g}})$ by
+\[
+\psi(a,b) = \operatorname{Res} \left( \frac{da}{dt} \,\middle|\, b \right)_t
+\]
+
+Recall that a $\mathbb{C}$-valued $2$-cocycle on a Lie algebra $\mathfrak{g}$ is a bilinear $\mathbb{C}$-valued function $\psi$ satisfying two conditions:
+\begin{align*}
+(\mathrm{Co}\,1) \quad & \psi(a,b) = -\psi(b,a), \\[2pt]
+(\mathrm{Co}\,2) \quad & \psi([a,b],c) + \psi([b,c],a) + \psi([c,a],b) = 0 
+\qquad (a,b,c \in \mathfrak{g}).
+\end{align*}
+
+It is sufficient to check these conditions for 
+$a = P \otimes x$, $b = Q \otimes y$, $c = R \otimes z$, 
+where $P,Q,R \in \mathcal{L}$ and $x,y,z \in \dot{\mathfrak{g}}$.  
+We have
+\[
+\psi(a,b) = (x \mid y) \, \varphi(P,Q).
+\]
+
+Hence, (Co 1) follows from~(7.1.1) and the symmetry of $(\,.\mid.\,)$.
+Property (Co 2) follows from~(7.1.2) and the symmetry and invariance of $(\,.\mid.\,)$.
+
+Denote by $\widetilde{\mathcal{L}}(\dot{\mathfrak{g}})$ the extension of the Lie algebra 
+$\mathcal{L}(\dot{\mathfrak{g}})$ by a $1$-dimensional center, associated to the cocycle~$\psi$.
+Explicitly,
+\[
+\widetilde{\mathcal{L}}(\overset{\circ}{\mathfrak{g}}) 
+= \mathcal{L}(\overset{\circ}{\mathfrak{g}}) \oplus \mathbb{C}K
+\]
+(direct sum of vector spaces), and the bracket is given by
+\begin{equation}\label{7.2.1}
+[a + \lambda K,\, b + \mu K]
+= [a,b]_0 + \psi(a,b)K,
+\qquad (a,b \in \mathcal{L}(\dot{\mathfrak{g}});\, \lambda,\mu \in \mathbb{C}).
+\tag{7.2.1}
+\end{equation}
+
+Finally, denote by $\widehat{\mathcal{L}}(\dot{\mathfrak{g}})$ the Lie algebra that is obtained by adjoining to
+$\widetilde{\mathcal{L}}(\dot{\mathfrak{g}})$ a derivation~$d$ which acts on 
+$\mathcal{L}(\dot{\mathfrak{g}})$ as $t\,\dfrac{d}{dt}$ and which kills~$K$. In other words, $\widehat{\mathcal{L}}(\dot{\mathfrak{g}})$ is a complex vector space
+\[
+\widehat{\mathcal{L}}(\dot{\mathfrak{g}}) 
+= \mathcal{L}(\dot{\mathfrak{g}}) \oplus \mathbb{C}K \oplus \mathbb{C}d
+\]
+with the bracket defined as follows ($x,y \in \dot{\mathfrak{g}}$; $\lambda,\mu,\lambda_1,\mu_1 \in \mathbb{C}$):
+\begin{align*}
+[t^m \otimes x \oplus \lambda K \oplus \mu d,\,
+t^n \otimes y \oplus \lambda_1 K \oplus \mu_1 d] \\
+= (t^{m+n} \otimes [x,y] + \mu n t^n \otimes y - \mu_1 m t^m \otimes x)
+  \oplus m \delta_{m,-n} (x\mid y)K.
+\tag{7.2.2}
+\end{align*}
+
+We shall prove that $\widehat{\mathcal{L}}(\dot{\mathfrak{g}})$ is an affine algebra associated to the affine matrix~$A$
+of type~$X_\ell^{(1)}$.
+
+Here we check that $d$ is a derivation of the Lie algebra 
+$\widetilde{\mathcal{L}}(\dot{\mathfrak{g}})$.
+More generally, denote by $d_s$ the endomorphism of the space 
+$\widetilde{\mathcal{L}}(\dot{\mathfrak{g}})$ defined by
+\begin{equation}
+d_s\big|_{\mathcal{L}(\dot{\mathfrak{g}})} = -t^{s+1} \frac{d}{dt},
+\qquad
+d_s(K) = 0,
+\tag{7.3.1}
+\end{equation}
+so that $d_0 = -d$.
+
+\begin{proposition}[7.3]
+$d_s$ is a derivation of $\widetilde{\mathcal{L}}(\dot{\mathfrak{g}})$.
+\end{proposition}
+
+\begin{proof}
+Since $D := d_s$ is a derivation of $\mathcal{L}(\dot{\mathfrak{g}})$, we deduce that
+\[
+D([a + \lambda K,\, b + \mu K]) 
+= D([a,b]_0) = [D(a),b]_0 + [a,D(b)]_0.
+\]
+But
+\[
+[D(a),b] = [D(a),b]_0 + \psi(D(a),b)K.
+\]
+Hence, one has to check that
+\begin{equation}
+\psi(D(a),b) + \psi(a,D(b)) = 0.
+\tag{7.3.2}
+\end{equation}
+
+Set $a = P \otimes x$, $b = Q \otimes y$.
+Then the left-hand side of~(7.3.2) is
+\begin{align*}
+(x\mid y)\big(\varphi(D(P),Q) + \varphi(P,D(Q))\big)
+&= (x\mid y)\big(-\varphi(Q,D(P)) + \varphi(P,D(Q))\big) \\
+&= (x\mid y)\operatorname{Res}\!\left(
+    -\frac{dQ}{dt}t^{s+1}\frac{dP}{dt} 
+    + \frac{dP}{dt}t^{s+1}\frac{dQ}{dt}
+  \right) = 0
+\end{align*}
+as desired.
+\end{proof}
+Note that
+\[
+\mathfrak{v} := \bigoplus_{j \in \mathbb{Z}} \mathbb{C} d_j
+\]
+is a $\mathbb{Z}$-graded subalgebra in $\operatorname{Der}\widetilde{\mathcal{L}}(\overset{\circ}{\mathfrak{g}})$
+with the following commutation relations:
+\[
+[d_i, d_j] = (i - j)d_{i+j}.
+\]
+This is the Lie algebra of regular vector fields on~$\mathbb{C}^\times$ 
+(= derivations of~$\mathcal{L}$). The Lie algebra~$\mathfrak{v}$ has a unique (up to isomorphism) nontrivial central extension
+by a $1$-dimensional center, say~$\mathbb{C}c$, called the \textbf{Virasoro algebra}~$\mathrm{Vir}$,
+which is defined by the following commutation relations:
+\begin{equation}
+[d_i, d_j] = (i - j)d_{i+j} + \frac{1}{12}(i^3 - i)\,\delta_{i,-j}\,c,
+\qquad (i,j \in \mathbb{Z}).
+\tag{7.3.3}
+\end{equation}
+
+\subsection{The root system}
+Let $\overset{\circ}{\Delta} \subset \overset{\circ}{\mathfrak{h}}^*$ be the root system of the Lie algebra 
+$\overset{\circ}{\mathfrak{g}}$, let $\{\alpha_1,\dots,\alpha_\ell\}$ be the root basis, 
+$\{H_1,\dots,H_\ell\}$ the coroot basis, and $E_i, F_i$ $(i=1,\dots,\ell)$ the Chevalley generators.  
+Let $\theta$ be the highest root of the finite root system $\overset{\circ}{\Delta}$.
+Let
+\[
+\overset{\circ}{\mathfrak{g}}
+= \bigoplus_{\alpha \in \overset{\circ}{\Delta} \cup \{0\}} 
+  \overset{\circ}{\mathfrak{g}}_\alpha
+\]
+be the root space decomposition of $\overset{\circ}{\mathfrak{g}}$.
+
+Recall that $(\alpha\mid\alpha) \neq 0$ and 
+$\dim \overset{\circ}{\mathfrak{g}}_\alpha = 1$ for $\alpha \in \overset{\circ}{\Delta}$ 
+(there are no imaginary roots).
+Let $\overset{\circ}{\omega}$ be the Chevalley involution of $\overset{\circ}{\mathfrak{g}}$.
+We choose $F_0 \in \overset{\circ}{\mathfrak{g}}_{-\theta}$ such that
+\[
+(F_0 \mid \overset{\circ}{\omega}(F_0)) = -\frac{2}{(\theta\mid\theta)},
+\qquad\text{and set } E_0 = -\overset{\circ}{\omega}(F_0).
+\]
+Then, due to Theorem~2.2(e), we have
+\begin{equation}
+[E_0, F_0] = -\theta^\vee.
+\tag{7.4.1}
+\end{equation}
+
+The elements $E_i$ $(i = 0, \dots, \ell)$ generate the Lie algebra $\overset{\circ}{\mathfrak{g}}$, since in the adjoint representation we have
+\[
+\overset{\circ}{\mathfrak{g}} = U(\overset{\circ}{\mathfrak{g}})(E_0)
+= U(\overset{\circ}{\mathfrak{n}}_+)(E_0)
+\quad\text{(recall that $\overset{\circ}{\mathfrak{g}}$ is simple).}
+\]
+
+\medskip
+
+Now we turn to the Lie algebra $\widehat{\mathcal{L}}(\overset{\circ}{\mathfrak{g}})$.
+It is clear that $\mathbb{C}K$ is the one-dimensional center of $\widehat{\mathcal{L}}(\overset{\circ}{\mathfrak{g}})$,
+and that the centralizer of $\mathfrak{v}$ in 
+$\widehat{\mathcal{L}}(\overset{\circ}{\mathfrak{g}})$
+is a direct sum of Lie algebras:
+\[
+\mathbb{C}K \oplus \mathbb{C}d \oplus (1 \otimes \overset{\circ}{\mathfrak{g}}).
+\]
+In particular, $1 \otimes \overset{\circ}{\mathfrak{g}}$ is a subalgebra of 
+$\widehat{\mathcal{L}}(\overset{\circ}{\mathfrak{g}})$; we identify 
+$\overset{\circ}{\mathfrak{g}}$ with this subalgebra by $x \mapsto 1 \otimes x$.
+
+\medskip
+
+Furthermore, set
+\[
+\mathfrak{h} := \overset{\circ}{\mathfrak{h}} \oplus \mathbb{C}K \oplus \mathbb{C}d,
+\]
+which is an $(\ell+2)$-dimensional commutative subalgebra of 
+$\widehat{\mathcal{L}}(\overset{\circ}{\mathfrak{g}})$.
+
+We extend $\lambda \in \overset{\circ}{\mathfrak{h}}^*$ to a linear function on $\mathfrak{h}$
+by setting
+\[
+(\lambda, K) = \langle \lambda, K \rangle = 0,
+\qquad
+\langle \lambda, d \rangle = 0,
+\]
+so that $\overset{\circ}{\mathfrak{h}}^*$ is identified with a subspace in $\mathfrak{h}^*$.
+We denote by $\delta$ the linear function on $\mathfrak{h}$ defined by
+\[
+\delta|_{\overset{\circ}{\mathfrak{h}} + \mathbb{C}K} = 0,
+\qquad
+\langle \delta, d \rangle = 1.
+\]
+Finally, set
+\[
+e_0 = t \otimes E_0, \qquad
+f_0 = t^{-1} \otimes F_0, \qquad
+e_i = 1 \otimes E_i, \qquad
+f_i = 1 \otimes F_i \quad (i = 1, \dots, \ell).
+\]
+
+We deduce from~(7.4.1) that
+\begin{equation}
+[E_0, F_0] = \frac{2}{(\theta\mid\theta)}\,K - \theta^\vee.
+\tag{7.4.2}
+\end{equation}
+
+Now we describe the root system and the root space decomposition of 
+$\widehat{\mathcal{L}}(\overset{\circ}{\mathfrak{g}})$ with respect to~$\mathfrak{h}$:
+\[
+\Delta = \{\, j\delta + \gamma \mid j \in \mathbb{Z},\; \gamma \in \overset{\circ}{\Delta}\,\}
+       \;\cup\;
+       \{\, j\delta \mid j \in \mathbb{Z}\setminus\{0\}\,\},
+\]
+\[
+\widehat{\mathcal{L}}(\overset{\circ}{\mathfrak{g}})
+= \mathfrak{h} \oplus
+  \bigoplus_{\alpha \in \Delta}
+  \widehat{\mathcal{L}}(\overset{\circ}{\mathfrak{g}})_\alpha,
+\]
+where
+\[
+\widehat{\mathcal{L}}(\overset{\circ}{\mathfrak{g}})_{j\delta+\gamma}
+= t^j \otimes \overset{\circ}{\mathfrak{g}}_\gamma,
+\qquad
+\widehat{\mathcal{L}}(\overset{\circ}{\mathfrak{g}})_{j\delta}
+= t^j \otimes \overset{\circ}{\mathfrak{h}}.
+\]
+
+We set
+\[
+\Pi = \{\alpha_0 := \delta - \theta,\; \alpha_1,\dots,\alpha_\ell\},
+\qquad
+\Pi^\vee = \{\alpha_0^\vee := \tfrac{2}{(\theta\mid\theta)}\,K - 1\otimes\theta^\vee,\;
+             \alpha_i^\vee := 1\otimes H_i \ (i=1,\dots,\ell)\}.
+\]
+
+Note that our $\theta$ is the same as the one introduced in~§6.4 (for $r=1$).
+Then Proposition~6.4(a) implies
+\begin{equation}
+A = \big((\alpha_j,\alpha_i^\vee)\big)_{i,j=0}^\ell.
+\tag{7.4.3}
+\end{equation}
+
+In other words, $(\mathfrak{h}, \Pi, \Pi^\vee)$ is a realization of the affine matrix~$A$ we started with.  
+Indeed, $\Pi$ and $\Pi^\vee$ are linearly independent, i.e.~(1.1.1) holds, and
+\[
+2n - \operatorname{rank}A = 2(\ell + 1) - \ell = \ell + 2 = \dim \mathfrak{h},
+\]
+
+\begin{theorem}[7.4]
+Let $\overset{\circ}{\mathfrak{g}}$ be a complex finite-dimensional simple Lie algebra, 
+and let $A$ be its extended Cartan matrix.  
+Then $\widehat{\mathcal{L}}(\overset{\circ}{\mathfrak{g}})$ is the affine Kac–Moody algebra
+associated to the affine matrix~$A$, $\mathfrak{h}$ is its Cartan subalgebra,
+$\Pi$ and $\Pi^\vee$ are the root and coroot bases, and
+$e_0,\dots,e_\ell, f_0,\dots,f_\ell$ are the Chevalley generators.  
+In other words, the quadruple
+\[
+\big(\widehat{\mathcal{L}}(\overset{\circ}{\mathfrak{g}}),\, 
+\mathfrak{h},\, \Pi,\, \Pi^\vee\big)
+\]
+is the quadruple associated to~$A$.
+\end{theorem}
+
+\begin{corollary}
+    Let $\mathfrak{g}$ be an untwisted affine Kac–Moody algebra with Cartan matrix of rank $\ell+1$. Then every imaginary root space of $\mathfrak{g}$ is of rank $\ell$.
+\end{corollary}
+
+\begin{proof}
+    The root space of the imaginary root $n\delta$ is $t^n \otimes \overset{\circ}{\mathfrak{h}}$, which is of rank $\ell$. To see this, we write  $h = h’ + \lambda K + \mu d \in \mathfrak{h}$ and $x \in \overset{\circ}{\mathfrak{h}}$. Then, for $a = t^n \otimes x$, the action of $h’ \in \overset{\circ}{\mathfrak{h}}$ is given by
+
+\begin{align*}
+[h',\, t^n \otimes x]
+&= t^n \otimes [h',x] = 0 \text{ since $\overset{\circ}{\mathfrak{h}}$ is abelian.}\\
+[K,\, t^n \otimes x] &= 0 \text{ since $K$ is central.}\\
+[d,\, t^n \otimes x] &= n\,t^n \otimes x
+\end{align*}
+
+Putting these together:
+$[h,\, t^n \otimes x] = \mu\,n\,t^n \otimes x$.
+
+That is, the functional $\alpha \in \mathfrak{h}^*$ corresponding to this weight satisfies $\alpha|_{\overset{\circ}{\mathfrak{h}} + \mathbb{C}K} = 0$,
+$\alpha(d) = n$. The functional above is just $n\delta$.
+\end{proof}
+
+\section{Highest weight modules over Kac–Moody algebras}
+Recall from the finite dimensional theory, we introduced the notion of highest weight modules, the universal such module (Verma module), and the unique irreducible quotient of the Verma module. We also introduced the notion of a primitve vector. The notions generalize to Kac-Moody algebras.
+\subsection{}
+Let $L(\Lambda)^*$ be the $\mathfrak{g}(A)$-module contragredient to $L(\Lambda)$. 
+Then 
+\[
+L(\Lambda)^* = \prod_{\lambda} (L(\Lambda)_\lambda)^*.
+\]
+The subspace
+\[
+L^*(\Lambda) := \bigoplus_{\lambda} (L(\Lambda)_\lambda)^*
+\]
+is a submodule of the $\mathfrak{g}(A)$-module $L(\Lambda)^*$. 
+It is clear that the module $L^*(\Lambda)$ is irreducible and that for 
+$v \in (L(\Lambda)_\Lambda)^*$ one has:
+\[
+\mathfrak{n}_-(v) = 0, 
+\qquad 
+h(v) = -\Lambda(h)v \quad \text{for } h \in \mathfrak{h}.
+\]
+Such a module is called an \textbf{irreducible module with lowest weight} $-\Lambda$.
+As in §9.3 we have a bijection between $\mathfrak{h}^*$ and irreducible lowest-weight
+modules: $\Lambda \mapsto L^*(-\Lambda)$.
+
+Denote by $\pi_\Lambda$ the action of $\mathfrak{g}(A)$ on $L(\Lambda)$, and introduce
+the new action $\pi_\Lambda^*$ on the space $L(\Lambda)$ by
+\begin{equation}
+\pi_\Lambda^*(g)v = \pi_\Lambda(\omega(g))v,
+\tag{9.4.1}
+\end{equation}
+where $\omega$ is the Chevalley involution of $\mathfrak{g}(A)$.
+It is clear that $(L(\Lambda), \pi_\Lambda^*)$ is an irreducible
+$\mathfrak{g}(A)$-module with lowest weight $-\Lambda$.
+By the uniqueness theorem, this module can be identified with $L^*(\Lambda)$,
+and the pairing between $L(\Lambda)$ and $L^*(\Lambda)$ gives us a nondegenerate
+bilinear form $B$ on $L(\Lambda)$ such that
+\begin{equation}
+B(gx, y) = -B(x, \omega(g)(y))
+\quad
+\text{for all } g \in \mathfrak{g}(A),\; x,y \in L(\Lambda).
+\tag{9.4.2}
+\end{equation}
+A bilinear form on $L(\Lambda)$ which satisfies (9.4.2) is called a 
+\textbf{contravariant bilinear form.}
+
+\begin{proposition}[9.4]
+Every $\mathfrak{g}(A)$-module $L(\Lambda)$ carries a unique up to constant factor
+nondegenerate contravariant bilinear form $B$. This form is symmetric, and
+$L(\Lambda)$ decomposes into an orthogonal direct sum of weight spaces with respect to
+this form.
+\end{proposition}
+
+\begin{proof}
+The existence of $B$ was proved above, the uniqueness follows from Lemma~9.3.
+The symmetry follows from the uniqueness. The fact that 
+$B(L(\Lambda)_\lambda, L(\Lambda)_\mu) = 0$ if $\lambda \neq \mu$ 
+follows from (9.4.2) for $g \in \mathfrak{h}$, $x \in L(\Lambda)_\lambda$, 
+$y \in L(\Lambda)_\mu$.
+\end{proof}
+
+A more explicit way to introduce the contravariant bilinear form is the following.
+Let $V$ be a highest-weight $\mathfrak{g}(A)$-module with a fixed highest-weight
+vector $v_\Lambda$. Given $v \in V$, we define its \textbf{expectation value}
+$\langle v \rangle \in \mathbb{C}$ by
+\[
+v = \langle v \rangle v_\Lambda + \sum_{\alpha \in Q_+ \setminus \{0\}} v_{\Lambda - \alpha},
+\qquad
+v_{\Lambda - \alpha} \in V_{\Lambda - \alpha}.
+\]
+
+\section{Vertex algebras}
+\subsection{Fields}
+Let $V$ be a vector space over $\mathbb{C}$. Denote by $\End V$ the algebra of linear operators on $V$.  
+A formal power series
+\begin{equation}\label{eq:field}
+A(z) = \sum_{j \in \mathbb{Z}} A_j z^{-j} \in \End V[[z^{\pm1}]]
+\end{equation}
+is called a \textbf{field} on $V$ if for any $v \in V$ we have $A_j v = 0$ for large enough $j$.  
+In other words, $A(z)\,v$ is an element of $V((z))$, the space of formal Laurent series with coefficients in $V$ (i.e.\ only finitely many terms with negative powers of $z$).  
+Fields on $V$ form a vector space denoted by $\mathcal{F}(V)$.
+
+Now suppose that $V$ is $\mathbb{Z}$–graded,
+\[
+V = \bigoplus_{n \in \mathbb{Z}} V_n.
+\]
+Recall that in this case a linear operator $\phi : V \to V$ is called \textbf{homogeneous of degree $m$} if $\phi(V_n) \subseteq V_{n+m}$ for all $n$.
+
+A (homogeneous) field of \textbf{conformal dimension} $\Delta \in \mathbb{Z}$ is by definition a field \eqref{eq:field} on $V$, where each $A_j$ is a homogeneous linear operator on $V$ of degree $-j + \Delta$.
+Suppose that $V_k = 0$ for all $k$ less than a fixed integer $K$.  
+Then if $v \in V_n$ is a vector of degree $n$, we have
+\[
+\deg(A_j v) = n - j + \Delta,
+\]
+so $A_j v = 0$ for all $j > n + K + \Delta$.  
+It follows that for an arbitrary $v \in V$ there is an integer $N$ such that $A_j v = 0$ for $j > N$. Thus
+\begin{equation}\label{eq:Aonv}
+A(z)\,v = \sum_{j \in \mathbb{Z}} (A_j v)\, z^{-j} \in V((z)),
+\end{equation}
+so $A(z)$ automatically satisfies the condition of being a field.
+
+\medskip
+
+If $A(z)$ is a field of conformal dimension $\Delta$, then
+\[
+\partial_z A(z) = \sum_{j \in \mathbb{Z}} (-j) A_j z^{-j-1}
+\]
+is a field of conformal dimension $\Delta + 1$.
+
+\medskip
+
+If we substitute for the formal variable $z$ a non–zero complex number (also denoted by $z$), then \eqref{eq:Aonv} yields an infinite sum of homogeneous components lying in the subspaces $V_n$, $n \in \mathbb{Z}$.  
+In other words, we obtain a vector in the direct product
+\[
+\overline{V} = \prod_{n \in \mathbb{Z}} V_n.
+\]
+Suppose that $V_n = 0$ for $n < K$, i.e.
+\[
+V = \bigoplus_{n=K}^{\infty} V_n.
+\]
+Then the space $\overline{V}$ is the completion of $V$ in the topology with a basis of open neighborhoods of $0$ of the form
+\[
+V_{\ge k} = \bigoplus_{n=k}^{\infty} V_n, \qquad k \ge K.
+\]
+Thus, for any nonzero complex number $z \in \mathbb{C}^\times$, $A(z)$ can be considered as a linear operator from $V$ to $\overline{V}$.
+\subsection{Composing Fields}
+
+We would like to formulate a reasonable condition of commutativity (which we will refer to as \textbf{locality}) of two fields $A(z)$ and $B(w)$ acting on $V$.
+
+Observe that for any vector $v \in V$ and any linear functional $\varphi : V \to \mathbb{C}$, the matrix element $\langle \varphi, A(z)v \rangle$ of a field $A(z)$ is a Laurent power series (the degrees in $z$ are bounded from below).
+
+Given another field $B(w)$, we consider the composition $A(z)B(w)$ as an $\End V$–valued formal power series in $z,w$.  
+Given $v \in V$ and $\varphi \in V^*$ (where $V^*$ denotes the space of all linear functionals on $V$), consider the matrix element
+\[
+\langle \varphi, A(z)B(w)v \rangle \in \mathbb{C}[[z^{\pm1}, w^{\pm1}]].
+\]
+From the definition of a field, this formal power series actually belongs to $\mathbb{C}((z))((w))$.
+Indeed, the degrees of $w$ in this series are bounded from below, and if we write $B(w) = \sum_{j \in \mathbb{Z}} B_j w^{-j}$, then the coefficient in front of $w^{-j}$ equals $\langle \varphi, A(z)B_j v\rangle$ and hence belongs to $\mathbb{C}((z))$.
+Similarly, $\langle \varphi, B(w)A(z)v\rangle$ belongs to $\mathbb{C}((w))((z))$.
+
+If we impose the condition that the fields $A(z)$ and $B(w)$ commute, i.e.\ that these two matrix elements are equal for all $v,\varphi$, then they both belong to the intersection \[\mathbb{C}((z))((w)) \cap \mathbb{C}((w))((z)) = \mathbb{C}[[z,w]][z^{-1},w^{-1}]\]
+
+This condition is too strong, so we relax it.  
+It is more reasonable to require that the two expressions be expansions of one and the same rational function of $z$ and $w$, with possible poles only at $z=0$, $w=0$, and $z=w$.  
+This motivates the following definition.
+
+\begin{definition}
+Two fields $A(z)$ and $B(w)$ acting on a vector space $V$ are said to be \textbf{local} with respect to each other if for every $v \in V$ and $\varphi \in V^*$, the matrix elements
+\[
+\langle \varphi, A(z)B(w)v \rangle \quad \text{and} \quad \langle \varphi, B(w)A(z)v \rangle
+\]
+are expansions of one and the same element
+\[
+f_{\varphi,v} \in \mathbb{C}[[z,w]][z^{-1},w^{-1},(z-w)^{-1}]
+\]
+in $\mathbb{C}((z))((w))$ and $\mathbb{C}((w))((z))$, respectively, and the order of the pole of $f_{\varphi,v}$ in $(z-w)$ is uniformly bounded for all $v,\varphi$.
+\end{definition}
+
+The last condition may be reformulated as saying that there exists
+$N \in \mathbb{Z}_+$ such that
+\[
+    (z-w)^N f_{v,\varphi} \in \mathbb{C}[[z,w]][z^{-1},w^{-1}]
+\]
+for all $v,\varphi$. But then the expansions of $(z-w)^N f_{v,\varphi}$ in 
+$\mathbb{C}((z))((w))$ and $\mathbb{C}((w))((z))$ are equal to each other. 
+Therefore if $A(z)$ and $B(w)$ are local with respect to each other, then
+\[
+    (z-w)^N A(z)B(w) = (z-w)^N B(w)A(z),
+\]
+or equivalently,
+\[
+    (z-w)^N [A(z),B(w)] = 0,
+\]
+The following proposition shows that the converse is also true.
+
+\begin{proposition}
+Two fields $A(z),B(w)$ are local if and only if there exists
+$N \in \mathbb{Z}_+$ such that
+\begin{equation}\label{eq:locality}
+    (z-w)^N [A(z),B(w)] = 0
+\end{equation}
+as a formal power series in $\End V[[z^{\pm1},w^{\pm1}]]$.
+\end{proposition}
+
+We also give an analytic interpretation of locality.
+\begin{proposition}
+Two fields $A(z),B(w)$ are local with respect to each other
+if and only if:
+\begin{enumerate}
+    \item For any $z,w \in \mathbb{C}^\times$ with $|z| > |w|$, 
+    the composition $A(z)B(w)$ exists and can be analytically 
+    continued to an operator–valued meromorphic function 
+    $R(A(z)B(w))$ on $\mathbb{C}^2$, with singularities at 
+    $\{z=0\}$, $\{w=0\}$, and $\{z=w\}$, such that the order 
+    of the pole at $z=w$ is uniformly bounded.
+
+    \item For $|w| > |z|$ the composition $B(w)A(z)$ exists and can 
+    be analytically continued to an operator–valued meromorphic 
+    function $R(B(w)A(z))$ on $\mathbb{C}^2$, with singularities 
+    at $\{z=0\}$, $\{w=0\}$, and $\{z=w\}$, such that the order 
+    of the pole at $z=w$ is uniformly bounded.
+
+    \item $R(A(z)B(w)) = R(B(w)A(z))$.
+\end{enumerate}
+\end{proposition}
+
+\begin{definition}[Vertex Algebras]
+A \textbf{vertex algebra} is a collection of data:
+\begin{itemize}
+    \item (\textbf{space of states}) a vector space $V$;
+    \item (\textbf{vacuum vector}) a vector $\lvert 0 \rangle \in V$;
+    \item (\textbf{translation operator}) a linear operator $T : V \to V$;
+    \item (\textbf{vertex operators}) a linear operation
+    \[
+        Y(\,\cdot\,,z) : V \to \End V[[z^{\pm1}]],
+    \]
+    taking each $A \in V$ to a field
+    \[
+        Y(A,z) = \sum_{n \in \mathbb{Z}} A_{(n)}\,z^{-n-1}
+    \]
+    acting on $V$.
+\end{itemize}
+
+These data are subject to the following axioms:
+\begin{itemize}
+    \item \textbf{(vacuum axiom)} 
+    \[
+        Y(\lvert 0 \rangle, z) = \id_V.
+    \]
+    Furthermore, for any $A \in V$ we have
+    \[
+        Y(A,z)\lvert 0 \rangle \in V[[z]],
+    \]
+    so that $Y(A,z)\lvert 0 \rangle$ has a well–defined value at $z=0$, and
+    \[
+        Y(A,z)\lvert 0 \rangle\big|_{z=0} = A.
+    \]
+    In other words, $A_{(n)}\lvert 0 \rangle = 0$ for $n \ge 0$, and 
+    $A_{(-1)}\lvert 0 \rangle = A$.
+    
+    \item \textbf{(translation axiom)}
+    For any $A \in V$,
+    \[
+        [T,\,Y(A,z)] = \partial_z Y(A,z),
+    \qquad
+    T\lvert 0 \rangle = 0.
+    \]
+
+    \item \textbf{(locality axiom)}
+    All fields $Y(A,z)$ are local with respect to each other.
+\end{itemize}
+
+A vertex algebra is called \(\mathbb{Z}\)-graded if \(V\) is a 
+\(\mathbb{Z}\)-graded vector space, 
+the vacuum \(\lvert 0 \rangle\) has degree \(0\),
+the operator \(T\) has degree \(1\), and for \(A \in V_m\) the field \(Y(A,z)\) 
+has conformal dimension \(m\) (i.e.\ $\deg A_{(n)} = -n + m - 1$).
+\end{definition}
+
+We begin with some basic remarks about the axioms.
+\begin{remark}
+    [$T$ is determined by $Y$] Recall the translation axiom:
+    $[T, Y(A,z)] = \partial_z Y(A,z)$, $T|0\rangle = 0$.
+
+    We know $Y(A,z)|0\rangle \in V[[z]]$, so it's a power series:
+    $Y(A,z)|0\rangle = A + \text{(terms with } z>0)$.
+    Explicitly,
+    $Y(A,z)|0\rangle = \sum_{n\ge 0} A_{(-n-1)}|0\rangle z^n$.
+    The coefficient of $z^0$ is $A$, the coefficient of $z^1$ is $A_{(-2)}|0\rangle$, and so on.
+
+Apply $[T,Y(A,z)] = \partial_z Y(A,z)$ to $|0\rangle$ and compute both sides:
+    $[T, Y(A,z)]|0\rangle = T(Y(A,z)|0\rangle) - Y(A,z)T|0\rangle = T(Y(A,z)|0\rangle)$
+    (since $T|0\rangle=0$).
+    The right-hand side gives
+    $\partial_z Y(A,z)|0\rangle = \sum_{n\ge 0} (n+1)A_{(-n-2)}|0\rangle z^n$.
+
+    Comparing coefficients of $z^0$:
+    $T A = A_{(-2)}|0\rangle$.
+\end{remark}
+
+\begin{remark}[$Y$ is injective]
+    This comes directly from the vacuum axiom:
+
+\[Y(A,z)|0\rangle \in V[[z]], \quad Y(A,z)|0\rangle\big|_{z=0} = A\]
+
+Expanding we get that $Y(A,z)|0\rangle = \sum_{n\ge 0} A_{(-n-1)}|0\rangle\,z^n$.
+Then the coefficient of $z^0$ is exactly $A_{(-1)}|0\rangle$.
+The vacuum axiom says this equals $A$:
+$A = A_{(-1)}|0\rangle$.
+
+Hence, if $A_{(-1)} = 0$, then $A_{(-1)}|0\rangle = 0$, so $A=0$.
+That shows the map
+\[
+V \to \End(V), \quad A \mapsto A_{(-1)}
+\]
+is injective and this implies the vertex operator map $Y$ is injective.
+\end{remark}
+
+\begin{definition}[Morphisms, Subalgebras, Ideals, Quotients]
+A \textbf{vertex algebra homomorphism} $\rho$ between vertex algebras
+\[
+(V, \lvert 0 \rangle, T, Y) \;\longrightarrow\; (V', \lvert 0 \rangle', T', Y')
+\]
+is a linear map $V \to V'$ mapping $\lvert 0 \rangle$ to $\lvert 0 \rangle'$, 
+intertwining the translation operators, and satisfying
+\[
+\rho\big(Y(A,z)B\big) = Y\big(\rho(A),z\big)\rho(B).
+\]
+
+A \textbf{vertex subalgebra} $V' \subset V$ is a $T$–invariant subspace 
+containing the vacuum vector, and satisfying 
+$Y(A,z)B \in V'((z))$ for all $A,B \in V'$ 
+(with the induced vertex algebra structure).
+
+A \textbf{vertex algebra ideal} $I \subset V$ is a $T$–invariant subspace satisfying 
+$Y(A,z)B \in I((z))$ for all $A \in I$ and $B \in V$.  
+The skew–symmetry property proved in Proposition~3.2.5 below implies that then 
+$Y(B,z)A \in I((z))$ as well (with $A,B$ as before), so that $I$ is automatically 
+a ``two–sided'' ideal.  
+It follows that for any proper ideal $I$, the quotient $V/I$ inherits 
+a natural quotient vertex algebra structure.
+\end{definition}
+\begin{definition}[Tensor Product of Vertex Algebras]
+For two vertex algebras $(V_1, \lvert 0 \rangle_1, T_1, Y_1)$ 
+and $(V_2, \lvert 0 \rangle_2, T_2, Y_2)$, 
+the data
+\[
+(V_1 \otimes_{\mathbb{C}} V_2,\;
+ \lvert 0 \rangle_1 \otimes \lvert 0 \rangle_2,\;
+ T_1 \otimes 1 + 1 \otimes T_2,\;
+ Y)
+\]
+where
+\[
+Y(A_1 \otimes A_2, z) 
+= Y_1(A_1,z) \otimes Y_2(A_2,z),
+\]
+defines a vertex algebra called the \textbf{tensor product} 
+of $V_1$ and $V_2$.
+\end{definition}
+
+\begin{example}
+    [Commutative Vertex Algebras]
+A vertex algebra is called \textbf{commutative} if all vertex operators 
+$Y(A,z)$, $A \in V$, commute with each other (i.e.\ we have $N=0$ in formula~(1.2.3)).
+
+Suppose we are given a commutative vertex algebra $V$. 
+Then for any $A,B \in V$ we have
+\[
+Y(A,z)\,B = Y(A,z)Y(B,w)\lvert 0 \rangle\big|_{w=0}
+= Y(B,w)Y(A,z)\lvert 0 \rangle\big|_{w=0}.
+\]
+But by the vacuum axiom, the last expression has no negative powers of $z$. 
+Therefore $Y(A,z)B \in V[[z]]$ for all $A,B \in V$, 
+so $Y(A,z) \in \End V[[z]]$ for all $A \in V$.
+
+Conversely, suppose that we are given a vertex algebra $V$ in which 
+$Y(A,z) \in \End V[[z]]$ for all $A \in V$.  
+Observe that if the equality 
+\[
+(z-w)^N f_1(z,w) = (z-w)^N f_2(z,w)
+\]
+holds for $f_1,f_2 \in \mathbb{C}[[z,w]]$ and $N \in \mathbb{Z}_+$, 
+then necessarily $f_1(z,w) = f_2(z,w)$.  
+Therefore we obtain that $[Y(A,z),Y(B,w)] = 0$ for all $A,B \in V$, 
+so $V$ is commutative.
+
+Thus, a commutative vertex algebra may alternatively be defined as one 
+in which all vertex operators $Y(A,z)$ are regular at $z=0$.
+
+\medskip
+
+Denote by $Y_A$ the endomorphism of a commutative vertex algebra $V$ 
+which is the constant term of $Y(A,z)$, $A \in V$, and define a bilinear 
+operation $\circ$ on $V$ by setting $A \circ B = Y_A B$.  
+By construction, $Y_A Y_B = Y_B Y_A$.  
+As explained in \S1.3.3, this implies both commutativity and associativity 
+of $\circ$.  
+Hence we obtain a commutative and associative product on $V$.  
+Furthermore, the vacuum vector $\lvert 0 \rangle$ is a unit, 
+and the operator $T$ is a derivation with respect to this product.  
+Thus, we have the structure of a commutative algebra with a derivation on $V$.
+
+\medskip
+
+Conversely, let $V$ be a commutative algebra with a unit and 
+finite–dimensional homogeneous components.  
+Suppose that $V$ is equipped with a derivation $T$ of degree~1.  
+Then $V$ carries a canonical vertex algebra structure.  
+Namely, we take the unit of $V$ as the vacuum vector $\lvert 0 \rangle$, 
+and define $Y(A,z)$ to be the operator of multiplication by
+\[
+\sum_{n \ge 0} \frac{z^n}{n!}\,(T^n A) = e^{zT}A.
+\]
+It is straightforward to check that all axioms of a commutative vertex algebra 
+are satisfied.
+
+\medskip
+
+Thus, we see that the notion of commutative vertex algebra is essentially 
+equivalent to that of a commutative algebra with a unit and a derivation.
+\end{example}
+
+\section{Vertex algebras from Lie algebras}
+Consider the vector space $\mathbb{C}((t))$ of formal Laurent series in one variable as a commutative Lie algebra.
+
+\begin{definition}
+    We define the \textbf{Heisenberg Lie algebra} $\mathcal{H}$ as the central extension
+\begin{equation} \label{2.1.2}
+0 \;\longrightarrow\; \mathbb{C}1 \;\longrightarrow\; \mathcal{H} \;\longrightarrow\; \mathbb{C}((t)) \;\longrightarrow\; 0
+\end{equation}
+with the cocycle
+\begin{equation} \label{2.1.3}
+c(f,g) \;=\; -\Res_{t=0}\, f\,dg.
+\end{equation}
+
+There is another version of the Heisenberg Lie algebra: the one–dimensional central extension $\mathcal{H}'$ of the commutative Lie algebra of Laurent polynomials $\mathbb{C}[t,t^{-1}]$ defined by the two–cocycle \eqref{2.1.3}.
+This Lie algebra has an obvious basis $b_n = t^n$, $n \in \mathbb{Z}$, and the central element $1$. The Lie algebra $\mathcal{H}$ does not possess such a simple basis.
+However, $\mathcal{H}$ is the completion of $\mathcal{H}'$ with respect to the topology in which the basis of open neighborhoods of $0$ is formed by the subspaces $t^N\mathbb{C}[t]$, $N\in\mathbb{Z}$.
+Hence it makes sense to say that $\mathcal{H}$ is \textbf{topologically} generated by $b_n = t^n$, $n\in\mathbb{Z}$, and $1$.
+Note that the Lie bracket is continuous with respect to the above topology, and so $\mathcal{H}$ is a complete topological Lie algebra.
+
+By a representation of a topological Lie algebra like $\mathcal{H}$ we will understand (unless noted otherwise) a continuous representation in a vector space $V$ equipped with the \textbf{discrete} topology.
+In the case of $\mathcal{H}$, this is equivalent to the requirement that for any $v\in V$, we have $t^N\mathbb{C}[[t]]\cdot v = 0$ for some $N\in\mathbb{Z}$.
+Giving such a representation of $\mathcal{H}$ is the same as giving a representation of $\mathcal{H}'$ such that for any $v\in V$, we have $t^N\mathbb{C}[t]\cdot v = 0$ for some $N\in\mathbb{Z}$, because then the action of $\mathcal{H}'$ on $V$ may be extended to $\mathcal{H}$ by continuity.
+
+\red{The advantage of $\mathcal{H}$ over $\mathcal{H}'$ is that $\mathcal{H}$ is preserved under changes of the coordinate~$t$, while $\mathcal{H}'$ is not.}
+This property will become important later on when we develop a coordinate–independent approach to vertex algebras. However, when studying concrete representations, it is more convenient to view them as representations of the Lie algebra $\mathcal{H}'$.
+\end{definition}
+
+From formula~\eqref{2.1.3} we find that
+\[
+\begin{aligned}
+c(t^n, t^m)
+&= -\Res_{t=0} t^n\,dt^m \\
+&= -m\,\Res_{t=0} t^{n+m-1}\,dt \\
+&= -m\,\delta_{n,-m}
+\;=\; n\,\delta_{n,-m}.
+\end{aligned}
+\]
+
+The definition \eqref{2.1.3} of the cocycle using residues of one–forms rather than coefficients of power series is clearly independent of the choice of local coordinate~$t$.
+Thus we may define a Heisenberg Lie algebra canonically as a central extension of the space of functions on a punctured disc $D^\times$ which is not endowed with a specific choice of formal coordinate~$t$.
+
+\red{Why is the coordinate free definition important? Has it been useful for anything related to automorphic forms and representation theory?}
+
+The universal enveloping algebra $U(\mathcal{H}')$ of $\mathcal{H}'$ is an associative algebra with generators $b_n$, $n\in\mathbb{Z}$, and $1$, and relations (for $n,m\in\mathbb{Z}$)
+\[
+b_n b_m - b_m b_n = n \delta_{n,-m} 1, 
+\qquad
+b_n 1 - 1 b_n = 0.
+\]
+
+Introduce a topology on $U(\mathcal{H}')$, in which the basis of open neighborhoods of $0$ is formed by the left ideals of the subspaces 
+$t^N\mathbb{C}[t] \subset \mathcal{H}' \subset U(\mathcal{H}')$, $N\in\mathbb{Z}$.
+The completion of $U(\mathcal{H}')$ with respect to this topology will be denoted by $\widetilde{U}(\mathcal{H})$.
+In more concrete terms, elements of $\widetilde{U}(\mathcal{H})$ may be described as (possibly infinite) series of the form
+\[
+R_0 + \sum_{n\ge 0} P_n b_n,
+\]
+where $R_0$ and the $P_n$’s are arbitrary (finite) elements of $U(\mathcal{H}')$.
+It is easy to check that $\widetilde{U}(\mathcal{H})$ is an associative algebra with a unit.
+
+Note that $\widetilde{U}(\mathcal{H})$ contains as a subalgebra (but is not equal to) the universal enveloping algebra $U(\mathcal{H})$.
+The latter consists of finite linear combinations of products of elements of $\mathcal{H}$.
+Moreover, $\widetilde{U}(\mathcal{H})$ is the completion of $U(\mathcal{H})$ with respect to the topology in which the basis of open neighborhoods of $0$ is formed by the left ideals of the subspaces 
+$t^N\mathbb{C}[[t]] \subset \mathcal{H} \subset U(\mathcal{H})$, $N\in\mathbb{Z}$.
+
+It is clear that any representation of $\mathcal{H}$ of the type discussed above is automatically a $\widetilde{U}(\mathcal{H})$–module.
+
+
+\begin{definition}[Weyl Algebra]
+     The \emph{Weyl algebra} $\widetilde{\mathcal{H}}$ is defined as the quotient of $\widetilde{U}(\mathcal{H})$ by the two–sided ideal generated by $(\mathbf{1}-1)$.
+    Here $\mathbf{1}$ stands for the central element of $\mathcal{H}\subset\widetilde{U}(\mathcal{H})$, and $1$ is the unit element of $\widetilde{U}(\mathcal{H})$.
+\end{definition}
+
+\subsection{The Fock representation}
+We wish to construct a representation of the Weyl algebra $\widetilde{\mathcal{H}}$ which is ``as small as possible''.
+Unlike commutative algebras, $\widetilde{\mathcal{H}}$ does not possess one–dimensional representations.
+Indeed, in $\widetilde{\mathcal{H}}$ the commutator of $b_n$, $n\ne 0$, and $b_{-n}$ gives a non–zero multiple of the unit element,
+\begin{equation}\label{2.1.5}
+b_n b_{-n} - b_{-n} b_n = n,
+\end{equation}
+so it is impossible to have a representation on which both $b_n$ (for $n\ne 0$) and $b_{-n}$ act by~$0$.
+
+\medskip
+
+Consider the subalgebra $\widetilde{\mathcal{H}}_+ \subset \widetilde{\mathcal{H}}$ generated by $b_0, b_1, b_2, \dots$.
+It is a commutative subalgebra, and hence has a trivial one–dimensional representation
+(in fact, $\widetilde{\mathcal{H}}_+$ is a maximal commutative subalgebra of $\widetilde{\mathcal{H}}$).
+We may then define a representation of $\widetilde{\mathcal{H}}$ as the induced representation from this representation of $\widetilde{\mathcal{H}}_+$:
+\[
+\pi \;\stackrel{\mathrm{def}}{=}\; 
+\mathrm{Ind}_{\widetilde{\mathcal{H}}_+}^{\widetilde{\mathcal{H}}} \mathbb{C}
+\;=\;
+\widetilde{\mathcal{H}} \otimes_{\widetilde{\mathcal{H}}_+} \mathbb{C},
+\]
+(note that $\widetilde{\mathcal{H}}_+$ acts on $\widetilde{\mathcal{H}}$ from the right).
+It is called the \emph{Fock representation} of $\widetilde{\mathcal{H}}$ (or of $\mathcal{H}$).
+
+\medskip
+
+Let $\widetilde{\mathcal{H}}_-$ be the commutative subalgebra of $\mathcal{H}$ generated by $b_n$, $n < 0$.
+It follows from the Poincaré–Birkhoff–Witt theorem that
+\[
+\widetilde{\mathcal{H}} \;\simeq\;
+\widetilde{\mathcal{H}}_+ \otimes \widetilde{\mathcal{H}}_-.
+\]
+Therefore
+\[
+\pi \;\simeq\; \widetilde{\mathcal{H}}_- \;=\; \mathbb{C}[b_{-1}, b_{-2}, \dots].
+\]
+Under this isomorphism, the generators $b_n$, $n<0$, simply act on $\pi$ by multiplication.
+
+To find the action of the $b_n$, $n\ge 0$, we consider a monomial $M=b_{-i_1}\cdots b_{-i_r}|0\rangle$ with all $i_j>0$. Move $b_n$ to the right, one factor at a time, using
+\[b_n b_{-m}=b_{-m} b_n + [b_n,b_{-m}]
+= b_{-m} b_n + n\,\delta_{n,m}\]
+Each time $b_n$ passes a $b_{-m}$ with $m\neq n$, nothing happens; when it passes a $b_{-n}$, you pick up a scalar $n$. After commuting past all $r$ factors you get
+\[b_n M
+= \sum_{\substack{1\le j\le r\\ i_j=n}}
+\big(b_{-i_1}\cdots \widehat{b_{-i_j}}\cdots b_{-i_r}\big)|0\rangle
+\cdot n \;+\; b_{-i_1}\cdots b_{-i_r} b_n|0\rangle\]
+The last term vanishes because $n\ge0$ implies $b_n|0\rangle=0$. So
+\[b_n\big(b_{-i_1}\cdots b_{-i_r}|0\rangle\big)
+= n\sum_{\substack{j: i_j=n}}
+b_{-i_1}\cdots \widehat{b_{-i_j}}\cdots b_{-i_r}|0\rangle\]
+Under the polynomial identification, that is exactly
+$b_n \;=\; n\,\frac{\partial}{\partial b_{-n}}$
+on $\mathbb{C}[b_{-1},b_{-2},\dots]$.
+
+
+The operators $b_n$ with $n<0$ are known in this context as \emph{creation operators}, since they ``create the state $b_n$ from the vacuum~$1$,''
+while the operators $b_n$ with $n\ge 0$ are the \emph{annihilation operators}, repeated application of which will ``kill'' any vector in~$\pi$.
+
+We will endow $\pi$ with the structure of a $\Z^+$-graded vertex algebra. Define \begin{align*}
+    |0\rangle &\stackrel{\mathrm{def}}{=} 1 \in \pi \\
+\end{align*} and the translation operator $T$ by the rules \begin{align*}
+    T|0\rangle &\stackrel{\mathrm{def}}{=} 0 \\
+    [T,b_n] &\stackrel{\mathrm{def}}{=} -n b_{n-1}, \quad n\in\mathbb{Z}.
+\end{align*} The $\Z^+$-grading is given by assigning $b_n$ degree $-n$ and extending multiplicatively. 
+
+Now we consider the vertex operator map $Y(\cdot,z): \pi \to \End \pi[[z^{\pm1}]]$. To the vacuum vector $\lvert 0 \rangle = 1$, we are required to assign $Y(\lvert 0 \rangle, z) = \mathrm{Id}$, so there is no ambiguity here. The key definition is that of the field $Y(b_{-1}, z)$, which as we will see generates $\pi$ in an appropriate sense.
+Let us denote $Y(b_{-1}, z)$ by $b(z)$ for brevity.
+Since $\deg b_{-1} = 1$, the field $b(z)$ needs to have conformal dimension one.
+We now set
+\[
+b(z) = \sum_{n\in\mathbb{Z}} b_n z^{-n-1},
+\]
+where $b_n$ is considered as an endomorphism of~$\pi$.
+Since $\deg b_n = -n$, $b(z)$ is indeed a field of conformal dimension~$1$.
+Note that $b(z)$ is nothing but a generating function for the generators $b_n$ of the Heisenberg Lie algebra~$\mathcal{H}$.
+
+\medskip
+
+Next, we proceed to define $Y(b_{-2}, z)$ as the field
+\[
+\partial_z b(z)
+= \sum_{n\in\mathbb{Z}} (-n-1) b_n z^{-n-2}.
+\]
+It has conformal dimension~2, as required, since $\deg b_{-2} = 2$.
+This formula may be motivated by the fact that $b_{-2} \sim t^{-2}$ equals $-\partial_t \cdot t^{-1}$.
+Following the same route, we obtain by induction
+\[
+Y(b_{-k}, z)
+= \frac{1}{(k-1)!}\,\partial_z^{\,k-1} b(z).
+\]
+
+Besides $b_{-2}$, the other generator in degree~2 is $b_{-1}^2$, to which one is tempted to assign
+\[
+b(z)^2
+= \sum_{n\in\mathbb{Z}} \bigg(\sum_{k+l=n} b_k b_l\bigg) z^{-n-2}.
+\]
+Let us check the behavior of this expression.
+Consider, for instance, the sum
+\begin{equation}\label{2.2.1}
+\sum_{k+l=10} b_k b_l
+\end{equation}
+appearing as the $z^{-12}$ coefficient in $b(z)^2$.
+Given any vector $x\in\pi$, we have $b_n x = 0$ for all but finitely many annihilation operators $b_n$ ($n\ge 0$)
+(since these are differentiation operators and $x$ is a polynomial).
+Thus in~\eqref{2.2.1}, except for finitely many terms, either $b_k\cdot x = 0$ or $b_l\cdot x = 0$.
+
+\medskip
+
+The Heisenberg relations~(2.1.4) imply that $b_k$ and $b_l$ commute whenever $k+l\ne 0$;
+hence we may rearrange the terms in our sum so that an annihilation operator always appears to the right of a creation operator.
+It follows that the operator~\eqref{2.2.1}, when applied to any $x\in\pi$, yields a finite sum.
+Thus, the $z^{-12}$ coefficient in $b(z)^2$ is a well-defined operator on~$\pi$.
+
+\medskip
+
+The same argument applies to the $z^i$ coefficient of $b(z)^2$ for any $i\ne -2$.
+But what about the coefficient
+\begin{equation}\label{2.2.2}
+\sum_{k+l=0} b_k b_l\; ?
+\end{equation}
+
+In front of $z^{-2}$? In this case $b_k$ and $b_l$ do not commute, so the above argument does not apply.
+We rewrite~(2.2.2) as
+\[
+\sum_{k\in\mathbb{Z}} b_k b_{-k}
+= \sum_{k<0} (-k)b_k \frac{\partial}{\partial b_k}
+  + \sum_{k>0} k\,\frac{\partial}{\partial b_{-k}}\,b_{-k}
+\]
+(recall that $b_0$ acts by~0 on~$\pi$).
+The first sum again becomes a finite sum when applied to any vector in~$\pi$.
+But each term in the second sum first multiplies by $b_{-k}$ and then differentiates with respect to the same $b_{-k}$, producing an infinite sum
+$\sum_{k>0} k$ when applied to the vector $1\in\pi$ (or a similar infinite sum for any other vector of~$\pi$).
+This sum obviously does not converge.
+Thus, the $z^{-2}$ coefficient of $b(z)^2$ is not well-defined, and hence $b(z)^2$ does not make sense as a field.
+
+There is a standard way to remove the infinities in products of fields.
+Namely, we rearrange the factors in each ``problematic'' term in such a way that the annihilation operators always act before the creation operators.
+Then the infinite sums arising from repeatedly creating and annihilating the same state will not occur.
+This procedure is known as \emph{normal ordering}.
+
+\medskip
+
+In the case at hand, we define the normally ordered product of $b(z)$ with itself, denoted by $:b(z)b(z):$, as the following formal power series in~$z$:
+\[
+:b(z)b(z):
+\;=\;
+\sum_{n\in\mathbb{Z}} \big(:b_k b_l:\big)\,z^{-n-2},
+\]
+where we set
+\[
+:b_k b_l:
+\;\stackrel{\mathrm{def}}{=}\;
+\begin{cases}
+b_l b_k, & \text{if } l=-k,\, k\ge0,\\[4pt]
+b_k b_l, & \text{otherwise.}
+\end{cases}
+\]
+Thus, taking the normally ordered product simply amounts to the instruction to replace everywhere the terms $b_k b_{-k}$ for $k>0$ by $b_{-k} b_k$.
+
+\medskip
+
+This procedure does not change the coefficients of $b(z)^2$ in front of $z^n$, $n\ne -2$, but the coefficient in front of $z^{-2}$ now becomes
+\[
+\sum_{k\in\mathbb{Z}} :b_k b_{-k}:
+= 2\sum_{k<0} (-k)b_k \frac{\partial}{\partial b_k},
+\]
+which is a well-defined linear operator on~$\pi$.
+
+\medskip
+
+In general, one must take the normally ordered product of fields.
+\begin{definition}[Normally Ordered Product]
+The \emph{normally ordered product} of the fields
+\[
+A(z) = \sum_{n\in\mathbb{Z}} A_{(n)} z^{-n-1},
+\qquad
+B(w) = \sum_{m\in\mathbb{Z}} B_{(m)} w^{-m-1}
+\]
+is defined as the formal power series
+\[
+:A(z)B(w):
+\;:=\;
+\sum_{n\in\mathbb{Z}}
+\left(
+\sum_{m<0} A_{(m)}B_{(n)}z^{-m-1}
+\;+\;
+\sum_{m\ge0} B_{(n)}A_{(m)}z^{-m-1}
+\right)
+w^{-n-1}
+\]
+\[
+=\;
+A(z)_+ B(w) \;+\; B(w)A(z)_-,
+\]
+where for a formal power series $f(z) = \sum_{n\in\mathbb{Z}} f_n z^n$, we write
+\[
+f(z)_+ = \sum_{n\ge0} f_n z^n,
+\qquad
+f(z)_- = \sum_{n<0} f_n z^n.
+\]
+\end{definition}
+
+The proof of the following lemma is left to the reader.
+
+\begin{lemma}[2.2.3]
+    \leavevmode
+\begin{enumerate}
+\item
+For any $v\in V$ and $\varphi\in V^*$, the matrix element
+\[
+\langle \varphi,\; :A(z)B(w):\,v\rangle
+\]
+belongs to $\mathbb{C}[[z,w]][z^{-1},w^{-1}]$.
+For any $z,w\in\mathbb{C}^\times$, $:A(z)B(w):$ is a well-defined linear operator $V\to\overline{V}$.
+
+\item
+The specialization of $:A(z)B(w):$ at $w=z$ is a well-defined field,
+which is called the \emph{normally ordered product} of $A(z)$ and $B(z)$.
+If $A(z)$ and $B(z)$ are homogeneous of conformal dimensions
+$\Delta_A$ and $\Delta_B$, respectively, then
+$:A(z)B(z):$ is also homogeneous of conformal dimension $\Delta_A+\Delta_B$.
+\item We have the formula
+\[
+:A(w)B(w):
+= \Res_{z=0}\big(
+\delta(z-w)_-A(z)B(w)
+\;+\;
+\delta(z-w)_+B(w)A(z)
+\big)
+\]
+\end{enumerate}
+\end{lemma}
+
+
+\begin{remark}
+In general, the operation of normally ordered product is neither commutative nor associative.
+We follow the convention that the normal ordering is read from right to left,
+so that by definition
+\[
+:A(z)B(z)C(z):
+\;:=\;
+:A(z)(:B(z)C(z):):
+\]
+\end{remark}
+
+In general we define
+\begin{equation}\label{2.2.3}
+Y(b_{j_1} b_{j_2} \cdots b_{j_k}, z)
+\;=\;
+\frac{1}{(-j_1-1)!\cdots(-j_k-1)!}
+:\partial_z^{-j_1-1} b(z)\,\cdots\,\partial_z^{-j_k-1} b(z):.
+\end{equation}
+
+It is not clear why we should define the vertex operation $Y(\,\cdot\,,z)$ in this way.
+It turns out that the vertex operation $Y(\,\cdot\,,z)$
+is completely determined by the assignment $Y(b_{-1},z)=b(z)$. In particular there exists (at most) one vertex algebra structure on~$\pi$
+such that $Y(b_{-1},z)=b(z)$, namely the one we defined.
+The reason is that the Fourier coefficients of the field $b(z)$ generate~$\pi$
+from the vacuum vector~$1$.
+Thus, the operation of normal ordering is not an arbitrary convention, but a natural consequence of the structure of a vertex algebra.
+
+ \section*{Meetings}
 \subsection*{Questions (Sept 18)}
 \begin{enumerate}[A.]
     \item I've been thinking about the hierarchy of objects: $L\mathfrak g$ $\to$ central extensions $\to$ full affine Kac–Moody with $d$. Each step seems to be motivated by making the structure better behaved for representation theory.
@@ -4220,6 +5284,37 @@ So the torus partition function is a trace over Hilbert space. That's why the Ka
 
 Then you can upgrade this to a loop group symmetry: maps $S^1 \to G$, acting on the circle direction. In physics language: the current algebra (affine Lie algebra) is the symmetry algebra you get when you "localize" the group symmetry along the circle. This is why $LSU(2)$ naturally acts on the Hilbert space of the theory on the circle.
 
+\subsection{Questions (Oct 9)}
+
+\begin{enumerate}
+    \item I roughly understand that the product in the Weyl denominator formula can be Poisson resummed to give a sum over the root lattice, and this is giving the relationship between weight multiplicities and theta functions. Kac describes one method of calculating weight multiplicities using Peterson's formula, and I was wondering if there has been any success in using this formula to better understand generalized Kac-Moody algebras and their denominator formulas?
+
+    \item In your papers you mention that many automorphic product forms correspond to denominator formulas of generalized Kac-Moody algebras, and that one open problem is to construct these algebras explicitly — beyond their generators and relations.
+ As an example, you wrote the fake monster Lie algebra is the Lie algebra of chiral strings on a 26-dimensional torus. Could you say more about how this arises? For example, how exactly do the physical states or vertex operators correspond to roots and multiplicities in the BKM presentation?”
+
+    You also wrote that many automorphic forms that are modular products can be interpreted as the denominator formulas of generalized Kac-Moody algebras. How does one get a hold of this correspondence in this particular example? Are there other examples where one can see this correspondence explicitly?
+
+    \item Vertex algebras are described as “meromorphic”
+generalizations of commutative algebras with an action of the formal additive group. From this point of view, how do the singular terms in the operator product expansion encode root multiplicities (say in the motivating example of Frenkel's construction of the Leech lattice Lie algebra)?
+
+    \item How does your original idea of vertex algebras as singular commutative rings on the formal additive group relate to the later coordinate-free, geometric definitions (e.g. chiral algebras or factorization algebras)?
+
+
+\item You describe a vertex algebra as a kind of "commutative ring in 1 dimension," analogous to how commutative algebras describe 0-dimensional field theories. What would the algebraic structure corresponding to a 2- or higher-dimensional analogue look like? Would the right framework for that now be factorization algebras or $E_n$-algebras, or is that a different direction from what you had in mind originally?
+
+
+\item Is there a character formula for representations of vertex algebras, analogous to the Weyl or Kac character formulas for Lie algebras and affine Kac-Moody algebras? I came across Zhu's modular invariance theorem for vertex algebras, which roughly says that charcters of certain representations of vertex operator algebras are modular functions. 
+\end{enumerate}
+
+\subsection*{Answers (Oct 9)}
+\begin{enumerate}
+    \item He gave me an exercise to convert chapter 14 of Kac's book into vertex algebra language.
+    \item He said that historically people have used automorphic forms to read off simple roots of generalized Kac-Moody algebras and their multiplicities. But the problem of classification remains open and in progress.
+    \item He said that simplest example of generalized Kac Moody algebra is the fake monster Lie algebra in rank $24$, and that the ones in lower rank are in fact more complicated. He said that people have plenty of examples in rank $2$ and some in rank $3$ but that there are significantly more examples in even rank. Also the examples in rank $24$ all come from automorphisms of the Leech lattice.
+    \item I think I will read Kac's book on vertex algebras in order to continue this reading course. I think that I can also ask him about this exercise in chapter 11 of Kac.
+    \item He said that the issue with reading anything written by Beilinson is that Beilinson is too smart.
+    \item He also made this remark that he hasn't thought about this stuff for over 30 years. He said if I want to do vertex algebras and algebraic curves, I should talk to Frenkel who would be more than happy to talk about his book with me. I didn't tell him that talking to Frenkel is most likely impossible.
+\end{enumerate}
 
 
 
@@ -4344,6 +5439,8 @@ Continuing with the discussion of theta functions, we have the following theorem
     and the inclusion of invariants induces a surjection on cohomology.
 \end{proof}
 
+\subsection{Checking locality}
+
 
 \section{References}
 \begin{enumerate}
@@ -4353,5 +5450,6 @@ Continuing with the discussion of theta functions, we have the following theorem
 
     \bibitem{kac} Kac, V. G. \textbf{Infinite Dimensional Lie Algebras}. Cambridge University Press, 1990.
     \bibitem{pressley-segal} Pressley, A., and Segal, G. \textbf{Loop Groups}. Oxford University Press, 1986.
+    \bibitem{frenkel-ben-zvi} Frenkel, E., and Ben-Zvi, D. \textbf{Vertex Algebras and Algebraic Curves}. Second edition. Mathematical Surveys and Monographs, 88. American Mathematical Society, Providence, RI; 2004.
 \end{enumerate}
 \end{document}

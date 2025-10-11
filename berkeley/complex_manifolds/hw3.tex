@@ -1,0 +1,80 @@
+\documentclass[12pt]{article}  % or any other class
+\usepackage{/Users/songye03/Desktop/Math_tex/style/psetconfig}         % loads your custom style
+\title{Homework 3}
+\author{Songyu Ye}
+\date{\today}
+
+
+\begin{document}
+\psettitle
+
+
+\begin{problem}[1]
+Which of the following is a Galois cover of the complex $z$-plane?
+\begin{enumerate}[(a)]
+    \item $w^2 = 4z^3 - g_2z - g_3$;
+    \item $w^n - z^n = 1$;
+    \item $w^3 + z + z^2 = w^2 + wz$; \textit{Hint: look at the fiber over $0$.}
+    \item $w^2 - 2zw + z^3 = 1$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\end{solution}
+
+\begin{problem}[2]
+Let $V$ be a rank $2$ (for simplicity) vector bundle over a Riemann surface $R$. Assume that $V$ has two meromorphic sections $s_1, s_2$ which, at some point, are holomorphic and span the fiber.
+\begin{enumerate}[(a)]
+    \item Show that this will be the case everywhere except at a set of isolated points.
+    \item At an exceptional point, show that we can modify $V$ by a finite sequence of elementary transformations so that $s_1$ and $s_2$ form a holomorphic frame of the new bundle.
+\end{enumerate}
+\textit{Suggestion:} First make the sections holomorphic, then find some numerical measure for their failure to give a basis. Then find a way to reduce that number.\\
+\textit{Remark:} The argument generalizes to any dimension. If $R$ is compact, it follows that we can trivialize $V$ by a finite number of elementary transformations. If $R$ is non-compact, one can show that every vector bundle is in fact trivial.
+\end{problem}
+
+\begin{solution}
+    Let $s_1, s_2$ be two meromorphic sections of a rank 2 vector bundle $V$ over a Riemann surface $R$. Since $V$ is a holomorphic vector bundle, there exists a local trivialization of $V$ around $p$. \begin{align*}
+        V|_U \cong \cO_U e_1 \oplus \cO_U e_2
+    \end{align*} and we can write \begin{align*}
+        s_1 = f_1 e_1 + f_2 e_2, \quad s_2 = g_1 e_1 + g_2 e_2
+    \end{align*} where $f_i, g_i$ are meromorphic functions on $U$. The failure of $s_1, s_2$ to span the fiber at a point $q \in U$ is given by the vanishing of the determinant \begin{align*}
+        D(q) = f_1(q)g_2(q) - f_2(q)g_1(q).
+    \end{align*} which is a meromorphic function on $U$. The zeroes of a meromorphic function are isolated unless the function is identically zero. Since $s_1, s_2$ span the fiber at $p$, $D$ is not identically zero. Therefore, the set of points where $s_1, s_2$ fail to be holomorphic or fail to span the fiber is a discrete set of isolated points in $R$, because meromorphic functions can only have isolated singularities and the determinant $D$ is meromorphic.
+
+    Let $D$ be the effective divisor of the poles of $s_1, s_2$. We can make $s_1, s_2$ holomorphic by twisting $V$ with the line bundle $\cO(D)$, i.e. consider the new vector bundle \begin{align*}
+        V(D) = V \otimes \cO(D)\end{align*} Then $s_1, s_2$ are holomorphic sections of $V(D)$. Now consider a point $p$ where $s_1, s_2$ fail to span the fiber of $V(D)$. If $s_1(p)$ and $s_2(p)$ both vanish, then twist by an appropriate power of $\cO(-p)$ to make at least one of them non-vanishing at $p$, say $s_1(p) \neq 0$. There is a $1$ dimensional subspace $L$ of $V(D)_p$ such that $s_1(p), s_2(p)$ span $L$. We can perform an elementary transformation of $V(D)$ at $p$ with respect to $L$ to obtain a new vector bundle $V'$ which fits into the short exact sequence of coherent sheaves \begin{align}
+        0 \to V' \to V(D) \to (V(D)_p/L) \otimes \cO_p \to 0.
+    \end{align} 
+    In a chart near $V(D)$ we have a local trivialization $V(D)|_U \cong \cO_U e_1 \oplus \cO_U e_2$ so that $s_1 = e_1$ and $s_2 = f(z)e_1 + g(z)e_2$ for some holomorphic functions $f(z), g(z)$. Their wedge product is given by \begin{align*}
+        s_1 \wedge s_2 = g(z) e_1 \wedge e_2.
+    \end{align*} Since $s_1, s_2$ fail to span the fiber at $p$, we have $g(0) = 0$, so we can write $g(z) = z^n h(z)$ for some $n \geq 1$ and unit $h(0) \neq 0$. After absorbing the unit $h(z)$ into $e_2$, we can assume $g(z) = z^n$. Then we have in local coordinates sections $s_1 = e_1$ and $s_2 = f(z) e_1 + z^n e_2$. The
+\end{solution}
+
+\begin{problem}[3]
+(a) Consider the vector bundle $V$ with sheaf of sections $\mathcal{O}(n_1) \oplus \cdots \oplus \mathcal{O}(n_k)$ over $\mathbb{P}^1$, with $n_1 \le \cdots \le n_k$. Show that the sequence of integers $n_i$ is uniquely determined by $V$.\\
+(b) In contrast with (a), show that $\mathcal{O}(1)\oplus\mathcal{O}(-1)$ and $\mathcal{O}\oplus\mathcal{O}$ are isomorphic as topological vector bundles.\\
+(c) Show that there is a holomorphic automorphism of $V$ which takes the vector $[1,0,\dots,0]$ in the fiber over $0$ to $[1,1,\dots,1]$.\\
+(d) Assuming the fact that every rank $k$ holomorphic vector bundle on $\mathbb{P}^1$ can be constructed from $\mathcal{O}^{\oplus k}$ by elementary transformations, show that it must be isomorphic to one of the form in (a).
+\end{problem}
+
+\begin{solution}
+\end{solution}
+
+\begin{problem}{4}
+Show that on a compact Riemann surface $R$ of genus $g$ and a line bundle $L$ of degree $> 2g-2$, we have $H^1(R; \mathcal{O}(L)) = 0$. Find a counterexample to this if $L$ is a vector bundle instead.\\
+\textit{Remark:} For noncompact Riemann surfaces, $H^1$ vanishes for any vector bundle.
+\end{problem}
+
+\begin{solution}
+\end{solution}
+
+\begin{problem}{5}
+Prove that every compact Riemann surface of genus $2$ is \textit{hyperelliptic}, meaning that it can be realized as a double (branched) cover of $\mathbb{P}^1$.\\
+\textit{Hint:} Use differentials.
+\end{problem}
+
+\begin{solution}
+\end{solution}
+
+
+\end{document}

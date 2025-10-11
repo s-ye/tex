@@ -20,7 +20,7 @@
 \rhead{\today}
 \cfoot{\thepage}
 
-\title{Title}
+\title{Complex Manifolds}
 
 \author{Songyu Ye}
 \date{\today}
@@ -28,10 +28,323 @@
 
 
 \begin{abstract}
-Abstract
+    These are notes for the course Complex Manifolds (Math 241) taught by Professor Constantin Teleman in the Fall of 2025 at UC Berkeley.
 \end{abstract}
 
 \tableofcontents
+\section{}
+The classical story begins with the Weierstrass $\wp$-function, defined by
+\[\wp(z;L) = \frac{1}{z^2} + \sum_{\omega \in L\setminus\{0\}} \left(\frac{1}{(z-\omega)^2} - \frac{1}{\omega^2}\right)\]
+which has the properties that it is an $L$-periodic meromorphic function on $\C$ with double poles at the lattice points, and that it satisfies the differential equation
+\[(\wp'(z))^2 = 4\wp(z)^3 - g_2\wp(z) - g_3 = 4(z - e_1)(z - e_2)(z - e_3)\]
+where $g_2,g_3$ are constants depending on $L$, given explicitly by \begin{align*}
+    g_2 & = 60\sum_{\omega \in L\setminus\{0\}} \frac{1}{\omega^4} \\
+    g_3 & = 140\sum_{\omega \in L\setminus\{0\}} \frac{1}{\omega^6}
+\end{align*} and $e_i$ are the values of $\wp$ at the half-lattice points $\omega_1/2, \omega_2/2, (\omega_1+\omega_2)/2$. The $e_i$ are distinct as we will show in Prop \ref{prop:wp-map}.
+The convergence is uniform on any compact subset $K \subset \C$, once the terms with poles in $K$ are set aside.
+
+Uniform convergence implies that the series can be differentiated term-by-term, so we get a formula for $\wp'(z)$ given by \begin{align*}
+    \wp'(z) & = -2\sum_{\omega \in L} \frac{1}{(z-\omega)^3}
+\end{align*} is an doubly periodic meromorphic function with triple poles at the lattice points. Moreover, one can see directly from the series expansion that $\wp$ is even and $\wp'$ is odd.
+
+The oddness implies that $\wp'(z)$ vanishes at the half-lattice points. Moreover, one can check that these are simple zeros of $\wp'$, and moreover the only zeros of $\wp'$ modulo $L$. Thus $\wp'$ has only poles at lattice points, each of order 3. In a fundamental parallelogram there is exactly one pole (mod $L$), of total multiplicity 3. This implies the following proposition.
+\begin{proposition}
+    $\wp(z)$ and $\wp'(z)$ define holomorphic maps $\C/L \to \P^1$ of degree $2$ and $3$ respectively.
+\end{proposition}
+We conclude that each of the half-lattice points must be a simple zero of $\wp'$ and moreover that these are all of the zeros, because any meromorphic function has divisor of degree 0.
+
+\begin{proposition}[Properties of the $\wp$-map]\label{prop:wp-map}
+\leavevmode
+\begin{enumerate}[(i)]
+    \item The numbers $e_1,e_2,e_3$ are all distinct.
+    \item For any $a \in \mathbb{C}$ with $a \neq e_1,e_2,e_3$, the equation $\wp(u)=a$ has two simple roots in a fundamental period parallelogram. For the three exceptional values $a=e_i$, it has a single double root.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\leavevmode
+\begin{enumerate}[(i)]
+    \setcounter{enumi}{1}
+    \item General theory of meromorphic functions on a torus shows that we either have two simple roots or one double root. Since a double root corresponds to a zero of the derivative $\wp'$, the claim follows. Note that the two simple roots always differ by a sign modulo $L$, by the parity of $\wp$.
+    
+    \setcounter{enumi}{0}
+    \item Suppose, for contradiction, that $e_1=e_2$. Then $\wp(u)=e_1$ would have a double root at $\tfrac{\omega_1}{2}$ and another double root at $\tfrac{\omega_2}{2}$. This would give too many roots (multiplicity $4$ in a fundamental parallelogram), contradicting the fact that $\wp$ is a double covering of $\mathbb{P}^1$. Hence the $e_i$ are distinct.
+\end{enumerate}
+\end{proof}
+\begin{remark}
+    Kac writes that this quadratic term which appears in the definition of $t_\alpha$ \ref{eq:ta} "explains" the appearance of theta functions in the theory of affine algebras. This is because when you compute the characters of highest-weight representations of affine Kac-Moody algebras, you sum over the affine Weyl group:
+\[\chi(\lambda) = \sum_{w \in W} \det(w)\, e^{w(\lambda+\rho) - \rho}\]
+and theta functions arise precisely when you sum exponentials of the form \begin{align*}
+    \Theta(\tau, z) = \sum_{\alpha \in \text{lattice}} \exp\!\big(-\tfrac{1}{2}|\alpha|^2 \tau + \langle \alpha, z\rangle\big).
+\end{align*}
+Continuing with the discussion of theta functions, we have the following theorem about genus $1$ Riemann surfaces.
+\end{remark}
+
+\begin{theorem}
+    Let $\theta_1,\dots,\theta_4$ be the four Jacobi theta functions. Then there is a map \begin{align*}
+        E/L \to \mathbb{CP}^3, \quad z \mapsto [\theta_1(z,\tau):\theta_2(z,\tau):\theta_3(z,\tau):\theta_4(z,\tau)]
+    \end{align*} which is a smooth embedding of the complex torus $E=\mathbb{C}/L$ into projective space. It is a degree $4$ map and its image is the intersection of two quadrics.
+\end{theorem}
+
+\begin{proposition}
+The function $\wp : \mathbb{C}/L \to \mathbb{P}^1$ is a degree $2$ holomorphic map with branch points over 
+$e_1, e_2, e_3, \infty$.
+\end{proposition}
+
+Those of us who solved Example Sheet 1, Question 2, have seen the same picture of branching 
+for the Riemann surface of the cubic equation
+\[
+    w^2 = (z - e_1)(z - e_2)(z - e_3);
+\]
+in Lecture 10, we shall establish a deep connection between the two.
+
+We will use the $\wp$-function to prove the Unique Presentation by principal parts.
+Uniqueness being clear on general grounds (cf.\ Lecture 4), we merely need to prove the existence statement;
+and this will emerge from the proof of the first theorem below. 
+Remarkably, this will also allow us to describe the field of meromorphic functions over $\mathbb{C}/L$.
+
+\begin{theorem}
+Every elliptic function is a rational function of $\wp$ and $\wp'$. 
+Specifically, every \emph{even} elliptic function is a rational function of $\wp$, 
+every \emph{odd} elliptic function is $\wp'$ times a rational function of $\wp$;
+and every elliptic function can be expressed uniquely as
+\[
+    f(u) = R_0(\wp(u)) + \wp'(u)\, R_1(\wp(u)),
+\]
+with $R_0, R_1$ rational functions, where the two terms are the even and odd parts of $f$.
+\end{theorem}
+
+\begin{proof}
+It suffices to prove the statement for even elliptic functions; division by $\wp'$ reduces odd ones to even ones. 
+Recall that 
+\[
+\wp : \C/L \longrightarrow \P^1
+\]
+is a degree $2$ holomorphic map. 
+This map realizes $\P^1$ as the quotient space of the torus $\C/L$ under the identification of $u$ with $-u$. Certainly the map is surjective because general theory of holomorphic maps between compact Riemann surfaces shows that any nonconstant holomorphic map is surjective. The map is injective because $\wp(u) = \wp(v)$ if and only if $u \equiv \pm v \mod L$. 
+
+A bijective holomorphic map between compact Riemann surfaces is automatically biholomorphic.
+Let $f:R \to S$ be such a map. The inverse function theorem guarantees that the inverse function $f^{-1}$ is smooth. Moreover, it guarantees that
+    \begin{align*}
+        (f^{-1})'(b) = \frac{1}{f'(f^{-1}(b))}
+    \end{align*}
+    Since $f$ is bijective, it has nonzero derivative everywhere because if it did not, it would look like $z\mapsto z^k$ for some $k\geq 2$ and thus it would fail to be locally bijective. Since it has nonzero derivative everywhere, $(f^{-1})'$ is defined everywhere and is in fact a complex number. Hence $f^{-1}$ is holomorphic. $\Delta$ and $\mathbb{C}$ are homeomorphic but they are not biholomorphic. 
+
+So indeed $\P^1$ is the quotient of $\C/L$ by the involution $u \mapsto -u$. Hence, any even \emph{continuous} map 
+\[
+f : \C/L \to \P^1
+\]
+has the form $f = R \circ \wp$, for some continuous map $R : \P^1 \to \P^1$. 
+Moreover, $\wp$ is a local analytic isomorphism away from the four branch points, which implies that $R$ is holomorphic there, if $R \circ \wp$ was so. So we know that $R$ is continuous everywhere and holomorphic away from the four branch points. 
+
+The following result shows that $R$ is holomorphic everywhere, hence a rational function. \begin{align*}
+    R(z) = P(z)/Q(z) \implies f(u) = P(\wp(u))/Q(\wp(u))
+\end{align*} Writing every elliptic function as a sum of an even and an odd one, and the odd ones as $\wp'$ times an even one, we get the desired result.
+\end{proof}
+
+\begin{proposition}
+Let $f : S \to R$ be a continuous map between Riemann surfaces, known to be holomorphic except at isolated points. 
+Then $f$ is holomorphic everywhere.
+\end{proposition}
+
+\begin{proof}
+Choosing coordinate neighbourhoods near the questionable points and their images, we are reduced to the statement that a continuous function on $\Delta$ which is holomorphic on $\Delta^\times$ is, in fact, holomorphic at $0$ as well. This follows from Riemann's theorem on removable singularities.
+\end{proof}
+
+A remarkable consequence is that the function $\wp'(u)^2$, being elliptic and even, 
+is expressible in terms of $\wp$. Explicitly, we have the following.
+
+\begin{theorem}[Differential equation for $\wp$]
+\[
+    \wp'(u)^2 = 4\wp(u)^3 - g_2 \wp(u) - g_3,
+\]
+where $g_2 = 60G_4$, $g_3 = 140G_6$, and
+\[
+    G_r = G_r(L) = \sum_{\omega \in L^*} \omega^{-r}.
+\]
+\end{theorem}
+
+\begin{proof}
+Recall the Laurent expansion of the Weierstrass function
+\[
+\wp(u)=u^{-2}+3G_4(L)u^{2}+5G_6(L)u^{4}+\cdots,
+\qquad
+\wp'(u)=-2u^{-3}+6G_4(L)u+20G_6(L)u^{3}+\cdots .
+\]
+
+For $|u|<|\omega|$ and any integer $k\ge1$,
+\[
+(u-\omega)^{-k}
+=\frac{(-1)^k}{\omega^{k}}
+\Bigg[\,1+k\frac{u}{\omega}+\frac{k(k+1)}{2!}\frac{u^{2}}{\omega^{2}}
++\frac{k(k+1)(k+2)}{3!}\frac{u^{3}}{\omega^{3}}+\cdots\Bigg].
+\]
+Expanding each term in the defining series for $\wp$ with the above, and (for small $u$) interchanging sums, the odd powers in $u$ cancel, giving
+\[
+\wp(u)=u^{-2}+\sum_{m=1}^{\infty}\binom{-2}{2m}\,G_{2m+2}(L)\,u^{2m}
+= u^{-2}+\sum_{m=1}^{\infty}(2m+1)\,G_{2m+2}(L)\,u^{2m}.
+\]
+Similarly,
+\[
+\wp'(u)=-2u^{-3}
++\sum_{m=0}^{\infty}\big(-2\big)\binom{-3}{\,2m+1\,}\,G_{2m+4}(L)\,u^{2m+1}
+\]
+
+Using these expansions, the first few terms of $(\wp'(u))^{2}$ and
+$4\wp(u)^{3}-g_{2}\wp(u)-g_{3}$ agree at $u=0$; hence their difference is an elliptic function
+with no poles that vanishes at $u=0$, so it is identically zero. 
+\end{proof}
+
+The two theorems immediately lead to a description of the field of meromorphic functions on $\mathbb{C}/L$.
+
+\begin{corollary}
+The field of meromorphic functions on $\mathbb{C}/L$ is isomorphic to
+\[
+    \mathbb{C}(z)[w] \big/ (w^2 - 4z^3 + g_2 z + g_3),
+\]
+the degree $2$ extension of the field of rational functions $\mathbb{C}(z)$ obtained by adjoining the solutions 
+$w$ to the equation 
+\[
+    w^2 = 4z^3 - g_2 z - g_3.
+\]
+\end{corollary}
+
+\begin{theorem}
+Let $z_1, \dots, z_n$ and $p_1, \dots, p_m$ denote the zeroes and poles of a non-constant elliptic function $f$ in the period parallelogram, repeated according to multiplicity. Then:
+\begin{enumerate}[(i)]
+    \item $m = n$,
+    \item $\displaystyle \sum_{k=1}^m \operatorname{Res}_{p_k}(f) = 0,$
+    \item $\displaystyle \sum_{k=1}^n z_k = \sum_{k=1}^m p_k \pmod{L}.$
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+Zeroes and poles that are on the boundary should be counted only on a single edge, or at a single vertex. 
+In fact, we can easily avoid zeroes and poles on the boundary by shifting our parallelogram by a small complex number $\lambda$; 
+the relations (i)--(iii) are unchanged.
+\end{remark}
+
+\begin{definition}
+    Fix a local coordinate $z$ at a point $p$. The \emph{principal part} of a meromorphic function $f$ at $p$ is the part of its Laurent expansion in negative powers of $(z-p)$:
+\[\sum_{n=1}^N a_{-n}(z-p)^{-n}\]
+\end{definition}
+
+
+\begin{theorem}[Unique Presentation by principal parts]
+An elliptic function is specified uniquely, up to an additive constant, 
+by prescribing its principal parts at all poles in the period parallelogram. 
+The prescription is subject only to condition~(ii).
+\end{theorem}
+
+\begin{proof}
+This is more computational, but also more concrete. 
+We first show that we can realize any even assignment of principal parts on $\C/L$ using a suitable rational function $R(\wp(u))$. 
+Such an assignment involves finitely many points $\lambda \in \C/L$ and principal parts
+\[
+    \sum_{k=1}^{n_\lambda} a^{(\lambda)}_k (u - \lambda)^{-k},
+\]
+with the properties that:
+\begin{itemize}
+    \item if $2\lambda \notin L$, then $(-\lambda)$ also appears, with assignment
+    \[
+        \sum_{k=1}^{n_\lambda} (-1)^k a^{(\lambda)}_k (u + \lambda)^{-k},
+    \]
+    i.e.\ $a_k^{(-\lambda)} = (-1)^k a_k^{(\lambda)}$;
+    \item if $2\lambda \in L$, then only even powers of $(u - \lambda)^{-1}$ are present.
+\end{itemize}
+
+This is because the local coordinates at $\lambda$ and $-\lambda$ are opposite signs. Write the principal part at $\lambda$ (using $v=u-\lambda$): $f(u)=\sum_{k=1}^{n_\lambda} a_k^{(\lambda)}\,v^{-k}+\cdots$. Near $-\lambda$ use $w=u+\lambda$. Evenness gives \[f(-\lambda+w)=f\bigl(-(-\lambda+w)\bigr)=f(\lambda-w) =\sum_{k\ge1} a_k^{(\lambda)}(-w)^{-k} =\sum_{k\ge1} (-1)^k a_k^{(\lambda)}\,w^{-k}\]
+If $2\lambda\in L$ (so $-\lambda\equiv\lambda$ on $\C/L$), the same calculation forces $\sum_{k\ge1} a_k^{(\lambda)} v^{-k}=\sum_{k\ge1} a_k^{(\lambda)}(-v)^{-k}$, hence $a_k^{(\lambda)}=0$ for all odd $k$: only even powers $(u-\lambda)^{-2j}$ can appear.
+
+Now if $2\lambda \notin L$, $(\wp(u) - \wp(\lambda))^{-1}$ has a simple pole at $u=\lambda$ and we can create any principal part there as a sum of $(\wp(u) - \wp(\lambda))^{-k}$. 
+Evenness of $\wp$ takes care of the symmetry. 
+If $2\lambda \in L$, then we can use either powers of $\wp$, if $\lambda \in L$, or powers of $(\wp(u) - e_{1,2,3})^{-1}$, which have double poles with no residue.
+
+Now, onto the odd functions. 
+Odd assignments of principal parts are of the form
+\[
+    \sum_{k=1}^{n_\lambda} a^{(\lambda)}_k (u - \lambda)^{-k},
+\]
+with a matching term
+\[
+    -\sum_{k=1}^{n_\lambda} (-1)^k a^{(\lambda)}_k (u + \lambda)^{-k}
+\]
+at $-\lambda$ (i.e.\ $a^{(-\lambda)}_k = (-1)^{k+1} a^{(\lambda)}_k$), 
+or else with vanishing $a^{(\lambda)}_k$ (for even $k$) if $2\lambda \in L$.
+
+The principal parts
+\[
+    \left( \frac{P_\lambda}{\wp'(u)} - \frac{P_{-\lambda}}{\wp'(u)} \right)
+\]
+can be realized by a sum of powers of $(\wp(u) - \wp(\lambda))^{-1}$. 
+If $2\lambda \in L$ but $\lambda \notin L$ (not $0$), then $P_\lambda^{(u)}/\wp'(u)$ is also a well-defined even principal part, expressible via $(\wp(u) - \wp(\lambda))^{-1}$. 
+The same goes for $P_0^{(u)}/\wp'(u)$. 
+So there exists a function of the form $R_1(\wp(u))$ whose principal parts agree with the $P_\lambda(u)/\wp'(u)$ everywhere. 
+
+The principal parts of $R_1(\wp(u))\,\wp'(u)$ agree with the $P_\lambda$, except possibly at $\lambda=0$, where the cubic pole of $\wp'$ could introduce unwanted or incorrect $u^{-3}$ and $u^{-1}$ terms. 
+We can adjust the $u^{-3}$ term by shifting $R_1$ by a constant. 
+We have no control over the $u^{-1}$ term, but that is determined from the condition $\sum \operatorname{Res} = 0$, 
+which indeed must be met if a function with the prescribed principal parts is to exist.
+\end{proof}
+
+\begin{theorem}[Unique Presentation by zeroes and poles]
+An elliptic function is specified uniquely, up to a multiplicative constant, 
+by prescribing the location of its zeroes and poles in the period parallelogram, with multiplicities. 
+The prescription is subject to conditions~(i) and~(iii).
+\end{theorem}
+
+
+\begin{lemma}
+$g_2^3 \neq 27g_3^2$ and $e_1, e_2, e_3$ are the roots of the equation
+\[
+4z^3 - g_2 z - g_3 = 0.
+\]
+\end{lemma}
+
+\begin{proof}
+$\wp'$ vanishes at the half-lattice points, while $\wp$ takes the values $e_1,e_2,e_3$ there. The roots are distinct so the discriminant of the cubic is nonzero, i.e.\ $g_2^3 \neq 27g_3^2$.
+\end{proof}
+
+\begin{theorem}[Geometric interpretation]
+The map $\C/L \setminus \{0\} \to \C^2$ given by
+\[
+u \longmapsto (z(u), w(u)) = (\wp(u), \wp'(u))
+\]
+gives an analytic isomorphism between the Riemann surface $\C/L \setminus \{0\}$ and the (concrete) Riemann surface $R$ of the function
+\[
+w^2 = 4z^3 - g_2 z - g_3
+\]
+in $\C^2$.
+\end{theorem}
+
+\begin{proof}
+We have the commutative diagram:
+\[
+\begin{tikzcd}
+\C/L \setminus \{0\} \arrow[r, "{(\wp,\wp')}"] \arrow[dr, "{\wp}"'] & R \arrow[d, "{\pi}"] \\
+ & \C
+\end{tikzcd}
+\]
+and we know that:
+\begin{itemize}
+    \item $\pi$ is proper and $2$-to-$1$ except at the branch points $e_1,e_2,e_3$, which are the roots of $4z^3 - g_2z - g_3$.
+    \item $\wp$ is proper and $2$-to-$1$ except at the half-period points $\omega_1/2,\omega_2/2,\omega_1/2+\omega_2/2$, which map to the roots $e_1,e_2,e_3$.
+    \item $\wp(u)=\wp(-u)$ and $\wp'(u)=-\wp'(-u)$: this means that, unless $u$ is a half-period, $\wp'$ takes both values $\pm w = \pm \wp'(u)$ at the two points $\pm u$ mapping to the same $z=\wp(u)$ of $\C$.
+\end{itemize}
+
+Together, these three properties show that the map we just constructed is bijective. 
+Note further that, at no point $u \in \C/L \setminus \{0\}$, is $\wp'(u)=\wp''(u)=0$, because $\wp'$ has simple zeros only (there are three of them); 
+this means that for every $u \in \C/L \setminus \{0\}$, either the map $\wp$ or the map $\wp'$ gives an analytic isomorphism of a neighbourhood of $u$ with a small disc in the $z$-plane or in the $w$-plane.
+
+Since the Riemann surface structure on the (concrete, non-singular) Riemann surface $R$ is defined by the projections to the $z$- and $w$-planes, appropriately, we conclude that $(\wp, \wp')$ gives an analytic isomorphism
+\[
+\C/L \;\longrightarrow\; R.
+\]
+\end{proof}
+
+
+
+
 
 \section{Introduction}
 \begin{theorem}
@@ -52,7 +365,6 @@ The correspondence in one direction is:
 \begin{remark}
     For curves, smooth and proper implies projective. This is false in higher dimensions.
 \end{remark}
-
 Common to both is the construction of nonconstant meromorphic functions. It suffices to find \begin{itemize}
     \item A map $f:R \to \P^1$ which realizes $R$ as a branched cover of $\P^1$ (the transcendental part of the function field) \begin{align*}
         f^*: \mathbb{C}(z) &\hookrightarrow \mathbb{C}(R) \\
@@ -74,5 +386,128 @@ We state Riemann's theorem which allows us to pass from the analytic setting to 
 
 The method of proof involves constructing holomorphic differentials with poles at $p$, and in fact one can get them to any order of pole $\geq 2$. Then if these differentials are exact, their integrals give a single valued function with pole only at $p$.
 
+\section{}
+If $f$ is a nonconstant meromorphic function on a compact Riemann surface $R$, then we defined the divisor of $f$ to be \[(f) = \sum_{p \in R} \operatorname{ord}_p(f) p\] where $\operatorname{ord}_p(f)$ is the order of vanishing of $f$ at $p$ (negative if $f$ has a pole at $p$). 
 
+We defined the following sets:
+\begin{align*}
+    \Div(R) & = \{\text{formal finite sums } \sum n_p p, n_p \in \mathbb{Z}\} \\
+    \PDiv(R) & = \{\text{divisors of meromorphic functions}\} \\
+    \Cl(R) & = \Div(R)/\PDiv(R)
+\end{align*} and there is a map \begin{align*}
+    \Div(R) & \to \Pic(R) \\
+    D & \mapsto \mathcal{O}(D)
+\end{align*} where \begin{align*}
+    \mathcal{O}(D)(U) & = \{f \text{ meromorphic on } U : (f)|_U + D|_U \geq 0\}
+\end{align*} is an invertible sheaf. More precisely, from $D$ one gets an invertible sheaf $\mathcal{O}(D)$ along with a meromorphic section $s_D$ such that $(s_D)=D$. 
+
+One can think of $s_D$ as the constant function $1$. In particular, recall that $\mathcal{O}(D)$ is locally isomorphic to $\mathcal{O}_R$ by picking local defining equations $\eta_\alpha$ for $D$ on an open cover $U_\alpha$. Recall that on a smooth variety there is an equivalence between Cartier divisors and Weil divisors.
+Then the isomorphism $\mathcal{O}(D)|_{U_\alpha} \to \mathcal{O}_R|_{U_\alpha}$ is given by multiplication by $\eta_\alpha$. Then the canonical meromorphic section $s_D$, when restricted to $U_\alpha$, is given by $\eta_\alpha$ which has divisor $D|_{U_\alpha}$.
+
+Therefore, there is an isomorphism of abelian groups \begin{align*}
+    \Cl(R) & \to \text{subgroup of } \Pic(R) \text{ consisting of invertible sheaves admitting meromorphic sections} \\
+    D & \mapsto (\mathcal{O}(D), 1)
+\end{align*} and this is in fact an isomorphism of groups because of the following theorem.
+
+\begin{theorem}
+    Every $\cL$ on a Riemann surface has a nonzero meromorphic section. More generally, every vector bundle admits a global meromorphic frame.
+\end{theorem}
+\begin{remark}
+    The compact case follows from the Kodaira vanishing theorem. In the noncompact case, all holomorphicq vector bundles on noncompact $R$ are trivializable and therefore admit a global holomorphic frame.
+\end{remark}
+
+Recall that the multiplicative Cousin problem is the problem of finding a global meromorphic function with prescribed zeroes and poles. The additive Cousin problem is the problem of finding a global meromorphic function with prescribed principal parts. The above theorem shows that both problems are always solvable on a noncompact Riemann surface.
+\begin{theorem}
+    On a noncompact Riemann surface, the multiplicative and additive Cousin problems are always solvable.
+
+    All holomorphic vector bundles on a noncompact Riemann surface are trivializable.
+\end{theorem}
+
+\begin{definition}
+    [Degree of a line/vector bundle] The degree of a line bundle $\cL$ on a compact Riemann surface $R$ is defined to be the degree of any meromorphic section of $\cL$. This is well defined because if $s,s'$ are two meromorphic sections of $\cL$, then $s/s'$ is a meromorphic function on $R$ and has degree $0$.
+
+    The degree of a vector bundle $\cE$ is defined to be the degree of its determinant line bundle $\det \cE = \wedge^{\operatorname{rank} \cE} \cE$.
+\end{definition}
+
+\begin{fact}
+On a compact Riemann surface, the degree and dimension of a vector bundle completely determine the topology of the bundle.
+\end{fact}
+
+\begin{proposition}
+    Every holomorphic line bundle on $\P^1$ is isomorphic to $\mathcal{O}_{\P^1}(n)$ for some integer $n$.
+\end{proposition}
+
+\begin{proof}
+    We can solve the multiplicative Cousin problem on $\P^1$ for degree zero divisors.
+\end{proof}
+
+\begin{proposition}
+    Let $E = \C/L$ be an elliptic curve. Then \begin{align*}
+        0 \to E & \to \Pic(E) \to \Z \to 0 
+    \end{align*}
+    is a short exact sequence of abelian groups. It splits, so $\Pic(E) \cong E \times \Z$.
+\end{proposition}
+
+\begin{example}
+    [Doubled lattice] Recall that every ellptic curve $E = \C/L$ has a degree four cover by $\tilde E = \C/2L$. We defined four $\theta$ functions on $E$, let $\cL_i$ be the corresponding line bundles. Then $\pi^*\cL_i$ are all isomorphic on $\tilde E$ because the beriodicity conditions all become the same after doubling the lattice. Moreover recall that there is a map \begin{align*}
+        E \to \P^3, \quad z \mapsto [\theta_1(z,\tau):\theta_2(z,\tau):\theta_3(z,\tau):\theta_4(z,\tau)]
+    \end{align*} which is in fact a projective embedding by a line bundle.
+\end{example}
+Recall that in general if one has $\cL$ a line bundle on $X$, then we can consider the evaluation map $X \to \P(H^0(X,\cL)^*)$ given by $x \mapsto \{s \in H^0(X,\cL) : s(x)=0\}$ when $\cL$ has enough sections. For example, if $\cL$ has negative degree than it has no sections. If $\cL$ has degree $0$ then it has a section if and only if it is trivial. 
+
+The analog of $\otimes \cO(D)$ for vector bundles is called an elementary transformation. Let $V$ be a vector bundle on $R$ and choose a subspace $S\subset V_p$. 
+
+Define $\operatorname{elm}(V,p,S)$ to be the sheaf of sections of $V$ whose value at $p$ lies in $S$. This is a vector bundle whose degree is $\deg V - \codim S$.
+
+\begin{proposition}
+    Every vector bundle is obtained from a trivial vector bundle by a finite sequence of elementary transformations. 
+\end{proposition}
+
+\begin{exercise}
+
+Let $V$ be a rank~2 (for simplicity) vector bundle over a Riemann surface~$R$. 
+Assume that $V$ has two meromorphic sections $s_1, s_2$ which, at some point, 
+are holomorphic and span the fiber.
+
+\begin{enumerate}[(a)]
+    \item Show that this will be the case everywhere except at a set of isolated points.
+    \item At an exceptional point, show that we can modify~$V$ by a finite sequence 
+    of elementary transformations so that $s_1$ and $s_2$ form a holomorphic frame 
+    of the new bundle.
+\end{enumerate}
+
+\textbf{Suggestion.} First make the sections holomorphic, then find some numerical measure 
+for their failure to give a basis. Then find a way to reduce that number.
+\end{exercise}
+
+\begin{solution}
+Let $V$ be rank 2 over a Riemann surface $R$. Let $s_1,s_2$ be meromorphic sections that at some point are holomorphic and span $V$ there.
+
+First clear poles once and for all. Pick an effective divisor $D$ dominating all poles of $s_1,s_2$. Then
+$\tilde s_i := s_i\otimes 1 \in H^0\big(R,\,V(D)\big)$
+are holomorphic sections of $V(D):=V\otimes \mathcal{O}(D)$, and agree with the original $s_i$ on $R\setminus \mathrm{supp}(D)$.
+
+Write $V'\coloneqq V(D)$ and still denote the sections by $s_1,s_2$. Consider the wedge
+$\sigma \;=\; s_1\wedge s_2 \;\in\; H^0\big(R,\,\det V'\big)$.
+At your original point it's nonzero, so $\sigma\not\equiv 0$. On a Riemann surface any nonzero holomorphic section of a line bundle has discrete zero set. Hence the locus where $s_1,s_2$ fail to span (i.e. $\sigma=0$) is a finite/locally finite set of isolated points. Everywhere else they are a holomorphic frame.
+\end{solution}
+
+\begin{remark}
+The argument generalizes to any dimension. If $R$ is compact, it follows that we can trivialize~$V$ by a finite number of elementary transformations. If $R$ is non-compact, one can show that every vector bundle is in fact trivial.
+\end{remark}
+
+
+
+
+\begin{theorem}
+    Every vector bundle on $\P^1$ is isomorphic to a direct sum of line bundles.
+\begin{align*}
+    V & \cong \bigoplus_{i=1}^{\operatorname{rank} V} \mathcal{O}_{\P^1}(n_i)
+\end{align*}
+where $n_i \geq n_{i+1}$. Moreover, the $n_i$ are uniquely determined by $V$.
+\end{theorem}
+The degree of $V$ is $\sum n_i$. 
+\begin{example}
+    On $\P^1$, we have homeomorphic but not biholomorphic vector bundles $\cO(1) \oplus \cO(-1)$ and $\cO \oplus \cO$. They both have degreee zero and the same number of sections, but the sections sit inside the bundles differently.
+\end{example}
 \end{document}
