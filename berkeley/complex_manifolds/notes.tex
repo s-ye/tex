@@ -32,7 +32,7 @@
 \end{abstract}
 
 \tableofcontents
-\section{}
+\section{Elliptic functions}
 The classical story begins with the Weierstrass $\wp$-function, defined by
 \[\wp(z;L) = \frac{1}{z^2} + \sum_{\omega \in L\setminus\{0\}} \left(\frac{1}{(z-\omega)^2} - \frac{1}{\omega^2}\right)\]
 which has the properties that it is an $L$-periodic meromorphic function on $\C$ with double poles at the lattice points, and that it satisfies the differential equation
@@ -105,8 +105,8 @@ Remarkably, this will also allow us to describe the field of meromorphic functio
 
 \begin{theorem}
 Every elliptic function is a rational function of $\wp$ and $\wp'$. 
-Specifically, every \emph{even} elliptic function is a rational function of $\wp$, 
-every \emph{odd} elliptic function is $\wp'$ times a rational function of $\wp$;
+Specifically, every \textbf{even} elliptic function is a rational function of $\wp$, 
+every \textbf{odd} elliptic function is $\wp'$ times a rational function of $\wp$;
 and every elliptic function can be expressed uniquely as
 \[
     f(u) = R_0(\wp(u)) + \wp'(u)\, R_1(\wp(u)),
@@ -130,7 +130,7 @@ Let $f:R \to S$ be such a map. The inverse function theorem guarantees that the 
     \end{align*}
     Since $f$ is bijective, it has nonzero derivative everywhere because if it did not, it would look like $z\mapsto z^k$ for some $k\geq 2$ and thus it would fail to be locally bijective. Since it has nonzero derivative everywhere, $(f^{-1})'$ is defined everywhere and is in fact a complex number. Hence $f^{-1}$ is holomorphic. $\Delta$ and $\mathbb{C}$ are homeomorphic but they are not biholomorphic. 
 
-So indeed $\P^1$ is the quotient of $\C/L$ by the involution $u \mapsto -u$. Hence, any even \emph{continuous} map 
+So indeed $\P^1$ is the quotient of $\C/L$ by the involution $u \mapsto -u$. Hence, any even \textbf{continuous} map 
 \[
 f : \C/L \to \P^1
 \]
@@ -225,7 +225,7 @@ the relations (i)--(iii) are unchanged.
 \end{remark}
 
 \begin{definition}
-    Fix a local coordinate $z$ at a point $p$. The \emph{principal part} of a meromorphic function $f$ at $p$ is the part of its Laurent expansion in negative powers of $(z-p)$:
+    Fix a local coordinate $z$ at a point $p$. The \textbf{principal part} of a meromorphic function $f$ at $p$ is the part of its Laurent expansion in negative powers of $(z-p)$:
 \[\sum_{n=1}^N a_{-n}(z-p)^{-n}\]
 \end{definition}
 
@@ -346,7 +346,7 @@ Since the Riemann surface structure on the (concrete, non-singular) Riemann surf
 
 
 
-\section{Introduction}
+\section{Riemann surfaces and field extensions}
 \begin{theorem}
 The following categories are equivalent:
 \begin{itemize}
@@ -378,15 +378,264 @@ P(f,g) = 0 \quad \text{on } S.
 \]
 Thus, the image of $S$ under $(f,g)$ is contained in the algebraic curve $P(x,y)=0$. Moreover, because $g$ separates the sheets, $(f,g)$ is generically injective, so the map is birational. Hence $S$ and the curve $P(x,y)=0$ have the same function field. So you've now explicitly realized $\mathbb{C}(S) = \mathbb{C}(f,g)$.
 
-\section{}
 We state Riemann's theorem which allows us to pass from the analytic setting to the algebraic setting.
 \begin{theorem}
     Let $R$ be a compact Riemann surface and $p\in R$. There exists a meromorphic function $f$ with poles of arbitrary order $n$ at $p$ and holomorphic elsewhere, provided that $n$ is sufficiently large.
 \end{theorem}
 
 The method of proof involves constructing holomorphic differentials with poles at $p$, and in fact one can get them to any order of pole $\geq 2$. Then if these differentials are exact, their integrals give a single valued function with pole only at $p$.
+\section{Galois theory of compact Riemann surfaces}
 
-\section{}
+The fundamental result of the theory, conjectured by Riemann circa 1850, and proved over the next few decades, is:
+
+\begin{theorem}
+Every compact Riemann surface is algebraic.
+\end{theorem}
+
+We have an idea what this means, because we have considered Riemann surfaces defined by polynomial equations
+\[
+P(z,w) = w^n + a_{n-1}(z)w^{n-1} + \cdots + a_1(z)w + a_0(z) = 0,
+\]
+and we have seen how to compactify these; and indeed, the result does imply that every compact Riemann surface arises in such manner.  
+But we would like now to do more than just explain the meaning of the theorem, and survey the basic algebraic tools available for the study of compact Riemann surfaces.
+
+The truly hard part of the theorem is to get started.  Nothing in the definition of an abstract Riemann surface implies in any obvious way the existence of the basic algebraic objects of study, the meromorphic functions.
+
+\begin{theorem}
+Every compact Riemann surface carries a non-constant meromorphic function.
+\end{theorem}
+
+Equivalently, every compact Riemann surface can be made into a branched cover of $\mathbb{P}^1$.
+
+\medskip
+\noindent
+\textbf{Remarks.}  
+This is the difficult part of the theorem; once we have a branched cover of $\mathbb{P}^1$, we can start studying it by algebraic methods.  
+The proof involves serious analysis, specifically finding solutions of the Laplace equation in various surface domains, with prescribed singularities (“Green’s functions”).
+
+\medskip
+Contained in Riemann’s theorem, there is a second result which we shall use without proof.
+
+\begin{proposition}
+Let $\pi : R \to \mathbb{P}^1$ be a holomorphic map of degree $n > 0$.  
+There exists, then, an additional meromorphic function $f$ on $R$ which \textbf{separates the sheets of $R$ over $\mathbb{P}^1$}, in the following sense: there exists a point $z_0 \in \mathbb{P}^1$ such that $f$ takes $n$ distinct values at the points of $R$ over $z_0$.
+\end{proposition}
+
+\begin{exercise}
+Show that such an $f$ must then take $n$ distinct values over all but finitely many points of $\mathbb{P}^1$.  
+(Consider a limit point of a sequence $z_k$ over which $f$ takes fewer values and use the fact that the zeros of a non-constant analytic function are isolated.  
+The case when the limit point is a branch point will require extra care.)
+\end{exercise}
+
+Assuming now that the Riemann surface $R$ is connected, let $\mathbb{C}(R)$ be its field of meromorphic functions.  
+A non-constant meromorphic function $z$ defines an inclusion of fields
+\[
+\mathbb{C}(z) \subset \mathbb{C}(R).
+\]
+
+In algebra, this is commonly called a \textbf{field extension} rather than a “field inclusion.”  
+The degree of the field extension, denoted $[\mathbb{C}(R):\mathbb{C}(z)]$, is the dimension of $\mathbb{C}(R)$ as a vector space over $\mathbb{C}(z)$.
+
+
+\begin{theorem}
+    Let $\pi : R \to \mathbb{P}^1$ denote the holomorphic map associated to the meromorphic function $z$.
+\begin{enumerate}
+    \item $[\mathbb{C}(R):\mathbb{C}(z)] = \deg \pi \;(= n)$.
+    \item Any $f \in \mathbb{C}(R)$ satisfies a polynomial equation of degree $\le n$ with coefficients in $\mathbb{C}(z)$:
+    \[
+    f^n + a_{n-1}(z)f^{n-1} + \cdots + a_0(z) = 0.
+    \]
+    \item Let $f$ be a meromorphic function on $R$ which separates the sheets of $R$ over $\mathbb{P}^1$.  
+    Then $\mathbb{C}(R)$ is generated by $f$ over $\mathbb{C}(z)$:
+    \[
+    \mathbb{C}(R) = \mathbb{C}(z)[f].
+    \]
+    \item Let now $f^n + a_{n-1}(z)f^{n-1} + \cdots + a_0(z) = 0$ be the equation satisfied by the $f$ in (iii).  
+    Then $R$ is isomorphic to the non-singular, compactified Riemann surface of the equation
+    \[
+    w^n + a_{n-1}(z)w^{n-1} + \cdots + a_1(z)w + a_0(z) = 0.
+    \]
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+There is a bijection between isomorphism classes of field extensions of $\mathbb{C}(z)$ on one hand, and isomorphism classes of compact Riemann surfaces, together with a degree $n$ map to $\mathbb{P}^1$.
+\end{theorem}
+
+Forgetting the map to $\mathbb{P}^1$, we have:
+
+\begin{theorem}
+There is a bijection between isomorphism classes of fields which can be realized as finite extensions of $\mathbb{C}(z)$, on one hand, and isomorphism classes of compact Riemann surfaces, on the other.
+\end{theorem}
+
+The theorem follows essentially from part~(iv) of the previous result; the only missing ingredient, which rounds up the correspondence between Riemann surfaces and their fields of functions, is:
+
+\begin{theorem}
+Homomorphisms from $\mathbb{C}(S)$ to $\mathbb{C}(R)$ are in bijection with holomorphic maps from $R$ to $S$.
+\end{theorem}
+
+\noindent
+Recall that a finite field extension $k \subset K$ is called \textbf{Galois}, with group $\Gamma$, if $\Gamma$ acts by automorphisms of $K$ and $k$ is precisely the set of elements fixed by $\Gamma$.
+
+\begin{proposition}
+The automorphisms of a Riemann surface $R$ are in bijection with those of its field of meromorphic functions $\mathbb{C}(R)$.
+\end{proposition}
+
+Let now $\pi : R \to S$ be holomorphic; it gives a field extension $\mathbb{C}(S) \subset \mathbb{C}(R)$.
+
+\begin{proposition}
+The automorphisms of $R$ that commute with $\pi$ are precisely the automorphisms of $\mathbb{C}(R)$ which fix $\mathbb{C}(S)$.
+\end{proposition}
+
+\begin{corollary}
+A map $\pi : R \to S$ defines a Galois extension on the fields of meromorphic functions if and only if there exists a group $\Gamma$ of automorphisms of $R$, commuting with $\pi$, and acting \textbf{simply transitively} on the fibres $\pi^{-1}(s)$, for a general $s \in S$.
+\end{corollary}
+
+\begin{proof}
+Note first that any automorphism of $R$, commuting with $\pi$, which fixes a point of valency $1$ must be the identity.  
+Indeed, by continuity, it will fix an open neighbourhood of the point in question, and the unique continuation property of analytic maps shows it to be the identity.  
+Now, if $\mathbb{C}(R)$ is Galois over $\mathbb{C}(S)$, the order of the group of automorphisms is $[\mathbb{C}(R):\mathbb{C}(S)]$.  
+So the automorphism group must act simply transitively on the fibres which do not contain branch points.  
+Conversely, an automorphism group acting simply transitively on even one fibre with no branch points must have order $\deg \pi$.  
+But since that is $[\mathbb{C}(R):\mathbb{C}(S)]$, it follows that the extension is Galois.
+\end{proof}
+
+\begin{remark}
+Such a map is called a \textbf{Galois cover with group $\Gamma$}.
+\end{remark}
+
+\begin{remark}
+Note that $R/\Gamma = S$, set theoretically.  
+Topology tells us that the $\Gamma$-invariant continuous functions on $R$ are precisely the continuous functions on $S$.  
+We have just shown the same for the meromorphic functions.
+\end{remark}
+
+\begin{example}[Galois covers]
+    \leavevmode
+\begin{enumerate}
+    \item[(i)] $\mathbb{P}^1 \longrightarrow \mathbb{P}^1$, with $w \longmapsto z = w^3$.\\[4pt]
+    The automorphisms are $z \mapsto \zeta z$, where $\zeta$ is any cube root of $1$.
+
+    \item[(ii)] $\mathbb{C}/L \longrightarrow \mathbb{P}^1$, with $u \longmapsto \wp(u)$.\\[4pt]
+    The non-trivial automorphism is $u \longmapsto -u$.\\[4pt]
+    Rewriting it, the surface $w^2 = 4z^3 - g_2 z - g_3$ is a Galois cover of the $z$-plane, with Galois group $\mathbb{Z}/2$ and automorphism $w \mapsto -w$.
+\end{enumerate}
+\end{example}
+
+\begin{definition}
+A differential $1$-form on a Riemann surface is called \textbf{holomorphic} if, in any local analytic coordinate, it has an expression
+\[
+\phi(z)\,dz = \phi(z)(dx + i\,dy),
+\]
+with $\phi$ holomorphic.
+\end{definition}
+
+For those of you familiar with the notion of differential forms on a surface, there is a hands-on (but dirty) definition:
+
+\begin{definition}
+A \textbf{holomorphic differential} on a Riemann surface $R$ is a quantity which takes the form $\phi(z)\,dz$ in a local coordinate $z$, and on the overlap region with another coordinate $u$, where it has the form $\psi(u)\,du$, it satisfies the gluing law
+\[
+\phi(z) = \psi(u(z))\,u'(z).
+\]
+(Formally, $du = u'(z)\,dz$.)
+\end{definition}
+
+\begin{proposition}
+If $f$ is a holomorphic function on $R$, then $df$ represents a holomorphic differential.  
+In a local coordinate $z$,
+\[
+df = f'(z)\,dz.
+\]
+\end{proposition}
+
+\begin{remark}
+We are trying to talk about derivatives of functions on a Riemann surface.  
+However, the derivative of a function does not transform like a function under a change of coordinates, because of the chain rule
+\[
+\frac{df}{dz} = \frac{df}{du} \frac{du}{dz}.
+\]
+Differentials are quantities which transform like derivatives of functions. They are not functions because the "value" of a differential at a point is not well-defined (it depends on the choice of local coordinate). However, its value evaluated on a tangent vector is well-defined, precisely because of the chain rule.
+\end{remark}
+
+\begin{proposition}
+If $\phi$ is a holomorphic differential and $f$ is a holomorphic function, then $f \cdot \phi$ is a holomorphic differential.
+\end{proposition}
+
+If $\phi$ and $\psi$ are two holomorphic differentials, then $\phi/\psi$ is a meromorphic function.  
+If $\phi$ is holomorphic if and only if the zeroes of $\psi$ are “dominated” by the zeroes of $\phi$, that is, in local coordinate $z$ when
+\[
+\phi = \phi(z)\,dz, \qquad \psi = \psi(z)\,dz,
+\]
+the order of the zeroes of $\psi$ is $\le$ the order of the zeroes of $\phi$.
+
+\begin{remark}
+There is an obvious notion of a meromorphic differential, and there are analogous properties to the above.
+\end{remark}
+
+
+\begin{example}[Holomorphic differentials]
+    \leavevmode
+\begin{enumerate}
+\item[(i)] \textbf{Holomorphic differentials on $\mathbb{P}^1$ are zero.}
+
+Indeed, over the usual chart $\mathbb{C}$, the differential must take the form $f(z)\,dz$ with $f$ holomorphic.  
+Near $\infty$, with $w = 1/z$ as a coordinate, the differential becomes
+\[
+f(1/w)\,d(1/w) = -f(1/w)\,dw/w^2.
+\]
+So we need $f(1/w)/w^2$ to be holomorphic at $w = 0$, so $f$ should extend holomorphically at $\infty$ and have a double zero there.  
+But then $f$ must be zero.
+
+\item[(ii)] \textbf{Holomorphic differentials on the Riemann surface $w^4 + z^4 = 1$.}
+
+The branch points of the projection to the $z$-plane are at $z = \pm1, \pm i$; $w = 0$ at all of them.  
+The map has degree $4$ and branching index $3$ at each of the points.  
+At $\infty$, we have four separate sheets defined by $w = \sqrt[4]{1 - z^4}$ which has four convergent expansions in $1/z$, as soon as $|z| > 1$.  
+So Riemann–Hurwitz gives
+\[
+g(R) - 1 = -4 + \tfrac{1}{2} \cdot 12 = 2, \qquad g(R) = 3.
+\]
+Thus $R$ is a genus $3$ surface with $4$ points at $\infty$.
+
+Now $dz$ defines a meromorphic differential on $R^{\mathrm{cpt}}$, because $z$ is a meromorphic function there.  
+At $\infty$, on $R^{\mathrm{cpt}}$, $u = z^{-1}$ is a local holomorphic coordinate, and $dz = -u^{-2}du$ has a double pole.
+
+On the other hand, I claim that $dz$ has a triple zero at each of the branch points.  
+Indeed, by the theorem on the local form of an analytic map, there is a local coordinate $v$ with $z - 1 = v^4$.  
+So
+\[
+dz = d(v^4) = 4v^3\,dv
+\]
+has a triple zero over $z = 1$, and similarly over the other branch points.
+
+So $dz/w^2$, $dz/w^3$ are still holomorphic at the branch points (and everywhere else when $z \neq \infty$, because $w \neq 0$).  
+At $z = \infty$, $w$ has a simple pole on $R^{\mathrm{cpt}}$ and we see that $w^{-2}dz$ and $w^{-3}dz$ (and higher powers) are non-singular there.  
+Moreover, we can even afford to add $z\,dz/w^3$ to our list, and we have produced three holomorphic differentials on $R^{\mathrm{cpt}}$.
+
+
+\begin{remark}
+It is easy to see that the three are linearly independent.  
+It takes more work to show that any holomorphic differential is a linear combination of these three.
+\end{remark}
+
+At any rate, we observe the following:
+
+\begin{proposition}
+The ratios of holomorphic differentials on $R^{\mathrm{cpt}}$ generate the field of meromorphic functions.
+\end{proposition}
+
+\begin{proof}
+\[
+\frac{dz/w^2}{dz/w^3} = w, \qquad
+\frac{z\,dz/w^3}{dz/w^3} = z,
+\]
+and $z, w$ generate the field of meromorphic functions, by our theorem from last time.
+\end{proof}
+
+\end{enumerate}
+\end{example}
+
+\section{Line bundles and divisors}
 If $f$ is a nonconstant meromorphic function on a compact Riemann surface $R$, then we defined the divisor of $f$ to be \[(f) = \sum_{p \in R} \operatorname{ord}_p(f) p\] where $\operatorname{ord}_p(f)$ is the order of vanishing of $f$ at $p$ (negative if $f$ has a pole at $p$). 
 
 We defined the following sets:
