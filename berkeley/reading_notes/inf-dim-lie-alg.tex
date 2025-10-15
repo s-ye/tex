@@ -80,7 +80,7 @@ Thus we will associate to $\phi \in \mathfrak{h}^*$ an element $t_\phi \in \math
 \begin{align*}
     \kappa(t_\phi, h) = \phi(h) \quad \text{for } h \in \mathfrak{h}.
 \end{align*}
-
+In general, if $\alpha$ is a root, then $t_\alpha$ is not quite the coroot, but they coincide if $\alpha$ has length squared $2$ (because then $(\alpha|\alpha)/2 = 1$).
 Then we will define an inner product on $\mathfrak{h}^*$ which we will denote
 \begin{align*}
     (\lambda | \mu) = \kappa(t_\lambda, t_\mu).
@@ -112,7 +112,7 @@ Thus if $x_\alpha \in \mathfrak{g}_\alpha$ we have $[h_\alpha, x_\alpha] = 2x_\a
 \]
 then for $\lambda \in \mathfrak{h}^*$ we have $(\alpha^\vee | \lambda) = \lambda(h_\alpha)$. Either $\alpha^\vee$ or $h_\alpha$ is called a \textbf{coroot}. They are really the same thing if we identify $\mathfrak{h}$ with its double dual $\mathfrak{h}^{**}$. The factor $\tfrac{2}{(\alpha|\alpha)}$ is chosen so that the root vectors $x_\alpha, y_\alpha$ together with $h_\alpha$ form a standard $\mathfrak{sl}_2$-triple, with the eigenvalue of $x_\alpha$ under $h_\alpha$ equal to $2$.
 
-We will denote by $\rho$ half the sum of the positive roots. Humphreys denotes this $\delta$, but the notation $\rho$ is now universally used by everyone. If $\alpha \in \Phi$ we will denote by $r_\alpha$ the reflection
+We will denote by $\rho$ half the sum of the positive roots. If $\alpha \in \Phi$ we will denote by $r_\alpha$ the reflection
 \[
     r_\alpha(x) = x - (x|\alpha^\vee)\alpha.
 \]
@@ -2477,6 +2477,12 @@ Kac proves the following classification theorem in \cite{kac}.
     Borcherds made the remark that nobody has really found a use for the indefinite type matrices.
 \end{remark}
 
+\begin{lemma}
+    [Symmetrizability of finite and affine type matrices] Let $A = (a_{ij})$ be a matrix of finite or affine type such
+that $a_{ii} = 2$ and $a_{ij}a_{ji} = 0$ or $\geq 1$. Then $A$ is symmetrizable.
+\end{lemma}
+In particular, all generalized Cartan matrices of finite or affine type are symmetrizable. This is quite important as much of the structure theory for symmetrizable Kac-Moody algebras we have developed would not be very interesting if we could not handle these examples.
+
 We proceed to classify all generalized Cartan matrices of finite and affine type.
 For this it is convenient to introduce the so-called \textbf{Dynkin diagrams}.
 \begin{definition}[Dynkin diagram]
@@ -2485,8 +2491,7 @@ For this it is convenient to introduce the so-called \textbf{Dynkin diagrams}.
     equipped with an ordered pair of integers $|a_{ij}|,|a_{ji}|$.
 \end{definition}
 
-It is clear that $A$ is indecomposable if and only if $S(A)$ is a connected graph.
-Note also that $A$ is determined by the Dynkin diagram $S(A)$ and an enumeration of its vertices.
+It is clear that $A$ is indecomposable if and only if $S(A)$ is a connected graph. Note also that $A$ is determined by the Dynkin diagram $S(A)$ and an enumeration of its vertices.
 We say that $S(A)$ is of finite, affine, or indefinite type if $A$ is of that type.
 
 \begin{proposition}[Properties of generalized Cartan matrices of finite and affine type]\label{prop:finite-affine}
@@ -2548,6 +2553,31 @@ In particular, an affine generalized Cartan matrix $A$ satisfies all proper prin
     \caption{Dynkin diagrams of affine type - parts 2 and 3}
 \end{figure}
 
+\begin{remark}
+    [Why the number $4$?] For a finite-dimensional semisimple Lie algebra $\mathfrak{g}$ with Killing form $(\cdot,\cdot)$, the Cartan matrix entries are 
+    \[a_{ij} = 2\frac{(\alpha_i,\alpha_j)}{(\alpha_i,\alpha_i)}\]
+    The Killing form gives a notion of angle between roots. In particular \begin{align*}
+        (\alpha_i,\alpha_j) = |\alpha_i|\,|\alpha_j|\,\cos\theta_{ij}
+    \end{align*} from which it follows \begin{align*}
+        a_{ij} = 2 \frac{|\alpha_j|}{|\alpha_i|} \cos\theta_{ij}, \quad
+a_{ji} = 2 \frac{|\alpha_i|}{|\alpha_j|} \cos\theta_{ij}
+    \end{align*} and hence \begin{align*}
+        a_{ij}a_{ji} = 4\cos^2\theta_{ij}
+    \end{align*} It immediately follows that $a_{ij}a_{ji} \in \{0,1,2,3\}$ (we cannot have $a_{ij}a_{ji} = 4$ because that would imply $\theta_{ij} = 0$ and hence $\alpha_i, \alpha_j$ are linearly dependent), with corresponding angles $\pi/2, 2\pi/3, 3\pi/4, 5\pi/6$. Then we can go back and get formulas for the ratios of squares of the root lengths. 
+    \begin{align*}
+        \frac{|\alpha_i|^2}{|\alpha_j|^2} = \frac{a_{ji}}{a_{ij}}
+    \end{align*}
+    This in fact shows how to go from the Dynkin diagram to pictures of the root systems. 
+
+    The only way to get $a_{ij}a_{ji} = 4$ is considering the $A^{(2)}_2$ which has Cartan matrix \begin{align*}
+        A = \begin{pmatrix}
+            2  & -1 \\
+            -4 & 2
+        \end{pmatrix}
+    \end{align*} \red{In affine $A_2^{(2)}$, we fold a triple-laced diagram by an order-2 automorphism. This multiplies one root's length by 2 (since we're averaging over an orbit of size 2), squaring that gives a ratio of 4.}
+
+    So one way of thinking about affineness is that the entries of the Cartan matrix closely resemble those of finite type, in which case this respects the geometry of root systems that the Killing form gives us.
+\end{remark}
 
 \begin{remark}
     A root of a finite root system $\Delta$ which satisfies condition (vi) of
@@ -2599,12 +2629,20 @@ In particular, an affine generalized Cartan matrix $A$ satisfies all proper prin
         \delta(h) & = 0  \\
         \delta(c) & = 0  \\
         \delta(d) & = 1.
-    \end{align*} The simple roots are $\alpha_0 = \delta - \alpha$ and $\alpha_1 = \alpha$. It seems to me that $\delta$ and $\alpha$ really should be the simple roots, but the issue is that $\delta$ is not a real root. It doesn't correspond to a reflection and it has no coroot, which is a consequence of the fact that $(\delta \mid \delta) = 0$.
+    \end{align*} The simple roots are $\alpha_0 = \delta - \alpha$ and $\alpha_1 = \alpha$. One can choose corresponding Chevalley generators \begin{align*}
+        e_0 & = f \otimes t, & f_0 & = e \otimes t^{-1}, & h_0 & = -h + K \\
+        e_1 & = e \otimes 1, & f_1 & = f \otimes 1,     & h_1 & = h
+    \end{align*} where $e,f,h$ are the standard Chevalley generators of $\mathfrak{sl}_2$. 
 
-    Note that for affine type $A$, one has the imaginary root $\delta$ is always the sum of the simple roots (in particular the labels on the affine Dynkin diagram are all 1's).
+The positive roots are \begin{align*}
+        \Delta_+ & = \{\alpha + n\delta, -\alpha + n\delta, n\delta \mid n \in \mathbb{Z}_{>0}\} \cup \{\alpha\} \\
+                & = \{\alpha_1 + n\delta, \alpha_0 + n\delta, n\delta \mid n \in \mathbb{Z}_{>0}\} \cup \{\alpha_1\}
+\end{align*}
+
+    Note that for affine type $A$, one has the imaginary root $\delta$ is always the sum of the simple roots (in particular the labels on the affine Dynkin diagram are all $1$'s).
 
     Then one computes the pairings \begin{align*}
-        a_{11} & = \langle \alpha_1, \alpha_1^\vee \rangle                                                                                                            & 2 \\
+        a_{11} & = \langle \alpha_1, \alpha_1^\vee \rangle = 2 \\
         a_{00} & = \frac{2(\alpha_0 \mid \alpha_0)}{(\alpha_0 \mid \alpha_0)} \texty{because there's a unique extension of $(\cdot \mid \cdot)$ to $\widehat{\sl_2}$}     \\
         a_{10} & = \frac{2(\alpha_1 \mid \alpha_0)}{(\alpha_1 \mid \alpha_1)} = \frac{2(\alpha \mid \delta - \alpha)}{(\alpha \mid \alpha)} = -2                          \\
     \end{align*} because under the extension of $(\cdot \mid \cdot)$ to $\widehat{\sl_2}$, $\delta$ is orthogonal to everything. By general uniqueness results, this is the only way to extend the Killing form so we didn't cheat. Hence the Cartan matrix is \[
@@ -2612,7 +2650,38 @@ In particular, an affine generalized Cartan matrix $A$ satisfies all proper prin
             2  & -2 \\
             -2 & 2
         \end{pmatrix}
-    \] which is indeed the Cartan matrix of $A_1^{(1)}$
+    \] which is indeed the Cartan matrix of $A_1^{(1)}$.
+\end{example}
+
+\begin{example}
+    [Decomposition of $\widehat{\sl_2}$ into action for $\sl_2$ triple] Consider the $\sl_2$-triple $\{e_0,f_0,h_0\}$ inside $\widehat{\sl_2}$. Then $\widehat{\sl_2}$ decomposes into irreducible representations of this $\sl_2$ as follows:
+
+        For each $n\in\mathbb{Z}$, set
+    $W(n)\;:=\;\operatorname{span}\{\,e\otimes t^{\,n},\;h\otimes t^{\,n+1},\;f\otimes t^{\,n+2}\,\}$.
+    Then for $n\neq -1$, $W(n)$ is a 3-dim irreducible $\mathfrak{sl}_2$-module (spin 1) under $\ad(e_0,f_0,h_0)$, with weights $-2,0,+2$ (eigenvalues of $\ad h_0$). Concretely,
+    \[
+    \begin{aligned}
+    [h_0,\,e\otimes t^n]&=-2\,e\otimes t^n, & [e_0,\,e\otimes t^n]&=-\,h\otimes t^{n+1}, & [f_0,\,e\otimes t^n]&=0,\\
+    [h_0,\,h\otimes t^{n+1}]&=0, & [e_0,\,h\otimes t^{n+1}]&=-2\,f\otimes t^{n+2}, & [f_0,\,h\otimes t^{n+1}]&=2\,e\otimes t^{n},\\
+    [h_0,\,f\otimes t^{n+2}]&=+2\,f\otimes t^{n+2}, & [e_0,\,f\otimes t^{n+2}]&=0, & [f_0,\,f\otimes t^{n+2}]&=h\otimes t^{n+1}.
+    \end{aligned}
+    \]
+    No central term appears because the loop degrees don't sum to zero in these brackets.
+
+    For $n=-1$, instead we have to take \[W(-1)=\operatorname{span}\{e\otimes t^{-1},\, -h\otimes 1 + K,\,f\otimes t\}\] to be the adjoint representation of $\sl_2$. There is also the 1-dimensional trivial submodule $\mathbb{C}K$.
+
+    There is another 1-dimensional trivial submodule:
+    $\mathbb{C}\,(h_0-2d)$,
+    since \[[e_0,\,h_0-2d]=0=[f_0,\,h_0-2d]=[h_0,\,h_0-2d]\]
+    Indeed $[d, x\otimes t^m]=m\,x\otimes t^m$ gives $[e_0,d]=-e_0$, $[f_0,d]=f_0$, so the combination $h_0-2d$ is fixed.
+
+    Putting these together, you can write the adjoint module as
+    \[
+    \widehat{\mathfrak{sl}}_2
+    \;\cong\;
+    \Big(\bigoplus_{n\in\mathbb{Z}} W(n)\Big)
+    \;\oplus\; \mathbb{C}K
+    \;\oplus\; \mathbb{C}(h_0-2d)\]
 \end{example}
 
 \section{Real and imaginary roots}
@@ -3957,7 +4026,8 @@ Now part b) follows from Proposition 3.12a). Finally $W_\lambda \cap T = 1$, sin
 \end{proof}
 
 \begin{example}
-    [Affine $\sl_2$] Recall that for $\widehat{\sl}_2$, we have $\theta = \alpha_1$, $\alpha_0 = \delta - \alpha_1$, and $\overset{\circ}{\mf h}^*_\mathbb{R} = \mathbb{R}$ with coordinate given by $\lambda \mapsto (\lambda|\alpha_1) = \langle \lambda, \alpha_1^\vee \rangle$. Note that this equality is because evaulating against simple coroots is the same as pairing against simple roots, since $\alpha_1^\vee = \frac{2\alpha_1}{(\alpha_1|\alpha_1)}$ and the Cartan matrix entry $a_{11} = 2$. The fundamental alcove is then \begin{align*}
+    [Affine $\sl_2$] Recall that for $\widehat{\sl}_2$, we have $\theta = \alpha_1$, $\alpha_0 = \delta - \alpha_1$, and $\overset{\circ}{\mf h}^*_\mathbb{R} = \mathbb{R}$ with coordinate given by $\lambda \mapsto (\lambda|\alpha_1) = \langle \lambda, \alpha_1^\vee \rangle$. Note that this equality is because evaulating against simple coroots is the same as pairing against simple roots, since $\alpha_1^\vee = \frac{2 h_{\alpha_1}}{(\alpha_1|\alpha_1)}$ since all roots have the same square length which is $2$.
+    The fundamental alcove is then \begin{align*}
     C_{\mathrm{af}} &= \{\lambda \in \mathbb{R} \mid (\lambda|\alpha_1) \geq 0, (\lambda|\theta) \leq 1\} \\
     &= \{\lambda \in \mathbb{R} \mid 0 \leq (\lambda|\alpha_1) \leq 1\}
     \end{align*} i.e. the interval $[0,1]$ in our coordinate $(\cdot | \alpha)$. The affine Weyl group $W = \overset{\circ}{W} \ltimes T$ corresponds to reflections across affine hyperplanes \[H_{\alpha,k} = \{\lambda \in \mf h^*_\mathbb{R} \mid (\lambda|\alpha) = k\}\] which is generated by the simple reflections $r_{\alpha_1}$ (reflection across $H_{\alpha_1,0}$) and $r_{\alpha_0}$ (reflection across $H_{\alpha_1,1}$). The group of translations $T$ is generated by $t_{\nu(\alpha_1^\vee)} = r_{\alpha_0} r_{\alpha_1}$.
@@ -3981,6 +4051,68 @@ The translations are indexed by \[M = \nu(\Z(\overset{\circ}{W})\cdot \theta^\ve
 
 All together, the affine Weyl group is generated $r_0:x \mapsto -x$ and $r_1:x \mapsto -x + 2$. They satisfy the relations $r_0^2 = r_1^2 = e$. Also $t_m = (r_0 r_1)^m$ for $m \in \Z$ and conjugation by $r_0$ inverts the translation $t_m$. Therefore, the structure is precisely the infinite dihedral group $D_\infty \cong \Z \rtimes \Z/2\Z$.
 \end{example}
+
+\begin{example}
+    [Fundamental chamber of $\widehat{\sl_2}$] Let $d, \alpha_1^\vee, K$ be the basis of $\mathfrak{h}$ dual to $\delta, \omega_1, \Lambda_0$. Recall that in general, the fundamental weights are dual to the simple coroots, and the fundamental coweights are dual to the simple roots.
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/a2chamber.png}
+    \caption{Fundamental chamber of $\widehat{\sl_2}$}
+\end{figure}
+    The vector space is $3$-dimensional but in fact we have projected onto the plane $\delta = 0$. The figure shows the dominant chamber $C$ in $\mathfrak{h}^*_\mathbb{R}$ for $\widehat{\sl_2}$ cut out by the hyperplanes $\alpha_0^\vee \geq 0$ and $\alpha_1^\vee \geq 0$. Another thing to note is that the lattice points where the fundamental chamber meets the hyperplane $\langle \lambda, K \rangle = k$ are precisely the dominant integral weights of level $k$. The reflections $r_0, r_1$ are reflections across the coroot hyperplanes, and looking at the $\langle \lambda, K \rangle = 1$ hyperplane we see that the fundamental alcove is the intersection of the dominant chamber with this hyperplane. The affine Weyl group acts on the level-1 hyperplane and tiles it with alcoves.
+
+The W-action fixes the level (the coefficient of $\Lambda_0$) but it actually changes the $\delta$ coordinate significantly. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/a2chamber-lambda.png}
+    \caption{Different projection of the chamber}
+\end{figure}
+\end{example}
+We compute what this action looks like. Any weight $\lambda\in \widehat{\mathfrak h}^*$ can be written as
+$\lambda = x\,\omega_1 + k\,\Lambda_0 + y\,\delta$. Recall that 
+$\langle \omega_1, h \rangle = 1$, $\langle \omega_1, K \rangle = 0$, 
+$\langle \Lambda_0, K \rangle = 1$, $\langle \Lambda_0, h \rangle = 0$,
+$\langle \delta, \text{anything in } \mathfrak h \oplus \mathbb{C}K \rangle = 0$.
+
+Then:
+\[\begin{aligned}
+\langle \lambda, \alpha_1^\vee\rangle &= \langle x\omega_1 + k\Lambda_0 + y\delta, h\rangle = x, \\
+\langle \lambda, \alpha_0^\vee\rangle &= \langle x\omega_1 + k\Lambda_0 + y\delta, K-h\rangle = k - x.
+\end{aligned}\]
+
+We compute that 
+\[s_1(\lambda) = \lambda - \langle \lambda, \alpha_1^\vee\rangle\, \alpha_1
+= (x\omega_1 + k\Lambda_0 + y\delta) - x(2\omega_1)
+= (-x)\,\omega_1 + k\Lambda_0 + y\delta\] so in coordinates, $s_1$ acts by $(x,y) \mapsto (-x,y)$. Similarly,
+\[\begin{aligned}
+s_0(\lambda) &= \lambda - \langle \lambda, \alpha_0^\vee\rangle\, \alpha_0 \\
+&= (x\omega_1 + k\Lambda_0 + y\delta) - (k-x)(\delta - 2\omega_1) \\
+&= x\omega_1 + k\Lambda_0 + y\delta - (k-x)\delta + 2(k-x)\omega_1 \\
+&= (x + 2(k - x))\omega_1 + k\Lambda_0 + (y - (k - x))\delta \\
+&= (2k - x)\omega_1 + k\Lambda_0 + (y - k + x)\delta.
+\end{aligned}\]
+so in coordinates, $s_0$ acts by $(x,y) \mapsto (2k - x, y - k + x)$.
+
+The translation $t_{\alpha_1^\vee} = s_1s_0$ acts by \begin{align*}
+    t(x,y)=(x-2k,y-k+x)
+\end{align*} and induction shows that \begin{align*} 
+    t^n(x,y) = (x - 2nk, \; y + n x - n^2 k)
+\end{align*} for $n \in \Z$. This agrees with the general formula of Kac: 
+\begin{align*}
+    t_\alpha(\lambda) 
+    = \lambda + \langle \lambda, K \rangle \alpha 
+      - \big( (\lambda|\alpha)
+      + \tfrac{1}{2}|\alpha|^2 \langle \lambda, K \rangle \big)\delta.
+\end{align*}
+We're translating by $\beta=-n\alpha_1$ at level $k=\lambda(K)$. Using $(\alpha_1,\alpha_1)=2$ and $(\omega_1,\alpha_1)=1$, and writing $\lambda = x_0\omega_1 + k\Lambda_0 + y_0\delta$, we get $(\lambda|\alpha_1)=x_0$ and $\langle \lambda,K\rangle = k$. The formula gives \[t^n(\lambda) = \lambda + k(-n\alpha_1) - ( -n(\lambda|\alpha_1) + \frac{1}{2} kn^2(\alpha_1|\alpha_1))\delta = \lambda - 2nk\omega_1 + nx_0\delta - n^2k\delta\] which matches our formula exactly in coordinates.
+
+If we eliminate the parameter, we get an equation for the parabola:
+\begin{align*}
+    y_n \;=\; y_0 \;-\;\frac{1}{4k}(x_n - x_0)^2 \;+\; \frac{x_0^2}{4k},
+\end{align*}
+
+In the figure above, $k=2$ and $\omega_1 + 2\Lambda_0$ has coordinates $(x_0,y_0) = (0,1)$, we get a downward opening parabola as the orbit of $\omega_1 + 2\Lambda_0$ under the affine Weyl group.
+
 
 \section{Affine Algebras as Central Extensions of Loop Algebras}
 Let $\mathfrak{g}$ be a simple Lie algebra over $\mathbb{C}$, e.g.\ $\mathfrak{sl}_n$, $\mathfrak{so}_n$ for $n \geq 5$, $\mathfrak{sp}_{2n}$ for $n \geq 4$, exceptional ones, etc. Fix an invariant inner product $\langle\ ,\ \rangle$ on $\mathfrak{g}$ satisfying
@@ -4453,8 +4585,6 @@ We set
 \Pi^\vee = \{\alpha_0^\vee := \tfrac{2}{(\theta\mid\theta)}\,K - 1\otimes\theta^\vee,\;
              \alpha_i^\vee := 1\otimes H_i \ (i=1,\dots,\ell)\}.
 \]
-
-Note that our $\theta$ is the same as the one introduced in~§6.4 (for $r=1$).
 Then Proposition~6.4(a) implies
 \begin{equation}
 A = \big((\alpha_j,\alpha_i^\vee)\big)_{i,j=0}^\ell.
@@ -4572,6 +4702,292 @@ v = \langle v \rangle v_\Lambda + \sum_{\alpha \in Q_+ \setminus \{0\}} v_{\Lamb
 \qquad
 v_{\Lambda - \alpha} \in V_{\Lambda - \alpha}.
 \]
+
+One might ask if every nonzero module in the category~$\mathcal{O}$ is a highest weight module. The answer is no because there are easy counterexamples like the sum of two irreducible highest weight modules. However, it turns out that these are the only counterexamples. More precisely, every irreducible module in the category~$\mathcal{O}$ is a highest weight module, and every module in the category~$\mathcal{O}$ is generated by its primitive vectors. 
+\begin{proposition}[9.3]
+Let $V$ be a nonzero module from the category~$\mathcal{O}$. Then:
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item $V$ contains a nonzero weight vector $v$ such that $\mathfrak{n}_+(v)=0$.
+  \item The following conditions are equivalent:
+  \begin{enumerate}[label=\textup{(\roman*)}]
+    \item $V$ is irreducible;
+    \item $V$ is a highest-weight module and any primitive vector of $V$ 
+          is a highest-weight vector;
+    \item $V \simeq L(\Lambda)$ for some $\Lambda \in \mathfrak{h}^*$.
+  \end{enumerate}
+  \item $V$ is generated by its primitive vectors as a $\mathfrak{g}(A)$-module.
+\end{enumerate}
+
+\begin{proof}
+To prove~(a), take a maximal $\lambda \in P(V)$ (with respect to the ordering~$\ge$).
+Then one can take $v$ to be a weight vector of weight~$\lambda$.
+
+Let $V$ be an irreducible module; then a weight vector~$v$ is primitive if and only if
+$\mathfrak{n}_+(v)=0$.  Take a primitive vector~$v$ of weight~$\lambda$.  
+Then $U(\mathfrak{g})(v)$ is a submodule of~$V$, hence 
+$V = U(\mathfrak{g})(v)$ and $V$ is a module with highest weight~$\lambda$.
+In particular, $P(V) \le \lambda$ and $\dim V_\lambda = 1$.  
+Hence every primitive vector is proportional to~$v$, which proves the implication
+\textup{(i)}~$\Rightarrow$~\textup{(ii)} of~(b).
+
+If $V$ is a highest-weight module and $U \subset V$ is a proper submodule, 
+then $U$ contains a primitive vector by~(a).  
+This proves the implication \textup{(ii)}~$\Rightarrow$~\textup{(iii)} and the assertion~(b).
+
+Let $V'$ be the submodule in~$V$ generated by all primitive vectors.  
+If $V' \ne V$, then the $\mathfrak{g}(A)$-module $V/V'$ contains a primitive vector~$v$ by~(a).
+But a weight vector in~$V$ which is a preimage of~$v$ is a primitive vector.
+\end{proof}
+\end{proposition}
+
+The following statement is a key technical result which is used in establishing the complete reducibility in many cases.
+\begin{lemma}[9.5]
+Let $V$ be a $\mathfrak{g}(A)$-module from the category~$\mathcal{O}$.
+If for any two primitive weights $\lambda$ and~$\mu$ of~$V$
+the inequality $\lambda \ge \mu$ implies $\lambda = \mu$,
+then the module~$V$ is completely reducible
+(i.e.\ $V$ decomposes into a direct sum of irreducible modules).
+\end{lemma}
+
+\begin{proof}
+Set 
+\[
+V^0 = \{\,v \in V \mid \mathfrak{n}_+(v) = 0\,\}.
+\]
+This is $\mathfrak{h}$-invariant, hence we have the weight-space decomposition
+\[
+V^0 = \bigoplus_{\lambda \in L} V^0_\lambda,
+\]
+where all elements from~$L$ are primitive weights.  
+
+Let $\lambda \in L$ and $v \in V^0_\lambda$, $v \ne 0$.
+Then the $\mathfrak{g}(A)$-module $U(\mathfrak{g})(v)$ is irreducible 
+(and hence isomorphic to~$L(\lambda)$).
+Indeed, if this is not the case, then by Proposition~9.3(b) we have
+$U(\mathfrak{n}_-)(v) \cap V^0_\mu \ne 0$ for some $\mu < \lambda$.
+This contradicts the assumption of the lemma.  
+Therefore, the $\mathfrak{g}(A)$-submodule~$V'$ of~$V$ generated by~$V^0$
+is completely reducible.
+
+It remains to show that $V' = V$.  
+If this is not the case, we consider the $\mathfrak{g}(A)$-module~$V/V'$.
+Then there exists a weight vector $v \in V$ of weight~$\mu$
+such that $v \notin V'$ but $e_i(v) \in V'$ and $\ne 0$ for some~$i$.
+But then, since $V$ is from the category~$\mathcal{O}$,
+there exists $\lambda \in L$ such that $\lambda \ge \mu + \alpha_i$, 
+and hence $\lambda > \mu$, which contradicts the assumption of the lemma.
+\end{proof}
+
+The following lemma establishes the existence of a "bounded from below" filtration of any module in the category~$\mathcal{O}$.
+\begin{lemma}[9.6]
+Let $V \in \mathcal{O}$ and $\lambda \in \mathfrak{h}^*$. Then there exists a filtration
+by a sequence of submodules
+\[
+V = V_t \supset V_{t-1} \supset \cdots \supset V_1 \supset V_0 = 0
+\]
+and a subset $J \subset \{1,\dots,t\}$ such that:
+\begin{enumerate}[label=\textup{(\roman*)}]
+    \item if $j \in J$, then $V_j/V_{j-1} \simeq L(\lambda_j)$ for some $\lambda_j \ge \lambda$;
+    \item if $j \notin J$, then $(V_j/V_{j-1})_\mu = 0$ for every $\mu \ge \lambda$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Define
+\[
+a(V,\lambda) = \sum_{\mu \ge \lambda} \dim V_\mu.
+\]
+We prove the lemma by induction on $a(V,\lambda)$.
+
+If $a(V,\lambda)=0$, then there are no weights $\mu \ge \lambda$, hence
+$V=0$ and the required filtration is $0 = V_0 = V_1 = V$ with $J = \varnothing$.
+
+Assume $a(V,\lambda) > 0$. Choose a maximal element $\mu \in P(V)$ such that $\mu \ge \lambda$,
+and pick a weight vector $v \in V_\mu$. Let $U = U(\mathfrak{g})(v)$.
+Then $U$ is a highest-weight module. By Proposition~9.3(c),
+$U$ contains a maximal proper submodule $\overline{U}$, and we have
+\[
+0 \subset \overline{U} \subset U \subset V, \qquad
+U/\overline{U} \simeq L(\mu), \quad \mu \ge \lambda.
+\]
+
+Since the top weight $\mu$ occurs in $V$ but not in $\overline{U}$ or $V/U$,
+we have
+\[
+a(\overline{U},\lambda) < a(V,\lambda), \qquad
+a(V/U,\lambda) < a(V,\lambda).
+\]
+Indeed, $a(V,\lambda)$ counts the total dimension of all weight spaces
+$V_\nu$ with $\nu \ge \lambda$.
+Passing to $\overline{U}$ or $V/U$ removes at least the contribution
+from the weight $\mu$, so the inequalities are strict.
+
+By the induction hypothesis, both $\overline{U}$ and $V/U$
+possess filtrations satisfying the conditions of the lemma.
+Say
+\[
+0 = U_0 \subset U_1 \subset \cdots \subset U_p = \overline{U},
+\qquad
+0 = W_0 \subset W_1 \subset \cdots \subset W_q = V/U.
+\]
+Combine them to obtain a filtration of $V$:
+\[
+0 = U_0 \subset \cdots \subset U_p = \overline{U}
+  \subset U_{p+1} := U
+  \subset \pi^{-1}(W_1) \subset \cdots \subset \pi^{-1}(W_q) = V,
+\]
+where $\pi: V \twoheadrightarrow V/U$ is the natural projection.
+Each successive quotient in this sequence is either one of the
+quotients from the filtration of $\overline{U}$, the factor
+$U/\overline{U} \simeq L(\mu)$, or one of the quotients from the
+filtration of $V/U$.
+
+This gives the required filtration of~$V$ satisfying (i) and~(ii).
+\end{proof}
+
+\begin{remark}[Different than semisimple Category $\cO$]
+    When $\mf g$ is finite semisimple, the filtration of Lemma 9.6 can be refined to a Jordan-Hölder series, i.e. a filtration where every successive quotient is irreducible, i.e. every module in Category $\cO$ has finite length. This is because of general theory of Shapovalov, Kac, and Kazhdan which says that a Verma module $M(\Lambda)$ has a singular vector at weight $\Lambda - m\beta$ iff $(\Lambda+\rho,\beta^\vee)=m\in\mathbb Z_{>0}$, where $\beta$ is a positive root. Each such vector generates a submodule $M(\Lambda - m\beta)$. Since there are only finitely many positive roots, and each root can only appear with a finite multiplicity, there are only finitely many such singular vectors, and hence only finitely many submodules of $M(\Lambda)$. This implies that every module in Category $\cO$ has finite length. 
+        
+    However, when $\mf g$ is an infinite-dimensional Kac-Moody algebra, the situation is more complicated. For example, if $\mf g$ is an affine Kac-Moody algebra, then there are infinitely many positive roots (the imaginary roots), and hence infinitely many possible singular vectors in $M(\Lambda)$. Thus, a Verma module $M(\Lambda)$ may have infinitely many submodules, and hence may not have finite length. Therefore, the filtration of Lemma 9.6 cannot always be refined to a Jordan-Hölder series in the infinite-dimensional case. However, it is good enough to define multiplicities because we can essentially truncate from below. If you fix a weight cutoff $\lambda$, then above that cutoff (weights $\geq \lambda$), every $V\in\mathcal O$ has only finitely many relevant weights.
+\end{remark}
+
+Let $[V:L(\Lambda)]$ be the multiplicity of $L(\Lambda)$ in a module $V \in \mathcal{O}$, i.e. the number of times $\lambda$ appears as a $\lambda_j$ in the filtration of Lemma 9.6. This number is independent of the choice of filtration by standard Jordan-Hölder arguments (in particular, Category $\mathcal{O}$ is a finite-length abelian category and every simple object is isomorphic to some $L(\Lambda)$).
+
+Moreover, $[V:L(\mu)] \neq 0$ if and only if $\mu$ is a primitive weight of $V$. This follows because if $\mu$ is a primitive weight of $V$, then we say that $V$ has a subquotient isomorphic to $L(\mu)$, and conversely, if $[V:L(\mu)] \neq 0$, then $V$ has a subquotient isomorphic to $L(\mu)$, which contains a primitive vector of weight $\mu$.
+
+
+\subsection{Formal characters}
+Let $\mathcal{E}$ be the vector space of all formal sums
+\[\sum_{\lambda \in \mathfrak{h}^*} c_\lambda e^\lambda, \quad c_\lambda \in \mathbb{C},\]
+so that $c_\lambda = 0$ for $\lambda$ outside a finite union of sets of the form $D(\mu) = \{\nu \in \mathfrak{h}^* \mid \nu \leq \mu\}$. Let $V$ be a module in the category $\mathcal{O}$. The \textbf{formal character} of $V$ is defined to be
+\[\ch V = \sum_{\lambda \in \mathfrak{h}^*}\dim V_\lambda e^\lambda \in \mathcal{E}.\]
+
+\begin{proposition}[9.7]
+Let $V$ be a $\mathfrak{g}(A)$-module from the category~$\mathcal{O}$. Then
+\begin{equation}\label{eq:9.7.1}
+\operatorname{ch} V
+= \sum_{\lambda \in \mathfrak{h}^*} [V : L(\lambda)]\, \operatorname{ch} L(\lambda).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Denote by $\phi$ the map which associates to each $V \in \mathcal{O}$ the difference
+\[
+\phi(V) \in \mathcal{E}
+\]
+between the left- and right-hand sides of~\eqref{eq:9.7.1}.
+Then $\phi(L(\lambda)) = 0$, and given an exact sequence of modules
+\[
+0 \to V_1 \to V_2 \to V_3 \to 0,
+\]
+we have $\phi(V_2) = \phi(V_1) + \phi(V_3)$. $\phi$ is additive because both the character function and the composition multiplicities are additive on short exact sequences of modules in category $\mathcal{O}$.
+
+Using Lemma~9.6, we deduce that given $\lambda \in \mathfrak{h}^*$, there exist modules
+$M_1,\dots,M_r \in \mathcal{O}$ such that $(M_i)_\mu = 0$ when $\mu \ge \lambda$, and
+\[
+\phi(V) = \sum_{i=1}^r \phi(M_i).
+\]
+In particular, for every $\lambda \in \mathfrak{h}^*$, the coefficient at $e(\lambda)$ in $\phi(V)$ is zero.
+\end{proof}
+
+By the PBW theorem, the character of a Verma module is given by
+\[
+\ch M(\lambda) = e^\lambda \prod_{\alpha \in \Delta_+} (1 + e^{-\alpha} + e^{-2\alpha} + \cdots)^{\dim \mathfrak{g}_\alpha}.
+\] or equivalently,
+\[
+\ch M(\lambda) = \frac{e^\lambda}{\prod_{\alpha \in \Delta_+} (1 - e^{-\alpha})^{\dim \mathfrak{g}_\alpha}}.
+\]
+
+\begin{lemma}[9.8]
+\leavevmode
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item
+If $V$ is a $\mathfrak{g}(A)$-module with highest weight $\Lambda$, then
+\[
+\Omega = (|\Lambda + \rho|^2 - |\rho|^2) I_V.
+\]
+
+\item
+If $V$ is a module from the category~$\mathcal{O}$ and $v$ is a primitive vector with weight~$\lambda$, 
+then there exists a submodule $U \subset V$ such that $v \notin U$ and
+\[
+\Omega(v) = (|\lambda + \rho|^2 - |\rho|^2)\, v \pmod{U}.
+\]
+\end{enumerate}
+
+\begin{proof}
+Follows immediately from Corollary~2.6.
+\end{proof}
+\end{lemma}
+
+\begin{proposition}[9.8]
+Let $V$ be a $\mathfrak{g}(A)$-module with highest weight~$\Lambda$. Then
+\begin{equation}\label{eq:9.8.1}
+\operatorname{ch} V
+= \sum_{\substack{\lambda \le \Lambda \\ |\lambda + \rho|^2 = |\Lambda + \rho|^2}}
+c_\lambda \, \operatorname{ch} M(\lambda),
+\qquad
+\text{where } c_\lambda \in \mathbb{Z}, \; c_\Lambda = 1.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Using~\eqref{eq:9.7.1}, it suffices to prove~\eqref{eq:9.8.1} for $V = L(\Lambda)$.
+Set
+\[
+B(\Lambda)
+= \{\, \lambda \le \Lambda \mid |\lambda + \rho|^2 = |\Lambda + \rho|^2 \,\},
+\]
+and order the elements of this set $\lambda_1, \lambda_2, \dots$
+so that the inequality $\lambda_i \ge \lambda_j$ implies $i \le j$.
+Then the proof of Proposition~9.7 and Lemma~9.8 imply the following
+system of equations:
+\[
+\operatorname{ch} M(\lambda_i)
+= \sum_{\lambda_j \in B(\Lambda)} c_{ij}\, \operatorname{ch} L(\lambda_j).
+\]
+The matrix $(c_{ij})$ of this system is triangular with ones on the diagonal.
+Solving this system proves~\eqref{eq:9.8.1}.
+\end{proof}
+Note that this proposition and the previous are exactly the same as in the finite-dimensional case. 
+
+\begin{proposition}[9.9]
+Let $A$ be a symmetrizable matrix.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item
+If $2(\Lambda + \rho \mid \beta) \ne (\beta \mid \beta)$ for every $\beta \in Q_+$, $\beta \ne 0$,
+then the $\mathfrak{g}(A)$-module $M(\Lambda)$ is irreducible.
+
+\item
+If $V$ is a $\mathfrak{g}(A)$-module from the category~$\mathcal{O}$ such that,
+for any two primitive weights $\lambda$ and $\mu$ of~$V$ with $\lambda - \mu = \beta > 0$,
+one has $2(\lambda + \rho \mid \beta) \ne (\beta \mid \beta)$,
+then $V$ is completely reducible.
+\end{enumerate}
+
+\begin{proof}
+Proposition~9.3(b) implies that if $M(\Lambda)$ is not irreducible,
+then there exists a primitive weight $\lambda = \Lambda - \beta$, where $\beta > 0$.
+But then Lemma~9.8(a) gives
+\begin{align*}
+|\Lambda + \rho|^2 = |\Lambda - \beta + \rho|^2
+\end{align*}
+which is equivalent to
+\[2(\Lambda + \rho \mid \beta) = (\beta \mid \beta)\]
+
+
+To prove~(b), we may assume that the $\mathfrak{g}(A)$-module~$V$ is indecomposable.
+Since, clearly, $\Omega$ is locally finite on~$V$, i.e.\ every $v \in V$
+lies in a finite-dimensional $\Omega$-invariant subspace, we obtain that there exists
+$a \in \mathbb{C}$ such that $\Omega - aI$ is locally nilpotent on~$V$.
+Hence Lemma~9.8(b) implies $|\lambda + \rho|^2 = |\mu + \rho|^2$
+for any two primitive weights $\lambda$ and~$\mu$.
+Now~(b) follows from Lemma~9.5 because in fact we see that $\lambda \ge \mu$ implies $\lambda = \mu$.
+\end{proof}
+\end{proposition}
+
+
+\subsection{Shapovalov form}
 
 \section{Vertex algebras}
 \subsection{Fields}
@@ -4814,29 +5230,20 @@ has conformal dimension \(m\) (i.e.\ $\deg A_{(n)} = -n + m - 1$).
 We begin with some basic remarks about the axioms.
 \begin{remark}
     [$T$ is determined by $Y$] Recall the translation axiom:
-    $[T, Y(A,z)] = \partial_z Y(A,z)$, $T|0\rangle = 0$.
-
-    We know $Y(A,z)|0\rangle \in V[[z]]$, so it's a power series:
-    $Y(A,z)|0\rangle = A + \text{(terms with } z>0)$.
-    Explicitly,
-    $Y(A,z)|0\rangle = \sum_{n\ge 0} A_{(-n-1)}|0\rangle z^n$.
-    The coefficient of $z^0$ is $A$, the coefficient of $z^1$ is $A_{(-2)}|0\rangle$, and so on.
-
-Apply $[T,Y(A,z)] = \partial_z Y(A,z)$ to $|0\rangle$ and compute both sides:
-    $[T, Y(A,z)]|0\rangle = T(Y(A,z)|0\rangle) - Y(A,z)T|0\rangle = T(Y(A,z)|0\rangle)$
-    (since $T|0\rangle=0$).
-    The right-hand side gives
-    $\partial_z Y(A,z)|0\rangle = \sum_{n\ge 0} (n+1)A_{(-n-2)}|0\rangle z^n$.
-
-    Comparing coefficients of $z^0$:
-    $T A = A_{(-2)}|0\rangle$.
+    \[[T, Y(A,z)] = \partial_z Y(A,z), \quad T|0\rangle = 0\]
+    We know $Y(A,z)|0\rangle \in V[[z]]$:
+    \[Y(A,z)|0\rangle = \sum_{n\ge 0} A_{(-n-1)}|0\rangle z^n \]
+    The coefficient of $z^0$ is $A$, the coefficient of $z^1$ is $A_{(-2)}|0\rangle$, and so on. Apply $[T,Y(A,z)] = \partial_z Y(A,z)$ to $|0\rangle$ and compute both sides:
+    \[[T, Y(A,z)]|0\rangle = T(Y(A,z)|0\rangle) - Y(A,z)T|0\rangle = T(Y(A,z)|0\rangle)\]
+    since $T|0\rangle=0$.
+    The lefthand side gives
+    $\partial_z Y(A,z)|0\rangle = \sum_{n\ge 0} (n+1)A_{(-n-2)}|0\rangle z^n$. Comparing coefficients of $z^0$:
+    \[TA = T A_{(-1)}|0\rangle = A_{(-2)}|0\rangle\]
 \end{remark}
 
 \begin{remark}[$Y$ is injective]
     This comes directly from the vacuum axiom:
-
 \[Y(A,z)|0\rangle \in V[[z]], \quad Y(A,z)|0\rangle\big|_{z=0} = A\]
-
 Expanding we get that $Y(A,z)|0\rangle = \sum_{n\ge 0} A_{(-n-1)}|0\rangle\,z^n$.
 Then the coefficient of $z^0$ is exactly $A_{(-1)}|0\rangle$.
 The vacuum axiom says this equals $A$:
@@ -5946,6 +6353,286 @@ Formula~\eqref{2.5.7} will be proved in \S\,3.4.8 using the formalism of operato
 
 In this section, we will discuss the operator product expansion (OPE) and its role in establishing the associativity of the vertex operator algebra structure on $V_k(\mathfrak{g})$. The OPE is a powerful tool that allows us to express the product of two vertex operators in terms of a sum of vertex operators with shifted arguments.
 
+\begin{theorem}[Goddard's Uniqueness Theorem]
+Let $V$ be a vertex algebra, and let $A(z)$ be a field on $V$. 
+Suppose there exists a vector $a \in V$ such that
+\[
+A(z)\,\ket{0} = Y(a,z)\,\ket{0}
+\]
+and that $A(z)$ is local with respect to $Y(b,z)$ for all $b \in V$.
+Then $A(z) = Y(a,z)$.
+\end{theorem}
+
+\begin{proof}
+Take any $b \in V$. 
+Using the formulation of locality from Proposition~1.2.5, 
+we obtain the following equalities in $V[[z^{\pm1}, w^{\pm1}]]$ for large enough $N$:
+\begin{align*}
+(z-w)^N A(z)Y(b,w)\ket{0} &= (z-w)^N Y(b,w)A(z)\ket{0} \texty{ by locality}\\
+&= (z-w)^N Y(b,w)Y(a,z)\ket{0} \texty{by assumption}\\
+&= (z-w)^N Y(a,z)Y(b,w)\ket{0} \texty{ by locality}
+\end{align*}
+By the vacuum axiom, both $(z-w)^N Y(a,z)Y(b,w)\ket{0}$ and $(z-w)^N A(z)Y(b,w)\ket{0}$
+are well-defined at $w=0$. 
+Setting $w=0$, and using $Y(b,w)\ket{0}|_{w=0} = b$, we obtain
+\[
+Y(a,z)b = A(z)b \quad \text{for all } b \in V,
+\]
+which is what we wanted to show.
+\end{proof}
+\begin{lemma}
+    We have the formula \begin{align*}
+        Y(a,z)\ket{0} = e^{zT}a
+    \end{align*}
+\end{lemma}
+
+\begin{corollary}
+For all $a \in V$, we have
+\[
+Y(Ta, z) = \partial_z Y(a, z).
+\]
+\end{corollary}
+
+\begin{proof}
+We have
+\[
+\partial_z^2 Y(a, z)\ket{0} 
+= \partial_z\big([T, Y(a, z)]\ket{0}\big)
+= \partial_z\big(TY(a, z)\ket{0}\big)
+= T\partial_z Y(a, z)\ket{0},
+\]
+and
+\[
+\partial_z Y(a, z)\ket{0}\big|_{z=0}
+= [T, Y(a, z)]\ket{0}\big|_{z=0}
+= TY(a, z)\ket{0}\big|_{z=0}
+= Ta.
+\]
+In view of Remark~3.1.5, the corollary now follows from Theorem~3.1.1 applied to the field 
+\[
+A(z) = \partial_z Y(a, z).
+\]
+\end{proof}
+
+\subsection{Associativity and the operator product expansion}
+Recall that there are two formal maps:
+
+\[i_{z,w} : V[[z,w]][z^{-1},w^{-1},(z-w)^{-1}] \longrightarrow V((z))((w))\]
+and
+\[
+i_{w,z} : V[[z,w]][z^{-1},w^{-1},(z-w)^{-1}] \longrightarrow V((w))((z)).
+\]
+which differ only in the expansion of $(z-w)^{-1}$. The locality axiom states that \begin{align*}
+    Y(A,z)Y(B,w)C \in V((z))((w)) \text{ and } Y(B,w)Y(A,z)C \in V((w))((z))
+\end{align*} are the expansions of the same element of \begin{align*}
+    V[[z,w]][z^{-1},w^{-1},(z-w)^{-1}]
+\end{align*} Our associativity theorem introduces a third expression which satisfies a similar property.
+
+\begin{theorem}[Associativity]
+Any vertex algebra $V$ satisfies the following associativity property:
+for all $A,B,C \in V$, the three expressions
+\begin{align*}
+Y(A,z)Y(B,w)C &\in V((z))((w)), \\[4pt]
+Y(B,w)Y(A,z)C &\in V((w))((z)), \\[4pt]
+Y(Y(A,z-w)B,w)C &\in V((w))((z-w))
+\end{align*}
+are the expansions, in their respective domains, of the same element of
+\[
+V[[z,w]][z^{-1},\,w^{-1},\,(z-w)^{-1}].
+\]
+\end{theorem}
+The proof follows from the = following lemmas.
+\begin{lemma}
+\label{lemma:translation}
+\[
+e^{wT} Y(A,z) e^{-wT} = Y(A,z+w)
+\]
+in $\End V[[z^{\pm1}, w^{\pm1}]]$, where by negative powers of $(z+w)^{-1}$ we understand their
+expansions in $\C((z))((w))$, i.e.\ in positive powers of $w/z$.
+\end{lemma}
+
+\begin{proof}
+By the translation axiom, $[T,Y(A,z)] = \partial_z Y(A,z)$. Also recall the adjoint exponential identity \begin{align*}
+    e^{X}Ye^{-X} = e^{\ad X} \cdot Y = \sum_{n=0}^\infty \frac{1}{n!} (\ad X)^n \cdot Y
+\end{align*} which is a standard Baker-Campbell-Hausdorff expansion, obtained by differentiating with respect to a parameter $t$:
+\[\frac{d}{dt}\big(e^{tX} Y e^{-tX}\big) = e^{tX}[X,Y]e^{-tX}\]
+and integrating from t=0 to t=1.
+Hence
+\[
+e^{wT} Y(A,z) e^{-wT}
+= \sum_{n=0}^\infty \frac{1}{n!} (\ad wT)^n \cdot Y(A,z)
+= \sum_{n=0}^\infty \frac{w^n}{n!}\,\partial_z^n Y(A,z),
+\]
+where we use the notation $\ad B \cdot C = [B,C]$.
+To complete the proof, we use the formal-variable version of the Taylor formula:
+for any algebra $R$ and a formal power series $f(z) \in R[[z^{\pm1}]]$, we have the identity
+\[
+\sum_{n=0}^\infty \frac{w^n}{n!}\,\partial_z^n f(z) = f(z+w)
+\]
+in $R[[z^{\pm1},w^{\pm1}]]$.
+\end{proof}
+
+\begin{proposition}[Skew-symmetry]
+\label{prop:skew-symmetry}
+The identity
+\begin{equation}
+\label{eq:skew-symmetry}
+Y(A,z)B = e^{zT} Y(B,-z)A
+\end{equation}
+holds in $V((z))$.
+\end{proposition}
+
+\begin{proof}
+First, note that for any field $\phi(z)$ on $V$, the product $e^{zT}\phi(z)$ is a well-defined element of $\End V[[z^{\pm1}]]$, so the statement of the lemma makes sense.
+
+By locality,
+\[
+(z-w)^N Y(A,z)Y(B,w)\ket{0} = (z-w)^N Y(B,w)Y(A,z)\ket{0},
+\]
+for large enough $N$. Using Lemma~3.1.3, we obtain
+\[
+(z-w)^N Y(A,z) e^{wT} B = (z-w)^N Y(B,w) e^{zT} A.
+\]
+Applying Lemma~\ref{lemma:translation}, we find that
+\[
+(z-w)^N Y(A,z)e^{wT}B = (z-w)^N e^{zT} Y(B,w-z)A,
+\]
+where by $(w-z)^{-1}$ we understand its expansion in $\C((w))((z))$.
+We may always choose $N$ large enough so that the right-hand side
+of this formula does not contain any negative powers of $w-z$.
+Then it becomes an identity in $V((z))[[w]]$, in which we can set $w=0$,
+and then divide by $z^N$. This gives formula~\eqref{eq:skew-symmetry}.
+\end{proof}
+
+Consider the expression $Y(A,z)Y(B,w)C$. 
+By locality, it is the expansion in $V((z))((w))$ of an element of the space
+\[
+V[[z,w]][z^{-1},w^{-1},(z-w)^{-1}].
+\]
+Let us denote this element by $f_{A,B,C}$. 
+By Theorem~3.2.1, the expansion of $f_{A,B,C}$ in $V((w))((z-w))$ 
+is equal to $Y(Y(A,z-w)B,w)C$. 
+The corresponding embedding
+\[
+V[[z,w]][z^{-1},w^{-1},(z-w)^{-1}] \;\to\; V((w))((z-w))
+\]
+is obtained by sending $z$ to $w+(z-w)$ and $z^{-1}$ to $(w+(z-w))^{-1}$,
+considered as a power series in positive powers of $(z-w)/w$.
+Thus, we find that applying this procedure to $f_{A,B,C}$ 
+we obtain $Y(Y(A,z-w)B,w)C$.
+By abusing notation, we may write this as
+\[
+Y(A,z)Y(B,w)C = Y(Y(A,z-w)B,w)C, \qquad A,B,C\in V,
+\]
+or as
+\begin{equation}
+\label{eq:OPE}
+Y(A,z)Y(B,w)C = 
+\sum_{n\in\mathbb{Z}} \frac{Y(A_{(n)}\cdot B,\,w)}{(z-w)^{n+1}}\,C,
+\qquad A,B,C\in V,
+\end{equation}
+where the left-hand side should be understood in the above sense.
+\begin{definition}
+    Formula~\eqref{eq:OPE} is called the \emph{operator product expansion} (or \emph{OPE} for short).
+\end{definition}
+
+\begin{proposition}[{\cite[§3.3.1]{Kac3}}]
+Let $\phi(z)$ and $\psi(w)$ be arbitrary fields on a vector space $V$. 
+Then the following are equivalent:
+\begin{enumerate}
+\item[(1)] There is an identity in $\End V[[z^{\pm1},w^{\pm1}]]$:
+\begin{equation}\label{eq:delta-commutator}
+[\phi(z),\psi(w)]
+= \sum_{j=0}^{N-1} \frac{1}{j!}\,\gamma_j(w)\,\partial_w^{j}\delta(z-w),
+\end{equation}
+where $\gamma_j(w)$, $j=0,\dots,N-1$, are some fields.
+\item[(2)] $\phi(z)\psi(w)$ (resp.\ $\psi(w)\phi(z)$) equals
+\begin{equation}\label{eq:OPE-form}
+\sum_{j=0}^{N-1} \frac{\gamma_j(w)}{(z-w)^{j+1}} 
+\;+\;
+:\phi(z)\psi(w):,
+\end{equation}
+where $1/(z-w)$ is expanded in positive powers of $w/z$ 
+(resp.\ $z/w$).
+\item[(3)] $\phi(z)\psi(w)$ converges for $|z|>|w|$ to the expression
+in~\eqref{eq:OPE-form}, and $\psi(w)\phi(z)$ converges for $|w|>|z|$
+to the same expression.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+First we derive (2) from (1).
+Given a formal power series $f(z)=\sum_{n\in\mathbb{Z}} f_n z^n$, 
+we will write, as before,
+\[
+f(z)_+ = \sum_{n\ge 0} f_n z^n,
+\qquad
+f(z)_- = \sum_{n<0} f_n z^n.
+\]
+On the left-hand side of~\eqref{eq:delta-commutator}, 
+$z$ appears only in the term $\phi(z)$. 
+Thus, taking the negative Fourier coefficients with respect to $z$, we obtain
+\[
+[\phi(z),\psi(w)]_- = 
+\big(\text{R.H.S. of~\eqref{eq:delta-commutator}}\big)_-,
+\]
+and similarly for $(\cdot)_+$.
+But since (by definition of normal ordering, since we are supposed to put all “creation operators” to the left) so 
+\[
+:\phi(z)\psi(w): 
+= \psi(w)\phi(z)_- + \phi(z)_+\psi(w)
+\]
+while 
+\[
+\phi(z)\psi(w) = \phi(z)_-\psi(w) + \phi(z)_+\psi(w),
+\]
+we see that
+\[
+[\phi(z),\psi(w)] = 
+\phi(z)\psi(w) - :\phi(z)\psi(w):.
+\]
+Thus,
+\[
+\big(\text{R.H.S. of~\eqref{eq:delta-commutator}}\big)_-
+= \sum_{j=0}^{N-1} \frac{1}{j!}\,\gamma_j(w)\,
+\partial_w^j \delta(z-w)_-.
+\]
+Since
+\[
+\frac{1}{j!}\,\partial_w^j \delta(z-w)_-
+\quad \text{is the expansion of } 
+\frac{1}{(z-w)^{j+1}}
+\text{ in } \mathbb{C}((z))((w)),
+\]
+we obtain formula~\eqref{eq:OPE-form}.
+The formula for $\psi(w)\phi(z)$ is obtained in the same way
+by taking the positive part of the commutator $[\psi(w),\phi(z)]$ 
+(with respect to $z$), which equals
+\[
+[\psi(w),\phi(z)]_+ = \psi(w)\phi(z) - :\phi(z)\psi(w):.
+\]
+To derive part (1) from part (2), observe that when we take the commutator
+between $\phi(z)$ and $\psi(w)$, the normally ordered terms cancel each other. Explicitly, we have
+\begin{align*}
+:\phi(z)\psi(w):
+&= \phi(z)_- \psi(w) + \phi(z)_+ \psi(w) \\
+:\psi(w)\phi(z):
+&= \psi(w)_- \phi(z) + \psi(w)_+ \phi(z) \\
+:\phi(z)\psi(w): - :\psi(w)\phi(z): &= (\phi(z)_- \psi(w) + \phi(z)_+ \psi(w)) - (\psi(w)_- \phi(z) + \psi(w)_+ \phi(z)) \\
+&= \phi(z)_- \psi(w) + \phi(z)_+ \psi(w) - \psi(w)_- \phi(z) - \psi(w)_+ \phi(z) \\
+&= \phi(z)_- (\psi(w)_- + \psi(w)_+) + \phi(z)_+ (\psi(w)_- + \psi(w)_+) \\
+&- \psi(w)_- (\phi(z)_- + \phi(z)_+) - \psi(w)_+ (\phi(z)_- + \phi(z)_+) \\
+&= 0
+\end{align*}
+
+We are left with the combination
+\[
+\sum_{j=0}^{N-1} \frac{1}{j!}\,\gamma_j(w)
+\big(\partial_w^j \delta(z-w)_- + \partial_w^j \delta(z-w)_+\big)
+= \text{R.H.S. of~\eqref{eq:delta-commutator}}.
+\]
+The equivalence of (2) and (3) is clear.
+\end{proof}
  \section*{Meetings}
 \subsection*{Questions (Sept 18)}
 \begin{enumerate}[A.]
@@ -6156,5 +6843,6 @@ Continuing with the discussion of theta functions, we have the following theorem
     \bibitem{kac} Kac, V. G. \textbf{Infinite Dimensional Lie Algebras}. Cambridge University Press, 1990.
     \bibitem{pressley-segal} Pressley, A., and Segal, G. \textbf{Loop Groups}. Oxford University Press, 1986.
     \bibitem{frenkel-ben-zvi} Frenkel, E., and Ben-Zvi, D. \textbf{Vertex Algebras and Algebraic Curves}. Second edition. Mathematical Surveys and Monographs, 88. American Mathematical Society, Providence, RI; 2004.
+    \bibitem{PNZ} McGlade, F., Ram, A., and Yang, Y. \textbf{Positive level, negative level and level zero}.
 \end{enumerate}
 \end{document}

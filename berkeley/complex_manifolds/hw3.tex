@@ -20,6 +20,12 @@ Which of the following is a Galois cover of the complex $z$-plane?
 \end{problem}
 
 \begin{solution}
+    \begin{enumerate}
+        \item The Riemann surface is degree two over the $z$-plane, and one sees by inspection that $w\mapsto -w$ is a deck transformation. So the cover has Deck group at least the size of the degree, hence is Galois.  
+	 \item The Riemann surface is degree $n$ over the $z$-plane, and one sees by inspection that $w\mapsto \zeta w$ ($\zeta^n=1$) is a deck transformation. So the cover has Deck group at least the size of the degree, hence is Galois.  
+    \item Look at the fiber over $z=0$. The point $(0,0)$ has valency $2$ with respect to the projection and hence the cover must fix it. In particular any deck transformation must also fix $(1,0)$ which is a point of valency $1$. So it must be the identity and the cover is not Galois.
+    \item Set $y = w - z$. Then the equation becomes $y^2 = 1 + z^2 - z^3$ is a degree two cover of the $z$-plane, and one sees by inspection that $y \mapsto -y$ is a deck transformation. So the cover has Deck group at least the size of the degree, hence is Galois.
+    \end{enumerate}
 \end{solution}
 
 \begin{problem}[2]
@@ -57,13 +63,36 @@ Let $V$ be a rank $2$ (for simplicity) vector bundle over a Riemann surface $R$.
 \end{solution}
 
 \begin{problem}[3]
-(a) Consider the vector bundle $V$ with sheaf of sections $\mathcal{O}(n_1) \oplus \cdots \oplus \mathcal{O}(n_k)$ over $\mathbb{P}^1$, with $n_1 \le \cdots \le n_k$. Show that the sequence of integers $n_i$ is uniquely determined by $V$.\\
-(b) In contrast with (a), show that $\mathcal{O}(1)\oplus\mathcal{O}(-1)$ and $\mathcal{O}\oplus\mathcal{O}$ are isomorphic as topological vector bundles.\\
-(c) Show that there is a holomorphic automorphism of $V$ which takes the vector $[1,0,\dots,0]$ in the fiber over $0$ to $[1,1,\dots,1]$.\\
-(d) Assuming the fact that every rank $k$ holomorphic vector bundle on $\mathbb{P}^1$ can be constructed from $\mathcal{O}^{\oplus k}$ by elementary transformations, show that it must be isomorphic to one of the form in (a).
+    \leavevmode
+    \begin{enumerate}[(a)]
+        \item Consider the vector bundle $V$ with sheaf of sections $\mathcal{O}(n_1) \oplus \cdots \oplus \mathcal{O}(n_k)$ over $\mathbb{P}^1$, with $n_1 \le \cdots \le n_k$. Show that the sequence of integers $n_i$ is uniquely determined by $V$.
+        \item In contrast with (a), show that $\mathcal{O}(1)\oplus\mathcal{O}(-1)$ and $\mathcal{O}\oplus\mathcal{O}$ are isomorphic as topological vector bundles.
+        \item Show that there is a holomorphic automorphism of $V$ which takes the vector $[1,0,\dots,0]$ in the fiber over $0$ to $[1,1,\dots,1]$.
+        \item Assuming the fact that every rank $k$ holomorphic vector bundle on $\mathbb{P}^1$ can be constructed from $\mathcal{O}^{\oplus k}$ by elementary transformations, show that it must be isomorphic to one of the form in (a).
+    \end{enumerate}
 \end{problem}
 
 \begin{solution}
+    \begin{enumerate}[(a)]
+        \item Suppose also $V\simeq \bigoplus_{j=1}^k \mathcal O(m_j)$ with $m_1\le\cdots\le m_k$. Recall \[\operatorname{Hom}(\mathcal O(a),\mathcal O(b)) \cong H^0(\mathcal O(b-a))\] which is $0$ if $b<a$ and nonzero if $b\ge a$.
+
+        Consider the $r$ maps $\phi_r$ given by the composition
+        \begin{align*}
+            \cO(n_k) \hookrightarrow V \cong \bigoplus_{j=1}^k \cO(m_j) \twoheadrightarrow \cO(m_r)
+        \end{align*}
+        At least one composite
+        $\mathcal O(n_k)\to \mathcal O(m_r)$ is nonzero (if not then the inclusion would be zero), forcing $m_r\ge n_k$. With the orderings this gives $m_k\ge n_k$. By symmetry (swap the roles of $n,m$) we also get $n_k\ge m_k$. Hence $n_k=m_k$. Cancel that summand and argue by induction on $k$. 
+        \item Complex vector bundles of rank $2$ on $\P^1\cong S^2$ are topologically classified by homotopy classes of maps from $S^2$ to the classifying space $BU(2)$. Since \[\pi_2(BU(2))\cong \pi_1(U(2))\cong \Z\] the isomorphism classes of rank $2$ complex vector bundles on $S^2$ are classified by an integer, which is the first Chern class of the bundle. The first Chern class is additive under direct sum, and $c_1(\mathcal O(n)) = n$. Thus, both $\mathcal O(1)\oplus \mathcal O(-1)$ and $\mathcal O\oplus \mathcal O$ have first Chern class $0$, so they are isomorphic as topological vector bundles.
+        \item Order $n_1\le\cdots\le n_k$. For $i>1$ pick the constant section $s_{i1}\in H^0\!\big(\mathcal O(n_i-n_1)\big)$ equal to 1 (exists since $n_i-n_1\ge 0$). View $s_{i1}$ as a morphism $\mathcal O(n_1)\to \mathcal O(n_i)$.
+
+        Define an endomorphism of $V$ by the lower-triangular matrix with ones on the diagonal and $s_{i1}$ in the $(i,1)$-entry, zeros elsewhere. It is clearly an automorphism. On the fiber over 0 it sends $[1,0,\dots,0]$ to $(1,s_{21}(0),\dots,s_{k1}(0))=(1,1,\dots,1)$.
+        \item Let $L$ be the span of the first basis vector in the fiber of $\mathcal O(n_1)$ at $p$. On sections near $p$,
+        $0\to \ker\big(\mathcal O(n_1)\xrightarrow{\mathrm{ev}_p}\mathbb C_p\big)\cong \mathcal O(n_1-1)\to \mathcal O(n_1)\to \mathbb C_p\to 0$,
+        while the other summands are untouched. Therefore
+        $\mathrm{Elm}_{p,L}\!\left(\bigoplus_i \mathcal O(n_i)\right)\;\cong\; \mathcal O(n_1-1)\oplus \mathcal O(n_2)\oplus\cdots\oplus \mathcal O(n_k)$. Dually, the inverse elementary transform raises one chosen summand by $+1$.
+        Hence any sequence of elementary transforms starting from $\mathcal O^{\oplus k}$ stays split and merely adjusts integers on the summands by $\pm1$. After reordering to $n_1\le\cdots\le n_k$ you land in a bundle of the form in (a).
+
+    \end{enumerate}
 \end{solution}
 
 \begin{problem}[4]
@@ -72,6 +101,9 @@ Show that on a compact Riemann surface $R$ of genus $g$ and a line bundle $L$ of
 \end{problem}
 
 \begin{solution}
+    Serre duality gives $H^1(R; \mathcal{O}(L)) \cong H^0(R; \mathcal{O}(K \otimes L^{-1}))^*$ where $K$ is the canonical bundle of $R$. Since $\deg(K) = 2g-2$, we have $\deg(K \otimes L^{-1}) = 2g-2 - \deg(L) < 0$. A line bundle of negative degree has no nontrivial global sections, so $H^0(R; \mathcal{O}(K \otimes L^{-1})) = 0$. Therefore, $H^1(R; \mathcal{O}(L)) = 0$.
+
+    Take any $R$ with $g\ge 1$. Pick a line bundle $A$ with $\deg A>2g-2$ (there are plenty). Set $E = \mathcal O \oplus A$. Then $\deg E=\deg A>2g-2$ and \[H^1(R,E) = H^1(R,\mathcal O) \oplus H^1(R,A)\] By the claim above $H^1(R,A)=0$, while $H^1(R,\mathcal O)\cong \mathbb C^{\,g}\neq 0$ for $g\ge 1$. Hence $H^1(R,E)\neq 0$ even though $\deg E>2g-2$.
 \end{solution}
 
 \begin{problem}[5]
@@ -80,6 +112,9 @@ Prove that every compact Riemann surface of genus $2$ is \textit{hyperelliptic},
 \end{problem}
 
 \begin{solution}
+    Being genus $2$ means that the space of holomorphic differentials $H^0(R, K)$ is $2$-dimensional. Pick a basis $\omega_1, \omega_2$. Since $K$ has degree $2g-2=2$, the differentials $\omega_i$ each have two zeroes (counted with multiplicity). If they had a common zero, then they would be linearly dependent (since they are sections of a line bundle with a common zero), contradicting the choice of basis. Therefore, $\omega_1$ and $\omega_2$ have no common zeroes.
+
+    Define a meromorphic function $f = \omega_1/\omega_2$. Since $\omega_1$ and $\omega_2$ have no common zeroes, $f$ is well-defined and meromorphic on $R$. The poles of $f$ are the zeroes of $\omega_2$, and the zeroes of $f$ are the zeroes of $\omega_1$. Each differential has two zeroes, so $f$ has two poles and two zeroes, counting multiplicities. Therefore, $f$ is a degree $2$ meromorphic function on $R$, which defines a double cover of $\mathbb{P}^1$ (the Riemann sphere).
 \end{solution}
 
 
