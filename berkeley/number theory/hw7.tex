@@ -1,0 +1,276 @@
+\documentclass[12pt]{article}  % or any other class
+\usepackage{/Users/songye03/Desktop/Math_tex/style/psetconfig}         % loads your custom style
+\title{Homework 7}
+\author{Songyu Ye}
+\date{\today}
+
+\newtheorem{nonexample}{Non-Example}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+
+\begin{document}
+\psettitle
+
+
+Let $K$ be a non-Archimedean complete valued field (CVF).  
+By $\mathcal{A}$ we mean its valuation ring, $\mathfrak{m}$ the unique maximal ideal of $\mathcal{A}$, and $k := \mathcal{A}/\mathfrak{m}$ the residue field.
+
+\begin{definition}
+We say $K$ is a \textbf{perfectoid field} if the following three conditions hold:
+\begin{enumerate}[label=(P\arabic*)]
+\item $\mathrm{char}(k) = p > 0$ (but $\mathrm{char}(K)$ can be either $0$ or $p$);
+\item the valuation is non-\emph{discrete}, i.e. the value group 
+  \[
+  \Gamma := |K^\times| \subset \mathbb{R}_{>0}^\times
+  \]
+  is not a discrete subgroup;
+\item the Frobenius map 
+  \[
+  \Phi : \mathcal{A}/p\mathcal{A} \to \mathcal{A}/p\mathcal{A}, \quad x \mapsto x^p
+  \]
+  is surjective.
+\end{enumerate}
+\end{definition}
+In typical examples, one does not have an isomorphism in (P3).
+
+\begin{nonexample}
+If $K$ is a finite extension of $\mathbb{Q}_p$, then $K$ is not perfectoid as the valuation is still discrete. Similarly, the completion of $\mathbb{Q}_p^{\mathrm{unr}}$ is not perfectoid.  
+A finite field is perfect of characteristic $>0$ but \emph{not} perfectoid because it has trivial valuation (thus not a CVF).
+\end{nonexample}
+
+\begin{example}
+If $\mathrm{char}(K) = p$, then it is a simple exercise to show that $K$ is a perfectoid field if and only if $K$ is a perfect field (in addition to being a non-Archimedean CVF).  
+A concrete example is
+\[
+K = \mathbb{F}_p\bigl((t^{1/p^\infty})\bigr) := \bigcup_{n \ge 1} \mathbb{F}_p\bigl((t^{1/p^n})\bigr),
+\]
+where $|t| = a$, $|t^{1/p^n}| = a^{1/p^n}$ for a fixed constant $0 < a < 1$.
+\end{example}
+
+\begin{example}
+The completion $C = \widehat{\overline{\mathbb{Q}}_p}$, which is a CVF, appeared in the previous problem set.  
+It is perfectoid --- this will be verified in the first problem below.  
+In this case, we usually write $\mathcal{O}_C$ for the valuation ring $\mathcal{A}$.  
+Write $\mathcal{O}_{\overline{\mathbb{Q}}_p}$ for the valuation ring of $\overline{\mathbb{Q}}_p$, and $\mathfrak{m}_C, \mathfrak{m}_{\overline{\mathbb{Q}}_p}$ for the maximal ideals in the corresponding valuation rings.  
+We verify this example in the following problem.
+\end{example}
+
+\begin{example}
+The completion of $\mathbb{Q}_p(\mu_{p^\infty})$ turns out to be a perfectoid field as well.  
+A general intuition is that a perfectoid field is ``infinitely ramified'' to allow the valuation to be non-discrete.
+\end{example}
+
+\begin{problem}[1]
+\leavevmode
+\begin{enumerate}[label=(\arabic*)]
+\item Show that the inclusion $\mathcal{O}_{\overline{\mathbb{Q}}_p} \subset \mathcal{O}_C$ induces isomorphisms
+\[
+\mathcal{O}_{\overline{\mathbb{Q}}_p}/p\mathcal{O}_{\overline{\mathbb{Q}}_p} \cong \mathcal{O}_C/p\mathcal{O}_C
+\quad \text{and} \quad
+\mathcal{O}_{\overline{\mathbb{Q}}_p}/\mathfrak{m}_{\overline{\mathbb{Q}}_p} \cong \mathcal{O}_C/\mathfrak{m}_C.
+\]
+(It is not hard to see that the residue field $\mathcal{O}_{\overline{\mathbb{Q}}_p}/\mathfrak{m}_{\overline{\mathbb{Q}}_p} \cong \overline{\mathbb{F}}_p$, since it is an algebraic extension of $\mathbb{F}_p$ containing an arbitrary finite extension of $\mathbb{F}_p$.)
+\item Show that $\Gamma = p^{\mathbb{Q}} = \{p^a : a \in \mathbb{Q}\}$ in this case, if we normalize the valuation such that $|p| = 1/p$.
+\item Check that the Frobenius map 
+\[
+\mathcal{O}_C/p\mathcal{O}_C \to \mathcal{O}_C/p\mathcal{O}_C
+\]
+is surjective.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+We first show that the natural inclusion $\mathcal{O}_{\overline{\mathbb{Q}}_p} \subset \mathcal{O}_C$ induces isomorphisms
+\[
+\mathcal{O}_{\overline{\mathbb{Q}}_p}/p \;\cong\; \mathcal{O}_C/p
+\qquad\text{and}\qquad
+\mathcal{O}_{\overline{\mathbb{Q}}_p}/\mathfrak{m}_{\overline{\mathbb{Q}}_p} \;\cong\; \mathcal{O}_C/\mathfrak{m}_C.
+\]
+Since $\mathcal{O}_{\overline{\mathbb{Q}}_p}$ is dense in $\mathcal{O}_C$, given any $\bar{x} \in \mathcal{O}_C/p$, we may choose a lift $x \in \mathcal{O}_C$ and find $y \in \mathcal{O}_{\overline{\mathbb{Q}}_p}$ such that $|x-y|\le |p|$. This implies $x \equiv y \pmod{p}$, establishing surjectivity. Conversely, if $a \in \mathcal{O}_{\overline{\mathbb{Q}}_p}$ maps to $0$ in $\mathcal{O}_C/p$, then $a \in p\mathcal{O}_C$. Writing $a = pb$ with $b \in \mathcal{O}_C$ and using that $\mathcal{O}_C$ and $\mathcal{O}_{\overline{\mathbb{Q}}_p}$ share the same valuation, we have $b \in \mathcal{O}_{\overline{\mathbb{Q}}_p}$. Hence $a \in p\mathcal{O}_{\overline{\mathbb{Q}}_p}$, proving injectivity. The same argument, applied to the maximal ideals $\mathfrak{m}_{\overline{\mathbb{Q}}_p}$ and $\mathfrak{m}_C$, shows that the reduction maps mod $\mathfrak m$ also induce an isomorphism of residue fields. In particular, both residue fields are algebraic closures of $\mathbb{F}_p$.
+
+Next we compute the value group. Since completion does not change valuations, we have
+\[
+|C^\times| = |\overline{\mathbb{Q}}_p^\times|.
+\]
+For each finite extension $L/\mathbb{Q}_p$ with ramification index $e$, the value group satisfies $|L^\times| = p^{\frac{1}{e}\mathbb{Z}}$. Taking the union over all finite extensions inside $\overline{\mathbb{Q}}_p$ gives
+\[
+|\overline{\mathbb{Q}}_p^\times| = \bigcup_{e \ge 1} p^{\frac{1}{e}\mathbb{Z}} = p^{\mathbb{Q}}.
+\]
+Hence $\Gamma = |C^\times| = p^{\mathbb{Q}}$, which is non-discrete and $p$-divisible when the normalization $|p| = p^{-1}$ is used.
+
+Finally, we verify that Frobenius on $\mathcal{O}_C/p$ is surjective. By the first part, it suffices to check surjectivity on $\mathcal{O}_{\overline{\mathbb{Q}}_p}/p$. Given $\bar{a} \in \mathcal{O}_{\overline{\mathbb{Q}}_p}/p$, choose a lift $a \in \mathcal{O}_{\overline{\mathbb{Q}}_p}$, which lies in the ring of integers $\mathcal{O}_L$ of some finite extension $L/\mathbb{Q}_p$. In $\mathcal{O}_L/p \cong k_L$, the residue field $k_L$ is finite of characteristic $p$, so Frobenius $x \mapsto x^p$ is bijective. Thus there exists $b \in \mathcal{O}_L \subset \mathcal{O}_{\overline{\mathbb{Q}}_p}$ such that $b^p \equiv a \pmod{p}$. Therefore Frobenius is surjective on $\mathcal{O}_{\overline{\mathbb{Q}}_p}/p$, and hence also on $\mathcal{O}_C/p$.
+\end{solution}
+
+For problems~2--4, we work in the following general setting.  
+Let $K$ be a perfectoid field with valuation ring $\mathcal{A}$.  
+Fix a nonzero element $\varpi \in \mathcal{A}$ such that
+\[
+|p| \le |\varpi| < 1.
+\]
+Such an element is called a \emph{pseudo-uniformizer}, as it plays a similar role to a uniformizer for a DVR.
+
+If $\mathrm{char}(K)=0$, we can take $\varpi = p$.  
+If $\mathrm{char}(K)=p$, we should make a different choice, e.g. for $K = \mathbb{F}_p((t^{1/p^\infty}))$, take $\varpi = t$.  
+In either case, (P3) implies that the $p$-th power map induces a surjection
+\[
+\mathcal{A}/\varpi \mathcal{A} \twoheadrightarrow \mathcal{A}/\varpi \mathcal{A} \quad (x \mapsto x^p).
+\]
+
+\medskip
+
+Consider the inverse limit along this $p$-th power map:
+\[
+\mathcal{A}^\flat := \varprojlim_{x \mapsto x^p} \mathcal{A}/\varpi \mathcal{A}
+= \{ (x_0, x_1, \dots) : x_i \in \mathcal{A}/\varpi \mathcal{A},\, x_{i+1}^p = x_i \text{ for all } i \ge 0 \}.
+\]
+
+\begin{problem}[2]
+\leavevmode
+\begin{enumerate}[label=(\arabic*)]
+\item Prove that $\mathcal{A}^\flat$ is a perfect ring of characteristic $p$.  
+(Addition and multiplication are defined term-by-term.)
+\item Show that the canonical map
+\[
+f : \varprojlim_{x \mapsto x^p} \mathcal{A} = \{ (y_0, y_1, \dots) : y_i \in \mathcal{A},\; y_{i+1}^p = y_i \} \to \mathcal{A}^\flat
+\]
+given by $f((y_i)) = (y_i \bmod \varpi)$ is a bijection.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+Each $\mathcal A/\varpi$ has characteristic $p$, hence so does the inverse limit; addition and multiplication are defined termwise and respect the transition maps, so $\mathcal A^\flat$ is a ring. The Frobenius
+\[
+\varphi: \mathcal A^\flat \to \mathcal A^\flat,\quad (x_0,x_1,\ldots)\mapsto(x_0^p,x_1^p,\ldots)
+\]
+is bijective: its inverse is the right shift
+\[
+\varphi^{-1}(x_0,x_1,\ldots)=(x_1,x_2,\ldots),
+\]
+which is well-defined because $x_{i+1}^p=x_i$. Thus $\mathcal A^\flat$ is perfect.
+
+\begin{lemma}[1]
+If $a\equiv b \pmod{\varpi^m}$ in $\mathcal A$, then $a^p\equiv b^p \pmod{\varpi^{m+1}}$. Consequently, for any $r\ge 1$,
+\[
+a^{p^r}\equiv b^{p^r} \pmod{\varpi^{m+r}}.
+\]
+\end{lemma}
+
+\begin{proof}
+Write $a=b+\varpi^m u$. Then
+\[
+a^p-b^p=\sum_{j=1}^p \binom pj b^{p-j}(\varpi^m u)^j.
+\]
+For $j\ge 2$ the term is divisible by $\varpi^{2m}$. For $j=1$ it equals $p\,b^{p-1}\,\varpi^m u$, which is divisible by $p\varpi^m$; since $v(p)\ge v(\varpi)$ (i.e.\ $|p|\le|\varpi|$), we have $p\varpi^m\in \varpi^{m+1}\mathcal A$. Hence $a^p\equiv b^p\ (\mathrm{mod}\ \varpi^{m+1})$. Iterate to get the $p^r$ statement.
+\end{proof}
+
+\noindent\emph{Injectivity of $f$.}
+Suppose $(y_i)$ and $(y_i')$ in $\varprojlim \mathcal A$ have the same reduction mod $\varpi$. Then $d_i:=y_i-y_i'\in\varpi\mathcal A$ for all $i$, and
+\[
+d_i \;=\; y_{i+1}^p - (y_{i+1}')^p.
+\]
+By Lemma 1 with $m=1$, $d_i\in \varpi^2\mathcal A$. Repeating, we get $d_i\in \varpi^n\mathcal A$ for all $n\ge 1$. Since $\mathcal A$ is $\varpi$-adically separated, $\bigcap_{n\ge1}\varpi^n\mathcal A=\{0\}$, hence $d_i=0$ for all $i$. Thus $f$ is injective.
+
+\smallskip
+\noindent\emph{Surjectivity of $f$.}
+Let $x=(x_0,x_1,\ldots)\in \mathcal A^\flat$. Choose arbitrary lifts $y_n^{(0)}\in\mathcal A$ of $x_n$ for each $n\ge 0$. For fixed $i$, define a sequence (indexed by $n\ge i$)
+\[
+z_i^{(n)} \;:=\; \bigl(y_n^{(0)}\bigr)^{p^{\,n-i}} \in \mathcal A.
+\]
+If $n>m\ge i$ and $y_n^{(0)}\equiv y_m^{(0)} \pmod{\varpi}$ (true because both reduce to $x_n$ transported along $p$-power to $x_m$), then by Lemma 1
+\[
+\bigl(y_n^{(0)}\bigr)^{p^{\,n-i}} \equiv \bigl(y_m^{(0)}\bigr)^{p^{\,n-i}} \equiv \bigl(y_m^{(0)}\bigr)^{p^{\,m-i}} \pmod{\varpi^{\, (n-i)+1}}.
+\]
+Hence $(z_i^{(n)})_{n\ge i}$ is Cauchy in the $\varpi$-adic topology. Since $\mathcal A$ is $\varpi$-adically complete, the limit
+\[
+y_i \;:=\; \lim_{n\to\infty} z_i^{(n)} \in \mathcal A
+\]
+exists. Define $y=(y_0,y_1,\ldots)$.
+
+By construction, $y_i \equiv x_i \ (\mathrm{mod}\ \varpi)$ (pass to the limit of the reductions), and
+\[
+y_{i+1}^p \;=\; \Bigl(\lim_{n\to\infty} \bigl(y_n^{(0)}\bigr)^{p^{\,n-(i+1)}}\Bigr)^p
+\;=\; \lim_{n\to\infty} \bigl(y_n^{(0)}\bigr)^{p^{\,n-i}}
+\;=\; y_i,
+\]
+using continuity of $t\mapsto t^p$. Thus $y\in \varprojlim \mathcal A$ and $f(y)=x$. So $f$ is surjective and hence a bijection.
+\end{solution}
+
+For each $x \in \mathcal{A}^\flat$, write $f^{-1}(x) = (y_0, y_1, \dots)$.  
+Define $x^\sharp \in \mathcal{A}$ to be $y_0$, the first coordinate in $f^{-1}(x)$.  
+Thus we obtain a map
+\[
+(\cdot)^\sharp : \mathcal{A}^\flat \to \mathcal{A}, \qquad x \mapsto x^\sharp.
+\]
+
+\begin{problem}[3]
+\leavevmode
+\begin{enumerate}[label=(\arabic*)]
+\item Given $x \in K^\times$, show there exists $y \in K^\times$ such that $|y^p| = |x|$.  
+(This tells us that $\Gamma = |K^\times|$ is not only non-discrete but $p$-divisible.)
+\item Prove that there exists an element $\varpi^\flat \in \mathcal{A}^\flat$ such that $|(\varpi^\flat)^\sharp| = |\varpi|$.
+\item Consider the localization 
+\[
+K^\flat := \mathcal{A}^\flat[1/\varpi^\flat].
+\]
+Show that the map $(\cdot)^\sharp$ extends to a multiplicative map $K^\flat \to K$, still denoted $(\cdot)^\sharp$, making $K^\flat$ a field of characteristic $p$.
+\item Show that the function
+\[
+|\cdot| : K^\flat \to \mathbb{R}_{\ge 0}, \qquad |y| := |y^\sharp|
+\]
+is a valuation on $K^\flat$, and that $\mathcal{A}^\flat$ is its valuation ring.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\begin{enumerate}
+    \item First treat the case $0<v(x)<v(p)$. By surjectivity of Frobenius on $\mathcal A/p$, pick $b\in\mathcal A$ with
+$b^p\equiv x \pmod p$, so $x=b^p+pc$ for some $c\in\mathcal A$. Since $v(pc)\ge v(p)>v(x)$, the ultrametric inequality gives
+$v(x)=v(b^p)$ and hence $|b^p|=|x|$. Thus the claim holds with $y=b$ in this range.
+
+For general $x\ne0$, choose $N\in\mathbb Z$ with $0<v(xp^{-N})<v(p)$; apply the previous paragraph to $x':=xp^{-N}$ to get $y_0\in K^\times$ with $|y_0^p|=|x'|$. 
+
+\item 
+By (1) choose $y\in\mathcal A$ with $|y^p|=|\varpi|$. Using surjectivity of Frobenius on $\mathcal A/\varpi$, choose inductively a sequence
+\[
+x_0:=\overline{y}\in \mathcal A/\varpi,\qquad
+x_{i+1}\in \mathcal A/\varpi\ \ \text{with}\ \ x_{i+1}^p=x_i\ \ \text{for all }i\ge0.
+\]
+Let $\varpi^\flat:=(x_0,x_1,x_2,\ldots)\in\mathcal A^\flat$. Pick arbitrary lifts $\tilde x_i\in\mathcal A$ of $x_i$. Then by the defining formula,
+\[
+(\varpi^\flat)^\sharp=\lim_{i\to\infty} \tilde x_i^{\,p^i},
+\]
+and (since $\tilde x_0$ may be taken to be $y$) we get $|(\varpi^\flat)^\sharp|=|y|^p=|\varpi|$.
+
+\item 
+Define $(\cdot)^\sharp$ on $K^\flat$ by
+\[
+\Bigl(\frac{a}{(\varpi^\flat)^n}\Bigr)^\sharp:=\frac{a^\sharp}{\bigl((\varpi^\flat)^\sharp\bigr)^n}
+\quad\in K
+\qquad (a\in\mathcal A^\flat,\ n\in\mathbb Z_{\ge0}).
+\]
+This is well-defined because $(\cdot)^\sharp$ is multiplicative on $\mathcal A^\flat$ and $(\varpi^\flat)^\sharp\neq0$. It is again multiplicative by construction. 
+
+Since $\mathcal A^\flat$ is perfect of characteristic $p$ (Problem~2) and $\varpi^\flat$ is a nonzerodivisor in the valuation setting below, inverting $\varpi^\flat$ yields a nonzero characteristic-$p$ domain.
+
+\item
+Multiplicativity is immediate:
+\[
+|xy|_\flat = |(xy)^\sharp| = |x^\sharp y^\sharp| = |x^\sharp|\cdot|y^\sharp| = |x|_\flat\,|y|_\flat.
+\]
+The ultrametric inequality follows from that in $K$ and continuity of $(\cdot)^\sharp$:
+\[
+|x+y|_\flat = |(x+y)^\sharp| \le \max\{|x^\sharp|,|y^\sharp|\}
+= \max\{|x|_\flat,|y|_\flat\}.
+\]
+Nontriviality holds because $|(\varpi^\flat)|_\flat=|(\varpi^\flat)^\sharp|=|\varpi|<1$.
+
+We claim $\mathcal A^\flat=\{z\in K^\flat: |z|_\flat\le 1\}$. If $a\in\mathcal A^\flat$, then $a^\sharp\in\mathcal A$ so $|a|_\flat=|a^\sharp|\le 1$. Conversely, let $z=a/(\varpi^\flat)^n$ with $a\in\mathcal A^\flat$. If $|z|_\flat\le 1$, then
+\[
+|a^\sharp|\le |(\varpi^\flat)^\sharp|^n = |\varpi|^n,
+\]
+so $a^\sharp\in \varpi^n\mathcal A$. Using multiplicativity and that $(\cdot)^\sharp$ detects divisibility by $\varpi^\flat$ via absolute values, this implies $a\in (\varpi^\flat)^n\mathcal A^\flat$, hence $z\in\mathcal A^\flat$. Therefore $\mathcal A^\flat$ is exactly the valuation ring for $|\cdot|_\flat$, and its fraction field is $K^\flat$.
+\end{enumerate}
+\end{solution}
+
+\end{document}

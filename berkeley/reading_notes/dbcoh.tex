@@ -34,8 +34,8 @@
 
 \tableofcontents
 
-\section{Preliminaries on GIT}
-\subsection{Generalities on GIT quotients}
+
+\section{Generalities on GIT quotients}
 Let $X \subset \mathbb{P}^n$ be a projective variety, and let $\widetilde{X} \subset \mathbb{C}^{n+1}$ be the corresponding affine cone.
 Since $X$ is the space of lines in $\widetilde{X}$, it has a tautological line bundle
 \[
@@ -239,13 +239,7 @@ than just $G$-orbits, so we need another definition.
   $\bigoplus_r H^0(X,\mathcal{O}(r))^G$ separates orbits near $x$ and the stabiliser of $x$ is finite.
 \end{definition}
 
-
-
-
-\subsection{Relevant example}
-We recall the basic set-up of Geometric Invariant Theory (GIT) quotients relevant to our situation.
-
-Let $V = \mathbb{C}^4$ with coordinates $x_1,x_2,y_1,y_2$ and consider the $\mathbb{C}^*$-action given by
+We now come to the main example which we will study throughout these notes. Let $V = \mathbb{C}^4$ with coordinates $x_1,x_2,y_1,y_2$ and consider the $\mathbb{C}^*$-action given by
 \[
   t\cdot(x_1,x_2,y_1,y_2)=(t x_1, t x_2, t^{-1}y_1, t^{-1}y_2)
 \]
@@ -272,130 +266,7 @@ The quotient is $(V\setminus\{x_1=x_2=0\})/\mathbb{C}^*$, i.e. the total space o
 \]
 The quotient is $(V\setminus\{y_1=y_2=0\})/\mathbb{C}^*$, i.e. the total space of $\mathcal{O}(-1)^{\oplus 2}\to\mathbb{P}^1_{[y_1:y_2]}$.
 
-\subsection{Quotient stack}
-Let $\mathcal{S}$ be a category and $p:\mathcal{X}\to\mathcal{S}$ be a functor of categories.
-We visualize this data as
-\[
-  \begin{tikzcd}
-    \mathcal{X} \arrow[d, "p"'] & a \arrow[r, "\alpha"] \arrow[d] & b \arrow[d] \\
-    \mathcal{S} & S \arrow[r, "f"'] & T
-  \end{tikzcd}
-\]
-where the lower case letters $a,b$ are objects of $\mathcal{X}$ and the upper case letters $S,T$
-are objects of $\mathcal{S}$. We say that $a$ is over $S$ and that a morphism $\alpha: a\to b$ is
-over $f:S\to T$.
-
-\begin{definition}[Prestacks]\label{def:prestacks}
-  A functor $p:\mathcal{X}\to\mathcal{S}$ is a \textbf{prestack over a category $\mathcal{S}$} if
-  \begin{enumerate}
-    \item[(1)] (\textbf{pullbacks exist}) for every diagram
-          \[
-            \begin{tikzcd}
-              a \arrow[d] \arrow[r, dashed] & b \arrow[d] \\
-              S \arrow[r] & T
-            \end{tikzcd}
-          \]
-          of solid arrows, there exists a morphism $a\to b$ over $S\to T$; and
-
-    \item[(2)] (\textbf{universal property for pullbacks}) for every diagram
-          \[
-            \begin{tikzcd}
-              a \arrow[d]
-              \arrow[r, dashed]
-              \arrow[rr, bend left=15] &
-              b \arrow[d] \arrow[r] &
-              c \arrow[d] \\
-              R \arrow[r] & S \arrow[r] & T
-            \end{tikzcd}
-          \]
-          of solid arrows, there exists a unique arrow $a\to b$ over $R\to S$ filling in the diagram.
-  \end{enumerate}
-  Prestacks are also referred to as \textbf{categories fibered in groupoids}.
-\end{definition}
-
-\begin{definition}[Fiber categories]\label{def:fibercat}
-  If $\mathcal{X}$ is a prestack over $\mathcal{S}$, the \textbf{fiber category}
-  $\mathcal{X}(S)$ over $S\in\mathcal{S}$ is the category of objects in $\mathcal{X}$ over $S$
-  with morphisms over $\mathrm{id}_S$.
-\end{definition}
-
-Given an action of an algebraic group $G$ on a scheme $X$, the \textbf{quotient prestack} $[X/G]^{\mathrm{pre}}$ is the prestack whose fiber category
-$[X/G]^{\mathrm{pre}}(S)$ over a scheme $S$ is the quotient groupoid (or the moduli groupoid of orbits) $[X(S)/G(S)]$
-This will not satisfy the gluing axioms of a stack; even when the action is free,
-the quotient functor $\mathrm{Sch} \to \mathrm{Sets}$ defined by $S \mapsto X(S)/G(S)$ is not a sheaf
-in general. Put another way, we define:
-\begin{definition}[Quotient prestacks]
-  Let $G \to S$ be a smooth affine group scheme acting on a scheme $U$ over $S$.
-  The \textbf{quotient prestack} $[U/G]^{\mathrm{pre}}$ of an action of a smooth affine group scheme $G \to S$
-  on an $S$-scheme $U$ is the category over $\mathrm{Sch}/S$ consisting of pairs $(T,u)$ where $T$ is an $S$-scheme
-  and $u \in U(T)$. An element $g \in G(T')$ acts by $(T',u') \to (T,u)$ via the data of a map $f:T'\to T$ of
-  $S$-schemes and an element $g \in G(T')$ such that $f^*u = g \cdot u'$. Note that the fiber category
-  $[U(T)/G(T)]$ is identified with the quotient groupoid.
-\end{definition}
-It turns out that the stackification of $[U/G]^{\mathrm{pre}}$ is the quotient stack $[U/G]$, hence the name is justified.
-
-\begin{definition}[Quotient stacks]
-  The \textbf{quotient stack} $[U/G]$ is the prestack over $\mathrm{Sch}/S$ consisting of diagrams
-  \[
-    \begin{tikzcd}
-      P \arrow[r] \arrow[d] & U \\
-      T
-    \end{tikzcd}
-  \]
-  where $P \to T$ is a principal $G$-bundle and $P \to U$ is a $G$-equivariant morphism of $S$-schemes.
-
-  A morphism
-  \[
-    (T' \;\longleftarrow\; P' \;\longrightarrow\; U) \;\longrightarrow\;
-    (T \;\longleftarrow\; P \;\longrightarrow\; U)
-  \]
-  consists of a morphism $T' \to T$ and a $G$-equivariant morphism $P' \to P$ of schemes such that the diagram
-  \[
-    \begin{tikzcd}
-      P' \arrow[r] \arrow[d] \arrow[rr, bend left=20] &
-      P \arrow[r] \arrow[d] &
-      U \\
-      T' \arrow[r] & T &
-      \arrow[from=1-1, to=2-1]
-      \arrow[from=1-2, to=2-2]
-    \end{tikzcd}
-  \]
-  is commutative and the left square is cartesian.
-\end{definition}
-
-A stack over a site $\mathcal{S}$ is a prestack $\mathcal{X}$ where the objects and morphisms glue uniquely in the Grothendieck topology of $\mathcal{S}$.
-
-\begin{definition}
-  [Stack] \label{def:stack}
-  A \textbf{stack} $\mathcal{X}$ over a site $\mathcal{C}$ is a prestack over $\mathcal{C}$ satisfying the following descent conditions:
-  \begin{itemize}
-    \item (Descent for morphisms) For any $U\in\mathcal{C}$, any covering $\{f_i:U_i\to U\}$, and any $x,y\in\mathcal{X}(U)$, the presheaf
-          \[
-            \underline{\mathrm{Hom}}(x,y): (V\to U) \mapsto \mathrm{Hom}_{\mathcal{X}(V)}(f^*x,f^*y)
-          \]
-          is a sheaf on $\mathcal{C}/U$.
-    \item (Descent for objects) For any $U\in\mathcal{C}$, any covering $\{f_i:U_i\to U\}$, and any descent datum $(x_i,\phi_{ij})$ relative to $\{f_i:U_i\to U\}$, there exists an object $x\in\mathcal{X}(U)$ and isomorphisms $\psi_i:f_i^*x\xrightarrow{\sim} x_i$ such that $\phi_{ij}\circ f_j^*\psi_j = f_i^*\psi_i$.
-  \end{itemize}
-\end{definition}
-
-\begin{definition}[Substack]
-  A \textbf{substack} $\mathcal{Y}\subseteq \mathcal{X}$ is given by:
-  \begin{itemize}
-    \item For each $U\in\mathcal{C}$, a full subcategory $\mathcal{Y}(U)\subseteq \mathcal{X}(U)$.
-    \item Stability under restriction:
-          If $y\in \mathcal{Y}(U)$ and $f:V\to U$ is a morphism in the site, then the pullback $f^*y \in \mathcal{X}(V)$ must lie in $\mathcal{Y}(V)$.
-    \item Stack condition:
-          The collection $\mathcal{Y}$ is itself a stack (i.e. satisfies descent for objects and morphisms).
-  \end{itemize}
-\end{definition}
-
-\begin{definition}[Open and closed substacks]\label{def:open-closed-substacks}
-  A substack $\mathcal{T} \subseteq \mathcal{X}$ of a stack over $\mathrm{Sch}_{\mathrm{\acute{e}t}}$
-  is called an \textbf{open substack} (resp.\ \textbf{closed substack}) if the inclusion
-  $\mathcal{T} \to \mathcal{X}$ is representable by schemes and an open immersion (resp.\ closed immersion).
-\end{definition}
-
-\section{Introduction}
+\section{Autoequivalences from VGIT}
 We show that we can construct $\mathbb{Z}$ many derived equivalences between $X_+$ and $X_-$, and that the resulting autoequivalences are spherical twists. Segal's paper upgrades this equivalence to an equivalence of $B$-brane dg-categories. In particular, he shows that there are $\mathbb{Z}$ many quasi-equivalences between the categories of B-branes on $(X_+, W)$ and $(X_-, W)$. When $W=0$, the dg-category of B-branes is just the dg-category of perfect complexes, whose homotopy category is the bounded derived category of coherent sheaves. So Segal's result recovers the derived equivalences we construct here.
 
 \red{Can you shed any intuition on what the $B$-brane dg-category is?}
@@ -406,7 +277,7 @@ We show that we can construct $\mathbb{Z}$ many derived equivalences between $X_
 
 \subsection{Set-up}
 
-Let $V = \mathbb{C}^4$ with co-ordinates $x_1, x_2, y_1, y_2$, and let $\mathbb{C}^*$ act on $V$ with weight $1$ on each $x_i$ and weight $-1$ on each $y_i$. There are two possible GIT quotients $X_{+}$ and $X_{-}$, depending on whether we choose a positive or negative character of $\mathbb{C}^*$. Both are isomorphic to the total space of the bundle $\mathcal{O}(-1)^{\oplus 2}$ over $\mathbb{P}^1$. This is the standard "three-fold flop" situation.
+Let $V = \mathbb{C}^4$ with coordinates $x_1, x_2, y_1, y_2$, and let $\mathbb{C}^*$ act on $V$ with weight $1$ on each $x_i$ and weight $-1$ on each $y_i$. There are two possible GIT quotients $X_{+}$ and $X_{-}$, depending on whether we choose a positive or negative character of $\mathbb{C}^*$. Both are isomorphic to the total space of the bundle $\mathcal{O}(-1)^{\oplus 2}$ over $\mathbb{P}^1$. This is the standard "three-fold flop" situation.
 
 Both are open substacks of the Artin quotient stack
 \[
@@ -557,7 +428,7 @@ To compute $H^\bullet(X_\pm,\mathcal{O}(i))$, we use the projection $\pi:X_\pm\t
   The last isomorphism above can be seen from the general fact that if $L$ is a line bundle and $V$ is a vector space, then $\operatorname{Sym}^m(L\otimes V) \cong L^{\otimes m}\otimes \operatorname{Sym}^m(V)$. Locally trivialize $L$. Then $\operatorname{Sym}^m(L\otimes V)$ is generated by monomials $(\ell\otimes v_1)\cdots (\ell\otimes v_m) = \ell^m \otimes (v_1\cdots v_m)$, which shows the factorization.
 \end{remark}
 
-By projection formula and affineness of $\pi$ \[
+By the projection formula and affineness of $\pi$ \[
   H^p(X^+,\mathcal{O}(k))
   \cong
   H^p\Big(\mathbb{P}^1,\ \pi_*\mathcal{O}_{X^+}\otimes\mathcal{O}(k)\Big)
@@ -704,7 +575,236 @@ through word-for-word, where now
   \mathcal{G}_t = \langle \mathcal{O}(t), \ldots, \mathcal{O}(t+d-1)\rangle.
 \]
 
+\section{Appendix: Algebraic Geometry}
+We collect some definitions and facts from algebraic geometry that are used in the main text.
+\subsection{Cohomology and affineness}
+If $X = \Spec A$ is an affine scheme, then every quasi-coherent sheaf $\mathcal{F}$ on $X$ has no higher cohomology
+\begin{align*}
+H^p(X,\mathcal{F}) = 0 \quad \text{for } p > 0.
+\end{align*} This is because quasi-coherent sheaves on affine schemes correspond to $A$-modules, and taking global sections corresponds to taking the module itself, which is an exact functor. In general, whenever a quasiseparated scheme $X$ has an open cover by affine schemes $U_i$, the \v{C}ech complex associated to this cover can be used to compute the cohomology of quasi-coherent sheaves on $X$. In particular, if $X$ can be covered by $m$ open affine sets then \begin{align*}
+H^p(X,\mathcal{F}) = 0 \quad \text{for } p \geq m.
+\end{align*}
 
+It turns out that the vanishing of higher cohomology for all quasi-coherent sheaves characterizes affineness. This is known as Serre's affineness criterion.
+\begin{theorem}[Serre's affineness criterion]
+\label{theorem:serre-affine}
+Let $X$ be a scheme. Assume that
+\begin{enumerate}
+\item $X$ is quasi-compact, and
+\item for every quasi-coherent sheaf of ideals $\mathcal{I}\subset\mathcal{O}_X$ we have $H^1(X,\mathcal{I})=0$.
+\end{enumerate}
+Then $X$ is affine.
+\end{theorem}
+
+\begin{proof}
+Let $x\in X$ be a closed point. Let $U\subset X$ be an affine open neighbourhood of $x$. 
+Write $U=\Spec(A)$ and let $\mathfrak m\subset A$ be the maximal ideal corresponding to $x$. 
+Set $Z = X\setminus U$ and $Z' = Z\cup\{x\}$. 
+There are quasi-coherent sheaves of ideals $\mathcal{I},\mathcal{I}'$ cutting out the reduced closed subschemes $Z$ and $Z'$ respectively. 
+Consider the short exact sequence
+\[
+0 \longrightarrow \mathcal{I}' \longrightarrow \mathcal{I} \longrightarrow \mathcal{I}/\mathcal{I}' \longrightarrow 0.
+\]
+Since $x$ is a closed point of $X$ and $x\notin Z$, we see that $\mathcal{I}/\mathcal{I}'$ is supported at $x$. 
+In fact, the restriction of $\mathcal{I}/\mathcal{I}'$ to $U$ corresponds to the $A$-module $A/\mathfrak m$. 
+Hence
+\[
+\Gamma(X,\mathcal{I}/\mathcal{I}') = A/\mathfrak m.
+\]
+Since by assumption $H^1(X,\mathcal{I}')=0$, there exists a global section 
+$f\in\Gamma(X,\mathcal{I})$ mapping to the element $1\in A/\mathfrak m$ as a section of 
+$\mathcal{I}/\mathcal{I}'$. 
+
+Let $X_f = D_X(f)$ be the open subset of $X$ where $f$ is invertible.
+Since the image of $f$ in $A / \mathfrak m$ equals 1, we have $f(x) \notin \mathfrak m_x$, equivalently, $f$ is invertible in the local ring $\mathcal O_{X, x}$ and so $x \in X_f$.
+
+Moreover $X_f\subset U$ because on $Z = X\setminus U$, the section sheaf $\mathcal{I}$ vanishes because it cuts out $Z$. So $f\vert_Z = 0$, and hence $f$ is not invertible on $Z$. Thus $X_f\subset U$. This clearly implies that $X_f = D(f_A)$ where $f_A$ is the image of $f$ in $A$.
+
+Consider the union
+\[
+W = \bigcup_{f\in\Gamma(X,\mathcal{O}_X)} X_f
+\]
+over all $f$ such that $X_f$ is affine. 
+Obviously $W$ is open in $X$. 
+By the arguments above, every closed point of $X$ is contained in $W$. 
+The closed subset $X\setminus W$ of $X$ is also quasi-compact and so it has a closed point if it is nonempty. This would contradict the fact that all closed points are in $W$. Hence we conclude $X=W$.
+
+Choose finitely many $f_1,\dots,f_n\in\Gamma(X,\mathcal{O}_X)$ such that 
+\[
+X = X_{f_1}\cup\cdots\cup X_{f_n},
+\]
+and such that each $X_{f_i}$ is affine. The finite cover above exists because $X$ is quasi-compact. First we argue that it suffices to show that 
+$f_1,\dots,f_n$ generate the unit ideal in $\Gamma(X,\mathcal{O}_X)$. 
+
+Suppose $X=\bigcup_i X_{f_i}$ and each $X_{f_i}$ affine, and
+$(f_1,\dots,f_n)=\Gamma(X,\mathcal O_X)$. Let $A:=\Gamma(X,\mathcal O_X)$ and let $\varphi:X\to \operatorname{Spec} A$ be the canonical map. For any $f\in A$, $\varphi^{-1}(D(f))=X_f$.
+
+If $(f_1,\dots,f_n)=A$, then $\{D(f_i)\}$ covers $\operatorname{Spec} A$. Since $\{X_{f_i}\}$ covers $X$ and each $X_{f_i}$ is affine, the restrictions $A_{f_i}\to \Gamma(X_{f_i},\mathcal O_X)$ are isomorphisms and they agree on overlaps $X_{f_if_j}$ (compatibility comes from functoriality of restriction). Therefore $\varphi$ is an isomorphism Zariski-locally on the cover $\{X_{f_i}\}$ and on the target cover $\{D(f_i)\}$. Since these cover $X$ and $\operatorname{Spec} A$, $\varphi$ is an isomorphism globally. Hence $X\simeq \operatorname{Spec} A$ is affine.
+
+Now we show that $f_1,\dots,f_n$ generate the unit ideal in $\Gamma(X,\mathcal{O}_X)$. Consider the short exact sequence
+\[
+0 \longrightarrow \mathcal{F} \longrightarrow 
+\mathcal{O}_X^{\oplus n} 
+\xrightarrow{(f_1,\ldots,f_n)} 
+\mathcal{O}_X \longrightarrow 0.
+\]
+The arrow defined by $f_1,\ldots,f_n$ is surjective since the opens $X_{f_i}$ cover $X$. 
+Let $\mathcal{F}$ be the kernel of this surjective map. 
+Observe that $\mathcal{F}$ has a filtration
+\[
+0 = \mathcal{F}_0 \subset \mathcal{F}_1 \subset \cdots \subset \mathcal{F}_n = \mathcal{F}
+\]
+such that each subquotient $\mathcal{F}_i/\mathcal{F}_{i-1}$ 
+is isomorphic to a quasi-coherent sheaf of ideals. 
+Namely, we can take $\mathcal{F}_i$ to be the intersection of $\mathcal{F}$ 
+with the first $i$ direct summands of $\mathcal{O}_X^{\oplus n}$. 
+The assumption of the lemma implies that 
+$H^1(X,\mathcal{F}_i/\mathcal{F}_{i-1})=0$ for all $i$. 
+This implies $H^1(X,\mathcal{F}_2)=0$, because it is sandwiched between 
+$H^1(X,\mathcal{F}_1)$ and $H^1(X,\mathcal{F}_2/\mathcal{F}_1)$. 
+Continuing in this way, we deduce that $H^1(X,\mathcal{F})=0$. 
+Therefore, we conclude that the map
+\[
+\bigoplus_{i=1}^n \Gamma(X,\mathcal{O}_X)
+\xrightarrow{(f_1,\ldots,f_n)} 
+\Gamma(X,\mathcal{O}_X)
+\]
+is surjective, as desired.
+\end{proof}
+
+The statement can actually be upgraded to a relative affineness criterion. Recall that a morphism of schemes $f:X\to Y$ is \textbf{affine} if for every affine open subset $V\subset Y$, the preimage $f^{-1}(V)$ is an affine scheme. Equivalently, $f$ is affine if and only if the direct image sheaf $f_*\mathcal{O}_X$ is a quasi-coherent sheaf of algebras on $Y$ and $X$ is isomorphic to the relative Spec $\underline{\mathrm{Spec}}_Y(f_*\mathcal{O}_X)$.
+\begin{theorem}
+[Relative affineness criterion]
+\label{theorem:relative-affine}
+Let $f:X\to Y$ be a quasi-compact and quasi-separated morphism of schemes. Then the following are equivalent:
+\begin{enumerate}
+\item The morphism $f$ is affine.
+\item For every quasi-coherent sheaf of ideals $\mathcal{I}\subset\mathcal{O}_X$, we have $R^1f_*\mathcal{I}=0$.
+\end{enumerate}
+\end{theorem}
+
+\subsection{Quotient stack}
+Let $\mathcal{S}$ be a category and $p:\mathcal{X}\to\mathcal{S}$ be a functor of categories.
+We visualize this data as
+\[
+  \begin{tikzcd}
+    \mathcal{X} \arrow[d, "p"'] & a \arrow[r, "\alpha"] \arrow[d] & b \arrow[d] \\
+    \mathcal{S} & S \arrow[r, "f"'] & T
+  \end{tikzcd}
+\]
+where the lower case letters $a,b$ are objects of $\mathcal{X}$ and the upper case letters $S,T$
+are objects of $\mathcal{S}$. We say that $a$ is over $S$ and that a morphism $\alpha: a\to b$ is
+over $f:S\to T$.
+
+\begin{definition}[Prestacks]\label{def:prestacks}
+  A functor $p:\mathcal{X}\to\mathcal{S}$ is a \textbf{prestack over a category $\mathcal{S}$} if
+  \begin{enumerate}
+    \item[(1)] (\textbf{pullbacks exist}) for every diagram
+          \[
+            \begin{tikzcd}
+              a \arrow[d] \arrow[r, dashed] & b \arrow[d] \\
+              S \arrow[r] & T
+            \end{tikzcd}
+          \]
+          of solid arrows, there exists a morphism $a\to b$ over $S\to T$; and
+
+    \item[(2)] (\textbf{universal property for pullbacks}) for every diagram
+          \[
+            \begin{tikzcd}
+              a \arrow[d]
+              \arrow[r, dashed]
+              \arrow[rr, bend left=15] &
+              b \arrow[d] \arrow[r] &
+              c \arrow[d] \\
+              R \arrow[r] & S \arrow[r] & T
+            \end{tikzcd}
+          \]
+          of solid arrows, there exists a unique arrow $a\to b$ over $R\to S$ filling in the diagram.
+  \end{enumerate}
+  Prestacks are also referred to as \textbf{categories fibered in groupoids}.
+\end{definition}
+
+\begin{definition}[Fiber categories]\label{def:fibercat}
+  If $\mathcal{X}$ is a prestack over $\mathcal{S}$, the \textbf{fiber category}
+  $\mathcal{X}(S)$ over $S\in\mathcal{S}$ is the category of objects in $\mathcal{X}$ over $S$
+  with morphisms over $\mathrm{id}_S$.
+\end{definition}
+
+Given an action of an algebraic group $G$ on a scheme $X$, the \textbf{quotient prestack} $[X/G]^{\mathrm{pre}}$ is the prestack whose fiber category
+$[X/G]^{\mathrm{pre}}(S)$ over a scheme $S$ is the quotient groupoid (or the moduli groupoid of orbits) $[X(S)/G(S)]$
+This will not satisfy the gluing axioms of a stack; even when the action is free,
+the quotient functor $\mathrm{Sch} \to \mathrm{Sets}$ defined by $S \mapsto X(S)/G(S)$ is not a sheaf
+in general. Put another way, we define:
+\begin{definition}[Quotient prestacks]
+  Let $G \to S$ be a smooth affine group scheme acting on a scheme $U$ over $S$.
+  The \textbf{quotient prestack} $[U/G]^{\mathrm{pre}}$ of an action of a smooth affine group scheme $G \to S$
+  on an $S$-scheme $U$ is the category over $\mathrm{Sch}/S$ consisting of pairs $(T,u)$ where $T$ is an $S$-scheme
+  and $u \in U(T)$. An element $g \in G(T')$ acts by $(T',u') \to (T,u)$ via the data of a map $f:T'\to T$ of
+  $S$-schemes and an element $g \in G(T')$ such that $f^*u = g \cdot u'$. Note that the fiber category
+  $[U(T)/G(T)]$ is identified with the quotient groupoid.
+\end{definition}
+It turns out that the stackification of $[U/G]^{\mathrm{pre}}$ is the quotient stack $[U/G]$, hence the name is justified.
+
+\begin{definition}[Quotient stacks]
+  The \textbf{quotient stack} $[U/G]$ is the prestack over $\mathrm{Sch}/S$ consisting of diagrams
+  \[
+    \begin{tikzcd}
+      P \arrow[r] \arrow[d] & U \\
+      T
+    \end{tikzcd}
+  \]
+  where $P \to T$ is a principal $G$-bundle and $P \to U$ is a $G$-equivariant morphism of $S$-schemes.
+
+  A morphism
+  \[
+    (T' \;\longleftarrow\; P' \;\longrightarrow\; U) \;\longrightarrow\;
+    (T \;\longleftarrow\; P \;\longrightarrow\; U)
+  \]
+  consists of a morphism $T' \to T$ and a $G$-equivariant morphism $P' \to P$ of schemes such that the diagram
+  \[
+    \begin{tikzcd}
+      P' \arrow[r] \arrow[d] \arrow[rr, bend left=20] &
+      P \arrow[r] \arrow[d] &
+      U \\
+      T' \arrow[r] & T &
+      \arrow[from=1-1, to=2-1]
+      \arrow[from=1-2, to=2-2]
+    \end{tikzcd}
+  \]
+  is commutative and the left square is cartesian.
+\end{definition}
+
+A stack over a site $\mathcal{S}$ is a prestack $\mathcal{X}$ where the objects and morphisms glue uniquely in the Grothendieck topology of $\mathcal{S}$.
+
+\begin{definition}
+  [Stack] \label{def:stack}
+  A \textbf{stack} $\mathcal{X}$ over a site $\mathcal{C}$ is a prestack over $\mathcal{C}$ satisfying the following descent conditions:
+  \begin{itemize}
+    \item (Descent for morphisms) For any $U\in\mathcal{C}$, any covering $\{f_i:U_i\to U\}$, and any $x,y\in\mathcal{X}(U)$, the presheaf
+          \[
+            \underline{\mathrm{Hom}}(x,y): (V\to U) \mapsto \mathrm{Hom}_{\mathcal{X}(V)}(f^*x,f^*y)
+          \]
+          is a sheaf on $\mathcal{C}/U$.
+    \item (Descent for objects) For any $U\in\mathcal{C}$, any covering $\{f_i:U_i\to U\}$, and any descent datum $(x_i,\phi_{ij})$ relative to $\{f_i:U_i\to U\}$, there exists an object $x\in\mathcal{X}(U)$ and isomorphisms $\psi_i:f_i^*x\xrightarrow{\sim} x_i$ such that $\phi_{ij}\circ f_j^*\psi_j = f_i^*\psi_i$.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}[Substack]
+  A \textbf{substack} $\mathcal{Y}\subseteq \mathcal{X}$ is given by:
+  \begin{itemize}
+    \item For each $U\in\mathcal{C}$, a full subcategory $\mathcal{Y}(U)\subseteq \mathcal{X}(U)$.
+    \item Stability under restriction:
+          If $y\in \mathcal{Y}(U)$ and $f:V\to U$ is a morphism in the site, then the pullback $f^*y \in \mathcal{X}(V)$ must lie in $\mathcal{Y}(V)$.
+    \item Stack condition:
+          The collection $\mathcal{Y}$ is itself a stack (i.e. satisfies descent for objects and morphisms).
+  \end{itemize}
+\end{definition}
+
+\begin{definition}[Open and closed substacks]\label{def:open-closed-substacks}
+  A substack $\mathcal{T} \subseteq \mathcal{X}$ of a stack over $\mathrm{Sch}_{\mathrm{\acute{e}t}}$
+  is called an \textbf{open substack} (resp.\ \textbf{closed substack}) if the inclusion
+  $\mathcal{T} \to \mathcal{X}$ is representable by schemes and an open immersion (resp.\ closed immersion).
+\end{definition}
 
 \section{References}
 NOTES ON GIT AND SYMPLECTIC REDUCTION FOR
@@ -714,4 +814,6 @@ by R. P. THOMAS
 Alper Moduli
 
 Segal paper
+
+Stacks project
 \end{document}

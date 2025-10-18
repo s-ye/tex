@@ -1,0 +1,111 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Quintic Threefolds}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+Abstract
+\end{abstract}
+
+\tableofcontents
+
+Take a smooth degree-5 hypersurface $X\subset \mathbb{P}^4$. For a generic one \red{hodge numbers?}
+\[h^{1,1}(X)=1, h^{2,1}(X)=101, h^{3,0}(X)=h^{0,3}(X)=1 \] and all other $h^{p,q}$ vanish. (The lone $h^{1,1}$ is the Kähler class; $h^{2,1}$ is complex-structure deformations.)
+
+
+There is a standard 1-parameter family (the Dwork pencil)  \[X_\psi:\; x_1^5+x_2^5+x_3^5+x_4^5+x_5^5 \;=\; 5\psi\,x_1x_2x_3x_4x_5 \subset \mathbb{P}^4\]
+\begin{enumerate}
+    \item Picard--Fuchs for periods. Let $z=(5\psi)^{-5}$, $\theta=z\frac{d}{dz}$. Periods $\Pi(z)$ of the holomorphic 3-form satisfy
+    $\mathcal{L}\Pi=0$, where
+    $\mathcal{L}=\theta^4-5z(5\theta+1)(5\theta+2)(5\theta+3)(5\theta+4)$.
+    Solve near the large complex structure limit $z=0$:
+    $\Pi_0(z)=\sum_{n\ge0}\frac{(5n)!}{(n!)^5}z^n$,
+    $\Pi_1=\Pi_0\log z+\cdots$
+    Extract the mirror map $q=\exp(\Pi_1/\Pi_0)$.
+
+    \item Yukawa coupling \& GW invariants. Compute the Yukawa coupling $C_{zzz}$ from the PF system, convert to $C_{ttt}$ in the flat coordinate $t=\frac{1}{2\pi i}\log q+\cdots$, expand
+    $C_{ttt}=5+\sum_{d\ge1} \frac{n_d\,d^3 q^d}{1-q^d}$,
+    and read off the genus-0 instanton numbers $n_d$ (curve counts on $X$):
+    $n_1=2875$ lines, $n_2=609,250$, $n_3=317,206,375$, etc.
+
+    \item Monodromy. Compute monodromies around $z=0$ (maximally unipotent), the conifold point $z=5^{-5}$, and the Gepner point $\psi=0$. Check that one monodromy is maximally unipotent (mirror criterion).
+
+    \item Kähler vs complex moduli. Identify the complex moduli of $Y$ with the 1-parameter Dwork modulus, and the Kähler moduli of $X$ with the $q$-coordinate you built. This is the mirror map statement in practice.
+
+    \item (Optional) Toric re-derivation. Rebuild the whole story via Batyrev's reflexive polytopes for the quintic and its polar dual; compute Hodge numbers from lattice point counts to see the $(1,101)\leftrightarrow(101,1)$ swap without period theory.
+\end{enumerate}
+
+\section{Basic setup}
+Let $Y=\mathbb{C}^n$ and $f:Y\to \mathbb{C}$ a holomorphic function with an isolated critical point at $0$.
+
+Define the local algebra $H_f = \mathbb{C}[y_1,\dots,y_n]/(\partial f/\partial y_i)$, called the Milnor ring or Jacobian algebra. It's a finite-dimensional vector space of dimension $\mu$ (the Milnor number).
+
+Choose a monomial basis $a_1,\dots,a_\mu$ representing classes in $H_f$. Then consider a versal deformation (a general perturbation) \[f_\lambda(y) = f(y) + \lambda_1 a_1(y) + \cdots + \lambda_\mu a_\mu(y)\] This gives a $\mu$-dimensional parameter space with coordinates $\lambda= (\lambda_1,\dots,\lambda_\mu)$.
+
+Define $I_i(\lambda) = \int e^{f_\lambda(y)/h}\, a_i(y)\, \omega$ where $\omega = dy_1\wedge\cdots\wedge dy_n$. As $h\to 0$, the integral is dominated by critical points of $f_\lambda$; so by stationary phase 
+\[I_i(\lambda) \sim \sum_{y_*(\lambda)} \frac{a_i(y_*(\lambda))}{\sqrt{J_\lambda(y_*(\lambda))}} e^{f_\lambda(y_*(\lambda))/h},\] where $J_\lambda = \det(\partial^2 f_\lambda/\partial y_i \partial y_j)$. Each critical point contributes an exponential term with phase $f_\lambda(y_*)/h$.
+
+The key observation is that the functions $I_i(\lambda)$ satisfy a system of differential equations in the parameters \[ \lambda_j: 
+h\frac{\partial I_i}{\partial \lambda_j} = \sum_k c_{ij}^k(\lambda) I_k \] where the $c_{ij}^k(\lambda)$ are the structure constants of the algebra $a_i a_j = \sum_k c_{ij}^k(\lambda) a_k$ in $H_{f_\lambda}$. 
+
+This has something to do with the Gauss Manin connection. Formally, you can think of the family of vector spaces $\mathcal{H}_\lambda = H_n(\mathbb{C}^n, \Re f_\lambda=-\infty)$ as forming a flat vector bundle over the parameter space of $\lambda$. 
+
+The integrals $I_i(\lambda)$ can be viewed as flat sections of the dual bundle $\mathcal{H}^*_\lambda$. The differential equations satisfied by the $I_i(\lambda)$ reflect the flatness of this connection.
+
+The family of quintic-mirrors $Y_\lambda$ is one of the examples for which one can construct flat coordinates on moduli spaces of complex structures. 
+\section{Givental Hori Vafa}
+Let $X$ be a compact toric Fano variety. Let $\cF(X)$ be its \textbf{Fukaya category} which is $D(\Z/2c_1(X)\Z)$-graded. Then conjecturally \begin{align*}
+    HH^*(\cF(X))\cong QH^*(X)
+\end{align*}
+Write $X = \C^n // H$ where \begin{align*}
+    0 \to H \to (\C^*)^n \to T_\C \to 0 \\
+    0 \to T_\C^\vee \to (\C^*)^{n\vee} \to H^\vee \to 0
+\end{align*}
+Consider the fiber $T_h^\vee$ of $h\in H^\vee$.
+Take the \textbf{superpotential} function \[W = x_1 + \cdots + x_n: T_h^\vee \to \C\]
+
+\begin{remark}
+    Joe made the remark that if you try to make the naive statement that there are two derived catgories on the $A$ and $B$ side of mirror symmetry which are equivalent, then this cannot possibly work and one needs to introduce extra structures, such as the superpotential $W$ here.
+\end{remark}
+
+Then by homological mirror symmetry this defines a matrix factorization category $MF(T_h^\vee, W)$ with a "map" \begin{align*}
+    MF(T_h^\vee, W) \to T_h^\vee
+\end{align*}
+Then we have the following theorem:
+\begin{theorem}
+    \leavevmode
+    \begin{enumerate}
+        \item There is an equivalence of categories \begin{align*}
+            MF(T_h^\vee, W) \cong \cF(X, \mf h)
+        \end{align*}
+        \item $MF(T_h^\vee, W)$ is a module category over $\C[T^\vee_h]$ and the Fourier modes are the Seidel shift operators.
+        \item There is an isomorphism of algebras \begin{align*}
+            HH^*(MF(T_h^\vee, W)) \cong Jac(W) \cong QH^*(X, \mf h)
+        \end{align*}
+    \end{enumerate}
+\end{theorem}
+\end{document}
