@@ -218,11 +218,50 @@ Let $z_1, \dots, z_n$ and $p_1, \dots, p_m$ denote the zeroes and poles of a non
 \end{enumerate}
 \end{theorem}
 
+\begin{proof}
+    (i) follows from the fact that
+    \[\frac{1}{2\pi i}\int_{\partial P} \frac{f’(z)}{f(z)}\,dz = n - m\] where $P$ is the period parallelogram. The integral is zero because opposite sides cancel out due to periodicity of $f$.
+    (ii) follows from the fact that
+    \[\sum_k \operatorname{Res}_{p_k}(f) = \frac{1}{2\pi i} \int_{\partial P} f(z)\,dz\] and the integral is zero by periodicity.
+
+Let's integrate $z\frac{f'(z)}{f(z)}$ over the boundary $\partial P$:
+\[
+I = \int_{\partial P} z\frac{f'(z)}{f(z)}\,dz
+\]
+
+By the residue theorem:
+\[
+I = 2\pi i\sum_{k} \operatorname{Res}_{z=z_k}(z f'/f) + 2\pi i\sum_{k} \operatorname{Res}_{z=p_k}(z f'/f)
+\]
+
+At a zero $z_k$ of order $r$, we have $\frac{f'(z)}{f(z)} \sim \frac{r}{z-z_k}$, so $\operatorname{Res}_{z_k}(z f'/f) = r z_k$. At a pole $p_k$ of order $s$, we have $\frac{f'(z)}{f(z)} \sim -\frac{s}{z-p_k}$, so $\operatorname{Res}_{p_k}(z f'/f) = -s p_k$. Hence
+\[
+\frac{I}{2\pi i} = \sum_{k=1}^n r_k z_k - \sum_{k=1}^m s_k p_k = \sum z_k - \sum p_k
+\]
+using multiplicities.
+
+Now consider how $z f'/f$ behaves under translation by a period $\omega$. When you shift $z \mapsto z+\omega_i$, $f'/f$ stays the same (because it's periodic), but $z$ changes by $+\omega_i$.
+
+When traversing the parallelogram boundary, the two vertical sides differ by the period $\omega_1$, and the two horizontal sides differ by $\omega_2$. Careful calculation gives:
+\[
+I = 2\pi i\,(\omega_1 k_1 + \omega_2 k_2)
+\]
+for some integers $k_1,k_2$, because the integral around the boundary shifts by integer multiples of the lattice periods (this is the quasi-periodicity of the logarithm of $f$).
+
+Thus
+\[
+\sum z_k - \sum p_k \equiv 0 \pmod{L}
+\]
+as desired.
+\end{proof}
+
 \begin{remark}
-Zeroes and poles that are on the boundary should be counted only on a single edge, or at a single vertex. 
-In fact, we can easily avoid zeroes and poles on the boundary by shifting our parallelogram by a small complex number $\lambda$; 
-the relations (i)--(iii) are unchanged.
+    Let $\omega$ be a meromorphic differential on a compact Riemann surface $S$. Then the sum of its residues at all poles is zero. Let $p_i$ be the poles of $\omega$ and take disks $D_i$ around each $p_i$. Then the boundary of $S \setminus \cup D_i$ is $\sum \partial D_i$. By Stokes' theorem,
+    \[
+    \int_{S \setminus \cup D_i} d\omega = \int_{\partial (S \setminus \cup D_i)} \omega = \sum_i \int_{\partial D_i} \omega
+    \] The left side is zero because $d\omega=0$ (since $\omega$ is a holomorphic $1$-form). The right hand side is $2\pi i \sum \operatorname{Res}_{p_i}(\omega)$. Hence the sum of residues is zero.
 \end{remark}
+Hartshorne actually delays the proof of the residue theorem until he has developed sheaf cohomology, because the general proof uses Serre duality. In the analytic setting, the proof is more elementary, as above.
 
 \begin{definition}
     Fix a local coordinate $z$ at a point $p$. The \textbf{principal part} of a meromorphic function $f$ at $p$ is the part of its Laurent expansion in negative powers of $(z-p)$:
@@ -499,10 +538,7 @@ So the automorphism group must act simply transitively on the fibres which do no
 Conversely, an automorphism group acting simply transitively on even one fibre with no branch points must have order $\deg \pi$.  
 But since that is $[\mathbb{C}(R):\mathbb{C}(S)]$, it follows that the extension is Galois.
 \end{proof}
-
-\begin{remark}
 Such a map is called a \textbf{Galois cover with group $\Gamma$}.
-\end{remark}
 
 \begin{remark}
 Note that $R/\Gamma = S$, set theoretically.  
@@ -707,13 +743,21 @@ Recall that in general if one has $\cL$ a line bundle on $X$, then we can consid
 The analog of $\otimes \cO(D)$ for vector bundles is called an elementary transformation. Let $V$ be a vector bundle on $R$ and choose a subspace $S\subset V_p$. 
 
 Define $\operatorname{elm}(V,p,S)$ to be the sheaf of sections of $V$ whose value at $p$ lies in $S$. This is a vector bundle whose degree is $\deg V - \codim S$.
+\begin{align*}
+    0 \to \operatorname{elm}(V,p,S) & \to V \to (V_p/S) \otimes \cO_p \to 0
+\end{align*} Therefore there is a short exact sequence of vector spaces \begin{align*}
+    0 \to K & \to \operatorname{elm}(V,p,S)_p \to S \to 0
+\end{align*} with the property that \begin{align*}
+    \operatorname{elm}(\operatorname{elm}(V,p,S),p,K) & \cong V(-x)
+\end{align*} and so elementary transformations are invertible up to twisting by a line bundle (which is also invertible). This resolves the obvious obstruction that elementary transformations reduce the degree of a vector bundle.
+
+
 
 \begin{proposition}
-    Every vector bundle is obtained from a trivial vector bundle by a finite sequence of elementary transformations. 
+    Every vector bundle is obtained from a trivial vector bundle by a finite sequence of elementary transformations and tensoring by line bundles.
 \end{proposition}
 
 \begin{exercise}
-
 Let $V$ be a rank~2 (for simplicity) vector bundle over a Riemann surface~$R$. 
 Assume that $V$ has two meromorphic sections $s_1, s_2$ which, at some point, 
 are holomorphic and span the fiber.
@@ -770,6 +814,8 @@ The degree of $V$ is $\sum n_i$.
     On $\P^1$, we have homeomorphic but not biholomorphic vector bundles $\cO(1) \oplus \cO(-1)$ and $\cO \oplus \cO$. They both have degreee zero and the same number of sections, but the sections sit inside the bundles differently.
 \end{example}
 
+\section{Riemann-Roch theorem for vector bundles}
+
 \section{Coherent sheaf cohomology}
 
 Recall if $V$ is a vector bundle on a compact Riemann surface $R$, then we proved that \begin{align*}
@@ -789,7 +835,7 @@ We have $H^0(R,\cT)$ has dimension the global length of $\cT$. We define \begin{
     0 \to \cO(-np) \to \cO & \to \C\set{z}/(z^n) \to 0
 \end{align*} where $p$ is a point with local coordinate $z$ and $\C{z}$ denotes the ring of germs of holomorphic functions at $p$. 
 
-\begin{theorem}
+\begin{theorem}[Long exact sequence in cohomology]\label{theorem:long_exact_sequence_cohomology}
     Let \begin{align*}
         0 \to \cS' & \to \cS \to \cS'' \to 0
     \end{align*} be a short exact sequence of coherent sheaves on a compact Riemann surface $R$. Then there is a long exact sequence in cohomology \begin{align*}
@@ -813,11 +859,261 @@ To prove this theorem, we will introduce spectral sequences in a limited context
 \end{align*} We want to relate $\mathbb{H}^k(R,\mathcal{S}^{\bullet})$ to the cohomology of the individual sheaves $\mathcal{S}^i$. Note the vertical differential computes exactly $H^*(R,\mathcal{S}^i)$. So if all the horizontal differentials were zero, we would have \begin{align*}
     \mathbb{H}^k(R,\mathcal{S}^{\bullet}) & = \bigoplus_{i+j=k} H^j(R,\mathcal{S}^i) = H^0(R,\mathcal{S}^k) \oplus H^1(R,\mathcal{S}^{k-1})
 \end{align*} In general, the horizontal differentials are not zero and we only have the following approximation.
-\begin{theorem}
+\begin{theorem}[Hypercohomology long exact sequence]\label{theorem:hypercohomology_long_exact_sequence}
     There is a long exact sequence \begin{align*}
         \cdots \to \ker{d^k\vert_{H^0(R,\mathcal{S}^k)}} \bigg / \operatorname{im}{d^{k-1}\vert_{H^0(R,\mathcal{S}^{k-1})}} & \to \mathbb{H}^k(R,\mathcal{S}^{\bullet}) \to \ker{d^{k-1}\vert_{H^1(R,\mathcal{S}^{k-1})}} \bigg/ \operatorname{im}{d^{k-2}\vert_{H^1(R,\mathcal{S}^{k-2})}} \to \cdots
     \end{align*}
 \end{theorem}
 We will get this theorem as a special case of the spectral sequence associated to a double complex. This presents the hypercohomology $\mathbb{H}^k(R,\mathcal{S}^{\bullet})$ as an extension of a subspace of the right term by a quotient of the left term. These terms are computable from $H^*(R,\mathcal{S}^i)$ and the differentials $d^i$.
 
+This is an example of the spectral sequence associated to a double complex. \begin{align*}
+    T^k = \bigoplus_{p+q=k} C^{p,q}
+\end{align*} Then we can compute the hypercohomology of the total complex knowing something about the vertical differential. We can do a page by page computation, taking the total complex as the $E^0$ page. Then the $E^1$ page is given by taking the cohomology with respect to the vertical differential. The only maps which survive are the horizontal differentials induced on the cohomology groups. 
+\[
+\begin{tikzcd}[row sep=2em]
+    \cdots \arrow[r] & H^{q+1}(C^{p,\bullet}) \arrow[r, "d_1"] & H^{q+1}(C^{p+1,\bullet}) \arrow[r] & \cdots \\
+    \cdots \arrow[r] & H^q(C^{p,\bullet}) \arrow[r, "d_1"] & H^q(C^{p+1,\bullet}) \arrow[r] & \cdots
+\end{tikzcd}
+\]
+The $E^2$ page looks like:
+\begin{center}
+    \begin{tikzpicture}[
+  dot/.style={circle,fill,inner sep=1.8pt},
+  diff/.style={->,thick,>=Latex},
+  labelstyle/.style={font=\scriptsize,anchor=south west}
+]
+
+% axes
+\draw[->] (0,0) -- (8.5,0) node[right] {$p$};
+\draw[->] (0,0) -- (0,5.5) node[above] {$q$};
+
+% grid of classes + labels
+\foreach \p in {0,...,7}{
+  \foreach \q in {0,...,4}{
+    \node[dot] (A-\p-\q) at (\p,\q) {};
+    \node[labelstyle] at (\p+0.1,\q+0.1) {$E^{\p,\q}_2$};
+  }
+}
+
+% d_2 differentials: (p,q) -> (p+2,q-1)
+\foreach \p in {0,...,5}{
+  \foreach \q in {1,...,4}{
+    \pgfmathtruncatemacro{\pp}{\p+2}
+    \pgfmathtruncatemacro{\qq}{\q-1}
+    \draw[diff] (A-\p-\q) -- (A-\pp-\qq);
+  }
+}
+\end{tikzpicture}
+\end{center}
+\begin{theorem}
+    There exists an induced second differential of bidegree $(2,-1)$ on the $E^2$ page \begin{align*}
+        d_2^{p,q} & : E_2^{p,q} \to E_2^{p+2,q-1}
+    \end{align*}
+\end{theorem}
+Our example had only two rows, so the $d_2$ differential was zero. In general, one can continue this process to get higher differentials \begin{align*}
+    d_r^{p,q} & : E_r^{p,q} \to E_r^{p+r,q-r+1}
+\end{align*} 
+\begin{theorem}
+    If or when the procedure stops, the $E^{p,q}_{\infty}$ page contains the associated graded of the cohomology of the total complex with respect to the filtration by the horizontal differential. More precisely, there is a filtration \begin{align*}
+        0 = F^{n+1}H^k & \subset F^n H^k \subset \cdots \subset F^0 H^k = H^k(\operatorname{Tot}^{\bullet}(C^{\bullet,\bullet}))
+    \end{align*} such that \begin{align*}
+        E_{\infty}^{p,q} & \cong F^p H^{p+q} / F^{p+1} H^{p+q}
+    \end{align*}
+\end{theorem}
+
+\begin{proof}
+    [Proof of Theorem \ref{theorem:hypercohomology_long_exact_sequence}]
+    The existence of the long exact sequence follows from applying the general theory. Suppose we have a spectral sequence $E_2^{p,q}$ converging to $L^{p+q}$ and we are in the nice case $E_2 = E_{\infty}$. So for each total degree n there is a finite filtration
+\[0=F^{n+1}L^n\subset F^{n}L^n\subset\cdots\subset F^{1}L^n\subset F^{0}L^n=L^n\] Then we can write down the beginning of a long exact sequence by looking at total degree $1$:
+\[
+0\;\to\;E_2^{1,0}\;\to\;L^1\;\to\;E_2^{0,1}\;\xrightarrow{d_2}\;E_2^{2,0}\]
+where the first map is the inclusion of $F^1L^1$ into $L^1$ and the second map is the projection onto $F^0L^1/F^1L^1$. Now we can proceed by looking at total degree $2$. We have a filtration
+\[0=F^{3}L^2\subset F^{2}L^2\subset F^{1}L^2\subset F^{0}L^2=L^2\] with associated graded pieces
+\[E_{\infty}^{2,0}\cong F^2L^2,\quad E_{\infty}^{1,1}\cong F^1L^2/F^2L^2,\quad E_{\infty}^{0,2}\cong F^0L^2/F^1L^2\] Thus we have a short exact sequence 
+\[
+E_2^{2,0}\;\to\;\ker(L^2\to E_2^{0,2})\;\to\;E_2^{1,1}\;\xrightarrow{d_2}\;E_2^{3,0}\] where the first map comes from the identification $\ker (L^2\to E_2^{0,2})=F^1L^2$ and the second map is the projection onto $F^1L^2/F^2L^2$. Splicing this with the previous exact sequence gives the long exact sequence \[0 \to E_2^{1,0} \to L^1 \to E_2^{0,1}
+\xrightarrow{d_2}
+E_2^{2,0} \to \ker\bigl(L^2 \to E_2^{0,2}\bigr)
+\to E_2^{1,1} \xrightarrow{d_2} E_2^{3,0}\]
+This is exactly the long exact sequence in the statement of Theorem \ref{theorem:long_exact_sequence_cohomology} since $E^{3,0}$ vanishes. More generally, we can proceed by looking at total degree $n$ and splicing the resulting short exact sequence with the previous long exact sequence to get the full long exact sequence.
+\[
+\cdots \longrightarrow E_2^{p,q}
+\longrightarrow \ker(L^{p+q}\!\to E_2^{p-2,q+2})
+\longrightarrow E_2^{p-1,q+1}
+\xrightarrow{d_2} E_2^{p+1,q}
+\longrightarrow \cdots
+\]
+\end{proof}
+
+\section{Serre duality}
+\subsection{Extensions of vector bundles}
+Let \begin{align*}
+    0 \to V' & \to V \to V'' \to 0
+\end{align*} be a short exact sequence of vector bundles on a compact Riemann surface $R$. On a small open set $U$ we get an exact sequence of sheaves of sections \begin{align*}
+    0 \to V'(U) & \to V(U) \to V''(U) \to 0
+\end{align*} which are all free $\cO(U)$-modules of finite rank. A splitting of this sequence is given by \[s: V''(U) \to V(U)\] a choice of free generators of $V''(U)$ lifted to $V(U)$, and can be thought of as a local choice of frame of $V''$ (i.e. a choice of inclusion $U\times \C^{\operatorname{rank} V''} \to U\times \C^{\operatorname{rank} }V$). Such a splitting always exists locally, however there may not exist a global splitting.
+
+\begin{example}
+    Let $R = \P^1$ and consider the sequence \begin{align*}
+        0 \to \cO \to \cO(0) \oplus \cO(\infty) & \to \cO(0 + \infty) \to 0
+    \end{align*} where the maps are the diagonal inclusion and the subtraction map $(a,b) \mapsto a-b$. This sequence is exact.
+
+    Exactness is clear away from $0$ and $\infty$. Near $0$, injectivity and surjectivity are clear. To see exactness in the middle, suppose $(a,b)$ maps to zero. Then $a=b$ as meromorphic functions on $\P^1$ and $a$ has no pole at $0$, $b$ has no pole at $\infty$, so $a=b$ is a constant function. Therefore, $(a,b)$ is in the image of the inclusion.
+
+    However this sequence is not split because \begin{align*}
+        \cO (1) \oplus \cO(1) & \not\cong \cO \oplus \cO(2)
+    \end{align*} because we can tensor by $\cO(-2)$ and take global sections to see that the dimensions of global sections differ.
+\end{example}
+
+\begin{theorem}
+An exact sequence of vector bundles on a compact Riemann surface
+\begin{align*}
+    0 \to V' & \to V \to V'' \to 0
+\end{align*} determines a cohomology class in
+\begin{align*}
+     H^1(R, \mathcal{H}om(V'', V')) & \cong H^1(R, V' \otimes (V'')^*)
+    \end{align*} and the sequence splits if and only if this class is zero.
+\end{theorem}
+\begin{example}
+    In the previous example, we calcuated the unique (up to "scale") nonsplit extension of $\cO(2)$ by $\cO$, which determines a cohomology class in \begin{align*}
+        H^1(\P^1, \cO(-2)) & \cong \C
+    \end{align*}
+    Addition of extensions corresponds to the operation \begin{align*}
+        (A \to E \to B) + (A \to E' \to B) = A \to E \oplus_B E' \to B
+    \end{align*} which makes sense in any category with kernels and cokernels. 
+\end{example}
+
+\begin{proof}
+First we construct the class. Recall that we defined \begin{align*}
+    H^1(R, V) & = \Gamma(R, \cP(V)) / \Gamma(R, \cM(V))
+\end{align*} There is a diagram of vector spaces 
+\begin{center}
+\begin{tikzcd}
+    0 \arrow[r] & \mathcal{M}(V')(R) \arrow[r] \arrow[d, "p'"] & \mathcal{M}(V)(R) \arrow[r] \arrow[d, "p"] & \mathcal{M}(V'')(R) \arrow[r] \arrow[d, "p''"] & 0 \\
+    0 \arrow[r] & \mathcal{P}(V')(R) \arrow[r] & \mathcal{P}(V)(R) \arrow[r, "Q"] & \mathcal{P}(V'')(R) \arrow[r] & 0
+\end{tikzcd}\end{center}
+and since the top row is a sequence of finite dimensional vector spaces over $\cM(R)$, we can product a splutting \begin{align*}
+    s & : \mathcal{M}(V'')(R) \to \mathcal{M}(V)(R)
+\end{align*} This splitting in fact defines a splitting of sheaves \[s:\cM(V'') \to \cM(V)\] by restricting to smaller open sets. 
+
+Now observe that $p\circ s:\cO(V'') \to \cP(V)$ in fact lands in $\cP(V')$ because \begin{align*}
+    Q \circ p \circ s & = p'' 
+\end{align*} and $p''$ vanishes on $\cO(V'')$. This gives a map $\cO(V'') \to \cP(V')$ of $\cO$-modules. Dualizing, we get \begin{align*}
+    1 \in \cO \to \cP(V' \otimes V''^\vee)
+\end{align*}
+Changing $s$ changes the result by a meromorphic section of $V'$. So its class in cohomlogy is well defined, independent of $s$.
+\end{proof}
+
+\begin{remark}
+    On $\P^1$, every vector bundle is a sum of line bundles and we still have nontrivial extensions. On higher genus Riemann surfaces, vector bundles are characterized by the Harder-Narasimhan filtration. \begin{align*}
+        0 = V_0 \subset V_1 \subset \cdots \subset V_n = V
+    \end{align*} with successive quotients semistable and decreasing slopes. The extensions between the successive quotients are nontrivial in general.
+
+    In general, $0 \to V' \to V \to V'' \to 0$ we should expect that \begin{align*}
+        \frac{\deg V''}{\rank V''} &\geq \frac{\deg V'}{\rank V'}
+    \end{align*} and $H^1(R, \cH om(V'', V'))$ is bigger if degree of $V''$ is large or degree of $V'$ is small.
+\end{remark}
+
+\subsection{Serre duality}
+Let $R$ be a compact Riemann surface, $V$ vector bundle on $R$. We have the canonical bundle $K_R = \Omega_R^1$ of holomorphic one-forms on $R$.
+\begin{theorem}[Serre duality]
+    There is an isomorphism of vector spaces, functorial in $R$:
+    \begin{align*}
+        H^0(R, V) & \cong H^1(R, K_R \otimes V^*)^* \\
+        H^1(R, V) & \cong H^0(R, K_R \otimes V^*)^*
+    \end{align*}
+\end{theorem}
+Functorial means that for $f: R \to S$ a nonconstant map of compact Riemann surfaces, we have the following commutative diagram:
+\begin{center}
+\begin{tikzcd}
+    H^0(R, V) \arrow[r, "\cong"] \arrow[d, "f^*"] & H^1(R, K_R \otimes V^*)^* \arrow[d, "f^*"] \\
+    H^0(S, V) \arrow[r, "\cong"] & H^1(S, K_S \otimes V^*)^*
+\end{tikzcd}
+\end{center}
+We will say a little bit more about the map on $H^1$.
+\begin{proof}
+    The global residue pairing \begin{align*}
+        H^0(R, V) \times H^1(R, K_R \otimes V^*) & \to \C 
+    \end{align*} comes from a local residue pairing at a point $x\in R$. \begin{align*}
+        \cO(V)_x \otimes \cP(K_R \otimes V^*)_x & \to \C \\
+        (\sigma, \tau) & \mapsto \operatorname{Res}_x(\langle \sigma, \tau \rangle)
+    \end{align*} In a local coordinate $z$ near $x$, the pairing takes the form \begin{align*}
+        z^n u \otimes \frac{v}{z^m} dz & \mapsto \operatorname{Res}_x \left( \frac{u v}{z^{m-n}} dz \right) = \begin{cases}
+            u(x)v(x) & m = n+1 \\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{align*}
+    Note that the holomorphic part of a differential has no residue so the map is defined on $\cP(K_R \otimes V^*)_x$. The pairing is nondegenerate. The global residue pairing then is simply the sum of the local pairings over all points $x \in R$.
+
+    We will establish that this pairing induces an isomorphism on the level of cohomology in the case $R = \P^1$. There, it suffices to check the case $V = \cO(n)$ for $n \in \Z$. Then we will reduce the general case to $\P^1$ by using the functoriality of the pairing and pushing forward along a branched cover $f: R \to \P^1$.
+
+    We check the isomorphism for $\cO(n)$ on $\P^1$ for $n \geq -1$. Move to $\cO(n\infty)$. Check the residue pairing at $z=0$. May assume the principal parts are at $0$ and that meromorphic functions have only poles at $0$. In this case \begin{align*}
+        H^0(\P^1, \cO(n\infty)) & = \operatorname{span}\set{1, z, z^2, \ldots, z^n} \\
+        H^1(\P^1, K_{\P^1} \otimes \cO(-n\infty)) = \span\set{\frac{dz}{z},
+        \frac{dz}{z^2}, \ldots, \frac{dz}{z^{n+1}}} 
+    \end{align*}
+\end{proof} because by the principal parts argument $dz/z^{n+2} = z^{-n} dz/z^n$ is holomorphic at $\infty$. The residue pairing is clear.
+
+Now we can reduce to $\P^1$. Let $f: R \to \P^1$ be a branched cover. We want to know what is the functorial isomorphism \begin{align*}
+    H^1(R, K_R \otimes V^*) & \to H^1(\P^1, K_{\P^1} \otimes f_* V^*)
+\end{align*} Consider the isomorphisms
+\[
+H^i(R;V) \;\cong\; H^i(\mathbb{P}^1;\pi_*V)
+\]
+An isomorphism
+\[
+f_*\bigl(K_R \otimes V^\vee\bigr)
+\;\cong\;
+K_{\mathbb{P}^1} \otimes (f_*V)^\vee
+\]
+compatible with the residue pairings with $V$ on $R$ and $f_*V$ on $\mathbb{P}^1$
+would complete the proof of duality. Now, by Lemma~3.10,
+\[
+(f_*V)^\vee \;\cong\; f_*\bigl(V^\vee(B)\bigr),
+\]
+so what we need is
+\[
+f_*\bigl(K_R \otimes V^\vee\bigr)
+\;\cong\;
+K_{\mathbb{P}^1} \otimes (f_*V)^\vee
+\]
+compatible with the residue pairings with $V$ on $R$ and $f_*V$ on $\mathbb{P}^1$
+would complete the proof of duality. We can restate this as an isomorphism 
+\begin{align*}
+    K_{\P^1}^{-1} \otimes f_*(K_R \otimes V^*) & \cong f_*(V)^{\vee}
+\end{align*} and by adjunction \begin{align*}
+    f_*(K_R \otimes V^*) & \cong f_*(f^* K_{\P^1}^{-1} \otimes K_R \otimes V^*)
+\end{align*}
+
+Then we check that $K_R \otimes f^* K_{\P^1}^{-1} \cong \cO(B)$ where $B$ is the branch divisor of $f$.
+
+Now, by Lemma~3.10,
+\[
+(f_*V)^\vee \;\cong\; f_*\bigl(V^\vee(B)\bigr),
+\]
+so what we need is
+\[
+f_*\bigl(K_R \otimes V^\vee\bigr)
+\;\cong\;
+K_{\mathbb{P}^1} \otimes (f_*V)^\vee
+\]
+The miracle that makes things match is that the pullback of differentials from
+$\mathbb{P}^1$ to $R$ lands in $K_R(-B)$, and in fact generates the latter as an
+$\mathcal{O}$-module over $R$. That is, we are saying that (in a local model
+$w \mapsto z = w^n$ for $\pi$) the lift of the nonvanishing holomorphic differential
+$dz$ has a zero of order exactly the branching index:
+\[
+d(w^n) = n w^{n-1} \, dw.
+\]
+So a local section of $K_R \otimes V^\vee$ can be written as $dz$ times a local
+section of $V^\vee(B)$, which gives the desired isomorphism.
+
+We can use the isomorphisms
+\[
+f_*\mathcal{P}_x(V) \;\cong\; \mathcal{P}_{f(x)}(f_*V),
+\]
+and the discussion of differentials at branch points, to check the compatibility of
+residue pairings on $R$ and $\mathbb{P}^1$: choose local coordinates in standard
+form and write the residue pairings in the Laurent basis.
+\qed
 \end{document}

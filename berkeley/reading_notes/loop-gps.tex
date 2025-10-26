@@ -104,7 +104,7 @@ $U_\lambda : H \to H$ so that
     U_\lambda U_{\lambda'} = c(\lambda, \lambda') U_{\lambda\lambda'}
 \]
 holds for all $\lambda, \lambda' \in L$, where $c(\lambda,\lambda')$ is a
-complex number of modulus $1$. $c : L \times L \to \mathbb{T}$ is called the \emph{projective multiplier} or \emph{cocycle} of the representation.
+complex number of modulus $1$. $c : L \times L \to \mathbb{T}$ is called the \textbf{projective multiplier} or \textbf{cocycle} of the representation.
 
 As topological spaces the $\widetilde{LG}$ are fibre bundles over $LG$ with the circle as fibre. Except for the product extension $LG \times \mathbb{T}$ they are non-trivial fibre bundles: that is to say
 $\widetilde{LG}$ is not homeomorphic to the cartesian product
@@ -133,7 +133,7 @@ $\theta : \mathbb{T} \to A$, in the sense that
 \])
 When $G$ is simply connected but not simple there is still a universal central extension, but, as we shall see, it is an extension of $LG$ by the homology group $H_3(G;\mathbb{T})$, a torus whose dimension is the number of simple factors in $G$.
 
-It is worth noticing that the central extensions of $LG$ are closely related to its natural affine action on the space of \emph{connections} in the trivial principal $G$-bundle on the circle. (See (4.3.3).)
+It is worth noticing that the central extensions of $LG$ are closely related to its natural affine action on the space of \textbf{connections} in the trivial principal $G$-bundle on the circle. (See (4.3.3).)
 
 \subsection{The Lie algebra extensions}
 
@@ -647,105 +647,105 @@ $\mathrm{Vect}(S^1)$.
     \]
     as desired. \end{proof}
 
-   \begin{remark}[Reminder about the infinitesimal adjoint and coadjoint actions]
-Let $G$ be compact, connected, and simply connected, with Lie algebra $\mathfrak g$
-and an $\Ad$–invariant inner product $\langle\,,\,\rangle_{\mathfrak g}$.
-For loops we use the $L^2$–pairing
-\[
-\langle \xi,\eta\rangle_{L\mathfrak g}
-:= \frac{1}{2\pi}\int_0^{2\pi}\langle \xi(\theta),\eta(\theta)\rangle_{\mathfrak g}\,d\theta,
-\qquad \xi,\eta\in L\mathfrak g .
-\]
-Define the $2$–cocycle
-\[
-\omega(\eta,\xi)
-:= \frac{1}{2\pi}\int_0^{2\pi}\!\!\langle \eta(\theta),\xi'(\theta)\rangle_{\mathfrak g}\,d\theta.
-\]
-The (Lie–algebra) central extension is
-\[
-\widetilde{L\mathfrak g} \;=\; L\mathfrak g \oplus \mathbb R K,
-\qquad
-[(\eta,aK),(\xi,bK)]
-= \big([\eta,\xi],\;\omega(\eta,\xi)\,K\big).
-\]
-Here $K$ is central, $[K,\cdot]=0$.
-We identify $\widetilde{L\mathfrak g}^{\,*}\cong (L\mathfrak g)^*\oplus\mathbb R$ and,
-via the $L^2$–pairing, $(L\mathfrak g)^*\cong L\mathfrak g$.
-We write the dual pairing as
-\[
-\big\langle (\phi,\lambda),(\xi,aK)\big\rangle
-= \langle \phi,\xi\rangle_{L\mathfrak g} + \lambda a .
-\]
+\begin{remark}[Reminder about the infinitesimal adjoint and coadjoint actions]
+    Let $G$ be compact, connected, and simply connected, with Lie algebra $\mathfrak g$
+    and an $\Ad$–invariant inner product $\langle\,,\,\rangle_{\mathfrak g}$.
+    For loops we use the $L^2$–pairing
+    \[
+        \langle \xi,\eta\rangle_{L\mathfrak g}
+        := \frac{1}{2\pi}\int_0^{2\pi}\langle \xi(\theta),\eta(\theta)\rangle_{\mathfrak g}\,d\theta,
+        \qquad \xi,\eta\in L\mathfrak g .
+    \]
+    Define the $2$–cocycle
+    \[
+        \omega(\eta,\xi)
+        := \frac{1}{2\pi}\int_0^{2\pi}\!\!\langle \eta(\theta),\xi'(\theta)\rangle_{\mathfrak g}\,d\theta.
+    \]
+    The (Lie–algebra) central extension is
+    \[
+        \widetilde{L\mathfrak g} \;=\; L\mathfrak g \oplus \mathbb R K,
+        \qquad
+        [(\eta,aK),(\xi,bK)]
+        = \big([\eta,\xi],\;\omega(\eta,\xi)\,K\big).
+    \]
+    Here $K$ is central, $[K,\cdot]=0$.
+    We identify $\widetilde{L\mathfrak g}^{\,*}\cong (L\mathfrak g)^*\oplus\mathbb R$ and,
+    via the $L^2$–pairing, $(L\mathfrak g)^*\cong L\mathfrak g$.
+    We write the dual pairing as
+    \[
+        \big\langle (\phi,\lambda),(\xi,aK)\big\rangle
+        = \langle \phi,\xi\rangle_{L\mathfrak g} + \lambda a .
+    \]
 
-\paragraph{Adjoint (Lie–algebra) action.}
-By definition, $\ad_{(\eta,aK)}(\xi,bK)=[(\eta,aK),(\xi,bK)]$; since $K$ is central,
-\[
-\ad_{(\eta,0)}(\xi,bK) = \big([\eta,\xi],\,\omega(\eta,\xi)\,K\big), \qquad
-\ad_{(0,aK)}(\xi,bK)=0 .
-\]
-Equivalently, the adjoint representation of $\widetilde{L\mathfrak g}$ on itself is
-\[
-\ad_{(\eta,aK)}
-\begin{pmatrix}\xi\\ bK\end{pmatrix}
-=
-\begin{pmatrix}
-[\eta,\xi]\\ \omega(\eta,\xi)\,K
-\end{pmatrix}.
-\]
+    \paragraph{Adjoint (Lie–algebra) action.}
+    By definition, $\ad_{(\eta,aK)}(\xi,bK)=[(\eta,aK),(\xi,bK)]$; since $K$ is central,
+    \[
+        \ad_{(\eta,0)}(\xi,bK) = \big([\eta,\xi],\,\omega(\eta,\xi)\,K\big), \qquad
+        \ad_{(0,aK)}(\xi,bK)=0 .
+    \]
+    Equivalently, the adjoint representation of $\widetilde{L\mathfrak g}$ on itself is
+    \[
+        \ad_{(\eta,aK)}
+        \begin{pmatrix}\xi\\ bK\end{pmatrix}
+        =
+        \begin{pmatrix}
+            [\eta,\xi] \\ \omega(\eta,\xi)\,K
+        \end{pmatrix}.
+    \]
 
-\paragraph{Coadjoint (Lie–algebra) action.}
-Recall the coadjoint action is defined by
-\[
-\big\langle \ad^*_{X}(\Phi),\,Y\big\rangle
-= \big\langle \Phi,\,[Y,X]\big\rangle
-\qquad (X,Y\in \widetilde{L\mathfrak g},\;\Phi\in \widetilde{L\mathfrak g}^{\,*}),
-\]
-which matches the sign convention that integrates to the group formula in Pressley--Segal.
-Take $X=(\eta,0)$, $Y=(\xi,aK)$, $\Phi=(\phi,\lambda)$:
-\begin{align*}
-\big\langle \ad^*_{(\eta,0)}(\phi,\lambda),\,(\xi,aK)\big\rangle
-&= \big\langle (\phi,\lambda),\,[(\xi,aK),(\eta,0)]\big\rangle\\
-&= \big\langle (\phi,\lambda),\,\big([\xi,\eta],\,\omega(\xi,\eta)K\big)\big\rangle\\
-&= \langle \phi,\,[\xi,\eta]\rangle_{L\mathfrak g} + \lambda\,\omega(\xi,\eta).
-\end{align*}
-Use $\Ad$–invariance of $\langle\,,\,\rangle_{\mathfrak g}$:
-$\langle \phi,[\xi,\eta]\rangle=\langle [\phi,\eta],\xi\rangle$, and integrate by parts
-(using periodicity) for the cocycle term
-\[
-\omega(\xi,\eta) = \frac{1}{2\pi}\int_0^{2\pi}\!\!\langle \xi,\eta'\rangle\,d\theta.
-\]
-Thus
-\[
-\big\langle \ad^*_{(\eta,0)}(\phi,\lambda),\,(\xi,aK)\big\rangle
-= \left\langle [\eta,\phi]+\lambda\,\eta',\,\xi\right\rangle_{L\mathfrak g},
-\]
-which identifies
-\[
-\ad^*_{(\eta,0)}(\phi,\lambda)\;=\;\big([\eta,\phi]+\lambda\,\eta',\;0\big).
-\]
-Since $K$ is central, $\ad^*_{(0,aK)}=0$. Therefore, for general $(\eta,aK)$:
-\[
-\ad^*_{(\eta,aK)}(\phi,\lambda) \;=\; \big([\eta,\phi]+\lambda\,\eta',\;0\big).
-\]
+    \paragraph{Coadjoint (Lie–algebra) action.}
+    Recall the coadjoint action is defined by
+    \[
+        \big\langle \ad^*_{X}(\Phi),\,Y\big\rangle
+        = \big\langle \Phi,\,[Y,X]\big\rangle
+        \qquad (X,Y\in \widetilde{L\mathfrak g},\;\Phi\in \widetilde{L\mathfrak g}^{\,*}),
+    \]
+    which matches the sign convention that integrates to the group formula in Pressley--Segal.
+    Take $X=(\eta,0)$, $Y=(\xi,aK)$, $\Phi=(\phi,\lambda)$:
+    \begin{align*}
+        \big\langle \ad^*_{(\eta,0)}(\phi,\lambda),\,(\xi,aK)\big\rangle
+         & = \big\langle (\phi,\lambda),\,[(\xi,aK),(\eta,0)]\big\rangle                      \\
+         & = \big\langle (\phi,\lambda),\,\big([\xi,\eta],\,\omega(\xi,\eta)K\big)\big\rangle \\
+         & = \langle \phi,\,[\xi,\eta]\rangle_{L\mathfrak g} + \lambda\,\omega(\xi,\eta).
+    \end{align*}
+    Use $\Ad$–invariance of $\langle\,,\,\rangle_{\mathfrak g}$:
+    $\langle \phi,[\xi,\eta]\rangle=\langle [\phi,\eta],\xi\rangle$, and integrate by parts
+    (using periodicity) for the cocycle term
+    \[
+        \omega(\xi,\eta) = \frac{1}{2\pi}\int_0^{2\pi}\!\!\langle \xi,\eta'\rangle\,d\theta.
+    \]
+    Thus
+    \[
+        \big\langle \ad^*_{(\eta,0)}(\phi,\lambda),\,(\xi,aK)\big\rangle
+        = \left\langle [\eta,\phi]+\lambda\,\eta',\,\xi\right\rangle_{L\mathfrak g},
+    \]
+    which identifies
+    \[
+        \ad^*_{(\eta,0)}(\phi,\lambda)\;=\;\big([\eta,\phi]+\lambda\,\eta',\;0\big).
+    \]
+    Since $K$ is central, $\ad^*_{(0,aK)}=0$. Therefore, for general $(\eta,aK)$:
+    \[
+        \ad^*_{(\eta,aK)}(\phi,\lambda) \;=\; \big([\eta,\phi]+\lambda\,\eta',\;0\big).
+    \]
 
-\paragraph{Consistency with the group formula.}
-Let $\gamma(t)=\exp(t\eta)\in LG$. The group–level coadjoint action is
-\[
-\gamma\cdot(\phi,\lambda)
-= \big(\Ad_\gamma\phi+\lambda\,\gamma'\gamma^{-1},\,\lambda\big).
-\]
-Differentiating at $t=0$ gives
-\[
-\frac{d}{dt}\Big|_{0}\big(\Ad_{\gamma(t)}\phi\big)=[\eta,\phi],
-\qquad
-\frac{d}{dt}\Big|_{0}\big(\gamma'(t)\gamma(t)^{-1}\big)=\eta',
-\]
-hence
-\[
-\frac{d}{dt}\Big|_{0}\big(\gamma(t)\cdot(\phi,\lambda)\big)
-= \big([\eta,\phi]+\lambda\,\eta',\,0\big)=\ad^*_{(\eta,0)}(\phi,\lambda),
-\]
-as derived above.
+    \paragraph{Consistency with the group formula.}
+    Let $\gamma(t)=\exp(t\eta)\in LG$. The group–level coadjoint action is
+    \[
+        \gamma\cdot(\phi,\lambda)
+        = \big(\Ad_\gamma\phi+\lambda\,\gamma'\gamma^{-1},\,\lambda\big).
+    \]
+    Differentiating at $t=0$ gives
+    \[
+        \frac{d}{dt}\Big|_{0}\big(\Ad_{\gamma(t)}\phi\big)=[\eta,\phi],
+        \qquad
+        \frac{d}{dt}\Big|_{0}\big(\gamma'(t)\gamma(t)^{-1}\big)=\eta',
+    \]
+    hence
+    \[
+        \frac{d}{dt}\Big|_{0}\big(\gamma(t)\cdot(\phi,\lambda)\big)
+        = \big([\eta,\phi]+\lambda\,\eta',\,0\big)=\ad^*_{(\eta,0)}(\phi,\lambda),
+    \]
+    as derived above.
 \end{remark}
 
 
@@ -797,7 +797,7 @@ $f(\theta+2\pi)=f(\theta)\cdot M$ for some $M \in G$.
 
 \begin{definition}[Monodromy / holonomy]
     Because $\phi$ is $2\pi$-periodic, there exists a unique $M_\phi\in G$
-    (the \emph{monodromy}) such that
+    (the \textbf{monodromy}) such that
     \begin{equation}\label{eq:monodromy-eq}
         f(\theta+2\pi) \;=\; f(\theta)\,M_\phi \qquad (\theta\in\mathbb R),
     \end{equation}
@@ -896,6 +896,7 @@ $f(\theta+2\pi)=f(\theta)\cdot M$ for some $M \in G$.
 
 The following proposition follows from the previous discussion.
 \begin{proposition}[Coadjoint orbits and conjugacy classes]
+    \leavevmode
     \begin{enumerate}[(i)]
         \item If $G$ is simply connected and $\lambda \neq 0$ then the orbits of $LG$
               on the smooth part of $(L\mathfrak{g})^* \times \{\lambda\} \subset (\widetilde{L\mathfrak{g}})^*$
@@ -1020,103 +1021,985 @@ On the other hand, $(\xi,\lambda)$ and $(\tilde{\xi},\lambda)$ belong to the sam
     because of the general formula for the coadjoint action. \[
         \gamma\cdot(\phi,\lambda) \;=\; (\operatorname{Ad}_\gamma\phi + \lambda\,\gamma'\gamma^{-1},\,\lambda).
     \]
-This shows that the orbit contains all points of the form
+    This shows that the orbit contains all points of the form
     $(w\cdot\xi+\lambda\eta,\lambda)$ with $w\in W$ and $\eta\in\widehat T$.
 
-The converse will be treated in the following lemma. This establishes a bijection between orbits and $W_{\mathrm{aff}}$-orbits
+    The converse will be treated in the following lemma. This establishes a bijection between orbits and $W_{\mathrm{aff}}$-orbits
     in $\hat{T}$.
 \end{proof}
 
 
 
 \begin{lemma}[Exhaustion by Weyl and lattice moves]
-Let $G$ be compact, connected and simply connected, $T\subset G$ a maximal
-torus with Lie algebra $\mathfrak t$, Weyl group $W=N_G(T)/T$, and
-$\widehat T=\ker(\exp:\mathfrak t\to T)$. Fix $\lambda\in\mathbb Z\setminus\{0\}$.
-If $(\xi,\lambda)$ and $(\tilde\xi,\lambda)$ with $\xi,\tilde\xi\in\mathfrak t$
-lie in the same $LG$–orbit, then there exist $w\in W$ and $\eta\in\widehat T$
-such that
-\[
-\tilde\xi \;=\; w\!\cdot\xi \;+\; \lambda\,\eta.
-\]
+    Let $G$ be compact, connected and simply connected, $T\subset G$ a maximal
+    torus with Lie algebra $\mathfrak t$, Weyl group $W=N_G(T)/T$, and
+    $\widehat T=\ker(\exp:\mathfrak t\to T)$. Fix $\lambda\in\mathbb Z\setminus\{0\}$.
+    If $(\xi,\lambda)$ and $(\tilde\xi,\lambda)$ with $\xi,\tilde\xi\in\mathfrak t$
+    lie in the same $LG$–orbit, then there exist $w\in W$ and $\eta\in\widehat T$
+    such that
+    \[
+        \tilde\xi \;=\; w\!\cdot\xi \;+\; \lambda\,\eta.
+    \]
 \end{lemma}
 
 \begin{proof}
-Assume $(\tilde\xi,\lambda)=\gamma\cdot(\xi,\lambda)$ for some $\gamma\in LG$.
+    Assume $(\tilde\xi,\lambda)=\gamma\cdot(\xi,\lambda)$ for some $\gamma\in LG$.
 
-Let $M_\xi:=\exp(2\pi\xi/\lambda)\in T$ and $M_{\tilde\xi}:=\exp(2\pi\tilde\xi/\lambda)\in T$
-be their monodromies. The general monodromy formula gives
-\[
-M_{\tilde\xi} \;=\; \gamma(0)\,M_\xi\,\gamma(0)^{-1}.
-\]
-Since $M_\xi,M_{\tilde\xi}\in T$, by the standard conjugacy theorem
-(“$G$–conjugacy on $T$ is $W$–conjugacy”), there exists $n\in N_G(T)$ with
-\[
-M_{\tilde\xi} \;=\; n\,M_\xi\,n^{-1}.
-\]
-Let $w\in W$ be the class of $n$. Replace $\gamma$ by
-\[
-\gamma_1 \;:=\; n^{-1}\gamma \in LG,
-\qquad
-\text{and set}\qquad
-\hat\xi \;:=\; \Ad_{n^{-1}}\tilde\xi \;=\; w^{-1}\!\cdot\tilde\xi \in \mathfrak t.
-\]
-Then $\gamma_1\cdot(\xi,\lambda)=(\hat\xi,\lambda)$ and
-\[
-M_{\hat\xi}
-= \gamma_1(0)\,M_\xi\,\gamma_1(0)^{-1}
-= n^{-1}\gamma(0)\,M_\xi\,\gamma(0)^{-1}n
-= n^{-1}M_{\tilde\xi}n
-= M_\xi.
-\]
-Thus $\xi,\hat\xi\in\mathfrak t$ have \emph{equal} monodromy:
-$\exp(2\pi\hat\xi/\lambda)=\exp(2\pi\xi/\lambda)$.
+    Let $M_\xi:=\exp(2\pi\xi/\lambda)\in T$ and $M_{\tilde\xi}:=\exp(2\pi\tilde\xi/\lambda)\in T$
+    be their monodromies. The general monodromy formula gives
+    \[
+        M_{\tilde\xi} \;=\; \gamma(0)\,M_\xi\,\gamma(0)^{-1}.
+    \]
+    Since $M_\xi,M_{\tilde\xi}\in T$, by the standard conjugacy theorem
+    (“$G$–conjugacy on $T$ is $W$–conjugacy”), there exists $n\in N_G(T)$ with
+    \[
+        M_{\tilde\xi} \;=\; n\,M_\xi\,n^{-1}.
+    \]
+    Let $w\in W$ be the class of $n$. Replace $\gamma$ by
+    \[
+        \gamma_1 \;:=\; n^{-1}\gamma \in LG,
+        \qquad
+        \text{and set}\qquad
+        \hat\xi \;:=\; \Ad_{n^{-1}}\tilde\xi \;=\; w^{-1}\!\cdot\tilde\xi \in \mathfrak t.
+    \]
+    Then $\gamma_1\cdot(\xi,\lambda)=(\hat\xi,\lambda)$ and
+    \[
+        M_{\hat\xi}
+        = \gamma_1(0)\,M_\xi\,\gamma_1(0)^{-1}
+        = n^{-1}\gamma(0)\,M_\xi\,\gamma(0)^{-1}n
+        = n^{-1}M_{\tilde\xi}n
+        = M_\xi.
+    \]
+    Thus $\xi,\hat\xi\in\mathfrak t$ have \textbf{equal} monodromy:
+    $\exp(2\pi\hat\xi/\lambda)=\exp(2\pi\xi/\lambda)$.
 
-Consider the solutions
-\[
-f(\theta)=\exp\!\Big(\tfrac{\theta}{\lambda}\xi\Big),\qquad
-\hat f(\theta)=\exp\!\Big(\tfrac{\theta}{\lambda}\hat\xi\Big)\qquad(\in T),
-\]
-and define the $T$–valued loop
-\[
-\delta(\theta)\;:=\;\hat f(\theta)\,f(\theta)^{-1}\in T.
-\]
-Since $T$ is abelian, we have
-\[
-\delta(\theta)=\exp\!\Big(\tfrac{\theta}{\lambda}(\hat\xi-\xi)\Big),
-\qquad
-\delta'(\theta)\,\delta(\theta)^{-1}=\tfrac{1}{\lambda}(\hat\xi-\xi)\in\mathfrak t.
-\]
-Moreover $\delta(2\pi)=1$ because $M_{\hat\xi}=M_\xi$. Hence
-\[
-\eta\;:=\;\tfrac{1}{\lambda}(\hat\xi-\xi)\;\in\;\widehat T,
-\quad\text{and}\quad
-\hat\xi=\xi+\lambda\eta.
-\]
-By the coadjoint action formula,
-\[
-\delta\cdot(\xi,\lambda)=(\xi+\lambda\eta,\lambda)=(\hat\xi,\lambda).
-\]
-Finally, undoing the $n^{-1}$–conjugation gives
-\[
-(\tilde\xi,\lambda)
-=(n\cdot\delta)\cdot(\xi,\lambda)
-=\Big(w\!\cdot(\xi+\lambda\eta),\,\lambda\Big)
-=\Big(w\!\cdot\xi+\lambda\,w\!\cdot\eta,\,\lambda\Big).
-\]
-Since $\widehat T$ is $W$–stable, $w\!\cdot\eta\in\widehat T$; renaming
-$\eta\leftarrow w\!\cdot\eta$ yields the claimed form
-$\tilde\xi=w\!\cdot\xi+\lambda\eta$.
+    Consider the solutions
+    \[
+        f(\theta)=\exp\!\Big(\tfrac{\theta}{\lambda}\xi\Big),\qquad
+        \hat f(\theta)=\exp\!\Big(\tfrac{\theta}{\lambda}\hat\xi\Big)\qquad(\in T),
+    \]
+    and define the $T$–valued loop
+    \[
+        \delta(\theta)\;:=\;\hat f(\theta)\,f(\theta)^{-1}\in T.
+    \]
+    Since $T$ is abelian, we have
+    \[
+        \delta(\theta)=\exp\!\Big(\tfrac{\theta}{\lambda}(\hat\xi-\xi)\Big),
+        \qquad
+        \delta'(\theta)\,\delta(\theta)^{-1}=\tfrac{1}{\lambda}(\hat\xi-\xi)\in\mathfrak t.
+    \]
+    Moreover $\delta(2\pi)=1$ because $M_{\hat\xi}=M_\xi$. Hence
+    \[
+        \eta\;:=\;\tfrac{1}{\lambda}(\hat\xi-\xi)\;\in\;\widehat T,
+        \quad\text{and}\quad
+        \hat\xi=\xi+\lambda\eta.
+    \]
+    By the coadjoint action formula,
+    \[
+        \delta\cdot(\xi,\lambda)=(\xi+\lambda\eta,\lambda)=(\hat\xi,\lambda).
+    \]
+    Finally, undoing the $n^{-1}$–conjugation gives
+    \[
+        (\tilde\xi,\lambda)
+        =(n\cdot\delta)\cdot(\xi,\lambda)
+        =\Big(w\!\cdot(\xi+\lambda\eta),\,\lambda\Big)
+        =\Big(w\!\cdot\xi+\lambda\,w\!\cdot\eta,\,\lambda\Big).
+    \]
+    Since $\widehat T$ is $W$–stable, $w\!\cdot\eta\in\widehat T$; renaming
+    $\eta\leftarrow w\!\cdot\eta$ yields the claimed form
+    $\tilde\xi=w\!\cdot\xi+\lambda\eta$.
 \end{proof}
 
 \begin{remark}[Rotation action]
     We can rotate the loop parameter: $(R_\alpha\phi)(\theta) := \phi(\theta+\alpha)$, where $\alpha\in\mathbb T=S^1$. This gives an action of the rotation group $\mathbb T$ on $L\mathfrak g$, hence also on $(\widetilde{L\mathfrak g})^*$.
 
-An orbit $\mathcal O$ is in the smooth part if it is stable under circle rotations. In other words, if rotating the loop parameter can be undone by some $LG$-coadjoint action.
+    An orbit $\mathcal O$ is in the smooth part if it is stable under circle rotations. In other words, if rotating the loop parameter can be undone by some $LG$-coadjoint action.
 
-At every point $(\phi,\lambda)\in\mathcal O$, the vector field generating rotations is tangent to the orbit. Equivalently: the infinitesimal variation $\delta_{\mathrm{rot}}\phi = \phi'$ must lie in the tangent space of the orbit. The tangent space at $(\phi,\lambda)$ to the coadjoint orbit is spanned by infinitesimal coadjoint actions: \[T_{(\phi,\lambda)}(\mathcal O) = \{([\eta,\phi] + \lambda \eta',\,0)\;:\; \eta \in L\mathfrak g\}\]
-So for stability we require $\phi' \in \{[\eta,\phi] + \lambda \eta' : \eta\in L\mathfrak g\}$. Thus there must exist some $\eta \in L\mathfrak g$ such that $\phi'(\theta) = [\eta(\theta),\phi(\theta)] + \lambda \eta'(\theta)$.
+    At every point $(\phi,\lambda)\in\mathcal O$, the vector field generating rotations is tangent to the orbit. Equivalently: the infinitesimal variation $\delta_{\mathrm{rot}}\phi = \phi'$ must lie in the tangent space of the orbit. The tangent space at $(\phi,\lambda)$ to the coadjoint orbit is spanned by infinitesimal coadjoint actions: \[T_{(\phi,\lambda)}(\mathcal O) = \{([\eta,\phi] + \lambda \eta',\,0)\;:\; \eta \in L\mathfrak g\}\]
+    So for stability we require $\phi' \in \{[\eta,\phi] + \lambda \eta' : \eta\in L\mathfrak g\}$. Thus there must exist some $\eta \in L\mathfrak g$ such that $\phi'(\theta) = [\eta(\theta),\phi(\theta)] + \lambda \eta'(\theta)$.
 
-If $\eta \in L\mathfrak g$ is smooth, then both $[\eta,\phi]$ and $\eta'$ are smooth in $\theta$. Hence $\phi'$ is smooth, which forces $\phi$ to be smooth. Representation-theoretically, this matches the fact that positive energy representations (the ones stable under rotations) correspond to smooth coadjoint orbits.
+    If $\eta \in L\mathfrak g$ is smooth, then both $[\eta,\phi]$ and $\eta'$ are smooth in $\theta$. Hence $\phi'$ is smooth, which forces $\phi$ to be smooth. Representation-theoretically, this matches the fact that positive energy representations (the ones stable under rotations) correspond to smooth coadjoint orbits.
 \end{remark}
+
+
+
+\subsection{From Lie algebra extensions to Lie group extensions (integrality)}
+Suppose $G$ is simply connected. The Lie algebra extensions described above do not automatically integrate to Lie group extensions. For a Lie algebra $2$-cocycle $\omega$ on $L\mathfrak g$, view $\omega$ as the value at the identity of a left–invariant closed $2$–form on $LG$; integration to a central \textbf{group} extension requires an integrality condition.
+
+
+\begin{theorem}[Pressley--Segal, Thm.~4.4.1]\label{thm:PS-4.4.1}
+    Suppose $G$ is simply connected.
+    \begin{enumerate}[(i)]
+        \item The Lie algebra extension
+              \[
+                  \mathbb{R} \longrightarrow \widetilde{L\mathfrak g} \longrightarrow L\mathfrak g
+              \]
+              defined by a cocycle $\omega$ integrates to a (topological) central extension of groups
+              \[
+                  \mathbb{T} \longrightarrow \widetilde{LG} \longrightarrow LG
+              \]
+              if and only if the left–invariant $2$–form $\omega/2\pi$ on $LG$ represents an integral cohomology class; equivalently, its integral over every $2$–cycle in $LG$ is an integer.
+
+        \item In that case, the group extension $\widetilde{LG}$ is completely determined (up to isomorphism) by $\omega$, and there is a unique action of $\Diff^+(S^1)$ on $\widetilde{LG}$ covering its action on $LG$.
+
+        \item If $\lambda\,\omega$ is not integral for any nonzero real number $\lambda$, then the Lie algebra extension $\widetilde{L\mathfrak g}$ does not correspond to any Lie group.
+
+        \item For the Kac–Moody cocycle \eqref{eq:4.2.2}, the integrality condition holds if and only if $\langle h_\alpha, h_\alpha\rangle$ is an even integer for each coroot $h_\alpha$ of $G$ (see §2.4).
+    \end{enumerate}
+\end{theorem}
+
+\begin{proposition}[Pressley--Segal, Prop.~4.4.2]\label{prop:PS-4.4.2}
+    Suppose a Lie group $\Gamma$ acts smoothly on a connected and simply connected manifold $X$, preserving an integral closed $2$-form $\omega/2\pi$ on $X$ (both $\Gamma$ and $X$ may be infinite-dimensional). Then there exists a canonical central extension
+    \[
+        \mathbb{T} \longrightarrow \widetilde{\Gamma} \longrightarrow \Gamma
+    \]
+    associated to $(X, \omega)$ such that for any $x\in X$, the corresponding extension of Lie algebras is represented by the cocycle
+    \[
+        (\xi,\eta) \longmapsto \omega(\xi_x,\eta_x),
+    \]
+    where $\xi_x$ denotes the tangent vector at $x$ induced by the infinitesimal action of $\xi\in\Lie(\Gamma)$.
+
+    The group $\widetilde{\Gamma}$ can be described explicitly. The integral closed form $\omega$ defines for every piecewise smooth loop $\ell$ in $X$ an element
+    \[
+        C(\ell) \;=\; \exp\!\Big( i \int_\sigma \omega \Big),
+    \]
+    where $\sigma$ is any surface in $X$ with boundary $\partial\sigma = \ell$. Because $\omega/2\pi$ is integral, $C(\ell)$ is well defined. This assignment satisfies:
+    \begin{enumerate}[label=({H\arabic*})]
+        \item \textbf{Independence of parametrization:} $C(\ell) = C(\ell\circ\phi)$ for any degree-one smooth map $\phi:S^1\to S^1$;
+        \item \textbf{Additivity:} for paths $p,q,r$ with $p(1)=q(0)$, $q(1)=r(0)$,
+              \[
+                  C(p*r^{-1}) = C(p*q^{-1})\,C(q*r^{-1});
+              \]
+        \item \textbf{$\Gamma$-invariance:} $C(\gamma\cdot\ell)=C(\ell)$ for all $\gamma\in\Gamma$.
+    \end{enumerate}
+    Any such assignment $C$ defines a central extension $\widetilde{\Gamma}$ of $\Gamma$ by $\mathbb{T}$ as follows. Fix $x_0\in X$. An element of $\widetilde{\Gamma}$ is represented by a triple $(\gamma,p,u)$, where $\gamma\in\Gamma$, $u\in\mathbb{T}$, and $p$ is a path in $X$ from $x_0$ to $\gamma\cdot x_0$. Two triples $(\gamma,p,u)$ and $(\gamma',p',u')$ are equivalent if $\gamma=\gamma'$ and $u = C(p'*p^{-1})\,u'$. The group law is
+    \[
+        (\gamma_1,p_1,u_1)\cdot(\gamma_2,p_2,u_2) = (\gamma_1\gamma_2,\, p_1 * (\gamma_1\cdot p_2),\, u_1u_2).
+    \]
+    This defines a well-defined Lie group $\widetilde{\Gamma}$.
+\end{proposition}
+
+Applying this to $\Gamma = X = LG$, if $G$ is simply connected then so is $LG$, since $LG\simeq G\times\Omega G$ and $\pi_1(LG)\cong\pi_1(G)\oplus\pi_2(G)$. For compact $G$, $\pi_2(G)=0$. Thus $\widetilde{LG}$ gives the desired central extension of $LG$, with a natural $\Diff^+(S^1)$-action preserving $\omega$.
+
+Now let us turn to part~(iv) of Theorem~\ref{thm:PS-4.4.1}. There is a so-called \textbf{transgression homomorphism}
+\begin{equation}\label{eq:transgression}
+    \tau : H^3(G) \longrightarrow H^2(\Omega G),
+\end{equation}
+where the cohomology may be taken with either real or integer coefficients. It is defined as the composite
+\[
+    H^3(G) \longrightarrow H^3(S^1 \times \Omega G) \longrightarrow H^2(\Omega G),
+\]
+where the first arrow is induced by the evaluation map $S^1\times \Omega G \to G$, and the second is integration over $S^1$. When $G$ is simply connected, the transgression $\tau$ is an isomorphism: it reduces to the transpose of the natural isomorphism (coming from the long exact homotopy sequence of the path-loop fibration)
+\[
+    \pi_2(\Omega G) \;\xrightarrow{\;\cong\;}\; \pi_3(G)
+\]
+under the Hurewicz identifications $\pi_2(\Omega G) \cong H_2(\Omega G)$ and $\pi_3(G) \cong H_3(G)$. Combining this with the next two results yields Theorem~\ref{thm:PS-4.4.1}(iv). We offer two other ways of thinking about this map.
+
+\begin{remark}[Serre spectral sequence]
+    For a fibration $F \to E \xrightarrow{\pi} B$ with connected base, we have the Serre spectral sequence with $E_2$ page
+    \[
+        E_2^{p,q} = H^p(B; H^q(F)) \implies H^{p+q}(E).
+    \]
+    In the case of the path-loop fibration $\Omega G \to PG \to G$, the $E_2$ page has $E_2^{p,0} = H^p(G)$ and $E_2^{0,q} = H^q(\Omega G)$. Since the total space $PG$ is contractible, we can conclude that the differentials must kill everything except $E_\infty^{0,0} = \mathbb{R}$. In particular, all the cohomology of the base $G$ must be killed by the image of some differential $d_r: E_r^{q-r,r-1} \to E_r^{q,0}$.
+
+    In our situation we want to identify $E_3^{3,0} = H^3(G)$ and on the third page it has an incoming differential from $E_3^{0,2} = H^2(\Omega G)$. These groups originally were on the $E_2$ page but I claim that they survive to $E_3$. This is because on the $E_2$ page, there is an outgoing differential \begin{align*}
+        E_2^{0,2} \to E_2^{2,1} = H^2(G; H^1(\Omega G))
+    \end{align*}
+    and it is well known that $H^2(G) = 0$. So the term $E_2^{0,2}$ survives. Also, on the second page we have the incoming differential $E_2^{1,1} \to E_2(3,0)$ where \begin{align*}
+        E_2^{1,1} = H^1(G; H^1(\Omega G))
+    \end{align*} and it is well known that $H^1(G) = 0$. So the term $E_2^{1,1}$ survives as well.
+\end{remark}
+
+\begin{remark}
+    Let $F \hookrightarrow E \xrightarrow{\pi} B$ be a fibration. Fix basepoints $e_0\in E$, $b_0=\pi(e_0)\in B$, and let $F=\pi^{-1}(b_0)$ with basepoint $e_0$. There is a natural long exact sequence in homotopy groups:
+    \[
+        \cdots \longrightarrow \pi_{n+1}(B,b_0) \xrightarrow{\partial} \pi_{n}(F,e_0) \xrightarrow{i_*} \pi_{n}(E,e_0) \xrightarrow{\pi_*} \pi_{n}(B,b_0) \xrightarrow{\partial} \pi_{n-1}(F,e_0) \longrightarrow \cdots
+    \]
+    The connecting homomorphism $\partial:\pi_n(B)\to \pi_{n-1}(F)$ works as follows: Take a based map $f:S^n\to B$ representing $[f]\in\pi_n(B)$. View $S^n=D^n/\partial D^n$ and precompose to get $\bar{f}:D^n\to B$ with $\bar{f}(\partial D^n)=b_0$. Because $\pi$ is a fibration (has the homotopy lifting property), $\bar{f}$ lifts to $\tilde{f}:D^n\to E$ with $\pi\circ \tilde{f}=\bar{f}$ and $\tilde{f}(\partial D^n)\subset F$. Then
+    \[
+        \partial([f]) := \left[\tilde{f}|_{\partial D^n} : S^{n-1}\to F\right] \in \pi_{n-1}(F).
+    \]
+    Different choices give the same homotopy class; exactness follows from standard lifting/extension arguments. For the path-loop fibration, the long exact sequence breaks into isomorphisms
+    \[
+        \pi_{n+1}(G) \xrightarrow[\cong]{\partial} \pi_n(\Omega G).
+    \]
+    The connecting map $\partial$ can be described explicitly here. Given $g:S^{n+1}\to G$, use the identification $S^{n+1}\cong S^n\wedge S^1$. Define
+    \[
+        \widehat{g}:S^n\longrightarrow \Omega G, \qquad \widehat{g}(s)(t) := g([s,t]).
+    \]
+    Then $\partial([g])=[\widehat{g}]$. This is exactly the standard loop-suspension adjunction. Homotopy classes of maps satisfy
+    \begin{align*}
+        [\Sigma X, Y] & \cong [X, \Omega Y]
+    \end{align*}
+
+    Now recall the Hurewicz theorem: If $X$ is $n-1$ connected, then the Hurewicz homomorphism
+    \[
+        h: \pi_n(X) \to H_n(X)
+    \]
+    defined by the pushforward of the fundamental class of $S^n$ is an isomorphism.
+
+    The Hurewicz theorem gives isomorphisms in first nontrivial degree: \[\pi_3(G)\cong H_3(G), \quad \pi_2(\Omega G)\cong H_2(\Omega G)\] The LES isomorphism $\partial:\pi_3(G)\xrightarrow{\cong}\pi_2(\Omega G)$ induces $\Sigma_*:H_2(\Omega G)\xrightarrow{\cong} H_3(G)$ on homology. The transgression $\tau:H^3(G)\to H^2(\Omega G)$ is the transpose of $\Sigma_*$ under the evaluation pairings:
+    \[
+        \langle \tau(\alpha), z\rangle = \langle \alpha, \Sigma_*(z)\rangle \quad (\alpha\in H^3(G),\ z\in H_2(\Omega G)).
+    \]
+
+    In de Rham terms, with $\alpha$ represented by a closed 3-form $\sigma$:
+    \[
+        \int_{S^2} z^*\tau(\sigma) = \int_{S^1\times S^2} (\mathrm{ev}\circ(\mathrm{id}\times z))^*\sigma = \int_{S^3} (\Sigma_* z)^*\sigma.
+    \]
+\end{remark}
+
+\begin{remark} Let $\pi:E\to B$ be a smooth proper submersion with compact, oriented fibers of (constant) dimension $k$. There is a degree-$k$ lowering linear map
+    \[\pi_*:\Omega^{p+k}(E)\longrightarrow \Omega^{p}(B)\]  
+called integration along the fiber (pushforward of forms). For $p_2:M\times F\to M$ with $F$ oriented, compact, $\dim F=k$:
+    $(p_2)_*(p_M^*\omega\wedge p_F^*\eta) = \omega\ \Big(\int_F \eta\Big)$.
+
+    More invariantly, if $V_1,\dots,V_p$ are tangent vectors on $M$,
+    \[
+        \big((p_2)_*\alpha\big)_x(V_1,\dots,V_p)
+        \;=\;\int_{F}\alpha_{(x,y)}(-,\,\tilde V_1,\dots,\tilde V_p),
+    \]
+    where $\tilde V_i$ are any horizontal lifts (choice doesn't matter) and now $\alpha_{(x,y)}(-,\,\tilde V_1,\dots,\tilde V_p)$ is a $k$-form on $F$ to be integrated. In order to lift $V_i$, we need a connection (horizontal distribution) on the fibration; however, the result is independent of the choice of connection.
+
+    This operation on forms is characterized by the identity
+    \[
+        \int_{B}\!(\pi_* \alpha)\wedge \beta\;=\;\int_{E}\!\alpha\wedge \pi^*\beta\quad
+        \forall\ \beta\in\Omega_c^{\dim B - p}(B)
+    \]
+If you have a local trivialization $E|_U\cong U\times F$ and $\alpha$ splits as
+    \[\alpha = \sum_i \text{(pullback of $\omega_i$ on $U$)} \wedge \text{(pullback of $\eta_i$ on $F$)}\] then
+    \[
+        (\pi_* \alpha)|_{U}\ =\ \sum_i\ \Big(\int_{F}\eta_i\Big)\ \omega_i
+    \]
+    Extend by linearity and a partition of unity. (If $\deg \eta_i\neq k$, its fiber integral is 0.)
+    Key properties you'll actually use:
+    \begin{itemize}
+        \item Naturality (base change): for a pullback square
+              \[
+                  \begin{array}{ccc}
+                      E'              & \xrightarrow{\ \tilde g\ } & E              \\
+                      \downarrow \pi' &                            & \downarrow \pi \\
+                      B'              & \xrightarrow{\ g\ }        & B
+                  \end{array}
+                  \qquad\Rightarrow\qquad
+                  g^* \circ \pi_* \;=\; \pi'_* \circ \tilde g^*.
+              \]
+        \item Projection formula: $\pi_*(\pi^*\beta\wedge \alpha)=\beta\wedge \pi_*\alpha$.
+        \item Stokes / d-commutation: if fibers are closed (no boundary),
+              $d\,(\pi_* \alpha)\;=\;\pi_*(d\alpha)$.
+              If fibers have boundary, a boundary term appears: $d\,\pi_* \alpha = \pi_* d\alpha \pm (\partial\pi)_*\alpha$.
+        \item Fubini/iterated integration: for $E\xrightarrow{\pi_1} B\xrightarrow{\pi_2} C$,
+              $(\pi_2\circ \pi_1)_* \;=\; \pi_{2*}\circ \pi_{1*}$.
+    \end{itemize}
+    Now we can check that indeed transgression is the adjoint to loop-suspension on homology.
+    Form the pullback square
+    \[
+    \begin{array}{ccc}
+    S^1\times S^2 & \xrightarrow{\ \ \mathrm{id}\times z\ \ } & S^1\times\Omega G\\[4pt]
+    \downarrow p_2' & & \downarrow p_2\\[4pt]
+    S^2 & \xrightarrow{\ \ z\ \ } & \Omega G
+    \end{array}
+    \]
+    where $p_2':S^1\times S^2\to S^2$ is projection.
+
+    Naturality of fiber integration (base change) says:
+    \[
+    z^* \circ (p_2)_* \;=\; (p_2')_*\circ (\mathrm{id}\times z)^*
+    \]
+
+    Apply to $\alpha=\mathrm{ev}^*\sigma$:
+    \[
+    z^*(p_2)_*(\mathrm{ev}^*\sigma) \;=\; (p_2')_*\big((\mathrm{id}\times z)^*\mathrm{ev}^*\sigma\big)
+    \]
+
+    Integration along a product fiber followed by integration over the base equals integration over the total space:
+    \[
+        \int_{S^2} (p_2')_*(\beta) = \int_{S^1\times S^2} \beta
+    \]
+    for any top-degree form $\beta$ on $S^1\times S^2$.
+
+    Take $\beta=(\mathrm{id}\times z)^*\mathrm{ev}^*\sigma$. Then
+    \[
+        \int_{S^2} z^*(p_2)_*(\mathrm{ev}^*\sigma)
+        = \int_{S^2} (p_2')_*\big((\mathrm{id}\times z)^*\mathrm{ev}^*\sigma\big)
+        = \int_{S^1\times S^2} (\mathrm{id}\times z)^*\mathrm{ev}^*\sigma.
+    \]
+
+    Step 3 (compose pullbacks). We have $(\mathrm{id}\times z)^*\mathrm{ev}^* = (\mathrm{ev}\circ(\mathrm{id}\times z))^*$. Hence
+    \[
+        \int_{S^1\times S^2} (\mathrm{id}\times z)^*\mathrm{ev}^*\sigma
+        = \int_{S^1\times S^2} (\mathrm{ev}\circ(\mathrm{id}\times z))^*\sigma.
+    \]
+
+    Now let $F := \mathrm{ev}\circ(\mathrm{id}\times z): S^1\times S^2 \to G$ be given by $F(t,s)=z(s)(t)$. $F$ is constant on the wedge $S^1\vee S^2\subset S^1\times S^2$, so it descends to the quotient
+    \[
+    q: S^1\times S^2 \twoheadrightarrow (S^1\times S^2)/(S^1\vee S^2) = S^1\wedge S^2 \cong S^3
+    \]
+    i.e. there exists a unique continuous map $\Sigma_* z:S^1\wedge S^2\to G$ such that $F = (\Sigma_* z)\circ q$. Concretely, $\Sigma_* z([t,s])=z(s)(t)$. This is the loop-suspension of $z$.
+
+    By functoriality of pullback:
+    \[
+    \int_{S^1\times S^2} F^*\sigma = \int_{S^1\times S^2} q^*(\Sigma_* z)^*\sigma
+    \]
+    The quotient $q$ has degree 1 (it is an orientation-preserving collapse of a wedge to a point), hence it pushes the fundamental class forward: $q_*[S^1\times S^2]=[S^1\wedge S^2]$. Therefore
+    \[
+    \int_{S^1\times S^2} q^*(\Sigma_* z)^*\sigma = \int_{S^1\wedge S^2} (\Sigma_* z)^*\sigma
+    \]
+
+    Finally, fix the standard orientation $S^1\wedge S^2 \cong S^3$. Then
+    \[
+    \int_{S^1\wedge S^2} (\Sigma_* z)^*\sigma = \int_{S^3} (\Sigma_* z)^*\sigma
+    \]
+\end{remark}
+
+\begin{proposition}[Pressley--Segal, Prop.~4.4.4]\label{prop:PS-4.4.4}
+    Let $\sigma$ denote the left-invariant 3-form on $G$ whose value at the identity element is
+    \[
+        \sigma(\xi,\eta,\zeta) = \langle [\xi,\eta], \zeta\rangle.
+    \]
+    Then the transgression $\tau(\sigma)$ is cohomologous to the invariant 2-form $\omega/2\pi$ on $\Omega G$.
+\end{proposition}
+
+\begin{remark}
+    [Another perspective on transgression] Recall that invariant symmetric bilinear forms on $\mathfrak g$ are classified by the Lie algebra cohomology $H^3(\mf g)$ defined by the Chevalley-Eilenberg complex. Given such a form $\langle\ ,\ \rangle$, the associated 3-cocycle is
+    \[    \sigma(\xi,\eta,\zeta) = \langle [\xi,\eta], \zeta\rangle. \]
+    Conversely, given a 3-cocycle $\sigma$ on $\mathfrak g$, one can define an invariant symmetric bilinear form by
+    \[    \langle \xi,\eta\rangle := \sigma(\xi,[\eta_1,\eta_2]), \]
+    where $\eta_1,\eta_2$ are any elements satisfying $\eta=[\eta_1,\eta_2]$ (such elements exist since $\mathfrak g$ is semisimple, and the definition is independent of the choice because $\sigma$ is a cocycle). We have seen that invariant symmetric bilinear forms on $\mathfrak g$ classify central extensions of the loop algebra $L\mathfrak g$ via the construction which takes $\langle\ ,\ \rangle$ to the cocycle
+    \[
+        \omega(\xi,\eta) = \frac{1}{2\pi} \int_0^{2\pi} \langle \xi(\theta), \eta'(\theta)\rangle\,d\theta.
+    \] Moreover we have seen that any such cocycle $\omega$ arises from such a bilinear form. Thus we have an isomorphism 
+    \[
+        H^3(\mathfrak g) \;\xrightarrow{\cong}\; H^2(L\mathfrak g)
+    \]
+    On the other hand, if $G$ is compact, then the de Rham cohomology $H^3(G)$ is isomorphic to the Lie algebra cohomology $H^3(\mathfrak g)$. This is because every de Rham cohomology class has a unique left invariant representative form given by averaging, and therefore the cohomology of $G$ can be calculated from the cochain complex of the Lie algebra $\mf g$.
+\end{remark}
+
+\begin{proposition}[Pressley--Segal, Prop.~4.4.5]\label{prop:PS-4.4.5}
+    The skew form $\sigma$ of Proposition~\ref{prop:PS-4.4.4} defines an \textbf{integral} cohomology class on the simply connected compact group $G$ if and only if
+    \[
+        \langle h_\alpha, h_\alpha\rangle \in 2\mathbb{Z}\quad\text{for each coroot } h_\alpha\text{ of } G.
+    \]
+\end{proposition}
+
+\begin{proof}
+        For each root $\alpha$ there is a homomorphism $i_\alpha : SU_2 \to G$ such that on diagonal matrices in $SU_2$, it induces the coroot $h_\alpha$ (see Section~2.4). When $\sigma$ is pulled back to $SU_2 \cong S^3$ by $i_\alpha$, one has
+        \[
+            i_\alpha^*\sigma = \tfrac{1}{2}\langle h_\alpha, h_\alpha\rangle \sigma_0,
+        \]
+        where $\sigma_0$ is the invariant 3-form on $SU_2$ with integral $1$. 
+        
+        Thus the statement follows because the maps $i_\alpha$ generate $\pi_3(G)$, and hence the condition for $\sigma$ to be integral is that all these pullbacks be integral. It suffices to verify this for simple groups $G$, since any locally isomorphic group has the same $\pi_3$. One must then show that for a suitable $\alpha$, the homogeneous space $G/i_\alpha(SU_2)$ is 3-connected; this holds for all simple classical groups (see Bott~\cite{Bott-MorseTheory} for a proof via Morse theory).
+    \end{proof}
+
+
+
+    If $\mathfrak{g}$ is simple then the space of invariant symmetric bilinear forms on $\mathfrak{g}$ is one-dimensional. There is a minimal such form $\langle\ ,\ \rangle_{\mathrm{min}}$ satisfying the integrality condition. We shall call this the basic inner product, and the associated extension the basic central extension of $LG$. 
+
+    If $G$ is simply laced then the basic inner product is the one discussed in Section 2.5 for which $\langle h_\alpha, h_\alpha\rangle = 2$ for every coroot. In general it is characterized by the property that $\langle h_\alpha, h_\alpha\rangle = 2$ when $\alpha$ is the highest root. The Killing form on $\mathfrak{g}$ satisfies the integrality condition, so it is an integer multiple of the basic form. We shall obtain a formula for the integer in Section 14.5. When $G$ is simply laced it is the Coxeter number of $G$. The basic central extension is universal.
+
+    \red{ I tried understand where this integrality condition comes from geometrically but I'm still a little confused. Pressley and Segal say that it's because the $SU(2) \to G$ corresponding to a coroot has the property that $i_\alpha^*\sigma = \frac{1}{2}\langle h_\alpha, h_\alpha\rangle \sigma_0$ where $\sigma_0$ is the generator of $H^3(SU(2),\mathbb{Z})$. But I had a hard time checking this and understanding why this is the right way to think about integrality. I was wondering if there is another way to understand this integrality condition and to pick out the integral cohomology classes.}
+
+    \section{Oct 26}
+\subsection{Circle Bundles, Connections, and Curvature}
+
+Suppose that $\pi : Y \to X$ is a smooth principal fibre bundle whose fibre is a circle and whose base $X$ is a possibly infinite-dimensional manifold. This means that the group $\mathbb{T}$ acts freely on $Y$, the fibres are its orbits, and $X$ is the orbit space $Y / \mathbb{T}$. A connection in the bundle is a prescription which decomposes the tangent space $T_y Y$ at a point $y \in Y$ as
+\[
+T_y Y = \mathbb{R} \oplus T^{\mathrm{horiz}}_y Y,
+\]
+where $\mathbb{R}$ is the tangent space along the fibre and $T^{\mathrm{horiz}}_y Y$—the 'horizontal' tangent vectors—is a replica of $T_{\pi(y)}X$. The decomposition is required to be invariant under the action of $\mathbb{T}$ on $Y$.
+
+A connection tells one how a path in $X$ can be lifted to a horizontal path in $Y$ with a prescribed starting point. If one lifts a closed path in $X$, the lifted path in $Y$ will in general fail to close. The gap between its ends corresponds to an element of $\mathbb{T}$, called the holonomy around the path. The curvature of the connection measures the holonomy around infinitesimally small closed paths: it is the closed $2$-form $\omega$ on $X$ whose value on a pair of tangent vectors $\xi, \eta$ at a point of $X$ is the infinitesimal holonomy around the parallelogram spanned by $\xi$ and $\eta$.
+\[\omega(\xi, \eta)
+= [\tilde{\xi}, \tilde{\eta}] - [\tilde{\xi}, \tilde{\eta}]^{\mathrm{horiz}}\]
+The curvature defines an element of the cohomology group $H^2(X; \mathbb{R})$ which depends only on the topological type of the bundle. Moreover $\omega/2\pi$ is an integral class—i.e. its integral over any $2$-cocycle in $X$ is an integer—and it comes from a well-defined element of $H^2(X; \mathbb{Z})$ called the (first) Chern class of the bundle.
+
+\begin{theorem}[Chern Weil for circle bundles]
+    Let $(Y,\alpha)$ be a principal $U(1)$-bundle with connection 1-form $\alpha$ and curvature 2-form $\omega = d\alpha$. Then $[\omega / 2\pi] \in H^2(X;\mathbb{R})$ equals the image of $c_1(Y) \in H^2(X;\mathbb{Z})$ under $i: H^2(X;\mathbb{Z})\to H^2(X;\mathbb{R})$.
+\end{theorem}
+
+The Chern class describes the topological type of the circle bundle completely, and any element of $H^2(X; \mathbb{Z})$ arises from a bundle. If $X$ is simply connected, then the natural map
+\[
+i : H^2(X; \mathbb{Z}) \longrightarrow H^2(X; \mathbb{R})
+\]
+is injective, and the topological type is completely determined by the class of $\omega / 2\pi$. In general the kernel of $i$ corresponds to the flat bundles, i.e. those which can be given a connection with curvature zero.
+
+Analytically, a connection can be described in three ways:
+
+\begin{enumerate}
+    \item 
+One can give the map $\xi \mapsto \tilde{\xi}$ which to each vector field $\xi$ on $X$ assigns the corresponding horizontal $\mathbb{T}$-invariant vector field $\tilde{\xi}$ on $Y$. From this point of view the curvature is given by
+\[
+\omega(\xi, \eta) = [\tilde{\xi}, \tilde{\eta}] - [\tilde{\xi}, \tilde{\eta}]^{\sim}.
+\]
+The right-hand side of this equation is a $\mathbb{T}$-invariant vertical vector field on $Y$; but we can canonically identify it with a real-valued function on $X$. For a principal $S^1$-bundle $\pi : Y \to X$, the group $S^1$ acts freely on $Y$:
+\[
+R_\rho(y) = y \cdot \rho, \qquad \rho \in S^1.
+\]
+
+This action gives, at every $y \in Y$, a canonical vector field on $Y$ generated by the Lie algebra of the group:
+\[
+\zeta_y := \left.\frac{d}{d\theta}\right|_{\theta=0} \big( y \cdot e^{i\theta} \big).
+\]
+For any $y\in Y$, the tangent space to the fibre through $y$ - i.e. the vertical subspace $V_y = \ker(d\pi_y)$ is exactly the one-dimensional subspace spanned by $\zeta_y$. And the correspondence
+\[
+i\mathbb{R} \longrightarrow V_y,\qquad a \longmapsto a \cdot \zeta_y
+\]
+is an isomorphism of vector spaces, depending smoothly on $y$.
+
+\item One can give the $\mathbb{T}$-invariant $1$-form $\alpha\in \Omega^1(Y,\R)$ where $\R\cong \Lie(S^1)$ which assigns to a tangent vector to $Y$ its vertical component. The restriction of $\alpha$ to each fibre is the standard $1$-form $d\theta$. The derivative $d\alpha$ is $\mathbb{T}$-invariant and vanishes on vertical vectors, so $d\alpha = \pi^*\omega$ for a unique closed $2$-form $\omega$ on $X$, which is the curvature.
+
+\item One can introduce local trivializations of $Y$. That is, $X$ is covered by open sets $\{U_a\}$, and the part of $Y$ over $U_a$ is identified with $U_a \times \mathbb{T}$. Then the connection is described in $U_a$ by the $1$-form $\alpha_a = s_a^*\alpha$ which is constant in terms of the local trivialization $U_a \times \mathbb{T}$. In $U_a$ the curvature $\omega$ is described by $d\alpha_a = \omega$. If the transition functions of the bundle are
+\[
+f_{ab} : U_a \cap U_b \longrightarrow \mathbb{T}
+\]
+(i.e. the point $(x,\rho) \in U_a \times \mathbb{T}$ is the same point as $(x, f_{ab}(x)\rho) \in U_b \times \mathbb{T}$), then
+\[
+\alpha_b = \alpha_a + i\, f_{ab}^{-1} d f_{ab}.
+\]
+\end{enumerate}
+
+\begin{remark}[Connections and curvature on principal $G$-bundles]
+    Let $Y\to X$ be a principal $G$-bundle with connection $1$-form $\alpha\in \Omega^1(Y,\mathfrak{g})$, where $\alpha$ satisfies:
+    \begin{enumerate}
+        \item $R_g^*\alpha = \mathrm{Ad}_{g^{-1}}\alpha$ for all $g\in G$,
+        \item $\alpha(\zeta_Y) = \zeta$ for all $\zeta\in \mathfrak{g}$, where $\zeta_Y$ is the fundamental vector field on $Y$ generated by $\zeta$.
+    \end{enumerate}
+
+    A differential form $\beta \in \Omega^k(Y,\mathfrak{g})$ is called \textbf{basic} if:
+    \begin{enumerate}
+        \item it's $G$-invariant, and
+        \item it's horizontal (i.e. $\iota_{\zeta_Y}\beta = 0$ for all $\zeta\in \mathfrak{g}$) where $\iota$ is the interior product 
+        \[ \iota_{\zeta_Y}\beta(Y_1,\dots,Y_{k-1}) = \beta(\zeta_Y,Y_1,\dots,Y_{k-1})
+        \]
+    \end{enumerate}
+    Basic forms are precisely the pullbacks of forms on the base. The choice of a connection induces a canonical identification:
+    \[
+        \Omega^k(X) \;\cong\; \Omega^k(Y)_{\mathrm{basic}}
+        := \{ \beta \in \Omega^k(Y) \mid R_\rho^*\beta = \beta,\ \iota_\zeta \beta = 0 \}.
+    \]
+    So if $\beta$ is basic, there exists a unique form $\omega$ on $X$ such that $\pi^*\omega = \beta$.
+
+    It turns out that if you set \[F = d\alpha + \tfrac{1}{2}[\alpha \wedge \alpha] \in \Omega^2(Y,\mathfrak{g})\] then $F$ is basic, and hence defines a unique form $\Omega \in \Omega^2(X,\mathfrak{g})$ such that $\pi^*\Omega = F$. This form $\Omega$ is called the curvature of the connection. In the case of a circle bundle, the Lie algebra is abelian so $F = d\alpha$.
+\end{remark} 
+
+    \subsection{Positive energy representations}
+    From any point of view the crucial property of loop groups is the existence of the one-parameter group of automorphisms which simply rotates the loops. It permits one to speak of representations of \(LG\) of \textbf{positive energy}. 
+    
+    \begin{definition}
+        A representation of \(LG\) on a topological vector space \(\mathcal H\) has \textbf{positive energy} if there is given a positive action of the circle group \(\mathbb{T}\) on \(\mathcal H\) which intertwines with the action of \(LG\) so as to provide a representation of the semidirect product
+\[
+\mathbb{T} \ltimes LG,
+\]where \(\mathbb{T}\) acts on \(LG\) by rotation. An action of \(\mathbb{T}\) on \(\mathcal H\) is \textbf{positive} if \(e^{i\theta} \in \mathbb{T}\) acts as \(e^{iA\theta}\), where \(A\) is an operator with positive spectrum. It turns out that representations of \(LG\) of positive energy are necessarily projective.
+    \end{definition}
+
+
+The theory of the positive energy representations of \(LG\) (or, more accurately, of \(\mathbb{T} \ltimes LG\)) is strikingly simple, and in strikingly close analogy with the representation theory of compact groups. Thus the irreducible representations
+\begin{enumerate}[(i)]
+\item are all unitary,
+\item all extend to holomorphic representations of \(LG_\mathbb{C}\), and
+\item form a countable discrete set, parametrized by the points of a positive cone in the lattice of characters of a torus.
+\end{enumerate}
+None of these properties holds, for example, for the representations of \(SL_2(\mathbb{R})\).
+
+In the study of \(LG\) the homogeneous space \(X = LG/G\) (where \(G\) is identified with the constant loops in \(LG\)) plays a central role.  
+One can think of \(X\) as the space \(\Omega G\) of \emph{based} loops in \(G\); but we prefer to regard it as a homogeneous space of \(LG\).  
+I shall list its most important properties.
+
+\begin{enumerate}[(i)]
+\item
+\(X\) is a complex manifold, and in fact a homogeneous space of the complex group \(LG_{\mathbb{C}}\):
+\[
+X = LG/G \;\cong\; LG_{\mathbb{C}} / L^+G_{\mathbb{C}}. \tag{2.1}
+\]
+Here \(L^+G_{\mathbb{C}}\) is the group of smooth maps 
+\[
+\gamma : S^1 \longrightarrow G_{\mathbb{C}}
+\]
+which are the boundary values of holomorphic maps
+\[
+\gamma : \{ z \in \mathbb{C} : |z| < 1 \} \longrightarrow G_{\mathbb{C}}.
+\]
+The isomorphism (2.1) is equivalent to the assertion that any loop 
+\(\gamma \in LG_{\mathbb{C}}\) can be factorized
+\[
+\gamma = \gamma_u \cdot \gamma_+,
+\]
+with \(\gamma_u \in LG\) and \(\gamma_+ \in L^+G_{\mathbb{C}}\).  
+This is analogous to the factorization of an element of \(GL_n(\mathbb{C})\) as 
+(unitary) \(\times\) (upper triangular). This endows \(X\) with a complex structure coming from the complex structure on \(LG_{\mathbb{C}}\).
+
+\item
+For each invariant inner product \(\langle\, , \,\rangle\) on the Lie algebra \(\mathfrak{g}\) of \(G\),
+there is an invariant closed \(2\)-form \(\omega\) on \(X\) which makes it a symplectic manifold, and even fits together with the complex structure to make a Kähler manifold.  
+The tangent space to \(X\) at its basepoint is \(L\mathfrak{g}/\mathfrak{g}\),
+and \(\omega\) is given there by
+\[
+\omega(\xi, \eta)
+= \frac{1}{2\pi} \int_0^{2\pi} \langle \xi'(\theta),\, \eta(\theta) \rangle\, d\theta.
+\tag{2.2}
+\]
+\item
+The \emph{energy} function
+\[
+\mathcal{E} : X \longrightarrow \mathbb{R}_+, \qquad
+\mathcal{E}(\gamma)
+= \frac{1}{4\pi} \int_0^{2\pi} \bigl\| \gamma'(\theta) \bigr\|^2 d\theta,
+\]
+is the Hamiltonian function corresponding, in terms of the symplectic structure,
+to the circle action on \(X\) which rotates loops.
+The critical points of \(\mathcal{E}\) are the loops which are homomorphisms
+\(\mathbb{T} \to G\).
+Downward gradient trajectories of \(\mathcal{E}\) emanate from every point of \(X\)
+and travel to critical points of \(\mathcal{E}\).
+The gradient flow of \(\mathcal{E}\) and the Hamiltonian circle action fit together
+to define a holomorphic action on \(X\) of the multiplicative semigroup
+\[
+\mathbb{C}_1^{\times} = \{\, z \in \mathbb{C} : 0 < |z| \le 1 \,\}.
+\]
+
+The connected components \(\mathcal{C}_{[\lambda]}\) of the critical set of \(\mathcal{E}\)
+are the conjugacy classes of homomorphisms
+\(\lambda : \mathbb{T} \to G\).
+They correspond to the orbits of the Weyl group \(W\) on the lattice
+\(\pi_1(\mathbb{T})\), where \(\mathbb{T}\) is a maximal torus of \(G\).
+The gradient flow of \(\mathcal{E}\) stratifies the manifold \(X\)
+into locally closed complex submanifolds \(X_{[\lambda]}\),
+where \(X_{[\lambda]}\) consists of the points which flow to \(\mathcal{C}_{[\lambda]}\).
+Each stratum \(X_{[\lambda]}\) is of finite codimension. 
+\begin{proposition}
+    
+The stratification coincides with the decomposition of \(X\) into orbits of \(L^-G_{\mathbb{C}}\).
+\[
+X_{[\lambda]} = L^-G_{\mathbb{C}} \cdot \lambda.
+\]
+\end{proposition}
+
+Here \(L^-G_{\mathbb{C}}\) is the group of loops in \(G_{\mathbb{C}}\) which are boundary values of holomorphic maps 
+\[
+\gamma : D_\infty \longrightarrow G_{\mathbb{C}},
+\quad \text{where } D_\infty = \{ z \in S^2 : |z| > 1 \}.
+\]
+This is analagous to the classical Birkhoff factorization theorem:
+a loop \(\gamma\) in \(G_{\mathbb{C}}\) can be factorized
+\[
+\gamma = \gamma_- \cdot \lambda \cdot \gamma_+,
+\]
+with \(\gamma_\pm \in L^\pm G_{\mathbb{C}}\) and \(\lambda : S^1 \to G\) a homomorphism.
+This is the analogue of factorizing an element of \(GL_n(\mathbb{C})\) as
+\[
+(\text{lower triangular}) \times (\text{permutation matrix}) \times (\text{upper triangular}).
+\]
+
+There is one dense open stratum \(X_0\) in \(X\).
+It is contractible, and can be identified with the nilpotent group
+\[
+L^-_0G_{\mathbb{C}}
+= \{\, \gamma \in L^-G_{\mathbb{C}} : \gamma(\infty) = 1 \,\}.
+\]
+\item
+The complex structure of \(X\) can be characterized in another way, pointed out by Atiyah \cite{Atiyah1}.
+To give a holomorphic map \(Z \to X\), where \(Z\) is an arbitrary complex manifold,
+is the same as to give a holomorphic principal \(G_{\mathbb{C}}\)-bundle on
+\(Z \times S^2\) together with a trivialization over \(Z \times D_\infty\).
+If \(Z\) is compact it follows that the space of \emph{based} maps \(Z \to X\) in a given homotopy class is finite-dimensional;
+for the moduli space of \(G_{\mathbb{C}}\)-bundles of a given topological type is finite-dimensional.
+\end{enumerate}
+
+
+\begin{remark}[Elaboration on the fourth point]
+    Recall that:
+    \[
+    LG_\mathbb{C} = \{ \gamma : S^1 \to G_\mathbb{C} \text{ smooth} \}
+    \]
+    \[
+    L^+G_\mathbb{C} = \{ \gamma : |z|=1 \mapsto G_\mathbb{C} \text{ extends holomorphically to } |z|<1 \}
+    \]
+
+    Then $X = LG_\mathbb{C} / L^+G_\mathbb{C}$ is a complex homogeneous space, and its points can be identified with equivalence classes of maps $\gamma : S^1 \to G_\mathbb{C}$, modulo multiplication on the right by $L^+G_\mathbb{C}$. Geometrically, this means each point of $X$ encodes a way of gluing two holomorphic trivializations of $G_\mathbb{C}$-bundles on the two disks $|z|<1$ and $|z|>1$, along their common boundary $S^1$.
+
+    Take the Riemann sphere $S^2 = D_0 \cup D_\infty$, where $D_0 = \{ |z| < 1 \}$ and $D_\infty = \{ |z| > 1 \} \cup \{\infty\}$. Suppose we're given a loop $\gamma \in LG_\mathbb{C}$. We can use $\gamma$ as a clutching function to glue together two trivial holomorphic $G_\mathbb{C}$-bundles:
+    \[
+    (D_0 \times G_\mathbb{C}) \cup_\gamma (D_\infty \times G_\mathbb{C}).
+    \]
+
+    That is, we identify points on the boundary circle $S^1 = \partial D_0 = \partial D_\infty$ via: $(z, g_0) \sim (z, g_\infty)$ if $g_\infty = \gamma(z)\, g_0$. This produces a holomorphic principal $G_\mathbb{C}$-bundle on $S^2$, whose isomorphism class depends only on the coset of $\gamma$ modulo right multiplication by $L^+G_\mathbb{C}$. Indeed, multiplying $\gamma$ on the right by an element of $L^+G_\mathbb{C}$ corresponds to changing the trivialization on the disk $D_0$ by a holomorphic gauge transformation which doesn't change the glued bundle.
+
+    Therefore there is a bijection between points of $X = LG_\mathbb{C} / L^+G_\mathbb{C}$ and isomorphism classes of holomorphic $G_\mathbb{C}$-bundles on $S^2$ with a fixed trivialization over $D_\infty$.
+
+    Now suppose you have a holomorphic map $f : Z \to X$. At each point $z \in Z$, the image $f(z)$ is a coset $[\gamma_z] \in X = LG_\mathbb{C} / L^+G_\mathbb{C}$. This means you have a family of clutching functions $\gamma_z : S^1 \to G_\mathbb{C}$, depending holomorphically on $z \in Z$.
+
+    Using these as gluing data, you can construct a holomorphic family of bundles on $Z \times S^2$ by gluing the trivial bundles $(Z \times D_0 \times G_\mathbb{C})$ and $(Z \times D_\infty \times G_\mathbb{C})$ along their intersection $Z \times S^1$ via: $(z, e^{i\theta}, g_0) \sim (z, e^{i\theta}, \gamma_z(e^{i\theta}) g_0)$. This yields a holomorphic principal $G_\mathbb{C}$-bundle on $Z \times S^2$, trivialized over $Z \times D_\infty$.
+
+    Conversely, given such a bundle $P$ over $Z \times S^2$ with trivialization over $Z \times D_\infty$, you can recover the transition function $\gamma_z$ on the boundary $S^1$, and hence a holomorphic map $f: Z \to X$. 
+
+    Now assume $Z$ is a compact complex manifold. The space of based holomorphic maps $Z \to X$ corresponds to holomorphic families of $G_\mathbb{C}$-bundles on $Z \times S^2$ with a chosen trivialization over $Z \times D_\infty$.
+
+    \red{But the moduli space $\mathcal{M}_{G_\mathbb{C}}(Z \times S^2)$ of holomorphic $G_\mathbb{C}$-bundles on any compact complex manifold is finite-dimensional.} Deformation theory of holomorphic principal bundles shows that the tangent space at a point is $H^1(Z \times S^2, \operatorname{ad} P)$, which is finite-dimensional because $Z \times S^2$ is compact.
+\end{remark}
+\subsection{Borel Weil theory for loop groups}
+To simplify the discussion we shall assume from now on that the compact group \(G\) is simply connected and simple.
+Then \[H^2(X;\mathbb{Z}) \cong \mathbb{Z}\]
+and so the complex line bundles \(L\) on \(X\) are classified by an integer invariant \(c_1(L)\). This can be thought of as the $\omega/2\pi$ curvature class of any choice of connection on \(L\).
+
+In fact each bundle has a unique holomorphic structure,
+and has non-zero holomorphic sections if and only if \(c_1(L) \ge 0\).
+The space of holomorphic sections of the bundle \(L_1\) with \(c_1(L_1) = 1\)
+is called the \emph{basic representation} of \(LG_{\mathbb{C}}\):
+\red{we have remarked that when \(G = SU_n\) the bundle \(L_1\)
+is the restriction of \(\operatorname{Det}^*\) on \(\operatorname{Gr}(\mathcal{H})\).}
+
+\red{Is there a way of talking about this Grassmannian algebraically, without thinking about Fredholm operators? Similar to the relationship between the Atiyah Singer index theorem and the Grothendieck Riemann Roch theorem?}
+
+As we saw in that case, \(L_1\) is not quite homogeneous under \(LG_{\mathbb{C}}\). If one tries to define an action of \(LG_\C\) on $L_1$ lifting its action on the base X, one finds that it's only defined up to multiplication by a scalar.
+
+The loop group \(LG_\C\) acts on the base $X$, but not linearly on \(L_{n,\lambda}\); it only acts up to scalar.
+In other words:
+\[
+g_1,g_2 \in LG_\C
+\quad \Rightarrow \quad
+(g_1g_2)\cdot s
+\;=\;
+c(g_1,g_2)\,(g_1\cdot(g_2\cdot s))
+\]
+for a scalar multiplier \(c(g_1,g_2) \in \C^\times\). This scalar factor $c(g_1,g_2)$ is a 2-cocycle and it agrees with the first Chern class of the line bundle.
+
+The holomorphic automorphisms of \(L_1\) which cover the action of \(LG_{\mathbb{C}}\) on \(X\)
+form a group \(\widetilde{LG}_{\mathbb{C}}\) which is a central extension of \(LG_{\mathbb{C}}\) by \(\mathbb{C}^\times\)—
+in fact its universal central extension.
+It corresponds to the Lie algebra cocycle (2.2) for an inner product \(\langle\ ,\ \rangle\)
+on which I shall also call ``basic''.
+
+One reason for the name ``basic'' is provided by
+
+\begin{proposition}
+If \(G\) is a simply-laced group and \(\Gamma\) is the basic representation of \(LG_{\mathbb{C}}\),
+then any irreducible representation of positive energy is a discrete summand in
+\(\rho^*\Gamma\), where
+\(\rho : LG_{\mathbb{C}} \to LG_{\mathbb{C}}\) is an endomorphism.
+\end{proposition}
+
+To describe all the positive energy irreducible representations of $LG$ we must consider the larger complex homogeneous space
+\[
+Y = LG_{\mathbb{C}} / T,
+\]
+where $T$ is a maximal torus of $G$.
+This manifold $Y$ is fibred over $X$ with the finite-dimensional complex homogeneous space $G/T$ as fibre.
+Complex line bundles on $Y$ are classified topologically by
+\[
+H^2(Y;\mathbb{Z}) \;\cong\;
+H^2(G/T;\mathbb{Z}) \oplus H^2(X;\mathbb{Z})
+\;\cong\; \mathbb{Z} \oplus \widehat{T},
+\]
+where $\widehat{T}$ is the character group of $T$.
+Once again each bundle has a unique holomorphic structure,
+and is homogeneous under $\widetilde{LG}_{\mathbb{C}}$. \red{Is there an algebriaic model for these line bundles?}
+
+\begin{proposition}[Borel-Weil for loop groups]
+\leavevmode
+\begin{enumerate}[(a)]
+\item
+The space $\Gamma(L_{n,\lambda})$ of holomorphic sections of $L_{n,\lambda}$
+is either zero or an irreducible projective representation of $LG_{\mathbb{C}}$
+of positive energy.
+
+\item
+Every projective irreducible representation of $LG$ of positive energy
+arises in this way.
+
+\item
+$\Gamma(L_{n,\lambda}) \neq 0$ if and only if $(n,\lambda)$ is
+\emph{positive} in the sense that
+\[
+0 \le \lambda(h_{\alpha}) \le n\langle h_{\alpha},h_{\alpha}\rangle
+\]
+for each positive coroot $h_{\alpha}$ of $G$,
+where $\langle\, ,\,\rangle$ is the basic inner product on $\mathfrak{g}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{remark}
+    Note that the level $n = c_1(L_{n,\lambda})$ must be a nonnegative integer for there to be any holomorphic sections at all. This is the integrality condition on the curvature of the line bundle. \red{So what does it mean to take rational level, such as in rational conformal field theory? }
+\end{remark}
+
+\begin{corollary}[4.3]
+For positive energy representations of $LG$:
+\begin{enumerate}[(a)]
+\item each representation is necessarily projective,
+\item each representation extends to a holomorphic representation
+of $LG_{\mathbb{C}}$, and
+\item each irreducible representation is of \emph{finite type}, i.e.
+if it is decomposed into energy levels
+$H = \bigoplus_q H_q$, where $H_q$ is the part where the rotation
+$e^{i\theta} \in \mathbb{T}$ acts as $e^{iq\theta}$,
+then each $H_q$ has finite dimension.
+\end{enumerate}
+\end{corollary}
+
+\subsection{Kac character formula}
+Because each irreducible representation of $\mathbb{T} \ltimes LG$
+is of finite type it makes sense to speak of its formal character,
+i.e.\ of its decomposition under the torus
+$\mathbb{T} \times T$.  This is given by the Kac character formula,
+an exact analogue of the classical Weyl character formula.
+
+Thinking of $Y = LG/T$ as $\mathbb{T} \ltimes LG / \mathbb{T} \times T$,
+we observe that the torus $\mathbb{T} \times T$ acts on $Y$
+with a discrete set of fixed points.
+This set is the \emph{affine Weyl group}
+\[
+W_{\mathrm{aff}}
+= N(\mathbb{T} \times T) / (\mathbb{T} \times T).
+\]
+If one ignores the infinite dimensionality of $Y$ and writes down formally
+the Lefschetz fixed--point formula of Atiyah-Bott
+for the character of the torus action on the holomorphic sections
+of a positive line bundle $L$ on $Y$,
+then one obtains the Kac formula,
+at least if one assumes that the cohomology groups
+$H^q(Y; \mathcal{O}(L))$ vanish for $q>0$.
+(Here $\mathcal{O}(L)$ is the sheaf of holomorphic sections of $L$.)
+Unfortunately it does not seem possible at present to prove the formula this way.
+
+\begin{remark}
+    Let $M$ be a compact complex manifold, $E\to M$ a holomorphic vector bundle, and $g:M\to M$ a holomorphic automorphism with isolated fixed points. Write
+    \[
+    L(g,M,E) := \sum_{q\ge 0}(-1)^q\,\mathrm{Tr}\left(g\,|\, H^q(M,\mathcal O(E))\right).
+    \]
+    Then
+    \[
+    L(g,M,E) = \sum_{x\in \mathrm{Fix}(g)} \frac{\mathrm{Tr}\left(g\,|\,E_x\right)}{\det\left( I - (dg)_x \,|\,T_xM\right)} \tag{HLF}
+    \]
+    Here $(dg)_x:T_xM\to T_xM$ is the complex linear derivative at the fixed point.
+
+if $Y$ had only isolated fixed points for the $\mathbb{T}\times T$ action and if higher cohomology vanished, the character $\chi(g)=\sum_q (-1)^q\mathrm{Tr}(g|H^q(Y,\mathcal O(L)))$ equals the right-hand sum. When $H^q=0$ for $q>0$, $\chi(g)=\mathrm{Tr}(g|H^0)$.
+
+Take $M=Y=LG_\C/T$, $E=L$ a positive line bundle, and let an element $t\in \mathbb T\times T$ act holomorphically. One checks the higher cohomology $H^q(Y,\mathcal O(L))$ vanishes for $q>0$. Then
+\[
+\chi_L(t)=\mathrm{Tr}\bigl(t\;|\;H^0(Y,\mathcal O(L))\bigr)
+=\sum_{w\in Y^{\mathbb T\times T}}
+\frac{t^{\,\text{weight of }L\text{ at }w}}{\prod_{\alpha\in \text{weights of }T_wY}\bigl(1-t^{\,\alpha}\bigr)}.
+\]
+For $Y$ the loop flag space, the fixed points are indexed by the affine Weyl group, and the denominator/product of tangent weights is the affine Weyl denominator; massaging this equality gives the Weyl-Kac character formula.
+
+\red{I was reading Pressley-Segal's remark that if you “formally apply the Atiyah-Bott Lefschetz fixed-point formula” to the torus action on \(Y = LG_\C/T\), you get the Kac character formula.
+I find that fascinating — could you say a bit about what's really going on there? Is there a geometric way to make sense of that heuristic?}
+\end{remark}
+
+One can do better by using more information about the geometry
+of the space $Y$.  It possesses a stratification just like that of $X$
+described in~\S2.
+The strata $\{\Sigma_w\}$ are complex affine spaces of finite codimension,
+and are indexed by the elements $w$ of the group $W_{\mathrm{aff}}$:
+indeed $\Sigma_w$ is the orbit of $w$ under
+\[
+N^-G_{\mathbb{C}} = \{\gamma \in L^-G_{\mathbb{C}} : \gamma(\infty)
+\text{ is lower triangular}\}.
+\]
+Let $Y_p$ denote the union of the strata of complex codimension $p$.
+The cohomology groups $H^*(Y; \mathcal{O}(L))$
+are those of the cochain complex $\mathcal{K}'$
+formed by the sections of a flabby resolution of $\mathcal{O}(L)$.
+Filtering $\mathcal{K}'$ by defining
+$\mathcal{K}'_p$ as the subcomplex of sections with support in $Y_p$
+gives us a spectral sequence converging to $H^*(Y;\mathcal{O}(L))$
+with
+\[
+E^{pq}_1 = H^{p+q}(\mathcal{K}'_p / \mathcal{K}'_{p+1}).
+\]
+Because $Y_p$ is affine and has an open neighbourhood
+$U_p$ isomorphic to $Y_p \times \mathbb{C}^p$
+the spectral sequence collapses, and its $E_1$--term reduces to
+\[
+E^{p0}_1 = H^p_{Y_p}(U_p; \mathcal{O}(L)), \qquad
+E^{pq}_1 = 0 \text{ if } q \ne 0.
+\]
+In other words $H^*(Y;\mathcal{O}(L))$
+can be calculated from the cochain complex
+$\{ H^p_{Y_p}(U_p; \mathcal{O}(L)) \}$.
+Here $H^p_{Y_p}(U_p; \mathcal{O}(L))$ means the cohomology
+of the sheaf $\mathcal{O}(L)|_{U_p}$ with supports in $Y_p$.
+It is simply the space of holomorphic sections of the bundle on $Y_p$
+whose fibre at $y$ is
+\[
+L_Y \otimes H^p_{\{0\}}(N_{Y_y}; \mathcal{O}),
+\]
+where $N_{Y_y} \cong \mathbb{C}^p$ is the normal space to $Y_p$ at $y$;
+furthermore $H^p_{\{0\}}(N_{Y_y}; \mathcal{O})$
+is the dual of the space of holomorphic $p$--forms on $N_{Y_y}$.
+Thus as a representation of $\mathbb{T} \times T$
+\[
+E^{p0}_1 \cong \bigoplus_{w}
+S(T^*_w \oplus N_w) \otimes \det(N_w) \otimes L_w,
+\]
+where $w$ runs through the elements of $W_{\mathrm{aff}}$
+of codimension $p$, and $T_w$ and $N_w$ are the tangent
+and normal spaces to $\Sigma_w$ at $w$.
+If we know that $H^q(Y; \mathcal{O}(L)) = 0$ for $q>0$
+then we can read off the Kac formula.
+
+The cochain complex $E^{\bullet 0}_1$ is the dual of the
+Bernstein--Gelfand--Gelfand resolution. Its exactness can be proved by standard algebraic arguments, and one can deduce the vanishing of the higher cohomology groups
+$H^q(Y;\mathcal{O}(L))$.
+\section{Questions for Teleman}
+
+I want to study the affine Grassmannian and generalized flag varieties via explicit, computable $T$-equivariant cohomology and $K$-theory (localization/GKM, push-pull along Hecke correspondences, Demazure operators), and understand the links to loop-group representation theory and moduli of $G$-bundles.
+
+This semester, I've been getting more comfortable with the representation theory of Kac-Moody Lie algebras. As an undergraduate, I studied localization (GKM) in equivariant cohomology, image of restriction to fixed points, and the combinatorics of the moment map in this context.
+
+I've been starting to look at Pressley-Segal and Kumar's books to understand the loop groups and their homogeneous spaces from both topological and algebro-geometric perspectives, but the approaches are very different. The literature is also quite vast, and I'm having trouble identifying the key results and techniques that would help me achieve my goals.
+
+I wanted your feedback on how to approach this learning process, with the following specific interests in mind:
+
+A computable model for $H_T^*(\mathrm{Gr}_G)$ and $K_T(\mathrm{Gr}_G)$: fixed-point data, edge labels, Demazure/Hecke operators, Pieri rules, and structure constants.
+
+Where do nontrivial but manageable computations first appear? For computations in the spirit of the finite type case $K_T$ of $\mathrm{Gr}_G$, should I think primarily in Kumar's ind-projective model or in the topological loop-group model? Has there been any fruit coming from looking at these objects from the lens of GKM theory and equivariant localization?
+
+\section{Appendix: From Lie groups to Lie algebras}
+Recall the classification of compact Lie groups. Then \begin{itemize}
+    \item Let $G$ be a compact Lie group. Let $G_0$ be the identity component of $G$. Then there is a short exact sequence of Lie groups
+          \[1 \to G_0 \to G \to \pi_0(G) \to 1.\]
+          The component group $\pi_0(G)$ is finite.
+    \item Let $G$ be a compact, connected Lie group. Then $G$ has a universal cover $\tilde{G}$, and there is a short exact sequence
+          \[1 \to \pi_1(G) \to \tilde{G} \to G \to 1.\]
+          The fundamental group $\pi_1(G)$ is an abelian group. If $G$ is already compact semisimple then $\pi_1(G)$ is finite. If we have torus factors then $\pi_1(G)$ has free abelian parts.
+          Moreover, $\tilde G$ is the product of a simply connected compact Lie group and a torus.
+    \item Let $G$ be a compact, connected, simply connected Lie group. Then $G$ is the product of a simply connected simple Lie groups.
+    \item Let $G$ be a compact, connected, simply connected simple Lie group. Then $G$ is determined up to isomorphism by its Lie algebra $\mathfrak g$. The simple compact Lie algebras are classified by the Dynkin diagrams $A_n$, $B_n$, $C_n$, $D_n$, $E_6$, $E_7$, $E_8$, $F_4$, and $G_2$.
+\end{itemize}
+
+\begin{example}[Adjoint and simply connected forms of $A_{n-1}$]
+    The simply connected compact form is \[K_{\mathrm{sc}}=\mathbf{SU}(n)\] and the adjoint compact form is \[K_{\mathrm{ad}}=\mathbf{PSU}(n)=\mathbf{PU}(n)\]
+    $\mathrm{SU}(n)$ and $\mathrm{PU}(n)$ are connected, so $\pi_0=1$. They are related by the exact central isogeny:
+    \[
+        1\to\mu_n\to \mathrm{SU}(n)\to\mathrm{PU}(n)\to 1.
+    \]
+    In particular, the long exact sequence in homotopy gives
+    \[
+        \pi_1(\mathrm{SU}(n)) \to \pi_1(\mathrm{PU}(n)) \to \pi_0(\mu_n) \to \pi_0(\mathrm{SU}(n)),
+    \]
+    i.e. $0 \to \pi_1(\mathrm{PU}(n)) \to \mathbb Z/n \to 0$. Therefore $\pi_1(\mathrm{PU}(n))\cong \mu_n\cong \mathbb Z/n$, while $\pi_1(\mathrm{SU}(n))=0$.
+
+    The complex forms are $\mathrm{SL}_n(\mathbb C)$ (simply connected) and $\mathrm{PGL}_n(\mathbb C)$ (adjoint). Their maximal compact subgroups are $\mathrm{SU}(n)\subset \mathrm{SL}_n(\mathbb C)$ and $\mathrm{PU}(n)\subset \mathrm{PGL}_n(\mathbb C)$. Complex reductive groups deformation-retract onto a maximal compact, so
+    \[
+        \pi_1\big(\mathrm{SL}_n(\mathbb C)\big)=0,\qquad
+        \pi_1\big(\mathrm{PGL}_n(\mathbb C)\big)\cong \pi_1\big(\mathrm{PU}(n)\big)\cong \mathbb Z/n.
+    \]
+    and $\mathrm{PGL}_n(\mathbb C)\cong \mathrm{PSL}_n(\mathbb C)=\mathrm{SL}_n(\mathbb C)/\mu_n$.
+\end{example}
+In general, adjointness and simply connectedness are dual notions for compact Lie groups. In particular, we always have a central isogeny
+\[ 1 \to Z(K_{\mathrm{sc}}) \to K_{\mathrm{sc}} \to K_{\mathrm{ad}} \to 1\]
+where $Z(K_{\mathrm{sc}})$ is the center of $K_{\mathrm{sc}}$. Studying the long exact sequence in homotopy shows that $\pi_1(K_{\mathrm{ad}}) \cong Z(K_{\mathrm{sc}})$. Moreover, any intermediate compact form $K$ corresponding to a subgroup $H \subset Z(K_{\mathrm{sc}})$ fits into the exact sequence
+\[ 1 \to H \to K_{\mathrm{sc}} \to K \to 1\]
+The fundamental group is then $\pi_1(K) \cong Z(K_{\mathrm{sc}})/H$.
+
+Fix a simple Lie algebra $\mathfrak g$ and let $P$ be its weight lattice and $Q$ be its root lattice. Let $P^\vee$ be the coweight lattice and $Q^\vee$ be the coroot lattice.
+
+In general, a compact, connected Lie group $G$ is specified by its root datum \[(X^*,X_*,\Delta \subset X^*,\Delta^\vee \subset X_*)\] with a perfect pairing $\langle \cdot, \cdot \rangle: X^* \times X_* \to \mathbb{Z}$, where $X^*$ is the character lattice of a maximal torus $T \subset G$, $X_*$ is the cocharacter lattice, $\Delta$ is the set of roots, and $\Delta^\vee$ is the set of coroots. This data determines the entire structure of $G$ up to isomorphism.
+\begin{theorem}
+    [Lie's third theorem] Every finite-dimensional Lie algebra over the real numbers is the Lie algebra of some simply connected Lie group. Moreover, every Lie algebra homomorphism $\varphi:\mathfrak{h}\to \mathfrak{g}$ integrates uniquely to a group homomorphism $\Phi:H_{\mathrm{sc}}\to G_{\mathrm{sc}}$ between the corresponding simply connected groups.
+
+\end{theorem}
+For every root $\alpha$, you have an inclusion of Lie algebras $\iota_\alpha:\mathfrak{sl}_2 \hookrightarrow \mathfrak{g}$. By Lie's third theorem, this integrates uniquely to a group homomorphism $\phi_\alpha: \mathrm{SL}_2(\mathbb{C}) \longrightarrow G_{\mathrm{sc}}$. If $G_{\mathrm{sc}}$ is compact, you can take $\mathrm{SU}(2)\to G_{\mathrm{sc}}$. Now look at the diagonal torus in $\mathrm{SL}_2$:
+\[
+    \left(\begin{matrix}
+            t & 0      \\
+            0 & t^{-1}
+        \end{matrix}\right)
+    \quad\text{for }t\in \mathbb{C}^\times.
+\]
+Its image under $\phi_\alpha$ is a one-parameter subgroup of $G_{\mathrm{sc}}$; by definition, $\alpha^\vee : \mathbb{C}^\times \to T_{\mathrm{sc}}$, and its derivative at $1$ is exactly the coroot $h_\alpha\in\mathfrak{t}$.
+
+Thus each coroot exponentiates to an actual algebraic 1-parameter subgroup of the maximal torus of the simply connected group. This identifies the coroot lattice \[
+    X_* = Q^\vee
+\]
+We can also identify the character lattice $X^*$ of $T_{\mathrm{sc}}$. Let $T$ be a compact, connected, abelian Lie group. Then $T\simeq(S^1)^r$.
+For its Lie algebra $\mathfrak t_\mathbb{R}$, the exponential map
+$\exp:\mathfrak t_\mathbb{R}\to T$
+is a surjective Lie group homomorphism with discrete kernel $\Lambda:=\ker(\exp)$. Hence
+\[
+    T\;\cong\;\mathfrak t_\mathbb{R}/\Lambda. \tag{1}
+\]
+
+For any algebraic torus $T$, write $X_*(T):=\Hom_{\text{alg}}(\mathbb{C}^\times,T_\mathbb{C})$ (or equivalently $\Hom_{\text{cts}}(S^1,T)$) for its cocharacter lattice.
+There's a canonical isomorphism
+\[
+    X_*(T)\;\xrightarrow{\ \sim\ }\;\frac{1}{2\pi i}\ker(\exp)\subset \mathfrak t_\mathbb{R},
+    \qquad
+    \lambda \longmapsto \frac{1}{2\pi i}\,d\lambda|_1(1),
+\]
+where for any $\lambda$ we have:
+\[
+    d\lambda\big|_{1}(v) := \frac{d}{du}\Big|_{u=0} \lambda \big(e^{u v}\big) \in \Lie(T).
+\]
+Tf $T=(\mathbb{C}^\times)^r$ and $\lambda(t)=(t^{m_1},\dots,t^{m_r})$ with $m_i\in\mathbb{Z}$, then
+\[
+    \lambda(e^{uv})=\big(e^{u v m_1},\dots,e^{u v m_r}\big) \quad\Rightarrow\quad
+    d\lambda\big|_{1}(v)=v\,(m_1,\dots,m_r).
+\]
+There is an inverse $H\mapsto(\theta\mapsto \exp(i\theta H))$ on $S^1$ and then complexify. Thus
+\[
+    \ker(\exp)=2\pi i\,X_*(T). \tag{2}
+\]
+Combining (1)-(2) gives the general model
+\[
+    T\;\cong\;\mathfrak t_\mathbb{R}/2\pi i\,X_*(T). \tag{3}
+\]
+Let $G_{\mathrm{sc}}$ be simply connected, semisimple, with maximal torus $T_{\mathrm{sc}}$.
+For each root $\alpha$ we have an $\mathfrak{sl}_2$-triple $(e_\alpha,f_\alpha,h_\alpha)$ and an integrated homomorphism
+\[
+    \phi_\alpha:\mathrm{SL}_2(\mathbb{C})\to G_{\mathrm{sc}}.
+\]
+Restricting to the diagonal torus gives the coroot $\alpha^\vee:\mathbb{C}^\times\to T_{\mathrm{sc}}$, i.e. $\alpha^\vee\in X_*(T_{\mathrm{sc}})$.
+These coroots generate the coroot lattice $Q^\vee$, and always $Q^\vee\subseteq X_*(T_{\mathrm{sc}})$.
+
+Because $G_{\mathrm{sc}}$ is simply connected, there can be no strictly larger cocharacter lattice: if \[Q^\vee\subsetneq \Lambda\subseteq X_*(T_{\mathrm{sc}})\] then (3) would enlarge the period lattice of $T_{\mathrm{sc}}$, producing a nontrivial finite central quotient of $G_{\mathrm{sc}}$ and hence a nontrivial $\pi_1$, which is a contradiction. Therefore
+\[
+    X_*(T_{\mathrm{sc}})=Q^\vee. \tag{4}
+\]
+which gives the desired model
+\[
+    T_{\mathrm{sc}}\ \cong\ \mathfrak t_\mathbb{R}\big/2\pi i\,Q^\vee
+\]
+
+
+
+
+Given $\lambda\in\mathfrak{t}^*$, define the character:
+\[
+    \chi_\lambda\big(e^{2\pi i H}\big) = e^{2\pi i\,\langle \lambda,H\rangle}.
+\]
+
+This is a well-defined homomorphism if and only if it is invariant under $H\mapsto H+\alpha^\vee$ for every coroot $\alpha^\vee$, that is:
+\[
+    e^{2\pi i\,\langle \lambda,\alpha^\vee\rangle}=1
+    \quad\Longleftrightarrow\quad
+    \langle \lambda,h_\alpha\rangle\in\mathbb{Z}\ \ \text{for all}\ \alpha.
+\]
+Conversely, every character arises from some $\lambda\in\mathfrak{t}^*$. There is a pairing $ X^* \times X_* \to \mathbb{Z}$
+between characters and cocharacters:
+\[
+    \langle \chi_\lambda,\alpha^\vee \rangle := \deg(\chi_\lambda \circ \alpha^\vee) = \langle \lambda,h_\alpha\rangle.
+\] which gives an isomorphism
+\[
+    \Phi: X^* \xrightarrow{\ \sim\ } \{ \lambda \in \mathfrak{t}^* : \langle \lambda,h_\alpha\rangle \in \mathbb{Z} \text{ for all } \alpha \}.
+\]
+Thus the character lattice is the weight lattice:
+\[X^* = P\]
+Thus for a simply connected, compact, semisimple Lie group $G_{\mathrm{sc}}$ with maximal torus $T_{\mathrm{sc}}$, we have identified its character and cocharacter lattices:
+\[
+    X^*(T_{\mathrm{sc}}) = P, \qquad X_*(T_{\mathrm{sc}}) = Q^\vee.
+\]
+
+The adjoint group $G_{\mathrm{ad}}$ has maximal torus $T_{\mathrm{ad}}$ with
+\[
+    X^*(T_{\mathrm{ad}}) = Q, \qquad X_*(T_{\mathrm{ad}}) = P^\vee.
+\]
+Langlands duality exchanges the simple roots and coroots. Intermediate forms $G$ correspond to intermediate lattices:
+\[
+    Q \subseteq X^*(T) \subseteq P, \qquad Q^\vee \subseteq X_*(T) \subseteq P^\vee.
+\]
+
+
+
 \end{document}

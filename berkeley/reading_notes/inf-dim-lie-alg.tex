@@ -4795,11 +4795,10 @@ The following lemma establishes the existence of a "bounded from below" filtrati
     This is because the BGG theorem says that a Verma module $M(\Lambda)$ has a primitive vector of weight $\mu$ iff $\mu=w\!\cdot\!\Lambda$ for some $w\in W$, where $W$ is the Weyl group and $w\!\cdot\!\Lambda=w(\Lambda+\rho)-\rho$. Since $W$ is finite, so the only possible singular weights are a finite set. Thus $M(\Lambda)$ has finitely many singular vectors (possibly none if $(\Lambda+\rho,\beta^\vee)\notin\mathbb Z_{>0}$ for all $\beta\in\Delta_+$).
 
 
-    However, when $\mf g$ is an infinite-dimensional Kac-Moody algebra, the situation is more complicated. For example, if $\mf g$ is an affine Kac-Moody algebra, then there are infinitely many positive roots (the imaginary roots), and hence infinitely many possible singular vectors in $M(\Lambda)$.
-    $(\Lambda+\rho,(\alpha+n\delta)^\vee)=(\Lambda+\rho,\alpha^\vee)$. So if $(\Lambda+\rho,\alpha^\vee)=m\in\mathbb{Z}_{>0}$ for one $\alpha$, you get singular vectors at $\Lambda-m(\alpha+n\delta)$ $(n=0,1,2,\dots)$.
+    However, when $\mf g$ is an infinite-dimensional Kac-Moody algebra, the situation is more complicated. For example, if $\mf g$ is an affine Kac-Moody algebra, then there are infinitely many positive roots (the imaginary roots), and hence infinitely many possible singular vectors in $M(\Lambda)$. $(\Lambda+\rho,(\alpha+n\delta)^\vee)=(\Lambda+\rho,\alpha^\vee)$. So if $(\Lambda+\rho,\alpha^\vee)=m\in\mathbb{Z}_{>0}$ for one $\alpha$, you get singular vectors at $\Lambda-m(\alpha+n\delta)$ $(n=0,1,2,\dots)$.
 
 
-    Thus, a Verma module $M(\Lambda)$ may have infinitely many submodules, and hence may not have finite length. Therefore, the filtration of Lemma 9.6 cannot always be refined to a Jordan-Hölder series in the infinite-dimensional case. However, it is good enough to define multiplicities because we can essentially truncate from below. If you fix a weight cutoff $\lambda$, then above that cutoff (weights $\geq \lambda$), every $V\in\mathcal O$ has only finitely many relevant weights.
+    Thus, a Verma module $M(\Lambda)$ may have infinitely many submodules, and hence may not have finite length. Therefore, the filtration of Lemma 9.6 cannot always be refined to a Jordan-Hölder series in the infinite-dimensional case. However, it is good enough to define multiplicities because we can essentially truncate from below. If you fix a weight cutoff $\lambda$, then above that cutoff (weights $\geq \lambda$), every $V\in\mathcal O$ has only finitely many relevant weights. We will produce a more explicit filtration with the desired properties after we introduce the Shapovalov form.
 \end{remark}
 
 Let $[V:L(\Lambda)]$ be the multiplicity of $L(\Lambda)$ in a module $V \in \mathcal{O}$, i.e. the number of times $\lambda$ appears as a $\lambda_j$ in the filtration of Lemma 9.6. This number is independent of the choice of filtration by standard Jordan-Hölder arguments (in particular, Category $\mathcal{O}$ is a finite-length abelian category and every simple object is isomorphic to some $L(\Lambda)$).
@@ -4902,7 +4901,7 @@ By the PBW theorem, the character of a Verma module is given by
 \end{proof}
 Note that this proposition and the previous are exactly the same as in the finite-dimensional case.
 
-\begin{proposition}[9.9]
+\begin{proposition}[Irreducibility and complete reducibility criteria]\label{prop:irred-crit}
     Let $A$ be a symmetrizable matrix.
     \begin{enumerate}[label=\textup{(\alph*)}]
         \item
@@ -4939,72 +4938,427 @@ Note that this proposition and the previous are exactly the same as in the finit
 
 
 \subsection{Shapovalov form}
-Let $L(\Lambda)^*$ be the $\mathfrak{g}(A)$-module contragredient to $L(\Lambda)$.
-Then
+Let $\mf g$ be a symmetrizable Kac-Moody algebra with triangular decomposition
 \[
-    L(\Lambda)^* = \prod_{\lambda} (L(\Lambda)_\lambda)^*.
+\mathfrak{g} = \mathfrak{n}^- \oplus \mathfrak{h} \oplus \mathfrak{n}
 \]
-The subspace
-\[
-    L^*(\Lambda) := \bigoplus_{\lambda} (L(\Lambda)_\lambda)^*
-\]
-is a submodule of the $\mathfrak{g}(A)$-module $L(\Lambda)^*$.
-It is clear that the module $L^*(\Lambda)$ is irreducible and that for
-$v \in (L(\Lambda)_\Lambda)^*$ one has:
-\[
-    \mathfrak{n}_-(v) = 0,
-    \qquad
-    h(v) = -\Lambda(h)v \quad \text{for } h \in \mathfrak{h}.
-\]
-Such a module is called an \textbf{irreducible module with lowest weight} $-\Lambda$.
-As in §9.3 we have a bijection between $\mathfrak{h}^*$ and irreducible lowest-weight
-modules: $\Lambda \mapsto L^*(-\Lambda)$.
-
-Denote by $\pi_\Lambda$ the action of $\mathfrak{g}(A)$ on $L(\Lambda)$, and introduce
-the new action $\pi_\Lambda^*$ on the space $L(\Lambda)$ by
+It gives rise to the decomposition
 \begin{equation}
-    \pi_\Lambda^*(g)v = \pi_\Lambda(\omega(g))v,
-    \tag{9.4.1}
+U(\mathfrak{g})
+= \bigl(\mathfrak{n}^- U(\mathfrak{g}) + U(\mathfrak{g}) \mathfrak{n}\bigr)
+  \oplus S(\mathfrak{h}).
 \end{equation}
-where $\omega$ is the Chevalley involution of $\mathfrak{g}(A)$.
-It is clear that $(L(\Lambda), \pi_\Lambda^*)$ is an irreducible
-$\mathfrak{g}(A)$-module with lowest weight $-\Lambda$.
-By the uniqueness theorem, this module can be identified with $L^*(\Lambda)$,
-and the pairing between $L(\Lambda)$ and $L^*(\Lambda)$ gives us a nondegenerate
-bilinear form $B$ on $L(\Lambda)$ such that
-\begin{equation}
-    B(gx, y) = -B(x, \omega(g)(y))
-    \quad
-    \text{for all } g \in \mathfrak{g}(A),\; x,y \in L(\Lambda).
-    \tag{9.4.2}
-\end{equation}
-A bilinear form on $L(\Lambda)$ which satisfies (9.4.2) is called a
-\textbf{contravariant bilinear form.}
+Observe that since $\mathfrak{h}$ is abelian, $U(\mathfrak{h})$ is the same as the symmetric algebra $S(\mathfrak{h})$.
 
-\begin{proposition}[9.4]
-    Every $\mathfrak{g}(A)$-module $L(\Lambda)$ carries a unique up to constant factor
-    nondegenerate contravariant bilinear form $B$. This form is symmetric, and
-    $L(\Lambda)$ decomposes into an orthogonal direct sum of weight spaces with respect to
-    this form.
+Projection gives the Harish-Chandra homomorphism
+\[
+\mathcal{H} : U(\mathfrak{g}) \longrightarrow S(\mathfrak{h}),
+\]
+
+Recall the definition of the Cartan involution $\omega$ of $\mathfrak{g}$ (and hence of $U(\mathfrak{g})$):
+\begin{align*}
+\omega(e_i) & = f_i, \\
+\omega(f_i) & = e_i, \\
+\omega(h)   & = h, \quad h \in \mathfrak{h}.
+\end{align*}
+Let $\tau$ be the anti-automorphism of $U(\mathfrak{g})$ induced by $\tau(X)=-X$
+for $X\in\mathfrak{g}$, and let $\sigma := \tau\omega = \omega\tau$
+be the anti-automorphism of $U(\mathfrak{g})$ of order 2.
+
+
+\begin{definition}
+     The \textbf{Shapovalov bilinear form}
+\[
+S : U(\mathfrak{g}) \times U(\mathfrak{g}) \longrightarrow S(\mathfrak{h})
+\]
+is defined by
+\[
+S(a,b) = \mathcal{H}\bigl(\sigma(a)b\bigr).
+\]
+\end{definition}
+Clearly $S$ is symmetric (since $\sigma|_{S(\mathfrak{h})} = 1$).
+Moreover, $S$ satisfies the \emph{contravariance property}
+\begin{equation}
+S(ca,b) = S(a,\sigma(c)b).
+\end{equation}
+Also,
+\[
+S\bigl(U(\mathfrak{g})_{\gamma_1},\, U(\mathfrak{g})_{\gamma_2}\bigr) = 0,
+\qquad\text{if }\gamma_1 \ne \gamma_2,
+\]
+where $U(\mathfrak{g})_\gamma$ denotes the $\gamma$-weight space
+with respect to the adjoint action of $\mathfrak{h}$ on $U(\mathfrak{g})$.
+
+\medskip
+For any $\lambda \in \mathfrak{h}^*$,
+the Shapovalov form $S$ gives rise to the bilinear form
+\[
+p_\lambda \circ S : U(\mathfrak{g}) \times U(\mathfrak{g}) \longrightarrow \mathbb{C},
+\]
+where $p_\lambda : S(\mathfrak{h}) \to \mathbb{C}$ is the algebra homomorphism $h_1 \cdots h_k \mapsto \lambda(h_1)\cdots \lambda(h_k)$ for $h_i \in \mathfrak{h}$.
+It is easy to see that the bilinear form $p_\lambda \circ S$ descends to give a bilinear form
+\[
+S_\lambda : M(\lambda) \times M(\lambda) \longrightarrow \mathbb{C}.
+\]
+Thus
+\begin{equation}
+S_\lambda(a \otimes 1,\, b \otimes 1)
+= p_\lambda\bigl(S(a,b)\bigr),
+\qquad a,b \in U(\mathfrak{g})
+\end{equation}
+Let $M'(\lambda)$ be the largest proper submodule of $M(\lambda)$. 
+
+\begin{proposition}[2.3.2]
+The symmetric bilinear form 
+\[
+S_\lambda : M(\lambda) \times M(\lambda) \longrightarrow \mathbb{C},
+\]
+as defined above, is \emph{contravariant} in the sense that
+\begin{equation}
+S_\lambda(xv, w) = S_\lambda\bigl(v, \sigma(x)w\bigr),
+\qquad v,w \in M(\lambda),\; x \in U(\mathfrak{g}).
+\tag{1}
+\end{equation}
+In particular,
+\begin{equation}
+S_\lambda\bigl(M(\lambda)_\mu, M(\lambda)_\theta\bigr) = 0,
+\qquad \text{if } \mu \neq \theta.
+\tag{2}
+\end{equation}
+Further, $S_\lambda(M'(\lambda), M(\lambda)) = 0$, and hence $S_\lambda$ induces
+a nondegenerate (symmetric contravariant) bilinear form, again denoted by $S_\lambda$,
+on the irreducible quotient $L(\lambda)$.
+Moreover, any contravariant bilinear form on $L(\lambda)$ is a scalar multiple of $S_\lambda$,
+and hence is automatically symmetric.
 \end{proposition}
 
 \begin{proof}
-    The existence of $B$ was proved above, the uniqueness follows from Lemma~9.3.
-    The symmetry follows from the uniqueness. The fact that
-    $B(L(\Lambda)_\lambda, L(\Lambda)_\mu) = 0$ if $\lambda \neq \mu$
-    follows from (9.4.2) for $g \in \mathfrak{h}$, $x \in L(\Lambda)_\lambda$,
-    $y \in L(\Lambda)_\mu$.
+Contravariance follows from the definition of $S(a,b) = \mathcal H(\sigma(a)b)$ and the defining property
+$S(ca,b) = S(a, \sigma(c)b)$.
+
+Take $a \otimes 1 \in M(\lambda)$ and $v \in M'(\lambda)$.
+Then 
+\begin{align*}
+S_\lambda(v, a \otimes 1) &= S_\lambda\bigl(\sigma(a)v,\, 1 \otimes 1\bigr) \\
+&= 0 
+\end{align*} since $1 \otimes 1$ is the highest-weight vector of weight $\lambda$, while all vectors in $M'(\lambda)$ have strictly lower weights. Since $\ker S_\lambda$ is a proper $\mathfrak{g}$-submodule containing $M'(\lambda)$, it coincides with $M'(\lambda)$. Since $M'(\lambda)$ is precisely the radical of $S_\lambda$, the form $S_\lambda$ descends to a nondegenerate bilinear form on $L(\lambda)$.
+
+Finally, let $B$ be a contravariant bilinear form on $L(\lambda)$ and assume that
+\[
+B_{L(\lambda),\, L(\lambda)} = S_{\lambda|\, L(\lambda)\times L(\lambda)}.
+\]
+Then from the contravariance property~(1) of $S_\lambda$ and~$B$,
+using~(2), we obtain $B = S_\lambda$.
 \end{proof}
 
-A more explicit way to introduce the contravariant bilinear form is the following.
-Let $V$ be a highest-weight $\mathfrak{g}(A)$-module with a fixed highest-weight
-vector $v_\Lambda$. Given $v \in V$, we define its \textbf{expectation value}
-$\langle v \rangle \in \mathbb{C}$ by
+\begin{definition}[Jantzen filtration]
+For any $\lambda \in \mathfrak{h}^*$, the Verma module $M(\lambda)$ admits a filtration
+known as the \emph{Jantzen filtration}, defined below.
+
+Choose an element $\rho \in \mathfrak{h}^*$ with the property that
+\[\langle \rho, \alpha^\vee \rangle = 1\] for every simple coroot $\alpha^\vee$. We define a one-parameter family of (symmetric) bilinear forms 
+$\widehat{S}_\lambda$ on $M(\lambda)$ by
+\begin{equation}
+\widehat{S}_\lambda(a \otimes 1,\, b \otimes 1)
+= p_{\lambda + t\rho}\bigl(S(a,b)\bigr) \in \mathbb{C}[t],
+\qquad a,b \in U(\mathfrak{n}^-)
+\end{equation}
+where 
 \[
-    v = \langle v \rangle v_\Lambda + \sum_{\alpha \in Q_+ \setminus \{0\}} v_{\Lambda - \alpha},
-    \qquad
-    v_{\Lambda - \alpha} \in V_{\Lambda - \alpha}.
+p_{\lambda + t\rho} : S(\mathfrak{h}) \longrightarrow \mathbb{C}[t]
 \]
+is the algebra homomorphism defined by
+\[
+p_{\lambda + t\rho}(h_1 \cdots h_k)
+= (\lambda(h_1) + t\rho(h_1)) \cdots (\lambda(h_k) + t\rho(h_k)).
+\]
+This defines a filtration of $M(\lambda)$ by $\mathfrak{g}$-submodules 
+\begin{equation}
+M(\lambda) = M^0(\lambda) \supset M^1(\lambda) \supset M^2(\lambda) \supset \cdots,
+\end{equation}
+where
+\begin{align*}
+M^p(\lambda)
+&:= \Bigl\{ v_0 \in M(\lambda) \;\Big|\;
+\exists\, v_1, \dots, v_{p-1} \in M(\lambda)
+\text{ such that } \\
+&\widehat{S}_\lambda(v_0, w)
++ t\,\widehat{S}_\lambda(v_1, w)
++ \cdots
++ t^{p-1}\widehat{S}_\lambda(v_{p-1}, w)
+\text{ is divisible by } t^p
+\text{ for all } w \in M(\lambda)
+\Bigr\}
+\end{align*}
+
+Clearly,
+\begin{equation}
+M^1(\lambda) = M'(\lambda).
+\end{equation}
+\end{definition}
+
+For $\eta \in Q^+$ (cf.~the beginning of Section~1.2 for the notation $Q^+$),
+let $U(\mathfrak{n}^-)_{\eta}$ denote the $(-\eta)$-weight space of $U(\mathfrak{n}^-)$
+under the adjoint action of $\mathfrak{h}$, and let
+\[
+S^{-}_{\eta} : U(\mathfrak{n}^-)_{\eta} \times U(\mathfrak{n}^-)_{\eta}
+\longrightarrow S(\mathfrak{h})
+\]
+be the restriction of the Shapovalov form $S$.
+
+Further, define the Kostant partition function $P(\eta) \in \mathbb{Z}_+$ 
+(for $\eta \in Q^+$) by
+\[
+\operatorname{ch} M(0) = \sum_{\eta \in Q^+} P(\eta)e^{-\eta}.
+\]
+Equivalently, $P(\eta)$ is the number of ways to express $\eta$ as a sum of
+positive roots, where the order of summands is not taken into account. We set $P(\eta) = 0$ if $\eta \notin Q^+$.
+
+Choose a $\mathbb{C}$-basis $F = \{F_I\}$ of $U(\mathfrak{n}^-)_{\eta}$ and define
+\[
+\det\nolimits_F(S^{-}_{\eta})
+:= \det\bigl(S^{-}_{\eta}(F_I, F_{I'})\bigr)_{I,I'},
+\]
+which is an element of $S(\mathfrak{h})$. For a different basis $G$ of $U(\mathfrak{n}^-)_{\eta}$,
+$\det_G(S^{-}_{\eta})$ is a nonzero scalar multiple of $\det_F(S^{-}_{\eta})$.
+We denote $\det_F(S^{-}_{\eta})$ simply by $\det(S^{-}_{\eta})$,
+but keep in mind that $\det(S^{-}_{\eta})$ is defined only up to nonzero scalar multiples.
+
+
+Recall we have the map $\nu : \mathfrak{h} \to \mathfrak{h}^*$ which respects the invariant bilinear form $(\mid)$ on $\mathfrak{g}$:
+\begin{align*}
+\langle \nu(h), h' \rangle & = (h \mid h'), \quad h,h' \in \mathfrak{h}, \\
+\end{align*}
+\begin{theorem}[Shapovalov determinant formula]
+Let $\mathfrak{g}$ be a symmetrizable Kac–Moody Lie algebra.
+Then for any $\eta \in Q^+$,
+\[
+\det(S^{-}_{\eta})
+= \prod_{(\alpha,n)}
+\bigl(\nu^{-1}(\alpha) +  (\rho - \tfrac{n\alpha}{2} \mid \alpha )\bigr)^{P(\eta - n\alpha)\,(\mathrm{mult}\,\alpha)},
+\]
+where the product is taken over $(\alpha,n) \in \Delta^+ \times \mathbb{N}$
+such that $\eta - n\alpha \in Q^+$, and $(\cdot \mid \cdot)$ is any invariant bilinear form on $\mathfrak{g}$.
+\end{theorem}
+Note that the factor $\nu^{-1}(\alpha) +  (\rho - \tfrac{n\alpha}{2} \mid \alpha )$ is an element of $S(\mathfrak{h})$ and the product is taking place in $S(\mathfrak{h})$. We refer the reader to Kumar for a proof of this theorem. We have the following well known corollary.
+\begin{corollary}[Jantzen sum formula]
+Let $\mathfrak{g}$ be a symmetrizable Kac–Moody algebra. 
+For any $\lambda, \mu \in \mathfrak{h}^*$, the weight space $M^p(\lambda)_\mu = 0$
+for large enough $p$ (depending on $\lambda,\mu$).
+Moreover,
+\begin{equation}
+\sum_{p \ge 1} \operatorname{ch} M^p(\lambda)
+\;=\;
+\sum_{(\alpha,n)\in D_\lambda} \operatorname{ch} M(\lambda - n\alpha),
+\tag{1}
+\end{equation}
+where 
+\[
+D_\lambda
+:= \{ (\alpha,n) \in \Delta^+ \times \mathbb{N}
+\;|\;
+\langle \lambda + \rho - \tfrac{n\alpha}{2},\, \alpha \rangle = 0 \},
+\]
+and $M(\lambda) = M^0(\lambda) \supset M^1(\lambda) \supset M^2(\lambda) \supset \cdots$
+is the Jantzen filtration.
+\end{corollary}
+
+\begin{proof}
+Extend the bilinear form
+\[
+\widehat{S}_\lambda : M(\lambda) \otimes M(\lambda) \to \mathbb{C}[t]
+\qquad \text{(cf.~(2.3.3.1))}
+\]
+to a $\mathbb{C}[[t]]$-bilinear form
+\[
+\widehat{S}_\lambda(t) :
+\bigl(M(\lambda) \otimes_{\mathbb{C}} \mathbb{C}[[t]]\bigr)
+\times_{\mathbb{C}[[t]]}
+\bigl(M(\lambda) \otimes_{\mathbb{C}} \mathbb{C}[[t]]\bigr)
+\longrightarrow \mathbb{C}[[t]],
+\]
+where $\mathbb{C}[[t]]$ is the power series ring in one variable.
+Denote its restriction to 
+\[M(\lambda)_{\lambda-\eta}[[t]]
+:= M(\lambda)_{\lambda-\eta} \otimes_{\mathbb{C}} \mathbb{C}[[t]]\]
+(for $\eta \in Q^+$) by $\widehat{S}_{\lambda,\eta}(t)$.
+
+\medskip
+Recall \ref{prop:irred-crit} that $M(\lambda)$ is irreducible if and only if $2\langle \lambda + \rho, \beta \rangle \neq \langle \beta, \beta \rangle$ for every $\beta \in Q^+ \setminus \{0\}$.
+Thus there are some complex values of $t$
+such that $M(\lambda + t\rho)$ is irreducible. In particular, the symmetric
+bilinear form $\widehat{S}_{\lambda,\eta}(t)$ is nondegenerate.
+By the structure theorem for modules over a PID,
+there exist two bases over $\mathbb{C}[[t]]$,
+$(t_j)_{1\le j \le P(\eta)}$ and $(s_j)$
+of $M(\lambda)_{\lambda-\eta}[[t]]$ such that
+\begin{equation}
+\widehat{S}_{\lambda,\eta}(t)(t_j, s_{j'}) = t^{n_j}\,\delta_{j,j'},
+\qquad
+0 \le n_1 \le \cdots \le n_{P(\eta)}.
+\end{equation}
+
+We check that 
+\begin{equation}
+M^p(\lambda)_{\lambda-\eta}
+= \pi\Bigl(
+\sum_{n_j \ge p} \mathbb{C}[[t]]\,t_j
+\Bigr),
+\end{equation}
+where $\pi : M(\lambda)\otimes_{\mathbb{C}}\mathbb{C}[[t]] \to M(\lambda)$
+is the canonical map induced by $t \mapsto 0$.
+
+Write any vector in the $(\lambda-\eta)$-space as
+\[u(t)=\sum_j a_j(t)\,t_j,\qquad a_j(t)\in\mathbb{C}[[t]].\] 
+By definition, $u_0\in M^p(\lambda)_{\lambda-\eta}$ if and only if there exist $u_1,\dots,u_{p-1}$ such that
+\[\widehat{S}_\lambda(u_0,w)+t\,\widehat{S}_\lambda(u_1,w)+\cdots+t^{p-1}\widehat{S}_\lambda(u_{p-1},w)\]
+is divisible by $t^p$ for all $w$. It suffices to test this for the basis $w=s_{j'}$. Using bilinearity and the diagonalization,
+\[\widehat{S}_\lambda(u_k,s_{j'}) = \sum_j a_j^{(k)}(t)\,\widehat{S}_\lambda(t_j,s_{j'}) = a_{j'}^{(k)}(t)\,t^{n_{j'}}.\]
+
+So the divisibility-by-$t^p$ requirement becomes:
+\[a_{j'}^{(0)}(t)\,t^{n_{j'}}+t\,a_{j'}^{(1)}(t)\,t^{n_{j'}}+\cdots+t^{p-1}a_{j'}^{(p-1)}(t)\,t^{n_{j'}} \equiv 0 \pmod{t^p}\]
+for every $j'$.
+
+If $n_{j'}\geq p$: this is automatic (every term has a factor $t^{n_{j'}}$, hence $\geq t^p$). There is no restriction on $a_{j'}^{(0)}(t)$. If $n_{j'} < p$: the condition forces $a_{j'}^{(0)}(t)$ to be divisible by $t^{p-n_{j'}}$.
+
+Now specialize $\pi: M(\lambda)[[t]]\to M(\lambda)$ given by $t\mapsto 0$. Only $\pi(a_{j'}^{(0)}(t)t_{j'})=a_{j'}(0)\overline{t_{j'}}$ can survive. The specialization $\overline{t_j'}$ of $t_{j'}$ is nonzero because the $t_j$ form a basis over $\mathbb{C}[[t]]$. Therefore the specialization of any $u_0\in M^p(\lambda)_{\lambda-\eta}$ is a $\mathbb{C}$-linear combination of those $t_j$ with $n_j\geq p$, and conversely any such combination arises by taking $u_0=\sum_{n_j\geq p} a_j(t)t_j$ with arbitrary $a_j(t)\in\mathbb{C}[[t]]$ and $u_k=0$.
+
+That is exactly
+\[M^p(\lambda)_{\lambda-\eta} = \pi\!\left(\sum_{n_j\geq p}\mathbb{C}[[t]]\,t_j\right),\]
+as claimed.
+
+With this description of $M^p(\lambda)$, we come to the proof of the corollary.
+Of course $M^p(\lambda)_\mu = 0$ unless $\mu$ is of the form $\lambda - \eta$
+(for some $\eta \in Q^+$).
+By~(3), $M^p(\lambda)_{\lambda-\eta} = 0$ for any $p > n_{P(\eta)}$.
+Now, for any $\eta \in Q^+$ we have
+\begin{align*}
+\operatorname{ord}_t(\det \widehat{S}_{\lambda,\eta}(t)) &= \sum_{j=1}^{P(\eta)} n_j \\
+&= \sum_{p\ge1}\#\{j : n_j\ge p\} \\
+&= \sum_{p \ge 1} \dim M^p(\lambda)_{\lambda-\eta}
+\end{align*}
+The first line follows from the Smith normal form.
+
+Hence
+\[
+\sum_{p \ge 1} \operatorname{ch} M^p(\lambda)
+= e^{\lambda}
+\sum_{\eta \in Q^+}
+\operatorname{ord}_t(\det \widehat{S}_{\lambda,\eta}(t))\, e^{-\eta}
+= \sum_{\eta \in Q^+}
+\sum_{(\alpha,n)\in D_\lambda}
+P(\eta - n\alpha)\, e^{\lambda - \eta}
+\]
+where the last equality follows from the Shapovalov determinant formula and the fact that
+\[\det\widehat S_{\lambda,\eta}(t)
+=\!\!\prod_{(\alpha,n)}\!\!
+f_{\alpha,n}(t)^{P(\eta-n\alpha)\,\mathrm{mult}\,\alpha}\]
+with $f_{\alpha,n}(t) = \nu^{-1}(\alpha) + (\rho - \tfrac{n\alpha}{2} \mid \alpha) + t(\rho \mid \alpha)$ is linear in $t$. As a function of t, the factor
+The factor $f_{\alpha,n}(t):=\langle \lambda+t\rho+\rho-\tfrac{n\alpha}{2},\alpha\rangle$ vanishes at $t=0$ if and only if
+\[\langle \lambda+\rho-\tfrac{n\alpha}{2},\alpha\rangle=0.\]
+
+For $(\alpha,n)\notin D_\lambda$, we have $f_{\alpha,n}(0)\neq0$ - that factor contributes no vanishing at $t=0$. For $(\alpha,n)\in D_\lambda$, the factor $f_{\alpha,n}$ contributes a simple zero at $t=0$.
+
+
+Therefore,
+\[
+\sum_{p \ge 1} \operatorname{ch} M^p(\lambda)
+= \sum_{(\alpha,n)\in D_\lambda}
+\operatorname{ch} M(\lambda - n\alpha).
+\]
+This proves the corollary.
+\end{proof}
+
+\begin{corollary}[2.3.6]
+For $\mu \le \lambda \in \mathfrak{h}^*$, the simple module $L(\mu)$ is a component
+of $M(\lambda)$ if and only if there exist positive roots
+$\beta_1,\dots,\beta_p$ $(p\ge0)$ and positive integers $k_1,\dots,k_p$ such that
+\begin{enumerate}
+\item $\displaystyle \lambda-\mu=\sum_{i=1}^p k_i\beta_i$, and
+\item for all $1\le j\le p$,
+\[
+2\bigl(\lambda+\rho-\sum_{i=1}^{j-1}k_i\beta_i,\;\beta_j\bigr)
+= k_j(\beta_j,\beta_j).
+\]
+\end{enumerate}
+\begin{proof}
+We argue by induction on $|\lambda-\mu|$. If $|\lambda-\mu|=0$,
+i.e.\ $\mu=\lambda$, take $p=0$. Assume $|\lambda-\mu|>0$.
+By Corollary~2.3.5, $L(\mu)$ is a component of $M(\lambda)$ if and only if
+$L(\mu)$ is a component of $M(\lambda-k_1\beta_1)$ for some $(k_1,\beta_1)\in D_\lambda$.
+But $|\lambda-k_1\beta_1-\mu|<|\lambda-\mu|$, so the claim follows by induction.
+\end{proof}
+\end{corollary}
+
+\medskip
+
+We define a subset $K^{\mathrm{w.g.}}\subset \mathfrak{h}^*$ (\emph{``w.g.''} stands for
+\emph{weakly good}) such that, for $\lambda\in K^{\mathrm{w.g.}}$, the description of
+the components of $M(\lambda)$ takes a particularly simple form.
+
+\begin{definition}[2.3.7]
+For any $\alpha\in\Delta^+_{\mathrm{im}}$set
+\[
+C_\alpha:=\{\lambda\in\mathfrak{h}^*: \langle \lambda+\rho,\alpha\rangle
+= \tfrac{\langle \alpha,\alpha\rangle}{2}\},
+\qquad
+C:=\bigcup_{\alpha\in\Delta^+_{\mathrm{im}}} C_\alpha,
+\qquad
+K^{\mathrm{w.g.}}:=\mathfrak{h}^*\setminus C.
+\]
+Clearly $C$ (hence $K^{\mathrm{w.g.}}$) is stable under the shifted $W$–action
+$w*\lambda:=w(\lambda+\rho)-\rho$ (see \S1.3.1).
+For a real root $\beta\in\Delta^+_{\mathrm{re}}$, let $s_\beta\in W$ be the reflection
+corresponding to $\beta$:
+\[
+s_\beta\lambda=\lambda-\langle \lambda,\beta^\vee\rangle\,\beta,
+\]
+where $\beta^\vee$ is the coroot.
+For any $\lambda\in\mathfrak{h}^*$, set
+\[
+W(\lambda):=\big\langle\, s_\beta \;:\; \beta\in\Delta^+_{\mathrm{re}},
+\ \langle \lambda+\rho,\beta^\vee\rangle\in\mathbb{Z}\,\big\rangle
+\ \subset\ W.
+\]
+\end{definition}
+
+\begin{proposition}[2.3.8]
+Let $\lambda\in K^{\mathrm{w.g.}}$. Then $\,[M(\lambda):L(\mu)]>0$ if and only if
+there exist reflections $s_{\beta_1},\dots,s_{\beta_p}\in W(\lambda)$
+with $\beta_i\in\Delta^+_{\mathrm{re}}$ and $p\ge0$ such that
+\[
+\lambda \;>\; s_{\beta_1}*\lambda \;>\; (s_{\beta_2}s_{\beta_1})*\lambda
+\;>\; \cdots \;>\; (s_{\beta_p}\cdots s_{\beta_1})*\lambda \;=\; \mu.
+\]
+In particular, $\mu\in W(\lambda)*\lambda$ and hence $\mu\in K^{\mathrm{w.g.}}$.
+\end{proposition}
+
+\begin{proof}
+We first prove the "only if" part.  
+Since $L(\mu)$ is a subquotient of $M(\lambda)$, of course
+$\lambda-\mu\in Q^+$. We prove the assertion by induction on
+$|\lambda-\mu|$. If $|\lambda-\mu|=0$, then $p=0$ and there is nothing to prove.
+
+Assume $|\lambda-\mu|>0$. Since $M(\lambda)/M^1(\lambda)=L(\lambda)$ is irreducible,
+we get from Corollary~2.3.5 that $L(\mu)$ is a subquotient of $M(\lambda-n\beta_1)$
+for some $(\beta_1,n)\in D_\lambda$.  
+But then $\beta_1\in\Delta^+_{\mathrm{re}}$
+(otherwise $n\beta_1\in\Delta^+_{\mathrm{im}}$ by (1.3.5.4),
+contradicting that $\lambda\in K^{\mathrm{w.g.}}$), and moreover
+\[
+n=\langle\lambda+\rho,\beta_1^\vee\rangle
+\quad\text{(in particular, } s_{\beta_1}\in W(\lambda)\text{)}.
+\]
+Hence $\lambda-n\beta_1 = s_{\beta_1}*\lambda$.
+Now $K^{\mathrm{w.g.}}$ is $W$–stable under~$*$, so
+$\lambda-n\beta_1\in K^{\mathrm{w.g.}}$, and of course
+$|s_{\beta_1}*\lambda-\mu|<|\lambda-\mu|$.
+Thus the ``only if'' part follows by induction,
+using the fact that $W(s_{\beta_1}*\lambda)=W(\lambda)$.
+
+The ``if'' part follows immediately from Corollary~2.3.6.
+\end{proof}
+
 \subsection{Virasoro algebra}
 Recall that the Virasoro algebra $\mathrm{Vir}$ is the Lie algebra with basis
 $\{d_n \mid n \in \mathbb{Z}\} \cup \{c\}$ and relations

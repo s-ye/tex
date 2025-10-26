@@ -1,0 +1,1883 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Conformal blocks, generalized theta functions, and the Verlinde formula}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+    These are reading notes for Kumar's book.
+\end{abstract}
+
+\tableofcontents
+
+\section{Vacua and covacua}
+\subsection{Setup on affine Lie algebras}
+Let $\mathfrak{g}$ be a finite-dimensional simple Lie algebra over $\C$ and let
+\[
+    \mathcal{A} := \C[t,t^{-1}], \qquad
+    K := \C((t)) := \C[[t]][t^{-1}]
+\]
+be the algebra of Laurent polynomials, respectively the field of Laurent power series.
+\begin{definition}[Formal loop algebras]
+
+    Define the \textbf{affine Kac--Moody Lie algebra} (or short, \textbf{affine Lie algebra})
+    \[
+        \tilde{\mathfrak g} := (\mathfrak g \otimes_\C \mathcal{A}) \oplus \C C,
+        \tag{1}
+    \]
+    under the bracket
+    \begin{equation}
+        [x[t^m] + zC,\; x'[t^{m'}] + z'C]
+        = [x,x'][t^{m+m'}] + m\,\delta_{m,-m'}\,\langle x,x'\rangle\,C,
+        \tag{2}
+    \end{equation}
+    for $z,z' \in \C$, $m,m' \in \Z$ and $x,x' \in \mathfrak g$, where $x[P]$ denotes $x\otimes P$.
+
+    We define the following completion $\hat{\mathfrak g}$ of $\tilde{\mathfrak g}$ defined by
+    \[
+        \hat{\mathfrak g} := \mathfrak g \otimes_\C K \oplus \C C,
+    \]
+    under the bracket
+    \begin{equation}
+        [x[P] + zC,\; x'[P'] + z'C]
+        = [x,x'][PP'] + \Res_{t=0}\!\big((dP)\,P'\big)\,\langle x,x'\rangle\,C,
+        \tag{4}
+    \end{equation}
+    for $P,P'\in K$, $z,z'\in\C$, and $x,x'\in\mathfrak g$, where $\Res_{t=0}$ denotes the coefficient of $t^{-1}dt$.
+
+    Define the (formal) \textbf{loop algebra}
+    \[
+        \mathfrak g((t)) := \mathfrak g \otimes_\C K,
+    \]
+    under the bracket
+    \begin{equation}
+        [x[P],x'[P']] = [x,x'][PP'], \quad P,P'\in K,\ x,x'\in\mathfrak g.
+        \tag{7}
+    \end{equation}
+\end{definition}
+Clearly, $\tilde{\mathfrak g}$ is a Lie subalgebra of $\hat{\mathfrak g}$.
+The Lie algebra $\hat{\mathfrak g}$ admits a derivation $d$ defined by
+\begin{equation}
+    d(x[P]) = x\!\left[t\,\frac{dP}{dt}\right],
+    \qquad d(C)=0,
+    \quad\text{for } P\in K,\ x\in\mathfrak g.
+    \tag{5}
+\end{equation}
+Clearly, $d$ keeps $\tilde{\mathfrak g}$ stable. Thus we have semidirect product Lie algebras
+\[
+    \C d \ltimes \hat{\mathfrak g}
+    \quad\text{and}\quad
+    \C d \ltimes \tilde{\mathfrak g}.
+\]
+$\hat{\mathfrak g}$ can be viewed as a one-dimensional central extension of $\mathfrak g((t))$:
+\begin{equation}
+    0 \longrightarrow \C C
+    \longrightarrow \hat{\mathfrak g}
+    \xrightarrow{\;\pi\;}
+    \mathfrak g((t))
+    \longrightarrow 0,
+    \tag{8}
+\end{equation}
+where the Lie algebra homomorphism $\pi$ is defined by $\pi(x[P]) = x[P]$ for $P\in K,\ x\in\mathfrak g$, and $\pi(C)=0$.
+The Kac-Moody presentation and root/weight combinatorics are written for $\tilde{\mf g}$. In practice we work with highest-weight (also called restricted or smooth) modules. On those, the action of $\tilde{\mf g}$ extends uniquely and continuously to $\widehat{\mathfrak g}$, because for every vector $v$ the positive modes $x\otimes t^{n}$ vanish for all $n\gg0$. So infinite positive tails act locally finitely.
+
+\begin{definition}[Definition~1.2.2 - Subalgebras of affine Lie algebras]
+    The Lie algebra $\mathfrak g$ is embedded in
+    $\widehat{\mathfrak g}$ as the subalgebra $\mathfrak g\otimes t^0$.
+    Define the (standard) Cartan subalgebra of $\widehat{\mathfrak g}$:
+    \[
+        \widehat{\mathfrak h} := \mathfrak h\otimes t^0 \oplus \C C,
+        \tag{1}
+    \]
+    the (standard) Borel subalgebra:
+    \[
+        \widehat{\mathfrak b} := \mathfrak g\otimes (t\C[[t]]) \oplus \mathfrak b\otimes t^0 \oplus \C C,
+        \tag{2}
+    \]
+    and the (standard) maximal parabolic subalgebra:
+    \[
+        \widehat{\mathfrak p} := \mathfrak g\otimes \C[[t]] \oplus \C C.
+        \tag{3}
+    \]
+
+    Also, define the following subalgebras of $\widehat{\mathfrak g}$:
+    \[
+        \widehat{\mathfrak g}_+ := \mathfrak g\otimes (t\C[[t]]), \qquad
+        \widehat{\mathfrak g}_- := \mathfrak g\otimes (t^{-1}\C[t^{-1}]), \qquad
+        \widehat{\mathfrak g}_0 := \mathfrak g\otimes t^0 \oplus \C C.
+        \tag{4}
+    \]
+    Then $\widehat{\mathfrak g}_+$ is an ideal of $\widehat{\mathfrak p}$,
+    and we have the Levi decomposition (as vector spaces):
+    \[
+        \widehat{\mathfrak p}
+        = \widehat{\mathfrak g}_0 \oplus \widehat{\mathfrak g}_+.
+        \tag{5}
+    \]
+    Also, as vector spaces:
+    \[
+        \widehat{\mathfrak g} = \widehat{\mathfrak p} \oplus \widehat{\mathfrak g}_-.
+        \tag{6}
+    \]
+    We can similarly define $\widetilde{\mathfrak b}$,
+    $\widetilde{\mathfrak g}_+$,
+    $\widetilde{\mathfrak g}_-$, and
+    $\widetilde{\mathfrak p}$.
+
+    Finally, define the $3$-dimensional subalgebra of $\widehat{\mathfrak g}$:
+    \[
+        \mathfrak r :=
+        \mathfrak g_\theta\otimes t^{-1}
+        \oplus \mathfrak g_{-\theta}\otimes t
+        \oplus \C(C-\theta^\vee),
+        \tag{7}
+    \]
+    where $\mathfrak g_\theta$ is the root space corresponding to the highest
+    root $\theta$, and $\theta^\vee\in\mathfrak h$ is the coroot corresponding
+    to $\theta$.
+\end{definition}
+
+\begin{definition}
+    For any $\hat\lambda\in\widehat{\mathfrak h}^{\,*}$, define the Verma module
+    \begin{equation}
+        \widehat M(\hat\lambda)\;:=\;U(\widehat{\mathfrak g})\;\otimes_{U(\widehat{\mathfrak b})}\;\C_{\hat\lambda},
+        \tag{3}
+    \end{equation}
+    where $U(\widehat{\mathfrak b})$ acts on $U(\widehat{\mathfrak g})$ by right multiplication and
+    $\C_{\hat\lambda}$ is the $1$–dimensional $\widehat{\mathfrak b}$–module on which
+    $[\widehat{\mathfrak b},\widehat{\mathfrak b}]$ acts trivially and
+    $\widehat{\mathfrak h}$ acts via the character $\hat\lambda$
+    (\textbf{note:} $\widehat{\mathfrak b}=\widehat{\mathfrak h}\oplus[\widehat{\mathfrak b},\widehat{\mathfrak b}]$).
+    The action of $U(\widehat{\mathfrak g})$ on $\widehat M(\hat\lambda)$ is by left multiplication on the first factor.
+
+    In exactly the same way, for any $\hat\lambda\in\widehat{\mathfrak h}^{\,*}$, one can define the
+    Verma module $\widetilde M(\hat\lambda)$ of $\widetilde{\mathfrak g}$. Then the canonical map
+    \[
+        i:\ \widetilde M(\hat\lambda)\longrightarrow \widehat M(\hat\lambda)
+    \]
+    (induced from the inclusion $\widetilde{\mathfrak g}\hookrightarrow \widehat{\mathfrak g}$) is an isomorphism.
+    In particular, the $\widetilde{\mathfrak g}$–module structure on $\widetilde M(\hat\lambda)$ extends to a
+    $\widehat{\mathfrak g}$–module structure.
+
+    Similarly, define the \textbf{generalized} Verma module $\widehat M(V,c)$ for any $\mathfrak g$–module $V$
+    and any $c\in\C$ by
+    \begin{equation}
+        \widehat M(V,c)\;:=\;U(\widehat{\mathfrak g})\otimes_{U(\widehat{\mathfrak p})} I_c(V)
+        \;=\; U(\widetilde{\mathfrak g})\otimes_{U(\widetilde{\mathfrak p})} I_c(V)
+        \tag{g.v.m}
+    \end{equation}
+    where $\widehat{\mathfrak p}$ (resp.\ $\widetilde{\mathfrak p}$) is as in identity~(3) of
+    Definition~1.2.2 (resp.\ identity~(2) of Definition~1.2.4). The algebra
+    $U(\widehat{\mathfrak p})$ acts on $U(\widehat{\mathfrak g})$ by right multiplication, and
+    $I_c(V)$ is the vector space $V$ on which $\widehat{\mathfrak p}$ acts via
+    \[
+        (x[P]+zC)\cdot v \;=\; P(0)\,x\cdot v \;+\; z\,c\,v,
+        \qquad P\in\C[[t]],\ x\in\mathfrak g,\ v\in V,\ z\in\C,
+    \]
+
+    For any $\lambda_c \in D_c$, we define the \textbf{integrable highest-weight module}
+    \begin{equation}
+        \mathcal{H}(\lambda_c) := \widehat M(V(\lambda), c) / U(\widehat{\mathfrak g})\cdot ((x_\theta[t^{-1}])^{c - \langle \lambda, \theta^\vee \rangle + 1} v_+)
+        \tag{i.h.w.m}
+    \end{equation}
+    We quotient out by the integrality condition on the highest weight. Local nilpotence propagates through the Serre relations.
+\end{definition}
+
+\begin{definition}[Restricted dual]
+    If $V=\bigoplus_{n\geq 0} V_n$ is a graded highest-weight $\widehat{\mathfrak{g}}$-module, the restricted dual is defined as
+    \[
+    V^\vee := \bigoplus_{n\geq 0} (V_n)^*.
+    \]
+    As a vector space, it's just the direct sum of the duals of the finite-dimensional homogeneous pieces.
+
+    It comes with the contragradient action
+    \[
+    (a\cdot f)(v) = -f(a\cdot v), \quad a\in\widehat{\mathfrak{g}}, \quad f\in V^\vee.
+    \]
+    This action makes $V^\vee$ into a lowest-weight module — not a highest-weight one. The central element $C$ acts on $V^\vee$ by the opposite scalar ($-c$ if $C$ acts by $c$ on $V$).
+\end{definition}
+
+
+\subsection{Spaces of vacua and covacua}
+Let $\mf g$ be a complex simple Lie algebra. Let $c$ be the level or central charge. Let $D$ be the set of dominant integral weights of $\mf g$. Let $\theta$ denote the highest root of $\mf g$, $\theta^\vee$ the corresponding coroot, and recall that we have \begin{align*}
+    D_c = \{\lambda \in D \mid \langle \lambda, \theta^\vee \rangle \leq c\} = \{\lambda \in D \mid (\lambda, \alpha_0) \geq 0\}
+\end{align*} where $\alpha_0 = \delta - \theta$ is the additional simple root of the affine Lie algebra $\tilde{\mf g}$.
+
+\begin{definition}
+    An $s$-\textbf{pointed curve} is a pair $(\Sigma, \vec{p})$ where $\Sigma$ is a reduced projective curve over $\C$ with at worst nodal singularities, and $\vec{p} = (p_1, \ldots, p_s)$ is an $s$-tuple of distinct smooth points of $\Sigma$ so that each irreducible component of $\Sigma$ contains at least one of the points $p_i$.
+
+    $(\Sigma, \vec{p})$ is called \textbf{stable} if the group of automorphisms of $\Sigma$ fixing each point $p_i$ is finite.
+\end{definition}
+
+Let $(\Sigma, \vec{p} = (p_1, \ldots, p_s))$ be an $s$-pointed curve and let $\vec{\lambda} = (\lambda_1, \ldots, \lambda_s)$
+be an $s$-tuple of weights with each $\lambda_i \in D_c$, where we think of $\lambda_i$ as “attached” to the point $p_i$.
+To this data, there is associated the \textbf{space of vacua} (also called the \textbf{space of conformal blocks})
+$\mathcal{V}^{\dagger}_{\Sigma}(\vec{p}, \vec{\lambda})$
+and its dual space $\mathcal{V}_{\Sigma}(\vec{p}, \vec{\lambda})$
+called the \textbf{space of covacua} (or the space of dual conformal blocks) defined as follows.
+
+\medskip
+
+Fix formal parameters $(t_1,\dots,t_s)$ of $\Sigma$ at the points $p_1,\dots,p_s$, respectively
+\[\varprojlim \mathcal{O}_{\Sigma}/\mathfrak{m}_{p_i}^n \cong \C[[t_i]]\]
+where $\mathfrak{m}_{p_i}$ is the maximal ideal of $\Sigma$ at $p_i$. Let $\mathfrak{g}[\Sigma \setminus \vec{p}]$ denote the space of morphisms
+$f \colon \Sigma \setminus \vec{p} \to \mathfrak{g}$ (in particular $\Sigma \setminus \vec{p}$ is an affine variety)
+\[
+    \mathfrak{g}[\Sigma \setminus \vec{p}] := \mathfrak{g} \otimes \C[\Sigma \setminus \vec{p}],
+\]
+where $\vec{p}$ also denotes the set $\{p_1,\dots,p_s\}$.
+Then $\mathfrak{g}[\Sigma \setminus \vec{p}]$ is a Lie algebra under the pointwise bracket:
+\begin{equation}
+    [x[f],y[g]] = [x,y][fg], \qquad f,g \in \C[\Sigma\setminus\vec{p}],\; x,y \in \mathfrak{g},
+    \tag{2}
+\end{equation}
+where, as earlier, we denote $x \otimes f$ by $x[f]$.
+
+For any $\lambda \in D_c$, let
+\begin{equation}
+    \lambda_c := (\lambda, c) \in \widehat{D}
+    \tag{3}
+\end{equation}
+where $\widehat{D}$ indexes the set of integrable highest weights of the affine Lie algebra $\widehat{\mathfrak{g}}$ at level $c$, and $(\lambda,c)\in \widehat{\mathfrak{h}}^{*}$ denotes the element such that $(\lambda,c)|_{\mathfrak{h}}=\lambda$ and $(\lambda,c)(C)=c$.
+
+Let $\mathcal{H}(\lambda_c)$ denote the integrable highest-weight $\widehat{\mathfrak{g}}$-module of highest weight $\lambda_c$. Since we have fixed the level, we will abbreviate $\mathcal{H}(\lambda_c)$ by $\mathcal{H}(\lambda)$ for any $\lambda \in D_c$. Set
+\begin{equation}
+    \mathcal{H}(\vec{\lambda}) :=
+    \mathcal{H}(\lambda_1) \otimes \cdots \otimes \mathcal{H}(\lambda_s).
+    \tag{4}
+\end{equation}
+Define an action of the Lie algebra $\mathfrak{g}[\Sigma\setminus\vec{p}]$ on $\mathcal{H}(\vec{\lambda})$ as follows:
+\begin{equation}
+    x[f]\cdot(v_1\otimes\cdots\otimes v_s)
+    = \sum_{i=1}^{s}
+    v_1 \otimes \cdots \otimes (x[f_{p_i}]\cdot v_i) \otimes \cdots \otimes v_s,
+    \tag{action}
+\end{equation}
+for $f \in \C[\Sigma\setminus\vec{p}]$, $x \in \mathfrak{g}$, and $v_i \in \mathcal{H}(\lambda_i)$,
+where $f_{p_i}$ denotes the Laurent-series expansion of $f$ at $p_i$
+with respect to the formal parameter $t_i$. \begin{align*}
+    x[f_{p_i}] = \sum_{n \in \mathbb{Z}} x \otimes a_n t_i^n \quad \text{if } f_{p_i} = \sum_{n \in \mathbb{Z}} a_n t_i^n
+\end{align*} and each $x \otimes t_i^n$ acts on $\mathcal{H}(\lambda_i)$ via the composition
+\[
+    \mathfrak g((t))
+    \xrightarrow{s}
+    \widehat{\mathfrak g}
+    \xrightarrow{\rho_c}
+    \mathrm{End}(\mathcal{H}(\lambda_i)), \qquad
+    x\otimes f\;\mapsto\;\rho_c(x\otimes f,0)
+\]
+Computing the commutator on $\mathcal{H}(\vec{\lambda})$, we have
+\[[\rho_c(x\otimes f,0),\,\rho_c(y\otimes g,0)]
+    =\rho_c([x,y]\otimes fg,0) + c\,\kappa(x,y)\operatorname{Res}(f\,dg)\,\mathrm{id}\]
+By the Residue Theorem (Hartshorne, 1977, Chap. III, Thm 7.14.2), taking the normalization of $\Sigma$,
+\begin{equation}
+    \sum_{i=1}^{s} \operatorname{Res}_{p_i}(f\,dg) = 0,
+    \qquad \text{for any } f,g\in\C[\Sigma\setminus\vec{p}].
+    \tag{6}
+\end{equation}
+Thus, the action (5) indeed defines an action of the Lie algebra $\mathfrak{g}[\Sigma\setminus\vec{p}]$
+on $\mathcal{H}(\vec{\lambda})$ once we have summed over all points $p_i$. Moreover, by the next lemma, the action of $\mathfrak{g}[\Sigma\setminus\vec{p}]$ on $\mathcal{H}(\vec{\lambda})$ does not depend upon the choice of formal parameters $t_i$ at $p_i$, up to a natural isomorphism of $\mathcal{H}(\vec{\lambda})$.
+
+\begin{remark}
+    Note that in general, there is no splitting of the central extension \begin{align*}
+        0 \longrightarrow \C C
+        \longrightarrow \hat{\mathfrak g}
+        \xrightarrow{\;\pi\;}
+        \mathfrak g((t))
+        \longrightarrow 0
+    \end{align*} because if you try the obvious linear section $s(x\otimes f)=(x\otimes f,0)$, you find
+    \[
+        [s(x\otimes f),s(y\otimes g)] - s([x\otimes f,y\otimes g]) = \kappa(x,y)\operatorname{Res}(f\,dg)\,K,
+    \]
+    so $s$ fails to be a Lie algebra homomorphism by precisely the cocycle $\omega(f,g)=\operatorname{Res}(f\,dg)$. For the same reason, there is no splitting of the level of representations $\rho_c \colon \hat{\mathfrak g} \to \mathrm{End}(\mathcal{H}(\lambda))$ to a representation of $\mathfrak g((t))$ unless $c=0$. The reason we get an action of $\mathfrak{g}[\Sigma\setminus\vec{p}]$ on $\mathcal{H}(\vec{\lambda})$ is that when we sum over all points $p_i$, the cocycles cancel out by the Residue Theorem.
+\end{remark}
+
+\begin{remark}
+    Recall that any smooth projective curve $\Sigma$ over $\C$ has the property that $\Sigma \setminus \{p\}$ is an affine variety for any point $p \in \Sigma$. This in fact immediately implies that every morphism $f$ of smooth projective curves is affine. More generally, $f$ is finite, which is equivalent to saying that it is affine and proper.
+
+
+\end{remark}
+
+Recall that for a Lie algebra $\mathfrak{a}$ and an $\mathfrak{a}$-module $M$, we have the space of invariants
+\[M^{\mathfrak{a}} := \{v \in M \mid x\cdot v = 0 \text{ for all } x \in \mathfrak{a}\}\] and the space of coinvariants
+$M_{\mathfrak{a}} := M / \mathfrak{a}M$ the smallest quotient of $M$ on which $\mathfrak{a}$ acts trivially.
+
+Note that an $\mathfrak{a}$-equivariant map $\phi:V\to \C$ is precisely a linear functional that vanishes on the subspace $\mathfrak{a}V = \{xv\mid x\in\mathfrak{a}, v\in V\}$. So it descends uniquely to the quotient $V_{\mathfrak{a}}=V/\mathfrak{a}V$. Conversely, every functional on the quotient lifts to such a map. In particular there is a natural isomorphism
+\begin{align*}
+    \operatorname{Hom}_{\mathfrak{a}}(V,\C)
+    \cong (V_{\mathfrak{a}})^*.
+\end{align*}
+\begin{definition}
+    We define the \textbf{space of vacua}
+    \begin{equation}
+        \mathcal{V}^{\dagger}_{\Sigma}(\vec{p},\vec{\lambda})
+        := \operatorname{Hom}_{\mathfrak{g}[\Sigma\setminus\vec{p}]}
+        \!\bigl(\mathcal{H}(\vec{\lambda}),\C\bigr),
+        \tag{7}
+    \end{equation} where $\C$ is the trivial $\mathfrak{g}[\Sigma\setminus\vec{p}]$-module, and the \textbf{space of covacua}
+    \begin{equation}
+        \mathcal{V}_{\Sigma}(\vec{p},\vec{\lambda})
+        := \bigl[\mathcal{H}(\vec{\lambda})\bigr]_{\mathfrak{g}[\Sigma\setminus\vec{p}]}.
+        \tag{8}
+    \end{equation}
+\end{definition}
+By the above discussion, there is a natural isomorphism
+\begin{equation}
+    \mathcal{V}^{\dagger}_{\Sigma}(\vec{p},\vec{\lambda})
+    \cong \bigl[\mathcal{V}_{\Sigma}(\vec{p},\vec{\lambda})\bigr]^*.
+    \tag{9}
+\end{equation}
+
+This definition is independent of the choice of formal parameters $t_i$ at $p_i$, up to a natural isomorphism of $\mathcal{H}(\vec{\lambda})$.
+
+More generally, for any power series $\omega(t) \in \C[[t]]$ with $\omega(0)=0$ and $\omega'(0)\ne 0$, consider
+the automorphism of $K = \C((t))$, $f \mapsto f \circ \omega$.
+This automorphism gives rise to an automorphism $\varphi_\omega$ of $\widehat{\mathfrak g}$,
+taking $x[f] \mapsto x[f \circ \omega]$ and $C \mapsto C$.
+Observe that for any two formal parameters $t$ and $s$ of $\Sigma$ at any smooth point $p$,
+$s$ is of the form $\omega(t)$ for some $\omega$ as above.
+
+\begin{lemma}[Lemma~2.1.2]
+    For any $\lambda \in D_c$, there is a natural linear isomorphism
+    \[
+        \varphi_\omega(\lambda)\colon
+        \mathcal H(\lambda) \longrightarrow \mathcal H(\lambda)
+    \]
+    satisfying
+    \[
+        \varphi_\omega(\lambda)(X\cdot h)
+        = \varphi_\omega(X)\cdot \bigl(\varphi_\omega(\lambda)h\bigr),
+        \qquad X\in \widehat{\mathfrak g},\; h\in \mathcal H(\lambda).
+    \]
+\end{lemma}
+
+\begin{proof}
+    Twist the $\widehat{\mathfrak g}$-module structure of $\mathcal H(\lambda)$ via the automorphism
+    $\varphi_\omega$.
+    To distinguish, we denote $\mathcal H(\lambda)$ with this twisted $\widehat{\mathfrak g}$-module structure by
+    $\mathcal H(\lambda)'$.
+    Since $\varphi_\omega$ keeps the Borel subalgebra $\widehat{\mathfrak b}$ stable,
+    $\mathcal H(\lambda)'$ continues to be a highest-weight module with the same highest-weight subspace
+    $\C h_+$.
+    Moreover, since $\varphi_\omega|_{\widehat{\mathfrak h}}$ is the identity map,
+    $\widehat{\mathfrak h}$ acts on the highest-weight subspace by the same weight $\lambda_c$.
+    In particular, $\mathcal H(\lambda)'$ is a quotient of the Verma module $\widetilde M(\lambda_c)$.
+    Further, $\varphi_\omega$ being an automorphism of $\widehat{\mathfrak g}$,
+    $\mathcal H(\lambda)'$ is an irreducible $\widehat{\mathfrak g}$-module.
+    In particular, $\mathcal H(\lambda)'$ is isomorphic with $\mathcal H(\lambda)$ as $\widehat{\mathfrak g}$-modules and there is a unique (up to a nonzero scalar multiple)
+    $\widehat{\mathfrak g}$-module isomorphism
+    \[
+        \varphi_\omega(\lambda)\colon
+        \mathcal H(\lambda) \longrightarrow \mathcal H(\lambda)'.
+    \]
+    In fact, since $\C h_+$ is the unique $\widehat{\mathfrak b}$-stable line in both
+    $\mathcal H(\lambda)$ and $\mathcal H(\lambda)'$, we can canonically choose
+    $\varphi_\omega(\lambda)$ so that $\varphi_\omega(\lambda)h_+ = h_+$.
+    This proves the lemma.
+\end{proof}
+
+As an immediate consequence of the above lemma, we get the following.
+
+\begin{corollary}[Cor.~2.1.3]
+    Up to a natural isomorphism, spaces
+    $\mathcal V^{\dagger}_{\Sigma}(\vec p, \vec\lambda)$ and
+    $\mathcal V_{\Sigma}(\vec p, \vec\lambda)$
+    do not depend upon the choice of formal parameters
+    $(t_1,\dots,t_s)$ of $\Sigma$ at the points $(p_1,\dots,p_s)$.
+\end{corollary}
+
+\begin{lemma}[Lemma~10.2.2]
+    Let $\mathfrak s$ be a subalgebra of $\mathfrak g$ such that
+    $\mathfrak s+\mathfrak n$, resp.\ $\mathfrak s+\mathfrak n^{-}$,
+    has finite codimension in $\mathfrak g$.
+    Then, for $\lambda\in D$, the spaces
+    $L(\lambda)/\mathfrak s\cdot L(\lambda)$, resp.\ $L(\lambda)^{\mathfrak s}$,
+    are finite dimensional.
+\end{lemma}
+
+\begin{proof}
+    First assume that $\mathfrak s+\mathfrak n$ has finite codimension in $\mathfrak g$.
+    Choose finitely many $x_i\in\mathfrak g$ such that the $x_i$'s act locally finitely on $L(\lambda)$
+    and $\mathfrak s+\sum_i \C x_i+\mathfrak n = \mathfrak g$.
+    (This is possible by Lemma~1.3.3(c).)
+    In particular, by the PBW Theorem,
+    \[
+        L(\lambda)
+        = U(\mathfrak g)\cdot v_\lambda
+        = U(\mathfrak s)F,
+    \]
+    for some finite-dimensional subspace $F\subset L(\lambda)$.
+    Hence $L(\lambda)/\mathfrak s\cdot L(\lambda)$ is finite dimensional.
+\end{proof}
+
+\begin{lemma}[Lemma~2.1.4]
+    With the notation and assumptions as in Definition~2.1.1,
+    the space of covacua $\mathcal V_{\Sigma}(\vec p,\vec\lambda)$ is finite-dimensional,
+    and hence by identity~(9) of Definition~2.1.1, so is the space of vacua
+    $\mathcal V^{\dagger}_{\Sigma}(\vec p,\vec\lambda)$.
+\end{lemma}
+
+\begin{proof}
+    Define a Lie algebra bracket on
+    \[
+        \widehat{\mathfrak g}^{(s)}
+        := \left(\bigoplus_{i=1}^{s} (\mathfrak g \otimes \C((t_i)))\right)
+        \oplus \C C,
+        \tag{1}
+    \]
+    by declaring $C$ to be a central element and setting
+    \[
+        \Bigl[\sum_{i=1}^{s} x_i[f_i],\; \sum_{i=1}^{s} y_i[g_i]\Bigr]
+        = \sum_{i=1}^{s} [x_i,y_i][f_i g_i]
+        + \left(\sum_{i=1}^{s} \langle x_i, y_i\rangle
+        \operatorname{Res}_{p_i}(g_i\,df_i)\right) C,
+    \]
+    for $f_i,g_i \in \C((t_i))$, $x_i,y_i \in \mathfrak g$.
+
+    Now, define an embedding of Lie algebras:
+    \[
+        \beta:\;\mathfrak g[\Sigma\setminus\vec p]
+        \longrightarrow \widehat{\mathfrak g}^{(s)},\qquad
+        x[f] \longmapsto \sum_{i=1}^{s} x[f_{p_i}],
+    \]
+    for $f\in \C[\Sigma\setminus\vec p]$ and $x\in\mathfrak g$. By the Residue Theorem $\beta$ is indeed a Lie algebra homomorphism. Moreover, by using the Riemann--Roch theorem for curves \[\operatorname{Im}\beta + \bigl(\bigoplus_{i=1}^{s} \mathfrak g \otimes \C[[t_i]]\bigr)\]
+    has finite codimension in $\widehat{\mathfrak g}^{(s)}$ (here we have used the fact that $\Sigma\setminus\vec p$ is an affine variety).
+
+    Further, define the following surjective Lie algebra homomorphism
+    from the direct sum Lie algebra:
+    \[
+        \pi:\;
+        \bigoplus_{i=1}^{s} \widehat{\mathfrak g}_{t_i}
+        \longrightarrow
+        \widehat{\mathfrak g}^{(s)},\qquad
+        \sum_{i=1}^{s} x_i[f_i] \longmapsto
+        \sum_{i=1}^{s} x_i[f_i],\quad
+        C_i \longmapsto C,
+    \]
+    for $f_i\in \C((t_i))$ and $x_i\in\mathfrak g$,
+    where $C_i$ is the center $C$ of $\widehat{\mathfrak g}_{t_i}$.
+
+    Now, the lemma follows from Kumar (2002, Lemma~10.2.2) by applying
+    Lemma~10.2.2 from the same (following its notation)
+    to the Kac--Moody Lie algebra
+    \[
+        \mathfrak g := \bigoplus_{i=1}^{s} \widehat{\mathfrak g}_{t_i},
+    \]
+    with $\mathfrak n$ the nil-radical of the standard Borel subalgebra,
+    and $\mathfrak s := \pi^{-1}(\operatorname{Im}\beta)$. \end{proof}
+
+\begin{remark}
+    We elaborate on the details of the application of Riemann-Roch. Let $\Sigma$ be a (reduced, nodal) projective curve with marked smooth points $p_1,\dots,p_s$. Fix local parameters $t_i$ at $p_i$. Put
+    \[
+        \widehat{\mathfrak g}^{(s)}
+        :=\Bigl(\bigoplus_{i=1}^s \mathfrak g\otimes \C((t_i))\Bigr)\oplus \C C,
+        \qquad
+        \mathfrak k:=\bigoplus_{i=1}^s \mathfrak g\otimes \C[[t_i]]
+    \]
+
+    The embedding $\beta: \mathfrak g[\Sigma\setminus\vec p]\to \widehat{\mathfrak g}^{(s)}$ given by $x[f]\mapsto \sum_{i=1}^s x[f_{p_i}]$ is a Lie algebra homomorphism by the Residue Theorem. To apply Kumar's Lemma 10.2.2 later, it suffices to prove:
+    \[
+        \operatorname{codim}_{\widehat{\mathfrak g}^{(s)}}
+        \bigl(\operatorname{Im}\beta+\mathfrak k \bigr)\ <\ \infty
+    \]
+    Since $\mathfrak g$ is finite-dimensional, we reduce to the scalar statement with $\mathfrak g$ replaced by $\C$:
+    \[
+        \operatorname{codim}_{\bigoplus_i \C((t_i))}
+        \Bigl(\operatorname{Im}(\C[\Sigma\setminus\vec p]\xrightarrow{f\mapsto (f_{p_i})_i})
+        +\bigoplus_i \C[[t_i]]\Bigr)\ <\ \infty
+        \tag{1}
+    \]
+    Equivalently, modulo $\bigoplus_i\C[[t_i]]$ this is: for principal parts only,
+    \[
+        \operatorname{codim}_{\bigoplus_i \C((t_i))/\C[[t_i]]}
+        \operatorname{Im}\bigl(\C[\Sigma\setminus\vec p]\longrightarrow \bigoplus_i \C((t_i))/\C[[t_i]]\bigr)
+        <\infty
+        \tag{2}
+    \]
+    For sheaf-theoretic principal parts, fix integers $m_i\ge 1$ and write the effective divisor $D=\sum_i m_i p_i$. We will study the sheaves $\cO_\Sigma(D)$ of functions with poles of order at most $m_i$ at $p_i$, because of the following relationship.
+    \[
+        \C[\Sigma\setminus\vec p]=\Gamma(\Sigma\setminus\vec p,\mathcal O_\Sigma)
+        =\{\,\text{meromorphic functions on }\Sigma\text{ with poles only at }\vec p\,\}.
+    \]
+    Let $\mathcal O_\Sigma(D)$ be the usual line bundle. There is a short exact sequence
+    \[
+        0 \longrightarrow \mathcal O_\Sigma
+        \longrightarrow \mathcal O_\Sigma(D)
+        \longrightarrow \mathcal P(D)\longrightarrow 0
+        \tag{3}
+    \]
+    where $\mathcal P(D)$ is the skyscraper sheaf of principal parts of order $\le m_i$ at $p_i$. With our chosen parameters $t_i$,
+    \[
+        \Gamma(\Sigma,\mathcal P(D))\ \cong\ \bigoplus_{i=1}^s t_i^{-m_i}\C[[t_i]]/\C[[t_i]]
+        \tag{4}
+    \]
+
+    Taking global sections of (3) yields the exact sequence (recall that torsion sheaves have no $H^1$)
+    \[
+        0\to H^0(\Sigma,\mathcal O_\Sigma)\to H^0(\Sigma,\mathcal O_\Sigma(D))
+        \overset{\mathrm{ev}D}{\longrightarrow}\Gamma(\Sigma,\mathcal P(D))
+        \longrightarrow H^1(\Sigma,\mathcal O_\Sigma)\to H^1(\Sigma,\mathcal O_\Sigma(D))\to 0
+    \]
+
+    Thus we see that $\mathrm{coker}(\mathrm{ev}D)$ injects into $H^1(\Sigma,\mathcal O_\Sigma)$. In particular,
+    \[
+        \dim\Bigl(\Gamma(\Sigma,\mathcal P(D)) / \operatorname{Im}\mathrm{ev}D\Bigr)
+        \ \le\ h^1\bigl(\Sigma,\mathcal O_\Sigma(D)\bigr)
+        \ <\ \infty
+        \tag{6}
+    \]
+    By Riemann-Roch on curves, $h^1(\Sigma,\mathcal O_\Sigma(D))=h^0(\Sigma,\omega_\Sigma(-D))$ is finite for every $D$, and vanishes for $D$ sufficiently large on each component. As $m_i\to\infty$, the system $\Gamma(\Sigma,\mathcal P(D))$ exhausts the space of all principal parts:
+    \[
+        \varinjlim_{D}\ \Gamma(\Sigma,\mathcal P(D))
+        \ \cong\ \bigoplus_{i=1}^s \C((t_i))/\C[[t_i]]
+        \tag{7}
+    \]
+    The maps $\mathrm{ev}D$ are compatible with inclusions $D\le D'$. The inverse limit of $\cO_\Sigma(m_1 p_1 + \cdots + m_s p_s)$ as $m_i\to\infty$ is the ring of functions regular away from $\vec p$, i.e. $\C[\Sigma \setminus \vec p]$, and since each finite-level cokernel has finite dimension, the direct limit image has finite codimension.
+
+    Therefore the image of global meromorphic functions on $\Sigma$ regular away from $\vec p$ in the full principal-parts space has finite codimension:
+    \[
+        \operatorname{codim}_{\bigoplus_i \C((t_i))/\C[[t_i]]} \operatorname{Im}\bigl(\C[\Sigma \setminus \vec p]\to \bigoplus_i \C((t_i))/\C[[t_i]]\bigr) <\infty
+    \] as desired. In fact, since for $D$ sufficiently large $H^1(\Sigma,\cO_\Sigma(D))=0$, the image stabilizes and in fact the image of the map in fact has corank zero.
+\end{remark}
+\subsection{Propagation of vacua}
+Let $\vec p=(p_1,\dots,p_s)$ and $\vec q=(q_1,\dots,q_a)$ be two disjoint nonempty sets of smooth and distinct points in $\Sigma$ such that $(\Sigma,\vec p)$ is an $s$-pointed curve, and let $\vec\lambda=(\lambda_1,\dots,\lambda_s)$, $\vec\mu=(\mu_1,\dots,\mu_a)$ be collections of weights in $D_c$.
+
+Let $V(\mu_j)$ denote the irreducible finite-dimensional $\mathfrak g$-module of highest weight $\mu_j$.
+\begin{definition}[Definition~2.2.1]
+    Denote the tensor product $\mathfrak g$-module
+    \[
+        V(\vec\mu):=V(\mu_1)\otimes\cdots\otimes V(\mu_a).
+        \tag{1}
+    \]
+    Define a $\mathfrak g[\Sigma\setminus\vec p]$-module structure on $V(\vec\mu)$ as follows:
+    \[
+        x[f]\cdot(v_1\otimes\cdots\otimes v_a)
+        =\sum_{j=1}^a
+        v_1\otimes\cdots\otimes f(q_j)\,x\cdot v_j\otimes\cdots\otimes v_a,
+        \tag{action 2}
+    \]
+    for $v_j\in V(\mu_j)$, $x\in\mathfrak g$, and
+    $f\in\C[\Sigma\setminus\vec p]$.
+    Thus, we get the tensor product
+    $\mathfrak g[\Sigma\setminus\vec p]$-module structure on
+    $\mathcal H(\vec\lambda)\otimes V(\vec\mu)$.
+\end{definition}
+
+\begin{theorem}[Theorem~2.2.2]
+    For $\vec p$, $\vec q$, $\vec\lambda$, $\vec\mu$ as above, the natural map
+    \[
+        \theta:
+        \Bigl[\mathcal H(\vec\lambda)\otimes V(\vec\mu)\Bigr]_{\mathfrak g[\Sigma\setminus\vec p]}
+        \longrightarrow
+        \mathcal V_{\Sigma}\bigl((\vec p,\vec q),(\vec\lambda,\vec\mu)\bigr)
+    \]
+    is an isomorphism, where $\mathcal V_{\Sigma}$ is the space of covacua defined by
+    identity~(8) of Definition~2.1.1, and the map $\theta$ is induced from the
+    $\mathfrak g[\Sigma\setminus\vec p]$-module embedding
+    \[
+        \mathcal H(\vec\lambda)\otimes V(\vec\mu)
+        \hookrightarrow
+        \mathcal H(\vec\lambda,\vec\mu),
+    \]
+    with $V(\mu_j)$ identified as the $\mathfrak g$-submodule of
+    $\mathcal H(\mu_j)$ generated by its highest-weight line. Recall that we defined \begin{align*}
+        \widehat{\mathfrak g}_+ := \bigoplus_{n \geq 1} \mathfrak g \otimes t^n
+    \end{align*}
+    Observe that the subspace $V(\mu_j)\subset\mathcal H(\mu_j)$ is annihilated by $\widehat{\mathfrak g}_+$, and hence the embedding $V(\mu_j)\subset\mathcal H(\mu_j)$ is indeed a $\mathfrak g[\Sigma\setminus\vec p]$-module embedding.
+\end{theorem}
+
+\begin{proof}
+    Let $\mathcal H = \mathcal H(\vec\lambda)\otimes V(\mu_1)\otimes\cdots\otimes V(\mu_{a-1})$.
+    By induction on $a$, it suffices to show that the inclusion
+    $V(\mu_a)\hookrightarrow \mathcal H(\mu_a)$
+    induces an isomorphism (abbreviating $\mu_a$ by $\mu$ and $q_a$ by $q$)
+    \[
+        \Bigl[\mathcal H\otimes V(\mu)\Bigr]_{\mathfrak g[\Sigma^{\circ}]}
+        \;\xrightarrow{\ \sim\ }\;
+        \Bigl[\mathcal H\otimes \mathcal H(\mu)\Bigr]_{\mathfrak g[\Sigma^{\circ}\setminus q]},
+        \tag{1}
+    \]
+    where $\Sigma^{\circ}:=\Sigma\setminus\vec p$.
+
+    Recall that we defined the generalized Verma module
+    \[
+        \widehat M(V,c)\;:=\;U(\widehat{\mathfrak g})\otimes_{U(\widehat{\mathfrak p})} I_c(V)
+        \;=\; U(\widetilde{\mathfrak g})\otimes_{U(\widetilde{\mathfrak p})} I_c(V)\]
+    We first prove~(1) replacing $\mathcal H(\mu)$ by the generalized
+    Verma module $\widehat M(V(\mu),c)$
+    \[
+        \Bigl[\mathcal H\otimes V(\mu)\Bigr]_{\mathfrak g[\Sigma^{\circ}]}
+        \;\xrightarrow{\ \sim\ }\;
+        \Bigl[\mathcal H\otimes \widehat M(V(\mu),c)\Bigr]_{\mathfrak g[\Sigma^{\circ}\setminus q]}.
+        \tag{2}
+    \]
+
+    Because every component of $\Sigma$ meets $\vec p$, the open curve
+    $\Sigma^\circ:=\Sigma\setminus\vec p$ is affine. On an affine curve and a
+    smooth point $q\in\Sigma^\circ$, there exists a global function
+    \(f\in \C[\Sigma^\circ\setminus q]\) with a simple pole at $q$ and no
+    other poles. Set $z:=f^{-1}$ in the local ring at $q$.
+    Then $z$ is a local parameter (uniformizer) at $q$, and
+    \(z^{-1}=f\in \C[\Sigma^\circ\setminus q]\). Consequently, all negative
+    powers $z^{-n}$ also lie in \(\C[\Sigma^\circ\setminus q]\).
+
+    With this choice of the local parameter $z$,
+    \[
+        \mathfrak g[\Sigma^{\circ}\setminus q]
+        =\mathfrak g[\Sigma^{\circ}]\oplus \widehat{\mathfrak g}_{-},
+        \quad\text{where, as in Definition~1.2.2,}\quad
+        \widehat{\mathfrak g}_{-}:=\bigoplus_{n\ge1}\mathfrak g\otimes z^{-n}.
+        \tag{3}
+    \]
+
+    Consider the Lie algebra
+    \[
+        \mathfrak s := \mathfrak g[\Sigma^{\circ}\setminus q]\oplus \C C.
+    \]
+    \noindent
+    where $C$ is central in $\mathfrak s$ and
+    \[
+        [x[f],y[g]]=[x,y][fg]+\langle x,y\rangle\,\mathrm{Res}_q(g\,df)\,C,
+        \qquad
+        f,g\in\C[\Sigma^\circ\setminus q],\ x,y\in\mathfrak g.
+    \]
+    Let $\mathfrak g[\Sigma^\circ\setminus q]$ act on $\mathcal H$
+    by the same formula as (action) and (action 2) and let $C$ act on $\mathcal H$ by the scalar $-c$.
+    By the Residue Theorem, these actions combine to make $\mathcal H$ into an $\mathfrak s$-module.
+
+    Consider the embedding of Lie algebras
+    \[
+        \mathfrak s \hookrightarrow \widehat{\mathfrak g}
+    \]
+    by taking $C\mapsto C$ and $x[f]\mapsto x[f_q]$, where the Laurent expansion
+    $f_q$ of $f$ at $q$ is taken with respect to the parameter $z$.
+    Thus, the action of $C\in\mathfrak s$ on the tensor product
+    $\mathcal H\otimes\widehat M(V(\mu),c)$ is trivial because we chose the levels to cancel \begin{align*}
+        C\cdot(u\otimes v)=(C\cdot u)\otimes v+u\otimes (C\cdot v)
+        =(-c)u\otimes v+c\,u\otimes v=0
+    \end{align*}
+    Now, by the definition of $\widehat M(V(\mu),c)$ and~(3)
+    (in the following, $\mathfrak g[\Sigma^\circ]$ acts on $V(\mu)$ via evaluation at $q$,
+    and $C$ acts via the scalar $c$),
+    \[
+        \begin{aligned}
+            \Bigl[\mathcal H\otimes\widehat M(V(\mu),c)\Bigr]_{\mathfrak g[\Sigma^\circ\setminus q]}
+             & =
+            \Bigl[\mathcal H\otimes\widehat M(V(\mu),c)\Bigr]_{\mathfrak s}
+            \quad\text{since $C$ acts trivially,}                                             \\[4pt]
+             & \simeq
+            \mathcal H\otimes_{U(\mathfrak s)}\widehat M(V(\mu),c)
+            \simeq
+            \mathcal H\otimes_{U(\mathfrak s)}
+            \bigl(U(\mathfrak s)\otimes_{U(\mathfrak g[\Sigma^\circ]\oplus \C C)}V(\mu)\bigr) \\[4pt]
+             & \simeq
+            \mathcal H\otimes_{U(\mathfrak g[\Sigma^\circ]\oplus \C C)}V(\mu)
+            \simeq
+            \mathcal H\otimes_{U(\mathfrak g[\Sigma^\circ])}V(\mu)
+            =\bigl[\mathcal H\otimes V(\mu)\bigr]_{\mathfrak g[\Sigma^\circ]}.
+        \end{aligned}
+    \]
+    This proves~(2). Now we come to the proof of~(1).
+    Let $K(\mu)$ be the kernel of the canonical projection
+    $\widehat M(V(\mu),c)\twoheadrightarrow \mathcal H(\mu)$.
+    In view of~(2), to prove~(1) it suffices to show that the image of
+    \[
+        \iota:
+        \bigl[\mathcal H\otimes K(\mu)\bigr]_{\mathfrak g[\Sigma^\circ\setminus q]}
+        \longrightarrow
+        \bigl[\mathcal H\otimes \widehat M(V(\mu),c)\bigr]_{\mathfrak g[\Sigma^\circ\setminus q]}
+    \]
+    is zero.  By~(3), the map $x[f]\mapsto x[f_q]$, $C\mapsto C$
+    (for $f\in\C[\Sigma^\circ\setminus q]$, $x\in\mathfrak g$)
+    induces a surjection
+    \[
+        \mathfrak s \twoheadrightarrow \widehat{\mathfrak g}/\widehat{\mathfrak g}_+.
+    \]
+    In particular,
+    \[
+        \widehat{\mathfrak g}=\mathfrak s+\widehat{\mathfrak g}_+,
+    \]
+    and hence, by the PBW theorem, $U(\widehat{\mathfrak g})$
+    is spanned by elements of the form
+    \[
+        Y_1\cdots Y_m X_1\cdots X_n,
+        \qquad
+        Y_i\in\mathfrak s,\quad X_j\in\widehat{\mathfrak g}_+,\quad m,n\ge0.
+    \]
+
+    Thus, to prove the vanishing of the map $\iota$, from the definition of $K(\mu)$ it suffices to show that (putting $Y=x_\theta[z^{-1}]$)
+    \[
+        \iota\bigl(h\otimes(X_1\cdots X_nY^{n_\mu}\cdot v_+)\bigr)=0,
+        \tag{4}
+    \]
+    for $h\in\mathcal H$, any $n\ge0$, and $X_j\in\widehat{\mathfrak g}_+$,
+    where $n_\mu:=c+1-\mu(\theta^\vee)$ and $v_+$ is a highest-weight vector
+    of $\widehat M(V(\mu),c)$.
+
+    This is because $K(\mu)$ is the submodule of $\widehat M(V(\mu),c)$ generated by the $U(\widehat{\mathfrak g})$-orbit of $Y^{n_\mu}\cdot v_+$ with $Y:=x_\theta[z^{-1}]$
+
+    In our tensor product $\mathcal H \otimes K(\mu)$, the Lie algebra $\mathfrak s$ acts diagonally:
+    \[
+        A \cdot (h\otimes v)
+        = (A\cdot h)\otimes v + h\otimes (A\cdot v),
+        \quad A\in\mathfrak s.
+    \]
+    When we pass to coinvariants, we identify
+    \[
+        (h\otimes (A\cdot v)) = -((A\cdot h)\otimes v)
+    \]
+    Only the part with no $Y_i$ left survives, i.e.
+    \[
+        h\otimes X_1\cdots X_n\, Y^{n_\mu}\cdot v_+,
+        \qquad X_j\in\widehat{\mathfrak g}_+.
+    \]
+    So it suffices to check that \(\iota(h\otimes (X_1\cdots X_nY^{n_\mu}\cdot v_+))=0\).
+    But since \(Y^{n_\mu}\cdot v_+\) is a primitive vector,
+    \[
+        \widehat{\mathfrak g}_+\cdot(Y^{n_\mu}\cdot v_+)=0.
+    \]
+    Thus, to prove~(4), it suffices to show that
+    \[
+        \iota\bigl(h\otimes (Y^{n_\mu}\cdot v_+)\bigr)=0,
+        \qquad \forall\,h\in\mathcal H.
+        \tag{5}
+    \]
+    Take $f\in\C[\Sigma^\circ]$ such that $f_q=z\pmod{z^2}$.
+    Since the action of $f$ is component-wise locally nilpotent on $\mathcal H$, there exists $N\ge0$ such that
+    \[
+        (x_{-\theta}[f])^N\cdot h=0,\qquad\text{for large enough $N$.}
+        \tag{6}
+    \]
+    We next show that, as elements of $\widehat M(V(\mu),c)$, for any $N\ge0$,
+    \[
+        Y^{n_\mu}\cdot v_+ = \alpha X^N Y^{n_\mu+N}\cdot v_+,
+        \tag{7}
+    \]
+    for some $\alpha\in\C$, where $X:=x_{-\theta}[f_q]\in\widehat{\mathfrak g}$.
+    We can (and do) choose $x_{-\theta}$ so that
+    $\langle x_{-\theta},x_\theta\rangle=1$.
+    Put $H=[X,Y]\in\widehat{\mathfrak g}$.
+    Then $H=C-\theta^\vee[z^{-1}f_q]$, and
+    $[Y,H]=2x_\theta[z^{-2}f_q]$.
+    In particular, $[Y,H]$ commutes with $Y$.
+
+    For any associative algebra $A$ and element $y\in A$,
+    define the operators $L_y(x)=yx$, $R_y(x)=xy$, and $\mathrm{ad}(y)=L_y-R_y$.
+    Considering the binomial theorem for the operator
+    $L_y^n=(\mathrm{ad}(y)+R_y)^n$, we get
+    \[
+        y^n x = \sum_{j=0}^n \binom{n}{j}((\mathrm{ad}(y))^jx)\,y^{n-j}.
+        \tag{8}
+    \]
+    Applying this identity for $y=Y$ and $x=H$ in $U(\widehat{\mathfrak g})$,
+    we get
+    \[
+        Y^nH = HY^n + nY^{n-1}[Y,H],
+        \quad\text{since $Y$ commutes with $[Y,H]$.}
+        \tag{9}
+    \]
+
+    Now,
+    \[
+        \begin{aligned}
+            [Y,H]\cdot v_+ & = 2x_\theta[z^{-2}f_q]\cdot v_+      \\
+                           & = 2x_\theta[z^{-1}]\cdot v_+, \qquad
+            \text{since }\widehat{\mathfrak g}_+\oplus(\mathfrak u\otimes t^0)
+            \text{ annihilates }v_+,                              \\
+                           & =2Y\cdot v_+.
+        \end{aligned}
+        \tag{10}
+    \]
+
+    Further, where $\mathfrak u$ is the nil-radical of $\mathfrak b$,
+    \[
+        \begin{aligned}
+            H\cdot v_+
+             & = (C-\theta^\vee[z^{-1}f_q])\cdot v_+ \\
+             & = cv_+ - \theta^\vee\cdot v_+, \qquad
+            \text{since }\widehat{\mathfrak g}_+\oplus(\mathfrak u\otimes t^0)
+            \text{ annihilates }v_+,                 \\
+             & =(n_\mu-1)v_+,
+            \qquad\text{since }n_\mu:=c+1-\mu(\theta^\vee).
+        \end{aligned}
+        \tag{11}
+    \]
+
+    Hence, by~(9)–(11),
+    \[
+        \begin{aligned}
+            HY^n\cdot v_+
+             & =Y^nH\cdot v_+ - nY^{n-1}[Y,H]\cdot v_+ \\
+             & =(n_\mu-1)Y^n\cdot v_+ - 2nY^n\cdot v_+ \\
+             & =(n_\mu-1-2n)Y^n\cdot v_+.
+        \end{aligned}
+        \tag{12}
+    \]
+
+    Applying~(8) for $y=Y$ and $x=X$, we get
+    \[
+        Y^nX = XY^n - nHY^{n-1} - \binom{n}{2}Y^{n-2}[Y,H],
+        \quad\text{since $Y$ commutes with $[Y,H]$.}
+    \]
+    Thus,
+    \[
+        \begin{aligned}
+            XY^n\cdot v_+
+             & = nHY^{n-1}\cdot v_+
+            + \binom{n}{2}Y^{n-2}[Y,H]\cdot v_+ \\
+             & = n(n_\mu+1-2n)Y^{n-1}\cdot v_+
+            + n(n-1)Y^{n-1}\cdot v_+,           \\
+             & = n(n_\mu-n)Y^{n-1}\cdot v_+.
+        \end{aligned}
+    \]
+    Thus, by induction on $m$, for any $0\le m\le n$,
+    \[
+        X^mY^n\cdot v_+
+        = (n(n-1)\cdots(n-m+1))
+        ((n_\mu-n)(n_\mu-n+1)\cdots(n_\mu+m-n-1))\,Y^{n-m}\cdot v_+.
+    \]
+    This proves~(7).  By~(7),
+    \[
+        \iota(h\otimes Y^{n_\mu}\cdot v_+)
+        =\alpha\,\iota\bigl(h\otimes X^N Y^{n_\mu+N}\cdot v_+\bigr)
+        =(-1)^N\alpha\,\iota\bigl((x_{-\theta}[f])^N\cdot h\otimes Y^{n_\mu+N}\cdot v_+\bigr)
+        =0,
+    \]
+    by~(6).  This proves~(5) and hence completes the proof of the theorem.
+\end{proof}
+
+
+\begin{corollary}[Corollary~2.2.3]
+    Let $(\Sigma,\vec p)$ be an $s$-pointed curve.
+    Then, for any smooth point $q\in\Sigma\setminus\vec p$, there are natural isomorphisms
+    \begin{enumerate}[(a)]
+        \item
+              $\mathcal V_{\Sigma}(\vec p,\vec\lambda)
+                  \simeq
+                  \mathcal V_{\Sigma}((\vec p,q),(\vec\lambda,0))$.
+        \item
+              If $\Sigma$ is irreducible, then
+              \[
+                  \mathcal V_{\Sigma}(\vec p,\vec\lambda)
+                  \simeq
+                  \bigl[\mathcal H(0)\otimes V(\vec\lambda)\bigr]_{\mathfrak g[\Sigma\setminus q]},
+              \]
+              where the point $q$ is assigned weight $0$.
+    \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    (a) Apply Theorem~2.2.2 for the case $\vec q=(q)$ and $\vec\mu=(0)$.
+
+    (b) Follows from Theorem~2.2.2 and part (a)
+    (in Theorem~2.2.2 replace $\vec p$ by the singleton $(q)$,
+    $\vec\lambda$ by $(0)$,
+    $\vec q$ by $\vec p$,
+    and $\vec\mu$ by $\vec\lambda$).
+\end{proof}
+
+\subsection{Vacua on $\P^1$}
+We follow the notation from Section~2.1. In particular, let $\mathfrak g$ be a simple (finite-dimensional) Lie algebra over $\mathbb{C}$ and let $c \ge 1$ be the level.
+In this section, we take $\Sigma = \mathbb{P}^1$, where $\mathbb{P}^1$ is thought of as $\mathbb{A}^1 \cup \{\infty\}$.
+Let $\vec{p} = (p_1,\dots,p_s)$ be an $s$-tuple of distinct points in $\mathbb{A}^1$ and let
+$\vec{\lambda} = (\lambda_1,\dots,\lambda_s)$ be an $s$-tuple of weights with each $\lambda_i \in D_c$ (we take $s \ge 1$).
+
+\begin{definition}[{\bf 2.3.1}]
+    Let $\theta$ be the highest root of $\mathfrak g$ and let $x_\theta \in \mathfrak g_\theta$ be a nonzero (highest) root vector.
+    Define the operator $\varphi = \varphi_{(\vec{p},\vec{\lambda})} : V(\vec{\lambda}) \to V(\vec{\lambda})$ by
+    \[
+        \varphi(v_1 \otimes \cdots \otimes v_s)
+        = \sum_{i=1}^s p_i\,v_1 \otimes \cdots \otimes (x_\theta \cdot v_i) \otimes \cdots \otimes v_s,
+        \qquad v_i \in V(\lambda_i),
+    \]
+    where $V(\vec{\lambda})$ is defined by identity~(1) of Definition~2.2.1.
+\end{definition}
+
+Let $\mathfrak{sl}_2(\theta)\subset\mathfrak g$ be the subalgebra spanned by
+$\{ \mathfrak g_\theta, \mathfrak g_{-\theta}, \theta^\vee \}$.
+Then $\mathfrak{sl}_2(\theta)$ is isomorphic to $\mathfrak{sl}_2$ under the map
+\[
+    X \mapsto x_\theta,\qquad
+    Y \mapsto x_{-\theta},\qquad
+    H \mapsto \theta^\vee,
+\]
+where $x_{-\theta} \in \mathfrak g_{-\theta}$ is chosen so that $[x_\theta, x_{-\theta}] = \theta^\vee$.
+
+Decompose $V(\lambda_i)$ under the action of $\mathfrak{sl}_2(\theta)$:
+\[
+    V(\lambda_i) = \bigoplus_{n \ge 0} V(\lambda_i)_{(n)},
+\]
+where $V(\lambda_i)_{(n)}$ denotes the isotypic component of $V(\lambda_i)$ (under the action of $\mathfrak{sl}_2(\theta)$)
+with highest weight the nonnegative integer $n$. (The irreducible representation of $\mathfrak{sl}_2$ with highest weight $n$ is of dimension $n+1$.)
+
+\begin{theorem}[{\bf 2.3.2}]
+    With the notation and assumptions as above:
+    \begin{enumerate}
+        \item[(a)]
+              \[
+                  \mathbb{V}_{\mathbb{P}^1}(\vec{p},\vec{\lambda})
+                  \simeq
+                  \frac{V(\vec{\lambda})}{\mathfrak g \cdot V(\vec{\lambda}) + \mathrm{Im}\,\varphi^{c+1}}.
+              \]
+              In particular, for $c \gg 0$ (for fixed $\vec{\lambda}$),
+              $\mathbb{V}_{\mathbb{P}^1}(\vec{p},\vec{\lambda})$
+              coincides with the space of covariants $V(\vec{\lambda})/(\mathfrak g \cdot V(\vec{\lambda}))$.
+
+              Similarly,
+        \item[(b)]
+              \[
+                  \mathbb{V}_{\mathbb{P}^1}^\dagger(\vec{p},\vec{\lambda})
+                  \simeq
+                  \{\, \mathfrak g\text{-module maps } f: V(\vec{\lambda}) \to \mathbb{C}
+                  \mid f\circ\varphi^{c+1}=0 \,\}.
+              \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Let $q=\infty\in\mathbb{P}^1$. Applying Corollary~2.2.3(b) for $\Sigma=\mathbb{P}^1$, we get
+    \[
+        \mathbb{V}_{\mathbb{P}^1}(\vec{p},\vec{\lambda})
+        \simeq
+        \bigl[\mathcal{H}(0)\otimes V(\vec{\lambda})\bigr]_{\mathfrak g[\mathbb{A}^1]}.
+        \tag{1}
+    \]
+    Let $K(0)$ be the kernel of the canonical projection $\widehat M(V(0),c)\to\mathcal{H}(0)$.
+    Then we have the exact sequence
+    \[
+        \bigl[K(0)\otimes V(\vec{\lambda})\bigr]_{\mathfrak g(\mathbb{A}^1)}
+        \xrightarrow{i}
+        \bigl[\widehat M(V(0),c)\otimes V(\vec{\lambda})\bigr]_{\mathfrak g(\mathbb{A}^1)}
+        \longrightarrow
+        \bigl[\mathcal{H}(0)\otimes V(\vec{\lambda})\bigr]_{\mathfrak g(\mathbb{A}^1)}
+        \to 0.
+        \tag{$*$}
+    \]
+    Here the generalized Verma module $\widehat M(V(0),c)$ is considered as a $\mathfrak g(\mathbb{A}^1)$-module
+    with respect to the parameter $t = z^{-1}$ on $\mathbb{P}^1$ at $\infty$.
+    Since $\widehat M(V(0),c)$ is a free $U(\widehat{\mathfrak g}_-)$-module generated by $v_+$
+    and $\widehat{\mathfrak g}_-$ is an ideal in $\mathfrak g\otimes\mathbb{C}[t^{-1}]$,
+    it is easy to see (setting $\mathfrak g_0(\mathbb{A}^1)$ to be the kernel of the evaluation map $\mathfrak g(\mathbb{A}^1)\to\mathfrak g$ at $0$,
+    thus $\mathfrak g_0(\mathbb{A}^1)=\widehat{\mathfrak g}_-$) that
+    \[
+        \bigl[\widehat M(V(0),c)\otimes V(\vec{\lambda})\bigr]_{\mathfrak g(\mathbb{A}^1)}
+        \simeq
+        \Bigl[\bigl[\widehat M(V(0),c)\otimes V(\vec{\lambda})\bigr]_{\mathfrak g_0(\mathbb{A}^1)}\Bigr]_{\mathfrak g}
+        \simeq
+        [v_+\otimes V(\vec{\lambda})]_{\mathfrak g}
+        \simeq
+        v_+\otimes\frac{V(\vec{\lambda})}{\mathfrak g\cdot V(\vec{\lambda})}
+        \tag{2}
+    \]
+    Moreover, by the definition of $\mathcal{H}(0)$ we get
+    \[
+        K(0)
+        =
+        U\bigl(\mathfrak g\otimes\mathbb{C}[t^{-1}]\bigr)
+        \cdot(x_\theta[t^{-1}])^{c+1}\cdot v_+
+        \subset
+        \widehat M(V(0),c).
+    \]
+    Thus, the image of
+    $\bigl[K(0)\otimes V(\vec{\lambda})\bigr]_{\mathfrak g(\mathbb{A}^1)}$
+    in $\bigl[\widehat M(V(0),c)\otimes V(\vec{\lambda})\bigr]_{\mathfrak g(\mathbb{A}^1)}$
+    under $i$ is the same as the image of $(x_\theta[t^{-1}])^{c+1}\cdot v_+\otimes V(\vec{\lambda})$.
+    The latter, under identification~(2), is equal to
+    \[
+        (-1)^{c+1}v_+\otimes
+        \frac{(x_\theta[t^{-1}])^{c+1}\cdot V(\vec{\lambda})+\mathfrak g\cdot V(\vec{\lambda})}
+        {\mathfrak g\cdot V(\vec{\lambda})}
+        =
+        v_+\otimes
+        \frac{(\varphi^{c+1}(V(\vec{\lambda}))+\mathfrak g\cdot V(\vec{\lambda}))}
+        {\mathfrak g\cdot V(\vec{\lambda})},
+    \]
+    by the definition of $\varphi$.
+    Thus, from the exact sequence~($*$) and~(2), we get that
+    \[
+        \bigl[\mathcal{H}(0)\otimes V(\vec{\lambda})\bigr]_{\mathfrak g(\mathbb{A}^1)}
+        \simeq
+        \frac{V(\vec{\lambda})}{(\mathfrak g\cdot V(\vec{\lambda})+\varphi^{c+1}(V(\vec{\lambda})))}.
+    \]
+    This proves the (a)-part of the theorem by using~(1).
+    Since $\mathbb{V}_{\mathbb{P}^1}^\dagger(\vec{p},\vec{\lambda})$ is dual to
+    $\mathbb{V}_{\mathbb{P}^1}(\vec{p},\vec{\lambda})$
+    (cf.~isomorphism~(9) of Definition~2.1.1),
+    the (b)-part follows immediately from the (a)-part.
+\end{proof}
+
+\begin{remark}
+    [Explicit $\mathcal{H}(0)$] Recall that we defined the generalized Verma module for a $\widehat{\mathfrak g}$-module as:
+    \[
+        \widehat M(V,c)
+        \;=\;
+        U(\widehat{\mathfrak g})
+        \;\otimes_{U(\widehat{\mathfrak p})}\;
+        I_c(V)
+    \] where $\widehat{\mathfrak g} = (\mathfrak g\otimes\C((t)))\oplus\C C$ is the affine Lie algebra, and $\widehat{\mathfrak p} = (\mathfrak g\otimes \C[[t]])\oplus \C C$ is the maximal parabolic subalgebra. Here $I_c(V)$ is a module for $\widehat{\mathfrak p}$ such that $(x\otimes f(t))\cdot v = f(0)\,xv$ for $x\in\mathfrak g$, $f(t)\in\C[[t]]$, and $C$ acts as multiplication by $c$.
+
+    When \(V=\C\) with trivial $\mathfrak g$-action, this becomes
+    \[
+        I_c(\C):\quad
+        (x\otimes f(t))\cdot 1 = 0 \quad \forall f\in\C[[t]],
+        \quad
+        C\cdot 1 = c.
+    \]
+    Then
+    \[
+        \widehat M(V(0),c)
+        \;=\;
+        U(\widehat{\mathfrak g})
+        \otimes_{U(\widehat{\mathfrak p})}
+        I_c(\C)
+        \;\cong\;
+        U(\widehat{\mathfrak g}-)\,v+,
+    \]
+    where
+    \(\widehat{\mathfrak g}_- := \mathfrak g\otimes t^{-1}\C[t^{-1}]\)
+    and $v_+$ is the image of $1\otimes 1$ — the highest-weight vector. Now we defined the integrable quotient
+    \begin{align*}
+        \mathcal H(0)
+        \;=\;
+        \widehat M(V(0),c)
+        \;\Big/\;
+        U(\widehat{\mathfrak g})
+        \cdot
+        (x_\theta[t^{-1}])^{c+1}\,v_+.
+    \end{align*}
+    This quotient enforces integrability with respect to the affine $\widehat{\mathfrak{sl}}_2$ corresponding to the highest root $\theta$:
+    \[
+        x_\theta[t^{-1}]^{c+1}v_+ = 0.
+    \]
+    Recall that generalized Verma modules have a unique maximal proper submodule, and the integrable highest-weight module $\mathcal{H}(0)$ is the corresponding irreducible quotient. In particular $\mathcal{H}(0)=L(c\Lambda_0)$.
+
+    Let $\widehat{\mathfrak g}$ have Chevalley generators $e_i,f_i,h_i$ for the affine Dynkin diagram ($i=0,\dots,\ell$). Then $\mathcal{H}(0)$ is generated by a vector $v_+$ with relations
+    \[
+        e_i v_+=0, \quad h_i v_+=\langle c\Lambda_0,h_i\rangle v_+, \quad
+        f_0^{c+1}v_+=0, \quad f_i v_+=0 \text{ for } i=1,\dots,\ell.
+    \]
+    Here $f_0$ corresponds to the operator $x_\theta[t^{-1}]$. These relations come from the fact that inside each simple $\mathfrak{sl}_2$-subalgebra $\mathfrak{sl}_2^{(i)} = \langle e_i, f_i, h_i \rangle$, the vector $v_+$ is a highest-weight vector of weight $\langle \Lambda, h_i\rangle$.
+
+    For $i>0$, we have $\langle c\Lambda_0, h_i\rangle = 0$, so $v_+$ is the trivial 1-dimensional representation of that finite $\mathfrak{sl}_2^{(i)}$. In such a representation, both $e_i$ and $f_i$ act as 0. Hence $f_i v_+ = 0$ for $i>0$.
+
+    For $i=0$, we have $\langle c\Lambda_0, h_0\rangle = c$. So $v_+$ is the highest-weight vector of weight $c$ for the subalgebra $\mathfrak{sl}_2^{(0)}$. That representation is $(c+1)$-dimensional. Thus we get the relations for $\cH(0)$ as above.
+\end{remark}
+
+\begin{remark}
+    [Unraveling the action of $\varphi$] Let us examine how the operator works geometrically. The Lie algebra
+    \[
+        \mathfrak g(\mathbb A^1) = \{\,x[f]\mid f\in\C[t]\text{ regular on }\mathbb A^1\,\}
+    \]
+    acts diagonally on the tensor product $\widehat M(V(0),c)\otimes V(\vec\lambda)$ through two mechanisms:
+
+    \begin{itemize}
+        \item First, at the point at infinity, it acts through Laurent expansions in the parameter $t^{-1}$. Note that in general, every regular function $f$ on $\mathbb A^1$ has a unique meromorphic extension to $\mathbb P^1$ with a pole only at infinity. Concretely, if $f$ is a polynomial in $t$, then its Laurent expansion at infinity is given by
+              \[f(t) = \sum_{n=0}^d a_n t^n = f(1/z) = \sum_{n=0}^d a_n z^{-n}\]
+        \item Second, at each marked point $p_i$, it acts by evaluating the polynomial $f$ at $p_i$. Note that $p_i \in \mathbb A^1$ and hence $f$ is regular at $p_i$, which is precisely the action of $\varphi$.
+    \end{itemize}
+\end{remark}
+
+\begin{proposition}[{\cite[Prop.~2.3.3]{Kumar}}]
+    \leavevmode
+    \begin{enumerate}
+        \item For any $\vec\lambda=(n_1,n_2,n_3)\in\Z_+^3$, the space
+              \[
+                  W(\vec\lambda)/\mathfrak{sl}_2\cdot W(\vec\lambda)
+              \]
+              is at most $1$-dimensional, where
+              \[
+                  W(\vec\lambda):=W(n_1)\otimes W(n_2)\otimes W(n_3),
+                  \quad\text{and}\quad
+                  \Z_+:=\Z_{\ge0}.
+              \]
+              Moreover, it is $1$-dimensional if and only if
+              \begin{equation}\label{eq:cond1}
+                  n_1+n_2+n_3\in2\Z_+
+              \end{equation} and the sum of any two of $\{n_1,n_2,n_3\}$ is at least as large as the third.
+
+        \item Let $\mathfrak g=\mathfrak{sl}_2$,
+              $\vec\lambda=(n_1,n_2,n_3)\in[c]^3$ and
+              $\vec p=(p_1,p_2,p_3)$ with distinct $p_i\in\A^1$, where
+              $[c]:=\{0,1,\dots,c\}$.
+              Then the space of covacua
+              $\mathbb V_{\P^1}(\vec p,\vec\lambda)$
+              (equivalently, the space of vacua) is at most $1$-dimensional.
+              Moreover, it is $1$-dimensional if and only if the above condition
+              \eqref{eq:cond1} is satisfied together with
+              \begin{equation}\label{eq:cond2}
+                  n_1+n_2+n_3\le2c.
+              \end{equation}
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}
+        \item This follows from the Clebsch-Gordan formula for the tensor-product decomposition of $\mathfrak{sl}_2$-representations. Recall that the Clebsch-Gordan formula says that \begin{align*}
+                  W(m)\otimes W(n) \;=\;\bigoplus_{k=0}^{\min(m,n)} W(m+n-2k). \end{align*} Applying this to the triple tensor product, we find that \begin{align*}
+                  W(n_1)\otimes W(n_2)\otimes W(n_3)
+                  \;=\;
+                  \bigoplus W\bigl(n_1+n_2+n_3-2(k+l)\bigr)
+            \end{align*} where $0\le k\le\min(n_1,n_2)$ and $0\le l\le\min(n_1+n_2-2k,n_3)$. We are interested in the case that the trivial representation $W(0)$ appears in this decomposition.
+
+            We need the highest weight to be 0:
+            \[
+            n_1+n_2+n_3-2(k+l)=0
+            \quad\Longleftrightarrow\quad
+            k+l = \tfrac{1}{2}(n_1+n_2+n_3).
+            \]
+From this we get the parity condition. We must also have $k,l\ge0$ and within the allowed ranges, so this equation must admit nonnegative integer solutions $k,l$ satisfying:
+            \[
+            k\le\min(n_1,n_2), \quad l\le\min(n_1+n_2-2k,n_3).
+            \]
+            Such $k,l$ exist if and only if the three integers $n_1,n_2,n_3$ satisfy the triangle inequalities:
+            \[
+            n_i \le n_j + n_k \quad\text{for all } \{i,j,k\}=\{1,2,3\}.
+            \]
+        \item We prove the statement for the space of vacua
+              $\mathbb V_{\P^1}^\dagger(\vec p,\vec\lambda)$.
+              Since $\mathbb V_{\P^1}^\dagger(\vec p,\vec\lambda)$
+              is a subspace of
+              $\Hom_{\mathfrak{sl}_2}(W(\vec\lambda),\C)$
+              by Theorem~2.3.2(b),
+              it is at most $1$-dimensional by part~(a).
+
+              By part~(a) again, if $\vec\lambda$ does not satisfy the parity condition then $W(\vec\lambda)=\mathfrak{sl}_2\cdot W(\vec\lambda)$ and hence $\mathbb V_{\P^1}^\dagger(\vec p,\vec\lambda)=0$. Assume now that $\vec\lambda\in[c]^3$ satisfies~\eqref{eq:cond1}. Then $\Hom_{\mathfrak{sl}_2}(W(\vec\lambda),\C)$ is $1$-dimensional.
+
+              Let $\{e_1,e_2\}$ be the standard basis of $\C^2$.
+              Then $\Hom_\C(W(\vec\lambda),\C)$ can be identified with the space of
+              polynomials $P$ in the variables $\{x_i\}_{1\le i\le3}$ which are (not necessarily homogeneous) of degree $\le n_i$ in $x_i$ for each $i=1,2,3$.
+              Under this correspondence, the function $f\in\Hom_\C(W(\vec\lambda),\C)$ identifies with the polynomial
+                \[  
+                  P(x_1,x_2,x_3)=
+                  f\!\left((e_1+x_1e_2)^{\otimes n_1}\otimes
+                  (e_1+x_2e_2)^{\otimes n_2}\otimes
+                  (e_1+x_3e_3)^{\otimes n_3}\right)\]
+              Letting
+              \[
+                  n:=\frac{n_1+n_2+n_3}{2},
+              \]
+              the $1$-dimensional space $\Hom_{\mathfrak{sl}_2}(W(\vec\lambda),\C)$
+              corresponds to the polynomial
+              \[
+                  P_0(x_1,x_2,x_3)
+                  =(x_2-x_3)^{\,n-n_1}(x_3-x_1)^{\,n-n_2}(x_1-x_2)^{\,n-n_3}
+              \]
+              (up to a nonzero scalar multiple).
+              Moreover for any $m\in\Z_+$, the polynomial $P_0\circ\varphi^m(x_1,x_2,x_3)$ corresponds to the coefficient of $\epsilon^m/m!$ in the expansion of
+              \begin{equation}\label{eq:Pvarphi}
+                  \begin{aligned}
+                      P_0 & (x_1+p_1\epsilon,\;x_2+p_2\epsilon,\;x_3+p_3\epsilon) \\
+                          & =(x_2-x_3+\epsilon(p_2-p_3))^{n-n_1}
+                      (x_3-x_1+\epsilon(p_3-p_1))^{n-n_2}
+                      (x_1-x_2+\epsilon(p_1-p_2))^{n-n_3}
+                  \end{aligned}
+              \end{equation}
+              But $P_0$ is a polynomial of degree
+              \[
+                  3n-(n_1+n_2+n_3)=n.
+              \]
+              Thus $P_0\circ\varphi^{c+1}=0$ if $n<c+1$, i.e.\ if
+              $n_1+n_2+n_3\le2c$.
+              Conversely, if $n\ge c+1$, then from~\eqref{eq:Pvarphi} one sees that
+              $P_0\circ\varphi^{c+1}\neq0$, since the points $p_i$ are distinct.
+              Hence the (b)-part follows from Theorem~2.3.2(b).
+    \end{enumerate}
+\end{proof}
+
+\begin{remark}
+    [Clebsch-Gordan invariant] Take $W(n) = S^n(\mathbb{C}^2)$ and choose a basis $e_1, e_2$ of $\mathbb{C}^2$. Then a general element of $W(n)$ can be written as a homogeneous polynomial of degree $n$ in two variables:
+    \[v = \sum_{k=0}^{n} a_k\, e_1^{\,n-k}\, e_2^{\,k}.\]
+    Equivalently, if we introduce a formal variable $x$, the "polarization map" $v \mapsto (e_1 + x e_2)^{\otimes n}$ packages this basis nicely:
+    \[(e_1 + x e_2)^{\otimes n} = \sum_{k=0}^{n} \binom{n}{k} e_1^{n-k} e_2^k x^k,\]
+
+    Hence we can think of $W(n)$ as the space of polynomials of degree $\leq n$ in $x$, with the identification $e_1^{\,n-k} e_2^{\,k} \leftrightarrow x^k$. Under this identification, the natural $\mathfrak{sl}_2$ action
+    \[E = e_1\frac{\partial}{\partial e_2}, \quad F = e_2\frac{\partial}{\partial e_1}, \quad H = [E,F]\]
+    becomes, in the polynomial model,
+    \[E = \frac{\partial}{\partial x}, \quad F = -x^2\frac{\partial}{\partial x} + n x, \quad H = n - 2x\frac{\partial}{\partial x}.\]
+    So $W(n)\cong \C[x]_{\leq n}$ as $\mathfrak{sl}_2$-representations. Now take three copies of this, one for each $n_i$, with its own variable $x_i$:
+    \[W(\vec\lambda) \cong \C[x_1]_{\leq n_1}\otimes \C[x_2]_{\leq n_2}\otimes \C[x_3]_{\leq n_3}.\]
+    A pure tensor $p_1(x_1)\otimes p_2(x_2)\otimes p_3(x_3)$ corresponds to the polynomial $P(x_1,x_2,x_3) = p_1(x_1)p_2(x_2)p_3(x_3)$ of degree $\leq n_i$ in each variable $x_i$. Hence
+    \[W(\vec\lambda) \cong \{\,P(x_1,x_2,x_3)\mid \deg_{x_i}P\le n_i\,\}.\]
+    A linear functional $f \in \Hom_\C(W(\vec\lambda), \C)$ is determined by its values on the basis vectors of $W(\vec\lambda)$. 
+
+    If we insert for each factor a formal symbol $(e_1 + x_i e_2)^{\otimes n_i}$, then expanding this gives all monomials $e_1^{n_i-k_i}e_2^{k_i}$ with coefficient $x_i^{k_i}$. So when we feed that into $f$, we're effectively computing:
+    \[f\Bigl((e_1 + x_1 e_2)^{\otimes n_1} \otimes (e_1 + x_2 e_2)^{\otimes n_2} \otimes (e_1 + x_3 e_2)^{\otimes n_3}\Bigr) = \]
+    \[\sum_{k_1,k_2,k_3} f(e_1^{n_1-k_1}e_2^{k_1}\otimes e_1^{n_2-k_2}e_2^{k_2}\otimes e_1^{n_3-k_3}e_2^{k_3}) \,x_1^{k_1}x_2^{k_2}x_3^{k_3}.\]
+
+    This is precisely a polynomial $P(x_1,x_2,x_3)$ whose coefficients are the values of $f$ on the basis tensors. Hence
+    \[P(x_1,x_2,x_3) := f\!\left((e_1+x_1e_2)^{\otimes n_1} \otimes (e_1+x_2e_2)^{\otimes n_2} \otimes (e_1+x_3e_2)^{\otimes n_3}\right)\]
+    encodes $f$ completely.
+
+    Conversely, given a polynomial $P(x_1,x_2,x_3)$ of degree $\leq n_i$ in each variable, we can recover a unique functional $f$ by declaring that the coefficient of $x_1^{k_1}x_2^{k_2}x_3^{k_3}$ is $f(e_1^{n_1-k_1}e_2^{k_1}\otimes e_1^{n_2-k_2}e_2^{k_2}\otimes e_1^{n_3-k_3}e_2^{k_3})$. Thus:
+    \[\Hom_\C(W(\vec\lambda),\C) \cong \{\,P(x_1,x_2,x_3)\mid \deg_{x_i}\le n_i\,\}.\]
+    This realization lets one describe the $\mathfrak{sl}_2$-action as differential operators acting on the $x_i$, and makes it possible to write explicit invariant polynomials such as
+    \[P_0(x_1,x_2,x_3) = (x_2-x_3)^{n-n_1}(x_3-x_1)^{n-n_2}(x_1-x_2)^{n-n_3},\]
+    which generates the invariant line (the Clebsch-Gordan invariant). That's the unique $\mathfrak{sl}_2$-invariant in the dual representation, and hence corresponds to the unique invariant functional on $W(\vec\lambda)$.
+
+    For $\mathfrak{sl}_2$, on $W(n)=\operatorname{Sym}^n(\C^2)$ with coordinates $x$, the highest-root vector $x_\theta$ acts as $\partial/\partial x$.
+    On $W(\vec\lambda)=W(n_1)\otimes W(n_2)\otimes W(n_3)$ realized as polynomials $P(x_1,x_2,x_3)$ with $\deg_{x_i}\le n_i$, the operator $x_\theta^{(i)}$ acts as $\partial_{x_i}$. Hence:
+    \[
+    \varphi=\sum_{i=1}^3 p_i\,x_\theta^{(i)}\quad\longleftrightarrow\quad
+    D:=\sum_{i=1}^3 p_i\,\partial_{x_i}.
+    \]
+    Now use the Taylor/exponential identity:
+    \[
+    e^{\epsilon D}P_0(x_1,x_2,x_3)
+    =\sum_{m\ge0}\frac{\epsilon^m}{m!}D^m P_0
+    =P_0\big(x_1+\epsilon p_1,\ x_2+\epsilon p_2,\ x_3+\epsilon p_3\big).
+    \]
+    Comparing coefficients of $\epsilon^m$ gives:
+    \[
+    \frac{1}{m!}\varphi^{m}P_0
+    =\frac{1}{m!}D^m P_0
+    =\big[\epsilon^m\big]\;
+    P_0(x_1+p_1\epsilon,\ x_2+p_2\epsilon,\ x_3+p_3\epsilon),
+    \]
+    which is exactly the statement.
+\end{remark}
+
+\begin{corollary}[{\cite[Cor.~2.3.5]{Kumar}}]
+Let the assumptions be as at the beginning of this section and the notation as in Definition~2.3.1, and take $s=3$.
+\begin{enumerate}[(a)]
+\item
+The space $\mathbb V_{\P^1}(\vec p,\vec\lambda)$ is naturally isomorphic to the quotient of $[V(\vec\lambda)]_{\mathfrak g}$ by the image of the subspace
+\[
+V(\vec\lambda)_F
+:=\bigoplus_{n_1+n_2+n_3>2c}V(\vec\lambda)_{(n_1,n_2,n_3)}
+\]
+under the canonical projection
+$V(\vec\lambda)\to[V(\vec\lambda)]_{\mathfrak g}$,
+where
+\[
+V(\vec\lambda)_{(n_1,n_2,n_3)}:=
+V(\lambda_1)_{(n_1)}\otimes V(\lambda_2)_{(n_2)}\otimes V(\lambda_3)_{(n_3)}.
+\]
+
+\item
+Similarly,
+\[
+\mathbb V_{\P^1}^\dagger(\vec p,\vec\lambda)
+\simeq
+\{\,f:V(\vec\lambda)\to\C\text{ $\mathfrak g$–module map }|\ f\text{ vanishes on }V(\vec\lambda)_F\,\}.
+\]
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+\begin{enumerate}
+    \item By virtue of Theorem~2.3.2(a), it suffices to show that
+\begin{equation}\label{eq:phi-statement}
+\varphi^{c+1}(V(\vec\lambda))+\mathfrak g\cdot V(\vec\lambda)
+=
+V(\vec\lambda)_F+\mathfrak g\cdot V(\vec\lambda).
+\tag{1}
+\end{equation}
+Decompose $V(\vec\lambda)$ under $\mathfrak{sl}_2(\theta)$:
+\begin{equation}\label{eq:decomposition}
+V(\vec\lambda)
+=
+\left(\bigoplus_{n_1+n_2+n_3>2c}V(\vec\lambda)_{(n_1,n_2,n_3)}\right)
+\oplus
+\left(\bigoplus_{n_1+n_2+n_3\le2c}V(\vec\lambda)_{(n_1,n_2,n_3)}\right).
+\tag{2}
+\end{equation}
+
+The operator $\varphi$ clearly keeps each $V(\vec\lambda)_{(n_1,n_2,n_3)}$ stable.  
+Further, if $n_1+n_2+n_3>2c$, then by Theorem~2.3.2(a) and Proposition~2.3.3(b),
+\begin{equation}\label{eq:phi-large}
+\varphi^{c+1}\big(V(\vec\lambda)_{(n_1,n_2,n_3)}\big)
++\mathfrak{sl}_2(\theta)\cdot V(\vec\lambda)_{(n_1,n_2,n_3)}
+=
+V(\vec\lambda)_{(n_1,n_2,n_3)}.
+\tag{3}
+\end{equation}
+If $n_1+n_2+n_3\le2c$, then by Proposition~2.3.3 and Theorem~2.3.2(a),
+\begin{equation}\label{eq:phi-small}
+\varphi^{c+1}\big(V(\vec\lambda)_{(n_1,n_2,n_3)}\big)
+\subset
+\mathfrak{sl}_2(\theta)\cdot V(\vec\lambda)_{(n_1,n_2,n_3)}.
+\tag{4}
+\end{equation}
+
+Combining \eqref{eq:decomposition}–\eqref{eq:phi-small}, we get
+\[
+V(\vec\lambda)_F+\mathfrak g\cdot V(\vec\lambda)
+=\operatorname{Im}(\varphi^{c+1})+\mathfrak g\cdot V(\vec\lambda),
+\]
+which proves \eqref{eq:phi-statement} and hence the (a)-part of the corollary.
+
+\item The (b)-part follows immediately from the (a)-part and identity~(9) of Definition~2.1.1.
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+    [Fusion rules] Theorem 2.3.2 (a) states that for any triple $(\vec{p}, \vec{\lambda})$,
+    \[
+    \mathbb{V}_{\P^1}(\vec p,\vec\lambda) \;\cong\;
+    \frac{V(\vec\lambda)}{\mathfrak{g}\cdot V(\vec\lambda) + \operatorname{Im}(\varphi^{c+1})},
+    \]
+    where $\varphi = \sum_i p_i x_\theta^{(i)}$.
+
+    So — the "fusion relation" is precisely the condition $\varphi^{c+1} = 0$ when acting in the coinvariants. That is, any part of $V(\vec\lambda)$ on which $\varphi^{c+1}$ acts nontrivially is "killed" when forming the space of covacua. Conversely, if $\varphi^{c+1}$ acts trivially, it contributes to the quotient.
+
+    Proposition 2.3.3 (b) computed the "vanishing" condition for the 3-point case explicitly: For $\mathfrak{sl}_2$, the space of vacua is 1-dimensional if and only if
+    \[
+    n_1 + n_2 + n_3 \in 2\Z_+ \quad \text{and} \quad n_1+n_2+n_3 \le 2c.
+    \]
+    Equivalently:
+    If $n_1 + n_2 + n_3 \le 2c$, the covacuum space survives.
+    If $n_1 + n_2 + n_3 > 2c$, the covacuum space vanishes (because $\varphi^{c+1}$ acts surjectively onto that component).
+
+    Each isotypic component $V(\vec\lambda)_{(n_1,n_2,n_3)}$ is an $\mathfrak{sl}_2(\theta)$-module of highest weight $n = n_1+n_2+n_3 - 2m$ for some $m\ge 0$. In the three-point case, the tensor product of three finite-dimensional $\mathfrak{sl}_2$-modules decomposes as a finite sum of irreducibles. The operator $\varphi = \sum_i p_i x_\theta^{(i)}$ acts as a raising operator in each such irreducible component.
+
+    When $n_1+n_2+n_3 > 2c$, the "level cutoff" $c$ is too small: the power $\varphi^{c+1}$ raises enough times to reach the top of the representation, i.e. it kills no new subspace, and its image together with the $\mathfrak{sl}_2(\theta)$-action spans the entire component. This is exactly equation (3):
+    \[
+    \varphi^{c+1}(V_{(n_1,n_2,n_3)}) + \mathfrak{sl}_2(\theta)\cdot V_{(n_1,n_2,n_3)}
+    = V_{(n_1,n_2,n_3)}.
+    \]
+    Intuitively, $\varphi^{c+1}$ acts surjectively in the "forbidden" region $n_1+n_2+n_3>2c$.
+
+    When $n_1+n_2+n_3 \le 2c$, the level is large enough that $\varphi^{c+1}$ acts nilpotently before reaching the top; hence its image lands inside the subspace already generated by the lowering operators (the $\mathfrak{sl}_2(\theta)$-span). So we get equation (4):
+    \[
+    \varphi^{c+1}(V_{(n_1,n_2,n_3)}) \subset \mathfrak{sl}_2(\theta)\cdot V_{(n_1,n_2,n_3)}.
+    \]
+    Geometrically, these are the "fusion rules": for $\mathbb{P}^1$ with three marked points and level $c$, the tensor product representation decomposes into a direct sum of "allowed" components ($n_1+n_2+n_3\leq 2c$) which contribute to conformal blocks, and "forbidden" components ($n_1+n_2+n_3>2c$) which are killed by the null-vector relation $\varphi^{c+1}=0$.
+\end{remark}
+
+\section{Factorization theorem}
+In particular, $(\Sigma,\vec{p})$ is an $s$-pointed curve, $\mathfrak g$ is a simple Lie algebra and we fix a level $c\ge1$. We do not assume that $\Sigma$ is irreducible.
+
+\begin{definition}[Restricted dual module, cf.~Def.~1.2.4]\label{def:restricted-dual}
+For any highest-weight $\widehat{\mathfrak g}$-module $\mathcal V$, define the $\widehat{\mathfrak g}$-module $D(\mathcal V)$ as the \emph{restricted dual} $\mathcal V^\vee$ of $\mathcal V$ (where by the restricted dual we mean the direct sum of the homogeneous components of $\mathcal V$ as in~(1) of the proof of Theorem~1.2.10) with the following twisted action of $\widehat{\mathfrak g}$:
+\[
+  x[n] \odot f = x[-n]\,f, \qquad \text{for } x\in\mathfrak g,~n\in\mathbb Z,~f\in\mathcal V^\vee,
+\]
+and
+\[
+  C \odot f = -C\,f.
+\]
+\end{definition}
+
+If $\mathcal V$ is an integrable highest-weight $\widehat{\mathfrak g}$-module of the form $\mathcal H(\lambda)$ with central charge $c$, then $D(\mathcal V)$ is again of the form $\mathcal H(\lambda^*)$ with the same central charge $c$, where $\lambda^*$ is the highest weight of the dual $\mathfrak g$-module $V(\lambda)^*$.
+
+\begin{remark}
+    [Restricted dual and twists] For a highest-weight $\widehat{\mathfrak g}$-module $V$, the restricted dual $V^\vee$ is the direct sum of the duals of each finite-dimensional homogeneous piece:
+    \[
+    V = \bigoplus_{n\geq 0} V_n,\qquad V^\vee = \bigoplus_{n\geq 0} (V_n)^*.
+    \]
+
+    This is needed because $V$ is infinite-dimensional, but each homogeneous graded component is finite-dimensional (since the affine algebra has degree operator).
+
+    Then $D(V)$ is defined to be $V^\vee$ with a twisted contragredient action of $\widehat{\mathfrak g}$:
+    \[
+    x[n] \odot f = x[-n]\cdot f,\qquad C \odot f = -C\cdot f.
+    \]
+    The action is "twisted" so that if $\cH(V(\lambda))$ is the integrable highest-weight module with highest weight $\lambda$ and central charge $c$, then $D(\cH(V(\lambda))) \cong \cH(V(\lambda)^*)$ is the integrable highest-weight module with highest weight $\lambda^*$ (the dual weight) and the same central charge $c$, where \begin{align*}
+        \lambda^* = - w_0(\lambda)
+    \end{align*} where $w_0$ is the longest element of the Weyl group of $\mathfrak g$.
+
+\end{remark}
+
+
+Let $q_0\in\Sigma$ be a node, and let $\widetilde\Sigma$ be the curve obtained from $\Sigma$ by the normalization $\pi:\widetilde\Sigma\to\Sigma$ at the point $q_0$. Thus, $\pi^{-1}q_0$ consists of two smooth points $q'_0,q''_0$, and
+\[
+  \pi|_{\widetilde\Sigma\setminus\{q'_0,q''_0\}}:\widetilde\Sigma\setminus\{q'_0,q''_0\}\longrightarrow\Sigma\setminus\{q_0\}
+\]
+is an isomorphism. Fix formal local parameters $z'$ and $z''$ at $q'_0$ and $q''_0$, respectively.
+
+The map $\pi$ on restriction gives rise to
+\[
+  \pi_{|\widetilde\Sigma\setminus\{\vec p,q'_0,q''_0\}}:\widetilde\Sigma\setminus\{\vec p,q'_0,q''_0\}\longrightarrow\Sigma\setminus\{\vec p\},
+\]
+which, in turn, induces a Lie algebra homomorphism
+\[
+  \pi^*:\mathfrak g[\Sigma\setminus\vec p]\longrightarrow\mathfrak g[\widetilde\Sigma\setminus\{\vec p,q'_0,q''_0\}].
+\]
+
+Define a linear map
+\[
+  \widehat F: \mathcal H(\vec\lambda) \longrightarrow \mathcal H(\vec\lambda) \otimes \biggl( \bigoplus_{\mu\in D_c} D(\mathcal H(\mu)) \otimes \mathcal H(\mu) \biggr),
+\]
+by
+\[
+  h \longmapsto h \otimes \sum_{\mu\in D_c} I_\mu, \qquad h\in\mathcal H(\vec\lambda),
+\]
+where $I_\mu$ denotes the identity map viewed as an element of $\End_\C(V(\mu))$, and where $V(\mu)$ (resp.~$V(\mu)^*$) is identified with the degree-zero homogeneous component inside $\mathcal H(\mu)$ (resp.~$D(\mathcal H(\mu))$).
+
+Realize $\mathcal H(\vec\lambda)\otimes D(\mathcal H(\mu))\otimes\mathcal H(\mu)$ as a $\mathfrak g[\widetilde\Sigma\setminus\{\vec p,q'_0,q''_0\}]$-module via the Laurent expansion at the points $\vec p, q'_0, q''_0$. Then $I_\mu$, being $\mathfrak g$-invariant, satisfies $(\pi^*f)(q'_0)=(\pi^*f)(q''_0)$ for any $f\in\C[\Sigma\setminus\vec p]$. Hence $\widehat F$ is a $\mathfrak g[\Sigma\setminus\vec p]$-module map (the range is viewed as a module via $\pi^*$).
+
+Therefore, $\widehat F$ induces a linear map
+\[
+  F: \mathcal V_\Sigma(\vec p,\vec\lambda) \longrightarrow \bigoplus_{\mu\in D_c}\mathcal V_{\widetilde\Sigma}\big((\vec p,q'_0,q''_0), (\vec\lambda,\mu,\mu^*)\big).
+\]
+The factorization theorem expresses the relationship between the spaces of conformal blocks on $\Sigma$ and on its normalization $\widetilde\Sigma$. Applications of this theorem include inductive formulas for the rank and Chern classes of the vector bundle of conformal blocks.
+\begin{theorem}
+    [Factorization theorem]
+    The map \[F: \mathcal V_\Sigma(\vec p,\vec\lambda) \to \bigoplus_{\mu\in D_c}\mathcal V_{\widetilde\Sigma}\big((\vec p,q'_0,q''_0), (\vec\lambda,\mu,\mu^*)\big)\] defined above is an isomorphism of vector spaces.
+\end{theorem}
+
+\begin{proof}
+We first prove surjectivity of $F$. For $n\ge1$, pick $g_n\in\C_{q'_0}[\widetilde\Sigma\setminus\{\vec p,q'_0\}]$ such that
+\[
+(g_n)_{q'_0} - (z')^{-n} \equiv 0\pmod{z'}.
+\]
+For any $x\in\mathfrak g$, $h\in\mathcal H(\vec\lambda)$, $v_1\in V(\mu)^*$, $v_2\in V(\mu)$, we have
+\[
+x[g_n]\cdot(h\otimes v_1\otimes v_2)
+= (x[g_n]\cdot h)\otimes v_1\otimes v_2 + h\otimes (x[-n]\cdot v_1)\otimes v_2.
+\]
+Thus for any $x\in\mathfrak g$, $n\in\mathbb N$, and $h\in\mathcal H(\vec\lambda)$, as elements of
+\[
+Q_\mu := [\mathcal H(\vec\lambda,\mu^*,\mu)]_{\mathfrak g[\widetilde\Sigma\setminus\{\vec p,q'_0,q''_0\}]},
+\]
+we get
+\begin{equation}
+(x[g_n]\cdot h)\otimes v_1\otimes v_2
+= -h\otimes(x[-n]\cdot v_1)\otimes v_2.
+\tag{1}
+\end{equation}
+
+Similarly, pick $f_n\in\C_{q''_0}[\widetilde\Sigma\setminus\{\vec p,q''_0\}]$ with
+\[
+(f_n)_{q''_0} - (z'')^{-n} \equiv 0\pmod{z''}.
+\]
+Then for any $h\in\mathcal H(\vec\lambda)$, $h_1\in D(\mathcal H(\mu))$, $v_2\in V(\mu)$, we have as elements of $Q_\mu$:
+\begin{equation}
+h\otimes h_1\otimes x[-n]\cdot v_2
+= - (x[f_n]\cdot h)\otimes h_1\otimes v_2 - h\otimes (x[(f_n)_{q'_0}]\cdot h_1)\otimes v_2.
+\tag{2}
+\end{equation}
+
+Finally, take $f\in\C[\widetilde\Sigma\setminus\vec p]$ such that
+\begin{equation}
+f(q'_0)=1,\quad f(q''_0)=0.
+\tag{3}
+\end{equation}
+Then for $x\in\mathfrak g$, $h\in\mathcal H(\vec\lambda)$, $v\in\bigoplus_{\mu\in D_c}V(\mu)^*\otimes V(\mu)$, as elements of $Q=\bigoplus_{\mu\in D_c}Q_\mu$, we have
+\begin{equation}
+-h\otimes (x\circ v) = (x[f]\cdot h)\otimes v.
+\tag{4}
+\end{equation}
+In particular,
+\begin{equation}
+-h\otimes \beta(x[f]) = (x[f]\cdot h)\otimes \sum_{\mu\in D_c} I_\mu,
+\tag{5}
+\end{equation}
+where $\beta:U(\mathfrak g)\to\bigoplus_{\mu\in D_c}V(\mu)^*\otimes V(\mu)$ is defined by
+\begin{equation}
+\beta(a) = a\circ\sum_{\mu}I_\mu.
+\tag{6}
+\end{equation}
+Since $\mathrm{Im}(\beta)$ is $\bigoplus_\mu\mathfrak g$-stable under the diagonal action and surjective, $F$ is surjective by combining (1), (2), and (5).
+
+To prove injectivity, equivalently, we show $F^*$ is surjective. By Theorem~2.2.2, we identify $F^*$ as the map
+\[
+F^* : \Hom_{\mathfrak g[\Sigma\setminus\vec p]}\big(\mathcal H(\vec\lambda)\otimes (\bigoplus_{\mu\in D_c}V(\mu)^*\otimes V(\mu)),\C\big)
+\to \Hom_{\mathfrak g[\Sigma\setminus\vec p]}(\mathcal H(\vec\lambda),\C),
+\]
+induced by the inclusion $i:h\mapsto h\otimes\sum_{\mu\in D_c}I_\mu$.
+
+Let $\C_{q_o}[\Sigma\setminus\vec p]\subset \C_{q'_0}[\widetilde\Sigma\setminus\vec p]\subset\C[\widetilde\Sigma\setminus\vec p]$ be the ideals of $\C[\widetilde\Sigma\setminus\vec p]$:
+\[
+\C_{q_o}[\Sigma\setminus\vec p]:=\{f\in\C[\Sigma\setminus\vec p]:f(q_o)=0\},
+\]
+and
+\[
+\C_{q''_0}[\widetilde\Sigma\setminus\vec p]=\{f\in\C[\widetilde\Sigma\setminus\vec p]:f(q''_0)=0\}.
+\]Define the Lie ideals
+\[
+\mathfrak g_{q'_0}[\Sigma\setminus\vec p]=\mathfrak g\otimes\C_{q'_0}[\Sigma\setminus\vec p],
+\qquad
+\mathfrak g_{q''_0}[\Sigma\setminus\vec p]=\mathfrak g\otimes\C_{q''_0}[\Sigma\setminus\vec p].
+\]
+Define the Lie algebra homomorphism
+\[
+\mathfrak g \to \mathfrak g_{q''_0}[\Sigma\setminus\vec p]/\mathfrak g_{q'_0}[\Sigma\setminus\vec p],
+\qquad x\mapsto x[f]+\mathfrak g_{q'_0}[\Sigma\setminus\vec p],
+\]
+where $f$ satisfies (3), and extend it to $\varphi:U(\mathfrak g)\to U(\mathfrak g_{q''_0}[\Sigma\setminus\vec p]/\mathfrak g_{q'_0}[\Sigma\setminus\vec p])$.
+
+\noindent To prove the surjectivity of $F^*$, take $\Phi\in\Hom_{\mathfrak g[\Sigma\setminus\vec p]}(\mathcal H(\vec\lambda),\C)$ and define the linear map
+\[
+\widetilde\Phi: \mathcal H(\vec\lambda)\otimes\Big(\bigoplus_{\mu\in D_c}V(\mu)^*\otimes V(\mu)\Big)\longrightarrow\C,
+\]
+via
+\[
+\widetilde\Phi(h\otimes\beta(a))=\Phi(\varphi(a^t)\cdot h),\qquad h\in\mathcal H(\vec\lambda),\ a\in U(\mathfrak g),
+\]
+where $t:U(\mathfrak g)\to U(\mathfrak g)$ is the anti-automorphism taking $x\mapsto -x$ for $x\in\mathfrak g$, $\beta$ is the map defined by~(6), and $\varphi$ is defined above. (Observe that even though $\varphi(a)\cdot h$ is not well defined, $\Phi(\varphi(a)\cdot h)$ is well defined, i.e. it does not depend on the choice of coset representatives in $\mathfrak g_{q''_0}[\widetilde\Sigma\setminus\vec p]/\mathfrak g_{q_o}[\Sigma\setminus\vec p]$.)
+
+To show that $\widetilde\Phi$ is well defined, we need to show that for any $a\in\ker\beta$ and $h\in\mathcal H(\vec\lambda)$,
+\begin{equation}
+\Phi(\varphi(a^t)\cdot h)=0.
+\tag{8}
+\end{equation}
+This will be proved in Lemma~3.1.4.
+
+We next show that $\widetilde\Phi$ is a $\mathfrak g[\widetilde\Sigma\setminus\vec p]$-module map. Take $x\in\mathfrak g$ and $f\in\C[\widetilde\Sigma\setminus\vec p]$ satisfying~(3). Then, for any $h\in\mathcal H(\vec\lambda)$ and $a\in U(\mathfrak g)$,
+\begin{align}
+\widetilde\Phi\big(x[f]\cdot(h\otimes\beta(a))\big)
+&=\widetilde\Phi\big((x[f]\cdot h)\otimes\beta(a)+h\otimes\beta(xa)\big)\\
+&=\Phi\big(\varphi(a^t)x[f]\cdot h-\varphi(a^t)x[f]\cdot h\big)\\
+&=0.
+\tag{9}
+\end{align}
+
+
+
+Next, take $x\in\mathfrak g$ and $g\in\C[\widetilde\Sigma\setminus\vec p]$ such that $g(q'_0)=0$ and $g(q''_0)=1$. Then, for any $h\in\mathcal H(\vec\lambda)$ and $a\in U(\mathfrak g)$,
+\begin{align}
+\widetilde\Phi\big(x[g]\cdot(h\otimes\beta(a))\big)
+&=\widetilde\Phi\big((x[g]\cdot h)\otimes\beta(a)-h\otimes\beta(ax)\big)\\
+&=\Phi\big(\varphi(a^t)x[g]\cdot h+\varphi(x)\varphi(a^t)\cdot h\big)\\
+&=\Phi\big(\varphi(a^t)x[g]\cdot h-x[g]\varphi(a^t)\cdot h+x[g+f]\varphi(a^t)\cdot h\big),
+\end{align}
+for any $f\in\C[\widetilde\Sigma\setminus\vec p]$ satisfying~(3). Thus,
+\begin{align}
+\widetilde\Phi\big(x[g]\cdot(h\otimes\beta(a))\big)
+&=-\Phi\big((\operatorname{ad}x[g])(\varphi(a^t))\cdot h\big),\quad\text{since }x[g+f]\in\mathfrak g[\Sigma\setminus\vec p],\\
+&=0,\quad\text{since }[x[g],\mathfrak g_{q''_0}[\widetilde\Sigma\setminus\vec p]]\subset\mathfrak g_{q_0}[\Sigma\setminus\vec p].
+\tag{10}
+\end{align}
+
+Combining~(9) and~(10) we see that $\widetilde\Phi$ is a $\mathfrak g[\widetilde\Sigma\setminus\vec p]$-module map.
+
+From the definition of $\widetilde\Phi$, it is clear that $F^*(\widetilde\Phi)=\Phi$. This proves the surjectivity of $F^*$ (and hence the injectivity of $F$) modulo the next lemma. 
+\end{proof}
+
+I decided that the following lemma is best overlooked and we skip straight to examples. We restate the factorization theorem as seen in (Gibney).
+\begin{theorem}[Factorization theorem]\label{thm:factorization}
+Let $(\Sigma_0;\vec p)$ be a stable $n$-pointed curve of genus $g$ with a node $x_0$,
+and let $\nu:\widetilde\Sigma\to\Sigma_0$ denote the normalization at $x_0$, with
+$\nu^{-1}(x_0)=\{q'_0,q''_0\}$.
+Then there is a canonical isomorphism of vector spaces
+\[
+  F:\;
+  \mathcal V_{\Sigma_0}(\vec p,\vec\lambda)
+  \;\xrightarrow{\;\sim\;}
+  \bigoplus_{\mu\in D_c}
+  \mathcal V_{\widetilde\Sigma}
+  \bigl((\vec p,q'_0,q''_0),(\vec\lambda,\mu,\mu^*)\bigr).
+\]
+Moreover:
+\begin{enumerate}
+\item If $x_0$ is a \emph{non-separating node}—so that $\widetilde\Sigma$ is connected—then the
+isomorphism above expresses $\mathcal V_{\Sigma_0}(\vec p,\vec\lambda)$
+as the direct sum of the spaces of vacua on the normalized curve
+with two additional marked points $q'_0,q''_0$ labeled by dual weights $\mu,\mu^*$.
+
+\item If $x_0$ is a \emph{separating node}—so that
+$\widetilde\Sigma=\Sigma_1\cup\Sigma_2$ with
+$q'_0\in\Sigma_1$ and $q''_0\in\Sigma_2$—then
+\[
+  \mathcal V_{\Sigma_0}(\vec p,\vec\lambda)
+  \;\cong\;
+  \bigoplus_{\mu\in D_c}\,
+  \mathcal V_{\Sigma_1}
+  \bigl((\vec p\cap\Sigma_1,q'_0),(\vec\lambda|_{\Sigma_1},\mu)\bigr)
+  \otimes
+  \mathcal V_{\Sigma_2}
+  \bigl((\vec p\cap\Sigma_2,q''_0),(\vec\lambda|_{\Sigma_2},\mu^*)\bigr).
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{example}[Dual weights for $\mathfrak{sl}_2$]
+    For $\mathfrak{sl}_2$, every dominant weight at level $\ell$ can be written as
+    \[
+    \mu = m\,\omega_1, \qquad m \in \{0,1,\dots,\ell\}.
+    \]
+
+    The longest Weyl group element acts by $w_0(\omega_1) = -\omega_1$, so we have:
+    \[
+    \mu^\star = -w_0(\mu) = -(-m\omega_1) = m\omega_1 = \mu.
+    \]
+
+    Hence, $\mu$ is self-dual for $\mathfrak{sl}_2$.
+\end{example}
+
+\begin{example}[Dual weights for $\sl_{n+1}$] 
+    A dominant weight $\lambda = \sum_{j=1}^r c_j \omega_j$ for a fixed level $\ell$ corresponds to a partition $\lambda_1 \ge \lambda_2 \ge \cdots \ge \lambda_{r+1}=0$ such that $\lambda_1 \le \ell$. The associated Young diagram fits into an $(r+1) \times \ell$ box. In particular the fundamental weight $\omega_j$ corresponds to partition $(1,1,\dots,1,0,\dots,0)$ with $j$ ones, i.e. the single row of row $j$.
+
+    The longest Weyl group element acts by $w_0(\omega_j) = -\omega_{r+1-j}$, so we have:
+    \[
+    \lambda^\star = -w_0(\lambda) = \sum_{j=1}^r c_j \omega_{r+1-j}.
+    \]
+\end{example}
+
+\begin{example}
+    [Factorizing $\sl_{r+1}$ conformal blocks on $\mathbb{P}^1$ with four points]
+    Let $\Sigma$ be a curve of genus zero with four marked points $p_1,p_2,p_3,p_4$ and a node $q_0$. Fix a level $\ell$. Let the corresponding weights be \begin{align*}
+        \lambda_1 = \omega_1 , \quad \lambda_2 = \omega_1 , \quad \lambda_3 = (\ell - 1)\omega_1 + \omega_r , \quad \lambda_4 = (\ell)\omega_r
+    \end{align*}
+    We consider the two situations based on which points lie on which component after normalization. In particular we can have two models for $\Sigma$: \begin{align*}
+        \Sigma_1 = \Sigma_{11} \cup \Sigma_{12}, \quad \text{where } \Sigma_{11} \text{ contains } p_1,p_2, \text{ and } \Sigma_{12} \text{ contains } p_3,p_4
+    \end{align*}
+    or we can have \begin{align*}
+        \Sigma_2 = \Sigma_{21} \cup \Sigma_{22}, \quad \text{where } \Sigma_{21} \text{ contains } p_1,p_3, \text{ and } \Sigma_{22} \text{ contains } p_2,p_4
+    \end{align*}
+
+    If $r+1 = 2$ then the vacua in question equals $\cV_{\Sigma}(\vec p, \vec \lambda)$ where $\vec \lambda = (\omega_1, \omega_1, \ell \omega_1, \ell \omega_1)$. By the factorization theorem we have \begin{align*}
+        \cV_{\Sigma_1}(\vec p, \vec \lambda) &\cong \bigoplus_{\mu \in D_\ell} \cV_{\Sigma_{11}}((p_1,p_2,q'_0), (\omega_1, \omega_1, \mu)) \otimes \cV_{\Sigma_{12}}((p_3,p_4,q''_0), (\ell \omega_1, \ell \omega_1, \mu^\star)) \\
+        &= \bigoplus_{m\in \Z} \cV_{\Sigma_{11}}((p_1,p_2,q'_0), (\omega_1, \omega_1, m \omega_1)) \otimes \cV_{\Sigma_{12}}((p_3,p_4,q''_0), (\ell \omega_1, \ell \omega_1, m \omega_1))
+    \end{align*}
+However, many of these summands are zero by the fusion rules. A 3-point conformal block
+\[\mathbb V(\mathfrak{sl}_2,\{a\omega_1,b\omega_1,c\omega_1\},\ell)\]
+is nonzero if and only if the tensor product $V_a\otimes V_b\otimes V_c$ contains a copy of the trivial representation in the fusion category at level $\ell$.
+
+This happens if and only if $a+b+c$ is even, $a+b+c \le 2\ell$, and the sum of any two of $a,b,c$ is at least as large as the third. Applying this to our case, we find that the only nonzero summand occurs when $m=0$, in which case the dimension is 1. We can also study the $\Sigma = \Sigma_2$ case similarly:
+\begin{align*}
+        \cV_{\Sigma_2}(\vec p, \vec \lambda) &\cong \bigoplus_{\mu \in D_\ell} \cV_{\Sigma_{21}}((p_1,p_3,q'_0), (\omega_1, \ell \omega_1, \mu)) \otimes \cV_{\Sigma_{22}}((p_2,p_4,q''_0), (\omega_1, \ell \omega_r, \mu^\star)) \\
+        &= \bigoplus_{m\in \Z} \cV_{\Sigma_{21}}((p_1,p_3,q'_0), (\omega_1, \ell \omega_1, m \omega_1)) \otimes \cV_{\Sigma_{22}}((p_2,p_4,q''_0), (\omega_1, \ell \omega_r, m \omega_1))
+    \end{align*}
+    Studying the fusion rules, we find that we must have $m = \ell - 1$ and the dimension is again 1. 
+\end{example}
+
+\begin{example}
+    We can also consider the $r+1 = 3$ case with the same weights as above. Then the vacua in question is equal to $\cV_{\Sigma}(\vec p, \vec \lambda)$ where $\vec \lambda = (\omega_1, \omega_1, (\ell - 1)\omega_1 + \omega_2, \ell \omega_2)$. Considering the $\Sigma = \Sigma_1$ case first, we have by the factorization theorem:
+     \begin{align*}
+        \cV_{\Sigma_1}(\vec p, \vec \lambda) &\cong \bigoplus_{\mu \in D_\ell} \cV_{\Sigma_{11}}((p_1,p_2,q'_0), (\omega_1, \omega_1, \mu)) \otimes \cV_{\Sigma_{12}}((p_3,p_4,q''_0), ((\ell - 1)\omega_1 + \omega_2, \ell \omega_2, \mu^\star))
+    \end{align*}
+It turns out that the only summand on the right hand side with nonzero rank is the one
+with $\mu = \omega_1$. However we have not discussed fusion rules for $\mathfrak{sl}_3$ at this point.
+\end{example}
+
+\section*{Sugawara Construction and the Virasoro Algebra}
+
+Let $\mathfrak{g}$ be a simple Lie algebra over $\mathbb{C}$.  
+We begin with the definition of the \emph{Sugawara elements} $\{L_n\}_{n\in\mathbb{Z}}$.  
+In particular, $\widetilde{\mathfrak{g}}$ is the uncompleted affine Kac--Moody Lie algebra.
+
+\begin{definition}[Sugawara elements]\label{def:3.2.1}
+Let $\{e_i\}_{i\in I}$ be a basis of $\mathfrak{g}$ and $\{e^i\}_{i\in I}$ the dual basis with respect to the normalized form $\langle\, ,\, \rangle$ on $\mathfrak{g}$.  
+Let $\mathfrak{n}\subset\mathfrak{b}$ be the nilradical of the Borel subalgebra $\mathfrak{b}$ of $\mathfrak{g}$ and $\mathfrak{b}_-$ be the opposite Borel subalgebra, i.e.\ a Borel subalgebra such that $\mathfrak{b}\cap\mathfrak{b}_- = \mathfrak{h}$.
+Define
+\[
+\widetilde{\mathfrak{n}} := (\mathfrak{g}\otimes t\mathbb{C}[t]) \oplus (\mathfrak{n}\otimes t^0),
+\qquad
+\widetilde{\mathfrak{b}}_- := (\mathfrak{g}\otimes t^{-1}\mathbb{C}[t^{-1}]) \oplus (\mathfrak{b}_-\otimes t^0)\oplus \mathbb{C}C.
+\tag{1}
+\]
+Define a certain completion $\widehat{U}(\widetilde{\mathfrak{g}})$ of the enveloping algebra $U(\widetilde{\mathfrak{g}})$ by
+\[
+\widehat{U}(\widetilde{\mathfrak{g}}) := \prod_{d\ge 0}
+\bigl(U(\widetilde{\mathfrak{b}}_-)\otimes_{\mathbb{C}} U_d(\widetilde{\mathfrak{n}})\bigr),
+\tag{2}
+\]
+where $U_d(\widetilde{\mathfrak{n}})\subset U(\widetilde{\mathfrak{n}})$ is the subspace of homogeneous elements of principal degree~$d$.
+(Recall that for an affine root $\alpha=\sum_{i=0}^\ell n_i\alpha_i$, its principal degree $|\alpha|$ is defined as $|\sum_i n_i|$.)  
+The algebra structure on $U(\widetilde{\mathfrak{g}})$ canonically extends to an algebra structure on $\widehat{U}(\widetilde{\mathfrak{g}})$.
+
+For any $n\in\mathbb{Z}$, define the \emph{Sugawara element} $L_n\in\widehat{U}(\widetilde{\mathfrak{g}})$ by
+\[
+L_n := \frac{1}{2}\sum_{j\in\mathbb{Z}}\sum_{i\in I}
+: e_i[-j]\, e^i[j+n] : \;\in \widehat{U}(\widetilde{\mathfrak{g}}),
+\tag{3}
+\]
+where the normal ordering symbol $:x[a]y[b]:$ means
+\[
+:x[a]y[b]: \;=\;
+\begin{cases}
+x[a]y[b], & a\le b,\\[4pt]
+y[b]x[a], & a> b.
+\end{cases}
+\]
+It is easy to see that $L_n$ does not depend on the choice of the basis $\{e_i\}$ of $\mathfrak{g}$.
+\end{definition}
+
+We have the following commutation relations involving the Sugawara elements. These relations are quite difficult to check directly. We appeal to the language of vertex algebras to prove them. In particular, one defines the Sugawara vector $S$ in the vacuum representation of the finite simple Lie algebra $\mathfrak{g}$ at level $k$. This representation has a vertex algebra structure, and the Fourier modes of the vertex operator associated to $S$ are precisely the Sugawara elements $L_n$. The commutation relations then follow from the operator product expansion of the vertex operator $Y(S,z)$.
+\begin{proposition}[Sugawara elements]\label{prop:3.2.2}
+    \leavevmode
+\begin{enumerate}[(a)]
+\item For any $x\in\mathfrak{g}$ and $m,n\in\mathbb{Z}$, as elements of $\widehat{U}(\widetilde{\mathfrak{g}})$,
+\[
+[x[m],L_n]=(C+h^{\vee})\,m\,x[m+n],
+\]
+where $h^{\vee}$ is the dual Coxeter number of $\mathfrak{g}$.
+
+\item As elements of $\widehat{U}(\widetilde{\mathfrak{g}})$,
+\[
+[L_m,L_n]=(C+h^{\vee})(m-n)L_{m+n}
++ \delta_{m,-n}\frac{m^3-m}{12}\dim(\mathfrak{g})\,C(C+h^{\vee}).
+\]
+\end{enumerate}
+\end{proposition}
+
+\begin{definition}[Smooth, Virasoro, Unitary]\label{def:3.2.3}
+    \leavevmode
+\begin{enumerate}[(a)]
+\item A representation $V$ of $\widetilde{\mathfrak{g}}$ is called \emph{smooth} if for any $v\in V$ and $x\in\mathfrak{g}$ there exists an integer $d$ (depending on $v$) such that
+\[
+x[m]\cdot v = 0, \qquad \text{for all } m\ge d.
+\tag{1}
+\]
+Any highest-weight $\widetilde{\mathfrak{g}}$-module is clearly smooth, and $L_n$ acts on any smooth $\widetilde{\mathfrak{g}}$-module.
+
+\item Recall that the \emph{Virasoro algebra} $\mathrm{Vir}$ is the Lie algebra over $\mathbb{C}$ with basis $\{d_n,\bar{C}\}_{n\in\mathbb{Z}}$ and commutation relations
+\[
+[d_m,d_n]=(m-n)d_{m+n} + \delta_{m,-n}\frac{m^3-m}{12}\bar{C}, 
+\qquad [d_m,\bar{C}]=0.
+\tag{2}
+\]
+A representation $V$ of $\mathrm{Vir}$ endowed with a positive-definite Hermitian form $\{\, ,\, \}$ is called \emph{unitary} if
+\[
+\{\bar{C}v,w\}=\{v,\bar{C}w\},\qquad
+\{d_m v,w\}=\{v,d_{-m}w\},\qquad
+\forall\,v,w\in V,\; m\in\mathbb{Z}.
+\]
+
+\item Let $\mathfrak{f}$ be a maximal compact subalgebra of $\mathfrak{g}$, i.e.\ the Lie subalgebra of a maximal compact subgroup $K$ of $G$ (the simply connected complex algebraic group with Lie algebra $\mathfrak{g}$).  
+Then, as a real vector space,
+\[
+\mathfrak{g}=\mathfrak{f}\oplus i\mathfrak{f}.
+\tag{3}
+\]
+This decomposition gives rise to a conjugate-linear Lie algebra anti-automorphism $\sigma_0:\mathfrak{g}\to\mathfrak{g}$ such that $\sigma_0|_{\mathfrak{f}}=-\mathrm{Id}$ and $\sigma_0|_{i\mathfrak{f}}=\mathrm{Id}$.
+A representation $V$ of $\widetilde{\mathfrak{g}}$ endowed with a positive-definite Hermitian form $\{\, ,\, \}$ is called \emph{unitary (with respect to $\mathfrak{f}$)} if
+\[
+\{Cv,w\}=\{v,Cw\},\qquad
+\{x[m]v,w\}=\{v,\sigma_0(x)[-m]w\},
+\]
+for all $v,w\in V$, $x\in\mathfrak{g}$, and $m\in\mathbb{Z}$.
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}\label{lem:3.2.4}
+Let $V$ be a smooth representation of $\widetilde{\mathfrak{g}}$.  
+Assume that the central element $C\in\widetilde{\mathfrak{g}}$ acts via a scalar $c\ne -h^{\vee}$ on $V$.  
+Then $V$ is a module for the Virasoro algebra under the following action:
+\[
+\bar{C}\;\mapsto\;\frac{c\,\dim\mathfrak{g}}{c+h^{\vee}}\,\mathrm{Id}_V,
+\qquad
+d_n\;\mapsto\;\frac{L_n}{c+h^{\vee}},\quad n\in\mathbb{Z}.
+\tag{1}
+\]
+Moreover, if $V$ is a unitary $\widetilde{\mathfrak{g}}$-module, then it is also a unitary Vir-module under the same positive-definite Hermitian form.
+\end{lemma}
+
+\begin{proof}
+The first assertion follows immediately from Proposition~\ref{prop:3.2.2}(b).
+
+We now prove the unitarity of $V$ as a Vir-module.
+Since $V$ is a unitary $\widetilde{\mathfrak{g}}$-module, for $n\ne0$ we have
+\[
+L_n=\frac{1}{2}\sum_{j\in\mathbb{Z}}\sum_{i\in I} e_i[-j]e^i[j+n].
+\]
+Choose an orthonormal $\mathbb{R}$-basis $\{e_i\}_{i\in I}$ of $\mathfrak{f}$ so that $e^i=-e_i$ for all $i$.  
+Then, for any $n\ne0$ and $v,w\in V$,
+\begin{align}
+\{d_n v,w\}
+&=\frac{1}{c+h^{\vee}}\{L_n v,w\}
+=-\frac{1}{2(c+h^{\vee})}\sum_{j\in\mathbb{Z}}\sum_{i\in I}
+\{e_i[-j]e_i[j+n]v,w\}\notag\\
+&=-\frac{1}{2(c+h^{\vee})}\sum_{j\in\mathbb{Z}}\sum_{i\in I}
+\{v,e_i[-j-n]e_i[j]w\}
+=\{v,d_{-n}w\}.
+\tag{2}
+\end{align}
+Similarly,
+\begin{align}
+\{d_0v,w\}
+&=-\frac{1}{2(c+h^{\vee})}
+\left\{\left(\sum_{i\in I} e_i^2 + 2\sum_{j\ge1}\sum_{i\in I} e_i[-j]e_i[j]\right)v,w\right\}\notag\\
+&=-\frac{1}{2(c+h^{\vee})}
+\left\{v,\left(\sum_{i\in I} e_i^2 + 2\sum_{j\ge1}\sum_{i\in I} e_i[-j]e_i[j]\right)w\right\}
+=\{v,d_0w\}.
+\tag{3}
+\end{align}
+Also,
+\begin{equation}
+\{\bar{C}v,w\}
+=\frac{c\,\dim\mathfrak{g}}{c+h^{\vee}}\{v,w\}
+=\{v,\bar{C}w\},
+\tag{4}
+\end{equation}
+since $c\in\mathbb{R}$.  
+Combining (2), (3), and (4), we conclude that $V$ is unitary as a Vir-module.
+\end{proof}
+
+
+\section{Appendix: Algebraic geometry facts}
+We collect here some basic facts from algebraic geometry that are used in the book.
+\subsection{Residues on curves}
+Let $C$ be a smooth projective curve. Let $\omega$ be a meromorphic differential on $C$.
+\begin{definition}
+    [Residue] The \textbf{residue} of $\omega$ at a point $p \in C$ is defined as follows: choose a local parameter $t$ at $p$, and write
+    \[\omega = f(t) dt = \left(\sum_{n=-\infty}^{\infty} a_n t^n\right) dt\] in terms of $t$. Then the residue of $\omega$ at $p$ is defined to be
+    \[\operatorname{Res}_p(\omega) := a_{-1}.\]
+\end{definition}
+
+\begin{proposition}
+    The residue $\operatorname{Res}_p(\omega)$ is independent of the choice of local parameter $t$ at $p$.
+\end{proposition}
+\begin{proof}
+    Let $s$ be another local parameter at $p$. Then we can write $t = g(s)$ for some invertible power series $g(s) \in \C[[s]]$ with $g(0) = 0$ and $g'(0) \neq 0$. Then we have
+    \[\omega = f(t) dt = f(g(s)) g'(s) ds.\]
+    Writing $f(g(s)) g'(s)$ as a Laurent series in $s$, we see that the coefficient of $s^{-1}$ in this expansion is equal to the coefficient of $t^{-1}$ in the expansion of $f(t)$, since the change of variables does not affect the residue term. Therefore, $\operatorname{Res}_p(\omega)$ is independent of the choice of local parameter.
+\end{proof}
+Note that every other coefficient $a_n$ for $n \neq -1$ does depend on the choice of local parameter.
+\begin{theorem}[Residue Theorem]
+    The sum of residues of $\omega$ at all points of $C$ is zero:
+    \[\sum_{p \in C} \operatorname{Res}_p(\omega) = 0\]
+\end{theorem}
+
+\begin{proof}
+    This follows from integrating $\omega$ over a large contour enclosing all poles and applying Cauchy's residue theorem.
+\end{proof}
+ 
+\subsection{Line bundles on curves}
+We review some basic facts about line bundles on smooth projective curves. We justify the fact used in the book that every smooth projective curve minus a point is an affine variety.
+
+\begin{definition}
+    Let $C$ be a smooth projective curve. A \textbf{line bundle} $\mathcal{L}$ on $C$ is very ample if the map \(\phi_{\mathcal L}:C\to \mathbb P H^0(\mathcal L)^*\) is an embedding.
+    Equivalently, $\cL$ separates points and tangent vectors, i.e, for any two points $p,q \in C$ (need not distinct) \begin{align*}
+        H^0(C,\cL - p - q) = H^0(C,\cL) - 2
+    \end{align*}
+\end{definition}
+
+\begin{proposition}
+    Let $\cL$ be a line bundle on a smooth projective curve $C$ with degree $\deg(\cL) \geq 2g+1$. Then $\cL$ is very ample, i.e., the global sections of $\cL$ define a closed embedding of $C$ into projective space.
+\end{proposition}
+
+\begin{proof}
+    For separating two points $x\neq y$:
+    \[
+        h^0(L)-h^0(L(-x-y)) = 2 + h^0(\omega_X\otimes L^{-1}(-x-y)) - h^0(\omega_X\otimes L^{-1})
+    \]
+    If $\deg L\ge 2g+1$, then $\deg(\omega_X\otimes L^{-1}(-x-y))\le -1$, so $h^0(L) - h^0(L(-x-y))=2$, meaning sections separate points and tangent vectors.
+\end{proof}
+
+\begin{corollary}
+    Let $C$ be a smooth projective curve and let $p \in C$ be any point. Then the open subset $C \setminus \{p\}$ is an affine variety.
+\end{corollary}
+\begin{proof}
+    Let $\mathcal{L}$ be a line bundle on $C$ with degree $\deg(\mathcal{L}) \geq 2g+1$. Then $\mathcal{L}$ is very ample, and the global sections of $\mathcal{L}$ define a closed embedding of $C$ into projective space. The complement of the hyperplane defined by a section vanishing at $p$ is an affine variety, and this complement is isomorphic to $C \setminus \{p\}$. Therefore, $C \setminus \{p\}$ is an affine variety.
+\end{proof}
+\section{Appendix: Vertex algebras}
+
+
+\end{document}
