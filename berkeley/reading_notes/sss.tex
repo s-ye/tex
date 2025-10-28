@@ -40,7 +40,7 @@ We describe an application of the Serre spectral sequence to the multiplicativit
 When $X$ is path connected, the fundamental groupoid has one object up to equivalence and so giving a local coefficient system is equivalent to a module over the group ring of $\pi_1(X)$. 
 
 \begin{definition}
-A Serre fibration is a map of topological spaces $p:E \to B$ such that for any disk $D^n$ and any commutative diagram
+A \textbf{Serre fibration} is a map of topological spaces $p:E \to B$ such that for any disk $D^n$ and any commutative diagram
     \[\begin{tikzcd}
     D^n \arrow[r] \arrow[d, hook] & E \arrow[d, "p"] \\
     D^n \times [0,1] \arrow[r] & B
@@ -58,9 +58,7 @@ Let $p: E \to B$ be a Serre fibration. Then the fibers $F_{b_0} := p^{-1}(b_0)$ 
 
     So, each point $e_0\in F_{b_0}$ gives a point in $F_{b_1}$: $T_\gamma(e_0) := \widetilde\gamma_{e_0}(1)$. This defines a map
     \[T_\gamma : F_{b_0} \longrightarrow F_{b_1},\]
-    called transport along $\gamma$.
-
-    Different choices of lift may give different maps $T_\gamma$, but the homotopy lifting property again guarantees that any two such lifts are homotopic through maps of fibers. So the induced map on fibers is well-defined up to homotopy.
+    called transport along $\gamma$. Different choices of lift may give different maps $T_\gamma$, but the homotopy lifting property again guarantees that any two such lifts are homotopic through maps of fibers. So the induced map on fibers is well-defined up to homotopy.
 
     Similarly, if $\gamma$ and $\gamma'$ are homotopic as paths (fixing endpoints), then the resulting maps $T_\gamma$ and $T_{\gamma'}$ are homotopic as well. This is because a homotopy of paths in $B$ can itself be lifted to a homotopy of fiber transport maps in $E$.
 
