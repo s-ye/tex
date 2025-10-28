@@ -1,0 +1,281 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Serre Spectral Sequence} 
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+We describe an application of the Serre spectral sequence to the multiplicativity of the Euler characteristic for Serre fibrations. Much of this material was taught to me by Yahya Bashandy, whom I thank for many helpful discussions.
+\end{abstract}
+
+\tableofcontents
+
+\section{Serre spectral sequence}
+\begin{definition}
+    A \textbf{local coefficient system} on a topological space $X$ is a functor from the fundamental groupoid of $X$ to the category of abelian groups.
+\end{definition}
+When $X$ is path connected, the fundamental groupoid has one object up to equivalence and so giving a local coefficient system is equivalent to a module over the group ring of $\pi_1(X)$. 
+
+\begin{definition}
+A Serre fibration is a map of topological spaces $p:E \to B$ such that for any disk $D^n$ and any commutative diagram
+    \[\begin{tikzcd}
+    D^n \arrow[r] \arrow[d, hook] & E \arrow[d, "p"] \\
+    D^n \times [0,1] \arrow[r] & B
+    \end{tikzcd}\]
+    there exists a lift $D^n \times [0,1] \to E$ making the diagram commute. 
+\end{definition}
+This is equivalent to the homotopy lifting property for all CW complexes. Let $F_b$ be the fiber over $b \in B$. The homotopy lifting property implies that all fibers are homotopy equivalent. Therefore we say that $F$ is the fiber of the fibration.
+
+\begin{proposition}
+Let $p: E \to B$ be a Serre fibration. Then the fibers $F_{b_0} := p^{-1}(b_0)$ and $F_{b_1} := p^{-1}(b_1)$ are homotopy equivalent.
+\end{proposition}
+
+\begin{proof}
+    Given a point $e_0\in E$ with $p(e_0)=b_0$ and a path $\gamma$ in $B$ starting at $b_0$, the lifting property gives you a lifted path $\widetilde\gamma_{e_0} : [0,1]\to E$ such that $p\circ \widetilde\gamma_{e_0} = \gamma$ and $\widetilde\gamma_{e_0}(0)=e_0$. The endpoint $\widetilde\gamma_{e_0}(1)$ lies in $F_{b_1}$.
+
+    So, each point $e_0\in F_{b_0}$ gives a point in $F_{b_1}$: $T_\gamma(e_0) := \widetilde\gamma_{e_0}(1)$. This defines a map
+    \[T_\gamma : F_{b_0} \longrightarrow F_{b_1},\]
+    called transport along $\gamma$.
+
+    Different choices of lift may give different maps $T_\gamma$, but the homotopy lifting property again guarantees that any two such lifts are homotopic through maps of fibers. So the induced map on fibers is well-defined up to homotopy.
+
+    Similarly, if $\gamma$ and $\gamma'$ are homotopic as paths (fixing endpoints), then the resulting maps $T_\gamma$ and $T_{\gamma'}$ are homotopic as well. This is because a homotopy of paths in $B$ can itself be lifted to a homotopy of fiber transport maps in $E$.
+
+    Now reverse the path: $\bar\gamma(t) = \gamma(1-t)$. Lifting that gives a map $T_{\bar\gamma}:F_{b_1}\to F_{b_0}$. The compositions $T_{\bar\gamma}\circ T_\gamma$ and $T_\gamma\circ T_{\bar\gamma}$ are each homotopic to the identity — again by lifting the obvious path homotopies (concatenating $\gamma$ and $\bar\gamma$ is homotopic to the constant path). Thus $T_\gamma$ is a homotopy equivalence between $F_{b_0}$ and $F_{b_1}$.
+\end{proof}
+Using this canonical homotopy equivalence between fibers, we can define a local coefficient system $\cH_n(F)$ on $B$ with value $H_n(F)$ for each $n$.
+\begin{definition}
+     Given a loop $\gamma$ based at $b_0$, the transport map $T_\gamma : F_{b_0} \to F_{b_0}$ induces an automorphism of $H_n(F_{b_0})$. Homotopic loops induce the same automorphism, so this defines a representation of $\pi_1(B,b_0)$ on $H_n(F_{b_0})$. 
+
+This local coefficient system is called the \textbf{homology local coefficient system} associated to the fibration. 
+\end{definition}
+
+We are now ready to state the Serre spectral sequence. This is a tool for computing the (co)homology of the total space of a fibration in terms of the (co)homology of the base and fiber. It was introduced by Jean-Pierre Serre in his 1951 thesis.
+
+\begin{theorem}[Serre spectral sequence]
+Let $F \to E \to B$ be a Serre fibration with $B
+$ path connected. Then there is a spectral sequence with
+\[E^2_{p,q} \cong H_p(B; \cH_q(F)) \implies H_{p+q}(E).\]
+\end{theorem}
+
+We will not prove this theorem here, but we will illustrate its use with an example. We will show that the Euler characteristic is multiplicative for Serre fibrations with finite CW complex fiber and base.
+
+
+
+
+Let $M$ be a CW complex with finite integral homology and let $R$ be a principal ideal domain.
+Set \[\chi(M;R) = \sum_i (-1)^i \operatorname{rk} H_i(M;R)\]
+\[\chi^c(M;k) = \sum_i (-1)^i \operatorname{rk} H^i(M;R)\] If $k$ is a field, then $\chi^c(M;\mathbb{Z}) = \chi(M;\mathbb{Z})$ and $\chi^c(M;k) = \chi(M;k)$. In the proof of the multiplicativity of the Euler characteristic, we will use homology with coefficients in a finite field. But in most situations, one wants to use homology with coefficients in $\mathbb{Z}$. The miracle is that the Euler characteristic is independent of the coefficient field.
+
+\begin{proposition}
+    If $k$ is a field, then $\chi(M;k) = \chi(M;\mathbb{Z})$.
+\end{proposition}
+
+\begin{proof}
+    First suppose that $\mathbb{F}$ is a field of characteristic zero.  
+Let $b_k$ be the $k$th Betti number of $X$, i.e.
+\[
+H_k(X;\mathbb{Z}) \;=\; \mathbb{Z}^{b_k} \oplus T
+\]
+where $T$ is the torsion subgroup. Then
+\[
+\chi_{\mathbb{Z}}
+\;=\;
+b_0 - b_1 + b_2 - \cdots
+\;=\;
+\sum_k (-1)^k b_k.
+\]
+
+\noindent
+Now the universal coefficient theorem says
+\[
+H_k(X;\mathbb{F})
+\;=\;
+H_k(X;\mathbb{Z}) \otimes \mathbb{F}
+\;\oplus\;
+\operatorname{Tor}\bigl(H_{k-1}(X;\mathbb{Z}), \mathbb{F}\bigr).
+\] where $\operatorname{Tor}$ is denotes $\operatorname{Tor}_1^{\mathbb{Z}}$. All the higher $\operatorname{Tor}$ groups vanish since $\mathbb{Z}$ has global dimension 1. It is a PID and so all modules have projective dimension at most 1.
+Since the field is of characteristic zero, the $\operatorname{Tor}$ term vanishes, and you're left with
+\[
+H_k(X;\mathbb{F}) \;=\; \mathbb{F}^{b_k}.
+\]
+It follows that $\chi_{\mathbb{F}} = \chi_{\mathbb{Z}}$.
+
+Suppose now that $\mathbb{F}$ is a field of characteristic $p$.  
+Suppose also that
+\[
+H_k(X;\mathbb{Z})
+\;=\;
+\mathbb{Z}^{b_k}
+\oplus
+(\mathbb{Z}/p\mathbb{Z})^{c_k^p}
+\oplus
+T_k^p,
+\]
+where $T_k^p$ is the torsion part which is not $p$-torsion.  
+The universal coefficient theorem gives:
+\[
+H_k(X;\mathbb{F})
+=
+\begin{cases}
+\mathbb{F}^{\,b_0 + c_0^p}, & k = 0 \\[4pt]
+\mathbb{F}^{\,b_k + c_k^p + c_{k-1}^p} & 1 \le k \le n, \\[4pt]
+\mathbb{F}^{\,c_n^p}, & k = n+1
+\end{cases}
+\]
+This calculation follows from the fact that
+\begin{align*}
+    \operatorname{Tor}(H_{k-1}(X;\mathbb Z),\mathbb F)
+\cong
+\operatorname{Tor}((\mathbb Z/p\mathbb Z)^{c_{k-1}^p},\mathbb F) \oplus 
+\operatorname{Tor}(T_{k-1},\mathbb F)
+\oplus \operatorname{Tor}(\mathbb Z^{b_{k-1}},\mathbb F)
+\cong
+\mathbb F^{\,c_{k-1}^p}
+\end{align*}
+
+To calculate these Tor groups, we use the general fact that for any abelian group $A$,
+\begin{align*}
+    \Tor(\mathbb Z/m\mathbb Z, A) & \cong \{x \in A : mx = 0\} 
+\end{align*} This fact follows from taking a projective resolution of $\mathbb Z/m\mathbb Z$:
+\begin{align*}
+    0 \to \mathbb Z \xrightarrow{m} \mathbb Z
+    \to \mathbb Z/m\mathbb Z \to 0
+\end{align*} and tensoring with $A$. When you do this, we get the complex
+\begin{align*}
+    0 \to A \xrightarrow{m} A \to 0
+\end{align*} whose first homology is exactly $\{x \in A : mx = 0\}$. Note that the zeroth homology is the cokernel of the map $A \xrightarrow{m} A$, which is $A/mA$ which agrees with the tensor product $\mathbb Z/m\mathbb Z \otimes A$. Thus we see that \begin{align*}
+    \Tor(T_{k-1},\mathbb F) & = 0 \\
+    \Tor(\mathbb Z^{b_{k-1}},\mathbb F) & = 0
+\end{align*} because $T_{k-1}$ has no $p$-torsion and 
+$\mathbb Z$ is torsion-free.
+Then the Euler characteristic becomes
+\begin{align*}
+\chi_{\mathbb{F}}
+&= (b_0 + c_0^p)
+- (b_1 + c_1^p + c_0^p)
++ \cdots
++ (-1)^n(b_n + c_n^p + c_{n-1}^p)
++ (-1)^{n+1} c_n^p.
+= \chi_{\mathbb{Z}}
+\end{align*} as desired.
+\end{proof}
+
+The following proposition follows from the fact that for a short exact sequence of finitely generated modules over a principal ideal domain, the rank is additive.
+
+\begin{proposition}
+Let $R$ be a principal ideal domain and let $C_\bullet$ be a bounded chain complex of finitely generated $R$-modules.
+Then $\chi(C_\bullet) = \chi(H_\bullet(C_\bullet))$.
+\end{proposition}
+
+\section{Multiplicativity of the Euler characteristic}
+From now on, set $k = \mathbb{F}_2$ and $\chi(M) = \chi(M;\mathbb{F}_2)$, $H_\ast(M) = H_\ast(M;\mathbb{F}_2)$.
+We want to prove that $\chi(E) = \chi(B)\chi(F)$ for a Serre fibration $F \to E \to B$,  where $F$ is a path-connected finite CW complex, $B$ is a path-connected finite CW complex, and $E$ is a finite CW complex.
+
+\begin{proposition}
+Assuming the conditions above, $\chi(E) = \chi(B)\chi(F)$ for a Serre fibration $F \to E \to B$.
+\end{proposition}
+
+\begin{proof}
+First we will pass to a finite index subgroup of $\pi_1(B)$ for which the monodromy action on $H_\ast(F)$ is trivial. Then we will use the Serre spectral sequence to compute $\chi(E)$. 
+
+Since $k$ is finite and $B$ is a finite CW complex, $H_\ast(B;k)$ is a finite set.
+So the image of \[\pi_1(B) \to \operatorname{Aut}(H_\ast(F))\] is finite, whose kernel has finite index $d$. There exists a $d$-sheeted covering $\tilde{B} \to B$ with this kernel as fundamental group.
+Since $B$ is locally path-connected, the base change $\tilde{E} \to E$ is also a $d$-sheeted covering.
+Moreover, the base change of any Serre fibration is a Serre fibration, so we have a Serre fibration $\tilde{F} \to \tilde{E} \to \tilde{B}$.
+
+The monodromy action
+\[
+\pi_1(\tilde{B}, \tilde{b}) \to \operatorname{Aut}(H_\ast(\tilde{F}))
+\]
+is the composition 
+\[
+\pi_1(\tilde{B}, \tilde{b}) \hookrightarrow \pi_1(B, b) \to \operatorname{Aut}(H_\ast(F))
+\]
+with the last map given by the homeomorphism $\tilde{h} \mapsto h$.
+It follows that the action of $\pi_1(\tilde{B}, \tilde{b})$ on $H_\ast(\tilde{F})$ is trivial.
+Now, because $E$ and $B$ are finite CW complexes, $\tilde{E}$ and $\tilde{B}$ are also finite CW complexes with 
+$\chi(\tilde{B}) = d\chi(B)$ and $\chi(\tilde{E}) = d\chi(E)$ (since coverings multiply $\chi$ by $d$).
+
+Thus it suffices to show $\chi(\tilde{E}) = \chi(\tilde{B})\chi(\tilde{F})$, 
+and since $\pi_1(\tilde{B})$ acts trivially on $H_\ast(\tilde{F})$, we may assume from now on that $\pi_1(B)$ acts trivially on $H_\ast(F)$.
+
+\medskip
+\noindent
+Let $E_r^{p,q}$ be the $r$th page of the Serre spectral sequence.
+For each $r \in \mathbb{Z}_{\ge 2} \cup \{\infty\}$, define
+\[
+V_n^r = \bigoplus_{p+q=n} E_r^{p,q}.
+\]
+Then we have the exact sequence
+\[
+\cdots \to V_{n+1}^r \xrightarrow{d_r} V_n^r \xrightarrow{d_r} V_{n-1}^r \to \cdots
+\]
+where $d_r = \bigoplus_{p+q=n} d_r^{p,q}$.
+
+\noindent
+Since $\pi_1(B)$ acts trivially, we have
+\[
+E_2^{p,q} = H_p(B, H_q(F)) \cong H_p(B) \otimes_k H_q(F),
+\]
+and since $B,F$ are finite CW complexes, $E_2^{p,q}=0$ for $p+q>\dim B + \dim F$.
+Thus each $V_n^r$ is finite-dimensional, and the complex $(V_\ast^r,d_r)$ is bounded.
+
+By the rank formula, 
+\[
+\chi(V_\ast^r) = \chi(H_\ast(V_\ast^r, d_r)) = \sum_n (-1)^n \dim H_n(V_\ast^r) = \sum_n (-1)^n \sum_{p+q=n} \dim E_r^{p,q}.
+\]
+But the spectral sequence satisfies $\chi(E_r^{p,q}) = \chi(E_{r+1}^{p,q})$, 
+so $\chi(E_r) = \chi(E_{r+1})$ for all $r$, and hence
+\[
+\chi(E_\infty^{\ast,\ast}) = \chi(E_2^{\ast,\ast}).
+\]
+
+We have a formula for $\chi(E_2^{\ast,\ast})$:
+\begin{align*}
+\chi(E_2^{\ast,\ast})
+&= \sum_n (-1)^n \sum_{p+q=n} \dim E_2^{p,q} \\
+&= \sum_n (-1)^n \sum_{p+q=n} \dim H_p(B)\otimes H_q(F) \\
+&= \sum_n (-1)^n \sum_{p+q=n} \dim H_p(B)\dim H_q(F) \\
+&= \Big(\sum_p (-1)^p \dim H_p(B)\Big)\Big(\sum_q (-1)^q \dim H_q(F)\Big) \\
+&= \chi(B)\chi(F).
+\end{align*}
+Finally, since $E_\infty^{p,q}$ gives a filtration of $H_{p+q}(E)$ with 
+\[
+\dim H_n(E) = \sum_p \dim E_\infty^{p,n-p},
+\]
+we obtain
+\[
+\chi(E) = \sum_n (-1)^n \dim H_n(E) 
+= \sum_{n,p} (-1)^{n} \dim E_\infty^{p,n-p}
+= \chi(E_\infty^{\ast,\ast})
+= \chi(E_2^{\ast,\ast})
+= \chi(B)\chi(F).
+\] as desired.
+\end{proof}
+
+
+\end{document}

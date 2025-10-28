@@ -1115,5 +1115,124 @@ f_*\mathcal{P}_x(V) \;\cong\; \mathcal{P}_{f(x)}(f_*V),
 and the discussion of differentials at branch points, to check the compatibility of
 residue pairings on $R$ and $\mathbb{P}^1$: choose local coordinates in standard
 form and write the residue pairings in the Laurent basis.
-\qed
+
+\section{Abel Jacobi}
+Recall the additive and multiplicative Cousin problems: 
+\begin{itemize}
+    \item Additive Cousin: Given a collection of principal parts on $R$, when does there exist a global meromorphic function with those principal parts?
+    \item Multiplicative Cousin: Given a divisor $D$ on $R$, when does there exist a global meromorphic function $f$ with divisor $(f) = D$?
+\end{itemize}
+We have seen that for $g=0$, the additive Cousin problem always has a solution and the multiplicative Cousin problem has a solution if and only if the degree of the divisor is zero. For $g = 1$, the additive Cousin problem has a solution if and only if the sum of the residues is zero and the multiplicative Cousin problem has a solution if and only if the degree of the divisor is zero and the sum of the points (with multiplicity) modulo the period lattice is zero.
+
+In general, the obstruction in the additive Cousin problem lies in $H^1(R, \cO)$ because we defined it to be so:
+\begin{align*}
+    H^1(R, \cO) & = \Gamma(R, \cP) / \Gamma(R, \cM)
+\end{align*} where $\cP$ is the sheaf of principal parts and $\cM$ is the sheaf of meromorphic functions. We proved the Serre duality isomorphism \begin{align*}
+    H^1(R, \cO) & \cong H^0(R, K_R)^*
+\end{align*} so the obstruction to solving the additive Cousin problem can be computed by pairing with holomorphic one-forms. In particular, a collection of principal parts $\set{p_i}$ has a solution if and only if \begin{align*}
+    \sum_i \operatorname{Res}_{x_i}(p_i \omega) & = 0
+\end{align*} for all $\omega \in H^0(R, K_R)$.
+
+Now we state some consequences of Riemann-Roch and Serre duality:
+\begin{itemize}
+    \item The degree of the canonical bundle is \begin{align*}
+        \deg K_R & = 2g - 2
+    \end{align*} In particular every meromorphic differential has exactly $2g-2$ zeros (counted with multiplicity). This agrees with the statement of the Poincare-Hopf theorem for vector fields, which says that if $M$ is a compact oriented surface, then every vector field with isolated zeros has total index equal to the Euler characteristic $\chi(M) = 2-2g$. For a holomorphic differential, the index of a zero is its multiplicity as a zero of the differential.
+    \item For all $R$ with genus $g \geq 1$, for all $p\in R$ there exists a nontrivial holomorphic differential not vanishing at $p$. If not, then all holomorphic differentials zeroes at $p$ and so $h^0(R, K_R(-p)) = g$. This implies that $h^0(R,\cO(p)) = 2$ so there exists a nonconstant meromorphic function with a single simple pole at $p$. This function gives an isomorphism to $\P^1$ and so $g=0$, a contradiction.
+    \item There exists a map of degree $g+1$ from $R$ to $\P^1$. This is because \begin{align*}
+        h^0(R, \cO((g+1)p)) &= h^1(R, K_R(- (g+1)p)) + (g+1) - g + 1 \geq 2 
+    \end{align*}
+    \item Every genus $2$ curve has a degree 2 map to $\P^1$ and is therefore hyperelliptic. This is because for $g=2$, we have $h^0(\Omega^1) = 2$ so there exist two linearly independent holomorphic differentials $\omega_1, \omega_2$. They each have degree $2g-2 = 2$ zeros. If they have a common zero at $p$, then $\omega_1/\omega_2$ is a meromorphic function with a single simple pole at $p$, which is impossible on a genus $2$ curve. 
+\end{itemize}
+For $\deg L \geq 2g - 1$, one always has $h^0(L(p)) = h^0(L) + 1$ for all $p \in R$. However, for smaller degree line bundles, this can fail. The failure is measured by the following theorem.
+\begin{theorem}
+    [Weierstrass gap theorem] At each point $p$ of a compact Riemann surface of genus $g$, there are exactly $g$ integers \begin{align*}
+        1 = n_1(p) < n_2(p) < \cdots < n_g(p) \leq 2g - 1
+    \end{align*} such that \begin{align*}
+        h^0(R, \cO(n_i(p) p)) & = h^0(R, \cO((n_i(p) - 1)p))
+    \end{align*} These integers are called the Weierstrass gaps at $p$.
+\end{theorem}
+The generic sequence of gaps is \begin{align*}
+    1, 2, \ldots, g
+\end{align*} A point $p$ is called a Weierstrass point if its gap sequence differs from the generic one. For example, on a hyperelliptic curve, the Weierstrass points are the branch points of the degree $2$ map to $\P^1$ and have gap sequence \begin{align*}
+    1, 3, 5, \ldots, 2g - 1
+\end{align*} There are always finitely many Weierstrass points on a compact Riemann surface of genus $g \geq 2$.
+
+\subsection{Differentials on a Riemann surface}
+Recall that on a Riemann surface $R$, we have the Hodge star operator defined on all smooth differential 1-forms \begin{align*}
+    * & : \Omega^1_{sm}(R) \to \Omega^1_{sm}(R)
+\end{align*} defined in local holomorphic coordinates $z = x + iy$ by \begin{align*}
+    *(f\,dx + g\,dy) & = -g\,dx + f\,dy
+\end{align*} so that \begin{align*}
+    *(dz) & = -i\, dz \\
+    *(d\overline{z}) & = i\, d\overline{z}
+\end{align*} The Hodge star operator satisfies \begin{align*}
+    ** & = -1
+\end{align*} on 1-forms. A differential form $\omega$ is called harmonic if \begin{align*}
+    d\omega & = 0 \\
+    d * \omega & = 0
+\end{align*}
+Recall that we had a decomposition of the square integrable smooth 1 forms on a compact Riemann surface $R$ \begin{align*}
+    L^2 \Omega^1_{sm}(R) & = (dC^{\infty}(R)) \oplus H \oplus (*d C^{\infty}(R))
+\end{align*} where $H$ is the space of harmonic 1-forms. Moreover, $H$ consists of smooth forms. Also recall that we defined an inner product on $L^2 \Omega^1_{sm}(R)$ by \begin{align*}
+    <\alpha, \beta> & = \int_R \alpha \wedge * \beta
+\end{align*} The decomposition is orthogonal with respect to this inner product in the sense that \begin{align*}
+    <d f, * d g> & = 0
+\end{align*} for all smooth functions $f,g$ on $R$.
+
+Any closed differential form has $2g$ periods given by integrating over the edges of the polygonal decomposition of $R$. The form is exact if and only if all its periods vanish. 
+
+\begin{enumerate}
+    \item In particular, the space of harmonic forms is at most $2g$-dimensional because it injects into the space of period vectors $\R^{2g}$.
+    \item There are $g$ linearly independent holomorphic differentials on $R$ and $g$ linearly independent antiholomorphic differentials on $R$, where holomorphic and antiholomorphic are defined as the $\pm i$ eigenspaces of the Hodge star operator $*$. Since eigenspaces don't intersect, we have \begin{align*}
+        \dim H & \geq 2g
+    \end{align*} Combining with the previous point, we have \begin{align*}
+        \dim H & = 2g
+    \end{align*} and the holomorphic and antiholomorphic differentials give bases for the eigenspaces.
+\end{enumerate}
+
+Let $a_1, \ldots, a_g, b_1, \ldots, b_g$ be the edges of the polygonal decomposition of $R$. Let $\phi, \phi'$ be holomorphic differentials, and $A_i = \int_{a_i} \phi$, $B_i = \int_{b_i} \phi$ and similarly for $\phi'$. Using Stokes' theorem, we can compute \begin{align*}
+    0 & = \int_R \phi \wedge \phi' = \sum_{i=1}^g \left( \int_{a_i} \phi \int_{b_i} \phi' - \int_{b_i} \phi \int_{a_i} \phi' \right) = \sum_{i=1}^g (A_i B_i' - B_i A_i')
+\end{align*} where the second equality comes from writing $\phi = dF$ (locally! there is monodromy) so that \begin{align*}
+    \int_X \phi \wedge \phi' &= \int_P dF\wedge\phi' \\
+    &= \int_P d(F\phi')-F\,d\phi' \\
+&= \oint_{\partial P} F\,\phi' \\
+&= \sum_{i=1}^g \left( \int_{a_i} F\phi' + \int_{b_i} F\phi' - \int_{b_i^{-1}} F\phi' - \int_{a_i^{-1}} F\phi' \right) \\
+&= \sum_{i=1}^g \left( \int_{a_i}F\phi' - \int_{a_i^{-1}} (F\phi') \right) + \sum_{i=1}^g \left( \int_{b_i} F\phi' - \int_{b_i^{-1}} (F\phi') \right) \\
+\end{align*} and the difference between integrating over $a_i$ and $a_i^{-1}$ is given by the period of $\phi$ over the cycle, that is precisely $A_i$. Similarly for $b_i$.
+We also have the relation \begin{align*}
+    \sum_i (A_i \overline{B_i} - B_i \overline{A_i}) = i<\phi, \phi'> 
+\end{align*} 
+We have the following consequences:
+\begin{itemize}
+    \item For any nonzero holomorphic differential $\phi$
+\begin{align*}
+    \Im( \sum _i A_i \overline{B_i} ) & > 0
+\end{align*} 
+\item A holomorphic differential with all periods real is zero. This is because \begin{align*}
+    \sum_i (A_i \overline{B_i} - B_i \overline{A_i}) & = 0 = i<\phi, \phi>
+\end{align*} so $\phi = 0$.
+\item We can choose a basis of holomorphic differentials $\phi_1, \ldots, \phi_g$ such that \begin{align*}
+    \int_{a_i} \phi_j & = \delta_{ij}
+\end{align*} Then the period matrix \begin{align*}
+    \Pi_{ij} & = \int_{b_i} \phi_j
+\end{align*} is symmetric with positive definite imaginary part. In particular \begin{align*}
+    [A | B] \to [I | \Pi]
+\end{align*} where $[A|B]$ is the old period matrix, $\Pi$ is symmetric and $\Im \Pi$ is positive definite.
+\item The periods form a lattice in $\C^g$ of rank $2g$.
+\end{itemize} 
+We are finally able to give a criterion for when a divisor is principal, completing the multiplicative Cousin problem.
+\begin{theorem}[Abel's theorem]
+    A divisor $D = \sum n_i p_i$ on a compact Riemann surface $R$ is principal if and only if \begin{align*}
+        \deg D & = 0 \\
+        \sum n_i \int_{p_0}^{p_i} \phi_j & \in \Lambda
+    \end{align*} for all $j=1, \ldots, g$, where $\phi_1, \ldots, \phi_g$ is a basis of holomorphic differentials normalized so that $\int_{a_i} \phi_j = \delta_{ij}$ and $\Lambda$ is the period lattice generated by the integrals of the $\phi_j$ over the $a_i$ and $b_i$ cycles.  
+\end{theorem}
+
+\begin{remark}
+    The Schottky problem asks for a characterization of which complex tori arise as the Jacobian of a Riemann surface. In other words, which period matrices $\Pi$ arise from Riemann surfaces. 
+
+    For $g=2,3$ it is an open subset of the space of symmetric $g \times g$ matrices with positive definite imaginary part. For $g=4$ it is a hypersurface. The problem is still open.
+\end{remark}
+
 \end{document}

@@ -33,21 +33,35 @@
 
 \tableofcontents
 \section{Construction of classical Dijkgraaf--Witten theory}
-Dijkgraaf-Witten theory with gauge group a finite group $G$ is a toy model of Chern-theory, in which $G$ is replaced by a Lie group. It has a single field, which is a principal $G$-bundle on some manifold $M$. Since $G$ is finite, a principal $G$-bundle on $M$ is precisely a $G$-cover, which is in turn precisely a groupoid homomorphism
+Let $G$ be a finite group and let $M$ be a compact oriented manifold (possibly with boundary). Dijkgraaf--Witten theory is a topological gauge theory with gauge group $G$. The fields of the theory on $M$ are principal $G$-bundles on $M$. Since $G$ is finite, a principal $G$-bundle on $M$ (with flat connection) is precisely a groupoid homomorphism
 \[
     \Pi_1(M) \;\longrightarrow\; BG
-    \tag{3}
-\]
-from the fundamental groupoid of $M$ to the groupoid $BG$ with one object whose automorphism group is $G$. The category of principal $G$-bundles on $M$ is precisely the functor category
+\] from the fundamental groupoid of $M$ to the groupoid $BG$ with one object whose automorphism group is $G$. Since $G$ is finite, there is a unique flat connection on any principal $G$-bundle because of the path lifting property.
+ If $P$ is a principal $G$ bundle on $M$, then we send $P$ to its holonomy functor 
+\[F_P : \Pi_1(M) \to BG\] 
+defined as follows. We choose trivializations $P_x \cong G$ for each point $x$. Parallel transport along a path $\gamma:x\to y$ gives a $G$-equivariant bijection $\tau_\gamma : P_x \to P_y$. In chosen coordinates $P_x \cong G$, $P_y \cong G$, this map acts by left multiplication:
+\[\tau_\gamma(g) = F([\gamma]) \cdot g.\]
+
+Now, if we change the identifications by left-multiplying each trivialization by some element $h_x \in G$, $P_x \cong G$ via $p \mapsto h_x^{-1} g$, then the new parallel transport elements become:
+\[F'([\gamma]) = h_y F([\gamma]) h_x^{-1}.\]
+Conversely, let $F, F': \Pi_1(M) \to BG$ be two functors. A natural transformation $\eta: F \Rightarrow F'$ consists of the following data. For each object $x\in M$, a morphism $\eta_x : F(x) \to F'(x)$ in $BG$. But since both $F(x)=F'(x)=*$, this means $\eta_x \in G$.
+
+These must satisfy the naturality condition for every morphism $[\gamma:x\to y]$ in $\Pi_1(M)$:
+\[F'([\gamma]) \circ \eta_x = \eta_y \circ F([\gamma]).\]
+In $BG$, composition of morphisms is multiplication in $G$, so this reads:
+\[F'([\gamma]) \cdot \eta_x = \eta_y \cdot F([\gamma]) = \eta_y F([\gamma]) \eta_x^{-1}.\]
+Therefore the category of principal $G$-bundles on $M$ is precisely the functor category
 \[
     \Pi_1(M) \;\Rightarrow\; BG,
 \]
-and classical Dijkgraaf--Witten theory assigns this functor category to $M$. This category, which is really a groupoid, should be thought of as the ``moduli stack'' $A_G(M)$ of principal $G$-bundles on $M$, since we keep track of automorphisms of bundles.
+and classical Dijkgraaf--Witten theory assigns this functor category to $M$. This category whose morphisms are natural transformations between functors is itself a groupoid. 
 
 \begin{example}[Connected $M$]
     If $M$ connected, there is an equivalent groupoid $\cD$ with objects given by group homomorphisms $\pi_1(M) \to G$. The morphisms between group homomorphisms are given by conjugation in $G$.
 
-    Pick a basepoint. Choose $x_0\in M$. In the fundamental groupoid $\Pi_1(M)$, the endomorphisms of $x_0$ are precisely $\pi_1(M,x_0)$. A functor $F\colon\Pi_1(M)\to BG$ sends objects (points of $M$) to the unique object of $BG$, and sends each morphism (homotopy class of path) to an element of $G=\mathrm{Aut}_{BG}(*)$. In particular, the restriction $\rho_F \;:=\; F\big|_{\mathrm{End}(x_0)}\colon \pi_1(M,x_0)\longrightarrow G$
+To see this, choose a basepoint $x_0\in M$. In the fundamental groupoid $\Pi_1(M)$, the endomorphisms of $x_0$ are precisely $\pi_1(M,x_0)$. A functor $F\colon\Pi_1(M)\to BG$ sends objects (points of $M$) to the unique object of $BG$, and sends each morphism (homotopy class of path) to an element of $G=\mathrm{Aut}_{BG}(*)$. 
+
+In particular, the restriction $\rho_F \;:=\; F\big|_{\mathrm{End}(x_0)}\colon \pi_1(M,x_0)\longrightarrow G$
     is a group homomorphism, because $F$ preserves composition and inverses. So every object $F$ determines a representation $\rho_F\colon\pi_1(M,x_0)\to G$. A morphism $\eta\colon F\Rightarrow F'$ is a natural transformation, which is determined by the element $\eta_{x_0}\in G$. The naturality square for $\eta$ and any loop $\gamma\in \pi_1(M,x_0)$ given by \[
         \begin{tikzcd}
             F(x) \arrow[r,"F(\gamma)"] \arrow[d,"\eta_x"'] & F(x) \arrow[d,"\eta_x"] \\
@@ -58,40 +72,34 @@ and classical Dijkgraaf--Witten theory assigns this functor category to $M$. Thi
     says that
     \[\eta_{x_0} \, \rho_F(\gamma) = \rho_{F'}(\gamma)\, \eta_{x_0}\] so $\rho_F$ and $\rho_{F'}$ differ by conjugation in $G$. Note that this conjugation can be thought of as changing the basepoint $x_0 \in M$ to another point $x\in M$, because the conjugation is using the functoriality of $F$ on a path from $x_0$ to $x$. There is another conjugation what one divides out by which is changing the anchor point in the fiber of the principal $G$-bundle over $x_0$.
 
-    Conversely, for each $x\in M$, choose once and for all a path $c_x:x_0\to x$ with $c_{x_0}=\mathrm{id}$. (Any choice will do; different choices produce naturally isomorphic functors.) Given a homotopy class $[\gamma]:x\to y$, form the loop at $x_0$ and define $\ell(\gamma)\ :=\ [\,c_y^{-1}\cdot \gamma \cdot c_x\,]\ \in \pi_1(M,x_0)$.
+    Conversely, for each $x\in M$, choose once and for all a path $c_x:x_0\to x$ with $c_{x_0}=\mathrm{id}$. (Any choice will do; different choices produce naturally isomorphic functors.) Given a homotopy class $[\gamma]:x\to y$, form the loop at $x_0$ and define $\ell(\gamma) = [c_y^{-1}\cdot \gamma \cdot c_x]\ \in \pi_1(M,x_0)$.
     Set
     $F_\rho([\gamma])\ :=\ \rho\big(\ell(\gamma)\big)\ \in G$.
     This respects composition:
     \[F_\rho([\gamma_2\circ\gamma_1])
-        = \rho\!\big([c_z^{-1}\gamma_2\gamma_1 c_x]\big)
-        = \rho\!\big([c_z^{-1}\gamma_2 c_y]\big)\ \rho\!\big([c_y^{-1}\gamma_1 c_x]\big)
+        = \rho\big([c_z^{-1}\gamma_2\gamma_1 c_x]\big)
+        = \rho\big([c_z^{-1}\gamma_2 c_y]\big)\ \rho\big([c_y^{-1}\gamma_1 c_x]\big)
         = F_\rho([\gamma_2])\,F_\rho([\gamma_1])\]
 
     Suppose $g:\rho\to\rho'$ in $\mathcal{D}$, so $\rho'(\gamma)=g \rho(\gamma) g^{-1}$.
     Define a natural transformation $\eta:\Psi(\rho)\Rightarrow \Psi(\rho')$ by setting
     $\eta_x := g \in G$ \quad \text{for all } $x\in M$.
     Naturality is automatic because
-    \[\eta_y\,\Psi(\rho)(\gamma) = g\,\rho(\ell(\gamma)) = \rho'(\ell(\gamma))\,g = \Psi(\rho')(\gamma)\,\eta_x\] So $F_\rho$ is indeed a functor $\Pi_1(M)\to BG$, and by construction $F_\rho\big|_{\pi_1(M,x_0)}=\rho$.
-
-    This gives an equivalence of groupoids $\cD\to \Pi_1(M)\Rightarrow BG$.
+    \[\eta_y\,\Psi(\rho)(\gamma) = g\,\rho(\ell(\gamma)) = \rho'(\ell(\gamma))\,g = \Psi(\rho')(\gamma)\,\eta_x\] So $F_\rho$ is indeed a functor $\Pi_1(M)\to BG$, and by construction $F_\rho\big|_{\pi_1(M,x_0)}=\rho$. This gives an equivalence of groupoids $\cD \simeq (\Pi_1(M)\Rightarrow BG)$.
 \end{example}
 
 
 \begin{example}
-    Let $M = S^1$. A principal $G$-bundle on $M$ may then be identified with a homomorphism $\mathbb{Z} \to G$, hence with an element of $G$. In this case $\Pi_1(S^1) \Rightarrow BG$ is the groupoid $G\sslash G$ of elements of $G$ up to conjugation. That is, it is the groupoid whose objects are the elements of $G$ and where the morphisms $g \to h$ are given by elements $a \in G$ such that $a g a^{-1} = h$.
+    Let $M = S^1$. A principal $G$-bundle on $M$ (with flat connection) may then be identified with a homomorphism $\mathbb{Z} \to G$, hence with an element of $G$. In this case $\Pi_1(S^1) \Rightarrow BG$ is the groupoid $G\sslash G$ of elements of $G$ up to conjugation. Specifically it is the groupoid whose objects are the elements of $G$ and where the morphisms $g \to h$ are given by elements $a \in G$ such that $a g a^{-1} = h$.
 
-    Where does the conjugation action come from geometrically? Take the canonical generator $\gamma$ of $\pi_1(S^1)$, i.e. the loop that goes once around the circle.
+We describe the holonomy interpretation of this. Take the canonical generator $\gamma$ of $\pi_1(S^1)$. Lift $\gamma$ starting at $u$ in the fiber over $x_0$. Because of the path lifting property, the lifted path $\tilde\gamma$ is unique and ends at some $u\cdot g$ for a unique $g\in G$. Define this $g$ as the holonomy element associated to $\gamma$ and the choice of $u$.
 
-    Lift $\gamma$ starting at $u$ in the fiber over $x_0$. Because of the path lifting property, the lifted path $\tilde\gamma$ is unique and ends at some $u\cdot g$ for a unique $g\in G$. Define this $g$ as the holonomy element associated to $\gamma$ and the choice of $u$.
-
-    So with a fixed choice of $u$, you get a well-defined element $g$. But what if you had chosen a different anchor $u' = u\cdot h$ in the fiber at $x_0$? Lift $\gamma$ starting at $u'$. You'll end at $u' \cdot g' = (u\cdot h)\cdot g' = u\cdot (h g')$. On the other hand, uniqueness of lifts forces this endpoint to agree with the previous one: $u\cdot g$. Therefore $h g' = g h \quad\implies\quad g' = h^{-1} g h$.
-
-    So the holonomy element depends on the choice of anchor up to conjugation.
+    So with a fixed choice of $u$, we get a well-defined element $g$. But what if we had chosen a different anchor $u' = u\cdot h$ in the fiber at $x_0$? Lift $\gamma$ starting at $u'$. You'll end at $u' \cdot g' = (u\cdot h)\cdot g' = u\cdot (h g')$. On the other hand, uniqueness of lifts forces this endpoint to agree with the previous one: $u\cdot g$. Therefore $h g' = g h$ so the holonomy element depends on the choice of anchor up to conjugation.
 \end{example}
 
 Since we only consider compact manifolds $M$, the fundamental group of each connected component of $M$ is finitely generated, hence $\Pi_1(M) \to BG$ is an essentially finite groupoid (a groupoid equivalent to a groupoid with finitely many morphisms).
 
-
+\begin{definition}
 The assignment $M \mapsto A_G(M)$ defined by \begin{align*}
     M \mapsto A_G(M) & := \Pi_1(M) \Rightarrow BG
 \end{align*}
@@ -99,14 +107,8 @@ is contravariant functor
 \begin{equation} \label{eq:AG-functor}
     A_G : \mathbf{Man} \to \mathbf{Gpd}
 \end{equation}
-from the category of manifolds to the category of groupoids. It is a composition of two functors, namely the covariant functor
-\[
-    \Pi_1(-) : \mathbf{Man} \to \mathbf{Gpd}
-\]
-and the contravariant functor
-\[
-    (-) \Rightarrow BG : \mathbf{Gpd} \to \mathbf{Gpd}.
-\]
+from the category of manifolds to the category of groupoids. It is known as the \textbf{moduli stack of principal $G$-bundles} (or classical Dijkgraaf-Witten theory) on $M$.
+\end{definition}
 Since we want to build a TQFT, we would like to extend $A_G$ to cobordisms. This is done as follows. If $M$ is an $n$-dimensional compact oriented manifold with boundary $\overline{X} \sqcup Y$ (so a cobordism $X \to Y$), then $M,X,Y$ together define a cospan
 \begin{equation} \label{eq:cospan-manifolds}
     \begin{tikzcd}
@@ -146,7 +148,7 @@ The assignment $M \mapsto A_G(M)$ then extends, by the groupoid Seifert-van Kamp
 \end{equation}
 which we might call \textbf{classical (untwisted) Dijkgraaf-Witten theory}.
 
-The point is that one has to check that the assignment is functorial and symmetric monoidal. The justification is that if $M_1:X\to Y$ and $M_2:Y\to Z$ glue along $Y$ to $M_2\circ M_1$, then for inclusions $X\hookrightarrow M_1\hookleftarrow Y$ and $Y\hookrightarrow M_2\hookleftarrow Z$ the groupoid Seifert--van Kampen theorem gives a pushout:
+One has to check that the assignment is functorial and symmetric monoidal. The justification is that if $M_1:X\to Y$ and $M_2:Y\to Z$ glue along $Y$ to $M_2\circ M_1$, then for inclusions $X\hookrightarrow M_1\hookleftarrow Y$ and $Y\hookrightarrow M_2\hookleftarrow Z$ the groupoid Seifert--van Kampen theorem gives a pushout:
 $\Pi_1(M_2\circ M_1)\ \simeq\ \Pi_1(M_1)\ \amalg_{\Pi_1(Y)}\ \Pi_1(M_2)$.
 Applying $\mathrm{Fun}(-,BG)$ (which is contravariant) turns that pushout into a pullback:
 $A_G(M_2\circ M_1)
@@ -167,40 +169,35 @@ Quantum (untwisted) Dijkgraaf–Witten theory $Z_G$ is obtained from the classic
 \[
     \mathbb{C}^{(-)} : \mathbf{Span}(\mathbf{FinGpd}) \to \mathbf{FinVect}.
 \]
-This functor is heuristically given by Feynman integrals over “moduli stacks” of principal $G$-bundles and rigorously defined using a push-pull construction as follows.
-
-\begin{remark}[Topological field theory and path integrals]
     In a quantum field theory, the partition function on a manifold $M$ is heuristically written as
     \[Z(M) \;=\; \int_{\text{fields on }M} e^{iS(\text{field})}\, \mathcal{D}(\text{field})\]
 
-    The fields are the configurations of the theory (here, principal $G$-bundles on $M$ with connection, if you were in Chern-Simons).
-    $S$ is the action functional and $\mathcal{D}(\text{field})$ is the (heuristic) "measure" on the space of fields.
+    The fields are the configurations of the theory (here, principal $G$-bundles on $M$ with connection, if we were in Chern-Simons).
+    $S$ is the action functional and $\mathcal{D}(\text{field})$ is the (heuristic) "measure" on the space of fields. In the topological case (finite gauge group, no action term), this integral reduces to "summing over all gauge fields," i.e. over all principal $G$-bundles.
 
-    In the topological case (finite gauge group, no action term), this integral reduces to "summing over all gauge fields," i.e. over all principal $G$-bundles.
-\end{remark}
 
-\begin{remark}[Moduli stacks instead of sets]
-    Naively try $Z(M) \stackrel{?}{=} \#\{\text{principal $G$-bundles on $M$}\}$.
-    But that's not quite right. To get a correct measure you shouldn't just count isomorphism classes, but rather weight each object by $1/|\mathrm{Aut}(P)|$.
+\begin{definition}
+    The \textbf{groupoid cardinality} of an essentially finite groupoid $X$ is defined as
+    \[
+        |X| \;:=\; \sum_{[x]\in \pi_0(X)} \frac{1}{|\mathrm{Aut}(x)|}
+    \]
+\end{definition}
 
-    This leads to the notion of the groupoid cardinality
-    \[\#\!\!\left[\tfrac{\{\text{$G$-bundles on $M$}\}}{\text{iso}}\right]
-        \;=\; \sum_{[P]} \frac{1}{|\mathrm{Aut}(P)|}\]
-    In general if $G$ acts on a set $X$, the groupoid cardinality of the action groupoid $X\sslash G$ is
+\begin{remark}
+    Naively we might try \[Z(M) \stackrel{?}{=} \#\{\text{principal $G$-bundles on $M$}\}\]
+    But that's not quite right. To get a correct measure we shouldn't just count isomorphism classes, but rather weight each object by $1/|\mathrm{Aut}(P)|$. For example, if $G$ acts on a set $X$, the groupoid cardinality of the action groupoid $X\sslash G$ is
     \[\#(X\sslash G) \;=\; \sum_{[x]\in X/G} \frac{1}{|\mathrm{Stab}_G(x)|} \;=\; \frac{|X|}{|G|}.\]
-    This is the correct measure for counting or integrating over moduli stacks. \red{I really don't understand this remark. I need to see an example computation where this weighting gives the right answer.}
 \end{remark}
 
-If $X$ is an essentially finite groupoid, let $\mathbb{C}^X$ denote the space of complex-valued functions on the objects of $X$ such that if there exists a morphism $p : x \to y$ in $X$, then $f(x)=f(y)$. Equivalently, $\mathbb{C}^X$ denotes the space of complex-valued functions on the isomorphism classes $\pi_0(X)$ of objects of $X$. A functor $F : X \to Y$ induces two linear maps between these spaces of functions. One of them is the pullback
+If $X$ is an essentially finite groupoid, let $\mathbb{C}^X$ denote the space of complex-valued functions on the objects of $X$ such that if there exists a morphism $p : x \to y$ in $X$, then $f(x)=f(y)$. Equivalently, $\mathbb{C}^X$ denotes the space of complex-valued functions on the isomorphism classes $\pi_0(X)$ of objects of $X$. A functor $F : X \to Y$ induces two linear maps between these spaces of functions. We have the pullback
 \[
     F^* : \mathbb{C}^Y \to \mathbb{C}^X
 \]
 given by
 \[
-    (F^*(f))(x) = f(F(x)).
+    (F^*(f))(x) := f(F(x)).
 \]
-
-The other is the pushforward
+We also have the pushforward
 \[
     F_* : \mathbb{C}^X \to \mathbb{C}^Y
 \]
@@ -220,79 +217,141 @@ which should be thought of as integration over $X$. The vector space $\mathbb{C}
 \]
 on $\mathbb{C}^X$, and the pushforward is adjoint to the pullback with respect to this inner product. It should be thought of as integration along fibers.
 
-\begin{remark}
-    [Unwinding the adjointness]
+\begin{proposition}
+    The pushforward and pullback satisfy the adjointness property.
+\end{proposition}
+\begin{proof}
     We need to check that if $f\in \mathbb{C}^X$ and $g\in \mathbb{C}^Y$, and $F : X \to Y$ is a functor between essentially finite groupoids, then
      \begin{align*}
         \langle F^* g, f\rangle_X & = \langle g, F_* f\rangle_Y
     \end{align*}
-Expanding the LHS gives:
+Expanding the left hand side gives:
 \[
 \langle F^* g, f\rangle_X
 = \sum_{[x]\in \pi_0(X)} \frac{(F^* g)(x)\, f(x)}{|\Aut(x)|}
 = \sum_{[x]} \frac{g(F(x))\, f(x)}{|\Aut(x)|}.
 \]
-Expanding the RHS gives:
+Expanding the right hand side gives:
 \begin{align*}
     \langle g, F_* f\rangle_Y &= \sum_{[y]\in \pi_0(Y)} \frac{g(y)\, (F_* f)(y)}{|\Aut(y)|} \\
     &= \sum_{[y]} \frac{g(y)}{|\Aut(y)|} \left( \sum_{[x]:F(x)\cong y} \frac{|\Aut(y)|}{|\Aut(x)|}\, f(x) \right) \\
     &= \sum_{[y]} \sum_{[x]:F(x)\cong y} \frac{g(y)\, f(x)}{|\Aut(x)|}
 \end{align*}
-which is the same as LHS after reindexing the sum over $[x]$. 
-\end{remark}
-Pushforward and pullback allow us to linearize a span of groupoids
+which is the same as the left hand side after reindexing the sum over $[x]$. 
+\end{proof}
+
+\begin{definition} The \textbf{linearization functor} $\mathbb{C}^{(-)} : \mathbf{Span}(\mathbf{FinGpd}) \to \mathbf{FinVect}$ is defined on objects by
+    \[
+        X \mapsto \mathbb{C}^X
+    \]
+and on morphisms by
 \[
 \begin{tikzcd}
 & Z \arrow[dl, "p"'] \arrow[dr, "q"] & \\
 X & & Y
 \end{tikzcd}
 \]
-by associating to it the composition
-\[
-q_* \circ p^* : \mathbb{C}^X \to \mathbb{C}^Y
-\]
-which explicitly takes the form
+    is sent to the linear map
+    \[
+    q_* \circ p^* : \mathbb{C}^X \to \mathbb{C}^Y.
+    \]
+    which explicitly takes the form
 \[
 \big((q_* \circ p^*)(f)\big)(y) \;=\; 
 \sum_{z \in \pi_0(Z)\,:\,q(z)\cong y} \frac{|\Aut(y)|}{|\Aut(z)|}\, f(p(z)).
 \]
+\end{definition}
 
-This defines a functor $\mathbb{C}^{(-)} : \mathbf{Span}(\mathbf{FinGpd}) \to \mathbf{FinVect}$ which, when composed with $A_G$, gives \textbf{untwisted Dijkgraaf-Witten theory}
+\begin{definition}
+We define \textbf{untwisted Dijkgraaf-Witten theory} as the composition of the linearization functor with the classical theory:
 \[
 Z_G = \mathbb{C}^{A_G} : n\mathbf{Cob} \to \mathbf{FinVect}.
 \]
+\end{definition}
 
-\begin{example}
-Suppose $M$ is a compact oriented $n$-manifold without boundary. Then 
-\[
-Z_G(M) : \mathbb{C} \to \mathbb{C}
-\]
-is multiplication by the groupoid cardinality
-\[
-\sum_{x \in \pi_0(A_G(M))} \frac{1}{|\Aut(x)|}.
-\]
-When $M$ is connected this sum is equal to
-\[
-\frac{|\Hom(\pi_1(M),G)|}{|G|}.
-\]
-\end{example}
-\section{2D TQFT}
-We now restrict our attention to the case $n=2$.
 
-A 2D TQFT is a symmetric monoidal functor
-$Z : 2\mathbf{Cob} \;\to\; \mathbf{Vect}$.
+
+\begin{proposition}
+For a finite group $G$ and a compact oriented $n$-manifold $\Sigma$, $Z_G(\Sigma): \mathbb{C} \to \mathbb{C}$ is given by multiplication by the groupoid cardinality of $\Bun_G(\Sigma)$:
+\[
+Z_G(\Sigma)\;=\;\left|\,\Bun_G(\Sigma)\,\right|
+\;=\;\sum_{[P]\in \pi_0 \Bun_G(\Sigma)} \frac{1}{|\Aut(P)|}
+\] 
+If $\Sigma$ is connected, this number is equal to
+\begin{align*}
+    |\Hom (\pi_1\Sigma,G)|/|G|
+\end{align*}
+\end{proposition}
+
+\begin{proof}
+For a closed oriented $n$-manifold $\Sigma$, both boundaries are empty, so the bordism functorial assignment is just
+\[
+\Bun_G(\emptyset)
+\xleftarrow{s}
+\Bun_G(\Sigma)
+\xrightarrow{t}
+\Bun_G(\emptyset).
+\]
+
+But $\Bun_G(\emptyset)\cong *$, a one-point groupoid with $|\Aut(*)|=1$. So our span is simply
+\[
+* \xleftarrow{\;\;s\;\;} \Bun_G(\Sigma) \xrightarrow{\;\;t\;\;} *.
+\]
+where both maps are the unique functor to the one-point groupoid. Now apply the push-pull formula to our situation. Let $1\in \mathbb{C}^*$ be the constant function with value 1. Then
+
+\[
+((q_* \circ p^*)(1))(y)
+\;=\;
+\sum_{z\in\pi_0(\Bun_G(\Sigma)) :\, q(z)\simeq y}
+\frac{|\Aut(y)|}{|\Aut(z)|}\, 1.
+\] Since $q(z) \simeq y$ is automatic (there is only one isomorphism class in $*$), and $|\Aut(y)|=1$, this reduces to multiplication by
+\[\sum_{[P]\in \pi_0 \Bun_G(\Sigma)} \frac{1}{|\Aut(P)|}\]
+which is exactly the groupoid cardinality of $\Bun_G(\Sigma)$.
+
+
+Fix a basepoint on $\Sigma$. Isomorphism classes of principal $G$-bundles
+with flat connection are in bijection with conjugacy classes of homomorphisms
+$\rho:\pi_1(\Sigma)\to G$. Moreover, the automorphism group of the bundle
+corresponds to the centralizer of the image:
+\[
+\Aut(P_\rho)\;\cong\;C_G(\rho):= \{g\in G:\ g\rho(\gamma)g^{-1}=\rho(\gamma)\ \forall\gamma\}.
+\]
+Hence
+\[
+Z_G(\Sigma)\;=\;\sum_{[\rho]}\frac{1}{|C_G(\rho)|}.
+\]
+Now view this as the groupoid cardinality of the action groupoid
+$[\Hom(\pi_1\Sigma,G)/G]$, where $G$ acts by conjugation.
+By the orbit-stabilizer identity (or Burnside counting),
+for any finite $G$-set $X$ one has
+\[
+\sum_{[x]\in X/G}\frac{1}{|\Stab(x)|}\;=\;\frac{|X|}{|G|}.
+\]
+Apply this to $X=\Hom(\pi_1\Sigma,G)$ to obtain
+\[
+\sum_{[\rho]}\frac{1}{|C_G(\rho)|}
+\;=\;\frac{|\Hom(\pi_1\Sigma,G)|}{|G|}.
+\]
+This is exactly the claimed formula.
+\end{proof}
+
+\section{TQFT and Mednykh's formula}
+We now restrict our attention to the case $n=2$. In particular, we consider untwisted Dijkgraaf-Witten theory as a 2-dimensional TQFT.
+\begin{definition}
+A \textbf{2-dimensional topological quantum field theory} is a symmetric monoidal functor
+\[Z:2\mathbf{Cob} \;\to\; \mathbf{Vect}\] where $2\mathbf{Cob}$ is the category whose
 \begin{itemize}
     \item Objects of $2\mathbf{Cob}$: finite disjoint unions of circles.
     \item Morphisms: oriented compact surfaces with boundary, viewed as cobordisms between collections of circles.
 \end{itemize}
-
-Under such a functor
+\end{definition}
+Explicitly, we have the following data. Under such a functor
 \begin{itemize}
     \item $Z(S^1) = A$, a vector space.
     \item pair of pants (2 in, 1 out): multiplication $m:A\otimes A\to A$,
     \item pair of pants (1 in, 2 out): comultiplication $\Delta:A\to A\otimes A$,
     \item cap (no in, 1 out): unit $\eta:\mathbb{C}\to A$,
-    \item cup (1 in, no out): counit $\varepsilon:A\to\mathbb{C}$.
+    \item cup (1 in, no out): counit $\lambda:A\to\mathbb{C}$.
 \end{itemize}
 This structure is exactly a commutative Frobenius algebra. This linear functional $\lambda$ is the trace map of the Frobenius algebra. The nondegeneracy condition on the Frobenius pairing $(a,b)\mapsto \lambda(ab)$ comes precisely from gluing two cups with a pair of pants (geometrically giving a sphere).
 
@@ -346,104 +405,131 @@ t([(g,h)]) & = [gh]
 Linearization sends a span to a linear map by pull--push:
 \[m \;=\; t_* \circ s^* \;:\; \mathbb{C}[\mathcal X]\longrightarrow \mathbb{C}[\mathcal Y].\]
 Identify $\mathbb{C}[G\sslash G]$ with class functions on $G$. Write elements of
-$\mathbb{C}[\mathcal X]\cong \mathrm{ClassFns}(G)\otimes \mathrm{ClassFns}(G)$ as $f_1\otimes f_2$.
-\end{example}
-
-\begin{example}[Transposed pair of pants]
-The transposed pair of pants is obtained by flipping the original pair of pants along the diagonal. This gives rise to a new span of groupoids
+$\mathbb{C}[\mathcal X]\cong \mathrm{ClassFns}(G)\otimes \mathrm{ClassFns}(G)$ as $f_1\otimes f_2$. The convolution product on the quotient stack $[G/G]$ (the groupoid of $G$ acting on itself by conjugation) is given by
 \[
-\begin{tikzcd}
-& G\times G \sslash G \arrow[dl, "t"'] \arrow[dr, "s"] & \\
-\cY = G\sslash G  & & G\sslash G \times G\sslash G = \cX
-\end{tikzcd}
+(f_1 \star f_2)(g)
+\;=\;
+\sum_{[(h_1,h_2)]\,:\,h_1h_2\sim g}
+\frac{|\Aut(g)|}{|\Aut(h_1,h_2)|}\,f_1(h_1)f_2(h_2)
+\] where $A\Aut(g)=C_G(g)$ and $\Aut(h_1,h_2)=C_G(h_1)\cap C_G(h_2)$. We show that this reduces to the usual convolution on the space of class functions on $G$:
+\[
+(f_1 * f_2)(g)
+\;=\;
+\sum_{h_1h_2=g} f_1(h_1)f_2(h_2)
 \]
-Computing the push--pull linear map gives the comultiplication
-\begin{align*}
-    (\Delta(f))(h_1,h_2) = \sum_{(h_1’,h_2’): h_i’ \sim h_i}
-\frac{|\mathrm{Aut}(h_1)|\,|\mathrm{Aut}(h_2)|}{|\mathrm{Aut}(h_1’,h_2’)|}
-\,f(h_1’h_2’).
-\end{align*}
+when the automorphism factors are expanded. Consider the multiplication map
+\[
+m \colon G\times G \longrightarrow G,
+\qquad
+m(h_1,h_2)=h_1h_2.
+\]
+For fixed $g\in G$, the fiber
+\[
+m^{-1}(g)
+=\{(h_1,h_2)\in G\times G : h_1h_2=g\}
+\]
+is acted on by the centralizer $C_G(g)$ via simultaneous conjugation:
+\[
+a\cdot(h_1,h_2)=(a h_1 a^{-1},\, a h_2 a^{-1}),
+\qquad a\in C_G(g).
+\]
+This action preserves the fiber since $a h_1 h_2 a^{-1}=a g a^{-1}=g$.  
+The stabilizer of $(h_1,h_2)$ under this action is
+\[
+\Stab_{C_G(g)}(h_1,h_2)
+= C_G(h_1)\cap C_G(h_2)
+= \Aut(h_1,h_2).
+\]
+Hence each orbit has cardinality
+\[
+\frac{|C_G(g)|}{|C_G(h_1,h_2)|}
+=\frac{|\Aut(g)|}{|\Aut(h_1,h_2)|}.
+\]
+
+Since $f_1,f_2$ are class functions, they are constant on conjugacy classes, so
+\[
+\sum_{h_1h_2=g} f_1(h_1)f_2(h_2)
+= \sum_{\text{orbits }[(h_1,h_2)]\subset m^{-1}(g)}
+\frac{|\Aut(g)|}{|\Aut(h_1,h_2)|}
+\,f_1(h_1)f_2(h_2).
+\]
 \end{example}
 
-\section{Mednykh's formula}
-We are now ready to prove Mednykh’s formula. First we will prove a more general result.
-Let $Z:\mathbf{2Cob}\to \mathbf{FinVect}$ be a 2\,-dimensional TQFT. Suppose that $Z(S^1)$ is semisimple.
-Then as an algebra it is a finite product of copies of $\mathbb{C}$. If $e_1,\dots,e_n$ denote its primitive
-idempotents, then $Z(S^1)$ is determined up to isomorphism as a commutative Frobenius
-algebra by the values $\lambda(e_1),\dots,\lambda(e_n)$, which are necessarily all nonzero (this is necessary and
-sufficient for $\lambda(ab)$ to be nondegenerate). In particular, these values determine $Z(\Sigma)$ for all
-closed connected orientable surfaces $\Sigma$.
+Let $Z:\mathbf{2Cob}\to \mathbf{FinVect}$ be a 2\,-dimensional semisimple oriented TQFT. Then $E = Z(S^1)$ is a finite-dimensional commutative semisimple Frobenius algebra over $\mathbb{C}$ with Frobenius form \[\lambda:Z(S^1)\to \mathbb{C}\]
+Semisimple implies there are primitive orthogonal idempotents $d_i$ with
+\[d_i d_j=\delta_{ij}d_i,\qquad \sum_i d_i=1,\]
+and the Frobenius form is diagonal in this basis:
+\[\langle d_i,d_j\rangle=0\ (i\neq j),\qquad \langle d_i,d_i\rangle=: \lambda_i^2\neq 0.\]
 
-\begin{theorem}\label{thm:mednykh-general}[Mednykh's formula, general version]
+As an algebra it is a finite product of copies of $\mathbb{C}$. $Z(S^1)$ is determined up to isomorphism as a commutative Frobenius
+algebra by the values $\lambda(e_1),\dots,\lambda(e_n)$, which are necessarily all nonzero (this is necessary and
+sufficient for $\lambda(ab)$ to be nondegenerate). In particular, these values determine $Z(\Sigma)$ for all closed connected orientable surfaces $\Sigma$.
+
+
+
+
+The comultiplication $\Delta:E\to E\otimes E$ is adjoint to $\mu$:
+\[\langle \mu(x\otimes y),z\rangle=\langle x\otimes y,\Delta z\rangle.\]
+Applying this with $x=y=z=d_i$, and using that $d_i^2=d_i$ and the basis is orthogonal, we get
+\[\Delta(d_i)=\lambda_i^{-2}\, d_i\otimes d_i.\]
+
+The handle element is $\omega:=\mu\circ\Delta(1)\in E$. The comultiplication $\Delta: E\to E\otimes E$ corresponds to a surface with one input and two outputs. The multiplication $\mu: E\otimes E\to E$ corresponds to a surface with two inputs and one output.
+
+If we compose them,
+\[E \xrightarrow{\ \Delta\ } E\otimes E \xrightarrow{\ \mu\ } E,\]
+we get the algebraic map corresponding to a surface with one input and one output. Composing with the counit $\lambda: E\to \mathbb{C}$ (a "cap") gives a surface with one handle and the output capped off (a "closed handle").
+
+For a closed genus-$g$ surface, the same handle argument shows that
+\[Z(\Sigma_g) = \lambda(\omega^{g-1}).\]
+We start with a sphere with one output (gives the unit), then glue on $g-1$ handles — each handle corresponds to multiplying by $\omega$ — and finally cap off (apply the counit $\lambda$).
+
+
+Because $1=\sum_i d_i$, we get
+\[\omega=\mu\!\left(\sum_i \lambda_i^{-2} d_i\otimes d_i\right)
+=\sum_i \lambda_i^{-2} d_i.\]
+As the $d_i$ are orthogonal idempotents \[\omega^{\,g-1}=\sum_i \lambda_i^{-2(g-1)}d_i\]
+But $\varepsilon(d_i)=\langle d_i,1\rangle=\langle d_i,d_i\rangle=\lambda_i^2$. Hence
+\[Z(\Sigma_g)=\sum_i \lambda_i^2\cdot \lambda_i^{-2(g-1)}=\sum_i (\lambda_i^2)^{\,1-g}.\]
+
+
+We have thus proved the following theorem.
+\begin{theorem}[Mednykh's formula]\label{thm:mednykh-general}
 Let $\Sigma$ be a closed connected orientable surface of genus $g$. Then
 \[
-Z(\Sigma)=\sum_{i=1}^n \lambda(e_i)^{\,1-g}. \tag{30}
+Z(\Sigma)=\sum_{i=1}^n (\lambda_i^2)^{\,1-g}
 \]
 \end{theorem}
 
+\begin{corollary}
+Let $G$ be a finite group and let $\Sigma$ be a closed connected orientable surface of genus $g$. Then the number of isomorphism classes of principal $G$-bundles on $\Sigma$ is given by
+\[
+\frac{|\mathrm{Hom}(\pi_1(\Sigma),G)|}{|G|}=\sum_{\rho\in \hat{G}} (\dim \rho/|G|)^{\,2-2g}
+\]
+\end{corollary}
+
 \begin{proof}
-We first need to compute the map $Z(S^1)\to Z(S^1)\otimes Z(S^1)$ assigned to the transpose
-of the pair of pants. This map takes the form
-\[
-e_i \longmapsto \sum_{j,k} c^{\,jk}_i\, e_j\otimes e_k \tag{31}
-\]
-for some coefficients $c^{\,jk}_i$. It has the property that composing with either
-$\mathrm{id}\otimes \lambda$ or with $\lambda\otimes \mathrm{id}$ gives the identity; this gives
-\[
-\sum_{j,k} c^{\,jk}_i\, e_j\otimes \lambda(e_k)
-\;=\;
-\sum_{j,k} c^{\,jk}_i\, \lambda(e_j)\otimes e_k
-\;=\; e_i. \tag{32}
-\]
-Since the $\lambda(e_i)$ are all nonzero, it follows that $c^{\,jk}_i=0$ if either $j\neq i$ or $k\neq i$, and
-$c^{\,ii}_i=\dfrac{1}{\lambda(e_i)}$. Hence the map assigned to the transpose of the pair of pants is
-\[
-e_i \longmapsto \frac{e_i\otimes e_i}{\lambda(e_i)}. \tag{33}
-\]
-It follows that the map $\theta: Z(S^1)\to Z(S^1)$ assigned to the composite of the transpose of
-the pair of pants and the pair of pants is
-\[
-e_i \longmapsto \frac{e_i}{\lambda(e_i)}. \tag{34}
-\]
+    Recall that we identified $Z_G(S^1)$ with the algebra $E = \mathrm{ClassFns}(G)$ of class functions on $G$, with Frobenius form
+    \[\lambda(f) = \frac{f(1)}{|G|}.\]
+and commutative multiplication given by convolution. The characters satisfy the relation 
+\begin{align*}
+    \chi_\rho * \chi_\sigma = \delta_{\rho\sigma} \frac{|G|}{\dim \rho} \chi_\rho
+\end{align*}
+which means that the normalized characters
+\[d_\rho = \frac{\dim \rho}{|G|} \chi_\rho\]
+are primitive orthogonal idempotents:
+\[d_\rho * d_\sigma = \delta_{\rho\sigma} d_\rho,\qquad \sum_{\rho\in \hat{G}} d_\rho = 1\]
+The values of the Frobenius form on these idempotents are
+\[\lambda(d_\rho) = \frac{(\dim \rho)}{|G|}\]
+and so inserting into Theorem \ref{thm:mednykh-general} gives
+\[Z_G(\Sigma_g) = \sum_{\rho\in \hat{G}} \left(\frac{\dim \rho}{|G|}\right)^{2-2g}.\]
+But recalling that \begin{align*}
+    Z_G(\Sigma_g) & = \frac{|\mathrm{Hom}(\pi_1(\Sigma),G)|}{|G|}
+\end{align*} we obtain the desired formula.
 \end{proof}
-We now observe that the closed orientable surface of genus $g$ can be obtained as the
-composite of $g$ copies of the cobordism $S^1 \to S^1$ given by the composite of the transpose of
-the pair of pants and the pair of pants, together with a cup and a cap. The corresponding
-composition of linear maps is given by
-\[
-1 \longmapsto \sum_i e_i \longmapsto \sum_i \frac{e_i}{\lambda(e_i)^g} \longmapsto \sum_i \lambda(e_i)^{1-g} \tag{35}
-\]
-as desired. \qed
 
-\medskip
+\section{References}
+\begin{enumerate}
+\item[{[1]}] Q. Yuan, Surfaces and the representation theory of finite groups (unpublished notes).
 
-To prove Mednykh’s formula it now suffices to compute the numbers $\lambda(e_i)$ for $Z_G(S^1)$.
-We will use the identification with the center of the group algebra $\mathbb{C}[G]$. The primitive
-idempotents here are given by
-\[
-e_V = \frac{\dim V}{|G|} \sum_{g\in G} \chi_V(g)\,g \tag{36}
-\]
-where $V$ is an irreducible complex representation of $G$, and we have
-\[
-\lambda(e_V) = \left(\frac{\dim V}{|G|}\right)^2 \tag{37}
-\]
-so it follows by the above theorem that
-\[
-Z_G(\Sigma) = \sum_V \left(\frac{\dim V}{|G|}\right)^{2-2g}. \tag{38}
-\]
-
-On the other hand, we observed earlier that
-\[
-Z_G(\Sigma) = \frac{|\mathrm{Hom}(\pi_1(\Sigma),G)|}{|G|}. \tag{39}
-\]
-
-Mednykh's formula follows.
-
-\begin{remark}[Funny remark]
-    There was a picture of a circle which should be interpreted as the gluing of two intervals and algebraically interpreted as the Hochschild homology of a $k$-linear category $\mathcal{C}$:
-\[
-\C \to V \otimes V^* \to \C
-\]
-where $V = HH_0(\mathcal{C})$.
-\end{remark}
+\end{enumerate}
 \end{document}
