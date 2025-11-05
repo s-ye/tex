@@ -1226,9 +1226,42 @@ This motivates the following definition:
     \end{align*}
 \end{example}
 
-\begin{proposition}
+\begin{proposition}[Algebraic stack of principal $G$-bundles]\label{prop:algebraic_stack_principal_bundles}
     If $G$ is reductive, the algebraic stack $\mathcal{M}_{G,X}$ is smooth, dimension $\dim G(g-1)$.
 \end{proposition}
+
+\begin{proof}
+Recall that given any principal $G$-bundle $E \to X$ and a representation $V$ of $G$, you can form the associated vector bundle $E(V) := E \times^G V$. This is the quotient of $E \times V$ by the right $G$-action $(e, v) \sim (eg, g^{-1}v)$.
+
+In particular, for the adjoint representation $V = \mathfrak{g}$, we have
+\[
+E(\mathfrak{g}) := E \times^G \mathfrak{g}
+\]
+is a vector bundle on $X$ whose fibers are copies of the Lie algebra $\mathfrak{g}$, twisted by the bundle $E$.
+
+    The geometry of this stack is controlled by deformation theory and in particular the cohomology groups of these adjoint bundles. Given a principal $G$-bundle $E$ over $X$: \begin{itemize}
+        \item The infinitesimal automorphisms of $E$ are given by $H^1(X, E(\mathfrak{g}))$ where $E(\mathfrak{g})$ is the adjoint bundle associated to $E$.
+        \item Automorphisms of $E$ are given by $H^0(X, E(\mathfrak{g}))$.
+        \item The obstructions to deformations of $E$ lie in $H^2(X, E(\mathfrak{g}))$. Since $X$ is a curve, this group is zero.
+    \end{itemize}
+    In particular, this shows that the moduli stack is smooth. \red{For algebraic stacks, we have the tangent complex formalism which reduces to the following:}
+    \begin{align*}
+        T_{\mathcal{M}_{G,X}}|_{[E]} & = R\Gamma(X, E(\mathfrak{g}))[1] \\
+        \mathbb{L}_{\mathcal{M}_{G,X}}|_{[E]} & = R\Gamma(X, E(\mathfrak{g}))^*[-1].
+    \end{align*}
+\red{At the point corresponding to $E$, we have}:
+    \[\dim T_{[E]} \mathcal{M}_{G,X} = \dim H^1(X, E(\mathfrak{g})) - \dim H^0(X, E(\mathfrak{g})) = -\chi(X, E(\mathfrak{g}))\]
+
+Since $\deg(E(\mathfrak{g})) = 0$ and $\operatorname{rk}(E(\mathfrak{g})) = \dim(G)$, we have by Riemann-Roch:
+    \[
+    \chi(X, E(\mathfrak{g})) = \operatorname{rk}(E(\mathfrak{g}))(1-g) = \dim(G)(1-g)
+    \]
+    Therefore:
+    \[
+    \dim \mathcal{M}_{G,X} = \dim(G)(g-1)
+    \]
+\red{See Sam Raskin notes}
+\end{proof}
 
 
 
@@ -1427,21 +1460,464 @@ Recall that a stack over $k$ associates to any $k$-algebra $R$ a groupoid $F(R)$
 When $Q = \Spec(k)$ (with the trivial action), $\Gamma\backslash Q$ is the \textit{classifying stack} $B\Gamma$: for each $k$-algebra $R$, $B\Gamma(R)$ is the groupoid of $\Gamma$-torsors over $\Spec(R)$.
 
 \begin{proposition}
-    The quotient stack $\SL_r(A_X)\backslash\SL_r(K)/\SL_r(\mathcal{O})$ is canonically isomorphic to the algebraic stack $\mathcal{S}\mathcal{L}_X(r)$ of vector bundles on $X$ with trivial determinant. The projection map $\pi : \SL_r(K)/\SL_r(\mathcal{O}) \longrightarrow \mathcal{S}\mathcal{L}_r(X)$ is locally trivial for the Zariski topology.
+    The quotient stack $\SL_r(A_X)\backslash\SL_r(K)/\SL_r(\mathcal{O})$ is canonically isomorphic to the algebraic stack $\mathcal{S}\mathcal{L}_X(r)$ of vector bundles on $X$ with trivial determinant. The projection map \[\pi : \SL_r(K)/\SL_r(\mathcal{O}) \longrightarrow \mathcal{S}\mathcal{L}_r(X)\] is locally trivial for the Zariski topology.
 \end{proposition}
 
+\subsection{Determinant line bundle on the moduli stack}
+Let $X$ projective curve smooth and connected over the algebraically closed field $k$. Let $F$ be a vector bundle over the fiber product \(X_S = X \times_{\Spec k} S\) where \(S\) is a locally noetherian \(k\)-scheme.
+
+\begin{definition}
+    
+A complex \(K^\bullet\) of coherent locally free \(\mathcal O_S\)-modules
+\[
+0 \longrightarrow K^0 \xrightarrow{\ \gamma\ } K^1 \longrightarrow 0
+\]
+a \textbf{representative of the cohomology} of \(F\) if for every base change \(T \xrightarrow{f} S\)
+\[
+\begin{tikzcd}
+X_T \arrow{r}{g} \arrow{d}[swap]{u} & X_S \arrow{d}{p} \\
+T \arrow{r}{f} & S
+\end{tikzcd}
+\]
+we have \(H^i(f^*K^\bullet) = R^i u_* g^* F\).
+\end{definition}
+In particular, if \(s \in S\) is a closed point:
+\[
+H^i(K^\bullet_s) = H^i(X, F_s).
+\]
+
+\begin{remark}
+    Without this condition, one could take any locally free resolution $K^\bullet \simeq Rp_*F$. But in general, base change does not commute with arbitrary choices of resolutions. For example, you might have $H^i(K^\bullet_s) \neq H^i(X_s,F_s)$ if your chosen resolution does not remain exact after tensoring with $\mathcal O_s$. Tensoring with $\mathcal O_s$ is only exact if the complex is flat over $S$.
+    \end{remark}
+
+Representatives of the cohomology of \(F\) are easy to construct in our setup.
+Indeed, we may choose a resolution
+\[
+0 \longrightarrow P_1 \longrightarrow P_0 \longrightarrow F \longrightarrow 0
+\]
+of \(F\) by \(S\)-flat coherent \(\mathcal O_{X_S}\)-modules such that \(p_* P_0 = 0\)
+\red{(use Serre's theorem~A in its relative version to see its existence).}
+Then we have \(p_* P_1 = 0\) and, by base change for coherent cohomology,
+the complex
+\[
+0 \longrightarrow R^1 p_* P_1 \longrightarrow R^1 p_* P_0 \longrightarrow 0
+\]
+is convenient. \red{This result is generally quoted as choosing a perfect complex
+of length one representing \(Rp_* F\) in the derived category \(D^c(S)\).}
+
+\begin{remark}
+    Let $f:T \to S$ be any morphism of locally noetherian schemes. If $p:X\to S$ is proper and $F$ is coherent and flat over $S$, then for each $i$ the natural map
+    \[
+        f^* R^i p_* F \longrightarrow R^i u_* g^* F
+    \]
+    is an isomorphism whenever $R^{i+1}p_*F$ is locally free.
+
+    Pick $n\gg 0$ such that
+    \begin{itemize}
+        \item[(RS1)]$F(n) := F\otimes p^*\mathcal O_X(n)$ is generated by global sections relatively over $S$
+        \item[(RS2)] $R^i p_* F(n) = 0$ for all $i>0$.
+    \end{itemize}
+    Being generated by relative global sections over $S$ means that there is a surjection of coherent sheaves on $X$ $\ev: p^*p_*F(n) \to F(n)$. Let $K_1(n)$ be its kernel and so we have a short exact sequence
+    \[
+    0 \longrightarrow K_1(n) \longrightarrow p^*p_*F(n) \longrightarrow F(n) \longrightarrow 0.
+    \] We untwist and let $P_0 = p^*p_*F(n) \otimes \mathcal O_X(-n)$ and $P_1 = K_1(n) \otimes \mathcal O_X(-n)$.
+
+    This gives a short exact sequence
+    \[
+    0\to P_1 \xrightarrow{\ \phi\ } P_0 \twoheadrightarrow F\to 0
+    \]
+    where $P_0$ is a pullback of a vector bundle on $S$ (so it is $S$-flat and $p$-acyclic) and $P_1$ is the kernel of a map between $S$-flat sheaves (so it is also $S$-flat).
+
+    Apply $Rp_*$ to the above sequence. Because of (RS2) and how we built $P_i$, we get:
+
+
+\begin{itemize}
+    \item We have $p_*P_0 = p_*(p^*p_*F(n)\otimes\mathcal O_X(-n)) \twoheadrightarrow p_*F$ and crucially $R^jp_*P_0=0$ for $j\geq 1$ (choose $n$ so this holds; standard with projection formula + vanishing).
+
+\item Similarly arrange $p_*P_1=0$ and $R^jp_*P_1=0$ for $j\geq 2$.
+\end{itemize}
+
+
+    Because the $P_i$ are $S$-flat and $p$-acyclic (their higher direct images vanish), the cohomology of $F$ can be computed from the 2-term complex
+    \[
+    0 \longrightarrow R^1 p_* P_1 \xrightarrow{R^1 p_\phi} R^1 p_{P_0} \longrightarrow 0.
+    \]
+
+From the long exact sequence, only the $R^1$ terms survive in a controlled way, and you extract a 2-term complex on $S$:
+\[
+K^\bullet := [K^0 \xrightarrow{\gamma} K^1] = [R^1p_*P_1 \xrightarrow{R^1p_*\phi} R^1p_*P_0], \tag{K}
+\]
+with $K^0,K^1$ locally free (by cohomology-and-base-change plus vanishing of the next $R^2$).
+\end{remark}
+
+\begin{definition}
+The \textbf{determinant} of a complex \(K^\bullet\) of locally free coherent \(\mathcal O_S\)-modules
+\[
+0 \longrightarrow K^0 \longrightarrow K^1 \longrightarrow 0
+\]
+is defined by
+\[
+\det(K^\bullet)
+= 
+\bigwedge\nolimits^{\!\max} K^0
+\;\otimes\;
+\bigl( \textstyle\bigwedge\nolimits^{\!\max} K^1 \bigr)^{-1}.
+\]
+The determinant of our family \(F\) of vector bundles parameterized by \(S\) is the line bundle on $S$ defined by
+\[
+\mathcal D_F = \det(Rp_*F)^{-1}.
+\]
+
+\end{definition}
+
+In general, in order to calculate \(\mathcal D_F\), we choose a representative \(K^\bullet\) of the
+cohomology of \(F\) and then calculate \(\det(K^\bullet)^{-1}\). This does not depend, up to canonical isomorphism on the choice of \(K^\bullet\). This means that if \(L^\bullet\) is another representative of the cohomology of \(F\),
+there is a canonical isomorphism \(\det(K^\bullet) \simeq \det(L^\bullet)\) not depending on the choice of quasi-isomorphism between \(K^\bullet\) and \(L^\bullet\), functorial in the sense that if \(M^\bullet\) is a third representative of the cohomology of \(F\),
+the following diagram commutes:
+\[
+\begin{tikzcd}
+\det(K^\bullet) \arrow{r} \arrow{rd} & \det(L^\bullet) \arrow{d} \\
+& \det(M^\bullet).
+\end{tikzcd}
+\]
+
+\begin{remark}
+    Note that this statement does not say that any quasi-isomorphism between $K^\bullet$ and $L^\bullet$ induces the same isomorphism between their determinants. This is false in general. If you take $K^\bullet = L^\bullet = [V \to W]$ with $V,W$ vector spaces over $k$ and the zero map between them, then a quasi-isomorphism between them is any automorphism of the complex, i.e. a pair of automorphisms $(u,v)$ of $V$ and $W$. The induced map on determinants is $\det(u) \det(v)^{-1}$, which depends on the choice of $(u,v)$.
+    
+    The point is that there is a systematic way to choose an isomorphism between the determinants that is compatible with composition.
+\end{remark}
+
+By construction, the fiber of \(\mathcal D_F\) at \(s \in S\) is given as follows:
+\[
+\mathcal D_F(s)
+=
+\Bigl(
+  \textstyle\bigwedge\nolimits^{\!\max} H^0(X, F_s)
+\Bigr)^{-1}
+\otimes
+\textstyle\bigwedge\nolimits^{\!\max} H^1(X, F_s).
+\]
+
+
+We may also twist our family \(F\) by bundles coming from \(X\),
+i.e.\ consider \(F \otimes q^*E\) where \(E\) is a vector bundle on \(X\) and $q : X_S \to X$ is the projection.
+We obtain the line bundle \(\mathcal D_{F \otimes q^*E}\),
+and this line bundle actually depends only on the class of \(E\)
+in the Grothendieck group \(K(X)\) of \(X\) (check this!).
+It follows that we get a group morphism, Le~Potier's determinant morphism
+\[
+\lambda_F : K(X) \longrightarrow \operatorname{Pic}(S),
+\qquad
+u \longmapsto \mathcal D_{F \otimes q^* u}.
+\]
+If our bundle \(F\) comes from an \(\mathrm{SL}_r\)-bundle, \emph{i.e.}\ has trivial determinant,
+twisting \(F\) by an element \(u \in K(X)\) then taking determinants just means
+taking the \(r(u)\)-th power of \(\mathcal D_F\):
+
+
+\begin{lemma}
+Suppose \(F\) is a vector bundle on \(X_S\) such that
+\(\bigwedge^{\!\max} F\) is the pullback of some line bundle on \(X\).
+Then
+\[
+\mathcal D_{F \otimes q^*u} = \mathcal D_F^{\otimes r(u)} 
+\quad\text{in }\operatorname{Pic}(S),
+\]
+where \(r(u)\) is the rank of \(u\).
+\end{lemma}
+
+\begin{proof}
+$\mathcal{D}_{F\otimes q^*u}$ depends additively on the class $u\in K(X)$:
+\[
+\mathcal{D}_{F\otimes q^*(u+v)} = \mathcal{D}_{F\otimes q^*u} \otimes \mathcal{D}_{F\otimes q^*v}.
+\]
+because determinant is multiplicative in short exact sequences. Moreover for a smooth projective variety, every coherent sheaf has a finite resolution by soms of line bundles $\cO_X(n)$. This follows from Serre's theorem and the existence of very ample $\cO(1)$.
+
+Thus it is enough to check it for \(L = \mathcal O_X(-p)\), for \(p \in X\),
+where it follows from considering
+\[
+0 \longrightarrow \mathcal O_X(-p)
+\longrightarrow \mathcal O_X
+\longrightarrow \mathcal O_p
+\longrightarrow 0
+\] Pulling back along $q : X_S \to X$ and tensoring with $F$, we get a short exact sequence
+\[
+0 \longrightarrow F \otimes q^* \mathcal O_X(-p)
+\longrightarrow F
+\longrightarrow F \otimes q^* \mathcal O_p
+\longrightarrow 0.
+\] Taking determinants, we get \[\mathcal D_F \cong \mathcal D_{F\otimes q^\mathcal O_X(-p)} \otimes
+\mathcal D_{F\otimes q^\mathcal O_p}.
+\] i.e \[
+\mathcal D_{F\otimes q^\mathcal O_X(-p)} \cong
+\mathcal D_F \otimes (\mathcal D_{F\otimes q^*\mathcal O_p})^{-1}.\]
+
+Thus everything hinges on showing that $\mathcal{D}_{F\otimes q^*\mathcal{O}_p} \cong \mathcal{O}_S$.
+
+The sheaf $q^*\mathcal{O}_p$ is just the structure sheaf of the fiber $q^{-1}(p)=\{p\}\times S$: 
+$q^*\mathcal{O}_p = \mathcal{O}_{q^{-1}(p)} = \mathcal{O}_{S}$. Hence
+$F\otimes q^*\mathcal{O}_p = F|_{q^{-1}(p)}$. This is a vector bundle on $S$ of rank $r=\operatorname{rk} F$.
+
+Since $p:X_S\to S$ is projection, the pushforward of a sheaf supported entirely on $q^{-1}(p)$ is just that sheaf:
+$Rp_*(F|_{q^{-1}(p)}) = F|_{q^{-1}(p)}$. So
+\[
+\mathcal{D}_{F\otimes q^*\mathcal{O}_p}
+=\det Rp_*(F|_{q^{-1}(p)})
+=\det(F|_{q^{-1}(p)})
+=\bigwedge^r F|_{q^{-1}(p)}.
+\]
+
+By assumption, $\det(F)$ is pulled back from $X$:
+$\det(F) = q^*(L_X)$ for some line bundle $L_X$ on $X$.
+
+Then
+\[
+\det(F|_{q^{-1}(p)})
+=(\det F)|_{q^{-1}(p)}
+= (q^*L_X)|_{\{p\}\times S}
+=L_X|_p \otimes \mathcal{O}_S.
+\]
+
+But $L_X|_p$ is just a 1-dimensional $k$-vector space, a constant line.
+As a line bundle on $S$, that's the trivial line bundle $\mathcal{O}_S$ (canonically trivial once you fix the base field).
+
+Hence $\mathcal{D}_{F\otimes q^*\mathcal{O}_p}=\mathcal{O}_S$. Plugging this back we get $\mathcal{D}_{F\otimes q^*\mathcal{O}_X(-p)}\cong \mathcal{D}_F$ as desired.
+\end{proof}
+
+\subsection{Theta-functions}
+Associating to each bundle $F$ on $X\times S$ the line bundle $\mathcal{D}_F$ defines
+a line bundle $L$ on the stack $\operatorname{SL}_X(r)$ (or $\operatorname{GL}_X(r)$), the determinant line bundle.
+
+Twisting is particularly useful in order to produce sections of (powers of)
+the determinant bundle. Suppose $S$ is integral and that $F$ is a vector bundle
+on $X_S$ with trivial determinant. Choose a vector bundle $E$ on $X$such that
+$F_s \otimes E$ has trivial Euler characteristic for some $s$.
+If
+\[
+0 \;\longrightarrow\; K^0 \xrightarrow{\gamma} K^1 \;\longrightarrow\; 0
+\]
+is a representative of the cohomology of $F \otimes q^*E$, then we know that
+the rank $n$ of $K^0$ is equal to the rank of $K^1$, hence $\gamma$ may be
+locally represented as an $n\times n$ matrix. We get a section
+\[
+\theta_E = \det(\gamma)
+\]
+of $\mathcal{D}^{\,r(E)}_F$. Changing the representative $K^\bullet$ changes $\gamma$ by a change of basis (automorphism of $K^0,K^1$), hence $\det(\gamma)$ changes by an invertible function on $S$. In particular, its divisor $\Theta_E$ is well defined with support the points $s\in S$ such that $H^0(F_s \otimes E)\neq 0$.
+
+If we suppose moreover that $F_t \otimes q^*E$ has trivial cohomology for some
+$t\in S$, then $\Theta_E \neq S$, i.e.\ the section $\theta_E$ is nontrivial;
+if there is $t'\in S$ such that $H^0(X, F_{t'} \otimes E)\neq 0$, then
+$\Theta_E \neq \varnothing$.
+
+\subsection{Pfaffian bundles}
+
+Suppose $\operatorname{char}(k)\neq 2$ in this subsection.
+Let $F$ be a vector bundle over $X_S = X\times S$, together with a quadratic
+nondegenerate form $\sigma$ with values in the canonical bundle $\omega_X$.
+We will view $\sigma$ as an isomorphism
+\[
+F \xrightarrow{\;\sim\;} F^{\vee}
+\quad\text{such that}\quad
+\sigma = \sigma^{\vee},
+\]
+where $F^{\vee} = \mathcal{H}\!om_{\mathcal{O}_{X_S}}(F, q^*\omega_X)$. By Grothendieck-Serre duality, this induces a pairing on the derived pushforward $Rp_*F$:
+\[
+Rp_*F \xrightarrow{\sim} \mathcal{R}\mathcal{H}\!om(Rp_*F,\mathcal{O}_S)[-1].
+\]
+So the object $Rp_*F$ (which represents the cohomology of $F$ on each fiber) comes with a symmetric bilinear form in the derived category. The motivating question is: Can we represent $Rp_*F$ by an actual complex of vector bundles with a symmetric pairing between the terms, not just in the derived category?
+
+\begin{lemma}
+If $K^\bullet$ is a representative of the cohomology of $F$, then
+\[
+K^{\bullet *}[-1]
+\]
+is a representative of the cohomology of $F^{\vee}$.
+
+\smallskip
+\noindent
+Here $K^{\bullet *}[-1]$ denotes the complex supported in degrees $0$ and $1$,
+\[
+0 \;\longrightarrow\; K^{1*}
+\xrightarrow{-\gamma^*} K^{0*}
+\;\longrightarrow\; 0.
+\]
+\end{lemma}
+
+\begin{proof}
+In the derived category $D_c(S)$, we have
+\[
+Rp_*(F^{\vee})
+\simeq Rp_*\big(\mathcal{R}\mathcal{H}\!om_{\mathcal{O}_{X_S}}(F,q^*\omega_X)\big)
+\quad (F\ \text{locally free})
+\]
+\[
+\simeq \mathcal{R}\mathcal{H}\!om\big(Rp_*F,\mathcal{O}_S\big)[-1]
+\quad\text{(Grothendieck--Serre duality)}.
+\]
+Now if $K^\bullet$ represents the cohomology of $F$, we see that
+$\mathcal{R}\mathcal{H}\!om(K^\bullet,\mathcal{O}_S)[-1]$
+represents the cohomology of $F^{\vee}$.
+But this is nothing else than $K^{\bullet *}[-1]$, as the $K^i$ are locally free.
+\end{proof}
+
+\begin{proposition}[6.2.2]
+There exists, locally for the Zariski topology on $S$, a representative of the
+cohomology $K^\bullet$ of $F$ and a symmetric isomorphism
+\[
+\tau : K^\bullet \xrightarrow{\;\sim\;} K^{\bullet *}[-1]
+\]
+such that $\tau$ and $\sigma$ induce the same map in cohomology.
+\end{proposition}
+
+\begin{proof}
+Choose a representative $\widetilde K^\bullet$ of the cohomology of $F$
+and remark that $\sigma$ induces an isomorphism $\widetilde \tau$
+in the derived category $D_c^b(S)$:
+\[
+\widetilde K^\bullet
+\xrightarrow{\;\sim\;}
+Rp_*F
+\xrightarrow{\;\sigma\;}
+Rp_*(F^{\vee})
+\xrightarrow{\;\sim\;}
+\widetilde K^{\bullet *}[-1],
+\]
+which is still symmetric (follows from symmetry of $\sigma$
+and standard properties of Grothendieck--Serre duality).
+
+\smallskip
+The problem here is that this isomorphism is only defined in the derived
+category: the proposition actually claims that we can get a symmetric
+morphism of complexes, and this we only get Zariski locally.
+
+\smallskip
+First we may suppose that $S$ is affine. Then the category of coherent
+sheaves on $S$ has enough projectives, and as the $\widetilde K^i$ are
+locally free we see that $\widetilde \tau$ is an isomorphism in
+$K_c^b(S)$. Let $\varphi$ be a lift of $\widetilde \tau$ to
+$C_c^b(S)$. We get a morphism of complexes
+\[
+\begin{tikzcd}
+\widetilde K^0 \arrow{r}{\gamma} \arrow{d}[swap]{\varphi_0} &
+\widetilde K^1 \arrow{d}{\varphi_1} \\
+\widetilde K^{1*} \arrow{r}{-\gamma^*} &
+\widetilde K^{0*}
+\end{tikzcd}
+\]
+which need neither be symmetric nor an isomorphism
+(it is only a quasi-isomorphism).
+We first symmetrize:
+\[
+\phi_i = \frac{1}{2}\bigl(\varphi_i + \varphi_{1-i}^*\bigr),
+\qquad i=0,1.
+\]
+Remark that $\phi$ is still a quasi-isomorphism, inducing $\sigma$
+in cohomology. Fix $s\in S$.
+A standard argument shows that there exists, in a neighborhood of $s$,
+another length-one complex $K^\bullet$ of free coherent
+$\mathcal O_S$-modules together with a quasi-isomorphism
+$u:K^\bullet\to\widetilde K^\bullet$, such that for the differential $d$
+we have $d|_s=0$.
+Now set
+\[
+\tau = u^*[-1]\phi\,u : K^\bullet \longrightarrow K^{\bullet *}[-1].
+\]
+Then $\tau$ is a symmetric quasi-isomorphism inducing $\sigma$ in cohomology,
+and $\tau_s$ is an isomorphism. Hence, in a neighborhood of $s$,
+$\tau_t$ remains an isomorphism, which proves the proposition.
+\end{proof}
+Let $(K^\bullet,\tau)$ be as in the proposition and consider the
+following diagram:
+\[
+\begin{tikzcd}
+K^0 \arrow{r}{\gamma} \arrow{d}[swap]{\tau_0} &
+K^1 \arrow{d}{\tau_0^*} \\
+K^{1*} \arrow{r}{-\gamma^*} &
+K^{0*}
+\end{tikzcd}
+\]
+It follows that $\alpha$ is skew-symmetric. Therefore the cohomology of $F$
+may be represented, locally for the Zariski topology on $S$, by complexes of
+free coherent $\mathcal O_S$-modules
+\[
+0 \;\longrightarrow\;
+K \xrightarrow{\;\alpha\;} K^* \;\longrightarrow\; 0,
+\]
+with $\alpha$ skew-symmetric.
+Such complexes will be called \textbf{special} in the following.
+
+
+\subsection*{6.3. The pfaffian bundle.}
+
+Let $F$ be a vector bundle on $X_S$ equipped with a nondegenerate quadratic
+form with values in $\omega_X$, and cover $S$ by Zariski open subsets $U_i$
+such that $F$ admits a special representative $K_i^\bullet$ of the cohomology
+of $F$ on $U_i$. Over $U_i$ we have
+\[
+\mathcal D_{F|U_i}
+\;=\;
+\bigwedge\nolimits^{\mathrm{max}} K_i^*
+\;\otimes\;
+\bigwedge\nolimits^{\mathrm{max}} K_i^*,
+\]
+which is a square. This formula comes from the fact that $\mathcal D_F|_U = (\det K) \otimes (\det K^*)^{-1}$ and $\det K^* = (\det K)^{-1}$ via the differential $\alpha: K \to K^*$. The skew-symmetry of $\alpha$ induces a canonical orientation on the determinant lines.
+
+It turns out, because the $K_i^\bullet$ are
+\emph{special complexes}, that the
+$\bigwedge^{\mathrm{max}} K_i^*$ glue together over $S$ and define a canonical
+square root of $\mathcal D_F$, called the \emph{pfaffian bundle}.
+
+\begin{theorem}[6.3.1]
+Let $F$ be a vector bundle over $X_S$ equipped with a nondegenerate quadratic
+form $\sigma$ with values in $\omega_X$. Then the determinant bundle
+$\mathcal D_F$ admits a canonical square root $\mathcal P_{(F,\sigma)}$.
+Moreover, if $f:S'\to S$ is a morphism of locally noetherian $k$-schemes,
+then
+\[
+\mathcal P_{(f^*F,f^*\sigma)} = f^*\mathcal P_{(F,\sigma)}.
+\]
+\end{theorem}
+
+
 \begin{example}
-    [Determinant line bundle] Let $T$ be a scheme, and $E$ a vector bundle on $X \times T$. The derived direct image $R(pr_{T})_*(E)$ is given by a complex of vector bundles $L^0 \to L^1$.
+Let $r \ge 3$ and $(F,\sigma)$ be the universal $\mathrm{SO}_r$-bundle over
+$\mathcal M_{\mathrm{SO}_r,X} \times X$.
+It comes with a non-degenerate form \[\sigma:F\otimes F \to \cO_{X\times \cM_{\mathrm{SO}_r,X}}\] because every $\mathrm{SO}_r$-bundle has a non-degenerate quadratic form with values in $\cO_X$ by definition.
 
-    This is a complex which represents the higher direct image sheaves in the derived category, i.e. pass to a resolution of $E$ and take the pushforward. Since $X$ has dimension 1, we can represent this complex by a two term complex of vector bundles $L^0 \to L^1$.
+If we twist by a theta-characteristic $\kappa$
+(i.e.\ a line bundle such that $\kappa \otimes \kappa = \omega_X$),
+then $F_\kappa = F \otimes q^* \kappa$ comes with a non-degenerate form with values in $\omega_X$.
+Then we may apply the theorem in order to get the pfaffian bundle
+$\mathcal P_{(F_\kappa,\sigma)}$, which we denote simply by $\mathcal P_\kappa$.
+\end{example}
 
-    The line bundle $\det(L^1) \otimes \det(L^0)^{-1}$ is independent of the choice of this complex, hence canonically defined on $T$; this is the "determinant of the cohomology" $\det R\Gamma_{T}(E)$. The important thing to note here is that in the derived category, quasi-isomorphisms need not induce the same isomorphisms on cohomology. But they do induce the same isomorphism on determinants of cohomology. This is precisely the compatilibity we need to define the determinant line bundle for stacks, in particular we need to know that given quasi-isomorphic three complexes $K^*, L^*, M^*$, the composition of isomorphisms $\det K^* \to \det L^* \to \det M^*$ is the same as the isomorphism $\det K^* \to \det M^*$.
+\begin{example}
+    [The square-root of the dualizing sheaf]
 
-    Associating to each bundle $E$ on $X \times T$ the line bundle $\det R\Gamma_{T}(E)$ defines a line bundle $\mathcal{L}$ on the stack $\mathcal{S}\mathcal{L}_{X}(r)$ (or $\mathcal{G}\mathcal{L}_{X}(r)$), the \textit{determinant line bundle}.
+Suppose $G$ is semi-simple and consider its action on $\mathfrak g$
+given by the adjoint representation.
+It follows from the proof of Proposition \ref{prop:algebraic_stack_principal_bundles} that the dualizing sheaf
+$\omega_{\mathcal M_{G,X}}$ is
+$\mathcal D_{\mathcal E(\mathfrak g)}$, where $\mathcal E$ is the
+universal $G$-bundle on $\mathcal M_{G,X}$.
+Remark that the bundle $\mathcal E(\mathfrak g)$ comes with a natural
+quadratic form given by the Cartan--Killing form.
+\begin{align*}
+    B:\cE (\mathfrak{g}) \otimes \cE(\mathfrak{g}) &\to \mathcal{O}_{\mathcal{M}_{G,X}\times X} \\
+    s\otimes t &\mapsto \tr(\ad(s)\ad(t))
+\end{align*}
+Hence the choice of a theta-characteristic $\kappa$ defines a skew symmetric
+form with values in $\omega_X$ on $\mathcal E(\mathfrak g)_\kappa
+= \mathcal E(\mathfrak g) \otimes q^* \kappa$.
+By the previous theorem, we get a canonical square root of $\omega_{\mathcal M_{G,X}}$.
+\[
+\omega_{\mathcal M_{G,X}}^{1/2}(\kappa)
+\]
+
 \end{example}
 
 \section{The central extension}
-Recall that there is a canonical map of stacks $\pi:\cQ = \SL_r(K) / \SL_r(\mathcal{O}) \to \mathcal{SL}_X(r)$. Let $\cL$ be the determinant line bundle on $\mathcal{SL}_X(r)$. We are interested in relating the following central extension construction to the determinant bundle on the moduli stack.
+Recall that there is a canonical map of stacks $\pi:\cQ = \SL_r(K) / \SL_r(\mathcal{O}) \to \mathcal{SL}_X(r)$. Let $\cL$ be the determinant line bundle on $\mathcal{SL}_X(r)$. It will turn out that, though it is invariant under the action of $\SL_r(K)$, this line bundle does not admit an action of $\SL_r(K)$. But it does admit an action of a canonical extension $\SL_{cr}(K)$ of $\SL_r(K)$.
 
 \subsection{Fredholm group}
 Let $V$ be an infinite dimensional vector space over $k$. Let $\End^f(V)$ denote the two sided ideal generated by the finite rank endomorphisms of $V$, and let $\cF(V) = (\End(V) / \End^f(V))^*$ be the equivalence classes of endomorphisms with finite dimensional kernel and cokernel. Let $\cF(V)^0$ denote the subgroup of index $0$ endomorphisms.

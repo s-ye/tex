@@ -1,0 +1,76 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+
+% Slightly denser font family but still readable and accepted by NSF
+\usepackage{mathptmx} % Times New Roman + math support
+\usepackage[scaled=0.90]{helvet} % Helvetica for sans-serif if needed
+\usepackage{courier}
+
+% Tighten spacing without breaking the 6-lines-per-inch rule
+\setlength{\parskip}{0.4em}
+\setlength{\parindent}{0pt}
+\linespread{0.96} % slightly denser line spacing but still ≥ single-space
+
+% Reduce spacing before/after section headers
+\usepackage[compact]{titlesec}
+\titlespacing*{\section}{0pt}{0.6em}{0.3em}
+\titlespacing*{\subsection}{0pt}{0.4em}{0.2em}
+
+% Other utilities
+\usepackage{amsmath,amssymb,enumitem,hyperref}
+
+\setlist[itemize]{leftmargin=1.1em,itemsep=0.3em,topsep=0.2em}
+\DeclareMathOperator{\Bun}{Bun}
+\DeclareMathOperator{\Gr}{Gr}
+
+
+
+\begin{document}
+
+\begin{center}
+{\Large \textbf{Finiteness of Index Maps via Loop Group Compactifications}}\\[0.5em]
+\end{center}
+
+One of the central goals of modern mathematics is to understand how symmetry and geometry interact. Symmetry, expressed through algebraic groups and their representations, encodes the structural constraints of physical theories and geometric objects. Geometry, expressed through spaces of shapes, fields, or bundles, records how these symmetries manifest concretely. The unifying language for this interaction is that of moduli spaces---geometric objects that parametrize all possible forms of a given structure. Moduli spaces of curves, vector bundles, and principal bundles not only centralize algebraic geometry but also form the backbone of large areas of modern representation theory and mathematical physics.
+
+The moduli stack $\Bun_G(C)$ of principal $G$-bundles on a curve $C$ lies at this intersection:
+\begin{itemize}[leftmargin=1.2em]
+\item In algebraic geometry, it provides the natural home for studying vector bundles, stability, and geometric invariants.
+\item In representation theory, its geometry encodes representation categories of affine Lie algebras and loop groups via the geometric Satake correspondence.
+\item In mathematical physics, it models the configuration space of two-dimensional gauge theories, with intersection numbers corresponding to quantum invariants such as Verlinde dimensions.
+\end{itemize}
+
+The key difficulty is that such moduli spaces are almost never compact. They fail to be proper: bundles can degenerate, and sequences of objects can escape to infinity. Compactifying these spaces---finding canonical ways to add boundary points capturing all degenerations---is a fundamental task in algebraic geometry. For principal $G$-bundles, this problem is subtle because degeneration involves both geometric and group-theoretic data.
+
+When a smooth curve $C$ acquires a node, a principal $G$-bundle on $C$ can be described as a bundle on the normalization $\tilde C$ together with an identification between fibers over the two preimages of the node. This identification is an element $\phi \in G$, often called the \textbf{clutching function}. In families, $\phi$ may degenerate, so understanding these limits is essential for completing $\Bun_G(C)$. A natural first attempt is to compactify $G$ itself, following the wonderful compactification of De~Concini and Procesi \cite{concini}, which provides a smooth projective completion of the adjoint group $G_{\mathrm{ad}}$ whose boundary records degenerations along parabolic subgroups. However, this approach fails in families of curves: new structures called \textbf{parahoric} reductions appear at the nodes, describing finer “loop-level" degenerations \cite{solis}.
+
+This leads naturally to the loop group $LG = G(\mathbb{C}((t)))$, which governs the local behavior of bundles on curves. The quotient $LG/L^+G$, the \textbf{affine Grassmannian}, classifies local modifications of a bundle at a point. The affine Grassmannian has rich geometric and representation-theoretic structures. It carries a stratification by Schubert cells indexed by dominant coweights of $G$. Through the geometric Satake equivalence, the intersection cohomology and convolution structure on $\Gr_G$ recover the representation ring of the Langlands dual group $G^\vee$, while derived and $\mathcal{D}$-module enhancements provide geometric models for representations of affine Lie algebras and quantum groups.
+
+\section*{Intellectual Merit}
+
+From this viewpoint, compactifying $\Bun_G(C)$ becomes a problem about compactifying the loop group $LG$. The completion of $\Bun_G(C)$ constructed by Faltings \cite{faltings} realizes this idea: it replaces the missing gluing data by points in a compactified loop group. Its boundary parametrizes bundles on the normalization equipped with parahoric structure at the nodes, describing precisely how a bundle degenerates. This not only ensures completeness but also provides the geometric foundation for computing intersection-theoretic invariants such as indices and determinant line bundle sections.
+
+Recent work \cite{frenkel} has established that for the simplest case $G = \mathbb{C}^\times$, the index map---defined by pushing forward admissible K-theory classes along the forgetful morphism---is finite and well defined, even though the underlying stack is non-proper and of infinite type. This finiteness ensures that twisted indices of evaluation classes, which play the role of Gromov--Witten invariants, are meaningful. 
+
+\textbf{My research goal is to establish finiteness of the index for more general reductive groups $G$}. This represents a major step beyond the torus case: for nonabelian $G$, the moduli stacks of maps to $[* / G]$ are more singular, and their boundary behavior is controlled by degenerations of $G$-bundles on nodal curves. Achieving finiteness requires importing geometric compactifications of loop groups, as described in Faltings’ completion of $\Bun_G(C)$. By bringing these compactifications into the K-theoretic setting, I aim to prove that the index map remains finite for more general reductive $G$, thereby extending the foundational results known for $\mathbb{C}^\times$.
+
+At a conceptual level, this research contributes to the ongoing unification of geometry, representation theory, and quantization. It seeks a geometric dictionary between spaces of physical fields and their algebraic moduli, where indices correspond to partition functions or correlation numbers. Compactifying stacks of bundles ensures that these indices are mathematically well defined, connecting abstract symmetry with computable geometric invariants. Understanding compactifications of loop groups and the moduli of bundles is not merely a technical problem—it is a window into how algebraic geometry captures the deep structures of symmetry, duality, and quantization that lie at the heart of modern mathematical physics.
+
+\section*{Broader Impacts}
+My long-term goal is to become a professor at a research university where I can contribute to mathematics through both scholarship and mentorship. I want to build a career that connects research, teaching, and outreach, showing students how abstract ideas in geometry and representation theory fit into the larger scientific landscape.  The collaborative and interdisciplinary nature of my work—linking loop groups, moduli spaces, and quantization—offers a natural foundation for mentoring students and engaging them in modern mathematical questions.
+
+As a graduate student, I plan to participate in programs such as Directed Reading Programs that pair graduate mentors with undergraduates.  I intend to design reading and research projects that introduce students to algebraic geometry and Lie theory in an accessible way, emphasizing conceptual understanding and the unifying role of symmetry.  In the long term, I hope to supervise undergraduate theses and mentor students from underrepresented backgrounds through bridge or summer research initiatives, helping them gain confidence and experience in research mathematics.
+
+I also view communication as a central part of being a mathematician.  I plan to develop talks and workshops aimed at broader audiences—students in other STEM fields and the general public—that illustrate how geometric ideas influence physics and computation.  Through teaching, mentorship, and outreach, I hope to strengthen the mathematical community, foster inclusivity, and inspire the next generation of students to see beauty and unity in abstract mathematics.
+
+\begin{thebibliography}{99}
+\bibitem{solis} P. Solis, A wonderful embedding of the loop group, \emph{Advances in Mathematics} \textbf{313} (2017), 689--717.
+
+\bibitem{frenkel} E. Frenkel, C. Teleman, A. Tolland, Gromov--Witten gauge theory, \emph{Advances in Mathematics} \textbf{288} (2016), 201--239.
+
+\bibitem{faltings} G. Faltings, Algebraic loop groups and moduli spaces of bundles, \emph{J. Eur. Math. Soc.} \textbf{5} (2003), 41--68.
+
+\bibitem{concini} C. De Concini, C. Procesi, Complete symmetric varieties, in: \emph{Invariant Theory} (Montecatini, 1982), Lecture Notes in Math.\ \textbf{996}, Springer, Berlin, 1983, pp.\ 1--44.
+\end{thebibliography}
+
+\end{document}

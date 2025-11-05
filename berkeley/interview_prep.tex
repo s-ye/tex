@@ -1,0 +1,173 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Interview Preparation}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+These are notes for my final round interview for the Jane Street Quantitative Trading Internship 2025.
+\end{abstract}
+
+\tableofcontents
+
+\section{Bradley}
+We start with a bankroll of 100 dollars. We want to maximize our winnings from each game while strongly minimizing the risk of ruin. In particular, one should think very carefully about bet sizing.
+
+\begin{example}
+    You and I are playing a game. We will draw four cards form a deck of standard playing cards at random. The payout of the game is equal to $5^n$ dollars, where $n$ is the number of red cards. 
+
+Using a binomial distribution, one can roughly estimate the payout of the game to be 81 dollars. We decide to make a 10 wide market on the game. In particular, I will buy the game from you for 86 dollars and sell it to you for 76 dollars.
+
+Let's suppose that I buy one contract. So now you have 186 dollars. You are potentially on the hook to lose everything if I hit 4 red cards. But luckily there is a side bet. Before the first card and each subsequent card is flipped over, you are allowed to take a 1:1 side bet on whether the card is red or black. Find an optimal strategy to minimize your risk of ruin.
+
+At the beginning of the game, suppose the first card is red. Then 1/8 of the time, you will owe me 625 dollars at the end of the game. 3/8 of the time, you will owe me 125 dollars at the end of the game. 3/8 of the time, you will owe me 25 dollars at the end of the game. 1/8 of the time, you will owe me 5 dollars at the end of the game. Therefore, your expected loss is 135 dollars.
+
+Conversely, if the first card is black, then 1/8 of the time, you will owe me 125 dollars at the end of the game. 3/8 of the time, you will owe me 25 dollars at the end of the game. 3/8 of the time, you will owe me 5 dollars at the end of the game. 1/8 of the time, you will owe me 1 dollar at the end of the game. Therefore, your expected loss is 27 dollars.
+
+Therefore, you should take (135 - 27)/2 = 54 dollar sidebet on red for the first card to minimize your expected loss in the worst case scenario.
+
+Now let's suppose the first card comes red. You now have 186 + 54 = 240 dollars. Then let's reason about how to hedge moving forward. If you hit red next, then you owe 25 dollars 1/4 of the time, 125 dollars 1/2 of the time, and 625 dollars 1/4 of the time. Therefore, your expected loss is 225 dollars. If you hit black next, then you owe 5 dollars 1/4 of the time, 25 dollars 1/2 of the time, and 125 dollars 1/4 of the time. Therefore, your expected loss is 45 dollars. Therefore, you should take the side bet of (225 - 45)/2 = 90 dollars on red to minimize your expected loss in the worst case scenario.
+
+Say the next card comes black. You now have 240 - 90 = 150 dollars. Then let's reason about how to hedge moving forward. If I hit red next, then half the time you will owe me 25 dollars and the other half of the time you will owe me 125. If I hit black next, then half of the time I owe you 5 dollars and half the time you owe me 25 dollars. Therefore, if I hit red, your expected loss is 75 dollars, and if I hit black, your expected loss is 15 dollars. Therefore, you should take the side bet of 30 dollars on red to minimize your expected loss in the worst case scenario.
+
+Say the third card comes black. At this point, you have 150 - 30 = 120 dollars. If the last card comes red, you owe me 25 dollars, and if the last card comes black, you owe me 5 dollars. Therefore, you should take a side bet of (25 - 5)/2 = 10 dollars on red to minimize your expected loss in the worst case scenario. No matter what happens, you will lose 15 dollars. So you end up with 105 dollars no matter what happens. This is the 5 dollars that comes from the bid-ask spread. So you have hedged away all of the risk of ruin while still making a profit.
+\end{example}
+
+Key takeaways from the game:
+\begin{itemize}
+    \item Always think about worst case scenarios and try to minimize your expected loss in the worst case scenario.
+    \item Don't just pick sizes blindly. Think about how your bet sizes affect your risk of ruin.
+    \item Use side bets to hedge your risk.
+    \item Rule of thumb: Don't risk more than 40\% of your bankroll on a single bet, unless the odds are heavily in your favor.
+    \end{itemize}
+
+    \begin{example}
+        We are playing with a 40 card deck of cards numbered 1 to 10. A player will draw four cards from the deck. The value of the game is the sum of the values of the red cards. 
+
+        One can estimate the expected value of the game to be 11 dollars. We decide to make a 10 wide market on the game. In particular, I will buy the option to play the game from you for 16 dollars and sell it to you for 6 dollars. There is a 1:1 sidebet where you can bet on whether the next card drawn is $\geq 6$ or $< 6$. Find an optimal sidebet strategy. With this sidebet strategy, how many contracts should you sell?
+
+        Before any cards are drawn, we can consider four situations. Since you lose more on larger numbers, your sidebet should be biased towards larger numbers. Suppose you bet $x$ dollars on the next card being $\geq 6$. 
+        \begin{itemize}
+            \item If the next card is black and $\geq 6$, then you win $x$ dollars from the sidebet. 
+            \item If the next card is black and $< 6$, then you lose $x$ dollars from the sidebet. 
+            \item If the next card is red and $\geq 6$, then you win $x - 8$ dollars from the sidebet. Note that $8$ is the average value of the red cards $\geq 6$.
+            \item If the next card is red and $< 6$, then you win $-x - 3$ dollars from the sidebet. 
+        \end{itemize} 
+        We want to use the sidebet to minimize our expected loss in the worst case scenario. Therefore, we want to solve the following equation:
+        \[x - 8 = -x - 3.\]
+        Solving this equation gives $x = 2.5$. Therefore, we should bet 2.5 dollars on the next card being $\geq 6$. Then the two worst case scenarios for us are losing 5.5 dollars. Since each sidebet is independent (the removed cards are negligible), we do not have to dynamically adjust our sidebet sizes.
+
+        Now we calculate how many contracts we should sell. The worst case scenario is that I pick four red 10s or four red 5s. In this case, you will owe me 40 dollars from the main bet, win 10 dollars from the sidebets, and make 16 dollars from selling the contract. Therefore, your total loss is 14 dollars. Since you start with 100 dollars, you can sell at most 7 contracts. However you should only sell 3 contracts to be safe, abide by the rule of not risking more than 40\% of your bankroll on a single bet.
+    \end{example}
+Key takeaways from the game:
+    \begin{itemize}
+        \item Use expected values (like 8, 3) within branches to summarize future payoffs.
+	\item Equalize losses between branches to flatten your worst-case profile.
+	\item “Minimizing expected loss in the worst case on average.”
+	\item Reason about the game before you decide how many contracts to sell.
+    \end{itemize}
+
+    \begin{example}
+        
+        \textbf{2. Sequential coin trade}
+
+        A hidden sequence of three fair coin flips will determine the payout $2^{\text{\#H}}$. Player A sees the first coin; Player B sees the second; both know the rules. A posts a bid/ask for the whole contract; B decides to hit or pass before seeing the third coin. Find sub-game-perfect equilibrium pricing. (Tests backward induction with asymmetric information.)
+
+        \textbf{3. Dynamic price quoting}
+
+        You must quote a price each round for an asset that moves $\pm1$ with equal probability for 4 rounds. At each round, an adversary can buy or sell 1 unit against your quote. Payout equals final price. Find the quoting rule that minimizes worst-case loss given you can't refuse trades. (Tests game-theoretic minimax / option-market-making intuition.)
+
+        \textbf{4. Variance market}
+
+        Underlying $X\in\{-1,1\}$ each day, independent. Over 3 days, payoff $= (\sum X_i)^2$. Player A sells variance for price $p$. Player B can dynamically trade 1:1 in $X_i$ each day. Find the no-arbitrage value of the variance contract. (Tests replication of quadratic payoffs; the answer is 3.)
+
+        \textbf{5. Information auction}
+
+        A random variable $R \in \{0, 1, 2\}$ is drawn uniformly. A knows $R$, B doesn't. A offers to sell B a contract paying $R^2$ for a price $x$. B can accept or reject. Compute A's optimal ask price and B's rational cutoff. (Tests signaling / adverse selection equilibrium.)
+
+        \textbf{6. Permuted cards}
+
+        Deck of four cards $\{1, 2, 3, 4\}$. Player A draws two at random and keeps their sum $S$. Player B sees only that $S \in \{3,\ldots,7\}$. A offers to sell B the contract paying $S^2$ for price $x$. B must guess whether to buy or short. Find equilibrium price (both mixed). (Tests expectation under constrained information.)
+
+        \textbf{7. Correlated assets}
+
+        Two correlated binary assets A,B with
+        \[\Pr(A=1,B=1)=0.4, \Pr(A=1,B=0)=0.1, \Pr(A=0,B=1)=0.1, \Pr(A=0,B=0)=0.4.\]
+        Payout = $A \times B \times 100$. One player sees A before quoting a price; the other sees B. Find equilibrium price when both can post bid/ask sequentially. (Tests correlation intuition \& conditioning.)
+
+        \textbf{8. Inventory penalty game}
+
+        You quote two-sided prices around an asset that moves $\pm1$ each round (like a random walk). Opponent trades 1 share per round to maximize your expected inventory cost (quadratic in position). Find the optimal spread as a function of volatility and penalty coefficient $\lambda$. (Tests dynamic programming and inventory control.)
+
+        \textbf{9. Forecasting competition}
+
+        A hidden number $N\in\{0,1,2,3,4\}$ drawn uniform. Players simultaneously post forecasts $f_A,f_B$. Whoever's closer ($|f-N|$ smaller) wins $\$1$; if tied, split. Each can see a private noisy signal $N+\varepsilon_i$ ($\varepsilon_i \in \{-1,0,1\}$). Find Bayesian best responses. (Tests signal weighting and equilibrium strategy.)
+
+        \textbf{10. Exploding payoff}
+
+        Payout = $5^n$ dollars where $n$ = number of reds in four cards, but after any card you may cancel the game by paying $\$50$. Two players alternate control: A decides to continue or cancel on odd turns, B on even turns. Find equilibrium stopping thresholds. (Tests dynamic stopping games \& expected value reasoning.)
+
+
+    \end{example}
+    \begin{example}
+
+        You roll a fair six-sided die once. The payout is $2^{X}$ dollars, where $X$ is the number on the die. Before the roll, you may trade a 1:1 side bet on whether the result will be even or odd.
+
+        The fair value is $\frac{2^1 + 2^2 + 2^3 + 2^4 + 2^5 + 2^6}{6} \approx 21.33$ dollars. Suppose the contract is trading at 15 25 dollars.
+        
+The optimal hedge is to bet $\frac{(2^6 + 2^4 + 2^2) - (2^5 + 2^3 + 2^1)}{2} = 21$ dollars on even. Then if the opponent rolls even, on average you lose them $\frac{2^6 + 2^4 + 2^2}{3} - 21 = 7$ dollars; if they roll odd, on average you lose them $\frac{2^5 + 2^3 + 2^1}{3} + 21 = 35$ dollars. The expected loss is $\frac{7 + 35}{2} = 21$ dollars.
+
+In the worst case scenario, if you sell the contract for 25 dollars, you might lose 64 dollars, but make 25 + 21 = 46 dollars from selling and hedging, for a net loss of 18 dollars. This means you can sell 2 contracts with this hedge before risking more than 40\% of your bankroll.
+        
+\end{example}
+    \begin{example}
+        \textbf{2. Coin chain with quadratic payoff}
+
+        You flip 3 fair coins. Payout equals $10(\text{\# heads})^2$. Before each flip, you can bet 1:1 on the next coin's outcome.
+
+        The dynamic hedge sequence depends on previous outcomes. Let $h$ be the number of heads so far. Before flip $k$, bet:
+        \[10((h+1)^2 - h^2)/2\]
+        dollars on heads. The no-arbitrage value is $\frac{10(0^2 + 1^2 + 4^2 + 9^2)}{8} = 15$ dollars.
+
+        \textbf{3. Two-asset correlation game}
+
+        There are two independent fair coins, A,B. Payout is $100 if both are heads, $0 otherwise. You can make 1:1 bets on each coin's outcome.
+
+        The minimum-variance hedge is to bet $50 on heads for each coin. The no-arbitrage value is $25 dollars since $P(\text{HH}) = \frac{1}{4}$.
+
+        \textbf{4. Sequential urn draw}
+
+        Urn starts with 4 red and 4 black balls. We draw 3 balls without replacement. Payout equals $50$ times the number of reds. Before each draw, you can place a 1:1 bet on "next ball = red".
+
+        The fair price is $150$ dollars. For hedging, bet $\frac{50r(8-r)}{2(r+b)}$ dollars on red before each draw, where $r,b$ are remaining red and black balls. Selling for $160$ guarantees a $10$ dollar profit with proper hedging.
+
+        \textbf{5. Skewed coin with exponential payout}
+
+        Biased coin with $P(\text{heads})=0.6$. We flip twice with payout $5^{\text{\# heads}}$. You can only hedge on the first flip.
+
+        The fair price is $0.6(0.6\cdot25 + 0.4\cdot5) + 0.4(0.6\cdot5 + 0.4\cdot1) = 11.8$ dollars. The optimal hedge fraction on the first flip is $(15-2)/2 = 6.5$ dollars on heads. Residual risk remains from the unhedgeable second flip.
+    \end{example}
+\end{document}

@@ -1,0 +1,88 @@
+\documentclass[12pt]{article}
+\usepackage{/Users/songye03/Desktop/Math_tex/style/psetconfig}
+
+\title{Homework 4}
+\author{Songyu Ye}
+\date{\today}
+
+\begin{document}
+\psettitle
+
+\begin{problem}[1]
+Prove the Weierstraß gap theorem. (See notes for lecture 10/23 for the statement.)
+\end{problem}
+
+\begin{problem}[2]
+When $d > 2g - 2$, show that the Abel-Jacobi map
+\[
+\operatorname{Sym}^d R \longrightarrow J^d
+\]
+is a bundle of projective spaces. Equivalently, the holomorphic sections over $R$ of a varying line bundle of degree $d$ are the fibers of a vector bundle over the Jacobian of degree $d$.
+
+\emph{Suggestion:} Check that the differential of the map is onto at every point, and use this to find local sections that give a local framing of the bundle.
+
+\emph{Suggestion:} Prove the vanishing of the sheaf cohomologies of $\mathcal M(V)$ and $\mathcal P(V)$.
+\end{problem}
+
+\begin{problem}[3]
+Kodaira’s theorem implies that for any vector bundle $V \to R$ on a compact Riemann surface, there exists a (bundle-dependent) degree $d \in \mathbb{Z}$ such that
+\[
+H^1(R; \mathcal{O}(V \otimes L)) = 0
+\]
+for all line bundles $L$ of degree $> d$.
+
+Use this fact, the long exact sequence for cohomology of
+\[
+\mathcal{O} \to \mathcal{M} \to \mathcal{P},
+\]
+and the result of Question~4 below to show that the ad hoc definition of cohomology of vector bundles via principal parts computes the genuine sheaf cohomology of vector bundles.
+\end{problem}
+
+\begin{problem}[4]
+Show that, on a compact Hausdorff space $X$, sheaf cohomology commutes with filtered colimits (formerly known as direct limits): if $\mathcal{S} = \varinjlim_{n \to \infty} \mathcal{S}_n$, then
+\[
+\varinjlim_{n \to \infty} H^q(X; \mathcal{S}_n) = H^q(X; \mathcal{S}).
+\]
+(Here the indexing set can be any filtered set, not just $\mathbb{N}$.)
+
+Use this to prove that the sheaf of principal parts of meromorphic sections of a vector bundle on a Riemann surface has no $H^1$ or higher cohomology.
+\end{problem}
+
+\begin{problem}[5]
+A \emph{nodal Riemann surface} $S$ is one which is smooth except for finitely many singularities that look locally like
+\[
+\{(x, y) \mid xy = 0\} \subset \mathbb{C}^2.
+\]
+It is obtained from a smooth Riemann surface $\widetilde{S}$ by identifying pairs of points; $\widetilde{S} \to S$ is called the \emph{normalization}.
+
+Define the canonical bundle $K_S$ of $S$ to be the sheaf of differentials holomorphic on $\widetilde{S}$, except for simple poles at the nodes, with opposite residues on the two branches of $S$.
+
+Show that $K_S$ is a line bundle. When $S$ is compact, prove the residue theorem for a meromorphic section of $K_S$ that is holomorphic at the nodes. Prove Serre duality for vector bundles on $S$.
+
+\emph{Hint:} Reduce to $\widetilde S$. (Use the Čech definition to show that you can compute $H^1$ on $\widetilde S$ instead of $S$.)
+\end{problem}
+
+\begin{problem}[6]
+Let $S$ be a chain of elliptic Riemann surfaces $E_1, \dots, E_g$, connected by nodes.
+\begin{enumerate}[label={\textbullet}, leftmargin=*]
+    \item Describe the space of holomorphic differentials (sections of $K_S$) and the period lattice for $S$.
+    \item Show that $\operatorname{Pic}(S) \cong \mathbb{Z}^g \times E_1 \times \cdots \times E_g$.
+    \item Collapse this to $\mathbb{Z} \times E_1 \times \cdots \times E_g$, “remembering only the total degree,” by allowing a divisor to skip from one component to another at the node.  
+    That is, if $p', p''$ are the two points on $\widetilde S$ over a node, identify the line bundles corresponding to $\mathcal{O}(p') \times \mathcal{O}$ and $\mathcal{O} \times \mathcal{O}(p'')$ on adjacent elliptic curves.  
+    Show that you can now define an Abel–Jacobi map
+    \[
+    \operatorname{Sym}^k(S) \longrightarrow \operatorname{Pic}.
+    \]
+    \item What is the image of $S$ in $\operatorname{Pic}^1$? What is the canonical Theta-divisor $W_{g-1}$ in $\operatorname{Pic}^{g-1}$?
+    \item Check that the Riemann Theta function for $S$ is the product of the Jacobi $\theta_3$ functions for the $E_i$:
+    \[
+    \theta_3(u \mid \tau) = \sum_{n=0}^{\infty} \exp(2\pi i n u + \pi i n^2 \tau),
+    \]
+    and identify the Riemann Theta divisor. Compare with $W_{g-1}$.
+\end{enumerate}
+
+\emph{Note:} $\theta_3$ has a unique simple zero at the center of the period parallelogram.  
+\emph{Caution:} The instructor has not checked any of this!
+\end{problem}
+
+\end{document}
