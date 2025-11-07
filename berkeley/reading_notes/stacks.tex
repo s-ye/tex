@@ -1074,8 +1074,6 @@ Recall the sheaf gluing theorem for honest open covers of a topological space. I
 We have proved in the previous section that every faithfully flat morphism of affine schemes satisfies effective descent. Moreover, every Zariski open covering satisfies effective descent.
 
 
-
-
 \subsection{Morphisms of $k$-stacks, fiber products, representable morphisms}
 \begin{definition}[Morphism of $k$-stacks]
     A \textbf{1-morphism} \( F : \mathcal{X} \to \mathcal{Y} \) will associate, for every \( U \in \operatorname{ob}(\Aff/k) \), a functor
@@ -1263,6 +1261,39 @@ Since $\deg(E(\mathfrak{g})) = 0$ and $\operatorname{rk}(E(\mathfrak{g})) = \dim
 \red{See Sam Raskin notes}
 \end{proof}
 
+\begin{proposition}[Line bundles on quotient stacks]
+\label{prop:Pic_quotient_stack}
+Let $S$ be a base scheme, $H$ a flat group scheme of finite type over~$S$, 
+and $Y$ an algebraic space (or scheme) equipped with an $H$–action.
+Denote by $[Y/H]$ the corresponding quotient stack, and let
+\[
+\pi : Y \longrightarrow [Y/H]
+\]
+be the natural projection.
+
+Then pullback along~$\pi$ induces a canonical isomorphism
+\[
+\pi^* : \Pic([Y/H]) \xrightarrow{\;\sim\;} \Pic_H(Y),
+\]
+where $\Pic_H(Y)$ denotes the group of $H$–linearized line bundles on~$Y$.
+
+\end{proposition}
+
+\begin{proof}[Sketch of proof]
+A line bundle $\mathcal L$ on the quotient stack $[Y/H]$ is, by definition,
+a line bundle on $Y$ together with descent data relative to the covering
+$\pi : Y \to [Y/H]$.
+Unwinding the descent condition gives an isomorphism
+\[
+m^*\mathcal L \;\simeq\; pr_2^*\mathcal L
+\quad\text{on } H\times Y,
+\]
+compatible with the cocycle condition on $H\times H\times Y$.
+This is precisely the definition of an $H$–linearization of~$\mathcal L$.
+Conversely, any $H$–linearized line bundle on~$Y$ descends uniquely
+to a line bundle on the quotient stack.
+Hence $\pi^*$ is an isomorphism.
+\end{proof}
 
 
 
@@ -1913,8 +1944,457 @@ By the previous theorem, we get a canonical square root of $\omega_{\mathcal M_{
 \[
 \omega_{\mathcal M_{G,X}}^{1/2}(\kappa)
 \]
-
 \end{example}
+
+\section{Picard groups}
+Let \(G\) be a simple (not necessarily simply connected) complex algebraic group.
+Let \(\widetilde{G} \to G\) be the universal cover of \(G\); its kernel is a subgroup of the center
+\(Z(\widetilde{G}) \subset \widetilde{G}\),
+canonically isomorphic to \(\pi_1(G)\).
+We will denote the adjoint group \(\widetilde{G}/Z(\widetilde{G})\) by \(\overline{G}\).
+We will fix a Cartan subgroup \(\overline{H} \subset \overline{G}\)
+(and denote by \(H\) and \(\widetilde{H}\) its inverse image in \(G\) and \(\widetilde{G}\) respectively)
+as well as a Borel subgroup \(\overline{B} \subset \overline{G}\)
+(and denote by \(B\) and \(\widetilde{B}\) its inverse image in \(G\) and \(\widetilde{G}\) respectively). Let $h^\vee$ be the dual Coxeter number of the Lie algebra of $\widetilde{G}$, defined as $h^\vee = 1 + (\rho, \theta)$ where $\rho$ is half the sum of the positive roots and $\theta$ is the highest root.
+
+Let $L\mf g = \mf g \otimes \C((z))$ be the loop algebra of $\mf g$. It admits a canonical 2-cocycle with values in $\C$:
+\[
+X[f], Y[g] \longmapsto (X,Y) \otimes \operatorname{Res}_{z=0} (f\,dg)
+\] where $(,)$ is the normalized Killing form on $\mf g$ (i.e. $(\theta,\theta) = 2$ for the highest root $\theta$). This cocycle defines a central extension of Lie algebras
+\[
+0 \longrightarrow \C \longrightarrow \widehat{L\mf g} \longrightarrow L\mf g \longrightarrow 0
+\]
+
+In nature, representations of \(L\mathfrak{g}\) are projective; this is why we look at (true) representations of \(\widehat{L\mathfrak{g}}\). Fix an integer \(\ell\). Call a representation of \(\widehat{L\mathfrak{g}}\) \emph{of level} \(\ell\), if the center acts by multiplication by \(\ell\).
+
+In order to construct such representations we start with a finite-dimensional representation \(L(\lambda)\),
+which we may view as an \(L^+\mathfrak{g}\)-module by evaluation. As the canonical cocycle is trivial over \(L^+\mathfrak{g}\), the central extension
+\(\widehat{L^+\mathfrak{g}}\) obtained by restriction from splits.
+Hence we may consider \(L(\lambda)\) as an \(\widehat{L^+\mathfrak{g}}\)-module of level \(\ell\)
+by letting the center act by multiplication by \(\ell\);
+denote this module \(L_\ell(\lambda)\).
+Now consider the generalized Verma module:
+\[
+M_\ell(\lambda)
+  = \operatorname{Ind}_{L^+\mathfrak{g}}^{\widehat{L\mathfrak{g}}} L_\ell(\lambda)
+  = U(\widehat{L\mathfrak{g}}) \otimes_{U(\widehat{L^+\mathfrak{g}})} L_\ell(\lambda).
+\]
+In the case when \(\ell\) is not the critical level \(-h^\vee\) (the dual Coxeter number),
+\(M_\ell(\lambda)\) has a unique irreducible quotient \(H_\ell(\lambda)\).
+Moreover, if \(\ell \ge (\lambda, \theta)\), then \(H_\ell(\lambda)\) has an important finiteness condition:
+for all \(X \in \mathfrak{g}^\alpha\) and all \(f \in \mathbb{C}((z))\), the element \(X[f]\) acts locally nilpotently on \(H_\ell(\lambda)\),
+i.e.\ for all \(u \in H_\ell(\lambda)\) there is \(N\) such that \(X[f]^N \cdot u = 0\).
+Such \(\widehat{L\mathfrak{g}}\)-modules are called \emph{integrable},
+and it can be shown that all irreducible integrable \(\widehat{L\mathfrak{g}}\)-modules arise in this way.
+In view of this it is convenient to define the following subset of the weight lattice \(P(R)\):
+\[
+P_\ell = \{\, \lambda \in P(R) \mid (\lambda, \alpha_i) \ge 0 \text{ for } i \in I \text{ and } (\lambda, \theta) \le \ell \,\}.
+\]
+$P_\ell$ is called the set of \emph{integrable weights} of level \(\ell\). It indexes the irreducible integrable \(\widehat{L\mathfrak{g}}\)-modules of level \(\ell\).
+
+Now we restrict to positive levels \(\ell \ge 0\).
+If \(\lambda \in P_\ell\), then \(H_\ell(\lambda)\) is the quotient of \(M_\ell(\lambda)\)
+by the submodule \(Z_\lambda(\ell)\) generated by \(X_\theta(-1)^{\ell+1-(\lambda,\theta)} \otimes v_\lambda\),
+where \(v_\lambda\) is a highest weight vector of \(L(\lambda)\).
+By Poincaré–Birkhoff–Witt, \(M_\lambda(\ell) = U(L^{<0}\mathfrak{g}) \otimes_\mathbb{C} L_\lambda\).
+It follows that we have the exact sequence
+\[
+0 \longrightarrow Z_\lambda(\ell)
+  \longrightarrow U(L^{<0}\mathfrak{g}) \otimes_\mathbb{C} L_\ell(\lambda)
+  \longrightarrow H_\ell(\lambda)
+  \longrightarrow 0. \tag{7.2d}
+\]
+
+In other words,
+\[
+[H_\ell(\lambda)]^{L^{>0}\mathfrak{g}}
+  = L_\ell(\lambda)
+  = \{\, v \in H_\ell(\lambda) \mid L^{>0}\mathfrak{g}\cdot v = 0 \,\}. \tag{7.2e}
+\]
+Finally, \(H_\ell(\lambda)\) is generated by \(L(\lambda)\) over \(L^{<0}\mathfrak{g}\)
+with only one relation:
+\[
+X_\theta(-1)^{\ell+1-(\lambda,\theta)} \otimes v_\lambda = 0. \tag{7.2f}
+\]
+
+
+The Lie algebra of \(LG\) is \(L\mathfrak{g}\),
+as the kernel of the homomorphism
+\[
+LG(R[\varepsilon]) \longrightarrow LG(R)
+\]
+is \(\mathfrak{L g}(R) = \mathfrak{g} \otimes R((z))\).
+For the same reason we have \(\mathrm{Lie}(L^+G) = L^+\mathfrak{g}\).
+
+Let \(H\) be an infinite-dimensional vector space over \(\mathbb{C}\).
+We define the \(\mathbb{C}\)-space \(\mathrm{End}(H)\) by \(R \mapsto \mathrm{End}(H \otimes R)\),
+the \(\mathbb{C}\)-group \(\mathrm{GL}(H)\) as the group of its units,
+and \(\mathrm{PGL}(H)\) by \(\mathrm{GL}(H)/\mathbb{G}_m\).
+The \(\mathbb{C}\)-group \(\widehat{L G}\) acts on \(L\mathfrak{g}\) by the adjoint action.
+We define the adjoint action of \(\widehat{L G}\) on \(\widehat{L\mathfrak{g}}\) as follows:
+\[
+\operatorname{Ad}(\gamma)\cdot(\alpha', s)
+= \bigl(\operatorname{Ad}(\gamma)\alpha',\; s + \operatorname{Res}_{z=0}(\gamma^{-1}\tfrac{d}{dz}\gamma,\alpha')\bigr),
+\]
+where \(\gamma \in \widehat{L G}(R)\),
+\(\alpha = (\alpha', s) \in \widehat{L\mathfrak{g}}(R)\),
+and \((\, , \,)\) is the \(R((z))\)-bilinear extension of the Cartan–Killing form.
+
+Consider an integral highest weight representation
+\[
+\bar{\pi} : \widehat{L\mathfrak{g}} \longrightarrow \mathrm{End}(H).
+\]
+The basic result we will use in the sequel is the following.
+
+
+\begin{proposition}[7.3.2.]
+Let \(R\) be a \(\mathbb{C}\)-algebra and \(\gamma \in \widehat{L G}(R)\).
+Locally over \(\operatorname{Spec}(R)\), there is an automorphism
+\(u_\gamma\) of \(H_R = H \otimes_\mathbb{C} R\), unique up to \(R^\ast\),
+such that for any \(\alpha \in \widehat{L\mathfrak{g}}(R)\),
+\[
+\begin{tikzcd}
+H_R \arrow[r, "\bar{\pi}(\alpha)"] \arrow[d, "u_\gamma"'] &
+H_R \arrow[d, "u_\gamma"] \\
+H_R \arrow[r, "\bar{\pi}(\operatorname{Ad}(\gamma)\alpha)"'] &
+H_R
+\end{tikzcd}
+\]
+commutes.
+\end{proposition}
+
+The important fact here is that we work over any \(\mathbb{C}\)-algebra (and not only over \(\mathbb{C}\)). An immediate corollary of the above proposition is that
+the representation \(\bar{\pi}\) may be \emph{integrated} to a (unique)
+algebraic projective representation of \(L\tilde{G}\),
+i.e.\ there is a morphism of \(\mathbb{C}\)-groups
+\[
+\pi : L\tilde{G} \longrightarrow \mathrm{PGL}(H)
+\]
+whose derivative coincides with \(\bar{\pi}\) up to homothety.
+Indeed, thanks to the unicity property,
+the automorphisms \(u_\gamma\) associated locally to \(\gamma\)
+glue together to define an element \(\pi(\gamma) \in \mathrm{PGL}(H)(R)\),
+and by the same unicity property, \(\pi\) defines a morphism of \(\mathbb{C}\)-groups.
+
+We are now looking for a central extension of \(\tilde{L G}\)
+such that its derivative is the canonical central extension~(7.2b).
+To do this, we apply the above to the basic representation \(H_1(0)\) of \(\widehat{L\mathfrak{g}}\).
+Consider the central extension
+\[
+1 \longrightarrow \mathbb{G}_m \longrightarrow \mathrm{GL}(H_1(0))
+   \longrightarrow \mathrm{PGL}(H_1(0)) \longrightarrow 1.
+   \tag{7.3b}
+\]
+
+Then the pullback of~(7.3b) to \(L\tilde{G}\) is convenient:
+it defines a central extension to which we refer as the
+\emph{canonical central extension} of \(L \tilde{G}\):
+\[
+1 \longrightarrow \mathbb{G}_m \longrightarrow \widehat{L \tilde{G}}
+   \longrightarrow L\tilde{G} \longrightarrow 1.
+   \tag{canonical-central-extension-gps}
+   \label{canonical-central-extension-gps}
+\]
+
+What happens if we restrict to \(L^+\tilde{G}\)?
+
+\begin{lemma}[Splitting over \(L^+\tilde{G}\)]\label{lemma-splitting-over-l-plus-g}
+The extension \eqref{canonical-central-extension-gps} splits canonically over \(L^+\tilde{G}\).
+\end{lemma}
+
+\begin{proof}
+(\cite[4.9]{Faltings})
+By construction of~(7.3c), it is enough to prove that the representation
+\[
+\bar{\pi} : L^+\tilde{G} \longrightarrow \mathrm{End}(H_1(0))
+\]
+integrates to a representation
+\[
+\pi : L^+\mathfrak{g} \longrightarrow \mathrm{GL}(H_1(0)).
+\]
+This will follow from the fact that, in the case \(\gamma \in L^+\tilde{G}(R)\),
+we can \emph{normalize} the automorphism \(u\) of Proposition~7.3.2.
+
+Indeed, as \(L(0) = [H_1(0)]^{L^+\mathfrak{g}}\) by~(7.2e),
+it follows from~(7.3a) that \(u\) maps \(L(0)_R\) to \(L(0)_R\).
+Now \(L(0)_R\) is a free \(R\)-module of rank one,
+hence we may choose \(u\) (in a unique way)
+such that it induces the identity on \(L(0)_R\).
+\end{proof}
+
+Let \(G\) be a connected simple complex group and \(X\) be a connected smooth projective complex curve. Consider the canonical central extension (\ref{canonical-central-extension-gps}) and form the affine Grassmannian \(\mathcal{Q}_{\widetilde{G}} = \widehat{L\widetilde{G}} / \widehat{L^+\widetilde{G}}\). By Lemma \ref{lemma-splitting-over-l-plus-g}, the central extension splits over \(L^+\widetilde{G}\) so we get a character \begin{align*}
+    \chi:\widehat{L^+\widetilde{G}} \to \Gm \times L^+\widetilde{G} \to \Gm
+\end{align*} and thus a line bundle on \(\mathcal{Q}_{\widetilde{G}}\). \begin{align*}
+    L_{\chi^{-1}} = \widehat{L\widetilde{G}} \times_{\widehat{L^+\widetilde{G}}} \mathbb{C}
+\end{align*}
+Consider the morphism of \(\mathbb{C}\)-groups
+\[
+\varphi : SL_2 \longrightarrow LSL_2
+\]
+defined by (for \(R\) a \(\mathbb{C}\)-algebra)
+\[
+\varphi : SL_2(R) \longrightarrow LSL_2(R) = SL_2(R((z))), \qquad
+\begin{pmatrix}
+a & b \\ c & d
+\end{pmatrix}
+\longmapsto
+\begin{pmatrix}
+d & cz^{-1} \\ bz & a
+\end{pmatrix}.
+\]
+Moreover, let \(\psi : LSL_2 \to L\tilde{G}\) be the morphism of \(\mathbb{C}\)-groups
+deduced from the map \(SL_2 \to \tilde{G}\) associated to the highest root \(\theta\).
+Set
+\[
+\varphi = \psi \circ \phi : SL_2 \longrightarrow L\tilde{G}. \tag{10.2c}
+\]
+
+The Borel subgroup \(B_2 \subset SL_2\) of upper triangular matrices maps to \(L^+\tilde{G}\)
+by construction, hence we obtain a morphism
+\[
+\overline{\varphi} : \mathbb{P}^1_\mathbb{C} \longrightarrow \mathcal{Q}_{\tilde{G}}.
+\]
+We check that the derivative \(\mathrm{Lie}(\varphi)\)
+maps the standard \(\mathfrak{sl}_2\)-triple
+\(\{ e, f, h \} = \{ X_\theta, X_{-\theta}, H_\theta \}\)
+to the \(\mathfrak{sl}_2\)-triple
+\(\{ X_{-\theta} \otimes z, X_\theta \otimes z^{-1}, -H_\theta \}\)
+of \(L\mathfrak{g}\).
+\begin{align*}
+    \varphi(\exp(te)) &= \varphi(\begin{pmatrix}1 & t \\ 0 & 1\end{pmatrix}) = \begin{pmatrix}1 & 0 \\ tz & 1\end{pmatrix} =  I + t \begin{pmatrix}0 & 0 \\ z & 0\end{pmatrix} + O(t^2) \\
+    \varphi(\exp(tf)) &= \varphi(\begin{pmatrix}1 & 0 \\ t & 1\end{pmatrix}) = \begin{pmatrix}1 & tz^{-1} \\ 0 & 1\end{pmatrix} =  I + t \begin{pmatrix}0 & z^{-1} \\ 0 & 0\end{pmatrix} + O(t^2) \\
+    \varphi(\exp(th)) &= \varphi(\begin{pmatrix}e^t & 0 \\ 0 & e^{-t}\end{pmatrix}) = \begin{pmatrix}e^{-t} & 0 \\ 0 & e^t\end{pmatrix} = I + t \begin{pmatrix}-1 & 0 \\ 0 & 1\end{pmatrix} + O(t^2)
+\end{align*}
+
+\begin{proposition}[Pullback to \(\mathbb{P}^1_\mathbb{C}\)]
+    \leavevmode
+\begin{enumerate}[(i)]
+\item The pullback defines an isomorphism
+\[
+\overline{\varphi}^* : \mathrm{Pic}(\mathcal{Q}_{\tilde{G}}) \xrightarrow{\;\sim\;} \mathrm{Pic}(\mathbb{P}^1_\mathbb{C}).
+\]
+\item We have
+\[
+\overline{\varphi}^*(\mathcal{L}_\chi) = \mathcal{O}_{\mathbb{P}^1_\mathbb{C}}(1),
+\quad\text{i.e.}\quad
+\mathrm{Pic}(\mathcal{Q}_G) = \mathbb{Z}\mathcal{L}_\chi.
+\]
+\end{enumerate}
+
+\end{proposition}
+
+\begin{proof}
+(i) follows from~\cite{Faltings}.
+To prove~(ii), we use that the restriction of (\ref{canonical-central-extension-gps}) to \(SL_2\) splits,
+hence \(\varphi\) lifts to a morphism
+\[
+\tilde{\varphi} : SL_2 \longrightarrow \widehat{L\tilde{G}},
+\]
+and all we have to do is calculate the character of
+\(B_2 \to L^+\tilde{G} \xrightarrow{\;\chi\;} \mathbb{G}_m.\)
+It is enough to calculate the character of \(B_2\)
+on the \(SL_2\)-module generated by \(v_0\).
+Recall that \(v_0\) is a highest weight vector for \(\widehat{L\tilde{G}}\) subject to the relation
+\[X_\theta(-1)^{\ell + 1 - (\lambda,\theta)} \otimes v_0 = 0.
+\] Since in the case of the basic representation \(\ell = 1\) and \(\lambda = 0\), we have
+\[X_\theta(-1)^{2} \otimes v_0 = 0.
+\] Thus the \(SL_2\)-module generated by \(v_0\) is the standard representation of \(SL_2\). The character of \(B_2\) on this module is given by the highest weight, which is \(1\).
+    \end{proof}
+In lieu of this proposition, we will denote the line bundle $\cL_\chi$ on $\cQ_{\widetilde{G}}$ simply by $\cO_{\cQ_{\widetilde{G}}}(1)$.
+
+\subsection*{10.3. Linearized line bundles on the infinite Grassmannian.}
+Consider the group \(\mathrm{Pic}_{L_X G}(\mathcal{Q}_G)\) of \(L_X G\)-linearized line bundles on \(\mathcal{Q}_G\).
+Recall that an \(L_X G\)-linearization of \(\mathcal{L}\) is an isomorphism
+\(m^*\mathcal{L} \xrightarrow{\sim} pr_2^*\mathcal{L}\),
+where \(m : L_X G \times \mathcal{Q}_G \to \mathcal{Q}_G\)
+is the action of \(L_X G\) on \(\mathcal{Q}_G\),
+satisfying the usual cocycle condition. It follows from the general dictionary of quotient stacks (see Proposition \ref{prop:Pic_quotient_stack})
+
+\begin{proposition}
+The map \(\pi : \mathcal{Q}_G \to \mathcal{M}_{G,X}\) induces an isomorphism
+\[
+\pi^* : \mathrm{Pic}(\mathcal{M}_{G,X}) \xrightarrow{\;\sim\;} \mathrm{Pic}_{L_X G}(\mathcal{Q}_G).
+\]
+Hence, once we know \(\mathrm{Pic}_{L_X G}(\mathcal{Q}_G)\), we know \(\mathrm{Pic}(\mathcal{M}_{G,X})\).
+\end{proposition}
+
+\subsection*{10.4. The case of simply connected groups.}
+To determine \(\mathrm{Pic}_{L_X \tilde{G}}(\mathcal{Q}_{\tilde{G}})\),
+consider the forgetful morphism
+\[
+f : \mathrm{Pic}_{L_X \tilde{G}}(\mathcal{Q}_{\tilde{G}}) \to \mathrm{Pic}(\mathcal{Q}_{\tilde{G}}).
+\]
+
+\begin{proposition}
+The map \(f : \mathrm{Pic}_{L_X \tilde{G}}(\mathcal{Q}_{\tilde{G}}) \to \mathrm{Pic}(\mathcal{Q}_{\tilde{G}})\) is injective.
+\end{proposition}
+
+\begin{proof}
+The kernel consists of \(L_X \tilde{G}\)-linearizations of the trivial bundle.
+Any two such differ by an automorphism of \(pr_2^*\mathcal{O}_{\mathcal{Q}_{\tilde{G}}}\),
+that is, by an invertible function on \(L_X \tilde{G} \times \mathcal{Q}_{\tilde{G}}\).
+Since \(\mathcal{Q}_{\tilde{G}}\) is integral,
+this function is the pullback of an invertible function \(f\) on \(L_X \tilde{G}\).
+The cocycle condition implies \(f\) is a character, hence \(f = 1\)
+by the following lemma.
+\end{proof}
+
+\begin{lemma}
+    [Characters of \(L_X \tilde{G}\)] \label{lemma-characters-of-l-x-g-are-trivial}
+The group \(L_X \tilde{G}\) has no non-trivial characters.
+\end{lemma}
+
+\begin{proof}
+The differential of $\chi$, considered as a function on $L_X\widetilde G$, is everywhere vanishing.
+Indeed, since $\chi$ is a group morphism, this means that the deduced
+Lie algebra morphism
+\[
+\mathfrak g \otimes A_X \longrightarrow \C
+\qquad\text{(with $A_X = \mathcal O(X^*)$)}
+\]
+is zero.
+The derived algebra
+\[
+[\mathfrak g \otimes A_X,\, \mathfrak g \otimes A_X]
+= [\mathfrak g,\mathfrak g] \otimes A_X
+\]
+and therefore equal to $\mathfrak g \otimes A_X$ (as $\mathfrak g$ is simple).
+Therefore any Lie algebra morphism
+$\mathfrak g \otimes A_X \to \C$
+is trivial.
+
+\red{As $L_X\widetilde G$ is integral (this is hard!)}, we can write it as the direct limit of an increasing sequence of integral varieties~$V_n$.
+The restriction of~$\chi$ to~$V_n$ has again zero derivative and is therefore constant.
+For large~$n$, the varieties~$V_n$ contain~$1$.
+This implies $\chi|_{V_n} = 1$, and we are done.
+\end{proof}
+
+\begin{lemma}
+The line bundle \(\mathcal{O}_{\mathcal{Q}_{\tilde{G}}}(1)\) admits an \(L_X \tilde{G}\)-linearization
+if and only if the restriction of the central extension (\ref{canonical-central-extension-gps}) to \(L_X \tilde{G}\) splits.
+\end{lemma}
+
+\begin{proof}
+Let \(\mathrm{Mum}_{L_X \tilde{G}}(\mathcal{O}_{\mathcal{Q}_{\tilde{G}}}(1))\)
+be the Mumford group of \(\mathcal{O}_{\mathcal{Q}_{\tilde{G}}}(1)\)
+under the action of \(L_X \tilde{G}\) on \(\mathcal{Q}_{\tilde{G}}\).
+This group consists of pairs \((f,g)\) with \(g \in L_X \tilde{G}\)
+and \(f : g^*\mathcal{O}_{\mathcal{Q}_{\tilde{G}}}(1) \xrightarrow{\sim} \mathcal{O}_{\mathcal{Q}_{\tilde{G}}}(1)\).
+As \(\mathcal{Q}_{\tilde{G}}\) is the direct limit of integral projective schemes,
+we obtain a central extension
+\[
+1 \longrightarrow \mathbb{G}_m
+\longrightarrow \mathrm{Mum}_{L_X \tilde{G}}(\mathcal{O}_{\mathcal{Q}_{\tilde{G}}}(1))
+\longrightarrow L_X \tilde{G} \longrightarrow 1. \tag{10.4a}
+\]
+An \(L_X \tilde{G}\)-linearization corresponds to a splitting of~(10.4a). Such a construction works in general and is functorial.
+Since \(\widehat{L \tilde{G}} = \mathrm{Mum}_{L \tilde{G}}(\mathcal{O}_{\mathcal{Q}_{\tilde{G}}}(1))\),
+the extension~(10.4a) is the pullback of (\ref{canonical-central-extension-gps}) to \(L_X \tilde{G}\), so the lemma follows.
+\end{proof}
+
+\begin{remark}
+    A line bundle $\mathcal{L}$ on a variety (or ind-scheme) $Y$ with a group action by $H$ is said to be $H$-linearized if the group acts compatibly on the total space of the line bundle. Formally, you must have an isomorphism \[m^*\mathcal{L} \cong pr_2^*\mathcal{L}\] on $H\times Y$, compatible with multiplication in $H$. That is exactly the same as saying the action of $H$ on $Y$ lifts to the line bundle $\mathcal{L}$. If a line bundle $\mathcal{L}$ on a homogeneous space $Y$ is $G$-equivariant, then it defines a central extension of $G$ by $\mathbb{G}_m$: \[1 \to \mathbb{G}_m \to \text{Aut}_G(\mathcal{L}) \to G \to 1.\] 
+    where $\text{Aut}_G(\mathcal{L})$ is the group of pairs $(g,\phi)$ with $g\in G$ and $\phi: g^*\mathcal{L} \to \mathcal{L}$ an isomorphism of line bundles. Giving a lift (linearization) of the $G$-action to $\mathcal{L}$ is equivalent to splitting this extension.
+
+    In fancier language, a linearization is a descent datum for the group action, and the obstruction to descent lives in $H^2(H, \mathbb{G}_m)$, which classifies central extensions of $H$ by $\mathbb{G}_m$. In particular, the class of the extension $\text{Mum}_H(\mathcal{L})$ is the obstruction class to lifting the $H$-action to $\mathcal{L}$. When that class vanishes (i.e. the extension splits), a linearization exists.
+\end{remark}
+
+\begin{theorem}
+The restriction of (\ref{canonical-central-extension-gps}) to \(L_X G\) splits.
+\end{theorem}
+
+\begin{proof}
+Consider the inclusion \(i : L_X \widehat{G} \hookrightarrow L\widehat{G}\).
+The map \(\mathrm{Lie}(i) : L_X \mathfrak{g} \hookrightarrow L\mathfrak{g}\)
+sends \(X \otimes f\) to \(X \otimes \widehat{f}_0\),
+the Laurent expansion of \(f\) at \(x_0\).
+By the residue theorem, the cocycle~(7.2a) is trivial on \(L_X \mathfrak{g}\),
+so \(L_X \mathfrak{g}\) embeds as a subalgebra of \(\widehat{L\mathfrak{g}}\).
+
+Let \(B = [H_1(0)]_{L_X \mathfrak{g}} = H_1(0)/L_X \mathfrak{g} \cdot H_1(0)\),
+the coinvariants of the level-one highest weight representation \(H_1(0)\).
+The key point is that \(B \neq 0\) by the theory of conformal blocks. From the commutativity of~(7.3a), for \(\gamma \in L_X G(R)\),
+the automorphism \(u_\gamma\) of \(H\) maps coinvariants to coinvariants,
+giving a morphism of \(\mathbb{C}\)-groups
+\[
+\pi : L_X G \longrightarrow \mathrm{PGL}(B),
+\]
+and a commutative diagram
+\[
+\begin{tikzcd}
+1 \arrow[r] & \mathbb{G}_m \arrow[r] & \widehat{L_X G} \arrow[r] & L_X \widehat{G} \arrow[r] & 1 \\
+1 \arrow[r] & \mathbb{G}_m \arrow[r] & \mathrm{GL}(B) \arrow[r] & \mathrm{PGL}(B) \arrow[r] & 1
+\end{tikzcd}
+\]
+By construction, the central extension of \(L_X \tilde{G}\) above coincides with the
+central extension obtained by restriction of~(7.3c) to \(L_X \tilde{G}\).
+By definition of \(B\), the derivative of \(\pi\) is trivial.
+As \(L_X \tilde{G}\) is an \emph{integral} ind-group by Proposition~9.1.1,
+it follows that \(\pi\) has to be the constant map identity.
+Indeed, write \(L_X G\) as the direct limit of integral schemes \(V_n\),
+and remark that \(\pi\) has to be constant on \(V_n\);
+for large \(n\), as \(V_n\) contains \(1\), this constant is \(\pi(1) = 1\).
+So, \(\pi\) being the identity, \(\widehat{\pi}\) factors through \(\mathbb{G}_m\),
+which gives the desired splitting. 
+\end{proof}
+
+\begin{corollary}
+The line bundle \(\mathcal{O}_{\mathcal{Q}_{\tilde{G}}}(1)\)
+descends to a line bundle \(\mathcal{O}_{\mathcal{M}_{\tilde{G},X}}(1)\) on \(\mathcal{M}_{\tilde{G},X}\).
+Moreover,
+\[
+\mathrm{Pic}(\mathcal{M}_{\tilde{G},X})
+= \mathcal{O}_{\mathcal{M}_{\tilde{G},X}}(1)\mathbb{Z}.
+\tag{10.4b}
+\]
+\end{corollary}
+
+\subsection*{10.5. The case of the special linear group.}
+
+\begin{lemma}
+Let \(\mathcal{D}\) be the determinant line bundle on \(\mathcal{M}_{SL_r,X}\).
+Then
+\[
+\mathcal{D} = \mathcal{O}_{\mathcal{M}_{SL_r,X}}(1).
+\]
+\end{lemma}
+
+\begin{proof}
+Consider the morphism \(\overline{\varphi}\) of~10.2.1:
+\[
+\begin{tikzcd}
+\mathbb{P}^1_\mathbb{C} \arrow[r, "\overline{\varphi}"] \arrow[d, "\gamma"'] &
+\mathcal{Q}_{SL_r} \arrow[d, "\pi"] \\
+\mathcal{M}_{SL_r,X} \arrow[r, equals] &
+\mathcal{M}_{SL_r,X}
+\end{tikzcd}
+\]
+Using \(\gamma\), we obtain a family \(E\) of \(SL_r\)-bundles parameterized by \(\mathbb{P}^1_\mathbb{C}\),
+and we must show that the determinant line bundle of this family is
+\(\mathcal{O}_{\mathbb{P}^1_\mathbb{C}}(1)\).
+By definition of \(\varphi\), it suffices to treat the rank-two case,
+where the family corresponds to the inclusion
+\[
+W =
+\begin{pmatrix}
+d & cz^{-1} \\ bz & a
+\end{pmatrix}
+(\mathbb{C}[[z]] \oplus \mathbb{C}[[z]])
+\hookrightarrow
+\mathbb{C}((z)) \oplus \mathbb{C}((z)).
+\]
+The lattice \(V = z^{-1}\mathbb{C}[[z]] \oplus \mathbb{C}[[z]]\)
+defines the rank-two bundle \(F = \mathcal{O}_X(p) \oplus \mathcal{O}_X\).
+Via the inclusion \(W \subset V\),
+the family \(E_{[a:c]}\) is the kernel of
+\(F \to \mathbb{C}_p\)
+sending local sections \((z^{-1}f,g)\) to \(a f(p) - c g(p)\).
+Hence
+\[
+\mathcal{D}_E = \mathcal{O}_{\mathbb{P}^1_\mathbb{C}}(1)
+\]
+\end{proof}
+
 
 \section{The central extension}
 Recall that there is a canonical map of stacks $\pi:\cQ = \SL_r(K) / \SL_r(\mathcal{O}) \to \mathcal{SL}_X(r)$. Let $\cL$ be the determinant line bundle on $\mathcal{SL}_X(r)$. It will turn out that, though it is invariant under the action of $\SL_r(K)$, this line bundle does not admit an action of $\SL_r(K)$. But it does admit an action of a canonical extension $\SL_{cr}(K)$ of $\SL_r(K)$.

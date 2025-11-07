@@ -1175,9 +1175,9 @@ Recall that on a Riemann surface $R$, we have the Hodge star operator defined on
 Recall that we had a decomposition of the square integrable smooth 1 forms on a compact Riemann surface $R$ \begin{align*}
     L^2 \Omega^1_{sm}(R) & = (dC^{\infty}(R)) \oplus H \oplus (*d C^{\infty}(R))
 \end{align*} where $H$ is the space of harmonic 1-forms. Moreover, $H$ consists of smooth forms. Also recall that we defined an inner product on $L^2 \Omega^1_{sm}(R)$ by \begin{align*}
-    <\alpha, \beta> & = \int_R \alpha \wedge * \beta
+    \langle\alpha, \beta\rangle & = \int_R \alpha \wedge * \beta
 \end{align*} The decomposition is orthogonal with respect to this inner product in the sense that \begin{align*}
-    <d f, * d g> & = 0
+    \langle d f, * d g\rangle & = 0
 \end{align*} for all smooth functions $f,g$ on $R$.
 
 Any closed differential form has $2g$ periods given by integrating over the edges of the polygonal decomposition of $R$. The form is exact if and only if all its periods vanish. 
@@ -1201,7 +1201,7 @@ Let $a_1, \ldots, a_g, b_1, \ldots, b_g$ be the edges of the polygonal decomposi
 &= \sum_{i=1}^g \left( \int_{a_i}F\phi' - \int_{a_i^{-1}} (F\phi') \right) + \sum_{i=1}^g \left( \int_{b_i} F\phi' - \int_{b_i^{-1}} (F\phi') \right) \\
 \end{align*} and the difference between integrating over $a_i$ and $a_i^{-1}$ is given by the period of $\phi$ over the cycle, that is precisely $A_i$. Similarly for $b_i$.
 We also have the relation \begin{align*}
-    \sum_i (A_i \overline{B_i} - B_i \overline{A_i}) = i<\phi, \phi'> 
+    \sum_i (A_i \overline{B_i} - B_i \overline{A_i}) = i\langle\phi, \phi'\rangle
 \end{align*} 
 We have the following consequences:
 \begin{itemize}
@@ -1360,7 +1360,7 @@ We denote by $J_d$ the set of isomorphism classes of line bundles of degree $d$
 We can change the degree of any given line bundle on $R$ to zero
 by twisting by a multiple of your favorite point, and we get:
 
-\begin{proposition}[2.4]
+\begin{proposition}
 The group $\Pic(R)$ of isomorphism classes of holomorphic line bundles on $R$
 fits into a short exact sequence
 \[
@@ -1383,8 +1383,6 @@ so the map to $J_0$ is well defined;
 now use the divisor $d\{r\}$ to identify $J_0$ with $J_d$,
 and the resulting map to $J_d$ is now also independent of your choice of $r$.
 
-\bigskip
-
 This map will hold the key to Riemann's solution of the multiplicative Cousin problem,
 but we need to settle some of its properties first.
 The word \textbf{generic} in the next theorem means
@@ -1393,6 +1391,44 @@ Analytic subspaces are locally cut out by a collection of holomorphic functions;
 they are usually not submanifolds,
 but they are always stratified by \textbf{locally closed} submanifolds of decreasing dimensions
 (limiting their “badness”).
+
+\begin{remark}
+    [Identifing the differential of $AJ_d$] First we identify the tangent space of $J_d$ at a point $[L]$ representing a line bundle $L$ on $R$. Since $J_d \cong J_0 \cong H^0(R,K_R)^*/H_1(R,\Z)$, we have
+\[T_{J_d,[L]} \cong H^0(R,K_R)^*.
+\]
+    
+    Use the Abel-Jacobi map in holomorphic 1-form coordinates. Pick a basis $\{\omega_1,\dots,\omega_g\}$ of $H^0(R,K_R)$ and periods so that
+    \[
+    AJ_1(p)=\left(\int_{r_0}^p \omega_1,\dots,\int_{r_0}^p \omega_g\right)\in J
+    \]
+    For reduced $D=p_1+\cdots+p_d$, we have $AJ_d(D)=\sum_{i=1}^d AJ_1(p_i)$. Let $v=(v_1,\dots,v_d)\in \bigoplus_i T_{p_i}R$ be a tangent to $\Sym^dR$ at $D$. Vary $p_i(t)$ with $ p'_i(0)=v_i$. Then the derivative of an integral of a holomorphic form along a path with moving endpoint is just evaluation of the form at that endpoint against the velocity vector:
+    \[
+    \left.\frac{d}{dt}\right|_{t=0}\int_{r_0}^{p_i(t)}\omega_k=\omega_k(p_i)(v_i)
+    \]
+    Summing over $i$ gives the differential
+    \[
+    d(AJ_d)_D: \bigoplus_{i=1}^d T_{p_i}R \longrightarrow H^0(R,K_R)^*
+    \]
+    \[
+    (v_1,\dots,v_d) \longmapsto \left(\omega \mapsto \sum_{i=1}^d \omega(p_i)(v_i)\right)
+    \]
+    The situation is more delicate if $D$ is not reduced. Choose a local coordinate $z$ near each $p_i$.
+    Write $\omega = f(z)\,dz$, so $f(z)$ is holomorphic.
+
+    A tangent vector to $\Sym^d R$ at $D$ corresponds to a choice of infinitesimal deformation of each $m_i p_i$, i.e. an element of $H^0(\mathcal O_R(D)|_D) \cong \bigoplus_i \mathbb C[z]/(z^{m_i})$. That means you specify the coefficients of $(1, z, z^2, \ldots, z^{m_i-1})$ at each $p_i$.
+
+    Then the differential of the Abel-Jacobi map acts by:
+    \[
+    d(AJ_d)_D: \bigoplus_i \mathbb C[z]/(z^{m_i}) \longrightarrow H^0(K_R)^*
+    \]
+    \[
+    (v_{i,0}, v_{i,1}, \ldots, v_{i,m_i-1})_i \mapsto \left(\omega \mapsto \sum_i \sum_{k=0}^{m_i-1} \frac{1}{k!}\, \omega^{(k)}(p_i)\, v_{i,k}\right)
+    \]
+    where $\omega^{(k)}(p_i)$ means the $k$-th derivative (the $k$-jet) of the local coefficient function $f(z)$ of $\omega=f(z)\,dz$.
+    
+    In general, there's a uniform way to describe the differential valid for all $D$:
+The differential \[d(AJ_d)_D : H^0(\mathcal O_R(D)|_D) \to H^1(\mathcal O_R)\] is given by the connecting homomorphism in the long exact sequence \[0 \to \mathcal O_R \to \mathcal O_R(D) \to \mathcal O_R(D)|_D \to 0\]
+\end{remark}
 
 \begin{theorem}[Properties of the Abel-Jacobi map]
 \leavevmode
@@ -1409,9 +1445,193 @@ as a holomorphic projective bundle over $J_d$.
 \end{enumerate}
 \end{theorem}
 
+\begin{proof}
+    \leavevmode
+\begin{enumerate}
+    \item A point in the fiber over $j$ is an effective divisor $D$ of degree $d$
+such that $\mathcal{O}(D) \cong L$.
+The set of such divisors is in bijection with the set of nonzero holomorphic sections
+of $L$, modulo scaling,
+which is precisely $\mathbb{P}H^0(R;L)$.
+    \item The fibers are connected. Local injectivity/isomorphism can be checked by computing the differential of $AJ_d$ and checking that it is injective at generic points. The differential at $(p_1 + \cdots + p_d) \in \Sym^d R$ is given by the map \begin{align*}
+    T_{p_1} R \oplus \cdots \oplus T_{p_d} R & \to T_{AJ_d(p_1 + \cdots + p_d)} J_d \cong H^0(R, K_R)^* \\
+    (v_1, \ldots, v_d) & \mapsto \left( \omega \mapsto \sum_{i=1}^d \omega(v_i) \right) 
+\end{align*} The map fails to be injective if and only if there exist nonzero $v_i \in T_{p_i} R$ such that \begin{align*}
+    \sum_{i=1}^d \omega(v_i) & = 0
+\end{align*} for all $\omega \in H^0(R, K_R)$. This is equivalent to saying that there exists a holomorphic differential $\omega$ vanishing at all $p_i$. By Riemann-Roch, for generic choices of $p_i$, there are no nontrivial holomorphic differentials vanishing at all $p_i$ if $d \leq g$. Hence, the differential is injective at generic points, making $AJ_d$ a local embedding.
+\item The argument is the same as local injectivity.
+\item By Riemann-Roch, for $d \geq 2g - 1$, we have \begin{align*}
+    h^0(R, L) & = d - g + 1
+\end{align*} for all line bundles $L$ of degree $d$ because $H^1(R, L) = 0$ by Serre duality. Therefore, the fibers of $AJ_d$ are all projective spaces of dimension $d - g$. This gives $\Sym^d(R)$ the structure of a holomorphic projective bundle over $J_d$.
+\end{enumerate}
+\end{proof}
+
 Let $W_d \subset J_d$ denote the image of $AJ_d$.
 They are only interesting for $d < g$,
 and the most interesting one is $W_{g-1}$,
-also known (for a reason that will be clear soon) as the \textbf{Theta-divisor}.
+also known as the \textbf{theta-divisor}.
 
+\begin{proposition}
+    The points of $W_{g-1}$ correspond to
+isomorphism classes of line bundles $L$ on $R$
+with $h^0(R;L) \ge 1$. It has codimension $1$ and therefore generically smooth. The smooth points correspond to line bundles $L$ with $h^0(R;L) = 1$. Locally $W_{g-1}$ is given as the zero locus of a single holomorphic function (a theta function).
+\end{proposition}
+
+\begin{proof}
+    The map $AJ_{g-1}$ has domain of dimension $g-1$ and target of dimension $g$ and is generically injective, so its image $W_{g-1}$ has dimension $g-1$, hence codimension $1$ in $J_{g-1}$. Its image is those line bundles which came from effective divisors of degree $g-1$. Such line bundles $L$ satisfy $h^0(R;L) \geq 1$ since they have a nontrivial holomorphic section given by the constant section $1$ in $\mathcal{O}_R(D)$ for some effective divisor $D$ with $\mathcal{O}_R(D) \cong L$. Explicitly (because I always get confused by this) there's a natural inclusion
+\[\mathcal O_R \hookrightarrow \mathcal O_R(D),\qquad
+f \longmapsto f\cdot 1\]
+where the image of the constant function $1$ is a holomorphic section of $\mathcal{O}_R(D)$. 
+
+Locally near $p_i$, pick a coordinate $z$ vanishing at $p_i$, and note that $\mathcal{O}_R(D)|_U \cong z^{-m_i}\mathcal{O}_U$. In this local trivialization, the "section 1" of $\mathcal{O}_R(D)$ corresponds to $z^{m_i}$ as a function. That function does vanish to order $m_i$ at $p_i$.
+
+    By the implicit function theorem, the smooth points of $W_{g-1}$ correspond to points where the differential of $AJ_{g-1}$ is injective.
+
+    The rank of the differential of $AJ_{g-1}$ controls the regularity of the image. From the differential computation, we have
+    \[
+    d(AJ_d)_D : \bigoplus_i T_{p_i}R \to H^0(K_R)^*, \quad (v_i) \mapsto (\omega\mapsto \sum_i\omega(p_i)(v_i))
+    \]
+    Its kernel is nontrivial if and only if there exists a nonzero $\omega\in H^0(K_R)$ such that $\omega(p_i)(v_i)=0$ for all $i$, i.e. $\omega$ vanishes at all $p_i$. Hence $\ker d(AJ_{g-1})_D \neq 0$ if and only if $H^0(K_R(-D))\neq 0$.
+
+    By Riemann-Roch:
+    \[
+    h^0(K_R(-D)) = h^0(\mathcal{O}_R(D)) + (g-1) - g + 1 = h^0(\mathcal{O}_R(D))
+    \]
+    Thus $\ker d(AJ_{g-1})_D \neq 0$ if and only if $h^0(\mathcal{O}_R(D)) \geq 2$. In particular, if $h^0(\mathcal{O}_R(D)) = 1$, the differential is injective.
+
+    General theory of complex analytic spaces tells us that a codimension $1$ analytic subspace is locally cut out by a single holomorphic function. In particular, every Weil divisor is locally principal, i.e. a Cartier divisor. However, we will see later that $W_{g-1}$ is actually globally principal, cut out by a theta function.
+\end{proof}
+
+\begin{definition}
+    A \textbf{theta characteristic} on a Riemann surface $R$ is a line bundle $\rho$ satisfying \begin{align*}
+        \rho^{\otimes 2} & \cong K_R
+    \end{align*} where $K_R$ is the canonical bundle of $R$.
+\end{definition}
+If we pick a basepoint $p_0 \in R$ to identify $J$ with $J_{g-1}$, then the difference of two theta characteristics is a $2$-torsion point in $J$, i.e. a line bundle $\tau$ satisfying \begin{align*}
+    \tau^{\otimes 2} & \cong \mathcal{O}_R
+\end{align*} This is because if $\rho_1, \rho_2$ are two theta characteristics, then \begin{align*}
+    (\rho_1 \otimes \rho_2^{-1})^{\otimes 2} & \cong K_R \otimes K_R^{-1} \cong \mathcal{O}_R
+\end{align*} The set of $2$-torsion points in $J$ forms a group isomorphic to $(\Z/2\Z)^{2g}$, so there are $2^{2g}$ theta characteristics on $R$.
+
+\begin{remark}
+    [Cultural remark on theta characteristics] A square root of $K$ on a Riemann surface is the same as a spin structure on the tangent bundle. It is also given by a quadratic form on $H_1(R, \Z/2\Z)$ compatible with the intersection form, i.e. a function $q:H_1(R, \Z/2\Z) \to \Z/2\Z$ satisfying \begin{align*}
+        q(a + b) & = q(a) + q(b) + a \cup b
+    \end{align*} where $a \cup b$ is the intersection number modulo $2$. 
+\end{remark}
+
+The following theorem describes the symmetries of $W_{g-1}$. Translating $W_{g-1}$ by a theta characteristic corresponds to shifting the theta function by a half-period in the classical theory of theta functions.
+
+\begin{theorem}
+    \leavevmode
+    \begin{enumerate}
+        \item $W_{g-1}$ is invariant under the involution $L \mapsto K_R\otimes L^{-1}$ on $J_{g-1}$.
+        \item (equivalent to (1)) Let $\rho$ be a theta characteristic, i.e. a line bundle satisfying $\rho^{\otimes 2} \cong K_R$. Then $\rho W_{g-1}$ is self-inverse under the group law on $J_0$
+        \item $W_{g-1}$ is not invariant under any translation of the torus.
+        \item $W_{g-1}$ is invariant under reflection by theta chraracteristics, but not under any reflections.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{remark}
+    There exists a universal vector bundle (the Poincaré bundle) $\cP_d$ over $R \times J_d$ such that for any line bundle $L$ on $R$, there is a natural isomorphism \begin{align*}
+        L & \cong \cP_d|_{R \times \{[L]\}}
+    \end{align*} To make $\mathcal{P}_d$ unique, one must choose a base point $r\in R$ and require that $\mathcal{P}_d$ be trivial along $\{r\}\times J_d$:
+    \[
+    \mathcal{P}_d|_{\{r\}\times J_d} \cong \mathcal{O}_{J_d}
+    \]
+    Without this normalization, the universal line bundle is only defined up to tensoring by a line bundle pulled back from $J_d$.
+    
+    Taking $d=g-1$, we have finite dimensional holomorphic vector bundles on $J_{g-1}$ denoted $\cH_0$ and $\cH_1$, a holomorphic map $\mathrm{pp}:\cH_0 \to \cH_1$, and an exact sequence of vector spaces for every $j\in J_{g-1}$\begin{align*}
+        0 \to H^0(R, L_j) & \to (\cH_0)_j \to (\cH_1)_j \to H^1(R, L_j) \to 0
+\end{align*}
+This map $\mathrm{pp}:\cH_0 \to \cH_1$ is the principal parts map, which at a point $j \in J_{g-1}$ representing a line bundle $L$ on $R$ is given by taking a global meromorphic section of $L$ and sending it to its principal parts at all points of $R$ (i.e its obstruction to being holomorphic). 
+\end{remark}
+
+Now we introduce an identification of the theta line bundle $\Theta$ on $J_{g-1}$ with the inverse determinant line bundle of the complex of vector bundles $\cH_0 \to \cH_1$.
+
+\begin{theorem}
+    $\Theta \cong \Lambda^{\mathrm{top}} \cH_1 \otimes (\Lambda^{\mathrm{top}} \cH_0)^{-1}$ where $\Theta$ is the line bundle on $J_{g-1}$ with divisor $W_{g-1}$. The map $\mathrm{pp}:\cH_0 \to \cH_1$ induces a holomorphic section of $\Theta$ whose zero locus is precisely $W_{g-1}$.
+\end{theorem}
+
+\begin{remark}
+    [What $\cP_d$ is not]  Consider the map $R \times \Sym^d R \to J_{d-1}$ given by \begin{align*}
+        (p, D) & \mapsto AJ_d(D) - AJ_1(p)
+    \end{align*}  The universal line bundle $\cP_{d-1}$ on $R \times J_{d-1}$ can be pulled back to $R \times \Sym^d R$ along this map. This pullback gives a divisor called the incidence divisor \begin{align*}
+        I & = \{(p, D) \in R \times \Sym^d R : p \in \operatorname{supp}(D) \}
+    \end{align*} It turns out that this is not quite $(\id_R \times AJ_d)^* \cP_d$. Instead, we have an isomorphism of line bundles on $R \times \Sym^d R$ \begin{align*}
+        \cO(I) & \cong (\id_R \times AJ_d)^* \cP_d \otimes \cO(1)
+    \end{align*} where $\cO(1)$ is the hyperplane line bundle along the projective fibers of $\Sym^d R \to J_d$. More precisely, if we denote by $\pi:R \times \Sym^d R \to \Sym^d R$ the projection map, then \begin{align*}
+        \cO(1) & = \pi^* \mathcal{O}_{\Sym^d R}(1)
+    \end{align*} This discrepancy arises because the incidence divisor $I$ only keeps track of the points in the support of the divisor $D$, while the universal line bundle $\cP_d$ also encodes the tautological line on the projectivized space of sections
+\end{remark}
+\subsection{Riemann Theta function}
+Recall that we had a basis of holomorphic differentials $\phi_1, \ldots, \phi_g$ on $R$ normalized so that the period matrix \begin{align*}
+    \Omega & = [I | B]
+\end{align*} with $B$ symmetric and $\Im B$ positive definite. Define the Riemann theta function \begin{align*}
+    \theta(z | B) & = \sum_{n \in \Z^g} \exp\left( 2\pi i \left( \frac{1}{2} n^t B n + n^t z \right) \right)
+\end{align*} 
+
+\begin{theorem}[Properties of the Riemann theta function]
+\leavevmode
+\begin{enumerate}[(1)]
+    \item $\Theta$ converges uniformly on compact subsets.
+    \item $\Theta$ is periodic under translations 
+    \[
+        \vec{z} \;\longmapsto\; \vec{z} + \vec{e}_j,
+    \]
+    and satisfies the quasi-periodicity relation
+    \[
+        \Theta(\vec{z} + B\vec{m}; B)
+        =
+        \Theta(\vec{z}\,|B)
+        \exp\!\bigl(-2\pi i(\vec{m}'\vec{z} + \tfrac{1}{2}\vec{m}^\top B \vec{m})\bigr).
+    \]
+    \item The zero locus of $\Theta$ is the translate
+    \[
+        W_{g-1} - \rho,
+    \]
+    where $\rho$ is a theta characteristic determined by the choice of $a$ and $b$ cycles.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof of (3)]
+The evenness of $\Theta$ implies symmetry under half-lattice points.
+We will see that:
+\begin{itemize}
+    \item Topologically, $\Theta \cong \mathcal{O}(W_{g-1})$.
+    \item Holomorphic line bundles of this type are related by translation on $J$. In particular, two line bundles of the same topological type on $J$ differ only by a translation. This is a general theorem about line bundles on complex tori.
+    \item Symmetry forces only half-lattice translations to be allowed.
+\end{itemize}
+\end{proof}
+
+
+We are now prepared to solve the multiplicative Cousin problem on $R$. Consider the map
+\[
+F : R \times \Sym^g R \;\longrightarrow\; J_{g-1},
+\qquad
+(r,D) \longmapsto AJ(D) - AJ(r).
+\]
+
+\begin{claim}
+\(F^{-1}(W_{g-1}^{\text{smooth}}) = \{\, (r,D) \mid r \in D \,\}.\)
+\end{claim}
+
+\begin{remark}
+If \(\dim H^0(R, \mathcal{O}(D)) > 1,\)
+then \(F^{-1}(AJ(D))\) projects surjectively onto all of \(R.\)
+\end{remark}
+
+
+Therefore the function $\Theta(F(r,D) + \rho)$ as a function of $r \in R$ has divisor exactly $D$. This implies that we can solve almost any prescription of zeros and poles by a ratio of products of shifted theta functions restricted to $AJ_1(R) \subset J$.
+
+Abel's condition ensures we can arrange the shifts so that
+the result is periodic with respect to the lattice,
+hence we obtain a single valued \emph{meromorphic function on \(R\)}.
+
+\begin{remark}
+    Torelli's theorem states that a compact Riemann surface $R$ is determined up to isomorphism by its Jacobian $J(R)$ together with the theta divisor $W_{g-1} \subset J(R)$. In other words, if two compact Riemann surfaces have isomorphic Jacobians as principally polarized abelian varieties (i.e. the isomorphism identifies the theta divisors), then the Riemann surfaces themselves are isomorphic.
+\end{remark}
 \end{document}

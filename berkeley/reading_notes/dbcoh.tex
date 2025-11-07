@@ -309,57 +309,6 @@ By $D^b(\mathcal{X})$ we mean the derived category of the category of $\mathbb{C
 
   Passing to derived categories, you still have $j^*: D^b(\mathrm{QCoh}(X)) \to D^b(\mathrm{QCoh}(U))$ which has no higher derived functors since $j^*$ is exact. The exact same holds in the stack setting: if $\iota: \mathcal{U} \hookrightarrow \mathcal{X}$ is an open immersion of stacks, you get $\iota^*: D^b(\mathcal{X}) \to D^b(\mathcal{U})$.
 \end{remark}
-
-\begin{remark}[General dictionary for quotient stacks and equivariant geometry]
-  There is a general dictionary relating the stack-theoretic concepts and the equivariant geometry of $X$. Here $G$ is a reductive algebraic group acting on a scheme $X$ and $[X/G]$ is the quotient stack.
-  \begin{center}
-    \begin{tabular}{|l|l|}
-      \hline
-      \textbf{Geometry of $[X/G]$} & \textbf{$G$-equivariant geometry of $X$}                   \\[1ex]
-      \hline
-      $\mathbb{C}$-point $\bar{x} \in [X/G]$
-                                   & orbit $Gx$ of $\mathbb{C}$-point $x \in X$                 \\
-                                   & (with $\bar{x}$ the image of $x$ under $X \to [X/G]$)      \\[1ex]
-      \hline
-      automorphism group $\mathrm{Aut}(\bar{x})$
-                                   & stabilizer $G_x$                                           \\[1ex]
-      \hline
-      function $f \in \Gamma([X/G],\mathcal{O}_{[X/G]})$
-                                   & $G$-equivariant function $f \in \Gamma(X,\mathcal{O}_X)^G$ \\[1ex]
-      \hline
-      map $[X/G] \to Y$ to a scheme $Y$
-                                   & $G$-equivariant map $X \to Y$                              \\[1ex]
-      \hline
-      line bundle
-                                   & $G$-equivariant line bundle (or $G$-linearization)         \\[1ex]
-      \hline
-      quasi-coherent sheaf
-                                   & $G$-equivariant quasi-coherent sheaf                       \\[1ex]
-      \hline
-      tangent space $T_{[X/G],\bar{x}}$
-                                   & normal space $T_{X,x}/T_{Gx,x}$ to the orbit               \\[1ex]
-      \hline
-      coarse moduli space $[X/G] \to Y$
-                                   & geometric quotient $X \to Y$                               \\[1ex]
-      \hline
-      good moduli space $[X/G] \to Y$
-                                   & good GIT quotient $X \to Y$                                \\[1ex]
-      \hline
-    \end{tabular}
-  \end{center}
-\end{remark}
-
-The unstable locus for the negative character is the set
-$\{y_1 = y_2 = 0\} \subset V$. Consider the Koszul resolution of the associated sky-scraper sheaf:
-\[
-  K_{-} = \mathcal{O}(2) \xrightarrow{(y_2,-y_1)} \mathcal{O}(1)^{\oplus 2}
-  \xrightarrow{(y_1,y_2)} \mathcal{O}.
-\]
-Then $\iota_{-}K_{-}$ is exact, it is the pull-up of the Euler sequence from
-$\mathbb{P}^1_{y_1:y_2}$. On the other hand $\iota_{+}K_{-}$ is a resolution of the sky-scraper
-sheaf $\mathcal{O}_{\mathbb{P}^1_{x_1:x_2}}$ along the zero section. Similar comments apply for
-the Koszul resolution $K_{+}$ of the set $\{x_1 = x_2 = 0\}$.
-
 Let
 \[
   \mathcal{G}_t \subset D^b(\mathcal{X})
@@ -519,7 +468,7 @@ $\{\mathcal{O}(t), \mathcal{O}(t+1)\}$.
   \]
   So $\Phi_t$ just sends the line bundles to the same ones on the other phase. Now, when we apply $\Phi_{t+1}^{-1}$ (the inverse equivalence for the next window) to these line bundles on $X_-$, we have to interpret them as objects of the new window $\mathcal G_{t+1} = \langle \mathcal{O}(t+1), \mathcal{O}(t+2)\rangle$.
 
-  But $\mathcal{O}(t)$ is not in that window. So we must rewrite $\mathcal{O}(t)$ in terms of $\mathcal{O}(t+1)$ and $\mathcal{O}(t+2)$. Consider the Koszul resolution resolving the structure sheaf of the unstable locus $\{y_1=y_2=0\}$ on the stack $\mathcal{X}=[V/\mathbb{C}^*]$:
+  But $\mathcal{O}(t)$ is not in that window. So we must rewrite $\mathcal{O}(t)$ in terms of $\mathcal{O}(t+1)$ and $\mathcal{O}(t+2)$. Consider the Koszul resolution resolving the structure sheaf of the unstable locus $\{y_1=y_2=0\}$:
 \[
   0 \to \mathcal{O}_V(2) \xrightarrow{(y_2,-y_1)} \mathcal{O}_V(1)^{\oplus 2} \xrightarrow{(y_1,y_2)} \mathcal{O}_V \to \cO_V/\{y_1=y_2=0\} \to 0
 \]
@@ -624,13 +573,12 @@ H^1(\mathbb{P}^1,\mathcal{O}(n)) = \begin{cases}
 
 Substituting into our formula above, we see that the only nonzero contributions occur at $i=0$ from \(H^0(\cO)\cong\C\), and at $i=2$ from \(H^0(\cO(-2))[2]\) shifting to degree $2$ via the $i-2$ term.
   \end{remark}
-
-\begin{remark}
   We now want to see what the inverse spherical twist $T_S^{-1}$ does to the generators $\mathcal{O}(t)$ and $\mathcal{O}(t+1)$ where $S=\mathcal{O}_\Sigma(t)$ is our spherical object.
+\begin{remark}[Action on \(\mathcal{O}(t+1)\)]
 
-  For $\mathcal{O}(t+1)$, we have $R\Hom(\mathcal{O}(t+1),S) = \Hom_{\text{Coh}(X_+)}(\cO_{X_+}(t+1),\cO_\Sigma(t))$ because we are dealing with sheaves both sitting in degree zero. But f any sheaf $E$ on $X_+$, we have \[\Hom_{X_+}(E, i_*F) \cong \Hom_{\Sigma}(i^*E, F)\] because $i_*$ is fully faithful on the abelian subcategory of sheaves supported on $\Sigma$. Thus
+  For $\mathcal{O}(t+1)$, we have $R\Hom(\mathcal{O}(t+1),S) = \Hom_{\text{Coh}(X_+)}(\cO_{X_+}(t+1),\cO_\Sigma(t))$ because we are dealing with sheaves both sitting in degree zero. But for any sheaf $E$ on $X_+$, we have \[\Hom_{X_+}(E, i_*F) \cong \Hom_{\Sigma}(i^*E, F)\] because $i_*$ is fully faithful on the abelian subcategory of sheaves supported on $\Sigma$. Thus
 \[
-\Hom_{X_+}\big(\mathcal{O}(t+1), i_*\mathcal{O}_\Sigma(t)\big)
+\Hom_{X_+}\big(\mathcal{O}_{X_+}(t+1), i_*\mathcal{O}_\Sigma(t)\big)
 \cong
 \Hom_{\Sigma}\big(i^*\mathcal{O}(t+1), \mathcal{O}_\Sigma(t)\big).
 \]
@@ -640,73 +588,63 @@ The restriction of $\mathcal{O}(t+1)$ to the zero section is $i^*\mathcal{O}(t+1
 = H^0\big(\Sigma, \mathcal{O}_\Sigma(t - (t+1))\big)
 = H^0\big(\Sigma, \mathcal{O}_\Sigma(-1)\big) = 0
 \]
-
-  For $E = \mathcal{O}_{X_+}(t)$, we have a nontrivial morphism $\mathcal{O}_{X_+}(t)\to S=\mathcal{O}_\Sigma(t)$, namely the restriction map to the zero section. By the inverse twist definition:
-  \[
-  T_S^{-1}(E) = \operatorname{Cone}\big(E \xrightarrow{\text{coev}} R\Hom(E,S)^\vee \otimes S\big)[-1].
-  \]
-
-  \[
-R\!\Hom(E,S)^\vee\otimes S
-\simeq
-\bigoplus_{i}\Ext^i(E,S)^\vee\otimes S[-i].
-\]
-
-\[
-\Ext^\bullet(E,S)
-=\Ext^\bullet_{X_+}(\O(t),i_*\O_\Sigma(t))
-\cong H^\bullet(\Sigma,\O(1))=\C^2[-1].
-\]
-
-  But $R\Hom(E,S)^\vee \otimes S$ is just a rank-2 copy of $\mathcal{O}_\Sigma(t)$ (corresponding to the two fiber coordinates $y_1,y_2$), and the map $E\to \mathcal{O}_\Sigma(t)^{\oplus2}$ is encoded by the same pair $(y_1,y_2)$. Hence
-  \[
-  T_S^{-1}(\mathcal{O}(t)) \simeq [\mathcal{O}(t+2)\xrightarrow{(-y_2,y_1)}\mathcal{O}(t+1)^{\oplus2}].
-  \]
-  That's the same two-term complex we found from the Koszul resolution earlier 
-  \[
-  T_S^{-1}(\mathcal{O}(t)) = \Phi_{t+1}^{-1}\Phi_t(\mathcal{O}(t))
-  \]
-  The wall-crossing functor $\Phi_t : D^b(X_+) \to D^b(X_-)$ was constructed via the window $\mathcal{G}_t$, and shifting the window by one changes how the same line bundle is expressed:
-  \[
-  \mathcal{O}(t) \mapsto [\mathcal{O}(t+2)\to\mathcal{O}(t+1)^{\oplus2}].
-  \]
+If \(R\!\Hom(E,S)=0\), the cone of the zero map is just $E$ itself. Hence \[T_S^{-1}(\mathcal O(t+1)) = \mathcal O(t+1)\]
 \end{remark}
 
-  $X_+=\Tot_\Sigma(\mathcal{O}_\Sigma(-1)^{\oplus2})$, $\Sigma=\mathbb{P}^1$, $i:\Sigma\hookrightarrow X_+$ the zero section, and $S:=i_*\mathcal{O}_\Sigma(t)$ is the spherical object. On the stack $\mathcal{X}=[V/\mathbb{C}^*]$ with weights $(+1,+1,-1,-1)$ on $(x_1,x_2,y_1,y_2)$, the zero section is cut out by the regular sequence $y_1,y_2$. Let $E:=\mathcal{O}(t)$.
+\begin{remark}[Action on \(\mathcal{O}(t)\)]
+Let
+\[
+A \;:=\; \big[\;\mathcal{O}(t+2)\xrightarrow{(y_2,-y_1)}\mathcal{O}(t+1)^{\oplus2}\;\big]
+\]
+in degrees $-1\to 0$. By the Koszul short exact sequence
+\[
+0\to \mathcal{O}(t+2)\xrightarrow{(y_2,-y_1)}\mathcal{O}(t+1)^{\oplus2}\twoheadrightarrow \mathcal{I}_\Sigma(t)\to 0,
+\]
+the canonical projection $q: A \to \mathcal{I}_\Sigma(t)[0]$ is a quasi-isomorphism since $H^{-1}(A)=0$ and $H^{0}(A)\cong \mathcal{I}_\Sigma(t)$.
 
-  On $\mathcal{X}$ there is the Koszul exact sequence resolving the structure sheaf of the zero section:
-  \[
-  0\to \mathcal{O}(t+2)\xrightarrow{(y_2,-y_1)}\mathcal{O}(t+1)^{\oplus2}\xrightarrow{(y_1,y_2)}\mathcal{O}(t)\to \mathcal{O}_\Sigma(t)\to 0
-  \]
-  Passing to $D^b(\mathcal{X})$, this gives a boundary morphism $\delta: \mathcal{O}(t)\to \mathcal{O}_\Sigma(t)[1]$, which is the extension class of the short exact sequence. In other words, $\delta$ is a canonical element of $\Ext^1_{\mathcal{X}}(\mathcal{O}(t),\mathcal{O}_\Sigma(t))$.
+Let $\iota:\mathcal{I}_\Sigma(t)\hookrightarrow \mathcal{O}(t)$ be the inclusion, and set
+\[
+\phi \;:=\; \iota\circ q \;:\; A \longrightarrow \mathcal{O}(t)
+\]
+which is a map of complexes where on degree 0 it's $\mathcal{I}_\Sigma(t)\hookrightarrow \mathcal{O}(t)$ and on degree $-1$ it's 0.
 
-  The conormal along the zero section is spanned (equivariantly) by the weight $+1$ functions $y_1,y_2$. Concretely, the Koszul class $\delta$ is obtained by contracting with $(y_1,y_2)$; the space of such extension classes is exactly the weight-$+1$ piece of the conormal:
-  \[
-  \Ext^1_{\mathcal{X}}(\mathcal{O}(t),\mathcal{O}_\Sigma(t)) \cong (H^0(\Sigma,\mathcal{O}_\Sigma(1)))_{\text{fiber coords}} \cong \mathbb{C}^2
-  \]
-  with a basis represented by the two fiber coordinates $y_1,y_2$. If you compute without the $\mathbb{C}^*$-grading, you see a larger space; the window/equivariant grading cuts it down to the two degree-$+1$ generators coming from $y_1,y_2$.
+The key calculation is to show that $\mathrm{Cone}(\phi)\cong S$. With $A^{-1}=\mathcal{O}(t+2)$ and $A^{0}=\mathcal{O}(t+1)^{\oplus2}$, the cone is a three -term complex supported in degrees $-1,0,1$:
+\[
+\mathrm{Cone}(\phi)\;=\;
+\Big[\; A^{-1} \xrightarrow{d_{-1}} A^{0}\oplus \mathcal{O}(t)\xrightarrow{d_0}\ \mathcal{O}(t) \;\Big]
+\]
+where $d_{-1}(a)
+= \big(-d_A(a), \phi(a)\big)
+= \big(- (y_2,-y_1)a, 0\big)$ and $d_0(a,b)\;=\; (y_1,y_2)(a)-b$.
 
-  Equivalently: take $R\Hom_{\mathcal{X}}(\mathcal{O}(t),\mathcal{O}_\Sigma(t))$. In degrees, the only nonzero piece inside the chosen window sits in degree 1, and it is spanned by $y_1,y_2$. Thus:
-  \[
-  R\Hom_{\mathcal{X}}(\mathcal{O}(t),\mathcal{O}_\Sigma(t)) \cong \mathbb{C}^2[-1], \quad
-  \text{so}\quad R\Hom_{\mathcal{X}}(\mathcal{O}(t),S)^\vee \cong \mathbb{C}^2[+1]
-  \]
+Computing the cohomology of this complex, we find that:
+$H^{0}(\mathrm{Cone}(\phi))$ is $\ker d_0 / \operatorname{im} d_{-1}$. The condition $d_0(a,b)=0$ says $b=(y_1,y_2)(a)$; modulo the image of $A^{-1}$ this identifies $H^0$ with $\operatorname{coker}((y_1,y_2):\mathcal{O}(t+1)^{\oplus2}\to \mathcal{O}(t))=\mathcal{O}(t)/\mathcal{I}_\Sigma(t)=S$. Also $H^{1}(\mathrm{Cone}(\phi))= \operatorname{coker} d = 0$ since a quick check shows $d_0$ is surjective.
+Also $H^{-1}(\mathrm{Cone}(\phi)) = \ker d_{-1} = 0$ since $(y_2,-y_1)$ is injective.
 
-  The inverse spherical twist is:
-  \[
-  T_S^{-1}(E)=\mathrm{Cone}(E \xrightarrow{\mathrm{coev}} R\Hom(E,S)^\vee\otimes S)[-1]
-  \]
-  With $R\Hom(E,S)^\vee\cong \mathbb{C}^2$ (in the relevant degree), this becomes $E \xrightarrow{(y_1,y_2)} S^{\oplus2}$. Here "$(y_1,y_2)$" means precisely that the two basis elements of $R\Hom(E,S)^\vee$ are the classes corresponding to the two fiber coordinates; evaluating them gives the two components of the coevaluation.
+Therefore $\mathrm{Cone}(\phi)$ is quasi-isomorphic to $S$ concentrated in degree 0: $\mathrm{Cone}(\phi)\ \simeq\ S[0]$.
 
-  Unwinding the cone gives exactly the familiar two-term complex on $X_+$ (after restricting the window equivalence):
-  \[
-  T_S^{-1}(\mathcal{O}(t)) \simeq [\mathcal{O}(t+2)\xrightarrow{(-y_2,y_1)}\mathcal{O}(t+1)^{\oplus2}]
-  \]
-  because this cone is just the truncation of the Koszul resolution governed by the same pair $(y_1,y_2)$.
+From the triangle
+\[
+A \xrightarrow{\ \phi\ } \mathcal{O}(t) \longrightarrow \mathrm{Cone}(\phi) \longrightarrow A[1]
+\]
+and $\mathrm{Cone}(\phi)\simeq S$, we get
+\[
+\mathrm{Cone}\big(\mathcal{O}(t)\to S\big)[-1]\ \simeq\ A
+\;=\;
+\Big[\;\mathcal{O}(t+2)\xrightarrow{(-y_2,\,y_1)}\mathcal{O}(t+1)^{\oplus2}\;\Big].
+\]
 
+That is exactly
+\[
+T^{-1}_{S}(\mathcal{O}(t))
+\;=\;
+\mathrm{Cone}\big(\mathcal{O}(t)\to S\big)[-1]
+\;\cong\;
+\Big[\mathcal{O}(t+2)\xrightarrow{(-y_2,\,y_1)}\mathcal{O}(t+1)^{\oplus2}\Big].
+\]
+\end{remark}
 
-\red{To complete the proof of the claim we would just need to check that the two functors }also agree on the Hom-sets between $\mathcal{O}(t)$ and
-$\mathcal{O}(t+1)$.
+To complete the proof of the claim we would just need to check that the two functors also agree on the Hom-sets between $\mathcal{O}(t)$ and $\mathcal{O}(t+1)$.
 
 Now instead let $V = \mathbb{C}^{p+q}$ with co-ordinates $x_1,\ldots,x_p, y_1,\ldots,y_q$.
 Let $\mathbb{C}^*$ act linearly on $V$ with positive weights on each $x_i$ and negative weights
@@ -720,8 +658,416 @@ through word-for-word, where now
   \mathcal{G}_t = \langle \mathcal{O}(t), \ldots, \mathcal{O}(t+d-1)\rangle.
 \]
 
+\section{Derived categories}
+In this appendix we collect some definitions and facts about derived categories. We prove the classical reconstruction theorem of Bondal-Orlov for varieties with ample or anti-ample canonical bundle.
+\subsection{Basic definitions}
+Let $\mathcal{A}$ be an abelian category. The derived category $D(\mathcal{A})$ is constructed in several steps. Consider the category $C(\mathcal{A})$ of complexes in $\mathcal{A}$, whose objects are cochain complexes and morphisms are chain maps that commute with the differentials.  
+
+Form the homotopy category $K(\mathcal{A})$ whose objects are the same as $C(\mathcal{A})$.
+
+The morphisms are chain maps modulo homotopy equivalence. Two chain maps \[f,g:A^\bullet\to B^\bullet\] are homotopic if there exist morphisms $h^i:A^i\to B^{i-1}$ such that \[f^i - g^i = d_B^{i-1} \circ h^i + h^{i+1} \circ d_A^i\] It is a routine check that two maps which are homotopic induce the same map on cohomology.
+
+Finally form $D(\mathcal{A})$ by formally inverting all quasi-isomorphisms in $K(\mathcal{A})$. The morphisms in $D(\mathcal{A})$ are a little subtle. For example, one cannot just introduce formal inverses to quasi-isomorphisms. If $X$ is not an injective object in $\mathcal{A}$, then the inclusion map $X[0] \to I^\bullet$ into an injective resolution is a quasi-isomorphism. If we formally invert by introducing $p: I^\bullet \to X[0]$ with \begin{align*}
+    [p] \circ [i] = [\mathrm{id}_{X[0]}] \quad \text{in } K(\mathcal{A}) \\
+    [i] \circ [p] = [\mathrm{id}_{I^\bullet}] \quad \text{in } K(\mathcal{A})
+  \end{align*} then by definition, we impose that $i,p$ are homotopy equivalences.  This is too strong, since not every quasi-isomorphism is a homotopy equivalence.
+
+Abstractly, let $S$ be the set of quasi-isomorphisms in $K(\mathcal{A})$. The derived category \[D(\mathcal{A}) = K(\mathcal{A})[S^{-1}]\] is characterized by a universal property: there is a functor
+  \[
+  Q : K(\mathcal{A}) \longrightarrow D(\mathcal{A})
+  \]
+  sending every $s \in S$ to an isomorphism, and universal with that property (any other functor inverting all quasi-isomorphisms factors uniquely through $Q$). One can also describe morphisms in $D(\mathcal{A})$ concretely as "roofs" via Verdier localization. The bounded derived category $D^b(\mathcal{A})$ is the full subcategory of complexes with bounded cohomology.
+
+  \begin{definition}
+    [Mapping cone] For a chain map $s:X^\bullet\to I^\bullet$ (cohomological grading), the \textbf{mapping cone} $\mathrm{Cone}(s)$ is the complex
+    \[
+    \mathrm{Cone}(s)^n = I^n \oplus X^{n+1}, \qquad d(b,a) = \big(d_I b + s(a),\; -d_X a\big).
+    \]
+  \end{definition} 
+  There's a short exact sequence of complexes
+    \[
+    0\to I^\bullet \xrightarrow{\iota} \mathrm{Cone}(s) \xrightarrow{\pi} X^\bullet[1]\to 0,
+    \]
+  giving rise to a long exact sequence in cohomology
+    \[\cdots \to H^{n}(I^\bullet) \xrightarrow{H^n(\iota)} H^{n}(\mathrm{Cone}(s)) \xrightarrow{H^n(\pi)} H^{n+1}(X^\bullet) \xrightarrow{H^{n+1}(s)} H^{n+1}(I^\bullet) \to \cdots\]
+
+    \begin{proposition}
+      Let $s:X^\bullet\to I^\bullet$ be a chain map in $C(\mathcal{A})$. Then:
+      \begin{enumerate}
+        \item $s$ is a quasi-isomorphism if and only if $\mathrm{Cone}(s)$ is acyclic (all cohomology groups vanish).
+
+        \item $s$ is an isomorphism in $K(\mathcal{A})$ (i.e., a homotopy equivalence) if and only if $\mathrm{Cone}(s)$ is contractible (chain-homotopic to 0).
+      \end{enumerate}
+    \end{proposition}
+
+\begin{proof}
+  \leavevmode
+\begin{enumerate}
+  \item ($\Rightarrow$) If $s$ is a quasi-isomorphism, then each $H^{n+1}(s)$ is an isomorphism. In the exact segment 
+  \[
+  H^n(I)\to H^n(\mathrm{Cone}(s))\to H^{n+1}(X)\xrightarrow{H^{n+1}(s)} H^{n+1}(I),
+  \]
+  the image of $H^n(\mathrm{Cone}(s))\to H^{n+1}(X)$ is $\ker H^{n+1}(s)=0$, so $H^n(I)\to H^n(\mathrm{Cone}(s))$ is surjective. Looking one step earlier,
+  \[
+  H^{n}(X)\xrightarrow{H^{n}(s)} H^{n}(I)\to H^n(\mathrm{Cone}(s)),
+  \]
+  the image of $H^{n}(s)$ is all of $H^{n}(I)$, so the map $H^{n}(I)\to H^n(\mathrm{Cone}(s))$ has zero kernel. Combining "surjective" and "zero kernel" forces $H^n(\mathrm{Cone}(s))=0$ for all $n$. So $\mathrm{Cone}(s)$ is acyclic.
+
+  ($\Leftarrow$) If $\mathrm{Cone}(s)$ is acyclic, then $H^n(\mathrm{Cone}(s))=0$ for all $n$. The exact segment becomes
+  \[
+  0\to H^{n+1}(X)\xrightarrow{H^{n+1}(s)} H^{n+1}(I)\to 0,
+  \]
+  so each $H^{n+1}(s)$ is an isomorphism. Hence $s$ is a quasi-isomorphism.
+
+
+  \item If $s$ has a homotopy inverse $t$ (so $ts\simeq \mathrm{id}_X$, $st\simeq \mathrm{id}_I$), then the triangle
+  \[
+  X^\bullet \xrightarrow{s} I^\bullet \to \mathrm{Cone}(s) \to X^\bullet[1]
+  \]
+  is isomorphic (in $K$) to
+  \[
+  X^\bullet \xrightarrow{\mathrm{id}} X^\bullet \to \mathrm{Cone}(\mathrm{id}_X) \to X^\bullet[1].
+  \]
+
+  For any complex $X^\bullet$, $\mathrm{Cone}(\mathrm{id}_X)$ is contractible with contracting homotopy
+  \[
+  H^n : X^n \oplus X^{n+1} \longrightarrow X^{n-1} \oplus X^{n},\qquad
+  H^n(x,y)=(0,x).
+  \]
+  One can check that $dH+Hd=\mathrm{id}$. Thus $\mathrm{Cone}(s)$ is contractible.
+  \end{enumerate}
+\end{proof}
+\begin{example}
+  Let $\mathcal{A}=\mathbf{Ab}$. Take the injective resolution of $\mathbb{Z}$:
+  \[
+  0 \to \mathbb{Z} \xrightarrow{i} \mathbb{Q} \xrightarrow{q} \mathbb{Q}/\mathbb{Z} \to 0
+  \]
+  and regard $I^\bullet$ as $I^0=\mathbb{Q}$, $I^1=\mathbb{Q}/\mathbb{Z}$ with $d^0=q$, and $X^\bullet=\mathbb{Z}[0]$. The resolution map $s:\mathbb{Z}[0]\to I^\bullet$ has $s^0=i$.
+
+  Compute the cone. By the definition above,
+  \[
+  \mathrm{Cone}(s)^{-1}=\mathbb{Z},\quad
+  \mathrm{Cone}(s)^0=\mathbb{Q},\quad 
+  \mathrm{Cone}(s)^1=\mathbb{Q}/\mathbb{Z}
+  \]
+  with differentials $d^{-1}=i:\mathbb{Z}\to\mathbb{Q}$ and $d^{0}=q:\mathbb{Q}\to\mathbb{Q}/\mathbb{Z}$. So $\mathrm{Cone}(s)$ is exactly the three-term complex sitting in degrees $-1,0,1$.
+  \[
+  \mathbb{Z} \xrightarrow{i} \mathbb{Q} \xrightarrow{q} \mathbb{Q}/\mathbb{Z}
+  \]
+  The cone is acyclic: the short exact sequence $0\to \mathbb{Z} \to \mathbb{Q} \to \mathbb{Q}/\mathbb{Z} \to 0$ is exact, so the cone's cohomology vanishes. However, it is not contractible: contractibility of this 3-term exact complex is equivalent to the short exact sequence splitting (a contracting homotopy gives splittings and vice versa). But $0\to \mathbb{Z} \to \mathbb{Q} \to \mathbb{Q}/\mathbb{Z} \to 0$ does not split: if it did, $\mathbb{Z}$ would be a direct summand of the divisible group $\mathbb{Q}$, hence divisible itself, which is false.
+
+  Therefore $s$ is a quasi-isomorphism whose cone is acyclic but not contractible; hence $s$ is not a homotopy equivalence and cannot be inverted in $K(\mathcal{A})$.
+\end{example}
+
+\begin{definition}
+  [Triangulated category] A \textbf{triangulated category} is an additive category $\mathcal{T}$ equipped with an autoequivalence $[1]:\mathcal{T}\to\mathcal{T}$ (the shift functor) and a class of distinguished triangles
+  \[X \xrightarrow{f} Y \xrightarrow{g} Z \xrightarrow{h} X[1]\]
+  satisfying the following axioms:
+  \begin{itemize}
+    \item (TR1) For every morphism $f:X\to Y$ in
+          $\mathcal{T}$, there exists a distinguished triangle
+          \[
+            X \xrightarrow{f} Y \longrightarrow Z \longrightarrow X[1].
+          \]
+          Moreover, for every object $X\in\mathcal{T}$, the triangle
+          \[
+            X \xrightarrow{\mathrm{id}_X} X \longrightarrow 0 \longrightarrow X[1]
+          \]
+          is distinguished, and any triangle isomorphic to a distinguished triangle is distinguished.
+    \item (TR2) A triangle
+          \[X \xrightarrow{f} Y \xrightarrow{g} Z \xrightarrow{h} X[1]\]
+          is distinguished if and only if the rotated triangle
+          \[Y \xrightarrow{g} Z \xrightarrow{h} X[1] \xrightarrow{-f[1]} Y[1]\]
+          is distinguished.
+    \item (TR3) Given two distinguished triangles
+          \[X \xrightarrow{f} Y \xrightarrow{g} Z \xrightarrow{h} X[1]\]
+                and
+                \[U \xrightarrow{p} V \xrightarrow{q} W \xrightarrow{r} U[1],\]
+                and morphisms $a:X\to U$, $b:Y\to V$ such that $b\circ f = p \circ a$, there exists a morphism $c:Z\to W$ making the following diagram commute:
+                \[
+\begin{tikzcd}
+X \arrow[r,"f"] \arrow[d,"a"'] 
+  & Y \arrow[r,"g"] \arrow[d,"b"'] 
+  & Z \arrow[r,"h"] \arrow[d,"c"'] 
+  & X[1] \arrow[d,"{a[1]}"] \\
+U \arrow[r,"p"'] 
+  & V \arrow[r,"q"'] 
+  & W \arrow[r,"r"'] 
+  & U[1]
+\end{tikzcd}
+\]
+          
+    \item (TR4) (Octahedral axiom) Given morphisms $X \xrightarrow{f} Y \xrightarrow{g} Z$ in $\mathcal{T}$, there exist distinguished triangles
+          \[X \xrightarrow{f} Y \xrightarrow{u} C(f) \xrightarrow{v} X[1],\]
+          \[Y \xrightarrow{g} Z \xrightarrow{u'} C(g) \xrightarrow{v'} Y[1],\]
+          and
+          \[X \xrightarrow{g\circ f} Z \xrightarrow{u''} C(g\circ f) \xrightarrow{v''} X[1],\]
+          along with morphisms $C(f) \xrightarrow{w} C(g\circ f)$ and $C(g) \xrightarrow{w'} C(g\circ f)$ such that the following diagram commutes and the rows and columns are distinguished triangles:
+          \[\begin{tikzcd}
+            & Y \arrow[rr, "u"] \arrow[dd, "g"'] & & C(f) \arrow[dd, "w"] \\
+            X \arrow[ur, "f"] \arrow[dr, "g\circ f"'] & & & \\
+            & Z \arrow[rr, "u'"'] & & C(g)
+          \end{tikzcd}\]
+  \end{itemize}
+\end{definition}
+
+\begin{proposition}
+  This construction gives $D(\mathcal{A})$ the structure of a triangulated category, where:
+\begin{itemize}
+  \item The shift functor $[1]$ moves complexes one place to the left:
+  \[X^\bullet[1]^n = X^{n+1}, \quad d_{X[1]}^n = -d_X^{n+1}\]
+  \item Distinguished triangles come from mapping cones of chain maps.
+  \item The cohomology functors are first defined on the homotopy category as functors \[H^i_K: K(\mathcal{A}) \to \mathcal{A}\] Since these functors send quasi-isomorphisms to isomorphisms, they descend through the localization map $Q: K(\mathcal{A}) \to D(\mathcal{A})$. In particular, there exists a unique functor \[H^i_D: D(\mathcal{A}) \to \mathcal{A}\] such that $H^i_K = H^i_D \circ Q$.
+\end{itemize}
+\end{proposition}
+
+In the Bondal-Orlov paper, they work with more relaxed categories known as graded categories. In particular every triangulated category is a graded category.
+\begin{definition}[Graded categories and exact functors]
+A \textbf{graded category} is a pair $(\mathcal{D}, T_{\mathcal{D}})$ consisting of a category $\mathcal{D}$ and a fixed autoequivalence
+\[
+T_{\mathcal{D}} : \mathcal{D} \longrightarrow \mathcal{D},
+\]
+called the \textbf{translation functor}.
+
+
+A functor
+\[
+F : \mathcal{D} \longrightarrow \mathcal{D}'
+\]
+between graded categories is called \textbf{graded} if it commutes with the translation functors.
+More precisely, there is a fixed natural isomorphism of functors
+\[
+t_F : F \circ T_{\mathcal{D}} \;\xrightarrow{\sim}\; T_{\mathcal{D}'} \circ F.
+\]
+A natural transformation $\mu : F \Rightarrow G$ between graded functors is called \textbf{graded}
+if the following diagram commutes:
+\[
+\begin{tikzcd}
+F \circ T \arrow[r, "t_F"] \arrow[d, "\mu T"'] & T \circ F \arrow[d, "T\mu"] \\
+G \circ T \arrow[r, "t_G"'] & T \circ G.
+\end{tikzcd}
+\]
+
+
+A graded functor
+\[
+F : \mathcal{D} \longrightarrow \mathcal{D}'
+\]
+between triangulated categories is called \textbf{exact} if it sends exact triangles
+to exact triangles in the following sense.
+
+If
+\[
+X \xrightarrow{f} Y \xrightarrow{g} Z \xrightarrow{h} T X
+\]
+is an exact triangle in $\mathcal{D}$, then one replaces the segment
+\[
+F T(X)
+\]
+by
+\[
+T F(X)
+\]
+via the natural isomorphism $t_F : F T \xrightarrow{\sim} T F$,
+and requires that the resulting sequence
+\[
+F X \xrightarrow{F f} F Y \xrightarrow{F g} F Z \xrightarrow{t_F(Fh)} T F X
+\]
+be an exact triangle in $\mathcal{D}'$.
+
+Finally, a \textbf{morphism between exact functors} is, by definition,
+a graded natural transformation.
+\end{definition}
+
+\begin{proposition}
+Let $F : \mathcal{D} \longrightarrow \mathcal{D}'$ be a graded functor between graded categories, and let
+$G : \mathcal{D}' \longrightarrow \mathcal{D}$
+be its left adjoint, so that the unit and counit of the adjunction are the natural transformations
+\[
+\operatorname{id}_{\mathcal{D}'} \xrightarrow{\ \alpha\ } F \circ G, 
+\qquad
+G \circ F \xrightarrow{\ \beta\ } \operatorname{id}_{\mathcal{D}}.
+\]
+Then \(G\) can be canonically endowed with the structure of a graded functor, so that the unit and counit of the adjunction become morphisms of graded functors. If, in addition, \(F\) is an exact functor between triangulated categories, then \(G\) also becomes an exact functor.
+\end{proposition}
+
+
+\begin{definition}
+  
+Let $\mathcal{D}$ be a $k$-linear category with finite-dimensional $\mathrm{Hom}$'s.
+A covariant additive functor
+\[
+S : \mathcal{D} \longrightarrow \mathcal{D}
+\]
+is called a \emph{Serre functor} if it is a category equivalence and there are given bifunctorial isomorphisms
+\[
+\varphi_{A,B} : \mathrm{Hom}_{\mathcal{D}}(A,B) \;\xrightarrow{\ \sim\;}\; \mathrm{Hom}_{\mathcal{D}}(B,SA)^{*}
+\]
+for all $A,B \in \mathcal{D}$, such that the following diagram is commutative:
+\[
+\begin{tikzcd}
+\mathrm{Hom}_{\mathcal{D}}(A,B)
+  \arrow[r,"\varphi^{A,B}"]
+  \arrow[d]
+  & \mathrm{Hom}_{\mathcal{D}}(B,SA)^{*}
+  \arrow[d] \\
+\mathrm{Hom}_{\mathcal{D}}(SA,SB)
+  \arrow[r,"\varphi^{SA,SB}"']
+  & \mathrm{Hom}_{\mathcal{D}}(SB,S^{2}A)^{*}
+\end{tikzcd}
+\]
+The vertical isomorphisms in this diagram are those induced by $S$.
+
+\end{definition}
+
+\begin{proposition}
+Any autoequivalence
+\[
+\Phi : \mathcal{D} \longrightarrow \mathcal{D}
+\]
+commutes with a Serre functor, i.e.\ there exists a natural graded isomorphism of functors
+\[
+\Phi \circ S \;\xrightarrow{\;\sim\;}\; S \circ \Phi.
+\]
+\end{proposition}
+
+\begin{proof}
+For any pair of objects $A,B \in \mathcal{D}$, we have a system of natural isomorphisms:
+\[
+\mathrm{Hom}(\Phi A, \Phi SB)
+  \;\cong\;
+\mathrm{Hom}(A, SB)
+  \;\cong\;
+\mathrm{Hom}(B, A)^{*}
+  \;\cong\;
+\mathrm{Hom}(\Phi B, \Phi A)^{*}
+  \;\cong\;
+\mathrm{Hom}(\Phi A, S\Phi B).
+\]
+Since $\Phi$ is an equivalence, the essential image of $\Phi$ covers all of $\mathcal{D}$; that is,
+every object is isomorphic to some $\Phi A$.
+Hence we have isomorphisms of contravariant functors represented by the objects
+$\Phi SB$ and $S\Phi B$.
+By Brown's representability lemma, morphisms between representable functors correspond
+bijectively to morphisms between their representing objects.
+This yields a canonical isomorphism
+\[
+\Phi SB \;\xrightarrow{\;\sim\;}\; S\Phi B,
+\]
+which is in fact natural in $B$.
+\end{proof}
+A Serre functor in a category $\mathcal{D}$, if it exists, is unique up to a graded natural isomorphism. By definition it is intrinsically related to the structure of the category.
+We shall use this later to reconstruct a variety from its derived category and to find
+the group of exact autoequivalences for algebraic varieties with ample either canonical
+or anticanonical sheaf.
+
+\subsection{Reconstruction theorem}
+Let $X$ be a smooth projective variety over a field $k$ with either ample or antiample canonical sheaf $\omega_X$. Let $n = \dim X$, $\cD = D^b_{\mathrm{coh}}(X)$ be the bounded derived category of coherent sheaves on $X$.
+
+\begin{proposition}
+  $\cD$ has a Serre functor $S$ given by
+  \[S(-) = - \otimes \omega_X [n]\]
+\end{proposition}
+
+\begin{proof}
+  Grothendieck-Serre duality gives bifunctorial isomorphisms
+  \[\Ext^i_X(F,G) \cong \Ext^{n-i}_X(G, F \otimes \omega_X)^*\]
+  for all coherent sheaves $F,G$ on $X$. This extends to complexes in $\cD$ by taking injective resolutions. Thus $S$ is a Serre functor.
+\end{proof}
+  \begin{definition}[Point object]
+An object $P \in \mathcal{D}$ is called a \emph{point object of codimension $s$} if
+\begin{enumerate}[label=\roman*)]
+    \item $S_{\mathcal{D}}(P) \simeq P[s]$,
+    \item $\Hom^{<0}(P,P) = 0$,
+    \item $\Hom^0(P,P) = k(P)$,
+\end{enumerate}
+where $k(P)$ is a field (automatically a finite extension of the base field $k$).
+\end{definition}
+
+\begin{proposition}
+Let $X$ be a smooth algebraic variety of dimension $n$ with ample canonical or anticanonical sheaf.  
+Then an object $P \in D^b_{\mathrm{coh}}(X)$ is a point object if and only if
+\[
+P \cong \mathcal{O}_x[r], \qquad r \in \mathbb{Z},
+\]
+where $\mathcal{O}_x$ is the skyscraper sheaf of a closed point $x \in X$ (up to translation).
+\end{proposition}
+
+\begin{proof}
+  Since $X$ has an ample invertible sheaf, it is projective. Any skyscraper sheaf of a closed point obviously satisfies the conditions of a point object
+with codimension equal to the dimension of the variety.
+
+Suppose now that for some $P \in D^b_{\mathrm{coh}}(X)$ we have that $P$ is a point object of codimension $s$. 
+Let $\mathcal{H}^i$ be the cohomology sheaves of $P$.
+
+
+From (i) we obtain $s = n$. From the Serre functor formula, we have
+\[P \otimes \omega_X [n] \;\simeq\; P[s]\]
+Because tensoring with an invertible sheaf is an exact functor on the abelian category of coherent sheaves, we can take cohomlogy sheaves
+\[\cH^i(P\otimes\omega_X) \cong \cH^i(P)\otimes\omega_X \cong \cH^{i+t}(P)\]
+If $t = s - n \neq 0$, then for any $i$ we can iterate this isomorphism to get that infinitely many $\cH^j(P)$ are nonzero, contradicting the boundedness of $P$. Thus $t=0$.
+
+
+We also get that $\mathcal{H}^i \otimes \omega_X \cong \mathcal{H}^i$.
+Since $\omega_X$ is either ample or antiample, it follows that
+each $\mathcal{H}^i$ is a finite-length sheaf, i.e.\ its support consists of isolated points. This follows from examining the Hilbert polynomial of $\mathcal{H}^i \otimes \omega_X^{\otimes m}$ for $m \gg 0$.
+
+Sheaves supported at different points are homologically orthogonal, so $P$ decomposes into a direct sum of components supported at single points.
+By (iii), $P$ is indecomposable.
+
+Now consider the spectral sequence computing $\Hom^m(P,P)$ from $\Ext^i(\mathcal{H}^j, \mathcal{H}^k)$:
+\[
+E_2^{p,q}
+    = \bigoplus_{k-j=q} \Ext^p(\mathcal{H}^j, \mathcal{H}^k)
+    \;\Longrightarrow\;
+    \Hom^{p+q}(P,P).
+\]
+For any two finite-length sheaves supported at the same point,
+there exists a nontrivial morphism from one to the other,
+sending a generator of the first to the socle of the second.
+
+Examining $\Hom^m(\mathcal{H}^j, \mathcal{H}^k)$ with minimal $k-j$,
+we see that this nontrivial term survives to $E_\infty$.
+By (ii), $k-j=0$, so all $\mathcal{H}^i$ vanish except one.
+Thus $P$ is quasi-isomorphic to a single sheaf $\mathcal{H}^i[-i]$,
+and (iii) then implies that $\mathcal{H}^i$ is a skyscraper sheaf.
+
+Hence the skyscraper sheaves allow one to reconstruct the invertible sheaves on $X$.
+\end{proof}
+
+\begin{remark}[Homological orthogonality of skyscraper sheaves]
+  
+Each cohomology sheaf $\mathcal{H}^i(P)$ is supported on a finite set of points in $X$. Write 
+\[
+\operatorname{Supp}(\mathcal{H}^i(P)) = \{x_1,\dots,x_r\}.
+\]
+Let $\mathcal{H}^i_{x_j}$ denote the summand of $\mathcal{H}^i(P)$ supported at the single point $x_j$ (you get this by taking the subsheaf of sections vanishing outside $\{x_j\}$).
+
+Then each $\mathcal{H}^i(P)$ decomposes canonically as
+\[
+\mathcal{H}^i(P) \;\cong\; \bigoplus_{j=1}^r \mathcal{H}^i_{x_j}.
+\]
+
+If two coherent sheaves $\mathcal{F},\mathcal{G}$ have disjoint supports, then
+\[
+\operatorname{Ext}^p_X(\mathcal{F},\mathcal{G}) = 0 \quad\text{for all } p.
+\]
+
+This is because Ext groups are computed locally — they vanish where the sheaves vanish together. Formally, for every open $U\subset X$,
+\[
+\mathcal{E}xt^p_X(\mathcal{F},\mathcal{G})|_U
+\;\cong\;
+\mathcal{E}xt^p_U(\mathcal{F}|_U,\mathcal{G}|_U),
+\]
+and the support of $\mathcal{E}xt^p_X(\mathcal{F},\mathcal{G})$ is contained in $\operatorname{Supp}(\mathcal{F}) \cap \operatorname{Supp}(\mathcal{G})$. So if that intersection is empty, the sheaf $\mathcal{E}xt^p_X(\mathcal{F},\mathcal{G})$ is zero; hence taking global sections gives $\operatorname{Ext}^p_X(\mathcal{F},\mathcal{G}) = 0$.
+\end{remark}
+
+
+
+
 \section{Appendix: Algebraic Geometry}
-We collect some definitions and facts from algebraic geometry that are used in the main text.
+We collect some definitions and facts from algebraic geometry that are used in the main text. In particular, we discuss sheaf cohomology and Serre's affineness criterion. We also include a proof of the Ext-computation for closed immersions used in the spherical twist example. Finally, we review some of the technical definitions around stacks.
+
 \subsection{Cohomology and affineness}
 If $X = \Spec A$ is an affine scheme, then every quasi-coherent sheaf $\mathcal{F}$ on $X$ has no higher cohomology
 \begin{align*}
@@ -826,6 +1172,51 @@ Let $f:X\to Y$ be a quasi-compact and quasi-separated morphism of schemes. Then 
 \item For every quasi-coherent sheaf of ideals $\mathcal{I}\subset\mathcal{O}_X$, we have $R^1f_*\mathcal{I}=0$.
 \end{enumerate}
 \end{theorem}
+
+\begin{theorem}[Hilbert polynomial and ampleness]
+Let $X$ be projective over an algebraically closed field, $L$ an ample line bundle, and $0\neq\mathcal F$ a coherent sheaf with $d=\dim \operatorname{Supp}\mathcal F$.
+Then the Hilbert function
+\[
+P_{\mathcal F}(m)\;:=\;\chi\big(\mathcal F\otimes L^{\otimes m}\big)
+\]
+agrees for $m\gg 0$ with a polynomial of degree exactly $d$, with positive leading coefficient.
+
+In particular, for $m\gg 0$ one has $P_{\mathcal F}(m+1)>P_{\mathcal F}(m)$ if $d\ge 1$. Consequently, if $\mathcal F\simeq \mathcal F\otimes L$, then $d=0$ (so $\mathcal F$ has finite length).
+\end{theorem}
+
+\begin{proof}
+By Grothendieck's theorem on Hilbert polynomials (or asymptotic Riemann--Roch),
+$P_{\mathcal F}(m)$ is a polynomial for $m\gg 0$ whose degree equals
+$\dim \operatorname{Supp}\mathcal F=d$.
+More precisely, with $H=c_1(L)$ and writing $\operatorname{ch}(\mathcal F)=\sum_{i} \operatorname{ch}_i(\mathcal F)$,
+\[
+P_{\mathcal F}(m)
+\;=\;
+\int_X \operatorname{ch}(\mathcal F)\, e^{mH}\,\operatorname{td}(X)
+\;=\;
+\frac{m^{d}}{d!}\,\big(H^{d}\cdot \operatorname{ch}_{\dim X-d}(\mathcal F)\big)
+\;+\;\text{lower powers of }m,
+\]
+and ampleness gives $H^{d}>0$ on $d$-dimensional cycles; since $\mathcal F\neq 0$,
+the leading coefficient is positive.
+
+
+A polynomial of degree $\ge 1$ with positive leading coefficient is eventually strictly increasing, hence
+$P_{\mathcal F}(m+1)>P_{\mathcal F}(m)$ for all $m\gg 0$.
+
+If $\mathcal F\simeq\mathcal F\otimes L$, then for all $m$
+\[
+\chi(\mathcal F\otimes L^{\otimes m})
+\;=\;
+\chi(\mathcal F\otimes L^{\otimes (m+1)})
+\]
+i.e. $P_{\mathcal F}(m)=P_{\mathcal F}(m+1)$.
+By the monotonicity just proved, this forces $d=0$.
+\end{proof}
+
+
+
+
 
 \subsection{Koszul resolutions and Ext along a closed immersion}
 Let $i: Z \hookrightarrow X$ be a closed immersion of smooth varieties of codimension $c$.
@@ -1017,6 +1408,45 @@ It turns out that the stackification of $[U/G]^{\mathrm{pre}}$ is the quotient s
   is commutative and the left square is cartesian.
 \end{definition}
 
+\begin{remark}[General dictionary for quotient stacks and equivariant geometry]
+  There is a general dictionary relating the stack-theoretic concepts and the equivariant geometry of $X$. Here $G$ is a reductive algebraic group acting on a scheme $X$ and $[X/G]$ is the quotient stack.
+  \begin{center}
+    \begin{tabular}{|l|l|}
+      \hline
+      \textbf{Geometry of $[X/G]$} & \textbf{$G$-equivariant geometry of $X$}                   \\[1ex]
+      \hline
+      $\mathbb{C}$-point $\bar{x} \in [X/G]$
+                                   & orbit $Gx$ of $\mathbb{C}$-point $x \in X$                 \\
+                                   & (with $\bar{x}$ the image of $x$ under $X \to [X/G]$)      \\[1ex]
+      \hline
+      automorphism group $\mathrm{Aut}(\bar{x})$
+                                   & stabilizer $G_x$                                           \\[1ex]
+      \hline
+      function $f \in \Gamma([X/G],\mathcal{O}_{[X/G]})$
+                                   & $G$-equivariant function $f \in \Gamma(X,\mathcal{O}_X)^G$ \\[1ex]
+      \hline
+      map $[X/G] \to Y$ to a scheme $Y$
+                                   & $G$-equivariant map $X \to Y$                              \\[1ex]
+      \hline
+      line bundle
+                                   & $G$-equivariant line bundle (or $G$-linearization)         \\[1ex]
+      \hline
+      quasi-coherent sheaf
+                                   & $G$-equivariant quasi-coherent sheaf                       \\[1ex]
+      \hline
+      tangent space $T_{[X/G],\bar{x}}$
+                                   & normal space $T_{X,x}/T_{Gx,x}$ to the orbit               \\[1ex]
+      \hline
+      coarse moduli space $[X/G] \to Y$
+                                   & geometric quotient $X \to Y$                               \\[1ex]
+      \hline
+      good moduli space $[X/G] \to Y$
+                                   & good GIT quotient $X \to Y$                                \\[1ex]
+      \hline
+    \end{tabular}
+  \end{center}
+\end{remark}
+
 A stack over a site $\mathcal{S}$ is a prestack $\mathcal{X}$ where the objects and morphisms glue uniquely in the Grothendieck topology of $\mathcal{S}$.
 
 \begin{definition}
@@ -1049,172 +1479,6 @@ A stack over a site $\mathcal{S}$ is a prestack $\mathcal{X}$ where the objects 
   $\mathcal{T} \to \mathcal{X}$ is representable by schemes and an open immersion (resp.\ closed immersion).
 \end{definition}
 
-\section{Derived categories}
-In this appendix we collect some definitions and facts about derived categories. We prove the classical reconstruction theorem of Bondal-Orlov for varieties with ample or anti-ample canonical bundle.
-\subsection{Basic definitions}
-Let $\mathcal{A}$ be an abelian category. The derived category $D(\mathcal{A})$ is constructed in several steps. Consider the category $C(\mathcal{A})$ of complexes in $\mathcal{A}$, whose objects are cochain complexes and morphisms are chain maps that commute with the differentials.  
-
-Form the homotopy category $K(\mathcal{A})$ whose objects are the same as $C(\mathcal{A})$.
-
-The morphisms are chain maps modulo homotopy equivalence. Two chain maps \[f,g:A^\bullet\to B^\bullet\] are homotopic if there exist morphisms $h^i:A^i\to B^{i-1}$ such that \[f^i - g^i = d_B^{i-1} \circ h^i + h^{i+1} \circ d_A^i\] It is a routine check that two maps which are homotopic induce the same map on cohomology.
-
-Finally form $D(\mathcal{A})$ by formally inverting all quasi-isomorphisms in $K(\mathcal{A})$. The morphisms in $D(\mathcal{A})$ are a little subtle. For example, one cannot just introduce formal inverses to quasi-isomorphisms. If $X$ is not an injective object in $\mathcal{A}$, then the inclusion map $X[0] \to I^\bullet$ into an injective resolution is a quasi-isomorphism. If we formally invert by introducing $p: I^\bullet \to X[0]$ with \begin{align*}
-    [p] \circ [i] = [\mathrm{id}_{X[0]}] \quad \text{in } K(\mathcal{A}) \\
-    [i] \circ [p] = [\mathrm{id}_{I^\bullet}] \quad \text{in } K(\mathcal{A})
-  \end{align*} then by definition, we impose that $i,p$ are homotopy equivalences.  This is too strong, since not every quasi-isomorphism is a homotopy equivalence.
-
-Abstractly, let $S$ be the set of quasi-isomorphisms in $K(\mathcal{A})$. The derived category \[D(\mathcal{A}) = K(\mathcal{A})[S^{-1}]\] is characterized by a universal property: there is a functor
-  \[
-  Q : K(\mathcal{A}) \longrightarrow D(\mathcal{A})
-  \]
-  sending every $s \in S$ to an isomorphism, and universal with that property (any other functor inverting all quasi-isomorphisms factors uniquely through $Q$). One can also describe morphisms in $D(\mathcal{A})$ concretely as "roofs" via Verdier localization. The bounded derived category $D^b(\mathcal{A})$ is the full subcategory of complexes with bounded cohomology.
-
-  \begin{definition}
-    [Mapping cone] For a chain map $s:X^\bullet\to I^\bullet$ (cohomological grading), the \textbf{mapping cone} $\mathrm{Cone}(s)$ is the complex
-    \[
-    \mathrm{Cone}(s)^n = I^n \oplus X^{n+1}, \qquad d(b,a) = \big(d_I b + s(a),\; -d_X a\big).
-    \]
-  \end{definition} 
-  There's a short exact sequence of complexes
-    \[
-    0\to I^\bullet \xrightarrow{\iota} \mathrm{Cone}(s) \xrightarrow{\pi} X^\bullet[1]\to 0,
-    \]
-  giving rise to a long exact sequence in cohomology
-    \[\cdots \to H^{n}(I^\bullet) \xrightarrow{H^n(\iota)} H^{n}(\mathrm{Cone}(s)) \xrightarrow{H^n(\pi)} H^{n+1}(X^\bullet) \xrightarrow{H^{n+1}(s)} H^{n+1}(I^\bullet) \to \cdots\]
-
-    \begin{proposition}
-      Let $s:X^\bullet\to I^\bullet$ be a chain map in $C(\mathcal{A})$. Then:
-      \begin{enumerate}
-        \item $s$ is a quasi-isomorphism if and only if $\mathrm{Cone}(s)$ is acyclic (all cohomology groups vanish).
-
-        \item $s$ is an isomorphism in $K(\mathcal{A})$ (i.e., a homotopy equivalence) if and only if $\mathrm{Cone}(s)$ is contractible (chain-homotopic to 0).
-      \end{enumerate}
-    \end{proposition}
-
-\begin{proof}
-  \leavevmode
-\begin{enumerate}
-  \item ($\Rightarrow$) If $s$ is a quasi-isomorphism, then each $H^{n+1}(s)$ is an isomorphism. In the exact segment 
-  \[
-  H^n(I)\to H^n(\mathrm{Cone}(s))\to H^{n+1}(X)\xrightarrow{H^{n+1}(s)} H^{n+1}(I),
-  \]
-  the image of $H^n(\mathrm{Cone}(s))\to H^{n+1}(X)$ is $\ker H^{n+1}(s)=0$, so $H^n(I)\to H^n(\mathrm{Cone}(s))$ is surjective. Looking one step earlier,
-  \[
-  H^{n}(X)\xrightarrow{H^{n}(s)} H^{n}(I)\to H^n(\mathrm{Cone}(s)),
-  \]
-  the image of $H^{n}(s)$ is all of $H^{n}(I)$, so the map $H^{n}(I)\to H^n(\mathrm{Cone}(s))$ has zero kernel. Combining "surjective" and "zero kernel" forces $H^n(\mathrm{Cone}(s))=0$ for all $n$. So $\mathrm{Cone}(s)$ is acyclic.
-
-  ($\Leftarrow$) If $\mathrm{Cone}(s)$ is acyclic, then $H^n(\mathrm{Cone}(s))=0$ for all $n$. The exact segment becomes
-  \[
-  0\to H^{n+1}(X)\xrightarrow{H^{n+1}(s)} H^{n+1}(I)\to 0,
-  \]
-  so each $H^{n+1}(s)$ is an isomorphism. Hence $s$ is a quasi-isomorphism.
-
-
-  \item If $s$ has a homotopy inverse $t$ (so $ts\simeq \mathrm{id}_X$, $st\simeq \mathrm{id}_I$), then the triangle
-  \[
-  X^\bullet \xrightarrow{s} I^\bullet \to \mathrm{Cone}(s) \to X^\bullet[1]
-  \]
-  is isomorphic (in $K$) to
-  \[
-  X^\bullet \xrightarrow{\mathrm{id}} X^\bullet \to \mathrm{Cone}(\mathrm{id}_X) \to X^\bullet[1].
-  \]
-
-  For any complex $X^\bullet$, $\mathrm{Cone}(\mathrm{id}_X)$ is contractible with contracting homotopy
-  \[
-  H^n : X^n \oplus X^{n+1} \longrightarrow X^{n-1} \oplus X^{n},\qquad
-  H^n(x,y)=(0,x).
-  \]
-  One can check that $dH+Hd=\mathrm{id}$. Thus $\mathrm{Cone}(s)$ is contractible.
-  \end{enumerate}
-\end{proof}
-\begin{example}
-  Let $\mathcal{A}=\mathbf{Ab}$. Take the injective resolution of $\mathbb{Z}$:
-  \[
-  0 \to \mathbb{Z} \xrightarrow{i} \mathbb{Q} \xrightarrow{q} \mathbb{Q}/\mathbb{Z} \to 0
-  \]
-  and regard $I^\bullet$ as $I^0=\mathbb{Q}$, $I^1=\mathbb{Q}/\mathbb{Z}$ with $d^0=q$, and $X^\bullet=\mathbb{Z}[0]$. The resolution map $s:\mathbb{Z}[0]\to I^\bullet$ has $s^0=i$.
-
-  Compute the cone. By the definition above,
-  \[
-  \mathrm{Cone}(s)^{-1}=\mathbb{Z},\quad
-  \mathrm{Cone}(s)^0=\mathbb{Q},\quad 
-  \mathrm{Cone}(s)^1=\mathbb{Q}/\mathbb{Z}
-  \]
-  with differentials $d^{-1}=i:\mathbb{Z}\to\mathbb{Q}$ and $d^{0}=q:\mathbb{Q}\to\mathbb{Q}/\mathbb{Z}$. So $\mathrm{Cone}(s)$ is exactly the three-term complex sitting in degrees $-1,0,1$.
-  \[
-  \mathbb{Z} \xrightarrow{i} \mathbb{Q} \xrightarrow{q} \mathbb{Q}/\mathbb{Z}
-  \]
-  The cone is acyclic: the short exact sequence $0\to \mathbb{Z} \to \mathbb{Q} \to \mathbb{Q}/\mathbb{Z} \to 0$ is exact, so the cone's cohomology vanishes. However, it is not contractible: contractibility of this 3-term exact complex is equivalent to the short exact sequence splitting (a contracting homotopy gives splittings and vice versa). But $0\to \mathbb{Z} \to \mathbb{Q} \to \mathbb{Q}/\mathbb{Z} \to 0$ does not split: if it did, $\mathbb{Z}$ would be a direct summand of the divisible group $\mathbb{Q}$, hence divisible itself, which is false.
-
-  Therefore $s$ is a quasi-isomorphism whose cone is acyclic but not contractible; hence $s$ is not a homotopy equivalence and cannot be inverted in $K(\mathcal{A})$.
-\end{example}
-
-\begin{definition}
-  [Triangulated category] A \textbf{triangulated category} is an additive category $\mathcal{T}$ equipped with an autoequivalence $[1]:\mathcal{T}\to\mathcal{T}$ (the shift functor) and a class of distinguished triangles
-  \[X \xrightarrow{f} Y \xrightarrow{g} Z \xrightarrow{h} X[1]\]
-  satisfying the following axioms:
-  \begin{itemize}
-    \item (TR1) For every morphism $f:X\to Y$ in
-          $\mathcal{T}$, there exists a distinguished triangle
-          \[
-            X \xrightarrow{f} Y \longrightarrow Z \longrightarrow X[1].
-          \]
-          Moreover, for every object $X\in\mathcal{T}$, the triangle
-          \[
-            X \xrightarrow{\mathrm{id}_X} X \longrightarrow 0 \longrightarrow X[1]
-          \]
-          is distinguished, and any triangle isomorphic to a distinguished triangle is distinguished.
-    \item (TR2) A triangle
-          \[X \xrightarrow{f} Y \xrightarrow{g} Z \xrightarrow{h} X[1]\]
-          is distinguished if and only if the rotated triangle
-          \[Y \xrightarrow{g} Z \xrightarrow{h} X[1] \xrightarrow{-f[1]} Y[1]\]
-          is distinguished.
-    \item (TR3) Given two distinguished triangles
-          \[X \xrightarrow{f} Y \xrightarrow{g} Z \xrightarrow{h} X[1]\]
-                and
-                \[U \xrightarrow{p} V \xrightarrow{q} W \xrightarrow{r} U[1],\]
-                and morphisms $a:X\to U$, $b:Y\to V$ such that $b\circ f = p \circ a$, there exists a morphism $c:Z\to W$ making the following diagram commute:
-                \[
-\begin{tikzcd}
-X \arrow[r,"f"] \arrow[d,"a"'] 
-  & Y \arrow[r,"g"] \arrow[d,"b"'] 
-  & Z \arrow[r,"h"] \arrow[d,"c"'] 
-  & X[1] \arrow[d,"{a[1]}"] \\
-U \arrow[r,"p"'] 
-  & V \arrow[r,"q"'] 
-  & W \arrow[r,"r"'] 
-  & U[1]
-\end{tikzcd}
-\]
-          
-    \item (TR4) (Octahedral axiom) Given morphisms $X \xrightarrow{f} Y \xrightarrow{g} Z$ in $\mathcal{T}$, there exist distinguished triangles
-          \[X \xrightarrow{f} Y \xrightarrow{u} C(f) \xrightarrow{v} X[1],\]
-          \[Y \xrightarrow{g} Z \xrightarrow{u'} C(g) \xrightarrow{v'} Y[1],\]
-          and
-          \[X \xrightarrow{g\circ f} Z \xrightarrow{u''} C(g\circ f) \xrightarrow{v''} X[1],\]
-          along with morphisms $C(f) \xrightarrow{w} C(g\circ f)$ and $C(g) \xrightarrow{w'} C(g\circ f)$ such that the following diagram commutes and the rows and columns are distinguished triangles:
-          \[\begin{tikzcd}
-            & Y \arrow[rr, "u"] \arrow[dd, "g"'] & & C(f) \arrow[dd, "w"] \\
-            X \arrow[ur, "f"] \arrow[dr, "g\circ f"'] & & & \\
-            & Z \arrow[rr, "u'"'] & & C(g)
-          \end{tikzcd}\]
-  \end{itemize}
-\end{definition}
-
-\begin{proposition}
-  This construction gives $D(\mathcal{A})$ the structure of a triangulated category, where:
-\begin{itemize}
-  \item The shift functor $[1]$ moves complexes one place to the left:
-  \[X^\bullet[1]^n = X^{n+1}, \quad d_{X[1]}^n = -d_X^{n+1}\]
-  \item Distinguished triangles come from mapping cones of chain maps.
-  \item The cohomology functors are first defined on the homotopy category as functors \[H^i_K: K(\mathcal{A}) \to \mathcal{A}\] Since these functors send quasi-isomorphisms to isomorphisms, they descend through the localization map $Q: K(\mathcal{A}) \to D(\mathcal{A})$.
-
-  That is, there exists a unique functor $H^i_D: D(\mathcal{A}) \to \mathcal{A}$ such that $H^i_K = H^i_D \circ Q$.
-\end{itemize}
-\end{proposition}
-For $X$ a scheme, we write $D^b(X)$ for the bounded derived category of coherent sheaves on $X$.
-
 \section{References}
 NOTES ON GIT AND SYMPLECTIC REDUCTION FOR
 BUNDLES AND VARIETIES
@@ -1225,4 +1489,8 @@ Alper Moduli
 Segal paper
 
 Stacks project
+
+Bondal Orlov paper
+
+Algebra V Encyclopedia of Mathematical Sciences
 \end{document}
