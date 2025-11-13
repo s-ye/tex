@@ -1,6 +1,7 @@
 \documentclass[12pt]{article}
 \usepackage{/Users/songye03/Desktop/Math_tex/style/psetconfig}
 
+\DeclareMathOperator{\res}{res}
 \title{Homework 4}
 \author{Songyu Ye}
 \date{\today}
@@ -9,8 +10,24 @@
 \psettitle
 
 \begin{problem}[1]
-Prove the Weierstraß gap theorem. (See notes for lecture 10/23 for the statement.)
+Prove the Weierstrass gap theorem, which says that for a compact Riemann surface $X$ of genus $g$, at each point there are exactly $g$ gaps in the sequence of possible pole orders of meromorphic functions. (That is, there are exactly $g$ integers $n \geq 1$ such that there is no meromorphic function with a single pole of order $n$ at the given point and holomorphic elsewhere.)
 \end{problem}
+
+\begin{solution}
+$g=0$ case is clear since we have explicit meromorphic functions on $\mathbb{P}^1$ with a single pole of any order at any point. So we assume $g\geq1$.
+
+A positive integer $n$ is a non-gap at $p$ if there exists a meromorphic function whose only pole is at $p$ and has order exactly $n$. Equivalently, $l(np) = l((n-1)p)+1$. Otherwise $n$ is a gap, i.e. $l(np)=l((n-1)p)$.
+
+For any divisor $D$ and point $p$, $0\leq l(D+p)-l(D)\leq1$, so in particular every $n\geq1$ is either a gap or a non-gap.
+
+Also, for $g\geq1$, $1$ is always a gap: a function with a single simple pole at $p$ would give a degree-1 map $X\to\mathbb{P}^1$, so $X\cong\mathbb{P}^1$ (genus 0), contradiction.
+
+Riemann-Roch and Serre duality immediately imply that every $m\geq 2g-1$ is a non-gap. Hence all gaps lie in $\{1,\dots,2g-1\}$.
+
+Let $G(m)$ be the number of gaps in $\{1,\dots,m\}$. The number of non-gaps in that interval are is $m-G(m)$. Starting from $l(0)=1$ and using that each non-gap increases $l$ by 1 while each gap leaves it unchanged, for any $m\geq1$, which implies that $l(mp) = 1 + (m-G(m))$.
+
+Now take $m\geq 2g$. From above: $l(mp) = m+1-g$. Equating: $m+1-g = 1 + (m-G(m))$, therefore $G(m)=g$ and so there are exactly $g$ gaps.
+    \end{solution}
 
 \begin{problem}[2]
 When $d > 2g - 2$, show that the Abel-Jacobi map
@@ -19,10 +36,46 @@ When $d > 2g - 2$, show that the Abel-Jacobi map
 \]
 is a bundle of projective spaces. Equivalently, the holomorphic sections over $R$ of a varying line bundle of degree $d$ are the fibers of a vector bundle over the Jacobian of degree $d$.
 
-\emph{Suggestion:} Check that the differential of the map is onto at every point, and use this to find local sections that give a local framing of the bundle.
+\textbf{Suggestion:} Check that the differential of the map is onto at every point, and use this to find local sections that give a local framing of the bundle.
 
-\emph{Suggestion:} Prove the vanishing of the sheaf cohomologies of $\mathcal M(V)$ and $\mathcal P(V)$.
+\textbf{Suggestion:} Prove the vanishing of the sheaf cohomologies of $\mathcal M(V)$ and $\mathcal P(V)$ where $\cM(V)$ is the sheaf of meromorphic sections of a vector bundle $V$ and $\mathcal P(V)$ is the sheaf of principal parts of meromorphic sections of $V$.
 \end{problem}
+
+\begin{solution}
+    $d>2g-2$ implies that for any line bundle $L$ of degree $d$, $H^1(R;L)=0$ by Riemann-Roch and Serre duality. Therefore, the fiber of the Abel-Jacobi map over $L$ is $\mathbb{P}(H^0(R;L))$, which has constant dimension $d-g$. So set theoretically, the Abel-Jacobi map is a bundle of projective spaces.
+
+    It remains to show that the map is holomorphic and locally trivial. Let $D = p_1 + \cdots + p_d$ with distinct points.  
+Then
+\[
+T_D(\Sym^d R) \cong \bigoplus_{i=1}^d T_{p_i} R,
+\qquad
+T_{[L]}(J^d) \cong H^0(K_R)^\vee
+\]
+The differential
+\[
+d(AJ_d) : \bigoplus_i T_{p_i}R \longrightarrow H^0(K_R)^\vee
+\]
+is given (dually, via Serre duality $H^1(\mathcal O_R)^\vee \cong H^0(K_R)$) by
+\[
+d(AJ_d)(v_1,\dots,v_d)(\omega) = \sum_{i=1}^d \omega_{p_i}(v_i)
+\]
+There is a dual map 
+\[
+d(AJ_d)^\vee : H^0(K_R) \longrightarrow \bigoplus_i K_{R,p_i}
+\] which evaluates a holomorphic differential at the points $p_i$.
+The map $d(AJ_d)$ is surjective if and only if the dual map $d(AJ_d)^\vee$ is injective, i.e., if and only if there is
+no nonzero $\omega \in H^0(K_R)$ vanishes at all $p_i$. But since $\deg D = d > 2g-2 = \deg K_R$, by Riemann-Roch and Serre duality, we conclude that $d(AJ_d)$ is surjective at every point.
+
+By the holomorphic implicit function theorem, a holomorphic map between complex manifolds with surjective differential at a point is locally a projection.  
+Thus for each $D_0$, there are local holomorphic coordinates $(z_1,\dots,z_{d-g},w_1,\dots,w_g)$ on $\Sym^d R$ and $(w_1,\dots,w_g)$ on $J^d$ such that
+\[
+A_d(z,w) = w.
+\]
+Therefore $A_d$ is a holomorphic submersion whose fibers are compact complex submanifolds of dimension $d-g$.  
+Hence $A_d : \Sym^d R \to J^d$ is a holomorphic fiber bundle with fiber $\mathbb P^{d-g}$.
+\end{solution}
+
+
 
 \begin{problem}[3]
 Kodaira’s theorem implies that for any vector bundle $V \to R$ on a compact Riemann surface, there exists a (bundle-dependent) degree $d \in \mathbb{Z}$ such that
@@ -38,6 +91,27 @@ Use this fact, the long exact sequence for cohomology of
 and the result of Question~4 below to show that the ad hoc definition of cohomology of vector bundles via principal parts computes the genuine sheaf cohomology of vector bundles.
 \end{problem}
 
+\begin{solution}
+For any $V$ there exists $d_0$ such that for every line bundle $L$ with $\deg L > d_0$, $H^1(R;\mathcal O(V\otimes L)) = 0$. In particular, choose $L = \mathcal O(D)$ for some effective divisor $D$ with $\deg D > d_0$.
+
+For an effective divisor $D$, we have the short exact sequence of sheaves
+\[0 \to \mathcal O(V) \to \mathcal O(V(D)) \to \mathcal P_D(V) \to 0,\]
+where $\mathcal P_D(V)$ is the sheaf of principal parts of meromorphic sections of $V$ with poles bounded by $D$.
+Taking the long exact sequence in cohomology, we have
+\[0 \to H^0(R;\mathcal O(V)) \to H^0(R;\mathcal O(V(D))) \to H^0(R;\mathcal P_D(V)) \to H^1(R;\mathcal O(V)) \to H^1(R;\mathcal O(V(D))) \to \cdots\]
+Since $\deg D > d_0$, we have $H^1(R;\mathcal O(V(D))) = 0$. Therefore,
+\[H^1(R;\mathcal O(V)) \cong \frac{H^0(R;\mathcal P_D(V))}{\operatorname{Im}(H^0(R;\mathcal O(V(D))) \to H^0(R;\mathcal P_D(V)))}.\]
+Taking the direct limit over all effective divisors $D$, we have
+\[H^1(R;\mathcal O(V)) \cong \varinjlim_D \frac{H^0(R;\mathcal P_D(V))}{\operatorname{Im}(H^0(R;\mathcal O(V(D))) \to H^0(R;\mathcal P_D(V)))}.\]
+By the result of Question 4, we have
+\[\varinjlim_D H^0(R;\mathcal P_D(V)) \cong H^0(R;\mathcal P(V)),\]
+where $\mathcal P(V)$ is the sheaf of principal parts of meromorphic sections of $V$. Therefore,
+\[H^1(R;\mathcal O(V)) \cong \frac{H^0(R;\mathcal P(V))}{\operatorname{Im}(\varinjlim_D H^0(R;\mathcal O(V(D))) \to H^0(R;\mathcal P(V)))}.\]
+But $\varinjlim_D H^0(R;\mathcal O(V(D)))$ is precisely the space of global meromorphic sections of $V$, i.e., $H^0(R;\mathcal O(V))$. Thus,
+\[H^1(R;\mathcal O(V)) \cong \frac{H^0(R;\mathcal P(V))}{\operatorname{Im}(H^0(R;\mathcal M(V)) \to H^0(R;\mathcal P(V)))}.\]
+This shows that the ad hoc definition of cohomology of vector bundles via principal parts computes the genuine sheaf cohomology of vector bundles.
+\end{solution}
+
 \begin{problem}[4]
 Show that, on a compact Hausdorff space $X$, sheaf cohomology commutes with filtered colimits (formerly known as direct limits): if $\mathcal{S} = \varinjlim_{n \to \infty} \mathcal{S}_n$, then
 \[
@@ -48,19 +122,236 @@ Show that, on a compact Hausdorff space $X$, sheaf cohomology commutes with filt
 Use this to prove that the sheaf of principal parts of meromorphic sections of a vector bundle on a Riemann surface has no $H^1$ or higher cohomology.
 \end{problem}
 
+\begin{solution}
+    Let $X$ be compact Hausdorff and $\{\mathcal{S}_\alpha\}$ a filtered direct system of sheaves. Let $\mathcal{S} = \varinjlim_\alpha \mathcal{S}_\alpha$ be the colimit in sheaves.
+
+    Take a finite open cover $\mathfrak{U} = \{U_i\}_{i=1}^m$ of $X$ (exists since $X$ is compact). For any $p$,
+    \[
+    C^p(\mathfrak{U},\mathcal{S}) = \prod_{i_0<\dots<i_p} \mathcal{S}(U_{i_0}\cap\cdots\cap U_{i_p}).
+    \]
+    We will use a couple of lemmas and justify them at the end of the solution.
+    \begin{lemma}[1]
+     Filtered colimits are computed stalkwise and commute with finite products.
+    \end{lemma}
+The lemma implies that the Čech complex for $\mathcal{S}$ is the filtered colimit of the Čech complexes for $\mathcal{S}_\alpha$ since we have the following isomorphisms which commute with the differentials:
+    \[
+    C^p(\mathfrak{U},\mathcal{S}) = \prod_{i_0<\dots<i_p} \mathcal{S}(U_{i_0}\cap\cdots\cap U_{i_p}) = \prod_{i_0<\dots<i_p} \varinjlim_\alpha \mathcal{S}_\alpha(U_{i_0}\cap\cdots\cap U_{i_p})
+    \]
+    \[
+    \cong \varinjlim_\alpha \prod_{i_0<\dots<i_p} \mathcal{S}_\alpha(U_{i_0}\cap\cdots\cap U_{i_p}) = \varinjlim_\alpha C^p(\mathfrak{U},\mathcal{S}_\alpha).
+    \]
+
+
+    \begin{lemma}[2]
+    Filtered colimits of abelian groups are exact, and in particular taking cohomology commutes with $\varinjlim$:
+    \[
+    \check{H}^q(\mathfrak{U};\mathcal{S}) \cong \varinjlim_\alpha \check{H}^q(\mathfrak{U};\mathcal{S}_\alpha).
+    \]
+    \end{lemma}
+    On a compact Hausdorff space (in particular, on a Riemann surface) Čech cohomology with respect to a good cover computes sheaf cohomology. Hence
+    \[
+    H^q(X;\mathcal{S}) \cong \varinjlim_\alpha H^q(X;\mathcal{S}_\alpha)
+    \]
+    for all $q$. 
+
+    For the second part, let $R$ be a Riemann surface and $V$ a holomorphic vector bundle. For each effective divisor $D$ on $R$, let $\mathcal{P}_D(V)$ be the sheaf of principal parts of meromorphic sections of $V$ with poles bounded by $D$.
+
+Observe that $\mathcal{P}_D(V)$ is supported on the finite set $\operatorname{Supp}(D)$, so it is a finite direct sum of skyscraper sheaves. 
+
+\begin{lemma}[3]
+    A sheaf on $R$ with finite support has no higher cohomology. In particular, for $q\geq1$,
+    \[
+    H^q(R;\mathcal{P}_D(V)) = 0,
+    \]
+\end{lemma}    
+    The full principal parts sheaf is the filtered colimit over all effective divisors:
+    \[
+    \mathcal{P}(V) = \varinjlim_D \mathcal{P}_D(V),
+    \]
+    directed by $D\leq D'$ if $D$ divides $D'$. Applying the result from the first part:
+    \[
+    H^q(R;\mathcal{P}(V)) \cong \varinjlim_D H^q(R;\mathcal{P}_D(V)).
+    \]
+    But each $H^q(R;\mathcal{P}_D(V))=0$ for $q\geq1$, so the colimit is 0. Therefore
+    \[
+    H^q(R;\mathcal{P}(V)) = 0 \quad \text{for all } q\geq1.
+    \]
+
+    Now we justify the lemmas used above.
+    \begin{proof}[Proof of Lemma 1]
+        Define a presheaf $\mathcal{F}(U) := \varinjlim_\alpha \mathcal{S}_\alpha(U)$. We claim $\mathcal{F}$ is already a sheaf. Then $\mathcal{F}$ is the colimit in the sheaf category, so for any open $U$, we have
+        \[
+        \mathcal{S} := \varinjlim_\alpha \mathcal{S}_\alpha \quad\text{satisfies}\quad \mathcal{S}(U) = \varinjlim_\alpha \mathcal{S}_\alpha(U)
+        \]
+        To show $\mathcal{F}$ is a sheaf, take an open cover $U = \bigcup_i U_i$. For separatedness, suppose $s \in \mathcal{F}(U)$ restricts to zero in every $\mathcal{F}(U_i)$. Represent $s$ by some $s_\alpha \in \mathcal{S}_\alpha(U)$. Its restriction to $\mathcal{F}(U_i)$ is the image of $s_\alpha|_{U_i}$. If that image is zero in the colimit, then for each $i$ there is some stage $\beta_i\geq\alpha$ with $s_{\beta_i}|_{U_i}=0$. Since the system is filtered, find $\gamma$ dominating all $\beta_i$. Then $(s_\gamma)|_{U_i}=0$ for all $i$, so by the sheaf property of $\mathcal{S}_\gamma$, $s_\gamma=0$, hence $s=0$ in the colimit.
+
+        For gluing, suppose we have $s_i \in \mathcal{F}(U_i)$ that agree on overlaps. Represent each $s_i$ by some $s_{i,\alpha_i}\in \mathcal{S}_{\alpha_i}(U_i)$. Filteredness gives a stage $\beta$ dominating all $\alpha_i$. Push all $s_{i,\alpha_i}$ to $\mathcal{S}_\beta$; they still agree on overlaps, so they glue to some $s_\beta\in \mathcal{S}_\beta(U)$. Its class in $\mathcal{F}(U)$ glues the original $s_i$.
+
+        Therefore the presheaf colimit is a sheaf, and $\mathcal{S}(U)=\varinjlim_\alpha \mathcal{S}_\alpha(U)$. Thus filtered colimits are computed stalkwise, so it is enough to show that in the category of abelian groups filtered colimits commute with finite products. 
+    \end{proof}
+
+    \begin{proof}
+    [Proof of Lemma 2]
+    Take a short exact sequence of direct systems
+    \[
+    0 \to A_\alpha \xrightarrow{f_\alpha} B_\alpha \xrightarrow{g_\alpha} C_\alpha \to 0,
+    \]
+    with all maps compatible. We need to show that
+    \[
+    0 \to \varinjlim A_\alpha \to \varinjlim B_\alpha \to \varinjlim C_\alpha \to 0
+    \]
+    is exact.
+
+    Left-exactness (injectivity at $\varinjlim A_\alpha$) holds for any colimit: if an element becomes zero in $\varinjlim B_\alpha$, it is already zero after some stage, and then in $A_\alpha$ by exactness there.
+
+    Surjectivity at $\varinjlim C_\alpha$ is where filteredness is used. Let $[c_\alpha] \in \varinjlim C_\alpha$. Pick representative $c_\alpha\in C_\alpha$. Exactness at $C_\alpha$ gives $b_\alpha\in B_\alpha$ with $g_\alpha(b_\alpha)=c_\alpha$. Let $[b_\alpha]$ be its class in $\varinjlim B_\alpha$; its image is $[c_\alpha]$. 
+
+    We need to check this does not depend on choices: if we change stage or lift, filteredness gives a common stage where the choices agree, because kernels and images are compatible. That is standard and uses only that the system is filtered.
+
+    Hence the right map is surjective and the colimit of a short exact sequence is exact.
+    \end{proof}
+
+    \begin{proof}[Proof of Lemma 3]
+    Let $\mathcal{F}$ be a sheaf on $R$ with finite support $\{p_1,\dots,p_n\}$. Then
+    \[
+    \mathcal{F} \cong \bigoplus_{i=1}^n (i_{p_i})_* \mathcal{F}_{p_i},
+    \]
+    where $i_{p_i} : \{p_i\} \hookrightarrow R$ is the inclusion. Each $(i_{p_i})_* \mathcal{F}_{p_i}$ is a skyscraper sheaf supported at $p_i$. 
+    
+Skyscraper sheaves are flasque. For $\mathcal{G} = (i_x)_*A$, where $A$ is an abelian group and $x\in R$, we have for $V\subset U$, the restriction map $\mathcal{G}(U)\to \mathcal{G}(V)$ is either:
+    \[
+    \begin{cases}
+    \mathrm{id}_A & \text{if both contain }x \\
+    A\to0 & \text{if }x\in U, x\notin V \\
+    0\to0 & \text{otherwise}
+    \end{cases}
+    \]
+
+    In all cases it is surjective. Therefore every restriction map is surjective, so $\mathcal{G}$ is flasque.
+
+Finite direct sums of flasque sheaves are flasque since surjectivity is preserved under finite products. Flasque sheaves have vanishing higher cohomology. Therefore, each summand has $H^q(R;(i_{p_i})_* \mathcal{F}_{p_i})=0$ for $q\geq1$. 
+Since cohomology commutes with finite direct sums, we conclude that $H^q(R;\mathcal{F})=0$ for $q\geq1$.
+\end{proof}
+\end{solution}
+
 \begin{problem}[5]
-A \emph{nodal Riemann surface} $S$ is one which is smooth except for finitely many singularities that look locally like
+A \textbf{nodal Riemann surface} $S$ is one which is smooth except for finitely many singularities that look locally like
 \[
 \{(x, y) \mid xy = 0\} \subset \mathbb{C}^2.
 \]
-It is obtained from a smooth Riemann surface $\widetilde{S}$ by identifying pairs of points; $\widetilde{S} \to S$ is called the \emph{normalization}.
-
-Define the canonical bundle $K_S$ of $S$ to be the sheaf of differentials holomorphic on $\widetilde{S}$, except for simple poles at the nodes, with opposite residues on the two branches of $S$.
+It is obtained from a smooth Riemann surface $\widetilde{S}$ by identifying pairs of points; $\widetilde{S} \to S$ is called the \textbf{normalization}. Define the canonical bundle $K_S$ of $S$ to be the sheaf of differentials holomorphic on $\widetilde{S}$, except for simple poles at the nodes, with opposite residues on the two branches of $S$.
 
 Show that $K_S$ is a line bundle. When $S$ is compact, prove the residue theorem for a meromorphic section of $K_S$ that is holomorphic at the nodes. Prove Serre duality for vector bundles on $S$.
 
-\emph{Hint:} Reduce to $\widetilde S$. (Use the Čech definition to show that you can compute $H^1$ on $\widetilde S$ instead of $S$.)
+\textbf{Hint:} Reduce to $\widetilde S$. (Use the Čech definition to show that you can compute $H^1$ on $\widetilde S$ instead of $S$.)
 \end{problem}
+
+\begin{solution}
+    Let $\nu:\widetilde S\to S$ be the normalization.
+Each node of $S$ has preimage a pair $\{p_i^+,p_i^-\}\subset\widetilde S$.
+Set $N:=\sum_i(p_i^++p_i^-)$.
+
+Let $K_{\widetilde S}$ be the canonical bundle on the smooth Riemann surface
+$\widetilde S$. Consider $K_{\widetilde S}(N)$, whose sections are meromorphic $1$--forms
+with at worst simple poles at the points of $N$.
+
+Define $K_S$ as the subsheaf of $\nu_*K_{\widetilde S}(N)$ consisting of
+sections $\omega$ such that for each node with preimages $p_i^\pm$,
+\[
+\res_{p_i^+}(\omega)+\res_{p_i^-}(\omega)=0.
+\]
+Equivalently, we have an exact sequence
+\[
+0\longrightarrow K_S\longrightarrow \nu_*K_{\widetilde S}(N)
+\xrightarrow{\ \mathrm{Res}\ } \bigoplus_i \underline{\C}_{\text{node }i}
+\longrightarrow 0,
+\tag{nodal}
+\label{nodal}
+\]
+where $\underline{\C}_{\text{node }i}$ is the skyscraper sheaf at the $i$-th node and the residue map takes
+$\omega$ to the collection of sums of residues at $p_i^\pm$, explicitly at the node $i$:
+\[\mathrm{Res}_i(\omega) = \res_{p_i^+}(\omega) + \res_{p_i^-}(\omega)\]
+
+
+We claim $K_S$ is a line bundle.
+Over smooth points of $S$, $\nu$ is an isomorphism, and the residue condition
+is vacuous, so $K_S$ agrees with $K_{\widetilde S}$; in particular it has
+rank $1$ there.
+
+Near a node, choose local coordinates so $\widetilde S$ is the disjoint
+union of two discs with coordinates $z$ and $w$, and the node identifies
+$z=0$ with $w=0$. A section of $K_{\widetilde S}(N)$ has local form
+\[
+\left(\frac{a}{z}+\text{hol}\right)dz
+\quad\text{on the $z$--branch,}\qquad
+\left(\frac{b}{w}+\text{hol}\right)dw
+\quad\text{on the $w$--branch.}
+\]
+The condition $a+b=0$ is one linear relation on the two residues, so the
+allowed principal parts form a $1$-dimensional space. Thus the stalk of
+$K_S$ at the node is also $1$-dimensional.
+
+
+
+Assume $S$ compact. Let $\omega$ be a meromorphic section of $K_S$ which is
+holomorphic at the nodes. Viewed on $\widetilde S$, this is a meromorphic
+$1$--form $\widetilde\omega$ which has the same poles away from the preimages of nodes and is holomorphic at each $p_i^\pm$ (since $\omega$ has no poles at nodes).
+
+Apply the usual residue theorem on $\widetilde S$:
+\[
+\sum_{q\in\widetilde S} \res_q(\widetilde\omega)=0.
+\]
+There is no contribution from $p_i^\pm$, so this sum is exactly
+$\sum_{p\in S}\res_p(\omega)$. Hence
+\[
+\sum_{p\in S} \res_p(\omega)=0,
+\]
+so we obtain the residue theorem on $S$.
+
+
+Let $E$ be a holomorphic vector bundle on $S$.
+We claim there is a natural perfect pairing
+\[
+H^1(S,E)\times H^0(S,K_S\otimes E^\vee)\longrightarrow\C,
+\]
+inducing an isomorphism
+\[
+H^1(S,E)^\vee \cong H^0(S,K_S\otimes E^\vee).
+\]
+
+Hence $H^1(S,E)$ identifies with a
+subspace of $H^1(\widetilde S,\nu^*E)$ cut out by linear relations at the nodes. In particular, using the principal parts characterization of $H^1$, a class in $H^1(S,E)$ corresponds to a collection of principal parts of $E$ at points of $\widetilde S$ (the poles of the sections) such that at each node the principal parts at $p_i^\pm$ have equal values residues in a common trivialization of $E$ near the node. 
+
+Similarly, a section of $K_S\otimes E^\vee$ corresponds to a section
+\[
+\phi\in H^0\big(\widetilde S,K_{\widetilde S}(N)\otimes\nu^*E^\vee\big)
+\]
+such that at each node the residues at $p_i^\pm$ are opposite, i.e.\ to a
+subspace of $H^0\big(\widetilde S,K_{\widetilde S}(N)\otimes\nu^*E^\vee\big)$
+defined by linear relations.
+
+On the smooth curve $\widetilde S$ we have the usual Serre duality pairing
+\[
+H^1(\widetilde S,\nu^*E)\times
+H^0\big(\widetilde S,K_{\widetilde S}\otimes(\nu^*E)^\vee\big)
+\to\C,
+\]
+which extends to allow simple poles at $N$, giving a perfect pairing
+\[
+H^1(\widetilde S,\nu^*E)\times
+H^0\big(\widetilde S,K_{\widetilde S}(N)\otimes(\nu^*E)^\vee\big)
+\to\C.
+\]
+The node-compatibility conditions defining $H^1(S,E)$ and $H^0(S,K_S\otimes
+E^\vee)$ are dual to each other with respect to this pairing. In particular, locally the principal part $(v^+,v^-)$ pairs with $(\ell^+,\ell^-)$ by
+$\ell^+(v^+)-\ell^-(v^-)$.
+
+Thus its restriction yields a perfect pairing
+\[
+H^1(S,E)\times H^0(S,K_S\otimes E^\vee)\to\C.
+\]
+
+\end{solution}
 
 \begin{problem}[6]
 Let $S$ be a chain of elliptic Riemann surfaces $E_1, \dots, E_g$, connected by nodes.
@@ -81,8 +372,172 @@ Let $S$ be a chain of elliptic Riemann surfaces $E_1, \dots, E_g$, connected by 
     and identify the Riemann Theta divisor. Compare with $W_{g-1}$.
 \end{enumerate}
 
-\emph{Note:} $\theta_3$ has a unique simple zero at the center of the period parallelogram.  
-\emph{Caution:} The instructor has not checked any of this!
+\textbf{Note:} $\theta_3$ has a unique simple zero at the center of the period parallelogram.  
+\textbf{Caution:} The instructor has not checked any of this!
 \end{problem}
+
+\begin{solution}
+Let $\nu:\widetilde S=\bigsqcup_{i=1}^g E_i\to S$ be the normalization.
+The canonical bundle $K_S$ is the subsheaf of
+$\nu_*K_{\widetilde S}(N)$ consisting of meromorphic $1$-forms on
+$\widetilde S$ with at worst simple poles at the preimages of nodes and
+opposite residues on the two branches. For a section of $K_S$ which is
+holomorphic at the nodes, all residues are zero, so there is no coupling
+condition between components.
+
+Each elliptic curve $E_i$ has
+$H^0(E_i,K_{E_i})\cong\C$; choose a nonzero form $\omega_i$.
+Viewing $\omega_i$ as a form on $\widetilde S$ extended by $0$ on the
+other components gives a global section of $K_S$.
+Thus
+\[
+H^0(S,K_S)\;\cong\;\bigoplus_{i=1}^g H^0(E_i,K_{E_i})
+\;\cong\;\C^g.
+\]
+So a basis of holomorphic differentials on $S$ is given by
+$\{\omega_1,\dots,\omega_g\}$, where $\omega_i$ lives on $E_i$ and vanishes
+on the others.
+
+Fix symplectic bases of $H_1(E_i,\Z)$ with periods
+$\int_{a_i}\omega_i=1$, $\int_{b_i}\omega_i=\tau_i$.
+Then
+\[
+H_1(S,\Z)\;\cong\;\bigoplus_{i=1}^g H_1(E_i,\Z),
+\]
+and the period matrix of $S$ (for the above basis of $H^0(K_S)$) is block
+diagonal:
+\[
+\Pi_S=\mathrm{diag}(\tau_1,\dots,\tau_g).
+\]
+The period lattice of $S$ is the direct sum of the lattices of the $E_i$.
+
+Line bundles on $S$ are obtained by choosing line bundles on each component and gluing uniquely at the
+nodes. In particular we have the standard exact sequence of sheaves of units:
+\[
+0\to\mathcal O_S^\times
+\to \nu_*\mathcal O_{\widetilde S}^\times
+\to \bigoplus_{\text{nodes}} \underline{\C^\times}
+\to 0
+\]
+Here a unit on $S$ pulls back to a unit on each component; the quotient is given by the ratios of the two branch values at each node.
+
+Take cohomology. Using $H^1(\underline{\C^\times})=0$ (skyscraper), we get:
+\[
+0\to H^0(\mathcal O_S^\times)
+\to H^0(\nu_*\mathcal O_{\widetilde S}^\times)
+\to \bigoplus_{\text{nodes}} \C^\times
+\to \Pic(S)
+\to \Pic(\widetilde S)
+\to 0
+\]
+
+We compute that $H^0(\mathcal O_S^\times)=\C^\times$, $H^0(\nu_*\mathcal O_{\widetilde S}^\times) = \prod_{i=1}^g H^0(\mathcal O_{E_i}^\times) = (\C^\times)^g$, and \[\Pic(\widetilde S)=\prod_{i=1}^g\Pic(E_i)\]
+
+The map $(\C^\times)^g\to(\C^\times)^{\text{nodes}}$ is: for each node joining $E_i$ and $E_{i+1}$, send $(\lambda_1,\dots,\lambda_g)$ to $\lambda_i/\lambda_{i+1}$. For a chain there are $g-1$ nodes, so this map is:
+\[
+(\C^\times)^g \longrightarrow (\C^\times)^{g-1},
+\qquad
+(\lambda_i)\mapsto (\lambda_i/\lambda_{i+1})_{i=1}^{g-1}
+\]
+
+This map is surjective (choose $\lambda_1=1$, then define $\lambda_{i+1}=\lambda_i/t_i$ for given $t_i$). Its kernel is exactly the diagonal $\C^\times$. Thus the map $\bigoplus_{\text{nodes}}\C^\times \to \Pic(S)$ has kernel equal to the image of $(\C^\times)^g$, so its cokernel is zero. Therefore the next map
+\[
+\Pic(S) \longrightarrow \Pic(\widetilde S) = \prod_{i=1}^g \Pic(E_i)
+\]
+is an isomorphism.
+
+On each elliptic curve,
+\[
+\Pic(E_i) \;\cong\; \Z \times E_i,
+\]
+via $(\deg,\Pic^0)\cong (\deg,\text{point})$.
+Hence
+\[
+\Pic(S)
+\;\cong\;
+\prod_{i=1}^g (\Z \times E_i)
+\;\cong\;
+\Z^g \times E_1 \times \cdots \times E_g.
+\]
+
+Define an equivalence relation on $\Pic(S)$ by allowing degree to move
+across a node: if $p',p''$ are the two preimages of a node on
+$E_i,E_{i+1}$, identify
+\[
+\mathcal O_{E_i}(p')\boxtimes\mathcal O_{E_{i+1}}
+\;\sim\;
+\mathcal O_{E_i}\boxtimes\mathcal O_{E_{i+1}}(p'').
+\]
+On multidegrees this identifies $(\dots,d_i,\dots,d_{i+1},\dots)$ with
+$(\dots,d_i-1,\dots,d_{i+1}+1,\dots)$, so only the \emph{total} degree
+$\sum_i d_i$ remains.
+
+The quotient of $\Pic(S)$ by this relation is
+\[
+\Z \times E_1\times\cdots\times E_g.
+\]
+Call this (still) $\Pic$.
+Given an effective divisor $D$ of degree $k$ on $S$, define
+\[
+AJ_k(D) := [\mathcal O_S(D)] \in \Pic
+\]
+(using total degree $k$ and the $\Pic^0$-coordinates on each $E_i$).
+This gives the Abel--Jacobi map
+\[
+AJ_k:\Sym^k(S)\longrightarrow \Pic.
+\]
+
+Fix basepoints $q_i\in E_i$ and use them to identify $\Pic^1$ with
+\[
+\Pic^1 \;\cong\; \{1\}\times E_1\times\cdots\times E_g.
+\]
+A point $x\in E_j\subset S$ maps to the line bundle
+\[
+\mathcal O_S(x) \sim
+\mathcal O_{E_j}(x-q_j)
+\]
+on the $j$-th factor, trivial elsewhere.
+Thus the image of $S$ in $\Pic^1$ is the union of the $g$ copies of the
+$E_j$ embedded as
+\[
+x\in E_j \;\longmapsto\; (1; 0,\dots,0, [x-q_j], 0,\dots,0).
+\]
+
+For degree $g-1$, line bundles in $\Pic^{g-1}$ with a nonzero section are
+exactly those arising from effective divisors of degree $g-1$.
+On the chain, such a divisor omits at least one component, so
+$W_{g-1}\subset\Pic^{g-1}$ is the union of $g$ translates where one
+coordinate (corresponding to a chosen component) is constrained by the
+condition that the section vanishes entirely on that component. 
+
+
+With the chosen basis of $H^0(K_S)$, the period matrix of $S$ is
+$\tau=\mathrm{diag}(\tau_1,\dots,\tau_g)$.
+The Riemann theta function for $S$ is
+\[
+\Theta(z\mid\tau)
+=\sum_{n\in\Z^g}
+\exp\big(\pi i\, n^T\tau n + 2\pi i\,n^T z\big),
+\quad z=(z_1,\dots,z_g).
+\]
+For diagonal $\tau$ this factorizes:
+\[
+\Theta(z\mid\tau)
+=\prod_{i=1}^g \theta_3(z_i\mid\tau_i),
+\]
+where
+\[
+\theta_3(u\mid\tau)
+=\sum_{n\in\Z}\exp(2\pi i n u + \pi i n^2\tau).
+\]
+
+Thus the theta divisor of $S$ is
+\[
+\{\Theta(z\mid\tau)=0\}
+=\bigcup_{i=1}^g \{\,\theta_3(z_i\mid\tau_i)=0\,\},
+\]
+a union of coordinate hypersurfaces in the product torus, matching the
+description of $W_{g-1}$ above.
+\end{solution}
 
 \end{document}

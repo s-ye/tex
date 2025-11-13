@@ -698,14 +698,36 @@ Therefore, there is an isomorphism of abelian groups \begin{align*}
     Every $\cL$ on a Riemann surface has a nonzero meromorphic section. More generally, every vector bundle admits a global meromorphic frame.
 \end{theorem}
 \begin{remark}
-    The compact case follows from the Kodaira vanishing theorem. In the noncompact case, all holomorphicq vector bundles on noncompact $R$ are trivializable and therefore admit a global holomorphic frame.
+    The compact case follows from the Kodaira vanishing theorem. In the noncompact case, all holomorphic vector bundles on noncompact $R$ are trivializable and therefore admit a global holomorphic frame.
+\end{remark}
+
+\begin{remark}[Confusion about degrees of meromorphic functions/sections]
+    By definition of the invertible sheaf $\mathcal{O}(D)$, its holomorphic sections are those rational functions $f \in \mathbb{C}(R)$ such that $(f) + D \geq 0$. The degree of a meromorphic function is zero. However, the same function interpreted as a section of $\mathcal{O}(D)$ has degree $\deg D$. This is because the transition functions of $\mathcal{O}(D)$ introduce additional zeroes/poles to the section.
+
+    For example, consider the line bundle $\cO_{\P^1}(1)$ on $\P^1$, and let $z$ be the coordinate near zero, $w$ the coordinate near infinity. Then $z$ is a meromorphic function on $\P^1$, it has a simple zero at $0$ and a simple pole at $\infty$, so it has degree zero as a meromorphic function. 
+
+    However we can also consider it as a section of $\cO_{\P^1}(1)$. Recall that $\cO_{\P^1}(1)$ is constructed by taking two copies of $\C$ with coordinates $e_0, e_\infty$ and gluing them on the overlap by $e_\infty = w e_0$. 
+
+    A section of $\cO_{\P^1}(1)$ is given by a pair of functions $(s_0(z)e_0, s_\infty(w)e_\infty)$ so that on the overlap, both expressions agree. In particular \[s_0(z)e_0 = s_\infty(w)e_\infty = s_\infty(w)(w e_0)\] so the rule becomes \begin{align*}
+        s_\infty(w) & = ws_0(1/w)
+    \end{align*}
+    Therefore the section corresponding to the meromorphic function $z$ is given by \begin{align*}
+        s_0(z) & = z \\
+        s_\infty(w) & = w s_0(1/w) = w \cdot (1/w) = 1
+    \end{align*} so as a section of $\cO_{\P^1}(1)$, $z$ has a simple zero at $0$ and is nonvanishing at $\infty$. Therefore as a section of $\cO_{\P^1}(1)$, $z$ has degree $1$. In particular it is a global holomorphic section of $\cO_{\P^1}(1\cdot \infty)$.
+
+    A meromorphic section of $\cO(D)$ also comes from a meromorphic function and it will have the same degree as $D$. In particular, if $\cO(D)$ has a nonzero holomorphic section, then the degree of a meromorphic section will equal the degree of a holomorphic section, which we aptly call the degree of the line bundle.
+
+    The point is that sometimes line bundles do not admit holomorphic sections, for example $\cO_{\P^1}(-1)$ has no nonzero holomorphic sections. In that case, the degree of the line bundle is still defined, and it is precisely the degree of any meromorphic section (which always exists by the above theorem). 
+    
+    Those line bundles with a nonzero holomorphic section are precisely those which come from effective divisors, i.e. $\cL \cong \cO(D)$ with $D \geq 0$. This is because if $\cL$ has a nonzero holomorphic section $s$, then $(s) \geq 0$ is an effective divisor and $\cL \cong \cO((s))$. Conversely if $\cL \cong \cO(D)$ with $D \geq 0$, then the constant function $1$ is a nonzero holomorphic section of $\cO(D)$.
+
+However it is not true that every line bundle of nonnegative degree is linearly equivalent to an effective divisor, unless $g=0$. Consider the line bundle $\cO_X(p - q)$ of degree zero for distinct points $p,q \in X$. If this line bundle were effective, then there would exist a nontrivial holomorphic section $s$ of $\cO_X(p - q)$. This would immediately give an isomorphism to $\P^1$. So every curve of genus $g \geq 1$ has non-effective degree-zero line bundles. See Remark \ref{rmk:non-effective} for another viewpoint.
 \end{remark}
 
 Recall that the multiplicative Cousin problem is the problem of finding a global meromorphic function with prescribed zeroes and poles. The additive Cousin problem is the problem of finding a global meromorphic function with prescribed principal parts. The above theorem shows that both problems are always solvable on a noncompact Riemann surface.
 \begin{theorem}
-    On a noncompact Riemann surface, the multiplicative and additive Cousin problems are always solvable.
-
-    All holomorphic vector bundles on a noncompact Riemann surface are trivializable.
+    On a noncompact Riemann surface, the multiplicative and additive Cousin problems are always solvable. Moreover every holomorphic vector bundle on a noncompact Riemann surface is trivializable.
 \end{theorem}
 
 \begin{definition}
@@ -1381,7 +1403,9 @@ from $r$ to the points of $D$.
 A change of paths will change the integrals by an integral linear combination of periods,
 so the map to $J_0$ is well defined;
 now use the divisor $d\{r\}$ to identify $J_0$ with $J_d$,
-and the resulting map to $J_d$ is now also independent of your choice of $r$.
+and the resulting map to $J_d$ is now also independent of your choice of $r$. The image of the divisor $D$
+is the isomorphism class of the line bundle $\mathcal{O}(D)$. In particular, the image of the Abel-Jacobi map is precisely the set of isomorphism classes of line bundles which admit a nontrivial holomorphic section
+(i.e., those line bundles which can be represented as $\mathcal{O}(D)$ for some effective divisor $D$).
 
 This map will hold the key to Riemann's solution of the multiplicative Cousin problem,
 but we need to settle some of its properties first.
@@ -1426,12 +1450,12 @@ but they are always stratified by \textbf{locally closed} submanifolds of decrea
     \]
     where $\omega^{(k)}(p_i)$ means the $k$-th derivative (the $k$-jet) of the local coefficient function $f(z)$ of $\omega=f(z)\,dz$.
     
-    In general, there's a uniform way to describe the differential valid for all $D$:
+    In general, there is a uniform way to describe the differential valid for all $D$:
 The differential \[d(AJ_d)_D : H^0(\mathcal O_R(D)|_D) \to H^1(\mathcal O_R)\] is given by the connecting homomorphism in the long exact sequence \[0 \to \mathcal O_R \to \mathcal O_R(D) \to \mathcal O_R(D)|_D \to 0\]
 \end{remark}
 
 \begin{theorem}[Properties of the Abel-Jacobi map]
-\leavevmode
+Let $AJ_d : \Sym^d(R) \to J_d$ be the Abel-Jacobi map which sends a degree $d$ effective divisor $D$ on $R$ to the isomorphism class of the line bundle $\mathcal{O}(D)$.
 \begin{enumerate}[(i)]
 \item The fiber of $AJ_d$ at a point $j \in J$ representing a line bundle $L$ on $R$
 is isomorphic to the projective space $\mathbb{P}H^0(R;L)$.
@@ -1465,6 +1489,31 @@ which is precisely $\mathbb{P}H^0(R;L)$.
 \end{align*} for all line bundles $L$ of degree $d$ because $H^1(R, L) = 0$ by Serre duality. Therefore, the fibers of $AJ_d$ are all projective spaces of dimension $d - g$. This gives $\Sym^d(R)$ the structure of a holomorphic projective bundle over $J_d$.
 \end{enumerate}
 \end{proof}
+
+\begin{remark}[Non-effective line bundles of nonnegative degree]\label{rmk:non-effective}
+
+    The discussion of the Abel Jacobi map shows that for $g \geq 1$, there exist line bundles of degree $0 \leq d < g$ with no nontrivial holomorphic sections.
+
+Consider the Abel-Jacobi map
+\[
+i_r:X\longrightarrow \Pic^0(X),\qquad s\longmapsto \mathcal{O}_X(s-r).
+\]
+Its image is a 1-dimensional subvariety of the $g$-dimensional torus $\Pic^0(X)$ and hence cannot be all of $\Pic^0(X)$.
+
+Pick a degree-zero line bundle $T\in\Pic^0(X)$ not in $i_r(X)$.
+Set
+\[
+L = \mathcal{O}_X(r)\otimes T \in \Pic^1(X).
+\]
+Then $\deg L=1$, but $h^0(X,L)=0$. This is because if $h^0(X,L)>0$ then $L\simeq \mathcal{O}_X(p)$ for some $p\in X$. Hence
+$T \simeq L\otimes \mathcal{O}_X(-r) \simeq \mathcal{O}_X(p-r)$,
+so $T\in i_r(X)$, contradicting the choice of $T$. Thus $L$ is a non-effective class of nonnegative degree.
+More generally, for any $0\le d<g$, choose $T\in\Pic^0(X)\setminus (W_d - D_0)$ and set $L=\mathcal{O}_X(D_0)\otimes T$ with $\deg D_0=d$; then $h^0(X,L)=0$.
+
+
+
+
+\end{remark}
 
 Let $W_d \subset J_d$ denote the image of $AJ_d$.
 They are only interesting for $d < g$,
@@ -1553,7 +1602,7 @@ This map $\mathrm{pp}:\cH_0 \to \cH_1$ is the principal parts map, which at a po
 Now we introduce an identification of the theta line bundle $\Theta$ on $J_{g-1}$ with the inverse determinant line bundle of the complex of vector bundles $\cH_0 \to \cH_1$.
 
 \begin{theorem}
-    $\Theta \cong \Lambda^{\mathrm{top}} \cH_1 \otimes (\Lambda^{\mathrm{top}} \cH_0)^{-1}$ where $\Theta$ is the line bundle on $J_{g-1}$ with divisor $W_{g-1}$. The map $\mathrm{pp}:\cH_0 \to \cH_1$ induces a holomorphic section of $\Theta$ whose zero locus is precisely $W_{g-1}$.
+    $\Theta \cong \Lambda^{\mathrm{top}} \cH_1 \otimes (\Lambda^{\mathrm{top}} \cH_0)^{-1}$ where $\Theta$ is the line bundle on $J_{g-1}$ with divisor $W_{g-1}$. The map $\det \mathrm{pp}:\cH_0 \to \cH_1$ induces a holomorphic section of $\Theta$ whose zero locus is precisely $W_{g-1}$.
 \end{theorem}
 
 \begin{remark}
@@ -1572,7 +1621,7 @@ Recall that we had a basis of holomorphic differentials $\phi_1, \ldots, \phi_g$
     \Omega & = [I | B]
 \end{align*} with $B$ symmetric and $\Im B$ positive definite. Define the Riemann theta function \begin{align*}
     \theta(z | B) & = \sum_{n \in \Z^g} \exp\left( 2\pi i \left( \frac{1}{2} n^t B n + n^t z \right) \right)
-\end{align*} 
+\end{align*} where $z \in \C^g$. 
 
 \begin{theorem}[Properties of the Riemann theta function]
 \leavevmode

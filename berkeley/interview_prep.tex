@@ -260,10 +260,60 @@ and so the total expected number of flips is
 \end{example}
 
 \begin{example}
-    Three cards are dealt face-down on the table each round. The game presents a market for the sum of the cards face values (each card is 1-10 with equal probability). Say the market is 15 for 100, 100 at 25. How much would you pay to look at one card before deciding to buy/sell, assuming that you have to trade?
+    Take a deck of cards numbered 1 to 10, with 4 copies of each card (40 cards total). Three cards are dealt face-down on the table each round. The game presents a market for the sum of the cards face values (each card is 1-10 with equal probability). Say the market is 15 for 100, 100 at 25. How much would you pay to look at one card before deciding to buy/sell, assuming that you have to trade?
 
+    Contract is linear on the sum $S$ of the three cards. Bid/ask is 15-25, so with no info you'd sell at 15. Baseline P/L: $15-\mathbb{E}[S]=15-16.5=-3/2$.
+
+    If we peek one card $X=x$, the two unseen cards are drawn from the remaining 39 cards whose mean is $(220-x)/39$. Therefore:
+    \[
+    \mu_x:=\mathbb{E}[S|X=x]=x+2\frac{220-x}{39}=\frac{440+37x}{39}
+    \]
+
+    For optimal action given $x$: buy if $\mu_x>20$ (mid), else sell. Solving $(440+37x)/39>20$ gives $x>340/37$. So only $x=10$ triggers a buy; for $x\in\{1,\dots,9\}$ you sell.
+
+    The expected P/L with the signal is:
+    \[
+    \frac{1}{10}\Bigg[\sum_{x=1}^{9}\big(15-\mu_x\big)+\big(\mu_{10}-25\big)\Bigg]=-\frac{35}{26}
+    \]
+
+    Therefore the value of the peek, which is the improvement over baseline, is:
+    \[
+    -\frac{35}{26}-\Big(-\frac{3}{2}\Big)=\frac{2}{13}\approx0.1538
+    \] For 100 contracts, the value is 15.38 units.
 \end{example}
 
+\begin{example}
+    Suppose you have a bankroll of 100 dollars. Take a deck of cards numbered 1 to 10, with 4 copies of each card (40 cards total). Three cards are dealt face-down on the table each round. The game presents a market for the sum of the cards face values (each card is 1-10 with equal probability). Say the market is 11.5 for 5, 5 at 21.5. How much would you pay to look at one card before deciding to buy/sell, assuming that you have to trade?
+
+    Per unit, the peek is worth $\frac{185}{78} \approx 2.372$ dollars.
+
+    Let $S$ be the sum of the three cards. With one peek revealing $X=x$, we have
+    \[
+    \mu_x := \mathbb{E}[S|X=x] = x + 2\frac{220-x}{39} = \frac{440+37x}{39}
+    \]
+
+    The market is 11.5-21.5 (center 16.5, half-width 5). If you must trade one unit, you buy if $\mu_x > 16.5$ and sell if $\mu_x < 16.5$. Your loss per unit after seeing $x$ is the distance from $\mu_x$ to the nearer edge:
+    \[
+    \text{loss}(x) = \min(\mu_x-11.5,\ 21.5-\mu_x) = 5-|\mu_x-16.5|
+    \]
+
+    Without a peek the loss is always 5 per unit, so the value of the peek is
+    \[
+    \mathbb{E}[|\mu_X-16.5|] = \frac{1}{10}\sum_{x=1}^{10}\left|\frac{440+37x}{39}-\frac{33}{2}\right| = \frac{185}{78}
+    \]
+
+    If you can trade multiple units subject to your $100 $bankroll and the posted sizes (5 at each side), the optimal sizing is: sell up to 5 units when $x \leq 5$; buy up to 4 units when $x \geq 6$ (cannot afford $5 \times 21.5$). Then the peek's total value (vs. best no-peek choice, which is buying 4 to lose $20$) is $\frac{555}{52} \approx 10.67$. If instead you must trade exactly one unit, use the per-unit value $\frac{185}{78}$.
+
+    Suppose the peek is mispriced and u have to pay 2 dollars per contract to peek. Suppose that the volume can be whatever you want. How many contracts would you trade subject to the condition you can't go bankrupt?
+
+    4 contracts.
+
+The worst-case loss per contract equals market loss of $18.5$ (since $S\in[3,30]$ and you must trade at $11.5/21.5$) plus peek fee of $2$, totaling $20.5$ per contract.
+
+With a bankroll of $100$, we must satisfy $Q\cdot 20.5 \leq 100$ where $Q$ is the number of contracts, which implies $Q \leq 4.87$. Since we need an integer number of contracts, this means $Q=4$.
+
+While the peek reduces expected loss per unit by $\frac{2}{13}\approx0.154$ compared to no peek, the net expected value per unit becomes negative after the $2$ fee. Therefore, we don't scale beyond what the no-bankruptcy constraint allows.
+\end{example}
 
 \section{ML and Programming Questions}
 The package we are most interested in is pandas. It provides data structures and functions needed to manipulate structured data seamlessly. Recall some basic operations that one can perform with pandas:
