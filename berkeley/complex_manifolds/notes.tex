@@ -614,10 +614,7 @@ There is an obvious notion of a meromorphic differential, and there are analogou
 \end{remark}
 
 
-\begin{example}[Holomorphic differentials]
-    \leavevmode
-\begin{enumerate}
-\item[(i)] \textbf{Holomorphic differentials on $\mathbb{P}^1$ are zero.}
+\begin{example}[Holomorphic differentials on $\P^1$]
 
 Indeed, over the usual chart $\mathbb{C}$, the differential must take the form $f(z)\,dz$ with $f$ holomorphic.  
 Near $\infty$, with $w = 1/z$ as a coordinate, the differential becomes
@@ -626,12 +623,14 @@ f(1/w)\,d(1/w) = -f(1/w)\,dw/w^2.
 \]
 So we need $f(1/w)/w^2$ to be holomorphic at $w = 0$, so $f$ should extend holomorphically at $\infty$ and have a double zero there.  
 But then $f$ must be zero.
+\end{example}
 
-\item[(ii)] \textbf{Holomorphic differentials on the Riemann surface $w^4 + z^4 = 1$.}
+\begin{example}
+    Consider the Riemann surface $R$ defined by
+\[w^4 = 1 - z^4.
+\] We will find holomorphic differentials on its compactification $R^{\mathrm{cpt}}$.
 
-The branch points of the projection to the $z$-plane are at $z = \pm1, \pm i$; $w = 0$ at all of them.  
-The map has degree $4$ and branching index $3$ at each of the points.  
-At $\infty$, we have four separate sheets defined by $w = \sqrt[4]{1 - z^4}$ which has four convergent expansions in $1/z$, as soon as $|z| > 1$.  
+The branch points of the projection to the $z$-plane are at $z = \pm1, \pm i$; $w = 0$ at all of them. The map has degree $4$ and branching index $3$ at each of the points. At $\infty$, we have four separate sheets defined by $w = \sqrt[4]{1 - z^4}$ which has four convergent expansions in $1/z$, as soon as $|z| > 1$.  
 So Riemann–Hurwitz gives
 \[
 g(R) - 1 = -4 + \tfrac{1}{2} \cdot 12 = 2, \qquad g(R) = 3.
@@ -653,14 +652,6 @@ So $dz/w^2$, $dz/w^3$ are still holomorphic at the branch points (and everywhere
 At $z = \infty$, $w$ has a simple pole on $R^{\mathrm{cpt}}$ and we see that $w^{-2}dz$ and $w^{-3}dz$ (and higher powers) are non-singular there.  
 Moreover, we can even afford to add $z\,dz/w^3$ to our list, and we have produced three holomorphic differentials on $R^{\mathrm{cpt}}$.
 
-
-\begin{remark}
-It is easy to see that the three are linearly independent.  
-It takes more work to show that any holomorphic differential is a linear combination of these three.
-\end{remark}
-
-At any rate, we observe the following:
-
 \begin{proposition}
 The ratios of holomorphic differentials on $R^{\mathrm{cpt}}$ generate the field of meromorphic functions.
 \end{proposition}
@@ -672,8 +663,6 @@ The ratios of holomorphic differentials on $R^{\mathrm{cpt}}$ generate the field
 \]
 and $z, w$ generate the field of meromorphic functions, by our theorem from last time.
 \end{proof}
-
-\end{enumerate}
 \end{example}
 
 \section{Line bundles and divisors}
@@ -702,6 +691,7 @@ Therefore, there is an isomorphism of abelian groups \begin{align*}
 \begin{theorem}
     Every line bundle $\cL$ on a Riemann surface has a nonzero meromorphic section. More generally, every vector bundle admits a global meromorphic frame.
 \end{theorem}
+
 \begin{remark}
     The compact case follows from the Kodaira vanishing theorem. In the noncompact case, all holomorphic vector bundles on noncompact $R$ are trivializable and therefore admit a global holomorphic frame.
 \end{remark}

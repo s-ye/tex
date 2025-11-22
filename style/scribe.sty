@@ -81,10 +81,6 @@
 \usepackage{tikz-cd}
 \usepackage{color}
 
-\usepackage{parskip}
-\setlength{\parskip}{1em}
-\setlength{\parindent}{0pt}
-
 \usepackage{hyperref}
 \hypersetup{
   colorlinks,
@@ -126,7 +122,7 @@
 \usepackage[most]{tcolorbox}
 \tcbset{
   enhanced,
-  breakable,
+  boxsep=5pt,
   arc=6pt
 }
 
@@ -135,20 +131,9 @@
 \newtheoremstyle{examples}% name
 {4pt}% space above
 {4pt}% space below
-{}% body font
+{\leftskip=-2em\relax }% <-- body font & INDENT HERE
 {}% indent amount
 {\color{blue}\bfseries}% theorem head font (blue color)
-{.}% punctuation after theorem head
-{.5em}% space after theorem head
-{}% theorem head spec (can be left empty, meaning 'normal')
-
-
-\newtheoremstyle{bigresults}% name
-{4pt}% space above
-{4pt}% space below
-{}% body font
-{}% indent amount
-{\color{violet}\bfseries}% theorem head font (blue color)
 {.}% punctuation after theorem head
 {.5em}% space after theorem head
 {}% theorem head spec (can be left empty, meaning 'normal')
@@ -157,7 +142,7 @@
 \newtheoremstyle{results}% name
 {4pt}% space above
 {4pt}% space below
-{}% body font
+{\leftskip=-2em\relax }% <-- body font & INDENT HERE
 {}% indent amount
 {\color{teal}\bfseries}% theorem head font (blue color)
 {.}% punctuation after theorem head
@@ -167,7 +152,7 @@
 \newtheoremstyle{definitions}% name
 {4pt}% space above
 {4pt}% space below
-{}% body font
+{\leftskip=-2em\relax }% <-- body font & INDENT HERE
 {}% indent amount
 {\color{purple}\bfseries}% theorem head font (blue color)
 {.}% punctuation after theorem head
@@ -177,7 +162,7 @@
 \newtheoremstyle{special}% name
 {4pt}% space above
 {4pt}% space below
-{}% body font
+{\leftskip=-2em\relax }% <-- body font & INDENT HERE
 {}% indent amount
 {\color{red}\bfseries}% theorem head font (blue color)
 {.}% punctuation after theorem head
@@ -188,15 +173,26 @@
 \newtheoremstyle{solutions}% name
 {4pt}% space above
 {4pt}% space below
-{}% body font
+{\leftskip=-2em\relax}% <-- body font & INDENT HERE
 {}% indent amount
 {\color{orange}\bfseries}% theorem head font (blue color)
 {.}% punctuation after theorem head
 {.5em}% space after theorem head
 {}% theorem head spec (can be left empty, meaning 'normal')
 
-% Set the theorem styles
+\newtheoremstyle{bigresults}% name
+{4pt}% space above
+{4pt}% space below
+{\leftskip=-2em\relax}% <-- body font & INDENT HERE
+{}% indent amount
+{\color{violet}\bfseries}% theorem head font (blue color)
+{.}% punctuation after theorem head
+{.5em}% space after theorem head
+{}% theorem head spec (can be left empty, meaning 'normal')
 
+
+
+% Set the theorem styles
 \theoremstyle{bigresults}
 \newtheorem{theorem}{Theorem}[section]
 
@@ -234,6 +230,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Feel free to ignore the rest of this file
 
+
 \def\ScribeStr{??}
 \def\LecStr{??}
 \def\LecNum{??}
@@ -267,199 +264,3 @@
     }
   \end{center}
   \vspace*{4mm}}
-
-
-% Automatically box all theorem-like environments, aligned with old left indent
-\let\oldtheorem\theorem
-\let\endoldtheorem\endtheorem
-% somewhere after you've saved \oldtheorem
-\renewenvironment{theorem}[1][]{%
-  \begin{tcolorbox}[breakable,
-    colback=white,
-    colframe=violet,
-    top=0pt,
-    boxsep=5pt,
-    arc=6pt,
-    enlarge left by=-2em]%
-    \oldtheorem[#1]%
-    \setlength{\parskip}{1em}%
-    \setlength{\parindent}{0pt}%
-    \ignorespaces
-}{%
-    \endoldtheorem%
-  \end{tcolorbox}%
-}
-
-\let\oldlemma\lemma
-\let\endoldlemma\endlemma
-
-\renewenvironment{lemma}[1][]{%
-  \begin{tcolorbox}[breakable,
-    colback=white,
-    colframe=teal,
-    top=0pt,
-    boxsep=5pt,
-    arc=6pt,
-    enlarge left by=-2em]%
-    \oldlemma[#1]%
-    \setlength{\parskip}{1em}%
-    \setlength{\parindent}{0pt}%
-    \ignorespaces
-}{%
-    \endoldlemma%
-  \end{tcolorbox}%
-}
-
-
-\let\oldclaim\claim
-\let\endoldclaim\endclaim
-
-\renewenvironment{claim}[1][]{%
-  \begin{tcolorbox}[breakable,
-    colback=white,
-    colframe=teal,
-    top=0pt,
-    boxsep=5pt,
-    arc=6pt,
-    enlarge left by=-2em]%
-    \oldclaim[#1]%
-    \setlength{\parskip}{1em}%
-    \setlength{\parindent}{0pt}%
-    \ignorespaces
-}{%
-    \endoldclaim%
-  \end{tcolorbox}%
-}
-
-\let\oldproposition\proposition
-\let\endoldproposition\endproposition
-\renewenvironment{proposition}[1][]{%
-  \begin{tcolorbox}[breakable,
-    colback=white,
-    colframe=teal,
-    top=0pt,
-    boxsep=5pt,
-    arc=6pt,
-    enlarge left by=-2em]%
-    \oldproposition[#1]%
-    \setlength{\parskip}{1em}%
-    \setlength{\parindent}{0pt}%
-    \ignorespaces
-}{%
-    \endoldproposition%
-  \end{tcolorbox}%
-}
-
-\let\oldcorollary\corollary
-\let\endoldcorollary\endcorollary
-\renewenvironment{corollary}[1][]{%
-  \begin{tcolorbox}[breakable,
-    colback=white,
-    colframe=teal,
-    top=0pt,
-    boxsep=5pt,
-    arc=6pt,
-    enlarge left by=-2em]%
-    \oldcorollary[#1]%
-    \setlength{\parskip}{1em}%
-    \setlength{\parindent}{0pt}%
-    \ignorespaces
-}{%
-    \endoldcorollary%
-  \end{tcolorbox}%
-}
-
-\let\oldfact\fact
-\let\endoldfact\endfact
-
-
-\renewenvironment{fact}[1][]{%
-  \begin{tcolorbox}[breakable,
-    colback=white,
-    colframe=teal,
-    top=0pt,
-    boxsep=5pt,
-    arc=6pt,
-    enlarge left by=-2em]%
-    \oldfact[#1]%
-    \setlength{\parskip}{1em}%
-    \setlength{\parindent}{0pt}%
-    \ignorespaces
-}{%
-    \endoldfact%
-  \end{tcolorbox}%
-}
-
-\let\oldremark\remark
-\let\endoldremark\endremark
-
-
-\renewenvironment{remark}[1][]{%
-  \begin{tcolorbox}[breakable,
-    colback=white,
-    colframe=red,
-    top=0pt,
-    boxsep=5pt,
-    arc=6pt,
-    enlarge left by=-2em]%
-    \oldremark[#1]%
-    \setlength{\parskip}{1em}%
-    \setlength{\parindent}{0pt}%
-    \ignorespaces
-}{%
-    \endoldremark%
-  \end{tcolorbox}%
-}
-
-\let\oldexample\example
-\let\endoldexample\endexample
-
-
-\renewenvironment{example}[1][]{%
-  \begin{tcolorbox}[breakable,
-    colback=white,
-    colframe=blue,
-    top=0pt,
-    boxsep=5pt,
-    arc=6pt,
-    enlarge left by=-2em]%
-    \oldexample[#1]%
-    \setlength{\parskip}{1em}%
-    \setlength{\parindent}{0pt}%
-    \ignorespaces
-}{%
-    \endoldexample%
-  \end{tcolorbox}%
-}
-\let\oldexercise\exercise
-\let\endoldexercise\endexercise
-\renewenvironment{exercise}[1][]{%
-  \begin{tcolorbox}[breakable,
-    colback=white,
-    colframe=blue,
-    top=0pt,
-    boxsep=5pt,
-    arc=6pt,
-    enlarge left by=-2em]%
-    \oldexercise[#1]%
-    \setlength{\parskip}{1em}%
-    \setlength{\parindent}{0pt}%
-    \ignorespaces
-}{%
-    \endoldexercise%
-  \end{tcolorbox}%
-}
-
-\let\olddefinition\definition
-\let\endolddefinition\enddefinition
-
-  
-\renewenvironment{definition}[1][]{\begin{tcolorbox}[breakable,colback=white,colframe=purple,top = 0pt,boxsep=5pt,arc=6pt,enlarge left by=-2em]\olddefinition[#1]\setlength{\parskip}{1em}\setlength{\parindent}{0pt}\ignorespaces}{\endolddefinition\end{tcolorbox}}
-\let\oldnotation\notation
-\let\endoldnotation\endnotation
-\renewenvironment{notation}[1][]{\begin{tcolorbox}[breakable,colback=white,colframe=purple,top = 0pt,boxsep=5pt,arc=6pt,enlarge left by=-2em]\oldnotation[#1]\setlength{\parskip}{1em}\setlength{\parindent}{0pt}\ignorespaces}{\endoldnotation\end{tcolorbox}}
-\let\oldsolution\solution
-\let\endoldsolution\endsolution
-
-  
-\renewenvironment{solution}[1][]{\begin{tcolorbox}[breakable,colback=white,colframe=orange,top = 0pt,boxsep=5pt,arc=6pt,enlarge left by=-2em]\oldsolution[#1]\setlength{\parskip}{1em}\setlength{\parindent}{0pt}\ignorespaces}{\endoldsolution\end{tcolorbox}}
