@@ -269,6 +269,155 @@ The quotient is $(V\setminus\{y_1=y_2=0\})/\mathbb{C}^*$, i.e. the total space o
 \section{Autoequivalences from VGIT}
 We show that we can construct $\mathbb{Z}$ many derived equivalences between $X_+$ and $X_-$, and that the resulting autoequivalences are spherical twists. Segal's paper upgrades this equivalence to an equivalence of $B$-brane dg-categories. In particular, he shows that there are $\mathbb{Z}$ many quasi-equivalences between the categories of B-branes on $(X_+, W)$ and $(X_-, W)$. When $W=0$, the dg-category of B-branes is just the dg-category of perfect complexes, whose homotopy category is the bounded derived category of coherent sheaves. So Segal's result recovers the derived equivalences we construct here.
 
+\subsection{Connection to mirror symmetry}
+A Landau-Ginzburg model is a Kähler manifold \(X\) equipped with a
+holomorphic function \(W\), called the superpotential.  In the B-model
+we are interested in the pair \((X,W)\), and this only requires the
+complex structure on \(X\), not the metric.  For our purposes we work
+in the algebro-geometric setting, so \(X\) will be a smooth scheme (or
+stack) over \(\mathbb{C}\).
+
+When \(W=0\), it is a standard slogan that the category of B-branes is
+the derived category \(D^{b}(X)\) of coherent sheaves on \(X\).  More
+precisely, the category of B-branes should be a dg-category whose
+homotopy category is \(D^{b}(X)\).  A convenient dg-model is given by
+the category \(\mathrm{Perf}(X)\) of perfect complexes.  Its objects
+are bounded complexes of finite-rank vector bundles on \(X\), and the
+morphism complex between two objects \(E^{\bullet}\) and \(F^{\bullet}\)
+is
+\[
+\mathrm{Hom}(E^{\bullet},F^{\bullet})
+  \;=\;
+  \Gamma\!\left( \mathcal{H}om(E^{\bullet},F^{\bullet})
+  \otimes \mathcal{A}^{0,\bullet} \right),
+\]
+the Dolbeault complex of internal Homs.  The differential is the sum
+of the Dolbeault operator \(\bar{\partial}\) and the internal
+differential on \(\mathcal{H}om(E^{\bullet},F^{\bullet})\), which is
+itself the graded commutator with the differentials on \(E^{\bullet}\)
+and \(F^{\bullet}\).  The homology of this complex computes
+\[
+\mathrm{Ext}^{\bullet}(E^{\bullet},F^{\bullet})
+  \;=\;
+  \mathrm{Hom}_{D^{b}(X)}(E^{\bullet},F^{\bullet}).
+\]
+Since \(X\) is smooth, every object of \(D^{b}(X)\) is quasi-isomorphic
+to a perfect complex, so that \(H_{0}(\mathrm{Perf}(X)) \simeq D^{b}(X)\)
+as expected.
+
+We now need to generalise this to the Landau-Ginzburg case \(W \neq 0\).
+Kontsevich’s idea is to modify the notion of a chain complex by
+replacing \(d^{2}=0\) with
+\[
+d^{2} = W.
+\]
+This makes no sense for a \(\mathbb{Z}\)-graded complex, so one works
+instead with \(\mathbb{Z}_{2}\)-graded complexes.  This is the origin of
+the category of matrix factorizations.  
+
+\begin{definition}[Matrix Factorizations]\label{def:MF}
+\leavevmode
+\begin{enumerate}
+\item
+A \textbf{matrix factorization} \(\bar E = (E_\bullet,\delta_\bullet)\) of \(W\) on \(X\)
+consists of a pair of vector bundles \(E_0,E_1\) on \(X\) together with
+homomorphisms
+\[
+\delta_1 : E_1 \to E_0,
+\qquad
+\delta_0 : E_0 \to E_1,
+\]
+such that
+\[
+\delta_1 \delta_0 = W\cdot \mathrm{Id}_{E_0},
+\qquad
+\delta_0 \delta_1 = W\cdot \mathrm{Id}_{E_1}.
+\]
+
+\item
+The dg-category of matrix factorizations is defined as follows.
+If \(\bar E\) and \(\bar F\) are matrix factorizations, the morphism complex
+\(\mathcal{H}om_{\MF}(\bar E,\bar F)\) is the \(\mathbb{Z}\)-graded complex
+\[
+\mathcal{H}om_{\MF}(\bar E,\bar F)^{2n}
+  := \Hom(E_0,F_0) \oplus \Hom(E_1,F_1),
+\]
+\[
+\mathcal{H}om_{\MF}(\bar E,\bar F)^{2n+1}
+  := \Hom(E_0,F_1) \oplus \Hom(E_1,F_0),
+\]
+with differential
+\[
+d f := \delta_F \circ f - (-1)^{|f|}\, f \circ \delta_E.
+\]
+\end{enumerate}
+\end{definition}
+
+Matrix factorizations are also known as curved \(\mathbb{Z}/2\)-graded complexes of vector bundles with curvature \(W\). 
+
+We replace the homological grading with the notion of \textbf{R-charge}
+(strictly speaking, \textbf{vector R-charge}).  This is a geometric action
+of \(\C^*\) on \(X\), under which \(W\) must have weight \(2\).  Then we
+can define a \(B\)-brane to be a \(\C^*\)-equivariant vector bundle
+\(E\), with an endomorphism \(d\) of R-charge \(1\), and the condition
+\(d^2 = W \cdot 1_E\) makes sense.  If the \(\C^*\)-action is trivial,
+then we are forced to take \(W=0\), and we recover the definition of a
+perfect complex.  Also, the definition of the morphism chain complexes
+in \(\Perf(X)\) adapts easily, as we shall see.
+
+\begin{definition}\label{def:LGmodel}
+A \textbf{Landau--Ginzburg \(B\)-model} is the following data:
+\begin{itemize}
+  \item A smooth \(n\)-dimensional scheme (or stack) \(X\) over \(\C\).
+  \item A choice of function \(W \in \O_X\) (the \textbf{superpotential}).
+  \item An action of \(\C^*\) on \(X\) (the \textbf{vector R-charge}).
+\end{itemize}
+such that
+\begin{enumerate}
+  \item \(W\) has weight (R-charge) equal to \(2\).
+  \item \(-1 \in \C^*\) acts trivially.
+\end{enumerate}
+From now on we call the \(\C^*\) acting in this definition
+\(\C^*_R\) to distinguish it from other \(\C^*\)-actions that will appear
+later.
+\end{definition}
+
+\begin{definition}\label{def:Bbrane}
+A \textbf{\(B\)-brane} on a Landau--Ginzburg \(B\)-model \((X,W)\) is a
+finite-rank vector bundle \(E\) on \(X\), equivariant with respect to
+\(\C^*_R\), equipped with an endomorphism \(d_E\) of R-charge \(1\)
+such that
+\[
+d_E^2 = W \cdot 1_E.
+\]
+\end{definition}
+
+In particular, \(X\) is a space endowed with a sheaf of curved algebras (with \(W\) as the curvature) and a \(B\)-brane is a locally free sheaf of curved dg-modules over \(X\).
+The relationship between this definition and matrix factorizations can be described succinctly. The dg-category of matrix factorizations is equivalent to the homotopy category of B-branes over the curved algebra associated to the Landau--Ginzburg datum.
+
+Recall that we can introduce an equivariant enhancement using the curved Cartan model. Set
+\[
+A \;=\; \big(\Omega^{0,\bullet}_X \otimes \Sym(\mathfrak{g}^\vee[1])\big)^G,
+\qquad
+d_A \;=\; \bar\partial + d_{\mathrm{Cartan}},
+\qquad
+d_A^2 \;=\; W\cdot.
+\]
+Here $\mathfrak g$ is the Lie algebra of the symmetry group, $d_{\mathrm{Cartan}}$ is the usual Cartan differential encoding the equivariant structure, and the curvature $W$ sits as the square of the total differential.
+
+A $B$‑brane is then a finite‑rank projective (equivariant) $A$‑module $(E,d_E)$ satisfying the curvature condition
+\[
+d_E^2 \;=\; W\cdot\mathrm{id}_E.
+\]
+Morphisms are given by the internal Hom over $A$; the derived morphism complex is
+\[
+\operatorname{RHom}_A(E,F)\;=\;\operatorname{Hom}_A(E,F),
+\]
+with differential
+\[
+d(f) \;=\; d_F\circ f \;-\; (-1)^{|f|}\, f\circ d_E.
+\]
+
 \subsection{Set-up}
 
 Let $V = \mathbb{C}^4$ with coordinates $x_1, x_2, y_1, y_2$, and let $\mathbb{C}^*$ act on $V$ with weight $1$ on each $x_i$ and weight $-1$ on each $y_i$. There are two possible GIT quotients $X_{+}$ and $X_{-}$, depending on whether we choose a positive or negative character of $\mathbb{C}^*$. Both are isomorphic to the total space of the bundle $\mathcal{O}(-1)^{\oplus 2}$ over $\mathbb{P}^1$. This is the standard "three-fold flop" situation.
@@ -603,23 +752,21 @@ in degrees $-1\to 0$. By the Koszul short exact sequence
 the canonical projection $q: A \to \mathcal{I}_\Sigma(t)[0]$ is a quasi-isomorphism since $H^{-1}(A)=0$ and $H^{0}(A)\cong \mathcal{I}_\Sigma(t)$.
 
 Let $\iota:\mathcal{I}_\Sigma(t)\hookrightarrow \mathcal{O}(t)$ be the inclusion, and set
-\[
-\phi \;:=\; \iota\circ q \;:\; A \longrightarrow \mathcal{O}(t)
-\]
-which is a map of complexes where on degree 0 it's $\mathcal{I}_\Sigma(t)\hookrightarrow \mathcal{O}(t)$ and on degree $-1$ it's 0.
+$\phi \;:=\; \iota\circ q \;:\; A \longrightarrow \mathcal{O}(t)$
+which is a map of complexes where on degree 0 it is given by $ \cO(t+1)^{\oplus2}\twoheadrightarrow\mathcal{I}_\Sigma(t)\hookrightarrow \mathcal{O}(t)$ and on degree $-1$ it's 0.
 
-The key calculation is to show that $\mathrm{Cone}(\phi)\cong S$. With $A^{-1}=\mathcal{O}(t+2)$ and $A^{0}=\mathcal{O}(t+1)^{\oplus2}$, the cone is a three -term complex supported in degrees $-1,0,1$:
+The key calculation is to show that $\mathrm{Cone}(\phi)\cong S$. With $A^{-1}=\mathcal{O}(t+2)$ and $A^{0}=\mathcal{O}(t+1)^{\oplus2}$, the cone is a three-term complex supported in degrees $-1,0,1$:
 \[
 \mathrm{Cone}(\phi)\;=\;
 \Big[\; A^{-1} \xrightarrow{d_{-1}} A^{0}\oplus \mathcal{O}(t)\xrightarrow{d_0}\ \mathcal{O}(t) \;\Big]
 \]
 where $d_{-1}(a)
-= \big(-d_A(a), \phi(a)\big)
-= \big(- (y_2,-y_1)a, 0\big)$ and $d_0(a,b)\;=\; (y_1,y_2)(a)-b$.
+= (-d_A(a), \phi(a))
+= (-(y_2,-y_1)a, 0)$ and $d_0(a,b) = (y_1,y_2)(a)-b$.
 
 Computing the cohomology of this complex, we find that:
-$H^{0}(\mathrm{Cone}(\phi))$ is $\ker d_0 / \operatorname{im} d_{-1}$. The condition $d_0(a,b)=0$ says $b=(y_1,y_2)(a)$; modulo the image of $A^{-1}$ this identifies $H^0$ with $\operatorname{coker}((y_1,y_2):\mathcal{O}(t+1)^{\oplus2}\to \mathcal{O}(t))=\mathcal{O}(t)/\mathcal{I}_\Sigma(t)=S$. Also $H^{1}(\mathrm{Cone}(\phi))= \operatorname{coker} d = 0$ since a quick check shows $d_0$ is surjective.
-Also $H^{-1}(\mathrm{Cone}(\phi)) = \ker d_{-1} = 0$ since $(y_2,-y_1)$ is injective.
+$H^{0}(\mathrm{Cone}(\phi))$ is $\ker d_0 / \operatorname{im} d_{-1}$. The condition $d_0(a,b)=0$ says $b=(y_1,y_2)(a)$; modulo the image of $A^{-1}$ this identifies $H^0$ with \[\operatorname{coker}((y_1,y_2):\mathcal{O}(t+1)^{\oplus2}\to \mathcal{O}(t))=\mathcal{O}(t)/\mathcal{I}_\Sigma(t)=S\] 
+ $H^{1}(\mathrm{Cone}(\phi))= \operatorname{coker} d = 0$ since a check shows $d_0$ is surjective. Also $H^{-1}(\mathrm{Cone}(\phi)) = \ker d_{-1} = 0$ since $(y_2,-y_1)$ is injective.
 
 Therefore $\mathrm{Cone}(\phi)$ is quasi-isomorphic to $S$ concentrated in degree 0: $\mathrm{Cone}(\phi)\ \simeq\ S[0]$.
 
@@ -633,8 +780,7 @@ and $\mathrm{Cone}(\phi)\simeq S$, we get
 \;=\;
 \Big[\;\mathcal{O}(t+2)\xrightarrow{(-y_2,\,y_1)}\mathcal{O}(t+1)^{\oplus2}\;\Big].
 \]
-
-That is exactly
+So we have shown that the inverse spherical twist acts as
 \[
 T^{-1}_{S}(\mathcal{O}(t))
 \;=\;
@@ -899,7 +1045,7 @@ A covariant additive functor
 \[
 S : \mathcal{D} \longrightarrow \mathcal{D}
 \]
-is called a \emph{Serre functor} if it is a category equivalence and there are given bifunctorial isomorphisms
+is called a \textbf{Serre functor} if it is a category equivalence and there are given bifunctorial isomorphisms
 \[
 \varphi_{A,B} : \mathrm{Hom}_{\mathcal{D}}(A,B) \;\xrightarrow{\ \sim\;}\; \mathrm{Hom}_{\mathcal{D}}(B,SA)^{*}
 \]
@@ -975,7 +1121,7 @@ Let $X$ be a smooth projective variety over a field $k$ with either ample or ant
   for all coherent sheaves $F,G$ on $X$. This extends to complexes in $\cD$ by taking injective resolutions. Thus $S$ is a Serre functor.
 \end{proof}
   \begin{definition}[Point object]
-An object $P \in \mathcal{D}$ is called a \emph{point object of codimension $s$} if
+An object $P \in \mathcal{D}$ is called a \textbf{point object of codimension $s$} if
 \begin{enumerate}[label=\roman*)]
     \item $S_{\mathcal{D}}(P) \simeq P[s]$,
     \item $\Hom^{<0}(P,P) = 0$,

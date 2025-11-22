@@ -1,0 +1,195 @@
+\documentclass[12pt]{article}
+\usepackage{/Users/songye03/Desktop/Math_tex/style/psetconfig}
+
+\DeclareMathOperator{\res}{res}
+\title{Homework 5}
+\author{Songyu Ye}
+\date{\today}
+
+\begin{document}
+\psettitle
+
+\begin{problem}[1]
+For a compact Riemann surface $R$, verify that the Serre duality pairing
+\[
+H^1(R;\cO)\otimes H^0(R;\Omega^1)\longrightarrow \C
+\]
+defined by principal parts and residues agrees with the one given by integration
+of Dolbeault representatives.
+
+Using the relation to harmonic forms, explain how this relates to
+Poincar\'e duality on $R$.
+\end{problem}
+
+\begin{problem}[2]
+For a compact Riemann surface $R$, verify that the map
+\[
+H^1(R;\Z)\longrightarrow H^1(R;\cO)
+\]
+corresponds to the period map
+\[
+H_1(R;\Z)\otimes H^0(R;\Omega^1)\longrightarrow \C
+\]
+under integral Poincar\'e duality and Serre duality on $R$.
+\end{problem}
+
+\begin{problem}[3]
+Show that the period mapping gives an isomorphism
+\[
+H_1(R;\Z)\xrightarrow{\ \sim\ } H_1(J;\Z),
+\]
+which can be realized geometrically by the Abel--Jacobi map
+\[
+R\longrightarrow J_1.
+\]
+
+Show that under this correspondence, $c_1(\Theta)\in\Lambda^2 H_1(R)$
+is the intersection pairing on $R$.
+
+\textit{Hints for the second part:} You can deduce it from the periodicity
+formulas of the Riemann $\Theta$-function. Alternatively, you can find this
+by exploiting the facts that the Poincar\'e dual of $c_1(\Theta)$ in $J_{g-1}$
+is the Theta divisor, the image of $\Sym^{g-1}(R)$. The maps
+\[
+\Sym^g(R)\longrightarrow J_g
+\qquad\text{and}\qquad
+\Sym^{g-1}(R)\longrightarrow \operatorname{div}(\Theta)
+\]
+have degree $1$.
+\end{problem}
+
+\begin{problem}[4]
+Prove the following generalized Cauchy formula for a smooth function $f$
+defined in the unit disk $\Delta$:
+\[
+f(z,\bar z)
+=
+\frac{1}{2\pi i}\oint_{|\zeta-z|=r}
+\frac{f(\zeta)}{\zeta-z}\,d\zeta
++
+\frac{1}{2\pi i}\iint_{\Delta'}
+\frac{\partial f}{\partial\bar\zeta}\,
+\frac{d\zeta\wedge d\bar\zeta}{\zeta-z},
+\]
+where $\Delta'\subset\Delta$ is the subdisk of radius $r<1$.
+
+\textit{Remark:} When $f$ is holomorphic, you recover Cauchy's formula.
+\end{problem}
+
+\begin{problem}[5]
+Let $L\to X$ be a holomorphic line bundle on a complex manifold, and let
+$\alpha\in\cE^{0,1}$ be a $\bar\partial$-closed form. Show that the
+re-defined operator
+\[
+\tilde{\bar\partial} = \bar\partial + \alpha
+\]
+on sections of $L$ defines a new holomorphic structure $L'$ on the same
+underlying bundle, where local holomorphic sections are defined as those
+killed by $\tilde{\bar\partial}$. Show that $L\simeq L'$ if $\alpha$ is
+$\bar\partial$-exact. Relate this to the exponential sequence.
+
+\textit{Remark:} For vector bundles, the same applies with an
+$\alpha\in\cE^{0,1}(\End(V))$ satisfying the non-linear equation
+\[
+\bar\partial\alpha + \alpha\wedge\alpha = 0.
+\]
+The new bundle is isomorphic to the old one if
+$\alpha = a^{-1}\bar\partial a$, for some smooth section $a$ of $\Aut(V)$.
+\end{problem}
+
+\begin{problem}[6]
+Let $V$ be a complex $g$-dimensional vector space and
+$L\simeq\Z^{2g}\subset V$ a lattice. Let $A = V/L$.
+
+\begin{enumerate}
+\item Using harmonic theory, compute the Dolbeault cohomology $H^\ast(A;\cO)$.
+
+\item Show that the moduli space of holomorphic line bundles on $A$ with zero
+Chern class is naturally identified with
+\[
+A^\vee := V^\vee / L^\vee.
+\]
+
+\item Show that the moduli space of holomorphic line bundles on $A^\vee$ is
+naturally identified with $A$.
+
+\item Define a line bundle
+\[
+\mathcal{P}\longrightarrow A\times A^\vee
+\]
+from the trivial line bundle over $V\times V^\vee$ with connection
+\[
+\nabla = d + i(x\,d\xi + \xi\,dx),
+\]
+by quotienting out the $L\times L^\vee$-action as follows: identify the
+fiber $\C$ over $(x,\xi)\in V\times V^\vee$ with that over
+$(x+\ell,\xi+\lambda)$ by multiplication by
+\[
+\exp\bigl(2\pi i(\lambda(x)+\xi(\ell))\bigr).
+\]
+Show that $\mathcal{P}$ is holomorphic, that
+$\mathcal{P}|_{A\times\{a^\vee\}}$ is the line bundle over $A$ classified
+by $a^\vee\in A^\vee$, and prove the corresponding statement for
+$\{a\}\times A^\vee$.
+\end{enumerate}
+\end{problem}
+
+\begin{problem}[7]
+Show that, in the case of the Jacobian $J$ of a Riemann surface $R$,
+one has a natural isomorphism $J \simeq J^\vee$.
+
+\textit{Hint:} Remember the natural Hilbert space structure on holomorphic
+differentials.
+
+\textit{Remark:} This self-duality is a property of principally polarized
+Abelian varieties, those $A$ equipped with a positive line bundle having a
+single holomorphic section (the $\Theta$-function).
+\end{problem}
+
+\begin{problem}[8]
+Given a holomorphic line bundle $\mathcal{L}$ on a complex manifold and a
+smooth real closed $2$-form $\omega$ in the cohomology class of
+$c_1(\mathcal{L})$, prove that there exists a Hermitian metric on
+$\mathcal{L}$ whose holomorphic connection has curvature $-2\pi i\,\omega$.
+
+Conclude (from Kodaira vanishing) that the holomorphic line bundles on a
+compact Riemann surface $R$ which carry metrics of positive curvature are
+precisely those of positive degree.
+
+Show also that for every holomorphic vector bundle $V$ on $R$, there exists
+a $d$ so that the twisted bundle $V(D)$ has no $H^1$ for any $D>d$.
+\end{problem}
+
+\begin{problem}[9]
+Show that isomorphism classes of \emph{flat unitary} line bundles on a
+manifold $X$ are classified by $H^1(X;U(1))$, with the constant sheaf $U(1)$
+associated to the unit circle group in $\C^\times$.
+
+When $X$ is compact K\"ahler, compare the constant and holomorphic
+exponential sequences to conclude that the map
+\[
+H^1(X;U(1))\longrightarrow H^1(X;\cO^\times)
+\]
+induces a bijection from isomorphism classes of flat unitary line bundles to
+those of holomorphic line bundles with zero Chern class.
+
+\textit{Remark:} You probably need the Hodge decomposition theorem for the
+second part.
+\end{problem}
+
+\begin{problem}[10]
+Prove the global $\partial\bar\partial$-Lemma on a compact K\"ahler
+manifold $X$: for any $d$-exact form $\varphi\in\cE^{p,q}$, there exists
+$\psi\in\cE^{p-1,q-1}$ with
+\[
+\partial\bar\partial\psi = \varphi.
+\]
+
+\textit{Hint:} Show that
+\[
+\varphi = \partial\bar\partial^\ast \Box \varphi
+\]
+and use this and similar identities to find $\psi$.
+\end{problem}
+
+\end{document}

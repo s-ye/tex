@@ -102,7 +102,7 @@ We recast the argument given above:
         L^{top}G   & = \{ \text{continuous maps } D^* \to G \} \\
         L^{top}_+G & = \{ \text{continuous maps } D \to G \}   \\
         L^{top}_XG & = \{ \text{continuous maps } X^* \to G \}
-    \end{align*} and natural inclusions $L^{top}_+G \to L^{top}G$ and $L^{top}_XG \to L^{top}G$.
+    \end{align*} and natural map $L^{top}_+G \to L^{top}G$ and $L^{top}_XG \to L^{top}G$.
 \end{definition}
 \begin{proposition}
     There is a canonical bijection \begin{align*}
@@ -1303,7 +1303,9 @@ whose long exact sequence in cohomology gives
 The determinant of cohomology $\det H^0(E_{[a:c]})^{-1} \otimes \det H^1(E_{[a:c]})$ is then (up to a fixed constant factor) the determinant of the evaluation map $\mathrm{ev}_p^{[a:c]}$ (whatever that means). 
 \end{remark}
 
-\section{GIT and moduli of semistable bundles}
+\section{Primer on GIT}
+
+\section{Moduli of semistable bundles}
 Let $C$ be a smooth projective curve. Fixing any line
 bundle $L$ on $C$, the set of isomorphism classes of stable vector bundles of rank $2$ with
 determinant line bundle isomorphic to $L$ carries the structure of an algebraic variety.
@@ -1323,7 +1325,7 @@ appear in the line bundle case of the last chapter, but it turns out that the no
 of stability is the correct way to resolve these problems, and one proves the
 following.
 
-\begin{theorem}[Moduli of rank 2 vector bundles with fixed determinant]
+\begin{theorem}[Moduli of rank 2 vector bundles with fixed determinant]\label{thm:moduli-of-rank-2-vb-with-fixed-det}
 Suppose that the line bundle $L$ has degree $\ge 4g - 1$.
 \begin{enumerate}[(i)]
     \item There exists a Proj quotient
@@ -1353,9 +1355,125 @@ Suppose that the line bundle $L$ has degree $\ge 4g - 1$.
 \subsection{Slope stability and Pfaffians}
 We begin by recalling the notion of slope stability for vector bundles on curves. We will then introduce the Pfaffian of a skew-symmetric matrix, which will be the key semiinvariant we will use to study the Gieseker points associated to rank 2 vector bundles.
 
+\begin{definition}
+    Let $E$ be a vector bundle. A coherent subsheaf $F \subset E$ is a subbundle if $F$ is a vector bundle (i.e. locally free) and the cokernel $E/F$ is also locally free.
+\end{definition}
+
+\begin{remark}
+    In particular, note that a subsheaf $F \subset E$ of a vector bundle can be a vector bundle in its own right, but not a subbundle if the cokernel $E/F$ has torsion. 
+
+    However, one can always saturate a subsheaf $F$ to get a subbundle $\overline{F}$ defined as the kernel of the composition
+    \[E \to E/F \to (E/F)/\text{torsion}.
+    \]
+    The saturation $\overline{F}$ is the largest subbundle of $E$ containing $F$, and $\deg \overline{F} \ge \deg F$. One can check that any saturated subsheaf of a locally free sheaf is again locally free.
+\end{remark}
+
 \begin{definition}[Slope stability]
     A vector bundle $E$ on $C$ is stable (resp. semistable) if for every proper subbundle $F \subset E$, we have \[\frac{\deg F}{\mathrm{rank} F} < \frac{\deg E}{\mathrm{rank} E}\] (resp. $\le$). The ratio $\mu(E) = \frac{\deg E}{\mathrm{rank} E}$ is called the slope of $E$, and this condition is often called slope stability (semistability).
 \end{definition}
+
+\begin{definition}
+    A vector bundle $E$ is \textbf{simple} if $\mathrm{End}(E) = k \cdot \mathrm{Id}_E$.
+    A vector bundle $E$ is decomposable if it is isomorphic to the
+    direct sum $E_1 \oplus E_2$ of two nonzero vector bundles; otherwise, $E$ is \textbf{indecomposable}.
+\end{definition}
+
+If $f\in\End(E)$ is an idempotent, $f^2=f$, then $f$ is the projection onto its image and $1-f$ is the projection onto its kernel. Hence the natural direct--sum decomposition of $E$ is
+\[
+E=\operatorname{im}f\oplus\operatorname{ker}f,
+\]
+because $\operatorname{im}f\cap\operatorname{ker}f=0$ and $\operatorname{im}f+\operatorname{ker}f=E$.
+
+Conversely, if $E=E_1\oplus E_2$ is a nontrivial decomposition, the projection onto the first summand along the second is an idempotent $f\in\End(E)$, $f^2=f$, whose image is $E_1$ and whose kernel is $E_2$. Thus decomposability of $E$ is equivalent to the existence of a nontrivial idempotent $f\neq0,\,1$ in $\End(E)$.
+\begin{proposition}
+    Every vector bundle $E$ can be uniquely decomposed as a direct sum of indecomposable vector bundles, up to isomorphism and permutation of the summands.
+\end{proposition}
+
+\begin{proof}
+    Omitted.
+\end{proof}
+
+Given an endomorphism \(f : E \to E\), consider the determinant
+\(\det f : \det E \to \det E\). This is just multiplication by a scalar because \(\det E\) is a line bundle, and this scalar is nonzero if and only if \(f\) is an isomorphism. Now, for an arbitrary scalar
+\(\lambda\) consider \(\det(f - \lambda \mathrm{id})\). This is a
+polynomial of degree \(r(E)\) in \(\lambda\) and is the characteristic
+polynomial of the endomorphism \(f\). In particular, if \(\alpha\) is an eigenvalue, then \(f - \alpha\,\mathrm{id}\) fails to be an
+isomorphism because its determinant is zero.
+\begin{lemma}
+If \(E\) is indecomposable, then \(f \in \End(E)\) has only one eigenvalue.
+\end{lemma}
+
+\begin{proof}
+Suppose \(f\) has distinct eigenvalues \(\alpha\) and \(\beta\). Then its
+characteristic polynomial can be expressed as a product of two
+polynomials without common factors:
+\[
+\det(f - \lambda \cdot \mathrm{id})
+  = p(\lambda)\, q(\lambda),
+  \qquad p(\alpha) = 0, \quad q(\beta) = 0.
+\]
+There exist polynomials \(a(\lambda)\), \(b(\lambda)\) satisfying
+\[
+p(\lambda)\, a(\lambda) + q(\lambda)\, b(\lambda) = 1,
+\]
+Let $h(f) = p(f) a(f)$. Then \begin{align*}
+    h(1-h) = \bigl(p(f)a(f)\bigr)\bigl(q(f)b(f)\bigr) = p(f)\,q(f)\,a(f)b(f) = 0
+\end{align*} by the Cayley-Hamilton theorem. This implies that \(E\) is
+the direct sum \(\ker(h) \oplus \ker(1-h)\), and since \(h\) and \(1-h\)
+are both nonzero, we conclude that \(E\) is decomposable.
+\end{proof}
+
+\begin{proposition}
+    Consider a short exact sequence of vector bundles on a curve
+\[0 \longrightarrow F \longrightarrow E \longrightarrow G \longrightarrow 0\] Then \[\mu(F) > \mu(E) \quad \iff \quad \mu(E) > \mu(G)\] with equalities holding in the semistable case. In particular, (semi)stability of $E$ is witnessed by slopes of quotients as well as subbundles.
+\end{proposition}
+
+\begin{proof}
+    One computes that \[\mu(E) = \frac{r_F}{r_F+r_G}\,\mu(F)
++ \frac{r_G}{r_F+r_G}\,\mu(G)\]
+In particular $\mu(E)$ is a convex combination of $\mu(F)$ and $\mu(G)$, it must lie between them. So the only possibilities are $\mu(F) < \mu(E) < \mu(G)$, or $\mu(G) < \mu(E) < \mu(F)$, or they are all equal.
+\end{proof}
+
+
+\begin{proposition}
+Let $E, E'$ be semistable vector bundles of the same rank and degree, and
+suppose that one of them is stable. Then every nonzero homomorphism
+between $E$ and $E'$ is an isomorphism.
+\end{proposition}
+
+\begin{proof}
+Let $r$ and $d$ be the common rank and degree of the two bundles, and let
+$f : E \to E'$ be a homomorphism with image $F \subset E'$. 
+
+$F$ is not necessarily a subbundle of $E'$, but we can consider its saturation, which is a subbundle $\overline{F} \subset E'$. Note that $\deg \overline{F} \ge \deg F$ by the short exact sequence
+\[0 \longrightarrow F \longrightarrow \overline{F} \longrightarrow \text{torsion} \longrightarrow 0\] and note that degree is additive on short exact sequences. 
+
+Since $\overline{F}$ is a subbundle of the semistable bundle $E'$, we have
+\[\mu(F) \leq \mu(\overline{F}) \le \mu(E') = \frac{d}{r}.\]
+
+Since $F$ is a quotient of $E$, we have
+\[\mu(F) = \frac{\deg F}{\mathrm{rank} F} \ge \frac{d}{r}\]
+
+So therefore $\mu(\overline{F}) = \mu(F)=d/r$. If $\operatorname{rank} F < r$, then $F$ is either a proper quotient bundle of $E$ with the same slope (which would contradict the stability of $E$) or would induce a proper subbundle $F \subset E'$ with the same slope (which would contradict the stability of $E'$). So this contradicts the stability of $E$ or $E'$, and hence $\operatorname{rank} F = r$. In particular, this means that the induced map
+\[
+f_{\mathrm{gen}} : E_{\mathrm{gen}} \longrightarrow E'_{\mathrm{gen}}
+\]
+is an isomorphism of vector spaces over $k(C)$, and so
+$\det(f_{\mathrm{gen}})$ is also an isomorphism. This implies that
+$\det f : \det E \to \det E'$ is injective, and since
+$\deg E = \deg E'$, it follows that $\det f$ is an isomorphism. Hence $f$ is an isomorphism.
+\end{proof}
+
+\begin{corollary}\label{cor:stable-implies-simple}
+Every stable vector bundle is simple.
+\end{corollary}
+
+\begin{proof}
+An endomorphism $f \in \End E$ induces, at each point $p \in C$, an
+endomorphism of the fiber $E/E(-p) \cong k^{\oplus r}$. Let $\alpha \in k$
+be an eigenvalue of this map, and consider $f - \alpha \cdot \mathrm{id}
+\in \End E$. This is not an isomorphism, so by the previous proposition it must be zero. 
+\end{proof}
 
 We are going to study the semistability of Gieseker points associated to rank 2 vector bundles. For this, the central notion, with which we will build our semiinvariants, is that of the Pfaffian of a skew-symmetric matrix.
 
@@ -1661,7 +1779,7 @@ for every line subbundle $M \subset E$, then we say that $E$ is
 \end{definition}
 
 The following corollary is an immediate consequence of the previous proposition.
-\begin{corollary}
+\begin{corollary}[Gieseker semistability implies $H^0$-semistability]\label{cor:gieseker-stab-implies-h0-stab}
 Suppose that $H^1(E)=0$. Then $N = h^0(E)$ and $S$ is a basis of $H^0(E)$. Let $T = T_{E,S}$ be any Gieseker point of $E$.  
 Then:
 \begin{enumerate}[(i)]
@@ -1672,7 +1790,7 @@ Then:
 
 
 
-\begin{proposition}
+\begin{proposition}[Equivalence of $H^0$-semistability and slope semistability]\label{prop:h0-semistability-equivalence-slope-semistability}
 Suppose that $H^1(E)=0$ and $\deg E \ge 4g - 2$.  
 Then $E$ is $H^0$-semistable if and only if it is slope-semistable.
 \end{proposition}
@@ -1737,8 +1855,7 @@ H^0(E) \otimes \cO_C \longrightarrow E.
 \]
 The image sheaf has $h^0(E)$ linearly independent sections; 
 if it had rank~$1$, then its saturation would be a line bundle 
-violating $H^0$-semistability. 
-So the image has rank~$2$.
+violating $H^0$-semistability. So the image has rank~$2$.
 
 
 The image sheaf cannot have rank $1$. If $\operatorname{rk} I = 1$, then $I$ is a torsion-free sheaf of rank $1$, so its saturation $M := I^{\mathrm{sat}} \subset E$ is a line subbundle. Since $I \subset M$, the map $H^0(I) \hookrightarrow H^0(M)$ is injective, so
@@ -1766,7 +1883,7 @@ The image of the evaluation map
 \[
 \mathrm{ev}:H^0(E)\otimes\O_C\longrightarrow E
 \]
-is a coherent subsheaf $I\subset E$. It need not be a subbundle because a subbundle means “locally free subsheaf with torsion-free (equivalently locally free on a curve) quotient.” The quotient $E/I$ can have torsion at the base locus of the sections.
+is a coherent subsheaf $I\subset E$. It need not be a subbundle because a subbundle means locally free subsheaf with torsion-free (equivalently locally free on a curve) quotient. The quotient $E/I$ can have torsion at the base locus of the sections.
 
 On a smooth curve, $I$ is torsion-free (subsheaf of a vector bundle), hence locally free. But $E/I$ may have zero-dimensional torsion, so $I$ is not saturated, hence not a subbundle.
 
@@ -2063,7 +2180,7 @@ which are nonzero at the Gieseker point $T_{E,S}$. Hence $T_{E,S}$ is semistable
 \end{proof}
 
 \subsection{Construction of the moduli space}
-We are now prepared to prove Theorem 10.1. For this we need to study the
+We are now prepared to prove Theorem \ref{thm:moduli-of-rank-2-vb-with-fixed-det} For this we need to study the
 $GL(N)$--orbits in the affine space $\Alt_N(H^0(L))$ coming from vector
 bundles via Corollary~10.62.
 
@@ -2404,10 +2521,295 @@ T' \;=\;
 \bigl( (s'_i + s''_i\varepsilon)\wedge (s'_j + s''_j\varepsilon) \bigr)_{1 \le i,j \le N},
 \]
 then $T'$ has entries in $H^0(L \otimes_k A')$, in particular everywhere regular, and \(T'\) is an \(A'\)-valued point of \(\Alt_{N,2}(H^0(L))\) lifting \(T\).
-
-
     \end{enumerate}
 \end{proof}
+
+\begin{proposition}[Vanishing of \(H^1\)]\label{prop:vanishing-H1}
+If \(E\) is a semistable vector bundle with \(\mu(E) > 2g-2\), or
+if \(E\) is stable and \(\mu(E) \ge 2g-2\), then \(H^1(E)=0\).
+\end{proposition}
+
+\begin{proof}
+By Serre duality, it suffices to show that there is no nonzero homomorphism
+\[E \longrightarrow \Omega_C,
+\]
+where \(\Omega_C\) is the canonical line bundle on \(C\).
+If $\phi: E \to \Omega_C$ is nonzero, then $\operatorname{im}(\phi)$ is a nonzero subsheaf of $\Omega_C$.
+
+Since $\Omega_C$ is a line bundle, the image is a line subbundle, so
+\[
+\operatorname{im}(\phi) \cong \Omega_C(-D) \quad\text{for some effective divisor } D\ge 0.
+\]
+
+Thus $\phi$ factors as
+\[
+E \twoheadrightarrow Q \hookrightarrow \Omega_C,
+\]
+where $Q:=\operatorname{im}(\phi)$ is a quotient line bundle of $E$. Moreover
+\[
+\deg Q=\deg\big(\Omega_C(-D)\big)=2g-2-\deg D\le 2g-2,
+\]
+which contradicts the hypothesis $\mu(E)>2g-2$. Hence no nonzero map $\phi$ exists.
+\end{proof}
+
+\begin{proposition}[Generation by global sections]\label{prop:generation-by-global-sections}
+If $E$ is semistable and $\mu(E) > 2g-1$, or if $E$ is stable and 
+$\mu(E) \ge 2g-1$, then $E$ is generated by global sections.
+\end{proposition}
+
+\begin{proof}
+By the previous proposition, $H^{1}(E(-p)) = 0$ for every point 
+$p \in C$.  It follows that, for every positive divisor $D \ge 0$, 
+the restricted principal part map
+\[
+H^{0}(E(D-p)) \;\longrightarrow\; E(D-p)/E(-p)
+\]
+is surjective.  In particular, taking $D=p$ shows that the evaluation map
+\[
+H^{0}(E) \;\longrightarrow\; E/E(-p)
+\]
+is surjective at every point $p \in C$.
+\end{proof}
+
+\subsection{Proof of the main theorem}
+We now take our fixed line bundle \(L\) to have degree \(\ge 4g-1\), and we
+consider the action of 
+$\GL(N)$ on $\Alt_{N,2}\bigl(H^0(L)\bigr)$.
+
+
+Suppose that \(E \in SU_C(2,L)\).  
+Then by Proposition~\ref{prop:vanishing-H1} we have \(H^1(E)=0\), so the orbit
+\(GL(N)\cdot T_{E,S}\) of a Gieseker point depends only on \(E\) and not on
+the marking \(S\).
+By Proposition \ref{prop:generation-by-global-sections}, moreover, \(E\) is generated by global sections and is
+therefore recovered up to isomorphism from its Gieseker points
+by Proposition \ref{reconstruction-from-gieseker-point}.
+
+And by Propositions \ref{h0-semistability-equivalence-slope-semistability} and \ref{h0-semistability-implies-gieseker-semistability}, the Gieseker points of \(E\) are semistable for the action of \(GL(N)\).
+
+Conversely, suppose that \(T\in\Alt_{N,2}(H^0(L))\) is a semistable point for
+the \(GL(N)\)-action.  
+The columns of \(T\) are vectors in \(H^0(L)^{\oplus N}\), and as in
+Proposition~9.63 in the line bundle case we can show the following.
+
+\begin{lemma}[Linear independence of columns]\label{lem:col-independence}
+If \(T\in \Alt_{N,2}(H^0(L))\) is semistable, then the \(N\) columns of \(T\)
+are linearly independent vectors in \(H^0(L)^{\oplus N}\) over \(k\).
+\end{lemma}
+
+\begin{proof}
+Suppose not.  
+Then by a suitable change of basis (that is, by moving within the
+\(GL(N)\)-orbit) we can assume that the first row and column of \(T\) are
+zero:
+\[
+T
+\,=\,
+\begin{pmatrix}
+0 & 0 & \cdots & 0 \\
+0 & * & \cdots & * \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & * & \cdots & *
+\end{pmatrix}.
+\]
+
+Consider the action of the \(1\)-parameter subgroup
+\[
+t \longmapsto g(t)
+:= 
+\begin{pmatrix}
+t^{-N+1} & 0 & \cdots & 0 \\
+0 & t & & \\
+\vdots & & \ddots & \\
+0 & & & t
+\end{pmatrix}
+\in \SL(N).
+\]
+Then
+\[
+g(t)Tg(t)^{t}
+=
+\begin{pmatrix}
+0 & 0 & \cdots & 0 \\
+0 & t^{2} * & \cdots & t^{2} * \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & t^{2} * & \cdots & t^{2} *
+\end{pmatrix}.
+\]
+
+Letting \(t\to 0\) shows that the origin lies in the closure of the
+\(SL(N)\)-orbit of \(T\).  
+Therefore \(T\) is unstable.
+\end{proof}
+
+\begin{proposition}[Properties of bundles from semistable Gieseker points]\label{prop:properties-from-semistable-gieseker}
+Suppose that $\deg L \ge 4g-2$ and that 
+$T \in \Alt_{N,2}(H^0(L))$ is semistable for the action of $GL(N)$.  
+Then $E := \operatorname{Im}\langle T\rangle \subset L^{\oplus N}$ satisfies:
+\begin{enumerate}[(i)]
+\item $H^1(E)=0$;
+\item $\det E \cong L$;
+\item $E$ is semistable.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}
+    \item Let $V \subset H^0(E)$ be the space of global sections coming from the 
+surjection $\mathcal O_C^{\oplus N} \to E$.  
+Lemma~10.80 implies that $\dim V = N$, and, in particular, that 
+$h^0(E)\ge N$.  
+By Serre duality, the vanishing of $H^1(E)$ implies that there is a 
+nonzero homomorphism $f : E \to \Omega_C$, and this induces a linear map
+\[
+V \longrightarrow H^0(\Omega_C).
+\]
+Since $\dim H^0(\Omega_C)= g$, the kernel of this map then has dimension at least 
+\[
+N - g \ge g,
+\]
+and so, letting $M := \ker(f) \subset E$, we have
+\[
+\dim \bigl(H^0(M)\cap V\bigr)\;\ge\; \frac{N}{2}.
+\]
+Recall that we showed if for some line subbundle $M \subset E$,
+\[
+\dim\bigl( H^0(M) \cap V\bigr) > \frac{N}{2},
+\]
+then the Gieseker matrix $T$ is unstable under the $GL(N)$-action. Here $S$ is the chosen basis giving the map $\mathcal O_C^{\oplus N} \to E$, and $V$ is the image of $H^0(\mathcal O_C^{\oplus N})$ in $H^0(E)$, and $M = \ker (f)$ is a line subbundle of $E$. 
+
+But we assumed at the beginning that $T$ is semistable under $GL(N)$. Therefore it is impossible that $H^1(E) \neq 0$.
+
+\item 
+Consider the bilinear pairing
+\[
+\mathcal O_C^{\oplus N} \times \mathcal O_C^{\oplus N}
+\;\longrightarrow\; L,
+\qquad
+(u,v) \longmapsto u^{t} T v.
+\]
+This is skew--symmetric and vanishes if $u$ or $v\in \ker\langle T\rangle$,
+and hence defines a sheaf homomorphism
+\[
+\wedge^{2}E \;\longrightarrow\; L.
+\]
+Now recall there are only maps of line bundles from lower to higher degree. Also, note that any nonzero map of line bundles $A\to B$ of the same degree is an isomorphism. This is because
+\[ 0 \to A \to B \to A/B\] where $A/B$ is torsion sheaf whose degree is equal to the sum of the lengths at the support points, so if $\deg A = \deg B$ then $A/B=0$ and the map is an isomorphism.
+
+Thus to show that it is an isomorphism, it is enough to check that $\deg L \le \deg E$. 
+\[
+\deg L - 2g + 2
+\;=\; N
+\;\le\; h^0(E),
+\]
+while by part~(i) we have $H^1(E)=0$, so that
+\[
+h^0(E) = \deg E - 2g + 2,
+\]
+and we are done.
+
+\item
+By construction $T$ is a Gieseker point of the vector bundle $E$, and so 
+semistability follows from Propositions~\ref{prop:h0-semistability-equivalence-slope-semistability} and~\ref{h0-semistability-implies-gieseker-semistability}.
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}
+    [Finite stabilizers of stable bundles]\label{lem:finite-stab} Suppose that $H^{1}(E)=0$, that $E$ is generated by global sections, 
+and that $E$ is simple.  
+Given a marking $S$ and a matrix $X\in GL(N)$,
+\[
+X\,T_{E,S}\,X^{t}=T_{E,S}
+\qquad\text{if and only if}\qquad
+X=\pm I_{N}.
+\]
+\end{lemma}
+
+\begin{proof}
+The hypothesis $X\,T_{E,S}\,X^{t}=T_{E,S}$ is equivalent to the commutativity
+of the diagram
+\[
+\begin{tikzcd}
+\O_{C}^{\oplus N} \arrow[r,"{\langle T_{E,S}\rangle}"] \arrow[d,"{X^{t}}"'] 
+& L^{\oplus N} \arrow[d,"{X}"] \\
+\O_{C}^{\oplus N} \arrow[r,"{\langle T_{E,S}\rangle}"] 
+& L^{\oplus N}.
+\end{tikzcd}
+\]
+This diagram determines an endomorphism $\phi$ of $E$, and the assumption that
+$E$ is simple implies that $\phi = c\,\mathrm{id}_{E}$ for some $c\in k$.
+But then $X = X^{t} = c\cdot I_{N}$, and in particular $c^{2}=1$. 
+Thus $X = \pm I_{N}$.
+\end{proof}
+
+
+\begin{proof}[Proof of Theorem \ref{thm:moduli-of-rank-2-bundles}]
+To construct the moduli space
+\[
+\Alt^{ss}_{N,2}(H^0(L)) /\!\!/ GL(N)
+\]
+as a projective GIT quotient we consider the graded semiinvariant ring with respect to the character \(\chi : GL(N) \to k^*\), choosing $\chi = \det$.  
+\[
+R = \bigoplus_{m\ge 0} H^0(\Alt_{N,2}(H^0(L)), \mathcal{O}(m))^{GL(N), \chi^m}.
+\]
+However, this argument is a little subtle since the ring $R$ might not be an integral domain, because strictly semistable points create multiple components. So one needs a result guaranteeing that Proj still gives an algebraic variety (or a disjoint union of such).
+
+\begin{lemma}
+    If $X^{ss}$ is smooth, then the Proj quotient exists as a disjoint union of varieties. We do not need $R$ to be integrally closed or irreducible.
+\end{lemma}
+
+\begin{proof}
+    Follows from the general theory of GIT quotients.
+\end{proof}
+  
+The smoothness follows from Proposition \ref{prop:properties-from-semistable-gieseker}, which guarantees the condition $H^1(E)=0$, together with Proposition \ref{prop:smoothness-at-gieseker-points}.
+
+Now consider the open set 
+\[
+\Alt^{\mathrm{s}}_{N,2}(H^0(L))/GL(N)
+\]
+of stable orbits. First note that, for each stable Gieseker point $T$, the vector bundle 
+$E=\im\langle T\rangle$ is stable.  
+This follows from Corollary \ref{cor:gieseker-stab-implies-h0-stab} and the proof of Proposition \ref{prop:h0-semistability-equivalence-slope-semistability}.  
+
+Conversely, if $E$ is stable as a vector bundle, then it is simple, and so by 
+Lemma \ref{lem:finite-stab} its Gieseker points $T$ have a finite stabiliser and hence are stable 
+for the $GL(N)$--action.  
+We therefore arrive at a bijection:
+\[
+SU_C(2,L) \;\xrightarrow{\;\sim\;}\; \Alt^{\mathrm{s}}_{N,2}(H^0(L))/GL(N).
+\]
+
+By Lemma \ref{lem:finite-stab}, moreover under the action 
+\[
+GL(N)/\{\pm I_N\} \;\curvearrowright\; \Alt^{\mathrm{s}}_{N,2}(H^0(L)),
+\]
+all orbits are free and closed. The stabilizer of any point is exactly $\{\pm I_N\}$, and so dividing by this subgroup makes the action free. Orbits are closed because stable points have closed orbits in GIT.
+
+\begin{proposition}
+    If an affine variety $X$ is nonsingular at every point of a free closed orbit $G \cdot x$, then the affine quotient $X//G$ is nonsingular at the image point, with dimension = $\dim X - \dim G$.
+\end{proposition}
+
+\begin{proof}
+    Follows from the general theory of GIT quotients.
+\end{proof}
+
+Applying the above proposition to the open set $\Alt^{\mathrm{s}}_{N,2}(H^0(L))$ with the free action of \[G'= GL(N)/\{\pm I_N\}\], we see that the quotient
+\[\Alt^{\mathrm{s}}_{N,2}(H^0(L))/G'\] is nonsingular since $\Alt^{\mathrm{s}}_{N,2}(H^0(L))$ is nonsingular by Proposition \ref{prop:smoothness-at-gieseker-points}. But note that \[\Alt^{\mathrm{s}}_{N,2}(H^0(L))/G' \cong \Alt^{\mathrm{s}}_{N,2}(H^0(L))/GL(N)\] since $\{\pm I_N\}$ acts trivially. Thus $\SU_C(2,L)$ is nonsingular.
+
+Moreover, when $E$ is stable,
+\[
+\dim H^1(\sl(E)) \;=\; 3g - 3
+\]
+This follows from Riemann-Roch for vector bundles and the fact that $H^0(\sl(E))=0$ for stable $E$. More generally, if $E$ is simple, then the only endomorphisms of $E$ are scalars, so $H^0(\sl(E))=0$ and $\dim H^0(\End(E))=1$, and in particular every stable bundle is simple. 
+
+
+
+This proves parts \textnormal{(i)} and \textnormal{(ii)}. For part \textnormal{(iii)} we note that when $\deg L$ is odd, stability  and semistability of $E$ are equivalent.
+\end{proof}
+
+
+
 
 \section{The central extension}
 Recall that there is a canonical map of stacks $\pi:\cQ = \SL_r(K) / \SL_r(\mathcal{O}) \to \mathcal{SL}_X(r)$. Let $\cL$ be the determinant line bundle on $\mathcal{SL}_X(r)$. It will turn out that, though it is invariant under the action of $\SL_r(K)$, this line bundle does not admit an action of $\SL_r(K)$. But it does admit an action of a canonical extension $\SL_{cr}(K)$ of $\SL_r(K)$.

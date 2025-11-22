@@ -62,7 +62,14 @@ Key takeaways from the game:
     \item Don't just pick sizes blindly. Think about how your bet sizes affect your risk of ruin.
     \item Use side bets to hedge your risk.
     \item Rule of thumb: Don't risk more than 40\% of your bankroll on a single bet, unless the odds are heavily in your favor.
+    \item When keeping track of your bankroll, remember to include any credits from selling the contract, as well as any gains/losses from side bets. The point of hedging is to walk away with a guaranteed profit from the bid-ask spread.
 \end{itemize}
+
+\begin{example}
+    Suppose a fair coin is used to generate a sequence of H and Ts, what is the probability that HHT occurs before HTT
+
+2. Suppose you can craft a deck with cards numbered 1 to 5. After you craft, I will check and pick a card. Then a random card is picked from the deck. If the value matches, you will gonna pay the value on the card. How to craft a deck to minimise my expected winning
+\end{example}
 
 \begin{example}
     We are playing with a 40 card deck of cards numbered 1 to 10. A player will draw four cards from the deck. The value of the game is the sum of the values of the red cards.
@@ -86,51 +93,13 @@ Key takeaways from the game:
 \begin{itemize}
     \item Use expected values (like 8, 3) within branches to summarize future payoffs.
     \item Equalize losses between branches to flatten your worst-case profile.
-    \item “Minimizing expected loss in the worst case on average.”
+    \item Minimizing expected loss in the worst case on average.
+    \item Another viable hedge is to reason about the worst case scenario on both sides of the sidebet absolutely.
     \item Reason about the game before you decide how many contracts to sell.
 \end{itemize}
 
 \begin{example}
-
-    \textbf{2. Sequential coin trade}
-
-    A hidden sequence of three fair coin flips will determine the payout $2^{\text{\#H}}$. Player A sees the first coin; Player B sees the second; both know the rules. A posts a bid/ask for the whole contract; B decides to hit or pass before seeing the third coin. Find sub-game-perfect equilibrium pricing. (Tests backward induction with asymmetric information.)
-
-    \textbf{3. Dynamic price quoting}
-
-    You must quote a price each round for an asset that moves $\pm1$ with equal probability for 4 rounds. At each round, an adversary can buy or sell 1 unit against your quote. Payout equals final price. Find the quoting rule that minimizes worst-case loss given you can't refuse trades. (Tests game-theoretic minimax / option-market-making intuition.)
-
-    \textbf{4. Variance market}
-
-    Underlying $X\in\{-1,1\}$ each day, independent. Over 3 days, payoff $= (\sum X_i)^2$. Player A sells variance for price $p$. Player B can dynamically trade 1:1 in $X_i$ each day. Find the no-arbitrage value of the variance contract. (Tests replication of quadratic payoffs; the answer is 3.)
-
-    \textbf{5. Information auction}
-
-    A random variable $R \in \{0, 1, 2\}$ is drawn uniformly. A knows $R$, B doesn't. A offers to sell B a contract paying $R^2$ for a price $x$. B can accept or reject. Compute A's optimal ask price and B's rational cutoff. (Tests signaling / adverse selection equilibrium.)
-
-    \textbf{6. Permuted cards}
-
-    Deck of four cards $\{1, 2, 3, 4\}$. Player A draws two at random and keeps their sum $S$. Player B sees only that $S \in \{3,\ldots,7\}$. A offers to sell B the contract paying $S^2$ for price $x$. B must guess whether to buy or short. Find equilibrium price (both mixed). (Tests expectation under constrained information.)
-
-    \textbf{7. Correlated assets}
-
-    Two correlated binary assets A,B with
-    \[\Pr(A=1,B=1)=0.4, \Pr(A=1,B=0)=0.1, \Pr(A=0,B=1)=0.1, \Pr(A=0,B=0)=0.4.\]
-    Payout = $A \times B \times 100$. One player sees A before quoting a price; the other sees B. Find equilibrium price when both can post bid/ask sequentially. (Tests correlation intuition \& conditioning.)
-
-    \textbf{8. Inventory penalty game}
-
-    You quote two-sided prices around an asset that moves $\pm1$ each round (like a random walk). Opponent trades 1 share per round to maximize your expected inventory cost (quadratic in position). Find the optimal spread as a function of volatility and penalty coefficient $\lambda$. (Tests dynamic programming and inventory control.)
-
-    \textbf{9. Forecasting competition}
-
-    A hidden number $N\in\{0,1,2,3,4\}$ drawn uniform. Players simultaneously post forecasts $f_A,f_B$. Whoever's closer ($|f-N|$ smaller) wins $\$1$; if tied, split. Each can see a private noisy signal $N+\varepsilon_i$ ($\varepsilon_i \in \{-1,0,1\}$). Find Bayesian best responses. (Tests signal weighting and equilibrium strategy.)
-
-        \textbf{10. Exploding payoff}
-
-        Payout = $5^n$ dollars where $n$ = number of reds in four cards, but after any card you may cancel the game by paying $\$50$. Two players alternate control: A decides to continue or cancel on odd turns, B on even turns. Find equilibrium stopping thresholds. (Tests dynamic stopping games \& expected value reasoning.)
-
-
+    Payout = $5^n$ dollars where $n$ = number of reds in four cards, but after any card you may cancel the game by paying $\$50$. Two players alternate control: A decides to continue or cancel on odd turns, B on even turns. Find equilibrium stopping thresholds. (Tests dynamic stopping games \& expected value reasoning.)
 \end{example}
 \begin{example}
 
@@ -138,14 +107,13 @@ Key takeaways from the game:
 
     The fair value is $\frac{2^1 + 2^2 + 2^3 + 2^4 + 2^5 + 2^6}{6} \approx 21.33$ dollars. Suppose the contract is trading at 15 25 dollars.
 
-    The optimal hedge is to bet $\frac{(2^6 + 2^4 + 2^2) - (2^5 + 2^3 + 2^1)}{2} = 21$ dollars on even. Then if the opponent rolls even, on average you lose them $\frac{2^6 + 2^4 + 2^2}{3} - 21 = 7$ dollars; if they roll odd, on average you lose them $\frac{2^5 + 2^3 + 2^1}{3} + 21 = 35$ dollars. The expected loss is $\frac{7 + 35}{2} = 21$ dollars.
+    One hedging strategy is to bet $\frac{(2^6 + 2^4 + 2^2) - (2^5 + 2^3 + 2^1)}{6} = 7$ dollars on even. Then if the opponent rolls even, on average you lose them $\frac{2^6 + 2^4 + 2^2}{3} - 7 = 21$ dollars; if they roll odd, on average you lose them $\frac{2^5 + 2^3 + 2^1}{3} + 7 = 21$ dollars. The loss in each case is equal and equal to $21$.
 
-    In the worst case scenario, if you sell the contract for 25 dollars, you might lose 64 dollars, but make 25 + 21 = 46 dollars from selling and hedging, for a net loss of 18 dollars. This means you can sell 2 contracts with this hedge before risking more than 40\% of your bankroll.
+    In the worst case scenario, if you sell the contract for 25 dollars, you might lose 64 dollars, but make 25 + 7 = 32 dollars from selling and hedging, for a net loss of 32 dollars. This means you can sell 1 contract with this hedge before risking more than 40\% of your bankroll.
 
+    The other hedging strategy would be to look at worst case scenario. You could lose 64 or 32 and you want those to be equal so you could hedge say 16 dollars by betting that amount on even. Therefore, if it came up $6$ you would have $100 + 25 + 16 - 64 = 77$. If it came up $5$ you would have $100 + 25 - 16 - 32 = 77$ so the worst case scenario you would lose $23$ dollars. With this hedging strategy, you could sell 2 contracts. 
 \end{example}
 \begin{example}
-    \textbf{2. Coin chain with quadratic payoff}
-
     You flip 3 fair coins. Payout equals $10(\text{\# heads})^2$. Before each flip, you can bet 1:1 on the next coin's outcome.
 
     The fair price is $10(0^2\cdot\frac{1}{8} + 1^2\cdot\frac{3}{8} + 2^2\cdot\frac{3}{8} + 3^2\cdot\frac{1}{8}) = 30$ dollars. However, if you sell a contract for 30 dollars, you can lose up to 90 dollars if all coins are heads. You can hedge dynamically as follows:
@@ -161,32 +129,64 @@ Key takeaways from the game:
     Proceeding this way, you see that with optimal hedging, even if you get all heads, you will always break even. Therefore, if you sell at a spread, you can sell as many contracts as you want without risking ruin.
 \end{example}
 \begin{example}
+    Urn starts with 4 red and 4 black balls. We draw 3 balls without replacement. Payout equals $50$ times the number of reds.
+
+    First we calculate the fair price. There are 4 ways to get 0 reds, 24 ways to get 1 red, 24 ways to get 2 reds, and 4 ways to get 3 reds.
+
+    There are $\binom{8}{3} = 56$ ways to draw 3 balls. Therefore, the fair price is \[\frac{4}{56}\cdot0 + \frac{24}{56}\cdot50 + \frac{24}{56}\cdot100 + \frac{4}{56}\cdot150 = 75\text{ dollars}.\]  Also note that expected number of reds in draws without replacement and so by linearity of expectation, the fair price is also $3 \cdot \frac{4}{8} \cdot 50 = 75$ dollars.
+
+    Now suppose that we make a 10 wide market on the game. In particular, I will buy the option to play the game from you for 80 dollars and sell it to you for 70 dollars. There is a 1:1 sidebet where you can bet on whether the next ball drawn is red or black. Find an optimal sidebet strategy. With this sidebet strategy, how many contracts should you sell?
+
+    Suppose the first ball drawn is red. Then there are 3 red balls and 4 black balls left. Then there is a $4/7 * 3/6 = 2/7$ chance of getting two blacks, $2 * 4/7 * 3/6 = 4/7$ chance of getting one black, and $3/7 * 2/6 =1/7 $ chance of getting zero blacks. In particular, there will be an expected loss of $2/7 * 50 + 4/7 * 100 + 1/7 * 150 = 650/7$ if the first ball comes red.
+
+    Suppose the first ball comes black. Then there is a $4/7 * 3/6 = 2/7$ chance of getting two reds, $2 * 4/7 * 3/6 = 4/7$ chance of getting one red, and $3/7 * 2/6 =1/7 $ chance of getting zero reds. In particular, there will be an expected loss of $2/7 * 100 + 4/7 * 50 + 1/7 * 0 = 400/7$ if the first ball comes black.
+
+    Thus in order to make the expected losses equal, we should bet $125/7$ dollars on red. Say it comes red. Then we currently have $100 + 80 + 125/7 = 1385/7$ dollars.
+    If the second ball is red, then there are 2 red balls and 4 black balls left. There is a $2/6$ chance of losing $150$ and a $4/6$ chance of losing $100$. In this case, the expected loss is $2/6 * 150 + 4/6 * 100 = 700/6$.
+
+    If the second ball is black, then there are 3 black balls and 3 red balls left. There is a $3/6$ chance of losing $50$ and a $3/6$ chance of losing $100$. In this case, the expected loss is $3/6 * 50 + 3/6 * 100 = 450/6$.
+
+    Therefore, we should bet $(700/6 - 450/6)/2 = 125/6$ dollars on red for the second ball. However, since there are only 3 red balls and 4 black balls left, betting on red is an unfavorable bet. However, we still need to protect ourselves from the risk of ruin.
+
+    Say the second ball comes red. Then we currently have $1385/7 + 125/6 = (1385*6 + 125*7)/(7*6) = 9185/42$ dollars.
+
+    The third ball will come red with probability $2/6$ and black with probability $4/6$. The expected loss if the third ball is red is $150$ dollars, and the expected loss if the third ball is black is $100$ dollars. Weighing these by their probabilities, we see that we need to bet $(2/6 * 150 - 4/6 * 100)/2 = -50/6$ dollars on red for the third ball. In other words, we should bet $50/6$ dollars on black for the third ball.
+    Say the third ball comes red. Then we currently have $9185/42 - 50/6 = (9185 - 350)/42 = 8835/42$ dollars. We also owe 150 dollars. Therefore, we end up with $8835/42 - 150 = (8835 - 6300)/42 = 2535/42$ dollars. This was very close to the worst case scenario, but we still managed to avoid ruin. However we could not survive being short more than 1 contract.
+
+\end{example}
 
 
-    \begin{example}
+\begin{example}
     There are two independent fair coins, A,B. Payout is $100$ if both are heads, $0$ otherwise. You can make 1:1 bets on each coin's outcome.
 
-    Say the first coin is heads. Then you owe 100 dollars with probability 1/2 and 0 dollars with probability 1/2. Expected loss is 50 dollars. If the first coin is tails, then you owe 0 dollars no matter what. Therefore, you should bet (50 - 0)/2 = 25 dollars on heads for the first coin. 
+    Say the first coin is heads. Then you owe 100 dollars with probability 1/2 and 0 dollars with probability 1/2. Expected loss is 50 dollars. If the first coin is tails, then you owe 0 dollars no matter what. Therefore, you should bet (50 - 0)/2 = 25 dollars on heads for the first coin.
 
     So we flip the first coin. Say it comes up heads. You now have 125 dollars. Then for the second coin, if it is heads, you owe 100 dollars; if it is tails, you owe 0 dollars. Therefore, you should bet (100 - 0)/2 = 50 dollars on heads for the second coin.
 
     Say the second coin comes up tails. You now have 125 - 50 = 75 dollars. So you end up with 75 dollars no matter what happens. If the second coin came up heads, you would make 50 dollars from the sidebet and pay 100 dollars from the main bet, for a net loss of 25 dollars. So you would end up with 75 dollars no matter what happens. So we see that hedging allows us to realize a sure final amount of 75 dollars. Therefore, if you sell the contract for more than 25 dollars, you can make a guaranteed profit.
-    \end{example}
-    \textbf{4. Sequential urn draw}
-
-    Urn starts with 4 red and 4 black balls. We draw 3 balls without replacement. Payout equals $50$ times the number of reds. Before each draw, you can place a 1:1 bet on "next ball = red".
-
-    The fair price is $150$ dollars. For hedging, bet $\frac{50r(8-r)}{2(r+b)}$ dollars on red before each draw, where $r,b$ are remaining red and black balls. Selling for $160$ guarantees a $10$ dollar profit with proper hedging.
 \end{example}
+
+
 \begin{example}
 
-    Biased coin with $P(\text{heads})=0.6$. We flip twice with payout $5^{\text{\# heads}}$. You can only hedge on the first flip. The payout of the hedge is $(1-.6)/.6 = 2/3$ dollars heads, $-1$ dollar tails.
+    Biased coin with $P(\text{heads})=0.6$. We flip twice with payout $5^{\text{\# heads}}$. The payout of the hedge is $(1-.6)/.6 = 2/3$ dollars heads, $-1$ dollar tails.
 
-    The fair price is $0.6(0.6\cdot25 + 0.4\cdot5) + 0.4(0.6\cdot5 + 0.4\cdot1) = 11.56$ dollars.
-    
-    If you flip heads first, you owe $25$ with probability $0.6$ and $5$ with probability $0.4$. Expected loss is $17$ dollars. If you flip tails first, you owe $5$ with probability $0.6$ and $1$ with probability $0.4$. Expected loss is $3.4$ dollars. But since heads is going to happen $60\%$ of the time, you should weight the two scenarios accordingly. Explicitly, you should solve the following equation: 
+    The fair price is $0.6(0.6\cdot25 + 0.4\cdot5) + 0.4(0.6\cdot5 + 0.4\cdot1) = 11.56$ dollars. How many contracts would you sell for 12 dollars?
+
+    If you flip heads first, you owe $25$ with probability $0.6$ and $5$ with probability $0.4$. Expected loss is $17$ dollars. If you flip tails first, you owe $5$ with probability $0.6$ and $1$ with probability $0.4$. Expected loss is $3.4$ dollars. But since heads is going to happen $60\%$ of the time, you should weight the two scenarios accordingly. Explicitly, you should solve the following equation:
     \[ 17 - \frac{2}{3}x = 3.4 + x\]
-because we want the expected loss to be equal in both scenarios. Solving this equation gives $x = 8.16$. 
+    because we want the expected loss to be equal in both scenarios. Solving this equation gives $x = 8.16$.
+
+    Say that the first flip comes heads. You now have $100 + 12 + 2/3 * 8.16 \approx 117.5$ dollars.
+Therefore you should solve \[
+    25 - 2/3 x = 5 + x
+    \]
+    which gives $x = 20/(5/3) = 12$. Suppose the second coin also comes heads. Then you have $117.5 + 8 - 25 = 100.5$.
+
+    Say the first flip comes tails. Then you have $112 - 8.18 \approx 104$. You now want to solve \[
+    5 - 2/3x = 1+x 
+    \]
+    and so $x = 4/(5/3) = 12/5$. Say the second flip also comes tails. Then you have $104 - 1 - 2.4 = 100.6$. So we hedged away all the risk and the answer is you should sell all the contracts that you can at 12 dollars.
 \end{example}
 
 \begin{example}
@@ -216,47 +216,47 @@ because we want the expected loss to be equal in both scenarios. Solving this eq
 
     So the optimal strategy is: pay to defer when your die is 1-4; take your die when it is 5 or 6; never choose the hidden die directly. The optimal expected value from the start is $V=5.1$ (in the same units as the die; if die are dollars, that's $5.10$).
 
-    In particular, deferral is always worth 4.9 regardless of how many times you've deferred before, since the state resets. So it is never optimal to tkae the hidden die directly. 
+    In particular, deferral is always worth 4.9 regardless of how many times you've deferred before, since the state resets. So it is never optimal to tkae the hidden die directly.
 \end{example}
 
 \begin{example}
     Flip 4 fair coins and note the parity of each. You are allowed to reroll any instance of TT. You cannot flip one coin at a time; you must reroll both coins together. What is the expected number of Hs at the end?
 
     Let $t$ be the number of tails and $a_t$ be the probability of ending with $0$ tails starting from $t$ tails. The base cases are $a_0=1$ (already all heads). Then $a_1=0$ and $a_2 = \frac{1}{4} + \frac{1}{4}a_2$ so $a_2 = 1/3$. Also $a_3 = 1/4 a_1 + 1/4 a_3 + 1/2 a_2 = 1/4 a_3 + 1/6$ so $a_3 = 2/9$. Finally, $a_4 = 1/4 a_2 + 1/4 a_4 + 1/2 a_3 = 1/4 a_4 + 1/12 + 1/9$ so $a_4 = 7/27$.
-    
-The starting number of tails is distributed binomially with $n=4$ and $p=1/2$. Therefore, the expected number of heads at the end is
-\[
-a_0/16 + 4a_1/16 + 6a_2/16 + 4a_3/16 + a_4/16 = 7/27\]
-The expected number of heads is $4 * 7/27 + 3 * (1 - 7/27) = 88/27 \approx 3.26$.
+
+    The starting number of tails is distributed binomially with $n=4$ and $p=1/2$. Therefore, the expected number of heads at the end is
+    \[
+        a_0/16 + 4a_1/16 + 6a_2/16 + 4a_3/16 + a_4/16 = 7/27\]
+    The expected number of heads is $4 * 7/27 + 3 * (1 - 7/27) = 88/27 \approx 3.26$.
 \end{example}
 
 \begin{example}
-Flip 4 fair coins and notes each outcome. After seeing them, he may flip any pair of tails again (i.e., reroll those two coins). He continues as long as he has fewer than 3 heads—once he has 3 or 4 heads, there's no TT pair, and the game stops. Each coin flip counts individually (so each pair reroll adds 2 to the flip count). Find the expected total number of flips, including the first 4.
+    Flip 4 fair coins and notes each outcome. After seeing them, he may flip any pair of tails again (i.e., reroll those two coins). He continues as long as he has fewer than 3 heads—once he has 3 or 4 heads, there's no TT pair, and the game stops. Each coin flip counts individually (so each pair reroll adds 2 to the flip count). Find the expected total number of flips, including the first 4.
 
-Let $E[h]$ = expected number of individual flips remaining (not counting the initial 4) starting with $h$ heads.
+    Let $E[h]$ = expected number of individual flips remaining (not counting the initial 4) starting with $h$ heads.
 
-If you have $h \geq 3$, stop: $E[3] = E[4] = 0$.
+    If you have $h \geq 3$, stop: $E[3] = E[4] = 0$.
 
-Otherwise:
-\[
-E[h] = 2 + \frac{1}{4} E[h] + \frac{1}{2} E[h+1] + \frac{1}{4} E[h+2]
-\] Now we can solve the system:
-\begin{align*}
-E[2] & = 2 + \frac{1}{4} E[2] + \frac{1}{2} \cdot 0 + \frac{1}{4} \cdot 0 \Rightarrow E[2] = \frac{8}{3} \\
-E[1] & = 2 + \frac{1}{4} E[1] + \frac{1}{2} \cdot \frac{8}{3} + \frac{1}{4} \cdot 0 \Rightarrow E[1] = \frac{40}{9} \\
-E[0] & = 2 + \frac{1}{4} E[0] + \frac{1}{2} \cdot \frac{40}{9} + \frac{1}{4} \cdot \frac{8}{3} \Rightarrow E[0] = \frac{176}{27}
-\end{align*}
-and so the total expected number of flips is
-\[
-\frac{1}{16} E[0] + \frac{4}{16} E[1] + \frac{6}{16} E[2] = 68/27\] and the final answer is $4 + 68/27 = 176/27 \approx 6.52$ flips.
+    Otherwise:
+    \[
+        E[h] = 2 + \frac{1}{4} E[h] + \frac{1}{2} E[h+1] + \frac{1}{4} E[h+2]
+    \] Now we can solve the system:
+    \begin{align*}
+        E[2] & = 2 + \frac{1}{4} E[2] + \frac{1}{2} \cdot 0 + \frac{1}{4} \cdot 0 \Rightarrow E[2] = \frac{8}{3}                         \\
+        E[1] & = 2 + \frac{1}{4} E[1] + \frac{1}{2} \cdot \frac{8}{3} + \frac{1}{4} \cdot 0 \Rightarrow E[1] = \frac{40}{9}              \\
+        E[0] & = 2 + \frac{1}{4} E[0] + \frac{1}{2} \cdot \frac{40}{9} + \frac{1}{4} \cdot \frac{8}{3} \Rightarrow E[0] = \frac{176}{27}
+    \end{align*}
+    and so the total expected number of flips is
+    \[
+        \frac{1}{16} E[0] + \frac{4}{16} E[1] + \frac{6}{16} E[2] = 68/27\] and the final answer is $4 + 68/27 = 176/27 \approx 6.52$ flips.
 \end{example}
 
 \begin{example}
-    [Coupon collector with 4 coupons] 
+    [Coupon collector with 4 coupons]
     We start with no coupons. Let $k$ be the number of distinct coupons we have collected so far. The probability of getting a new coupon is $\frac{4-k}{4}$. Therefore, the expected number of trials to get a new coupon is $\frac{4}{4-k}$. Therefore, the expected number of trials to collect all 4 coupons is
     \[
         \frac{4}{4} + \frac{4}{3} + \frac{4}{2} + \frac{4}{1} = \frac{25}{3}\]
-        The same method can be used to solve the general coupon collector problem with $n$ coupons. The expected number of trials to collect all $n$ coupons is $nH_n$, where $H_n$ is the $n$-th harmonic number.
+    The same method can be used to solve the general coupon collector problem with $n$ coupons. The expected number of trials to collect all $n$ coupons is $nH_n$, where $H_n$ is the $n$-th harmonic number.
 \end{example}
 
 \begin{example}
@@ -266,19 +266,19 @@ and so the total expected number of flips is
 
     If we peek one card $X=x$, the two unseen cards are drawn from the remaining 39 cards whose mean is $(220-x)/39$. Therefore:
     \[
-    \mu_x:=\mathbb{E}[S|X=x]=x+2\frac{220-x}{39}=\frac{440+37x}{39}
+        \mu_x:=\mathbb{E}[S|X=x]=x+2\frac{220-x}{39}=\frac{440+37x}{39}
     \]
 
     For optimal action given $x$: buy if $\mu_x>20$ (mid), else sell. Solving $(440+37x)/39>20$ gives $x>340/37$. So only $x=10$ triggers a buy; for $x\in\{1,\dots,9\}$ you sell.
 
     The expected P/L with the signal is:
     \[
-    \frac{1}{10}\Bigg[\sum_{x=1}^{9}\big(15-\mu_x\big)+\big(\mu_{10}-25\big)\Bigg]=-\frac{35}{26}
+        \frac{1}{10}\Bigg[\sum_{x=1}^{9}\big(15-\mu_x\big)+\big(\mu_{10}-25\big)\Bigg]=-\frac{35}{26}
     \]
 
     Therefore the value of the peek, which is the improvement over baseline, is:
     \[
-    -\frac{35}{26}-\Big(-\frac{3}{2}\Big)=\frac{2}{13}\approx0.1538
+        -\frac{35}{26}-\Big(-\frac{3}{2}\Big)=\frac{2}{13}\approx0.1538
     \] For 100 contracts, the value is 15.38 units.
 \end{example}
 
@@ -289,17 +289,17 @@ and so the total expected number of flips is
 
     Let $S$ be the sum of the three cards. With one peek revealing $X=x$, we have
     \[
-    \mu_x := \mathbb{E}[S|X=x] = x + 2\frac{220-x}{39} = \frac{440+37x}{39}
+        \mu_x := \mathbb{E}[S|X=x] = x + 2\frac{220-x}{39} = \frac{440+37x}{39}
     \]
 
     The market is 11.5-21.5 (center 16.5, half-width 5). If you must trade one unit, you buy if $\mu_x > 16.5$ and sell if $\mu_x < 16.5$. Your loss per unit after seeing $x$ is the distance from $\mu_x$ to the nearer edge:
     \[
-    \text{loss}(x) = \min(\mu_x-11.5,\ 21.5-\mu_x) = 5-|\mu_x-16.5|
+        \text{loss}(x) = \min(\mu_x-11.5,\ 21.5-\mu_x) = 5-|\mu_x-16.5|
     \]
 
     Without a peek the loss is always 5 per unit, so the value of the peek is
     \[
-    \mathbb{E}[|\mu_X-16.5|] = \frac{1}{10}\sum_{x=1}^{10}\left|\frac{440+37x}{39}-\frac{33}{2}\right| = \frac{185}{78}
+        \mathbb{E}[|\mu_X-16.5|] = \frac{1}{10}\sum_{x=1}^{10}\left|\frac{440+37x}{39}-\frac{33}{2}\right| = \frac{185}{78}
     \]
 
     If you can trade multiple units subject to your $100 $bankroll and the posted sizes (5 at each side), the optimal sizing is: sell up to 5 units when $x \leq 5$; buy up to 4 units when $x \geq 6$ (cannot afford $5 \times 21.5$). Then the peek's total value (vs. best no-peek choice, which is buying 4 to lose $20$) is $\frac{555}{52} \approx 10.67$. If instead you must trade exactly one unit, use the per-unit value $\frac{185}{78}$.
@@ -308,11 +308,56 @@ and so the total expected number of flips is
 
     4 contracts.
 
-The worst-case loss per contract equals market loss of $18.5$ (since $S\in[3,30]$ and you must trade at $11.5/21.5$) plus peek fee of $2$, totaling $20.5$ per contract.
+    The worst-case loss per contract equals market loss of $18.5$ (since $S\in[3,30]$ and you must trade at $11.5/21.5$) plus peek fee of $2$, totaling $20.5$ per contract.
 
-With a bankroll of $100$, we must satisfy $Q\cdot 20.5 \leq 100$ where $Q$ is the number of contracts, which implies $Q \leq 4.87$. Since we need an integer number of contracts, this means $Q=4$.
+    With a bankroll of $100$, we must satisfy $Q\cdot 20.5 \leq 100$ where $Q$ is the number of contracts, which implies $Q \leq 4.87$. Since we need an integer number of contracts, this means $Q=4$.
 
-While the peek reduces expected loss per unit by $\frac{2}{13}\approx0.154$ compared to no peek, the net expected value per unit becomes negative after the $2$ fee. Therefore, we don't scale beyond what the no-bankruptcy constraint allows.
+    While the peek reduces expected loss per unit by $\frac{2}{13}\approx0.154$ compared to no peek, the net expected value per unit becomes negative after the $2$ fee. Therefore, we don't scale beyond what the no-bankruptcy constraint allows.
+\end{example}
+
+\begin{example}
+    You have bankroll $W$. You bet a fraction $f$ of it each round on an independent gamble with probability of win $p$, loss probability $q=1-p$, win payoff $+b\cdot fW$ (you gain $b$ for each dollar risked) and loss payoff $-fW$. Assume the edge $p(b+1)-1>0$ so the gamble has positive expected value and you can repeat it many times.
+
+    Your wealth after one round is $W(1+bf)$ with probability $p$ and $W(1-f)$ with probability $q$. The quantity to maximize is expected log‑wealth
+    \[
+        G(f)=p\log(1+bf)+q\log(1-f).
+    \]
+
+    Differentiate and set to zero:
+    \[
+        G'(f)=\frac{pb}{1+bf}-\frac{q}{1-f}=0,
+    \]
+    so
+    \[
+        \frac{pb}{1+bf}=\frac{q}{1-f}.
+    \]
+
+    Cross‑multiply and solve:
+    \[
+        pb(1-f)=q(1+bf)\quad\Rightarrow\quad pb-q = b f (p+q)=b f,
+    \]
+    hence the Kelly fraction is
+    \[
+        f^\ast=\frac{pb-q}{b}.
+    \]
+    In the special even‑money case $b=1$ this reduces to $f^\ast=2p-1$.
+\end{example}
+
+\begin{example}
+    [Kelly criterion with side bets]
+    You have a bankroll of 100 dollars. A fair coin will be flipped once. If it comes up heads, you win 200 dollars; if tails, you lose 100 dollars. Before the coin flip, you can place a side bet on tails at 1:1 odds. How much should you bet on tails in the side bet to maximize your expected logarithmic utility? How many contracts of the main bet should you take?
+
+    If you bet $x$ dollars on tails in the side bet and take $Q$ contracts of the main bet, your final wealth is:
+    \begin{itemize}
+        \item Heads: $100 + Q \cdot 200 - x$
+        \item Tails: $100 - Q \cdot 100 + x$
+    \end{itemize}
+    We want to reduce the variance between the two outcomes, so we set them equal:
+    \[100 + 200Q - x = 100 - 100Q + x\]
+    Solving this gives $x = 150Q$.
+    Therefore, if we take $Q$ contracts of the main bet, we should bet $150Q$ dollars on tails in the side bet to minimize variance. We can spend at most $250Q$ dollars in total, so we must have $250Q \leq 100$, which implies $Q \leq 0.4$.
+
+    When $Q=0.4$, our final wealth is always $120$ dollars, regardless of the coin flip outcome.
 \end{example}
 
 \section{ML and Programming Questions}
@@ -451,13 +496,13 @@ inline void update_features(const Tick& t, State& s) {
     s.imb    = double(t.bid_sz) / (t.bid_sz + t.ask_sz + 1e-9);
 }
     \end{lstlisting}
-Python can then import it via pybind11 for high-level logic. Another example couple be to compute signal kernels, such as order book imbalance over time:
+    Python can then import it via pybind11 for high-level logic. Another example couple be to compute signal kernels, such as order book imbalance over time:
     \begin{lstlisting}[language=C++]
     inline double imbalance(double bid_sz, double ask_sz) {
     return (bid_sz - ask_sz) / (bid_sz + ask_sz + 1e-9);
 }
     \end{lstlisting}
-Other examples of signals could be mid-price changes, spread changes, volume-weighted average price (VWAP), etc.
+    Other examples of signals could be mid-price changes, spread changes, volume-weighted average price (VWAP), etc.
 \end{example}
 
 \begin{example}
@@ -476,4 +521,115 @@ Other examples of signals could be mid-price changes, spread changes, volume-wei
     This works for any dynamically linked program — even proprietary binaries you can't recompile.
 \end{example}
 
+Bayesian Neural Networks for Time Series Forecasting 2024
+\begin{enumerate}
+    \item Developed a Bayesian Neural Network (BNN) to predict stock prices with uncertainty quantification, using probabilistic forecasts to generate confidence intervals around price predictions.
+    \item Implemented variational inference and Monte Carlo dropout to approximate posterior weight distributions, allowing robust forecasts adaptable to dynamic market conditions.
+    \item Backtested BNN-based trading strategies, integrating a custom framework with transaction cost modeling and out-of-sample testing, using Sharpe ratio and max drawdown to evaluate performance.
+\end{enumerate}
+
+\begin{example}
+    [Variational inference] VI is a way of approximating a posterior distrubtion via a choice of a simpler family of distributions. In particular we choose a family of distributions $q(\theta; \phi)$ parameterized by $\phi$ (e.g. mean and variance of a Gaussian). We then optimize $\phi$ to make $q(\theta; \phi)$ close to the true posterior $p(\theta\mid\mathcal{D})$. We do so by minimizing the KL divergence (which is equivalent to maximizing the log likelihood) which becomes an optimizing problem.
+\end{example}
+
+\begin{example}
+    [Monte Carlo Dropout]
+    Traditional dropout randomly sets neurons to zero during training to prevent overfitting. Monte Carlo dropout extends this idea to inference time, allowing us to estimate uncertainty in predictions. In traditional dropout, dropout is turned off during inference, but in MC dropout, we keep it on and perform multiple forward passes through the network with different dropout masks. This results in a distribution of outputs for the same input, which we can use to estimate uncertainty. This replicates variational inference in a cheaper manner.
+\end{example}
+
+\begin{example}[Bayesian Neural Networks]
+    A Bayesian neural network does not learn a single set of weights.
+    It learns a distribution over weights, so that every forward pass draws slightly different weights, giving you a distribution over predictions.
+    That predictive distribution directly gives you uncertainty, which you use to form confidence intervals or size trades.
+
+    In particular, Bayesian inference uses:
+    \begin{enumerate}
+        \item Prior: belief about weights before seeing data
+              $p(\theta)$
+              Often a Gaussian prior.
+        \item Likelihood: how probable the data are under the model
+              $p(y\mid x,\theta)$
+        \item Posterior: what we believe about the weights after seeing data
+              $p(\theta \mid \mathcal{D})
+                  = \frac{p(\mathcal{D}\mid\theta)\,p(\theta)}{p(\mathcal{D})}$
+    \end{enumerate}
+
+    The posterior expresses “which weight configurations fit the data”. In particular we assume a distributional form for the posterior approximation
+
+    The most common assumption is:
+    $q(\theta) = \prod_{i} \mathcal{N}(\mu_i,\sigma_i^2)
+    $
+    This is called a mean-field Gaussian posterior:
+    \begin{enumerate}
+        \item every weight has its own mean $\mu_i$
+        \item every weight has its own variance $\sigma_i^2$
+        \item weights are assumed independent (this is not true, but it's easy to work with)
+    \end{enumerate}
+
+
+    MAP estimation (maximum a posteriori) finds the most probable weights given the data. Define $\theta^\star = \arg\max_\theta p(\theta\mid\mathcal{D})$ and note
+    \[
+        p(\theta\mid\mathcal{D}) \propto p(\mathcal{D}\mid\theta)\,p(\theta).
+    \]
+
+    Taking the negative log (up to an additive constant) yields
+    \[
+        -\log p(\theta\mid\mathcal{D}) = -\log p(\mathcal{D}\mid\theta) - \log p(\theta) + \text{const},
+    \]
+    so MAP corresponds to minimizing the negative log-posterior, i.e. minimizing the negative log-likelihood plus the negative log-prior.
+
+    In practice, choosing a Gaussian prior $p(\theta)\propto\exp\big(-\tfrac{\lambda}{2}\|\theta\|^2\big)$ makes $-\log p(\theta)$ proportional to $\tfrac{\lambda}{2}\|\theta\|^2$, which is standard $L_2$ regularization (weight decay). Thus MAP training reduces to standard loss minimization with a regularizer.
+
+    MAP returns a single point estimate $\theta^\star$, the mode of the posterior, rather than a full posterior distribution.
+\end{example}
+
+
+
+Interactive Brokers API Integration for Algorithmic Trading 2024
+\begin{itemize}
+    \item Integrated BNN model predictions with Interactive Brokers (IBKR) API for live/paper trading, using Python for data
+          handling and C++ for low-latency order execution.
+    \item Optimized trading system performance by implementing asynchronous data handling and error logging to ensure reliability
+          in live market conditions.
+\end{itemize}
+
+\begin{example}
+    [C++ speedups]
+    \begin{enumerate}
+        \item Nonblocking I/O: Use asynchronous calls to avoid waiting for data, allowing other tasks to proceed.
+        \item Multithreading using synchronization techniques, i.e. bounded buffer, allows concurrent data processing and order execution.
+        \item Preallocated memory reduces overhead from head allocations
+        \item Cache friendly layout
+    \end{enumerate}
+    Remark that this was largely pedagogical as we did not have sufficiently detailed market data to fully test latency improvements.
+\end{example}
+
+\section{Interview day: Nov 19}
+\subsection{Part 1}
+Standard market making games with dice and cards.
+Roll a 20 sided die 5 times and 24 sided die 5 times and make a market on the sum of the highest two rolls. How many contracts would you trade?
+
+Ten cards arranged in a 2 by 5 grid, the game pays 4:1 on picking the column with the highest product. One row of cards is face up, the other is face down. Make a 6 wide market on the value of the game. How many contracts would you trade?
+
+There were sidebets such as product is even, highest product is tied with second highest product, product is greater than 50, and you had to decide whether to buy or sell at the price given to you by the interviewer.
+
+
+\subsection{Part 2}
+Part 2 was programming with Jupyter notebook. There was a game in which you start with ten gold and there is a function which gives how many seeds one can buy with a certain amount of gold. It rewards buying seeds in bulk in the sense that you can get more seeds per gold if you buy seeds in larger quantities. 
+
+There are three types of seeds whose yields are random variables with unknown distributions. Every round, the game tells you how much yield you got from each seed type. Your objective is to get to 100 gold as fast as possible. 
+
+Your goal is to develop a trading bot that can minimize the average number of rounds to reach 100 gold over 1000 simulations. 
+
+The first thing I did was to visualize the distrubitons of the yields for each seed type. Then I did the naive thing of restricting to the seed with the highest expected yield and buying as many of those seeds as possible every round. Then I did a simple grid search, optimizing over how my starting strategy. In particular, my strategy was to start by buying $n$ gold worth of $B$ seed, and then scale up to spending the proportion $m$ of my gold on $B$ seeds every round. I optimized over $n$ and $m$ using grid search. This was quite a naive thing to do, as the interviewer later told me that the optimal strategy is to diversify between seed types. However, I did not have enough time to implement a more sophisticated strategy.
+
+The interviewer remarked that someitmes the game is too complicated to solve in a short time, and that the best one can do is to implement a naive strategy that captures most of the value.
+
+\subsection{Part 3}
+This took place on a spreadsheet. You are doing an auction with 3 other people bidding on a treasure chest with gold coins in it. You always bid first. The other three people know the number of gold coins in the treasure chest within a margin of error of 5 coins. You can bid $n$ times and if you refuse to bid, then you can not bid again. In some rounds, you can only bid once. In some rounds, there is a fee for bidding. The coins are worth 1:1 for the other people but they are worth 1.5:1 for you.
+
+There are 6 different setups to the game, each time the interviewer shows you a different probability distribution of how the coins are distributed in the treasure chest. You have to decide how much to bid in each round.
+
+
+I bombed this part as I didn't understand the subtlety of the fact that the other people know the number of coins within a margin of error.
 \end{document}
