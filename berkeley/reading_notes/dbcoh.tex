@@ -63,7 +63,7 @@ on $X$. So
 considered a graded ring by tensoring sections
 $\mathcal{O}(k) \otimes \mathcal{O}(l) \cong \mathcal{O}(k+l)$. For the line bundle $\mathcal{O}_X(1)$
 sufficiently positive, this ring will be generated in degree one. It is often called the
-(homogeneous) coordinate ring of the \textbf{polarised} (i.e.~endowed with an ample line bundle)
+(homogeneous) coordinate ring of the \textbf{polarized} (i.e.~endowed with an ample line bundle)
 variety $(X,\mathcal{O}_X(1))$.
 
 The degree one restriction is for convenience and can be dropped (by working with varieties
@@ -94,7 +94,7 @@ $X$ through $SL$ transformations of the projective space.
 \]
 Since we have assumed that $G$ acts through $SL(n+1,\mathbb{C})$, the action lifts from $X$ to one covering it on $\mathcal{O}_X(-1)$. In other words we don't just act on the projective space (and $X$ therein)
 but on the vector space overlying it (and the cone $\widetilde{X}$ on $X$ therein). This
-is called a \textbf{linearisation} of the action. Thus $G$ acts on each
+is called a \textbf{linearization} of the action. Thus $G$ acts on each
 $H^0(\mathcal{O}_X(r))$.
 
 Then, just as $(X,\mathcal{O}_X(1))$ is determined by its graded ring of sections of
@@ -146,7 +146,7 @@ $X \to X/G$. For it to work we need:
 If $X$ is a variety (rather than a scheme) then so is $X/G$, as its graded ring sits inside
 that of $X$ and so has no zero divisors.
 
-\begin{definition}[Affine GIT quotient]
+\begin{definition}[Naive affine GIT quotient]
   Let $X = \operatorname{Spec} R$ be an affine variety with an action of a reductive group $G$. We define the affine GIT quotient $X/G$ to be $\operatorname{Spec}(R^G)$, where $R^G$ is the ring of $G$-invariant regular functions on $X$.
 \end{definition}
 In some cases, this does not work so well. For instance, under the scalar action of
@@ -161,14 +161,14 @@ with each other — those whose closures intersect which therefore cannot be sep
 by invariant functions). But for the scalar action of $\mathbb{C}^*$ on $\mathbb{C}^{n+1}$
 we clearly need to remove at least the origin to get a sensible quotient.
 
-So we should change the linearisation, from the trivial linearisation to a nontrivial one, to get a bigger quotient. This is demonstrarted in the following example.
+So we should change the linearization, from the trivial linearization to a nontrivial one, to get a bigger quotient. This is demonstrarted in the following example.
 
 \begin{example}[Projective space as a GIT quotient]
   Consider the trivial line bundle on $\mathbb{C}^{n+1}$ but with a nontrivial
-  linearisation, by composing the $\mathbb{C}^*$-action on $\mathbb{C}^{n+1}$ by a character
+  linearization, by composing the $\mathbb{C}^*$-action on $\mathbb{C}^{n+1}$ by a character
   $\lambda \mapsto \lambda^{p}$ of $\mathbb{C}^*$ acting on the fibres of the trivial line
   bundle over $\mathbb{C}^{n+1}$. The invariant sections of this no longer form a ring; we
-  have to take the direct sum of spaces of sections of \textbf{all powers} of this linearisation,
+  have to take the direct sum of spaces of sections of \textbf{all powers} of this linearization,
   just as in the projective case, and take $\operatorname{Proj}$ of the invariants of the
   resulting graded ring.
 
@@ -178,7 +178,7 @@ So we should change the linearisation, from the trivial linearisation to a nontr
   \]
   where $d=\deg f$.
 
-  But the linearisation introduces an extra factor $\lambda^{-pk}$ when we act on the fibre of the $k$-th tensor power. By definition, the $G$-action on a section $s$ is
+  But the linearization introduces an extra factor $\lambda^{-pk}$ when we act on the fibre of the $k$-th tensor power. By definition, the $G$-action on a section $s$ is
   \[
     (g\cdot s)(x) \;=\; g\cdot \big(s(g^{-1}\cdot x)\big).
   \]
@@ -198,7 +198,7 @@ So we should change the linearisation, from the trivial linearisation to a nontr
 
   If $p<0$ then there are no invariant sections and the quotient is empty. We have seen that
   for $p=0$ the quotient is a single point. For $p>0$ the invariant sections of the $k$th
-  power of the linearisation are the homogeneous polynomials on $\mathbb{C}^n$ of degree $kp$.
+  power of the linearization are the homogeneous polynomials on $\mathbb{C}^n$ of degree $kp$.
   So for $p=1$ we get the quotient
   \begin{equation}
     \mathbb{C}^{n+1}/\mathbb{C}^*
@@ -212,7 +212,7 @@ So we should change the linearisation, from the trivial linearisation to a nontr
   $x_{n+1}=1$, act by $\mathbb{C}^*$ on the latter by
   \[\operatorname{diag}(\lambda,\dots,\lambda,\lambda^{-(n+1)}) \in SL(n+2,\mathbb{C})\]
   and do projective GIT. This gives, on restriction to $\mathbb{C}^{n+1} \subset \mathbb{P}^{n+1}$,
-  the $p=n+1$ linearisation above. The invariant sections of $\mathcal{O}((n+2)k)$ are of the form
+  the $p=n+1$ linearization above. The invariant sections of $\mathcal{O}((n+2)k)$ are of the form
   $x_{n+1}^k f$, where $f$ is a homogeneous polynomial of degree $(n+1)k$ in $x_1,\dots,x_n$.
   Therefore the quotient is
   \[
@@ -221,13 +221,43 @@ So we should change the linearisation, from the trivial linearisation to a nontr
   \]
 \end{example}
 
+\begin{remark}[Variation of affine GIT]
+  The different GIT quotients of an affine variety $X = \operatorname{Spec} R$ by a reductive group $G$ correspond to different choices of linearization of the trivial line bundle on $X$, i.e.~to different characters $\chi: G \to \mathbb{C}^*$. For each such character we define the GIT quotient to be
+  \[
+    X/\!/_{\chi} G := \operatorname{Proj} \bigoplus_{r\ge 0} R^{G,\chi^{\otimes r}},
+  \]
+  where
+  \[
+    R^{G,\chi^{\otimes r}} := \{f \in R \mid g\cdot f = \chi(g)^r f, \forall g\in G\}
+  \]
+  is the space of semi-invariant functions of weight $\chi^{\otimes r}$.
+\end{remark}
+
+\begin{remark}
+  [Projective over affine GIT quotients] We have descibed the same recipe for constructing GIT quotients in the projective and affine cases. The most general situation is when we have a projective variety over an affine variety, i.e. a graded noetherian algebra
+\[
+R = \bigoplus_{m=0}^\infty R_m
+\]
+which is finitely generated as an algebra over $\C$.  
+The variety $X = \Proj R$ is projective over the affine variety $\Spec R_0$, and comes equipped with an ample line bundle $\cL = \O_X(1)$.  
+Furthermore, the integral closure (or normalization) of $R$ is isomorphic to the ring
+\[
+R' = \bigoplus_{m=0}^\infty \Gamma(X, \cL^{\otimes m}).
+\]
+
+Let $G$ be a reductive algebraic group acting on $R$ by graded algebra automorphisms.  Then $G$ acts on $X$ and $\cL$ is a $G$-linearized ample line bundle.  We can form the GIT quotient
+\[
+X /\!/ G := \Proj(R^G)
+\]
+\end{remark}
+
 
 \begin{definition}[Semistable points]
   A point $x \in X$ is \textbf{semistable} iff there exists
   $s \in H^0(X,\mathcal{O}(r))^G$ with $r>0$ such that $s(x) \neq 0$. Points which are not
   semistable are \textbf{unstable}.
 \end{definition}
-So semistable points are those that the $G$-invariant functions "see." The map \begin{align*}
+So semistable points are those that the $G$-invariant functions see. The map \begin{align*}
   X^{ss} & \to \P(H^0(X,\mathcal{O}(r))^G)^* \\
   x      & \mapsto ev_x
 \end{align*} is well defined on the (Zariski open, though possibly empty) locus $X^{ss} \subseteq X$ of semistable points, and it is clearly constant on $G$-orbits,
@@ -239,7 +269,11 @@ than just $G$-orbits, so we need another definition.
   $\bigoplus_r H^0(X,\mathcal{O}(r))^G$ separates orbits near $x$ and the stabiliser of $x$ is finite.
 \end{definition}
 
-We now come to the main example which we will study throughout these notes. Let $V = \mathbb{C}^4$ with coordinates $x_1,x_2,y_1,y_2$ and consider the $\mathbb{C}^*$-action given by
+We now come to the main example which we will study throughout these notes, also known as the standard flop.
+
+\begin{example}
+[The standard flop via VGIT]
+Let $V = \mathbb{C}^4$ with coordinates $x_1,x_2,y_1,y_2$ and consider the $\mathbb{C}^*$-action given by
 \[
   t\cdot(x_1,x_2,y_1,y_2)=(t x_1, t x_2, t^{-1}y_1, t^{-1}y_2)
 \]
@@ -249,27 +283,39 @@ We linearize this action by a character $\chi_m:t\mapsto t^m$ with $m\in\mathbb{
 \]
 In other words, $R^{(m)}_d$ is spanned by monomials whose total $\mathbb{C}^*$-weight is $md$, where the weight of a monomial $x_1^{a_1}x_2^{a_2}y_1^{b_1}y_2^{b_2}$ is $w=a_1+a_2-(b_1+b_2)$.
 
-A point $v\in V$ is $\chi_m$-semistable iff there exists $d>0$ and $f\in R^{(m)}_d$ with $f(v)\ne 0$.
-
-Here $R^{(m)}_d$ consists of polynomials whose monomials have positive weight $w=md>0$. Such a monomial must contain at least one $x$ (indeed, more $x$'s than $y$'s), so it vanishes at any point with $x_1=x_2=0$. Therefore no section in $R^{(m)}_d$ can be nonzero at a point with $x_1=x_2=0$ $\Rightarrow$ those points are unstable.
-
-Conversely, if $(x_1,x_2)\neq(0,0)$, then pick $d$ and the monomial
+A point $v\in V$ is $\chi_m$-semistable iff there exists $d>0$ and $f\in R^{(m)}_d$ with $f(v)\ne 0$. Here $R^{(m)}_d$ consists of polynomials whose monomials have positive weight $w=md>0$. Such a monomial must contain at least one $x$, so it vanishes at any point with $x_1=x_2=0$. Therefore no section in $R^{(m)}_d$ can be nonzero at a point with $x_1=x_2=0$ and such points are unstable. Conversely, if $(x_1,x_2)\neq(0,0)$, then pick $d$ and the monomial
 $f=x_i^{md}$ with $x_i\neq 0$. It has weight $md$ and $f(v)\neq 0$, so $v$ is semistable.
 
 Therefore, for $m>0$,
 \[
   V^{ss}(\chi_m)=V\setminus\{x_1=x_2=0\}.
 \]
-The quotient is $(V\setminus\{x_1=x_2=0\})/\mathbb{C}^*$, i.e. the total space of $\mathcal{O}(-1)^{\oplus 2}\to\mathbb{P}^1_{[x_1:x_2]}$. Similarly, for $m<0$, we have
+whose quotient is the total space of $\mathcal{O}(-1)^{\oplus 2}\to\mathbb{P}^1_{[x_1:x_2]}$. Similarly, for $m<0$, we have
 \[
   V^{ss}(\chi_m)=V\setminus\{y_1=y_2=0\}.
 \]
-The quotient is $(V\setminus\{y_1=y_2=0\})/\mathbb{C}^*$, i.e. the total space of $\mathcal{O}(-1)^{\oplus 2}\to\mathbb{P}^1_{[y_1:y_2]}$.
+whose quotient is the total space of $\mathcal{O}(-1)^{\oplus 2}\to\mathbb{P}^1_{[y_1:y_2]}$.
+\end{example}
 
 \section{Autoequivalences from VGIT}
 We show that we can construct $\mathbb{Z}$ many derived equivalences between $X_+$ and $X_-$, and that the resulting autoequivalences are spherical twists. Segal's paper upgrades this equivalence to an equivalence of $B$-brane dg-categories. In particular, he shows that there are $\mathbb{Z}$ many quasi-equivalences between the categories of B-branes on $(X_+, W)$ and $(X_-, W)$. When $W=0$, the dg-category of B-branes is just the dg-category of perfect complexes, whose homotopy category is the bounded derived category of coherent sheaves. So Segal's result recovers the derived equivalences we construct here.
 
 \subsection{Connection to mirror symmetry}
+Homological mirror symmetry predicts, in certain cases, that the bounded derived category of coherent sheaves on an algebraic variety should admit twist autoequivalences corresponding to a spherical object. 
+
+In particular, Seidel and Thomas consider symplectic automorphisms of $M$ induce selfequivalences of the derived category of coherent sheaves on its mirror partner. Roughly saying, twist functors and generalized Dehn twists correspond to each other under mirror symmetry, and Kontsevich's homological mirror symmetry conjecture suggests that the derived category of coherent sheaves on a Calabi-Yau variety should admit twist autoequivalences corresponding to spherical objects.
+
+There are techniques for studying the derived category of a geometric invariant theory (GIT)
+quotient which are useful for the construction of autoequivalences, and there are general connections between the theory of spherical functors and the theory of
+semiorthogonal decompositions and mutations.
+
+Spherical twist autoequivalences of \(D^{b}(V)\) for a Calabi-Yau \(V\)
+correspond to loops in the moduli space of complex structures on the mirror Calabi-
+Yau \(V^\vee\), and flops correspond, under the mirror map, to certain paths in that complex
+moduli space.
+
+\subsection{Landau-Ginzburg B-models and matrix factorizations}
+
 A Landau-Ginzburg model is a Kähler manifold \(X\) equipped with a
 holomorphic function \(W\), called the superpotential.  In the B-model
 we are interested in the pair \((X,W)\), and this only requires the
@@ -392,34 +438,316 @@ d_E^2 = W \cdot 1_E.
 \]
 \end{definition}
 
-In particular, \(X\) is a space endowed with a sheaf of curved algebras (with \(W\) as the curvature) and a \(B\)-brane is a locally free sheaf of curved dg-modules over \(X\).
-The relationship between this definition and matrix factorizations can be described succinctly. The dg-category of matrix factorizations is equivalent to the homotopy category of B-branes over the curved algebra associated to the Landau--Ginzburg datum.
+In particular, \(X\) is a space endowed with a sheaf of curved algebras (with \(W\) as the curvature) and a \(B\)-brane is a locally free sheaf of curved dg-modules over \(X\). In particular, a brane for a LG model is given by a matrix factorization of its superpotential. The homotopy category of the dg-category of B-branes is an important invariant of singularities of the superpotential \(W\), as proved by Orlov.
 
-Recall that we can introduce an equivariant enhancement using the curved Cartan model. Set
-\[
-A \;=\; \big(\Omega^{0,\bullet}_X \otimes \Sym(\mathfrak{g}^\vee[1])\big)^G,
-\qquad
-d_A \;=\; \bar\partial + d_{\mathrm{Cartan}},
-\qquad
-d_A^2 \;=\; W\cdot.
-\]
-Here $\mathfrak g$ is the Lie algebra of the symmetry group, $d_{\mathrm{Cartan}}$ is the usual Cartan differential encoding the equivariant structure, and the curvature $W$ sits as the square of the total differential.
 
-A $B$‑brane is then a finite‑rank projective (equivariant) $A$‑module $(E,d_E)$ satisfying the curvature condition
+\begin{example}
+Let $X$ be a smooth variety and let $E\to X$ be a vector bundle with a connection
 \[
-d_E^2 \;=\; W\cdot\mathrm{id}_E.
+\nabla_E \colon \Omega_X^p(E)\longrightarrow \Omega_X^{p+1}(E),
 \]
-Morphisms are given by the internal Hom over $A$; the derived morphism complex is
+satisfying the usual Leibniz rule.  
+Write
 \[
-\operatorname{RHom}_A(E,F)\;=\;\operatorname{Hom}_A(E,F),
+R := \nabla_E^2 \in \Omega_X^2(\End(E))
 \]
-with differential
+for the curvature of $\nabla_E$. The connection $\nabla_E$ induces a connection on $\End(E)$ and hence a degree-$1$ operator
 \[
-d(f) \;=\; d_F\circ f \;-\; (-1)^{|f|}\, f\circ d_E.
+\nabla \colon \Omega_X^p(\End(E)) \longrightarrow \Omega_X^{p+1}(\End(E)),
 \]
+characterized by
+\[
+(\nabla T)(s) \;=\; \nabla_E(Ts) - T(\nabla_E s),
+\qquad T\in\Gamma(\End(E)),\; s\in\Gamma(E),
+\]
+and extended to all forms by the Leibniz rule.  A standard computation gives
+\[
+\nabla^2(\Phi) \;=\; [R,\Phi] := R\circ\Phi - \Phi\circ R
+\qquad\text{for all }\Phi\in\Omega_X^\bullet(\End(E)).
+\]
+
+Thus the triple
+\[
+\mathcal{A}
+:= \bigl(\Omega_X^\bullet(\End(E)),\,\nabla,\,[R,-]\bigr)
+\]
+is a curved dg-algebra in the sense that $\Omega_X^\bullet(\End(E))$ is a graded algebra, 
+$\nabla$ is a degree-$1$ derivation, and
+\[
+\nabla^2 = [R,-]
+\]
+is given by commutator with a fixed element $R\in\Omega_X^2(\End(E))$.
+
+Now consider the graded $\Omega_X^\bullet(\End(E))$-module
+\[
+M := \Omega_X^\bullet(E) = \bigoplus_{p\ge 0}\Omega_X^p(E),
+\]
+with action defined by
+\[
+(\eta\otimes T)\cdot(\theta\otimes s)
+:= (\eta\wedge\theta)\otimes (T s),
+\]
+for local forms $\eta,\theta$ and sections $T\in\End(E)$, $s\in E$.  
+The connection $\nabla_E$ defines a degree-$1$ operator
+\[
+\nabla_E \colon \Omega_X^p(E)\longrightarrow \Omega_X^{p+1}(E),
+\]
+which satisfies the graded Leibniz rule
+\[
+\nabla_E(a\cdot m)
+= \nabla(a)\cdot m + (-1)^{|a|}\,a\cdot\nabla_E(m),
+\qquad a\in\Omega_X^\bullet(\End(E)),\; m\in\Omega_X^\bullet(E).
+\]
+Moreover, by definition of the curvature,
+\[
+\nabla_E^2(m) = R\cdot m, \qquad m\in\Omega_X^\bullet(E),
+\]
+where $R$ acts via the above module structure.  This shows that
+\[
+(\Omega_X^\bullet(E),\nabla_E)
+\]
+is a (left) dg-module over the curved dg-algebra $\mathcal{A}$.
+
+On the other hand, if we try to make $\mathcal A$ into a dg-module over itself using
+left multiplication as the module structure and $\nabla$ as the differential, we obtain
+\[
+\nabla^2(a) = [R,a] = Ra - aR,
+\qquad a\in\Omega_X^\bullet(\End(E)).
+\]
+For a module over the curved dg-algebra $(\mathcal A,\nabla,[R,-])$, the curvature
+condition would require $d_M^2(m) = R\cdot m$ for all $m$ in the module.  
+Under left multiplication this would read
+\[
+\nabla^2(a) = R\cdot a = Ra,
+\]
+which coincides with $[R,a]$ only if $a$ commutes with $R$.  Thus, in general,
+$\nabla^2 \neq R\cdot(-)$ on $\mathcal{A}$, and hence $\mathcal{A}$ is \emph{not}
+a dg-module over itself (with the naive left--multiplication structure).
+\end{example}
+
+\begin{example}[LG model ($\Z/2$-graded)]
+Let $(R,W)$ be a Landau--Ginzburg model with $R$ a commutative ring and
+$W\in R$ the superpotential.  Consider the curved dg-algebra
+\[
+A = (A^\bullet,d_A,h)
+\]
+defined by
+\[
+A^0 = R,\qquad A^1 = 0,\qquad d_A = 0,\qquad h = W.
+\]
+Thus $A$ is just the ring $R$ placed in degree $0$, with zero differential
+and curvature element $W\in A^0$. In particular, $R$ is commutative so $[W,-]=0 = d_A^2$. A (left) dg-module over $A$ is then a $\Z/2$-graded $R$-module
+\[
+P = P^0 \oplus P^1
+\]
+equipped with an odd $R$-linear endomorphism
+\[
+d_P : P \longrightarrow P
+\]
+such that
+\[
+d_P^2 = W\cdot \id_P.
+\]
+Writing $d_P$ in components,
+\[
+d_P =
+\begin{pmatrix}
+0 & d^1 \\[2pt]
+d^0 & 0
+\end{pmatrix},
+\qquad
+d^0 : P^0 \to P^1,\quad
+d^1 : P^1 \to P^0,
+\]
+the condition $d_P^2 = W\cdot\id_P$ becomes
+\[
+d^1 d^0 = W\cdot\id_{P^0},
+\qquad
+d^0 d^1 = W\cdot\id_{P^1}.
+\]
+That is, $P^0 \xrightarrow{d^0} P^1 \xrightarrow{d^1} P^0$ is a
+$\Z/2$-periodic complex whose ``differential'' squares to multiplication
+by $W$.  This is exactly a \emph{matrix factorization} of $W$ over $R$.
+\end{example}
+
+For a pair of dg-modules $M,N$ (i.e.\ matrix factorizations of $W$),
+their morphisms form a $\Z$-graded complex $\Hom_A(M,N)$, where
+\[
+\Hom_A(M,N)^0
+:= \Hom_R(M^0,N^0)\oplus\Hom_R(M^1,N^1),
+\]
+\[
+\Hom_A(M,N)^1
+:= \Hom_R(M^0,N^1)\oplus\Hom_R(M^1,N^0),
+\]
+and degrees extend periodically.  The differential on this complex is
+defined for a homogeneous map $f$ of degree $|f|$ by
+\[
+d_{M,N}(f) = d_N \circ f \;-\; (-1)^{|f|}\, f \circ d_M.
+\]
+Because $d_M^2 = W\cdot\id_M$ and $d_N^2 = W\cdot\id_N$, with $W$ central in $R$,
+one checks
+\[
+d_{M,N}^2(f)
+= d_N^2\circ f \;-\; f\circ d_M^2
+= W f - f W
+= 0,
+\]
+so $d_{M,N}$ is indeed a differential.  In this way the matrix
+factorizations of $(R,W)$ form a dg-category: objects are
+dg-modules $(P,d_P)$ as above, and the morphism spaces are the complexes
+$\Hom_A(M,N)$ with this differential.  Passing to $H^0$ of these Hom
+complexes produces the corresponding \emph{homotopy category} of matrix
+factorizations.
+
+For a pair of dg-modules $M,N$, we have a differential $d_{M,N}$ on $\Hom_A(M,N)$ defined by
+\[
+d_{M,N}(f) = d_N \circ f \;-\; (-1)^{|f|}\, f \circ d_M.
+\]
+Thus we obtain a dg-category of dg-modules. One can form a \emph{homotopy category}.\begin{definition}
+   A dg-category $\mathcal{C}$ gives, for each pair of objects $X,Y$, a cochain complex
+\[
+\Hom_{\mathcal{C}}^\bullet(X,Y)
+\]
+with differential $d$. The homotopy category $H^0(\mathcal{C})$ is defined as follows. Its objects are the same as those of $\mathcal{C}$. The morphism spaces are the degree-zero cohomology of the Hom-complexes, namely
+\[
+\Hom_{H^0(\mathcal{C})}(X,Y)=H^0\big(\Hom_{\mathcal{C}}^\bullet(X,Y)\big),
+\]
+and composition in $H^0(\mathcal{C})$ is induced by the composition of cochain maps (passing to cohomology). This makes sense because if one unwinds what it means for an element $f$ of degree $0$ of $\Hom_{\mathcal{C}}^\bullet(X,Y)$ to be closed (resp. exact), one sees that $f$ is closed precisely when it is a map of chain complexes, and exact when it is null-homotopic.
+\end{definition}
+
+\begin{definition} Let $(R,W)$ be a LG model with $R$ a commutative ring and $W\in R$ the superpotential. 
+The \textbf{homotopy category of matrix factorizations} $\mathrm{HMF}(R,W)$ is defined as the homotopy category of the dg-category of dg-modules over the curved algebra $(R,0,W)$, i.e.
+\[  
+\mathrm{HMF} = \text{homotopy category of MFs with } 
+P^0,P^1 \text{ finitely generated projective over } R.
+\]
+\end{definition}
+
+\begin{theorem}[Buchweitz, Orlov] Fix a base field $k$. Let $(R,W)$ be a LG model with $R$ a commutative $k$-algebra and $W\in R$ the superpotential. Suppose $R$ is smooth. Then
+\[
+\mathrm{HMF}(R,W) \;=\; D_{\mathrm{Sing}}(R/W)
+\;\simeq\;
+D^b(R/W\text{\rm -f.g.-mod})/\Perf,
+\]
+where $\Perf = \text{bounded complexes of f.g.\ projective $R$-modules}$.
+\end{theorem}
+
+Recall that a \(B\)-brane on the LG \(B\)-model \((X,0)\) is a \(\C_R^*\)-equivariant
+bundle \(E\) on \(X\) equipped with an endomorphism \(d_E\) of R-charge \(1\) whose
+square is zero.  Let \(\mathbf{dg}_R\Vect(X)\) be the category whose objects are
+\(B\)-branes on \((X,0)\) and whose morphisms are all morphisms of vector bundles.
+This is a dg-category, and when the \(\C_R^*\)-action on \(X\) is trivial it is
+just the usual category \(\mathbf{dg}\Vect(X)\) of complexes of vector bundles on \(X\).
+It is also a monoidal category, since we can tensor equivariant bundles and their
+endomorphisms in the usual way.
+
+Now let \((X,W)\) be any LG \(B\)-model, and let \((E,d_E)\), \((F,d_F)\) be two
+\(B\)-branes on \((X,W)\).  We have a \(\C_R^*\)-equivariant vector bundle
+\[
+  \cH om(E,F) := E^\vee \otimes F
+\]
+and this carries an endomorphism
+\[
+  d_{E,F} \;=\; 1_{E^\vee}\otimes d_F \;-\; d_E^\vee \otimes 1_F
+\]
+of R-charge \(1\).  One checks that
+\[
+  d_{E,F}^2 = 0
+\]
+(the two copies of \(W\) that appear cancel each other).  Thus the pair
+\((\cH om(E,F),d_{E,F})\) is an object of \(\mathbf{dg}_R\Vect(X)\).  Furthermore,
+given a third \(B\)-brane \((G,d_G)\), we have composition maps
+\[
+  \cH om(E,F)\otimes \cH om(F,G) \longrightarrow \cH om(E,G)
+\]
+and these are closed and of degree zero.
+
+\begin{definition}\label{def:curly-Br}
+Given an LG-model \((X,W)\) we define a category
+\(\mathcal{B}r(X,W)\) \emph{enriched} over the dg-category
+\(\mathbf{dg}_R\Vect(X)\).  The objects of \(\mathcal{B}r(X,W)\) are the \(B\)-branes
+on \((X,W)\), and the morphisms between two branes \(E\) and \(F\) are given by the
+object
+\[
+  \bigl(\cH om(E,F), d_{E,F}\bigr)
+\]
+of \(\mathbf{dg}_R\Vect(X)\).
+\end{definition}
+This is a category enriched over vector bundles on X. We need to pass to global sections to obtain a dg-category whose homotopy category is $D^b(X)$ when $W=0$ and $X$ is smooth.
+
+We now fix a monoidal functor
+\[
+  R\Gamma : \Vect(X)^{\C_R^*} \longrightarrow \mathbf{dg}\Vect^{\C_R^*}
+\]
+which sends a \(\C_R^*\)-equivariant vector bundle to a bounded
+\(\C_R^*\)-equivariant chain complex of vector spaces computing its
+derived global sections.  Since we are working over smooth complex
+spaces we will use Dolbeault resolutions and set
+\[
+  R\Gamma(E) := \bigl(\Gamma(E\otimes \mathcal{A}_X^{0,\bullet}),\,
+  \bar\partial\bigr),
+\]
+though one could equally well use \v{C}ech resolutions with respect to a
+\(\C_R^*\)-invariant affine open cover.
+
+Now \(\cH om(E,F)\) is an object of \(\mathbf{dg}_R\Vect(X)\), so we can apply
+\(R\Gamma\) to obtain a complex
+\[
+  R\Gamma\bigl(\cH om(E,F)\bigr)
+  = \Gamma\bigl(\cH om(E,F)\otimes \mathcal{A}_X^{0,\bullet}\bigr),
+\]
+which is a bicomplex, graded by R-charge and by Dolbeault degree, with
+total differential \(d_{E,F} + \bar\partial\).  Collapsing this bicomplex,
+we regard it as an object of \(\mathbf{dg}\Vect^{\C_R^*}\).
+
+\begin{definition}[dg-category of \(B\)-branes]\label{def:Br}
+Given an LG-model \((X,W)\) we define the dg-category of \(B\)-branes to be
+\[
+  Br(X,W) \;:=\; R\Gamma\bigl(\mathcal{B}r(X,W)\bigr),
+\]
+i.e.\ we keep the same objects as \(\mathcal{B}r(X,W)\) but replace each
+\(\cH om(E,F)\) by the complex \(R\Gamma(\cH om(E,F))\) with differential
+\(d_{E,F}+\bar\partial\).
+\end{definition}
+
+The monoidality of \(R\Gamma\) ensures that the induced composition maps
+\[
+  R\Gamma\bigl(\cH om(E,F)\bigr)\otimes
+  R\Gamma\bigl(\cH om(F,G)\bigr)
+  \longrightarrow
+  R\Gamma\bigl(\cH om(E,G)\bigr)
+\]
+are associative and closed of degree zero, so \(Br(X,W)\) is indeed a
+dg-category.
+
+\begin{example}
+Let \(W=0\) and assume \(\C_R^*\) acts trivially on \(X\).
+Then \(Br(X,0) = \Perf(X)\), the dg-category of perfect complexes on \(X\).
+Since \(X\) is smooth, the homotopy category of this dg-category is
+\[
+  H_0\bigl(Br(X,0)\bigr) \;\cong\; D^b(X).
+\]
+\end{example}
+
+\begin{remark}
+In this talk I will work at the level of the bounded derived category
+\(D^b(X)\).  Conceptually, however, \(D^b(X)\) is only the homotopy
+category \(H^0\) of a more structured dg-category: when \(W=0\) this is
+the dg-category \(\Perf(X)\) of perfect complexes, and for a Landau--Ginzburg
+model \((X,W)\) it is the dg-category \(Br(X,W)\) of \(B\)-branes.
+The VGIT "window" equivalences appearing in the flop example admit
+dg-enhancements: Segal shows that the equivalences
+\[
+D^b(X_+) \xrightarrow{\;\sim\;} D^b(X_-)
+\]
+coming from the grade-restriction windows actually arise as
+quasi-equivalences between the dg-categories \(Br(X_+,W)\) and
+\(Br(X_-,W)\).  Thus the autoequivalences of \(D^b(X_\pm)\) constructed
+via magic windows are shadows of honest symmetries at the dg / \(B\)-brane level.
+\end{remark}
 
 \subsection{Set-up}
-
 Let $V = \mathbb{C}^4$ with coordinates $x_1, x_2, y_1, y_2$, and let $\mathbb{C}^*$ act on $V$ with weight $1$ on each $x_i$ and weight $-1$ on each $y_i$. There are two possible GIT quotients $X_{+}$ and $X_{-}$, depending on whether we choose a positive or negative character of $\mathbb{C}^*$. Both are isomorphic to the total space of the bundle $\mathcal{O}(-1)^{\oplus 2}$ over $\mathbb{P}^1$. This is the standard "three-fold flop" situation.
 
 Both are open substacks of the Artin quotient stack

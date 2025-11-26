@@ -631,7 +631,7 @@ But then $f$ must be zero.
 \] We will find holomorphic differentials on its compactification $R^{\mathrm{cpt}}$.
 
 The branch points of the projection to the $z$-plane are at $z = \pm1, \pm i$; $w = 0$ at all of them. The map has degree $4$ and branching index $3$ at each of the points. At $\infty$, we have four separate sheets defined by $w = \sqrt[4]{1 - z^4}$ which has four convergent expansions in $1/z$, as soon as $|z| > 1$.  
-So Riemann–Hurwitz gives
+So Riemann-Hurwitz gives
 \[
 g(R) - 1 = -4 + \tfrac{1}{2} \cdot 12 = 2, \qquad g(R) = 3.
 \]
@@ -1050,7 +1050,7 @@ Thus $\mathbb{C}\{w\}$ is a free $\mathbb{C}\{z\}$-module of rank $n$ with basis
 
 \begin{proof}
     [Proof of Riemann--Roch theorem for vector bundles]
-We realise our surface $R$ as an $n$–sheeted branched cover 
+We realise our surface $R$ as an $n$-sheeted branched cover 
 $\pi : R \to \P^1$ for some $n$. 
 We will prove the theorem on $R$ by pushing $V$ down to $\P^1$ 
 and using Riemann-Roch there. For $\P^1$, the theorem follows from Grothendieck's classification (Theorem \ref{thm:grothendieck}) of vector bundles and the explicit calculation for line bundles. 
@@ -1681,8 +1681,8 @@ and isomorphism $f_L^* \mathcal P \cong L$.
 The trivialization condition may seem curious but is necessary to make the statement work.
 The actual moduli that universally parametrizes degree-zero line bundles on $R$
 is an \textbf{algebraic stack} with underlying space $J$
-and automorphisms forming a $\C^\times$–gerbe,
-a principal $B\C^\times$–bundle over $J$.
+and automorphisms forming a $\C^\times$-gerbe,
+a principal $B\C^\times$-bundle over $J$.
 This is split as $B\C^\times \times J$ by a choice of point $r \in R$.
 \end{remark}
 
@@ -2271,6 +2271,735 @@ None of these examples are flabby. In fact, the failure of the sheaf of principa
 
     In this situation, one must derive $\Hom$ using larger categories of $\cO$-modules to get the correct derived functors. In particular, one may consider complexes of sheaves with coherent cohomology sheaves.
 \end{remark}
+
+\section{Introduction to connections on vector bundles}
+Let $E$ be a complex vector bundle over a complex manifold $X$. Let $\cE^p(E)$ be the sheaf of smooth $E$-valued $p$-forms on $X$. In particular, $\cE^0(E)$ is the sheaf of smooth sections of $E$.
+
+\section{Hermetian connections, curvature, and Chern classes}
+For now, we let $E$ be a real or complex vector bundle over a smooth manifold $X$. Recall that we had introduced a connection as a $\C$-linear map \begin{align*}
+    \nabla: \cE^0(E) & \to \cE^1(E)
+\end{align*} satisfying the Leibniz rule \begin{align*}
+    \nabla(f s) & = df \otimes s + f \nabla s
+\end{align*} for any smooth function $f$ and smooth section $s$ of $E$. This map extends uniquely to a map \begin{align*}
+    \nabla: \cE^p(E) & \to \cE^{p+1}(E)
+\end{align*} satisfying the graded Leibniz rule for $E$-valued forms:
+\begin{align*}
+    \nabla(\omega \otimes s) & = d\omega \otimes s + (-1)^{\deg \omega} \omega \wedge \nabla s
+\end{align*} for any smooth $p$-form $\omega$ and smooth section $s$ of $E$.
+
+\begin{remark}
+    [Notation] Juxtaposition always means wedge product of forms + composition of endomorphisms. In particular, for $\alpha = A \otimes \omega \in \cE^p(\End(E))$ and $\beta = B \otimes \eta \in \cE^q(\End(E))$, we have \begin{align*}
+        \alpha \beta & = (A \circ B) \otimes (\omega \wedge \eta)
+    \end{align*} where $A \circ B$ is composition of endomorphisms and $\omega \wedge \eta$ is wedge product of forms.
+\end{remark}
+
+\begin{definition}
+    The \textbf{curvature} of a connection $\nabla$ on a vector bundle $E$ over a smooth manifold $X$ is the map \begin{align*}
+        F_\nabla & = \nabla^2: \cE^0(E) \to \cE^2(E)
+    \end{align*} is an endomorphism valued $2$-form on $E$.
+\end{definition}
+
+\begin{enumerate}
+    \item In a local trivialization, one can write $\nabla(s) = ds + As$ where $s$ is a local section, $A$ is a matrix of $1$-forms, and $As$ is matrix multiplication where entrywise wedge products are taken.
+
+\item When extending $\nabla$ to $\End(E)$-valued forms we require the graded
+Leibniz rule
+\[
+\nabla(\Phi s)
+  = (\nabla\Phi)\wedge s \;+\; (-1)^{\deg\Phi}\,\Phi\wedge(\nabla s)
+\]
+for any section $s$ of $E$ and any $\Phi\in\Omega^p(X,\End(E))$.
+Note that $\Phi s$ is the $E$-valued $p$-form obtained by applying the
+endomorphism $\Phi(x)(v_1,\dots,v_p)$ to $s(x)$.
+
+To compute $\nabla\Phi$, write $\nabla = d + A$ in a local trivialization.
+Then
+\[
+\begin{aligned}
+\nabla(\Phi s)
+ &= d(\Phi s) + A\wedge(\Phi s) \\
+ &= (d\Phi)\wedge s
+     \;+\; (-1)^p\,\Phi\wedge ds
+     \;+\; A\wedge\Phi\wedge s.
+\end{aligned}
+\]
+
+On the other hand,
+\[
+\Phi(\nabla s)
+ = \Phi(ds + A\wedge s)
+ = \Phi\wedge ds \;+\; \Phi\wedge A\wedge s.
+\]
+
+Subtracting the two expressions and using the graded Leibniz rule shows
+that the extra term multiplying $s$ must be
+\[
+d\Phi + A\wedge\Phi - (-1)^p\,\Phi\wedge A.
+\]
+
+Thus
+\[
+\boxed{\displaystyle
+\nabla\Phi
+  = d\Phi + A\wedge\Phi - (-1)^p\,\Phi\wedge A
+}
+\]
+which is equivalently
+\[
+\nabla\Phi = d\Phi + [A,\Phi],
+\qquad
+[A,\Phi] := A\wedge\Phi - (-1)^p\,\Phi\wedge A.
+\]
+Note that we are using the graded commutator here, which stems from the fact that differential forms supercommute.
+
+\item The curvature is given by \begin{align*}
+    F_\nabla & = dA + A \wedge A = dA + \frac{1}{2}[A, A]
+\end{align*} 
+\end{enumerate}
+
+\begin{proposition}
+    The Bianchi identity states that \begin{align*}
+    dF_\nabla + [A, F_\nabla] = \nabla F_\nabla &= 0
+\end{align*} 
+\end{proposition}
+\begin{proof}
+    We compute \begin{align*}
+        dF_\nabla + [A, F_\nabla] & = d(dA + A \wedge A) + [A, dA + A \wedge A] \\
+        & = d^2 A + dA \wedge A - A \wedge dA + [A, dA] + [A, A \wedge A] \\
+        & = 0
+    \end{align*} since $d^2 = 0$, the middle two terms cancel, and the last term vanishes since $A \wedge A$ is of even degree and therefore commutes with $A$.
+\end{proof}
+
+\begin{definition}[Chern classes]
+    Let $E$ be a complex vector bundle over $X$. The total Chern class of $E$ is a cohomology class in $H^{\text{even}}(X, \R)$ defined by \begin{align*}
+        c(E) & = \det\left( I + \frac{i}{2\pi} F_\nabla \right)
+    \end{align*} where $F_\nabla$ is the curvature of any connection $\nabla$ on $E$.
+\end{definition}
+
+Morally $c_k \in H^{2k}(X, \R)$ is the $k$th symmetric polynomial in the eigenvalues of $\frac{i}{2\pi} F_\nabla$. Many things are not clear. It's not clear that this is a closed form, it's not clear that it's real. It's not clear that it depends only on $R$ and not on the curvature.
+
+
+\begin{enumerate}
+    \item We get a closed form \[
+    d(c(E)) = 0
+    \] In fact for any conjugation invariant polynomial $P:\Mat_r(\C) \to \C$, we have \[
+        dP(F_\nabla) = 0
+    \] This is checked by specializing to $P(M) = \tr(M^k)$ because these generate all conjugation invariant polynomials. Then \[
+        d\tr(F_\nabla^k) = k \tr(dF_\nabla \wedge F_\nabla^{k-1}) = -k \tr([A, F_\nabla] \wedge F_\nabla^{k-1}) = 0
+    \] by the Bianchi identity and cyclicity of the trace.
+    \item The Chern class $c(E)$ is independent of the choice of connection $\nabla$ and depends only on $E$. We will check this by showing that if we change connections, the traces of powers $\tr(F^k)$ will change by exact forms. If you try to do this directly it gets very messy, so it is easiest to check infinitesimal changes. Then when we integrate up the infinitesimal changes, we integrate exact forms which remain exact.
+    
+    Let $\nabla_t$ be a family of connections on $E$ with curvature $F_t$. We will show that $\frac{d}{dt} \tr(F_t^k)$ is exact for each $k$.
+    
+    First compute the derivative of the curvature. With $A_t$ the connection $1$-form and $\dot A_t=\frac{d}{dt}A_t$, we have
+    \[
+    F_t=dA_t + A_t\wedge A_t,
+    \qquad
+    \frac{d}{dt}F_t = d\dot A_t + \dot A_t\wedge A_t + A_t\wedge\dot A_t.
+    \]
+    Recalling the covariant derivative $\nabla_t(\cdot)=d(\cdot)+[A_t,\cdot]$ with $[A_t,\dot A_t]=A_t\wedge\dot A_t+\dot A_t\wedge A_t$, we obtain
+    \[
+    \frac{d}{dt}F_t=\nabla_t(\dot A_t).
+    \]
+    Thus we get that \begin{align*}
+\frac{d}{dt}\operatorname{tr}(F_t^k)
+&= \sum_{j=0}^{k-1}
+\operatorname{tr}\!\left(
+F_t^{\,j}\,\frac{dF_t}{dt}\,F_t^{\,k-1-j}
+\right) \\ 
+        & = k \tr(F_t^{k-1} \wedge \frac{d}{dt} F_t) \texty{by cyclicity} \\
+        & = k \tr(F_t^{k-1} \wedge \nabla_t (\dot A_t))  \\
+        & = -k \sum_{j=0}^{k-2} \tr(F_t^j \wedge (\nabla_t F_t) \wedge F_t^{k-2-j} \wedge (\dot A_t)) + k d \tr(F_t^{k-1} \wedge \dot A_t)
+    \end{align*}
+where the last line follows from the graded Leibniz rule for $\nabla_t$ applied to the product $F_t^{k-1} \wedge \dot A_t$. Explicitly, \[
+\nabla_t\bigl(F_t^{k-1}\wedge \dot A_t\bigr)
+= \nabla_t(F_t^{k-1})\wedge \dot A_t
++ F_t^{k-1}\wedge \nabla_t(\dot A_t).
+\]
+But
+\[
+\nabla_t(F_t^{k-1})
+= \sum_{j=0}^{k-2}
+F_t^{\,j}\,(\nabla_t F_t)\,F_t^{\,k-2-j},
+\]
+so
+\[
+\nabla_t\bigl(F_t^{k-1}\wedge\dot A_t\bigr)
+=
+\sum_{j=0}^{k-2}
+F_t^{\,j}\wedge(\nabla_t F_t)\wedge F_t^{\,k-2-j}\wedge\dot A_t
++ F_t^{k-1}\wedge\nabla_t(\dot A_t).
+\]
+Rearrange to solve for the term we have:
+\[
+F_t^{k-1}\wedge\nabla_t(\dot A_t)
+=
+\nabla_t\bigl(F_t^{k-1}\wedge\dot A_t\bigr)
+- \sum_{j=0}^{k-2}
+F_t^{\,j}\wedge(\nabla_t F_t)\wedge F_t^{\,k-2-j}\wedge\dot A_t.
+\]
+    
+Returning to our computation, the first term vanishes by the Bianchi identity, so we get that \begin{align*}
+        \frac{d}{dt} \tr(F_t^k) & = k d \tr(F_t^{k-1} \wedge \dot A_t)
+    \end{align*} which is exact. Thus the Chern classes are independent of the choice of connection.
+    \item We skip the check of reality. In fact it is only real up to exact forms. Need a hermetian connection to get a real form representative.
+\end{enumerate}
+
+\subsection{Key properties of Chern classes}
+\begin{proposition}
+    Chern classes are natural, i.e. for any smooth map $f: Y \to X$ between smooth manifolds and complex vector bundle $E$ over $X$, we have \begin{align*}
+        c(f^* E) & = f^* c(E)
+    \end{align*} where $f^* E$ is the pullback bundle of $E$ over $Y$.
+\end{proposition}
+The reason is that when we pull back a vector bundle, one can also pull back a connection.
+
+\begin{proposition}
+    $c_0$ is the identity, i.e. \begin{align*}
+        c_0(E) & = 1
+    \end{align*} If $E \cong \C^r \times X$ is the trivial bundle, then \begin{align*}
+        c(E) & = 1
+    \end{align*} i.e. all higher Chern classes vanish. If $k > \text{rank}(E)$, then \begin{align*}
+        c_k(E) & = 0
+    \end{align*}
+\end{proposition}
+
+\begin{proposition}
+    The top Chern class $c_r(E)$ of a complex vector bundle $E$ of rank $r$ over a smooth manifold $X$ is the Euler class $e(E_\R)$ of the underlying real vector bundle $E_\R$ of rank $2r$.
+\end{proposition}
+
+\begin{proposition}
+    [Whitney sum formula] For any two complex vector bundles $E$ and $F$ over a smooth manifold $X$, we have \begin{align*}
+        c(E \oplus F) & = c(E) \wedge c(F)
+    \end{align*} where $E \oplus F$ is the direct sum bundle of $E$ and $F$.
+\end{proposition}
+
+\begin{proof}
+    Choose $\nabla$ on $E \oplus F$ which respects the direct sum decomposition, then $\nabla^E$ and $\nabla^F$ commute and the curvature decomposes as \[
+        F_\nabla = F_{\nabla^E} \oplus F_{\nabla^F}
+    \] and so the determinant factors.
+\end{proof}
+
+\begin{proposition}
+    [Splitting principle] Given $E \to X$ a complex vector bundle of rank $r$ over a smooth manifold $X$, there exists a natural smooth manifold $\Fl(E)$ (holomorphic if $E$ and $X$ are), and a fiber bundle $\pi: \Fl(E) \to X$, so that $\pi^* E$ splits (non-holomorphically) as a direct sum of complex line bundles \begin{align*}
+        \pi^* E & \cong L_1 \oplus L_2 \oplus \cdots \oplus L_r
+    \end{align*}
+    At a point $x \in X$, the fiber $\Fl(E)_x$ is the variety of complete flags in the vector space $E_x$. If $\alpha_i = c_1(L_i)$ are the first Chern classes of the line bundles $L_i$, then \begin{align*}
+        H^*(\Fl(E), \R) & \cong H^*(X, \R)[\alpha_1, \alpha_2, \ldots, \alpha_r] / \left( e_k(\alpha_1, \alpha_2, \ldots, \alpha_r) - \pi^*c_k(E) \mid k = 1, 2, \ldots, r \right)
+    \end{align*} In particular, the induced map on cohomology \begin{align*}
+        \pi^*: H^*(X, \R) & \to H^*(\Fl(E), \R)
+    \end{align*} is injective, and the total Chern class of $E$ splits in $\Fl(E)$ as \begin{align*}
+        \pi^* c(E) & = \prod_{i=1}^r (1 + \alpha_i)
+    \end{align*} where the $\alpha_i$ are the Chern roots of $E$.
+\end{proposition}
+
+\begin{remark}
+    Assume $E \to X$ is a holomorphic vector bundle of rank $r$. On the flag bundle $\pi:\mathrm{Fl}(E)\to X$ one has the tautological holomorphic flag
+    \[
+    0 = S_0 \subset S_1 \subset \cdots \subset S_r = \pi^{*}E
+    \]
+    of holomorphic subbundles, with $\operatorname{rk} S_i = i$. Define holomorphic line bundles
+    \[
+    L_i := S_i / S_{i-1}, \qquad i=1,\dots,r.
+    \]
+
+    From the short exact sequences
+    \[
+    0 \longrightarrow S_{i-1} \longrightarrow S_i \longrightarrow L_i \longrightarrow 0
+    \]
+    we see that each $S_i$ is an extension of $S_{i-1}$ by the line bundle $L_i$. In the holomorphic category these extensions need not split: the obstruction to splitting is an extension class in
+    \[
+    \operatorname{Ext}^1(L_i,S_{i-1}) \cong H^1\bigl(\mathrm{Fl}(E),\,\mathcal{H}om(L_i,S_{i-1})\bigr),
+    \]
+    which is in general nonzero.
+
+    In the $C^\infty$ category, however, every such short exact sequence of complex vector bundles splits. Choosing a Hermitian metric on the bundles and taking the orthogonal complement of $S_{i-1}$ inside $S_i$ yields a smooth splitting
+    \[
+    S_i \cong S_{i-1} \oplus L_i
+    \qquad\text{as $C^\infty$ complex bundles.}
+    \]
+    Inductively this gives a smooth isomorphism
+    \[
+    \pi^*E = S_r \cong L_1 \oplus \cdots \oplus L_r
+    \]
+    as complex $C^\infty$-bundles. The complements obtained by orthogonal projection are not holomorphic subbundles in general, so the resulting splitting is not holomorphic.
+\end{remark}
+
+\subsection{Hermitian structures on complex vector bundles}
+Let $E$ be a complex vector bundle over a smooth manifold $X$. 
+
+\begin{definition}
+A \textbf{Hermitian structure} on $E$ is a smoothly varying family of Hermitian inner products $\langle \cdot, \cdot \rangle_x$ on the fibers $E_x$ for each $x \in X$. In other words, for any two smooth sections $s, t$ of $E$, the function \begin{align*}
+    x & \mapsto \langle s(x), t(x) \rangle_x
+\end{align*} is a smooth complex-valued function on $X$.
+\end{definition}
+In a local frame $\sigma_i$, a Hermitian structure is given by a positive definite Hermitian matrix of smooth functions, defining a positive definite inner product on each fiber. If $\sigma = \sum f_i \sigma_i$ and $\tau = \sum g_i \sigma_i$ are local sections, then \begin{align*}
+    \langle \sigma, \tau \rangle & = \sum_{i,j} h_{ij} \overline{f_i} g_j
+\end{align*} where $h_{ij} = \langle \sigma_i, \sigma_j \rangle$. \textbf{Throughout the text, we use the convention that the inner product is conjugate linear in the first variable and linear in the second variable. Note that this convention results in some formulas looking different from other texts which use the opposite convention.}
+
+Global Hermitian structures always exist on complex vector bundles over smooth manifolds by using partitions of unity to patch together local Hermitian structures.
+
+\begin{definition}
+    A connection $\nabla$ on a complex vector bundle $E$ with Hermitian structure $\langle \cdot, \cdot \rangle$ is \textbf{Hermitian} if for any real tangent vector field $X$ on $X$ and any smooth sections $s, t$ of $E$, we have \begin{align*}
+        X \langle s, t \rangle & = \langle \nabla_X s, t \rangle + \langle s, \nabla_X t \rangle
+    \end{align*} Equivalently, the parallel transport defined by $\nabla$ preserves the Hermitian structure on the fibers of $E$. 
+    
+For any piecewise smooth path $\gamma: [0,1] \to X$ and an initial vector $\sigma(\gamma(0)) \in E_{\gamma(0)}$, the parallel transport of $\sigma(\gamma(0))$ along $\gamma$ is the unique section $\sigma$ of $\gamma^* E$ satisfying the following ordinary differential equation:
+    \begin{align*}
+        \nabla_{\dot \gamma(t)} \sigma & = 0 \\
+        \sigma(\gamma(0)) & = \sigma(\gamma(0))
+    \end{align*} We say $\sigma$ is horizontal along $\gamma$ for the connection $\nabla$. Then $\nabla$ is Hermitian if for any such $\gamma$ and any two initial vectors $v, w \in E_{\gamma(0)}$, the parallel transports $s_v$ and $s_w$ of $v$ and $w$ along $\gamma$ satisfy \begin{align*}
+        \langle s_v(\gamma(t)), s_w(\gamma(t)) \rangle
+    & = \langle v, w \rangle
+    \end{align*} for all $t \in [0,1]$.
+\end{definition}
+One way of thinking about the expression $X \langle s, t \rangle$ is that it is linear in $s$ and $t$, but also $\langle, \rangle$ as well, and the Hermitian condition expresses the fact that the covariant derivative of the Hermitian metric is zero.
+
+\begin{example}
+    On $X = S^1$, consider the trivial complex line bundle $E = S^1 \times \C$ with the standard Hermitian structure \begin{align*}
+        \langle (x, v), (x, w) \rangle & = \overline{v} w
+    \end{align*} for $x \in S^1$ and $v, w \in \C$. Define a connection $\nabla$ on $E$ by \begin{align*}
+        \nabla_{\frac{d}{d\theta}} s & = \frac{d s}{d\theta} + \cos(\theta) s
+    \end{align*} for any smooth section $s: S^1 \to E$. This choice of $\nabla$ is not Hermitian because the factor of $\cos(\theta)$ causes the norm of a section to change under parallel transport. The connection \begin{align*}
+        \nabla_{\frac{d}{d\theta}} s & = \frac{d s}{d\theta} + i f(\theta) s
+    \end{align*} for any real-valued function $f: S^1 \to \R$ is Hermitian because the factor of $i f(\theta)$ acts only by rotation and preserves the norm of sections under parallel transport.
+\end{example}
+
+\begin{theorem}[Chern connection]
+    Given $E,h$ over $X$ Hermitian and holomorphic, there exists a unique Hermitian connection $\nabla$ on $E$ whose $(0,1)$-component is the Dolbeault operator $\bar{\partial}_E$:
+\begin{align*}
+    \nabla_{d/d\bar{z}_i} s & = \frac{\partial}{\partial \bar{z}_i} s
+\end{align*}
+\end{theorem}
+
+\begin{proof}
+    First we check the uniqueness. Let $s,t$ be local holomorphic sections of $E$. Then by the Hermitian condition, we have \begin{align*}
+        \frac{\partial}{\partial z_i} h(s,t) & = h(\nabla_{\frac{\partial}{\partial \overline{z}_i}} s, t) + h(s, \nabla_{\frac{\partial}{\partial z_i}} t) = h(s, \nabla_{\frac{\partial}{\partial z_i}} t)
+    \end{align*} since $\nabla_{\frac{\partial}{\partial \overline{z}_i}} s = \bar{\partial}_E s = 0$ by holomorphicity of $s$. In particular, any two holomorphic sections $s,t$ can be written as column vectors $s = (s^1, s^2, \ldots, s^r)$ and $t = (t^1, t^2, \ldots, t^r)$ in a local holomorphic frame of $E$, and the Hermitian metric can be expressed as \begin{align*}
+h(s,t) = \sum_{i,j} h_{ij} \overline{s^i} t^j
+\end{align*} where the $s^i$ and $t^j$ are holomorphic functions. Therefore, applying $\frac{\partial}{\partial z_i}$ to the $s^i$ yields zero because $\overline{s^i}$ is antiholomorphic.
+
+    In this case, the left hand side is known and since the form $h(s, \cdot)$ is nondegenerate, this determines $\nabla_{\frac{\partial}{\partial z_i}} t$ uniquely. Now we check existence. Note that having established uniqueness, it suffices to establish existence via a formula locally since there is no ambiguity in gluing local connections.
+
+Choose a local holomorphic frame
+\[
+  \{\sigma_1,\dots,\sigma_r\}
+\]
+for $E$.  In this frame the metric is given by a positive definite
+Hermitian matrix of smooth functions
+\[
+  H=(h_{ij}), \qquad h_{ij} := h(\sigma_i,\sigma_j).
+\]
+
+Any local section $s$ of $E$ can be written as a column vector of
+holomorphic functions
+\[
+  s = \sum_i s^i \sigma_i \quad\leftrightarrow\quad
+  s = (s^1,\dots,s^r)^{\mathsf T},
+\]
+and similarly $t=(t^1,\dots,t^r)^{\mathsf T}$.  With our convention on
+$h$ we have
+\[
+  h(s,t) = \sum_{i,j} h_{ij}\,\overline{s^i}\,t^j
+         = \overline{s}^{\mathsf T} H t .
+\]
+
+We look for a connection of the form
+\[
+  \nabla^{0,1} = \bar\partial_E, \qquad
+  \nabla^{1,0} = \partial + A^{1,0},
+\]
+where $A^{1,0}$ is an $r\times r$ matrix of $(1,0)$–forms.  Thus, in
+this frame,
+\[
+  \nabla s = \bar\partial s + \partial s + A^{1,0} s.
+\]
+
+For a vector field of type $(1,0)$, say $X=\partial/\partial z_k$, set
+$\nabla_k := \nabla_{\partial/\partial z_k}$ and
+$\partial_k := \partial/\partial z_k$.
+The Hermitian compatibility condition
+\[
+  \partial_k h(s,t)
+   \;=\; h(\nabla_k s,t) + h(s,\nabla_k t)
+\]
+now becomes, in matrix notation,
+\begin{align*}
+  \partial_k(\overline{s}^{\mathsf T} H t)
+    &= \overline{(\nabla_k s)}^{\mathsf T} H t
+       \;+\; \overline{s}^{\mathsf T} H (\nabla_k t) \\
+  &= \overline{(\partial_k s + A_k s)}^{\mathsf T} H t
+       \;+\; \overline{s}^{\mathsf T} H (\partial_k t + A_k t),
+\end{align*}
+where $A_k$ is the matrix of functions such that
+$A^{1,0} = \sum_k A_k\,dz_k$.
+
+On the other hand,
+\[
+  \partial_k(\overline{s}^{\mathsf T} H t)
+   = \overline{s}^{\mathsf T} (\partial_k H) t
+     + \overline{(\partial_k s)}^{\mathsf T} H t
+     + \overline{s}^{\mathsf T} H (\partial_k t),
+\]
+since $\partial_k \overline{s} = 0$ (the $s^i$ are holomorphic).
+
+Comparing the two expressions and cancelling the terms containing
+$\partial_k s$ and $\partial_k t$ gives
+\[
+  \overline{s}^{\mathsf T} (\partial_k H) t
+   = \overline{(A_k s)}^{\mathsf T} H t
+     + \overline{s}^{\mathsf T} H A_k t
+   = \overline{s}^{\mathsf T} (A_k^{*} H + H A_k) t
+\]
+for all $s,t$.  Hence we obtain the matrix identity
+\[
+  \partial_k H = A_k^{*} H + H A_k.
+\]
+
+Taking the $(1,0)$–part of both sides and using that $A_k$ is of type
+$(1,0)$ while $A_k^{*}$ is of type $(0,1)$, we get
+\[
+  \partial_k H = H A_k,
+\]
+so
+\[
+  A_k = H^{-1} \partial_k H.
+\]
+
+Equivalently, in differential form notation,
+\[
+  A^{1,0} = H^{-1} \partial H.
+\]
+
+Thus in our holomorphic frame we have defined a connection by
+\[
+  \nabla_{\frac{\partial}{\partial\bar z_k}} s
+     = \frac{\partial s}{\partial\bar z_k}, \qquad
+  \nabla_{\frac{\partial}{\partial z_k}} s
+     = \frac{\partial s}{\partial z_k}
+       + H^{-1}\frac{\partial H}{\partial z_k}\, s,
+\]
+which by construction satisfies $\nabla^{0,1}=\bar\partial_E$ and is
+compatible with the Hermitian metric $h$.  One checks that these local
+formulas transform correctly under change of holomorphic frame, so they
+glue to a global connection.  This is the desired Chern connection.
+    \end{proof}
+
+    \begin{proposition}
+        The Chern connection has curvature given by the formula \begin{align*}
+            F_\nabla & = \bar{\partial}(H^{-1} \partial H)
+        \end{align*} provided $H$ is defined in a local holomorphic frame. In particular, the curvature is of type $(1,1)$.
+    \end{proposition}
+
+    \begin{example}
+        Consider the tautological line bundle $\mathcal{O}(-1)$ over $\C \P^n$. It carries a hermitian structure invariant under the action of $U(n+1)$ induced from the standard hermitian structure on $\C^{n+1}$. In the standard affine chart $U_0 = \{ [1:z_1:\cdots:z_n] \}$ with coordinates $z_i = x_i + i y_i$, a local holomorphic frame is given by the section \begin{align*}
+            \sigma(z) & = (1, z_1, z_2, \ldots, z_n)
+        \end{align*} whose norm is given by \begin{align*}
+            h(\sigma(z), \sigma(z)) & = 1 + |z_1|^2 + |z_2|^2 + \cdots + |z_n|^2
+        \end{align*} Therefore, in this local holomorphic frame, the hermitian metric is the bilinear form $h = 1 + \sum |z_i|^2$, i.e. \begin{align*}
+            h(f \sigma, g \sigma) & = (1 + \sum |z_i|^2) \overline{f} g
+        \end{align*} where $f\sigma, g\sigma$ are local sections. We can compute the curvature of the Chern connection on $\mathcal{O}(-1)$ \begin{align*}
+            F_\nabla & = \bar{\partial} \left( h^{-1} \partial h \right) \\
+            & = \bar{\partial} \left( \frac{\sum \overline{z_i} d z_i}{1 + \sum |z_i|^2} \right) \\
+            & = \frac{\sum z_i d z_i \wedge \sum \overline{z_i} d \overline{z_i}}{(1 + \sum |z_i|^2)^2} - \frac{\sum d z_i \wedge d \overline{z_i}}{1 + \sum |z_i|^2} \\
+            & = \frac{-\sum (1 + \sum |z_j|^2) d z_i \wedge d \overline{z_i} + \sum z_i \overline{z_j} d z_i \wedge d \overline{z_j}}{(1 + \sum |z_i|^2)^2}
+        \end{align*}
+        When $n=1$, this reduces to \begin{align*}
+            F_\nabla & = \frac{-(1 + |z|^2) d z \wedge d \overline{z} + z \overline{z} d z \wedge d \overline{z}}{(1 + |z|^2)^2} \\
+            & = \frac{-d z \wedge d \overline{z}}{(1 + |z|^2)^2} \\
+            &= \frac{2i d x \wedge d y}{(1 + r^2)^2}
+        \end{align*} This gives \begin{align*}
+            c_1(\mathcal{O}(-1)) & = \frac{i}{2\pi} F_\nabla = \frac{-1}{\pi} \frac{d x \wedge d y}{(1 + r^2)^2}
+        \end{align*}
+        
+        Finally we can compute \begin{align*}
+            \int_{\C \P^1} c_1(\mathcal{O}(-1)) &= \frac{-1}{\pi} \cdot 2\pi \cdot \int_0^\infty \frac{r}{(1 + r^2)^2} d r \\
+            & = -1
+        \end{align*} so we see why the normalization of Chern classes is chosen as it is.
+    \end{example}
+\section{Kahler manifolds}
+Recall that a Riemannian metric $g$ on a smooth manifold $X$ is a smoothly varying choice of inner product $g_x$ on each tangent space $T_x X$ for $x \in X$. In local coordinates $x_i$, the metric can be expressed as \begin{align*}
+    g & = \sum_{i,j} g_{ij} d x_i \otimes d x_j
+\end{align*} where $g_{ij} = g\left( \frac{\partial}{\partial x_i}, \frac{\partial}{\partial x_j} \right)$ are smooth functions on $X$.
+
+\begin{definition}
+    The torsion $T$ of a connection $\nabla$ on the tangent bundle $TX$ of a smooth manifold $X$ is the map \begin{align*}
+        T: \cE^0(TX) \times \cE^0(TX) & \to \cE^0(TX) \\
+        T(X,Y) & = \nabla_X Y - \nabla_Y X - [X,Y]
+    \end{align*} for any two smooth vector fields $X,Y$ on $X$. A connection is torsion-free if $T(X,Y) = 0$ for all vector fields $X,Y$.
+\end{definition}
+
+\begin{theorem}[Levi-Civita]
+    There exists a unique torsion-free connection $\nabla$ on the tangent bundle $TX$ of a smooth manifold $X$ which is compatible with a Riemannian metric $g$ on $X$, i.e. for any vector fields $X,Y,Z$ on $X$, we have \begin{align*}
+        X g(Y,Z) & = g(\nabla_X Y, Z) + g(Y, \nabla_X Z)
+    \end{align*} This connection is called the Levi-Civita connection.
+\end{theorem}
+
+One can obtain the Levi-Civita connection by symmetrizing any connection compatible with the metric. Let its torsion be
+$T(X,Y) = \nabla_X Y - \nabla_Y X - [X,Y]$. Define a new connection $\widetilde\nabla$ by $\widetilde\nabla_X Y := \nabla_X Y - \frac12\,T(X,Y)$. Then one checks that $\widetilde\nabla$ is torsion-free and compatible with the metric.
+
+Now if $X$ is a complex manifold, then the Riemannian metric comes from a Hermitian metric $h$ on the tangent bundle $TX$. We get a preferred hermitian connection on $TX$ by taking the Chern connection. However, the induced connection on the underlying real tangent bundle $T_\R X$ need not be the Levi-Civita connection of the Riemannian metric associated to $h$. This is very special and is precisely the condition for $X$ to be a Kahler manifold.
+
+\begin{theorem}
+    The following are equivalent for a complex manifold $X$ with Hermitian metric $h$:
+    \begin{enumerate}
+        \item The Levi-Civita connection of the Riemannian metric associated to $h$ coincides with the Chern connection of $h$ on $TX$.
+        \item Parallel transport with respect to the Levi-Civita connection is complex linear.
+        \item Let the Hermitian metric be given by \begin{align*}
+            h & = \sum_{i,j} h_{ij} d z_i \otimes d \overline{z_j}
+        \end{align*} in local holomorphic coordinates $z_i$. Then the associated $(1,1)$-form \begin{align*}
+            \omega & = \frac{i}{2} \sum_{i,j} h_{ij} d z_i \wedge d \overline{z_j}
+        \end{align*} is closed.
+        \item For all $x$ there exist complex coordinates $z_i$ centered at $x$ so that at $x$, \begin{align*}
+            h_{ij} & = \delta_{ij} + O(|z|^2)
+        \end{align*} i.e. the first derivatives of $h_{ij}$ vanish at $x$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{remark}
+    In flat space $\C^n$ with standard coordinates $z_i = x_i + i y_i$, the standard Hermitian metric is given by \begin{align*}
+        h & = \sum_{i=1}^n d z_i \otimes d \overline{z_i} = \sum_{i=1}^n (d x_i \otimes d x_i + d y_i \otimes d y_i)
+    \end{align*} The associated $(1,1)$-form is \begin{align*}
+        \omega & = \frac{i}{2} \sum_{i=1}^n d z_i \wedge d \overline{z_i} = \sum_{i=1}^n d x_i \wedge d y_i
+    \end{align*} In particular, $\omega$ is real, nondegenerate, and closed so it is a symplectic form. 
+\end{remark}
+
+\begin{remark}[Sketch of proof of equivalences]
+    A strong consequence of (4) is that any coordinate independent identity involving the metric and its first derivatives which holds in flat space must hold on any Kahler manifold. One identity one sees immediately is that $d \omega = 0$ because it holds in flat space. Thus (4) implies (3). (3) implies (4) is an exercise in choosing coordinates. The equivalence of (1) and (2) is straightforward from the definitions. The equivalence of (1) and (3) is a computation in local coordinates.
+\end{remark}
+
+\begin{definition}
+    A complex manifold $X$ with Hermitian metric $h$ satisfying the equivalent conditions above is called a \textbf{Kahler manifold}. The associated $(1,1)$-form $\omega$ is called the \textbf{Kahler form} of the Kahler manifold.
+\end{definition}
+
+The formula relating the Kahler form to the metric is given by \begin{align*}
+    h(X,Y) & = -2i\omega(X, \overline{Y})
+\end{align*}
+
+\begin{theorem}
+    Every compact Riemann surface is a Kahler manifold.
+\end{theorem}
+
+\begin{proof}
+    Let $X$ be a compact Riemann surface and pick any Hermitian metric $h$ on $TX$. The resulting $(1,1)$-form $\omega$ is a real $2$-form on the $2$-dimensional manifold $X$, so it is automatically closed because there are no $3$-forms on a $2$-manifold. Therefore, $h$ is a Kahler metric on $X$.
+\end{proof}
+
+\subsection{Harmonic theory on Kahler manifolds}
+Recall that we have the decomposition of the de Rham differential \begin{align*}
+    d: \cE^{p,q}(X) & \to \cE^{p+1,q}(X) \oplus \cE^{p,q+1}(X)
+\end{align*} into its $(1,0)$ and $(0,1)$ components \begin{align*}
+    \partial & : \cE^{p,q}(X) \to \cE^{p+1,q}(X) \\
+    \bar{\partial} & : \cE^{p,q}(X) \to \cE^{p,q+1}(X)
+\end{align*} satisfying \begin{align*}
+    \partial^2 & = 0 \\
+    \bar{\partial}^2 & = 0 \\
+    \partial \bar{\partial} + \bar{\partial} \partial & = 0
+\end{align*} so that \begin{align*} 
+    d & = \partial + \bar{\partial}
+\end{align*} 
+
+On a compact Kahler manifold $X$, we have the following harmonic theory. There is a Hodge star operator \begin{align*}
+    *: \cE^{p,q}(X) & \to \cE^{n-q, n-p}(X)
+\end{align*} characterized on real forms $\phi$ by \begin{align*}
+    \overline{\phi} \wedge * \psi & = \langle \phi, \psi \rangle dV
+\end{align*} where $dV = \frac{\omega^n}{n!}$ is the volume form associated to the Kahler metric and $\langle \cdot, \cdot \rangle$ is the pointwise inner product on forms induced by the Kahler metric.
+
+In coordinates $x_i$ for which $\frac{\partial}{\partial x_i}$ is an orthonormal basis at a point, we have \begin{align*}
+    *(d x_{i_1} \wedge d x_{i_2} \wedge \cdots \wedge d x_{i_k}) & = d x_{j_1} \wedge d x_{j_2} \wedge \cdots \wedge d x_{j_{n-k}} \varepsilon
+\end{align*} where $\{ j_1, j_2, \ldots, j_{n-k} \}$ is the complement of $\{ i_1, i_2, \ldots, i_k \}$ in $\{ 1, 2, \ldots, n \}$ such that corresponding permutation has sign $\varepsilon$.
+
+Then we extend $*$ complex linearly to complex-valued forms. This induces the complex inner product \begin{align*}
+    \langle \phi, \psi \rangle_{L^2} &= \int_X \langle  \phi, \psi \rangle dV = \int_X \overline{\phi} \wedge * \psi
+\end{align*} on the space of complex-valued forms. We define the formal adjoints of $\partial$ and $\bar{\partial}$ with respect to this inner product: \begin{align*}
+    \partial^* & : \cE^{p+1,q}(X) \to \cE^{p,q}(X) \\
+    \bar{\partial}^* & : \cE^{p,q+1}(X) \to \cE^{p,q}(X)
+\end{align*} characterized by the adjunction 
+\begin{align*}
+    \langle \partial \phi, \psi \rangle_{L^2} & = \langle \phi, \partial^* \psi \rangle_{L^2} \\
+    \langle \bar{\partial} \phi, \psi \rangle_{L^2} & = \langle \phi, \bar{\partial}^* \psi \rangle_{L^2}
+\end{align*} for all compactly supported smooth forms $\phi, \psi$ of appropriate degrees. 
+
+\begin{proposition}
+Let $\bar\partial:\cE^{k}(X)\to\cE^{k+1}(X)$ be the Dolbeault operator on
+$k$–forms.  Its formal adjoint with respect to $\langle\cdot,\cdot\rangle_{L^2}$
+is
+\[
+\bar\partial^* \;=\; - *^{-1}\,\partial\,*.
+\]
+Similarly,
+\[
+\partial^* \;=\; - *^{-1}\,\bar\partial\,*.
+\]
+\end{proposition}
+
+\begin{proof}
+Let $\phi\in\cE^{k}(X)$ and $\psi\in\cE^{k+1}(X)$ have compact support.
+Then
+\[
+\langle\bar\partial\phi,\psi\rangle_{L^2}
+ = \int_X \overline{\bar\partial\phi}\wedge *\psi
+ = \int_X \partial\overline{\phi}\wedge *\psi,
+\]
+since complex conjugation interchanges $\partial$ and $\bar\partial$.
+
+By the Leibniz rule for $\partial$ on a $k$–form $\overline{\phi}$,
+\[
+\partial(\overline{\phi}\wedge *\psi)
+ = \partial\overline{\phi}\wedge *\psi
+   + (-1)^k\,\overline{\phi}\wedge\partial(*\psi).
+\]
+Integrating and using Stokes’ theorem (the boundary term vanishes because
+the forms are compactly supported), we obtain
+\[
+\int_X \partial\overline{\phi}\wedge *\psi
+ = (-1)^{k+1}\int_X \overline{\phi}\wedge\partial(*\psi).
+\]
+Hence
+\[
+\langle\bar\partial\phi,\psi\rangle_{L^2}
+ = (-1)^{k+1}\int_X \overline{\phi}\wedge\partial(*\psi).
+\]
+Insert $*^{-1}$:
+\[
+\partial(*\psi)
+ = *\bigl(*^{-1}\partial(*\psi)\bigr).
+\]
+Thus
+\[
+\langle\bar\partial\phi,\psi\rangle_{L^2}
+ = (-1)^{k+1}\int_X
+    \overline{\phi}\wedge *\bigl(*^{-1}\partial(*\psi)\bigr).
+\]
+
+By the definition of the $L^2$ inner product,
+\[
+\langle\phi,\eta\rangle_{L^2}
+ = \int_X \overline{\phi}\wedge *\eta
+\qquad\text{for any form }\eta,
+\]
+so comparing with the previous line we see that
+\[
+\bar\partial^*\psi
+ = (-1)^{k+1}\,*^{-1}\partial(*\psi)
+\quad\text{on $k+1$–forms }\psi.
+\]  
+\end{proof}
+
+\begin{remark}
+    Note that these are only formal adjoints since $d, \partial, \bar{\partial}$ are unbounded operators on the $L^2$-completion of the space of smooth forms. The adjunction only holds on the dense subspace of compactly supported smooth forms.
+\end{remark}
+\subsection{Hodge decomposition}
+\begin{definition}
+    The \textbf{Laplacians} associated to the differentials $d, \partial, \bar{\partial}$ are defined as follows:
+    \begin{align*}
+        \Delta & = d d^* + d^* d = (d + d^*)^2 \\
+        \Box & = \partial \partial^* + \partial^* \partial = (\partial + \partial^*)^2 \\
+        \overline{\Box} & = \bar{\partial} \bar{\partial}^* + \bar{\partial}^* \bar{\partial} = (\bar{\partial} + \bar{\partial}^*)^2 
+    \end{align*}
+\end{definition}
+
+On a general complex manifold with a Hermitian metric, these Laplacians are different. However, on a  Kahler manifold, they essentially coincide. 
+
+\begin{theorem}
+    On a Kahler manifold $X$, the Laplacians satisfy the relations \begin{align*}
+        \Delta & = 2 \Box = 2 \overline{\Box}
+        \end{align*} 
+\end{theorem}
+\begin{proof}
+    The identity is true in flat space and involves only the metric and its first derivatives.
+\end{proof}
+
+\begin{definition}[Harmonic forms]
+    We say that a form $\varphi \in \cE^{p,q}(X)$ is harmonic if it satisfies \begin{align*}
+        \Delta \varphi & = 0
+    \end{align*} The space of harmonic $(p,q)$-forms is denoted by $\cH^{p,q}(X)$. Similarly, we define the space of harmonic $r$-forms by \begin{align*}
+        \cH^r(X) & = \{ \varphi \in \cE^r(X) : \Delta \varphi = 0 \}
+    \end{align*}
+\end{definition}
+
+On a compact complex manifold, we have the de Rham cohomology groups $H^r(X, \C)$ whose classes are represented by closed $r$-forms with complex coefficients. We also have the Dolbeault cohomology groups $H^{p,q}(X)$ whose classes are represented by $\bar{\partial}$-closed $(p,q)$-forms. These groups are finite dimensional and are related by a spectral sequence. 
+
+However, if $\phi$ is a $d$-closed $r$-form, its $(p,q)$-components need not be $\bar{\partial}$-closed, and conversely if $\psi$ is a $\bar{\partial}$-closed $(p,q)$-form, it need not be $d$-closed. However, on a compact Kahler manifold, it turns out that every $d$-closed form $\phi$ is $d$-cohomologous to a form whose $(p,q)$-components are all $\bar{\partial}$-closed, and conversely every $\bar{\partial}$-closed form $\psi$ is $\bar{\partial}$-cohomologous to a form whose $r$-components are all $d$-closed. This leads to the Hodge decomposition theorem.
+
+\begin{theorem}[Hodge decomposition on K\"ahler manifolds]\label{thm:hodge}
+Let $X$ be a compact K\"ahler manifold. Then there is a
+direct sum decomposition
+\begin{equation}\label{eq:hodge-decomp}
+H^r(X,\C) \;=\; \bigoplus_{p+q=r} H^{p,q}(X),
+\end{equation}
+and, moreover,
+\begin{equation}\label{eq:conj}
+\overline{H^{p,q}(X)} \;=\; H^{q,p}(X).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+We shall show that
+\[
+\cH^r(X) \;=\; \bigoplus_{p+q=r} \cH^{p,q}(X),
+\]
+and then \eqref{eq:hodge-decomp} follows immediately from Hodge theory for de Rham cohomology \begin{align*}
+H^r(X,\C) & \cong \cH^r(X) \\
+[\varphi] & \longmapsto \text{the unique harmonic representative of } [\varphi]
+\end{align*}
+and Dolbeault cohomology \begin{align*}
+H^{p,q}(X) & \cong \cH^{p,q}(X) \\
+[\varphi] & \longmapsto \text{the unique harmonic representative of } [\varphi]
+\end{align*}
+
+Suppose that $\varphi\in\cH^r(X)$, so $\Delta\varphi=0$. On a K\"ahler
+manifold we have $2\bar\square = \Delta$ and hence
+$\bar\square\varphi=0$. Writing $\varphi$ as a sum of its bihomogeneous components,
+\[
+\varphi = \varphi^{r,0} + \cdots + \varphi^{0,r},
+\]
+we have
+\[
+\bar\square\varphi
+ = \bar\square\varphi^{r,0} + \cdots + \bar\square\varphi^{0,r}.
+\]
+Since $\bar\square$ preserves bidegree, we see that
+$\bar\square\varphi=0$ implies that
+\[
+\bar\square\varphi^{r,0}
+ = \cdots
+ = \bar\square\varphi^{0,r}
+ = 0.
+\]
+Therefore there is a mapping
+\[
+\tau:\cH^r(X)\longrightarrow \bigoplus_{p+q=r}\cH^{p,q}(X)
+\]
+given by
+\[
+\varphi \longmapsto (\varphi^{r,0},\dots,\varphi^{0,r}).
+\]
+The mapping is clearly injective, and moreover surjective, since if
+$\psi^{p,q}\in\cH^{p,q}(X)$ for $p+q=r$, then
+\[\varphi := \sum_{p+q=r} \psi^{p,q}
+\]satisfies $\Delta\varphi=2\bar\square\varphi=0$, so
+$\varphi\in\cH^r(X)$ and $\tau(\varphi)=(\psi^{r,0},\dots,\psi^{0,r})$.
+
+The isomorphism $\overline{H^{p,q}(X)} \cong H^{q,p}(X)$ follows immediately from the fact that
+$\bar\square$ is real, i.e. commutes with complex conjugation, and that complex conjugation is an
+isomorphism from $\cE^{p,q}(X)$ to $\cE^{q,p}(X)$, hence also from
+$\cH^{p,q}(X)$ to $\cH^{q,p}(X)$.
+\end{proof}
+
+\begin{remark}
+    The Hodge decomposition theorem can also be obtained via direct spectral sequence arguments using the degeneration at the $E_1$ page of the Hodge-de Rham spectral sequence on a Kahler manifold. This argument is worth mentioning because it allows one to obtain the Hodge decomposition theorem for special compact complex manifolds which are not known to be Kahler but for which the Hodge-de Rham spectral sequence degenerates at $E_1$. This remark applies to K3 surfaces whose Hodge decomposition was obtained before the proof that all K3 surfaces are Kahler manifolds.
+\end{remark}
+
+\begin{corollary} Let $X$ be a compact K\"ahler manifold. Then the Betti numbers $b_r = \dim H^r(X,\C)$ and Hodge numbers $h^{p,q} = \dim H^{p,q}(X)$ satisfy the relations
+    \begin{enumerate}
+        \item $b_r = \sum_{p+q=r} h^{p,q}$
+        \item $h^{p,q} = h^{q,p}$
+        \item $b_r$ is even when $r$ is odd.
+        \item $h^{1,0}$ is a topological invariant since $h^{1,0} = \frac{1}{2} b_1$.
+    \end{enumerate}
+\end{corollary}
+
+
+
 
 
 \end{document}
