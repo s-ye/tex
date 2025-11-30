@@ -29,13 +29,13 @@
 
 
 \begin{abstract}
-  Notes for a talk I'm giving on equivariant derived categories of coherent sheaves.
+  We recall the construction of GIT quotients, and then study derived categories of coherent sheaves on GIT quotients and their autoequivalences via variation of GIT. 
 \end{abstract}
 
 \tableofcontents
 
 
-\section{Generalities on GIT quotients}
+\section{GIT quotients}
 Let $X \subset \mathbb{P}^n$ be a projective variety, and let $\widetilde{X} \subset \mathbb{C}^{n+1}$ be the corresponding affine cone.
 Since $X$ is the space of lines in $\widetilde{X}$, it has a tautological line bundle
 \[
@@ -221,31 +221,15 @@ So we should change the linearization, from the trivial linearization to a nontr
   \]
 \end{example}
 
-\begin{remark}[Variation of affine GIT]
-  The different GIT quotients of an affine variety $X = \operatorname{Spec} R$ by a reductive group $G$ correspond to different choices of linearization of the trivial line bundle on $X$, i.e.~to different characters $\chi: G \to \mathbb{C}^*$. For each such character we define the GIT quotient to be
-  \[
-    X/\!/_{\chi} G := \operatorname{Proj} \bigoplus_{r\ge 0} R^{G,\chi^{\otimes r}},
-  \]
-  where
-  \[
-    R^{G,\chi^{\otimes r}} := \{f \in R \mid g\cdot f = \chi(g)^r f, \forall g\in G\}
-  \]
-  is the space of semi-invariant functions of weight $\chi^{\otimes r}$.
-\end{remark}
-
 \begin{remark}
   [Projective over affine GIT quotients] We have descibed the same recipe for constructing GIT quotients in the projective and affine cases. The most general situation is when we have a projective variety over an affine variety, i.e. a graded noetherian algebra
 \[
 R = \bigoplus_{m=0}^\infty R_m
 \]
-which is finitely generated as an algebra over $\C$.  
+which is finitely generated as an algebra over $\C$. 
 The variety $X = \Proj R$ is projective over the affine variety $\Spec R_0$, and comes equipped with an ample line bundle $\cL = \O_X(1)$.  
-Furthermore, the integral closure (or normalization) of $R$ is isomorphic to the ring
-\[
-R' = \bigoplus_{m=0}^\infty \Gamma(X, \cL^{\otimes m}).
-\]
 
-Let $G$ be a reductive algebraic group acting on $R$ by graded algebra automorphisms.  Then $G$ acts on $X$ and $\cL$ is a $G$-linearized ample line bundle.  We can form the GIT quotient
+Let $G$ be a reductive algebraic group acting on $R$ by graded algebra automorphisms (in particular the grading involves a choice of character). Then $G$ acts on $X$ and $\cL$ is a $G$-linearized ample line bundle. The invariant subring $R^G$ is again a graded noetherian algebra, finitely generated over $\C$, and we can form the GIT quotient
 \[
 X /\!/ G := \Proj(R^G)
 \]
@@ -265,8 +249,7 @@ i.e.~it factors through the set-theoretic quotient $X^{ss}/G$. But it may contra
 than just $G$-orbits, so we need another definition.
 
 \begin{definition}[Stable points]
-  A semistable point $x$ is \textbf{stable} if and only if
-  $\bigoplus_r H^0(X,\mathcal{O}(r))^G$ separates orbits near $x$ and the stabiliser of $x$ is finite.
+  A semistable point $x$ is \textbf{stable} if and only if its $G$-orbit is closed in $X^{ss}$ and its stabilizer group $\operatorname{Stab}_G(x)$ is finite.
 \end{definition}
 
 We now come to the main example which we will study throughout these notes, also known as the standard flop.
@@ -297,13 +280,21 @@ whose quotient is the total space of $\mathcal{O}(-1)^{\oplus 2}\to\mathbb{P}^1_
 whose quotient is the total space of $\mathcal{O}(-1)^{\oplus 2}\to\mathbb{P}^1_{[y_1:y_2]}$.
 \end{example}
 
+In the above example, we have two different GIT quotients $X_+$ and $X_-$ corresponding to the two chambers $m>0$ and $m<0$. As we vary the character $\chi_m$ from $m>0$ to $m<0$, we cross a wall at $m=0$, where the GIT quotient is just a point. The two GIT quotients $X_+$ and $X_-$ are related by a birational transformation called a flop. In general, the following theorem captures the relationship between different GIT quotients as we vary the linearization. 
+
+\begin{theorem}
+  Let $\cL$ be a fixed ample line bundle on a projective over affine variety $X$ with an action of a reductive group $G$. The real character space $\Hom(G,\mathbb{C}^*)\otimes_\mathbb{Z}\mathbb{R}$ is divided into a finite number of rational polyhedral chambers by walls. As we vary the linearization of the $G$-action on $\cL$ by characters in different chambers, the GIT quotients are all isomorphic. As we cross a wall, the GIT quotients on either side are related by a birational transformation.
+\end{theorem}
+
+In fact, it is also true that there are only finitely many possible GIT quotients as we vary the line bundle $\cL$ itself, not just the linearization. 
+
 \section{Autoequivalences from VGIT}
-We show that we can construct $\mathbb{Z}$ many derived equivalences between $X_+$ and $X_-$, and that the resulting autoequivalences are spherical twists. Segal's paper upgrades this equivalence to an equivalence of $B$-brane dg-categories. In particular, he shows that there are $\mathbb{Z}$ many quasi-equivalences between the categories of B-branes on $(X_+, W)$ and $(X_-, W)$. When $W=0$, the dg-category of B-branes is just the dg-category of perfect complexes, whose homotopy category is the bounded derived category of coherent sheaves. So Segal's result recovers the derived equivalences we construct here.
+We show that we can construct $\mathbb{Z}$ many derived equivalences between $X_+$ and $X_-$, and that the resulting autoequivalences are spherical twists. Segal \cite{Segal2011} upgrades this equivalence to an equivalence of $B$-brane dg-categories. In particular, he shows that there are $\mathbb{Z}$ many quasi-equivalences between the categories of B-branes on $(X_+, W)$ and $(X_-, W)$. When $W=0$, the dg-category of B-branes is just the dg-category of perfect complexes, whose homotopy category is the bounded derived category of coherent sheaves. So Segal's result recovers the derived equivalences we construct here.
 
 \subsection{Connection to mirror symmetry}
 Homological mirror symmetry predicts, in certain cases, that the bounded derived category of coherent sheaves on an algebraic variety should admit twist autoequivalences corresponding to a spherical object. 
 
-In particular, Seidel and Thomas consider symplectic automorphisms of $M$ induce selfequivalences of the derived category of coherent sheaves on its mirror partner. Roughly saying, twist functors and generalized Dehn twists correspond to each other under mirror symmetry, and Kontsevich's homological mirror symmetry conjecture suggests that the derived category of coherent sheaves on a Calabi-Yau variety should admit twist autoequivalences corresponding to spherical objects.
+In particular, Seidel and Thomas \cite{SeidelThomas2001} consider symplectic automorphisms of $M$ induce selfequivalences of the derived category of coherent sheaves on its mirror partner. Roughly saying, twist functors and generalized Dehn twists correspond to each other under mirror symmetry, and Kontsevich's homological mirror symmetry conjecture suggests that the derived category of coherent sheaves on a Calabi-Yau variety should admit twist autoequivalences corresponding to spherical objects.
 
 There are techniques for studying the derived category of a geometric invariant theory (GIT)
 quotient which are useful for the construction of autoequivalences, and there are general connections between the theory of spherical functors and the theory of
@@ -412,7 +403,7 @@ perfect complex.  Also, the definition of the morphism chain complexes
 in \(\Perf(X)\) adapts easily, as we shall see.
 
 \begin{definition}\label{def:LGmodel}
-A \textbf{Landau--Ginzburg \(B\)-model} is the following data:
+A \textbf{Landau-Ginzburg \(B\)-model} is the following data:
 \begin{itemize}
   \item A smooth \(n\)-dimensional scheme (or stack) \(X\) over \(\C\).
   \item A choice of function \(W \in \O_X\) (the \textbf{superpotential}).
@@ -566,7 +557,7 @@ d^1 d^0 = W\cdot\id_{P^0},
 d^0 d^1 = W\cdot\id_{P^1}.
 \]
 That is, $P^0 \xrightarrow{d^0} P^1 \xrightarrow{d^1} P^0$ is a
-$\Z/2$-periodic complex whose ``differential'' squares to multiplication
+$\Z/2$-periodic complex whose "differential" squares to multiplication
 by $W$.  This is exactly a \emph{matrix factorization} of $W$ over $R$.
 \end{example}
 
@@ -748,6 +739,26 @@ via magic windows are shadows of honest symmetries at the dg / \(B\)-brane level
 \end{remark}
 
 \subsection{Set-up}
+
+Examples of flops may be obtained by variation of GIT.  Concretely, suppose $X_+$ and $X_-$ are a pair of varieties related by a flop and that both arise as GIT quotients of a larger space $M$ by a reductive group $G$.  Put $\mathcal{X}=[M/G]$ for the quotient stack; for suitable linearizations we have
+\[
+X_\pm \;=\; [M^{ss}(\chi_\pm)/G] \;\subset\; \mathcal{X},
+\]
+so $X_\pm$ are open substacks of $\mathcal{X}$.  There are exact restriction functors
+\[
+\iota_\pm^*: D^b(\mathcal{X}) \longrightarrow D^b(X_\pm)
+\]
+coming from these open immersions.
+
+One can often construct an equivalence $D^b(X_+)\simeq D^b(X_-)$ by finding a single triangulated subcategory $\mathcal{W}\subset D^b(\mathcal{X})$ which restricts isomorphically to both sides.  Such a subcategory is called a "window": the functors $\iota_\pm^*$ induce equivalences
+\[
+\mathcal{W} \xrightarrow{\ \sim\ } D^b(X_+),\qquad
+\mathcal{W} \xrightarrow{\ \sim\ } D^b(X_-),
+\]
+and composing these gives the desired derived equivalence $D^b(X_+)\xrightarrow{\ \sim\ } D^b(X_-)$.
+
+This "grade restriction window" technique originated in the physics work of Herbst--Hori--Page and was adapted to mathematical LG/GIT contexts by Segal.  Although those papers primarily treat Landau--Ginzburg models (where the category is modified by a superpotential), the window formalism is equally useful for ordinary derived categories and gives a uniform method for producing flop equivalences.
+
 Let $V = \mathbb{C}^4$ with coordinates $x_1, x_2, y_1, y_2$, and let $\mathbb{C}^*$ act on $V$ with weight $1$ on each $x_i$ and weight $-1$ on each $y_i$. There are two possible GIT quotients $X_{+}$ and $X_{-}$, depending on whether we choose a positive or negative character of $\mathbb{C}^*$. Both are isomorphic to the total space of the bundle $\mathcal{O}(-1)^{\oplus 2}$ over $\mathbb{P}^1$. This is the standard "three-fold flop" situation.
 
 Both are open substacks of the Artin quotient stack
@@ -802,25 +813,19 @@ $\mathcal{O}(t)$ and $\mathcal{O}(t+1)$. This is the smallest thick triangulated
 \begin{proof}
 The restriction functors
 \[
-  \iota_\pm^*:\ D^b(\mathcal X)\longrightarrow D^b(X^\pm)
+  \iota_\pm^*:\ D^b(\mathcal X)\longrightarrow D^b(X_\pm)
 \]
 are exact and preserve shifts and cones. To prove that the restrictions
 \[
-  \iota_\pm^*:\ \mathcal{G}_t \xrightarrow{\ \sim\ } D^b(X^\pm)
+  \iota_\pm^*:\ \mathcal{G}_t \xrightarrow{\ \sim\ } D^b(X_\pm)
 \]
 are equivalences, we need:
 \begin{enumerate}
   \item Fully faithfulness: On $\mathcal{G}_t$, the restriction maps induce isomorphisms
-        \[\mathrm{Hom}_{D^b(\mathcal{X})}(E,F) \cong \mathrm{Hom}_{D^b(X^\pm)}(\iota_\pm^*E, \iota_\pm^*F)\]
-        Since $\mathcal{G}_t$ is generated by $\{\mathcal{O}(t), \mathcal{O}(t+1)\}$, it suffices to check this on these generators.
-        Concretely, we need to compute $\mathrm{Ext}^\bullet_{\mathcal{X}}(\mathcal{O}(t+k), \mathcal{O}(t+l))$ for $k,l\in\{0,1\}$,
-        and show it matches the Ext groups in $X^\pm$.
-
-  \item Essential surjectivity: Every object in $D^b(X^\pm)$ should be built out of $\iota_\pm^*\mathcal{G}_t$.
-        In other words, the images of $\mathcal{O}(t), \mathcal{O}(t+1)$ generate $D^b(X^\pm)$.
-\end{enumerate}
-
-
+        \[\mathrm{Hom}_{D^b(\mathcal{X})}(E,F) \cong \mathrm{Hom}_{D^b(X_\pm)}(\iota_\pm^*E, \iota_\pm^*F)\]
+        Since $\mathcal{G}_t$ is generated by $\{\mathcal{O}(t), \mathcal{O}(t+1)\}$, it suffices to check this on these generators. 
+        
+        Let $\cO_{X_\pm}(k) = \iota_\pm^*\cO(k)$ denote the restriction of the line bundle $\cO_{\cX}(k)$ to $X_\pm$.
 To see that these functors are fully-faithful it suffices to check what they do to the maps
 between the generating line-bundles, so we just need to check that
 \[
@@ -830,14 +835,33 @@ between the generating line-bundles, so we just need to check that
 for $k,l \in [0,1]$.
 For line bundles, $\operatorname{Ext}^\bullet(\mathcal O(a),\mathcal O(b)) \cong H^\bullet(\,\cdot\,,\ \mathcal O(b-a))$. Thus we need to verify that $H^\bullet_{\mathcal{X}}(\mathcal{O}(i)) = H^\bullet_{X_\pm}(\mathcal{O}(i))$ for $i \in [-1,1]$.
 
-$\mathcal{X}$ is an affine quotient stack (with $V$ affine), so for any equivariant coherent sheaf, higher cohomology on $\mathcal{X}$ vanishes; taking global sections means "equivariant global sections" on $V$. Hence $H^p(\mathcal{X},\mathcal{O}(i))=(\mathcal{O}_V)_i$ for $p=0$ and $0$ for $p>0$, where $(\mathcal{O}_V)_i$ is the weight-$i$ subspace of the polynomial ring $\mathcal{O}_V=\mathbb{C}[V]$.
+$\mathcal{X}$ is presented as an affine quotient stack (with $V$ affine), so for any equivariant coherent sheaf, higher cohomology on $\mathcal{X}$ vanishes. Thus \begin{align*}
+  H^p(\mathcal{X},\mathcal{O}(i)) &=
+  \begin{cases}
+    (\mathcal{O}_V)_i & p=0 \\
+    0 & p>0
+  \end{cases}
+\end{align*}
+On the other side, we do the computation for $X^+$. Let projection $\pi:X_+ \to\mathbb{P}^1$. Recall $X_+$ is the total space of the bundle $E = \mathcal{O}(-1)^{\oplus 2}$ over $\mathbb{P}^1_x$. Then
 
-To compute $H^\bullet(X_\pm,\mathcal{O}(i))$, we use the projection $\pi:X_\pm\to\mathbb{P}^1$ and the fact that $X_\pm$ is the total space of the bundle $\mathcal{O}(-1)^{\oplus 2}$ over $\mathbb{P}^1$. We do the computation for $X^+$; the case of $X^-$ is similar. Let $\pi:X^+\to \mathbb{P}^1$ be the projection and $E=\mathcal{O}(-1)^{\oplus 2}$. Then
+ Then
 \[
   \pi_*\mathcal{O}_{X^+}\cong\operatorname{Sym}^\bullet(E^\vee)
   =\operatorname{Sym}^\bullet(\mathcal{O}(1)^{\oplus 2})
-  \cong\bigoplus_{m\ge0}\operatorname{Sym}^m(\mathcal{O}(1)^{\oplus 2})
-  \cong\bigoplus_{m\ge0}\mathcal{O}(m)^{\oplus (m+1)}.
+  \cong\bigoplus_{m\ge0}\operatorname{Sym}^m(\mathcal{O}(1)^{\oplus 2}) \cong \bigoplus_{m\ge0}\mathcal{O}(m)^{\oplus(m+1)}
+\]
+has global sections $\bigoplus_{m\ge0} \Span\{x_1^a x_2^{m-a}\}^{\oplus(m+1)}$, one for each monomial in $y_1,y_2$ of degree $m$.
+
+Write $\cO_{X^+}(k) = i^*\cO_{\mathcal{X}}(k)$. We can identify \[
+i^{*}\cO_V(k)\cong \pi^{*}\cO_{\P^1}(k) \cong \cO_{X^+} \otimes \pi^{*}\cO_{\P^1}(k).
+\]
+
+By the projection formula and affineness of $\pi$ \[
+  H^p(X^+,\mathcal{O}_{X_+}(k))
+  \cong
+  H^p\Big(\mathbb{P}^1,\ \pi_*\mathcal{O}_{X^+}\otimes\mathcal{O}(k)\Big)
+  \cong
+  \bigoplus_{m\ge0} H^p(\mathbb{P}^1,\ \mathcal{O}(k+m))^{\oplus (m+1)}
 \]
 
 \begin{remark}
@@ -848,49 +872,28 @@ To compute $H^\bullet(X_\pm,\mathcal{O}(i))$, we use the projection $\pi:X_\pm\t
   The last isomorphism above can be seen from the general fact that if $L$ is a line bundle and $V$ is a vector space, then $\operatorname{Sym}^m(L\otimes V) \cong L^{\otimes m}\otimes \operatorname{Sym}^m(V)$. Locally trivialize $L$. Then $\operatorname{Sym}^m(L\otimes V)$ is generated by monomials $(\ell\otimes v_1)\cdots (\ell\otimes v_m) = \ell^m \otimes (v_1\cdots v_m)$, which shows the factorization.
 \end{remark}
 
-By the projection formula and affineness of $\pi$ \[
-  H^p(X^+,\mathcal{O}(k))
-  \cong
-  H^p\Big(\mathbb{P}^1,\ \pi_*\mathcal{O}_{X^+}\otimes\mathcal{O}(k)\Big)
-  \cong
-  \bigoplus_{m\ge0} H^p(\mathbb{P}^1,\ \mathcal{O}(k+m))^{\oplus (m+1)}.
-\]
 
 \begin{remark}
   Recall that for a morphism $\pi:X\to B$ and a sheaf $F$ on $X$, there is a spectral sequence (Leray) \[E_2^{p,q} = H^p(B, R^q\pi_*F) \Longrightarrow H^{p+q}(X,F)\]
 
   Since $\pi$ is affine, $R^p\pi_*=0$ for $p>0$.
-  So in the Leray spectral sequence, all rows with $q>0$ are zero. That means already on the $E_2$-page, only the bottom row q=0 survives. No differentials are possible, so $E_2=E_\infty$.
+  So in the Leray spectral sequence, all rows with $q>0$ are zero. That means already on the $E_2$-page, only the bottom row $q=0$ survives. No differentials are possible, so $E_2=E_\infty$.
 Thus
   \[H^p(X,F) \cong H^p(B,\pi_*F)\]
 
   Therefore we need to compute $\pi_*\mathcal{O}_{X^+} \otimes \mathcal{O}(k)$. The projection formula says: for any quasi-coherent sheaf $F$ on $X$ and any sheaf $G$ on $B$, $\pi_*(F\otimes \pi^*G) \cong \pi_*F \otimes G$. Take $F=\mathcal{O}_X$ and $G=\mathcal{O}_B(k)$. Then: $\pi_*(\mathcal{O}_X\otimes \pi^*\mathcal{O}_B(k)) \cong \pi_*\mathcal{O}_X \otimes \mathcal{O}_B(k)$. But $\mathcal{O}_X\otimes \pi^*\mathcal{O}_B(k)$ is exactly $\mathcal{O}_X(k)$ so \[\pi_*\mathcal{O}_X(k) \cong \pi_*\mathcal{O}_X \otimes \mathcal{O}_B(k)\]
 \end{remark}
 
-Now use the standard $\mathbb{P}^1$ cohomology:
-\[
-  H^0(\mathbb{P}^1,\mathcal{O}(n))=\begin{cases}\mathbb{C}^{\,n+1}& n\ge0\\ 0& n<0\end{cases},\qquad
-  H^1(\mathbb{P}^1,\mathcal{O}(n))=\begin{cases}0& n\ge-1\\ \mathbb{C}^{\,(-n-1)}& n\le-2\end{cases}.
-\]
 
-So for $p=0$, we get that \begin{align*}
-  H^0(X^+,\mathcal O(k)) &\;\cong\;
-\bigoplus_{m\ge0} H^0(\mathbb P^1,\mathcal O(k+m))^{\oplus(m+1)} \\
-&\;\cong\; \Sym^{k+m}(\mathbb C^2_{x_1,x_2}) \otimes \Sym^m(\mathbb C^2_{y_1,y_2}) \\
-\end{align*} which is exactly the weight-$k$ part of $\mathcal O_V=\mathbb C[x_1,x_2,y_1,y_2]$.
+When $p=0$, this has global sections \begin{align*}
+\Sym^{k+m}(\mathbb C^2_{x_1,x_2}) \otimes \Sym^m(\mathbb C^2_{y_1,y_2})
+\end{align*}
+which is exactly the degree $k$ piece of $\mathcal{O}_V$. When $p>0$, this is zero for $k=-1,0,1$.
 
-For $p=1$, we have \[H^1(X^+,\mathcal O(k))\cong \bigoplus_{m\ge0} H^1(\mathbb P^1,\mathcal O(k+m))^{\oplus(m+1)}\]
- On $\mathbb P^1$, $H^1(\mathcal O(n))=0$ for $n\ge -1$. So if $k\ge -1$ (the window for the flop), then $k+m\ge -1$ for all $m\ge0$, hence $H^1(X^+,\mathcal O(k))=0$. This matches the stack, where all higher $H^p$ vanish because $[V/\mathbb C^*]$ is (relatively) affine. This proves fully faithfulness of $\iota_+^*$ on the window.
-\begin{remark}
-Note that if $k\leq -2$, then at least the $m=0$ term contributes $H^1(\mathbb{P}^1,\mathcal{O}(k))\neq 0$. Here $H^1$ on $X^+$ is nonzero, while on the stack it is zero - this is exactly where agreement fails outside the window.
-\end{remark}
+For $p=1$, recall $k \in {-1,0,1}$ and $m\ge0$, so $k+m\ge -1$. Thus $H^1(\mathbb{P}^1,\ \mathcal{O}(k+m))=0$. This agrees with the left hand side. Note that if the size of the window is bigger, then we would pick up some $H^1$ terms.
 
 
-To see that they are essentially surjective we need to know that the two given line bundles generate $D^b(X_\pm)$. That is, every object of $D^b(X^\pm)$ should be quasi-isomorphic to a complex built out of $\iota_\pm^*\mathcal{O}(t)$ and $\iota_\pm^*\mathcal{O}(t+1)$. 
-\end{proof}
-
-\begin{remark}
-  Essential surjectivity follows from a general theorem which says that on quasi-projective varieties, an ample line bundle and its twists generate the derived category. The intuition behind this statement is Serre's theorem which says that for any coherent sheaf $\mathcal{F}$, $\mathcal{F}(n)$ is globally generated for $n\gg 0$. 
+  \item Essential surjectivity: we need to know that the two given line bundles generate $D^b(X_\pm)$. That is, every object of $D^b(X^\pm)$ should be quasi-isomorphic to a complex built out of $\iota_\pm^*\mathcal{O}(t)$ and $\iota_\pm^*\mathcal{O}(t+1)$. Essential surjectivity follows from a general theorem which says that on quasi-projective varieties, an ample line bundle and its twists generate the derived category. The intuition behind this statement is Serre's theorem which says that for any coherent sheaf $\mathcal{F}$, $\mathcal{F}(n)$ is globally generated for $n\gg 0$. 
 
   Pick an ample line bundle $L$ on $X$. Serre vanishing gives, for $m\gg0$ that $H^i(X, F\otimes L^{\otimes m})=0$ for all $i>0$ and any coherent $F$, and $F\otimes L^{\otimes m}$ is globally generated. For $m$ large, the evaluation map is surjective:
   \[
@@ -922,9 +925,9 @@ D^b(\mathbb{P}^1) = \langle \mathcal{O}_{\mathbb{P}^1}(t), \mathcal{O}_{\mathbb{
 That is, any bounded complex of coherent sheaves on $\mathbb{P}^1$ can be built out of just these two line bundles by taking cones, shifts, and summands. Note that $p^*\mathcal{O}_{\mathbb{P}^1}(t) = \mathcal{O}_{X_+}(t)$. Given $F \in D^b(\mathrm{Coh}\,X_+)$, you can write $p_*F \in D^b(\mathrm{Coh}\,\mathbb{P}^1)$ as a complex built from $\mathcal{O}_{\mathbb{P}^1}(t)$ and $\mathcal{O}_{\mathbb{P}^1}(t+1)$ by Beilinson. Applying $p^*$ to that construction gives you a complex built from their pullbacks $\mathcal{O}_{X_+}(t)$ and $\mathcal{O}_{X_+}(t+1)$. Hence
 \[
 D^b(X_+) = \langle \mathcal{O}_{X_+}(t),\; \mathcal{O}_{X_+}(t+1) \rangle.
-\]
-\end{remark}
-
+\] \qedhere
+\end{enumerate}
+\end{proof}
 
 
 So for any $t\in\mathbb{Z}$ we have a derived equivalence
@@ -937,7 +940,6 @@ passing through $\mathcal{G}_t$. Composing these, we get auto-equivalences
 \]
 To see what these do, we need to check them on the generating set of line-bundles
 $\{\mathcal{O}(t), \mathcal{O}(t+1)\}$. 
-\begin{remark}
   $\Phi_t$ identifies $D^b(X_+)$ and $D^b(X_-)$ through the common window $\mathcal G_t$. Thus:
   \[
   \Phi_t(\mathcal{O}(t)) = \mathcal{O}(t)_{X_-}, \qquad 
@@ -957,46 +959,43 @@ Restricting the same sequence to $X^-$, the resolution becomes exact at the end 
 \[
   \mathcal{O}_{X^-}(k) \simeq \big[ \mathcal{O}_{X^-}(k+2) \xrightarrow{(y_2,-y_1)} \mathcal{O}_{X^-}(k+1)^{\oplus 2} \big]
 \] 
-\end{remark}
-
-Thus we have shown that \begin{align*}
-  \Phi_{t+1}^{-1}\Phi_t(\mathcal{O}(t))
-  &\simeq \Phi_{t+1}^{-1}(\mathcal{O}(t)_{X_-}) \\
-  &\simeq \Phi_{t+1}^{-1}\Big(\big[\mathcal{O}(t+2)_{X_-} \xrightarrow{(y_2,-y_1)} \mathcal{O}(t+1)_{X_-}^{\oplus 2}\big]\Big) \\
-  &\simeq \big[\mathcal{O}(t+2) \xrightarrow{(y_2,-y_1)} \mathcal{O}(t+1)^{\oplus 2}\big], \\
-  \Phi_{t+1}^{-1}\Phi_t(\mathcal{O}(t+1))
-  &\simeq \Phi_{t+1}^{-1}(\mathcal{O}(t+1)_{X_-}) \\
-  &\simeq \mathcal{O}(t+1).
+Thus we have shown that 
+\begin{align*}
+  \Phi_{t+1}^{-1}\Phi_t(\mathcal{O}_{X_+}(t))
+  &\simeq \Phi_{t+1}^{-1}(\mathcal{O}_{X_-}(t)) \\
+  &\simeq \Phi_{t+1}^{-1}\Big(\big[\mathcal{O}_{X_-}(t+2) \xrightarrow{(y_2,-y_1)} \mathcal{O}_{X_-}(t+1)^{\oplus 2}\big]\Big) \\
+  &\simeq \big[\mathcal{O}_{X_+}(t+2) \xrightarrow{(y_2,-y_1)} \mathcal{O}_{X_+}(t+1)^{\oplus 2}\big], \\
+  \Phi_{t+1}^{-1}\Phi_t(\mathcal{O}_{X_+}(t+1))
+  &\simeq \Phi_{t+1}^{-1}(\mathcal{O}_{X_-}(t+1)) \\
+  &\simeq \mathcal{O}_{X_+}(t+1).
 \end{align*}
-
+This autoequivalence $\Phi_{t+1}^{-1}\Phi_t$ is an example of a spherical twist.
 This autoequivalence $\Phi_{t+1}^{-1}\Phi_t$ is an example of a spherical twist.
 \begin{definition}
-  A \textbf{spherical twist} is an autoequivalence discovered by \cite{seidel-thomas} associated to any
+  A \textbf{spherical twist} is an autoequivalence discovered by \cite{SeidelThomas2000} associated to any
 spherical object in the derived category, i.e.\ an object $S$ such that
 \[
   \operatorname{Ext}(S,S) = \mathbb{C} \oplus \mathbb{C}[-n]
 \]
 for some $n$ (i.e.\ the homology of the $n$-sphere). It sends any object $\mathcal{E}$ to the cone on the evaluation map
 \[
-  \big[ \operatorname{RHom}(S,\mathcal{E}) \otimes S \;\longrightarrow\; \mathcal{E} \big].
+  \Cone\big(\operatorname{RHom}(S,\mathcal{E}) \otimes S \;\longrightarrow\; \mathcal{E} \big)
 \]
 The inverse twist sends $\mathcal{E}$ to the cone on the dual evaluation map
 \[
-  \big[ \mathcal{E} \;\longrightarrow\; \operatorname{RHom}(\mathcal{E},S)^\vee \otimes S \big].
+  \Cone\big( \mathcal{E} \;\longrightarrow\; \operatorname{RHom}(\mathcal{E},S)^\vee \otimes S \big)
 \]
 \end{definition}
 
 
 
 \begin{claim}
-The object $\mathcal{O}_{\mathbb{P}^1_{x_1:x_2}}(t) \simeq \iota_+K_{-}(t)$ is spherical for the derived category $D^b(X_+)$, and the inverse twist around it sends $\mathcal{O}(t+1)$ to itself and $\mathcal{O}(t)$ to the cone
+The object $\mathcal{O}_{\mathbb{P}^1_{x_1:x_2}}(t)$ is spherical for the derived category $D^b(X_+)$, and the inverse twist around it sends $\mathcal{O}(t+1)$ to itself and $\mathcal{O}(t)$ to the cone of the map
 \[
-  \big[\mathcal{O}(t) \longrightarrow \iota_+K_{-}(t)\big]
-  \simeq \big[\mathcal{O}(t+2) \xrightarrow{(-y_2,y_1)} \mathcal{O}(t+1)^{\oplus 2}\big],
+\Cone\big(\mathcal{O}(t+2) \xrightarrow{(-y_2,y_1)} \mathcal{O}(t+1)^{\oplus 2}\big),
 \]
 which agrees with $\Phi_{t+1}^{-1}\Phi_t$. 
 \end{claim}
-
 
 
 \begin{remark}
@@ -1069,11 +1068,12 @@ If \(R\!\Hom(E,S)=0\), the cone of the zero map is just $E$ itself. Hence \[T_S^
 \end{remark}
 
 \begin{remark}[Action on \(\mathcal{O}(t)\)]
-Let
-\[
-A \;:=\; \big[\;\mathcal{O}(t+2)\xrightarrow{(y_2,-y_1)}\mathcal{O}(t+1)^{\oplus2}\;\big]
-\]
-in degrees $-1\to 0$. By the Koszul short exact sequence
+Let 
+\begin{align*}
+A &= \Cone\big(\mathcal{O}(t+2)\xrightarrow{(y_2,-y_1)}\mathcal{O}(t+1)^{\oplus2}\big) \\
+&=\Big[\mathcal{O}(t+2)\xrightarrow{(y_2,-y_1)}\mathcal{O}(t+1)^{\oplus2}\Big]
+\end{align*}
+be the two-term complex supported in degrees $-1$ and $0$. By the Koszul short exact sequence
 \[
 0\to \mathcal{O}(t+2)\xrightarrow{(y_2,-y_1)}\mathcal{O}(t+1)^{\oplus2}\twoheadrightarrow \mathcal{I}_\Sigma(t)\to 0,
 \]
@@ -1120,20 +1120,1202 @@ T^{-1}_{S}(\mathcal{O}(t))
 
 To complete the proof of the claim we would just need to check that the two functors also agree on the Hom-sets between $\mathcal{O}(t)$ and $\mathcal{O}(t+1)$.
 
-Now instead let $V = \mathbb{C}^{p+q}$ with co-ordinates $x_1,\ldots,x_p, y_1,\ldots,y_q$.
-Let $\mathbb{C}^*$ act linearly on $V$ with positive weights on each $x_i$ and negative weights
-on each $y_i$. The two GIT quotients $X_+$ and $X_-$ are both the total spaces of orbi-vector
-bundles over weighted projective spaces.
 
-We must assume the Calabi-Yau condition that $\mathbb{C}^*$ acts through $SL(V)$. Let $d$ be the
-sum of the positive weights, so the sum of the negative weights is $-d$. The above argument goes
-through word-for-word, where now
+\section{Windows in general}
+The above work by Segal formally introduced grade restriction windows to the mathematics literature and showed that window shift
+equivalences are given by spherical functors in the context of gauged Landau-Ginzburg
+models. In the second work by Segal and Donovan, the authors study window shift autoequivalences associated to Grassmannian flops, using representation theory of $\GL(n)$ to compute with homogeneous bundles. Below we follow a more general treatment by Halpern-Leistner and Shipman \cite{HalpernLeistnerShipman2016}  In particular, this discussion builds upon the analysis by Segal which was only carried out for a linear action of $\mathbb{G}_m$, and the window was identified in an ad-hoc way. The main contribution of this paper is showing that the splitting can be globalized
+and applies to arbitrary $X/G$ as a categorification of Kirwan surjectivity, and that the window categories arise naturally via the semiorthogonal decompositions.
+
+\subsection{Mutations and spherical twists}
+
+Recall that if $B$ is an object in a dg-category, then we can define the twist functor
+\begin{align*}
+T_B : \mathcal C &\longrightarrow \mathcal C \\
+T_B(A) &:= \mathrm{Cone}\big( \mathrm{RHom}_{\mathcal C}(B,A) \otimes B \longrightarrow A \big)
+\end{align*}
+If $B$ is a spherical object, then $T_B$ is by definition the spherical twist autoequivalence
+defined by $B$. It was noticed  that if $B$ were instead an exceptional object, then
+$T_B$ is the formula for the left mutation equivalence ${}^\perp B \to B^\perp$ coming from a pair of
+semiorthogonal decompositions $\langle B^\perp, B \rangle = \langle B, {}^\perp B \rangle$.
+If $\mathcal{C}$ is a pretriangulated dg-category, then the braid group on $n$ strands acts by left and right mutation on the set of length-$n$ semiorthogonal decompositions
 \[
-  \mathcal{G}_t = \langle \mathcal{O}(t), \ldots, \mathcal{O}(t+d-1)\rangle.
+  \mathcal{C} \;=\; \langle \mathcal{A}_1,\dots,\mathcal{A}_n\rangle,
+\]
+with each $\mathcal{A}_i$ admissible.  
+
+Mutating by a braid gives equivalences
+\[
+  \mathcal{A}_i \;\xrightarrow{\;\sim\;}\; \mathcal{A}_{\sigma(i)},
+\]
+where $\sigma$ is the permutation of end points induced by the braid, and correspondingly
+\[
+  \langle \mathcal{A}_1,\dots,\mathcal{A}_n\rangle
+  \longmapsto
+  \langle \mathcal{A}_{\sigma(1)},\dots,\mathcal{A}_{\sigma(n)}\rangle.
 \]
 
+In particular, if a given semiorthogonal factor $\mathcal{A}_k$ is unchanged by a mutation (i.e.\ $\mathcal{A}_k=\mathcal{A}_{\sigma(k)}$), this mutation produces an autoequivalence of $\mathcal{A}_k$.  The left and right mutation functors satisfy the braid relations, for example
+\[
+  R_iR_{i+1}R_i \cong R_{i+1}R_iR_{i+1},
+\]
+so the assignment of mutations defines a genuine braid group action on the collection of admissible decompositions.
+
+
+\begin{theorem}[\cite{HalpernLeistnerShipman2016}]
+If $\mathcal C$ is a pretriangulated dg category admitting a semiorthogonal decomposition
+\[
+\mathcal C = \langle \mathcal A, \mathcal G\rangle
+\]
+which is fixed by the braid action acting by mutation, then the autoequivalence of $\mathcal G$ induced by mutation is the
+twist $T_S$ corresponding to a spherical functor
+$S : \mathcal A \to \mathcal G$.
+Conversely, if $S : \mathcal A \to \mathcal B$ is a spherical functor,
+then there is a larger category $\mathcal C$ admitting a
+semiorthogonal decomposition fixed by this braid which recovers $S$ and
+$T_S$ \textup{(Theorem~3.15)}.
+\end{theorem}
+
+
+In the context of a balanced GIT wall crossing, the category
+$\mathcal C$ arises naturally as a subcategory of the equivariant
+category $D^b(X/G)$, defined in terms of "grade restriction rules"
+\textup{(Section~2)}.  The resulting autoequivalence agrees with the
+window shift $\Phi_w$ \textup{(Proposition~3.4)} and corresponds to a
+spherical functor
+\[
+f_w : D^b(Z/L)_w \longrightarrow D^b(X^{ss}/G),
+\]
+where $Z/L$ is the "critical locus" of the VGIT, which is unstable in
+both quotients \textup{(Section~3)}.
+
+\subsection{Derived Kirwan surjectivity}
+In this section we fix our notation and recall the theory of derived
+Kirwan surjectivity developed in \cite{HalpernLeistner2014}.  We also introduce the
+category $\mathcal C_w$ and its semiorthogonal decompositions, which
+will be used throughout this paper.
+
+We consider a smooth projective-over-affine variety $X$ over an
+algebraically closed field $k$ of characteristic~$0$, and we consider a
+reductive group $G$ acting on $X$.  Given a $G$--ample equivariant line
+bundle $L$, geometric invariant theory defines an open semistable locus
+$X^{ss}\subset X$.  After choosing an invariant inner product on the
+cocharacter lattice of $G$, the Hilbert--Mumford numerical criterion
+produces a special stratification of the unstable locus by locally
+closed $G$--equivariant subvarieties $X^{us}=\bigsqcup_i S_i$ called
+Kirwan--Ness (KN) strata.  The indices are ordered so that the closure
+of $S_i$ lies in $\bigcup_{j\ge i} S_j$.
+
+We briefly recall the Kirwan--Ness stratification of the unstable
+locus.  Let $X$ be a projective-over-affine variety over an
+algebraically closed field of characteristic $0$, equipped with an
+action of a reductive group $G$, and let $L$ be a $G$-linearized ample
+line bundle on $X$.
+
+\begin{definition}[Hilbert--Mumford weight]
+For a point $x\in X$ and a one-parameter subgroup (1-PS)
+$\lambda:\Gm\to G$ such that the limit
+\[
+x_0 := \lim_{t\to 0} \lambda(t)\cdot x
+\]
+exists in $X$, the $G$-linearization on $L$ induces an action of
+$\lambda$ on the fiber $L_{x_0}$.  The corresponding integer weight is
+denoted $\mu^L(x,\lambda)\in\mathbb Z$.
+\end{definition}
+
+
+
+\begin{theorem}[Kempf, Kempf--Ness]
+For every unstable point $x\in X^{us}$, the supremum $M(x)$ is a
+maximum, attained by some 1-PS $\lambda_x$.  The 1-PS $\lambda_x$ is
+unique up to conjugation by the associated parabolic subgroup
+\[
+P(\lambda_x)
+ :=\{\, g\in G \mid
+      \lim_{t\to 0}\lambda_x(t)g\lambda_x(t)^{-1}\ \text{exists in }G
+   \,\}
+\]
+and up to positive rescaling of $\lambda_x$.
+\end{theorem}
+
+\begin{remark}
+Let all such optimal 1-PS's for $x$ be denoted $\Lambda_x$.  
+  If one fixes a maximal torus $T\subset P_x$ and a choice of positive roots, then the intersection $\Lambda_x\cap X_*(T)$ is a single orbit for the Weyl group $W(P_x,T)$ of the Levi factor of $P_x$. Equivalently,
+  \[
+  \Lambda_x\cap X_*(T)=W(P_x,T)\cdot\lambda
+  \]
+  for any $\lambda\in\Lambda_x\cap X_*(T)$.
+  Moreover, among the elements of this orbit there is exactly one dominant cocharacter: precisely one element of $W(P_x,T)\cdot\lambda$ lies in the chosen closed positive chamber of $X_*(T)\otimes\mathbb{R}$.
+\end{remark}
+
+\begin{remark}
+  Recall that parabolic subgroups of $G$ (up to conjugation) are in bijection with subsets of the set of simple roots for a fixed maximal torus and choice of positive roots. In particular, the choice $\Theta \subset \Delta$ of simple roots corresponds to the parabolic subgroup $P_\Theta$ with Lie algebra
+  \[
+  \mathfrak{p}_\Theta = \mathfrak{t} \oplus \bigoplus_{\alpha\in \Phi^+} \mathfrak{g}_\alpha \oplus \bigoplus_{\alpha\in \langle \Theta \rangle} \mathfrak{g}_{-\alpha}
+  \]
+  where $\Phi^+$ is the set of positive roots and $\langle \Theta \rangle$ is the set of roots generated by $\Theta$.
+  Equivalently (and more concretely), for dominant $\lambda$ we have $P(\lambda)=P_\Theta$ if and only if
+  \[
+  \begin{cases}
+  \langle\alpha,\lambda\rangle = 0 &\text{for all }\alpha\in\Theta,\\[6pt]
+  \langle\alpha,\lambda\rangle > 0 &\text{for all }\alpha\in\Delta\setminus\Theta.
+  \end{cases}
+  \]
+
+  The set of such $\lambda$ is the open cone
+  \[
+  C_\Theta
+  := \big\{ \lambda\in X_*(T)_\mathbb{R}^{\mathrm{dom}}
+  \ \big|\ \langle\alpha,\lambda\rangle=0\ \forall\alpha\in\Theta,\ 
+  \langle\alpha,\lambda\rangle>0\ \forall\alpha\in\Delta\setminus\Theta\big\}.
+  \]
+
+  Every $\lambda\in C_\Theta$ gives the same parabolic $P(\lambda)=P_\Theta$.
+
+\end{remark}
+
+Thus each unstable point $x$ determines a distinguished "optimal"
+1-PS $\lambda_x$ up to this equivalence.  Let $\beta$ run over the set
+of such equivalence classes of optimal 1-PS's.  Define
+\[
+S_\beta
+ := \{\, x\in X^{us} \mid \text{the optimal 1-PS for }x\text{ is of
+      type }\beta \,\}.
+\]
+
+\begin{theorem}[Kirwan--Ness stratification]
+Each $S_\beta$ is a locally closed $G$-invariant subvariety of $X$, and
+the unstable locus decomposes as a disjoint union
+\[
+X^{us} \;=\; \bigsqcup_\beta S_\beta.
+\]
+Moreover, one can order the indices so that
+\[
+\overline{S_i}\subset \bigcup_{j\ge i} S_j,
+\]
+i.e.\ the closure of a stratum meets only strata of the same or
+"greater" index.
+\end{theorem}
+
+The subvarieties $S_i$ are called the \textbf{Kirwan--Ness strata}.  They
+provide a canonical $G$-equivariant stratification of the unstable
+locus $X^{us}$ determined by the choice of $L$ and the invariant inner
+product on the cocharacter lattice of $G$.
+
+Each stratum comes with a distinguished one-parameter subgroup
+$\lambda_i:\mathbb C^\ast\to G$ and $S_i$ fits into the diagram
+\begin{equation}\label{eq:KN-diagram}
+\begin{tikzcd}[column sep=large]
+Z_i \arrow[r, hook, "\sigma_i"] & Y_i \arrow[l, bend left=15, "\pi_i"'] \subset S_i := G\cdot Y_i \arrow[r, "j_i"] &
+X
+\end{tikzcd}
+\end{equation}
+where $Z_i$ is an open subvariety of $X^{\lambda_i\text{-fixed}}$, and
+\[
+  Y_i \;=\;
+  \left\{
+    x\in X - \bigcup_{j>i} S_j \ \bigg|\ 
+    \lim_{t\to 0} \lambda_i(t)\cdot x \in Z_i
+  \right\}.
+\]
+
+The maps $\sigma_i$ and $j_i$ are the inclusions and $\pi_i$ is taking
+the limit under the flow of $\lambda_i$ as $t\to 0$.  We denote the
+immersion $Z_i\to X$ by $\sigma_i$ as well.  Throughout this paper, the
+spaces $Z,Y,S$ and morphisms $\sigma,\pi,j$ will refer to diagram
+\eqref{eq:KN-diagram}.
+
+In addition, $\lambda_i$ determines the parabolic subgroup $P_i$ of
+elements of $G$ which have a limit under conjugation by $\lambda_i$, and
+the centralizer of $\lambda_i$, $L_i\subset P_i\subset G$, is a Levi
+component for $P_i$.
+
+One key property of the KN stratum is that $S_i = G\times_{P_i} Y_i$, so that $G$--equivariant quasicoherent
+sheaves on $S_i$ are equivalent to $P_i$--equivariant quasicoherent
+sheaves on $Y_i$.  When $G$ is abelian, then $G=P_i=L_i$ and $Y_i=S_i$
+is already $G$--invariant, so the story simplifies quite a bit.
+
+\begin{remark}
+  The Levi subgroup $L := L(\lambda)$ is the subgroup that centralizes $\lambda$, namely
+  \[
+  L \;=\; \{\, g\in G \mid \lambda(t)\,g\,\lambda(t)^{-1} = g \text{ for all } t\in\mathbb{G}_m \,\}.
+  \]
+  On Lie algebras one has
+  \[
+  \mathfrak l = \Lie L
+  = \mathfrak t \oplus \bigoplus_{\langle\alpha,\lambda\rangle = 0}\mathfrak g_\alpha.
+  \]
+
+  The unipotent radical $U := U(\lambda)$ is defined by
+  \[
+  U \;=\; \{\, g\in G \mid \lim_{t\to0} \lambda(t)\,g\,\lambda(t)^{-1} = 1 \,\},
+  \]
+  and its Lie algebra is
+  \[
+  \mathfrak u = \Lie U
+  = \bigoplus_{\langle\alpha,\lambda\rangle > 0}\mathfrak g_\alpha.
+  \]
+
+  The parabolic $P = P(\lambda)$ therefore has Lie algebra
+  \[
+  \mathfrak p = \mathfrak l \oplus \mathfrak u.
+  \]
+  Moreover, $U$ is normal in $P$, and the multiplication map
+  \[
+  L \times U \longrightarrow P
+  \]
+  is an isomorphism of varieties, so that $P$ admits the Levi decomposition
+  \[
+  P \;=\; L \ltimes U.
+  \]
+\end{remark}
+
+The following theorem relates the derived category of the GIT quotient
+$X^{ss}/G$ to the derived category of the quotient stack $X/G$. In particular, there is a functorial splitting of the restriction functor 
+\[
+i^* : D^b(X/G) \longrightarrow D^b(X^{ss}/G)\]
+
+
+\begin{theorem}[Derived Kirwan surjectivity, \cite{HalpernLeistner2014}]
+\label{thm:kirwan-surj}
+Let $\eta_i$ be the weight of
+$\det\bigl(N_{S_i}^\vee X\bigr)\big|_{Z_i}$
+with respect to $\lambda_i$.  Choose an integer $w_i$ for each stratum
+and define the full subcategory
+\[
+  \mathcal G_w
+  := \bigl\{
+        F^\bullet\in D^b(X/G)
+        \,\big|\,
+        \forall i,\ \sigma_i^\ast F^\bullet
+        \text{ has weights in }[w_i,\, w_i+\eta_i)
+        \text{ w.r.t.\ }\lambda_i
+     \bigr\}.
+\]
+Then the restriction functor
+\[
+  r:\mathcal G_w \longrightarrow D^b(X^{ss}/G)
+\]
+is an equivalence of dg-categories.
+\end{theorem}
+
+The weight condition on $\sigma_i^\ast F^\bullet \in D^b(Z_i/L_i)$ is called the
+\emph{grade restriction rule} and the interval $[w_i, w_i+\eta_i)$ is
+the \emph{grade restriction window}.  The theorem follows immediately
+from the corresponding statement for a single closed KN stratum by
+considering the chain of open subsets
+\[
+  X^{ss} \subset X_n \subset \cdots \subset X_0 \subset X
+  \quad\text{where } X_i = X_{i-1}\setminus S_i.
+\]
+
+The full version of the theorem also describes the kernel of the
+restriction functor
+\[
+r : D^b(X/G) \longrightarrow D^b(X^{ss}/G).
+\]
+For a single stratum $S$ we define the full subcategory
+\[
+\mathcal A_w
+:=
+\Bigl\{
+  F^\bullet \in D^b(X/G)
+  \ \Big|\ 
+  \mathcal H^\ast(\sigma^\ast F^\bullet)
+  \text{ has weights in }[w,w+\eta]
+  \text{ with respect to }\lambda,\
+  \mathcal H^\ast(F^\bullet)\text{ is supported on }S
+\Bigr\}.
+\]
+Then we have an infinite semiorthogonal decomposition
+\[
+D^b(X/G)
+  = \langle \dots,\mathcal A_{w-1},\mathcal A_w,\mathcal G_w,
+            \mathcal A_{w+1},\dots\rangle.
+\]
+
+
+Let $D^b(Z/L)_w \subset D^b(Z/L)$ denote the full subcategory consisting
+of objects which have weight $w$ with respect to $\lambda$, and let
+\((\bullet)_w\) be the exact functor which takes a coherent sheaf on
+\(Z/L\) to its direct summand of $\lambda$-weight \(w\).
+
+\begin{remark}
+  Recall that $Z$ is characterized as
+\[
+Z
+= \bigl\{ z\in X^\lambda
+\mid \text{KN type of }z\text{ is }[\lambda],
+\text{ and } z\notin \overline{S'} \text{ for any more unstable } S'
+\bigr\}.
+\]
+
+Since $\lambda$ is central in the Levi $L$, the group $L$ acts on $X^\lambda$ and preserves $Z$.  The quotient stack $Z/L$ is often called the \emph{critical locus} of the wall crossing.
+\end{remark}
+
+\begin{lemma}[{\cite[Lemma~2.2]{HalpernLeistner2014}}]\label{lem:iota-equivalence}
+The functor
+\begin{align*}
+\iota_w : D^b(Z/L)_w &\longrightarrow D^b(X/G) \\
+G^\bullet &\longmapsto j_\ast \pi^\ast G^\bullet
+\end{align*}
+actually lands in $\mathcal A_w$ and is an equivalence $D^b(Z/L)_w \to \mathcal A_w$, and its inverse can be described either as
+\((\sigma^\ast F^\bullet)_w\) or as
+\((\sigma^\ast F^\bullet)_{w+\eta}\otimes \det(N_S X)\).
+\end{lemma}
+
+Using the equivalences $\iota_w$ and $r$ we can rewrite the main
+semiorthogonal decomposition as
+\begin{equation}\label{eq:main-sod}
+D^b(X/G)
+ = \langle \dots, D^b(Z/L)_w, D^b(X^{ss}/G), D^b(Z/L)_{w+1},\dots\rangle.
+\tag{2}
+\end{equation}
+In this paper, we will consider the full subcategory
+\[
+\mathcal C_w :=
+\bigl\{
+  F^\bullet \in D^b(X/G)
+  \;\big|\;
+  \mathcal H^\ast(\sigma^\ast F^\bullet)
+  \text{ has weights in }[w,w+\eta]\text{ w.r.t.\ }\lambda
+\bigr\}
+\subset D^b(X/G).
+\]
+
+If we instead use the grade restriction window $[w,w+\eta)$, then we get
+the subcategory $\mathcal G_w \subset \mathcal C_w$.  The main theorem
+of \cite{12} implies that we have two semiorthogonal decompositions
+\begin{equation}\label{eq:Cw-two-sod}
+\mathcal C_w = \langle \mathcal G_w, \mathcal A_w\rangle
+             = \langle \mathcal A_w, \mathcal G_{w+1}\rangle.
+\tag{3}
+\end{equation}
+
+We regard restriction to $X^{ss}$ as a functor
+\[
+r : \mathcal C_w \longrightarrow D^b(X^{ss}/G).
+\]
+The subcategory $\mathcal A_w$ is the kernel of $r$, but is described
+more explicitly as the essential image of the fully faithful functor
+$\iota_w : D^b(Z/L)_w \to \mathcal C_w$ as discussed above.
+
+\begin{lemma}\label{lem:iota-adjoints}
+The left and right adjoints of
+\(\iota_w : D^b(Z/L)_w \to \mathcal C_w\) are
+\[
+\iota_w^L(F^\bullet) = (\sigma^\ast F^\bullet)_w
+\qquad\text{and}\qquad
+\iota_w^R(F^\bullet) = (\sigma^\ast F^\bullet)_{w+\eta}
+                       \otimes \det N_S X\big|_Z.
+\]
+\end{lemma}
+
+\begin{lemma}\label{lem:r-adjoints}
+The functor \(r : \mathcal C_w \to D^b(X^{ss}/G)\) has right and left
+adjoints given respectively by
+\[
+r^R : D^b(X^{ss}/G) \xrightarrow{\sim} \mathcal G_w \subset \mathcal C_w,
+\qquad
+r^L : D^b(X^{ss}/G) \xrightarrow{\sim} \mathcal G_{w+1} \subset \mathcal C_{w+1}.
+\]
+\end{lemma}
+
+Now because we have two semiorthogonal decompositions in
+\eqref{eq:Cw-two-sod}, there is a left mutation \cite{6} equivalence
+functor
+\[
+\mathbb L_{\mathcal A_w} : \mathcal G_{w+1} \longrightarrow \mathcal G_w
+\]
+defined by the functorial exact triangle
+\begin{equation}\label{eq:mutation-triangle}
+\iota_w \iota_w^R(F^\bullet)
+ \longrightarrow F^\bullet
+ \longrightarrow \mathbb L_{\mathcal A_w} F^\bullet
+ \longrightarrow
+\tag{4}
+\end{equation}
+for \(F^\bullet\in\mathcal G_{w+1}\).
+
+Note that restricting to \(X^{ss}/G\), this triangle gives an
+equivalence \(r(F^\bullet) \simeq r(\mathbb L_{\mathcal A_w}F^\bullet)\).
+Thus this mutation implements the \emph{window shift} functor, fitting
+into the commutative diagram
+\begin{equation}\label{eq:window-shift-diagram}
+\begin{tikzcd}[row sep=large, column sep=large]
+\mathcal G_{w+1}
+  \arrow[r, "\mathbb L_{\mathcal A_w}"]
+  \arrow[dr, "r"']
+&
+\mathcal G_w\\
+& D^b(X^{ss}/G)
+  \arrow[u, "r^{-1} = r^R"']
+\end{tikzcd}
+\tag{5}
+\end{equation}
+meaning that \(\mathbb L_{\mathcal A_w} F^\bullet\) is the unique object
+of \(\mathcal G_w\) restricting to the same object as \(F^\bullet\) in
+\(D^b(X^{ss}/G)\).
+
+\subsection{Toy example: $\A^1$ with scaling action}
+Let $X = \A^1 = \Spec k[x]$ and let $G = \Gm$ act with weight
+$1$ on $x$:
+\[
+t\cdot x = t x,\qquad t\in\Gm.
+\]
+Equip $X$ with the standard $G$-linearization on $\cO_X(1)$ so that
+the unstable locus is
+\[
+X^{us} = \{0\},
+\qquad
+X^{ss} = X\setminus\{0\}.
+\]
+
+There is a single Kirwan-Ness stratum
+\[
+S = \{0\}\subset X
+\]
+with $1$-PS $\lambda : \Gm\to G$ given by the identity. The
+fixed locus of $\lambda$ is
+\[
+X^\lambda = \{0\} = S,
+\]
+so we set
+\[
+Z := S = \{0\},
+\qquad
+L := G = \Gm
+\]
+The normal bundle $N_S X$ is the tangent line at $0$, on which
+$\lambda$ acts with weight $-1$, hence the weight of the dual determinant
+is
+\[
+\eta = 1
+\]
+We may identify:
+\begin{itemize}
+\item $D^b(X/G)$ with the bounded derived category of graded
+  $k[x]$-modules, where $\deg x = 1$;
+\item $D^b(Z/L) \cong D^b(\mathrm{Vect}_k^{\mathrm{gr}})$, the bounded derived category of finite-dimensional
+  graded $k$-vector spaces (representations of $\Gm$).
+\end{itemize}
+The restriction functor
+\begin{align*}
+\sigma^\ast : D^b(X/G) &\longrightarrow D^b(Z/L) \\
+F^\bullet &\longmapsto F^\bullet \otimes_{k[x]} k[x]/(x)
+\end{align*}
+is simply evaluation at $0$, i.e.\ taking the fiber of a graded
+$k[x]$-module at $x=0$.
+
+For a
+graded module $M = \bigoplus_{d\in\mathbb Z} M_d$ we write $M_d$ for the
+weight-$d$ subspace.
+
+Fix an integer $w\in\mathbb Z$. Since $\eta=1$, the relevant intervals
+are $[w,w+1]$ and $[w,w+1)$.
+
+\begin{itemize}
+\item The category $\mathcal C_w\subset D^b(X/G)$ is defined by
+\[
+\mathcal C_w
+ :=
+ \Bigl\{
+   F^\bullet \in D^b(X/G)
+   \ \Big|\ 
+   \cH^\ast(\sigma^\ast F^\bullet)
+   \text{ has weights only in }[w,w+1]
+ \Bigr\}.
+\]
+\item The window subcategory $\mathcal G_w\subset\mathcal C_w$ uses the
+half-open interval $[w,w+1)$:
+\[
+\mathcal G_w
+ :=
+ \Bigl\{
+   F^\bullet \in D^b(X/G)
+   \ \Big|\ 
+   \cH^\ast(\sigma^\ast F^\bullet)
+   \text{ has weight only }w
+ \Bigr\}.
+\]
+\item The subcategory $\mathcal A_w$ is defined by the conditions that
+$F^\bullet$ is supported on the stratum and satisfies the closed window
+condition:
+\[
+\mathcal A_w
+ :=
+ \Bigl\{
+   F^\bullet \in D^b(X/G)
+   \ \Big|\ 
+   \Supp \cH^\ast(F^\bullet)\subset\{0\},
+   \ \cH^\ast(\sigma^\ast F^\bullet)
+   \text{ has weights in }[w,w+1]
+ \Bigr\}.
+\]
+Support on \(\{0\}\) implies that in particular, restricting to the open set $D(x)$ gives zero, so \(F \otimes_{k[x]} k[x, x^{-1}] = 0\). This means that multiplication by \(x\) is nilpotent on the cohomology sheaves \(\cH^\ast(F^\bullet)\), so these are finite-length graded \(k[x]\)-modules. So \emph{a priori} $\mathcal A_w$ consists of complexes of finite-length
+graded $k[x]$--modules whose fibers at $0$ live in degrees $w$ and
+$w+1$. It is \emph{not} automatic from the definition that every such
+module lies in the essential image of the KN construction.
+\end{itemize}
+
+The functor
+\[
+\iota_w : D^b(Z/L)_w \longrightarrow D^b(X/G)
+\]
+is simply
+\[
+\iota_w(G^\bullet) := j_\ast \pi^\ast G^\bullet = j_\ast G^\bullet.
+\]
+where $j : S \hookrightarrow X$ is the inclusion of the origin. Concretely, $\iota_w$ takes a complex of weight-$w$ vector spaces and realizes it as a complex of graded $k[x]$--modules supported at $0$, with $x$ acting by $0$. 
+
+Lemma~2.2 in \cite{12} specializes here to the statement that
+$\iota_w$ is an equivalence
+\[
+\iota_w : D^b(Z/L)_w \xrightarrow{\sim} \mathcal A_w,
+\]
+with inverse given by
+\[
+\iota_w^{-1}(F^\bullet)
+ = (\sigma^\ast F^\bullet)_w,
+\]
+i.e.\ restrict to $Z=\{0\}$ and then take the weight-$w$ summand.
+
+\begin{lemma}\label{lem:toy-window}
+Let $X = \Spec k[x]$ with the $\Gm$-action $t\cdot x = tx$, and let
+$S = Z = \{0\} \subset X$ be the unique KN stratum.  Let
+\[
+\mathcal A_w
+ := \Bigl\{
+      F^\bullet \in D^b(X/G)
+      \ \Big|\
+      \Supp \cH^i(F^\bullet)\subset\{0\}\ \forall i,\
+      \cH^*(L\sigma^*F^\bullet)\text{ has weights in }[w,w+1]
+    \Bigr\},
+\]
+where $\sigma : Z \hookrightarrow X$ is the inclusion and weights are
+taken with respect to the $\Gm$-action.  Let
+$D^b(Z/L)_w \subset D^b(Z/L)$ be the full subcategory of complexes whose
+cohomology is pure weight $w$ and let
+\[
+\iota_w : D^b(Z/L)_w \longrightarrow D^b(X/G),
+\qquad
+\iota_w(G^\bullet) := j_* G^\bullet
+\]
+for $j : Z\hookrightarrow X$.  Then for any
+$F^\bullet\in\mathcal A_w$ there exists a complex
+$G^\bullet\in D^b(Z/L)_w$ such that
+\[
+F^\bullet \simeq \iota_w(G^\bullet) = j_*G^\bullet
+\quad\text{in }D^b(X/G).
+\]
+In particular, $\mathcal A_w$ is equal to the essential image of
+$\iota_w$. Being fully faithful, $\iota_w$ induces an equivalence
+\[
+\iota_w : D^b(Z/L)_w \xrightarrow{\sim} \mathcal A_w.
+\]
+\end{lemma}
+
+\begin{proof}
+\emph{(1) $\iota_w$ lands in $\mathcal A_w$.}
+Let $G^\bullet\in D^b(Z/L)_w$.  As a complex of $\cO_Z$--modules this is
+just a bounded complex of finite-dimensional vector spaces, each pure
+weight $w$.  The pushforward $j_*G^\bullet$ is a complex of graded
+$k[x]$--modules supported at $\{0\}$: on each cohomology group $V$ the
+action of $x$ is zero.
+
+To verify the window condition, it suffices to check a single
+weight-$w$ object in degree $0$, say $G^\bullet = V$ with $V$ pure
+weight $w$.  Then $j_*V$ is the module $k[x]/(x)(w)$, and
+\[
+L\sigma^* j_*V \simeq k[x]/(x)(w)\otimes_{k[x]}^{\mathbf L} k
+\simeq \bigl( k[x]/(x)(w-1) \xrightarrow{\cdot x} k[x]/(x)(w) \bigr)
+\]
+has cohomology in weights $w$ and $w+1$.  Thus
+$\cH^*(L\sigma^* j_*V)$ has weights in $[w,w+1]$, and the same holds for
+an arbitrary complex $G^\bullet$ by passing to cohomology.  Hence
+$\iota_w(G^\bullet)=j_*G^\bullet \in \mathcal A_w$.
+
+\emph{(2) essential surjectivity.}
+We first classify finite-length graded $k[x]$-modules and compute their
+derived fibers at $0$. Over the PID $k[x]$, any finite-length graded $k[x]$-module $M$ admits a
+decomposition
+\[
+M \cong \bigoplus_j k[x]/(x^{n_j})(d_j),
+\]
+where $(d)$ denotes a grading (weight) shift.  Thus indecomposable
+summands are of the form
+\[
+M_{n,d} := k[x]/(x^n)(d),
+\qquad n\ge1,\ d\in\Z.
+\]
+The inclusion $\sigma : Z=\{0\}\hookrightarrow X=\Spec k[x]$ is induced
+by $k[x]\twoheadrightarrow k$, $x\mapsto0$, so for any module $M$ we
+have
+\[
+L\sigma^* M \simeq M\otimes^{\mathbf L}_{k[x]} k.
+\]
+Take the standard free resolution of $k$:
+\[
+0 \longrightarrow k[x](-1) \xrightarrow{\cdot x} k[x] \longrightarrow k
+\longrightarrow 0,
+\]
+where $(-1)$ is the usual grading shift.  Tensoring with $M_{n,d}$ gives
+a two-term complex
+\[
+L\sigma^* M_{n,d}
+\simeq
+\bigl( M_{n,d}(-1) \xrightarrow{\cdot x} M_{n,d} \bigr),
+\]
+with $M_{n,d}(-1)$ in cohomological degree $-1$ and $M_{n,d}$ in degree
+$0$.
+
+As a graded module, $M_{n,d}$ has a basis
+\[
+e,\; xe,\; x^2e,\dots,x^{n-1}e
+\]
+of weights $d,d+1,\dots,d+n-1$.  Thus $M_{n,d}(-1)$ has weights
+$d+1,\dots,d+n$.  The differential
+$x : M_{n,d}(-1)\to M_{n,d}$ sends
+\[
+x\cdot (x^k e) = x^{k+1}e,
+\]
+so
+\[
+\im(x) = \langle xe,\dots,x^{n-1}e\rangle,
+\qquad
+\ker(x) = \langle x^{n-1}e\rangle.
+\]
+Therefore
+\[
+\begin{aligned}
+H^0(L\sigma^* M_{n,d})
+  &= \coker(x) \cong k\cdot e
+     &&\text{(weight $d$)},\\
+H^{-1}(L\sigma^* M_{n,d})
+  &= \ker(x)   \cong k\cdot x^{n-1}e
+     &&\text{(weight $d+n$)}.
+\end{aligned}
+\]
+So the weights appearing in $H^*(L\sigma^* M_{n,d})$ are exactly
+$\{d,d+n\}$.
+
+\smallskip
+
+Now impose the window condition.
+Let $F^\bullet\in\mathcal A_w$.  Each cohomology module
+$\cH^i(F^\bullet)$ is finite-length and hence decomposes as
+\[
+\cH^i(F^\bullet) \cong \bigoplus_j M_{n_{ij},d_{ij}}.
+\]
+Applying $L\sigma^*$ and taking cohomology, the contribution of
+$M_{n_{ij},d_{ij}}$ yields weights $\{d_{ij},d_{ij}+n_{ij}\}$, as above.
+
+By definition of $\mathcal A_w$, all weights of
+$H^*(L\sigma^*F^\bullet)$ must lie in the interval $[w,w+1]$ of length
+$1$.  Thus for each summand $M_{n_{ij},d_{ij}}$ we must have
+\[
+d_{ij},\; d_{ij}+n_{ij} \in [w,w+1].
+\]
+Since $n_{ij}\ge1$, the only possibility is
+\[
+n_{ij}=1,\qquad d_{ij}=w.
+\]
+Hence every indecomposable summand is $M_{1,w}=k[x]/(x)(w)$, and for
+each $i$ we have an isomorphism of graded $k[x]$-modules
+\[
+\cH^i(F^\bullet) \cong \bigoplus_{m_i} k[x]/(x)(w).
+\]
+In particular, $x$ acts by $0$ on each $\cH^i(F^\bullet)$.
+
+Let $V_i$ be a weight-$w$ $\Gm$-representation of dimension $m_i$, and
+let $G^\bullet$ be a bounded complex of $\Gm$-representations on $Z$
+with
+\[
+\cH^i(G^\bullet) \cong V_i
+\quad\text{for all }i.
+\]
+Then $G^\bullet\in D^b(Z/L)_w$, and its pushforward $j_*G^\bullet$ has
+cohomology
+\[
+\cH^i(j_*G^\bullet) \cong j_* V_i \cong \bigoplus_{m_i} k[x]/(x)(w)
+\cong \cH^i(F^\bullet).
+\]
+Since $j_*$ is exact and fully faithful on quasi-coherent sheaves
+supported at $\{0\}$, we can choose $G^\bullet$ and quasi-isomorphisms
+so that
+\[
+F^\bullet \simeq j_*G^\bullet = \iota_w(G^\bullet)
+\]
+in $D^b(X/G)$.
+
+Thus every $F^\bullet\in\mathcal A_w$ is quasi-isomorphic to an object
+in the essential image of $\iota_w$, as claimed.
+\end{proof}
+
+In this example one can see explicitly that
+\[
+\mathcal C_w
+  = \langle \mathcal A_w,\mathcal G_w\rangle
+ = \langle \mathcal G_w,\mathcal A_{w+1}\rangle.
+\]
+
+\begin{lemma}\label{lem:toy-SOD}
+In the toy setup
+\[
+X = \Spec k[x],\qquad G=\Gm,\qquad t\cdot x = tx,
+\]
+with unique KN stratum $S = Z = \{0\}$ and $\eta = 1$, let
+$\sigma : Z\hookrightarrow X$ be the inclusion.  Define full
+subcategories of $D^b(X/G)$ by
+\[
+\mathcal C_w
+ := \Bigl\{
+      F^\bullet \in D^b(X/G)
+      \ \Big|\ 
+      \text{all weights of } H^*(L\sigma^*F^\bullet)
+      \text{ lie in }[w,w+1]
+    \Bigr\},
+\]
+\[
+\mathcal A_w
+ := \Bigl\{
+      F^\bullet \in \mathcal C_w
+      \ \Big|\ 
+      \Supp \cH^i(F^\bullet)\subset\{0\}
+      \ \forall i
+    \Bigr\},
+\]
+\[
+\mathcal G_w
+ := \Bigl\{
+      F^\bullet \in \mathcal C_w
+      \ \Big|\ 
+      \text{all weights of }H^*(L\sigma^*F^\bullet)
+      \text{ lie in }\{w\}
+    \Bigr\},
+\]
+\[
+\mathcal G_{w+1}
+ := \Bigl\{
+      F^\bullet \in \mathcal C_w
+      \ \Big|\ 
+      \text{all weights of }H^*(L\sigma^*F^\bullet)
+      \text{ lie in }\{w+1\}
+    \Bigr\}.
+\]
+Then $\mathcal C_w$ admits two semiorthogonal decompositions
+\[
+\mathcal C_w
+  = \langle \mathcal G_w, \mathcal A_w \rangle,
+\qquad
+\mathcal C_w
+  = \langle \mathcal A_w, \mathcal G_{w+1} \rangle.
+\]
+\end{lemma}
+\begin{proof}
+We break the proof into two parts.
+
+\medskip\noindent
+\textbf{1. The decomposition $\cC_w=\langle\cG_w,\cA_w\rangle$.}
+
+Let $i:Z\hookrightarrow X$ and $j:U:=X\setminus Z\hookrightarrow X$ be
+the closed and open immersions.  For any $F^\bullet\in D^b(X/G)$ there
+is a standard localization triangle
+\[
+F_Z^\bullet \longrightarrow F^\bullet \longrightarrow j_*j^*F^\bullet
+\longrightarrow
+\]
+with $F_Z^\bullet$ supported on $Z$ and $j^*F_Z^\bullet\simeq 0$.
+Restricting to $\cC_w$ we get, for each $F^\bullet\in\cC_w$, a triangle
+\begin{equation}\label{eq:loc-triangle}
+F_Z^\bullet \longrightarrow F^\bullet \longrightarrow G^\bullet
+\longrightarrow
+\end{equation}
+where we set $G^\bullet:=j_*j^*F^\bullet$.
+
+Since $F^\bullet\in\cC_w$, the weights of $H^*(L\sigma^*F^\bullet)$ lie
+in $[w,w+1]$.  The object $G^\bullet$ is supported on $U$, so
+$\sigma^*G^\bullet\simeq0$ and hence $G^\bullet\in\cG_w$ (all weights of
+$H^*(L\sigma^*G^\bullet)$ lie in the empty set, which is vacuously
+$\{w\}$).  On the other hand $F_Z^\bullet$ is supported on $Z$, so
+$F_Z^\bullet\in\cA_w$.  Thus \eqref{eq:loc-triangle} has the form
+\[
+F_Z^\bullet \longrightarrow F^\bullet \longrightarrow G^\bullet
+\longrightarrow,
+\qquad
+F_Z^\bullet\in\cA_w,\; G^\bullet\in\cG_w.
+\]
+Putting $D_0:=F^\bullet$, $D_1:=F_Z^\bullet$, $D_2:=0$, we see that
+$\Cone(D_1\to D_0)=G^\bullet\in\cG_w$ and
+$\Cone(D_2\to D_1)=D_1\in\cA_w$.  This is exactly the filtration
+required by the definition of a semiorthogonal decomposition
+$\cC_w=\langle\cG_w,\cA_w\rangle$.
+
+It remains to check the orthogonality
+$\RHom(\cA_w,\cG_w)=0$.  Take $A^\bullet\in\cA_w$ and
+$G^\bullet\in\cG_w$.  Any morphism $A^\bullet\to G^\bullet$ restricts to
+zero on $U$, because $A^\bullet|_U\simeq0$, so it factors through the
+subobject $F_Z^\bullet$ in \eqref{eq:loc-triangle} for $G^\bullet$.
+However, for $G^\bullet\in\cG_w$ we have $G_Z^\bullet=0$ (since
+$\sigma^*G^\bullet\simeq0$), hence $F_Z^\bullet=0$ and the only such
+morphism is $0$.  Thus
+$\RHom_{D^b(X/G)}(A^\bullet,G^\bullet)=0$, proving
+$\cC_w=\langle\cG_w,\cA_w\rangle$.
+
+\medskip\noindent
+\textbf{2. The decomposition $\cC_w=\langle\cA_w,\cG_{w+1}\rangle$.}
+
+We now use the weight decomposition on the fiber at $0$.
+
+First, in this toy setup we have an explicit equivalence
+\[
+\iota_w : D^b(Z/L)_w \xrightarrow{\ \sim\ } \cA_w,
+\]
+constructed in Lemma~3.14: it sends a complex of weight-$w$
+$\Gm$--representations on $Z$ to its pushforward $j_*G^\bullet$, and
+its quasi-inverse takes $F^\bullet\in\cA_w$ to the weight-$w$ summand of
+$L\sigma^*F^\bullet$.
+
+Now let $F^\bullet\in\cC_w$ and set $K:=L\sigma^*F^\bullet\in D^b(Z/L)$.
+By definition of $\cC_w$, all weights of $H^*(K)$ lie in $[w,w+1]$, so
+we can write
+\[
+K \;\cong\; K_w \oplus K_{w+1},
+\qquad
+K_w\in D^b(Z/L)_w,\ K_{w+1}\in D^b(Z/L)_{w+1}.
+\]
+
+Using $\iota_w$ define
+\[
+A^\bullet := \iota_w(K_w) \in \cA_w.
+\]
+By construction of $\iota_w$ and its quasi-inverse there is an
+isomorphism
+\[
+L\sigma^*A^\bullet \;\cong\; K_w \oplus Q,
+\]
+where $Q$ is a complex all of whose cohomology has weight $w+1$.
+Consider the morphism
+\[
+\phi : L\sigma^*A^\bullet \longrightarrow K
+        \cong K_w\oplus K_{w+1}
+\]
+which is the identity on the $K_w$ summand and zero on $Q$, i.e.
+\[
+\phi = (\id_{K_w},0) : K_w\oplus Q \to K_w\oplus K_{w+1}.
+\]
+By adjunction between $L\sigma^*$ and the extension-by-zero functor
+along $\sigma$, $\phi$ corresponds to a unique morphism
+\[
+A^\bullet \xrightarrow{f} F^\bullet.
+\]
+
+Let $G^\bullet$ be the cone of $f$:
+\[
+A^\bullet \xrightarrow{f} F^\bullet \longrightarrow G^\bullet
+\longrightarrow.
+\]
+Applying $L\sigma^*$ we get a distinguished triangle
+\[
+L\sigma^*A^\bullet \longrightarrow L\sigma^*F^\bullet
+\longrightarrow L\sigma^*G^\bullet \longrightarrow
+\]
+which identifies with
+\[
+K_w\oplus Q \xrightarrow{(\id_{K_w},0)} K_w\oplus K_{w+1}
+\longrightarrow L\sigma^*G^\bullet \longrightarrow.
+\]
+The cone of $(\id_{K_w},0)$ is canonically isomorphic to $K_{w+1}$, so
+\[
+L\sigma^*G^\bullet \;\simeq\; K_{w+1},
+\]
+which lies in $D^b(Z/L)_{w+1}$ and is pure weight $w+1$.  In particular,
+$G^\bullet\in\cC_w$ and all weights of $H^*(L\sigma^*G^\bullet)$ lie in
+$\{w+1\}$, hence $G^\bullet\in\cG_{w+1}$.
+
+Thus every $F^\bullet\in\cC_w$ is equipped with a distinguished triangle
+\[
+A^\bullet \longrightarrow F^\bullet \longrightarrow G^\bullet
+\longrightarrow,
+\qquad
+A^\bullet\in\cA_w,\ G^\bullet\in\cG_{w+1}.
+\]
+Setting $D_0:=F^\bullet$, $D_1:=G^\bullet$, $D_2:=0$ we have
+\[
+\Cone(D_1\to D_0) = \Cone(G^\bullet\to F^\bullet) \cong A^\bullet[1]
+  \in\cA_w,
+\]
+and
+\[
+\Cone(D_2\to D_1) = D_1 = G^\bullet\in\cG_{w+1},
+\]
+so the filtration condition for the semiorthogonal decomposition
+$\cC_w=\langle\cA_w,\cG_{w+1}\rangle$ is satisfied.
+
+Finally, we need orthogonality
+$\RHom(\cG_{w+1},\cA_w)=0$.  Let $G^\bullet\in\cG_{w+1}$ and
+$A^\bullet\in\cA_w$.  Using the adjunction between $\iota_w$ and its
+right adjoint, we have
+\[
+\RHom_{\cC_w}(G^\bullet,A^\bullet)
+ \cong \RHom_{D^b(Z/L)_w}((L\sigma^*G^\bullet)_w,\ \iota_w^{-1}A^\bullet),
+\]
+where $(L\sigma^*G^\bullet)_w$ denotes the weight-$w$ summand of
+$L\sigma^*G^\bullet$.  But $G^\bullet\in\cG_{w+1}$ means that
+$L\sigma^*G^\bullet$ has only weight $w+1$, so
+$(L\sigma^*G^\bullet)_w=0$, and hence $\RHom(\cG_{w+1},\cA_w)=0$.
+
+Combining the filtration above with this orthogonality, we obtain the
+semiorthogonal decomposition
+$\cC_w=\langle\cA_w,\cG_{w+1}\rangle$.
+\end{proof}
+
+\subsection{Application to GIT}
+Let $L_0$ be a
+$G$-ample line bundle such that the strictly semistable locus
+$X^{sss} = X^{ss} - X^s$ is nonempty, and let $L'$ be another
+$G$-equivariant line bundle.  We assume that $X^{ss} = X^s$ for the
+linearizations $L_\pm = L_0 \pm \epsilon L'$ for sufficiently small
+$\epsilon$, and we denote $X^{ss}_\pm = X^{ss}(L_\pm)$.  In this case,
+$X^{ss}(L_0) - X^{ss}(L_\pm)$ is a union of KN strata for the
+linearization $L_\pm$.
+
+\begin{definition}
+  The wall crossing is
+\emph{balanced} if the strata $S_i^+$ and $S_i^-$ lying in
+$X^{ss}(L_0)$ are indexed by the same set, with $Z_i^+ = Z_i^-$ and
+$\lambda_i^+ = (\lambda_i^-)^{-1}$. 
+\end{definition}In particular, if $G$ is abelian and there is some linearization with a
+stable point, then all codimension one wall crossings are balanced.
+
+In this case we will replace $X$ with $X^{ss}(L_0)$ so that these are
+the only strata we need to consider.  In fact we will mostly consider a
+balanced wall crossing where only a single stratum flips --- the
+analysis for multiple strata is analogous.  We will drop the superscript
+from $Z^\pm$, but retain superscripts for the distinct subcategories
+$\mathcal A^\pm_w$.  Objects in $\mathcal A^+_w$ are supported on
+$S^+$, which are distinct because $S^+$ consists of orbits of points
+flowing to $Z$ under $\lambda^+$, whereas $S^-$ consists of orbits of
+points flowing to $Z$ under $\lambda^-$.  When there is ambiguity as to
+which $\lambda^\pm$ we are referring to, we will include it in the
+notation, i.e.\ $D^b(Z/L)_{[\lambda^+=w]}$.
+
+\begin{claim}
+If $\omega_X|_Z$ has weight $0$ with respect to $\lambda^+$, then
+$\eta^+ = \eta^-$. This implies that
+$\mathcal C^+_w = \mathcal C^-_{w'}$, $\mathcal G^+_w = \mathcal
+G^-_{w'+1}$, and $\mathcal G^+_{w+1} = \mathcal G^-_{w'}$, where
+$w' = -\eta - w$.
+\end{claim}
+
+\begin{proof}
+Assume we are in a balanced wall crossing with a single KN stratum, so
+$\lambda^-=(\lambda^+)^{-1}$ and the fixed locus is $Z$.  Let
+$\eta^\pm$ denote the weight of $\det(N_{S^\pm}X)^\vee|_Z$ with respect
+to $\lambda^\pm$, as in \S2.  Suppose moreover that
+$\omega_X|_Z$ has weight $0$ with respect to $\lambda^+$.
+
+Along $Z$ we have a $\lambda^+$-equivariant splitting
+\[
+T_X|_Z \;\cong\; T_Z \oplus N^+ \oplus N^-,
+\]
+where $T_Z$ is fixed, $N^+$ is the sum of positive weight spaces and
+$N^-$ the sum of negative weight spaces.  Hence
+\[
+\omega_X|_Z
+ \cong \det(T_X^*|_Z)
+ \cong \det(T_Z^*)\otimes\det(N^{+*})\otimes\det(N^{-*}),
+\]
+so, writing $\wt^+$ for the $\lambda^+$-weight,
+\[
+\wt^+(\omega_X|_Z)
+ = \wt^+(\det(N^{+*})) + \wt^+(\det(N^{-*}))
+ = \eta^+ - \eta^-.
+\]
+Since $\omega_X|_Z$ has weight $0$, we obtain $\eta^+=\eta^-$.  Denote
+this common value by $\eta$.
+
+Now consider the window subcategories
+\[
+\cC_w^+
+ := \left\{F^\bullet \in D^b(X/G)\;\middle|\;
+   \text{$\lambda^+$-weights of $H^*(L\sigma^*F^\bullet)$ lie in $[w,w+\eta]$}
+   \right\},
+\]
+and, analogously, $\cC_{w'}^-$ defined using $\lambda^-$.  Since
+$\lambda^-=(\lambda^+)^{-1}$, the $\lambda^-$-weights are the negatives
+of the $\lambda^+$-weights, so
+\[
+\text{$\lambda^+$-weights in $[w,w+\eta]$}
+\iff
+\text{$\lambda^-$-weights in $[-w-\eta,-w]$}.
+\]
+If we set
+\[
+w' := -\eta - w,
+\]
+then $[w',w'+\eta]=[-\eta-w,-w]$, and therefore
+\[
+\cC_w^+ = \cC_{w'}^-.
+\]
+
+Similarly, the subcategories $\cG$ defined by extremal weights satisfy
+\[
+\cG_w^+
+ = \left\{F^\bullet\in\cC_w^+\;\middle|\;
+    \text{$\lambda^+$-weights lie in $\{w\}$}\right\},
+\quad
+\cG_{w+1}^+
+ = \left\{F^\bullet\in\cC_w^+\;\middle|\;
+    \text{$\lambda^+$-weights lie in $\{w+1\}$}\right\},
+\]
+and
+\[
+\cG_{w'}^-
+ = \left\{F^\bullet\in\cC_{w'}^-\;\middle|\;
+    \text{$\lambda^-$-weights lie in $\{w'\}$}\right\},
+\quad
+\cG_{w'+1}^-
+ = \left\{F^\bullet\in\cC_{w'}^-\;\middle|\;
+    \text{$\lambda^-$-weights lie in $\{w'+1\}$}\right\}.
+\]
+If $F^\bullet\in\cG_w^+$ then its $\lambda^+$-weights are $\{w\}$ and
+its $\lambda^-$-weights are $\{-w\}$; in the interval
+$[w',w'+\eta]=[-\eta-w,-w]$ this is the upper endpoint $w'+\eta$, which
+is $w'+1$ when $\eta=1$.  Hence $\cG_w^+=\cG_{w'+1}^-$.  Likewise, if
+$F^\bullet\in\cG_{w+1}^+$ then its $\lambda^-$-weights are $\{-w-1\}$,
+the lower endpoint $w'$ of $[w',w'+\eta]$, so $\cG_{w+1}^+=\cG_{w'}^-$.
+
+Thus when $\omega_X|_Z$ has weight $0$ we have $\eta^+=\eta^-$
+and, with $w'=-\eta-w$,
+\[
+\cC_w^+ = \cC_{w'}^-,
+\qquad
+\cG_w^+ = \cG_{w'+1}^-,
+\qquad
+\cG_{w+1}^+ = \cG_{w'}^-\]
+\end{proof}
+
+This observation, combined with derived Kirwan surjectivity, implies
+that the restriction functors
+\[
+r_\pm : \mathcal G_w \longrightarrow D^b(X^{ss}_\pm/G)
+\]
+are both equivalences.  In particular
+\[
+\psi_w := r_+\,r_-^{-1} :
+D^b(X^{ss}_-/G) \longrightarrow D^b(X^{ss}_+/G)
+\]
+is a derived equivalence between the two GIT quotients.  Due to the
+dependence on the choice of $w$, we can define the \emph{window shift
+autoequivalence}
+\[
+\Phi_w := \psi_{w-1}^{-1}\,\psi_w
+\]
+of $D^b(X^{ss}/G)$.
+
+Finally, \cite{HalpernLeistnerShipman2016}
+shows that the window shift autoequivalence $\Phi_w$ is a twist corresponding to
+a spherical functor.
+This generalizes a spherical object which is equivalent to a spherical functor $D^b(k-\Vect) \to B$.
+By describing window shifts both in terms of mutations and as spherical twists, we show why these two operations have the “same formula” in this setting. In particular, there is a geometric explanation for the identical formulas for left mutations and spherical twists: the spherical twist is the restriction to the GIT quotient of a left mutation in the equivariant derived category. I won't reproduce this here since it is too technical for the current setting.
+
+\begin{example}[Window shifts on a K3 surface]\label{ex:K3-window-shift}
+Following \cite[Ex.~4.19]{HalpernLeistnerShipman2016}, let
+\[
+X \subset \P^2_x\times\P^2_y
+\]
+be a K3 surface cut out by a divisor of bidegree $(2,0)$ and a divisor
+of bidegree $(1,3)$.  Line bundles on a K3 surface are spherical
+objects, so any autoequivalence which can be written in terms of such
+line bundles is automatically a composition of spherical twists.
+
+The example is realized inside a VGIT picture as follows.
+\begin{center}
+  \begin{tikzpicture}[scale=0.7]
+
+  % light square grid
+  \draw[step=0.8cm,very thin,color=gray!40] (-3.2,-3.2) grid (3.2,3.2);
+
+  % coordinate axes = walls
+  \draw[very thick] (-3.2,0) -- (3.2,0) node[right] {$W_2$};
+  \draw[very thick] (0,0) -- (0,-3.2) node[below right] {$W_1$};
+
+  % slanted wall (ray) in quadrant III
+  \draw[very thick] (0,0) -- (1.2,3.2);
+
+  % chamber labels
+  \node at (-2.5,-2.5) {$\mathrm{I}$};
+  \node at (-2.5, 2.5) {$\mathrm{II}$};
+  \node at ( 2.5, 2.5) {$\mathrm{III}$};
+  \node at ( 2.5,-2.5) {$\mathrm{IV}$};
+
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}
+\item Let
+\[
+\cV = \cO_{\P^2_x\times\P^2_y}(-2,0)\oplus
+      \cO_{\P^2_x\times\P^2_y}(-1,-3),
+\]
+and consider $\mathrm{tot}(\cV)$ as a toric variety given as a GIT
+quotient of $\A^8$ by a torus $T\cong(\C^\ast)^2$ with weight matrix
+$(t, s) \mapsto (t, t, t, s, s, s, t^{-2}, t^{-1}s^{-3})$.
+
+\item For each wall $W_i$ there is a Kirwan-Ness stratification near
+$W_i$ (Table~1 in \cite{HLS}).  The least unstable stratum has fixed
+locus $Z_i$ and Levi quotient $L_i$, so that the local GIT quotient for
+the wall is $Z_i/L_i$.
+
+\item One introduces a Landau-Ginzburg potential
+\[
+W = p f + q g \in \C[x_i,y_j,p,q]_{\deg=2},
+\]
+where $f$ has bidegree $(2,0)$ and $g$ has bidegree $(1,3)$, and $f$ cuts out a smooth rational curve on $\P^2_x$.
+  The LG
+pair $(\cV,W)$ carries a second $\C^\ast$-grading (the LG grading, "R-charge") so that the variables $p,q$ have weight
+$2$ and the $x_i,y_j$ have weight $0$, so that $W$ has weight
+$2$; the associated category $D^b(\cV,W)$ is equivalent to $D^b(X)$.
+
+  The key point is that, although $Z_i/L_i$ is \emph{non-compact} as a
+  usual GIT quotient, the restriction $W|_{Z_i}$ makes the LG quotient
+  $(Z_i/L_i,W|_{Z_i})$ effectively compact.  Concretely:
+  \begin{itemize}
+  \item Near $W_1$ one has $Z_1/L_1 \cong \P^2/\C^\ast$; the LG
+        category $D^b(Z_1/L_1,W|_{Z_1})$ is equivalent to
+        $D^b(\P^2)$, which admits the full exceptional collection
+        $\langle \cO,\cO(1),\cO(2)\rangle$.
+  \item Near $W_2$ one has $Z_2/L_2 \cong \mathrm{tot}\,\cO_{\P^2}(-2)/\C^\ast$;
+        the potential restricts to $pf$. Then
+        $D^b(Z_2/L_2,W|_{Z_2})\simeq D^b(C)$, and for each window this is
+        equivalent to $D^b(\P^1)$ with its exceptional pair
+        $\langle\cO,\cO(1)\rangle$.
+  \end{itemize}
+
+\item One finds:
+  \begin{itemize}
+  \item the window shift across $W_1$ is a composition of spherical
+        twists around the line bundles
+        \[
+        \cO_X(0,i),\ \cO_X(0,i+1),\ \cO_X(0,i+2),
+        \]
+  \item the window shift across $W_2$ is a composition of spherical
+        twists around
+        \[
+        \cO_X(i,0),\ \cO_X(i+1,0),
+        \]
+  for suitable integers $i$ (depending on the chosen windows).
+  \end{itemize}
+\end{itemize}
+
+Thus, in this example the abstract window-shift autoequivalences
+arising from VGIT of $(\cV,W)$ are identified explicitly with
+compositions of spherical twists by line bundles on the K3 surface $X$.
+\end{example}
+
 \section{Derived categories}
-In this appendix we collect some definitions and facts about derived categories. We prove the classical reconstruction theorem of Bondal-Orlov for varieties with ample or anti-ample canonical bundle.
+In this appendix we collect some definitions and facts about derived categories. We prove the classical reconstruction theorem of Bondal-Orlov \cite{BondalOrlov2001} for varieties with ample or anti-ample canonical bundle.
 \subsection{Basic definitions}
 Let $\mathcal{A}$ be an abelian category. The derived category $D(\mathcal{A})$ is constructed in several steps. Consider the category $C(\mathcal{A})$ of complexes in $\mathcal{A}$, whose objects are cochain complexes and morphisms are chain maps that commute with the differentials.  
 
@@ -1208,7 +2390,7 @@ Abstractly, let $S$ be the set of quasi-isomorphisms in $K(\mathcal{A})$. The de
   H^n : X^n \oplus X^{n+1} \longrightarrow X^{n-1} \oplus X^{n},\qquad
   H^n(x,y)=(0,x).
   \]
-  One can check that $dH+Hd=\mathrm{id}$. Thus $\mathrm{Cone}(s)$ is contractible.
+  One can check that $dH+Hd=\mathrm{id}$. Thus $\mathrm{Cone}(s)$ is contractible. \qedhere
   \end{enumerate}
 \end{proof}
 \begin{example}
@@ -1275,7 +2457,7 @@ U \arrow[r,"p"']
           \[X \xrightarrow{f} Y \xrightarrow{u} C(f) \xrightarrow{v} X[1],\]
           \[Y \xrightarrow{g} Z \xrightarrow{u'} C(g) \xrightarrow{v'} Y[1],\]
           and
-          \[X \xrightarrow{g\circ f} Z \xrightarrow{u''} C(g\circ f) \xrightarrow{v''} X[1],\]
+          \[X \xrightarrow{g\circ f} Z \xrightarrow{u"} C(g\circ f) \xrightarrow{v"} X[1],\]
           along with morphisms $C(f) \xrightarrow{w} C(g\circ f)$ and $C(g) \xrightarrow{w'} C(g\circ f)$ such that the following diagram commutes and the rows and columns are distinguished triangles:
           \[\begin{tikzcd}
             & Y \arrow[rr, "u"] \arrow[dd, "g"'] & & C(f) \arrow[dd, "w"] \\
@@ -1536,8 +2718,100 @@ This is because Ext groups are computed locally — they vanish where the sheave
 and the support of $\mathcal{E}xt^p_X(\mathcal{F},\mathcal{G})$ is contained in $\operatorname{Supp}(\mathcal{F}) \cap \operatorname{Supp}(\mathcal{G})$. So if that intersection is empty, the sheaf $\mathcal{E}xt^p_X(\mathcal{F},\mathcal{G})$ is zero; hence taking global sections gives $\operatorname{Ext}^p_X(\mathcal{F},\mathcal{G}) = 0$.
 \end{remark}
 
+\section{Appendix: Semiorthogonal decompositions}
+Roughly speaking, a semiorthogonal decomposition of a triangulated category $\cD$ is a way of breaking $\cD$ into smaller pieces (full triangulated subcategories) such that the pieces are disjoint and semiorthogonal
+(there are no $\mathbf R\!\Hom$'s pointing to the left), and that every object has a functorial filtration whose associated graded pieces lie in these subcategories (ordered from right to left). We follow the exposition given by \cite{Bondal1990}.
+\begin{definition}
+  A \textbf{semiorthogonal decomposition} of a triangulated category $\mathcal{D}$ is a sequence of full triangulated subcategories $\mathcal{A}_1, \ldots, \mathcal{A}_n$ of $\mathcal{D}$ such that:
+  \begin{enumerate}
+    \item For all $1 \leq i < j \leq n$, we have
+          \[\mathrm{Hom}_{\mathcal{D}}(A_j, A_i) = 0 \quad \text{for all } A_i \in \mathcal{A}_i, A_j \in \mathcal{A}_j.\]
+    \item  The smallest triangulated subcategory of $\cD$ containing $\cA_1, \ldots, \cA_n$ coincides with $\cD$. This is equivalent (under the orthogonality hypothesis) to the condition that for every object $D \in \mathcal{D}$, there exists a sequence of morphisms  
+          \[
+            0 = D_n \to D_{n-1} \to \cdots \to D_1 \to D_0 = D
+          \]
+          such that the cone of the morphism $D_i \to D_{i-1}$ is an object of $\mathcal{A}_i$ for each $1 \leq i \leq n$. 
+  \end{enumerate}
+  We denote such a semiorthogonal decomposition by
+  \[\mathcal{D} = \langle \mathcal{A}_1, \mathcal{A}_2, \ldots, \mathcal{A}_n \rangle.\]
+\end{definition}
 
 
+\begin{definition}
+  A full triangulated subcategory $\mathcal{A} \subset \mathcal{D}$ is called \textbf{left admissible} if the inclusion functor $i: \mathcal{A} \hookrightarrow \mathcal{D}$ has a left adjoint $i^*: \mathcal{D} \to \mathcal{A}$. Similarly, $\mathcal{A}$ is called \textbf{right admissible} if the inclusion functor has a right adjoint $i^!: \mathcal{D} \to \mathcal{A}$. A subcategory is called \textbf{admissible} if it is both left and right admissible.
+\end{definition}
+
+It is a general fact that if $\cD$ is the bounded derived category of coherent sheaves on a smooth projective variety, then a full triangulated subcategory is left or right admissible if and only if it is admissible. An admissible subcategory $\mathcal{A} \subset \mathcal{D}$ gives rise to two semiorthogonal decompositions:
+\[\mathcal{D} = \langle \mathcal{A}^\perp, \mathcal{A} \rangle = \langle \mathcal{A}, {}^\perp \mathcal{A} \rangle,\]
+where
+\[\mathcal{A}^\perp = \{D \in \mathcal{D} \mid \mathrm{Hom}_{\mathcal{D}}(A[t],D) = 0 \text{ for all } A \in \mathcal{A}, t\in \Z\}\]
+and
+\[{}^\perp \mathcal{A} = \{D \in \mathcal{D} \mid \mathrm{Hom}_{\mathcal{D}}(D,A[t]) = 0 \text{ for all } A \in \mathcal{A}, t \in \Z\}\]
+
+\begin{remark}
+  In the older literature, authors often asked that the terms in a semiorthogonal decomposition be admissible subcategories. However, this is not necessary in modern treatments, and the name "weak semiorthogonal decomposition" is sometimes used to refer to semiorthogonal decompositions where the terms are not required to be admissible.
+\end{remark}
+
+The simplest example of an admissible subcategory is the one generated
+by an exceptional object. 
+\begin{definition}
+An object $E$ is \textbf{exceptional} if
+\[
+\Hom(E,E) = k \quad\text{and}\quad \Hom(E,E[t]) = 0 \text{ for } t \neq 0.
+\]
+An exceptional collection is a collection of exceptional objects
+$E_1,E_2,\dots,E_m$ such that
+\[
+\Hom(E_i,E_j[t]) = 0 \quad\text{for all } i>j \text{ and all } t\in\Z.
+\]
+\end{definition}
+An exceptional collection in $\mathcal T$ gives rise to a
+semiorthogonal decomposition
+\begin{equation}\label{eq:exc-sod}
+  \mathcal T = \langle \mathcal A, E_1,\dots,E_m\rangle
+  \quad\text{with}\quad
+  \mathcal A = \langle E_1,\dots,E_m\rangle^\perp.
+\end{equation}
+Here $E_i$ denotes the subcategory generated by the exceptional object
+with the same name. If the category $\mathcal A$ in
+\eqref{eq:exc-sod} is zero, the exceptional collection is called
+\textbf{full}.
+
+\begin{definition}
+  Let $(E,F)$ be an exceptional pair in a triangulated category $\mathcal{D}$. The \textbf{left mutation} of $F$ through $E$ is the object $L_E F$ defined by the distinguished triangle
+  \[L_E F \to \mathrm{Hom}^\bullet(E,F) \otimes E \xrightarrow{\mathrm{ev}} F \to L_E F[1],\]
+  where $\mathrm{ev}$ is the evaluation map. Similarly, the \textbf{right mutation} of $E$ through $F$ is the object $R_F E$ defined by the distinguished triangle
+  \[R_F E[-1] \to E \xrightarrow{\mathrm{coev}} \mathrm{Hom}^\bullet(E,F)^* \otimes F \to R_F E,\]
+  where $\mathrm{coev}$ is the coevaluation map.
+
+  A mutation of an exceptional collection $\sigma = (E_0,\dots,E_n)$ is defined by applying left or right mutations to adjacent pairs of objects in the collection.
+  \[R_i\sigma = (E_0,\dots,E_{i-1}, E_{i+1}, R_{E_{i+1}} E_i, E_{i+2},\dots,E_n),\]
+  \[L_i\sigma = (E_0,\dots,E_{i-1}, L_{E_i} E_{i+1}, E_i, E_{i+2},\dots,E_n).\]
+\end{definition}
+
+When $\cD$ is the derived category of an abelian category $\mathcal{A}$, the object $\mathrm{Hom}^\bullet(E,F)$ is precisely $R\Hom_{\mathcal{A}}(E,F)$. 
+
+\begin{theorem}[Properties of mutations, {\cite{Bondal1990}}]
+  \leavevmode
+  \begin{enumerate}
+    \item The mutation of an exceptional collection is again an exceptional collection. In particular, the triangulated subcategory generated by the original collection coincides with the subcategory generated by any of its mutations: if $\sigma$ is an exceptional collection and $\sigma'$ is obtained from $\sigma$ by a sequence of left or right mutations, then $\langle\sigma\rangle=\langle\sigma'\rangle$.
+
+  \item For an adjacent pair $(E_i,E_{i+1})$ the left and right mutation functors $L_{i}$ and $R_{i}$ (short for $L_{E_i}$ and $R_{E_{i+1}}$) are inverse to each other on the subcategory generated by that pair. In particular, on $\langle E_i,E_{i+1}\rangle$ one has $R_i\circ L_i\cong\mathrm{id}$ and $L_i\circ R_i\cong\mathrm{id}$.
+
+  \item The mutations satisfy the braid relations: for all relevant indices,
+  \[
+  R_iR_{i+1}R_i \cong R_{i+1}R_iR_{i+1},\qquad
+  L_iL_{i+1}L_i \cong L_{i+1}L_iL_{i+1},
+  \]
+  and nonadjacent mutations commute:
+  \[
+  R_iR_j \cong R_jR_i,\qquad L_iL_j \cong L_jL_i\qquad\text{for }|i-j|>1.
+  \]
+
+  Consequently the operators $R_i$ (resp.\ $L_i$) induce an action of the braid group on the set of exceptional collections: compositions of mutations give well-defined braid-group elements acting by producing new exceptional collections which generate the same admissible subcategory.
+  \end{enumerate}
+  
+\end{theorem}
 
 \section{Appendix: Algebraic Geometry}
 We collect some definitions and facts from algebraic geometry that are used in the main text. In particular, we discuss sheaf cohomology and Serre's affineness criterion. We also include a proof of the Ext-computation for closed immersions used in the spherical twist example. Finally, we review some of the technical definitions around stacks.
@@ -1792,7 +3066,7 @@ However, in our case the horizontal differential is zero, so the spectral sequen
 \end{remark}
 
 \subsection{Quotient stack}
-Let $\mathcal{S}$ be a category and $p:\mathcal{X}\to\mathcal{S}$ be a functor of categories.
+We recall some definitions around stacks and quotient stacks, following \cite{alper_moduli}. Let $\mathcal{S}$ be a category and $p:\mathcal{X}\to\mathcal{S}$ be a functor of categories.
 We visualize this data as
 \[
   \begin{tikzcd}
@@ -1953,18 +3227,32 @@ A stack over a site $\mathcal{S}$ is a prestack $\mathcal{X}$ where the objects 
   $\mathcal{T} \to \mathcal{X}$ is representable by schemes and an open immersion (resp.\ closed immersion).
 \end{definition}
 
-\section{References}
-NOTES ON GIT AND SYMPLECTIC REDUCTION FOR
-BUNDLES AND VARIETIES
-by R. P. THOMAS
+\begin{thebibliography}{99}
 
-Alper Moduli
+\bibitem{alper_moduli}
+J.~Alper, \emph{Stacks and moduli (notes)}, available online. \url{https://sites.math.washington.edu/~jarod/moduli.pdf}.
 
-Segal paper
+\bibitem{Bondal1990}
+A.~I.~Bondal, \emph{Representation of associative algebras and coherent sheaves}, Math. USSR-Izv. \textbf{34} (1990), 23--42.
 
-Stacks project
+\bibitem{BondalOrlov2001}
+A.~Bondal and D.~Orlov, \emph{Reconstruction of a variety from the derived category and groups of autoequivalences}, Compositio Math. \textbf{125} (2001), no.~3, 327--344. DOI:10.1023/a:1002470302976.
 
-Bondal Orlov paper
+\bibitem{HalpernLeistner2014}
+D.~Halpern-Leistner, \emph{The derived category of a GIT quotient}, 2014, arXiv:1203.0276. \url{https://arxiv.org/abs/1203.0276}.
 
-Algebra V Encyclopedia of Mathematical Sciences
+\bibitem{HalpernLeistnerShipman2016}
+D.~Halpern-Leistner and I.~Shipman, \emph{Autoequivalences of derived categories via geometric invariant theory}, 2016, arXiv:1303.5531. \url{https://arxiv.org/abs/1303.5531}.
+
+\bibitem{Segal2011}
+E.~Segal, \emph{Equivalences Between GIT Quotients of Landau-Ginzburg B-Models}, Comm. Math. Phys. \textbf{304} (2011), no.~2, 411--432. DOI:10.1007/s00220-011-1232-y.
+
+\bibitem{SeidelThomas2000}
+P.~Seidel and R.~P.~Thomas, \emph{Braid group actions on derived categories of coherent sheaves}, 2000, arXiv:math/0001043. \url{https://arxiv.org/abs/math/0001043}.
+
+\bibitem{thomas2006}
+R.~P.~Thomas, \emph{Notes on GIT and symplectic reduction for bundles and varieties}, 2006, arXiv:math/0512411. \url{https://arxiv.org/abs/math/0512411}.
+
+\end{thebibliography}
+
 \end{document}
