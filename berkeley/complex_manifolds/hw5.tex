@@ -9,6 +9,7 @@
 \begin{document}
 \psettitle
 
+For Questions 1 and 2, you may use the correspondence indicated in class between the representation of $H^1$ classes by classes by principal parts versus Dolbeault distributions.
 \begin{problem}[1]
 For a compact Riemann surface $R$, verify that the Serre duality pairing
 \[
@@ -20,6 +21,125 @@ of Dolbeault representatives.
 Using the relation to harmonic forms, explain how this relates to
 Poincar\'e duality on $R$.
 \end{problem}
+
+\begin{solution} Choose a meromorphic function $f$ on $R$ whose principal part at each
+$p_i$ with prescribed principal parts. Let $U_i$ be pairwise disjoint coordinate discs around $p_i$, and choose
+$\chi\in C^\infty(R)$ such that $\chi\equiv 1$ on smaller discs $U_i'\subset U_i$
+and $\chi\equiv 0$ outside $\bigcup_i U_i$.
+Define a $(0,1)$-\emph{current}
+\[
+T_f := \bar\partial(\chi f).
+\]
+
+Since $\bar\partial^2=0$, $T_f$ is $\bar\partial$-closed.
+If we replace $f$ by $f+g$ for a global meromorphic function $g$
+(with poles in $D$) or change $\chi$ within the same constraints,
+$T_f$ changes by a current of the form $\bar\partial u$, so the
+class $[T_f]$ in
+\[
+H^{0,1}_{\bar\partial}(R) \cong H^1(R,\cO)
+\]
+depends only on the underlying principal parts.
+
+Let $\omega\in H^0(R,\Omega^1)$ be a holomorphic $1$-form.
+The \emph{Dolbeault} definition of the pairing is
+\[
+\langle\alpha,\omega\rangle_{Dol}
+:= \frac{1}{2\pi i}\int_R T_f\wedge\omega
+= \frac{1}{2\pi i}\int_R \bar\partial(\chi f)\wedge\omega.
+\]
+Since $\omega$ is of type $(1,0)$ and holomorphic,
+$\bar\partial\omega=0$, hence
+\[
+\bar\partial(\chi f)\wedge\omega
+= \bar\partial(\chi f\omega).
+\]
+
+Let $D_i\subset U_i'$ be small closed discs around $p_i$ and set
+\[
+R_\varepsilon := R\setminus\bigcup_i D_i(\varepsilon),
+\]
+where $D_i(\varepsilon)$ are concentric discs of radius $\varepsilon$.
+On $R_\varepsilon$ the form $\chi f\omega$ is smooth with compact
+support, so Stokes' theorem gives
+\[
+\int_{R_\varepsilon} \bar\partial(\chi f\omega)
+= \int_{\partial R_\varepsilon} \chi f\omega
+= -\sum_i \int_{\partial D_i(\varepsilon)} f\omega,
+\]
+the sign coming from the induced orientation on the boundary.
+
+Letting $\varepsilon\to 0$ and using the residue theorem,
+\[
+\int_{\partial D_i(\varepsilon)} f\omega
+\;\longrightarrow\; 2\pi i\,\Res_{p_i}(f\omega),
+\]
+we obtain
+\[
+\frac{1}{2\pi i}\int_R \bar\partial(\chi f)\wedge\omega
+= \sum_i \Res_{p_i}(f\omega).
+\]
+This is precisely the \emph{principal parts} definition of the Serre pairing.
+
+Now equip $R$ with any Hermitian (necessarily K\"ahler) metric. Hodge theory yields the decompositions
+\[
+H^1_{\dR}(R,\C)
+\;\cong\;
+\cH^1(R) \;\cong\;
+H^{1,0}_{\bar\partial}(R)\oplus H^{0,1}_{\bar\partial}(R),
+\]
+and every class has a unique harmonic representative.  Moreover,
+\[
+H^0(R,\Omega^1) \cong H^{1,0}_{\bar\partial}(R)
+\]
+consists of harmonic $(1,0)$-forms, and
+\[
+H^1(R,\cO) \cong H^{0,1}_{\bar\partial}(R)
+\]
+is represented by harmonic $(0,1)$-forms.  Complex conjugation gives
+an isomorphism \[\overline{H^{1,0}_{\bar\partial}(R)}
+\cong H^{0,1}_{\bar\partial}(R)\]
+
+Poincaré duality on $R$ is given by the nondegenerate pairing
+\[
+H^1_{\dR}(R,\C)\times H^1_{\dR}(R,\C)
+\longrightarrow \C,
+\qquad
+([\alpha],[\beta])\mapsto\int_R \alpha\wedge\beta.
+\]
+It is clear that $\alpha \wedge \beta$ is nonzero only if
+$\alpha$ and $\beta$ are of complementary types, i.e. their wedge is of type
+$(1,1)$, since $(1,0)\wedge(1,0)$ and $(0,1)\wedge(0,1)$ necessarily vanish.
+Thus the Poincaré pairing restricts to a nondegenerate pairing
+\[
+H^{0,1}_{\bar\partial}(R)\;\otimes\; H^{1,0}_{\bar\partial}(R)
+\longrightarrow \C,
+\qquad
+(\eta,\omega)\mapsto\int_R \eta\wedge\omega,
+\]
+with $\eta,\omega$ harmonic representatives.
+
+Under the identifications
+\[
+H^1(R,\cO)\cong H^{0,1}_{\bar\partial}(R),
+\qquad
+H^0(R,\Omega^1)\cong H^{1,0}_{\bar\partial}(R),
+\]
+the Serre pairing of $\alpha$ and $\omega$ is
+\[
+\langle\alpha,\omega\rangle
+= \frac{1}{2\pi i}\int_R \eta\wedge\omega,
+\]
+where $\eta$ is the harmonic $(0,1)$-representative of $\alpha$. In particular, on a compact Riemann surface the Serre duality
+\[
+H^1(R,\cO)\;\cong\;H^0(R,\Omega^1)^\vee
+\]
+is nothing but Poincaré duality in degree~$1$ up to the 
+constant factor $2\pi i$, expressed via the Hodge
+decomposition of $H^1_{\dR}(R,\C)$.
+\end{solution}
+
+
 
 \begin{problem}[2]
 For a compact Riemann surface $R$, verify that the map
@@ -33,6 +153,107 @@ H_1(R;\Z)\otimes H^0(R;\Omega^1)\longrightarrow \C
 under integral Poincar\'e duality and Serre duality on $R$.
 \end{problem}
 
+\begin{solution}
+Let $i:H^1(R;\Z)\to H^1(R;\cO)$ be the given homomorphism. We need to show
+for every $c\in H^1(R;\Z)$ and $\omega\in H^0(R,\Omega^1)$, the Serre
+pairing
+\(
+\langle i(c),\omega\rangle_{\mathrm{Serre}}
+\)
+equals the period of $\omega$ along the $1$--cycle Poincar\'e dual to
+$c$.
+
+By Hodge theory, every class in $H^1(R;\R)$ has a unique harmonic
+representative.  An element $c\in H^1(R;\Z)$ maps to a real class
+$c_\R\in H^1(R;\R)$ whose harmonic representative we denote by
+$\alpha$ so
+\[
+[\alpha]_{\dR} = c_\R\in H^1_{\dR}(R;\R).
+\]
+Decompose $\alpha$
+\[
+\alpha = \alpha^{1,0}+\alpha^{0,1},
+\qquad
+\alpha^{0,1} = \overline{\alpha^{1,0}},
+\]
+since $\alpha$ is real.  Under the Dolbeault isomorphism and Hodge
+decomposition, we have
+\[
+H^1(R,\cO)\;\cong\; H^{0,1}_{\bar\partial}(R)
+\]
+and the image $i(c)\in H^1(R,\cO)$ is represented by the harmonic $(0,1)$--form $\alpha^{0,1}$.
+
+We know that the Serre pairing can be described as
+\[
+\langle\beta,\omega\rangle_{\mathrm{Serre}
+}
+=\frac{1}{2\pi i}\int_R \eta^{0,1}\wedge\omega
+\]
+whenever $\beta\in H^1(R,\cO)$ is represented by a harmonic
+$(0,1)$--form $\eta^{0,1}$ and $\omega\in H^0(R,\Omega^1)$ is a
+holomorphic $1$--form.
+
+Applying this to $\beta=i(c)$ and $\eta^{0,1}=\alpha^{0,1}$ gives
+\[
+\langle i(c),\omega\rangle_{\mathrm{Serre}}
+= \frac{1}{2\pi i}\int_R \alpha^{0,1}\wedge\omega.
+\]
+Since $R$ has complex dimension $1$, a $(2,0)$–form vanishes, hence
+$\alpha^{1,0}\wedge\omega=0$, and therefore
+\[
+\alpha^{0,1}\wedge\omega
+= (\alpha^{1,0}+\alpha^{0,1})\wedge\omega
+= \alpha\wedge\omega.
+\]
+Thus
+\begin{equation}
+\label{eq:Serre-alpha}
+\langle\iota^*c,\omega\rangle_{\mathrm{Serre}}
+= \frac{1}{2\pi i}\int_R \alpha\wedge\omega.
+\end{equation}
+Integral Poincar\'e duality gives a perfect pairing
+\[
+H^1(R;\Z)\times H_1(R;\Z)\longrightarrow\Z,
+\]
+and we denote by $\gamma_c\in H_1(R;\Z)$ the Poincar\'e dual of $c$.
+
+The de~Rham realization of this pairing is as follows.  The class
+$c_\R\in H^1(R;\R)$ is represented by the closed $1$--form $\alpha$ with integral periods, i.e.
+\[
+\int_\gamma \alpha \in \Z
+\quad\text{for all } \gamma\in H_1(R;\Z).
+\]
+The Poincar\'e dual cycle $\gamma_c$ is then characterized by
+\[
+\int_{\gamma_c} \beta
+= \int_R \alpha\wedge\beta
+\quad\text{for all closed $1$--forms }\beta,
+\]
+
+Thus, if we identify
+\[
+H^1(R;\Z)\xrightarrow{\;\text{PD}\;}\; H_1(R;\Z)
+\quad\text{and}\quad
+H^1(R;\cO)\xrightarrow{\;\text{Serre}\;}
+H^0(R,\Omega^1)^\vee,
+\]
+the class $c\in H^1(R;\Z)$ maps to the functional
+\[
+H^0(R,\Omega^1)\longrightarrow\C,
+\qquad
+\omega\longmapsto \frac{1}{2\pi i}\int_{\gamma_c}\omega.
+\]
+
+This is precisely the period map (up to the factor $1/(2\pi i)$)
+\[
+H_1(R;\Z)\otimes H^0(R,\Omega^1)\longrightarrow\C,
+\qquad
+(\gamma,\omega)\longmapsto\int_\gamma\omega,
+\]
+with $\gamma=\gamma_c$ the Poincar\'e dual of $c$.
+
+\end{solution}
+
 \begin{problem}[3]
 Show that the period mapping gives an isomorphism
 \[
@@ -42,7 +263,6 @@ which can be realized geometrically by the Abel--Jacobi map
 \[
 R\longrightarrow J_1.
 \]
-
 Show that under this correspondence, $c_1(\Theta)\in\Lambda^2 H_1(R)$
 is the intersection pairing on $R$.
 
@@ -57,6 +277,108 @@ is the Theta divisor, the image of $\Sym^{g-1}(R)$. The maps
 \]
 have degree $1$.
 \end{problem}
+
+\begin{solution}
+The presentation of the Jacobian $J$ as
+\[
+J \cong H^1(R;\cO) / H_1(R;\Z)
+\]
+makes it clear that $H_1(J;\Z)$ is naturally identified with
+$H_1(R;\Z)$, since the universal cover of $J$ is the vector space
+$H^1(R;\cO)$. The period mapping 
+\[
+H_1(R;\Z)\to H_1(J;\Z)
+\] is injective because of the Riemann bilinear relations, and since both groups are free abelian of rank $2g$, it is an isomorphism. Pick a base point $p_0\in R$ and define the Abel--Jacobi map
+\[
+\varphi:R\to J,
+\qquad
+p\mapsto \left[\omega\mapsto \int_{p_0}^p \omega\right].
+\]
+precisely implements the lift of the period mapping to the universal cover and hence induces the same isomorphism on $H_1$.
+
+Pick a symplectic basis $\{a_1,\dots,a_g,b_1,\dots,b_g\}$ of $H_1(R,\Z)$, i.e.
+\[a_i\cdot a_j = 0,
+\quad b_i\cdot b_j = 0,
+\quad a_i\cdot b_j = \delta_{ij}.\]
+
+
+Under the identification
+$H_1(R,\Z)\xrightarrow{\sim}\Lambda\cong H_1(J,\Z)$ coming from the period map and the Abel--Jacobi embedding, a homology class $\gamma\in H_1(R,\Z)$ corresponds to an integral vector $(m,n)\in\Z^{2g}$. The intersection pairing on $H_1(R,\Z)$ is given in these coordinates by
+\[
+(m,n)\cdot(m',n') \;=\; m^{\mathrm T}n' - m'^{\mathrm T}n.
+\]
+The Riemann theta function with period matrix $\tau$ is
+\[
+\theta(z\mid\tau)
+:= \sum_{k\in\Z^g}
+\exp\bigl(\pi i\,k^{\mathsf T}\tau k + 2\pi i\,k^{\mathsf T}z\bigr),
+\quad z\in\C^g.
+\]
+The Riemann theta function satisfies the quasi-periodicity property.
+\[
+\theta\bigl(z + m + \tau n \mid \tau\bigr)
+=
+\exp\bigl(-\pi i n^{\mathsf T}\tau n - 2\pi in^{\mathsf T}z\bigr)
+\theta(z\mid\tau)
+\]
+In particular, the Riemann theta function defines a holomorphic section of the line bundle
+$\mathcal{O}_J(\Theta)$.
+
+Hence, identifying $H^{2}(U,\mathbb{Z})$ and $H^{2}(X,\mathbb{Z})$ by the above
+isomorphism, the Chern class of $L$ is simply $\delta(\operatorname{cl}\{e_{u}\})$.
+Write $e_{u}(z)=e^{2\pi i f_{u}(z)}$ with $f_{u}$ holomorphic in $V$.  Then by
+definition, $\delta(\operatorname{cl}\{e_{u}\})\in H^{2}(U,\mathbb{Z})$ is
+given by the $2$--cocycle $F(u_{1},u_{2})$ on $U$ with coefficients in
+$\mathbb{Z}$ defined by
+\[
+  F(u_{1},u_{2})
+  = f_{u_{2}}(z+u_{1}) - f_{u_{1}+u_{2}}(z) + f_{u_{1}}(z)
+  \in \mathbb{Z}. \tag{$*$}
+\]
+
+\begin{lemma}[1 (Mumford)]
+Let $U \subset V$ be a lattice in a complex vector space $V$. The map which associates to any map $F: U\times U \to \mathbb{Z}$ the
+map $AF: U\times U\to \mathbb{Z}$ defined by
+\[
+  AF(u_{1},u_{2}) = F(u_{1},u_{2}) - F(u_{2},u_{1})
+\]
+maps the group of $2$--cocycles $Z^{2}(U,\mathbb{Z})$ into the space of
+alternating linear maps $U\times U\to\mathbb{Z}$, and induces an
+isomorphism
+\[
+  A:\;
+  H^{2}(U,\mathbb{Z})
+  \;\xrightarrow{\ \sim\ }\;
+  \operatorname{Hom}(\Lambda^{2}U,\mathbb{Z})
+  \;\cong\;
+  \Lambda^{2}\operatorname{Hom}(U,\mathbb{Z}).
+\]
+Furthermore for $\xi,\eta\in\operatorname{Hom}(U,\mathbb{Z})=H^{1}(U,\mathbb{Z})$,
+we have $A(\xi\smile\eta)=\xi\wedge\eta$.
+\end{lemma}
+
+\begin{proposition}[2 (Mumford)]
+The Chern class of the line bundle corresponding to
+$\{e_{u}\}\in Z^{1}(U,H^{*})$ is the alternating $2$--form on $U$ with values
+in $\mathbb{Z}$ given by
+\[
+  E(u_{1},u_{2})
+  = f_{u_{2}}(z+u_{1}) + f_{u_{1}}(z)
+    - f_{u_{1}}(z+u_{2}) - f_{u_{2}}(z),
+  \qquad (z\text{ arbitrary in }V),
+  \tag{$**$}
+\]
+where
+\[
+  e_{u}(z) = e^{\,2\pi i\, f_{u}(z)}.
+\]
+\end{proposition}
+Moreover if we extend $E$ $\mathbb{R}$--linearly to a map
+$V\times V\to\mathbb{R}$, then $E$ satisfies the identity
+\[
+  E(ix,iy) = E(x,y) \qquad \text{for } x,y\in V.
+\]
+\end{solution}
 
 \begin{problem}[4]
 Prove the following generalized Cauchy formula for a smooth function $f$

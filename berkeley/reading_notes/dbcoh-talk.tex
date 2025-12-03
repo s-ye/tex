@@ -21,7 +21,7 @@
 \rhead{\today}
 \cfoot{\thepage}
 
-\title{Equivariant Derived Categories of Coherent Sheaves}
+\title{Autoequivalences from GIT}
 
 \author{Songyu Ye}
 \date{\today}
@@ -29,7 +29,7 @@
 
 
 \begin{abstract}
-Notes for a talk on equivariant derived categories of coherent sheaves, given in the low dimensional gauge theory seminar at UC Berkeley. 
+Notes for a talk on autoequivalences arising from variation of GIT quotients, given in the low dimensional gauge theory seminar at UC Berkeley. 
 \end{abstract}
 
 \tableofcontents
@@ -41,23 +41,7 @@ derived categories of coherent sheaves on an algebraic variety should admit twis
     \item A-model: symplectic automorphisms and generalized Dehn twists along Lagrangian spheres
     \item B-model: derived autoequivalences such as spherical twists
 \end{enumerate}
-We want to consider natural constructions of twist autoequivalences of $D^b(X)$.
-Techinques come from variation of GIT (VGIT) and the general theory of spherical functors and semiorthogonal decompositions. For example, this formalism makes it clear the action of the braid group on the derived category of the variety.
-
-A remark about the general strategy: Suppose $X_+$ and $X_-$ are a pair of varieties related by a flop and that both arise as GIT quotients of a larger space $V$ by a reductive group $G$. 
-\[
-X_\pm \;=\; [V^{ss}(\chi_\pm)/G] \;\subset\; \mathcal{X} := [V/G]
-\]
-so $X_\pm$ are open substacks of $\mathcal{X}$.  There are exact restriction functors
-\[
-\iota_\pm^*: D^b(\mathcal{X}) \longrightarrow D^b(X_\pm)
-\]
-Try to construct an equivalence $D^b(X_+)\simeq D^b(X_-)$ by finding a single triangulated subcategory window $\mathcal{W}\subset D^b(\mathcal{X})$ which restricts isomorphically to both sides.   the functors $\iota_\pm^*$ induce equivalences
-\[
-\mathcal{W} \xrightarrow{\ \sim\ } D^b(X_+),\qquad
-\mathcal{W} \xrightarrow{\ \sim\ } D^b(X_-),
-\]
-and composing these gives the desired derived equivalence $D^b(X_+)\xrightarrow{\ \sim\ } D^b(X_-)$. Choosing different windowsand composing the resulting equivalences gives autoequivalences of $D^b(X_\pm)$.
+We want to consider natural constructions of twist autoequivalences of $D^b(X)$. Techniques come from variation of GIT (VGIT) and the general theory of spherical functors and semiorthogonal decompositions.
 
 \section{Refresher on GIT}
 Consider a graded noetherian algebra over $\C$:
@@ -72,25 +56,28 @@ X /\!/ G := \Proj(R^G)
 \]
 The invariant algerbra is finitely generated (Hilbert, Nagata).
 
+The inclusion $R^G \subset R$ induces a rational map
+\[
+X \dashrightarrow X /\!/ G.
+\] 
+\begin{definition}
+    A point $x \in X$ is semistable if it is in the domain of definition of the above rational map. A point $x \in X$ is stable if its orbit is closed in the semistable locus and its stabilizer is finite. Denote the semistable locus by $X^{ss}$ and the stable locus by $X^s$.
+\end{definition}
+The map $X^{ss} \to X /\!/ G$ is the GIT quotient.
+
+\subsection{Chambers}
 Fix an ample line bundle $L$ on $X$. The space of G-linearizations of $L$ has a wall-chamber structure; crossing a wall changes the GIT quotient by a birational map.
 
 \begin{theorem}
-    The real character space $X^\ast(G)_\R$ is cut into finitely many chambers by rational walls; for characters in the same chamber the GIT quotient is constant, and crossing a wall induces a birational modification of the quotient.
+    The real character space $X^\ast(G)_\R$ is cut into finitely many chambers by rational walls; for characters in the same chamber the GIT quotient $X^{ss}(L,\chi) \to X /\!/_{L,\chi} G$
+     is constant, and crossing a wall induces a birational modification of the quotient.
 \end{theorem}
 
 It is also true that there are only finitely many distinct GIT quotients
 $X /\!/_{L} G$ up to isomorphism as $L$ ranges over all $G$--ample
 linearizations.
 
-There are rational maps for every $r$ \[
-X//G \dashrightarrow \P(H^0(X,\cL^r)^G)^*
-\]
-
-\begin{definition}
-    A point $x \in X$ is semistable if one of the above maps is defined at $x$ for some $r>0$. A point $x \in X$ is stable if the orbit $G\cdot x$ is closed in $X^{ss}$ and the stabilizer of $x$ in $G$ is finite. A point $x \in X$ is unstable if it is not semistable.
-\end{definition}
-
-Restriction gives an exact dg-functor $i^\ast: D^b(X/G) \to D^b(X^{ss}/G)$. The meat of what I want to talk about is the construction of a functorial splitting.
+Restriction gives an exact dg-functor $i^\ast: D^b(X/G) \to D^b(X^{ss}/G)$. One important fact that we will see later is that there is a functorial splitting.
 
 \section{The standard flop}
 We do an example following Segal. Let $V = \mathbb{C}^4_{x_1,x_2,y_1,y_2}$ and $\mathbb{C}^*$ act on $V$ with weight $(1,1,-1,-1)$.
@@ -99,14 +86,13 @@ There are two possible GIT quotients $X_{+}$ and $X_{-}$, depending on whether w
 
 Open substacks of the stack $\mathcal{X} = [V/\mathbb{C}^*]$ given by the semistable loci. Let $\iota_\pm: X_\pm \to \mathcal{X}$ be the open immersions. The restriction functors $\iota_\pm^*: D^b(\mathcal{X}) \to D^b(X_\pm)$ are exact.
 
-Let $\cG_t$ be the full subcategory of $D^b(\mathcal{X})$ generated by the line bundles $\cO(t),\cO(t+1)$ for some integer $t$. 
+Let $\cG_t = \langle \cO(t), \cO(t+1) \rangle \subset D^b(\mathcal{X})$. It is called a window subcategory.
 
 \begin{claim}
 For any $t \in \mathbb{Z}$, both $\iota_+^*$ and $\iota_-^*$ restrict to give equivalences
   \[
     D^b(X_+) \xleftarrow{\sim} \mathcal{G}_t \xrightarrow{\sim} D^b(X_-).
   \]
-  for 
 \end{claim}
 
 \begin{proof}
@@ -115,19 +101,7 @@ For any $t \in \mathbb{Z}$, both $\iota_+^*$ and $\iota_-^*$ restrict to give eq
 
 Left hand side: $V$ affine, so $H^p(\mathcal{X},\mathcal{O}(i))=(\mathcal{O}_V)_i$ for $p=0$ and $0$ for $p>0$. 
 
-Right hand side: We do the computation for $X^+$. Let projection $\pi:X_+ \to\mathbb{P}^1$. Recall $X_+$ is the total space of the bundle $E = \mathcal{O}(-1)^{\oplus 2}$ over $\mathbb{P}^1_x$. Then
-
- Then
-\[
-  \pi_*\mathcal{O}_{X^+}\cong\operatorname{Sym}^\bullet(E^\vee)
-  =\operatorname{Sym}^\bullet(\mathcal{O}(1)^{\oplus 2})
-  \cong\bigoplus_{m\ge0}\operatorname{Sym}^m(\mathcal{O}(1)^{\oplus 2}) \cong \bigoplus_{m\ge0}\mathcal{O}(m)^{\oplus(m+1)}
-\]
-has global sections $\bigoplus_{m\ge0} \Span\{x_1^a x_2^{m-a}\}^{\oplus(m+1)}$, one for each monomial in $y_1,y_2$ of degree $m$.
-
-Write $\cO_{X^+}(k) = i^*\cO_{\mathcal{X}}(k)$. We can identify \[
-i^{*}\cO_V(k)\cong \pi^{*}\cO_{\P^1}(k) \cong \cO_{X^+} \otimes \pi^{*}\cO_{\P^1}(k).
-\]
+Right hand side: We do the computation for $X^+$. Let projection $\pi:X_+ \to\mathbb{P}^1$. Recall $X_+$ is the total space of the bundle $E = \mathcal{O}(-1)^{\oplus 2}$ over $\mathbb{P}^1_x$. 
 
 By the projection formula and affineness of $\pi$ \[
   H^p(X^+,\mathcal{O}_{X_+}(k))
@@ -143,8 +117,7 @@ which is exactly the degree $k$ piece of $\mathcal{O}_V$. When $p>0$, this is ze
 
 For $p=1$, recall $k \in {-1,0,1}$ and $m\ge0$, so $k+m\ge -1$. Thus $H^1(\mathbb{P}^1,\ \mathcal{O}(k+m))=0$. This agrees with the left hand side. Note that if the size of the window is bigger, then we would pick up some $H^1$ terms.
 
-To check essential surjectivity, note that general theory says on a quasi-projective variety, an ample line bundle and its twists generate the derived category. Thus it is enough to show that $\cO(t), \cO(t+1)$ generate all powers of $\cO(1)$ on $X_\pm$. 
-This follows from the exactness of \[\pi^*: \Coh(\P^1) \to \Coh(X_\pm)\] and the fact that $D^b(\P^1)$ is generated by $\cO_{\P^1}(t), \cO_{\P^1}(t+1)$ by Beilinson's theorem.
+Essential surjectivity follows from exactness of \[\pi^*: \Coh(\P^1) \to \Coh(X_\pm)\] and the fact that $D^b(\P^1)$ is generated by $\cO_{\P^1}(t), \cO_{\P^1}(t+1)$ by Beilinson's theorem.
 \end{proof}
 
 So for any $t\in\mathbb{Z}$ we have a derived equivalence
@@ -180,36 +153,24 @@ Thus we compute:
 This autoequivalence $\Phi_{t+1}^{-1}\Phi_t$ is an example of a spherical twist.
 
 \begin{definition}
-  A \textbf{spherical twist} is an autoequivalence discovered by associated to any
-spherical object in the derived category, i.e.\ an object $S \in D^b(X)$ such that
+A spherical object $S$ in a dg-category $\mathcal{C}$ is an object such that
 \[
   \operatorname{Ext}(S,S) = \mathbb{C} \oplus \mathbb{C}[-n]
 \]
-for some $n$ (i.e.\ the homology of the $n$-sphere). It sends any object $\mathcal{E}$ to the cone on the evaluation map
+for some $n$. The spherical twist around $S$ sends any object $\mathcal{E}$ to the cone on the evaluation map
 \[
  \Cone\big(\operatorname{RHom}(S,\mathcal{E}) \otimes S \;\longrightarrow\; \mathcal{E}\big)
 \]
-The inverse twist sends $\mathcal{E}$ to the cone on the dual evaluation map
-\[
-  \Cone\big(\mathcal{E} \;\longrightarrow\; \operatorname{RHom}(\mathcal{E},S)^\vee \otimes S \big)
-\]
+
 \end{definition}
 
 \begin{claim}
-The object $\mathcal{O}_{\mathbb{P}^1_{x_1:x_2}}(t)$ is spherical for the derived category $D^b(X_+)$, and the inverse twist around it sends $\mathcal{O}(t+1)$ to itself and $\mathcal{O}(t)$ to the two -term complex
+The object $\mathcal{O}_{\mathbb{P}^1_{x_1:x_2}}(t)$ is spherical for the derived category $D^b(X_+)$, and the inverse twist around it sends $\mathcal{O}(t+1)$ to itself and $\mathcal{O}(t)$ to the two-term complex
 \[
 \big[\mathcal{O}(t+2) \xrightarrow{(-y_2,y_1)} \mathcal{O}(t+1)^{\oplus 2}\big],
 \]
 which agrees with $\Phi_{t+1}^{-1}\Phi_t$. 
 \end{claim}
-
-\begin{remark}
-    Tedious but straightforward computation. I checked it was spherical using the following fact. For a regular embedding $i:\Sigma\hookrightarrow X_+$ of codimension 2 there is a well-known identity:
-\[
-\operatorname{Ext}^i_{X_+}(i_*F, i_*G) \cong \bigoplus_{p=0}^{2} \operatorname{Ext}^{i-p}_{\Sigma}(F, G\otimes \wedge^p N_{\Sigma/X_+}).
-\] The normal bundle of a zero section in the total space of a vector bundle $E\to B$ is canonically identified with $E$ itself.
-\end{remark}
-
 
 
 \section{Autoequivalences from VGIT}
@@ -217,103 +178,29 @@ which agrees with $\Phi_{t+1}^{-1}\Phi_t$.
 The above example by Segal formally introduced windows to the mathematics literature and showed that window shift equivalences are given by spherical functors for gauged LG models. Note it was done for linear action of $\Gm$, and the window was identified in an ad-hoc way.
 
 We outline a more general treatment by
-Halpern-Leistner and Shipman. The main contribution of their paper is showing that there is a functorial splitting of the restriction functor \begin{align*}
+Halpern-Leistner and Shipman. 
+First a remark about the general strategy. Suppose $X_+$ and $X_-$ are a pair of varieties related by a flop and that both arise as GIT quotients of a larger space $V$ by a reductive group $G$. 
+\[
+X_\pm \;=\; [V^{ss}(\chi_\pm)/G] \;\subset\; \mathcal{X} := [V/G]
+\]
+so $X_\pm$ are open substacks of $\mathcal{X}$.  There are exact restriction functors
+\[
+\iota_\pm^*: D^b(\mathcal{X}) \longrightarrow D^b(X_\pm)
+\]
+Try to construct an equivalence $D^b(X_+)\simeq D^b(X_-)$ by finding a single triangulated subcategory window $\mathcal{W}\subset D^b(\mathcal{X})$ which restricts isomorphically to both sides.   the functors $\iota_\pm^*$ induce equivalences
+\[
+\mathcal{W} \xrightarrow{\ \sim\ } D^b(X_+),\qquad
+\mathcal{W} \xrightarrow{\ \sim\ } D^b(X_-),
+\]
+and composing these gives the desired derived equivalence $D^b(X_+)\xrightarrow{\ \sim\ } D^b(X_-)$. Choosing different windows and composing the resulting equivalences gives autoequivalences of $D^b(X_\pm)$.
+
+
+
+
+The main contribution of their paper is showing that there is a functorial splitting of the restriction functor \begin{align*}
     i^*:D^b(X/G) \to D^b(X^{ss}/G)
 \end{align*}
 and that the window categories arise naturally via the semiorthogonal decompositions.
-\subsection{Definitions}
-\begin{definition}
-  A \textbf{semiorthogonal decomposition} of a triangulated category $\mathcal{D}$ is a sequence of full triangulated subcategories $\mathcal{A}_1, \ldots, \mathcal{A}_n$ of $\mathcal{D}$ such that:
-  \begin{enumerate}
-    \item For all $1 \leq i < j \leq n$, we have
-          \[\mathrm{Hom}_{\mathcal{D}}(A_j, A_i) = 0 \quad \text{for all } A_i \in \mathcal{A}_i, A_j \in \mathcal{A}_j.\]
-    \item  The smallest triangulated subcategory of $\cD$ containing $\cA_1, \ldots, \cA_n$ coincides with $\cD$. This is equivalent (under the orthogonality hypothesis) to the condition that for every object $D \in \mathcal{D}$, there exists a sequence of morphisms  
-          \[
-            0 = D_n \to D_{n-1} \to \cdots \to D_1 \to D_0 = D
-          \]
-          such that the cone of the morphism $D_i \to D_{i-1}$ is an object of $\mathcal{A}_i$ for each $1 \leq i \leq n$. 
-  \end{enumerate}
-  We denote such a semiorthogonal decomposition by
-  \[\mathcal{D} = \langle \mathcal{A}_1, \mathcal{A}_2, \ldots, \mathcal{A}_n \rangle.\]
-\end{definition}
-
-\begin{definition}
-An object $E$ is \textbf{exceptional} if
-\[
-\Hom(E,E) = k \quad\text{and}\quad \Hom(E,E[t]) = 0 \text{ for } t \neq 0.
-\]
-An exceptional collection is a collection of exceptional objects
-$E_1,E_2,\dots,E_m$ such that
-\[
-\Hom(E_i,E_j[t]) = 0 \quad\text{for all } i>j \text{ and all } t\in\Z.
-\]
-\end{definition}
-
-\begin{definition}
-  Let $(E,F)$ be an exceptional pair in a triangulated category $\mathcal{D}$. The \textbf{left mutation} of $F$ through $E$ is the object $L_E F$ defined by the distinguished triangle
-  \[L_E F \to \mathrm{Hom}^\bullet(E,F) \otimes E \xrightarrow{\mathrm{ev}} F \to L_E F[1],\]
-  where $\mathrm{ev}$ is the evaluation map. Similarly, the \textbf{right mutation} of $E$ through $F$ is the object $R_F E$ defined by the distinguished triangle
-  \[R_F E[-1] \to E \xrightarrow{\mathrm{coev}} \mathrm{Hom}^\bullet(E,F)^* \otimes F \to R_F E,\]
-  where $\mathrm{coev}$ is the coevaluation map.
-
-  A mutation of an exceptional collection $\sigma = (E_0,\dots,E_n)$ is defined by applying left or right mutations to adjacent pairs of objects in the collection.
-  \[R_i\sigma = (E_0,\dots,E_{i-1}, E_{i+1}, R_{E_{i+1}} E_i, E_{i+2},\dots,E_n),\]
-  \[L_i\sigma = (E_0,\dots,E_{i-1}, L_{E_i} E_{i+1}, E_i, E_{i+2},\dots,E_n).\]
-\end{definition}
-
-\begin{theorem}[Properties of mutations]
-  \leavevmode
-  \begin{enumerate}
-    \item The mutation of an exceptional collection is again an exceptional collection generating the same subcategory.
-
-  \item For an adjacent pair $(E_i,E_{i+1})$ the left and right mutation functors $L_{i}$ and $R_{i}$ are inverse to each other on the subcategory generated by that pair.
-
-  \item The mutations satisfy the braid relations
-  \end{enumerate}
-  \end{theorem}
-    Consequently the operators $R_i$ (resp.\ $L_i$) induce an action of the braid group on the set of exceptional collections.
-
-\subsection{Summary theorem}
-Recall that if $B$ is an object in a dg-category, then we can define the twist functor
-\begin{align*}
-T_B : \mathcal C &\longrightarrow \mathcal C \\
-T_B(A) &:= \mathrm{Cone}\big( \mathrm{RHom}_{\mathcal C}(B,A) \otimes B \longrightarrow A \big)
-\end{align*}
-If $B$ is a spherical object, then $T_B$ is by definition the spherical twist autoequivalence
-defined by $B$. If $B$ were instead an exceptional object, then
-$T_B$ is the formula for the left mutation equivalence ${}^\perp B \to B^\perp$ coming from a pair of
-semiorthogonal decompositions $\langle B^\perp, B \rangle = \langle B, {}^\perp B \rangle$.
-
-If $\mathcal{C}$ is a pretriangulated dg-category, then the braid group on $n$ strands acts by left and right mutation on the set of length-$n$ semiorthogonal decompositions
-\[
-  \mathcal{C} \;=\; \langle \mathcal{A}_1,\dots,\mathcal{A}_n\rangle,
-\]
-with each $\mathcal{A}_i$ admissible.  
-
-The left and right mutation functors satisfy the braid relations, for example
-\[
-  R_iR_{i+1}R_i \cong R_{i+1}R_iR_{i+1},
-\]
-so the assignment of mutations defines a genuine braid group action on the collection of admissible decompositions.
-
-I don't have time to define spherical functors, but they generalize spherical objects. In particular, a spherical object $S$ is a spherical functor with source $D^b(\mathrm{pt})$.
-
-\begin{theorem}[HL-S16]
-If $\mathcal C$ is a pretriangulated dg category and
-\[
-\mathcal C = \langle \mathcal A, \mathcal G\rangle
-\]
-fixed by the braid action acting by mutation, then the autoequivalence of $\mathcal G$ induced by mutation is the
-twist $T_S$ corresponding to a spherical functor
-$S : \mathcal A \to \mathcal G$.
-
-Conversely, if $S : \mathcal A \to \mathcal B$ is a spherical functor,
-then there is a larger category $\mathcal C$ admitting a
-semiorthogonal decomposition fixed by this braid which recovers $S$ and
-$T_S$. 
-\end{theorem}
-
-
 
 \subsection{Application to VGIT}
 $X$ smooth projective over affine, $G$ reductive acting on $X$, $\cL$ a $G$-linearized ample line bundle on $X$. 
@@ -343,19 +230,16 @@ M(x) \;:=\; \sup_{\lambda\neq 0}\,
 
 \begin{theorem}[Kempf, Kempf--Ness]
 For every unstable point $x\in X^{us}$, the supremum $M(x)$ is a
-maximum, attained by some 1-PS $\lambda_x$.  The 1-PS $\lambda_x$ is unique up to conjugation by the associated parabolic subgroup
+ attained by some 1-PS $\lambda_x$, unique up to positive rescaling of $\lambda_x$.
+  conjugation by the associated parabolic subgroup
 \[
 P(\lambda_x)
  :=\{\, g\in G \mid
       \lim_{t\to 0}\lambda_x(t)g\lambda_x(t)^{-1}\ \text{exists in }G
    \,\}
 \]
-and up to positive rescaling of $\lambda_x$.
 \end{theorem}
-
-Thus each unstable point $x$ determines a distinguished "optimal"
-1-PS $\lambda_x$ up to this equivalence.  Let $\beta$ run over the set
-of such equivalence classes of optimal 1-PS's.  Define
+Let $\beta$ run over the set of such equivalence classes of optimal 1-PS's.  Define
 \[
 S_\beta
  := \{\, x\in X^{us} \mid \text{the optimal 1-PS for }x\text{ is of
@@ -392,7 +276,7 @@ Z
 \text{ and } z\notin \overline{S'} \text{ for any more unstable } S'
 \bigr\}.
 \]
-and
+and $Y_i$ is the “attracting slice" of the stratum $S_i$
 \[
   Y_i \;=\;
   \left\{
@@ -404,6 +288,27 @@ and
 The maps $\sigma_i$ and $j_i$ are the inclusions and $\pi_i$ is taking
 the limit under the flow of $\lambda_i$ as $t\to 0$.  We denote the
 immersion $Z_i\to X$ by $\sigma_i$ as well.  
+
+\begin{example}[Kirwan--Ness stratification for binary quartics]
+Let $X = \P(\Sym^4 \C^2)$ be the space of binary quartic forms with the
+standard $\SL_2$--action.  A quartic is unstable precisely when it has a 
+root of multiplicity $\ge 3$, and the unstable locus decomposes into two 
+Kirwan--Ness strata, the \emph{most unstable} stratum
+\begin{align*}
+  S_{(4)} &= \{\,\text{quartics with a quadruple root}\,\} = G\cdot Y_{(4)} \\
+  &\supset Y_{(4)} = \set{\text{quartics with quadruple root at $x$ or $y$}}\supset Z_{(4)} = \set{x^4, y^4}
+\end{align*}
+  and the \emph{next most unstable} stratum \begin{align*}
+  S_{(3,1)} &= \{\,\text{quartics with a triple root}\,\} = G\cdot Y_{(3,1)} \\
+  &\supset Y_{(3,1)} = \set{\text{quartics with triple root at $x$ or $y$}}\supset Z_{(3,1)} = \set{x^3y, xy^3}
+\end{align*}
+  They both have the one--parameter subgroup 
+\[
+\lambda(t)=\begin{pmatrix} t & 0 \\ 0 & t^{-1} \end{pmatrix},
+\qquad 
+\lambda(t)\cdot (x^{4-i}y^i)=t^{\,4-2i}\,x^{4-i}y^i,
+\]
+\end{example}
 
 We are now ready to relate the equivariant derived category of $X$ to that of the GIT quotient.
 
@@ -430,12 +335,7 @@ Then the restriction functor
 is an equivalence of dg-categories.
 \end{theorem}
 
-Now we introduced balanced GIT wall crossings.  Let $L_0$ be a
-$G$-ample line bundle such that $X^{ss} - X^s$ is nonempty, and let $L'$ be another
-$G$-equivariant line bundle.  We assume that $X^{ss} = X^s$ for the
-linearizations $L_\pm = L_0 \pm \epsilon L'$ for sufficiently small
-$\epsilon$, and we denote $X^{ss}_\pm = X^{ss}(L_\pm)$.  
-
+Now we introduced balanced GIT wall crossings.  Suppose $L$ is on a wall and $L_\pm = L \pm \epsilon L'$ are linearizations on either side of the wall for sufficiently small $\epsilon>0$ and some ample line bundle $L'$.  
 
 In this case,
 $X^{ss}(L_0) - X^{ss}(L_\pm)$ is a union of KN strata for $L_\pm$.
@@ -455,19 +355,54 @@ In this situation, HL15 implies that the restriction functors
 are equivalences. In particular we get a family of derived equivalences
 \begin{align*}
   \Phi_w := r_- \circ r_+^{-1} : D^b(X^{ss}_+/G) &\longrightarrow D^b(X^{ss}_-/G) 
-\end{align*} and the dependence on the choice of integer $w$ gives a family of autoequivalences
+\end{align*} and the dependence on the choice of integer $w$ gives a family of autoequivalences (the window shift functors)
 \begin{align*}
   \Phi_{w+1}^{-1} \circ \Phi_w : D^
 b(X^{ss}_+/G) &\longrightarrow D^b(X^{ss}_+/G).
 \end{align*}
+which are induced by the mutations 
+\begin{center}
+  \begin{tikzcd}
+\mathcal G^{+}_{w+1} \arrow[r, "\mathbb L_{\mathcal A^+_w}"] &
+\mathcal G^{+}_w \arrow[d, "r_-"] \\
+D^b(X^{ss}_-/G) \arrow[u, "r_-^{R} = r_-^{-1}"] \arrow[r, "\Phi_w"'] &
+D^b(X^{ss}_-/G)
+\end{tikzcd}
+\end{center}
+
 
 Finally, Halpern-Leistner shows that the window shift autoequivalence is a twist corresponding to
 a spherical functor. 
 
 By describing window shifts both in terms of mutations and as spherical twists, we see why these two operations have the “same formula” in this setting.
 
+\begin{theorem}[HL-S16]
+If $\mathcal C$ is a pretriangulated dg category and
+\[
+\mathcal C = \langle \mathcal A, \mathcal G\rangle
+\]
+is fixed by the braid action acting by mutation, then the autoequivalence of $\mathcal G$ induced by mutation is the
+twist $T_S$ corresponding to a spherical functor
+$S : \mathcal A \to \mathcal G$. Conversely, if $S : \mathcal A \to \mathcal B$ is a spherical functor,
+then there is a larger category $\mathcal C$ admitting a
+semiorthogonal decomposition fixed by this braid which recovers $S$ and $T_S$. 
+
+In the context of a balanced GIT wall crossing, the category $\mathcal C$ arises naturally as a subcategory of the equivariant category $D^b(X/G)$, defined in terms of a "grade restriction rule."
+The resulting autoequivalence agrees with the window shift
+$\Phi_w$ and corresponds to a spherical functor
+\[
+  f_w : D^b(Z/L)_w \longrightarrow D^b(X^{ss}/G),
+\]
+where $Z/L$ is the "critical locus" of the VGIT, which is unstable in both quotients.
+\end{theorem}
+
+\begin{remark}
+  In the standard flop example, the window $\cG_t \subset D^b(\mathcal{X})$ is generated by the exceptional collection $\{\cO(t), \cO(t+1)\}$, and the spherical functor is given by the spherical object $\cO_{\P^1}(t)$, and the stack $Z/L$ is just $[\mathrm{pt}/\C^*]$.
+\end{remark}
+
+
 \begin{example}[Window shifts on a K3 surface]\label{ex:K3-window-shift}
-Following \cite[Ex.~4.19]{HLS}, let
+Let
 \[
 X \subset \P^2_x\times\P^2_y
 \]
@@ -509,12 +444,7 @@ and consider $\mathrm{tot}(\cV)$ as a toric variety given as a GIT
 quotient of $\A^8$ by a torus $T\cong(\C^\ast)^2$ with weight matrix
 $(t, s) \mapsto (t, t, t, s, s, s, t^{-2}, t^{-1}s^{-3})$.
 
-\item For each wall $W_i$ there is a Kirwan-Ness stratification near
-$W_i$ (Table~1 in \cite{HLS}).  The least unstable stratum has fixed
-locus $Z_i$ and Levi quotient $L_i$, so that the local GIT quotient for
-the wall is $Z_i/L_i$.
-
-\item One introduces a Landau–Ginzburg potential
+\item One introduces a Landau-Ginzburg potential
 \[
 W = p f + q g \in \C[x_i,y_j,p,q]_{\deg=2},
 \]
@@ -524,7 +454,7 @@ pair $(\cV,W)$ carries a second $\C^\ast$–grading (the LG grading, "R-charge")
 $2$ and the $x_i,y_j$ have weight $0$, so that $W$ has weight
 $2$; the associated category $D^b(\cV,W)$ is equivalent to $D^b(X)$.
 
-  The key point is that, although $Z_i/L_i$ is \emph{non–compact} as a
+  The key point is that, although $Z_i/L_i$ is \emph{non-compact} as a
   usual GIT quotient, the restriction $W|_{Z_i}$ makes the LG quotient
   $(Z_i/L_i,W|_{Z_i})$ effectively compact.  Concretely:
   \begin{itemize}
@@ -554,9 +484,18 @@ $2$; the associated category $D^b(\cV,W)$ is equivalent to $D^b(X)$.
   for suitable integers $i$ (depending on the chosen windows).
   \end{itemize}
 \end{itemize}
-
-Thus, in this example the abstract window-shift autoequivalences
-arising from VGIT of $(\cV,W)$ are identified explicitly with
-compositions of spherical twists by line bundles on the K3 surface $X$.
 \end{example}
+
+\begin{thebibliography}{99}
+\bibitem{HalpernLeistnerShipman2016}
+D.~Halpern-Leistner and I.~Shipman, \emph{Autoequivalences of derived categories via geometric invariant theory}, 2016, arXiv:1303.5531. \url{https://arxiv.org/abs/1303.5531}.
+
+\bibitem{Segal2011}
+E.~Segal, \emph{Equivalences Between GIT Quotients of Landau-Ginzburg B-Models}, Comm. Math. Phys. \textbf{304} (2011), no.~2, 411--432. DOI:10.1007/s00220-011-1232-y.
+
+\bibitem{SeidelThomas2000}
+P.~Seidel and R.~P.~Thomas, \emph{Braid group actions on derived categories of coherent sheaves}, 2000, arXiv:math/0001043. \url{https://arxiv.org/abs/math/0001043}.
+
+\end{thebibliography}
+
 \end{document}

@@ -1910,10 +1910,15 @@ The following theorem describes the symmetries of $W_{g-1}$. Translating $W_{g-1
     \end{enumerate}
 \end{theorem}
 
-\begin{proof}
-    
+\begin{proof}[Proof of (3)]
+The evenness of $\Theta$ implies symmetry under half-lattice points.
+We will see that:
+\begin{itemize}
+    \item Topologically, $\Theta \cong \mathcal{O}(W_{g-1})$.
+    \item Holomorphic line bundles of this type are related by translation on $J$. In particular, two line bundles of the same topological type on $J$ differ only by a translation. This is a general theorem about line bundles on complex tori.
+    \item Symmetry forces only half-lattice translations to be allowed. \qedhere
+\end{itemize}
 \end{proof}
-
 \begin{remark}
     There exists a universal vector bundle (the Poincaré bundle) $\cP_d$ over $R \times J_d$ such that for any line bundle $L$ on $R$, there is a natural isomorphism \begin{align*}
         L & \cong \cP_d|_{R \times \{[L]\}}
@@ -1976,15 +1981,7 @@ Recall that we had a basis of holomorphic differentials $\phi_1, \ldots, \phi_g$
 \end{enumerate}
 \end{theorem}
 
-\begin{proof}[Proof of (3)]
-The evenness of $\Theta$ implies symmetry under half-lattice points.
-We will see that:
-\begin{itemize}
-    \item Topologically, $\Theta \cong \mathcal{O}(W_{g-1})$.
-    \item Holomorphic line bundles of this type are related by translation on $J$. In particular, two line bundles of the same topological type on $J$ differ only by a translation. This is a general theorem about line bundles on complex tori.
-    \item Symmetry forces only half-lattice translations to be allowed.
-\end{itemize}
-\end{proof}
+
 
 
 We are now prepared to solve the multiplicative Cousin problem on $R$. Consider the map
@@ -2192,11 +2189,7 @@ Let $i: K \hookrightarrow X$ be the inclusion of a closed set. Then
 \mathcal{F}(K)=\Gamma(K,i^{-1}\mathcal{F})
 =\varinjlim_{\,U\supseteq K}\mathcal{F}(U),
 \]
-the colimit taken over open neighborhoods $U$ of $K$ in $X$.
-
-Thus a section $s\in\mathcal{F}(K)$ is represented by some pair $(U,s_U)$ with $K\subseteq U\subseteq X$ open and $s_U\in\mathcal{F}(U)$.
-
-Using flabbiness, the restriction map $\mathcal{F}(X)\twoheadrightarrow\mathcal{F}(U)$ is surjective, so choose $t\in\mathcal{F}(X)$ with $t|_U=s_U$.
+the colimit taken over open neighborhoods $U$ of $K$ in $X$. Thus a section $s\in\mathcal{F}(K)$ is represented by some pair $(U,s_U)$ with $K\subseteq U\subseteq X$ open and $s_U\in\mathcal{F}(U)$. Using flabbiness, the restriction map $\mathcal{F}(X)\twoheadrightarrow\mathcal{F}(U)$ is surjective, so choose $t\in\mathcal{F}(X)$ with $t|_U=s_U$.
 
 In the colimit description of $\mathcal{F}(K)$ the class of $(U,s_U)$ equals the class of $(X,t)$ because they agree on $U\supseteq K$. Hence $s$ is the restriction of $t$, so the restriction map $\mathcal{F}(X)\to\mathcal{F}(K)$ is surjective. Therefore $\mathcal{F}$ is soft.
 \end{proof}
@@ -2272,10 +2265,152 @@ None of these examples are flabby. In fact, the failure of the sheaf of principa
     In this situation, one must derive $\Hom$ using larger categories of $\cO$-modules to get the correct derived functors. In particular, one may consider complexes of sheaves with coherent cohomology sheaves.
 \end{remark}
 
-\section{Introduction to connections on vector bundles}
+\subsection{Currents}
+Let $M$ be a $\cC^\infty$ oriented differentiable manifold, $m=\dim_{\R} M$.
+We first introduce a topology on the space of differential forms
+$C^s(M,\Lambda^p T_M^*)$.
+Let $\Omega\subset M$ be a coordinate open set and $u$ a $p$-form on $M$,
+written $u(x)=\sum u_I(x)\,dx_I$ on $\Omega$.
+To every compact subset $L\subset\Omega$ and every integer $s\in\N$,
+we associate a seminorm
+\[
+  p^s_L(u)
+  =\sup_{x\in L}\ \max_{\substack{|I|=p\\|\alpha|\le s}}\,
+   \bigl|D^\alpha u_I(x)\bigr|,
+\tag{2.1}
+\]
+where $\alpha=(\alpha_1,\dots,\alpha_m)$ runs over $\N^m$, and
+\[
+  D^\alpha=\partial^{|\alpha|}
+           /(\partial x_1^{\alpha_1}\cdots\partial x_m^{\alpha_m})
+\]
+is a derivation of order $|\alpha|=\alpha_1+\cdots+\alpha_m$.
+
+\begin{definition}
+We introduce as follows spaces of $p$-forms on manifolds.
+\begin{enumerate}[label=\textnormal{(\alph*)}]
+\item
+We denote by $\cE^p(M)$  the space
+$C^\infty(M,\Lambda^p T_M^*)$ equipped with the topology defined by all seminorms $p_L^s$ as $s,L,\Omega$
+vary.
+
+\item
+If $K\subset M$ is a compact subset, $\cD^p(K)$ will denote the subspace
+of elements $u\in\cE^p(M)$ with support contained in $K$, together with
+the induced topology; $\cD^p(M)$ will stand for the set of all elements
+with compact support, i.e.
+\[
+  \cD^p(M)=\bigcup_K \cD^p(K).
+\]
+\end{enumerate}
+\end{definition}
+
+Since our manifolds are assumed to be separable, the topology of
+$\cE^p(M)$ can be defined by means of a countable set of seminorms
+$p^s_L$, hence $\cE^p(M)$ is a Fréchet space.
+It should be observed however that $\cD^p(M)$ is not a Fréchet space;
+in fact $\cD^p(M)$ is dense in $\cE^p(M)$ and thus non-complete for the induced topology. Spaces of \emph{currents} are defined as the topological duals of the above spaces, in analogy with the usual definition of distributions.
+
+\begin{definition}
+The \emph{space of currents of dimension $p$} (or degree $m-p$) on $M$
+is the space $\cD'_p(M)$ of linear forms $T$ on $\cD^p(M)$ such that the
+restriction of $T$ to all subspaces $\cD^p(K)$, $K\Subset M$, is
+continuous.
+The degree is indicated by raising the index, hence we set
+\[
+  \cD'^{\,m-p}(M) = \cD'_p(M) := \text{topological dual }\bigl(\cD^p(M)\bigr)'.
+\]
+\end{definition}
+
+Currents can be given locally by integration against differential forms with distributional coefficients. In particular, there is an inclusion of differential forms into currents \begin{align*}
+    \cE^p(M) & \to \cD'^{\,m-p}(M) \\
+    \omega & \mapsto \left( \eta \mapsto \int_M \omega \wedge \eta \right)
+\end{align*} 
+
+Currents have a well-defined exterior derivative defined by duality. In particular, for a current $T \in \cD'^{\,m-p}(M)$, the exterior derivative $dT \in \cD'^{\,m-(p+1)}(M)$ is defined by \begin{align*}
+    dT(\eta) & = (-1)^{p+1} T(d\eta)
+\end{align*} for any test form $\eta \in \cD^{p+1}(M)$. Also, the construction admits a natural sheafification, where for each open set $U \subseteq M$, we define \begin{align*}
+    \cD'^{\,m-p}_M(U) & = \cD'^{\,m-p}(U)
+\end{align*} and the restriction map for $j: V \hookrightarrow U$ is given by \begin{align*}
+    \cD'^{\,m-p}_M(U) & \to \cD'^{\,m-p}_M(V) \\
+    T & \mapsto T|_V
+\end{align*} where for any test form $\varphi \in \cD^p(V)$, we define \begin{align*}
+    (T|_V)(\varphi) & = T(\tilde{\varphi})
+\end{align*} where $\tilde {\varphi} = j_* \varphi$ is the pushforward of $\varphi$ by $j$, defined by \begin{align*}
+    j_* \varphi(x) & = \begin{cases}
+        \varphi(x) & x \in V \\
+        0 & x \notin V
+    \end{cases}
+\end{align*} 
+This is an $\cE^0_M$-module sheaf, where $\cE^0_M$ is the sheaf of smooth functions on $M$. Moreover, it is a fine sheaf because one can construct partitions of unity using smooth bump functions.
+
+\subsection{De Rham/Dolbeault cohomology}
+Let $X$ be a $n$-dimensional paracompact
+differential manifold. Then the de Rham complex resolves the constant sheaf $\R_X$ on $X$:
+\[0 \to \R_X \to \cE^0_X \xrightarrow{d} \cE^1_X \xrightarrow{d} \cdots \xrightarrow{d} \cE^n_X \to 0\]
+where $\cE^k_X$ is the sheaf of smooth $k$-forms on $X$. Local exactness holds by the Poincaré lemma.
+
+\begin{lemma}
+    Let $\omega$ be a closed $k$-form defined on an open set $U \subseteq X$. Then for any $x \in U$, there exists an open neighborhood $V \subseteq U$ of $x$ and a $(k-1)$-form $\eta$ on $V$ such that $d\eta = \omega|_V$.
+\end{lemma}
+
+Since each $\cE^k_X$ is a fine sheaf, we can compute the sheaf cohomology groups $H^i(X, \R)$ using the global sections of the de Rham complex:
+\[
+H^i(X, \R) \cong H^i(\Gamma(X, \cE^\bullet_X)) = H^i_{\text{dR}}(X)
+\]
+
+Instead of using $C^\infty$ differential forms, one can consider the resolution of $\R$ given by the exterior derivative $d$ acting on currents. Being modules over the sheaf of smooth functions, the sheaves of currents are fine, so one can compute sheaf cohomology using currents as well.
+\begin{align*}
+    0 \to \R_X & \to \cD'^{\,m}_X \xrightarrow{d} \cD'^{\,m-1}_X \xrightarrow{d} \cdots \xrightarrow{d} \cD'^{\,0}_X \to 0
+\end{align*} and the inclusion $\cE_X^\bullet \to \cD'^{\,m-\bullet}_X$ induces an isomorphism on cohomology.
+Thus we have \begin{align*}
+    H^i(X, \R) & \cong H^i(\Gamma(X, \cD'^{\,m-\bullet}_X)) = H^i_{\text{dR}}(X)
+\end{align*}
+
+
+Let $X$ be a $\C$-analytic manifold of dimension $n$, and let
+$\cE^{p,q}$ be the sheaf of germs of $\cC^\infty$ differential forms of
+type $(p,q)$ with complex values.
+For every $p=0,1,\dots,n$, the Dolbeault-Grothendieck Lemma~I-2.9 shows
+that $(\cE^{p,\bullet},d'')$ is a resolution of the sheaf $\Omega_X^p$ of
+germs of holomorphic forms of degree $p$ on $X$.
+The complex of global sections
+\[0 \to \cE^{p,0}(X) \xrightarrow{d''} \cE^{p,1}(X) \xrightarrow{d''} \cdots \xrightarrow{d''} \cE^{p,n}(X) \to 0\]
+then defines the $\overline{\partial}$-cohomology groups of $X$ with
+coefficients in $\C$:
+\begin{equation}
+  H^{p,q}(X,\C) = H^q\bigl(\cE^{p,\bullet}(X)\bigr).
+\end{equation}
+
+The sheaves $\cE^{p,q}$ are acyclic, so we get the Dolbeault
+isomorphism theorem which
+relates $\overline{\partial}$-cohomology and sheaf cohomology:
+\begin{equation}
+  H^{p,q}(X,\C) \;\simeq\; H^q\bigl(X,\Omega_X^p\bigr).
+  \tag{6.15}
+\end{equation}
+
+The case $p=0$ is especially interesting:
+\begin{equation}
+  H^{0,q}(X,\C) \;\simeq\; H^q\bigl(X,\cO_X\bigr).
+  \tag{6.16}
+\end{equation}
+
+As in the case of De~Rham cohomology, there is an inclusion
+$\cE^{p,q}\subset \cD'_{n-p,n-q}$, and the complex of currents
+$(\cD'_{\,n-p,n-\bullet},d'')$ defines also a resolution of $\Omega_X^p$.
+Hence there is an isomorphism:
+\begin{equation}
+  H^{p,q}(X,\C)
+  = H^q\bigl(\cE^{p,\bullet}(X)\bigr)
+  \;\simeq\;
+  H^q\bigl(\cD'_{\,n-p,n-\bullet}(X)\bigr)
+\end{equation}
+
+
+\section{Hermitian connections, curvature, and Chern classes}
 Let $E$ be a complex vector bundle over a complex manifold $X$. Let $\cE^p(E)$ be the sheaf of smooth $E$-valued $p$-forms on $X$. In particular, $\cE^0(E)$ is the sheaf of smooth sections of $E$.
 
-\section{Hermetian connections, curvature, and Chern classes}
 For now, we let $E$ be a real or complex vector bundle over a smooth manifold $X$. Recall that we had introduced a connection as a linear map \begin{align*}
     \nabla: \cE^0(E) & \to \cE^1(E)
 \end{align*} satisfying the Leibniz rule \begin{align*}
@@ -2608,7 +2743,7 @@ We look for a connection of the form
   \nabla^{0,1} = \bar\partial_E, \qquad
   \nabla^{1,0} = \partial + A^{1,0},
 \]
-where $A^{1,0}$ is an $r\times r$ matrix of $(1,0)$–forms.  Thus, in
+where $A^{1,0}$ is an $r\times r$ matrix of $(1,0)$-forms.  Thus, in
 this frame,
 \[
   \nabla s = \bar\partial s + \partial s + A^{1,0} s.
@@ -2655,7 +2790,7 @@ for all $s,t$.  Hence we obtain the matrix identity
   \partial_k H = A_k^{*} H + H A_k.
 \]
 
-Taking the $(1,0)$–part of both sides and using that $A_k$ is of type
+Taking the $(1,0)$-part of both sides and using that $A_k$ is of type
 $(1,0)$ while $A_k^{*}$ is of type $(0,1)$, we get
 \[
   \partial_k H = H A_k,
@@ -2820,7 +2955,7 @@ Then we extend $*$ complex linearly to complex-valued forms. This induces the co
 
 \begin{proposition}
 Let $\bar\partial:\cE^{k}(X)\to\cE^{k+1}(X)$ be the Dolbeault operator on
-$k$–forms.  Its formal adjoint with respect to $\langle\cdot,\cdot\rangle_{L^2}$
+$k$-forms.  Its formal adjoint with respect to $\langle\cdot,\cdot\rangle_{L^2}$
 is
 \[
 \bar\partial^* \;=\; - *^{-1}\,\partial\,*.
@@ -2841,7 +2976,7 @@ Then
 \]
 since complex conjugation interchanges $\partial$ and $\bar\partial$.
 
-By the Leibniz rule for $\partial$ on a $k$–form $\overline{\phi}$,
+By the Leibniz rule for $\partial$ on a $k$-form $\overline{\phi}$,
 \[
 \partial(\overline{\phi}\wedge *\psi)
  = \partial\overline{\phi}\wedge *\psi
@@ -2880,7 +3015,7 @@ so comparing with the previous line we see that
 \[
 \bar\partial^*\psi
  = (-1)^{k+1}\,*^{-1}\partial(*\psi)
-\quad\text{on $k+1$–forms }\psi.
+\quad\text{on $k+1$-forms }\psi.
 \]  
 \end{proof}
 
