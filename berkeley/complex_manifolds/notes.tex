@@ -941,13 +941,13 @@ In other words, we have a four-term exact sequence
 \begin{equation}
 0 \;\longrightarrow\; H^{0}(R;V) \;\longrightarrow\; 
 \Gamma(R;\cM(V)) \;\xrightarrow{\;p\;}\; 
-\cP(R;V) \;\longrightarrow\; H^{1}(R;V) \;\longrightarrow\; 0.
-\tag{3.5}
+\cP(R;V) \;\longrightarrow\; H^{1}(R;V) \;\longrightarrow\; 0
+\label{pp}
 \end{equation}
 
 \begin{remark}
 We will rediscover this construction of $H^{1}$ in the context of 
-sheaf cohomology, and the sequence~(3.5) will be the long exact sequence of 
+sheaf cohomology, and the sequence~\eqref{pp} will be the long exact sequence of 
 sheaf cohomology associated to the short exact sequence of sheaves
 \[
 0 \;\longrightarrow\; \cO(V) \;\longrightarrow\; 
@@ -1049,8 +1049,8 @@ Thus $\mathbb{C}\{w\}$ is a free $\mathbb{C}\{z\}$-module of rank $n$ with basis
 \end{example}
 
 \begin{proof}
-    [Proof of Riemann--Roch theorem for vector bundles]
-We realise our surface $R$ as an $n$-sheeted branched cover 
+    [Proof of Riemann-Roch for vector bundles]
+We realize our surface $R$ as an $n$-sheeted branched cover 
 $\pi : R \to \P^1$ for some $n$. 
 We will prove the theorem on $R$ by pushing $V$ down to $\P^1$ 
 and using Riemann-Roch there. For $\P^1$, the theorem follows from Grothendieck's classification (Theorem \ref{thm:grothendieck}) of vector bundles and the explicit calculation for line bundles. 
@@ -1820,7 +1820,7 @@ which is precisely $\mathbb{P}H^0(R;L)$.
 \item The argument is the same as local injectivity.
 \item By Riemann-Roch, for $d \geq 2g - 1$, we have \begin{align*}
     h^0(R, L) & = d - g + 1
-\end{align*} for all line bundles $L$ of degree $d$ because $H^1(R, L) = 0$ by Serre duality. Therefore, the fibers of $AJ_d$ are all projective spaces of dimension $d - g$. This gives $\Sym^d(R)$ the structure of a holomorphic projective bundle over $J_d$.
+\end{align*} for all line bundles $L$ of degree $d$ because $H^1(R, L) = 0$ by Serre duality. Therefore, the fibers of $AJ_d$ are all projective spaces of dimension $d - g$. This gives $\Sym^d(R)$ the structure of a holomorphic projective bundle over $J_d$. \qedhere
 \end{enumerate}
 \end{proof}
 
@@ -2287,7 +2287,7 @@ where $\alpha=(\alpha_1,\dots,\alpha_m)$ runs over $\N^m$, and
 is a derivation of order $|\alpha|=\alpha_1+\cdots+\alpha_m$.
 
 \begin{definition}
-We introduce as follows spaces of $p$-forms on manifolds.
+We introduce the following spaces of $p$-forms on manifolds.
 \begin{enumerate}[label=\textnormal{(\alph*)}]
 \item
 We denote by $\cE^p(M)$  the space
@@ -2411,7 +2411,9 @@ Hence there is an isomorphism:
 \section{Hermitian connections, curvature, and Chern classes}
 Let $E$ be a complex vector bundle over a complex manifold $X$. Let $\cE^p(E)$ be the sheaf of smooth $E$-valued $p$-forms on $X$. In particular, $\cE^0(E)$ is the sheaf of smooth sections of $E$.
 
-For now, we let $E$ be a real or complex vector bundle over a smooth manifold $X$. Recall that we had introduced a connection as a linear map \begin{align*}
+For now, we let $E$ be a real or complex vector bundle over a smooth manifold $X$. 
+\begin{definition}
+A \textbf{connection} as a linear map \begin{align*}
     \nabla: \cE^0(E) & \to \cE^1(E)
 \end{align*} satisfying the Leibniz rule \begin{align*}
     \nabla(f s) & = df \otimes s + f \nabla s
@@ -2421,6 +2423,7 @@ For now, we let $E$ be a real or complex vector bundle over a smooth manifold $X
 \begin{align*}
     \nabla(\omega \otimes s) & = d\omega \otimes s + (-1)^{\deg \omega} \omega \wedge \nabla s
 \end{align*} for any smooth $p$-form $\omega$ and smooth section $s$ of $E$.
+\end{definition}
 
 \begin{remark}
     [Notation] Juxtaposition always means wedge product of forms + composition of endomorphisms. In particular, for $\alpha = A \otimes \omega \in \cE^p(\End(E))$ and $\beta = B \otimes \eta \in \cE^q(\End(E))$, we have \begin{align*}
@@ -2491,6 +2494,8 @@ Note that we are using the graded commutator here, which stems from the fact tha
     F_\nabla & = dA + A \wedge A = dA + \frac{1}{2}[A, A]
 \end{align*} 
 \end{enumerate}
+
+
 
 \begin{proposition}
     The Bianchi identity states that \begin{align*}
@@ -2825,6 +2830,81 @@ glue to a global connection.  This is the desired Chern connection.
         \end{align*} provided $H$ is defined in a local holomorphic frame. In particular, the curvature is of type $(1,1)$.
     \end{proposition}
 
+\begin{theorem}[Weights and curvature of Hermitian metrics on holomorphic line bundles]
+Let $L\to X$ be a holomorphic line bundle on a complex manifold, equipped with a
+Hermitian metric $h$.  Choose a local holomorphic frame $e$ of $L$ over an open
+set $U\subset X$, and write
+\[
+h(e,e) = e^{-\phi},
+\qquad \phi\in C^\infty(U,\R).
+\]
+Then $\phi$ is called the \emph{local weight} of the metric $h$ in the frame
+$e$.  The following statements hold:
+
+\begin{enumerate}
+\item 
+The Chern connection $\nabla$ of $(L,h)$ is given in the frame $e$ by
+\[
+\nabla e = (\partial\phi)\otimes e.
+\]
+
+\item
+The curvature of the Chern connection is
+\[
+F_h \;=\; \partial\bar\partial\phi.
+\]
+In particular, $F_h$ is a real $(1,1)$--form representing $2\pi i\,c_1(L)$.
+
+\item
+If $h_0$ and $h$ are two Hermitian metrics related by
+\[
+h = e^{-\varphi}\,h_0,
+\qquad \varphi\in C^\infty(X,\R),
+\]
+and if $h_0(e,e)=e^{-\phi_0}$, then $h(e,e)=e^{-(\phi_0+\varphi)}$.  Thus the
+weights satisfy $\phi=\phi_0+\varphi$, and the curvatures satisfy
+\[
+F_h = F_0 + \partial\bar\partial\varphi.
+\]
+
+\item
+Since $\log h(e,e)=-\phi$, one may also write
+\[
+F_h = -\,\partial\bar\partial \log h(e,e).
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Let $e$ be a holomorphic frame. Since $h(e,e)=e^{-\phi}$, metric compatibility determines the connection $1$-form $\theta$ by
+    \[
+    \partial h(e,e) = h(e,e)\bigl(\theta + \overline{\theta}\bigr),\qquad
+    \bar\partial h(e,e) = h(e,e)\,\overline{\theta}.
+    \]
+
+    Because $e$ is holomorphic, the $(0,1)$-part of the Chern connection equals $\bar\partial$, hence $\overline{\theta}=\bar\partial\phi$. It follows that $\theta=\partial\phi$, giving
+    \[
+    \nabla e = \theta\otimes e = (\partial\phi)\otimes e,
+    \]
+    which proves (1).
+
+    Since the curvature is $F_h=\nabla^2=d\theta$ and $\theta=\partial\phi$ has type $(1,0)$, we obtain
+    \[
+    F_h=\bar\partial(\partial\phi)=\partial\bar\partial\phi,
+    \]
+    proving (2). If $h=e^{-\varphi}h_0$, then
+    \[
+    h(e,e)=e^{-\varphi}h_0(e,e)=e^{-(\phi_0+\varphi)},
+    \]
+    so $\phi=\phi_0+\varphi$. Applying (2) yields
+    \[F_h=\partial\bar\partial\phi=\partial\bar\partial(\phi_0+\varphi)=F_0+\partial\bar\partial\varphi,
+    \]
+    which proves (3). Finally, since $\log h(e,e)=-\phi$, statement (4) is the same as (2) written as
+    \[
+    F_h=-\partial\bar\partial\log h(e,e).
+    \]
+\end{proof}
+
     \begin{example}
         Consider the tautological line bundle $\mathcal{O}(-1)$ over $\C \P^n$. It carries a hermitian structure invariant under the action of $U(n+1)$ induced from the standard hermitian structure on $\C^{n+1}$. In the standard affine chart $U_0 = \{ [1:z_1:\cdots:z_n] \}$ with coordinates $z_i = x_i + i y_i$, a local holomorphic frame is given by the section \begin{align*}
             \sigma(z) & = (1, z_1, z_2, \ldots, z_n)
@@ -2851,6 +2931,79 @@ glue to a global connection.  This is the desired Chern connection.
             & = -1
         \end{align*} so we see why the normalization of Chern classes is chosen as it is.
     \end{example}
+
+The reason $\bar{\partial}$ operators are important is that they allow us to define holomorphic structures on complex line bundles. In fact, the following proposition holds for complex vector bundles of any rank, but we state it here for line bundles for simplicity.
+\begin{proposition}
+Let $L$ be a smooth complex line bundle over a complex manifold $X$.
+A holomorphic structure on $L$ is equivalent to the choice of a
+$\C$-linear operator
+\[
+\bar\partial_L : \cE^0(L) \longrightarrow \cE^{0,1}(L)
+\]
+satisfying:
+\begin{enumerate}[(i)]
+\item (\emph{Leibniz rule})
+
+$\bar\partial_L(f s) = (\bar\partial f)\otimes s \;+\; f\,\bar\partial_L s,
+\qquad f\in C^\infty(X),\; s\in\cE^0(L) $
+\item $\bar\partial_L^2 = 0$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Suppose first that $L$ is a holomorphic line bundle.  
+Choose a holomorphic trivialization on an open set $U\subset X$ with
+holomorphic frame $e$.  
+Every smooth section has the form $s=f e$, and we define
+\[
+\bar\partial_L (s) := (\bar\partial f)\, e.
+\]
+If $e'=g e$ is another holomorphic frame on $U$, then  
+$f' = g^{-1}f$ and $\bar\partial g=0$, so
+\[
+\bar\partial f' = g^{-1} \bar\partial f.
+\]
+Thus $(\bar\partial f')e' = (\bar\partial f)e$, so the definition
+glues on overlaps.  
+The resulting operator clearly satisfies the Leibniz rule, and
+$\bar\partial_L^2=0$ because in a holomorphic frame it is just the usual
+$\bar\partial$ on functions.
+
+Conversely, suppose we are given a $\C$-linear operator
+$\bar\partial_L$ satisfying (i)-(ii).  
+On a trivializing open set $U$, pick a nowhere-vanishing smooth frame
+$e$, and write any section as $s=f e$.  
+By the Leibniz rule there is a unique $(0,1)$-form $\alpha$ on $U$ such
+that
+\[
+\bar\partial_L e = \alpha\otimes e.
+\]
+Then
+\[
+\bar\partial_L(f e) = (\bar\partial f + \alpha f)\, e.
+\]
+Applying $\bar\partial_L^2=0$ to $e$ gives $\bar\partial\alpha=0$.
+By the $\bar\partial$-Poincaré lemma, on a smaller $U$ there exists a
+smooth function $\phi$ with $\alpha=\bar\partial\phi$.
+Define a new frame $e' := e\, e^{-\phi}$; then
+\[
+\bar\partial_L e' = 0.
+\]
+Thus $e'$ is a $\bar\partial_L$-holomorphic frame, meaning that a
+section $s=f e'$ satisfies $\bar\partial_L s=0$ iff $\bar\partial f=0$.
+Hence the sheaf
+\[
+\cO_L(U) := \{\, s\in\cE^0(L|_U) \mid \bar\partial_L s = 0 \,\}
+\]
+is identified with the usual sheaf of holomorphic functions on $U$.
+On overlaps $U\cap V$, if $e'$ and $e''$ are such holomorphic frames,
+the transition function $g$ defined by $e'' = g e'$ satisfies
+\[
+0 = \bar\partial_L e'' = (\bar\partial g)\, e' ,
+\]
+so $\bar\partial g = 0$; hence $g$ is holomorphic.
+Therefore these frames define a holomorphic line bundle structure on $L$.
+\end{proof} 
 \section{Kahler manifolds}
 Recall that a Riemannian metric $g$ on a smooth manifold $X$ is a smoothly varying choice of inner product $g_x$ on each tangent space $T_x X$ for $x \in X$. In local coordinates $x_i$, the metric can be expressed as \begin{align*}
     g & = \sum_{i,j} g_{ij} d x_i \otimes d x_j
@@ -2866,11 +3019,40 @@ Recall that a Riemannian metric $g$ on a smooth manifold $X$ is a smoothly varyi
 \begin{theorem}[Levi-Civita]
     There exists a unique torsion-free connection $\nabla$ on the tangent bundle $TX$ of a smooth manifold $X$ which is compatible with a Riemannian metric $g$ on $X$, i.e. for any vector fields $X,Y,Z$ on $X$, we have \begin{align*}
         X g(Y,Z) & = g(\nabla_X Y, Z) + g(Y, \nabla_X Z)
-    \end{align*} This connection is called the Levi-Civita connection.
+    \end{align*} This connection is called the \textbf{Levi-Civita connection}.
 \end{theorem}
 
 One can obtain the Levi-Civita connection by symmetrizing any connection compatible with the metric. Let its torsion be
 $T(X,Y) = \nabla_X Y - \nabla_Y X - [X,Y]$. Define a new connection $\widetilde\nabla$ by $\widetilde\nabla_X Y := \nabla_X Y - \frac12\,T(X,Y)$. Then one checks that $\widetilde\nabla$ is torsion-free and compatible with the metric.
+
+\begin{example}
+    Let $V = \C^r$ and equip $V$ with a hermitian inner product $\langle \cdot, \cdot \rangle$, i.e. one which is conjugate linear in the first argument and linear in the second argument. Then the Levi-Civita connection is the unique connection $\nabla$ on the tangent bundle $TV \cong V \times V$ compatible with the Riemannian metric $g$ defined by \begin{align*}
+        g(u,v) & = \mathrm{Re} \langle u, v \rangle
+    \end{align*} for $u,v \in V$. In this case, the Levi-Civita connection is simply the trivial connection \begin{align*}
+        \nabla_{\frac{\partial}{\partial x_i}} \frac{\partial}{\partial x_j} = 0,\qquad
+\nabla_{\frac{\partial}{\partial z_i}} \frac{\partial}{\partial z_j} = 0
+    \end{align*} 
+    Equivalently, to covariantly differentiate the vector field $Y$ in the direction of $X$ at a point $x$, just take the directional derivative of the vector-valued function $Y$ in the direction $X(x)$. \[(\nabla_X Y)(x) = dY_x\big(X(x)\big)\]
+In particular all constant vector fields are parallel and all coordinate functions have zero second derivatives. It has zero curvature via a long computation which can be done in coordinates.
+
+In standard coordinates on $V$ we can write
+\[
+h \;=\; \sum_{i,j} h_{i j}\,d \bar{z_i} \otimes d z_j
+\]
+with constants $h_{ij}$ (because we chose a constant Hermitian inner product).
+
+The associated Riemannian metric is $g=\Re(h)$, and the associated Kähler form is defined by
+\[
+\omega(X,Y)\;:=\; g(X,JY),
+\]
+where $J$ is the standard complex structure. In coordinates one has
+\[
+\omega \;=\; \frac{i}{2}\sum_{i,j} h_{i j}\,dz_i\wedge d\bar z_j,
+\]
+and again all coefficients $h_{i j}$ are constant functions on $V$.
+
+Since $\omega$ has constant coefficients in these linear coordinates, $d\omega=0$ because $d$ only differentiates the coefficients, which are constant. Hence $(V,J,g)$ is Kähler.
+\end{example}
 
 Now if $X$ is a complex manifold, then the Riemannian metric comes from a Hermitian metric $h$ on the tangent bundle $TX$. We get a preferred hermitian connection on $TX$ by taking the Chern connection. However, the induced connection on the underlying real tangent bundle $T_\R X$ need not be the Levi-Civita connection of the Riemannian metric associated to $h$. This is very special and is precisely the condition for $X$ to be a Kahler manifold.
 
@@ -3015,7 +3197,7 @@ so comparing with the previous line we see that
 \[
 \bar\partial^*\psi
  = (-1)^{k+1}\,*^{-1}\partial(*\psi)
-\quad\text{on $k+1$-forms }\psi.
+\quad\text{on $k+1$-forms }\psi 
 \]  
 \end{proof}
 
@@ -3027,16 +3209,16 @@ so comparing with the previous line we see that
     The \textbf{Laplacians} associated to the differentials $d, \partial, \bar{\partial}$ are defined as follows:
     \begin{align*}
         \Delta & = d d^* + d^* d = (d + d^*)^2 \\
-        \Box & = \partial \partial^* + \partial^* \partial = (\partial + \partial^*)^2 \\
-        \overline{\Box} & = \bar{\partial} \bar{\partial}^* + \bar{\partial}^* \bar{\partial} = (\bar{\partial} + \bar{\partial}^*)^2 
+        \square & = \partial \partial^* + \partial^* \partial = (\partial + \partial^*)^2 \\
+        \bar\square & = \bar{\partial} \bar{\partial}^* + \bar{\partial}^* \bar{\partial} = (\bar{\partial} + \bar{\partial}^*)^2 
     \end{align*}
 \end{definition}
 
-On a general complex manifold with a Hermitian metric, these Laplacians are different. However, on a  Kahler manifold, they essentially coincide. 
+On a general complex manifold with a Hermitian metric, these Laplacians are different. However, on a K\"ahler manifold, they essentially coincide. 
 
 \begin{theorem}
-    On a Kahler manifold $X$, the Laplacians satisfy the relations \begin{align*}
-        \Delta & = 2 \Box = 2 \overline{\Box}
+    On a K\"ahler manifold $X$, the Laplacians satisfy the relations \begin{align*}
+        \Delta & = 2 \square = 2 \bar\square
         \end{align*} 
 \end{theorem}
 \begin{proof}
@@ -3121,6 +3303,30 @@ $\cH^{p,q}(X)$ to $\cH^{q,p}(X)$.
 \end{proof}
 
 \begin{remark}
+
+Every real cohomology class $[\alpha] \in H^1(X, \R)$ on a compact K\"ahler manifold $X$ has a unique harmonic representative $\alpha$ satisfying $\Delta_d \alpha = 0$. Since $\alpha$ is a real $1$-form, we can write it as \begin{align*}
+    \alpha & = \alpha^{1,0} + \alpha^{0,1}
+\end{align*} where $\alpha^{1,0}$ is a $(1,0)$-form and $\alpha^{0,1}$ is a $(0,1)$-form. Note that $\overline{\alpha^{1,0}} = \alpha^{0,1}$ since $\alpha$ is real. The Dolbeault cohomology class $[\alpha^{0,1}] \in H^{0,1}(X)$ corresponds to the image of $[\alpha]$ under the natural map \begin{align*}
+    H^1(X, \R) & \hookrightarrow H^1(X, \C) \to H^{0,1}(X)
+\end{align*} induced by the inclusion of sheaves $\R \hookrightarrow \mathcal{O}_X$.
+
+This is because on a Kahler manifold, the three operators 
+\begin{align*}
+    \Delta_d & = d d^* + d^* d \\
+    \square & = \partial \partial^* + \partial^* \partial \\
+    \bar\square & = \bar{\partial} \bar{\partial}^* + \bar{\partial}^* \bar{\partial}
+\end{align*} mapping $\cE^{p,q}(X) \to \cE^{p,q}(X)$ are related by \begin{align*}
+    \Delta_d & = 2 \bar\square = 2 \square
+\end{align*}
+In particular, an $\alpha\in\cE^{p,q}$ is $\Delta_d$-harmonic if and only if it is $\bar\square$-harmonic if and only if it is $\square$-harmonic.
+
+Therefore, the map \begin{align*}
+    H^1(X, \R) & \to H^{0,1}(X) \\
+    [\alpha] & \mapsto [\alpha^{0,1}]
+\end{align*} is an isomorphism on $\R$-vector spaces.
+\end{remark}
+
+\begin{remark}
     The Hodge decomposition theorem can also be obtained via direct spectral sequence arguments using the degeneration at the $E_1$ page of the Hodge-de Rham spectral sequence on a Kahler manifold. This argument is worth mentioning because it allows one to obtain the Hodge decomposition theorem for special compact complex manifolds which are not known to be Kahler but for which the Hodge-de Rham spectral sequence degenerates at $E_1$. This remark applies to K3 surfaces whose Hodge decomposition was obtained before the proof that all K3 surfaces are Kahler manifolds.
 \end{remark}
 
@@ -3133,12 +3339,27 @@ $\cH^{p,q}(X)$ to $\cH^{q,p}(X)$.
     \end{enumerate}
 \end{corollary}
 
-\section{References}
-\begin{enumerate}
+
+
+
+\section{Kodaira Nakano vanishing}
+\begin{example}
+    The hyperplane bundle $\cO_{\P^N}(1)$ carries the Fubini--Study Hermitian
+metric $h_{\mathrm{FS}}$ whose curvature form $F_{\mathrm{FS}}$ is a
+positive $(1,1)$-form. Therefore, any ample line bundle $L$ over a compact
+Kähler manifold $X$ admits a Hermitian metric $h$ whose curvature form
+$F$ is a positive $(1,1)$-form by using Kodaira's embedding theorem to
+embed $X$ into projective space and pulling back the Fubini-Study metric on
+$\cO_{\P^N}(1)$ to $L$.
+\end{example}
+\section{Problem Set 5}
+
+\begin{thebibliography}{9}
     \bibitem{gh} P. Griffiths and J. Harris, Principles of Algebraic Geometry, Wiley-Interscience, 1994.
     \bibitem{wells} R. O. Wells, Differential Analysis on Complex Manifolds, Springer, 2008.
-\end{enumerate}
-
-
-
+\bibitem{demailly}
+J.-P. Demailly,
+\textit{Complex Analytic and Differential Geometry}, lecture notes, 2012.
+Available at \url{https://people.math.harvard.edu/~demarco/Math274/Demailly_ComplexAnalyticDiffGeom.pdf}.
+\end{thebibliography}
 \end{document}
