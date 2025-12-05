@@ -2942,9 +2942,7 @@ $\C$-linear operator
 \]
 satisfying:
 \begin{enumerate}[(i)]
-\item (\emph{Leibniz rule})
-
-$\bar\partial_L(f s) = (\bar\partial f)\otimes s \;+\; f\,\bar\partial_L s,
+\item The Leibniz rule: $\bar\partial_L(f s) = (\bar\partial f)\otimes s \;+\; f\,\bar\partial_L s,
 \qquad f\in C^\infty(X),\; s\in\cE^0(L) $
 \item $\bar\partial_L^2 = 0$.
 \end{enumerate}
@@ -3004,6 +3002,130 @@ the transition function $g$ defined by $e'' = g e'$ satisfies
 so $\bar\partial g = 0$; hence $g$ is holomorphic.
 Therefore these frames define a holomorphic line bundle structure on $L$.
 \end{proof} 
+
+\begin{exercise}
+Let $L\to X$ be a holomorphic line bundle on a complex manifold, and let
+$\alpha\in\cE^{0,1}$ be a $\bar\partial$-closed form. Show that the
+re-defined operator
+\[
+\tilde{\bar\partial} = \bar\partial + \alpha
+\]
+on sections of $L$ defines a new holomorphic structure $L'$ on the same
+underlying bundle, where local holomorphic sections are defined as those
+killed by $\tilde{\bar\partial}$. Show that $L\simeq L'$ if $\alpha$ is
+$\bar\partial$-exact. Relate this to the exponential sequence.
+\end{exercise}
+
+For vector bundles, the same applies with an
+$\alpha\in\cE^{0,1}(\End(V))$ satisfying the non-linear equation
+\[
+\bar\partial\alpha + \alpha\wedge\alpha = 0.
+\]
+The new bundle is isomorphic to the old one if
+$\alpha = a^{-1}\bar\partial a$, for some smooth section $a$ of $\Aut(V)$.
+
+\begin{solution}
+From the given holomorphic structure, we have a $\C$-linear map
+\[
+\bar\partial_L\colon \cE^0(L)\longrightarrow\cE^{0,1}(L)
+\]
+satisfying the Leibniz rule and the condition
+$\bar\partial_L^2=0$.
+We have the new operator
+\[
+\tilde{\bar\partial}s := \bar\partial s + \alpha\wedge s
+\in\cE^{0,1}(L).
+\]
+First we check that $\tilde{\bar\partial}$ is a $\bar\partial$-operator.
+For $f\in C^\infty(X)$ and $s\in\cE^0(L)$,
+\[
+\tilde{\bar\partial}(fs)
+= \bar\partial(fs) + \alpha\,fs
+= (\bar\partial f)\,s + f\,\bar\partial s + f\,\alpha s
+= (\bar\partial f)\,s + f\,\tilde{\bar\partial}s,
+\]
+so the Leibniz rule holds.
+
+Next, compute $\tilde{\bar\partial}^2$.  View $\bar\partial$ as a
+derivation of degree $(0,1)$ on $\cE^{0,\bullet}(L)$; then for
+$\beta\in\cE^{0,1}$ and $\eta\in\cE^{0,q}(L)$,
+\[
+\bar\partial(\beta\wedge\eta)
+= (\bar\partial\beta)\wedge\eta - \beta\wedge\bar\partial\eta.
+\]
+Hence, for a section $s\in\cE^0(L)$,
+\begin{align*}
+\tilde{\bar\partial}^2 s
+&= \tilde{\bar\partial}\bigl(\bar\partial s + \alpha \wedge s\bigr) \\
+&= \bar\partial(\bar\partial s + \alpha \wedge s)
+   + \alpha\wedge(\bar\partial s + \alpha \wedge s) \\
+&= \bar\partial^2 s
+   + \bar\partial(\alpha \wedge s)
+   + \alpha\wedge\bar\partial s
+   + \alpha\wedge\alpha \wedge s \\
+&= 0 + (\bar\partial\alpha)\wedge s - \alpha\wedge\bar\partial s
+   + \alpha\wedge\bar\partial s + \alpha\wedge\alpha \wedge s \\
+&= (\bar\partial\alpha)\wedge s + \alpha\wedge\alpha \wedge s.
+\end{align*}
+By assumption $\bar\partial\alpha=0$, and since $\alpha$ is a $1$-form,
+$\alpha\wedge\alpha=0$.  Thus $\tilde{\bar\partial}^2s=0$ for all $s$,
+so $\tilde{\bar\partial}^2=0$ and $\tilde{\bar\partial}$ is a
+$\bar\partial$-operator.  It therefore defines a new holomorphic
+structure $L'$ on the same underlying smooth bundle, whose local
+holomorphic sections are those killed by $\tilde{\bar\partial}$.
+
+Now we check that if $\alpha$ is $\bar\partial$-exact, then $L'\simeq L$.
+Suppose $\alpha=\bar\partial\phi$ for some smooth complex-valued
+function $\phi$.  Define an automorphism of the \(C^\infty\) line bundle
+$L$ by multiplication with $e^\phi$:
+\[
+F\colon L\longrightarrow L,\qquad s\longmapsto e^\phi s.
+\]
+We claim that $F$ is an isomorphism of holomorphic line bundles
+$L'\to L$, i.e.
+\[
+\bar\partial(Fs) = F(\tilde{\bar\partial}s)
+\quad\text{for all }s.
+\]
+Indeed,
+\[
+\bar\partial(Fs)
+= \bar\partial(e^\phi s)
+= e^\phi(\bar\partial\phi\wedge s + \bar\partial s)
+= e^\phi(\alpha\wedge s + \bar\partial s)
+= F(\tilde{\bar\partial}s).
+\]
+Thus $F$ is holomorphic with respect to $\tilde{\bar\partial}$ on the
+domain and $\bar\partial$ on the target, so $L'\simeq L$.
+
+The $(0,1)$-form $\alpha$ is $\bar\partial$-closed, so it defines a
+Dolbeault cohomology class
+\[
+[\alpha]\in H^{0,1}_{\bar\partial}(X)
+\cong H^1(X;\cO).
+\]
+Changing $\alpha$ by a $\bar\partial$-exact form does not change this
+class, and by the computation above such a change yields an isomorphic
+holomorphic structure.  Thus the isomorphism class of the new line
+bundle $L'$ depends only on $[\alpha]$.
+
+Recall the holomorphic exponential sequence
+\[
+0\longrightarrow \Z
+\longrightarrow \cO
+\xrightarrow{\ \exp(2\pi i \cdot)\ } \cO^\times
+\longrightarrow 1,
+\]
+whose long exact cohomology sequence contains
+\[
+H^1(X;\cO) \xrightarrow{\ \exp\ } H^1(X;\cO^\times),
+\]
+and $H^1(X;\cO^\times)\cong\Pic(X)$ classifies holomorphic line bundles.
+The class $[\alpha]\in H^1(X;\cO)$ maps under the exponential to the
+class of the holomorphic line bundle $L'\otimes L^{-1}$. 
+\end{solution}
+
+
 \section{Kahler manifolds}
 Recall that a Riemannian metric $g$ on a smooth manifold $X$ is a smoothly varying choice of inner product $g_x$ on each tangent space $T_x X$ for $x \in X$. In local coordinates $x_i$, the metric can be expressed as \begin{align*}
     g & = \sum_{i,j} g_{ij} d x_i \otimes d x_j
@@ -3101,6 +3223,8 @@ The formula relating the Kahler form to the metric is given by \begin{align*}
 \end{proof}
 
 \subsection{Harmonic theory on Kahler manifolds}
+The key construction is the inner product on the space of complex-valued differential forms on a compact Kahler manifold, which allows us to define formal adjoints of the operators $\partial$ and $\bar{\partial}$. This leads to the definition of Laplacians and harmonic forms.
+
 Recall that we have the decomposition of the de Rham differential \begin{align*}
     d: \cE^{p,q}(X) & \to \cE^{p+1,q}(X) \oplus \cE^{p,q+1}(X)
 \end{align*} into its $(1,0)$ and $(0,1)$ components \begin{align*}
@@ -3320,10 +3444,11 @@ This is because on a Kahler manifold, the three operators
 \end{align*}
 In particular, an $\alpha\in\cE^{p,q}$ is $\Delta_d$-harmonic if and only if it is $\bar\square$-harmonic if and only if it is $\square$-harmonic.
 
-Therefore, the map \begin{align*}
-    H^1(X, \R) & \to H^{0,1}(X) \\
+Therefore, the map induced by $\R_X \hookrightarrow \mathcal{O}_X$ 
+\begin{align*}
+    H^1(X, \R_X) & \to H^1(X,\cO_X) \cong H^{0,1}(X) \\
     [\alpha] & \mapsto [\alpha^{0,1}]
-\end{align*} is an isomorphism on $\R$-vector spaces.
+\end{align*} is an isomorphism of $\R$-vector spaces.
 \end{remark}
 
 \begin{remark}
@@ -3340,19 +3465,667 @@ Therefore, the map \begin{align*}
 \end{corollary}
 
 
+\begin{exercise}
+For a compact Riemann surface $R$, verify that the Serre duality pairing
+\[
+H^1(R;\cO)\otimes H^0(R;\Omega^1)\longrightarrow \C
+\]
+defined by principal parts and residues agrees with the one given by integration
+of Dolbeault representatives. Using the relation to harmonic forms, explain how this relates to
+Poincar\'e duality on $R$.
+\end{exercise}
 
+\begin{solution} Choose a meromorphic function $f$ on $R$ whose principal part at each
+$p_i$ with prescribed principal parts. Let $U_i$ be pairwise disjoint coordinate discs around $p_i$, and choose
+$\chi\in C^\infty(R)$ such that $\chi\equiv 1$ on smaller discs $U_i'\subset U_i$
+and $\chi\equiv 0$ outside $\bigcup_i U_i$.
+Define a $(0,1)$-\emph{current}
+\[
+T_f := \bar\partial(\chi f).
+\]
+
+Since $\bar\partial^2=0$, $T_f$ is $\bar\partial$-closed.
+If we replace $f$ by $f+g$ for a global meromorphic function $g$
+(with poles in $D$) or change $\chi$ within the same constraints,
+$T_f$ changes by a current of the form $\bar\partial u$, so the
+class $[T_f]$ in
+\[
+H^{0,1}_{\bar\partial}(R) \cong H^1(R,\cO)
+\]
+depends only on the underlying principal parts.
+
+Let $\omega\in H^0(R,\Omega^1)$ be a holomorphic $1$-form.
+The \emph{Dolbeault} definition of the pairing is
+\[
+\langle\alpha,\omega\rangle_{Dol}
+:= \frac{1}{2\pi i}\int_R T_f\wedge\omega
+= \frac{1}{2\pi i}\int_R \bar\partial(\chi f)\wedge\omega.
+\]
+Since $\omega$ is of type $(1,0)$ and holomorphic,
+$\bar\partial\omega=0$, hence
+\[
+\bar\partial(\chi f)\wedge\omega
+= \bar\partial(\chi f\omega).
+\]
+
+Let $D_i\subset U_i'$ be small closed discs around $p_i$ and set
+\[
+R_\varepsilon := R\setminus\bigcup_i D_i(\varepsilon),
+\]
+where $D_i(\varepsilon)$ are concentric discs of radius $\varepsilon$.
+On $R_\varepsilon$ the form $\chi f\omega$ is smooth with compact
+support, so Stokes' theorem gives
+\[
+\int_{R_\varepsilon} \bar\partial(\chi f\omega)
+= \int_{\partial R_\varepsilon} \chi f\omega
+= -\sum_i \int_{\partial D_i(\varepsilon)} f\omega,
+\]
+the sign coming from the induced orientation on the boundary.
+
+Letting $\varepsilon\to 0$ and using the residue theorem,
+\[
+\int_{\partial D_i(\varepsilon)} f\omega
+\;\longrightarrow\; 2\pi i\,\Res_{p_i}(f\omega),
+\]
+we obtain
+\[
+\frac{1}{2\pi i}\int_R \bar\partial(\chi f)\wedge\omega
+= \sum_i \Res_{p_i}(f\omega).
+\]
+This is precisely the \emph{principal parts} definition of the Serre pairing.
+
+Now equip $R$ with any Hermitian (necessarily K\"ahler) metric. Hodge theory yields the decompositions
+\[
+H^1_{\dR}(R,\C)
+\;\cong\;
+\cH^1(R) \;\cong\;
+H^{1,0}_{\bar\partial}(R)\oplus H^{0,1}_{\bar\partial}(R),
+\]
+and every class has a unique harmonic representative.  Moreover,
+\[
+H^0(R,\Omega^1) \cong H^{1,0}_{\bar\partial}(R)
+\]
+consists of harmonic $(1,0)$-forms, and
+\[
+H^1(R,\cO) \cong H^{0,1}_{\bar\partial}(R)
+\]
+is represented by harmonic $(0,1)$-forms.  Complex conjugation gives
+an isomorphism \[\overline{H^{1,0}_{\bar\partial}(R)}
+\cong H^{0,1}_{\bar\partial}(R)\]
+
+Poincaré duality on $R$ is given by the nondegenerate pairing
+\[
+H^1_{\dR}(R,\C)\times H^1_{\dR}(R,\C)
+\longrightarrow \C,
+\qquad
+([\alpha],[\beta])\mapsto\int_R \alpha\wedge\beta.
+\]
+It is clear that $\alpha \wedge \beta$ is nonzero only if
+$\alpha$ and $\beta$ are of complementary types, i.e. their wedge is of type
+$(1,1)$, since $(1,0)\wedge(1,0)$ and $(0,1)\wedge(0,1)$ necessarily vanish.
+Thus the Poincaré pairing restricts to a nondegenerate pairing
+\[
+H^{0,1}_{\bar\partial}(R)\;\otimes\; H^{1,0}_{\bar\partial}(R)
+\longrightarrow \C,
+\qquad
+(\eta,\omega)\mapsto\int_R \eta\wedge\omega,
+\]
+with $\eta,\omega$ harmonic representatives.
+
+Under the identifications
+\[
+H^1(R,\cO)\cong H^{0,1}_{\bar\partial}(R),
+\qquad
+H^0(R,\Omega^1)\cong H^{1,0}_{\bar\partial}(R),
+\]
+the Serre pairing of $\alpha$ and $\omega$ is
+\[
+\langle\alpha,\omega\rangle
+= \frac{1}{2\pi i}\int_R \eta\wedge\omega,
+\]
+where $\eta$ is the harmonic $(0,1)$-representative of $\alpha$. In particular, on a compact Riemann surface the Serre duality
+\[
+H^1(R,\cO)\;\cong\;H^0(R,\Omega^1)^\vee
+\]
+is nothing but Poincaré duality in degree~$1$ up to the 
+constant factor $2\pi i$, expressed via the Hodge
+decomposition of $H^1_{\dR}(R,\C)$.
+\end{solution}
+
+\begin{exercise}
+For a compact Riemann surface $R$, verify that the map
+\[
+H^1(R;\Z)\longrightarrow H^1(R;\cO)
+\]
+corresponds to the period map
+\[
+H_1(R;\Z)\otimes H^0(R;\Omega^1)\longrightarrow \C
+\]
+under integral Poincar\'e duality and Serre duality on $R$.
+\end{exercise}
+
+\begin{solution}
+Let $i:H^1(R;\Z)\to H^1(R;\cO)$ be the given homomorphism. We need to show
+for every $c\in H^1(R;\Z)$ and $\omega\in H^0(R,\Omega^1)$, the Serre
+pairing
+\(
+\langle i(c),\omega\rangle_{\mathrm{Serre}}
+\)
+equals the period of $\omega$ along the $1$-cycle Poincar\'e dual to
+$c$.
+
+By Hodge theory, every class in $H^1(R;\R)$ has a unique harmonic
+representative.  An element $c\in H^1(R;\Z)$ maps to a real class
+$c_\R\in H^1(R;\R)$ whose harmonic representative we denote by
+$\alpha$ so
+\[
+[\alpha]_{\dR} = c_\R\in H^1_{\dR}(R;\R).
+\]
+Decompose $\alpha$
+\[
+\alpha = \alpha^{1,0}+\alpha^{0,1},
+\qquad
+\alpha^{0,1} = \overline{\alpha^{1,0}},
+\]
+since $\alpha$ is real.  Under the Dolbeault isomorphism and Hodge
+decomposition, we have
+\[
+H^1(R,\cO)\;\cong\; H^{0,1}_{\bar\partial}(R)
+\]
+and the image $i(c)\in H^1(R,\cO)$ is represented by the harmonic $(0,1)$-form $\alpha^{0,1}$.
+
+We know that the Serre pairing can be described as
+\[
+\langle\beta,\omega\rangle_{\mathrm{Serre}
+}
+=\frac{1}{2\pi i}\int_R \eta^{0,1}\wedge\omega
+\]
+whenever $\beta\in H^1(R,\cO)$ is represented by a harmonic
+$(0,1)$-form $\eta^{0,1}$ and $\omega\in H^0(R,\Omega^1)$ is a
+holomorphic $1$-form.
+
+Applying this to $\beta=i(c)$ and $\eta^{0,1}=\alpha^{0,1}$ gives
+\[
+\langle i(c),\omega\rangle_{\mathrm{Serre}}
+= \frac{1}{2\pi i}\int_R \alpha^{0,1}\wedge\omega.
+\]
+Since $R$ has complex dimension $1$, a $(2,0)$-form vanishes, hence
+$\alpha^{1,0}\wedge\omega=0$, and therefore
+\[
+\alpha^{0,1}\wedge\omega
+= (\alpha^{1,0}+\alpha^{0,1})\wedge\omega
+= \alpha\wedge\omega.
+\]
+Thus
+\begin{equation}
+\label{eq:Serre-alpha}
+\langle\iota^*c,\omega\rangle_{\mathrm{Serre}}
+= \frac{1}{2\pi i}\int_R \alpha\wedge\omega.
+\end{equation}
+Integral Poincar\'e duality gives a perfect pairing
+\[
+H^1(R;\Z)\times H_1(R;\Z)\longrightarrow\Z,
+\]
+and we denote by $\gamma_c\in H_1(R;\Z)$ the Poincar\'e dual of $c$.
+
+The de~Rham realization of this pairing is as follows.  The class
+$c_\R\in H^1(R;\R)$ is represented by the closed $1$-form $\alpha$ with integral periods, i.e.
+\[
+\int_\gamma \alpha \in \Z
+\quad\text{for all } \gamma\in H_1(R;\Z).
+\]
+The Poincar\'e dual cycle $\gamma_c$ is then characterized by
+\[
+\int_{\gamma_c} \beta
+= \int_R \alpha\wedge\beta
+\quad\text{for all closed $1$-forms }\beta,
+\]
+
+Thus, if we identify
+\[
+H^1(R;\Z)\xrightarrow{\;\text{PD}\;}\; H_1(R;\Z)
+\quad\text{and}\quad
+H^1(R;\cO)\xrightarrow{\;\text{Serre}\;}
+H^0(R,\Omega^1)^\vee,
+\]
+the class $c\in H^1(R;\Z)$ maps to the functional
+\[
+H^0(R,\Omega^1)\longrightarrow\C,
+\qquad
+\omega\longmapsto \frac{1}{2\pi i}\int_{\gamma_c}\omega.
+\]
+
+This is precisely the period map (up to the factor $1/(2\pi i)$)
+\[
+H_1(R;\Z)\otimes H^0(R,\Omega^1)\longrightarrow\C,
+\qquad
+(\gamma,\omega)\longmapsto\int_\gamma\omega,
+\]
+with $\gamma=\gamma_c$ the Poincar\'e dual of $c$.
+\end{solution}
+
+\begin{exercise}
+Let $V$ be a complex $g$-dimensional vector space and
+$L\simeq\Z^{2g}\subset V$ a lattice. Let $A = V/L$.
+
+\begin{enumerate}
+\item Using harmonic theory, compute the Dolbeault cohomology $H^\ast(A;\cO)$.
+
+\item Show that the moduli space of holomorphic line bundles on $A$ with zero
+Chern class is naturally identified with
+\[
+A^\vee := \bar{V}^\vee / L^\vee.
+\]
+
+\item Define a line bundle
+\[
+\mathcal{P}\longrightarrow A\times A^\vee
+\]
+from the trivial line bundle over $V\times V^\vee$ with connection
+\[
+\nabla = d + i(x\,d\xi + \xi\,dx),
+\]
+by dividing the $L\times L^\vee$-action as follows: identify the
+fiber $\C$ over $(x,\xi)\in V\times V^\vee$ with that over
+$(x+\ell,\xi+\lambda)$ by multiplication by
+\[
+\exp\bigl(2\pi i(\lambda(x)+\xi(\ell))\bigr).
+\]
+Show that $\mathcal{P}$ is holomorphic, that
+$\mathcal{P}|_{A\times\{a^\vee\}}$ is the line bundle over $A$ classified
+by $a^\vee\in A^\vee$, and prove the corresponding statement for
+$\{a\}\times A^\vee$.
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+  Write $g=\dim_\C V$.  Choose a Hermitian inner product on $V$ which is
+$L$-invariant. By translation invariance and the locality of Kahler
+geometry, this induces a flat Kahler metric on $A$.  
+  \begin{enumerate}
+    \item The Dolbeault Laplacian $\Box_{\bar\partial}$ on $(0,q)$-forms is
+translation invariant.  On a flat torus, a $(0,q)$-form is harmonic iff it
+has constant coefficients. This is because in a global parallel frame, the Laplacian on forms acts coefficientwise as the usual scalar Laplacian and the that any harmonic function on a compact manifold is constant by the maximum principle.
+
+A translation-invariant $(0,1)$-form on $A$ is determined by its value at a single point (say $0$), and conversely any linear functional on $T_0^{0,1}A$ extends uniquely to a translation-invariant $(0,1)$-form.
+Thus
+\[
+\cH^{0,q}(A)\cong \Lambda^q (T_0^{0,1}A)^\vee
+\cong \Lambda^q \overline{V}^\vee,
+\]
+where $\overline{V}$ is $V$ with the conjugate complex structure.
+By Hodge theory,
+\[
+H^{0,q}(A) \cong \cH^{0,q}(A),
+\]
+and since $H^q(A;\cO) \cong H^{0,q}(A)$ we obtain
+\[
+H^q(A;\cO) \;\cong\; \Lambda^q\overline{V}^\vee \cong \Lambda^q V^\vee,
+\qquad 0\le q\le g.
+\]
+More generally, the same reasoning shows
+\[
+H^{p,q}(A) \;\cong\; \Lambda^p V^\vee \otimes \Lambda^q\overline{V}^\vee
+\]
+
+
+\item Isomorphism classes of holomorphic line bundles on $A$ are classified by
+\[
+\Pic(A) \cong H^1(A;\cO^\times).
+\]
+Consider the holomorphic exponential sequence
+\[
+0\longrightarrow \Z 
+\longrightarrow \cO
+\xrightarrow{\ \exp(2\pi i\cdot)\ }
+\cO^\times
+\longrightarrow 1,
+\]
+with long exact cohomology sequence
+\[
+H^1(A;\cO) \longrightarrow H^1(A;\cO^\times)
+\xrightarrow{c_1} H^2(A;\Z).
+\]
+The subgroup
+\[
+\Pic^0(A)\;:=\;\ker\bigl(c_1:\Pic(A)\to H^2(A;\Z)\bigr)
+\]
+is precisely those bundles with zero Chern class. Exactness shows
+\[
+\Pic^0(A) \;\cong\; H^1(A;\cO)/\operatorname{im}\bigl(H^1(A;\Z)\bigr)
+\]
+We have already computed
+\[
+H^1(A;\cO)\cong H^{0,1}(A)\cong \overline{V}^\vee 
+\]
+On the other hand, $H^1(A;\Z)\cong \Hom_\Z(L,\Z)\cong L^\vee$, and this
+sits inside $H^1(A;\cO)$ as a lattice (one way to see this is via
+$H^1(A;\Z)\subset H^1(A;\R)\subset H^1(A;\C)$ and the Hodge decomposition).
+Thus
+\[
+\Pic^0(A)
+\cong 
+H^1(A;\cO)/H^1(A;\Z)
+\cong
+\overline{V}^\vee / L^\vee
+=
+A^\vee.
+\]
+So the moduli space of holomorphic line bundles on $A$ with $c_1=0$ is
+canonically identified with $A^\vee$.
+
+\item Consider the trivial line bundle
+\[
+V\times V^\vee \times \C \longrightarrow V\times V^\vee
+\]
+equipped with the connection
+\[
+\nabla = d + i(x\,d\xi + \xi\,dx),
+\]
+where $x\in V$, $\xi\in V^\vee$, and $x\,d\xi+\xi\,dx$ denotes the
+tautological pairing (so in coordinates it is linear in $x$ and $\xi$).
+
+The group $L\times L^\vee$ acts on $V\times V^\vee\times\C$ by
+\[
+(\ell,\lambda)\cdot(x,\xi,z)
+= \bigl(x+\ell,\;\xi+\lambda,\;
+   e^{2\pi i(\lambda(x)+\xi(\ell))}\,z\bigr).
+\]
+The multiplier
+\(
+e^{2\pi i(\lambda(x)+\xi(\ell))}
+\)
+is holomorphic in $(x,\xi)$ (it is the exponential of a holomorphic linear
+function), so this action is by holomorphic bundle automorphisms of the
+trivial holomorphic line bundle $V\times V^\vee\times\C$.
+
+The quotient
+\[
+\mathcal{P}
+:= (V\times V^\vee\times\C)/(L\times L^\vee)
+\longrightarrow (V/L)\times(V^\vee/L^\vee)
+= A\times A^\vee
+\]
+is therefore a holomorphic line bundle, the \emph{Poincar\'e bundle}.  The
+connection $\nabla$ is invariant under the $L\times L^\vee$-action, hence
+descends to a connection on $\mathcal{P}$.
+
+Now fix $a^\vee\in A^\vee$ and choose a lift $\xi_0\in V^\vee$.
+The restriction $\mathcal{P}|_{A\times\{a^\vee\}}$ is obtained as the
+quotient of $V\times\C$ by the following $L$-action: an element
+$\ell\in L$ sends $(x,z)$ to
+\[
+(x+\ell,\;e^{2\pi i\,\xi_0(\ell)}z),
+\]
+because along the slice $\xi=\xi_0$ the factor $\lambda(x)$ vanishes
+(we take $\lambda=0$ to stay in the same fiber over $a^\vee$), while
+$\xi(\ell)=\xi_0(\ell)$ is constant in $x$.  Thus the monodromy of the
+resulting line bundle around $\ell\in L$ is exactly
+\[
+\chi_{\xi_0}(\ell) = e^{2\pi i\,\xi_0(\ell)}.
+\]
+A holomorphic line bundle on $A$ with zero Chern class is
+classified precisely by such a character $L\to U(1)$, and changing
+$\xi_0$ by an element of $L^\vee$ does not change the character
+$\chi_{\xi_0}$.  Hence the isomorphism class of
+$\mathcal{P}|_{A\times\{a^\vee\}}$ depends only on the class
+$a^\vee = [\xi_0]\in A^\vee$ and is exactly the line bundle over $A$
+classified by $a^\vee$.
+
+The argument for the restriction to $\{a\}\times A^\vee$ is symmetric.
+Fix $a\in A$ with lift $x_0\in V$.  Then the effective $L^\vee$-action
+on $V^\vee\times\C$ along the slice $x=x_0$ is
+\[
+\lambda\cdot(\xi,z)
+= \bigl(\xi+\lambda,\; e^{2\pi i\,\lambda(x_0)} z\bigr),
+\]
+so the monodromy around $\lambda\in L^\vee$ is
+\[
+\chi_{x_0}(\lambda) = e^{2\pi i\,\lambda(x_0)}.
+\]
+This is precisely the character of $L^\vee$ corresponding to the point $a=[x_0]\in A$, and hence
+$\mathcal{P}|_{\{a\}\times A^\vee}$ is the line bundle on $A^\vee$
+classified by $a$.
+  \end{enumerate}
+\end{solution}
+
+\begin{remark}
+    Let $L$ be a lattice in a complex vector space $V$, and let
+$A=V/L$ be the corresponding complex torus. We will verify in detail the fact that a holomorphic line bundle on $A$ with zero Chern class is classified precisely by such a character $L\to U(1)$, and therefore the moduli space of such line bundles is identified with
+\[A^\vee = \overline{V}^\vee / L^\vee.
+\]
+
+  A unitary character is a homomorphism $\chi: L \longrightarrow U(1)$. Any $\chi$ can be written as $\chi(\ell)=\exp(2\pi i\,\xi(\ell))$ for some real-valued group homomorphism $\xi: L\to\R$. Conversely, any such $\xi$ defines a character this way. So
+  \[
+  \Hom(L,U(1)) \cong \Hom(L,\R)/\Hom(L,\Z).
+  \]
+
+  But
+  \[
+  \Hom(L,\R) \cong \Hom_\R(V,\R) \cong \overline{V}^\vee
+  \]
+  where $\Hom_\R(V,\R)$ has a canonical complex structure inherited from that of $V$ by defining $(i\phi)(v) := \phi(iv)$ for $\phi\in \Hom_\R(V,\R)$ and $v\in V$.
+  Finally,
+  \[
+  \Hom(L,\Z)\cong L^\vee.
+  \]
+  Therefore
+  \[
+  \Hom(L,U(1))
+  \;\cong\;
+  \Hom(L,\R)/\Hom(L,\Z)
+  \;\cong\;
+  \overline{V}^\vee / L^\vee
+  \;=\;
+  A^\vee.
+  \]
+\end{remark}
+
+\begin{exercise}
+Show that isomorphism classes of flat unitary line bundles on a
+manifold $X$ are classified by $H^1(X;U(1))$, with the constant sheaf $U(1)$
+associated to the unit circle group in $\C^\times$.
+
+When $X$ is compact K\"ahler, compare the constant and holomorphic
+exponential sequences to conclude that the map
+\[
+H^1(X;U(1))\longrightarrow H^1(X;\cO^\times)
+\]
+induces a bijection from isomorphism classes of flat unitary line bundles to
+those of holomorphic line bundles with zero Chern class.
+\end{exercise}
+
+\begin{solution}
+    A flat unitary line bundle on $X$ is a complex line bundle with structure
+group $U(1)$ and a flat unitary connection.  Choosing a good open cover
+$\{U_i\}$, such a bundle is given by locally constant transition functions
+$g_{ij}\colon U_{ij}\to U(1)$ satisfying the cocycle condition
+$g_{ij}g_{jk}g_{ki}=1$ on $U_{ijk}$, and two such bundles are isomorphic if
+their cocycles differ by a coboundary $g'_{ij}=h_i^{-1}g_{ij}h_j$ with
+$h_i\colon U_i\to U(1)$ locally constant.  This is exactly the description
+of Čech 1--cocycles and coboundaries for the constant sheaf $U(1)$, so
+isomorphism classes of flat unitary line bundles are classified by
+\[
+H^1(X;U(1)).
+\]
+Now suppose $X$ is compact K\"ahler.  Consider the constant exponential
+sequence
+\[
+0\longrightarrow \Z \longrightarrow \R
+\xrightarrow{\ \exp(2\pi i\cdot)\ }
+U(1)\longrightarrow 1
+\]
+and the holomorphic exponential sequence
+\[
+0\longrightarrow \Z \longrightarrow \cO
+\xrightarrow{\ \exp(2\pi i\cdot)\ }
+\cO^\times\longrightarrow 1.
+\]
+The inclusions $\R\hookrightarrow\cO$ and $U(1)\hookrightarrow\cO^\times$
+give a morphism of short exact sequences and so we get a commutative diagram of long exact cohomology sequences:
+\begin{align*}
+\begin{array}{ccccccccc}
+  H^1(X;\Z) &\to H^1(X;\R) &\to H^1(X;U(1)) &\xrightarrow{c_1^{\mathrm{top}}} &H^2(X;\Z)
+  \\  
+  \downarrow &\downarrow &\downarrow & & \downarrow
+  \\
+  H^1(X;\Z) &\to H^1(X;\cO) &\to H^1(X;\cO^\times) &\xrightarrow{c_1^{\mathrm{hol}}} &H^2(X;\Z)
+\end{array}
+\end{align*}
+Let
+\[
+\Pic^0(X):=\ker\bigl(c_1^{\mathrm{hol}}\bigr)
+\]
+be the subgroup of holomorphic line bundles with $c_1=0$.
+Let $TF(H^1(X;U(1)))$ denote the torsion-free part of $H^1(X;U(1))$. Using the fact that the kernel of $H^2(X;\Z)\to H^2(X;\R)$ is the torsion subgroup of $H^2(X;\Z)$, we see that the above diagram induces the following commutative diagram:
+\begin{align*}
+\begin{array}{ccccccccc}
+  0 &\to H^1(X;\R)/H^1(X;\Z) &\to TF(H^1(X;U(1))) &\to 0
+  \\  
+  &\downarrow &\downarrow &
+  \\
+  0 &\to H^1(X;\cO)/H^1(X;\Z) &\to \Pic^0(X) &\to 0
+\end{array}
+\end{align*}
+in which all the maps are isomorphisms.  The left vertical map is induced by the inclusion $\R\hookrightarrow\cO$ and is an isomorphism by the Hodge decomposition theorem, which gives
+\[H^1(X;\R) \cong H^{0,1}(X)\] sending a harmonic representative to its $(0,1)$-part. The horizontal maps are isomorphisms by the exact sequences.  Thus the middle vertical map is an isomorphism
+\[TF(H^1(X;U(1))) \longrightarrow \Pic^0(X)\] and thus every flat unitary line bundle with non torsion Chern class corresponds precisely to a holomorphic line bundle with zero Chern class.
+\end{solution} 
 
 \section{Kodaira Nakano vanishing}
+We introduce the operators 
+\begin{align*}
+    L = \omega\wedge - &:\Omega^{p,q}(X)\to \Omega^{p+1,q+1}(X) \\
+    \Lambda = L^* &:\Omega^{p,q}(X)\to \Omega^{p-1,q-1}(X) \\
+    H = [L,\Lambda] = p+q - n &:\Omega^{p,q}(X)\to \Omega^{p,q}(X)
+\end{align*} 
+where $\omega$ is the Kähler form on a compact Kähler manifold $X$ of complex dimension $n$. These operators satisfy the commutation relations of the Lie algebra $\mathfrak{sl}_2(\C)$:
+\begin{align*}
+    [L,\partial^*] &= i\bar{\partial} \\
+    [L,\bar{\partial^*}] &= -i\partial \\
+    [\Lambda,\partial] &= -i\bar{\partial^*} \\
+    [\Lambda,\bar{\partial}] &= i\partial^* 
+\end{align*}
+The Riemannian Hodge decomposition recovers Poincaré duality on $X$. The ordinary Poincaré duality pairing
+\[H^k(X;\C)\otimes H^{2n-k}(X;\C)\to \C\]
+becomes, via the isomorphism $*:\cH^k \cong \cH^{n-k}$, the $L^2$-pairing. Note that Poincaré duality is topological whereas the Hodge star operator depends on the metric.
+
+\subsection{Dolbeault cohomology for vector bundles}
+Let $E\to X$ be a holomorphic vector bundle over a complex manifold $X$. The holomorphic structure on $E$ gives rise to the Dolbeault operator
+\[
+\bar{\partial}_E:\Omega^{p,q}(X,E)\to \Omega^{p,q+1}(X,E)
+\]
+Put a Hermitian metric $h$ on $E$. We also have the Chern connection $\nabla$ on $E$ compatible with the holomorphic and Hermitian structure, given by the formula \[
+\nabla = \partial_E + \bar{\partial}
+\] The Hodge decomposition says that $\bar\partial$ cohomology is computed by the kernel of the Dolbeault Laplacian
+\[\Box_{\bar\partial} = \bar{\partial}\bar{\partial}^* + \bar{\partial}^*\bar{\partial}\]
+acting on $\Omega^{p,q}(X,E)$. 
+
+
+
 \begin{example}
     The hyperplane bundle $\cO_{\P^N}(1)$ carries the Fubini--Study Hermitian
 metric $h_{\mathrm{FS}}$ whose curvature form $F_{\mathrm{FS}}$ is a
-positive $(1,1)$-form. Therefore, any ample line bundle $L$ over a compact
+positive $(1,1)$-form. \red{Check this.}
+\end{example}
+
+\begin{example}
+From the above example, any ample line bundle $L$ over a compact
 Kähler manifold $X$ admits a Hermitian metric $h$ whose curvature form
 $F$ is a positive $(1,1)$-form by using Kodaira's embedding theorem to
 embed $X$ into projective space and pulling back the Fubini-Study metric on
 $\cO_{\P^N}(1)$ to $L$.
 \end{example}
-\section{Problem Set 5}
+
+\begin{exercise}
+    \leavevmode
+\begin{enumerate}
+  \item Given a holomorphic line bundle $\mathcal{L}$ on a complex manifold and a
+smooth real closed $2$-form $\omega$ in the cohomology class of
+$c_1(\mathcal{L})$, prove that there exists a Hermitian metric on
+$\mathcal{L}$ whose holomorphic connection has curvature $-2\pi i\,\omega$.
+
+\item Conclude (from Kodaira vanishing) that the holomorphic line bundles on a
+compact Riemann surface $R$ which carry metrics of positive curvature are
+precisely those of positive degree.
+
+\item Show also that for every holomorphic vector bundle $V$ on $R$, there exists
+a $d$ so that the twisted bundle $V(D)$ has no $H^1$ for any $D>d$.
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \leavevmode
+  \begin{enumerate}
+    \item 
+ Let $L\to X$ be a holomorphic line bundle on a complex manifold and let
+$\omega$ be a smooth real closed $2$--form representing $c_1(L)\in H^2(X;\R)$.
+Choose any Hermitian metric $h_0$ on $L$ and let $F_0$ denote the curvature of
+its Chern connection.  Then
+\[
+\frac{i}{2\pi}F_0\in\Omega^{1,1}(X,\R)
+\qquad\text{represents } c_1(L).
+\]
+Since $\omega$ also represents $c_1(L)$, the difference
+\[
+\omega-\frac{i}{2\pi}F_0
+\]
+is an exact real $(1,1)$--form.  By the $\partial\bar\partial$--lemma (which
+holds on every complex curve and more generally on K\"ahler manifolds), there
+exists a real-valued smooth function $\varphi$ such that
+\[
+\omega-\frac{i}{2\pi}F_0=\frac{i}{2\pi}\,\partial\bar\partial\varphi.
+\]
+
+Define a new Hermitian metric $h$ by $h=e^{-\varphi}h_0$. In a local holomorphic frame $l$, if $h(l,l)=e^{-\phi}$
+the curvature is $F_h=\partial\bar\partial\phi$.
+Thus
+\[
+F_h = F_0 + \partial\bar\partial\varphi
+     = -2\pi i\,\omega.
+\]
+Hence $h$ is a Hermitian metric whose Chern connection has curvature $-2\pi i\,\omega$.
+
+\item
+For a Hermitian metric $h$ on a holomorphic line bundle $L\to R$, the degree is
+\[
+\deg(L)=\int_R c_1(L)
+       = \int_R \frac{i}{2\pi}F_h.
+\]
+If $h$ has positive curvature, then the form $\frac{i}{2\pi}F_h$ is positive on
+$R$, hence its integral is strictly positive and $\deg(L)>0$.
+
+The hyperplane bundle $\cO_{\P^N}(1)$ carries the Fubini-Study Hermitian
+metric $h_{\mathrm{FS}}$ whose curvature form $F_{\mathrm{FS}}$ is a
+positive $(1,1)$-form.  Pulling back gives a metric $h_m = \Phi_m^*
+h_{\mathrm{FS}}$ on $L^{\otimes m}$ with positive curvature
+\[
+F_{h_m} = \Phi_m^* F_{\mathrm{FS}} > 0.
+\]
+
+Now define a Hermitian metric $h$ on $L$ by taking an $m$th root locally:
+in a local holomorphic frame $e$ of $L$, write
+\[
+h_m(e^{\otimes m}, e^{\otimes m}) = e^{-\phi_m}
+\]
+and set
+\[
+h(e,e) := e^{-\phi_m/m}.
+\]
+Then the curvature satisfies
+\[
+F_h = \frac{1}{m} F_{h_m},
+\]
+which is still a positive $(1,1)$-form.  Thus $L$ admits a Hermitian metric
+of positive curvature. Therefore the holomorphic line bundles on $R$ which carry metrics of positivecurvature are precisely those of positive degree.
+
+\item This follows immediately from Serre duality and the Riemann--Roch theorem.  For a holomorphic vector bundle $V$ on $R$ and a divisor $D$, Serre duality gives
+\[H^1(R,V(D)) \cong H^0(R, K_R \otimes V^\vee \otimes \cO(-D))^\vee.\]
+By Riemann--Roch, for $\deg(D)$ sufficiently large, the degree of the bundle $K_R \otimes V^\vee \otimes \cO(-D)$ becomes negative, and hence
+\[H^0(R, K_R \otimes V^\vee \otimes \cO(-D)) = 0.\]
+Thus, for such $D$, we have $H^1(R,V(D))=0$.  
+\end{enumerate}
+\end{solution}
 
 \begin{thebibliography}{9}
     \bibitem{gh} P. Griffiths and J. Harris, Principles of Algebraic Geometry, Wiley-Interscience, 1994.

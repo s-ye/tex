@@ -26,7 +26,7 @@ Poincar\'e duality on $R$.
 $p_i$ with prescribed principal parts. Let $U_i$ be pairwise disjoint coordinate discs around $p_i$, and choose
 $\chi\in C^\infty(R)$ such that $\chi\equiv 1$ on smaller discs $U_i'\subset U_i$
 and $\chi\equiv 0$ outside $\bigcup_i U_i$.
-Define a $(0,1)$-\emph{current}
+Define a $(0,1)$-current
 \[
 T_f := \bar\partial(\chi f).
 \]
@@ -42,7 +42,7 @@ H^{0,1}_{\bar\partial}(R) \cong H^1(R,\cO)
 depends only on the underlying principal parts.
 
 Let $\omega\in H^0(R,\Omega^1)$ be a holomorphic $1$-form.
-The \emph{Dolbeault} definition of the pairing is
+The Dolbeault definition of the pairing is
 \[
 \langle\alpha,\omega\rangle_{Dol}
 := \frac{1}{2\pi i}\int_R T_f\wedge\omega
@@ -79,7 +79,7 @@ we obtain
 \frac{1}{2\pi i}\int_R \bar\partial(\chi f)\wedge\omega
 = \sum_i \Res_{p_i}(f\omega).
 \]
-This is precisely the \emph{principal parts} definition of the Serre pairing.
+This is precisely the principal parts definition of the Serre pairing.
 
 Now equip $R$ with any Hermitian (necessarily K\"ahler) metric. Hodge theory yields the decompositions
 \[
@@ -251,7 +251,6 @@ H_1(R;\Z)\otimes H^0(R,\Omega^1)\longrightarrow\C,
 (\gamma,\omega)\longmapsto\int_\gamma\omega,
 \]
 with $\gamma=\gamma_c$ the Poincar\'e dual of $c$.
-
 \end{solution}
 
 \begin{problem}[3]
@@ -876,7 +875,7 @@ The quotient
 \longrightarrow (V/L)\times(V^\vee/L^\vee)
 = A\times A^\vee
 \]
-is therefore a holomorphic line bundle, the \emph{Poincar\'e bundle}.  The
+is therefore a holomorphic line bundle, the Poincar\'e bundle.  The
 connection $\nabla$ is invariant under the $L\times L^\vee$-action, hence
 descends to a connection on $\mathcal{P}$.
 
@@ -919,34 +918,6 @@ classified by $a$.
   \end{enumerate}
 \end{solution}
 
-\begin{remark}[1]
-  A unitary character is a homomorphism $\chi: L \longrightarrow U(1)$.
-
-  Any $\chi$ can be written as $\chi(\ell)=\exp(2\pi i\,\xi(\ell))$ for some real-valued group homomorphism $\xi: L\to\R$. Conversely, any such $\xi$ defines a character this way. So
-  \[
-  \Hom(L,U(1)) \cong \Hom(L,\R)/\Hom(L,\Z).
-  \]
-
-  But
-  \[
-  \Hom(L,\R) \cong L^\vee\otimes_{\Z}\R \cong \overline{V}^\vee
-  \]
-  (using the inclusion $L\subset V$ and identifying $V \cong L\otimes_\Z\R$), and
-  \[
-  \Hom(L,\Z)\cong L^\vee.
-  \]
-
-  Therefore
-  \[
-  \Hom(L,U(1))
-  \;\cong\;
-  \Hom(L,\R)/\Hom(L,\Z)
-  \;\cong\;
-  \overline{V}^\vee / L^\vee
-  \;=\;
-  A^\vee.
-  \]
-\end{remark}
 
 \begin{problem}[7]
 Show that, in the case of the Jacobian $J$ of a Riemann surface $R$,
@@ -1106,7 +1077,7 @@ Thus, for such $D$, we have $H^1(R,V(D))=0$.
 \end{solution}
 
 \begin{problem}[9]
-Show that isomorphism classes of \emph{flat unitary} line bundles on a
+Show that isomorphism classes of flat unitary line bundles on a
 manifold $X$ are classified by $H^1(X;U(1))$, with the constant sheaf $U(1)$
 associated to the unit circle group in $\C^\times$.
 
@@ -1135,78 +1106,48 @@ isomorphism classes of flat unitary line bundles are classified by
 \[
 H^1(X;U(1)).
 \]
-
-Now suppose $X$ is compact K\"ahler.  Consider the \emph{constant exponential
-sequence}
+Now suppose $X$ is compact K\"ahler.  Consider the constant exponential
+sequence
 \[
 0\longrightarrow \Z \longrightarrow \R
 \xrightarrow{\ \exp(2\pi i\cdot)\ }
 U(1)\longrightarrow 1
 \]
-and the \emph{holomorphic exponential sequence}
+and the holomorphic exponential sequence
 \[
 0\longrightarrow \Z \longrightarrow \cO
 \xrightarrow{\ \exp(2\pi i\cdot)\ }
 \cO^\times\longrightarrow 1.
 \]
 The inclusions $\R\hookrightarrow\cO$ and $U(1)\hookrightarrow\cO^\times$
-give a morphism of short exact sequences and therefore a natural map
-\[
-H^1(X;U(1))\longrightarrow H^1(X;\cO^\times)\cong\Pic(X).
-\]
-
-The connecting homomorphism in the holomorphic sequence
-\[
-c_1^{\mathrm{hol}}\colon H^1(X;\cO^\times)\longrightarrow H^2(X;\Z)
-\]
-is the first Chern class of the corresponding holomorphic line bundle; let
+give a morphism of short exact sequences and so we get a commutative diagram of long exact cohomology sequences:
+\begin{align*}
+\begin{array}{ccccccccc}
+  H^1(X;\Z) &\to H^1(X;\R) &\to H^1(X;U(1)) &\xrightarrow{c_1^{\mathrm{top}}} &H^2(X;\Z)
+  \\  
+  \downarrow &\downarrow &\downarrow & & \downarrow
+  \\
+  H^1(X;\Z) &\to H^1(X;\cO) &\to H^1(X;\cO^\times) &\xrightarrow{c_1^{\mathrm{hol}}} &H^2(X;\Z)
+\end{array}
+\end{align*}
+Let
 \[
 \Pic^0(X):=\ker\bigl(c_1^{\mathrm{hol}}\bigr)
 \]
 be the subgroup of holomorphic line bundles with $c_1=0$.
-
-The long exact sequence of the constant exponential sequence yields
-\[
-H^1(X;\R)\longrightarrow H^1(X;U(1))
-\longrightarrow H^2(X;\Z)\longrightarrow H^2(X;\R),
-\]
-so $H^1(X;U(1))$ is an extension of $H^1(X;\R)/H^1(X;\Z)$ by the torsion
-subgroup of $H^2(X;\Z)$.  Similarly, the long exact sequence of the
-holomorphic exponential sequence gives
-\[
-H^1(X;\cO)\longrightarrow H^1(X;\cO^\times)
-\xrightarrow{\,c_1^{\mathrm{hol}}\,} H^2(X;\Z)\longrightarrow H^2(X;\cO),
-\]
-and exactness shows
-\[
-\Pic^0(X) \;\cong\; H^1(X;\cO)/H^1(X;\Z).
-\]
-
-By Hodge decomposition, on a compact K\"ahler manifold
-\[
-H^1(X;\C)\cong H^{1,0}(X)\oplus H^{0,1}(X),
-\]
-and $H^1(X;\cO)\cong H^{0,1}(X)$.  The inclusion $\R\hookrightarrow\cO$
-induces a map
-\[
-H^1(X;\R)\longrightarrow H^1(X;\cO)\cong H^{0,1}(X)
-\]
-which, under Hodge decomposition, is the projection
-$H^{1,0}(X)\oplus H^{0,1}(X)\to H^{0,1}(X)$. 
-
-Passing to the quotients by
-$H^1(X;\Z)$, we obtain an isomorphism of real tori
-\[
-\frac{H^1(X;\R)}{H^1(X;\Z)}\;\xrightarrow{\ \sim\ }\;
-\frac{H^1(X;\cO)}{H^1(X;\Z)}\;\cong\;\Pic^0(X).
-\]
-
-Thus we see that the image of
-$H^1(X;U(1))$ is precisely $\Pic^0(X)$ and that the induced map
-\[
-H^1(X;U(1)) \;\xrightarrow{\ \sim\ }\; \Pic^0(X)
-\]
-is a bijection. 
+Let $TF(H^1(X;U(1)))$ denote the torsion-free part of $H^1(X;U(1))$. Using the fact that the kernel of $H^2(X;\Z)\to H^2(X;\R)$ is the torsion subgroup of $H^2(X;\Z)$, we see that the above diagram induces the following commutative diagram:
+\begin{align*}
+\begin{array}{ccccccccc}
+  0 &\to H^1(X;\R)/H^1(X;\Z) &\to TF(H^1(X;U(1))) &\to 0
+  \\  
+  &\downarrow &\downarrow &
+  \\
+  0 &\to H^1(X;\cO)/H^1(X;\Z) &\to \Pic^0(X) &\to 0
+\end{array}
+\end{align*}
+in which all the maps are isomorphisms.  The left vertical map is induced by the inclusion $\R\hookrightarrow\cO$ and is an isomorphism by the Hodge decomposition theorem, which gives
+\[H^1(X;\R) \cong H^{0,1}(X)\] sending a harmonic representative to its $(0,1)$-part. The horizontal maps are isomorphisms by the exact sequences.  Thus the middle vertical map is an isomorphism
+\[TF(H^1(X;U(1))) \longrightarrow \Pic^0(X)\] and thus every flat unitary line bundle with non torsion Chern class corresponds precisely to a holomorphic line bundle with zero Chern class.
 \end{solution} 
 
 \begin{problem}[10]
