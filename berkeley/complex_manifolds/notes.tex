@@ -28,7 +28,7 @@
 
 
 \begin{abstract}
-    These are notes for the course Complex Manifolds (Math 241) taught by Professor Constantin Teleman in the Fall of 2025 at UC Berkeley.
+    These notes accompany Math 241 (Complex Manifolds), taught by Professor Constantin Teleman, Fall 2025, UC Berkeley.  They present a self-contained treatment of the elementary theory of Riemann surfaces functions and differentials, line bundles, Riemann-Roch, Abel-Jacobi maps, and theta functions. This is followed by an introduction to higher-dimensional complex manifolds: holomorphic vector bundles, sheaves, and Dolbeault cohomology.  The exposition culminates in the central results for Kähler geometry, including Hodge decomposition, the Hard Lefschetz theorem, Serre duality for vector bundles, and Kodaira vanishing and embedding theorems.
 \end{abstract}
 
 \tableofcontents
@@ -225,7 +225,7 @@ Let $z_1, \dots, z_n$ and $p_1, \dots, p_m$ denote the zeroes and poles of a non
 
 \begin{proof}
     (i) follows from the fact that
-    \[\frac{1}{2\pi i}\int_{\partial P} \frac{f’(z)}{f(z)}\,dz = n - m\] where $P$ is the period parallelogram. The integral is zero because opposite sides cancel out due to periodicity of $f$.
+    \[\frac{1}{2\pi i}\int_{\partial P} \frac{f'(z)}{f(z)}\,dz = n - m\] where $P$ is the period parallelogram. The integral is zero because opposite sides cancel out due to periodicity of $f$.
     (ii) follows from the fact that
     \[\sum_k \operatorname{Res}_{p_k}(f) = \frac{1}{2\pi i} \int_{\partial P} f(z)\,dz\] and the integral is zero by periodicity.
 
@@ -455,10 +455,10 @@ Equivalently, every compact Riemann surface can be made into a branched cover of
 \noindent
 \textbf{Remarks.}  
 This is the difficult part of the theorem; once we have a branched cover of $\mathbb{P}^1$, we can start studying it by algebraic methods.  
-The proof involves serious analysis, specifically finding solutions of the Laplace equation in various surface domains, with prescribed singularities (“Green’s functions”).
+The proof involves serious analysis, specifically finding solutions of the Laplace equation in various surface domains, with prescribed singularities (“Green's functions”).
 
 \medskip
-Contained in Riemann’s theorem, there is a second result which we shall use without proof.
+Contained in Riemann's theorem, there is a second result which we shall use without proof.
 
 \begin{proposition}
 Let $\pi : R \to \mathbb{P}^1$ be a holomorphic map of degree $n > 0$.  
@@ -1510,6 +1510,16 @@ For $\deg L \geq 2g - 1$, one always has $h^0(L(p)) = h^0(L) + 1$ for all $p \in
         h^0(R, \cO(n_i(p) p)) & = h^0(R, \cO((n_i(p) - 1)p))
     \end{align*} These integers are called the Weierstrass gaps at $p$.
 \end{theorem}
+
+\begin{proof}
+    $g=0$ case is clear since we have explicit meromorphic functions on $\mathbb{P}^1$ with a single pole of any order at any point. So we assume $g\geq1$. A positive integer $n$ is a non-gap at $p$ if there exists a meromorphic function whose only pole is at $p$ and has order exactly $n$.
+    
+    For any divisor $D$ and point $p$, $0\leq l(D+p)-l(D)\leq1$, so in particular every $n\geq1$ is either a gap or a non-gap. Also, for $g\geq1$, $1$ is always a gap: a function with a single simple pole at $p$ would give a degree-1 map $X\to\mathbb{P}^1$, so $X\cong\mathbb{P}^1$ (genus 0), contradiction.
+
+Riemann-Roch and Serre duality immediately imply that every $m\geq 2g-1$ is a non-gap. Hence all gaps lie in $\{1,\dots,2g-1\}$.
+
+Let $G(m)$ be the number of gaps in $\{1,\dots,m\}$. The number of non-gaps in that interval are is $m-G(m)$. Starting from $l(0)=1$ and using that each non-gap increases $l$ by 1 while each gap leaves it unchanged, for any $m\geq1$, which implies that $l(mp) = 1 + (m-G(m))$. Now take $m\geq 2g$. Then $l(mp) = m+1-g$ and equating, we get $G(m) = g$ for all $m\geq 2g-1$. 
+\end{proof}
 The generic sequence of gaps is \begin{align*}
     1, 2, \ldots, g
 \end{align*} A point $p$ is called a Weierstrass point if its gap sequence differs from the generic one. For example, on a hyperelliptic curve, the Weierstrass points are the branch points of the degree $2$ map to $\P^1$ and have gap sequence \begin{align*}
@@ -2265,6 +2275,160 @@ None of these examples are flabby. In fact, the failure of the sheaf of principa
     In this situation, one must derive $\Hom$ using larger categories of $\cO$-modules to get the correct derived functors. In particular, one may consider complexes of sheaves with coherent cohomology sheaves.
 \end{remark}
 
+\begin{exercise}\label{ex:coh-filtered-colimits}
+Show that, on a compact Hausdorff space $X$, sheaf cohomology commutes with filtered colimits: if $\mathcal{S} = \varinjlim \mathcal{S}_n$, then
+\[
+\varinjlim H^q(X; \mathcal{S}_n) = H^q(X; \mathcal{S}).
+\]
+Use this to prove that the sheaf of principal parts of meromorphic sections of a vector bundle on a Riemann surface has no $H^1$ or higher cohomology.
+\end{exercise}
+
+\begin{solution}
+    Let $X$ compact Hausdorff and $\{\mathcal{S}_\alpha\}$ a filtered direct system of sheaves. Let $\mathcal{S} = \varinjlim_\alpha \mathcal{S}_\alpha$ be the colimit in sheaves.
+
+    Take a finite open cover $\mathfrak{U} = \{U_i\}_{i=1}^m$ of $X$ (exists since $X$ is compact). For any $p$,
+    \[
+    C^p(\mathfrak{U},\mathcal{S}) = \prod_{i_0<\dots<i_p} \mathcal{S}(U_{i_0}\cap\cdots\cap U_{i_p}).
+    \]
+    We will use a couple of lemmas and justify them at the end of the solution.
+    \begin{lemma}\label{lem:filtered-colim-stalkwise}
+     Filtered colimits are computed stalkwise and commute with finite products.
+    \end{lemma}
+The lemma implies that the Čech complex for $\mathcal{S}$ is the filtered colimit of the Čech complexes for $\mathcal{S}_\alpha$ since we have the following isomorphisms which commute with the differentials:
+    \[
+    C^p(\mathfrak{U},\mathcal{S}) = \prod_{i_0<\dots<i_p} \mathcal{S}(U_{i_0}\cap\cdots\cap U_{i_p}) = \prod_{i_0<\dots<i_p} \varinjlim_\alpha \mathcal{S}_\alpha(U_{i_0}\cap\cdots\cap U_{i_p})
+    \]
+    \[
+    \cong \varinjlim_\alpha \prod_{i_0<\dots<i_p} \mathcal{S}_\alpha(U_{i_0}\cap\cdots\cap U_{i_p}) = \varinjlim_\alpha C^p(\mathfrak{U},\mathcal{S}_\alpha).
+    \]
+
+
+    \begin{lemma}\label{lem:filtered-colim-exact}
+    Filtered colimits of abelian groups are exact, and in particular taking cohomology commutes with $\varinjlim$:
+    \[
+    \check{H}^q(\mathfrak{U};\mathcal{S}) \cong \varinjlim_\alpha \check{H}^q(\mathfrak{U};\mathcal{S}_\alpha).
+    \]
+    \end{lemma}
+    On a compact Hausdorff space (in particular, on a Riemann surface) Čech cohomology with respect to a good cover computes sheaf cohomology. Hence
+    \[
+    H^q(X;\mathcal{S}) \cong \varinjlim_\alpha H^q(X;\mathcal{S}_\alpha)
+    \]
+    for all $q$. 
+
+    For the second part, let $R$ be a Riemann surface and $V$ a holomorphic vector bundle. For each effective divisor $D$ on $R$, let $\mathcal{P}_D(V)$ be the sheaf of principal parts of meromorphic sections of $V$ with poles bounded by $D$.
+
+Observe that $\mathcal{P}_D(V)$ is supported on the finite set $\operatorname{Supp}(D)$, so it is a finite direct sum of skyscraper sheaves. 
+
+\begin{lemma}\label{lem:finite-support-no-coh}
+    A sheaf on $R$ with finite support has no higher cohomology. In particular, for $q\geq1$,
+    \[
+    H^q(R;\mathcal{P}_D(V)) = 0,
+    \]
+\end{lemma}    
+    The full principal parts sheaf is the filtered colimit over all effective divisors:
+    \[
+    \mathcal{P}(V) = \varinjlim_D \mathcal{P}_D(V),
+    \]
+    directed by $D\leq D'$ if $D$ divides $D'$. Applying the result from the first part:
+    \[
+    H^q(R;\mathcal{P}(V)) \cong \varinjlim_D H^q(R;\mathcal{P}_D(V)).
+    \]
+    But each $H^q(R;\mathcal{P}_D(V))=0$ for $q\geq1$, so the colimit is 0. Therefore
+    \[
+    H^q(R;\mathcal{P}(V)) = 0 \quad \text{for all } q\geq1.
+    \]
+
+    Now we justify the lemmas used above.
+    \begin{proof}[Proof of Lemma \ref{lem:filtered-colim-stalkwise}]
+        Define a presheaf $\mathcal{F}(U) := \varinjlim_\alpha \mathcal{S}_\alpha(U)$. We claim $\mathcal{F}$ is already a sheaf. Then $\mathcal{F}$ is the colimit in the sheaf category, so for any open $U$, we have
+        \[
+        \mathcal{S} := \varinjlim_\alpha \mathcal{S}_\alpha \quad\text{satisfies}\quad \mathcal{S}(U) = \varinjlim_\alpha \mathcal{S}_\alpha(U)
+        \]
+        To show $\mathcal{F}$ is a sheaf, take an open cover $U = \bigcup_i U_i$. For separatedness, suppose $s \in \mathcal{F}(U)$ restricts to zero in every $\mathcal{F}(U_i)$. Represent $s$ by some $s_\alpha \in \mathcal{S}_\alpha(U)$. Its restriction to $\mathcal{F}(U_i)$ is the image of $s_\alpha|_{U_i}$. If that image is zero in the colimit, then for each $i$ there is some stage $\beta_i\geq\alpha$ with $s_{\beta_i}|_{U_i}=0$. Since the system is filtered, find $\gamma$ dominating all $\beta_i$. Then $(s_\gamma)|_{U_i}=0$ for all $i$, so by the sheaf property of $\mathcal{S}_\gamma$, $s_\gamma=0$, hence $s=0$ in the colimit.
+
+        For gluing, suppose we have $s_i \in \mathcal{F}(U_i)$ that agree on overlaps. Represent each $s_i$ by some $s_{i,\alpha_i}\in \mathcal{S}_{\alpha_i}(U_i)$. Filteredness gives a stage $\beta$ dominating all $\alpha_i$. Push all $s_{i,\alpha_i}$ to $\mathcal{S}_\beta$; they still agree on overlaps, so they glue to some $s_\beta\in \mathcal{S}_\beta(U)$. Its class in $\mathcal{F}(U)$ glues the original $s_i$.
+
+        Therefore the presheaf colimit is a sheaf, and $\mathcal{S}(U)=\varinjlim_\alpha \mathcal{S}_\alpha(U)$. Thus filtered colimits are computed stalkwise, so it is enough to show that in the category of abelian groups filtered colimits commute with finite products. 
+    \end{proof}
+
+    \begin{proof}
+    [Proof of Lemma \ref{lem:filtered-colim-exact}]
+    Take a short exact sequence of direct systems
+    \[
+    0 \to A_\alpha \xrightarrow{f_\alpha} B_\alpha \xrightarrow{g_\alpha} C_\alpha \to 0,
+    \]
+    with all maps compatible. We need to show that
+    \[
+    0 \to \varinjlim A_\alpha \to \varinjlim B_\alpha \to \varinjlim C_\alpha \to 0
+    \]
+    is exact.
+
+    Left-exactness (injectivity at $\varinjlim A_\alpha$) holds for any colimit: if an element becomes zero in $\varinjlim B_\alpha$, it is already zero after some stage, and then in $A_\alpha$ by exactness there.
+
+    Surjectivity at $\varinjlim C_\alpha$ is where filteredness is used. Let $[c_\alpha] \in \varinjlim C_\alpha$. Pick representative $c_\alpha\in C_\alpha$. Exactness at $C_\alpha$ gives $b_\alpha\in B_\alpha$ with $g_\alpha(b_\alpha)=c_\alpha$. Let $[b_\alpha]$ be its class in $\varinjlim B_\alpha$; its image is $[c_\alpha]$. 
+
+    We need to check this does not depend on choices: if we change stage or lift, filteredness gives a common stage where the choices agree, because kernels and images are compatible. That is standard and uses only that the system is filtered.
+
+    Hence the right map is surjective and the colimit of a short exact sequence is exact.
+    \end{proof}
+
+    \begin{proof}[Proof of Lemma \ref{lem:finite-support-no-coh}]
+    Let $\mathcal{F}$ be a sheaf on $R$ with finite support $\{p_1,\dots,p_n\}$. Then
+    \[
+    \mathcal{F} \cong \bigoplus_{i=1}^n (i_{p_i})_* \mathcal{F}_{p_i},
+    \]
+    where $i_{p_i} : \{p_i\} \hookrightarrow R$ is the inclusion. Each $(i_{p_i})_* \mathcal{F}_{p_i}$ is a skyscraper sheaf supported at $p_i$. 
+    
+Skyscraper sheaves are flasque. For $\mathcal{G} = (i_x)_*A$, where $A$ is an abelian group and $x\in R$, we have for $V\subset U$, the restriction map $\mathcal{G}(U)\to \mathcal{G}(V)$ is either:
+    \[
+    \begin{cases}
+    \mathrm{id}_A & \text{if both contain }x \\
+    A\to0 & \text{if }x\in U, x\notin V \\
+    0\to0 & \text{otherwise}
+    \end{cases}
+    \]
+
+    In all cases it is surjective. Therefore every restriction map is surjective, so $\mathcal{G}$ is flasque.
+
+Finite direct sums of flasque sheaves are flasque since surjectivity is preserved under finite products. Flasque sheaves have vanishing higher cohomology.
+Since cohomology commutes with finite direct sums, we conclude that $H^q(R;\mathcal{F})=0$ for $q\geq1$.
+\end{proof}
+\end{solution}
+
+\begin{exercise}
+Kodaira's theorem implies that for any vector bundle $V \to R$ on a compact Riemann surface, there exists a (bundle-dependent) degree $d \in \mathbb{Z}$ such that
+\[
+H^1(R; \mathcal{O}(V \otimes L)) = 0
+\]
+for all line bundles $L$ of degree $> d$.
+
+Use this fact, the long exact sequence for cohomology of
+\[
+\mathcal{O} \to \mathcal{M} \to \mathcal{P},
+\]
+and the result of Exercise \ref{ex:coh-filtered-colimits} to show that the ad hoc definition of cohomology of vector bundles via principal parts computes the genuine sheaf cohomology of vector bundles.
+\end{exercise}
+
+\begin{solution}
+For any $V$ there exists $d_0$ such that for every line bundle $L$ with $\deg L > d_0$, \[H^1(R;\mathcal O(V\otimes L)) = 0\] In particular, choose $L = \mathcal O(D)$ for some effective divisor $D$ with $\deg D > d_0$.
+
+For an effective divisor $D$, we have the short exact sequence of sheaves
+\[0 \to \mathcal O(V) \to \mathcal O(V(D)) \to \mathcal P_D(V) \to 0,\]
+where $\mathcal P_D(V)$ is the sheaf of principal parts of meromorphic sections of $V$ with poles bounded by $D$.
+Taking the long exact sequence in cohomology, we have
+\[0 \to H^0(R;\mathcal O(V)) \to H^0(R;\mathcal O(V(D))) \to H^0(R;\mathcal P_D(V)) \to H^1(R;\mathcal O(V)) \to H^1(R;\mathcal O(V(D))) \to \cdots\]
+Since $\deg D > d_0$, we have $H^1(R;\mathcal O(V(D))) = 0$. Therefore,
+\[H^1(R;\mathcal O(V)) \cong \frac{H^0(R;\mathcal P_D(V))}{\operatorname{Im}(H^0(R;\mathcal O(V(D))) \to H^0(R;\mathcal P_D(V)))}.\]
+Taking the direct limit over all effective divisors $D$, we have
+\[H^1(R;\mathcal O(V)) \cong \varinjlim_D \frac{H^0(R;\mathcal P_D(V))}{\operatorname{Im}(H^0(R;\mathcal O(V(D))) \to H^0(R;\mathcal P_D(V)))}.\]
+By the result of Exercise \ref{ex:coh-filtered-colimits}, we have
+\[\varinjlim_D H^0(R;\mathcal P_D(V)) \cong H^0(R;\mathcal P(V)),\]
+where $\mathcal P(V)$ is the sheaf of principal parts of meromorphic sections of $V$. Therefore,
+\[H^1(R;\mathcal O(V)) \cong \frac{H^0(R;\mathcal P(V))}{\operatorname{Im}(\varinjlim_D H^0(R;\mathcal O(V(D))) \to H^0(R;\mathcal P(V)))}.\]
+But $\varinjlim_D H^0(R;\mathcal O(V(D)))$ is precisely the space of global meromorphic sections of $V$. Thus,
+\[H^1(R;\mathcal O(V)) \cong \frac{H^0(R;\mathcal P(V))}{\operatorname{Im}(H^0(R;\mathcal M(V)) \to H^0(R;\mathcal P(V)))}\]
+\end{solution}
+
 \subsection{Currents}
 Let $M$ be a $\cC^\infty$ oriented differentiable manifold, $m=\dim_{\R} M$.
 We first introduce a topology on the space of differential forms
@@ -2277,7 +2441,6 @@ we associate a seminorm
   p^s_L(u)
   =\sup_{x\in L}\ \max_{\substack{|I|=p\\|\alpha|\le s}}\,
    \bigl|D^\alpha u_I(x)\bigr|,
-\tag{2.1}
 \]
 where $\alpha=(\alpha_1,\dots,\alpha_m)$ runs over $\N^m$, and
 \[
@@ -2905,7 +3068,7 @@ F_h = -\,\partial\bar\partial \log h(e,e).
     \]
 \end{proof}
 
-    \begin{example}
+    \begin{example}\label{ex:tautological-bundle}
         Consider the tautological line bundle $\mathcal{O}(-1)$ over $\C \P^n$. It carries a hermitian structure invariant under the action of $U(n+1)$ induced from the standard hermitian structure on $\C^{n+1}$. In the standard affine chart $U_0 = \{ [1:z_1:\cdots:z_n] \}$ with coordinates $z_i = x_i + i y_i$, a local holomorphic frame is given by the section \begin{align*}
             \sigma(z) & = (1, z_1, z_2, \ldots, z_n)
         \end{align*} whose norm is given by \begin{align*}
@@ -3288,7 +3451,7 @@ By the Leibniz rule for $\partial$ on a $k$-form $\overline{\phi}$,
  = \partial\overline{\phi}\wedge *\psi
    + (-1)^k\,\overline{\phi}\wedge\partial(*\psi).
 \]
-Integrating and using Stokes’ theorem (the boundary term vanishes because
+Integrating and using Stokes' theorem (the boundary term vanishes because
 the forms are compactly supported), we obtain
 \[
 \int_X \partial\overline{\phi}\wedge *\psi
@@ -3743,8 +3906,7 @@ $\{a\}\times A^\vee$.
 $L$-invariant. By translation invariance and the locality of Kahler
 geometry, this induces a flat Kahler metric on $A$.  
   \begin{enumerate}
-    \item The Dolbeault Laplacian $\Box_{\bar\partial}$ on $(0,q)$-forms is
-translation invariant.  On a flat torus, a $(0,q)$-form is harmonic iff it
+    \item The Dolbeault Laplacian $\bar\square$ on $(0,q)$-forms is translation invariant.  On a flat torus, a $(0,q)$-form is harmonic iff it
 has constant coefficients. This is because in a global parallel frame, the Laplacian on forms acts coefficientwise as the usual scalar Laplacian and the that any harmonic function on a compact manifold is constant by the maximum principle.
 
 A translation-invariant $(0,1)$-form on $A$ is determined by its value at a single point (say $0$), and conversely any linear functional on $T_0^{0,1}A$ extends uniquely to a translation-invariant $(0,1)$-form.
@@ -4011,27 +4173,185 @@ The Riemannian Hodge decomposition recovers Poincaré duality on $X$. The ordina
 becomes, via the isomorphism $*:\cH^k \cong \cH^{n-k}$, the $L^2$-pairing. Note that Poincaré duality is topological whereas the Hodge star operator depends on the metric.
 
 \subsection{Dolbeault cohomology for vector bundles}
-Let $E\to X$ be a holomorphic vector bundle over a complex manifold $X$. The holomorphic structure on $E$ gives rise to the Dolbeault operator
+Let $E\to X$ be a holomorphic vector bundle over a compact complex manifold $X$. The holomorphic structure on $E$ gives rise to the Dolbeault operator
 \[
 \bar{\partial}_E:\Omega^{p,q}(X,E)\to \Omega^{p,q+1}(X,E)
 \]
 Put a Hermitian metric $h$ on $E$. We also have the Chern connection $\nabla$ on $E$ compatible with the holomorphic and Hermitian structure, given by the formula \[
 \nabla = \partial_E + \bar{\partial}
 \] The Hodge decomposition says that $\bar\partial$ cohomology is computed by the kernel of the Dolbeault Laplacian
-\[\Box_{\bar\partial} = \bar{\partial}\bar{\partial}^* + \bar{\partial}^*\bar{\partial}\]
-acting on $\Omega^{p,q}(X,E)$. 
+\[\bar\square = \bar{\partial}\bar{\partial}^* + \bar{\partial}^*\bar{\partial}\]
+acting on $\Omega^{p,q}(X,E)$. In particular, on a compact Hermitian manifold,
+\[\Omega^{p,q}(X,E)
+\;=\;
+\ker \square_{\bar\partial}
+\;\oplus\;
+\operatorname{im}\bar\partial_E
+\;\oplus\;
+\operatorname{im}\bar\partial_E^*\]
+In particular,
+$\ker\bar\partial_E = \ker\bar\square \oplus \operatorname{im}\bar\partial_E$. Using the decomposition above, every cohomology class has a unique representative in $\ker\bar\square$, and the map
+\[\ker\bar\square \;\longrightarrow\; H^{p,q}_{\bar\partial}(X,E),
+\qquad \alpha \longmapsto [\alpha]\]
+is an isomorphism.
+ 
+\begin{theorem}
+    [Kodaira-Nakano] We have the Weitzenböck formula
+    \[
+    \bar\square = \square - i[\Lambda,F\wedge ]
+    \]
+    In particular, $[\Lambda,F\wedge]$ is an order zero differential operator acting on $\Omega^{p,q}(X,E)$.
+\end{theorem}
 
 
+
+\begin{remark}
+    The zeroth order term $-i[\Lambda,F\wedge]$ is self adjoint. For a unitary connection, the curvature $F$ is skew-Hermitian in the
+bundle indices, and the commutator $[\Lambda,F\wedge]$ is skew-adjoint. Multiplying a skew-adjoint operator $T$ by $-i$ gives a
+self-adjoint operator: $(-iT)^* = iT^* = i(-T) = -iT$.
+\end{remark}
+
+\begin{remark}
+    $\square$ is semipositive because \begin{align*}
+    \langle \square \alpha, \alpha \rangle
+    &= \langle (\partial\partial^* + \partial^*\partial)\alpha, \alpha \rangle \\
+    &= \langle \partial^*\alpha, \partial^*\alpha \rangle + \langle \partial\alpha, \partial\alpha \rangle \\
+    &= \|\partial^*\alpha\|^2 + \|\partial\alpha\|^2 \geq 0
+    \end{align*}
+\end{remark}
+
+\begin{remark}
+    If $-i[\Lambda,F\wedge]$ is positive definite on $\Omega^{p,q}(X,E)$, then $\bar\square$ is strictly positive on $\Omega^{p,q}(X,E)$, hence $\ker\bar\square=0$ and therefore $H^{p,q}_{\bar\partial}(X,E)=0 = \ker\bar\square = 0$.
+\end{remark}
+
+\begin{proof}
+    By direct computation using the commutation relations above, we have
+    \begin{align*}
+    \bar\square
+    &= [\bar{\partial}, \bar{\partial}^*] \\
+    &= [\bar{\partial}, -i[\Lambda,\partial]] \\
+    &= -i[[\bar\partial, \Lambda], \partial] - i[\Lambda, [\bar\partial, \partial]] \\
+    &= -i[i\partial^*, \partial] - i[\Lambda, F\wedge] \\
+    &= \square - i[\Lambda, F\wedge]
+    \end{align*}
+\end{proof}
 
 \begin{example}
+    Let $E = \cL$ and pick a Hermitian metric $h$ on the holomorphic line bundle $\cL\to X$ with curvature form $F$. We suppose that $F = -2\pi i \,\omega$ for a Kähler form $\omega$. The line bundles which admit such metrics are by definition the positive line bundles. Then
+    \begin{align*}
+    [\Lambda, F\wedge]
+    &= -2\pi i [\Lambda, \omega\wedge] \\
+    &= -2\pi i L^* L \\
+    &= -2\pi i H \\
+    &= -2\pi i (p+q - n)
+    \end{align*}
+    Therefore, if $p=n$ then $\bar\square = \square + 2\pi (p+q - n) = \square + 2\pi q$ is strictly positive on $\Omega^{n,q}(X,\cL)$ for $q>0$, hence we recover the Kodaira vanishing theorem
+    \[
+    H^q(X, \cL\otimes \Omega^n_X) = 0
+    \quad\text{for } q>0
+    \]
+    There is also the dual statement
+    \[
+    H^q(X, \cL^{-1}) = 0
+    \quad\text{for } q < n
+    \]
+\end{example}
+
+We notice from this example that positivity seems like a very strong condition on a line bundle. We can relax this condition as follows.
+Let $X$ be a compact Kähler manifold.
+
+\begin{definition}
+    We say a class $\alpha\in H^{1,1}(X;\R)$ is \textbf{positive} if it is in the real part of $H^{1,1}(X)$ and can be represented by a Kähler form.
+\end{definition}
+
+\begin{theorem}
+    Suppose $\cL \to X$ is holomorphic line bundle with positive $c_1(\cL)\in H^{1,1}(X;\R)$. Then there exists a Hermitian metric on $\cL$ with curvature $2\pi/i \omega$, where $\omega$ is an integral Kähler form representing $c_1(\cL)$.
+\end{theorem}
+
+\begin{remark}
+    The constraints $[\omega]\in \Im H^2(X;\Z) \cap H^{1,1}(X;\R)$ and $\omega>0$ imply such Hermitian metric exists on $\cL$. A compact complex $X$ admitting such a form $\omega$ is called a \textbf{Hodge manifold}.
+\end{remark}
+
+\begin{theorem}
+    [Kodaira embedding theorem] Let $X$ be a Hodge manifold. For a choice of $\cL$, there exists $N>0$ and a holomorphic embedding $X \to \P(H^0(X,\cL^{\otimes N})^\vee)$.
+\end{theorem}
+
+An $\cL$ whose power gives such an embedding is called an \textbf{ample line bundle}. If $\cL$ gives an embedding itself, it is called \textbf{very ample}.
+
+\begin{proof}
+    [Sketch] We must arrange that there is no base locus, the map is injective, and the map is an immersion. All of these properties are witnessed by the surjectivity of certain evaluation maps. In particular \begin{align*}
+    H^0(X,\cL^{\otimes N}) &\to H^0(X,I \cL^{\otimes N}) 
+    \end{align*} where $I = \mf{m}_x$ for no base locus, $I = \mf{m}_x \mf{m}_y$ for injectivity, and $I = \mf{m}_x^2$ for immersion. It suffices to demonstrate the vanishing of the cohomology group $H^1(X, I \cL^{\otimes N})$ for sufficiently large $N$. The issue is that when $\dim X > 1$, $I$ is not a line bundle, so we cannot use degree arguments invoking Riemann Roch and Serre duality.
+
+It turns out that you can pass to a blowup $\tilde{X} \to X$ at the finite set of points involved and compute there. In this context, we consider $H^1(\tilde{X}, \pi^* I \cL^{\otimes N})$ where $I = I(E_x), I(E_x + E_y), I(2E_x)$ for the exceptional divisors $E_x, E_y$ over $x,y\in X$. The exceptional divisor, being codimension $1$, puts us back in the line bundle situation and so degree arguments can be used. 
+\end{proof}
+
+\begin{example}\label{ex:fubini-study}
     The hyperplane bundle $\cO_{\P^N}(1)$ carries the Fubini--Study Hermitian
 metric $h_{\mathrm{FS}}$ whose curvature form $F_{\mathrm{FS}}$ is a
-positive $(1,1)$-form. \red{Check this.}
+positive $(1,1)$-form.
+
+Work on the affine chart
+\[
+U_0=\{[1:z_1:\dots:z_n]\}\subset\P^n,
+\qquad z=(z_1,\dots,z_n),
+\]
+and let $\sigma$ denote the standard holomorphic frame of
+$\mathcal O_{\P^n}(-1)$ given by the point $(1,z_1,\dots,z_n)\in\C^{n+1}$.
+With respect to this frame, the Hermitian metric is
+\[
+h(\sigma,\sigma)\;=\;1+\sum_{i=1}^n |z_i|^2,
+\]
+and we computed that the Chern curvature is
+\[
+F_\nabla
+ \;=\;
+ \frac{
+   -\Bigl(1+\textstyle\sum_{k=1}^n |z_k|^2\Bigr)
+      \sum_{i=1}^n dz_i\wedge d\bar z_i
+   \;+\;
+   \sum_{i,j=1}^n z_i\overline{z_j}\,dz_i\wedge d\bar z_j}
+ {(1+\sum_{k=1}^n |z_k|^2)^2}.
+\]
+Evaluate the associated real $(1,1)$-form on a
+tangent vector $v=(v_1,\dots,v_n)\in T^{1,0}_zU_0\cong\C^n$:
+\[
+\frac{i}{2\pi}F_\nabla(v,\bar v)
+ \;=\;
+ -\,\frac{1}{2\pi}\cdot
+   \frac{
+     \bigl(1+\sum_{k=1}^n |z_k|^2\bigr)\,|v|^2
+     \;-\;
+     |\langle z,v\rangle|^2}
+   {(1+\sum_{k=1}^n |z_k|^2)^2}.
+\]
+
+By the Cauchy-Schwarz inequality,
+$|\langle z,v\rangle|^2 \le |z|^2\,|v|^2$, so the numerator satisfies
+\[
+\bigl(1+\sum |z_k|^2\bigr)\,|v|^2 - |\langle z,v\rangle|^2
+ \;\ge\; |v|^2 \;>\;0
+\qquad\text{for all } v\neq 0.
+\]
+Thus the entire expression is strictly negative.  Hence the real
+$(1,1)$-form $\frac{i}{2\pi}F_\nabla$ is negative definite, and we conclude that 
+$\mathcal O_{\P^n}(-1)$ is negatively curved, while its dual
+$\mathcal O_{\P^n}(1)$ is positively curved.
 \end{example}
 
 \begin{example}
-From the above example, any ample line bundle $L$ over a compact
-Kähler manifold $X$ admits a Hermitian metric $h$ whose curvature form
+Positivity is preserved under pullback. If $f:Y\to X$ is a holomorphic map
+between compact Kähler manifolds and $\cL\to X$ is a holomorphic line
+bundle with a Hermitian metric of positive curvature, then the pullback
+bundle $f^*\cL\to Y$ carries the pullback metric whose curvature form is
+the pullback of the original curvature form, which is also positive because
+if one evaluates the pulled-back form on a tangent vector $v \in T_x^{1,0}X$:
+\[(f^*\alpha)(v,\bar v) \;=\; \alpha(df_x v, \overline{df_x v})\]
+Since $\alpha$ is positive, the right-hand side satisfies
+$\alpha(df_x v, \overline{df_x v}) \ge 0$.
+
+
+Therefore, from Example \ref{ex:fubini-study}, any ample line bundle $L$ over a compact Kähler manifold $X$ admits a Hermitian metric $h$ whose curvature form
 $F$ is a positive $(1,1)$-form by using Kodaira's embedding theorem to
 embed $X$ into projective space and pulling back the Fubini-Study metric on
 $\cO_{\P^N}(1)$ to $L$.
@@ -4064,9 +4384,7 @@ Choose any Hermitian metric $h_0$ on $L$ and let $F_0$ denote the curvature of
 its Chern connection.  Then
 \[
 \frac{i}{2\pi}F_0\in\Omega^{1,1}(X,\R)
-\qquad\text{represents } c_1(L).
-\]
-Since $\omega$ also represents $c_1(L)$, the difference
+\] also represents $c_1(L)$, so the difference
 \[
 \omega-\frac{i}{2\pi}F_0
 \]
