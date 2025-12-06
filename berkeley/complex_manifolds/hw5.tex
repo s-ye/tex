@@ -324,28 +324,26 @@ The Riemann theta function with period matrix $\tau$ is
 \exp\bigl(\pi i\,k^{\mathsf T}\tau k + 2\pi i\,k^{\mathsf T}z\bigr),
 \quad z\in\C^g.
 \]
-The Riemann theta function satisfies the quasi-periodicity property.
+The Riemann theta function satisfies the quasi-periodicity property:
 \[
 \theta\bigl(z + m + \tau n \mid \tau\bigr)
 =
 \exp\bigl(-\pi i n^{\mathsf T}\tau n - 2\pi in^{\mathsf T}z\bigr)
-\theta(z\mid\tau)
+\theta(z\mid\tau).
 \]
-In particular, the Riemann theta function defines a holomorphic section of the line bundle
-$\mathcal{O}_J(\Theta)$.
-
-Hence, identifying $H^{2}(U,\mathbb{Z})$ and $H^{2}(X,\mathbb{Z})$ by the above
-isomorphism, the Chern class of $L$ is simply $\delta(\operatorname{cl}\{e_{u}\})$.
-Write $e_{u}(z)=e^{2\pi i f_{u}(z)}$ with $f_{u}$ holomorphic in $V$.  Then by
-definition, $\delta(\operatorname{cl}\{e_{u}\})\in H^{2}(U,\mathbb{Z})$ is
-given by the $2$-cocycle $F(u_{1},u_{2})$ on $U$ with coefficients in
-$\mathbb{Z}$ defined by
+In particular, the Riemann theta function defines a holomorphic section of the line bundle $\mathcal{O}_J(\Theta)$.
+Thus the factor of automorphy is
 \[
-  F(u_{1},u_{2})
-  = f_{u_{2}}(z+u_{1}) - f_{u_{1}+u_{2}}(z) + f_{u_{1}}(z)
-  \in \mathbb{Z}. \tag{$*$}
+e_u(z)
+=\exp\bigl(-\pi i\,n^{\mathsf T}\tau n-2\pi i\,n^{\mathsf T}z\bigr)
+=\exp\bigl(2\pi i f_u(z)\bigr)
+\]
+with
+\[
+f_u(z)=-\tfrac12\,n^{\mathsf T}\tau n - n^{\mathsf T}z,\qquad u=m+\tau n.
 \]
 
+The following lemma is standard.
 \begin{lemma}[1 (Mumford)]
 Let $U \subset V$ be a lattice in a complex vector space $V$. The map which associates to any map $F: U\times U \to \mathbb{Z}$ the
 map $AF: U\times U\to \mathbb{Z}$ defined by
@@ -365,30 +363,95 @@ isomorphism
 \]
 Furthermore for $\xi,\eta\in\operatorname{Hom}(U,\mathbb{Z})=H^{1}(U,\mathbb{Z})$,
 we have $A(\xi\smile\eta)=\xi\wedge\eta$.
+\end{lemma} 
+The proof of this lemma is given at the end of the solution.
+\begin{lemma}[2 (Mumford)]
+  If $e_u(z)=\exp(2\pi i f_u(z))$ are the factors of automorphy, then the Chern class
+$c_1(L)\in H^2(J,\Z)\cong\Alt^2(\Lambda,\Z)$ corresponds to the form
+\[
+E(u_1,u_2)
+= f_{u_2}(z+u_1)+f_{u_1}(z)-f_{u_1}(z+u_2)-f_{u_2}(z)
+\]
+which is bilinear, alternating, and independent of $z$.
 \end{lemma}
+Substituting into Mumford's formula and using the symmetry of $\tau$, the quadratic terms cancel, leaving
+\[
+E(u_1,u_2)= n_1^{\mathsf T}m_2 - n_2^{\mathsf T}m_1.
+\]
+recovering the intersection pairing on $H_1(R,\Z)$.
 
-\begin{proposition}[2 (Mumford)]
-The Chern class of the line bundle corresponding to
-$\{e_{u}\}\in Z^{1}(U,H^{*})$ is the alternating $2$-form on $U$ with values
-in $\mathbb{Z}$ given by
+\begin{proof}
+[Proof of Lemma 2]
+A holomorphic line bundle on $J$ is equivalent to the trivial bundle
+$V\times\C\to V$ endowed with the $\Lambda$--action
 \[
-  E(u_{1},u_{2})
-  = f_{u_{2}}(z+u_{1}) + f_{u_{1}}(z)
-    - f_{u_{1}}(z+u_{2}) - f_{u_{2}}(z),
-  \qquad (z\text{ arbitrary in }V),
-  \tag{$**$}
+u\cdot(z,\xi)=(z+u, e_u(z)\xi).
 \]
-where
+Thus $L$ corresponds to the multiplicative $1$--cocycle $\{e_u\}$
+satisfying the identity \[e_{u_1+u_2}(z)=e_{u_2}(z+u_1)e_{u_1}(z)\]
+
+Consider the exponential sequence on $V$,
 \[
-  e_{u}(z) = e^{\,2\pi i\, f_{u}(z)}.
+0 \longrightarrow \Z
+  \longrightarrow \cO_V
+  \xrightarrow{\exp(2\pi i\,\cdot)} \cO_V^\times
+  \longrightarrow 1.
 \]
-\end{proposition}
-Moreover if we extend $E$ $\mathbb{R}$-linearly to a map
-$V\times V\to\mathbb{R}$, then $E$ satisfies the identity
+Passing to group cohomology of $\Lambda$ gives an exact sequence
 \[
-  E(ix,iy) = E(x,y) \qquad \text{for } x,y\in V.
+H^1(\Lambda,\cO^\times_V)
+  \xrightarrow{\;\delta\;}
+H^2(\Lambda,\Z),
 \]
+and it is standard that the Chern class $c_1(L)$ is precisely the
+image under $\delta$ of the cocycle $\{e_u\}$.
+
+Choose logarithms $f_u$ with $e_u=\exp(2\pi i f_u)$.  The formula for
+$\delta$ on group cochains gives the $2$--cochain
+\[
+F(u_1,u_2)(z)
+  := f_{u_2}(z+u_1)-f_{u_1+u_2}(z)+f_{u_1}(z).
+\]
+Because of the multiplicative cocycle identity taking
+logarithms yields
+\[
+f_{u_1+u_2}(z)
+  - f_{u_2}(z+u_1)
+  - f_{u_1}(z)
+  \in \Z.
+\]
+Hence $F(u_1,u_2)(z)$ takes values in $\Z$.  Being holomorphic and
+integer--valued, it is constant in $z$.  Thus $F$ defines a function
+\[
+F:\Lambda\times\Lambda\longrightarrow\Z,
+\]
+and one checks directly that it satisfies the group cocycle condition
+$\delta F=0$.  Therefore $F$ is a $2$--cocycle representing the Chern
+class $c_1(L)$.
+
+The previous lemma identifies
+\[
+H^2(\Lambda,\Z)\;\cong\;\Alt^2(\Lambda,\Z)
+\]
+via the alternation map
+\[
+AF(u_1,u_2)=F(u_1,u_2)-F(u_2,u_1).
+\]
+Applying this to the cocycle $F$ gives
+\[
+\begin{aligned}
+E(u_1,u_2)
+ &= F(u_1,u_2)-F(u_2,u_1) \\
+ &= f_{u_2}(z+u_1)+f_{u_1}(z)
+    -f_{u_1}(z+u_2)-f_{u_2}(z),
+\end{aligned}
+\]
+which is therefore a representative of $c_1(L)$ in the alternating
+form picture.  In particular $E$ is bilinear, alternating, and
+independent of~$z$.
+\end{proof}
 \end{solution}
+
 
 \begin{problem}[4]
 Prove the following generalized Cauchy formula for a smooth function $f$
@@ -1011,10 +1074,8 @@ a $d$ so that the twisted bundle $V(D)$ has no $H^1$ for any $D>d$.
 $\omega$ be a smooth real closed $2$--form representing $c_1(L)\in H^2(X;\R)$.
 Choose any Hermitian metric $h_0$ on $L$ and let $F_0$ denote the curvature of
 its Chern connection.  Then
-\[
-\frac{i}{2\pi}F_0\in\Omega^{1,1}(X,\R)
-\qquad\text{represents } c_1(L).
-\]
+$
+\frac{i}{2\pi}F_0\in\Omega^{1,1}(X,\R)$ represents the class $c_1(L)$
 Since $\omega$ also represents $c_1(L)$, the difference
 \[
 \omega-\frac{i}{2\pi}F_0
@@ -1129,25 +1190,23 @@ give a morphism of short exact sequences and so we get a commutative diagram of 
   \\
   H^1(X;\Z) &\to H^1(X;\cO) &\to H^1(X;\cO^\times) &\xrightarrow{c_1^{\mathrm{hol}}} &H^2(X;\Z)
 \end{array}
-\end{align*}
-Let
+\end{align*}Let
 \[
 \Pic^0(X):=\ker\bigl(c_1^{\mathrm{hol}}\bigr)
 \]
 be the subgroup of holomorphic line bundles with $c_1=0$.
-Let $TF(H^1(X;U(1)))$ denote the torsion-free part of $H^1(X;U(1))$. Using the fact that the kernel of $H^2(X;\Z)\to H^2(X;\R)$ is the torsion subgroup of $H^2(X;\Z)$, we see that the above diagram induces the following commutative diagram:
+
+There is a commutative diagram
 \begin{align*}
-\begin{array}{ccccccccc}
-  0 &\to H^1(X;\R)/H^1(X;\Z) &\to TF(H^1(X;U(1))) &\to 0
-  \\  
-  &\downarrow &\downarrow &
-  \\
-  0 &\to H^1(X;\cO)/H^1(X;\Z) &\to \Pic^0(X) &\to 0
+\begin{array}{ccc}
+H^1(X;\R)/H^1(X;\Z) &\cong & \ker c_1^{\mathrm{top}}
+\\
+\downarrow & &\downarrow
+\\
+H^1(X;\cO)/H^1(X;\Z) & = & \Pic^0(X)
 \end{array}
 \end{align*}
-in which all the maps are isomorphisms.  The left vertical map is induced by the inclusion $\R\hookrightarrow\cO$ and is an isomorphism by the Hodge decomposition theorem, which gives
-\[H^1(X;\R) \cong H^{0,1}(X)\] sending a harmonic representative to its $(0,1)$-part. The horizontal maps are isomorphisms by the exact sequences.  Thus the middle vertical map is an isomorphism
-\[TF(H^1(X;U(1))) \longrightarrow \Pic^0(X)\] and thus every flat unitary line bundle with non torsion Chern class corresponds precisely to a holomorphic line bundle with zero Chern class.
+The left vertical map is an isomorphism by the Hodge decomposition theorem. Thus the right vertical map is also an isomorphism, and we conclude that every holomorphic line bundle with zero Chern class corresponds to a flat unitary line bundle with zero Chern class.
 \end{solution} 
 
 \begin{problem}[10]

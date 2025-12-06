@@ -32,7 +32,215 @@
 \end{abstract}
 
 \tableofcontents
-\section{Elliptic functions}
+\section{Riemann Surfaces}
+\red{Introduction here.}
+\subsection{Structure theory}
+\begin{definition}[Holomorphic function in two variables]
+A complex function $F(z,w)$ defined in an open set in $\C^2$ is called
+\textbf{holomorphic} if, near each point $(z_0,w_0)$ in its domain, $F$
+admits a convergent power series expansion
+\[
+  F(z,w) = \sum_{m,n\ge 0} F_{mn} (z - z_0)^m (w - w_0)^n .
+\]
+\end{definition}
+
+\begin{definition}[Analytic Riemann surface in $\C^2$]
+A subset $S\subseteq \C^2$ is called a \textbf{(concrete, possibly singular)
+Riemann surface} if, for each point $s\in S$, there exists a neighbourhood
+$U$ of $s$ and a holomorphic function $F$ on $U$ such that $S\cap U$ is the
+zero-set of $F$ in $U$. Moreover, we require that
+\[
+  \frac{\partial^n F}{\partial w^n}(s) \neq 0
+\quad\text{for some } n.
+\]
+
+In particular, the continuity of $F$ implies that $S$ is locally closed.
+The condition $\partial^n F/\partial w^n (s)\neq 0$ rules out vertical
+lines through~$s$, which cannot reasonably be viewed as graphs.
+(Indeed, from the power series expansion we see that $S\cap U$ contains
+a vertical line precisely when $F_{0n}=0$ for all $n$.)
+\end{definition}
+
+\begin{definition}[Non-singular point]
+The Riemann surface $S$ is called \textbf{non-singular} at $s\in S$ if a
+function $F$ defining $S$ near $s$ can be found with gradient vector
+$(\partial F/\partial z,\, \partial F/\partial w)$ nonzero at $s$.
+\end{definition}
+
+\begin{definition}
+    An \textbf{abstract Riemann surface} is a topological surface $R$ equipped with a maximal atlas of charts to open subsets of $\C$ such that the transition functions are holomorphic.
+\end{definition}
+
+Every non-singular concrete Riemann surface is an abstract Riemann surface in a natural way, by using the implicit function theorem to produce local charts. However, the converse fails for the obvious reason that compact Riemann surfaces cannot be embedded in $\C^2$ as concrete Riemann surfaces. 
+
+\begin{definition}
+    Let $R$ and $S$ be Riemann surfaces. A map $f : R \to S$ is called \textbf{holomorphic} if for every holomorphic function $g : U \to \C$ defined on an open subset $U \subseteq S$, the composition $g \circ f : f^{-1}(U) \to \C$ is a holomorphic function on $R$.
+\end{definition}
+
+\begin{theorem}[Local normal form and ramification index]
+Let $f : R \to S$ be a nonconstant holomorphic map between Riemann surfaces,
+and let $p \in R$ with $q := f(p)$. Then there exist local holomorphic
+coordinates
+\[
+z : (R,p) \xrightarrow{\sim} (\C,0),
+\qquad
+w : (S,q) \xrightarrow{\sim} (\C,0),
+\]
+and an integer $k \ge 1$ such that
+\[
+w \circ f \circ z^{-1}(\zeta) \;=\; \zeta^k
+\]
+for all $\zeta$ in a neighbourhood of $0$. The integer $k$ is uniquely
+determined and is called the \textbf{ramification index} of $f$ at $p$.
+\end{theorem}
+
+\begin{proof}
+Choose local coordinates $z$ near $p$ and $w$ near $q=f(p)$ with
+$z(p)=0$, $w(q)=0$, and consider the resulting holomorphic map
+\[
+F := w \circ f \circ z^{-1} : (\C,0)\longrightarrow(\C,0).
+\]
+Then $F$ is holomorphic, $F(0)=0$, and $F$ is not constant.
+
+Write the Taylor expansion of $F$ at $0$:
+\[
+F(z) = \sum_{n=0}^\infty a_n z^n.
+\]
+Since $F(0)=0$ and $F$ is not constant, there is a smallest integer
+$k \ge 1$ such that $a_k \neq 0$. Thus we can factor
+\[
+F(z) = z^k u(z),
+\]
+where
+\[
+u(z) := a_k + a_{k+1}z + a_{k+2}z^2 + \cdots
+\]
+is holomorphic and satisfies $u(0)=a_k\neq 0$.
+
+Shrink the coordinate disc so that $u(z)$ is never zero there. On a
+simply connected neighbourhood of $0$ avoiding the zeros of $u$, a
+nowhere vanishing holomorphic function admits a holomorphic logarithm:
+there exists a holomorphic function $h$ such that
+\[
+u(z) = e^{h(z)}.
+\]
+Define a holomorphic $k$-th root of $u$ by
+\[
+v(z) := u(z)^{1/k} := e^{h(z)/k}.
+\]
+Then $v$ is holomorphic, $v(0) \neq 0$, and $v(z)^k = u(z)$.
+
+Now define a new local coordinate on the source by
+\[
+\zeta := z\,v(z).
+\]
+Since $v$ is holomorphic and $v(0)\neq 0$, we have
+\[
+\frac{d\zeta}{dz}\Big|_{z=0} = v(0) \neq 0,
+\]
+so by the holomorphic inverse function theorem, $\zeta$ is a valid
+holomorphic coordinate near $z=0$.
+
+In terms of this new coordinate, we compute
+\[
+F(z) = z^k u(z) = z^k v(z)^k = (z v(z))^k = \zeta^k.
+\]
+Thus, in the coordinates $\zeta$ on $R$ and $w$ on $S$, the map $f$ is
+given by
+\[
+w = \zeta^k
+\]
+near $p$. This proves the existence of the local normal form.
+
+Uniqueness of $k$ follows from the uniqueness of the order of vanishing:
+if $F(z) = z^k u(z)$ with $u(0)\neq 0$, then $k$ is exactly the order of
+the zero of $F$ at $0$, which is independent of the choice of local
+coordinates. Hence $k$ is well defined and is called the ramification
+index of $f$ at $p$.
+\end{proof}
+
+\begin{corollary}
+Let $f : R \to S$ be a nonconstant holomorphic map between Riemann surfaces.
+Then $f$ is an open map: the image of every open set in $R$ is open in $S$.
+\end{corollary}
+\begin{proof}
+Let $U \subseteq R$ be an open set and let $q \in f(U)$. Choose $p \in U$ with $f(p)=q$. By the local normal form theorem, there exist local coordinates $z$ near $p$ and $w$ near $q$ such that $w \circ f \circ z^{-1}(\zeta) = \zeta^k$ for some $k \ge 1$. Since $z(U)$ is open in $\C$, it contains a small disc around $0$. The image of this disc under $\zeta \mapsto \zeta^k$ is also a small disc around $0$, which shows that $f(U)$ contains a neighbourhood of $q$. Thus $f(U)$ is open in $S$.
+\end{proof}
+
+\begin{corollary}
+    Every holomorphic function defined everywhere on a compact connected Riemann surface is constant.
+\end{corollary}
+
+\begin{proof}
+Let $f : R \to \C$ be a holomorphic function on a compact connected Riemann surface $R$. Since $R$ is compact, the image $f(R)$ is a compact subset of $\C$. The only compact open subsets of $\C$ are the empty set and $\C$ itself. Since $f(R)$ is nonempty, it must be all of $\C$. However, $\C$ is not compact, so this is a contradiction unless $f(R)$ is a single point. Thus $f$ is constant.
+\end{proof}
+
+\begin{theorem}
+Let $f : R \to S$ be a nonconstant holomorphic map between compact Riemann surfaces. Pick $s\in S$ and define the quantity \begin{align*}
+    d := \sum_{p \in f^{-1}(s)} e_p
+\end{align*}
+Then $d$ is independent of the choice of $s \in S$ and is called the \textbf{degree} of the map $f$.
+\end{theorem}
+
+\begin{theorem}[Riemann--Hurwitz]
+Let $f : R \to S$ be a nonconstant holomorphic map of compact Riemann
+surfaces of degree $d$.  Write
+\[
+B \;:=\; \sum_{p\in R} (e_p - 1)\,p
+\]
+for the ramification divisor of $f$. Then
+\[
+2g_R - 2 \;=\; d(2g_S - 2) + \deg(B),
+\]
+or equivalently,
+\[
+\chi(R) \;=\; d\,\chi(S) - \sum_{p\in R}(e_p - 1).
+\]
+\end{theorem}
+
+\begin{proof}[Proof via Euler characteristic]
+If $f$ were an unramified covering map, then $R$ would be a $d$-fold cover of $S$ and by the description of Euler characteristic as the alternating sum of cells in a cell decomposition, we would have
+\[
+\chi(R) = d\,\chi(S).
+\]
+However, ramification changes this count. We have to delete $e_p - 1$ points of $R$ for each ramification point $p$, and each deletion drops the Euler characteristic by $1$. Thus we obtain the desired formula.
+\end{proof}
+
+\begin{proof}[Proof via canonical bundles]
+Let $K_R$ and $K_S$ denote the canonical bundles of $R$ and $S$.
+Choose local coordinates $w$ near $p\in R$ and $z$ near $f(p)$ so that
+the map is written $z = w^{e_p}$.  Then
+\[
+f^*(dz) = d(w^{e_p})
+        = e_p \, w^{e_p-1}\,dw,
+\]
+so $f^*(dz)$ has a zero of order $e_p - 1$ at $p$.
+Globalizing, one obtains an isomorphism of line bundles
+\[
+K_R \;\cong\; f^*K_S \otimes \cO_R(B),
+\]
+where $B = \sum (e_p-1)p$ is the ramification divisor.
+
+Taking degrees on both sides, and using $\deg K_X = 2g_X - 2$, yields
+\[
+2g_R - 2
+= d(2g_S - 2) + \sum_{p}(e_p - 1),
+\]
+the desired identity.
+\end{proof}
+
+\begin{remark}
+These two proofs are related by the fact a holomorphic $1$--form $\omega$ on a compact Riemann surface satisfies
+$\deg(\omega) = 2g-2 = -\chi(X)$.
+
+In particular, there is the isomorphism of line bundles
+$K_R = f^*K_S + B$.
+which refines the Riemann--Hurwitz formula. 
+\end{remark}
+
+
+
+\subsection{Elliptic functions}
 The classical story begins with the Weierstrass $\wp$-function, defined by
 \[\wp(z;L) = \frac{1}{z^2} + \sum_{\omega \in L\setminus\{0\}} \left(\frac{1}{(z-\omega)^2} - \frac{1}{\omega^2}\right)\]
 which has the properties that it is an $L$-periodic meromorphic function on $\C$ with double poles at the lattice points, and that it satisfies the differential equation
@@ -80,7 +288,7 @@ We conclude that each of the half-lattice points must be a simple zero of $\wp'$
     This is because when you compute the characters of highest-weight representations of affine Kac-Moody algebras, you sum over the affine Weyl group:
 \[\chi(\lambda) = \sum_{w \in W} \det(w)\, e^{w(\lambda+\rho) - \rho}\]
 and theta functions arise precisely when you sum exponentials of the form \begin{align*}
-    \Theta(\tau, z) = \sum_{\alpha \in \text{lattice}} \exp\!\big(-\tfrac{1}{2}|\alpha|^2 \tau + \langle \alpha, z\rangle\big).
+    \Theta(\tau, z) = \sum_{\alpha \in \text{lattice}} \exp\big(-\tfrac{1}{2}|\alpha|^2 \tau + \langle \alpha, z\rangle\big).
 \end{align*}
 Continuing with the discussion of theta functions, we have the following theorem about genus $1$ Riemann surfaces.
 \end{remark}
@@ -615,7 +823,6 @@ There is an obvious notion of a meromorphic differential, and there are analogou
 
 
 \begin{example}[Holomorphic differentials on $\P^1$]
-
 Indeed, over the usual chart $\mathbb{C}$, the differential must take the form $f(z)\,dz$ with $f$ holomorphic.  
 Near $\infty$, with $w = 1/z$ as a coordinate, the differential becomes
 \[
@@ -1142,7 +1349,7 @@ More generally,
 
 \begin{proof}
 To exhibit the duality, we must construct a perfect pairing between the two direct image bundles.  
-For a meromorphic function on $R$, define its \emph{trace} $\mathrm{Tr}_\pi a$ along $\pi$ 
+For a meromorphic function on $R$, define its \textbf{trace} $\mathrm{Tr}_\pi a$ along $\pi$ 
 to be the sum of the values along the fibres of $\pi$ (with multiplicities, at branch points): 
 this is a meromorphic function on $\P^1$.
 
@@ -1295,7 +1502,7 @@ E_2^{2,0} \to \ker\bigl(L^2 \to E_2^{0,2}\bigr)
 This is exactly the long exact sequence in the statement of Theorem \ref{theorem:long_exact_sequence_cohomology} since $E^{3,0}$ vanishes. More generally, we can proceed by looking at total degree $n$ and splicing the resulting short exact sequence with the previous long exact sequence to get the full long exact sequence.
 \[
 \cdots \longrightarrow E_2^{p,q}
-\longrightarrow \ker(L^{p+q}\!\to E_2^{p-2,q+2})
+\longrightarrow \ker(L^{p+q}\to E_2^{p-2,q+2})
 \longrightarrow E_2^{p-1,q+1}
 \xrightarrow{d_2} E_2^{p+1,q}
 \longrightarrow \cdots
@@ -1373,6 +1580,8 @@ Changing $s$ changes the result by a meromorphic section of $V'$. So its class i
 
 \subsection{Serre duality}
 Let $R$ be a compact Riemann surface, $V$ vector bundle on $R$. We have the canonical bundle $K_R = \Omega_R^1$ of holomorphic one-forms on $R$.
+
+
 \begin{theorem}[Serre duality]
     There is an isomorphism of vector spaces, functorial in $R$:
     \begin{align*}
@@ -1388,6 +1597,16 @@ Functorial means that for $f: R \to S$ a nonconstant map of compact Riemann surf
 \end{tikzcd}
 \end{center}
 We will say a little bit more about the map on $H^1$.
+
+\begin{example}
+    We check the isomorphism for $\cO(n)$ on $\P^1$ for $n \geq -1$. Move to $\cO(n\infty)$. Check the residue pairing at $z=0$. May assume the principal parts are at $0$ and that meromorphic functions have only poles at $0$. In this case \begin{align*}
+        H^0(\P^1, \cO(n\infty)) & = \operatorname{span}\set{1, z, z^2, \ldots, z^n} \\
+        H^1(\P^1, K_{\P^1} \otimes \cO(-n\infty)) = \span\set{\frac{dz}{z},
+        \frac{dz}{z^2}, \ldots, \frac{dz}{z^{n+1}}} 
+    \end{align*}
+because by the principal parts argument $dz/z^{n+2} = z^{-n} dz/z^n$ is holomorphic at $\infty$. The residue pairing is clear.
+\end{example}
+
 \begin{proof}
     The global residue pairing \begin{align*}
         H^0(R, V) \times H^1(R, K_R \otimes V^*) & \to \C 
@@ -1402,77 +1621,177 @@ We will say a little bit more about the map on $H^1$.
     \end{align*}
     Note that the holomorphic part of a differential has no residue so the map is defined on $\cP(K_R \otimes V^*)_x$. The pairing is nondegenerate. The global residue pairing then is simply the sum of the local pairings over all points $x \in R$.
 
-    We will establish that this pairing induces an isomorphism on the level of cohomology in the case $R = \P^1$. There, it suffices to check the case $V = \cO(n)$ for $n \in \Z$. Then we will reduce the general case to $\P^1$ by using the functoriality of the pairing and pushing forward along a branched cover $f: R \to \P^1$.
+    We will reduce the proof to the case $R = \P^1$. In this case, we have already explicitly verified the isomorphism. We wish to construct an isomorphism of sheaves on $\P^1$
+\begin{equation}\label{eq:target-duality}
+  f_*\bigl(K_R\otimes V^\vee\bigr)
+  \;\cong\;
+  K_{\P^1}\otimes (f_*V)^\vee.
+\end{equation}
+Tensoring both sides by $K_{\P^1}^{-1}$, this is equivalent to
+\begin{equation}\label{eq:step1}
+  K_{\P^1}^{-1}\otimes f_*(K_R\otimes V^\vee)
+  \;\cong\;
+  (f_*V)^\vee.
+\end{equation}
 
-    We check the isomorphism for $\cO(n)$ on $\P^1$ for $n \geq -1$. Move to $\cO(n\infty)$. Check the residue pairing at $z=0$. May assume the principal parts are at $0$ and that meromorphic functions have only poles at $0$. In this case \begin{align*}
-        H^0(\P^1, \cO(n\infty)) & = \operatorname{span}\set{1, z, z^2, \ldots, z^n} \\
-        H^1(\P^1, K_{\P^1} \otimes \cO(-n\infty)) = \span\set{\frac{dz}{z},
-        \frac{dz}{z^2}, \ldots, \frac{dz}{z^{n+1}}} 
-    \end{align*}
-because by the principal parts argument $dz/z^{n+2} = z^{-n} dz/z^n$ is holomorphic at $\infty$. The residue pairing is clear.
-
-Now we can reduce to $\P^1$. Let $f: R \to \P^1$ be a branched cover. We want to know what is the functorial isomorphism \begin{align*}
-    H^1(R, K_R \otimes V^*) & \to H^1(\P^1, K_{\P^1} \otimes f_* V^*)
-\end{align*} Consider the isomorphisms
+By the projection formula,
 \[
-H^i(R;V) \;\cong\; H^i(\mathbb{P}^1;\pi_*V)
-\]
-An isomorphism
-\[
-f_*\bigl(K_R \otimes V^\vee\bigr)
+K_{\P^1}^{-1}\otimes f_*(K_R\otimes V^\vee)
 \;\cong\;
-K_{\mathbb{P}^1} \otimes (f_*V)^\vee
+f_*\bigl(f^*K_{\P^1}^{-1}\otimes K_R\otimes V^\vee\bigr),
 \]
-compatible with the residue pairings with $V$ on $R$ and $f_*V$ on $\mathbb{P}^1$
-would complete the proof of duality. Now, by Lemma~3.10,
+so \eqref{eq:step1} is equivalent to the existence of an isomorphism
+\begin{equation}\label{eq:step2}
+  f_*\bigl(f^*K_{\P^1}^{-1}\otimes K_R\otimes V^\vee\bigr)
+  \;\cong\;
+  (f_*V)^\vee.
+\end{equation}
+
+By Lemma~3.10,
 \[
 (f_*V)^\vee \;\cong\; f_*\bigl(V^\vee(B)\bigr),
 \]
-so what we need is
-\[
-f_*\bigl(K_R \otimes V^\vee\bigr)
-\;\cong\;
-K_{\mathbb{P}^1} \otimes (f_*V)^\vee
-\]
-compatible with the residue pairings with $V$ on $R$ and $f_*V$ on $\mathbb{P}^1$
-would complete the proof of duality. We can restate this as an isomorphism 
-\begin{align*}
-    K_{\P^1}^{-1} \otimes f_*(K_R \otimes V^*) & \cong f_*(V)^{\vee}
-\end{align*} and by adjunction \begin{align*}
-    f_*(K_R \otimes V^*) & \cong f_*(f^* K_{\P^1}^{-1} \otimes K_R \otimes V^*)
-\end{align*}
+where $B$ is the branch divisor of $f$.  
+Hence \eqref{eq:step2} will follow provided we can identify the bundles upstairs:
+\begin{equation}\label{eq:step3}
+  f^*K_{\P^1}^{-1}\otimes K_R\otimes V^\vee
+  \;\cong\;
+  V^\vee(B).
+\end{equation}
 
-Then we check that $K_R \otimes f^* K_{\P^1}^{-1} \cong \cO(B)$ where $B$ is the branch divisor of $f$.
+Cancelling $V^\vee$, condition \eqref{eq:step3} is equivalent to the line-bundle identity
+\begin{equation}\label{eq:RH}
+  K_R\otimes f^*K_{\P^1}^{-1}
+  \;\cong\;
+  \cO_R(B),
+\end{equation}
+which is precisely the Riemann--Hurwitz formula in line-bundle form.
 
-Now, by Lemma~3.10,
-\[
-(f_*V)^\vee \;\cong\; f_*\bigl(V^\vee(B)\bigr),
-\]
-so what we need is
-\[
-f_*\bigl(K_R \otimes V^\vee\bigr)
-\;\cong\;
-K_{\mathbb{P}^1} \otimes (f_*V)^\vee
-\]
-The miracle that makes things match is that the pullback of differentials from
-$\mathbb{P}^1$ to $R$ lands in $K_R(-B)$, and in fact generates the latter as an
-$\mathcal{O}$-module over $R$. That is, we are saying that (in a local model
-$w \mapsto z = w^n$ for $\pi$) the lift of the nonvanishing holomorphic differential
-$dz$ has a zero of order exactly the branching index:
-\[
-d(w^n) = n w^{n-1} \, dw.
-\]
-So a local section of $K_R \otimes V^\vee$ can be written as $dz$ times a local
-section of $V^\vee(B)$, which gives the desired isomorphism.
-
-We can use the isomorphisms
+To check the compatibility of residue pairings on $R$ and $\mathbb{P}^1$. We can use the isomorphisms
 \[
 f_*\mathcal{P}_x(V) \;\cong\; \mathcal{P}_{f(x)}(f_*V),
 \]
-and the discussion of differentials at branch points, to check the compatibility of
-residue pairings on $R$ and $\mathbb{P}^1$: choose local coordinates in standard
+and the discussion of differentials at branch points. Choose local coordinates in standard
 form and write the residue pairings in the Laurent basis.
 \end{proof} 
+
+
+
+\begin{exercise}
+
+A \textbf{nodal Riemann surface} $S$ is one which is smooth except for finitely many singularities that look locally like
+\[
+\{(x, y) \mid xy = 0\} \subset \mathbb{C}^2.
+\]
+It is obtained from a smooth Riemann surface $\widetilde{S}$ by identifying pairs of points; $\widetilde{S} \to S$ is called the \textbf{normalization}. Define the canonical bundle $K_S$ of $S$ to be the sheaf of differentials holomorphic on $\widetilde{S}$, except for simple poles at the nodes, with opposite residues on the two branches of $S$.
+
+Show that $K_S$ is a line bundle. When $S$ is compact, prove the residue theorem for a meromorphic section of $K_S$ that is holomorphic at the nodes. Prove Serre duality for vector bundles on $S$.
+\end{exercise}
+\begin{solution}
+    Let $\nu:\widetilde S\to S$ be the normalization.
+Each node of $S$ has preimage a pair $\{p_i^+,p_i^-\}\subset\widetilde S$.
+Set $N:=\sum_i(p_i^++p_i^-)$.
+
+Let $K_{\widetilde S}$ be the canonical bundle on the smooth Riemann surface
+$\widetilde S$. Consider $K_{\widetilde S}(N)$, whose sections are meromorphic $1$--forms
+with at worst simple poles at the points of $N$.
+
+Define $K_S$ as the subsheaf of $\nu_*K_{\widetilde S}(N)$ consisting of
+sections $\omega$ such that for each node with preimages $p_i^\pm$,
+\[
+\Res_{p_i^+}(\omega)+\Res_{p_i^-}(\omega)=0.
+\]
+Equivalently, we have an exact sequence
+\[
+0\longrightarrow K_S\longrightarrow \nu_*K_{\widetilde S}(N)
+\xrightarrow{\ \mathrm{Res}\ } \bigoplus_i \underline{\C}_{\text{node }i}
+\longrightarrow 0,
+\tag{nodal}
+\label{nodal}
+\]
+where $\underline{\C}_{\text{node }i}$ is the skyscraper sheaf at the $i$-th node and the residue map takes
+$\omega$ to the collection of sums of residues at $p_i^\pm$, explicitly at the node $i$:
+\[\mathrm{Res}_i(\omega) = \Res_{p_i^+}(\omega) + \Res_{p_i^-}(\omega)\]
+
+
+We claim $K_S$ is a line bundle.
+Over smooth points of $S$, $\nu$ is an isomorphism, and the residue condition
+is vacuous, so $K_S$ agrees with $K_{\widetilde S}$; in particular it has
+rank $1$ there.
+
+Near a node, choose local coordinates so $\widetilde S$ is the disjoint
+union of two discs with coordinates $z$ and $w$, and the node identifies
+$z=0$ with $w=0$. A section of $K_{\widetilde S}(N)$ has local form
+\[
+\left(\frac{a}{z}+\text{hol}\right)dz
+\quad\text{on the $z$--branch,}\qquad
+\left(\frac{b}{w}+\text{hol}\right)dw
+\quad\text{on the $w$--branch.}
+\]
+The condition $a+b=0$ is one linear relation on the two residues, so the
+allowed principal parts form a $1$-dimensional space. Thus the stalk of
+$K_S$ at the node is also $1$-dimensional.
+
+
+Assume $S$ compact. Let $\omega$ be a meromorphic section of $K_S$ which is
+holomorphic at the nodes. Viewed on $\widetilde S$, this is a meromorphic
+$1$--form $\widetilde\omega$ which has the same poles away from the preimages of nodes and is holomorphic at each $p_i^\pm$ (since $\omega$ has no poles at nodes).
+
+Apply the usual residue theorem on $\widetilde S$:
+\[
+\sum_{q\in\widetilde S} \Res_q(\widetilde\omega)=0.
+\]
+There is no contribution from $p_i^\pm$, so this sum is exactly
+$\sum_{p\in S}\Res_p(\omega)$. Hence
+\[
+\sum_{p\in S} \Res_p(\omega)=0,
+\]
+so we obtain the residue theorem on $S$.
+
+
+Let $E$ be a holomorphic vector bundle on $S$.
+We claim there is a natural perfect pairing
+\[
+H^1(S,E)\times H^0(S,K_S\otimes E^\vee)\longrightarrow\C,
+\]
+inducing an isomorphism
+\[
+H^1(S,E)^\vee \cong H^0(S,K_S\otimes E^\vee).
+\]
+
+Hence $H^1(S,E)$ identifies with a
+subspace of $H^1(\widetilde S,\nu^*E)$ cut out by linear relations at the nodes. In particular, using the principal parts characterization of $H^1$, a class in $H^1(S,E)$ corresponds to a collection of principal parts of $E$ at points of $\widetilde S$ (the poles of the sections) such that at each node the principal parts at $p_i^\pm$ have equal values residues in a common trivialization of $E$ near the node. 
+
+Similarly, a section of $K_S\otimes E^\vee$ corresponds to a section
+\[
+\phi\in H^0\big(\widetilde S,K_{\widetilde S}(N)\otimes\nu^*E^\vee\big)
+\]
+such that at each node the residues at $p_i^\pm$ are opposite, i.e.\ to a
+subspace of $H^0\big(\widetilde S,K_{\widetilde S}(N)\otimes\nu^*E^\vee\big)$
+defined by linear relations.
+
+On the smooth curve $\widetilde S$ we have the usual Serre duality pairing
+\[
+H^1(\widetilde S,\nu^*E)\times
+H^0\big(\widetilde S,K_{\widetilde S}\otimes(\nu^*E)^\vee\big)
+\to\C,
+\]
+which extends to allow simple poles at $N$, giving a perfect pairing
+\[
+H^1(\widetilde S,\nu^*E)\times
+H^0\big(\widetilde S,K_{\widetilde S}(N)\otimes(\nu^*E)^\vee\big)
+\to\C.
+\]
+The node-compatibility conditions defining $H^1(S,E)$ and $H^0(S,K_S\otimes
+E^\vee)$ are dual to each other with respect to this pairing. In particular, locally the principal part $(v^+,v^-)$ pairs with $(\ell^+,\ell^-)$ by
+$\ell^+(v^+)-\ell^-(v^-)$.
+
+Thus its restriction yields a perfect pairing
+\[
+H^1(S,E)\times H^0(S,K_S\otimes E^\vee)\to\C.
+\]
+\end{solution}
+
 
 \section{Abel Jacobi}
 Recall the additive and multiplicative Cousin problems: 
@@ -1981,7 +2300,7 @@ Recall that we had a basis of holomorphic differentials $\phi_1, \ldots, \phi_g$
         \Theta(\vec{z} + B\vec{m}; B)
         =
         \Theta(\vec{z}\,|B)
-        \exp\!\bigl(-2\pi i(\vec{m}'\vec{z} + \tfrac{1}{2}\vec{m}^\top B \vec{m})\bigr).
+        \exp\bigl(-2\pi i(\vec{m}'\vec{z} + \tfrac{1}{2}\vec{m}^\top B \vec{m})\bigr).
     \]
     \item The zero locus of $\Theta$ is the translate
     \[
@@ -2015,7 +2334,7 @@ Therefore the function $\Theta(F(r,D) + \rho)$ as a function of $r \in R$ has di
 
 Abel's condition ensures we can arrange the shifts so that
 the result is periodic with respect to the lattice,
-hence we obtain a single valued \emph{meromorphic function on \(R\)}.
+hence we obtain a single valued \textbf{meromorphic function on \(R\)}.
 
 \begin{remark}
     Torelli's theorem states that a compact Riemann surface $R$ is determined up to isomorphism by its Jacobian $J(R)$ together with the theta divisor $W_{g-1} \subset J(R)$. In other words, if two compact Riemann surfaces have isomorphic Jacobians as principally polarized abelian varieties (i.e. the isomorphism identifies the theta divisors), then the Riemann surfaces themselves are isomorphic.
@@ -2472,10 +2791,10 @@ Since our manifolds are assumed to be separable, the topology of
 $\cE^p(M)$ can be defined by means of a countable set of seminorms
 $p^s_L$, hence $\cE^p(M)$ is a Fréchet space.
 It should be observed however that $\cD^p(M)$ is not a Fréchet space;
-in fact $\cD^p(M)$ is dense in $\cE^p(M)$ and thus non-complete for the induced topology. Spaces of \emph{currents} are defined as the topological duals of the above spaces, in analogy with the usual definition of distributions.
+in fact $\cD^p(M)$ is dense in $\cE^p(M)$ and thus non-complete for the induced topology. Spaces of \textbf{currents} are defined as the topological duals of the above spaces, in analogy with the usual definition of distributions.
 
 \begin{definition}
-The \emph{space of currents of dimension $p$} (or degree $m-p$) on $M$
+The \textbf{space of currents of dimension $p$} (or degree $m-p$) on $M$
 is the space $\cD'_p(M)$ of linear forms $T$ on $\cD^p(M)$ such that the
 restriction of $T$ to all subspaces $\cD^p(K)$, $K\Subset M$, is
 continuous.
@@ -2707,7 +3026,7 @@ Morally $c_k \in H^{2k}(X, \R)$ is the $k$th symmetric polynomial in the eigenva
     Thus we get that \begin{align*}
 \frac{d}{dt}\operatorname{tr}(F_t^k)
 &= \sum_{j=0}^{k-1}
-\operatorname{tr}\!\left(
+\operatorname{tr}\left(
 F_t^{\,j}\,\frac{dF_t}{dt}\,F_t^{\,k-1-j}
 \right) \\ 
         & = k \tr(F_t^{k-1} \wedge \frac{d}{dt} F_t) \texty{by cyclicity} \\
@@ -2826,6 +3145,194 @@ The reason is that when we pull back a vector bundle, one can also pull back a c
     \]
     as complex $C^\infty$-bundles. The complements obtained by orthogonal projection are not holomorphic subbundles in general, so the resulting splitting is not holomorphic.
 \end{remark}
+
+\begin{exercise}
+Let $R$ be a compact Riemann surface of genus $g$.
+Show that the period mapping gives an isomorphism
+\[
+H_1(R;\Z)\xrightarrow{\ \sim\ } H_1(J;\Z),
+\]
+which can be realized geometrically by the Abel-Jacobi map
+\[
+R\longrightarrow J_1.
+\]
+Show that under this correspondence, $c_1(\Theta)\in\Lambda^2 H_1(R)$
+is the intersection pairing on $R$.
+\end{exercise}
+\begin{solution}
+The presentation of the Jacobian $J$ as
+\[
+J \cong H^1(R;\cO) / H_1(R;\Z)
+\]
+makes it clear that $H_1(J;\Z)$ is naturally identified with
+$H_1(R;\Z)$, since the universal cover of $J$ is the vector space
+$H^1(R;\cO)$. The period mapping 
+\[
+H_1(R;\Z)\to H_1(J;\Z)
+\] is injective because of the Riemann bilinear relations, and since both groups are free abelian of rank $2g$, it is an isomorphism. Pick a base point $p_0\in R$ and define the Abel-Jacobi map
+\[
+\varphi:R\to J,
+\qquad
+p\mapsto \left[\omega\mapsto \int_{p_0}^p \omega\right].
+\]
+precisely implements the lift of the period mapping to the universal cover and hence induces the same isomorphism on $H_1$.
+
+To identify $c_1(\Theta)$ with the intersection pairing on $H_1(R,\Z)$, we first note that by the universal coefficient theorem and the fact that $H^k(J,\Z) = \Alt^k(H_1(J,\Z),\Z)$
+(the group law on $J$ induces a map $H_1(J,\Z) \otimes \dots \otimes H_1(J,\Z) \to H_k(J,\Z)$ as follows. For each $\alpha\in H_1(J,\mathbb Z)$ choose a loop
+$\ell_\alpha: S^1\to J$
+representing $\alpha$. For $\alpha_1,\dots, \alpha_k$, consider the map  $(S^1)^k \to J$ given by $(t_1,\dots,t_k) \mapsto \ell_{\alpha_1}(t_1) + \dots + \ell_{\alpha_k}(t_k)$. For orientation reasons, this map is alternating in the $\alpha_i$). We have
+\[
+\begin{aligned}
+H^2(J,\Z)
+&\cong \operatorname{Hom}(H_2(J,\Z),\Z)\\
+&\cong \operatorname{Hom}(\Lambda^2 H_1(J,\Z),\Z)\\
+&\cong \operatorname{Alt}^2(H_1(J,\Z),\Z) \xrightarrow{\iota^*} \operatorname{Alt}^2(H_1(R,\Z),\Z)
+\end{aligned}
+\] so indeed $c_1(\Theta)$ corresponds to an alternating bilinear form on $H_1(R,\Z)$. Pick a symplectic basis $\{a_1,\dots,a_g,b_1,\dots,b_g\}$ of $H_1(R,\Z)$, i.e.
+\[a_i\cdot a_j = 0,
+\quad b_i\cdot b_j = 0,
+\quad a_i\cdot b_j = \delta_{ij}.\]
+
+
+Under the identification
+$H_1(R,\Z)\xrightarrow{\sim}\Lambda\cong H_1(J,\Z)$ coming from the period map and the Abel-Jacobi embedding, a homology class $\gamma\in H_1(R,\Z)$ corresponds to an integral vector $(m,n)\in\Z^{2g}$. The intersection pairing on $H_1(R,\Z)$ is given in these coordinates by
+\[
+(m,n)\cdot(m',n') \;=\; m^{\mathrm T}n' - m'^{\mathrm T}n.
+\]
+The Riemann theta function with period matrix $\tau$ is
+\[
+\theta(z\mid\tau)
+:= \sum_{k\in\Z^g}
+\exp\bigl(\pi i\,k^{\mathsf T}\tau k + 2\pi i\,k^{\mathsf T}z\bigr),
+\quad z\in\C^g.
+\]
+The Riemann theta function satisfies the quasi-periodicity property:
+\[
+\theta\bigl(z + m + \tau n \mid \tau\bigr)
+=
+\exp\bigl(-\pi i n^{\mathsf T}\tau n - 2\pi in^{\mathsf T}z\bigr)
+\theta(z\mid\tau).
+\]
+In particular, the Riemann theta function defines a holomorphic section of the line bundle $\mathcal{O}_J(\Theta)$.
+Thus the factor of automorphy is
+\[
+e_u(z)
+=\exp\bigl(-\pi i\,n^{\mathsf T}\tau n-2\pi i\,n^{\mathsf T}z\bigr)
+=\exp\bigl(2\pi i f_u(z)\bigr)
+\]
+with
+\[
+f_u(z)=-\tfrac12\,n^{\mathsf T}\tau n - n^{\mathsf T}z,\qquad u=m+\tau n.
+\]
+
+The following lemma is standard.
+\begin{lemma}
+Let $U \subset V$ be a lattice in a complex vector space $V$. The map which associates to any map $F: U\times U \to \mathbb{Z}$ the
+map $AF: U\times U\to \mathbb{Z}$ defined by
+\[
+  AF(u_{1},u_{2}) = F(u_{1},u_{2}) - F(u_{2},u_{1})
+\]
+maps the group of $2$-cocycles $Z^{2}(U,\mathbb{Z})$ into the space of
+alternating linear maps $U\times U\to\mathbb{Z}$, and induces an
+isomorphism
+\[
+  A:\;
+  H^{2}(U,\mathbb{Z})
+  \;\xrightarrow{\ \sim\ }\;
+  \operatorname{Hom}(\Lambda^{2}U,\mathbb{Z})
+  \;\cong\;
+  \Lambda^{2}\operatorname{Hom}(U,\mathbb{Z}).
+\]
+Furthermore for $\xi,\eta\in\operatorname{Hom}(U,\mathbb{Z})=H^{1}(U,\mathbb{Z})$,
+we have $A(\xi\smile\eta)=\xi\wedge\eta$.
+\end{lemma} 
+The proof of this lemma is given at the end of the solution.
+\begin{lemma}\label{lem:cc-rep}
+  If $e_u(z)=\exp(2\pi i f_u(z))$ are the factors of automorphy, then the Chern class
+\[c_1(L)\in H^2(J,\Z)\cong\Alt^2(\Lambda,\Z)\] corresponds to the form
+\[
+E(u_1,u_2)
+= f_{u_2}(z+u_1)+f_{u_1}(z)-f_{u_1}(z+u_2)-f_{u_2}(z)
+\]
+which is bilinear, alternating, and independent of $z$.
+\end{lemma}
+Substituting into Mumford's formula and using the symmetry of $\tau$, the quadratic terms cancel, leaving
+\[
+E(u_1,u_2)= n_1^{\mathsf T}m_2 - n_2^{\mathsf T}m_1.
+\]
+recovering the intersection pairing on $H_1(R,\Z)$.
+
+\begin{proof}
+[Proof of Lemma \ref{lem:cc-rep}]
+A holomorphic line bundle on $J$ is equivalent to the trivial bundle
+$V\times\C\to V$ endowed with the $\Lambda$--action
+\[
+u\cdot(z,\xi)=(z+u, e_u(z)\xi).
+\]
+Thus $L$ corresponds to the multiplicative $1$--cocycle $\{e_u\}$
+satisfying the identity \[e_{u_1+u_2}(z)=e_{u_2}(z+u_1)e_{u_1}(z)\]
+
+Consider the exponential sequence on $V$,
+\[
+0 \longrightarrow \Z
+  \longrightarrow \cO_V
+  \xrightarrow{\exp(2\pi i\,\cdot)} \cO_V^\times
+  \longrightarrow 1.
+\]
+Passing to group cohomology of $\Lambda$ gives an exact sequence
+\[
+H^1(\Lambda,\cO^\times_V)
+  \xrightarrow{\;\delta\;}
+H^2(\Lambda,\Z),
+\]
+and it is standard that the Chern class $c_1(L)$ is precisely the
+image under $\delta$ of the cocycle $\{e_u\}$.
+
+Choose logarithms $f_u$ with $e_u=\exp(2\pi i f_u)$.  The formula for
+$\delta$ on group cochains gives the $2$--cochain
+\[
+F(u_1,u_2)(z)
+  := f_{u_2}(z+u_1)-f_{u_1+u_2}(z)+f_{u_1}(z).
+\]
+Because of the multiplicative cocycle identity taking
+logarithms yields
+\[
+f_{u_1+u_2}(z)
+  - f_{u_2}(z+u_1)
+  - f_{u_1}(z)
+  \in \Z.
+\]
+Hence $F(u_1,u_2)(z)$ takes values in $\Z$.  Being holomorphic and
+integer--valued, it is constant in $z$.  Thus $F$ defines a function
+\[
+F:\Lambda\times\Lambda\longrightarrow\Z,
+\]
+and one checks directly that it satisfies the group cocycle condition
+$\delta F=0$.  Therefore $F$ is a $2$--cocycle representing the Chern
+class $c_1(L)$.
+
+The previous lemma identifies
+\[
+H^2(\Lambda,\Z)\;\cong\;\Alt^2(\Lambda,\Z)
+\]
+via the alternation map
+\[
+AF(u_1,u_2)=F(u_1,u_2)-F(u_2,u_1).
+\]
+Applying this to the cocycle $F$ gives
+\[
+\begin{aligned}
+E(u_1,u_2)
+ &= F(u_1,u_2)-F(u_2,u_1) \\
+ &= f_{u_2}(z+u_1)+f_{u_1}(z)
+    -f_{u_1}(z+u_2)-f_{u_2}(z),
+\end{aligned}
+\]
+which is therefore a representative of $c_1(L)$ in the alternating
+form picture.  In particular $E$ is bilinear, alternating, and
+independent of~$z$.
+\end{proof}
+\end{solution}
 
 \subsection{Hermitian structures on complex vector bundles}
 Let $E$ be a complex vector bundle over a smooth manifold $X$. 
@@ -3001,7 +3508,7 @@ set $U\subset X$, and write
 h(e,e) = e^{-\phi},
 \qquad \phi\in C^\infty(U,\R).
 \]
-Then $\phi$ is called the \emph{local weight} of the metric $h$ in the frame
+Then $\phi$ is called the \textbf{local weight} of the metric $h$ in the frame
 $e$.  The following statements hold:
 
 \begin{enumerate}
@@ -3642,7 +4149,7 @@ Poincar\'e duality on $R$.
 $p_i$ with prescribed principal parts. Let $U_i$ be pairwise disjoint coordinate discs around $p_i$, and choose
 $\chi\in C^\infty(R)$ such that $\chi\equiv 1$ on smaller discs $U_i'\subset U_i$
 and $\chi\equiv 0$ outside $\bigcup_i U_i$.
-Define a $(0,1)$-\emph{current}
+Define a $(0,1)$-\textbf{current}
 \[
 T_f := \bar\partial(\chi f).
 \]
@@ -3658,7 +4165,7 @@ H^{0,1}_{\bar\partial}(R) \cong H^1(R,\cO)
 depends only on the underlying principal parts.
 
 Let $\omega\in H^0(R,\Omega^1)$ be a holomorphic $1$-form.
-The \emph{Dolbeault} definition of the pairing is
+The \textbf{Dolbeault} definition of the pairing is
 \[
 \langle\alpha,\omega\rangle_{Dol}
 := \frac{1}{2\pi i}\int_R T_f\wedge\omega
@@ -3695,7 +4202,7 @@ we obtain
 \frac{1}{2\pi i}\int_R \bar\partial(\chi f)\wedge\omega
 = \sum_i \Res_{p_i}(f\omega).
 \]
-This is precisely the \emph{principal parts} definition of the Serre pairing.
+This is precisely the \textbf{principal parts} definition of the Serre pairing.
 
 Now equip $R$ with any Hermitian (necessarily K\"ahler) metric. Hodge theory yields the decompositions
 \[
@@ -4008,7 +4515,7 @@ The quotient
 \longrightarrow (V/L)\times(V^\vee/L^\vee)
 = A\times A^\vee
 \]
-is therefore a holomorphic line bundle, the \emph{Poincar\'e bundle}.  The
+is therefore a holomorphic line bundle, the \textbf{Poincar\'e bundle}.  The
 connection $\nabla$ is invariant under the $L\times L^\vee$-action, hence
 descends to a connection on $\mathcal{P}$.
 
@@ -4139,19 +4646,17 @@ Let
 \Pic^0(X):=\ker\bigl(c_1^{\mathrm{hol}}\bigr)
 \]
 be the subgroup of holomorphic line bundles with $c_1=0$.
-Let $TF(H^1(X;U(1)))$ denote the torsion-free part of $H^1(X;U(1))$. Using the fact that the kernel of $H^2(X;\Z)\to H^2(X;\R)$ is the torsion subgroup of $H^2(X;\Z)$, we see that the above diagram induces the following commutative diagram:
+There is a commutative diagram
 \begin{align*}
-\begin{array}{ccccccccc}
-  0 &\to H^1(X;\R)/H^1(X;\Z) &\to TF(H^1(X;U(1))) &\to 0
-  \\  
-  &\downarrow &\downarrow &
-  \\
-  0 &\to H^1(X;\cO)/H^1(X;\Z) &\to \Pic^0(X) &\to 0
+\begin{array}{ccc}
+H^1(X;\R)/H^1(X;\Z) &\cong & \ker c_1^{\mathrm{top}}
+\\
+\downarrow & &\downarrow
+\\
+H^1(X;\cO)/H^1(X;\Z) & = & \Pic^0(X)
 \end{array}
 \end{align*}
-in which all the maps are isomorphisms.  The left vertical map is induced by the inclusion $\R\hookrightarrow\cO$ and is an isomorphism by the Hodge decomposition theorem, which gives
-\[H^1(X;\R) \cong H^{0,1}(X)\] sending a harmonic representative to its $(0,1)$-part. The horizontal maps are isomorphisms by the exact sequences.  Thus the middle vertical map is an isomorphism
-\[TF(H^1(X;U(1))) \longrightarrow \Pic^0(X)\] and thus every flat unitary line bundle with non torsion Chern class corresponds precisely to a holomorphic line bundle with zero Chern class.
+The left vertical map is an isomorphism by the Hodge decomposition theorem. Thus the right vertical map is also an isomorphism, and we conclude that every holomorphic line bundle with zero Chern class corresponds to a flat unitary line bundle with zero Chern class.
 \end{solution} 
 
 \section{Kodaira Nakano vanishing}
@@ -4232,7 +4737,7 @@ self-adjoint operator: $(-iT)^* = iT^* = i(-T) = -iT$.
     &= [\bar{\partial}, -i[\Lambda,\partial]] \\
     &= -i[[\bar\partial, \Lambda], \partial] - i[\Lambda, [\bar\partial, \partial]] \\
     &= -i[i\partial^*, \partial] - i[\Lambda, F\wedge] \\
-    &= \square - i[\Lambda, F\wedge]
+    &= \square - i[\Lambda, F\wedge] 
     \end{align*}
 \end{proof}
 
