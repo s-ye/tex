@@ -33,7 +33,7 @@
 
 \tableofcontents
 \section{Riemann Surfaces}
-\red{Introduction here.}
+We introduce Riemann surfaces as analytic subsets of $\C^2$ defined by holomorphic equations. We then develop the structure theory of Riemann surfaces, including holomorphic maps, ramification, and the Riemann-Hurwitz formula. We present the Weierstrass Division and Preparation Theorems, which are fundamental results about the local structure of analytic sets in several complex variables. We examine closely the theory of theta functions on complex tori. We establish the correspondence between Riemann surfaces and finite degree field extensions of $\C(z)$.
 \subsection{Structure theory}
 \begin{definition}[Holomorphic function in two variables]
 A complex function $F(z,w)$ defined in an open set in $\C^2$ is called
@@ -365,7 +365,7 @@ Thus $\cO(\C)$ is not Noetherian. Similar chains can be constructed in
 $\cO(U)$ for many noncompact domains $U\subset\C^n$.
 
 \item
-Even more dramatically, the ring $\cO(\C)$ is not a UFD as exhibited by the infinite product expansion of the sine function
+Even more dramatically, the ring $\cO(\C)$ is not a UFD as exhibited by the infinite product expansion of the sine function:
 \[
 \sin(\pi z)
 = \pi z \prod_{n=1}^\infty \left(1 - \frac{z^2}{n^2}\right).
@@ -572,7 +572,75 @@ We conclude that each of the half-lattice points must be a simple zero of $\wp'$
 \end{enumerate} 
 \end{proof}
 
-\red{Need passage on theta functions here.}
+\subsection{Theta functions for an elliptic curve}
+
+Let $\tau\in\mathfrak{H}$ (upper half-plane) and let
+\[
+L \;=\; \Z + \tau\Z \subset \C, \qquad
+E = \C/L
+\]
+be the corresponding elliptic curve. Put
+\[
+q := e^{\pi i\tau}.
+\]
+
+\begin{definition}
+The \emph{Riemann theta function} is the entire function
+\[
+\vartheta(z\mid\tau)
+:= \sum_{n\in\Z}
+   \exp\bigl(\pi i n^2\tau + 2\pi i n z\bigr),
+\qquad z\in\C.
+\]
+It satisfies the quasi-periodicity relations
+\begin{align*}
+\vartheta(z+1\mid\tau) &= \vartheta(z\mid\tau),\\
+\vartheta(z+\tau\mid\tau)
+&= \exp\bigl(-\pi i\tau - 2\pi i z\bigr)\,\vartheta(z\mid\tau).
+\end{align*}
+Thus $\vartheta$ is a holomorphic section of a degree-$1$ line bundle on $E=\C/L$ (the theta line bundle).
+\end{definition}
+
+It is often convenient to use the Jacobi theta functions with characteristics.
+
+\begin{definition}[Theta with characteristic; Jacobi theta functions]
+For $a,b\in\R$, the \emph{theta function with characteristic}
+$\bigl[\begin{smallmatrix}a\\ b\end{smallmatrix}\bigr]$ is
+\[
+\vartheta\begin{bmatrix}a\\ b\end{bmatrix}(z\mid\tau)
+:= \sum_{n\in\Z}
+   \exp\bigl(\pi i (n+a)^2\tau
+              + 2\pi i (n+a)(z+b)\bigr).
+\]
+
+The four classical Jacobi theta functions are
+\begin{align*}
+\theta_1(z\mid\tau)
+&:= \vartheta\!\begin{bmatrix}\tfrac12\\ \tfrac12\end{bmatrix}(z\mid\tau)
+ = 2 \sum_{n=0}^\infty
+   (-1)^n q^{(n+\tfrac12)^2}
+   \sin\bigl((2n+1)\pi z\bigr),\\[0.3em]
+\theta_2(z\mid\tau)
+&:= \vartheta\!\begin{bmatrix}\tfrac12\\ 0\end{bmatrix}(z\mid\tau)
+ = 2 \sum_{n=0}^\infty
+   q^{(n+\tfrac12)^2}
+   \cos\bigl((2n+1)\pi z\bigr),\\[0.3em]
+\theta_3(z\mid\tau)
+&:= \vartheta\!\begin{bmatrix}0\\ 0\end{bmatrix}(z\mid\tau)
+ = 1 + 2\sum_{n=1}^\infty q^{n^2}\cos(2\pi n z),\\[0.3em]
+\theta_4(z\mid\tau)
+&:= \vartheta\!\begin{bmatrix}0\\ \tfrac12\end{bmatrix}(z\mid\tau)
+ = 1 + 2\sum_{n=1}^\infty (-1)^n q^{n^2}\cos(2\pi n z).
+\end{align*}
+
+In particular, the genus-$1$ Riemann theta function above is
+$\vartheta(z\mid\tau)=\theta_3(z\mid\tau)$.
+\end{definition}
+
+Each $\theta_j(z\mid\tau)$ satisfies analogous quasi-periodicity
+conditions under $z\mapsto z+1$ and $z\mapsto z+\tau$; these
+transformation laws encode the factors of automorphy of the corresponding
+degree-$1$ line bundles on $E$.
 
 \begin{theorem}
     Let $\theta_1,\dots,\theta_4$ be the four Jacobi theta functions. Then there is a map \begin{align*}
@@ -585,15 +653,13 @@ The function $\wp : \mathbb{C}/L \to \mathbb{P}^1$ is a degree $2$ holomorphic m
 $e_1, e_2, e_3, \infty$.
 \end{proposition}
 
-\red{We have seen the same picture of branching 
-for the Riemann surface of the cubic equation}
+We have seen the same picture of branching 
+for the Riemann surface of the cubic equation
 \[
     w^2 = (z - e_1)(z - e_2)(z - e_3);
 \]
-
-
 We will use the $\wp$-function to prove the Unique Presentation by principal parts.
-Uniqueness being clear on general grounds (cf.\ Lecture 4), we merely need to prove the existence statement;
+Uniqueness being clear on general grounds, we merely need to prove the existence statement;
 and this will emerge from the proof of the first theorem below. 
 Remarkably, this will also allow us to describe the field of meromorphic functions over $\mathbb{C}/L$.
 
@@ -1280,11 +1346,45 @@ The argument generalizes to any dimension. If $R$ is compact, it follows that we
 \begin{align*}
     V & \cong \bigoplus_{i=1}^{\operatorname{rank} V} \mathcal{O}_{\P^1}(n_i)
 \end{align*}
-where $n_i \geq n_{i+1}$. Moreover, the $n_i$ are uniquely determined by $V$.
+where $n_i \geq n_{i+1}$. Moreover, the $n_i$ are uniquely determined by $V$. The degree of $V$ is the sum of the $n_i$.
 \end{theorem}
-The degree of $V$ is $\sum n_i$. 
+
+
+\begin{exercise}
+In this exercise we will prove Grothendieck's theorem assuming the fact that every vector bundle on $\mathbb{P}^1$ can be constructed from a trivial bundle by a finite sequence of elementary transformations.
+    \begin{enumerate}[(a)]
+        \item Consider the vector bundle $V$ with sheaf of sections $\mathcal{O}(n_1) \oplus \cdots \oplus \mathcal{O}(n_k)$ over $\mathbb{P}^1$, with $n_1 \le \cdots \le n_k$. Show that the sequence of integers $n_i$ is uniquely determined by $V$.
+        \item In contrast with (a), show that $\mathcal{O}(1)\oplus\mathcal{O}(-1)$ and $\mathcal{O}\oplus\mathcal{O}$ are isomorphic as topological vector bundles.
+        \item Show that there is a holomorphic automorphism of $V$ which takes the vector $[1,0,\dots,0]$ in the fiber over $0$ to $[1,1,\dots,1]$.
+        \item Assuming the fact that every rank $k$ holomorphic vector bundle on $\mathbb{P}^1$ can be constructed from $\mathcal{O}^{\oplus k}$ by elementary transformations, show that it must be isomorphic to one of the form in (a).
+    \end{enumerate}
+\end{exercise}
+
+\begin{solution}
+    \leavevmode
+    \begin{enumerate}[(a)]
+        \item Suppose also $V\simeq \bigoplus_{j=1}^k \mathcal O(m_j)$ with $m_1\le\cdots\le m_k$. Recall \[\operatorname{Hom}(\mathcal O(a),\mathcal O(b)) \cong H^0(\mathcal O(b-a))\] which is $0$ if $b<a$ and nonzero if $b\ge a$.
+
+        Consider the $r$ maps $\phi_r$ given by the composition
+        \begin{align*}
+            \cO(n_k) \hookrightarrow V \cong \bigoplus_{j=1}^k \cO(m_j) \twoheadrightarrow \cO(m_r)
+        \end{align*}
+        At least one composite
+        $\mathcal O(n_k)\to \mathcal O(m_r)$ is nonzero (if not then the inclusion would be zero), forcing $m_r\ge n_k$. With the orderings this gives $m_k\ge n_k$. By symmetry (swap the roles of $n,m$) we also get $n_k\ge m_k$. Hence $n_k=m_k$. Cancel that summand and argue by induction on $k$. 
+        \item Complex vector bundles of rank $2$ on $\P^1\cong S^2$ are topologically classified by homotopy classes of maps from $S^2$ to the classifying space $BU(2)$. Since \[\pi_2(BU(2))\cong \pi_1(U(2))\cong \Z\] the isomorphism classes of rank $2$ complex vector bundles on $S^2$ are classified by an integer, which is the first Chern class of the bundle. The first Chern class is additive under direct sum, and $c_1(\mathcal O(n)) = n$. Thus, both $\mathcal O(1)\oplus \mathcal O(-1)$ and $\mathcal O\oplus \mathcal O$ have first Chern class $0$, so they are isomorphic as topological vector bundles.
+        \item Order $n_1\le\cdots\le n_k$. For $i>1$ pick the constant section $s_{i1}\in H^0\!\big(\mathcal O(n_i-n_1)\big)$ equal to 1 (exists since $n_i-n_1\ge 0$). View $s_{i1}$ as a morphism $\mathcal O(n_1)\to \mathcal O(n_i)$.
+
+        Define an endomorphism of $V$ by the lower-triangular matrix with ones on the diagonal and $s_{i1}$ in the $(i,1)$-entry, zeros elsewhere. It is clearly an automorphism. On the fiber over 0 it sends $[1,0,\dots,0]$ to $(1,s_{21}(0),\dots,s_{k1}(0))=(1,1,\dots,1)$.
+        \item Let $L$ be the span of the first basis vector in the fiber of $\mathcal O(n_1)$ at $p$. On sections near $p$,
+        $0\to \ker\big(\mathcal O(n_1)\xrightarrow{\mathrm{ev}_p}\mathbb C_p\big)\cong \mathcal O(n_1-1)\to \mathcal O(n_1)\to \mathbb C_p\to 0$,
+        while the other summands are untouched. Therefore
+        $\mathrm{Elm}_{p,L}\!\left(\bigoplus_i \mathcal O(n_i)\right)\;\cong\; \mathcal O(n_1-1)\oplus \mathcal O(n_2)\oplus\cdots\oplus \mathcal O(n_k)$. Dually, the inverse elementary transform raises one chosen summand by $+1$.
+        Hence any sequence of elementary transforms starting from $\mathcal O^{\oplus k}$ stays split and merely adjusts integers on the summands by $\pm1$. After reordering to $n_1\le\cdots\le n_k$ you land in a bundle of the form in (a).
+    \end{enumerate}
+\end{solution}
+
 \begin{example}
-    On $\P^1$, we have homeomorphic but not biholomorphic vector bundles $\cO(1) \oplus \cO(-1)$ and $\cO \oplus \cO$. They both have degreee zero and the same number of sections, but the sections sit inside the bundles differently.
+    On $\P^1$, we have homeomorphic but not biholomorphic vector bundles $\cO(1) \oplus \cO(-1)$ and $\cO \oplus \cO$. They both have degreee zero and the same number of sections. However, in \(\cO\oplus\cO\), the two independent sections give a global holomorphic trivialization whereas in \(\cO(1)\oplus\cO(-1)\), the same-dimensional space of global sections only generates a proper subbundle.
 \end{example}
 
 \subsection{Riemann-Roch theorem for vector bundles}
@@ -1321,7 +1421,7 @@ In higher dimension these fail:
 \end{enumerate}
 The comparison between line bundles and divisors can be formalized to the statement that on a Riemann surface, Cartier and Weil divisors coincide. This is because Cartier divisors correspond to the transition functions of line bundles. In general, Cartier divisors are Weil divisors when $X$ is regular in codimension one.
 
-The identification $\Div(X)/\PDiv(X) = Pic(X)$ continues to hold for projective algebraic manifolds $X$, by a similar argument, but can fail for non-algebraic manifolds. It also fails for singular varieties.
+The identification $\Div(X)/\PDiv(X) = \Pic(X)$ continues to hold for projective algebraic manifolds $X$, by a similar argument, but can fail for non-algebraic manifolds. It also fails for singular varieties.
 \end{remark}
 
 The Riemann--Roch theorem is the best possible answer to the question of 
@@ -1501,7 +1601,30 @@ Thus $\mathbb{C}\{w\}$ is a free $\mathbb{C}\{z\}$-module of rank $n$ with basis
 \end{proof}
 
 \begin{example}
-    [Riemann-Roch on $\P^1$] We will directly verify the Riemann-Roch theorem for vector bundles on $\P^1$. 
+    [Riemann-Roch on $\P^1$] We will directly verify the Riemann-Roch theorem for vector bundles on $\P^1$. Since every vector bundle on $\P^1$ splits as a direct sum of line bundles by Grothendieck's theorem, it suffices to verify the theorem for line bundles ($\chi$, rank, and degree are additive under direct sum). 
+
+    
+For each $n\in\Z$, we have already computed
+\[
+\dim H^{0}(\P^{1},\cO(n)) =
+\begin{cases}
+n+1, & n\ge -1,\\[4pt]
+0, & n<-1,
+\end{cases}
+\qquad
+\dim H^{1}(\P^{1},\cO(n)) =
+\begin{cases}
+0, & n\ge -1,\\[4pt]
+-n-1, & n<-1,
+\end{cases}
+\]
+so in all cases
+\[
+\chi\bigl(\P^{1},\cO(n)\bigr)
+:= \dim H^{0}(\P^{1},\cO(n)) - \dim H^{1}(\P^{1},\cO(n))
+= n+1.
+\]
+is precisely the statement of Riemann-Roch for $\P^1$.
 \end{example}
 
 \begin{proof}
@@ -1628,6 +1751,16 @@ where $\zeta = e^{2\pi i/n}$, and we obtain from the above equation the natural 
 For general $V$, the same argument applies, but now the trace pairing must include the trace pairing 
 on $V \times V^\vee$ as well as $\mathrm{Tr}_\pi$.  
 \end{proof}
+
+\begin{exercise}
+Prove that every compact Riemann surface of genus $2$ is \textit{hyperelliptic}, meaning that it can be realized as a double (branched) cover of $\mathbb{P}^1$.
+\end{exercise}
+
+\begin{solution}
+    Being genus $2$ means that the space of holomorphic differentials $H^0(R, K)$ is $2$-dimensional. Pick a basis $\omega_1, \omega_2$. Since $K$ has degree $2g-2=2$, the differentials $\omega_i$ each have two zeroes (counted with multiplicity). If they had a common zero, then they would be linearly dependent (since they are sections of a line bundle with a common zero), contradicting the choice of basis. Therefore, $\omega_1$ and $\omega_2$ have no common zeroes.
+
+    Define a meromorphic function $f = \omega_1/\omega_2$. Since $\omega_1$ and $\omega_2$ have no common zeroes, $f$ is well-defined and meromorphic on $R$. The poles of $f$ are the zeroes of $\omega_2$, and the zeroes of $f$ are the zeroes of $\omega_1$. Each differential has two zeroes, so $f$ has two poles and two zeroes, counting multiplicities. Therefore, $f$ is a degree $2$ meromorphic function on $R$, which defines a double cover of $\mathbb{P}^1$ (the Riemann sphere).
+\end{solution}
 
 \subsection{Coherent sheaf cohomology}
 
