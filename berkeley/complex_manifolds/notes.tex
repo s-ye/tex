@@ -231,12 +231,304 @@ the desired identity.
 
 \begin{remark}
 These two proofs are related by the fact a holomorphic $1$--form $\omega$ on a compact Riemann surface satisfies
-$\deg(\omega) = 2g-2 = -\chi(X)$.
-
-In particular, there is the isomorphism of line bundles
+$\deg(\omega) = 2g-2 = -\chi(X)$. In particular, there is the isomorphism of line bundles
 $K_R = f^*K_S + B$.
 which refines the Riemann--Hurwitz formula. 
 \end{remark}
+
+
+\begin{exercise}
+Let $f(z)$ be a polynomial of odd degree, with simple zeroes. Identify the topology of the Riemann surface of the double-valued function defined by $w^2 = f(z)$.
+\end{exercise}
+
+
+
+\begin{solution}
+    Consider $X_{\mathrm{aff}} = \{(z,w)\in\mathbb{C}^2 : w^2 = f(z)\}$. Its projection $\pi_{\mathrm{aff}} : (z,w) \mapsto z$ is a $2$-sheeted branched covering of $\mathbb{C}$ away from the zeros of $f$. We compactify to a projective curve $X = \overline{X_{\mathrm{aff}}} \subset \mathbb{P}^1_z \times \mathbb{P}^1_w$ and extend the projection to $\pi : X \longrightarrow \mathbb{P}^1_z$. The map $\pi$ has degree $2$.
+    To study the topology of $X_{\mathrm{aff}}$, we will use the Riemann-Hurwitz formula to compute the genus of $X$ and delete the point(s) over $z=\infty$.
+
+
+
+    If $a$ is a simple zero of $f$, write locally $f(z) = (z-a)u(z)$ with $u(a)\neq 0$. Then $w^2 = (z-a)u(z)$ has a single point of $X$ lying over $z=a$ and the local model is $w^2 = z-a$, so the ramification index is $e=2$. Thus each simple zero gives one branch point of ramification index $2$. There are $d$ of these in $\mathbb{C}$. Put $t=1/z$ as a coordinate near $z=\infty$ and write
+    \[f(z) = z^{d}\,g(1/z) = t^{-d}\,g(t), \qquad g(0)\neq 0\]
+    The equation becomes
+    $w^2 = t^{-d}g(t) \Longleftrightarrow (w\,t^{\frac{d-1}{2}})^2 = t^{-1}g(t)$.
+    Let $u = w\,t^{\frac{d-1}{2}}$. Then $u^2 = t^{-1}g(t)$, so near $t=0$ we have the model $u^2 \sim t^{-1}$. Therefore, there is one point of $X$ over $z=\infty$ and it is ramified of order $2$. Hence the total number of simple branch points is $B = d+1$.
+
+    Apply Riemann-Hurwitz to the degree-$2$ map $\pi : X \to \mathbb{P}^1$:
+    \[
+        2g(X)-2 = 2\cdot(-2) + \sum_{p\in X}(e_p-1).
+    \]
+    Every simple ramification contributes $e_p-1=1$, so
+    \[
+        2g(X)-2 = -4 + B = -4 + (d+1) = d-3.
+    \]
+    Therefore
+    \[
+        g(X) = \frac{d-1}{2}.
+    \]
+
+    The compact Riemann surface $X$ is a closed orientable surface of genus $g = \frac{d-1}{2}$. Recall that there is only one point of $X$ over $z=\infty$. Therefore, $X_{\mathrm{aff}}$ is homeomorphic to $X$ with one point removed. Hence $X_{\mathrm{aff}}$ is homeomorphic to a genus $\frac{d-1}{2}$ surface with one puncture.
+\end{solution}
+
+\subsection{Weierstrass theorems}
+The suprising fact about holomorphic functions in several variables is that they behave like polynomials in many respects. The following theorems establish that analytic sets have algebraic-like local structure and are important in estbalishing general factorization, dimension, flatness, and coherence theorems.
+
+\begin{theorem}[Weierstrass Division Theorem]
+Given a polynomial
+\[
+    P(w,z_1,\dots,z_n) = w^n + \sum_{k=0}^{n-1} p_k(z) w^k,
+\]
+with the functions $p_k(z)$ holomorphic in an open set $V \subset \mathbb{C}^n$ and satisfying $p_k(0)=0$, every germ of holomorphic function $G(w,z)$ near $(w,z)=(0,0)$ can be uniquely expressed as
+\[
+    G(w,z) = P(w,z)\cdot Q(w,z) + R(w,z),
+\]
+where $Q(w,z)$ is a holomorphic germ near $0$ and $R(w,z)$ is a polynomial in $w$ of degree $< n$ with coefficients germs of holomorphic functions in $z$ near $z=0$.
+\end{theorem}
+
+
+\begin{proof}
+    Using Cauchy's integral formula we write \begin{align*}
+        G(w,z) & = \frac{1}{2\pi i}\oint_{\Gamma} \frac{G(\zeta, z)}{\zeta - w} d\zeta
+    \end{align*}
+    from which we can write \begin{align*}
+        R(w,z) = \frac{1}{2\pi i}\oint_{\Gamma}  \frac{G(\zeta, z)P(\zeta,z)}{P(\zeta,z)(\zeta - w)} - \frac{G(\zeta,z)P(w,z)}{P(\zeta,z)(\zeta - w)} d\zeta
+    \end{align*}
+    Now write \begin{align*}
+        P(\zeta,z) - P(w,z) = (\zeta^k - w^k) + \sum_{i=1}^{k-1} p_k(z)(\zeta^i - w^i)
+    \end{align*} which is divisible by $\zeta - w$, and the quotient \begin{align*}
+        \frac{P(\zeta,z) - P(w,z)}{\zeta - w}
+    \end{align*} is a polynomial in $w$ of degree $n-1$. If for a fixed value of $z$, we pick a contour $\Gamma$ in the $w$ plane for which $P(\zeta,z)$ does not vanish on $\Gamma$, then the function $R$ is holomorphic in $w$ and $z$ because it is the contour integral of an integrand, holomorphic in both $w$ and $z$. Since $R$ is holomorphic, we may differentiate $n$ times with respect to $w$ under the integral and we find that the integrand becomes zero, since the integrand is a polynomial in $w$ of degree $n-1$. Therefore, \begin{align*}
+        \frac{d^nR}{dw^n} = 0
+    \end{align*} so $R$ is indeed polynomial of degree $n-1$.
+\end{proof} 
+
+
+
+\begin{theorem}[Weierstrass Preparation Theorem]
+    Let $F$ be holomorphic in the variables $z = (z_1,\dots,z_k)$ and $w$ near the origin in $\C^{k+1}$ and let $n$ be the smallest integer such that
+\[
+\frac{\partial^{n}F}{\partial w^{\,n}}(0,0)\neq 0.
+\]
+Then:
+
+\begin{itemize}
+\item[\textnormal{(weak form)}]
+There exists a function $\Phi$ of the form
+\[
+\Phi(z,w)
+ = w^{n} + f_{n-1}(z) w^{n-1} + \cdots + f_1(z) w + f_0(z),
+\]
+with $f_0,\dots,f_{n-1}$ analytic near $z=0$, such that the zero--set of
+$\Phi(z,w)$ agrees with that of $F(z,w)$ near $(0,0)$.
+
+\item[\textnormal{(strong form)}]
+There exists, in addition, a holomorphic function $u(z,w)$, nonzero near
+$(0,0)$, such that
+\[
+F(z,w) \;=\; \Phi(z,w)\,u(z,w).
+\]
+\end{itemize}
+Moreover, this factorization of $F$ is unique.
+\end{theorem}
+
+
+\begin{example}\label{germs-noetherian}
+    The ring of germs of holomorphic functions on a complex manifold $X$ can be identified with the ring of convergent power series in $\dim X$ local coordinates. 
+The Weierstrass theorems show that the \emph{local} analytic rings
+\[
+\cO_{X,p} \;\cong\; \C\{z_1,\dots,z_n\}
+\]
+are Noetherian and factorial (UFD). By contrast, the ring of
+\emph{global} holomorphic functions on a domain is typically very far
+from either property.
+
+\begin{enumerate}
+\item
+For example, let $\cO(\C)$ denote the ring of entire functions. For
+each $m\ge 1$ define the ideal
+\[
+I_m := \{\, f\in\cO(\C) : f(1/k)=0 \text{ for all } 1\le k\le m \,\}.
+\]
+Then $I_m$ consists of entire functions vanishing at the finite set
+$\{1,\dots,1/m\}$, hence
+\[
+I_m = \Bigl(\prod_{k=1}^m (z-1/k)\Bigr),
+\]
+so each $I_m$ is principal. Clearly
+\[
+I_1 \;\subsetneq\; I_2 \;\subsetneq\; I_3 \;\subsetneq\; \cdots
+\]
+is a strictly ascending chain of ideals (each new condition $f(1/(m+1))=0$
+cuts out a strictly smaller ideal), and the chain never stabilizes.
+Thus $\cO(\C)$ is not Noetherian. Similar chains can be constructed in
+$\cO(U)$ for many noncompact domains $U\subset\C^n$.
+
+\item
+Even more dramatically, the ring $\cO(\C)$ is not a UFD as exhibited by the infinite product expansion of the sine function
+\[
+\sin(\pi z)
+= \pi z \prod_{n=1}^\infty \left(1 - \frac{z^2}{n^2}\right).
+\]
+\end{enumerate}
+\end{example}
+
+\begin{theorem}
+The local ring of convergent power series 
+\[
+A_n := \C\{z_1,\dots,z_n\}
+\]
+is Noetherian for every $n\ge 1$.
+\end{theorem}
+
+\begin{proof}
+For $n=1$, the ring $\C\{z\}$ is a discrete valuation ring: every
+$f\neq 0$ can be written uniquely as $f(z)=z^k u(z)$ with $u(0)\neq 0$,
+so every ideal is generated by a single power of $z$, hence $\C\{z\}$ is
+Noetherian.
+
+Assume inductively that $A_{n-1}$ is Noetherian, and write
+\[
+A_n = A_{n-1}\{w\}
+\]
+with $w=z_n$. Let $I\subset A_n$ be an arbitrary ideal. Choose
+$f\in I$ such that its order in $w$ is minimal among all elements of $I$.
+By the Weierstrass Preparation Theorem, after multiplying by a unit we may
+assume that $f$ is a monic Weierstrass polynomial
+\[
+P(w) = w^d + a_{d-1}(z') w^{d-1} + \cdots + a_0(z'),
+\qquad a_i(0)=0,
+\]
+lying in $A_{n-1}[w]\subset A_n$.
+
+For any $g\in I$, the Weierstrass Division Theorem gives a unique
+expression
+\[
+g = qP + r,
+\]
+where $q\in A_n$ and the remainder has the form
+\[
+r(z',w) = r_0(z') + r_1(z')w + \cdots + r_{d-1}(z')w^{d-1},
+\qquad r_i \in A_{n-1}.
+\]
+Thus
+\[
+I = (P) + I',
+\]
+where $I'$ consists of those elements of $I$ of $w$--degree $<d$.
+Define a map
+\[
+\Phi : I' \longrightarrow A_{n-1}^d,\qquad
+r \longmapsto (r_0,\dots,r_{d-1}).
+\]
+The image $J:=\Phi(I')$ is a submodule of the finitely generated
+$A_{n-1}$--module $A_{n-1}^d$. Since $A_{n-1}$ is Noetherian, $J$ is
+finitely generated, say by the vectors
+\[
+(r_0^{(j)},\dots,r_{d-1}^{(j)}) \in A_{n-1}^d,
+\qquad j=1,\dots,N.
+\]
+Lift each generator to an element
+\[
+r^{(j)}(z',w)
+:= r_0^{(j)}(z') + \cdots + r_{d-1}^{(j)}(z') w^{d-1}
+\in I'.
+\]
+
+By construction, every element $r\in I'$ is an $A_{n-1}$--linear
+combination of the $r^{(j)}$, and hence also an $A_n$--linear combination.
+Thus
+\[
+I = (P, r^{(1)},\dots,r^{(N)}),
+\]
+so $I$ is finitely generated. Since $I$ was arbitrary, $A_n$ is Noetherian.
+\end{proof}
+
+\begin{theorem}
+The ring $A_n = \C\{z_1,\dots,z_n\}$ is a unique factorization domain.
+\end{theorem}
+
+\begin{proof}
+We proceed by induction on $n$. For $n=1$, the ring $\C\{z\}$ is a
+discrete valuation ring, hence a UFD.
+
+Assume the result holds for $A_{n-1}$. Every nonunit $f\in A_n =
+A_{n-1}\{w\}$ can be made regular in $w$ after a linear change of
+coordinates. By the Weierstrass Preparation Theorem, we may write
+\[
+f = u \cdot P,
+\]
+where $u$ is a unit in $A_n$ and $P$ is a \emph{monic Weierstrass
+polynomial}
+\[
+P(w) = w^d + a_{d-1}(z') w^{d-1} + \cdots + a_0(z') \in A_{n-1}[w],
+\qquad a_i(0)=0.
+\]
+Thus factorization questions for $A_n$ reduce to factorization questions
+for monic polynomials in $A_{n-1}[w]$.
+
+Since $A_{n-1}$ is a UFD by induction, the polynomial ring
+$A_{n-1}[w]$ is also a UFD. Hence every monic polynomial $P$ admits a
+unique factorization
+\[
+P = P_1 \cdots P_r
+\]
+into monic irreducible polynomials $P_i \in A_{n-1}[w]$.
+
+We claim that these irreducible factors $P_i$ remain irreducible in
+$A_n$. Indeed, suppose $P_i = QR$ in $A_n$. By the Weierstrass Division
+Theorem, dividing $Q$ by $P_i$ in the variable $w$ gives remainder zero
+(since $P_i$ is monic), hence $Q$ lies in $A_{n-1}[w]$. Likewise for $R$.
+Thus any factorization of $P_i$ in $A_n$ already occurs in
+$A_{n-1}[w]$, contradicting its irreducibility there. Hence $P_i$ is
+irreducible in $A_n$, and being monic it is also prime.
+
+Therefore every nonunit $f\in A_n$ factors as
+\[
+f = u \cdot P_1\cdots P_r,
+\]
+with $u$ a unit and the $P_i$ pairwise nonassociate irreducible elements.
+Uniqueness of this factorization follows from the uniqueness of
+factorization in the UFD $A_{n-1}[w]$.
+
+Thus $A_n$ is a unique factorization domain.
+\end{proof}
+
+\begin{exercise}\label{ex:codim-2-extn}
+Let $C_1$ and $C_2$ be two circles in the $w$- and $z$-planes in $\mathbb{C}^2$, and $\Delta_{1,2}$ the disks that they bound. Show that a holomorphic function defined in an open set containing
+\[
+    C_1 \times \Delta_2 \;\cup\; \Delta_1 \times C_2
+\]
+has a unique holomorphic extension over $\Delta_1 \times \Delta_2$.
+\end{exercise}
+
+\begin{solution}
+    Suppose $f$ is holomorphic on a neighborhood of $X = (\partial\Delta\times \Delta)\ \cup\ (\Delta\times \partial\Delta)\subset\mathbb{C}^2$. For each fixed $z_2\in\Delta$, the map $\zeta_1\mapsto f(\zeta_1,z_2)$ is holomorphic on a neighborhood of $\partial\Delta$. Define
+    \[
+        F(z_1,z_2) = \frac{1}{2\pi i}\int_{|\zeta_1|=1}\frac{f(\zeta_1,z_2)}{\zeta_1-z_1}\,d\zeta_1, \qquad (z_1,z_2)\in\Delta\times\Delta.
+    \]
+    $F$ is holomorphic on $\Delta\times\Delta$. Moreover, on a neighborhood of $\partial\Delta\times\Delta$ (where $f$ is defined in a full annulus in $\zeta_1$), Cauchy's formula gives $F=f$. Similarly, for each fixed $z_1\in\Delta$ the map $\zeta_2\mapsto f(z_1,\zeta_2)$ is holomorphic near $\partial\Delta$. Define
+    \[
+        G(z_1,z_2) = \frac{1}{2\pi i}\int_{|\zeta_2|=1}\frac{f(z_1,\zeta_2)}{\zeta_2-z_2}\,d\zeta_2.
+    \]
+    Then $G$ is holomorphic on $\Delta\times\Delta$ and $G=f$ on a neighborhood of $\Delta\times\partial\Delta$. On a neighborhood of the torus $\partial\Delta\times\partial\Delta\subset X$, both representations are valid and equal $f$, hence $F=G$ there. By the identity theorem for holomorphic functions on $\Delta\times\Delta$, $F\equiv G$ on all of $\Delta\times\Delta$. Thus this common function extends $f$ holomorphically to the full interior.
+
+    The extension is unique because if $H$ were another holomorphic extension, then $H=F$ on $\partial\Delta\times\Delta$ by the identity theorem applied to the first variable, hence $H=F$ on all of $\Delta\times\Delta$ by the identity theorem applied to the second variable.
+\end{solution}
+
+
+
+\begin{exercise}
+Let $F,G$ be two irreducible holomorphic functions in $n>1$ variables defined on an open set $U$, and call their common zero-set $Z$. Using the Weierstrass Preparation Theorem (twice) and Q6, show that any holomorphic function defined on $U\setminus Z$ extends holomorphically over $Z$.
+\end{exercise}
+
+\begin{remark}
+    This is a version of \emph{Hartogs' theorem} for holomorphic functions of several variables; somewhat loosely, the singular set of a holomorphic function defined on "most of" an open $U \subset \mathbb{C}^n$ cannot lie in an analytic subset of co-dimension $2$, unless it's empty. Contrast that with the real function $1/(x^2+y^2)$ on $\mathbb{R}^2$.
+\end{remark}
+
+\begin{solution}
+Let $F,G$ be irreducible holomorphic functions on $U\subset\mathbb{C}^n$, $n>1$, and set \[Z=\{F=0\}\cap\{G=0\}\] Fix $p\in Z$ and change coordinates so that $p=0$, with $F$ regular in $w$ and $G$ regular in $z$. By Weierstrass Preparation we may write $F=U_F\cdot P(w;z,t)$ and $G=U_G\cdot Q(z;w,t)$ where $P$ is a Weierstrass polynomial in $w$, $Q$ one in $z$, and $t$ denotes the other coordinates. Thus for small polydisks, the zeros of $F$ in $w$ and of $G$ in $z$ form finite sets of roots varying holomorphically with the parameters. Choosing circles $C_1=\{|w|=r_1\}$ and $C_2=\{|z|=r_2\}$ that avoid these roots (uniformly in $t$), we see that $(C_1\times \Delta_2)\cup (\Delta_1\times C_2)$ is contained in $U\setminus Z$, so $f$ is holomorphic there. By Exercise \ref{ex:codim-2-extn}, $f$ extends holomorphically to $\Delta_1\times \Delta_2$ for each fixed $t$, and the extension depends holomorphically on $t$. Hence $f$ extends to a neighborhood of $p$, and by uniqueness these local extensions glue to give a holomorphic extension of $f$ to all of $U$.
+\end{solution}
 
 
 
@@ -281,17 +573,6 @@ We conclude that each of the half-lattice points must be a simple zero of $\wp'$
 \end{proof}
 
 \red{Need passage on theta functions here.}
-
-\begin{remark}
-    Kac writes that this quadratic term which appears in the definition of $t_\alpha$ "explains" the appearance of theta functions in the theory of affine algebras, where $t_\alpha$ is the translation by the coroot $\alpha$ in the affine Weyl group.
-    \[t_\alpha(\lambda) = \lambda + \langle \lambda, K \rangle \alpha - \left( (\lambda | \alpha) + \frac{1}{2} |\alpha|^2 \langle \lambda, K \rangle \right) \delta\]
-    This is because when you compute the characters of highest-weight representations of affine Kac-Moody algebras, you sum over the affine Weyl group:
-\[\chi(\lambda) = \sum_{w \in W} \det(w)\, e^{w(\lambda+\rho) - \rho}\]
-and theta functions arise precisely when you sum exponentials of the form \begin{align*}
-    \Theta(\tau, z) = \sum_{\alpha \in \text{lattice}} \exp\big(-\tfrac{1}{2}|\alpha|^2 \tau + \langle \alpha, z\rangle\big).
-\end{align*}
-Continuing with the discussion of theta functions, we have the following theorem about genus $1$ Riemann surfaces.
-\end{remark}
 
 \begin{theorem}
     Let $\theta_1,\dots,\theta_4$ be the four Jacobi theta functions. Then there is a map \begin{align*}
@@ -594,11 +875,8 @@ Since the Riemann surface structure on the (concrete, non-singular) Riemann surf
 \]
 \end{proof}
 
-
-
-
-
-\section{Riemann surfaces and field extensions}
+\subsection{Riemann surfaces and field extensions}
+This section is devoted to explaining the equivalence of three categories.
 \begin{theorem}
 The following categories are equivalent:
 \begin{itemize}
@@ -617,6 +895,7 @@ The correspondence in one direction is:
 \begin{remark}
     For curves, smooth and proper implies projective. This is false in higher dimensions.
 \end{remark}
+
 Common to both is the construction of nonconstant meromorphic functions. It suffices to find \begin{itemize}
     \item A map $f:R \to \P^1$ which realizes $R$ as a branched cover of $\P^1$ (the transcendental part of the function field) \begin{align*}
         f^*: \mathbb{C}(z) &\hookrightarrow \mathbb{C}(R) \\
@@ -636,9 +915,6 @@ We state Riemann's theorem which allows us to pass from the analytic setting to 
 \end{theorem}
 
 The method of proof involves constructing holomorphic differentials with poles at $p$, and in fact one can get them to any order of pole $\geq 2$. Then if these differentials are exact, their integrals give a single valued function with pole only at $p$.
-\section{Galois theory of compact Riemann surfaces}
-
-The fundamental result of the theory, conjectured by Riemann circa 1850, and proved over the next few decades, is:
 
 \begin{theorem}
 Every compact Riemann surface is algebraic.
@@ -657,42 +933,28 @@ The truly hard part of the theorem is to get started.  Nothing in the definition
 Every compact Riemann surface carries a non-constant meromorphic function.
 \end{theorem}
 
-Equivalently, every compact Riemann surface can be made into a branched cover of $\mathbb{P}^1$.
-
-\medskip
-\noindent
-\textbf{Remarks.}  
-This is the difficult part of the theorem; once we have a branched cover of $\mathbb{P}^1$, we can start studying it by algebraic methods.  
+\begin{remark}
+    This is the difficult part of the theorem; once we have a branched cover of $\mathbb{P}^1$, we can start studying it by algebraic methods.  
 The proof involves serious analysis, specifically finding solutions of the Laplace equation in various surface domains, with prescribed singularities (“Green's functions”).
+\end{remark}
 
-\medskip
 Contained in Riemann's theorem, there is a second result which we shall use without proof.
 
 \begin{proposition}
 Let $\pi : R \to \mathbb{P}^1$ be a holomorphic map of degree $n > 0$.  
-There exists, then, an additional meromorphic function $f$ on $R$ which \textbf{separates the sheets of $R$ over $\mathbb{P}^1$}, in the following sense: there exists a point $z_0 \in \mathbb{P}^1$ such that $f$ takes $n$ distinct values at the points of $R$ over $z_0$.
+There exists, then, an additional meromorphic function $f$ on $R$ which separates the sheets of $R$ over $\mathbb{P}^1$, in the following sense: there exists a point $z_0 \in \mathbb{P}^1$ such that $f$ takes $n$ distinct values at the points of $R$ over $z_0$.
 \end{proposition}
 
-\begin{exercise}
-Show that such an $f$ must then take $n$ distinct values over all but finitely many points of $\mathbb{P}^1$.  
-(Consider a limit point of a sequence $z_k$ over which $f$ takes fewer values and use the fact that the zeros of a non-constant analytic function are isolated.  
-The case when the limit point is a branch point will require extra care.)
-\end{exercise}
 
 Assuming now that the Riemann surface $R$ is connected, let $\mathbb{C}(R)$ be its field of meromorphic functions.  
 A non-constant meromorphic function $z$ defines an inclusion of fields
 \[
 \mathbb{C}(z) \subset \mathbb{C}(R).
 \]
-
-In algebra, this is commonly called a \textbf{field extension} rather than a “field inclusion.”  
-The degree of the field extension, denoted $[\mathbb{C}(R):\mathbb{C}(z)]$, is the dimension of $\mathbb{C}(R)$ as a vector space over $\mathbb{C}(z)$.
-
-
 \begin{theorem}
-    Let $\pi : R \to \mathbb{P}^1$ denote the holomorphic map associated to the meromorphic function $z$.
+    Let $\pi : R \to \mathbb{P}^1$ be the holomorphic map associated to the meromorphic function $z$.
 \begin{enumerate}
-    \item $[\mathbb{C}(R):\mathbb{C}(z)] = \deg \pi \;(= n)$.
+    \item $[\mathbb{C}(R):\mathbb{C}(z)] = \deg \pi$.
     \item Any $f \in \mathbb{C}(R)$ satisfies a polynomial equation of degree $\le n$ with coefficients in $\mathbb{C}(z)$:
     \[
     f^n + a_{n-1}(z)f^{n-1} + \cdots + a_0(z) = 0.
@@ -720,7 +982,7 @@ Forgetting the map to $\mathbb{P}^1$, we have:
 There is a bijection between isomorphism classes of fields which can be realized as finite extensions of $\mathbb{C}(z)$, on one hand, and isomorphism classes of compact Riemann surfaces, on the other.
 \end{theorem}
 
-The theorem follows essentially from part~(iv) of the previous result; the only missing ingredient, which rounds up the correspondence between Riemann surfaces and their fields of functions, is:
+The theorem follows essentially from part~(4) of the previous result; the only missing ingredient, which rounds up the correspondence between Riemann surfaces and their fields of functions, is:
 
 \begin{theorem}
 Homomorphisms from $\mathbb{C}(S)$ to $\mathbb{C}(R)$ are in bijection with holomorphic maps from $R$ to $S$.
@@ -740,7 +1002,7 @@ The automorphisms of $R$ that commute with $\pi$ are precisely the automorphisms
 \end{proposition}
 
 \begin{corollary}
-A map $\pi : R \to S$ defines a Galois extension on the fields of meromorphic functions if and only if there exists a group $\Gamma$ of automorphisms of $R$, commuting with $\pi$, and acting \textbf{simply transitively} on the fibres $\pi^{-1}(s)$, for a general $s \in S$.
+A map $\pi : R \to S$ defines a Galois extension on the fields of meromorphic functions if and only if there exists a group $\Gamma$ of automorphisms of $R$, commuting with $\pi$, and acting simply transitively on the fibres $\pi^{-1}(s)$, for a general $s \in S$. Such a map is called a \textbf{Galois cover with group $\Gamma$}.
 \end{corollary}
 
 \begin{proof}
@@ -751,7 +1013,7 @@ So the automorphism group must act simply transitively on the fibres which do no
 Conversely, an automorphism group acting simply transitively on even one fibre with no branch points must have order $\deg \pi$.  
 But since that is $[\mathbb{C}(R):\mathbb{C}(S)]$, it follows that the extension is Galois.
 \end{proof}
-Such a map is called a \textbf{Galois cover with group $\Gamma$}.
+
 
 \begin{remark}
 Note that $R/\Gamma = S$, set theoretically.  
@@ -762,65 +1024,56 @@ We have just shown the same for the meromorphic functions.
 \begin{example}[Galois covers]
     \leavevmode
 \begin{enumerate}
-    \item[(i)] $\mathbb{P}^1 \longrightarrow \mathbb{P}^1$, with $w \longmapsto z = w^3$.\\[4pt]
-    The automorphisms are $z \mapsto \zeta z$, where $\zeta$ is any cube root of $1$.
+    \item[(i)] $\mathbb{P}^1 \longrightarrow \mathbb{P}^1$, with $w \longmapsto z = w^3$. The automorphisms are $z \mapsto \zeta z$, where $\zeta$ is any cube root of $1$.
 
-    \item[(ii)] $\mathbb{C}/L \longrightarrow \mathbb{P}^1$, with $u \longmapsto \wp(u)$.\\[4pt]
-    The non-trivial automorphism is $u \longmapsto -u$.\\[4pt]
-    Rewriting it, the surface $w^2 = 4z^3 - g_2 z - g_3$ is a Galois cover of the $z$-plane, with Galois group $\mathbb{Z}/2$ and automorphism $w \mapsto -w$.
+    \item[(ii)] $\mathbb{C}/L \longrightarrow \mathbb{P}^1$, with $u \longmapsto \wp(u)$. The non-trivial automorphism is $u \longmapsto -u$. The surface $w^2 = 4z^3 - g_2 z - g_3$ is a Galois cover of the $z$-plane, with Galois group $\mathbb{Z}/2$ and automorphism $w \mapsto -w$.
+\end{enumerate}
+\end{example}
+
+
+\section{Coherent sheaves}
+Let $X$ be a complex manifold and $\cO_X$ the sheaf of holomorphic functions on $X$.
+\begin{definition}
+A sheaf of $\cO_X$-modules \(\cF\) is \textbf{coherent} if
+\begin{enumerate}
+    \item \(\cF\) is locally of finite type: for every $x\in X$ there is a neighborhood U and a surjection
+\[
+\cO_X^{\oplus n}\big|_U \twoheadrightarrow \cF\big|_U,
+\]
+    \item for every open set \(U\subseteq X\) and every morphism \(\phi:\cO_X^{\oplus p}\big|_U\to\cF\big|_U\), the kernel $\ker\phi$ is locally of finite type.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+    For quasi-coherent sheaves on a locally Noetherian scheme, being locally of finite type is a local/stalkwise condition, and kernels of maps of finite free modules are again finite type automatically (because any submodule of a finitely generated module over a Noetherian ring is finitely generated). Thus, a locally Noetherian scheme, a quasi-coherent sheaf \(\cF\) is coherent iff it is of finite type.
+\end{remark}
+
+\begin{example}
+    $\cO_X$ is coherent. The condition that $\cO_X$ is locally of finite type is trivial. We need to see that for every map
+\[
+\phi:\cO_X^{\oplus m} \longrightarrow \cO_X
+\]
+the kernel $\ker\phi$ should be locally generated by finitely many sections. Equivalently, we can show that \begin{enumerate}
+    \item for each $x\in X$, the local ring \(\cO_{X,x}\) is Noetherian. We can do this by identifing \(\cO_{X,x}\) with convergent power series in \(n=\dim X\) variables, which is known to be Noetherian by the Weierstrass division theorem (See Example \ref{ex:germs_noetherian}).
+    \item For every homomorphism of free modules over \(\cO_{X,x}\),
+\[
+\varphi:\cO_{X,x}^{\oplus m}\to \cO_{X,x},
+\]
+the kernel $\ker\varphi$ is a finitely generated \(\cO_{X,x}\)-module. Over a Noetherian ring, submodules of finitely generated modules are finitely generated. These generators can be lifted holomorphically to a neighborhood of $x$ to give local generators of $\ker\phi$.
 \end{enumerate}
 \end{example}
 
 \begin{definition}
-A differential $1$-form on a Riemann surface is called \textbf{holomorphic} if, in any local analytic coordinate, it has an expression
-\[
-\phi(z)\,dz = \phi(z)(dx + i\,dy),
-\]
-with $\phi$ holomorphic.
+    An \textbf{invertible sheaf} (or line bundle) on a complex manifold $X$ is a coherent sheaf of $\cO_X$-modules $\cL$ which is locally isomorphic to $\cO_X$, i.e. for every $x \in X$ there exists an open neighborhood $U$ of $x$ such that \(\cL\big|_U \cong \cO_X\big|_U\).
 \end{definition}
 
-For those of you familiar with the notion of differential forms on a surface, there is a hands-on (but dirty) definition:
+\begin{example}
+    The sheaf of holomorphic sections of a holomorphic line bundle is an invertible sheaf.
+\end{example}
 
-\begin{definition}
-A \textbf{holomorphic differential} on a Riemann surface $R$ is a quantity which takes the form $\phi(z)\,dz$ in a local coordinate $z$, and on the overlap region with another coordinate $u$, where it has the form $\psi(u)\,du$, it satisfies the gluing law
-\[
-\phi(z) = \psi(u(z))\,u'(z).
-\]
-(Formally, $du = u'(z)\,dz$.)
-\end{definition}
-
-\begin{proposition}
-If $f$ is a holomorphic function on $R$, then $df$ represents a holomorphic differential.  
-In a local coordinate $z$,
-\[
-df = f'(z)\,dz.
-\]
-\end{proposition}
-
-\begin{remark}
-We are trying to talk about derivatives of functions on a Riemann surface.  
-However, the derivative of a function does not transform like a function under a change of coordinates, because of the chain rule
-\[
-\frac{df}{dz} = \frac{df}{du} \frac{du}{dz}.
-\]
-Differentials are quantities which transform like derivatives of functions. They are not functions because the "value" of a differential at a point is not well-defined (it depends on the choice of local coordinate). However, its value evaluated on a tangent vector is well-defined, precisely because of the chain rule.
-\end{remark}
-
-\begin{proposition}
-If $\phi$ is a holomorphic differential and $f$ is a holomorphic function, then $f \cdot \phi$ is a holomorphic differential.
-\end{proposition}
-
-If $\phi$ and $\psi$ are two holomorphic differentials, then $\phi/\psi$ is a meromorphic function.  
-If $\phi$ is holomorphic if and only if the zeroes of $\psi$ are “dominated” by the zeroes of $\phi$, that is, in local coordinate $z$ when
-\[
-\phi = \phi(z)\,dz, \qquad \psi = \psi(z)\,dz,
-\]
-the order of the zeroes of $\psi$ is $\le$ the order of the zeroes of $\phi$.
-
-\begin{remark}
-There is an obvious notion of a meromorphic differential, and there are analogous properties to the above.
-\end{remark}
-
+\begin{example}
+    Let $K$ be the sheaf of holomorphic differentials on a Riemann surface $R$. Then $K$ is an invertible sheaf.
+\end{example}
 
 \begin{example}[Holomorphic differentials on $\P^1$]
 Indeed, over the usual chart $\mathbb{C}$, the differential must take the form $f(z)\,dz$ with $f$ holomorphic.  
@@ -828,8 +1081,7 @@ Near $\infty$, with $w = 1/z$ as a coordinate, the differential becomes
 \[
 f(1/w)\,d(1/w) = -f(1/w)\,dw/w^2.
 \]
-So we need $f(1/w)/w^2$ to be holomorphic at $w = 0$, so $f$ should extend holomorphically at $\infty$ and have a double zero there.  
-But then $f$ must be zero.
+So we need $f(1/w)/w^2$ to be holomorphic at $w = 0$, so $f$ should extend holomorphically at $\infty$ and have a double zero there. But then $f$ must be zero.
 \end{example}
 
 \begin{example}
@@ -859,20 +1111,16 @@ So $dz/w^2$, $dz/w^3$ are still holomorphic at the branch points (and everywhere
 At $z = \infty$, $w$ has a simple pole on $R^{\mathrm{cpt}}$ and we see that $w^{-2}dz$ and $w^{-3}dz$ (and higher powers) are non-singular there.  
 Moreover, we can even afford to add $z\,dz/w^3$ to our list, and we have produced three holomorphic differentials on $R^{\mathrm{cpt}}$.
 
-\begin{proposition}
 The ratios of holomorphic differentials on $R^{\mathrm{cpt}}$ generate the field of meromorphic functions.
-\end{proposition}
-
-\begin{proof}
 \[
 \frac{dz/w^2}{dz/w^3} = w, \qquad
 \frac{z\,dz/w^3}{dz/w^3} = z,
 \]
 and $z, w$ generate the field of meromorphic functions, by our theorem from last time.
-\end{proof}
+
 \end{example}
 
-\section{Line bundles and divisors}
+\subsection{Line bundles and divisors}
 If $f$ is a nonconstant meromorphic function on a compact Riemann surface $R$, then we defined the divisor of $f$ to be \[(f) = \sum_{p \in R} \operatorname{ord}_p(f) p\] where $\operatorname{ord}_p(f)$ is the order of vanishing of $f$ at $p$ (negative if $f$ has a pole at $p$). 
 
 We defined the following sets:
@@ -964,6 +1212,7 @@ On a compact Riemann surface, the degree and dimension of a vector bundle comple
 \end{example}
 Recall that in general if one has $\cL$ a line bundle on $X$, then we can consider the evaluation map $X \to \P(H^0(X,\cL)^*)$ given by $x \mapsto \{s \in H^0(X,\cL) : s(x)=0\}$ when $\cL$ has enough sections. For example, if $\cL$ has negative degree than it has no sections. If $\cL$ has degree $0$ then it has a section if and only if it is trivial. 
 
+\subsection{Vector bundles and elementary transformations}
 The analog of $\otimes \cO(D)$ for vector bundles is called an elementary transformation. Let $V$ be a vector bundle on $R$ and choose a subspace $S\subset V_p$. 
 
 Define $\operatorname{elm}(V,p,S)$ to be the sheaf of sections of $V$ whose value at $p$ lies in $S$. This is a vector bundle whose degree is $\deg V - \codim S$.
@@ -1038,7 +1287,7 @@ The degree of $V$ is $\sum n_i$.
     On $\P^1$, we have homeomorphic but not biholomorphic vector bundles $\cO(1) \oplus \cO(-1)$ and $\cO \oplus \cO$. They both have degreee zero and the same number of sections, but the sections sit inside the bundles differently.
 \end{example}
 
-\section{Riemann-Roch theorem for vector bundles}
+\subsection{Riemann-Roch theorem for vector bundles}
 To a divisor $D = \sum n_p p$ on a compact Riemann surface $R$, we can associate the invertible sheaf $\cO(D)$, defined by \begin{align*}
     \cO(D)(U) & = \{f \text{ meromorphic on } U : (f)|_U + D|_U \geq 0\}
 \end{align*} The fact that $\cO(D)$ is a locally free sheaf of rank one follows from the following fact:
@@ -1336,7 +1585,7 @@ which has degree opposite that of $\pi_* \cO$; the desired equality is equivalen
 This equality, and with it the theorem, follows by comparing degrees in the following lemma.
 \end{proof}
 
-\begin{lemma}
+\begin{lemma}\label{lem:twisted-dual-direct-image}
 With notation as in the proof above,
 \[
 (\pi_* \cO)^\vee \cong \pi_* \big(\cO(B)\big).
@@ -1349,7 +1598,7 @@ More generally,
 
 \begin{proof}
 To exhibit the duality, we must construct a perfect pairing between the two direct image bundles.  
-For a meromorphic function on $R$, define its \textbf{trace} $\mathrm{Tr}_\pi a$ along $\pi$ 
+For a meromorphic function on $R$, define its trace $\mathrm{Tr}_\pi a$ along $\pi$ 
 to be the sum of the values along the fibres of $\pi$ (with multiplicities, at branch points): 
 this is a meromorphic function on $\P^1$.
 
@@ -1380,7 +1629,7 @@ For general $V$, the same argument applies, but now the trace pairing must inclu
 on $V \times V^\vee$ as well as $\mathrm{Tr}_\pi$.  
 \end{proof}
 
-\section{Coherent sheaf cohomology}
+\subsection{Coherent sheaf cohomology}
 
 Recall if $V$ is a vector bundle on a compact Riemann surface $R$, then we proved that \begin{align*}
     \chi(R,V) & = \dim H^0(R,V) - \dim H^1(R,V) = \deg V + \operatorname{rank} V (1-g)
@@ -1509,8 +1758,8 @@ This is exactly the long exact sequence in the statement of Theorem \ref{theorem
 \]
 \end{proof}
 
-\section{Serre duality}
 \subsection{Extensions of vector bundles}
+
 Let \begin{align*}
     0 \to V' & \to V \to V'' \to 0
 \end{align*} be a short exact sequence of vector bundles on a compact Riemann surface $R$. On a small open set $U$ we get an exact sequence of sheaves of sections \begin{align*}
@@ -1579,8 +1828,8 @@ Changing $s$ changes the result by a meromorphic section of $V'$. So its class i
 \end{remark}
 
 \subsection{Serre duality}
-Let $R$ be a compact Riemann surface, $V$ vector bundle on $R$. We have the canonical bundle $K_R = \Omega_R^1$ of holomorphic one-forms on $R$.
 
+Let $R$ be a compact Riemann surface, $V$ vector bundle on $R$. We have the canonical bundle $K_R = \Omega_R^1$ of holomorphic one-forms on $R$.
 
 \begin{theorem}[Serre duality]
     There is an isomorphism of vector spaces, functorial in $R$:
@@ -1647,7 +1896,7 @@ so \eqref{eq:step1} is equivalent to the existence of an isomorphism
   (f_*V)^\vee.
 \end{equation}
 
-By Lemma~3.10,
+By Lemma \ref{lem:twisted-dual-direct-image}, we have
 \[
 (f_*V)^\vee \;\cong\; f_*\bigl(V^\vee(B)\bigr),
 \]
@@ -1676,14 +1925,48 @@ form and write the residue pairings in the Laurent basis.
 \end{proof} 
 
 
+Now we state some consequences of Riemann-Roch and Serre duality:
+\begin{itemize}
+    \item The degree of the canonical bundle is \begin{align*}
+        \deg K_R & = 2g - 2
+    \end{align*} In particular every meromorphic differential has exactly $2g-2$ zeros (counted with multiplicity). This agrees with the statement of the Poincare-Hopf theorem for vector fields, which says that if $M$ is a compact oriented surface, then every vector field with isolated zeros has total index equal to the Euler characteristic $\chi(M) = 2-2g$. For a holomorphic differential, the index of a zero is its multiplicity as a zero of the differential.
+    \item For all $R$ with genus $g \geq 1$, for all $p\in R$ there exists a nontrivial holomorphic differential not vanishing at $p$. If not, then all holomorphic differentials zeroes at $p$ and so $h^0(R, K_R(-p)) = g$. This implies that $h^0(R,\cO(p)) = 2$ so there exists a nonconstant meromorphic function with a single simple pole at $p$. This function gives an isomorphism to $\P^1$ and so $g=0$, a contradiction.
+    \item There exists a map of degree $g+1$ from $R$ to $\P^1$. This is because \begin{align*}
+        h^0(R, \cO((g+1)p)) &= h^1(R, K_R(- (g+1)p)) + (g+1) - g + 1 \geq 2 
+    \end{align*}
+    \item Every genus $2$ curve has a degree 2 map to $\P^1$ and is therefore hyperelliptic. This is because for $g=2$, we have $h^0(\Omega^1) = 2$ so there exist two linearly independent holomorphic differentials $\omega_1, \omega_2$. They each have degree $2g-2 = 2$ zeros. If they have a common zero at $p$, then $\omega_1/\omega_2$ is a meromorphic function with a single simple pole at $p$, which is impossible on a genus $2$ curve. 
+\end{itemize}
+For $\deg L \geq 2g - 1$, one always has $h^0(L(p)) = h^0(L) + 1$ for all $p \in R$. However, for smaller degree line bundles, this can fail. The failure is measured by the following theorem.
+\begin{theorem}
+    [Weierstrass gap theorem] At each point $p$ of a compact Riemann surface of genus $g$, there are exactly $g$ integers \begin{align*}
+        1 = n_1(p) < n_2(p) < \cdots < n_g(p) \leq 2g - 1
+    \end{align*} such that \begin{align*}
+        h^0(R, \cO(n_i(p) p)) & = h^0(R, \cO((n_i(p) - 1)p))
+    \end{align*} These integers are called the Weierstrass gaps at $p$.
+\end{theorem}
+
+\begin{proof}
+    $g=0$ case is clear since we have explicit meromorphic functions on $\mathbb{P}^1$ with a single pole of any order at any point. So we assume $g\geq1$. A positive integer $n$ is a non-gap at $p$ if there exists a meromorphic function whose only pole is at $p$ and has order exactly $n$.
+    
+    For any divisor $D$ and point $p$, $0\leq l(D+p)-l(D)\leq1$, so in particular every $n\geq1$ is either a gap or a non-gap. Also, for $g\geq1$, $1$ is always a gap: a function with a single simple pole at $p$ would give a degree-1 map $X\to\mathbb{P}^1$, so $X\cong\mathbb{P}^1$ (genus 0), contradiction.
+
+Riemann-Roch and Serre duality immediately imply that every $m\geq 2g-1$ is a non-gap. Hence all gaps lie in $\{1,\dots,2g-1\}$.
+
+Let $G(m)$ be the number of gaps in $\{1,\dots,m\}$. The number of non-gaps in that interval are is $m-G(m)$. Starting from $l(0)=1$ and using that each non-gap increases $l$ by 1 while each gap leaves it unchanged, for any $m\geq1$, which implies that $l(mp) = 1 + (m-G(m))$. Now take $m\geq 2g$. Then $l(mp) = m+1-g$ and equating, we get $G(m) = g$ for all $m\geq 2g-1$. 
+\end{proof}
+The generic sequence of gaps is \begin{align*}
+    1, 2, \ldots, g
+\end{align*} A point $p$ is called a \textbf{Weierstrass point} if its gap sequence differs from the generic one. For example, on a hyperelliptic curve, the Weierstrass points are the branch points of the degree $2$ map to $\P^1$ and have gap sequence \begin{align*}
+    1, 3, 5, \ldots, 2g - 1
+\end{align*} There are always finitely many Weierstrass points on a compact Riemann surface of genus $g \geq 2$.
+
 
 \begin{exercise}
-
-A \textbf{nodal Riemann surface} $S$ is one which is smooth except for finitely many singularities that look locally like
+A nodal Riemann surface $S$ is one which is smooth except for finitely many singularities that look locally like
 \[
 \{(x, y) \mid xy = 0\} \subset \mathbb{C}^2.
 \]
-It is obtained from a smooth Riemann surface $\widetilde{S}$ by identifying pairs of points; $\widetilde{S} \to S$ is called the \textbf{normalization}. Define the canonical bundle $K_S$ of $S$ to be the sheaf of differentials holomorphic on $\widetilde{S}$, except for simple poles at the nodes, with opposite residues on the two branches of $S$.
+It is obtained from a smooth Riemann surface $\widetilde{S}$ by identifying pairs of points; $\widetilde{S} \to S$ is called the normalization. Define the canonical bundle $K_S$ of $S$ to be the sheaf of differentials holomorphic on $\widetilde{S}$, except for simple poles at the nodes, with opposite residues on the two branches of $S$.
 
 Show that $K_S$ is a line bundle. When $S$ is compact, prove the residue theorem for a meromorphic section of $K_S$ that is holomorphic at the nodes. Prove Serre duality for vector bundles on $S$.
 \end{exercise}
@@ -1744,11 +2027,8 @@ Apply the usual residue theorem on $\widetilde S$:
 There is no contribution from $p_i^\pm$, so this sum is exactly
 $\sum_{p\in S}\Res_p(\omega)$. Hence
 \[
-\sum_{p\in S} \Res_p(\omega)=0,
+\sum_{p\in S} \Res_p(\omega)=0
 \]
-so we obtain the residue theorem on $S$.
-
-
 Let $E$ be a holomorphic vector bundle on $S$.
 We claim there is a natural perfect pairing
 \[
@@ -1758,7 +2038,6 @@ inducing an isomorphism
 \[
 H^1(S,E)^\vee \cong H^0(S,K_S\otimes E^\vee).
 \]
-
 Hence $H^1(S,E)$ identifies with a
 subspace of $H^1(\widetilde S,\nu^*E)$ cut out by linear relations at the nodes. In particular, using the principal parts characterization of $H^1$, a class in $H^1(S,E)$ corresponds to a collection of principal parts of $E$ at points of $\widetilde S$ (the poles of the sections) such that at each node the principal parts at $p_i^\pm$ have equal values residues in a common trivialization of $E$ near the node. 
 
@@ -1793,7 +2072,7 @@ H^1(S,E)\times H^0(S,K_S\otimes E^\vee)\to\C.
 \end{solution}
 
 
-\section{Abel Jacobi}
+\section{Abel Jacobi theory}
 Recall the additive and multiplicative Cousin problems: 
 \begin{itemize}
     \item Additive Cousin: Given a collection of principal parts on $R$, when does there exist a global meromorphic function with those principal parts?
@@ -1809,41 +2088,7 @@ In general, the obstruction in the additive Cousin problem lies in $H^1(R, \cO)$
 \end{align*} so the obstruction to solving the additive Cousin problem can be computed by pairing with holomorphic one-forms. In particular, a collection of principal parts $\set{p_i}$ has a solution if and only if \begin{align*}
     \sum_i \operatorname{Res}_{x_i}(p_i \omega) & = 0
 \end{align*} for all $\omega \in H^0(R, K_R)$.
-
-Now we state some consequences of Riemann-Roch and Serre duality:
-\begin{itemize}
-    \item The degree of the canonical bundle is \begin{align*}
-        \deg K_R & = 2g - 2
-    \end{align*} In particular every meromorphic differential has exactly $2g-2$ zeros (counted with multiplicity). This agrees with the statement of the Poincare-Hopf theorem for vector fields, which says that if $M$ is a compact oriented surface, then every vector field with isolated zeros has total index equal to the Euler characteristic $\chi(M) = 2-2g$. For a holomorphic differential, the index of a zero is its multiplicity as a zero of the differential.
-    \item For all $R$ with genus $g \geq 1$, for all $p\in R$ there exists a nontrivial holomorphic differential not vanishing at $p$. If not, then all holomorphic differentials zeroes at $p$ and so $h^0(R, K_R(-p)) = g$. This implies that $h^0(R,\cO(p)) = 2$ so there exists a nonconstant meromorphic function with a single simple pole at $p$. This function gives an isomorphism to $\P^1$ and so $g=0$, a contradiction.
-    \item There exists a map of degree $g+1$ from $R$ to $\P^1$. This is because \begin{align*}
-        h^0(R, \cO((g+1)p)) &= h^1(R, K_R(- (g+1)p)) + (g+1) - g + 1 \geq 2 
-    \end{align*}
-    \item Every genus $2$ curve has a degree 2 map to $\P^1$ and is therefore hyperelliptic. This is because for $g=2$, we have $h^0(\Omega^1) = 2$ so there exist two linearly independent holomorphic differentials $\omega_1, \omega_2$. They each have degree $2g-2 = 2$ zeros. If they have a common zero at $p$, then $\omega_1/\omega_2$ is a meromorphic function with a single simple pole at $p$, which is impossible on a genus $2$ curve. 
-\end{itemize}
-For $\deg L \geq 2g - 1$, one always has $h^0(L(p)) = h^0(L) + 1$ for all $p \in R$. However, for smaller degree line bundles, this can fail. The failure is measured by the following theorem.
-\begin{theorem}
-    [Weierstrass gap theorem] At each point $p$ of a compact Riemann surface of genus $g$, there are exactly $g$ integers \begin{align*}
-        1 = n_1(p) < n_2(p) < \cdots < n_g(p) \leq 2g - 1
-    \end{align*} such that \begin{align*}
-        h^0(R, \cO(n_i(p) p)) & = h^0(R, \cO((n_i(p) - 1)p))
-    \end{align*} These integers are called the Weierstrass gaps at $p$.
-\end{theorem}
-
-\begin{proof}
-    $g=0$ case is clear since we have explicit meromorphic functions on $\mathbb{P}^1$ with a single pole of any order at any point. So we assume $g\geq1$. A positive integer $n$ is a non-gap at $p$ if there exists a meromorphic function whose only pole is at $p$ and has order exactly $n$.
-    
-    For any divisor $D$ and point $p$, $0\leq l(D+p)-l(D)\leq1$, so in particular every $n\geq1$ is either a gap or a non-gap. Also, for $g\geq1$, $1$ is always a gap: a function with a single simple pole at $p$ would give a degree-1 map $X\to\mathbb{P}^1$, so $X\cong\mathbb{P}^1$ (genus 0), contradiction.
-
-Riemann-Roch and Serre duality immediately imply that every $m\geq 2g-1$ is a non-gap. Hence all gaps lie in $\{1,\dots,2g-1\}$.
-
-Let $G(m)$ be the number of gaps in $\{1,\dots,m\}$. The number of non-gaps in that interval are is $m-G(m)$. Starting from $l(0)=1$ and using that each non-gap increases $l$ by 1 while each gap leaves it unchanged, for any $m\geq1$, which implies that $l(mp) = 1 + (m-G(m))$. Now take $m\geq 2g$. Then $l(mp) = m+1-g$ and equating, we get $G(m) = g$ for all $m\geq 2g-1$. 
-\end{proof}
-The generic sequence of gaps is \begin{align*}
-    1, 2, \ldots, g
-\end{align*} A point $p$ is called a Weierstrass point if its gap sequence differs from the generic one. For example, on a hyperelliptic curve, the Weierstrass points are the branch points of the degree $2$ map to $\P^1$ and have gap sequence \begin{align*}
-    1, 3, 5, \ldots, 2g - 1
-\end{align*} There are always finitely many Weierstrass points on a compact Riemann surface of genus $g \geq 2$.
+The obstruction in the multiplicative Cousin problem is encoded by the Abel-Jacobi map, which this section is devoted to describing.
 
 \subsection{Differentials on a Riemann surface}
 Recall that on a Riemann surface $R$, we have the Hodge star operator defined on all smooth differential 1-forms \begin{align*}
@@ -1919,6 +2164,8 @@ We are finally able to give a criterion for when a divisor is principal, complet
 \begin{remark}
     The Schottky problem asks for a characterization of which complex tori arise as the Jacobian of a Riemann surface. In other words, which period matrices $\Pi$ arise from Riemann surfaces. For $g=2,3$ it is an open subset of the space of symmetric $g \times g$ matrices with positive definite imaginary part. For $g=4$ it is a hypersurface. The problem is still open.
 \end{remark}
+
+\subsection{Jacobian of a curve}
 
 \begin{definition}
     The \textbf{Jacobian variety} of a compact Riemann surface $R$ of genus $g$ is the complex torus \begin{align*}
@@ -2070,15 +2317,6 @@ and the resulting map to $J_d$ is now also independent of your choice of $r$. Th
 is the isomorphism class of the line bundle $\mathcal{O}(D)$. In particular, the image of the Abel-Jacobi map is precisely the set of isomorphism classes of line bundles which admit a nontrivial holomorphic section
 (i.e., those line bundles which can be represented as $\mathcal{O}(D)$ for some effective divisor $D$).
 
-This map will hold the key to Riemann's solution of the multiplicative Cousin problem,
-but we need to settle some of its properties first.
-The word \textbf{generic} in the next theorem means
-\textbf{away from an analytic subspace of strictly lower dimension}.
-Analytic subspaces are locally cut out by a collection of holomorphic functions;
-they are usually not submanifolds,
-but they are always stratified by \textbf{locally closed} submanifolds of decreasing dimensions
-(limiting their “badness”).
-
 \begin{remark}
     [Identifing the differential of $AJ_d$] First we identify the tangent space of $J_d$ at a point $[L]$ representing a line bundle $L$ on $R$. Since $J_d \cong J_0 \cong H^0(R,K_R)^*/H_1(R,\Z)$, we have
 \[T_{J_d,[L]} \cong H^0(R,K_R)^*.
@@ -2117,6 +2355,13 @@ but they are always stratified by \textbf{locally closed} submanifolds of decrea
 The differential \[d(AJ_d)_D : H^0(\mathcal O_R(D)|_D) \to H^1(\mathcal O_R)\] is given by the connecting homomorphism in the long exact sequence \[0 \to \mathcal O_R \to \mathcal O_R(D) \to \mathcal O_R(D)|_D \to 0\]
 \end{remark}
 
+The Abel Jacobi map will hold the key to Riemann's solution of the multiplicative Cousin problem,
+but we need to settle some of its properties first.
+The word generic in the next theorem means
+away from an analytic subspace of strictly lower dimension
+Analytic subspaces are locally cut out by a collection of holomorphic functions; they are usually not submanifolds,
+but they are always stratified by locally closed submanifolds of decreasing dimensions.
+
 \begin{theorem}[Properties of the Abel-Jacobi map]
 Let $AJ_d : \Sym^d(R) \to J_d$ be the Abel-Jacobi map which sends a degree $d$ effective divisor $D$ on $R$ to the isomorphism class of the line bundle $\mathcal{O}(D)$.
 \begin{enumerate}[(i)]
@@ -2149,7 +2394,8 @@ which is precisely $\mathbb{P}H^0(R;L)$.
 \item The argument is the same as local injectivity.
 \item By Riemann-Roch, for $d \geq 2g - 1$, we have \begin{align*}
     h^0(R, L) & = d - g + 1
-\end{align*} for all line bundles $L$ of degree $d$ because $H^1(R, L) = 0$ by Serre duality. Therefore, the fibers of $AJ_d$ are all projective spaces of dimension $d - g$. This gives $\Sym^d(R)$ the structure of a holomorphic projective bundle over $J_d$. \qedhere
+\end{align*} for all line bundles $L$ of degree $d$ because $H^1(R, L) = 0$ by Serre duality. Therefore, the fibers of $AJ_d$ are all projective spaces of dimension $d - g$. This gives $\Sym^d(R)$ the structure of a holomorphic projective bundle over $J_d$. The map is holomorphic submersion because the differential is surjective at all points, and moreover the map is proper since the domain and target are compact. Hence, by Ehresmann's fibration theorem, it is a holomorphic fiber bundle with fibers $\mathbb{P}^{d-g}$.
+\qedhere
 \end{enumerate}
 \end{proof}
 
@@ -3246,7 +3492,7 @@ isomorphism
 Furthermore for $\xi,\eta\in\operatorname{Hom}(U,\mathbb{Z})=H^{1}(U,\mathbb{Z})$,
 we have $A(\xi\smile\eta)=\xi\wedge\eta$.
 \end{lemma} 
-The proof of this lemma is given at the end of the solution.
+The proof of the following lemma is given at the end of the solution.
 \begin{lemma}\label{lem:cc-rep}
   If $e_u(z)=\exp(2\pi i f_u(z))$ are the factors of automorphy, then the Chern class
 \[c_1(L)\in H^2(J,\Z)\cong\Alt^2(\Lambda,\Z)\] corresponds to the form
@@ -4659,7 +4905,7 @@ H^1(X;\cO)/H^1(X;\Z) & = & \Pic^0(X)
 The left vertical map is an isomorphism by the Hodge decomposition theorem. Thus the right vertical map is also an isomorphism, and we conclude that every holomorphic line bundle with zero Chern class corresponds to a flat unitary line bundle with zero Chern class.
 \end{solution} 
 
-\section{Kodaira Nakano vanishing}
+\subsection{Kodaira Nakano vanishing and the embedding theorem}
 We introduce the operators 
 \begin{align*}
     L = \omega\wedge - &:\Omega^{p,q}(X)\to \Omega^{p+1,q+1}(X) \\
@@ -4951,11 +5197,12 @@ Thus, for such $D$, we have $H^1(R,V(D))=0$.
 \end{solution}
 
 \begin{thebibliography}{9}
-    \bibitem{gh} P. Griffiths and J. Harris, Principles of Algebraic Geometry, Wiley-Interscience, 1994.
-    \bibitem{wells} R. O. Wells, Differential Analysis on Complex Manifolds, Springer, 2008.
 \bibitem{demailly}
 J.-P. Demailly,
 \textit{Complex Analytic and Differential Geometry}, lecture notes, 2012.
 Available at \url{https://people.math.harvard.edu/~demarco/Math274/Demailly_ComplexAnalyticDiffGeom.pdf}.
+    \bibitem{gh} P. Griffiths and J. Harris, Principles of Algebraic Geometry, Wiley-Interscience, 1994.
+\bibitem{mumford} D. Mumford, \textit{Abelian Varieties}, Oxford University Press, 1970.
+    \bibitem{wells} R. O. Wells, Differential Analysis on Complex Manifolds, Springer, 2008.
 \end{thebibliography}
 \end{document}
