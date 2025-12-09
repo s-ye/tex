@@ -1,0 +1,246 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Title}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+Abstract
+\end{abstract}
+
+\tableofcontents
+
+\section{Principal $G$-Bundles on Affine Curves}
+
+It is a consequence of a theorem of Harder \cite[Satz 3.3]{Har67} that generically trivial principal $G$-bundles on a smooth affine curve $C$ over an arbitrary field $k$ are trivial if $G$ is a semisimple and simply connected algebraic group. When $k$ is algebraically closed and $G$ reductive, generic triviality, conjectured by Serre, was proved by Steinberg \cite{Ste65} and Borel–Springer \cite{BS68}.
+
+It follows that principal bundles for simply connected semisimple groups over smooth affine curves over algebraically closed fields are trivial. This fact (and a generalization to families of bundles \cite{DS95}) plays an important role in the geometric realization of conformal blocks for smooth curves as global sections of line bundles on moduli-stacks of principal bundles on the curves (see the review \cite{Sor96} and the references therein).
+
+\subsection{Derived Pushforward of Admissible Complexes}
+
+\begin{theorem}
+    
+The derived pushforward $RF_* \alpha$ of an admissible complex $\alpha$ along the bundle-forgetting map $F : \mathcal{M}_{g,I}([pt/G]) \to \mathcal{M}_{g,I}$ is a bounded complex of coherent sheaves.
+\end{theorem}
+
+This theorem is a relative version over varying curves of the analogous finiteness result for $\text{Bun}_G(\Sigma)$ in \cite[34]{}.
+
+\subsection{Finiteness for Fixed Curves}
+
+Let $G$ be a reductive, connected complex Lie group and $\mathcal{M}$ the moduli stack of algebraic $G$-bundles over a smooth projective curve $\Sigma$ of genus $g$. We recall the finiteness theorem for this moduli stack.
+We recall the finiteness theorem for the moduli stack of principal bundles on a fixed smooth curve.
+
+\subsection*{1.1 \; Admissible classes}
+
+Given a representation $V$ of $G$, call $E^{*}V$ the vector bundle over 
+$\Sigma \times \mathcal{M}$ associated to the universal $G$–bundle.
+Call $\pi$ the projection along $\Sigma$, the relative canonical bundle $K$ of $\Sigma \times \mathcal{M} \to \mathcal{M}$ (so that $K|_{\Sigma} = K_{\Sigma}$), $\sqrt{K}$ its square root, $[C]$ the topological $K_{1}$–homology
+class of a $1$–cycle $C$ on $\Sigma$.
+Consider the following classes in the topological $K$–theory of $\mathcal{M}$:
+
+\begin{enumerate}[(i)]
+    \item The restriction $E_{x}^{*}V \in K^{0}(\mathcal{M})$ of $E^{*}V$ to a point $x \in \Sigma$;
+    \item The slant product $E^{*}_{C}V := E^{*}V/[C] \in K^{-1}(\mathcal{M})$ of $E^{*}V$ with $[C]$;
+    \item The Dirac index bundle $E^{*}_{\Sigma}V := R\pi_{*}(E^{*}V \otimes \sqrt{K}) 
+        \in K^{0}(\mathcal{M})$ of $E^{*}V$ along $\Sigma$;
+    \item The inverse determinant of cohomology,
+        \[
+            D_{\Sigma}V := \inv{\det} E^{*}_{\Sigma}V.
+        \]
+\end{enumerate}
+
+We call the classes (i)–(iii) the \emph{Atiyah–Bott generators}; 
+they are introduced in \cite[§2]{AB}, along with their counterparts 
+in cohomology, and can also be described from the K\"unneth decomposition of
+$E^{*}V$ in
+\[
+    K^{0}(\Sigma \times \mathcal{M})
+    \;\cong\; K^{0}(\Sigma) \otimes K^{0}(\mathcal{M})
+    \,\oplus\, K^{1}(\Sigma) \otimes K^{1}(\mathcal{M}),
+\]
+by contraction with the various classes in $\Sigma$.
+Classes (i) and (iv) are represented by algebraic vector bundles, while (iii)
+can be realised as a perfect complex of $\mathcal{O}$–modules.
+The class $E^{*}_{C}V$ in (ii) is not algebraic.
+Note that
+\[
+    \det E^{*}_{\Sigma}V = \det R\pi_{*}(E^{*}V)
+\]
+when $\det V$ is trivial; an important example is the canonical bundle
+\[
+    \mathcal{K} = \det E^{*}_{\Sigma}\mathfrak{g}
+\]
+of $\mathcal{M}$, defined from the adjoint representation $\mathfrak{g}$.
+
+\medskip
+
+
+\begin{remark}
+For a line bundle $\mathcal{L}$ on $\mathcal{M}=\mathrm{Bun}_G(\Sigma)$, one associates a 
+\emph{level} $\lambda(\mathcal{L})$, namely the invariant symmetric bilinear form on 
+$\mathfrak g$ corresponding to the class 
+$\lambda(\mathcal{L}) \in H^{4}(BG;\mathbb{Z})$.  
+If $\mathcal{L}$ is a determinant line bundle $\det R\pi_{*}(E^{*}V)$ attached to a 
+representation $V$ of $G$, then $\lambda(\mathcal{L})$ is the trace form 
+$\operatorname{Tr}_{V}(xy)$ on $\mathfrak g$.  
+When $G$ is not simply connected, such determinant bundles do not realise all possible integral 
+levels. Passing from the simply connected cover $\widetilde G$ to
+$G = \widetilde G/Z$ cuts down the lattice of integral invariant bilinear
+forms by imposing congruence conditions along the finite central subgroup
+$Z$, so that only a finite--index sublattice is realised by trace forms of actual $G$--representations.
+\end{remark}
+
+\begin{remark}[Smoothness and the relative canonical bundle]
+Let $\mathcal M = \Bun_G(\Sigma)$ and let 
+\[
+\pi : \Sigma \times \mathcal M \longrightarrow \mathcal M
+\]
+be the projection.  Although the coarse moduli space of semistable $G$–bundles
+may be singular, the \emph{stack} $\mathcal M$ is a smooth Artin stack of
+dimension $(g-1)\dim G$.  Indeed, for a bundle $P$ one has
+\[T_{[P]}\mathcal M \simeq H^1(\Sigma,\Ad P)\] and $H^2(\Sigma,\Ad P)=0$
+because $\dim\Sigma=1$, so deformations are unobstructed.
+
+The relative canonical bundle $K := K_{\Sigma\times\mathcal M/\mathcal M}$
+is defined purely from the morphism $\pi$, which is smooth of relative
+dimension~$1$; no smoothness of the base is required.  In fact,
+\[
+K_{\Sigma\times\mathcal M/\mathcal M}
+\;\cong\;
+\pr_\Sigma^* K_\Sigma,
+\]
+the pullback of the ordinary canonical bundle of the curve.
+\end{remark}
+
+\begin{remark}
+By contrast, the "canonical bundle" of the moduli stack itself is
+\[
+\mathcal K := \det R\pi_*(E^*\mathfrak g),
+\]
+the determinant of the cotangent complex of $\mathcal M$, and
+Laszlo--Sorger construct a canonical Pfaffian square root
+$\mathcal K^{1/2}$ of this line bundle. In particular, for semi-simple, not necessarily simply connected $G$ and for every theta characteristic $K^{1/2}_\Sigma$ on $\Sigma$, one has a square root
+\[\mathcal K^{1/2} := \det R\pi_*(E^*\mathfrak g \otimes \pr_\Sigma^* K^{1/2}_\Sigma).\]
+
+
+This gives rise to a natural "reference level"  $\lambda(\mathcal{K}^{1/2}) = \tfrac12\,\lambda(\mathcal{K})$.
+We call a line bundle $\mathcal{L}$ on $\mathcal{M}$ \emph{admissible} if its level exceeds 
+that of $\mathcal{K}^{1/2}$, in the sense that 
+$\lambda(\mathcal{L}) - \lambda(\mathcal{K}^{1/2})$ is positive definite on every simple  factor of $\mathfrak g$.  
+
+
+Such positivity plays the role of an ampleness condition, and admissible line bundles provide 
+the appropriate class of twistings needed for the K--theoretic index and Verlinde formulas. Products of an admissible line bundle and any number of Atiyah-Bott generators span the ring of \emph{admissible classes}.
+\end{remark}
+
+\begin{remark}
+We have defined a level by an integral invariant symmetric bilinear form on $\mathfrak g$ and simultaneously identified with central extensions of the loop group $LG$. The latter is completely determined by the action of the central scalar, which is to be an integer by the integrality condition. Abstractly, the Chern-Weil homomorphism identifies the cohomology ring $H^{*}(BG;\mathbb{R})$ of the classifying space $BG$ with the ring of invariant polynomials on the Lie algebra $\mathfrak{g}$ of $G$:
+\[
+    H^{*}(BG;\mathbb{R}) \cong \text{Inv}(\mathfrak{g}) := \text{Sym}(\mathfrak{g}^{*})^{G}
+    \] and in degree four, we have
+    \[    H^{4}(BG;\mathbb{R}) \cong \text{Inv}^{2}(\mathfrak{g}) \]
+    the space of invariant symmetric bilinear forms on $\mathfrak{g}$. In particular $H^4(BG;\mathbb{R}) \cong H^3(\mf g)$ via the isomorphism we have just discussed. There is a transgression map arising from the fibration $G \to EG \to BG$:
+    \[    \tau : H^{4}(BG;\mathbb{R}) \to H^{3}(G;\mathbb{R}) \]
+    which is an isomorphism when $G$ is compact, simple, and simply connected. Thus we have the chain of isomorphisms
+    \[    H^{4}(BG;\mathbb{R}) \;\cong\; H^{3}(\mathfrak g) \;\cong\; H^{3}(G;\mathbb{R}) \;\cong\; H^{2}(L\mathfrak g) \]
+    which identifies the level defined via $H^4(BG;\mathbb{R})$ with the level defined via central extensions of the loop group $LG$, all of which are classified by invariant symmetric bilinear forms on $\mathfrak g$.
+
+In particular, central extensions of the loop algebra $L\mathfrak{g}$ are classified by invariant symmetric bilinear forms on $\mathfrak{g}$, which are classified by $H^3(\mf g)$ defined by the Chevalley-Eilenberg complex. Given such a form $\langle\ ,\ \rangle$, the associated 3-cocycle is
+    \[    \sigma(\xi,\eta,\zeta) = \langle [\xi,\eta], \zeta\rangle. \]
+    Conversely, given a 3-cocycle $\sigma$ on $\mathfrak g$, one can define an invariant symmetric bilinear form by
+    \[    \langle \xi,\eta\rangle := \sigma(\xi,[\eta_1,\eta_2]), \]
+    where $\eta_1,\eta_2$ are any elements satisfying $\eta=[\eta_1,\eta_2]$ (such elements exist since $\mathfrak g$ is semisimple, and the definition is independent of the choice because $\sigma$ is a cocycle). We have seen that invariant symmetric bilinear forms on $\mathfrak g$ classify central extensions of the loop algebra $L\mathfrak g$ via the construction which takes $\langle\ ,\ \rangle$ to the cocycle
+    \[
+        \omega(\xi,\eta) = \frac{1}{2\pi} \int_0^{2\pi} \langle \xi(\theta), \eta'(\theta)\rangle\,d\theta.
+    \] Moreover we have seen that any such cocycle $\omega$ arises from such a bilinear form. Thus we have an isomorphism 
+    \[
+        H^3(\mathfrak g) \;\xrightarrow{\cong}\; H^2(L\mathfrak g)
+    \]
+    On the other hand, if $G$ is compact, then the de Rham cohomology $H^3(G)$ is isomorphic to the Lie algebra cohomology $H^3(\mathfrak g)$. This is because every de Rham cohomology class has a unique left invariant representative form given by averaging, and therefore the cohomology of $G$ can be calculated from the cochain complex of the Lie algebra $\mf g$.
+\end{remark}
+
+\subsection*{1.2\; Line bundles with a level}
+To certain line bundles on $\mathcal M$ we now associate a \emph{level}, a
+quadratic form on the Lie algebra $\mathfrak g$.  Briefly, for any
+representation $V$, the level of $\det E^*_\Sigma V$ is the trace form
+$\xi,\eta\mapsto \operatorname{Tr}_V(\xi\eta)$, and we wish to extend this
+definition by linearity in the first Chern class of the line bundle.
+
+Riemann--Roch along $\Sigma$ expresses $c_1(E^*_\Sigma V)$ as the image of
+$\ch_2(V)=\tfrac12 c_1(V)^2 - c_2(V)$ under \emph{transgression along $\Sigma$},
+\[
+\tau : H^4(BG;\mathbb Q)\ \longrightarrow\ H^2(\mathcal M;\mathbb Q)
+\qquad\text{(construction (1.1.iii) in cohomology)}.
+\]
+It is important that $\tau$ is injective (Remark~4.11).  We now identify
+$H^4(BG;\mathbb R)$ with the space of invariant symmetric bilinear forms on
+$\mathfrak g_\kappa$ so that $\operatorname{Tr}_V$ corresponds to $\ch_2(V)$.
+We say that the line bundle $\mathcal L$ \emph{has a level} if its Chern class
+$c_1(\mathcal L)$ agrees with some $\tau(h)$ in $H^2(\mathcal M;\mathbb Q)$;
+the form $h$, called the \emph{level} of $\mathcal L$, is then unique.
+
+For $\mathrm{SL}_n$, the level of the positive generator of $\Pic(\mathcal M)$
+is $-\operatorname{Tr}_{\mathbb C^n}$ in the standard representation; the
+calculation is due to Quillen.  For another example, the level of
+$\mathcal K^{-1/2}$ is $c := -\tfrac12\operatorname{Tr}_{\mathfrak g}$.
+Positivity of a level refers to the quadratic form on $\mathfrak g_\kappa$;
+thus $D_\Sigma V$ has positive level iff $V$ is $\mathfrak g$--faithful.
+Finally, $\mathcal L$, with level $h$, is \emph{admissible} iff
+$h > -c$ as a quadratic form.
+
+\subsection*{1.3\; Remark}
+\begin{enumerate}[(i)]
+\item
+When $G$ is simply connected, the map
+$\tau : H^4(BG;\mathbb Z) \to H^2(\mathcal M;\mathbb Z)$
+is an isomorphism, but this fails (even rationally) as soon as
+$\pi_1(G)\neq 0$.  Line bundles with a level satisfy a prescribed
+relation between their Chern classes over the different components of
+$\mathcal M$; cf.~(4.8).
+
+\item
+The trace forms span the negative semi--definite cone in
+$H^4(BG;\mathbb R)$; so $\mathcal L$ has positive level iff
+$c_1(\mathcal L)$ lies in the $\mathbb Q_+$--span of the
+$c_1(D_\Sigma V)$’s for $\mathfrak g$--faithful $V$.
+
+\item
+For semi--simple $G$, the line bundle $\mathcal K$ has negative level,
+and so $\mathcal O$ is admissible.  This fails for a torus, but
+positive--level line bundles are admissible for any $G$.
+
+\item
+For $g>1$ and simply connected $G$, positivity of the level is
+equivalent to ampleness on the moduli space.  (It suffices to check this
+for simple $G$: recall then that $\Pic(\mathcal M)=\mathbb Z$ and that
+$\mathcal K^{-1}$ is ample.)  When $\pi_1(G)\neq 0$, the positive--level
+condition is much more restrictive.
+\end{enumerate}
+
+
+
+
+\end{document}

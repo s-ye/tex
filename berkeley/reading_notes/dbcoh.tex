@@ -253,7 +253,7 @@ The variety $X = \Proj R$ is projective over the affine variety $\Spec R_0$, and
 
 Let $G$ be a reductive algebraic group acting on $R$ by graded algebra automorphisms (in particular the grading involves a choice of character). Then $G$ acts on $X$ and $\cL$ is a $G$-linearized ample line bundle. The invariant subring $R^G$ is again a graded noetherian algebra, finitely generated over $\C$, and we can form the GIT quotient
 \[
-X /\!/ G := \Proj(R^G)
+X // G := \Proj(R^G)
 \]
 \end{remark}
 
@@ -291,7 +291,7 @@ In the above example, we have two different GIT quotients $X_+$ and $X_-$ corres
   Let $\cL$ be a fixed ample line bundle on a projective over affine variety $X$ with an action of a reductive group $G$. The real character space $\Hom(G,\mathbb{C}^*)\otimes_\mathbb{Z}\mathbb{R}$ is divided into a finite number of rational polyhedral chambers by walls such that \begin{enumerate}
     \item If $\chi,\chi'$ lie in the same chamber, then
 $X^{\mathrm{ss}}(\chi) = X^{\mathrm{ss}}(\chi')$ and 
-$X /\!/_{\chi} G \cong X /\!/_{\chi'} G.$
+$X //_{\chi} G \cong X //_{\chi'} G.$
 	  \item If you cross a wall, the semistable locus changes and the corresponding quotients are related by a birational morphism 
   \end{enumerate}
 \end{theorem}
@@ -335,7 +335,7 @@ is
 \[
 \mathrm{Hom}(E^{\bullet},F^{\bullet})
   \;=\;
-  \Gamma\!\left( \mathcal{H}om(E^{\bullet},F^{\bullet})
+  \Gamma\left( \mathcal{H}om(E^{\bullet},F^{\bullet})
   \otimes \mathcal{A}^{0,\bullet} \right),
 \]
 the Dolbeault complex of internal Homs.  The differential is the sum
@@ -1070,11 +1070,11 @@ Substituting into our formula above, we see that the only nonzero contributions 
 \]
 The restriction of $\mathcal{O}(t+1)$ to the zero section is $i^*\mathcal{O}(t+1) = \mathcal{O}_\Sigma(t+1)$, since $\mathcal{O}(k)$ on $X_+$ is pulled back from the base $\Sigma$ with the same twisting character. So we see that 
 \[
-\Hom_{\Sigma}\!\big(\mathcal{O}_\Sigma(t+1), \mathcal{O}_\Sigma(t)\big)
+\Hom_{\Sigma}\big(\mathcal{O}_\Sigma(t+1), \mathcal{O}_\Sigma(t)\big)
 = H^0\big(\Sigma, \mathcal{O}_\Sigma(t - (t+1))\big)
 = H^0\big(\Sigma, \mathcal{O}_\Sigma(-1)\big) = 0
 \]
-If \(R\!\Hom(E,S)=0\), the cone of the zero map is just $E$ itself. Hence \[T_S^{-1}(\mathcal O(t+1)) = \mathcal O(t+1)\]
+If \(R\Hom(E,S)=0\), the cone of the zero map is just $E$ itself. Hence \[T_S^{-1}(\mathcal O(t+1)) = \mathcal O(t+1)\]
 \end{remark}
 
 \begin{remark}[Action on \(\mathcal{O}(t)\)]
@@ -2330,9 +2330,7 @@ In this appendix we collect some definitions and facts about derived categories.
 \subsection{Basic definitions}
 Let $\mathcal{A}$ be an abelian category. The derived category $D(\mathcal{A})$ is constructed in several steps. Consider the category $C(\mathcal{A})$ of complexes in $\mathcal{A}$, whose objects are cochain complexes and morphisms are chain maps that commute with the differentials.  
 
-Form the homotopy category $K(\mathcal{A})$ whose objects are the same as $C(\mathcal{A})$.
-
-The morphisms are chain maps modulo homotopy equivalence. Two chain maps \[f,g:A^\bullet\to B^\bullet\] are homotopic if there exist morphisms $h^i:A^i\to B^{i-1}$ such that \[f^i - g^i = d_B^{i-1} \circ h^i + h^{i+1} \circ d_A^i\] It is a routine check that two maps which are homotopic induce the same map on cohomology.
+Form the homotopy category $K(\mathcal{A})$ whose objects are the same as $C(\mathcal{A})$. The morphisms are chain maps modulo homotopy equivalence. Two chain maps \[f,g:A^\bullet\to B^\bullet\] are homotopic if there exist morphisms $h^i:A^i\to B^{i-1}$ such that \[f^i - g^i = d_B^{i-1} \circ h^i + h^{i+1} \circ d_A^i\] It is a routine check that two maps which are homotopic induce the same map on cohomology.
 
 Finally form $D(\mathcal{A})$ by formally inverting all quasi-isomorphisms in $K(\mathcal{A})$. The morphisms in $D(\mathcal{A})$ are a little subtle. For example, one cannot just introduce formal inverses to quasi-isomorphisms. If $X$ is not an injective object in $\mathcal{A}$, then the inclusion map $X[0] \to I^\bullet$ into an injective resolution is a quasi-isomorphism. If we formally invert by introducing $p: I^\bullet \to X[0]$ with \begin{align*}
     [p] \circ [i] = [\mathrm{id}_{X[0]}] \quad \text{in } K(\mathcal{A}) \\
@@ -2679,61 +2677,376 @@ If $t = s - n \neq 0$, then for any $i$ we can iterate this isomorphism to get t
 
 We also get that $\mathcal{H}^i \otimes \omega_X \cong \mathcal{H}^i$.
 Since $\omega_X$ is either ample or antiample, it follows that
-each $\mathcal{H}^i$ is a finite-length sheaf, i.e.\ its support consists of isolated points. This follows from examining the Hilbert polynomial of $\mathcal{H}^i \otimes \omega_X^{\otimes m}$ for $m \gg 0$.
+each $\mathcal{H}^i$ is a finite-length sheaf, i.e.\ its support consists of isolated points. 
 
-Sheaves supported at different points are homologically orthogonal, so $P$ decomposes into a direct sum of components supported at single points.
-By (iii), $P$ is indecomposable.
+\begin{remark}
+  In general, if $\mathcal{F}$ is a coherent sheaf on a projective variety $X$ such that $\mathcal{F} \otimes \mathcal{L} \cong \mathcal{F}$ for an ample line bundle $\mathcal{L}$, then $\mathcal{F}$ is supported at finitely many points. Examining the Hilbert polynomial of $\mathcal{H}^i \otimes \omega_X^{\otimes m}$ for $m \gg 0$ shows that the dimension of the support of $\mathcal{F}$ must be zero.
+\end{remark}
 
-Now consider the spectral sequence computing $\Hom^m(P,P)$ from $\Ext^i(\mathcal{H}^j, \mathcal{H}^k)$:
-\[
-E_2^{p,q}
-    = \bigoplus_{k-j=q} \Ext^p(\mathcal{H}^j, \mathcal{H}^k)
-    \;\Longrightarrow\;
-    \Hom^{p+q}(P,P).
-\]
-For any two finite-length sheaves supported at the same point,
-there exists a nontrivial morphism from one to the other,
-sending a generator of the first to the socle of the second.
 
-Examining $\Hom^m(\mathcal{H}^j, \mathcal{H}^k)$ with minimal $k-j$,
-we see that this nontrivial term survives to $E_\infty$.
-By (ii), $k-j=0$, so all $\mathcal{H}^i$ vanish except one.
-Thus $P$ is quasi-isomorphic to a single sheaf $\mathcal{H}^i[-i]$,
-and (iii) then implies that $\mathcal{H}^i$ is a skyscraper sheaf.
-
-Hence the skyscraper sheaves allow one to reconstruct the invertible sheaves on $X$.
-\end{proof}
-
-\begin{remark}[Homological orthogonality of skyscraper sheaves]
-  
-Each cohomology sheaf $\mathcal{H}^i(P)$ is supported on a finite set of points in $X$. Write 
-\[
-\operatorname{Supp}(\mathcal{H}^i(P)) = \{x_1,\dots,x_r\}.
-\]
-Let $\mathcal{H}^i_{x_j}$ denote the summand of $\mathcal{H}^i(P)$ supported at the single point $x_j$ (you get this by taking the subsheaf of sections vanishing outside $\{x_j\}$).
-
-Then each $\mathcal{H}^i(P)$ decomposes canonically as
-\[
-\mathcal{H}^i(P) \;\cong\; \bigoplus_{j=1}^r \mathcal{H}^i_{x_j}.
-\]
-
-If two coherent sheaves $\mathcal{F},\mathcal{G}$ have disjoint supports, then
-\[
-\operatorname{Ext}^p_X(\mathcal{F},\mathcal{G}) = 0 \quad\text{for all } p.
-\]
-
-This is because Ext groups are computed locally — they vanish where the sheaves vanish together. Formally, for every open $U\subset X$,
+Sheaves supported at different points are homologically orthogonal, so $P$ decomposes into a direct sum of components supported at single points. This is because Ext groups are computed locally, i.e. for every open $U\subset X$,
 \[
 \mathcal{E}xt^p_X(\mathcal{F},\mathcal{G})|_U
 \;\cong\;
 \mathcal{E}xt^p_U(\mathcal{F}|_U,\mathcal{G}|_U),
 \]
-and the support of $\mathcal{E}xt^p_X(\mathcal{F},\mathcal{G})$ is contained in $\operatorname{Supp}(\mathcal{F}) \cap \operatorname{Supp}(\mathcal{G})$. So if that intersection is empty, the sheaf $\mathcal{E}xt^p_X(\mathcal{F},\mathcal{G})$ is zero; hence taking global sections gives $\operatorname{Ext}^p_X(\mathcal{F},\mathcal{G}) = 0$.
+and the support of $\mathcal{E}xt^p_X(\mathcal{F},\mathcal{G})$ is contained in $\operatorname{Supp}(\mathcal{F}) \cap \operatorname{Supp}(\mathcal{G})$.
+
+
+
+By (iii), $P$ is indecomposable. In particular, if $P = P_1 \oplus P_2$ with $P_1,P_2$ supported at different points, then $\End(P)$ would contain nontrivial idempotents, contradicting (iii). 
+
+There is a standard spectral sequence (coming from the stupid filtration on $P$ and the $t$-structure) computing self-Exts of $P$ from Exts between its cohomology sheaves:
+\[
+E_2^{p,q}
+= \bigoplus_{i\in\Z}
+\Ext^p\bigl(\cH^i,\ \cH^{i+q}\bigr)
+\;\Longrightarrow\;
+\Hom^{p+q}(P,P).
+\]
+\begin{remark}
+The spectral sequence used above arises instead from the general fact that any filtered complex carries a canonical spectral sequence. General spectral sequence theory for filtered complexes says if $(K^\bullet, F^\bullet)$ is a filtered complex in an abelian category (or more generally in a suitable derived context), there is a spectral sequence
+\[
+E_1^{p,q} = H^{p+q}\bigl(\operatorname{Gr}^p_F K^\bullet\bigr)
+\;\Longrightarrow\;
+H^{p+q}(K^\bullet)
+\]
+Here the associated graded pieces are the complexes $\operatorname{Gr}^p_F K^\bullet = F^p K^\bullet / F^{p-1}K^\bullet$ obtained by taking successive quotients of the filtration. The differentials in the spectral sequence come from the differentials in the original complex $K^\bullet$ and from the filtration structure.  
+
+Let $D^b(\Coh X)$ carry its standard $t$--structure, with truncations
+$\tau_{\le i},\tau_{\ge i}$ and cohomology sheaves $\cH^i(-)$.
+
+Fix $P\in D^b(\Coh X)$, and consider the stupid filtration of $P$:
+\[
+\cdots \subset P_{\le i-1} \subset P_{\le i} \subset P_{\le i+1} \subset \cdots
+\]
+where
+\[
+P_{\le i} = 
+\cdots \to P^{n-2} \to P^{n-1} \to P^{n} \to 0 \to 0 \to \cdots
+\]
+and each successive quotient fits into a triangle
+\[
+\cH^i(P)[-i] \longrightarrow P_{\le i} \longrightarrow P_{\le i-1} \longrightarrow \cH^i(P)[-i+1].
+\]
+Thus the \emph{associated graded} of this filtration is
+\[
+\Gr^i P \;\simeq\; \cH^i(P)[-i].
+\]
+
+Now apply the derived functor
+\[
+\mathbf R\!\Hom(-,P): D^b(\Coh X)^{op}\longrightarrow D^b(\mathrm{Vect}_k)
+\]
+to this filtered object.  We obtain a decreasing filtration
+\[
+\cdots \subset F^{i+1}C \subset F^i C \subset F^{i-1}C \subset \cdots
+\]
+on the complex
+\[
+C := \mathbf R\!\Hom(P,P)
+\]
+defined by
+\[
+F^i C := \mathbf R\!\Hom(P_{\le i},P).
+\]
+The successive quotients of this filtration are
+\[
+\Gr^i C
+:= F^iC/F^{i+1}C
+\simeq \mathbf R\!\Hom(\Gr^i P,P)
+\simeq \mathbf R\!\Hom(\cH^i(P)[-i],P)
+\simeq \mathbf R\!\Hom(\cH^i(P),P)[-i].
+\]
+In our situation,
+\[
+E_1^{p,q}
+  = H^{p+q}\bigl(\Gr^p C\bigr)
+  \cong
+  H^{p+q}\bigl(\mathbf R\!\Hom(\cH^p(P),P)[-p]\bigr)
+  \cong
+  H^{p+q-p}\bigl(\mathbf R\!\Hom(\cH^p(P),P)\bigr).
+\]
+But
+\[
+H^{r}\bigl(\mathbf R\!\Hom(\cH^p(P),P)\bigr)
+  \;\cong\;
+  \Ext^r\bigl(\cH^p(P),P\bigr),
+\]
+so we get
+\[
+E_1^{p,q}
+  \;\cong\;
+  \Ext^{q}\bigl(\cH^p(P),P\bigr).
+\]
+To compute the $E_2$ page, we take cohomology with respect
+to the first differential \(d_1 : E_1^{p,q} \to E_1^{p+1,q}\), i.e.
+cohomology along the \(p\)-direction.
+
+Let \(A\in\mathcal A\) and \(B^\bullet\in D^b(\mathcal A)\) be bounded.
+Filter \(B^\bullet\) by its stupid truncations
+\[
+B_{\le i}^\bullet,\qquad
+\Gr^i B^\bullet \simeq \cH^i(B^\bullet)[-i].
+\]
+Apply \(\mathbf R\!\Hom(A,-)\). This gives a decreasing filtration
+\[
+G^i K
+:= \mathbf R\!\Hom\bigl(A,B_{\le i}^\bullet\bigr)\subset
+   \mathbf R\!\Hom\bigl(A,B^\bullet\bigr)=:K
+\]
+of the complex \(K = \mathbf R\!\Hom(A,B^\bullet)\).
+The associated graded pieces are
+\[
+\Gr^i K
+:= G^iK/G^{i-1}K
+\simeq \mathbf R\!\Hom\bigl(A,\Gr^i B^\bullet\bigr)
+\simeq \mathbf R\!\Hom\bigl(A,\cH^i(B^\bullet)[-i]\bigr)
+\simeq \mathbf R\!\Hom\bigl(A,\cH^i(B^\bullet)\bigr)[-i].
+\]
+
+The spectral sequence of this filtered complex has
+\[
+{}^{(A,B)}E_1^{i,j}
+  = H^{i+j}(\Gr^i K)
+  \cong
+  H^{j}\mathbf R\!\Hom\bigl(A,\cH^i(B^\bullet)\bigr)
+  \cong
+  \Ext^{j}\bigl(A,\cH^i(B^\bullet)\bigr),
+\]
+and converges to
+\[
+H^{i+j}(K) \cong \Ext^{i+j}(A,B^\bullet).
+\]
+
+Reindexing by writing \(j = q\) and \(i = r\), the \(E_2\)-page of this
+spectral sequence is (by definition: cohomology of \({}^{(A,B)}E_1\) with
+respect to its first differential)
+\[
+{}^{(A,B)}E_2^{r,s}
+  \;\cong\;
+  \Ext^{r}\bigl(A,\cH^{s}(B^\bullet)\bigr),
+\]
+and it converges to
+\(\Ext^{r+s}(A,B^\bullet)\).
+
+Now fix \(p\). For the column
+\[
+E_1^{p,\bullet}
+  = \Ext^\bullet\bigl(\cH^p(P^\bullet),P^\bullet\bigr)
+\]
+take \(A = \cH^p(P^\bullet)\), \(B^\bullet = P^\bullet\) in the above
+construction. We get a spectral sequence
+\[
+{}^{(p)}E_2^{r,s}
+  \;\cong\;
+  \Ext^r\bigl(\cH^p(P^\bullet),\cH^{s}(P^\bullet)\bigr)
+  \;\Longrightarrow\;
+  \Ext^{r+s}\bigl(\cH^p(P^\bullet),P^\bullet\bigr)
+  = E_1^{p,r+s}.
+\]
+
+Thus, for each fixed \(p\), the graded group
+\(E_1^{p,\bullet} = \Ext^\bullet(\cH^p(P),P)\) is itself computed by a
+second spectral sequence whose \(E_2\)-page consists of the groups
+\(\Ext^r(\cH^p(P),\cH^s(P))\).
+
+The spectral sequence attached to the filtration \(F^\bullet C\) is
+built from the bigraded object
+\[
+E_1^{p,q} = \Ext^q\bigl(\cH^p(P^\bullet),P^\bullet\bigr)
+\]
+together with the differentials \(d_1 : E_1^{p,q}\to E_1^{p+1,q}\).
+By general spectral sequence formalism, the \(E_2\)-page is obtained by
+taking cohomology of this \(E_1\) with respect to \(d_1\). Equivalently,
+it is the page you get after “resolving” each \(E_1^{p,q}\) via the
+hyper--\(\Ext\) spectral sequence of Step~1 and keeping track of the
+total degree.
+
+Concretely, the total degree of the original spectral sequence is
+\(p+q\). The contribution in bidegree \((p,q)\) on the \(E_2\)-page
+comes from all classes of total degree \(p+q\) in the various
+\(\Ext^\bullet(\cH^i(P),P)\) that survive to the \(E_2\)-page of their
+internal hyper--\(\Ext\) spectral sequences. For each cohomological
+index \(i\), these internal \(E_2\)-terms are
+\[
+{}^{(i)}E_2^{p,\,i+q}
+  \;\cong\;
+  \Ext^p\bigl(\cH^i(P^\bullet),\cH^{i+q}(P^\bullet)\bigr),
+\]
+and they land in total degree
+\[
+p + (i+q) - i = p+q.
+\]
+Summing over all \(i\in\mathbb Z\) gives precisely
+\[
+E_2^{p,q}
+  \;\cong\;
+  \bigoplus_{i\in\mathbb Z}
+  \Ext^p_{\mathcal A}\bigl(\cH^i(P^\bullet),\cH^{i+q}(P^\bullet)\bigr),
+\]
+which is the claimed description of the \(E_2\)-page.
+
+Since \(P^\bullet\) is bounded, only finitely many \(i\) contribute for
+each \((p,q)\); the filtrations involved are finite, and hence both the
+inner hyper--\(\Ext\) spectral sequences and the outer one for
+\(C = \mathbf R\!\Hom(P,P)\) are bounded and converge. Thus we have proved the following:
+
+\begin{proposition}
+Let \(\mathcal A\) be an abelian category, and let
+\(P^\bullet \in D^b(\mathcal A)\) be a bounded complex.
+There is a convergent spectral sequence with $E_1$--page
+\[E_1^{p,q}
+  \;\cong\;
+  \Ext^q_{\mathcal A}\bigl(\cH^p(P^\bullet),P^\bullet\bigr)
+\]
+and $E_2$--page
+\[E_2^{p,q}
+  \;\cong\;
+  \bigoplus_{i\in\mathbb Z}
+  \Ext^p_{\mathcal A}\bigl(\cH^i(P^\bullet),\cH^{i+q}(P^\bullet)\bigr)
+\]
+converging to
+\(\Hom^{p+q}(P^\bullet,P^\bullet)\).
+\end{proposition}
 \end{remark}
+
+If two cohomology sheaves are nonzero, a negative-degree class appears.
+Assume for contradiction that $\cH^i$ and $\cH^j$ are both nonzero for
+some $i<j$.  Since all $\cH^k$ are supported at the same closed point,
+the sheaves $\cH^i$ and $\cH^j$ are finite--length $\cO_{X,x}$--modules.
+For such modules it is standard that
+\[
+\Hom(\cH^j,\cH^i)\neq 0,
+\]
+because any nonzero finite--length module possesses a simple quotient,
+and any nonzero finite--length module contains a copy of that simple
+module.
+
+Such a map $\phi:\cH^j\to\cH^i$ determines a nonzero class
+\[
+0\neq [\phi] \in E_2^{0,\;i-j},
+\]
+where $i-j<0$.  
+Among all nonzero classes in $E_2^{0,q}$ with $q<0$, choose one with
+$q_0$ \emph{minimal} (i.e.\ the most negative possible).
+
+This class cannot be killed by any differential.
+The possible outgoing differentials from $E_r^{0,q_0}$ have targets
+\[
+E_r^{r,\;q_0-r+1},\qquad r\ge 2.
+\]
+But $q_0-r+1 < q_0$, and by minimality of $q_0$ there are \emph{no}
+nonzero entries with $q<q_0$ at the $E_2$--page, hence none at any
+later page.  Therefore all outgoing differentials vanish.
+
+The possible incoming differentials come from
+\[
+E_r^{-r,\;q_0+r-1},
+\]
+but $p=-r<0$ forces $\Ext^p(-,-)=0$, so these groups are always zero.
+Thus there are no incoming differentials either.
+
+Hence the class $[\phi]$ survives to the limit:
+\[
+0\neq[\phi]\in E_\infty^{0,\;q_0}.
+\]
+
+Since the spectral sequence abuts to
+$\Hom^{m}(P,P)$ with $m=p+q$, our surviving class contributes
+\[
+0\neq[\phi]\in \Hom^{\,q_0}(P,P).
+\]
+But $q_0<0$, contradicting the assumption that
+$\Hom^m(P,P)=0$ for all negative $m$.
+
+Thus it is impossible for two distinct cohomology sheaves $\cH^i$ and
+$\cH^j$ to be nonzero.  Therefore $P$ has a single nonzero
+cohomology sheaf:
+\[
+P \simeq \cH^r(P)[-\,r].
+\]
+Since $\End(P)=\End(\cH^r)$ is a field, the sheaf $\cH^r$ must be an
+indecomposable finite--length $\cO_{X,x}$--module whose endomorphism
+ring has no nontrivial idempotents.  The only such modules are the
+simple ones.  Thus $\cH^r \cong k(x)$ is a skyscraper sheaf at a closed
+point.
+\end{proof}
+
+\begin{definition}[Invertible object]\label{def:invertible-object}
+An object \(L\in \mathcal D\) is called \emph{invertible} if for any point
+object \(P\in\mathcal D\) there exists an \(s\in\mathbb Z\) such that
+\begin{enumerate}
+  \item[(i)] \(\Hom^{s}(L,P)=k(P)\),
+  \item[(ii)] \(\Hom^{i}(L,P)=0\) for \(i\ne s\).
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}\label{prop:invertible-objects-are-shifts}
+Let \(X\) be a smooth irreducible algebraic variety.  Assume that all
+point objects have the form \(\mathcal O_{x}[s]\) for some \(x\in X\),
+\(s\in\mathbb Z\).  Then an object \(L\in\mathcal D\) is invertible if
+and only if \(L\simeq \mathcal L[t]\) for some invertible sheaf
+\(\mathcal L\) on \(X\) and some \(t\in\mathbb Z\).
+\end{proposition}
+
+\begin{proof}
+For an invertible sheaf \(\mathcal L\) we have
+\[
+  \Hom(\mathcal L,\mathcal O_{x}) = k(x),\qquad
+  \Ext^{i}(\mathcal L,\mathcal O_{x}) = 0,\quad \text{if } i\ne 0.
+\]
+Therefore, if \(L=\mathcal L[s]\), then it is an invertible object.
+
+Now let \(\mathcal H^{i}\) be the cohomology sheaves of an invertible
+object \(L\).  Consider the spectral sequence that calculates
+\(\Hom^{\bullet}(L,\mathcal O_{x})\) for a point \(x\in X\) by means of
+\(\Hom^{i}(\mathcal H^{j},\mathcal O_{x})\):
+\[
+  E_{2}^{p,q} = \Hom^{p}(\mathcal H^{q},\mathcal O_{x})
+  \;\Longrightarrow\; \Ext^{p-q}(L,\mathcal O_{x}).
+\]
+
+Let \(\mathcal H^{q_{0}}\) be the nontrivial cohomology sheaf with
+maximal index.  Then for any closed point \(x\in X\) in the support of
+\(\mathcal H^{q_{0}}\) we have \(\Hom(\mathcal H^{q_{0}},\mathcal O_{x})\neq 0\).
+But both \(\Hom(\mathcal H^{q_{0}},\mathcal O_{x})\) and
+\(\Ext^{1}(\mathcal H^{q_{0}},\mathcal O_{x})\) are intact under the
+differentials of the spectral sequence.  Therefore, by the definition of
+an invertible object we obtain that for any point \(x\) in the support
+of \(\mathcal H^{q_{0}}\)
+\begin{align*}
+  \text{a)}\quad &\Hom(\mathcal H^{q_{0}},\mathcal O_{x}) = k(x),\\
+  \text{b)}\quad &\Ext^{1}(\mathcal H^{q_{0}},\mathcal O_{x}) = 0.
+\end{align*}
+
+Since \(X\) is smooth and irreducible, it follows from b) that
+\(\mathcal H^{q_{0}}\) is locally free on \(X\).  From a) one deduces
+that it is invertible.
+
+This implies that \(\Ext^{i}(\mathcal H^{q_{0}},\mathcal O_{x}) = 0\) for
+\(i>0\), and \(\Hom(\mathcal H^{q_{0}-1},\mathcal O_{x})\) is intact
+under the differentials of the spectral sequence.  This means that
+\(\Hom(\mathcal H^{q_{0}-1},\mathcal O_{x}) = 0\) for any \(x\in X\),
+i.e.\ \(\mathcal H^{q_{0}-1} = 0\).  Repeating this argument for
+\(\mathcal H^{q}\) with smaller \(q\), we easily see that all
+\(\mathcal H^{q}\), except \(q=q_{0}\), are trivial.  This proves the
+proposition.
+\end{proof}
+
+
+We are now ready to state and prove the reconstruction theorem.
+\begin{theorem}[Reconstruction theorem]
+Let $X$ and $Y$ be smooth projective varieties over a field $k$
+with either ample or antiample canonical sheaf. If there is an exact equivalence of triangulated categories
+\[D^b_{\mathrm{coh}}(X) \xrightarrow{\sim} D^b_{\mathrm{coh}}(Y),\]
+then $X$ is isomorphic to $Y$.
+\end{theorem}
+
 
 \section{Appendix: Semiorthogonal decompositions}
 Roughly speaking, a semiorthogonal decomposition of a triangulated category $\cD$ is a way of breaking $\cD$ into smaller pieces (full triangulated subcategories) such that the pieces are disjoint and semiorthogonal
-(there are no $\mathbf R\!\Hom$'s pointing to the left), and that every object has a functorial filtration whose associated graded pieces lie in these subcategories (ordered from right to left). We follow the exposition given by \cite{Bondal1990}.
+(there are no $\mathbf R\Hom$'s pointing to the left), and that every object has a functorial filtration whose associated graded pieces lie in these subcategories (ordered from right to left). We follow the exposition given by \cite{Bondal1990}.
 \begin{definition}
   A \textbf{semiorthogonal decomposition} of a triangulated category $\mathcal{D}$ is a sequence of full triangulated subcategories $\mathcal{A}_1, \ldots, \mathcal{A}_n$ of $\mathcal{D}$ such that:
   \begin{enumerate}
@@ -3027,15 +3340,15 @@ whose $p$-th term is
 \[
 \Hom_A(i_*F\otimes\wedge^{p}A^{c},\;i_*G)
 \cong
-\Hom_{A/I}\!\big(F,\;G\otimes (\wedge^{p}A^{c})^{\!\vee}\big)
+\Hom_{A/I}\big(F,\;G\otimes (\wedge^{p}A^{c})^{\vee}\big)
 \]
 because $I$ acts trivially on both sides, so we can reduce mod $I$.
-Here $(\wedge^{p}A^{c})^{\!\vee}\cong \wedge^{p}(A^{c})^{\!\vee}$, which geometrically is $\wedge^{p}N_{Z/X}$.
+Here $(\wedge^{p}A^{c})^{\vee}\cong \wedge^{p}(A^{c})^{\vee}$, which geometrically is $\wedge^{p}N_{Z/X}$.
 
 So we have constructed a cochain complex $C^{\bullet}$ with terms
 \[
-C^{p} = \Hom_{A/I}\!\big(F,\,G\otimes \wedge^{p}N\big),
-\qquad N=(I/I^{2})^{\!\vee}.
+C^{p} = \Hom_{A/I}\big(F,\,G\otimes \wedge^{p}N\big),
+\qquad N=(I/I^{2})^{\vee}.
 \]
 The differential $d$ in the Koszul complex $K(f_\bullet): \wedge^{p}A^{c}\to\wedge^{p-1}A^{c}$ induces, after applying $\Hom$, a map $d^{*}: C^{p-1}\to C^{p}$. Now $d_p\otimes1$ itself is "multiplication by the $f_i$" acting on the $\wedge^pA^c$-factor. But both $i_*F$ and $i_*G$ are annihilated by $I=(f_1,\dots,f_c)$, so multiplying by any $f_i$ on their modules gives zero. Hence $d_p\otimes1$ is zero after applying $\Hom_A(-,i_*G)$ and so in fact this differential $d^*$ is zero.
 
@@ -3047,7 +3360,7 @@ you can promote this chain-level equality to an equality of derived objects:
 R\Hom_A(i_*F,i_*G)
 \;\simeq\;
 \bigoplus_{p=0}^c
-R\Hom_{A/I}\!\big(F,\,G\otimes\wedge^p N\big)[-p].
+R\Hom_{A/I}\big(F,\,G\otimes\wedge^p N\big)[-p].
 \]
 Taking $H^i$ of both sides gives the desired formula:
 
