@@ -1,0 +1,1056 @@
+%%% template.tex
+%%% This is a template for making up an AMS-LaTeX file
+%%% Version of February 12, 2011
+%%%---------------------------------------------------------
+%%% The following command chooses the default 10 point type.
+%%% To choose 12 point, change it to
+%%% \documentclass[12pt]{amsart}
+\documentclass{amsart}
+\usepackage{cite}
+%%% The following command loads the amsrefs package, which will be
+%%% used to create the bibliography:
+\usepackage[lite]{amsrefs}
+\usepackage{/Users/songye03/Desktop/math_tex/style/macros}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+%%% The following command defines the standard names for all of the
+%%% special symbols in the AMSfonts package, listed in
+%%% http://www.ctan.org/tex-archive/info/symbols/math/symbols.pdf
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{float}
+\usepackage{mathtools}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+%%% The following commands allow you to use \Xy-pic to draw
+%%% commutative diagrams.  (You can omit the second line if you want
+%%% the default style of the nodes to be \textstyle.)
+\usepackage[all,cmtip]{xy}
+\let\objectstyle=\displaystyle
+
+%%% If you'll be importing any graphics, uncomment the following
+%%% line.  (Note: The spelling is correct; the package graphicx.sty is
+%%% the updated version of the older graphics.sty.)
+% \usepackage{graphicx}
+
+
+
+%%% This part of the file (after the \documentclass command,
+%%% but before the \begin{document}) is called the ``preamble''.
+%%% This is where we put our macro definitions.
+
+%%% Comment out (or delete) any of these that you don't want to use.
+
+
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%% The Theorem environments:
+%%%
+%%%
+%%% The following commands set it up so that:
+%%% 
+%%% All Theorems, Corollaries, Lemmas, Propositions, Definitions,
+%%% Remarks, Examples, Notations, and Terminologies  will be numbered
+%%% in a single sequence, and the numbering will be within each
+%%% section.  Displayed equations will be numbered in the same
+%%% sequence. 
+%%% 
+%%% 
+%%% Theorems, Propositions, Lemmas, and Corollaries will have the most
+%%% formal typesetting.
+%%% 
+%%% Definitions will have the next level of formality.
+%%% 
+%%% Remarks, Examples, Notations, and Terminologies will be the least
+%%% formal.
+%%% 
+%%% Theorem:
+%%% \begin{thm}
+%%% 
+%%% \end{thm}
+%%% 
+%%% Corollary:
+%%% \begin{cor}
+%%% 
+%%% \end{cor}
+%%% 
+%%% Lemma:
+%%% \begin{lem}
+%%% 
+%%% \end{lem}
+%%% 
+%%% Proposition:
+%%% \begin{prop}
+%%% 
+%%% \end{prop}
+%%% 
+%%% Definition:
+%%% \begin{defn}
+%%% 
+%%% \end{defn}
+%%% 
+%%% Remark:
+%%% \begin{rem}
+%%% 
+%%% \end{rem}
+%%% 
+%%% Example:
+%%% \begin{ex}
+%%% 
+%%% \end{ex}
+%%% 
+%%% Notation:
+%%% \begin{notation}
+%%% 
+%%% \end{notation}
+%%% 
+%%% Terminology:
+%%% \begin{terminology}
+%%% 
+%%% \end{terminology}
+%%% 
+%%%       Theorem environments
+
+% The following causes equations to be numbered within sections
+\numberwithin{equation}{section}
+
+% We'll use the equation counter for all our theorem environments, so
+% that everything will be numbered in the same sequence.
+
+%       Theorem environments
+
+\theoremstyle{plain} %% This is the default, anyway
+\newtheorem{theorem}[equation]{Theorem}
+\newtheorem{cor}[equation]{Corollary}
+\newtheorem{lemma}[equation]{Lemma}
+\newtheorem{proposition}[equation]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[equation]{Definition}
+
+\theoremstyle{remark}
+\newtheorem{remark}[equation]{Remark}
+\newtheorem{example}[equation]{Example}
+\newtheorem{notation}[equation]{Notation}
+\newtheorem{terminology}[equation]{Terminology}
+
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+\begin{document}
+
+%%% In the title, use a double backslash "\\" to show a linebreak:
+%%% Use one of the following two forms:
+%%% \title{Text of the title}
+%%% or
+%%% \title[Short form for the running head]{Text of the title}
+\title{Reconstruction theorem for derived categories}
+
+
+%%% If there are multiple authors, they're described one at a time:
+%%% First author: \author{} \address{} \curraddr{} \email{} \thanks{}
+%%% Second author: \author{} \address{} \curraddr{} \email{} \thanks{}
+%%% Third author: \author{} \address{} \curraddr{} \email{} \thanks{}
+\author{Songyu Ye} \email{songyuye@berkeley.edu}
+
+%%% In the address, show linebreaks with double backslashes:
+\address{}
+
+%%% Current address is optional.
+% \curraddr{}
+
+%%% Email address is optional.
+% \email{}
+
+
+%%% If there's a second author:
+% \author{}
+% \address{}
+% \curraddr{}
+% \email{}
+
+
+%%% To have the current date inserted, use \date{\today}:
+\date{\today}
+
+%%% To include an abstract, uncomment the following two lines and type
+%%% the abstract in between them:
+\begin{abstract}
+In this note we give a gentle introduction to derived categories and triangulated structures. We prove the classical reconstruction theorem of Bondal-Orlov \cite{BondalOrlov2001} for varieties with ample or anti-ample canonical bundle.
+\end{abstract}
+
+
+\maketitle
+\tableofcontents
+
+\section{Derived categories and triangulated structures}
+Our main reference for this section is \cite{HuybrechtsFM}. Let $\mathcal{A}$ be an abelian category. The derived category $D(\mathcal{A})$ is constructed in several steps. Consider the category $C(\mathcal{A})$ of complexes in $\mathcal{A}$, whose objects are cochain complexes and morphisms are chain maps that commute with the differentials.  
+
+Form the homotopy category $K(\mathcal{A})$ whose objects are the same as $C(\mathcal{A})$. The morphisms are chain maps modulo homotopy equivalence. Two chain maps \[f,g:A^\bullet\to B^\bullet\] are homotopic if there exist morphisms $h^i:A^i\to B^{i-1}$ such that \[f^i - g^i = d_B^{i-1} \circ h^i + h^{i+1} \circ d_A^i\] It is a routine check that two maps which are homotopic induce the same map on cohomology.
+
+Finally form $D(\mathcal{A})$ by formally inverting all quasi-isomorphisms in $K(\mathcal{A})$. The morphisms in $D(\mathcal{A})$ are a little subtle. For example, one cannot just introduce formal inverses to quasi-isomorphisms. If $X$ is not an injective object in $\mathcal{A}$, then the inclusion map $X[0] \to I^\bullet$ into an injective resolution is a quasi-isomorphism. If we formally invert by introducing $p: I^\bullet \to X[0]$ with \begin{align*}
+    [p] \circ [i] = [\mathrm{id}_{X[0]}] \quad \text{in } K(\mathcal{A}) \\
+    [i] \circ [p] = [\mathrm{id}_{I^\bullet}] \quad \text{in } K(\mathcal{A})
+  \end{align*} then by definition, we impose that $i,p$ are homotopy equivalences.  This is too strong, since not every quasi-isomorphism is a homotopy equivalence.
+
+Abstractly, let $S$ be the set of quasi-isomorphisms in $K(\mathcal{A})$. The derived category \[D(\mathcal{A}) = K(\mathcal{A})[S^{-1}]\] is characterized by a universal property: there is a functor
+  \[
+  Q : K(\mathcal{A}) \longrightarrow D(\mathcal{A})
+  \]
+  sending every $s \in S$ to an isomorphism, and universal with that property (any other functor inverting all quasi-isomorphisms factors uniquely through $Q$). One can also describe morphisms in $D(\mathcal{A})$ concretely as "roofs" via Verdier localization. The bounded derived category $D^b(\mathcal{A})$ is the full subcategory of complexes with bounded cohomology.
+
+  \begin{definition}
+    [Mapping cone] For a chain map $s:X^\bullet\to I^\bullet$ (cohomological grading), the \textbf{mapping cone} $\mathrm{Cone}(s)$ is the complex
+    \[
+    \mathrm{Cone}(s)^n = I^n \oplus X^{n+1}, \qquad d(b,a) = \big(d_I b + s(a), -d_X a\big).
+    \]
+  \end{definition} 
+  There's a short exact sequence of complexes
+    \[
+    0\to I^\bullet \xrightarrow{\iota} \mathrm{Cone}(s) \xrightarrow{\pi} X^\bullet[1]\to 0,
+    \]
+  giving rise to a long exact sequence in cohomology
+    \[\cdots \to H^{n}(I^\bullet) \xrightarrow{H^n(\iota)} H^{n}(\mathrm{Cone}(s)) \xrightarrow{H^n(\pi)} H^{n+1}(X^\bullet) \xrightarrow{H^{n+1}(s)} H^{n+1}(I^\bullet) \to \cdots\]
+
+    \begin{proposition}
+      Let $s:X^\bullet\to I^\bullet$ be a chain map in $C(\mathcal{A})$. Then:
+      \begin{enumerate}
+        \item $s$ is a quasi-isomorphism if and only if $\mathrm{Cone}(s)$ is acyclic (all cohomology groups vanish).
+
+        \item $s$ is an isomorphism in $K(\mathcal{A})$ (i.e., a homotopy equivalence) if and only if $\mathrm{Cone}(s)$ is contractible (chain-homotopic to 0).
+      \end{enumerate}
+    \end{proposition}
+
+\begin{proof}
+  \leavevmode
+\begin{enumerate}
+  \item This follows from a careful examination of the segments of the long exact sequence in cohomology. 
+  \[
+  H^n(I^\bullet)\to H^n(\mathrm{Cone}(s))\to H^{n+1}(X^\bullet)\xrightarrow{H^{n+1}(s)} H^{n+1}(I^\bullet),
+  \]
+
+  \item If $s$ has a homotopy inverse $t$ (so $ts\simeq \mathrm{id}_X$, $st\simeq \mathrm{id}_I$), then the triangle
+  \[
+  X^\bullet \xrightarrow{s} I^\bullet \to \mathrm{Cone}(s) \to X^\bullet[1]
+  \]
+  is isomorphic (in $K$) to
+  \[
+  X^\bullet \xrightarrow{\mathrm{id}} X^\bullet \to \mathrm{Cone}(\mathrm{id}_X) \to X^\bullet[1].
+  \]
+
+  For any complex $X^\bullet$, $\mathrm{Cone}(\mathrm{id}_X)$ is contractible with contracting homotopy
+  \[
+  H^n : X^n \oplus X^{n+1} \longrightarrow X^{n-1} \oplus X^{n},\qquad
+  H^n(x,y)=(0,x).
+  \]
+  One can check that $dH+Hd=\mathrm{id}$. Thus $\mathrm{Cone}(s)$ is contractible. \qedhere
+  \end{enumerate}
+\end{proof}
+\begin{example} We will produce an example of an acyclic complex which is not contractible. Let $\mathcal{A}=\mathbf{Ab}$. Take the injective resolution of $\mathbb{Z}$:
+  \[
+  0 \to \mathbb{Z} \xrightarrow{i} \mathbb{Q} \xrightarrow{q} \mathbb{Q}/\mathbb{Z} \to 0
+  \]
+  and regard $I^\bullet$ as $I^0=\mathbb{Q}$, $I^1=\mathbb{Q}/\mathbb{Z}$ with $d^0=q$, and $X^\bullet=\mathbb{Z}[0]$. The resolution map $s:\mathbb{Z}[0]\to I^\bullet$ has $s^0=i$. Computing from the definition, the mapping cone $\mathrm{Cone}(s)$ has
+  \[
+  \mathrm{Cone}(s)^{-1}=\mathbb{Z},\quad
+  \mathrm{Cone}(s)^0=\mathbb{Q},\quad 
+  \mathrm{Cone}(s)^1=\mathbb{Q}/\mathbb{Z}
+  \]
+  with differentials $d^{-1}=i:\mathbb{Z}\to\mathbb{Q}$ and $d^{0}=q:\mathbb{Q}\to\mathbb{Q}/\mathbb{Z}$. So $\mathrm{Cone}(s)$ is exactly the three-term complex sitting in degrees $-1,0,1$.
+  \[
+  \mathbb{Z} \xrightarrow{i} \mathbb{Q} \xrightarrow{q} \mathbb{Q}/\mathbb{Z}
+  \]
+  The cone is acyclic but not contractible. Indeed, the cone is acyclic since it is the cone on a short exact sequence. On the other hand, the contractibility of this 3-term exact complex is equivalent to the short exact sequence splitting (a contracting homotopy gives splittings and vice versa). But $0\to \mathbb{Z} \to \mathbb{Q} \to \mathbb{Q}/\mathbb{Z} \to 0$ does not split: if it did, $\mathbb{Z}$ would be a direct summand of the divisible group $\mathbb{Q}$, hence divisible itself, which is false.
+\end{example}
+
+\begin{definition}
+  [Triangulated category] A \textbf{triangulated category} is an additive category $\mathcal{T}$ equipped with an autoequivalence $[1]:\mathcal{T}\to\mathcal{T}$ (the shift functor) and a class of distinguished triangles
+  \[X \xrightarrow{f} Y \xrightarrow{g} Z \xrightarrow{h} X[1]\]
+  satisfying the following axioms:
+  \begin{itemize}
+    \item (TR1) For every morphism $f:X\to Y$ in
+          $\mathcal{T}$, there exists a distinguished triangle
+          \[
+            X \xrightarrow{f} Y \longrightarrow Z \longrightarrow X[1].
+          \]
+          Moreover, for every object $X\in\mathcal{T}$, the triangle
+          \[
+            X \xrightarrow{\mathrm{id}_X} X \longrightarrow 0 \longrightarrow X[1]
+          \]
+          is distinguished, and any triangle isomorphic to a distinguished triangle is distinguished.
+    \item (TR2) A triangle
+          \[X \xrightarrow{f} Y \xrightarrow{g} Z \xrightarrow{h} X[1]\]
+          is distinguished if and only if the rotated triangle
+          \[Y \xrightarrow{g} Z \xrightarrow{h} X[1] \xrightarrow{-f[1]} Y[1]\]
+          is distinguished.
+    \item (TR3) Given two distinguished triangles
+          \[X \xrightarrow{f} Y \xrightarrow{g} Z \xrightarrow{h} X[1]\]
+                and
+                \[U \xrightarrow{p} V \xrightarrow{q} W \xrightarrow{r} U[1],\]
+                and morphisms $a:X\to U$, $b:Y\to V$ such that $b\circ f = p \circ a$, there exists a morphism $c:Z\to W$ making the following diagram commute:
+                \[
+\begin{tikzcd}
+X \arrow[r,"f"] \arrow[d,"a"'] 
+  & Y \arrow[r,"g"] \arrow[d,"b"'] 
+  & Z \arrow[r,"h"] \arrow[d,"c"'] 
+  & X[1] \arrow[d,"{a[1]}"] \\
+U \arrow[r,"p"'] 
+  & V \arrow[r,"q"'] 
+  & W \arrow[r,"r"'] 
+  & U[1]
+\end{tikzcd}
+\]
+          
+    \item (TR4) (Octahedral axiom) Given morphisms $X \xrightarrow{f} Y \xrightarrow{g} Z$ in $\mathcal{T}$, there exist distinguished triangles
+          \[X \xrightarrow{f} Y \xrightarrow{u} C(f) \xrightarrow{v} X[1],\]
+          \[Y \xrightarrow{g} Z \xrightarrow{u'} C(g) \xrightarrow{v'} Y[1],\]
+          and
+          \[X \xrightarrow{g\circ f} Z \xrightarrow{u"} C(g\circ f) \xrightarrow{v"} X[1],\]
+          along with morphisms $C(f) \xrightarrow{w} C(g\circ f)$ and $C(g) \xrightarrow{w'} C(g\circ f)$ such that the following diagram commutes and the rows and columns are distinguished triangles:
+          \[\begin{tikzcd}
+            & Y \arrow[rr, "u"] \arrow[dd, "g"'] & & C(f) \arrow[dd, "w"] \\
+            X \arrow[ur, "f"] \arrow[dr, "g\circ f"'] & & & \\
+            & Z \arrow[rr, "u'"'] & & C(g)
+          \end{tikzcd}\]
+  \end{itemize}
+\end{definition}
+
+\begin{proposition}
+  This construction gives $D(\mathcal{A})$ the structure of a triangulated category, where:
+\begin{itemize}
+  \item The shift functor $[1]$ moves complexes one place to the left:
+  \[X^\bullet[1]^n = X^{n+1}, \quad d_{X[1]}^n = -d_X^{n+1}\]
+  \item Distinguished triangles come from mapping cones of chain maps, in particular, for any chain map $f:X^\bullet\to Y^\bullet$, the triangle
+  \[X^\bullet \xrightarrow{f} Y^\bullet \to \mathrm{Cone}(f) \to X^\bullet[1]\]
+  is distinguished
+  \item The cohomology functors are first defined on the homotopy category as functors \[H^i_K: K(\mathcal{A}) \to \mathcal{A}\] Since these functors send quasi-isomorphisms to isomorphisms, they descend through the localization map $Q: K(\mathcal{A}) \to D(\mathcal{A})$. In particular, there exists a unique functor \[H^i_D: D(\mathcal{A}) \to \mathcal{A}\] such that $H^i_K = H^i_D \circ Q$.
+\end{itemize}
+\end{proposition}
+
+\cite{BondalOrlov2001} work with more relaxed categories known as graded categories. In particular every triangulated category is a graded category.
+\begin{definition}[Graded categories and exact functors]
+A \textbf{graded category} is a pair $(\mathcal{D}, T_{\mathcal{D}})$ consisting of a category $\mathcal{D}$ and a fixed autoequivalence
+\[
+T_{\mathcal{D}} : \mathcal{D} \longrightarrow \mathcal{D},
+\]
+called the \textbf{translation functor}. A functor
+\[
+F : \mathcal{D} \longrightarrow \mathcal{D}'
+\]
+between graded categories is called \textbf{graded} if it commutes with the translation functors.
+More precisely, there is a fixed natural isomorphism of functors
+\[
+t_F : F \circ T_{\mathcal{D}} \xrightarrow{\sim} T_{\mathcal{D}'} \circ F.
+\]
+A natural transformation $\mu : F \Rightarrow G$ between graded functors is called \textbf{graded}
+if the following diagram commutes:
+\[
+\begin{tikzcd}
+F \circ T \arrow[r, "t_F"] \arrow[d, "\mu T"'] & T \circ F \arrow[d, "T\mu"] \\
+G \circ T \arrow[r, "t_G"'] & T \circ G.
+\end{tikzcd}
+\]
+
+
+A graded functor
+\[
+F : \mathcal{D} \longrightarrow \mathcal{D}'
+\]
+between triangulated categories is called \textbf{exact} if it sends exact triangles
+to exact triangles in the following sense.
+
+If
+\[
+X \xrightarrow{f} Y \xrightarrow{g} Z \xrightarrow{h} T X
+\]
+is an exact triangle in $\mathcal{D}$, then one replaces the segment
+\[
+F T(X)
+\]
+by
+\[
+T F(X)
+\]
+via the natural isomorphism $t_F : F T \xrightarrow{\sim} T F$,
+and requires that the resulting sequence
+\[
+F X \xrightarrow{F f} F Y \xrightarrow{F g} F Z \xrightarrow{t_F(Fh)} T F X
+\]
+be an exact triangle in $\mathcal{D}'$. We call a morphism between graded exact functors a \textbf{graded natural transformation}.
+\end{definition}
+
+\begin{proposition}
+Let $F : \mathcal{D} \longrightarrow \mathcal{D}'$ be a graded functor between graded categories, and let
+$G : \mathcal{D}' \longrightarrow \mathcal{D}$
+be its left adjoint, so that the unit and counit of the adjunction are the natural transformations
+\[
+\operatorname{id}_{\mathcal{D}'} \xrightarrow{\ \alpha\ } F \circ G, 
+\qquad
+G \circ F \xrightarrow{\ \beta\ } \operatorname{id}_{\mathcal{D}}.
+\]
+Then \(G\) can be canonically endowed with the structure of a graded functor, so that the unit and counit of the adjunction become morphisms of graded functors. If, in addition, \(F\) is an exact functor between triangulated categories, then \(G\) also becomes an exact functor.
+\end{proposition}
+
+
+\begin{definition}
+  
+Let $\mathcal{D}$ be a $k$-linear category with finite-dimensional $\mathrm{Hom}$'s.
+A covariant additive functor
+\[
+S : \mathcal{D} \longrightarrow \mathcal{D}
+\]
+is called a \textbf{Serre functor} if it is a category equivalence and there are given bifunctorial isomorphisms
+\[
+\varphi_{A,B} : \mathrm{Hom}_{\mathcal{D}}(A,B) \xrightarrow{\ \sim} \mathrm{Hom}_{\mathcal{D}}(B,SA)^{*}
+\]
+for all $A,B \in \mathcal{D}$, such that the following diagram is commutative:
+\[
+\begin{tikzcd}
+\mathrm{Hom}_{\mathcal{D}}(A,B)
+  \arrow[r,"\varphi^{A,B}"]
+  \arrow[d]
+  & \mathrm{Hom}_{\mathcal{D}}(B,SA)^{*}
+  \arrow[d] \\
+\mathrm{Hom}_{\mathcal{D}}(SA,SB)
+  \arrow[r,"\varphi^{SA,SB}"']
+  & \mathrm{Hom}_{\mathcal{D}}(SB,S^{2}A)^{*}
+\end{tikzcd}
+\]
+The vertical isomorphisms in this diagram are those induced by $S$.
+\end{definition}
+
+A Serre functor in a category $\mathcal{D}$, if it exists, is unique up to a graded natural isomorphism. Serre functors are also natural in the following sense.
+
+\begin{proposition}
+Any autoequivalence
+\[
+\Phi : \mathcal{D} \longrightarrow \mathcal{D}
+\]
+commutes with a Serre functor, i.e.\ there exists a natural graded isomorphism of functors
+\[
+\Phi \circ S \xrightarrow{\sim} S \circ \Phi.
+\]
+\end{proposition}
+
+\begin{proof}
+For any pair of objects $A,B \in \mathcal{D}$, we have a system of natural isomorphisms:
+\begin{align*}
+\mathrm{Hom}(\Phi A, \Phi SB)
+  &\cong
+\mathrm{Hom}(A, SB) \\
+  &\cong
+\mathrm{Hom}(B, A)^{*} \\
+  &\cong
+\mathrm{Hom}(\Phi B, \Phi A)^{*} \\
+  &\cong
+\mathrm{Hom}(\Phi A, S\Phi B).
+\end{align*}
+Since $\Phi$ is an equivalence, the essential image of $\Phi$ covers all of $\mathcal{D}$; that is,
+every object is isomorphic to some $\Phi A$.
+Hence we have isomorphisms of contravariant functors represented by the objects
+$\Phi SB$ and $S\Phi B$. Morphisms between representable functors correspond
+bijectively to morphisms between their representing objects.
+This yields a canonical isomorphism
+\[
+\Phi SB \xrightarrow{\sim} S\Phi B,
+\]
+which is in fact natural in $B$.
+\end{proof}
+
+Finally we recall an important computation tool in derived categories: spectral sequences arising from filtered complexes. General spectral sequence theory for filtered complexes says if $(K^\bullet, F^\bullet)$ is a filtered complex in an abelian category (or more generally in a suitable derived context), there is a spectral sequence
+\[
+E_1^{p,q} = H^{p+q}\bigl(\operatorname{Gr}^p_F K^\bullet\bigr)
+\Longrightarrow
+H^{p+q}(K^\bullet)
+\]
+Here the associated graded pieces are the complexes $\operatorname{Gr}^p_F K^\bullet = F^p K^\bullet / F^{p-1}K^\bullet$ obtained by taking successive quotients of the filtration. The differentials in the spectral sequence come from the differentials in the original complex $K^\bullet$ and from the filtration structure. We refer to \cite{Weibel1994} for more details and a precise discussion of the following proposition.
+
+\begin{proposition}\label{prop:hyper-ext-spectral-sequence}
+Let \(\mathcal A\) be an abelian category, and let
+\(P^\bullet \in D^b(\mathcal A)\) be a bounded complex.
+There is a convergent spectral sequence with $E_1$--page
+\[E_1^{p,q}
+  \cong
+  \Ext^q_{\mathcal A}\bigl(\cH^p(P^\bullet),P^\bullet\bigr)
+\]
+and $E_2$--page
+\[E_2^{p,q}
+  \cong
+  \bigoplus_{i\in\mathbb Z}
+  \Ext^p_{\mathcal A}\bigl(\cH^i(P^\bullet),\cH^{i+q}(P^\bullet)\bigr)
+\]
+converging to
+\(\Hom^{p+q}(P^\bullet,P^\bullet)\).
+\end{proposition}
+
+
+
+\section{Point objects and invertible objects}
+Let $X$ be a smooth projective variety over a field $k$ with either ample or antiample canonical sheaf $\omega_X$. Let $n = \dim X$ and $\cD = D^b_{\mathrm{coh}}(X)$ be the bounded derived category of coherent sheaves on $X$.
+
+\begin{proposition}
+  $\cD$ has a Serre functor $S$ given by
+  \[S(-) = - \otimes \omega_X [n]\]
+\end{proposition}
+
+\begin{proof}
+  Grothendieck-Serre duality gives bifunctorial isomorphisms
+  \[\Ext^i_X(F,G) \cong \Ext^{n-i}_X(G, F \otimes \omega_X)^*\]
+  for all coherent sheaves $F,G$ on $X$. This extends to complexes in $\cD$ by taking injective resolutions. Thus $S$ is a Serre functor.
+\end{proof}
+  \begin{definition}[Point object]
+An object $P \in \mathcal{D}$ is called a \textbf{point object of codimension $n(P)$} if
+\begin{enumerate}
+    \item $S_{\mathcal{D}}(P) \simeq P[n(P)]$,
+    \item $\Hom^{<0}(P,P) = 0$,
+    \item $\Hom^0(P,P) = k(P)$,
+\end{enumerate}
+where $k(P)$ is a field, necessarily a finite extension of the base field $k$.
+\end{definition}
+
+\begin{lemma}\label{lem:tensor-implies-finite-support}
+If $\mathcal{F}$ is a coherent sheaf on a projective variety $X$ such that $\mathcal{F} \otimes \mathcal{L} \cong \mathcal{F}$ for an ample line bundle $\mathcal{L}$, then $\mathcal{F}$ is supported at finitely many points. 
+\end{lemma}
+
+\begin{proof}
+  Examining the Hilbert polynomial of $\mathcal{H}^i \otimes \omega_X^{\otimes m}$ for $m \gg 0$ shows that the dimension of the support of $\mathcal{F}$ must be zero.
+\end{proof} 
+
+
+
+\begin{proposition}
+Let $X$ be a smooth algebraic variety of dimension $n$ with ample canonical or anticanonical sheaf.  
+Then an object $P \in D^b_{\mathrm{coh}}(X)$ is a point object if and only if
+\[
+P \cong \mathcal{O}_x[r], \qquad r \in \mathbb{Z},
+\]
+where $\mathcal{O}_x$ is the skyscraper sheaf of a closed point $x \in X$ (up to translation).
+\end{proposition}
+
+\begin{proof}
+  Since $X$ has an ample invertible sheaf, it is projective. Any skyscraper sheaf of a closed point obviously satisfies the conditions of a point object
+with codimension equal to the dimension of the variety.
+
+Suppose now that for some $P \in D^b_{\mathrm{coh}}(X)$ we have that $P$ is a point object of codimension $s$. 
+Let $\mathcal{H}^i$ be the cohomology sheaves of $P$.
+
+
+From (i) we obtain $s = n$. From the Serre functor formula, we have
+\[P \otimes \omega_X [n] \simeq P[s]\]
+Because tensoring with an invertible sheaf is an exact functor on the abelian category of coherent sheaves, we can take cohomlogy sheaves
+\[\cH^i(P\otimes\omega_X) \cong \cH^i(P)\otimes\omega_X \cong \cH^{i+t}(P)\]
+If $t = s - n \neq 0$, then for any $i$ we can iterate this isomorphism to get that infinitely many $\cH^j(P)$ are nonzero, contradicting the boundedness of $P$. Thus $t=0$.
+
+
+We also get that $\mathcal{H}^i \otimes \omega_X \cong \mathcal{H}^i$.
+Since $\omega_X$ is either ample or antiample, it follows from Lemma \ref{lem:tensor-implies-finite-support} that each $\mathcal{H}^i$ is a finite-length sheaf, i.e.\ its support consists of isolated points. 
+
+
+Sheaves supported at different points are homologically orthogonal in the sense that if $\mathcal{F},\mathcal{G}$ are coherent sheaves with disjoint supports, then
+\[\Ext^p_X(\mathcal{F},\mathcal{G}) = 0\]
+for all $p$. This is because Ext groups are computed locally, i.e. for every open $U\subset X$,
+\[
+\mathcal{E}xt^p_X(\mathcal{F},\mathcal{G})|_U
+\cong
+\mathcal{E}xt^p_U(\mathcal{F}|_U,\mathcal{G}|_U),
+\]
+and the support of $\mathcal{E}xt^p_X(\mathcal{F},\mathcal{G})$ is contained in $\operatorname{Supp}(\mathcal{F}) \cap \operatorname{Supp}(\mathcal{G})$. Thus $P$ decomposes into a direct sum of components supported at single points.
+
+
+
+By (iii), $P$ is indecomposable. In particular, if $P = P_1 \oplus P_2$ with $P_1,P_2$ supported at different points, then $\End(P)$ would contain nontrivial idempotents, contradicting (iii). 
+
+Applying Proposition \ref{prop:hyper-ext-spectral-sequence} gives us a spectral sequence coming from the stupid filtration on $P$ computing self-Exts of $P$ from Exts between its cohomology sheaves:
+\[
+E_2^{p,q}
+= \bigoplus_{i\in\Z}
+\Ext^p\bigl(\cH^i,\ \cH^{i+q}\bigr)
+\Longrightarrow
+\Hom^{p+q}(P,P).
+\]
+If two cohomology sheaves are nonzero, a negative-degree class appears.
+Assume for contradiction that $\cH^i$ and $\cH^j$ are both nonzero for
+some $i<j$.  Since all $\cH^k$ are supported at the same closed point,
+the sheaves $\cH^i$ and $\cH^j$ are finite--length $\cO_{X,x}$--modules.
+For such modules it is standard that
+\[
+\Hom(\cH^j,\cH^i)\neq 0,
+\]
+because any nonzero finite--length module possesses a simple quotient,
+and any nonzero finite--length module contains a copy of that simple
+module.
+
+Such a map $\phi:\cH^j\to\cH^i$ determines a nonzero class
+\[
+0\neq [\phi] \in E_2^{0,i-j}
+\]
+where $i-j<0$.  
+Among all nonzero classes in $E_2^{0,q}$ with $q<0$, choose one with
+$q_0$ \emph{minimal}. We will show that this class cannot be killed by any differential.
+The possible outgoing differentials from $E_r^{0,q_0}$ have targets
+\[
+E_r^{r,q_0-r+1},\qquad r\ge 2
+\]
+But $q_0-r+1 < q_0$, and by minimality of $q_0$ there are \emph{no}
+nonzero entries with $q<q_0$ at the $E_2$--page, hence none at any
+later page.  Therefore all outgoing differentials vanish.
+
+The possible incoming differentials come from
+\[
+E_r^{-r,q_0+r-1}
+\]
+but $p=-r<0$ forces $\Ext^p(-,-)=0$, so these groups are always zero.
+Thus there are no incoming differentials either. Hence the class $[\phi]$ survives to the limit:
+\[
+0\neq[\phi]\in E_\infty^{0,q_0}
+\]
+
+Since the spectral sequence abuts to
+$\Hom^{m}(P,P)$ with $m=p+q$, our surviving class contributes
+\[
+0\neq[\phi]\in \Hom^{\,q_0}(P,P)
+\]
+But $q_0<0$, contradicting the assumption that
+$\Hom^m(P,P)=0$ for all negative $m$. Thus it is impossible for two distinct cohomology sheaves $\cH^i$ and
+$\cH^j$ to be nonzero and so $P$ has a single nonzero
+cohomology sheaf:
+\[
+P \simeq \cH^r(P)[-\,r]
+\]
+Since $\End(P)=\End(\cH^r)$ is a field, the sheaf $\cH^r$ must be an
+indecomposable finite--length $\cO_{X,x}$--module whose endomorphism
+ring has no nontrivial idempotents.  The only such modules are the
+simple ones.  Thus $\cH^r \cong k(x)$ is a skyscraper sheaf at a closed
+point.
+\end{proof}
+
+\begin{definition}[Invertible object]\label{def:invertible-object}
+An object \(L\in \mathcal D\) is called \emph{invertible} if for any point
+object \(P\in\mathcal D\) there exists an \(s\in\mathbb Z\) such that
+\begin{enumerate}
+  \item[(i)] \(\Hom^{s}(L,P)=k(P)\),
+  \item[(ii)] \(\Hom^{i}(L,P)=0\) for \(i\ne s\).
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}\label{prop:invertible-objects-are-shifts}
+Let \(X\) be a smooth irreducible algebraic variety.  Assume that all
+point objects have the form \(\mathcal O_{x}[s]\) for some \(x\in X\),
+\(s\in\mathbb Z\).  Then an object \(L\in\mathcal D\) is invertible if
+and only if \(L\simeq \mathcal L[t]\) for some invertible sheaf
+\(\mathcal L\) on \(X\) and some \(t\in\mathbb Z\).
+\end{proposition}
+
+\begin{proof}
+For an invertible sheaf \(\mathcal L\) we have
+\[
+  \Hom(\mathcal L,\mathcal O_{x}) = k(x),\qquad
+  \Ext^{i}(\mathcal L,\mathcal O_{x}) = 0,\quad \text{if } i\ne 0.
+\]
+Therefore, if \(L=\mathcal L[s]\), then it is an invertible object. Now suppose $L$ is an invertible object in $D^b(X)$ and let $m$ be maximal
+ such that $\mathcal H^m := \mathcal H^m(L)\neq 0$.   
+
+From the truncation triangle
+\[\tau_{\le m-1}L \longrightarrow L \longrightarrow \mathcal H^{m}[-m]\]
+and the assumption that $m$ is maximal with $\mathcal H^{m}(L)\neq 0$, one knows that $\tau_{\le m-1}L$ has cohomology only in degrees $< m$. Thus applying \(\Hom(-,\mathcal O_{x_0})\) shows that \(\Hom(\tau_{\le m-1}L, k(x_0)[t])=0\) for $t\ge -m$ and in particular the map $L \longrightarrow \mathcal H^{m}[-m]$ induces isomorphisms on all \(\Hom(-,k(x_0)[t])\) for $t\ge -m$.
+
+
+
+Pick a point $x_0\in \operatorname{supp}(\mathcal H^m)$.  
+Then there exists a nontrivial homomorphism
+\[
+   \mathcal H^m \longrightarrow k(x_0).
+\]
+This is because the stalk
+$M := \mathcal H^m_{x_0}$ is a nonzero finitely generated
+$\mathcal O_{X,x_0}$–module. Let $R := \mathcal O_{X,x_0}$, with maximal
+ideal $\mathfrak m_{x_0}$ and residue field $k(x_0)=R/\mathfrak m_{x_0}$.
+By Nakayama, $M/\mathfrak m_{x_0}M\neq 0$, so $M/\mathfrak m_{x_0}M$ is a
+nonzero finite–dimensional $k(x_0)$–vector space. Choose a nonzero
+$k(x_0)$–linear functional
+\[
+\ell : M/\mathfrak m_{x_0}M \to k(x_0),
+\]
+and compose with the natural surjection $M\twoheadrightarrow
+M/\mathfrak m_{x_0}M$ to obtain a nonzero $R$–linear map
+$M\to k(x_0)$. Using the identification
+\[
+\Hom_X(\mathcal H^m,k(x_0))\cong \Hom_R(M,k(x_0)),
+\]
+this gives a nontrivial homomorphism of sheaves
+$\mathcal H^m\to k(x_0)$.
+
+Hence
+\[
+  0 \neq \Hom\bigl(\mathcal H^m, k(x_0)\bigr)
+    = \Hom\bigl(L, k(x_0)[-m]\bigr),
+\]
+and the nonvanishing of this group forces the codimension of this point object $n_{k(x_0)} = -m$. Apply the same spectral sequence (Proposition~\ref{prop:hyper-ext-spectral-sequence})
+to deduce
+\[
+E_{2}^{1,-m}
+ = \Hom(\mathcal H^{m}, k(x_{0})[1])
+ = \Hom\bigl(L, k(x_{0})[1+n_{k(x_{0})}]\bigr)
+ = 0.
+\]
+Thus, as soon as $x_{0}\in X$ is in the support of $\mathcal H^{m}$, we obtain
+\[
+\Ext^{1}(\mathcal H^{m}, k(x_{0})) = 0.
+\]
+Next, we shall apply the following standard result in commutative algebra:
+Any finite module $M$ over an arbitrary noetherian local ring $(A,\mathfrak m)$
+with $\Ext^{1}_{A}(M, A/\mathfrak m)=0$ is free.
+
+The local-to-global spectral sequence
+\[
+E_{2}^{p,q} = H^{p}\left(X, \cE xt^{q}(\mathcal H^{m}, k(x_{0}))\right)
+  \Longrightarrow
+  \Ext^{p+q}(\mathcal H^{m}, k(x_{0}))
+\]
+allows us to pass from the global vanishing $\Ext^{1}(\mathcal H^{m}, k(x_{0}))=0$
+to the local one $\cE xt^{1}(\mathcal H^{m}, k(x_{0}))=0$.  
+More precisely, as $\cE xt^{0}(\mathcal H^{m}, k(x_{0}))$ is concentrated at
+$x_{0}\in X$, one has
+\[
+E_{2}^{2,0}
+ = H^{2}\left(X, \cE xt^{0}(\mathcal H^{m}, k(x_{0}))\right)
+ = 0.
+\] since sheaves with zero-dimensional support have vanishing higher cohomology.
+  Hence, there are no nontrivial differentials and so
+\[
+E_{2}^{0,1} = E_{\infty}^{0,1}
+\]
+Moreover, since $\cE xt^{1}(\mathcal H^{m}, k(x_{0}))$ is also concentrated at $x_{0}\in X$,
+it is a globally generated sheaf because it is precisely the data of its stalk at $x_{0}$.
+Hence,
+\[
+H^{0}\left(X, \cE xt^{1}(\mathcal H^{m}, k(x_{0}))\right)
+  = E_{2}^{0,1}
+  = 0
+\]
+implies $\cE xt^{1}(\mathcal H^{m}, k(x_{0})) = 0$. But then the aforementioned
+result from commutative algebra shows that $\mathcal H^{m}$ is free in a
+neighbourhood of $x_{0}\in X$.
+
+Since $X$ is irreducible, we have in particular
+$\operatorname{supp}(\mathcal H^{m}) = X$.  
+Thereby, there exists for any $x\in X$ a surjection
+$\mathcal H^{m} \twoheadrightarrow k(x)$. Hence,
+\[
+\Hom(L, k(x)[-m]) = \Hom(\mathcal H^{m}, k(x)) \neq 0.
+\]
+In particular, $n_{k(x)}$ does not depend on $x$. As by assumption,
+\[
+k(x)
+ = \Hom\bigl(L, k(x)[-m]\bigr)
+ = \Hom(\mathcal H^{m}, k(x)),
+\]
+the sheaf $\mathcal H^{m}$ has constant fibre dimension one. Hence
+$\mathcal H^{m}$ is a line bundle.
+\end{proof}
+
+
+\begin{definition}
+  We say a set $\Omega$ is a \textbf{spanning class} if for any $E\in D^b(Y)$,
+\begin{enumerate}
+\item if $\Hom(A,E[i])=0$ for all $A\in\Omega$ and all $i\in\mathbb Z$, then $E=0$;
+\item if $\Hom(E[i],A)=0$ for all $A\in\Omega$ and all $i\in\mathbb Z$, then $E=0$.
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}\label{lem:spanning-class}
+Let $Y$ be a smooth projective variety over a field $k$. Then the set
+\[\Omega = \{k(y)[m] \mid y \in Y \text{ closed point}, m \in \mathbb Z\}\]
+is a spanning class for $D^b_{\mathrm{coh}}(Y)$.
+\end{lemma}
+\begin{proof}
+Assume $\Hom\bigl(k(y)[m],E\bigr)=0$ for all $y,m$. Let $i$ be minimal such that $\mathcal H^i(E)\neq 0$ (if no such $i$ exists, then the natural map $E \to 0$ is an isomorphism). Choose a closed point $y\in \operatorname{Supp}\mathcal H^i(E)$.
+
+For coherent sheaves there is a standard identification
+\[
+\Hom_Y(k(y),\mathcal H^i(E))
+\cong \Hom_{\mathcal O_{Y,y}}\bigl(k(y),\mathcal H^i(E)_y\bigr).
+\]
+Since $\mathcal H^i(E)_y\neq 0$ over the local ring $\mathcal O_{Y,y}$, the simple module $k(y)$ occurs as a quotient of some submodule, so $\Hom_Y(k(y),\mathcal H^i(E))\neq 0$. Now use the natural map $\mathcal H^i(E)[-i]\to E$: composing $k(y)[-i]\longrightarrow \mathcal H^i(E)[-i]\longrightarrow E$ gives a nonzero element of $\Hom(k(y)[-i],E)$, contradicting the assumption. Hence no such $i$ exists and $E=0$.
+
+Assume $\Hom\bigl(E,k(y)[m]\bigr)=0$ for all $y,m$. Let $i$ be maximal such that $\mathcal H^i(E)\neq 0$. Consider the truncation triangle
+\[
+\tau_{<i}E \longrightarrow E \longrightarrow \mathcal H^i(E)[-i]
+\xrightarrow{+1}.
+\]
+Apply $\Hom(-,k(y)[m])$. Using the long exact sequence of $\Hom$'s and the hypothesis, we get \[\Hom\bigl(\mathcal H^i(E)[-i],k(y)[m]\bigr) = 0\] for all $y,m$. Taking $m=i$, we have
+\[
+\Hom\bigl(\mathcal H^i(E),k(y)\bigr) = 0
+\quad\text{for all }y.
+\]
+
+Recall that if $F$ is a coherent sheaf with $\Hom(F,k(y))=0$ for all closed $y$, then $F=0$. 
+
+To see this, suppose $F\neq0$ and choose $y$ in $\operatorname{Supp}F$. Then $F_y\neq0$ as an $\mathcal O_{Y,y}$-module. Since $\mathcal O_{Y,y}$ is local Noetherian, there is a surjection $F_y\twoheadrightarrow k(y)$, which corresponds exactly to a nonzero morphism $F\to k(y)$, a contradiction. Applying this to $F=\mathcal H^i(E)$, we conclude $\mathcal H^i(E)=0$, contradicting the choice of $i$. Hence all cohomology sheaves vanish and $E=0$.
+\end{proof}
+
+\section{The reconstruction theorem}
+We are now ready to state and prove the reconstruction theorem.
+\begin{theorem}[Reconstruction theorem \cite{BondalOrlov2001}]
+Let $X$ and $Y$ be smooth projective varieties over a field $k$
+with either ample or antiample canonical sheaf. If there is an exact equivalence of triangulated categories
+\[D^b_{\mathrm{coh}}(X) \xrightarrow{\sim} D^b_{\mathrm{coh}}(Y),\]
+then $X$ is isomorphic to $Y$.
+\end{theorem}
+
+\begin{proof}
+Assume that under an equivalence 
+\[
+F : D^{b}(X) \xrightarrow{\sim} D^{b}(Y)
+\]
+the structure sheaf $\mathcal O_{X}$ is mapped to $\mathcal O_{Y}$.
+Since any equivalence is compatible with Serre functors 
+and $\dim(X)=\dim(Y)=:n$, this proves
+\[
+F(\omega_{X}^{k})
+ = F\bigl(S_{X}^{k}(\mathcal O_{X})[-kn]\bigr)
+ \simeq
+ S_{Y}^{k}\bigl(F(\mathcal O_{X})\bigr)[-kn]
+ \simeq
+ S_{Y}^{k}(\mathcal O_{Y})[-kn]
+ = \omega_{Y}^{k}.
+\]
+Using that $F$ is fully faithful, we conclude from this that
+\[
+H^{0}(X,\omega_{X}^{k})
+ = \Hom(\mathcal O_{X},\omega_{X}^{k})
+ \simeq \Hom(F(\mathcal O_{X}),F(\omega_{X}^{k}))
+ = \Hom(\mathcal O_{Y},\omega_{Y}^{k})
+ = H^{0}(Y,\omega_{Y}^{k})
+\]
+for all $k$.
+
+Write the product in $\bigoplus H^{0}(X,\omega_{X}^{k})$ as follows:
+for $s_{i}\in \Hom(\mathcal O_{X},\omega_{X}^{k_{i}})$ one has
+\[
+s_{1}\cdot s_{2}
+ = S_{X}^{k_{1}}\bigl(s_{2}\bigr)[-k_{1}n]\circ s_{1}
+\]
+and similarly for sections on~$Y$.  
+Hence, the induced bijection
+\[
+\bigoplus_{k} H^{0}(X,\omega_{X}^{k})
+ \simeq
+\bigoplus_{k} H^{0}(Y,\omega_{Y}^{k})
+\]
+is a ring isomorphism.  If the (anti-)canonical bundle of $Y$ is also ample,
+then this shows
+\[
+X \simeq \Proj\left(\bigoplus\nolimits_{k} H^{0}(X,\omega_{X}^{k})\right)
+ \simeq
+\Proj\left(\bigoplus\nolimits_{k} H^{0}(Y,\omega_{Y}^{k})\right)
+ \simeq Y.
+\]
+
+Thus, under the two assumptions that $F(\mathcal O_{X})\simeq\mathcal O_{Y}$
+and that $\omega_{Y}$ (or $\omega_{Y}^{*}$) is ample, we have proved the
+assertion.  
+
+We now explain how to reduce to this situation. As the notions of pointlike and invertible objects in $D^{b}$ are intrinsic,
+an exact equivalence
+\[
+F : D^{b}(X) \longrightarrow D^{b}(Y)
+\]
+induces bijections
+\[
+\{\text{pointlike objects in $D^{b}(X)$}\}
+ \xleftrightarrow{(*)}
+\{\text{pointlike objects in $D^{b}(Y)$}\}
+\]
+\[
+\big\| \qquad\qquad\qquad\qquad\qquad\qquad\quad\ \rotatebox{90}{$\hookrightarrow$}
+\]
+\[
+\{\,k(x)[m]\mid x\in X,\, m\in\mathbb Z\,\}
+ \qquad\qquad\qquad
+\{\,k(y)[m]\mid y\in Y,\, m\in\mathbb Z\,\}
+\]
+and
+\[
+\{\text{invertible objects in $D^{b}(X)$}\}
+ \xleftrightarrow{(**)}
+\{\text{invertible objects in $D^{b}(Y)$}\}
+\]
+\[
+\big\| \qquad\qquad\qquad\qquad\qquad\qquad\quad\ \rotatebox{-90}{$\hookrightarrow$}
+\]
+\[
+\{\,L[m]\mid L\in \Pic(X)\,\}
+ \qquad\qquad\qquad
+\{\,M[m]\mid M\in \Pic(Y)\,\}.
+\]
+
+The pointlike objects in $D^{b}(X)$ are all
+of the form $k(x)[m]$ for $x\in X$ a closed point and $m\in\mathbb Z$. Any line bundle $L$, in particular $L=\mathcal O_{X}$,
+defines an invertible object in $D^{b}(X)$.  Thus, by $(**)$ also
+$F(\mathcal O_{X})$ is an invertible object in $D^{b}(Y)$ and hence of the form $M[m]$ for some line bundle $M$ on~$Y$.
+
+Compose $F$ with the two equivalences given by $M^\ast\otimes(\,)$ and then $[{-}m]$ to obtain a new equivalence, which we also call $F$. It satisfies
+\[
+F(\mathcal O_X) \simeq \mathcal O_Y.
+\]
+In order to prove the ampleness of the (anti-)canonical bundle
+$\omega_Y$, we shall first prove that point like objects in
+$D^b(Y)$ are of the form $k(y)[m]$.  We will conclude this, without
+assuming any positivity of $\omega_Y$, simply from the existence of the
+equivalence $F$.
+
+Due to $(\ast)$, one finds for any closed point $y\in Y$ a closed point
+$x_y\in X$ and an integer $m_y$ such that
+\[
+k(y)\simeq F\bigl(k(x_y)[m_y]\bigr).
+\]
+
+Suppose there exists a point like object $P\in D^b(Y)$ which is not of
+the form $k(y)[m]$ and denote by $x_P\in X$ the closed point with
+\[
+F\bigl(k(x_P)[m_P]\bigr)\simeq P
+\]
+for a certain $m_P\in\mathbb Z$.  Note that $x_P\neq x_y$ for all
+$y\in Y$.  Hence we have for all $y\in Y$ and all $m\in\mathbb Z$
+\begin{align*}
+\Hom\bigl(P,k(y)[m]\bigr)
+  &= \Hom\bigl(F(k(x_P))[m_P],\,F(k(x_y))[m_y+m]\bigr) \\
+  &= \Hom\bigl(k(x_P),k(x_y)[m_y+m-m_P]\bigr) \\
+  &= 0.
+\end{align*}
+This implies that $P \simeq 0$ because the objects $k(y)[m]$ form a spanning class in $D^b(Y)$ by \ref{lem:spanning-class}.
+This is a contradiction so point like objects in $D^b(Y)$ are exactly the objects of the form
+$k(y)[m]$.
+
+
+Note that together with $F(\mathcal O_X)\simeq\mathcal O_Y$ this also
+implies that for any closed point $x\in X$ there exists a closed point
+$y\in Y$ such that $F(k(x))\simeq k(y)$. This is because in $D^b(Y)$, for any complex $E$, we have
+\[
+\Hom_{D^b(Y)}(\mathcal O_Y,E[m]) \cong H^m(Y,E),
+\]
+where the right-hand side denotes the $m$-th sheaf cohomology group of $E$. This follows from the fact that $\Hom(\mathcal O_Y,E) = \Gamma(E)$.
+
+Now $k(y)$ is a skyscraper sheaf at a single closed point. Thus its sheaf cohomology is
+\[
+\Hom(\mathcal O_Y,k(y)[m]) \cong H^m(Y,k(y))
+=
+\begin{cases}
+k & m=0,\\
+0 & m\neq 0.
+\end{cases}
+\]
+This gives us
+\[
+\Hom(\mathcal O_Y,k(y)[m])\neq 0 \quad\Longleftrightarrow\quad m=0.
+\]
+
+From the point-object discussion above, we already know that for each closed point $x\in X$ there exist a closed point $y\in Y$ and an integer $m$ such that $F(k(x)) \simeq k(y)[m]$.
+
+Now assume additionally that $F(\mathcal O_X) \simeq \mathcal O_Y$. Because $F$ is an equivalence, it preserves $\Hom$-spaces. In particular, for each $x$, we have
+\[
+\Hom(\mathcal O_X, k(x)) \cong \Hom(F(\mathcal O_X),F(k(x))) \cong \Hom(\mathcal O_Y, k(y)[m]).
+\]
+
+The left-hand side is clearly nonzero: there is a nonzero surjective map $\mathcal O_X \twoheadrightarrow k(x)$ obtained by taking the quotient by the maximal ideal at $x$. Therefore the right-hand side is also nonzero:
+\[
+\Hom(\mathcal O_Y, k(y)[m])\neq 0.
+\]By the computation above, this can only happen if $m=0$.
+
+Now we will show that some power $\omega_Y^k$ separates points and
+tangents and thus $\omega_Y$ is ample. We continue to use that for any $k(y)$, with $y\in Y$ a closed point,
+there exists a closed point $x_y\in X$ with $F(k(x_y))=k(y)$ and that
+$F(\omega_X^k)=\omega_Y^k$ for all $k\in\mathbb Z$. The line bundle $\omega_Y^k$ separates points if for any two points
+$y_1\neq y_2\in Y$ the restriction map
+\[
+r_{y_1,y_2} : \omega_Y^k \longrightarrow
+\omega_Y^k(y_1)\oplus\omega_Y^k(y_2)
+\simeq k(y_1)\oplus k(y_2)
+\]
+induces a surjection
+\[
+H^0(r_{y_1,y_2}) : H^0(Y,\omega_Y^k)
+   \longrightarrow H^0\bigl(k(y_1)\oplus k(y_2)\bigr).
+\]
+Let us denote $x_i := x_{y_i}$, $i=1,2$.  Then
+\begin{align*}
+r_{y_1,y_2}
+  &\in \Hom\bigl(\omega_Y^k,\,k(y_1)\oplus k(y_2)\bigr) \\
+  &\simeq \Hom\bigl(F(\omega_X^k),\,F(k(x_1)\oplus k(x_2))\bigr) \\
+  &\simeq \Hom\bigl(\omega_X^k,\,k(x_1)\oplus k(x_2)\bigr).
+\end{align*}
+It indeed corresponds to the restriction map
+\[
+r_{x_1,x_2} : \omega_X^k \longrightarrow k(x_1)\oplus k(x_2)
+\]
+as there is only one
+non-trivial homomorphism $\omega_X^k \to k(x_i)$ up to scaling. Altogether this yields the commutative diagram:
+\[
+\begin{tikzcd}[row sep=3.4em, column sep=4.5em]
+H^{0}(Y,\omega_{Y}^{k})
+  \arrow[r,"H^{0}(r_{y_{1},y_{2}})"]
+  \arrow[d, equal]
+&
+H^{0}\bigl(Y,\,k(y_{1})\oplus k(y_{2})\bigr)
+  \arrow[d, equal]
+\\[0.2em]
+\Hom(\mathcal O_{Y},\omega_{Y}^{k})
+  \arrow[r,"r_{y_{1},y_{2}}^{0}"]
+  \arrow[d, equal]
+&
+\Hom\bigl(\mathcal O_{Y},\,k(y_{1})\oplus k(y_{2})\bigr)
+  \arrow[d, equal]
+\\[0.2em]
+\Hom(\mathcal O_{X},\omega_{X}^{k})
+  \arrow[r,"r_{x_{1},x_{2}}^{0}"]
+  \arrow[d, equal]
+&
+\Hom\bigl(\mathcal O_{X},\,k(x_{1})\oplus k(x_{2})\bigr)
+  \arrow[d, equal]
+\\[0.2em]
+H^{0}(X,\omega_{X}^{k})
+  \arrow[r,"H^{0}(r_{x_{1},x_{2}})"]
+&
+H^{0}\bigl(X,\,k(x_{1})\oplus k(x_{2})\bigr).
+\end{tikzcd}
+\]
+
+As, by assumption, the line bundle $\omega_{X}^{k}$ is very ample for
+$k\gg 0$ (or $k\ll 0$) and, in particular, separates points, the map
+\[
+H^{0}(r_{x_{1},x_{2}})
+\]
+is surjective.  The commutativity of the diagram allows us to conclude
+that also $H^{0}(r_{y_{1},y_{2}})$ is surjective.
+
+One proceeds in a similar fashion to prove that $\omega_{Y}^{k}$
+separates tangent directions if $\omega_{X}^{k}$ does. Thus, we have
+proved that $\omega_{Y}$ (or $\omega_{Y}^{*}$) is ample and this completes
+the proof of the theorem.
+\end{proof}
+
+\bibliography{refs}{}
+% need refs.bib file
+\bibliographystyle{plain}
+\end{document}

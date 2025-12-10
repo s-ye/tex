@@ -522,7 +522,7 @@ Under left multiplication this would read
 \nabla^2(a) = R\cdot a = Ra,
 \]
 which coincides with $[R,a]$ only if $a$ commutes with $R$.  Thus, in general,
-$\nabla^2 \neq R\cdot(-)$ on $\mathcal{A}$, and hence $\mathcal{A}$ is \emph{not}
+$\nabla^2 \neq R\cdot(-)$ on $\mathcal{A}$, and hence $\mathcal{A}$ is not
 a dg-module over itself (with the naive left--multiplication structure).
 \end{example}
 
@@ -568,7 +568,7 @@ d^0 d^1 = W\cdot\id_{P^1}.
 \]
 That is, $P^0 \xrightarrow{d^0} P^1 \xrightarrow{d^1} P^0$ is a
 $\Z/2$-periodic complex whose "differential" squares to multiplication
-by $W$.  This is exactly a \emph{matrix factorization} of $W$ over $R$.
+by $W$.  This is exactly a matrix factorization of $W$ over $R$.
 \end{example}
 
 For a pair of dg-modules $M,N$ (i.e.\ matrix factorizations of $W$),
@@ -598,14 +598,14 @@ so $d_{M,N}$ is indeed a differential.  In this way the matrix
 factorizations of $(R,W)$ form a dg-category: objects are
 dg-modules $(P,d_P)$ as above, and the morphism spaces are the complexes
 $\Hom_A(M,N)$ with this differential.  Passing to $H^0$ of these Hom
-complexes produces the corresponding \emph{homotopy category} of matrix
+complexes produces the corresponding homotopy category of matrix
 factorizations.
 
 For a pair of dg-modules $M,N$, we have a differential $d_{M,N}$ on $\Hom_A(M,N)$ defined by
 \[
 d_{M,N}(f) = d_N \circ f \;-\; (-1)^{|f|}\, f \circ d_M.
 \]
-Thus we obtain a dg-category of dg-modules. One can form a \emph{homotopy category}.\begin{definition}
+Thus we obtain a dg-category of dg-modules. One can form a homotopy category.\begin{definition}
    A dg-category $\mathcal{C}$ gives, for each pair of objects $X,Y$, a cochain complex
 \[
 \Hom_{\mathcal{C}}^\bullet(X,Y)
@@ -666,7 +666,7 @@ and these are closed and of degree zero.
 
 \begin{definition}\label{def:curly-Br}
 Given an LG-model \((X,W)\) we define a category
-\(\mathcal{B}r(X,W)\) \emph{enriched} over the dg-category
+\(\mathcal{B}r(X,W)\) enriched over the dg-category
 \(\mathbf{dg}_R\Vect(X)\).  The objects of \(\mathcal{B}r(X,W)\) are the \(B\)-branes
 on \((X,W)\), and the morphisms between two branes \(E\) and \(F\) are given by the
 object
@@ -1411,8 +1411,8 @@ is an equivalence of dg-categories.
 \end{theorem}
 
 The weight condition on $\sigma_i^\ast F^\bullet \in D^b(Z_i/L_i)$ is called the
-\emph{grade restriction rule} and the interval $[w_i, w_i+\eta_i)$ is
-the \emph{grade restriction window}.  The theorem follows immediately
+\textbf{grade restriction rule} and the interval $[w_i, w_i+\eta_i)$ is
+the \textbf{grade restriction window}.  The theorem follows immediately
 from the corresponding statement for a single closed KN stratum by
 considering the chain of open subsets
 \[
@@ -1461,7 +1461,7 @@ Z
 \bigr\}.
 \]
 
-Since $\lambda$ is central in the Levi $L$, the group $L$ acts on $X^\lambda$ and preserves $Z$.  The quotient stack $Z/L$ is often called the \emph{critical locus} of the wall crossing.
+Since $\lambda$ is central in the Levi $L$, the group $L$ acts on $X^\lambda$ and preserves $Z$.  The quotient stack $Z/L$ is often called the critical locus of the wall crossing.
 \end{remark}
 
 \begin{lemma}[{\cite[Lemma~2.2]{HalpernLeistner2014}}]\label{lem:iota-equivalence}
@@ -2642,9 +2642,9 @@ Let $X$ be a smooth projective variety over a field $k$ with either ample or ant
   for all coherent sheaves $F,G$ on $X$. This extends to complexes in $\cD$ by taking injective resolutions. Thus $S$ is a Serre functor.
 \end{proof}
   \begin{definition}[Point object]
-An object $P \in \mathcal{D}$ is called a \textbf{point object of codimension $s$} if
-\begin{enumerate}[label=\roman*)]
-    \item $S_{\mathcal{D}}(P) \simeq P[s]$,
+An object $P \in \mathcal{D}$ is called a \textbf{point object of codimension $n(P)$} if
+\begin{enumerate}
+    \item $S_{\mathcal{D}}(P) \simeq P[n(P)]$,
     \item $\Hom^{<0}(P,P) = 0$,
     \item $\Hom^0(P,P) = k(P)$,
 \end{enumerate}
@@ -2736,7 +2736,7 @@ Thus the \emph{associated graded} of this filtration is
 
 Now apply the derived functor
 \[
-\mathbf R\!\Hom(-,P): D^b(\Coh X)^{op}\longrightarrow D^b(\mathrm{Vect}_k)
+\mathbf R\Hom(-,P): D^b(\Coh X)^{op}\longrightarrow D^b(\mathrm{Vect}_k)
 \]
 to this filtered object.  We obtain a decreasing filtration
 \[
@@ -2744,32 +2744,32 @@ to this filtered object.  We obtain a decreasing filtration
 \]
 on the complex
 \[
-C := \mathbf R\!\Hom(P,P)
+C := \mathbf R\Hom(P,P)
 \]
 defined by
 \[
-F^i C := \mathbf R\!\Hom(P_{\le i},P).
+F^i C := \mathbf R\Hom(P_{\le i},P).
 \]
 The successive quotients of this filtration are
 \[
 \Gr^i C
 := F^iC/F^{i+1}C
-\simeq \mathbf R\!\Hom(\Gr^i P,P)
-\simeq \mathbf R\!\Hom(\cH^i(P)[-i],P)
-\simeq \mathbf R\!\Hom(\cH^i(P),P)[-i].
+\simeq \mathbf R\Hom(\Gr^i P,P)
+\simeq \mathbf R\Hom(\cH^i(P)[-i],P)
+\simeq \mathbf R\Hom(\cH^i(P),P)[-i].
 \]
 In our situation,
 \[
 E_1^{p,q}
   = H^{p+q}\bigl(\Gr^p C\bigr)
   \cong
-  H^{p+q}\bigl(\mathbf R\!\Hom(\cH^p(P),P)[-p]\bigr)
+  H^{p+q}\bigl(\mathbf R\Hom(\cH^p(P),P)[-p]\bigr)
   \cong
-  H^{p+q-p}\bigl(\mathbf R\!\Hom(\cH^p(P),P)\bigr).
+  H^{p+q-p}\bigl(\mathbf R\Hom(\cH^p(P),P)\bigr).
 \]
 But
 \[
-H^{r}\bigl(\mathbf R\!\Hom(\cH^p(P),P)\bigr)
+H^{r}\bigl(\mathbf R\Hom(\cH^p(P),P)\bigr)
   \;\cong\;
   \Ext^r\bigl(\cH^p(P),P\bigr),
 \]
@@ -2789,20 +2789,20 @@ Filter \(B^\bullet\) by its stupid truncations
 B_{\le i}^\bullet,\qquad
 \Gr^i B^\bullet \simeq \cH^i(B^\bullet)[-i].
 \]
-Apply \(\mathbf R\!\Hom(A,-)\). This gives a decreasing filtration
+Apply \(\mathbf R\Hom(A,-)\). This gives a decreasing filtration
 \[
 G^i K
-:= \mathbf R\!\Hom\bigl(A,B_{\le i}^\bullet\bigr)\subset
-   \mathbf R\!\Hom\bigl(A,B^\bullet\bigr)=:K
+:= \mathbf R\Hom\bigl(A,B_{\le i}^\bullet\bigr)\subset
+   \mathbf R\Hom\bigl(A,B^\bullet\bigr)=:K
 \]
-of the complex \(K = \mathbf R\!\Hom(A,B^\bullet)\).
+of the complex \(K = \mathbf R\Hom(A,B^\bullet)\).
 The associated graded pieces are
 \[
 \Gr^i K
 := G^iK/G^{i-1}K
-\simeq \mathbf R\!\Hom\bigl(A,\Gr^i B^\bullet\bigr)
-\simeq \mathbf R\!\Hom\bigl(A,\cH^i(B^\bullet)[-i]\bigr)
-\simeq \mathbf R\!\Hom\bigl(A,\cH^i(B^\bullet)\bigr)[-i].
+\simeq \mathbf R\Hom\bigl(A,\Gr^i B^\bullet\bigr)
+\simeq \mathbf R\Hom\bigl(A,\cH^i(B^\bullet)[-i]\bigr)
+\simeq \mathbf R\Hom\bigl(A,\cH^i(B^\bullet)\bigr)[-i].
 \]
 
 The spectral sequence of this filtered complex has
@@ -2810,7 +2810,7 @@ The spectral sequence of this filtered complex has
 {}^{(A,B)}E_1^{i,j}
   = H^{i+j}(\Gr^i K)
   \cong
-  H^{j}\mathbf R\!\Hom\bigl(A,\cH^i(B^\bullet)\bigr)
+  H^{j}\mathbf R\Hom\bigl(A,\cH^i(B^\bullet)\bigr)
   \cong
   \Ext^{j}\bigl(A,\cH^i(B^\bullet)\bigr),
 \]
@@ -2890,9 +2890,9 @@ which is the claimed description of the \(E_2\)-page.
 Since \(P^\bullet\) is bounded, only finitely many \(i\) contribute for
 each \((p,q)\); the filtrations involved are finite, and hence both the
 inner hyper--\(\Ext\) spectral sequences and the outer one for
-\(C = \mathbf R\!\Hom(P,P)\) are bounded and converge. Thus we have proved the following:
+\(C = \mathbf R\Hom(P,P)\) are bounded and converge. Thus we have proved the following:
 
-\begin{proposition}
+\begin{proposition}\label{prop:hyper-ext-spectral-sequence}
 Let \(\mathcal A\) be an abelian category, and let
 \(P^\bullet \in D^b(\mathcal A)\) be a bounded complex.
 There is a convergent spectral sequence with $E_1$--page
@@ -2945,9 +2945,7 @@ The possible incoming differentials come from
 E_r^{-r,\;q_0+r-1},
 \]
 but $p=-r<0$ forces $\Ext^p(-,-)=0$, so these groups are always zero.
-Thus there are no incoming differentials either.
-
-Hence the class $[\phi]$ survives to the limit:
+Thus there are no incoming differentials either. Hence the class $[\phi]$ survives to the limit:
 \[
 0\neq[\phi]\in E_\infty^{0,\;q_0}.
 \]
@@ -2998,50 +2996,386 @@ For an invertible sheaf \(\mathcal L\) we have
 \]
 Therefore, if \(L=\mathcal L[s]\), then it is an invertible object.
 
-Now let \(\mathcal H^{i}\) be the cohomology sheaves of an invertible
-object \(L\).  Consider the spectral sequence that calculates
-\(\Hom^{\bullet}(L,\mathcal O_{x})\) for a point \(x\in X\) by means of
-\(\Hom^{i}(\mathcal H^{j},\mathcal O_{x})\):
+Suppose $L$ is an invertible object in $D^b(X)$ and let $m$ be maximal
+ such that $\mathcal H^m := \mathcal H^m(L)\neq 0$.   
+
+From the truncation triangle
+\[\tau_{\le m-1}L \longrightarrow L \longrightarrow \mathcal H^{m}[-m]\]
+and the assumption that $m$ is maximal with $\mathcal H^{m}(L)\neq 0$, one knows that $\tau_{\le m-1}L$ has cohomology only in degrees $< m$. Thus applying \(\Hom(-,\mathcal O_{x_0})\) shows that \(\Hom(\tau_{\le m-1}L, k(x_0)[t])=0\) for $t\ge -m$ and in particular the map $L \longrightarrow \mathcal H^{m}[-m]$ induces isomorphisms on all \(\Hom(-,k(x_0)[t])\) for $t\ge -m$.
+
+
+
+Pick a point $x_0\in \operatorname{supp}(\mathcal H^m)$.  
+Then there exists a nontrivial homomorphism
 \[
-  E_{2}^{p,q} = \Hom^{p}(\mathcal H^{q},\mathcal O_{x})
-  \;\Longrightarrow\; \Ext^{p-q}(L,\mathcal O_{x}).
+   \mathcal H^m \longrightarrow k(x_0).
 \]
+This is because the stalk
+$M := \mathcal H^m_{x_0}$ is a nonzero finitely generated
+$\mathcal O_{X,x_0}$–module. Let $R := \mathcal O_{X,x_0}$, with maximal
+ideal $\mathfrak m_{x_0}$ and residue field $k(x_0)=R/\mathfrak m_{x_0}$.
+By Nakayama, $M/\mathfrak m_{x_0}M\neq 0$, so $M/\mathfrak m_{x_0}M$ is a
+nonzero finite–dimensional $k(x_0)$–vector space. Choose a nonzero
+$k(x_0)$–linear functional
+\[
+\ell : M/\mathfrak m_{x_0}M \to k(x_0),
+\]
+and compose with the natural surjection $M\twoheadrightarrow
+M/\mathfrak m_{x_0}M$ to obtain a nonzero $R$–linear map
+$M\to k(x_0)$. Using the identification
+\[
+\Hom_X(\mathcal H^m,k(x_0))\cong \Hom_R(M,k(x_0)),
+\]
+this gives a nontrivial homomorphism of sheaves
+$\mathcal H^m\to k(x_0)$.
 
-Let \(\mathcal H^{q_{0}}\) be the nontrivial cohomology sheaf with
-maximal index.  Then for any closed point \(x\in X\) in the support of
-\(\mathcal H^{q_{0}}\) we have \(\Hom(\mathcal H^{q_{0}},\mathcal O_{x})\neq 0\).
-But both \(\Hom(\mathcal H^{q_{0}},\mathcal O_{x})\) and
-\(\Ext^{1}(\mathcal H^{q_{0}},\mathcal O_{x})\) are intact under the
-differentials of the spectral sequence.  Therefore, by the definition of
-an invertible object we obtain that for any point \(x\) in the support
-of \(\mathcal H^{q_{0}}\)
-\begin{align*}
-  \text{a)}\quad &\Hom(\mathcal H^{q_{0}},\mathcal O_{x}) = k(x),\\
-  \text{b)}\quad &\Ext^{1}(\mathcal H^{q_{0}},\mathcal O_{x}) = 0.
-\end{align*}
+Hence
+\[
+  0 \neq \Hom\bigl(\mathcal H^m, k(x_0)\bigr)
+    = \Hom\bigl(L, k(x_0)[-m]\bigr),
+\]
+and the nonvanishing of this group forces the codimension of this point object $n_{k(x_0)} = -m$. Apply the same spectral sequence (Proposition~\ref{prop:hyper-ext-spectral-sequence})
+to deduce
+\[
+E_{2}^{1,-m}
+ = \Hom(\mathcal H^{m}, k(x_{0})[1])
+ = \Hom\bigl(L, k(x_{0})[1+n_{k(x_{0})}]\bigr)
+ = 0.
+\]
+Thus, as soon as $x_{0}\in X$ is in the support of $\mathcal H^{m}$, we obtain
+\[
+\Ext^{1}(\mathcal H^{m}, k(x_{0})) = 0.
+\]
+Next, we shall apply the following standard result in commutative algebra:
+Any finite module $M$ over an arbitrary noetherian local ring $(A,\mathfrak m)$
+with $\Ext^{1}_{A}(M, A/\mathfrak m)=0$ is free.
 
-Since \(X\) is smooth and irreducible, it follows from b) that
-\(\mathcal H^{q_{0}}\) is locally free on \(X\).  From a) one deduces
-that it is invertible.
+The local-to-global spectral sequence
+\[
+E_{2}^{p,q} = H^{p}\left(X, \cE xt^{q}(\mathcal H^{m}, k(x_{0}))\right)
+  \;\Longrightarrow\;
+  \Ext^{p+q}(\mathcal H^{m}, k(x_{0}))
+\]
+allows us to pass from the global vanishing $\Ext^{1}(\mathcal H^{m}, k(x_{0}))=0$
+to the local one $\cE xt^{1}(\mathcal H^{m}, k(x_{0}))=0$.  
+More precisely, as $\cE xt^{0}(\mathcal H^{m}, k(x_{0}))$ is concentrated at
+$x_{0}\in X$, one has
+\[
+E_{2}^{2,0}
+ = H^{2}\left(X, \cE xt^{0}(\mathcal H^{m}, k(x_{0}))\right)
+ = 0.
+\] since sheaves with zero-dimensional support have vanishing higher cohomology.
+  Hence, there are no nontrivial differentials and so
+\[
+E_{2}^{0,1} = E_{\infty}^{0,1}
+\]
+Moreover, since $\cE xt^{1}(\mathcal H^{m}, k(x_{0}))$ is also concentrated at $x_{0}\in X$,
+it is a globally generated sheaf because it is precisely the data of its stalk at $x_{0}$.
+Hence,
+\[
+H^{0}\left(X, \cE xt^{1}(\mathcal H^{m}, k(x_{0}))\right)
+  = E_{2}^{0,1}
+  = 0
+\]
+implies $\cE xt^{1}(\mathcal H^{m}, k(x_{0})) = 0$. But then the aforementioned
+result from commutative algebra shows that $\mathcal H^{m}$ is free in a
+neighbourhood of $x_{0}\in X$.
 
-This implies that \(\Ext^{i}(\mathcal H^{q_{0}},\mathcal O_{x}) = 0\) for
-\(i>0\), and \(\Hom(\mathcal H^{q_{0}-1},\mathcal O_{x})\) is intact
-under the differentials of the spectral sequence.  This means that
-\(\Hom(\mathcal H^{q_{0}-1},\mathcal O_{x}) = 0\) for any \(x\in X\),
-i.e.\ \(\mathcal H^{q_{0}-1} = 0\).  Repeating this argument for
-\(\mathcal H^{q}\) with smaller \(q\), we easily see that all
-\(\mathcal H^{q}\), except \(q=q_{0}\), are trivial.  This proves the
-proposition.
+Since $X$ is irreducible, we have in particular
+$\operatorname{supp}(\mathcal H^{m}) = X$.  
+Thereby, there exists for any $x\in X$ a surjection
+$\mathcal H^{m} \twoheadrightarrow k(x)$. Hence,
+\[
+\Hom(L, k(x)[-m]) = \Hom(\mathcal H^{m}, k(x)) \neq 0.
+\]
+In particular, $n_{k(x)}$ does not depend on $x$. As by assumption,
+\[
+k(x)
+ = \Hom\bigl(L, k(x)[-m]\bigr)
+ = \Hom(\mathcal H^{m}, k(x)),
+\]
+the sheaf $\mathcal H^{m}$ has constant fibre dimension one. Hence
+$\mathcal H^{m}$ is a line bundle.
 \end{proof}
 
 
 We are now ready to state and prove the reconstruction theorem.
-\begin{theorem}[Reconstruction theorem]
+\begin{theorem}[Reconstruction theorem \cite{BondalOrlov2001}]
 Let $X$ and $Y$ be smooth projective varieties over a field $k$
 with either ample or antiample canonical sheaf. If there is an exact equivalence of triangulated categories
 \[D^b_{\mathrm{coh}}(X) \xrightarrow{\sim} D^b_{\mathrm{coh}}(Y),\]
 then $X$ is isomorphic to $Y$.
 \end{theorem}
+
+\begin{proof}
+Assume that under an equivalence 
+\[
+F : D^{b}(X) \;\xrightarrow{\;\sim\;}\; D^{b}(Y)
+\]
+the structure sheaf $\mathcal O_{X}$ is mapped to $\mathcal O_{Y}$.
+Since any equivalence is compatible with Serre functors 
+and $\dim(X)=\dim(Y)=:n$, this proves
+\[
+F(\omega_{X}^{k})
+ = F\bigl(S_{X}^{k}(\mathcal O_{X})[-kn]\bigr)
+ \;\simeq\;
+ S_{Y}^{k}\bigl(F(\mathcal O_{X})\bigr)[-kn]
+ \;\simeq\;
+ S_{Y}^{k}(\mathcal O_{Y})[-kn]
+ = \omega_{Y}^{k}.
+\]
+Using that $F$ is fully faithful, we conclude from this that
+\[
+H^{0}(X,\omega_{X}^{k})
+ = \Hom(\mathcal O_{X},\omega_{X}^{k})
+ \simeq \Hom(F(\mathcal O_{X}),F(\omega_{X}^{k}))
+ = \Hom(\mathcal O_{Y},\omega_{Y}^{k})
+ = H^{0}(Y,\omega_{Y}^{k})
+\]
+for all $k$.
+
+The product in $\bigoplus H^{0}(X,\omega_{X}^{k})$ can be expressed as follows: for $s_{i}\in H^{0}(X,\omega_{X}^{k_{i}})
+= \Hom(\mathcal O_{X},\omega_{X}^{k_{i}})$ one has
+\[
+s_{1}\cdot s_{2}
+ = S_{X}^{k_{1}}\bigl(s_{2}\bigr)[-k_{1}n]\circ s_{1}
+\]
+and similarly for sections on~$Y$.  
+Hence, the induced bijection
+\[
+\bigoplus_{k} H^{0}(X,\omega_{X}^{k})
+ \;\simeq\;
+\bigoplus_{k} H^{0}(Y,\omega_{Y}^{k})
+\]
+is a ring isomorphism.  If the (anti-)canonical bundle of $Y$ is also ample,
+then this shows
+\[
+X \simeq \Proj\left(\bigoplus\nolimits_{k} H^{0}(X,\omega_{X}^{k})\right)
+ \;\simeq\;
+\Proj\left(\bigoplus\nolimits_{k} H^{0}(Y,\omega_{Y}^{k})\right)
+ \;\simeq\; Y.
+\]
+
+Thus, under the two assumptions that $F(\mathcal O_{X})\simeq\mathcal O_{Y}$
+and that $\omega_{Y}$ (or $\omega_{Y}^{*}$) is ample, we have proved the
+assertion.  
+
+We now explain how to reduce to this situation. As the notions of pointlike and invertible objects in $D^{b}$ are intrinsic,
+an exact equivalence
+\[
+F : D^{b}(X) \longrightarrow D^{b}(Y)
+\]
+induces bijections
+\[
+\{\text{pointlike objects in $D^{b}(X)$}\}
+ \;\xleftrightarrow{(*)}\;
+\{\text{pointlike objects in $D^{b}(Y)$}\}
+\]
+\[
+\big\| \qquad\qquad\qquad\qquad\qquad\qquad\quad\ \rotatebox{90}{$\hookrightarrow$}
+\]
+\[
+\{\,k(x)[m]\mid x\in X,\, m\in\mathbb Z\,\}
+ \qquad\qquad\qquad
+\{\,k(y)[m]\mid y\in Y,\, m\in\mathbb Z\,\}
+\]
+and
+\[
+\{\text{invertible objects in $D^{b}(X)$}\}
+ \;\xleftrightarrow{(**)}\;
+\{\text{invertible objects in $D^{b}(Y)$}\}
+\]
+\[
+\big\| \qquad\qquad\qquad\qquad\qquad\qquad\quad\ \rotatebox{-90}{$\hookrightarrow$}
+\]
+\[
+\{\,L[m]\mid L\in \Pic(X)\,\}
+ \qquad\qquad\qquad
+\{\,M[m]\mid M\in \Pic(Y)\,\}.
+\]
+
+The pointlike objects in $D^{b}(X)$ are all
+of the form $k(x)[m]$ for $x\in X$ a closed point and $m\in\mathbb Z$. Any line bundle $L$, in particular $L=\mathcal O_{X}$,
+defines an invertible object in $D^{b}(X)$.  Thus, by $(**)$ also
+$F(\mathcal O_{X})$ is an invertible object in $D^{b}(Y)$ and hence of the form $M[m]$ for some line bundle $M$ on~$Y$.
+
+Compose $F$ with the two equivalences given by $M^\ast\otimes(\,)$,
+respectively by the shift $T^{-m}$.  The new equivalence, which we
+continue to call $F$, satisfies
+\[
+F(\mathcal O_X) \simeq \mathcal O_Y.
+\]
+In order to prove the ampleness of the (anti-)canonical bundle
+$\omega_Y$, we shall first prove that point like objects in
+$D^b(Y)$ are of the form $k(y)[m]$.  We will conclude this, without
+assuming any positivity of $\omega_Y$, simply from the existence of the
+equivalence $F$.
+
+Due to $(\ast)$, one finds for any closed point $y\in Y$ a closed point
+$x_y\in X$ and an integer $m_y$ such that
+\[
+k(y)\;\simeq\; F\bigl(k(x_y)[m_y]\bigr).
+\]
+
+Suppose there exists a point like object $P\in D^b(Y)$ which is not of
+the form $k(y)[m]$ and denote by $x_P\in X$ the closed point with
+\[
+F\bigl(k(x_P)[m_P]\bigr)\;\simeq\; P
+\]
+for a certain $m_P\in\mathbb Z$.  Note that $x_P\neq x_y$ for all
+$y\in Y$.  Hence we have for all $y\in Y$ and all $m\in\mathbb Z$
+\begin{align*}
+\Hom\bigl(P,k(y)[m]\bigr)
+  &= \Hom\bigl(F(k(x_P))[m_P],\,F(k(x_y))[m_y+m]\bigr) \\
+  &= \Hom\bigl(k(x_P),k(x_y)[m_y+m-m_P]\bigr) \\
+  &= 0.
+\end{align*}
+This implies that $P \simeq 0$ because the objects $k(y)[m]$ form a spanning class in $D^b(Y)$.
+This is a contradiction so point like objects in $D^b(Y)$ are exactly the objects of the form
+$k(y)[m]$.
+
+\begin{remark}
+Recall that we say a set $\Omega$ is a \textbf{spanning class} if for any $E\in D^b(Y)$,
+\begin{enumerate}
+\item if $\Hom(A,E[i])=0$ for all $A\in\Omega$ and all $i\in\mathbb Z$, then $E=0$;
+\item if $\Hom(E[i],A)=0$ for all $A\in\Omega$ and all $i\in\mathbb Z$, then $E=0$.
+\end{enumerate}
+We show both for $\Omega=\{k(y)[m]\}$.
+Assume $\Hom\bigl(k(y)[m],E\bigr)=0$ for all $y,m$. Let $i$ be minimal such that $\mathcal H^i(E)\neq 0$ (if no such $i$ exists, then the natural map $E \to 0$ is an isomorphism). Choose a closed point $y\in \operatorname{Supp}\mathcal H^i(E)$.
+
+For coherent sheaves there is a standard identification
+\[
+\Hom_Y(k(y),\mathcal H^i(E))
+\;\cong\; \Hom_{\mathcal O_{Y,y}}\bigl(k(y),\mathcal H^i(E)_y\bigr).
+\]
+Since $\mathcal H^i(E)_y\neq 0$ over the local ring $\mathcal O_{Y,y}$, the simple module $k(y)$ occurs as a quotient of some submodule, so $\Hom_Y(k(y),\mathcal H^i(E))\neq 0$. Now use the natural map $\mathcal H^i(E)[-i]\to E$: composing $k(y)[-i]\longrightarrow \mathcal H^i(E)[-i]\longrightarrow E$ gives a nonzero element of $\Hom(k(y)[-i],E)$, contradicting the assumption. Hence no such $i$ exists and $E=0$.
+
+Assume $\Hom\bigl(E,k(y)[m]\bigr)=0$ for all $y,m$. Let $i$ be maximal such that $\mathcal H^i(E)\neq 0$. Consider the truncation triangle
+\[
+\tau_{<i}E \longrightarrow E \longrightarrow \mathcal H^i(E)[-i]
+\xrightarrow{+1}.
+\]
+Apply $\Hom(-,k(y)[m])$. Using the long exact sequence of $\Hom$'s and the hypothesis, we get \[\Hom\bigl(\mathcal H^i(E)[-i],k(y)[m]\bigr) = 0\] for all $y,m$. Taking $m=i$, we have
+\[
+\Hom\bigl(\mathcal H^i(E),k(y)\bigr) = 0
+\quad\text{for all }y.
+\]
+
+Now use the elementary sheaf-theoretic lemma: if $F$ is a coherent sheaf with $\Hom(F,k(y))=0$ for all closed $y$, then $F=0$. 
+
+To see this, suppose $F\neq0$ and choose $y$ in $\operatorname{Supp}F$. Then $F_y\neq0$ as an $\mathcal O_{Y,y}$-module. Since $\mathcal O_{Y,y}$ is local Noetherian, there is a surjection $F_y\twoheadrightarrow k(y)$, which corresponds exactly to a nonzero morphism $F\to k(y)$, a contradiction. Applying this to $F=\mathcal H^i(E)$, we conclude $\mathcal H^i(E)=0$, contradicting the choice of $i$. Hence all cohomology sheaves vanish and $E=0$.
+\end{remark}
+
+Note that together with $F(\mathcal O_X)\simeq\mathcal O_Y$ this also
+implies that for any closed point $x\in X$ there exists a closed point
+$y\in Y$ such that $F(k(x))\simeq k(y)$. 
+
+This is because in $D^b(\Coh Y)$, for any complex $E$, we have
+\[
+\Hom_{D^b(Y)}(\mathcal O_Y,E[m]) \cong H^m(Y,E),
+\]
+where the right-hand side denotes the $m$-th sheaf cohomology group of $E$. This follows from the fact that $\Hom(\mathcal O_Y,E) = \Gamma(E)$.
+
+Now $k(y)$ is a skyscraper sheaf at a single closed point. Thus its sheaf cohomology is
+\[
+\Hom(\mathcal O_Y,k(y)[m]) \cong H^m(Y,k(y))
+=
+\begin{cases}
+k & m=0,\\
+0 & m\neq 0.
+\end{cases}
+\]
+This gives us
+\[
+\Hom(\mathcal O_Y,k(y)[m])\neq 0 \quad\Longleftrightarrow\quad m=0.
+\]
+
+From the point-object discussion above, we already know that for each closed point $x\in X$ there exist a closed point $y\in Y$ and an integer $m$ such that $F(k(x)) \simeq k(y)[m]$.
+
+Now assume additionally that $F(\mathcal O_X) \simeq \mathcal O_Y$. Because $F$ is an equivalence, it preserves $\Hom$-spaces. In particular, for each $x$, we have
+\[
+\Hom(\mathcal O_X, k(x)) \cong \Hom(F(\mathcal O_X),F(k(x))) \cong \Hom(\mathcal O_Y, k(y)[m]).
+\]
+
+The left-hand side is clearly nonzero: there is a nonzero surjective map $\mathcal O_X \twoheadrightarrow k(x)$ obtained by taking the quotient by the maximal ideal at $x$. Therefore the right-hand side is also nonzero:
+\[
+\Hom(\mathcal O_Y, k(y)[m])\neq 0.
+\]By the computation above, this can only happen if $m=0$.
+
+
+We will show that some power $\omega_Y^k$ separates points and
+tangents and thus $\omega_Y$ is ample.
+
+We continue to use that for any $k(y)$, with $y\in Y$ a closed point,
+there exists a closed point $x_y\in X$ with $F(k(x_y))=k(y)$ and that
+$F(\omega_X^k)=\omega_Y^k$ for all $k\in\mathbb Z$. The line bundle $\omega_Y^k$ separates points if for any two points
+$y_1\neq y_2\in Y$ the restriction map
+\[
+r_{y_1,y_2} : \omega_Y^k \longrightarrow
+\omega_Y^k(y_1)\oplus\omega_Y^k(y_2)
+\simeq k(y_1)\oplus k(y_2)
+\]
+induces a surjection
+\[
+H^0(r_{y_1,y_2}) : H^0(Y,\omega_Y^k)
+   \longrightarrow H^0\bigl(k(y_1)\oplus k(y_2)\bigr).
+\]
+Let us denote $x_i := x_{y_i}$, $i=1,2$.  Then
+\begin{align*}
+r_{y_1,y_2}
+  &\in \Hom\bigl(\omega_Y^k,\,k(y_1)\oplus k(y_2)\bigr) \\
+  &\simeq \Hom\bigl(F(\omega_X^k),\,F(k(x_1)\oplus k(x_2))\bigr) \\
+  &\simeq \Hom\bigl(\omega_X^k,\,k(x_1)\oplus k(x_2)\bigr).
+\end{align*}
+It indeed corresponds to the restriction map
+\[
+r_{x_1,x_2} : \omega_X^k \longrightarrow k(x_1)\oplus k(x_2)
+\]
+(up to isomorphism, which we will ignore), as there is only one
+non-trivial homomorphism $\omega_X^k \to k(x_i)$ (up to scaling). Altogether this yields the commutative diagram:
+\[
+\begin{tikzcd}[row sep=3.4em, column sep=4.5em]
+H^{0}(Y,\omega_{Y}^{k})
+  \arrow[r,"H^{0}(r_{y_{1},y_{2}})"]
+  \arrow[d, equal]
+&
+H^{0}\bigl(Y,\,k(y_{1})\oplus k(y_{2})\bigr)
+  \arrow[d, equal]
+\\[0.2em]
+\Hom(\mathcal O_{Y},\omega_{Y}^{k})
+  \arrow[r,"r_{y_{1},y_{2}}^{0}"]
+  \arrow[d, equal]
+&
+\Hom\bigl(\mathcal O_{Y},\,k(y_{1})\oplus k(y_{2})\bigr)
+  \arrow[d, equal]
+\\[0.2em]
+\Hom(\mathcal O_{X},\omega_{X}^{k})
+  \arrow[r,"r_{x_{1},x_{2}}^{0}"]
+  \arrow[d, equal]
+&
+\Hom\bigl(\mathcal O_{X},\,k(x_{1})\oplus k(x_{2})\bigr)
+  \arrow[d, equal]
+\\[0.2em]
+H^{0}(X,\omega_{X}^{k})
+  \arrow[r,"H^{0}(r_{x_{1},x_{2}})"]
+&
+H^{0}\bigl(X,\,k(x_{1})\oplus k(x_{2})\bigr).
+\end{tikzcd}
+\]
+
+As, by assumption, the line bundle $\omega_{X}^{k}$ is very ample for
+$k\gg 0$ (or $k\ll 0$) and, in particular, separates points, the map
+\[
+H^{0}(r_{x_{1},x_{2}})
+\]
+is surjective.  The commutativity of the diagram allows us to conclude
+that also $H^{0}(r_{y_{1},y_{2}})$ is surjective.
+
+One proceeds in a similar fashion to prove that $\omega_{Y}^{k}$
+separates tangent directions if $\omega_{X}^{k}$ does. Thus, we have
+proved that $\omega_{Y}$ (or $\omega_{Y}^{*}$) is ample and this completes
+the proof of the theorem.
+\end{proof}
 
 
 \section{Appendix: Semiorthogonal decompositions}
