@@ -1,0 +1,244 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Derived Categories and Bondal--Orlov Reconstruction}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+These notes discuss the concept of derived categories in the context of algebraic geometry, particularly focusing on the Bondal--Orlov reconstruction theorem. We explore how derived categories encapsulate information about coherent sheaves on smooth projective varieties and how this framework leads to a powerful reconstruction result under certain positivity conditions on the canonical bundle.
+\end{abstract}
+
+\tableofcontents
+
+\section{Algebraic vs analytic}
+My talk will be about algebraic geometry, but the course is about complex manifolds, so let me start with a brief comparison of the two subjects.
+
+We had the notion of a Hodge manifold: a compact Kahler manifold $X$ which admits an ample line bundle $\mathcal{L}$. By Kodaira's embedding theorem, such an $X$ is biholomorphic to a smooth projective variety. Conversely, any projective variety over $\mathbb{C}$ (by definition a closed subvariety of projective space $\mathbb{P}^n$) which is smooth is a Hodge manifold by the pull back of $\mathcal{O}_{\mathbb{P}^n}(1)$. We also defined coherent analytic sheaves on complex manifolds, and coherent sheaf cohomology $H^i(X,\mathcal{F})$ for coherent analytic sheaves $\mathcal{F}$.
+
+This talk will focus on coherent algebraic sheaves on smooth projective varieties, and their derived categories. The two theories are closely related: by Serre's GAGA theorem, for a smooth projective variety $X$ over $\mathbb{C}$, the category of coherent algebraic sheaves on $X$ is equivalent to the category of coherent analytic sheaves on the associated complex manifold $X^{an}$. Moreover, the cohomology groups $H^i(X,\mathcal{F})$ computed in either category are isomorphic.
+
+\section{Derived Categories}
+We've spent a lot of time in this course on sheaf cohomology: $H^i(X, \mathcal{F})$, defined via resolutions: injective resolutions, Čech resolutions, Dolbeault resolutions on complex manifolds, etc.
+
+A basic pattern is: whenever we have a left exact functor like
+\[
+\Gamma(X, -), \quad \mathcal{F} \longmapsto \mathcal{F} \otimes \mathcal{G}, \quad f_*, \ldots
+\]
+we get derived functors $R^i F$ measuring the failure of exactness.
+
+Key observation: To compute $R^i F(\mathcal{F})$ you choose a resolution $\mathcal{F} \to I^\bullet$ and apply $F$ termwise. All choices of resolution give the same cohomology groups, but not canonically the same map between complexes.
+
+This motivates keeping the whole resolution instead of just its cohomology.
+
+\begin{itemize}
+  \item A (cochain) complex in an abelian category $\mathcal A$ is
+  \[
+  \cdots \to A^{i-1} \xrightarrow{d^{i-1}} A^i \xrightarrow{d^i} A^{i+1} \to \cdots,
+  \qquad d^{i}\circ d^{i-1}=0.
+  \]
+  \item A morphism of complexes is a collection of maps commuting with the differentials.
+  \item Two morphisms $f,g:A^\bullet\to B^\bullet$ are \emph{homotopic} if
+  \[
+    f^i - g^i = d_B^{i-1}\circ h^i + h^{i+1}\circ d_A^i
+  \]
+  for some $h^i:A^i\to B^{i-1}$.
+\end{itemize}
+
+The \textbf{homotopy category} $K(\mathcal A)$ has:
+\begin{itemize}
+  \item objects = complexes in $\mathcal A$,
+  \item morphisms = maps of complexes modulo homotopy.
+\end{itemize}
+
+This is natural because in a first course on algebraic topology, one of the key results is that homotopic maps induce the same map on cohomology.
+
+A morphism of complexes $f:A^\bullet\to B^\bullet$ is a
+\textbf{quasi-isomorphism} if it induces isomorphisms on all
+cohomology sheaves:
+\[
+\mathcal H^i(A^\bullet) \xrightarrow{\;\cong\;} \mathcal H^i(B^\bullet)\quad\forall i.
+\]
+
+\textbf{Definition (very informally).}
+The derived category $D(\mathcal A)$ is obtained from $K(\mathcal A)$
+by \emph{localizing} at all quasi-isomorphisms:
+\[
+D(\mathcal A) := K(\mathcal A)[\text{quasi-isos}^{-1}].
+\]
+This means:
+\begin{itemize}
+  \item we freely adjoin formal inverses to all quasi-isomorphisms,
+  \item two complexes that are quasi-isomorphic become isomorphic objects in $D(\mathcal A)$,
+  \item morphisms can be represented by "roofs"
+  \[
+    A^\bullet \xleftarrow{\simeq} C^\bullet \to B^\bullet,
+  \]
+  with the left arrow a quasi-isomorphism.
+\end{itemize}
+
+For a smooth projective variety or complex manifold $X$, we write:
+\[
+D^b(X) := D^b_{\mathrm{coh}}(X)
+\]
+for the bounded derived category of coherent sheaves on $X$.
+Objects are bounded complexes of coherent sheaves on $X$, up to quasi-isomorphism.
+
+Major payoff: A fundamental fact is:
+\[
+\Ext^i_X(\mathcal F,\mathcal G)
+\simeq
+\Hom_{D^b(X)}(\mathcal F,\mathcal G[i]).
+\]
+In other words, all the $\Ext^i$-groups between two sheaves
+are packaged as morphisms between shifts in $D^b(X)$.
+
+Let $X$ be a smooth projective variety of dimension $n$ with canonical bundle $\omega_X$.
+For us, Serre duality for vector bundles on a curve says that
+\[
+H^1(X, V)
+\;\cong\;
+H^0(X,V^*\otimes\omega_X)^*
+\]
+functorially in $V$. This extends to all coherent sheaves $\mathcal{F}$ and $\mathcal{G}$ on $X$:
+\[
+H^1(X,\mathcal F)
+ \cong 
+H^{0}(X,\mathcal F\otimes\omega_X)^*,
+\]
+because every coherent sheaf admits a finite resolution by vector bundles of length $\le 1$.
+
+Let $\mathcal{F}$ be a coherent sheaf on a smooth projective curve $X$, and let $\mathcal{O}_X(1)$ be a very ample line bundle. For $m \gg 0$, the twisted sheaf $\mathcal{F}(m) := \mathcal{F} \otimes \mathcal{O}_X(m)$ is generated by global sections. So there is a surjection
+\[
+\mathcal{O}_X^{\oplus N} \twoheadrightarrow \mathcal{F}(m)
+\]
+for some $N$. Twisting back by $\mathcal{O}_X(-m)$, we get a surjection from a vector bundle onto $\mathcal{F}$:
+\[
+\mathcal{O}_X(-m)^{\oplus N} \twoheadrightarrow \mathcal{F}.
+\]
+Call this vector bundle $E_0 := \mathcal{O}_X(-m)^{\oplus N}$.
+
+Let $E_1 := \ker(E_0 \twoheadrightarrow \mathcal{F})$. Then we have an exact sequence
+\[
+0 \longrightarrow E_1 \longrightarrow E_0 \longrightarrow \mathcal{F} \longrightarrow 0.
+\]
+Two key facts apply: a smooth projective curve is regular of dimension $1$, so its local rings $\mathcal{O}_{X,x}$ are discrete valuation rings (DVRs), and over a DVR, any finitely generated torsion-free module is free. The kernel $E_1$ is a coherent subsheaf of the vector bundle $E_0$, so it is torsion-free. A torsion-free coherent sheaf on a smooth curve is therefore locally free (since its stalk at each point is a torsion-free $\mathcal{O}_{X,x}$-module, hence free). So $E_1$ is also a vector bundle, giving us a short exact sequence of vector bundles resolving $\mathcal{F}$:
+\[
+0 \longrightarrow E_1 \longrightarrow E_0 \longrightarrow \mathcal{F} \longrightarrow 0.
+\]
+
+Because $\mathcal{F}$ has a finite locally free resolution, you can compute $\Ext^i_X(\mathcal{F}, \mathcal{G})$ by applying $\Hom(-, \mathcal{G})$ to that resolution. Since Serre duality is already known for vector bundles (the terms $E_0, E_1$), you can pass to $\mathcal{F}$ by homological algebra and the same duality formula extends to arbitrary coherent $\mathcal{F}$. 
+
+
+The statement in fact generalizes to coherent sheaves on higher-dimensional varieties:
+\[
+\Ext^i_X(\mathcal F,\mathcal G)
+\;\cong\;
+\Ext^{n-i}_X(\mathcal G,\mathcal F\otimes\omega_X)^*
+\]
+functorially in $\mathcal F,\mathcal G$. This recovers the previous Serre duality since
+\[H^i(X,\mathcal F) \cong \Ext^i_X(\mathcal O_X,\mathcal F).\]
+
+In the language of derived categories, this duality is encoded by a
+\textbf{Serre functor}:
+\[
+S_X(-) := -\otimes\omega_X[n] : D^b(X)\to D^b(X)
+\]
+such that
+\[
+\Hom_{D^b(X)}(A,B)
+\;\cong\;
+\Hom_{D^b(X)}(B,S_X A)^*
+\]
+naturally in $A,B$.
+
+\begin{definition}
+An object $P\in D^b(X)$ is a \emph{point object} if:
+\begin{enumerate}
+  \item $S_X(P)\simeq P[n]$ (it has the expected Serre duality of a codimension-$n$ object),
+  \item $\Hom^{<0}(P,P)=0$,
+  \item $\Hom^0(P,P)$ is a field (no nontrivial idempotents).
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Bondal--Orlov, special case]
+If $\omega_X$ is ample or anti-ample, then the point objects in
+$D^b(X)$ are exactly the shifts of skyscraper sheaves:
+\[
+P \text{ point object}
+\quad\Longleftrightarrow\quad
+P \simeq \mathcal O_x[m]
+\quad\text{for some closed }x\in X,\ m\in\mathbb Z.
+\]
+\end{theorem}
+
+\begin{definition}
+An object $L\in D^b(X)$ is \emph{invertible} if for every point object $P$
+there is an integer $s$ such that
+\[
+\Hom^s(L,P)\cong k,\qquad \Hom^i(L,P)=0\ \text{for }i\neq s.
+\]
+\end{definition}
+
+\begin{theorem}
+Under the same positivity assumption on $\omega_X$, the invertible objects
+in $D^b(X)$ are exactly the shifts of line bundles:
+\[
+L \text{ invertible}
+\quad\Longleftrightarrow\quad
+L \simeq \mathcal L[t],\quad\mathcal L\in\Pic(X).
+\]
+\end{theorem}
+
+\begin{theorem}[Bondal--Orlov reconstruction]
+Let $X$ and $Y$ be smooth projective varieties over $k$ whose canonical
+bundles $\omega_X,\omega_Y$ are ample or anti-ample. If there is a
+triangulated equivalence
+\[
+F : D^b_{\mathrm{coh}}(X) \xrightarrow{\ \sim\ } D^b_{\mathrm{coh}}(Y),
+\]
+then $X$ and $Y$ are isomorphic as varieties.
+\end{theorem}
+\begin{proof}
+An equivalence $F$ preserves Serre functors and Ext groups. Therefore $F$ sends point objects to point objects and invertible objects to invertible objects.
+
+This induces a bijection between closed points $\{\mathcal{O}_x[m]\} \leftrightarrow \{\mathcal{O}_y[m]\}$ and an isomorphism of Picard groups (line bundles).
+
+Using compatibility with the Serre functor, one checks that $F(\omega_X^k) \simeq \omega_Y^k$ for all $k$, and hence
+\[
+H^0(X,\omega_X^k) \cong H^0(Y,\omega_Y^k)
+\]
+as rings in $k$. If $\omega_X$ is ample or anti-ample, the canonical (or anti-canonical) ring
+\[
+R(X,\omega_X) := \bigoplus_{k \geq 0} H^0(X,\omega_X^k)
+\]
+determines $X$ as a projective variety:
+\[
+X \cong \Proj R(X,\omega_X), \qquad Y \cong \Proj R(Y,\omega_Y).
+\]
+Since the rings are isomorphic, $\Proj R(X,\omega_X) \cong \Proj R(Y,\omega_Y)$, so $X \cong Y$.
+\end{proof}
+
+\end{document}

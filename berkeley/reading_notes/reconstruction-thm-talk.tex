@@ -203,21 +203,48 @@ In this note we give a gentle introduction to derived categories and triangulate
 \maketitle
 \tableofcontents
 
+\section{Introduction}
+
+The bounded derived category of coherent sheaves $D^{b}(X)$ has emerged as a powerful invariant of an algebraic variety. At first sight, it appears to be merely a technical enlargement of the abelian category $\Coh(X)$: one takes complexes of coherent sheaves, identifies quasi-isomorphic complexes, and equips the result with the structure of a triangulated category. Yet this construction greatly enhances the amount of information visible in the category.
+
+Several basic geometric operations—tensoring with line bundles, taking pullbacks and pushforwards under morphisms, forming extensions—are naturally expressed at the level of complexes. Passing to the derived category packages these operations into a single formal framework in which cohomology, duality, and spectral sequences are built in from the outset. In practice, $D^{b}(X)$ behaves like a homological enlargement of $X$ that makes many subtle structures more rigid and more transparent.
+
+A natural question, then, is the extent to which the derived category determines the underlying variety. In general, $D^{b}(X)$ is a far more flexible object than $X$ itself: there exist derived equivalences between varieties that are not isomorphic. However, in the presence of positivity of the canonical class, the situation is dramatically different. Bondal and Orlov proved in \cite{BondalOrlov2001} that for a smooth projective variety $X$ with ample (or anti-ample) canonical bundle $\omega_X$, the derived category $D^{b}(X)$ determines $X$ uniquely up to isomorphism.
+
+In particular, point objects in $D^{b}(X)$ can be characterized intrinsically from the triangulated structure and the Serre functor, and line bundles can be recognized inside $D^{b}(X)$ as the invertible objects. Thus the derived category does not merely retain some ``soft'' cohomological data; when $\omega_X$ is ample (or anti-ample), it contains enough rigidity to recover the full variety.
+
+From this perspective, the reconstruction theorem is a fundamental example of a broader philosophy: the derived category reflects the geometry of $X$, and under suitable conditions it even determines it.
+
 \section{Derived categories and triangulated structures}
 Our main reference for this section is \cite{HuybrechtsFM}. Let $\mathcal{A}$ be an abelian category. The derived category $D(\mathcal{A})$ is constructed in several steps. Consider the category $C(\mathcal{A})$ of complexes in $\mathcal{A}$, whose objects are cochain complexes and morphisms are chain maps that commute with the differentials.  
 
 Form the homotopy category $K(\mathcal{A})$ whose objects are the same as $C(\mathcal{A})$. The morphisms are chain maps modulo homotopy equivalence. Two chain maps \[f,g:A^\bullet\to B^\bullet\] are homotopic if there exist morphisms $h^i:A^i\to B^{i-1}$ such that \[f^i - g^i = d_B^{i-1} \circ h^i + h^{i+1} \circ d_A^i\] It is a routine check that two maps which are homotopic induce the same map on cohomology.
 
-Finally form $D(\mathcal{A})$ by formally inverting all quasi-isomorphisms in $K(\mathcal{A})$. The morphisms in $D(\mathcal{A})$ are a little subtle. For example, one cannot just introduce formal inverses to quasi-isomorphisms. If $X$ is not an injective object in $\mathcal{A}$, then the inclusion map $X[0] \to I^\bullet$ into an injective resolution is a quasi-isomorphism. If we formally invert by introducing $p: I^\bullet \to X[0]$ with \begin{align*}
-    [p] \circ [i] = [\mathrm{id}_{X[0]}] \quad \text{in } K(\mathcal{A}) \\
-    [i] \circ [p] = [\mathrm{id}_{I^\bullet}] \quad \text{in } K(\mathcal{A})
-  \end{align*} then by definition, we impose that $i,p$ are homotopy equivalences.  This is too strong, since not every quasi-isomorphism is a homotopy equivalence.
+Finally form $D(\mathcal{A})$ by formally inverting all quasi-isomorphisms in $K(\mathcal{A})$. 
+The morphisms in $D(\mathcal{A})$ are a little subtle. 
+One cannot obtain $D(\mathcal{A})$ by staying inside $K(\mathcal{A})$ and demanding that every 
+quasi-isomorphism already admit an inverse there. 
+If $X$ is not injective in $\mathcal{A}$, the inclusion $i\colon X[0]\to I^\bullet$ into an injective resolution 
+is a quasi-isomorphism, but in general there is no morphism $p\colon I^\bullet\to X[0]$ in $K(\mathcal{A})$ with 
+\[
+[p]\circ[i]=[\mathrm{id}_{X[0]}],\qquad [i]\circ[p]=[\mathrm{id}_{I^\bullet}].
+\]
+Requiring such equalities in $K(\mathcal{A})$ would force $i$ to be a homotopy equivalence, which is too strong because not every quasi-isomorphism is a homotopy equivalence.
 
-Abstractly, let $S$ be the set of quasi-isomorphisms in $K(\mathcal{A})$. The derived category \[D(\mathcal{A}) = K(\mathcal{A})[S^{-1}]\] is characterized by a universal property: there is a functor
-  \[
-  Q : K(\mathcal{A}) \longrightarrow D(\mathcal{A})
-  \]
-  sending every $s \in S$ to an isomorphism, and universal with that property (any other functor inverting all quasi-isomorphisms factors uniquely through $Q$). One can also describe morphisms in $D(\mathcal{A})$ concretely as "roofs" via Verdier localization. The bounded derived category $D^b(\mathcal{A})$ is the full subcategory of complexes with bounded cohomology.
+Instead one passes to the localization
+\[
+D(\mathcal{A}) = K(\mathcal{A})[S^{-1}],
+\]
+a new category characterized by the universal property that the localization functor
+\[
+Q\colon K(\mathcal{A})\longrightarrow D(\mathcal{A})
+\]
+sends every quasi-isomorphism to an isomorphism and is universal with this property. 
+Concretely, morphisms in $D(\mathcal{A})$ can be represented by “roofs”
+\[
+X \xleftarrow{s} X' \xrightarrow{f} Y
+\]
+with $s$ a quasi-isomorphism, which encodes the formal composite $f\circ s^{-1}$ in the localized category.
 
   \begin{definition}
     [Mapping cone] For a chain map $s:X^\bullet\to I^\bullet$ (cohomological grading), the \textbf{mapping cone} $\mathrm{Cone}(s)$ is the complex
