@@ -205,15 +205,11 @@ In this note we give a gentle introduction to derived categories and triangulate
 
 \section{Introduction}
 
-The bounded derived category of coherent sheaves $D^{b}(X)$ has emerged as a powerful invariant of an algebraic variety. At first sight, it appears to be merely a technical enlargement of the abelian category $\Coh(X)$: one takes complexes of coherent sheaves, identifies quasi-isomorphic complexes, and equips the result with the structure of a triangulated category. Yet this construction greatly enhances the amount of information visible in the category.
+The bounded derived category of coherent sheaves $D^{b}(X)$ is a powerful invariant of an algebraic variety. At first sight, it appears to be merely a technical enlargement of the abelian category $\Coh(X)$: one takes complexes of coherent sheaves, identifies quasi-isomorphic complexes, and equips the result with the structure of a triangulated category.
 
-Several basic geometric operations—tensoring with line bundles, taking pullbacks and pushforwards under morphisms, forming extensions—are naturally expressed at the level of complexes. Passing to the derived category packages these operations into a single formal framework in which cohomology, duality, and spectral sequences are built in from the outset. In practice, $D^{b}(X)$ behaves like a homological enlargement of $X$ that makes many subtle structures more rigid and more transparent.
+Several basic geometric operations—tensoring with line bundles, taking pullbacks and pushforwards under morphisms, forming extensions—are naturally expressed at the level of complexes. Passing to the derived category packages these operations into a single formal framework in which cohomology, duality, and spectral sequences are built in from the outset.
 
 A natural question, then, is the extent to which the derived category determines the underlying variety. In general, $D^{b}(X)$ is a far more flexible object than $X$ itself: there exist derived equivalences between varieties that are not isomorphic. However, in the presence of positivity of the canonical class, the situation is dramatically different. Bondal and Orlov proved in \cite{BondalOrlov2001} that for a smooth projective variety $X$ with ample (or anti-ample) canonical bundle $\omega_X$, the derived category $D^{b}(X)$ determines $X$ uniquely up to isomorphism.
-
-In particular, point objects in $D^{b}(X)$ can be characterized intrinsically from the triangulated structure and the Serre functor, and line bundles can be recognized inside $D^{b}(X)$ as the invertible objects. Thus the derived category does not merely retain some ``soft'' cohomological data; when $\omega_X$ is ample (or anti-ample), it contains enough rigidity to recover the full variety.
-
-From this perspective, the reconstruction theorem is a fundamental example of a broader philosophy: the derived category reflects the geometry of $X$, and under suitable conditions it even determines it.
 
 \section{Derived categories and triangulated structures}
 Our main reference for this section is \cite{HuybrechtsFM}. Let $\mathcal{A}$ be an abelian category. The derived category $D(\mathcal{A})$ is constructed in several steps. Consider the category $C(\mathcal{A})$ of complexes in $\mathcal{A}$, whose objects are cochain complexes and morphisms are chain maps that commute with the differentials.  
@@ -582,10 +578,12 @@ Suppose now that for some $P \in D^b_{\mathrm{coh}}(X)$ we have that $P$ is a po
 Let $\mathcal{H}^i$ be the cohomology sheaves of $P$.
 
 
-From (i) we obtain $s = n$. From the Serre functor formula, we have
-\[P \otimes \omega_X [n] \simeq P[s]\]
-Because tensoring with an invertible sheaf is an exact functor on the abelian category of coherent sheaves, we can take cohomlogy sheaves
+First we will show that $s=n$. Write $t = s - n$.
+From the Serre functor formula, we have
+\[P \otimes \omega_X [n] \simeq P[s] \implies P \otimes \omega_X \simeq P[t]\]
+Taking cohomology sheaves gives
 \[\cH^i(P\otimes\omega_X) \cong \cH^i(P)\otimes\omega_X \cong \cH^{i+t}(P)\]
+where the first equality follows because tensoring with an invertible sheaf is an exact functor on the abelian category of coherent sheaves and the second equality follows from the shift by $[t]$ on the right-hand side. 
 If $t = s - n \neq 0$, then for any $i$ we can iterate this isomorphism to get that infinitely many $\cH^j(P)$ are nonzero, contradicting the boundedness of $P$. Thus $t=0$.
 
 
@@ -618,14 +616,12 @@ E_2^{p,q}
 If two cohomology sheaves are nonzero, a negative-degree class appears.
 Assume for contradiction that $\cH^i$ and $\cH^j$ are both nonzero for
 some $i<j$.  Since all $\cH^k$ are supported at the same closed point,
-the sheaves $\cH^i$ and $\cH^j$ are finite--length $\cO_{X,x}$--modules.
-For such modules it is standard that
-\[
-\Hom(\cH^j,\cH^i)\neq 0,
-\]
-because any nonzero finite--length module possesses a simple quotient,
-and any nonzero finite--length module contains a copy of that simple
-module.
+the sheaves $\cH^i$ and $\cH^j$ are finite-length $\cO_{X,x}$--modules.
+
+It is a consequence of general theory
+  of modules over local rings that for any two nonzero finite--length modules
+  over a local ring $\cO_{X,x}$, there exists a nontrivial homomorphism
+  between them. If $(R,\mathfrak{m})$ is a local ring and $M,N$ are finite--length $R$-modules, then note that any simple $R$-module is isomorphic to the residue field $k = R/\mathfrak{m}$. $M$ admits a quotient map onto a simple module $M \twoheadrightarrow k$ because $M$ being finite length, it is Noetherian and therefore admits a maximal submodule whose quotient is simple, hence isomorphic to $k$. Dually, $N$ admits an injection of a simple module $k \hookrightarrow N$ because $N$ being finite length, it is Artinian and therefore admits a minimal nonzero submodule which is necessarily simple, hence isomorphic to $k$. Then there is a map $M \to N$ passing through $k$.
 
 Such a map $\phi:\cH^j\to\cH^i$ determines a nonzero class
 \[
@@ -744,9 +740,7 @@ Thus, as soon as $x_{0}\in X$ is in the support of $\mathcal H^{m}$, we obtain
 \[
 \Ext^{1}(\mathcal H^{m}, k(x_{0})) = 0.
 \]
-Next, we shall apply the following standard result in commutative algebra:
-Any finite module $M$ over an arbitrary noetherian local ring $(A,\mathfrak m)$
-with $\Ext^{1}_{A}(M, A/\mathfrak m)=0$ is free.
+General theory in commutative algebra states that any finite module $M$ over an arbitrary noetherian local ring $(A,\mathfrak m)$ with $\Ext^{1}_{A}(M, A/\mathfrak m)=0$ is free.
 
 The local-to-global spectral sequence
 \[
@@ -862,7 +856,7 @@ F(\omega_{X}^{k})
  S_{Y}^{k}(\mathcal O_{Y})[-kn]
  = \omega_{Y}^{k}.
 \]
-Using that $F$ is fully faithful, we conclude from this that
+Using that $F$ is fully faithful, we conclude from this that for all $k$,
 \[
 H^{0}(X,\omega_{X}^{k})
  = \Hom(\mathcal O_{X},\omega_{X}^{k})
@@ -870,8 +864,6 @@ H^{0}(X,\omega_{X}^{k})
  = \Hom(\mathcal O_{Y},\omega_{Y}^{k})
  = H^{0}(Y,\omega_{Y}^{k})
 \]
-for all $k$.
-
 Write the product in $\bigoplus H^{0}(X,\omega_{X}^{k})$ as follows:
 for $s_{i}\in \Hom(\mathcal O_{X},\omega_{X}^{k_{i}})$ one has
 \[
@@ -906,7 +898,7 @@ F : D^{b}(X) \longrightarrow D^{b}(Y)
 induces bijections
 \[
 \{\text{pointlike objects in $D^{b}(X)$}\}
- \xleftrightarrow{(*)}
+ \xleftrightarrow{(\ast)}
 \{\text{pointlike objects in $D^{b}(Y)$}\}
 \]
 \[
@@ -920,7 +912,7 @@ induces bijections
 and
 \[
 \{\text{invertible objects in $D^{b}(X)$}\}
- \xleftrightarrow{(**)}
+ \xleftrightarrow{(\ast\ast)}
 \{\text{invertible objects in $D^{b}(Y)$}\}
 \]
 \[
@@ -941,11 +933,7 @@ Compose $F$ with the two equivalences given by $M^\ast\otimes(\,)$ and then $[{-
 \[
 F(\mathcal O_X) \simeq \mathcal O_Y.
 \]
-In order to prove the ampleness of the (anti-)canonical bundle
-$\omega_Y$, we shall first prove that point like objects in
-$D^b(Y)$ are of the form $k(y)[m]$.  We will conclude this, without
-assuming any positivity of $\omega_Y$, simply from the existence of the
-equivalence $F$.
+We first prove that point like objects in $D^b(Y)$ are of the form $k(y)[m]$ without assuming any positivity of $\omega_Y$.
 
 Due to $(\ast)$, one finds for any closed point $y\in Y$ a closed point
 $x_y\in X$ and an integer $m_y$ such that
@@ -979,7 +967,7 @@ $y\in Y$ such that $F(k(x))\simeq k(y)$. This is because in $D^b(Y)$, for any co
 \]
 where the right-hand side denotes the $m$-th sheaf cohomology group of $E$. This follows from the fact that $\Hom(\mathcal O_Y,E) = \Gamma(E)$.
 
-Now $k(y)$ is a skyscraper sheaf at a single closed point. Thus its sheaf cohomology is
+The sheaf cohomology of $k(y)$ is clearly
 \[
 \Hom(\mathcal O_Y,k(y)[m]) \cong H^m(Y,k(y))
 =
@@ -1072,9 +1060,7 @@ is surjective.  The commutativity of the diagram allows us to conclude
 that also $H^{0}(r_{y_{1},y_{2}})$ is surjective.
 
 One proceeds in a similar fashion to prove that $\omega_{Y}^{k}$
-separates tangent directions if $\omega_{X}^{k}$ does. Thus, we have
-proved that $\omega_{Y}$ (or $\omega_{Y}^{*}$) is ample and this completes
-the proof of the theorem.
+separates tangent directions if $\omega_{X}^{k}$ does.
 \end{proof}
 
 \bibliography{refs}{}

@@ -5,9 +5,12 @@
 \usepackage{listings}
 \usepackage{bookmark}
 \usepackage{tikz}
+\usepackage[all]{xy}
 \usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
 \usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
 \usepackage{fancyhdr}
+\DeclareMathOperator{\Al}{Al}
+\DeclareMathOperator{\Chmb}{Ch}
 
 \usepackage{parskip} % Automatically respects blank lines
 \setlength{\parskip}{1em} % Adds more space between paragraphs
@@ -35,31 +38,697 @@ Abstract
 
 \section{Principal $G$-Bundles on Affine Curves}
 
-It is a consequence of a theorem of Harder \cite[Satz 3.3]{Har67} that generically trivial principal $G$-bundles on a smooth affine curve $C$ over an arbitrary field $k$ are trivial if $G$ is a semisimple and simply connected algebraic group. When $k$ is algebraically closed and $G$ reductive, generic triviality, conjectured by Serre, was proved by Steinberg \cite{Ste65} and Borel–Springer \cite{BS68}.
+It is a consequence of a theorem of Harder \cite[Satz 3.3]{Har67} that generically trivial principal $G$-bundles on a smooth affine curve $C$ over an arbitrary field $k$ are trivial if $G$ is a semisimple and simply connected algebraic group. When $k$ is algebraically closed and $G$ reductive, generic triviality, conjectured by Serre, was proved by Steinberg \cite{Ste65} and Borel-Springer \cite{BS68}.
 
 It follows that principal bundles for simply connected semisimple groups over smooth affine curves over algebraically closed fields are trivial. This fact (and a generalization to families of bundles \cite{DS95}) plays an important role in the geometric realization of conformal blocks for smooth curves as global sections of line bundles on moduli-stacks of principal bundles on the curves (see the review \cite{Sor96} and the references therein).
 
 \subsection{Derived Pushforward of Admissible Complexes}
+Recall that a $\mathbb{C}^\times$-bundle on a nodal curve $\Sigma$ is defined by a $\mathbb{C}^\times$-bundle on the normalization of $\Sigma$ together with an identification of the two fibers at the preimages of each node. The stack $\text{Bun}_{\mathbb{C}^\times}(g, I)$ of $\mathbb{C}^\times$-bundles over the universal stable curve fails to be complete, because the space of identifications over a given node is isomorphic to $\mathbb{C}^\times$.
+
+Following Gieseker \cite{Gie16} and Caporaso \cite{Cap09}, we add new strata which represent the limits where an identification goes to zero or infinity, by allowing projective lines carrying the line bundle $\mathcal{O}_{\mathbb{P}^1}(1)$ to appear at the nodes. 
+
+The resulting stack denoted $\widetilde{\mathcal{M}}_{g,I}([pt/\mathbb{C}^\times])$ is complete but not separated, i.e., the limit of a family of bundles exists but may not be unique. 
+
+This stack classifies maps from marked nodal curves to the quotient stack $[pt / \mathbb{C}^\times]$. These are the moduli stacks of principal $\mathbb{C}^\times$-bundles on such curves.
+
+\red{My understanding is that the construction of this compactifications goes through Pablo's wonderful compactification of loop groups. But it seems this is not necessary in the $\C^*$ case. Then Teleman gives a modular interpretation of this compactification in terms of Gieseker bundles.}
 
 \begin{theorem}
-    
-The derived pushforward $RF_* \alpha$ of an admissible complex $\alpha$ along the bundle-forgetting map $F : \mathcal{M}_{g,I}([pt/G]) \to \mathcal{M}_{g,I}$ is a bounded complex of coherent sheaves.
+The derived pushforward $RF_* \alpha$ of an admissible complex $\alpha$ along the bundle-forgetting map $F : \widetilde{\mathcal{M}}_{g,I}([pt/G]) \to \overline{\mathcal{M}_{g,I}}$ is a bounded complex of coherent sheaves.
 \end{theorem}
 
 This theorem is a relative version over varying curves of the analogous finiteness result for $\text{Bun}_G(\Sigma)$ in \cite[34]{}.
 
-\subsection{Finiteness for Fixed Curves}
+\begin{enumerate}
+    \item Section~1 reviews basic facts about nodal curves and principal $\mathbb{C}^\times$-bundles.
+    The moduli stack $\widetilde{\mathcal{M}}_{g,I}([pt/\mathbb{C}^\times])$ of Gieseker bundles on stable curves is introduced with some key examples (small $g$ and $|I|$).
+
+    \item Section~2 proves some basic facts about the geometry of our stack:
+    it is an Artin stack, is stratified by topological type, and is complete (but not separated).
+
+    \item Section~3 gives an (étale-local) presentation of $\widetilde{\mathcal{M}}_{g,I}([pt/\mathbb{C}^\times])$ as a quotient $A/G$ (where $G \simeq (\mathbb{C}^\times)^V$). We identify a stable subspace $A^\circ \subset A$ which leads to a smooth and proper quotient moduli space over $\mathcal{M}_{g,I}$.
+
+    \item Section~4 refines the stratification by topological type by tracking the nodes smoothed under deformations. We use this to stratify $A/G$ by distinguished spaces $Z$, $W$ which are affine space bundles over their fixed-point loci under subgroups of $G$.
+
+    \item Section~5 reviews the admissible $K$-theory classes and estimates the weights of the fixed-point fibers of subgroups of $G$.
+
+    \item Section~6 uses a local cohomology vanishing argument to finish the proof of the main theorem.
+
+    \item Section~7 constructs a moduli stack which we expect to carry Gromov-Witten invariants for $[X/\mathbb{C}^\times]$.
+\end{enumerate}
+
+
+
+We expect to recover the Gromov-Witten invariants of GIT quotients from our invariants by applying the Chern character to certain limits of our invariants. This was done for
+smooth curves and G-bundles in Teleman-Woodward \cite{TW}.
+
+\subsection{Construction of $\widetilde{\mathcal{M}}_{g,I}([pt/\mathbb{C}^\times])$}
+
+One sees from this how $\mathbb{C}^\times$-bundles on $C$ can become singular in families: the space of gluing isomorphisms at a node $\sigma \in C$ is a copy of $\mathbb{C}^\times$; in a family, these isomorphisms can tend to the limit points $0$ and $\infty$. As a result, the stack $\text{Bun}_{\mathbb{C}^\times}(g, I)$ of $\mathbb{C}^\times$-bundles on stable marked curves of type $(g, I)$ fails the valuative criterion for completeness. This will be a problem for integration of cohomology or K-theory classes.
+
+
+
+We always work over $\C$.  In everything that follows, $(C,\sigma_i)$ is a
+family of prestable marked curves over a finitely generated complex base
+scheme $B$.  More precisely, $\pi : C \to B$ is a flat proper morphism whose
+fibers are connected complex projective curves of genus $g$ with at worst
+nodal singularities, carrying a collection of smooth marked points
+$\sigma_i : B \to C$ which are indexed by an ordered set $I$.
+
+A point is \emph{special} if it is a node or a marked point.  Special points
+are required to be pairwise disjoint.  We shall always assume that any
+rational component of $C$ has at least \emph{two} special points.
+
+We reserve the notation $(\Sigma,\sigma_i)$ for families of \emph{stable}
+marked curves.  Recall that a marked curve is stable if each component of
+genus $0$ carries at least $3$ special points and each component of genus
+$1$ carries at least $1$ special point.  The \emph{stabilization morphism}
+$\operatorname{st} : C \to C^{st}$ blows down every unstable rational curve
+in $C$.  Stabilization can be implemented by a pluricanonical embedding and
+thus works in families.
+
+\begin{definition}[Modification of curves]\label{def:modification}
+A morphism $m : C \to \Sigma$ of prestable curves is a \textbf{modification} if
+\begin{enumerate}
+\item $m$ is an isomorphism away from the preimage of the nodes of $\Sigma$, and
+\item the preimage under $m$ of every node in $\Sigma$ is either a node or a
+  $\mathbb P^1$ with two special points.
+\end{enumerate}
+A \textbf{modification of a family} $f : \Sigma \to B$ of marked prestable curves
+is a morphism $m : C \to \Sigma$ such that, for each geometric $b\in B$,
+the induced map
+\[
+m_b : C_b \longrightarrow \Sigma_{f(b)}
+\]
+is a modification.
+\end{definition}
+
+\begin{remark}\label{rem:modifications}
+\begin{enumerate}
+\item
+Finding modifications with desirable properties---such as smoothness of
+the total space $C$---may require us to change the base $B$; the reader
+can be entrusted to write out the defining diagram.
+
+\item
+Modifications of marked curves do not introduce $\mathbb P^1$'s at marked
+points, only at nodes.  The marked points in a family $\Sigma$ lift uniquely
+to the modification, and will sometimes be denoted by the same symbol.
+\end{enumerate}
+\end{remark}
+
+\begin{definition}[Gieseker bundle]\label{def:gieseker-bundle}
+Let $(\Sigma,\sigma_i)$ be a stable marked curve.  A
+\textbf{Gieseker $\C^\times$--bundle} on $(\Sigma,\sigma_i)$ is a pair
+$(m,\mathcal P)$ consisting of
+\begin{enumerate}
+\item a modification $m : (C,\sigma_i) \to (\Sigma,\sigma_i)$, and
+\item a principal $\C^\times$--bundle $p : \mathcal P \to C$,
+\end{enumerate}
+which satisfy the \textbf{Gieseker condition}:
+\begin{enumerate}
+\item[1.] the restriction of $\mathcal P$ to every unstable $\mathbb P^1$
+  has degree $1$.
+\end{enumerate}
+\end{definition}
+\red{We should learn what the Gieseker condition says. Is it a general formula or just an intuition?}
+
+\begin{definition}
+The stack $\widetilde{\mathcal M}_{g,I}([pt/\C^\times])$ of
+\emph{Gieseker $\C^\times$–bundles on stable genus $g$, $I$–marked curves}
+is a fibred category (over $\C$–schemes).  Its objects are tuples
+$(B,C,\sigma_i,\mathcal P)$ consisting of
+\begin{enumerate}
+\item a test scheme $B$;
+\item a flat projective family $\pi : C \to B$ of pre-stable, genus $g$
+  curves with marked points $\sigma_i : B \to C$, $i\in I$; and
+\item a principal $\C^\times$–bundle $p : \mathcal P \to C$ defining a family
+  of Gieseker bundles on the stabilization $C \to C^{st}$.
+\end{enumerate}
+The morphisms in this category are commutative diagrams
+\[
+\xymatrix{
+\mathcal P' \ar[r]^{\tilde f} \ar[d]_{p'} & \mathcal P \ar[d]^{p} \\
+C' \ar[r]^{f} \ar[d]_{\pi'} & C \ar[d]^{\pi} \\
+B' \ar[r] & B
+}
+\]
+where $\tilde f$ is $\C^\times$-equivariant and $C' = B'\times_B C$ and the morphism of curves $f$ respects the marked points.
+\end{definition}
+There is a natural forgetful morphism
+\[
+F : \widetilde{\mathcal M}_{g,I}([pt/\C^\times]) \longrightarrow \overline{\mathcal M}_{g,I}
+\]
+which sends a Gieseker bundle $(C,\sigma_i,\mathcal P)$ to the stabilized curve $(C^{st},\sigma_i)$.
+
+\begin{example}
+    
+\end{example}
+
+\section{Pablo's modifications}
+
+\subsection{Setup}
+
+For any torus $T$ we have the lattice of characters $\hom(T,\C^\times)$ and
+co-characters $\hom(\C^\times,T)$.  Further, for
+$(\eta,\chi) \in \hom(\C^\times,T) \times \hom(T,\C^\times)$ we set
+\[
+\langle \eta,\chi\rangle := \chi\circ\eta \in \Z.
+\]
+
+For $T\subset G$ a maximal torus and for $\eta\in\hom(\C^\times,T)$ the set
+\[
+P(\eta) := \{ g\in G \mid \lim_{t\to0}\eta(t)g\eta(t)^{-1} \text{ exists}\}
+\]
+is a subgroup.  A \textbf{parabolic} subgroup is any subgroup
+$P\subset G$ conjugate to some $P(\eta)$.
+
+We can apply the same construction for
+$\eta\in\hom(\C^\times,\C^\times\times T)$ to get a subgroup
+$P(\eta)\subset L^\times G$.  A \textbf{parahoric} subgroup is any group
+conjugate to one of the $P(\eta)$.  By abuse of notation, we use $P(\eta)$
+to denote its image under the projection $L^\times G\to LG$.
+Parahoric subgroups of $LG$ are any subgroups conjugate to one of the
+$P(\eta)$.
+
+Parabolic and parahoric subgroups come with natural factorizations
+$P(\eta)=L(\eta)U(\eta)$ known as a Levi decomposition:
+\[
+L(\eta) = \{ g\in G \mid \lim_{t\to0}\eta(t)g\eta(t)^{-1}=g\},
+\qquad
+U(\eta) = \{ g\in G \mid \lim_{t\to0}\eta(t)g\eta(t)^{-1}=1\}.
+\]
+A simple example comes from $\eta_0:\C^\times\to\C^\times\times T$ defined
+by $\eta_0(t)=(t,1)$.  Then $\eta_0(t)g(z)\eta_0(t)^{-1}=g(tz)$ and
+\[
+P(\eta_0)=G[[z]] = G(\C[[z]]) =: L^+G.
+\]
+The Levi factorization is $G\cdot N$ where $N$ is the kernel of the map
+\[
+G[[z]] \xrightarrow{\,z\mapsto 0\,} G.
+\]
+
+By $\mathfrak t_\Q$ we denote $\hom(\C^\times,T)\otimes_\Z\Q$.  The Weyl
+chamber is defined as
+\[
+\Chmb := \{\eta\in\mathfrak t_\Q \mid \langle \alpha_i,\eta\rangle \ge 0\}.
+\]
+It is a simplicial cone whose faces are given by
+$\{\langle \alpha,\eta\rangle =0 \mid \alpha\in I\}$ for subsets
+$I\subset\{\alpha_1,\dots,\alpha_r\}$.
+
+Similarly, we have the affine Weyl chamber
+\[
+\Chmb^{\mathrm{aff}} = \{\eta\in \Q\oplus\mathfrak t_\Q \mid
+\langle \alpha_i,\eta\rangle >0\};
+\]
+now the faces are in bijection with subsets $\{\alpha_0,\dots,\alpha_r\}$.
+It is convention to instead work with the affine Weyl alcove
+\[
+\Al := \Chmb^{\mathrm{aff}}\cap(1\oplus\mathfrak t_\Q)
+     = \{\eta\in\mathfrak t_\Q \mid 0\le \langle \alpha_i,\eta\rangle,\,
+                                  \langle\theta,\eta\rangle \le 1\}.
+\]
+A \textbf{face} $F$ of $\Al$ is $F' \cap (1\oplus\mathfrak t_\Q)$ where $F'$ is
+a face of $\Chmb^{\mathrm{aff}}$.
+
+Any $\eta\in \Chmb$ determines a fractional co-character $\C^\times\to T$ but
+nevertheless a well-defined parabolic $P(\eta)$.  Any parabolic is conjugate
+to some $P(\eta)$ and if $\eta,\eta'$ are in the interior of the same face
+then $P(\eta)=P(\eta')$.  Similarly any $\eta\in \Al$ determines a parahoric
+$P(\eta)\subset LG$.  Any parahoric is conjugate either to $P(\eta)$ or to
+$P(-\eta)$.  Let
+\[
+\Al_e = \{\eta\in \Al \mid \langle\theta,\eta\rangle =1\}.
+\]
+If $\eta\in \Al_e$ the resulting parahoric is called \textbf{exotic}.
+Alternatively, the inclusion \[\{\alpha_1,\dots,\alpha_r\}\subset
+\{\alpha_0,\dots,\alpha_r\}\] defines a map from faces of $\Chmb$ to those of
+$\Al$.  The faces missed by $\Chmb$ are exactly those contained in $\Al_e$.
+
+The exotic parahorics give rise to moduli spaces of torsors on curves which
+are not isomorphic with moduli spaces of $G$-bundles.  Informally then the
+exotic parahorics can be viewed as geometry only visible to $LG$.
+
+The ordered simple roots $\{\alpha_0,\alpha_1,\dots,\alpha_r\}$ determine
+ordered vertices $\{\eta_0,\dots,\eta_r\}$ determined by the conditions
+\[
+\langle \eta_i,\alpha_j\rangle = 0 \text{ for } i\neq j
+\quad\text{and}\quad
+\langle \eta_0,\alpha_0\rangle =1.
+\]
+If we write $\theta = \sum_{i=1}^r n_i\alpha_i$ and set $n_0=1$ then one can
+check these conditions can be expressed as
+\begin{equation}
+\label{eq:alpha-eta}
+\langle \alpha_i,\eta_j\rangle = \frac{1}{n_i}\delta_{i,j}.
+\end{equation}
+Now for each $I\subset\{0,\dots,r\}$ we define
+\[
+\eta_I = \sum_{i\in I}\eta_i.
+\]
+The alcove $\Al$ is a compact convex polytope whose faces are in bijection
+with conjugacy classes of parahoric subgroups of $LG$. For each
+$I\subset\{0,\dots,r\}$ the cocharacter
+\[
+\eta_I := \sum_{i\in I}\eta_i
+\]
+lies in the relative interior of the face of $\Al$ corresponding to the
+complement of $I$, meaning that $\langle \alpha_j,\eta_I\rangle =0$ for $j\notin I$
+and hence determines a parahoric subgroup
+\[
+P(\eta_I)\subset LG.
+\]
+Equivalently, $\eta_I:\C^\times\to\C^\times\times T$ is a one--parameter
+subgroup whose conjugation action is used to define $P(\eta_I)$ as the subgroup
+on which the limit $\lim_{t\to0}\eta_I(t)g\eta_I(t)^{-1}$ exists. Note that if $I=\varnothing$ we take $\eta_I$ to be the trivial co-character.
+Finally, we set
+\begin{equation}
+\label{eq:PI-UI-LI}
+\begin{aligned}
+P_I &= P(\eta_I), &\qquad P_{\bar I} &= P(-\eta_I),\\
+U_I &= U(\eta_I), &\qquad U_{\bar I} &= U(-\eta_I),\\
+L_I &= L(\eta_I) = L(-\eta_I).
+\end{aligned}
+\end{equation}
+    \begin{example}
+        We work out the case $G=\SL_2$ in detail. Take the standard maximal torus
+    \[
+    T = \left\{
+    \begin{pmatrix}
+    t & 0 \\ 0 & t^{-1}
+    \end{pmatrix}
+    \;\middle|\; t\in\C^\times
+    \right\} \cong \C^\times.
+    \]
+    A cocharacter $\eta\in\hom(\C^\times,T)$ is determined by an integer $m$:
+    \[
+    \eta_m:\C^\times\to T,\qquad
+    \eta_m(t)=\begin{pmatrix} t^m & 0 \\ 0 & t^{-m}\end{pmatrix}.
+    \]
+    So $\hom(\C^\times,T)\cong\Z$. A character $\chi\in\hom(T,\C^\times)$ is also determined by an integer $k$:
+    \[
+    \chi_k\begin{pmatrix} t & 0 \\ 0 & t^{-1}\end{pmatrix} = t^k.
+    \]
+
+    The pairing $\langle\eta_m,\chi_k\rangle = \chi_k\circ\eta_m$ is
+    \[
+    \langle\eta_m,\chi_k\rangle = km \in \Z.
+    \]
+    The simple (finite) root $\alpha$ corresponds to the character $\chi_2$, so if we identify $\mathfrak t_\Q \cong \Q$ using the basis $\eta_1$, then
+    \[
+    \langle \alpha,\eta_m\rangle = 2m.
+    \]
+    We can (and usually do) renormalize so that $\langle\alpha,\eta_1\rangle = 1$, but the picture is the same: $\mathfrak t_\Q$ is a line and the Weyl chamber is the half-line $m\ge 0$.
+
+
+    Take $\eta(t)=\eta_1(t)=\operatorname{diag}(t,t^{-1})$. For $g=\begin{pmatrix} a & b \\ c & d\end{pmatrix}\in \SL_2$, we have
+    \[
+    \eta(t)g\eta(t)^{-1} = \begin{pmatrix} t & 0\\ 0 & t^{-1}\end{pmatrix}
+    \begin{pmatrix} a & b \\ c & d\end{pmatrix}
+    \begin{pmatrix} t^{-1} & 0\\ 0 & t\end{pmatrix} = \begin{pmatrix}
+    a & t^2 b\\ t^{-2} c & d
+    \end{pmatrix}.
+    \]
+    As $t\to0$, this has a limit if and only if $c=0$. So
+    \[
+    P(\eta) = \left\{
+    \begin{pmatrix} a & b \\ 0 & d\end{pmatrix}\in \SL_2
+    \right\} = \text{upper Borel } B.
+    \]
+
+    The Levi and unipotent parts are $L(\eta)=$ diagonal torus (the copy of $T$), and $U(\eta)=$ strictly upper triangular unipotent matrices. Similarly $P(-\eta)$ is the lower Borel.
+
+    The Weyl chamber $\Ch$ is $\{\eta_m \mid m\ge 0\}\subset \Q$. All nonzero $m>0$ lie in the interior of the same cone, so $P(\eta_m)$ is always conjugate to $B$. The ``faces'' of the cone are: the origin $\{0\}$ and the open half-line $\{m>0\}$. At $\eta=0$, $P(0)=G$; in the open face we get the Borel. This is the finite-type picture behind the general definition.
+
+    For the affine root system $\widehat{\mathfrak{sl}}_2$ (type $A_1^{(1)}$): there are two simple affine roots $\alpha_0,\alpha_1$, the highest finite root is $\theta=\alpha_1$, and the extended Cartan is $\Q\oplus \mathfrak t_\Q$. Restricting to the slice $1\oplus\mathfrak t_\Q$ (the ``height 1'' slice) identifies the affine Weyl alcove
+    \[
+    \Al = \{\eta\in\mathfrak t_\Q \mid 0\le\langle\alpha_1,\eta\rangle,\,
+    \langle\theta,\eta\rangle\le 1\}.
+    \]
+    For $\mathfrak{sl}_2$, $\theta=\alpha_1$, so this reduces to
+    \[
+    \Al = \{\eta\in\mathfrak t_\Q \mid 0\le \langle\alpha,\eta\rangle\le 1\}.
+    \]
+    Identifying $\mathfrak t_\Q\cong\Q$ so that $\langle\alpha,\eta\rangle$ is literally the coordinate, we get $\Al = [0,1] \subset \Q$. 
+You can write a cocharacter as a pair
+    \[
+    \eta(t) = (t^m, \eta_T(t)),
+    \]
+    where $t^m \in \C^\times$ and $\eta_T(t) \in T$ where first component rescales the loop parameter $(t^m \cdot g)(z) = g(t^m z)$.
+    The vertices $\eta_0,\eta_1$ are the endpoints $0$ and $1$. The interior $0<\langle\alpha,\eta\rangle<1$ corresponds to the "Iwahori" parahoric (the analogue of a Borel in the loop group).
+
+    In the loop group $LG = \SL_2(\C((z)))$, the choice $\eta_0(t)=(t,1)$ rescales the loop variable and gives
+    \[
+    P(\eta_0) = \{ g(z)\in G(\C((z))) \mid \lim_{t\to0} g(tz)\ \text{exists in }G(\C((z)))\} =
+    \SL_2(\C[[z]]) = L^+\SL_2,
+    \]
+    the standard maximal parahoric corresponding to the vertex $\eta_0$.  
+    The other vertex $\eta_1$ corresponds to the cocharacter $\eta_1(t)=(t, \eta_T(t))$ where $\eta_T(t)=\operatorname{diag}(t,t^{-1})$. Then \[
+(\eta_1(t)\cdot g)(z)
+=
+\begin{pmatrix}
+a(tz) & t^{2} b(tz)\\
+t^{-2} c(tz) & d(tz)
+\end{pmatrix}\] so the limit as $t\to0$ exists if and only if $c(z)$ vanishes at $z=0$. Thus the parahoric subgroup is
+    \[
+    P(\eta_1) = \left\{
+    \begin{pmatrix} a(z) & b(z) \\ c(z) & d(z)\end{pmatrix}
+    \in \SL_2(\C((z))) \mid c(z) \in z^2\C[[z]], z^2b(z)\in\C[[z]], a(z),d(z)\in\C[[z]]
+    \right\}.
+    \]
+    This parahoric subgroup is not conjugate to $L^+\SL_2$.
+    
+    Finally any choice of point $\eta$ in the interior of the interval $\Al=(0,1)$ gives conjugate parahoric subgroups, so choose $\eta=\tfrac12$. This gives \[(\eta(t)\cdot g)(z)
+=
+\begin{pmatrix}
+a(tz) & t\, b(tz)\\
+t^{-1} c(tz) & d(tz)
+\end{pmatrix}\] so the limit as $t\to0$ exists if and only if $a(z),d(z)\in\C[[z]]$, $zb(z)\in \C[[z]]$, and $c(z)\in z\C[[z]]$. 
+
+After intersecting with the positive loop group $\SL_2(\C[[z]])$, we get the Iwahori subgroup
+\[
+I = \{ g(z)\in \SL_2(\C[[z]]) \mid g(0)\in B\},
+\]
+where $B$ is the upper Borel subgroup of $\SL_2$.
+\end{example}
+
+\subsection{Twisted curves and admissible bundles}
+Generally we work over $\Spec \C$ and a scheme will mean a scheme over
+$\Spec \C$.  Let $S$ be a scheme.  We denote a flat family of curves
+$C \to S$ as $C_S$.  If $B$ is an $S$--scheme then
+$C_B := C_S \times_S B$.  For affine schemes $\Spec R \to S$ we write
+$C_R$ for $C_{\Spec R}$.
+
+Generally we work with a fixed curve over $\Spec \C$ or with a family of
+curves over $S = \Spec \C[[s]]$.  Set $S^* = \Spec \C((s))$ and
+$S_0 = \Spec \C = \Spec \C[[s]]/(s)$ the closed point.  Then $C_S$ always
+denotes a curve with generic fiber $C_{S^*}$ smooth and special fiber
+$C_0 := C_{S_0}$ nodal with unique node $p$.  We write $C_S - p$ for the
+open subscheme $C_S\setminus\{p\}$.  We also assume $C_S$ is a regular
+surface as a scheme over $\Spec \C$.
+
+For any closed point $p$ in a scheme $Z$ we denote by $\widehat{\mathcal O}_{Z,p}$
+the completion of $\mathcal O_{Z,p}$ with respect to the maximal ideal.
+We often use $D$ to denote a formal neighborhood of a point in a curve.
+The cases that will arise are:
+\begin{itemize}
+\item If $p\in C$ is a smooth curve,
+      $\widehat{\mathcal O}_{C,p}\cong \C[[z]]$ and we set
+      $D=\Spec \C[[z]]$.
+
+\item If $p\in C_0$ is the node,
+      $\widehat{\mathcal O}_{C,p} \cong \C[[x,y]]/(xy)$ and we set
+      $D_0 = \Spec \C[[x,y]]/(xy)$.
+
+\item If $p\in C_S$ is the node,
+      $\widehat{\mathcal O}_{C_S,p} \cong \C[[x,y,s]]/(xy - s)$
+      and we set $D_S = \Spec \C[[x,y,s]]/(xy - s)$.
+\end{itemize}
+
+For $k\ge 2$ and $k$th roots $u,v$ of $x,y$ we set
+\[
+D^{\frac1k}_S = \Spec \C[[u,v]].
+\]
+
+The last case arises as follows.  We first notice that if we base change
+$D_S$ under $s\mapsto s^k$ then $D_S$ becomes
+\[
+\Spec \C[[x,y,s]]/(xy - s^k).
+\]
+If we let $\mu_k$ denote the $k$th roots of unity then
+\[
+\Spec \C[[x,y,s]]/(xy - s^k) \;=\; D_S^{\frac1k}/\mu_k
+\]
+where $\zeta\in\mu_k$ acts by $(u,v) \mapsto (\zeta u,\zeta^{-1}v)$.
+A basic strategy we employ is to replace the curve
+$\Spec \C[[x,y,s]]/(xy - s)$ with the orbifold or twisted curve
+\[
+D_S^{\frac1k}/\mu_k.
+\]
+
+\begin{remark}
+    Recall that a course moduli space of a stack $\mathcal{X}$ is an algebraic space $X$ with a morphism $\pi:\mathcal{X}\to X$ satisfying the following:
+\begin{enumerate}
+    \item For any algebraically closed field $k$, the map $\pi$ induces a bijection between isomorphism classes of $k$-points of $\mathcal{X}$ and $k$-points of $X$.
+    \item The map $\pi$ is universal for maps from $\mathcal{X}$ to algebraic spaces.
+\end{enumerate}
+For example $[pt/G]$ has coarse moduli space \(pt = \Spec k\). For 
+
+\end{remark}
+
+
+We recall the definition of a twisted curve (with no marked points) in
+characteristic~$0$.
+
+\begin{definition}
+A \textbf{twisted nodal curve} $\cC \to S$ is a proper Deligne--Mumford stack
+such that
+\begin{enumerate}[(i)]
+\item the geometric fibers of $\cC \to S$ are connected of dimension~$1$ and
+the coarse moduli space $C$ of $\cC$ is a nodal curve over~$S$;
+
+\item if $U \subset \cC$ denotes the complement of the singular locus of
+$\cC \to S$, then $U \to C$ is an open immersion;
+\item let $p : \Spec k \to C$ be a geometric point mapping to a node and
+let $s \in S$ denote the image of $\Spec k$ under $C \to S$, and let
+$\mathfrak m_{S,s}$ denote the maximal ideal of the local ring
+$\mathcal O_{S,s}$.  Then there is an integer $k$ and an element
+$t \in \mathfrak m_{S,s}$ such that
+\[
+\Spec \mathcal O_{C,p} \times_C \cC \;\cong\; [D^{sh} / \mu_k],
+\]
+where $D^{sh}$ denotes the strict henselization of
+\[
+D := \Spec \mathcal O_{S,s}[u,v]/(uv-t)
+\]
+at the point $(\mathfrak m_{S,s},u,v)$, and $\zeta\in\mu_k$ acts by
+\[
+\zeta\cdot (u,v) = (\zeta u,\zeta^{-1}v).
+\]
+\end{enumerate}
+\end{definition}
+
+We did not mention markings because largely we will not make use of them
+except for one exception.  If $C$ is a smooth curve we can twist at a
+marked point $p$ as described below.  Let $p\in C$ and
+$D = \Spec \C[[z]]$ as in the first bullet point above, and fix a positive
+integer $k$ and a $k$th root $w$ of $z$.  We have
+$\Spec \C((w))/\mu_k = \Spec \C((z))$, so let $C_{[k]}$ denote
+\[
+C_{[k]}
+:= C \setminus \{p\} \mathop{\cup}_{\Spec \C((z))}
+        [\Spec \C[[w]] / \mu_k].
+\]
+Then $C_{[k]}$ is a twisted curve whose coarse moduli space is~$C$.
+
+In a similar fashion, with $C_0$, $C_S$ as in the bullet points above, we
+can construct twisted curves $C_{0,[k]}$ and $C_{S,[k]}$ with coarse moduli
+spaces $C_0$, $C_S$ and such that the fiber of the node is $[pt/\mu_k]$.
+
+The motivation to consider these objects comes from the valuative criterion for completenss. Specifically it comes from the following local calculation that Pablo does in Section 4.
+
+\subsection{G-bundles on Twisted Chains}
+
+In the previous section we saw that associated to the singleton sets
+$\{i\}\subset \{0,r+1\}$ there is a moduli space parametrizing $G$-bundles
+on a twisted nodal curve and further the moduli space can be identified
+with an orbit of the wonderful embedding of the loop group.  In this
+section we introduce a more general moduli problem which we show is
+isomorphic to the orbit $O_I$ in the wonderful embedding for any
+$I\subset \{0,\dots,r+1\}$.
+
+Let $R_n$ denote the rational chain of projective lines with $n$--components. There is an
+action of $\C^\times$ on $R_n$ which scales each component.  Let
+$p_0,\dots,p_n$ denote the fixed points of this action.
+
+Recall $u,v$ are $k$--th roots of $x,y$ which are our coordinates near a node.
+Let $p',p''$ be the closed points of $\Spec \C[[u]]$, $\Spec \C[[v]]$ and
+finally let $D^{\frac1k}_n$ be the curve obtained from
+\[\Spec \C[[u]] \amalg R_n \amalg \Spec \C[[v]]\] by identifying $p'$ with $p_0$
+and $p''$ with $p_n$.
+
+The group $\mu_k$ acts on $D^{\frac1k}_n$ through its usual action on $u,v$ and
+through the inclusion $\mu_k \subset \C^\times$ on the chain $R_n$.
+For an $n$--tuple $(\beta_0,\dots,\beta_n)\in \hom(\C^\times,T)^n$, we can
+speak about the equivariant $G$--bundles on $D^{\frac1k}_n$ with equivariant
+structure at $p_i$ determined by $\beta_i$.  We refer to this equivalently as
+a $G$--bundle on $[D^{\frac1k}_n/\mu_k]$ of type $(\beta_1,\dots,\beta_n)$.
+
+\begin{remark}
+Suppose have a space $B$ with an action of a group $\Pi$. We have a principal $H$-bundle $P \to B$. We want $\Pi$ to also act on $P$, but in a way compatible with the projection $P \to B$. An $\Pi$-equivariant $H$-bundle over $B$ is equivalent to an $H$-bundle over the quotient stack $[B/\Pi]$. Over the point $b/\Pi$ of this stack, the automorphisms are exactly $\Pi_b$. Therefore an $H$-bundle over $[B/\Pi]$ must specify how $\Pi_b$ acts on the fiber, and that is a representation $\rho:\Pi_b\to H$.
+\end{remark}
+
+Further, we can also glue $[D^{\frac1k}_n/\mu_k]$ to $C_0 - p_0$ to obtain a
+curve $C_{n,[k]}$.  Let $C_n$ denote the coarse moduli space of $C_{n,[k]}$.
+
+
+We call $C_n$ a \textbf{modification} of $C_0$ and $C_{n,[k]}$ a \textbf{twisted
+modification} of $C_0$.
+
+
+Recall the specific co-characters $\eta_0,\dots,\eta_r$. 
+
+\begin{definition}
+    For $I=\{i_1,\dots,i_n\}\subset\{0,\dots,r\}$ let
+$T_{G,I}([D^{\frac1k}_n/\mu_k])$ denote the moduli space of pairs $(P,\tau)$
+where $P$ is a $G$--bundle on $[D^{\frac1k}_n/\mu_k]$ of type
+$(\eta_{i_1},\dots,\eta_{i_n})$ and $\tau$ is a trivialization on
+$[\Spec \C((u))\times C((v))]/\mu_k$. 
+\end{definition}
+
+Let $H = \Aut(P)$ then restriction to
+$\Spec \C[[u]]$ and $\Spec \C[[v]]$ realizes
+\[
+H \subset (L_u G)^{\mu_k} \times (L_v G)^{\mu_k}.
+\]
+\begin{theorem}
+Let $I\subset\{0,\dots,r\}$ and $T_{G,I}([D^{\frac1k}_n/\mu_k])$ be as above.
+Then there is an isomorphism
+\[
+T_{G,I}(C_{0,[k]}) \xrightarrow{\ \Psi^{\eta_I}\ }
+(L_u G)^{\mu_k} \times (L_v G)^{\mu_k} \sslash H
+\xrightarrow{\eta_I^(\cdot)\eta_I^{-1}}
+\frac{L_{\mathrm{poly}}G \times L_{\mathrm{poly}}G}
+     {Z(L_1)\times Z(L_1)\cdot P^{A,\pm}_I},
+\]
+where $\Psi^{\eta_I}$ is induced by the double coset construction and $\eta_I^{(\cdot)}\eta_I^{-1}$ is the map $LG \times LG/\cP^\Delta \to (L_uG \times L_vG)^{\mu_k}/(G_{u,v}^\Delta)^{\mu_k}$ given by \begin{align*}
+    g(z)\cP \mapsto (\eta_I(w)g(w^k)\eta_I^{-1}(w))L^+_wG
+\end{align*} on each factor.
+
+
+Let $i : [D^{\frac1k}_n/\mu_k]\to C_{0,[k]}$ be the natural
+map.  Then $i^\ast : T_{G,I}(C_{0,[k]}) \to T_{G,I}([D^{\frac1k}_n/\mu_k])$ is
+an isomorphism.  In particular,
+$T_{G,I}(C_{0,[k]})$ and $T_{G,I}([D^{\frac1k}_n/\mu_k])$ are isomorphic to an orbit in the wonderful embedding of $L^{\times}_{\mathrm{poly}}G$.
+\end{theorem}
+
+In this section we begin with a curve $C_S$ as in Section~2.3 and construct an algebraic
+$S$--stack $\mathcal X_G(C_S)$ such that $\mathcal M_G(C_S)\subset \mathcal X_G(C_S)$ is a
+dense open substack and the boundary is a divisor with normal crossings.  Further we show
+the morphism $\mathcal X_G(C_S)\to S$ is complete.
+
+For the remainder of this section we fix a simple group $G$ and further
+fix an integer $k = k_G$ defined as follows. Let $\eta_i$ be the vertices of $\Al$. Define $k_i$ as the minimum integer such that $k_i \cdot \eta_i \in \hom(\C^\times, T)$ and set $k_G = \text{lcm}(k_i)$. The $\eta_i$ correspond to the maximal parahorics $P_i$ of $LG$ and further any parahoric $P$ is conjugate to a subgroup of some $P_i$. It follows readily that $k = k_G$ is the minimum value of $k$ for which the statement of Corollary~4.3 holds for any particular parahoric $P$.
+
+
+We recall some of the notation from~2.3.  Namely,
+$S = \Spec\C[[s]]$, $S^* = \Spec\C((s))$, $S_0 = \Spec\C[[s]]/(s) = \Spec\C$,
+$C_0 = C_{S_0}$.  For $B$ an $S$--scheme we set $B^* = B\times_S S^*$,
+$B_0 = B\times_S S_0$.  We also have $D_S = \Spec\C[[x,y]]$ considered as an $S$--scheme
+via $s\mapsto xy$ and $D_0 = \Spec\C[[x,y]]/(xy)$.  Further, we set
+$D_S^{1/k} := \C[[u,v]]$ where $u^k = x$ and $v^k = y$.  Then
+$D_{S,[k]} = [D_S^{1/k}/\mu_k]$; the coarse moduli space of $D_{S,[k]}$ is
+$\Spec\C[[x,y,s]]/(xy - s^k)$.  We further fix $p\in C_S$ to be the node.
+
+To define $\mathcal X_G(C_S)$ we need to define twisted modifications of $C_S$; this is a
+relative version of~(11).  Then in Subsection~5.2 we define $\mathcal X_G(C_S)$ to be the
+moduli stack parametrizing $G$--bundles on twisted modifications.  There we prove the main
+theorem which shows that $\mathcal X_G(C_S)$ satisfies the valuative criterion for
+completeness.
+
+\subsection{Twisted modifications}
+
+Let $C_S$ be a nodal curve.  A \textbf{modification of length $\le n$ of $C_S$ over $B$} is
+a curve $C'_B$ over $B$ with a morphism $C'_B \xrightarrow{\pi} C_B$ such that
+\begin{itemize}
+\item $C'_B$ is flat over $B$ and $\pi$ is finitely presented and projective;
+\item $C'_B \xrightarrow{\pi} C_B^*$ is an isomorphism;
+\item for $b\in B_0$ the map of curves $C'_b \xrightarrow{\pi} C_b$ is a modification; that
+  is, the fiber $\pi^{-1}(p_b)$ over the unique node $p_b\in C_b$ is a rational chain of
+  $\mathbb P^1$s with at most $n$ components and there is $b\in B_0$ such that
+  $\pi^{-1}(p_b)$ has exactly $n$ components.
+\end{itemize}
+
+
+Let $(g_1,\dots,g_n)\in (\C^\times)^n$ act on $\C[[t_1,\dots,t_{n+1}]]$ by
+\[
+(t_1,\dots,t_n) \xmapsto{(g_1,\dots,g_n)}
+(g_1 t_1,\tfrac{g_2}{g_1} t_2,\dots,\tfrac{g_n}{g_{n-1}} t_n,\tfrac{1}{g_n} t_{n-1}).
+\]
+This action extends to $C'_{[[t_1,\dots,t_{n+1}]]}$ such that for every closed point
+$q\in \Spec\C[[t_1,\dots,t_{n+1}]]$ the stabilizer of $q$ in $(\C^\times)^n$ coincides with
+$\Aut(C'_q/C_q)$.  We set
+\[
+\mathsf{Mdf}_n = [\C[[t_1,\dots,t_{n+1}]] / (\C^\times)^n].
+\]
+This is an algebraic $S$--stack that comes equipped with a curve
+$[C'_S / (\C^\times)^n]$ and the modifications of $C_S$ over $B$ that arise from
+$S$--maps $B\to \mathsf{Mdf}_n$ we call \textbf{local modifications of length $\le n$}.
+
+A \textbf{twisted modification of length $\le n$ of $C_S$ over $B$} is a twisted curve
+$C'_B$ such that its coarse moduli space $\overline{C'_B}$ is a modification of
+length $\le n$ of $C_S$ over $B$.  A twisted modification is \textbf{of order $k$} if the
+order of the stabilizer group of every twisted point has order exactly $k$.  Similarly, a
+twisted modification is \textbf{of order $\le k$} if the order of the stabilizer of every
+twisted point has order $\le k$.  A \textbf{local twisted modification} $C'_B$ is a twisted
+modification whose coarse moduli space $\overline{C'_B}$ is a local modification. 
+
+Let $\mathsf{Mdf}_n^{\mathrm{tw}}$ denote the functor that assigns to $B\to S$ the
+groupoid of twisted local modifications of $C_S$ over $B$ of length $\le n$.  Let
+$\mathsf{Mdf}_n^{\mathrm{tw},k} \subset \mathsf{Mdf}_n^{\mathrm{tw},\le k}$ be the functors
+of twisted local modifications of order $k$ and order $\le k$, respectively.
+
+
+\subsection{Construction of the algebraic stack}
+Let $r = \operatorname{rk}(G)$. If $C'_B$ is a twisted modification of length $\le r$, then a 
+$G$--bundle on $C'_B$ is called \textbf{admissible} if the co--characters determining the 
+equivariant structure at all nodes are linearly independent over $\mathbb{Q}$ and are given by 
+a subset of $\{\eta_0,\dots,\eta_r\}$.
+
+Let $B$ be an $S$--scheme.  Define a groupoid $\mathcal{X}_G(C_S)$ over $S$--schemes by the assignment
+\[
+\mathcal{X}(C_S)(B)
+=
+\left\langle
+\xymatrix{
+  P_B \ar[r] & C'_B \ar[r] & C_B 
+}
+\right\rangle
+\]
+where $C'_B$ is a twisted local modification of $C_B$ and $P_B$ is an admissible $G$--bundle on 
+$C_B$.  Isomorphisms are commutative diagrams
+\[
+\xymatrix{
+  P_B \ar[d] \ar[r]^{\cong} & Q_B \ar[d] \\
+  C'_B \ar[r]^{\cong} \ar[dr] & C''_B \ar[d] \\
+  & C_B
+}
+\]
+
+For notational convenience we abbreviate $\mathcal{X}_G(C_S)(B)$ as $\mathcal{X}_G(B)$.
+
+\begin{theorem}
+The functor $\mathcal{X}_G = \mathcal{X}_G(C_S)$ is an algebraic stack locally of finite type.  
+It contains $\mathcal{M}_G(C_S)$ and $\mathcal{M}_G(C_{S^\ast})$ as dense open substacks, and the 
+complement of $\mathcal{M}_G(C_{S^\ast})$ is a divisor with normal crossings.
+\end{theorem}
+
+\begin{theorem}
+Let $R = \C[[s]]$ and $K = \C((s))$; for a finite extension $K \to K'$, let $R'$ denote the 
+integral closure of $R$ in $K'$.  Given the right commutative square below, there is a finite 
+extension $K \to K'$ and a dotted arrow making the entire diagram commute:
+\[
+\xymatrix{
+\Spec K' \ar[r] \ar[d] & \Spec K \ar[r]^{h^*} \ar[d] & \mathcal{X}_G(C_S) \ar[d] \\
+\Spec R' \ar[r] \ar@{-->}[ur]^{h} & \Spec R \ar[r]_{f} & S
+}
+\]
+In particular, $\mathcal{X}_G(C_S)$ is complete over $S$.
+\end{theorem}
+
+\section{Finiteness for Fixed Curves}
 
 Let $G$ be a reductive, connected complex Lie group and $\mathcal{M}$ the moduli stack of algebraic $G$-bundles over a smooth projective curve $\Sigma$ of genus $g$. We recall the finiteness theorem for this moduli stack.
 We recall the finiteness theorem for the moduli stack of principal bundles on a fixed smooth curve.
 
-\subsection*{1.1 \; Admissible classes}
+\subsection{Admissible classes}
 
 Given a representation $V$ of $G$, call $E^{*}V$ the vector bundle over 
-$\Sigma \times \mathcal{M}$ associated to the universal $G$–bundle.
-Call $\pi$ the projection along $\Sigma$, the relative canonical bundle $K$ of $\Sigma \times \mathcal{M} \to \mathcal{M}$ (so that $K|_{\Sigma} = K_{\Sigma}$), $\sqrt{K}$ its square root, $[C]$ the topological $K_{1}$–homology
-class of a $1$–cycle $C$ on $\Sigma$.
-Consider the following classes in the topological $K$–theory of $\mathcal{M}$:
+$\Sigma \times \mathcal{M}$ associated to the universal $G$-bundle.
+Call $\pi$ the projection along $\Sigma$, the relative canonical bundle $K$ of $\Sigma \times \mathcal{M} \to \mathcal{M}$ (so that $K|_{\Sigma} = K_{\Sigma}$), $\sqrt{K}$ its square root, $[C]$ the topological $K_{1}$-homology
+class of a $1$-cycle $C$ on $\Sigma$.
+Consider the following classes in the topological $K$-theory of $\mathcal{M}$:
 
 \begin{enumerate}[(i)]
     \item The restriction $E_{x}^{*}V \in K^{0}(\mathcal{M})$ of $E^{*}V$ to a point $x \in \Sigma$;
@@ -72,7 +741,7 @@ Consider the following classes in the topological $K$–theory of $\mathcal{M}$:
         \]
 \end{enumerate}
 
-We call the classes (i)–(iii) the \emph{Atiyah–Bott generators}; 
+We call the classes (i)-(iii) the \textbf{Atiyah-Bott generators}; 
 they are introduced in \cite[§2]{AB}, along with their counterparts 
 in cohomology, and can also be described from the K\"unneth decomposition of
 $E^{*}V$ in
@@ -83,7 +752,7 @@ $E^{*}V$ in
 \]
 by contraction with the various classes in $\Sigma$.
 Classes (i) and (iv) are represented by algebraic vector bundles, while (iii)
-can be realised as a perfect complex of $\mathcal{O}$–modules.
+can be realised as a perfect complex of $\mathcal{O}$-modules.
 The class $E^{*}_{C}V$ in (ii) is not algebraic.
 Note that
 \[
@@ -100,7 +769,7 @@ of $\mathcal{M}$, defined from the adjoint representation $\mathfrak{g}$.
 
 \begin{remark}
 For a line bundle $\mathcal{L}$ on $\mathcal{M}=\mathrm{Bun}_G(\Sigma)$, one associates a 
-\emph{level} $\lambda(\mathcal{L})$, namely the invariant symmetric bilinear form on 
+\textbf{level} $\lambda(\mathcal{L})$, namely the invariant symmetric bilinear form on 
 $\mathfrak g$ corresponding to the class 
 $\lambda(\mathcal{L}) \in H^{4}(BG;\mathbb{Z})$.  
 If $\mathcal{L}$ is a determinant line bundle $\det R\pi_{*}(E^{*}V)$ attached to a 
@@ -118,8 +787,8 @@ Let $\mathcal M = \Bun_G(\Sigma)$ and let
 \[
 \pi : \Sigma \times \mathcal M \longrightarrow \mathcal M
 \]
-be the projection.  Although the coarse moduli space of semistable $G$–bundles
-may be singular, the \emph{stack} $\mathcal M$ is a smooth Artin stack of
+be the projection.  Although the coarse moduli space of semistable $G$-bundles
+may be singular, the \textbf{stack} $\mathcal M$ is a smooth Artin stack of
 dimension $(g-1)\dim G$.  Indeed, for a bundle $P$ one has
 \[T_{[P]}\mathcal M \simeq H^1(\Sigma,\Ad P)\] and $H^2(\Sigma,\Ad P)=0$
 because $\dim\Sigma=1$, so deformations are unobstructed.
@@ -147,13 +816,13 @@ $\mathcal K^{1/2}$ of this line bundle. In particular, for semi-simple, not nece
 
 
 This gives rise to a natural "reference level"  $\lambda(\mathcal{K}^{1/2}) = \tfrac12\,\lambda(\mathcal{K})$.
-We call a line bundle $\mathcal{L}$ on $\mathcal{M}$ \emph{admissible} if its level exceeds 
+We call a line bundle $\mathcal{L}$ on $\mathcal{M}$ \textbf{admissible} if its level exceeds 
 that of $\mathcal{K}^{1/2}$, in the sense that 
 $\lambda(\mathcal{L}) - \lambda(\mathcal{K}^{1/2})$ is positive definite on every simple  factor of $\mathfrak g$.  
 
 
 Such positivity plays the role of an ampleness condition, and admissible line bundles provide 
-the appropriate class of twistings needed for the K--theoretic index and Verlinde formulas. Products of an admissible line bundle and any number of Atiyah-Bott generators span the ring of \emph{admissible classes}.
+the appropriate class of twistings needed for the K--theoretic index and Verlinde formulas. Products of an admissible line bundle and any number of Atiyah-Bott generators span the ring of \textbf{admissible classes}.
 \end{remark}
 
 \begin{remark}
@@ -182,15 +851,15 @@ In particular, central extensions of the loop algebra $L\mathfrak{g}$ are classi
     On the other hand, if $G$ is compact, then the de Rham cohomology $H^3(G)$ is isomorphic to the Lie algebra cohomology $H^3(\mathfrak g)$. This is because every de Rham cohomology class has a unique left invariant representative form given by averaging, and therefore the cohomology of $G$ can be calculated from the cochain complex of the Lie algebra $\mf g$.
 \end{remark}
 
-\subsection*{1.2\; Line bundles with a level}
-To certain line bundles on $\mathcal M$ we now associate a \emph{level}, a
+\subsection{Levels of Line Bundles}
+To certain line bundles on $\mathcal M$ we now associate a \textbf{level}, a
 quadratic form on the Lie algebra $\mathfrak g$.  Briefly, for any
 representation $V$, the level of $\det E^*_\Sigma V$ is the trace form
 $\xi,\eta\mapsto \operatorname{Tr}_V(\xi\eta)$, and we wish to extend this
 definition by linearity in the first Chern class of the line bundle.
 
 Riemann--Roch along $\Sigma$ expresses $c_1(E^*_\Sigma V)$ as the image of
-$\ch_2(V)=\tfrac12 c_1(V)^2 - c_2(V)$ under \emph{transgression along $\Sigma$},
+$\ch_2(V)=\tfrac12 c_1(V)^2 - c_2(V)$ under \textbf{transgression along $\Sigma$},
 \[
 \tau : H^4(BG;\mathbb Q)\ \longrightarrow\ H^2(\mathcal M;\mathbb Q)
 \qquad\text{(construction (1.1.iii) in cohomology)}.
@@ -198,9 +867,9 @@ $\ch_2(V)=\tfrac12 c_1(V)^2 - c_2(V)$ under \emph{transgression along $\Sigma$},
 It is important that $\tau$ is injective (Remark~4.11).  We now identify
 $H^4(BG;\mathbb R)$ with the space of invariant symmetric bilinear forms on
 $\mathfrak g_\kappa$ so that $\operatorname{Tr}_V$ corresponds to $\ch_2(V)$.
-We say that the line bundle $\mathcal L$ \emph{has a level} if its Chern class
+We say that the line bundle $\mathcal L$ \textbf{has a level} if its Chern class
 $c_1(\mathcal L)$ agrees with some $\tau(h)$ in $H^2(\mathcal M;\mathbb Q)$;
-the form $h$, called the \emph{level} of $\mathcal L$, is then unique.
+the form $h$, called the \textbf{level} of $\mathcal L$, is then unique.
 
 For $\mathrm{SL}_n$, the level of the positive generator of $\Pic(\mathcal M)$
 is $-\operatorname{Tr}_{\mathbb C^n}$ in the standard representation; the
@@ -208,10 +877,10 @@ calculation is due to Quillen.  For another example, the level of
 $\mathcal K^{-1/2}$ is $c := -\tfrac12\operatorname{Tr}_{\mathfrak g}$.
 Positivity of a level refers to the quadratic form on $\mathfrak g_\kappa$;
 thus $D_\Sigma V$ has positive level iff $V$ is $\mathfrak g$--faithful.
-Finally, $\mathcal L$, with level $h$, is \emph{admissible} iff
+Finally, $\mathcal L$, with level $h$, is \textbf{admissible} iff
 $h > -c$ as a quadratic form.
 
-\subsection*{1.3\; Remark}
+\begin{remark}[Properties of levels]
 \begin{enumerate}[(i)]
 \item
 When $G$ is simply connected, the map
@@ -239,7 +908,7 @@ for simple $G$: recall then that $\Pic(\mathcal M)=\mathbb Z$ and that
 $\mathcal K^{-1}$ is ample.)  When $\pi_1(G)\neq 0$, the positive--level
 condition is much more restrictive.
 \end{enumerate}
-
+\end{remark}
 
 
 
