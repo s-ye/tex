@@ -16,7 +16,11 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{titlesec}
-\usepackage{/Users/songye03/Desktop/Math_tex/style/macros}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/macros}
 % Theorem Environments
 \newtheoremstyle{mystyle}% name
   {10pt}% space above

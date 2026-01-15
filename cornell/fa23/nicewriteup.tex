@@ -2,8 +2,16 @@
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
-\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
 \usepackage{listings}
 \usepackage{tikz}
 

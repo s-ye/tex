@@ -1,0 +1,47 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\usepackage{../../style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\usepackage{booktabs} % For \addlinespace command
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Geometric invariant theory}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+
+These are reading notes for \emph{Geometric Invariant Theory} by Mumford, Fogarty and Kirwan.
+\end{abstract}
+
+\section{Example}
+Consider the action of $G = \PGL(n+1)$ on $X = (\mathbb{P}^n)^m$ using the line bundle
+\[
+L = \mathcal{O}_{\mathbb{P}^n}(1)^{\boxtimes m} = \mathcal{O}(1, \ldots, 1).
+\]
+We need to lift the geometric action of $G$ on $X$ to a linear action on $L$. The natural group that acts linearly on $\cO_{\mathbb{P}^n}(1)$ is $\GL(n+1)$, which is a central extension of $\PGL(n+1)$ by $\mathbb{G}_m$. Thus we have a linear action of $\GL(n+1)$ on $L$.
+\end{document}

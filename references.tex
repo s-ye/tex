@@ -2,7 +2,11 @@
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
 \usepackage{listings}
 \usepackage{tikz}
 \usepackage{setspace}

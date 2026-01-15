@@ -5,13 +5,21 @@
 \usepackage{listings}
 \usepackage{bookmark}
 \usepackage{tikz}
-\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
 \usepackage{fancyhdr}
 
 \usepackage{parskip} % Automatically respects blank lines
 \setlength{\parskip}{1em} % Adds more space between paragraphs
 \setlength{\parindent}{0pt} % Removes paragraph indentation
-\usepackage{/Users/songye03/Desktop/Math_tex/style/professional-notes}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/professional-notes}
 
 % Metadata
 \title{Qualifying Exam notes}

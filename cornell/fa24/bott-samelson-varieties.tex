@@ -5,8 +5,16 @@
 \usepackage{listings}
 \usepackage{bookmark}
 \usepackage{tikz}
-\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
-\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
 \usepackage{fancyhdr}
 
 \begin{document}

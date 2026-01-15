@@ -3,7 +3,11 @@
 \usepackage{amsmath,amsthm,amssymb,amsfonts, scrlayer-scrpage, color, comment, graphicx, environ}
 \usepackage{xcolor}
 \usepackage{bbm}
-\usepackage{/Users/songye03/Desktop/Math_tex/style/macros}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/macros}
 \usepackage{tikz-cd}
 \usepackage{mdframed}
 \usepackage[shortlabels]{enumitem}
@@ -56,7 +60,11 @@
     { \begin{mdframed}[backgroundcolor=gray!20] \textbf{Remark #1}}
     {  \end{mdframed}}
 
-\usepackage{/Users/songye03/Desktop/Math_tex/style/macros}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/macros}
 
 
 \usepackage{parskip}

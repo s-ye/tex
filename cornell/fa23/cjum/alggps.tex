@@ -10,7 +10,11 @@
 %%% The following command loads the amsrefs package, which will be
 %%% used to create the bibliography:
 \usepackage[lite]{amsrefs}
-\usepackage{/Users/songye03/Desktop/math_tex/style/macros}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/macros}
 
 %%% The following command defines the standard names for all of the
 %%% special symbols in the AMSfonts package, listed in
