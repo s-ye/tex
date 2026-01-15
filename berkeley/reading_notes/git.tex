@@ -39,9 +39,110 @@ These are reading notes for \emph{Geometric Invariant Theory} by Mumford, Fogart
 \end{abstract}
 
 \section{Example}
-Consider the action of $G = \PGL(n+1)$ on $X = (\mathbb{P}^n)^m$ using the line bundle
+Consider the action of $G = \PGL(n+1)$ on $X = (\mathbb{P}^n)^{m+1}$ using the line bundle
 \[
-L = \mathcal{O}_{\mathbb{P}^n}(1)^{\boxtimes m} = \mathcal{O}(1, \ldots, 1).
+L = \mathcal{O}_{\mathbb{P}^n}(1)^{\boxtimes (m+1)} = \mathcal{O}(1, \ldots, 1) = \pi_1^* \mathcal{O}_{\mathbb{P}^n}(1) \otimes \cdots \otimes \pi_{m+1}^* \mathcal{O}_{\mathbb{P}^n}(1)
+\] where $\pi_i : X \to \mathbb{P}^n$ is the projection to the $i$-th factor.
+We need to lift the geometric action of $G$ on $X$ to a linear action on $L$. The natural group that acts linearly on $\mathcal{O}_{\mathbb{P}^n}(1)$ is $\GL(n+1)$. There is no canonical way to make an element of $\PGL(n+1)$ act linearly on the fibers of $\mathcal{O}(1)$, because it is only defined up to scalar. The exact sequence is
+\[
+1 \to \mathbb{G}_m \to \GL(n+1) \to \PGL(n+1) \to 1
 \]
-We need to lift the geometric action of $G$ on $X$ to a linear action on $L$. The natural group that acts linearly on $\cO_{\mathbb{P}^n}(1)$ is $\GL(n+1)$, which is a central extension of $\PGL(n+1)$ by $\mathbb{G}_m$. Thus we have a linear action of $\GL(n+1)$ on $L$.
+Why don't we stay with $\GL(n+1)$ instead of $\PGL(n+1)$? Because the center $\mathbb{G}_m$ acts trivially on $X$ and this introduces a useless symmetry which breaks stability.
+
+We can restrict to the subgroup $\SL(n+1) \subset \GL(n+1)$, which kills most of the scalars except for the finite center $\mu_{n+1}$. We want the linearization to descend to $\PGL(n+1)$, so we need the center $\mu_{n+1} = \ker(\SL(n+1) \to \PGL(n+1)
+)$ to act trivially on the fibers of $L$. 
+
+On $\mathcal O_{\mathbb P^n}(1)$, a scalar $\zeta I \in \mu_{n+1} \subset SL(n+1)$ acts as multiplication by $\zeta$ on each fiber.
+
+On 
+\[
+\mathcal L \;=\; \mathcal O_{\mathbb P^n}(1)^{\boxtimes m},
+\]
+it therefore acts as multiplication by $\zeta^m$.
+
+Hence the $SL(n+1)$--linearization of $\mathcal L$ factors through $PGL(n+1)$ if and only if every $\zeta \in \mu_{n+1}$ acts trivially on $\mathcal L$, i.e.
+\[
+\zeta^m = 1 \quad \text{for all } \zeta \text{ with } \zeta^{n+1} = 1.
+\]
+This holds if and only if
+\[
+n+1 \mid m.
+\] More generally, if we consider the line bundle
+\[  L_i = \mathcal O_{\mathbb P^n}(a_i) \] on the $i$-th factor, then the same argument shows that the $SL(n+1)$--linearization of
+\[ \mathcal L = \bigotimes_{i=1}^{m+1} \pi_i^* L_i = \mathcal O_{\mathbb P^n}(a_1, \ldots, a_{m+1}) \] descends to $PGL(n+1)$ if and only if
+\[n+1 \mid \sum_{i=1}^{m+1} a_i.\]
+
+In any case, by means of these linearizations we can define invariant sections of all the sheaves $\mathcal L_{\boldsymbol\alpha}$. To construct such invariant sections, let $X_0,\ldots,X_n$ be the canonical sections of $\mathcal O_{\mathbb P^n}(1)$ on $\mathbb P^n$. Let
+\[
+X_i^{(j)} = \pi_j^*(X_i)
+\]
+be the induced sections of $L_j$.
+
+
+\begin{definition}
+For all sequences $\boldsymbol\alpha = (\alpha_0,\ldots,\alpha_n)$ of integers such that $0 \le \alpha_i \le m$, let
+\[
+D_{\alpha_0,\ldots,\alpha_n}
+=
+\det\bigl( X_i^{(\alpha_j)} \bigr)_{0 \le i,j \le n}
+\]
+be the section of $L_{\alpha_0} \otimes \cdots \otimes L_{\alpha_n}$ obtained by addition and tensor product as in the determinant.
+\end{definition}
+
+ It is evident that $D_{\alpha_0,\ldots,\alpha_n}$ is an invariant section of
+$L_{\alpha_0} \otimes \cdots \otimes L_{\alpha_n}$. The non-vanishing of suitable $D$'s defines the open sets we are looking for. Explicitly, a point of $(\mathbb{P}^n)^{m+1}$ is a tuple
+\[
+(p_0,\ldots,p_m), \quad p_j = [v_j], \quad v_j \in k^{n+1} \setminus \{0\}.
+\]
+
+Choose homogeneous lifts $v_j$. Put them as columns of a matrix
+\[
+M = [v_0 \mid v_1 \mid \cdots \mid v_m] \in \text{Mat}_{n+1,m+1}.
+\]
+Then 
+\[
+D_{\alpha_0,\ldots,\alpha_n} = \det(v_{\alpha_0}, \ldots, v_{\alpha_n}).
+\]
+The fact that $D_{\alpha_0,\ldots,\alpha_n}$ is well defined as a section of $L_{\alpha_0} \otimes \cdots \otimes L_{\alpha_n}$ follows from the following properties:
+\begin{itemize}
+\item $D_{\alpha_0,\ldots,\alpha_n} = 0$ iff the points $p_{\alpha_0}, \ldots, p_{\alpha_n}$ lie in a hyperplane.
+\item Under $g \in \GL(n+1)$, all minors are multiplied by $\det(g)$.
+\item Rescaling columns rescales the corresponding minors.
+\end{itemize}
+
+\begin{definition}
+An $R$-partition of $\{0,1,\ldots,n\}$ is an ordered set of subsets $S_1,\ldots,S_\nu$ of $\{0,1,\ldots,n\}$ such that
+\begin{enumerate}
+\item[(i)] $S_i \cap (S_1 \cup \cdots \cup S_{i-1})$ consists of exactly one integer for $i=2,\ldots,
+\nu$
+\item[(ii)] $\bigcup_i S_i = \{0,1,\ldots,n\}$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+Given an $R$-partition $R=\{S_1,\ldots,S_\nu\}$, let $U_R \subset (\mathbb P^n)^{m+1}$ be the open subset defined by
+\begin{enumerate}
+\item[(i)] $D_{0,1,\ldots,n} \neq 0$,
+\item[(ii)] for all $k$ between $1$ and $\nu$, and for all $i \in S_k$,
+\[
+D_{0,\ldots,i-1,i+1,\ldots,n,n+k} \neq 0
+\]
+\end{enumerate}
+\end{definition}
+
+Not only is $U_R$ affine, but the whole structure of the action of $PGL(n+1)$ on $U_R$ can be described explicitly. On each open set $U_R$, a configuration of points in $(\mathbb{P}^n)^{m+1}$ is uniquely the same thing as
+\begin{enumerate}
+\item a projective frame, and
+\item a collection of free affine parameters
+\end{enumerate}
+
+
+\begin{proposition}
+Let $R=\{S_1,\ldots,S_\nu\}$ be an $R$-partition of $\{0,1,\ldots,n\}$. Let $\PGL(n+1)$ act on $PGL(n+1)\times \mathbb A^{n\nu - n}$ by the product of left translation on itself and the trivial action on the affine space. Then there is a $\PGL(n+1)$-linear isomorphism:
+\[
+U_R \cong \PGL(n+1) \times \mathbb A^{n\nu - n}.
+\]
+
+Hence $U_R$ is a globally trivial principal fibre bundle with respect to the action of $\PGL(n+1)$, with base space $\mathbb A^{n\nu - n}$.
+\end{proposition}
 \end{document}
