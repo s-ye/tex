@@ -19,6 +19,8 @@
 \usepackage{fancyhdr}
 \DeclareMathOperator{\Al}{Al}
 \DeclareMathOperator{\Chmb}{Ch}
+\DeclareMathOperator{\pt}{pt}
+\DeclareMathOperator{\defect}{defect}
 
 \usepackage{parskip} % Automatically respects blank lines
 \setlength{\parskip}{1em} % Adds more space between paragraphs
@@ -163,14 +165,14 @@ which satisfy the \textbf{Gieseker condition}:
 
 \begin{definition}
 The stack $\widetilde{\mathcal M}_{g,I}([pt/\C^\times])$ of
-\emph{Gieseker $\C^\times$–bundles on stable genus $g$, $I$–marked curves}
-is a fibred category (over $\C$–schemes).  Its objects are tuples
+\emph{Gieseker $\C^\times$-bundles on stable genus $g$, $I$-marked curves}
+is a fibred category (over $\C$-schemes).  Its objects are tuples
 $(B,C,\sigma_i,\mathcal P)$ consisting of
 \begin{enumerate}
 \item a test scheme $B$;
 \item a flat projective family $\pi : C \to B$ of pre-stable, genus $g$
   curves with marked points $\sigma_i : B \to C$, $i\in I$; and
-\item a principal $\C^\times$–bundle $p : \mathcal P \to C$ defining a family
+\item a principal $\C^\times$-bundle $p : \mathcal P \to C$ defining a family
   of Gieseker bundles on the stabilization $C \to C^{st}$.
 \end{enumerate}
 The morphisms in this category are commutative diagrams
@@ -189,10 +191,1451 @@ F : \widetilde{\mathcal M}_{g,I}([pt/\C^\times]) \longrightarrow \overline{\math
 \]
 which sends a Gieseker bundle $(C,\sigma_i,\mathcal P)$ to the stabilized curve $(C^{st},\sigma_i)$.
 
-\begin{example}
-    
-\end{example}
+\subsection{Generalities on geometry of stacks}
 
+
+Let $\mathfrak{C}_{g,I} \to \mathfrak{M}_{g,I}$ be the universal curve over the stack of prestable, genus $g$,
+$I$-marked curves.
+
+\begin{definition}
+The stack $\mathfrak{M}_{g,I}\bigl([\pt/\C^\times]\bigr)$ of principal $\C^\times$-bundles on prestable
+$I$-marked curves of genus $g$ is the relative Hom-stack.
+\[
+\Hom_{\mathfrak{M}_{g,I}}\bigl(\mathfrak{C}_{g,I},\; [\pt/\C^\times]\times \mathfrak{M}_{g,I}\bigr).
+\]
+\end{definition}
+
+    \begin{remark}
+    Note that $\mathfrak{C}_{g,I} \to \mathfrak{M}_{g,I}$ is representable. Because mapping stacks behave well when the source is representable (an algebraic space) and proper/flat over the base.
+
+    Concretely: for a test $S\to\mathfrak{M}_{g,I}$, the pullback $\mathfrak{C}_{g,I}\times_{\mathfrak{M}_{g,I}} S$ is an honest algebraic space (in fact a family of curves), so a $\C^\times$-bundle on it is a standard moduli problem in algebraic geometry, not a moduli problem on a stacky source.
+
+    That representability is the technical input that lets you quote standard representability theorems for $\underline{\Hom}$ / mapping stacks, or build atlas charts using Quot-schemes.
+    \end{remark}
+
+The substack of $\mathfrak{M}_{g,I}\bigl([\pt/\C^\times]\bigr)$ which classifies curves with modular graph
+$\gamma$ and bundles of multi-degree $d$ is denoted $\mathfrak{M}_{\gamma,d}$.
+
+\begin{proposition}
+$\mathfrak{M}_{g,I}\bigl([\pt/\C^\times]\bigr)$ is an Artin stack, as is every substack $\mathfrak{M}_{\gamma,d}$.
+\end{proposition}
+
+\begin{proof}[Idea of proof]
+The base stack $\mathfrak{M}_{g,I}$ of prestable curves is Artin, and we can give Quot-scheme
+presentations of the stacks of bundles, locally over the base of the forgetful map
+$\mathfrak{M}_{g,I}\bigl([\pt/\C^\times]\bigr)\to \mathfrak{M}_{g,I}$.
+\end{proof}
+
+
+\begin{remark}
+\begin{enumerate}
+    \item \textbf{Mapping stack viewpoint.} There are general theorems: if $X \to S$ is proper, flat, finitely presented, with $X$ representable (algebraic space), and $\mathcal{Y}$ is an algebraic stack with reasonable finiteness properties, then the stack $\underline{\Hom}_S(X, \mathcal{Y})$ is an algebraic (Artin) stack. Here $X = \mathfrak{C}_{g,I}$ over $S = \mathfrak{M}_{g,I}$, and $\mathcal{Y} = B\mathbb{C}^\times$ is a smooth Artin stack. So $\Hom_{\mathfrak{M}_{g,I}}(\mathfrak{C}_{g,I}, B\mathbb{C}^\times \times \mathfrak{M}_{g,I})$ is Artin.
+    \item \textbf{``Bundles are a Quot/GL presentation'' viewpoint.} Over a fixed curve $C$, line bundles can be embedded into a fixed vector bundle after twisting enough: choose $m \gg 0$ so that $L(m)$ is globally generated and $R^1\pi_*(L(m)) = 0$, then $L(m)$ is a quotient of $\mathcal{O}_C^{\oplus N}$. Such quotients are parameterized by a Quot-scheme. Varying $C$ in a family, you do this locally on the base and get a presentation of the ``stack of line bundles'' by a scheme with a $\GL_N$-action, hence an Artin stack.
+
+\end{enumerate}
+\end{remark}
+
+\begin{proposition}
+The substacks $\mathfrak{M}_{\gamma,d}$ are of finite type and finite presentation.
+\end{proposition}
+
+\begin{proof}
+We have fixed the topological type, so we may exploit the normalization of $\mathfrak{C}_{g,I}$
+over $\mathfrak{M}_{\gamma,d}$ to represent bundles by their lifts to the connected components of
+the normalization plus gluing data.
+\end{proof}
+
+\begin{proposition}
+The substacks $\mathfrak{M}_{\gamma,d}$ stratify $\mathfrak{M}_{g,I}\bigl([\pt/\C^\times]\bigr)$: they are locally
+closed and disjoint. The whole stack is a union
+\[
+\mathfrak{M}_{g,I}\bigl([\pt/\C^\times]\bigr)=\bigsqcup_{\gamma,d}\mathfrak{M}_{\gamma,d},
+\]
+over all topological types. Moreover, the closure of $\mathfrak{M}_{\gamma,d}$ in
+$\mathfrak{M}_{g,I}\bigl([\pt/\C^\times]\bigr)$ is a disjoint union of other such strata.
+\end{proposition}
+
+\begin{lemma}\label{lem:elementary-ops}
+Let $(C_0,\sigma_{0,i},\mathcal P_0)$ be a $\C^\times$-bundle on a prestable
+curve of topological type $(\gamma_0,d_0)$.  Let
+$(C,\sigma_i,\mathcal P)$ be a deformation of
+$(C_0,\sigma_{0,i},\mathcal P_0)$ over the spectrum of a complete discrete
+valuation ring.  Then the topological type $(\gamma,d)$ of the generic
+fiber is obtained from $(\gamma_0,d_0)$ by a finite sequence of the
+following elementary operations on degree-labelled modular graphs:
+\begin{enumerate}
+\item[\textnormal{(1)}] \emph{Resolving a self-node.}
+Remove a loop (self-edge) at a vertex $v$ and increase its genus label
+from $g_v$ to $g_v+1$, leaving the multi-degree $d_v$ unchanged.
+
+\item[\textnormal{(2)}] \emph{Resolving a splitting node.}
+Let $v_1,v_2$ be two vertices joined by at least one edge.  Replace
+$v_1,v_2$ and all edges between them by a single vertex $v$ with
+\[
+g_v = g_{v_1}+g_{v_2},\qquad d_v = d_{v_1}+d_{v_2},
+\]
+delete one edge joining $v_1$ and $v_2$, and turn any remaining such
+edges into loops at $v$.
+\end{enumerate}
+Conversely, every degree-labelled modular graph obtained from
+$(\gamma_0,d_0)$ by finitely many operations \textnormal{(1)} and
+\textnormal{(2)} occurs as the topological type of the generic fiber of
+some deformation.
+\end{lemma}
+
+\begin{proof}[Sketch of proof]
+Any deformation of a prestable curve over a complete DVR can only
+\emph{smooth} existing nodes; new nodes do not appear.  Thus the only
+possible changes to the modular graph are obtained by resolving
+nodes of $C_0$.
+
+Locally at a node there are two possibilities.  If the node is a
+self-intersection of one irreducible component, then smoothing it
+replaces a genus-$g_v$ component with one node by a smooth component
+of genus $g_v+1$.  On the modular graph this is operation~(1):
+removing a loop at $v$ and increasing the genus label.
+
+If the node joins two distinct components with vertices $v_1$ and
+$v_2$, then smoothing it merges the two components into a single one.
+The arithmetic genus adds:
+\[
+g_v = g_{v_1}+g_{v_2},
+\]
+and the degree labels add similarly, giving operation~(2).  If there
+are several nodes between the same two components, smoothing one of
+them leaves the others as self-nodes on the glued component, which
+explains the appearance of loops in~(2).
+
+To see which degree labels can occur, normalize $C_0$ at the nodes
+which are \emph{not} smoothed in the deformation and look at each
+connected component separately.  Flatness of the family forces the
+total degree of the line bundle on each component of the
+normalization to stay constant.  This exactly yields the degree
+transformation rules in~(1) and~(2).
+
+Finally, one checks that each allowed combinatorial move can actually
+be realized by an explicit local smoothing of the corresponding node,
+so every graph obtained in this way appears in some deformation.
+\end{proof}
+
+\begin{remark}[Resolving a self-node and increase of genus]
+The arithmetic genus of a nodal curve with modular graph $\Gamma$ is
+\[
+g_{\mathrm{arith}} = \sum_{v} g_v \;+\; b_1(\Gamma),
+\]
+where $b_1(\Gamma)$ is the first Betti number of the graph.  A loop
+at a vertex contributes $1$ to $b_1(\Gamma)$.
+
+In operation~\textnormal{(1)}, we remove a loop at a vertex $v$ and
+raise $g_v$ by $1$.  On the right-hand side,
+$b_1(\Gamma)$ decreases by $1$, while $\sum_v g_v$ increases by $1$, so
+the arithmetic genus $g_{\mathrm{arith}}$ is unchanged.  Geometrically,
+we are replacing an irreducible rational component with one node
+(arithmetic genus $1$) by a smooth elliptic component (geometric
+genus $1$).
+
+A concrete example is the standard family of plane cubics
+\[
+C_t :\ y^2 = x^3 + x^2 + t \subset \P^2,\qquad t\in\C.
+\]
+For $t\neq0$, $C_t$ is a smooth genus-$1$ curve (an elliptic curve).
+For $t=0$, $C_0$ has a single node; its normalization is $\P^1$, so
+it is a “pinched $\P^1$’’ of arithmetic genus $1$.  The modular
+graph of $C_0$ has one vertex with $g_v=0$ and one loop; smoothing
+the node (passing to $t\neq0$) corresponds exactly to deleting the
+loop and changing $g_v$ to $1$, as in operation~\textnormal{(1)}.
+\end{remark}
+
+\begin{proposition}
+$\mathfrak{M}_{g,I}\bigl([\pt/\C^\times]\bigr)$ is locally of finite type and locally
+finitely presented.
+\end{proposition}
+
+\begin{proof}
+We check why there are only finitely many possible outcomes.
+
+\textbf{Finite number of nodes.} The modular graph $\gamma_0$ has finitely many edges, which correspond to nodes. Each operation (1) or (2) removes at least one edge. Therefore, you can perform at most $|E(\gamma_0)|$ operations, and there are no infinite chains.
+
+\textbf{Genus is fixed.} The arithmetic genus of the curve is
+\[
+g = \sum_v g_v + b_1(\gamma),
+\]
+and our operations are precisely designed to preserve $g$. This constrains how the $g_v$ can change when you remove edges.
+
+\textbf{Degrees are bounded.} The total degree of the bundle is fixed:
+\[
+\sum_v d_v = \deg \mathcal P_0.
+\]
+In operation (1) the degree at $v$ stays the same. In operation (2) you replace $(d_{v_1},d_{v_2})$ by $d_v=d_{v_1}+d_{v_2}$. So all vertex degrees you ever see are sums of the finitely many initial degrees and are bounded by the fixed total degree. There is no way to create arbitrarily many new degree patterns.
+
+\textbf{Number of vertices decreases or stays bounded.} Operation (1) does not change the vertex set. Operation (2) strictly decreases the number of vertices. So the number of vertices across all reachable graphs is bounded by $|V(\gamma_0)|$.
+
+A finite graph with bounded numbers of vertices, bounded genera, and with degree labels summing to a fixed integer has only finitely many possibilities. Hence there are only finitely many degree-labelled modular graphs $(\gamma,d)$ obtainable from $(\gamma_0,d_0)$ by the previous lemma.
+
+Equivalently, starting from a given point of $\mathfrak M_{g,I}([\pt/\C^\times])$, any $1$-parameter deformation can land only in a finite set of strata $\mathfrak M_{\gamma,d}$.
+
+\textbf{From finitely many strata near a point to locally of finite type.} You already proved that for each fixed $(\gamma,d)$, the substack $\mathfrak M_{\gamma,d}$ is of finite type and finite presentation over $\mathbb{C}$, and that the whole stack is the disjoint union
+\[
+\mathfrak M_{g,I}([\pt/\C^\times]) = \bigsqcup_{\gamma,d} \mathfrak M_{\gamma,d}.
+\]
+
+Now take any geometric point $x$ of the stack, of type $(\gamma_0,d_0)$. Consider all deformations of $x$ over DVRs (or, equivalently, all small $1$-parameter families through $x$). By Lemma~2.5 and the argument above, the generic fibers of these deformations can only lie in finitely many strata $\mathfrak M_{\gamma,d}$. This has two consequences:
+
+First, there is an open neighbourhood $U$ of $x$ in $\mathfrak M_{g,I}([\pt/\C^\times])$ that intersects only those finitely many strata. (If infinitely many strata accumulated at $x$, you could construct DVR deformations hitting infinitely many types, contradicting the lemma.)
+
+Second, on that neighbourhood we have
+\[
+U = U \cap \bigcup_{\text{finite set }(\gamma,d)} \mathfrak M_{\gamma,d},
+\]
+a finite union of substacks, each of which is of finite type and finitely presented.
+
+A finite union of finite-type (resp.\ finitely presented) substacks is again of finite type (resp.\ finitely presented). So every point has a neighbourhood of finite type and finite presentation: that is exactly what "locally of finite type" and "locally finitely presented" mean for stacks.
+\end{proof}
+
+The following propositions follow from general deformation theory and we will review the necessary background in the next subsection.
+
+\begin{proposition}
+$\mathfrak{M}_{g,I}\bigl([\pt/\C^\times]\bigr)$ is unobstructed.
+\end{proposition}
+
+\begin{proposition}
+The dimension agrees with the virtual dimension:
+\[
+\dim \mathfrak{M}_{g,I}\bigl([\pt/\C^\times]\bigr)
+  = (g-1) + 3(g-1) + |I|.
+\]
+\end{proposition}
+
+\subsection{General theory of deformations and obstructions}
+
+A deformation functor is a systematic way to encode all infinitesimal deformations of some object as a functor on Artinian local rings. Set the base field to $\mathbb{C}$.
+Let $\mathbf{Art}_\mathbb{C}$ be the category of local Artinian $\mathbb{C}$-algebras with residue field $\mathbb{C}$ (objects $A$, with a surjection $A \to \mathbb{C}$).
+
+\begin{definition}
+    A \textbf{deformation functor} is a functor
+\[
+F : \mathbf{Art}_\mathbb{C} \longrightarrow \mathbf{Sets}
+\]
+with the property that
+\[
+F(\mathbb{C}) = \{\text{one distinguished point}\}.
+\]
+
+\end{definition}
+Intuitively, $F(A)$ is the set of isomorphism classes of families over $\Spec A$ whose special fiber (over $\Spec \mathbb{C}$) is your fixed object. The distinguished point in $F(\mathbb{C})$ is the trivial family, consisting only of the fixed object itself. As we deform by passing to larger Artinian rings, we obtain non-trivial families and capture all the infinitesimal deformation data.
+
+
+Let $F:\mathbf{Art}_\C\to\mathbf{Sets}$ be a deformation functor in the sense of Schlessinger, and fix a point $x\in F(\C)$.
+
+A first-order deformation is an element of $F(\C[\varepsilon]/(\varepsilon^2))$; this set is the tangent space $T^1$.
+
+Now consider a small extension of Artinian rings 
+\[
+0\to I\to A'\xrightarrow{q} A\to 0,\qquad I^2=0.
+\]
+
+\begin{remark}
+    Recall that a small extension is a surjection of local Artinian rings $q:A' \to A$ whose kernel $I$ satisfies $\mathfrak{m}_{A'} I = 0$. In particular, $I$ is a vector space over the residue field $\mathbb{C}$ of dimension $1$.
+
+    Since $I \subset \mathfrak{m}_{A'}$ and $\mathfrak{m}_{A'} I = 0$, we have $I^2 \subset \mathfrak{m}_{A'} I = 0$. Thus small extensions are a special case of square-zero extensions, where the kernel satisfies $I^2 = 0$.
+\end{remark}
+
+
+    \begin{remark}
+        Why do we package deformation theory in terms of small extensions?
+\begin{enumerate}
+    \item \textbf{Infinitesimal nature of deformation functors.}
+    A deformation functor $F:\mathbf{Art}_\C\to\mathbf{Sets}$ is ``infinitesimal'' by design. To understand its behavior, you look at lifting problems along short exact sequences
+    \[
+    0 \to I \to A' \xrightarrow{q} A \to 0
+    \]
+    with $I^2=0$. These are the first-order thickenings of $\Spec A$.
+
+    For each such extension and each $\xi_A\in F(A)$, you ask: does $\xi_A$ lift to $F(A')$? If yes, how many lifts are there? An obstruction theory packages this as an obstruction class
+    \[
+    \mathrm{ob}(\xi_A,A'\to A) \in T^2 \otimes_\C I,
+    \]
+    and if the obstruction vanishes, the set of lifts is a torsor under
+    \[
+    T^1 \otimes_\C I.
+    \]
+
+    Here it is crucial that $I$ is a $\C$-vector space, so that everything is linear in $I$. For a small extension, $I\cong\C$, so obstructions live in a fixed vector space $T^2$, and lifts, when unobstructed, form a torsor under a fixed vector space $T^1$. This is exactly what lets you identify $T^1$ as the tangent space and $T^2$ as the obstruction space.
+
+    \item \textbf{Building general Artinian algebras from small extensions.}
+    Any local Artinian $\C$-algebra of finite length can be built as a tower of small extensions:
+    \[
+    \C = A_0 \xleftarrow{} A_1 \xleftarrow{} \dots \xleftarrow{} A_n = A
+    \]
+    where each $A_i \to A_{i-1}$ is a small extension.
+
+    Thus, to control $F(A)$ for arbitrary $A$, it suffices to understand how deformations lift across small extensions and how obstructions behave in this simple situation. 
+\end{enumerate}
+    \end{remark}
+
+\begin{definition}
+An \textbf{obstruction theory} for $F$ at $x$ consists of:
+\begin{enumerate}
+\item a finite-dimensional vector space $T^2$ (the obstruction space),
+\item for each small extension $A'\to A$ and each deformation $\xi_A\in F(A)$ lifting $x$, an obstruction class
+\[
+\mathrm{ob}(\xi_A,A'\to A) \in T^2\otimes_\C I,
+\]
+\end{enumerate}
+satisfying the following properties:
+\begin{enumerate}
+\item $\mathrm{ob}(\xi_A,A'\to A)=0$ if and only if $\xi_A$ lifts to some $\xi_{A'}\in F(A')$;
+\item if $\mathrm{ob}=0$, the set of lifts is a torsor under $T^1\otimes I$;
+\item the obstruction classes satisfy compatibility with composition of small extensions.
+\end{enumerate}
+\end{definition}
+
+\textbf{For an algebraic space or (Artin/DM) stack $\mathcal X$, there is a canonical deformation functor at each point.} Illusie and then Behrend--Fantechi package its obstruction theory in terms of the cotangent complex $L_{\mathcal X/\C}$.
+
+\begin{definition}
+    A \textbf{(perfect) obstruction theory} on $\mathcal X$ is a morphism of complexes
+\[
+\phi : E^\bullet \longrightarrow L_{\mathcal X/\C},
+\]
+where $E^\bullet$ is (perfect) of amplitude $[-1,0]$, such that on cohomology sheaves
+\[
+h^0(\phi) : h^0(E^\bullet) \xrightarrow{\;\sim\;} h^0(L_{\mathcal X/\C}),\qquad
+h^{-1}(\phi) : h^{-1}(E^\bullet) \twoheadrightarrow h^{-1}(L_{\mathcal X/\C}).
+\]
+\end{definition}
+
+\begin{theorem}[Tangent--obstruction via cotangent complex]
+Let $\mathcal X$ be an Artin stack locally of finite type over~$\C$, with
+structure morphism $f:\mathcal X\to\Spec\C$ and cotangent complex
+$L_{\mathcal X/\C}$.  For a $\C$--point $x:\Spec\C\to\mathcal X$, set
+$L_x := x^*L_{\mathcal X/\C}$.  Then
+\[
+T^1_x\mathcal X \;\cong\; \Ext^1(L_x,\C),
+\qquad
+T^2_x\mathcal X \;\subseteq\; \Ext^2(L_x,\C),
+\]
+functorially in small extensions of Artinian algebras. In particular, the pair $(T^1_x,T^2_x)$ with the natural obstruction classes is an obstruction theory in the functorial sense above.
+\end{theorem}
+\begin{remark}
+Intrinsically, obstructions lie in $\Ext^2(L_x,\mathbb{C})$. A perfect obstruction theory $\phi:E^\bullet\to L_{\mathcal X/\mathbb{C}}$ picks out a canonical subspace 
+\[
+T^2_x = \Ext^2(E_x^\bullet,\mathbb{C})\;\subseteq\; \Ext^2(L_x,\mathbb{C})
+\]
+containing all actual obstruction classes. If $L_{\mathcal X/\mathbb{C}}$ itself has perfect amplitude $[-1,0]$ (so that we may take $E^\bullet=L_{\mathcal X/\mathbb{C}}$), then this inclusion is an isomorphism.
+
+More concretely, there are two perspectives on obstruction spaces. The first is intrinsic to the stack $\mathcal X$: for any point $x$ on an Artin stack, the cotangent complex $L_{\mathcal X/\mathbb{C}}$ determines a canonical obstruction space $\mathrm{Ob}^{\mathrm{intr}}_x \cong \Ext^2(L_x,\mathbb{C})$ via Illusie's theory. This is independent of any choice.
+
+The second perspective is extrinsic: you choose a morphism of complexes
+\[
+\phi : E^\bullet \longrightarrow L_{\mathcal X/\mathbb{C}}
+\]
+where $E^\bullet$ is perfect of amplitude $[-1,0]$ with $h^0(\phi)$ an isomorphism and $h^{-1}(\phi)$ surjective (the defining properties of a Behrend--Fantechi perfect obstruction theory). At the point $x$ you then define
+\[
+T^1_x := \Ext^1(E_x^\bullet,\mathbb{C}),\qquad
+T^2_x := \Ext^2(E_x^\bullet,\mathbb{C}).
+\]
+
+The map $\phi$ induces a canonical inclusion
+\[
+\Ext^2(E_x^\bullet,\mathbb{C}) \longrightarrow \Ext^2(L_x,\mathbb{C})
+\]
+because the cone of $\phi$ has cohomology only in degrees $\le -2$, making the map injective. Thus the obstruction space $T^2_x$ determined by your chosen obstruction theory sits inside the intrinsic obstruction space, and all actual obstruction classes land in this subspace.
+
+Equality holds precisely when the cotangent complex $L_{\mathcal X/\mathbb{C}}$ is already perfect of amplitude $[-1,0]$ and you take $E^\bullet = L_{\mathcal X/\mathbb{C}}$ with $\phi = \mathrm{id}$. This is a strong condition on $\mathcal X$---roughly speaking, it means $\mathcal X$ is intrinsically lci (local complete intersection in the stacky sense). In such cases, $T^2_x = \Ext^2(L_x,\mathbb{C})$ exactly.
+
+If the intrinsic cotangent complex has nontrivial cohomology below degree $-2$, then the cone of $\phi$ may contribute additional classes in $\Ext^2$, and $T^2_x$ will be a proper subspace of the intrinsic obstruction space.
+\end{remark}
+
+\subsection{Application to $\mathfrak M_{g,I}([\pt/\C^\times])$}
+
+
+Consider a pair
+$(C,\sigma_i,\mathcal P)$ consisting of a (pre)stable marked curve and a
+principal $\C^\times$--bundle.
+
+\begin{definition}
+Let $\mathbf{Art}_\C$ be the category of local Artinian $\C$--algebras with
+residue field~$\C$.  The \emph{deformation functor} of
+$(C,\sigma_i,\mathcal P)$ is the functor
+\[
+\Def_{(C,\sigma_i,\mathcal P)} : \mathbf{Art}_\C \longrightarrow \mathbf{Sets}
+\]
+which sends $A\in\mathbf{Art}_\C$ to the set of isomorphism classes of
+tuples $(C_A,\sigma_{i,A},\mathcal P_A)$, where
+\begin{itemize}
+\item $C_A\to\Spec A$ is a flat family of prestable curves whose special
+fiber is~$C$,
+\item $\sigma_{i,A} : \Spec A \to C_A$ are sections lifting the $\sigma_i$,
+\item $\mathcal P_A$ is a principal $\C^\times$--bundle on $C_A$ extending
+$\mathcal P$,
+\end{itemize}
+all modulo isomorphisms that restrict to the identity on the special fiber.
+\end{definition}
+
+The tangent and obstruction spaces of this functor at $A=\C$ are denoted
+\[
+T^1 := \Def_{(C,\sigma_i,\mathcal P)}(\C[\varepsilon]/(\varepsilon^2)),
+\qquad
+T^2 := \text{obstruction space},
+\]
+canonically identify with the Zariski tangent and obstruction
+spaces of the stack $\mathfrak M_{g,I}([\pt/\C^\times])$ at the
+corresponding point.
+
+There are two sources of deformations:
+\begin{enumerate}
+\item deformations of the marked curve $(C,\sigma_i)$,
+\item deformations of the bundle $\mathcal P$ over the varying curve.
+\end{enumerate}
+
+The cotangent complex of the stack of prestable curves
+$\mathfrak M_{g,I}$ is perfect of amplitude $[-1,0]$, and at a point
+$(C,\sigma_i)$ its dual gives the usual deformation theory of curves:
+\[
+T^1_{(C,\sigma_i)}\mathfrak M_{g,I}
+\;\cong\;
+H^1\bigl(C,\mathcal T_C(-\sum_i\sigma_i)\bigr),\qquad
+T^2_{(C,\sigma_i)}\mathfrak M_{g,I}
+\;\cong\;
+H^2\bigl(C,\mathcal T_C(-\sum_i\sigma_i)\bigr)=0.
+\]
+The key point is that $\mathcal T_C$ is a line bundle (even if $C$ is nodal),
+so its cohomology is concentrated in degrees $\le1$.
+
+For the bundle, one has the classical \emph{Atiyah class} of a principal
+bundle $\mathcal P$ over a scheme $C$, which produces an extension of vector
+bundles
+\[
+0 \longrightarrow \operatorname{ad}\mathcal P
+  \longrightarrow \mathcal D
+  \longrightarrow \mathcal T_C
+  \longrightarrow 0.
+\]
+Here $\operatorname{ad}\mathcal P$ is the adjoint bundle (for
+$G=\C^\times$ this is just $\mathcal O_C$), and $\mathcal D$ is called the
+\emph{Atiyah bundle} of $\mathcal P$.  Twisting by $-\sum_i\sigma_i$ to fix
+the marked points, we obtain:
+\begin{equation}
+\label{eq:Atiyah-seq}
+0 \longrightarrow \operatorname{ad}\mathcal P
+  \longrightarrow \mathcal D
+  \longrightarrow \mathcal T_C\Bigl(-\sum_i\sigma_i\Bigr)
+  \longrightarrow 0.
+\end{equation}
+
+
+Consider the stack
+\[
+\mathcal X := \mathfrak M_{g,I}([\pt/\C^\times])\;\simeq\; \underline{\Hom}_{\mathfrak M_{g,I}}(\mathfrak C_{g,I}, B\C^\times\times\mathfrak M_{g,I})
+\]
+parametrizing pairs $(C,\sigma_i,\mathcal P)$.
+
+There is a general fact for mapping stacks: when the source is proper and representable and the target is a smooth stack, the relative cotangent complex of the mapping stack over the base is
+\[
+L_{\mathcal X/\mathfrak M_{g,I}}\;\simeq\; R\pi_*\bigl(\Omega^1_C\otimes \operatorname{ad}\mathcal P\bigr),
+\]
+where $\pi:C\to\Spec\C$ is the curve in a given fiber. Dualizing, the tangent complex is
+\[
+T_{\mathcal X/\mathfrak M_{g,I}}\;\simeq\; R\Gamma\bigl(C,\mathcal D\bigr)[1],
+\]
+where $\mathcal D$ fits into the Atiyah exact sequence
+\[
+0 \to \operatorname{ad}\mathcal P \to \mathcal D \to \mathcal T_C(-\sum\sigma_i) \to 0.
+\]
+
+In Behrend--Fantechi language one can take the perfect obstruction theory
+\[
+E^\bullet = R\Gamma(C,\mathcal D)[1]
+\]
+at the point $(C,\sigma_i,\mathcal P)$. This is a two-term complex concentrated in degrees $-1,0$:
+\begin{align*}
+h^{-1}(E^\bullet) &\cong H^0(C,\mathcal D),\\
+h^{0}(E^\bullet) &\cong H^1(C,\mathcal D).
+\end{align*}
+
+Then the tangent and obstruction spaces are:
+\[
+T^1 \;\cong\; \Ext^1(E^\bullet,\C) \;\cong\; H^1(C,\mathcal D),
+\]
+\[
+T^2 \;\subseteq\; \Ext^2(E^\bullet,\C) \;\cong\; H^2(C,\mathcal D).
+\]
+Finally, since $\dim C = 1$, for any vector bundle $\mathcal D$ on $C$ we have
+\[
+H^2(C,\mathcal D) = 0,
+\]
+so $\Ext^2(E^\bullet,\C)=0$ and the obstruction space vanishes. 
+
+\begin{remark}
+    \textbf{Where does $\Omega^1_C\otimes \operatorname{ad}\mathcal P$ come from?}
+
+    We are studying the stack
+    \[
+    \mathcal X
+    =
+    \underline{\Hom}_{\mathfrak M_{g,I}}
+    \bigl(\mathfrak C_{g,I},B\C^\times\times\mathfrak M_{g,I}\bigr)
+    \]
+    at a point corresponding to a family $(C,\sigma_i,\mathcal P)$.
+
+    There is a general fact about mapping stacks: if $X\to S$ is proper, flat, and representable, and $Y\to S$ is a smooth stack, then for the relative mapping stack $\underline{\Hom}_S(X,Y)$, the relative cotangent complex at a map $f:X\to Y$ is
+    \[
+    L_{\underline{\Hom}_S(X,Y)/S}\Big|_{[f]}
+    \simeq
+    R\Gamma\bigl(X, f^*L_{Y/S}\bigr),
+    \]
+    and the tangent complex is its dual
+    \[
+    T_{\underline{\Hom}_S(X,Y)/S}\Big|_{[f]}
+    \simeq
+    R\Gamma\bigl(X, f^*T_{Y/S}\bigr)[1].
+    \]
+
+    In our case, we have $X = \mathfrak C_{g,I}$, $S = \mathfrak M_{g,I}$, and $Y = B\C^\times \times \mathfrak M_{g,I}$. The target $B\C^\times$ is smooth, and its cotangent complex is the vector bundle $L_{B\C^\times} \cong \mathfrak{c}^\vee[-1]$. When pulled back along the universal bundle, this gives the adjoint bundle $\operatorname{ad}\mathcal P$. Over a curve, this sheaf appears tensored with $\Omega^1_C$, so the relative cotangent complex of the mapping stack over $\mathfrak M_{g,I}$ is
+    \[
+    L_{\mathcal X/\mathfrak M_{g,I}}
+    \simeq
+    R\pi_*\bigl(\Omega^1_C \otimes \operatorname{ad}\mathcal P\bigr),
+    \]
+    where $\pi:C\to \Spec\C$ is the curve in the fiber under consideration.
+    \end{remark}
+
+    \begin{remark}
+    \textbf{What is $\mathcal D$ by definition?}
+    The sheaf $\mathcal D$ is the Atiyah bundle of the principal bundle $\mathcal P$, and it admits several equivalent concrete definitions.
+
+    First, consider the vertical tangent bundle construction. Let $\pi_P:\mathcal P\to C$ be the principal $\C^\times$-bundle. There is an exact sequence of vector bundles on $\mathcal P$:
+    \[
+    0 \to T_{\mathcal P/C} \to T_{\mathcal P} \to \pi_P^*T_C \to 0.
+    \]
+    The vertical tangent bundle $T_{\mathcal P/C}$ is isomorphic to $\pi_P^*(\operatorname{ad}\mathcal P)$ (for $\C^\times$, simply $\pi_P^*\mathcal O_C$). Taking $G$-invariants and descending to the base gives
+    \[
+    \mathcal D := (T_{\mathcal P})^G / G,
+    \]
+    or more invariantly, $\mathcal D$ is the sheaf of $G$-invariant vector fields on $\mathcal P$ modulo the $G$-action, viewed as a vector bundle on $C$. This construction yields the fundamental Atiyah exact sequence:
+    \[
+    0 \longrightarrow \operatorname{ad}\mathcal P
+    \longrightarrow \mathcal D
+    \longrightarrow \mathcal T_C
+    \longrightarrow 0.
+    \]
+We can twist by $-\sum_i\sigma_i$ to fix the marked points:
+    \[
+    0 \longrightarrow \operatorname{ad}\mathcal P
+    \longrightarrow \mathcal D
+    \longrightarrow \mathcal T_C\Bigl(-\sum_i\sigma_i\Bigr)
+    \longrightarrow 0.
+    \]
+    The exact sequence itself serves as the practical definition of $\mathcal D$: it is the unique (up to isomorphism) extension of $\mathcal T_C(-\sum\sigma_i)$ by $\operatorname{ad}\mathcal P$ that represents the Atiyah class of $\mathcal P$.
+
+    Alternatively, we can take an associated vector bundle $E$ of $\mathcal P$ and consider $\mathbb{C}$-linear maps
+    \[
+    D: E \longrightarrow E
+    \]
+    satisfing the differential operator of order $\le 1$. For every function $f\in\mathcal O_C$, the commutator
+    \[
+    [D,f] := D\circ (f\cdot) - (f\cdot)\circ D
+    \]
+    is $\mathcal O_C$-linear (i.e.\ is given by multiplication by a section of $\End(E)$).
+
+    Equivalently, locally on $C$, in a trivialization $E\simeq \mathcal O_C^r$ and a coordinate $z$, such an operator looks like
+    \[
+    D = A(z)\frac{d}{dz} + B(z),
+    \]
+    where $A(z),B(z)$ are $r\times r$ matrices of functions. The first-order part is $A(z)\frac{d}{dz}$ and the symbol of $D \in T_C \otimes \End(E)$ is the class of this first-order part.
+
+Consider the sheaf of first-order differential operators $D:E\to E$ such that the symbol $\sigma(D)$ is a vector field times the identity, and that vector field vanishes at each marked point. This sheaf, independent of the choice of $E$, is $\mathcal D$, and it sits in the Atiyah exact sequence
+    \[
+    0 \to \operatorname{ad}\mathcal P \to \mathcal D \to \mathcal T_C\Bigl(-\sum\sigma_i\Bigr) \to 0
+    \]
+    after identifying $\End(E)^G \cong \operatorname{ad}\mathcal P$.
+    \end{remark}
+
+    \begin{remark}
+    \textbf{Relation to the cotangent complex}
+
+    We know from general theory that
+    \[
+    L_{\mathcal{X}/\mathfrak{M}_{g,I}}\bigg|_{(C,\sigma_i,\mathcal{P})} \simeq R\Gamma(C,\Omega^1_C\otimes\operatorname{ad}\mathcal{P}).
+    \]
+he dual of the Atiyah bundle $\mathcal{D}$ is isomorphic to $\Omega^1_C\otimes\operatorname{ad}\mathcal{P}$, visible from the presentation of $\mathcal{D}$ as first-order differential operators with scalar symbol. 
+    \[
+    \mathcal{D}^\vee \simeq \Omega^1_C\otimes\operatorname{ad}\mathcal{P}.
+    \]
+    Combining these two facts, we obtain
+    \[
+    L_{\mathcal{X}/\mathfrak{M}_{g,I}}\bigg|_{(C,\sigma_i,\mathcal{P})} \simeq R\Gamma(C,\mathcal{D}^\vee).
+    \]
+    To find the tangent complex, we apply Serre duality and Grothendieck duality. Since $C$ is a curve, the dualizing sheaf is the canonical bundle, and duality exchanges $R\Gamma$ of sheaves with $R\Gamma$ of dual sheaves up to a shift. This gives
+    \[
+    T_{\mathcal{X}/\mathfrak{M}_{g,I}}\bigg|_{(C,\sigma_i,\mathcal{P})}
+    \simeq
+    R\Gamma(C,\mathcal{D})[1],
+    \]
+    which is the two-term complex we used above to define the perfect obstruction theory.
+    \end{remark}
+
+    
+
+
+\begin{proposition}
+The stack $\mathfrak{M}_{g,I}([\pt/\C^\times])$ is unobstructed.
+Equivalently, the obstruction space $T^2$ vanishes at every point.
+\end{proposition}
+
+\begin{proof}
+As explained above, obstructions to deforming $(C,\sigma_i,\mathcal P)$ lie
+in $H^2(C,\mathcal D)$, where $\mathcal D$ is the Atiyah bundle of
+$\mathcal P$ twisted to fix the markings.  The sheaf $\mathcal D$ is a
+vector bundle on a (pre)stable curve $C$, hence coherent on a
+one--dimensional scheme.  For any coherent sheaf $\mathcal F$ on a
+one--dimensional scheme, $H^2(C,\mathcal F)=0$.  Thus
+\[
+T^2 \subseteq H^2(C,\mathcal D) = 0
+\]
+for every point, so the stack is unobstructed.
+\end{proof}
+
+\subsection{Virtual dimension and Euler characteristic}
+In the language of Behrend--Fantechi, the perfect obstruction theory on
+$\mathfrak{M}_{g,I}([\pt/\C^\times])$ is given by the complex
+\[
+E^\bullet := R\pi_*(\mathcal D^\vee)
+\simeq L_{\mathfrak{M}_{g,I}([\pt/\C^\times])/\mathfrak M_{g,I}},
+\]
+which is perfect of amplitude $[-1,0]$; its dual tangent complex is
+\[
+T_{\mathfrak{M}_{g,I}([\pt/\C^\times])/\mathfrak M_{g,I}}
+\simeq \mathbf R\Gamma(C,\mathcal D)[1].
+\]
+whose fiber at a point is quasi-isomorphic to
+\[
+\bigl[ H^0(C,\mathcal D) \longrightarrow H^1(C,\mathcal D) \bigr],
+\]
+with $H^0$ in degree $-1$ and $H^1$ in degree~$0$.  The \emph{virtual
+dimension} of the stack is by definition the rank of this two--term complex,
+namely
+\[
+\vdim \mathfrak{M}_{g,I}([\pt/\C^\times])
+=
+\dim H^1(C,\mathcal D) - \dim H^0(C,\mathcal D)
+=
+-\,\chi(C,\mathcal D),
+\]
+the negative of the Euler characteristic of $\mathcal D$.
+
+Because we have just shown that obstructions vanish (so $T^2=0$), the actual
+dimension of the stack at a general point agrees with this virtual
+dimension.  More precisely, over the locus where the automorphism group is
+finite (so that $\dim H^0(C,\mathcal D)$ is locally constant), the Zariski
+dimension of the stack equals~$-\chi(C,\mathcal D)$.
+
+\begin{proposition}
+The dimension of $\mathfrak{M}_{g,I}([\pt/\C^\times])$ is
+\[
+\dim \mathfrak{M}_{g,I}([\pt/\C^\times])
+=
+-\,\chi(C,\mathcal D).
+\]
+In particular, one can compute it explicitly via Riemann--Roch applied to
+the exact sequence~\eqref{eq:Atiyah-seq}.
+\end{proposition}
+
+\begin{proof}[Sketch of explicit computation]
+For $G=\C^\times$ one has $\operatorname{ad}\mathcal P\simeq\mathcal O_C$,
+so
+\[
+\chi(\operatorname{ad}\mathcal P) = \chi(\mathcal O_C) = 1-g.
+\]
+From the exact sequence~\eqref{eq:Atiyah-seq} and additivity of the Euler
+characteristic we get
+\[
+\chi(\mathcal D)
+=
+\chi(\operatorname{ad}\mathcal P)
++
+\chi\Bigl(\mathcal T_C\Bigl(-\sum_i\sigma_i\Bigr)\Bigr).
+\]
+Riemann--Roch for the line bundle
+$\mathcal T_C(-\sum_i\sigma_i)$ gives
+\[
+\chi\Bigl(\mathcal T_C\Bigl(-\sum_i\sigma_i\Bigr)\Bigr)
+=
+\deg\mathcal T_C(-\sum_i\sigma_i) + 1 - g
+=
+(2-2g-|I|) + 1 - g
+=
+3-3g - |I|.
+\]
+Hence
+\[
+\chi(\mathcal D)
+=
+(1-g) + (3-3g-|I|)
+=
+4-4g-|I|.
+\]
+Negating and simplifying yields
+\[
+-\,\chi(\mathcal D)
+=
+4g-4+|I|
+=
+(g-1) + 3(g-1) + |I|,
+\]
+\end{proof}
+
+\subsection{Openness of Gieseker}
+The key observation is that if in Lemma \ref{lem:elementary-ops} we have that $\gamma_0,d_0$ correspond to a Gieseker bundle, then so do $\gamma,d$. In particular, we see that the Gieseker condition is open.
+
+Take a DVR $R$ with generic point $\eta$ and special point $0$, and a map
+\[
+\Spec R \longrightarrow \mathfrak M_{g,I}([\pt/\C^\times]).
+\]
+
+Let the special fiber have type $(\gamma_0,d_0)$, the generic fiber type $(\gamma,d)$. Lemma 2.5 says that $(\gamma,d)$ is obtained from $(\gamma_0,d_0)$ by resolving nodes (operations (1) and (2)).
+
+Under those operations, the set of unstable vertices of $\gamma$ is identified with a subset of the unstable vertices of $\gamma_0$, and the degree labels on those vertices are unchanged. So if each unstable vertex of $(\gamma_0,d_0)$ has degree $1$, then so does each unstable vertex of $(\gamma,d)$. That is exactly Proposition 2.9: if the special fiber type $(\gamma_0,d_0)$ is Gieseker, then the generic fiber type $(\gamma,d)$ is also Gieseker.
+
+Rephrasing in topological terms: let $U$ be the Gieseker locus and $F := X\setminus U$ its complement. For any DVR-map $\Spec R\to X$, if the special point lands in $U$, then the generic point also lands in $U$. Equivalently (contrapositive): if the generic point lands in $F$, then the special point also lands in $F$. So $F$ is stable under specialization. That is the crucial property.
+
+Now use only general topology of noetherian schemes and stacks: the underlying topological space $|\mathfrak M_{g,I}([\pt/\C^\times])|$ is spectral and noetherian. A subset $F\subset |X|$ is closed if and only if it is constructible and stable under specialization (this is on Stacks project). Constructibility follows from Chevalley's theorem. The property of being "stable under specialization" is exactly the DVR criterion above.
+
+We have already verified that $F$ is a union of strata that fail the Gieseker condition, hence constructible. The DVR argument (using Lemma 2.5 and Proposition 2.9) shows that $F$ is stable under specialization. Therefore $F$ is closed, and its complement
+\[
+U = X\setminus F = \widetilde{\mathfrak M}_{g,I}([\pt/\C^\times])
+\]
+is open.
+
+\begin{proposition}
+The Gieseker locus
+\[\widetilde{\cal M}_{g,I}([\pt/\C^\times]) \subset \mathfrak M_{g,I}([\pt/\C^\times])\] is an open substack and therefore:
+\begin{enumerate}
+    \item an Artin stack
+    \item unobstructed
+    \item of dimension $4g-4+|I|$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+We verify each property by restricting from the ambient stack $\mathfrak{M}_{g,I}([\pt/\C^\times])$.
+
+\textbf{(1) Artin stack.}
+Being Artin is fpqc-local on the target. An open substack of an Artin stack is again Artin. Since $\widetilde{\mathfrak{M}}_{g,I}([\pt/\C^\times])$ is an open substack of the Artin stack $\mathfrak{M}_{g,I}([\pt/\C^\times])$, it inherits the structure of an Artin stack.
+
+\textbf{(2) Unobstructed.}
+Unobstructedness is a statement about the vanishing of the obstruction space at each point, computed from the tangent--obstruction complex. That complex is the restriction of the one on $\mathfrak{M}_{g,I}([\pt/\C^\times])$ to the open substack.
+
+For any point in $\mathfrak{M}_{g,I}([\pt/\C^\times])$, obstructions lie in $H^2(C,\mathcal{D})$ where $\mathcal{D}$ is the Atiyah bundle. Since $C$ is a curve (dimension $1$), we have $H^2(C,\mathcal{D}) = 0$ for any coherent sheaf on $C$. Therefore, the obstruction space vanishes at every point in the big stack. When we restrict to the open substack $\widetilde{\mathfrak{M}}_{g,I}([\pt/\C^\times])$, we are looking at the same objects with the same deformation theory, so the obstruction space remains zero.
+
+\textbf{(3) Dimension formula.}
+The dimension is computed Zariski--locally from the two-term complex
+\[
+\left[H^0(C,\mathcal{D}) \longrightarrow H^1(C,\mathcal{D})\right].
+\]
+The virtual dimension of $\mathfrak{M}_{g,I}([\pt/\C^\times])$ is given by $-\chi(C,\mathcal{D})$.
+
+On the open substack $\widetilde{\mathfrak{M}}_{g,I}([\pt/\C^\times])$, we restrict this complex to the Gieseker locus. The Euler characteristic $-\chi(C,\mathcal{D})$ is computed from the fixed exact sequence, so it remains unchanged when restricting to the open substack. Since we have already established that obstructions vanish everywhere, the virtual dimension equals the actual dimension on the locus where the automorphism group is finite. Thus the dimension formula
+\[
+\dim \widetilde{\mathfrak{M}}_{g,I}([\pt/\C^\times]) = 4g-4+|I|
+\]
+follows directly from the restriction of the already-constructed obstruction theory to the open substack.
+\end{proof}
+
+\begin{proposition}
+$\widetilde{\mathfrak{M}}_{g,I}([\pt/\C^\times])$ inherits a topological type
+stratification from $\mathfrak{M}_{g,I}([\pt/\C^\times])$.  The substacks
+$\widetilde{\mathfrak{M}}_{\gamma,d}$ are locally closed and disjoint, and the
+whole moduli stack is their union:
+\[
+\widetilde{\mathfrak{M}}_{g,I}([\pt/\C^\times])
+  = \bigsqcup_{\gamma,d}\widetilde{\mathfrak{M}}_{\gamma,d}.
+\]
+
+Finally, the closure of any given $\widetilde{\mathfrak{M}}_{\gamma,d}$ in
+$\widetilde{\mathfrak{M}}_{g,I}([\pt/\C^\times])$ is obtained as a union
+\[
+\operatorname{cl}\bigl(\widetilde{\mathfrak{M}}_{\gamma,d}\bigr)
+  = \bigsqcup_{\gamma',d'} \widetilde{\mathfrak{M}}_{\gamma',d'},
+\]
+where the union is over all multi-degree-labelled modular graphs
+$(\gamma',d')$ obtained from $(\gamma,d)$ by finite combinations of the
+following elementary operations:
+\begin{enumerate}
+  \item[\textnormal{1.}] \emph{Self node:} Lower the genus of a vertex by $1$
+    and add a self-edge.
+
+  \item[\textnormal{2.}] \emph{Splitting node:} Split a vertex $v$ into two
+    vertices $v_1$ and $v_2$, connected by an edge, with
+    $g_{v_1}+g_{v_2}=g_v$ and $d_{v_1}+d_{v_2}=d_v$.
+
+  \item[\textnormal{3.}] \emph{Gieseker bubbling:} Replace an edge connecting a
+    stable vertex $v$ to a stable vertex $v'$ with two edges connected to a
+    new common vertex having $g=0$ and $d=1$, while subtracting $1$ from
+    either $d_v$ or $d_{v'}$.  (Note that $v$ may equal $v'$.) \qedhere
+\end{enumerate}
+\end{proposition}
+
+\begin{corollary}
+The connected components of
+$\widetilde{\mathfrak{M}}_{g,I}([\pt/\C^\times])$ are labelled by total degree
+$D$:
+\[
+\widetilde{\mathfrak{M}}_{g,I}([\pt/\C^\times])
+  = \bigsqcup_{D\in\Z} \widetilde{\mathfrak{M}}^{D}_{g,I}([\pt/\C^\times]).
+\]
+\end{corollary}
+
+\begin{proof}
+Any Gieseker bundle may be deformed to a bundle on a smooth curve, so all
+Gieseker bundles with the same total degree lie in the same connected
+component.  Conversely, no deformation can change the total degree.
+\end{proof}
+
+The Gieseker stack $\widetilde{\mathcal M}_{g,I}\bigl([\pt/\C^\times]\bigr)$ has
+infinitely many connected components, and even its connected components
+generally have infinite type: a modular graph $\gamma$ with at least two
+vertices carries countably many multi-degrees
+$d : V_\gamma \to \Z$ for which $\sum_v d_v = D$.  In addition,
+$\widetilde{\mathcal M}_{g,I}\bigl([\pt/\C^\times]\bigr)$ is not separated,
+because of the continuous automorphism groups of line bundles.  Even if we fix
+the fiber of the bundle at some marked points, Gieseker bubbles introduce
+additional automorphisms, which keep our stack typically non-separated.
+Nonetheless, $\widetilde{\mathcal M}_{g,I}\bigl([\pt/\C^\times]\bigr)$
+satisfies the valuative criterion for completeness.
+
+Let then $R$ be a complete discrete valuation ring with fraction field $K$ and
+denote by $D$ the disc $\Spec R$ and by $D^\times$ the punctured disc
+$\Spec K$.  Let $C^\times \to D^\times$ be a family of marked, pre-stable
+curves carrying a $\C^\times$-bundle $\mathcal P^\times \to C^\times$.  We omit
+the marked points from the notation, and will at times impose additional
+restrictions on $C^\times,\mathcal P^\times$.
+
+\begin{proposition}\label{prop:2.14}
+Any family $(C^\times,\mathcal P^\times)$ of Gieseker bundles can be extended
+to a Gieseker family $(C,\mathcal P)$ over $D$ (possibly after \'etale base
+change on $D^\times$).
+\end{proposition}
+
+In particular, the stack $\widetilde{\mathcal M}_{g,I}\bigl([\pt/\C^\times]\bigr)$ is a completion of $\Bun_{\C^\times}(g,I)$.
+
+\subsection{The Stack $A$}
+We will identify a local model for $\widetilde{\mathcal M}_{g,I}([\pt/\C^\times])$, presented as the quotient of an algebraic space $A$ by a reductive group $G$.
+
+\begin{notation}
+We fix the following notation for this section and the next.
+\begin{enumerate}
+    \item $(\Sigma_0,\sigma_{0,i})$ is a stable marked curve of type $(g,I)$.
+    \item $V = V_{\gamma_0}$ denotes the set of vertices of its modular graph $\gamma_0$.
+    \item $d : V \to \Z$ is a general multi-degree, giving a topological type $(\gamma_0,d)$.
+    \item $\mathcal G$ is the group $(\C^\times)^V$, with $\C^\times_\Delta \subset \mathcal G$ the diagonal subgroup.
+    \item $B$ will be an affine \'etale neighborhood of $(\Sigma_0,\sigma_{0,i})$ in $\overline{\mathcal M}_{g,I}$. It carries a locally universal deformation $(\Sigma,\sigma_i)$ of $(\Sigma_0,\sigma_{0,i})$.
+    \item $\sigma_v : B \to \Sigma$ ($v \in V$) is an additional set of smooth special points over $B$, each meeting the respective component $v$ of $\Sigma_0$. We also assume that every stable component of every fiber of $\Sigma$ carries a $\sigma_v$.
+    \item $\sigma_+$ is a particular chosen $\sigma_v$.
+\end{enumerate}
+\end{notation}
+Denote by $\widetilde{\mathcal M}|_B$ the fiber of $F$ over $B \to \overline{\mathcal M}_{g,I}$ under the forget-and-stabilize map
+\[
+F : \widetilde{\mathcal M}_{g,I}([\pt/\C^\times]) \to \overline{\mathcal M}_{g,I}.
+\]
+We will present $\widetilde{\mathcal M}|_B$ as a quotient stack by trivializing the bundles at special points. Recall that for a prestable curve $C$ with a special point $\sigma : B \to C$, a \emph{trivialization} at $\sigma$ of a principal $\C^\times$-bundle $\mathcal P \to C$ is an isomorphism
+\[
+t : \sigma^*\mathcal P \xrightarrow{\;\sim\;} \C^\times
+\]
+with the trivial bundle over $B$. (We may need to refine $B$ for $t$ to exist.)
+
+\begin{definition}[3.3]
+The \emph{local chart} $A$ for $\widetilde{\mathcal M}|_B$ is the stack of Gieseker bundles over the curve $\Sigma \to B$, equipped with a trivialization $t_v$ at each $\sigma_v$; isomorphisms are required to be compatible with the trivializations.
+\end{definition}
+
+Denote by $A_D \subset A$ the connected component of bundles of total degree $D$.
+
+
+\begin{proposition}[3.5]
+The stack $A$ is represented by an algebraic space.
+\end{proposition}
+
+\begin{proof}
+It is enough to check that the geometric points of $A$ have no automorphisms. Fix therefore a $\Sigma$ and $\mathcal P \to C$. By Remark~1.11, $\Aut(\mathcal P)$ is computed by deleting the Gieseker bubbles from $C$. This, however, leaves the stable components, each of which carries at least one trivialization point for $\mathcal P$.
+\end{proof}
+
+The group $\mathcal G = (\C^\times)^V$ acts on $A$ by scaling the trivializations,
+and displays $\widetilde{\mathcal M}|_B$ as a quotient stack
+\[
+\widetilde{\mathcal M}|_B = A / \mathcal G.
+\]
+
+\begin{corollary}[3.6]
+$A$ and $\widetilde{\mathcal M}_{g,I}([\pt/\C^\times])$ are smooth.
+\end{corollary}
+
+\begin{proof}
+$\widetilde{\mathcal M}_{g,I}([\pt/\C^\times])$ is unobstructed, hence formally
+smooth, and is locally of finite presentation. Thus, $A$ is formally smooth and
+locally of finite presentation, therefore smooth. Finally, the quotient of a
+smooth algebraic space by a smooth group action is a smooth stack.
+\end{proof}
+
+\subsection{The stable subspace $A^\circ$}
+
+For each total degree $D$, we will identify an open subspace
+$A_D^\circ \subset A_D$ for which the quotient stack $[A_D^\circ/\mathcal G]$
+is the product of the stack $[\pt/\C^\times_\Delta]$ and a smooth proper
+quotient space $Q/B$.  The union of the $A_D^\circ$ is $A^\circ$.
+
+Twisting line bundles with our chosen preferred point $\sigma_+$
+equivariantly identifies the various spaces $A_D$.  We will define
+$A_G^\circ$ first, where the total degree is the genus $G = g(\gamma_0)$,
+and then extend the definitions using these isomorphisms.
+
+\begin{definition}[Genus bounds]\label{def:genus-bounds}
+A Gieseker bundle $(\mathcal P,C)$ of total degree $G$ \emph{meets the genus
+bounds} if its restriction to any subcurve $S\subset C$ has degree no less
+than the genus $g(S)$.  (Likewise, a Gieseker bundle $(\mathcal P,C)$ of
+total degree $D$ meets the genus bounds if the $(G-D)\sigma_+$-twist of
+$\mathcal P$ does.)
+
+The \emph{stable subspace} $A_G^\circ\subset A_G$ comprises the bundles
+meeting the genus bounds.  For general total degree $D$, the space
+$A_D^\circ$ is the appropriate twist of $A_G^\circ$.
+\end{definition}
+
+\begin{proposition}\label{prop:AG-open-finite-type}
+$A_G^\circ\subset A_G$ is open and of finite type.
+\end{proposition}
+
+\begin{proof}
+The genus bounds are conditions on the topological type.  The elementary
+operations of Lemma~\ref{lem:elementary-ops} preserve the genus bounds,
+proving openness.  Next, an upper bound on the degree on each subcurve $S$
+follows from the lower bound on its complement, so $A_G^\circ$ is a union of
+only finitely many topological-type strata.
+\end{proof}
+
+\section{Stratification of $A$}
+
+The stable subspace $A_D^\circ \subset A_D$ is the open component in a
+stratification we will use to prove our main theorem.  To define it and
+study its properties, we first introduce a \emph{deformation type}
+stratification of $A_D$, refining the stratification by topological type.
+We then define spaces $Z_\delta(\pi)$, $W_\delta(\pi)$ which retract to
+their fixed point sets under distinguished $\C^\times$-actions.
+
+\subsection{Stratifying $A$ by deformation type}
+
+Let us describe the deformation type stratification for
+$\overline{\mathcal M}_{g,I}$ first.  Each stratum
+$\mathcal M_\gamma \subset \overline{\mathcal M}_{g,I}$ is an intersection
+of normally crossing branches of divisors.
+
+In a sufficiently small \'etale chart, the branches become distinct
+connected components, each of them representing a persistent node in the
+deformation.  For instance, the one-dimensional stratum in
+$\overline{\mathcal M}_{2,0}$ representing curves with two nodes is the
+self-intersection of the boundary divisor; but the double cover defined by
+labeling the nodes is locally an intersection of two separate divisors.
+
+\begin{definition}[4.1]
+A \emph{deformation map}
+\[
+c : \gamma \longrightarrow \gamma'
+\]
+of modular graphs is a continuous map
+$| \gamma | \to | \gamma' |$ which sends vertices to vertices and tails to
+tails, while possibly contracting edges to vertices.  The map $c$ induces a
+genus labelling on $\gamma'$:
+\[
+g_{\gamma'}(v)
+  = \sum_{v' \in c^{-1}(v)} g(v')
+    + \dim H^1\bigl(|c^{-1}(v)|\bigr).
+\]
+\end{definition}
+
+The strata near $\mathcal M_\gamma$ are in one-to-one correspondence with
+deformation maps whose domain is $\gamma$.  More precisely, Lemma~2.5
+gives:
+
+\begin{proposition}[4.2]
+After \'etale refinement, the modular-graph stratification
+\[
+B = \bigsqcup_\gamma B_\gamma
+\]
+inherited from $\overline{\mathcal M}_{g,I}$ refines to a stratification
+\[
+B = \bigsqcup_{c:\gamma_0\to\gamma} B_c,
+\]
+labelled by deformation maps $c:\gamma_0\to\gamma$ of the modular graph
+$\gamma_0$.\qed
+\end{proposition}
+
+We lift this stratification from $B$ to $A_D$, account for Gieseker
+bubbling, and track degrees.
+
+\begin{proposition}[4.3]
+The topological-type stratification of $A_D$ by degree-labelled modular
+graphs refines to a stratification
+\[
+A_D = \bigsqcup_t A_t
+\]
+with labels $t := (c,\tau,d)$ consisting of a deformation map
+$c:\gamma_0\to\gamma$, the graph $\tau$ of a modification of a curve with
+modular graph $\gamma$, and a multi-degree
+$d : V_\tau \to \Z$.\qed
+\end{proposition}
+
+We call $c:\gamma_0\to\gamma$ the \emph{deformation type} (with respect to
+$\Sigma_0$) of any curve $\Sigma$ parametrized by $B_c$.  Likewise, the
+\emph{deformation type} of a Gieseker bundle $\mathcal P$ of multi-degree
+$d$ on such a curve is the triplet $t = (c,\tau,d)$. 
+
+\subsection{Local cohomology}
+
+\begin{proposition}[6.2]
+Let $V$ be a finite rank $\cal G$-equivariant vector bundle on $A_D$
+with the following property:
+
+\begin{quote}
+For all $\pi \in \Pi(V)$, the $\C^\times_\pm$-weights of the fibers of
+$V$ over the $\cal G(\pi)$-fixed points $F_n(\pi)$ are bounded below by
+increasing linear functions of $n_\pm$.
+\end{quote}
+
+Then the $\cal G$-invariants in the local cohomology groups
+\[
+  R^p\Gamma_{Z_\delta(\pi)}(A_D,V)
+  \qquad\text{and}\qquad
+  R^p\Gamma_{W_\delta(\pi)}(A_D,V)
+\]
+are finitely generated.  Moreover, these cohomology groups vanish when
+$\delta \gg 0$.
+\end{proposition}
+\subsection{Local cohomology reminder}
+
+\textbf{Setup:} Let $X$ be a scheme (or stack), $Z \subset X$ a closed subset, and $U = X \setminus Z$. Denote by $j : U \hookrightarrow X$ the open immersion.
+For a sheaf $\mathcal{F}$ on $X$, we have the basic left-exact functor
+\[
+\Gamma_Z(X,-): \mathsf{Sh}(X)\to \mathsf{Ab},\qquad
+\Gamma_Z(X,\mathcal{F})
+= \{\,s\in \Gamma(X,\mathcal{F})\mid \operatorname{supp}(s)\subset Z\,\}.
+\]
+This functor consists of global sections whose support is contained in $Z$.
+
+Its right derived functor is
+\[
+R\Gamma_Z(X,\mathcal{V}) \in D^+(\mathsf{Ab}).
+\]
+Taking cohomology gives the local cohomology groups
+\[
+H_Z^i(X,\mathcal{V}) := H^i\bigl(R\Gamma_Z(X,\mathcal{V})\bigr),
+\]
+which are vector spaces depending on the index $i$.
+
+There is a distinguished triangle
+\[
+R\Gamma_Z(\mathcal{F})\;\longrightarrow\; R\Gamma(X,\mathcal{F})
+\;\longrightarrow\; R\Gamma(U,\mathcal{F}|_U)
+\xrightarrow{+1},
+\]
+which yields the long exact sequence
+\[
+\cdots\to H^{p-1}(U,\mathcal{F}|_U)
+\to H^p_Z(X,\mathcal{F})
+\to H^p(X,\mathcal{F})
+\to H^p(U,\mathcal{F}|_U)\to\cdots
+\]
+One also has a sheaf-level functor:
+\[\Gamma_Z(-,\mathcal V): U\subseteq X \longmapsto
+\{\,s\in\Gamma(U,\mathcal V)\mid \operatorname{supp}(s)\subset U\cap Z\,\}\]
+Sheafifying the presheaf $U\mapsto\Gamma_Z(U,\mathcal V)$ gives a functor
+\[\Gamma_Z(-,\mathcal V): \mathsf{Sh}(X) \longrightarrow \mathsf{Sh}(X)\]
+and deriving it gives an object $R\Gamma_Z(\mathcal V)\in D^+(\mathsf{Sh}(X))$,
+a complex of sheaves on $X$ supported on $Z$. Its cohomology sheaves are the local cohomology sheaves
+$\mathcal H_Z^i(\mathcal V) := \mathcal H^i\bigl(R\Gamma_Z(\mathcal V)\bigr)$.
+and one has the isomorphism
+\[
+R\Gamma_Z(X,\mathcal V)
+\;\cong\;
+R\Gamma\bigl(X,R\Gamma_Z(\mathcal V)\bigr)\]
+where the right-hand side means resolve $R\Gamma_Z(\mathcal V)$ by injective sheaves, apply the global sections functor $\Gamma(X,-)$, and then take its total complex.
+\subsection{Application in this paper}
+
+In this paper we work on an étale chart $B\to \overline{\mathcal{M}}_{g,I}$ with
+$\widetilde{\mathcal{M}}|_B \simeq A_D/\mathcal{G}$. The coherence of $RF_*\alpha$ is equivalent to showing that:
+for each degree $p$, the $\mathcal{G}$-invariant part of
+$H^p(A_D,\alpha)$ is a finitely generated $\mathcal{O}_B$-module, and vanishes
+for $p \gg 0$.
+
+The complement of the ``good'' open $A_D^\circ$ is a union of closed
+$\mathcal{G}$-invariant pieces built from the strata
+$Z_\delta(\pi)$ and $W_\delta(\pi)$. These form an increasing filtration
+by closed subsets
+\[
+\emptyset \subset Z_{\le 0} \subset Z_{\le 1} \subset \cdots \subset A_D,
+\]
+where each successive layer is a union of some $Z_\delta(\pi)$ or
+$W_\delta(\pi)$.
+
+For each step in the filtration, we apply local cohomology. We take $X=A_D$, $Z = Z_{\le \delta}(\pi)$ (or similarly with $W$), and $U = X\setminus Z$. The long exact sequence relating
+$H^p_Z(X,\mathcal{V})$, $H^p(X,\mathcal{V})$, and $H^p(U,\mathcal{V}|_U)$ allows us to control the
+change in global cohomology when adding one more closed layer.
+
+For admissible $\mathcal{V}$, the $\mathcal{G}$-invariant part of
+$H^p_Z(X,\mathcal{V}) = R^p\Gamma_Z(A_D,\mathcal{V})$ is both finitely generated and vanishes for all sufficiently large defect $\delta$.
+
+Therefore only finitely many layers contribute to $\mathcal{G}$-invariant global cohomology. By inducting over the filtration, we conclude that:
+\begin{itemize}
+\item $H^p(A_D,\mathcal{V})^\mathcal{G}$ is finitely generated for each $p$,
+\item $H^p(A_D,\mathcal{V})^\mathcal{G} = 0$ for $p \gg 0$.
+\end{itemize}
+
+This is exactly what is needed to conclude that the derived pushforward
+$RF_*\alpha$ is a complex of coherent sheaves for admissible $\alpha$.
+\subsection{proof}
+\begin{proof}
+We abbreviate $Z = Z_\delta(\pi)$ and $F = F_{\delta,Z}(\pi)$ for a fixed
+partition $\pi$; the arguments for $W$ and $Z$ are similar, so we focus on
+$Z$.
+
+Now $\mathcal V$ is a vector bundle and $Z$ is a smooth, closed subvariety
+of some open subspace $U \subset A_D$.  Exactness of the functor of
+$\mathcal G$-invariants reduces the vanishing of the invariants in the
+cohomology groups with supports $R^i\Gamma_Z(A_D,\mathcal V)$ to that of
+the $\mathcal G$-invariants in $R^i\Gamma(U,R^\bullet\Gamma_Z(\mathcal
+V))$.  The latter will follow (via the filtration spectral sequence) from
+the vanishing of invariants in
+\[
+R^i\Gamma\bigl(Z,\mathcal V \otimes \det N_{Z/A_D} \otimes
+                    \Sym N_{Z/A_D}\bigr).
+\]
+
+The subspace $Z$ is the total space of a bundle of affine spaces over the
+fixed-point locus $F$, so by pushing down along the fibers we reduce the
+computation of the latter to
+\[
+R^i\Gamma\bigl(F,\,
+   \mathcal V \otimes \det N_{Z/A_D} \otimes \Sym N_{Z/A_D}
+               \otimes \Sym N_{F/Z}^\vee\bigr).
+\]
+
+The vector spaces in the two symmetric powers on the right-hand side have
+positive $\C^\times_-$-weights.  Since $\mathcal V$ has finite rank, it
+follows that the $\mathcal G$-invariants in the right-hand side are
+finitely generated.  Moreover, since $n_- \sim -\delta$ on $Z$ while
+$n_+ \gg 0$ when $\delta \gg 0$, the $\C^\times_+$-invariants vanish in
+that case.  Thus the $\mathcal G(\pi)$-invariants in the expression above
+vanish, which implies that the $\mathcal G$-invariants in
+$R^i\Gamma_Z(A_D,\mathcal V)$ vanish as well.
+\end{proof}
+
+\begin{remark}
+    \textbf{1. Reducing to cohomology on an open neighbourhood}
+
+    $Z = Z_\delta(\pi)$ is one of the bad strata inside $A_D$, and $\mathcal V$ is a $\mathcal G$-equivariant vector bundle on $A_D$. We first restrict to an open $U \subset A_D$ containing $Z$ on which $Z$ is a smooth closed subvariety. 
+    This is possible because the stratification is locally finite and $Z$ is smooth. We do this because cohomology with support near $Z$ only depends on a neighbourhood of $Z$, so we shrink from $A_D$ to a convenient open $U$.
+
+   $(-)^\mathcal G$ is exact for representations of a reductive group over $\C$. So for any $\mathcal G$-equivariant complex of vector spaces $C^\bullet$, we have $(H^i C^\bullet)^\mathcal G \cong H^i ((C^\bullet)^\mathcal G)$. By definition one has
+\[R\Gamma_Z(X,\mathcal V) = R\Gamma\bigl(X, R\Gamma_Z(\mathcal V)\bigr)\]
+where $R\Gamma_Z(\mathcal V)$ is a complex of sheaves supported on $Z$.
+
+Since $Z\subset U$, that complex is actually supported inside $U$. For any complex $\mathcal F^\bullet$ whose cohomology sheaves are supported in $U$, you have
+\[R\Gamma(X,\mathcal F^\bullet)
+\;\simeq\;
+R\Gamma(U,\mathcal F^\bullet|_U),\]
+because $j_*:D^+(U)\to D^+(X)$ is fully faithful on complexes supported in $U$, and global sections of $j_*\mathcal F$ over $X$ are the same as global sections of $\mathcal F$ over $U$.
+Apply that with $\mathcal F^\bullet = R\Gamma_Z(\mathcal V)$. Then
+\[ R\Gamma_Z(A_D,\mathcal V)
+= R\Gamma\bigl(A_D, R\Gamma_Z(\mathcal V)\bigr)
+\simeq R\Gamma\bigl(U, R\Gamma_Z(\mathcal V)|_U\bigr)\]
+Applying the exact functor of $\mathcal G$-invariants, we get
+\[
+H^i\Bigl(R\Gamma_Z(A_D,\mathcal V)\Bigr)^{\mathcal G}
+\;\cong\;
+H^i\Bigl(R\Gamma\bigl(U,R\Gamma_Z(\mathcal V)|_U\bigr)\Bigr)^{\mathcal G}\]
+and thus the vanishing of $\mathcal G$-invariants in $R^i\Gamma_Z(A_D,\mathcal V)$ is equivalent to vanishing of $\mathcal G$-invariants in $R^i\Gamma\bigl(U,R^\bullet\Gamma_Z(\mathcal V)\bigr)$. 
+
+    \textbf{2. Local cohomology along a smooth closed subvariety}
+
+    For a smooth closed embedding $i:Z\hookrightarrow U$ with normal bundle $N_{Z/U}$ and a vector bundle $\mathcal V$ on $U$, there is a standard description of $R\Gamma_Z(\mathcal V)$: it has a finite filtration whose graded pieces are
+    \[
+    i_*\bigl(\mathcal V|_Z \otimes \det N_{Z/U} \otimes \Sym^m N_{Z/U}\bigr)[-c],
+    \]
+    where $c = \codim(Z,U)$ and $m\ge 0$. This comes from the Koszul-type resolution of the ideal of $Z$.
+
+    Taking global sections and using the spectral sequence associated to the filtration, we find that it suffices to control the cohomology groups
+    \[
+    R^i\Gamma\bigl(Z,\mathcal V \otimes \det N_{Z/A_D} \otimes \Sym N_{Z/A_D}\bigr).
+    \]
+
+    \begin{remark}
+    Fix $X = A_D$, closed $Z \subset X$, open $U = X \setminus Z$, and a vector bundle $\mathcal{V}$ on $X$. By definition,
+    \[
+    R\Gamma_Z(X,\mathcal{V}) := R\Gamma\bigl(X, R\Gamma_Z(\mathcal{V})\bigr).
+    \]
+    For a smooth closed embedding $i : Z \hookrightarrow U \subset X$ of codimension $c$ with normal bundle $N_{Z/U}$, there is a standard filtered description. The local cohomology sheaf $R\Gamma_Z(\mathcal{V})$ has a finite filtration whose graded pieces are
+    \[
+    \operatorname{gr}^m R\Gamma_Z(\mathcal{V}) \simeq i_*\bigl(\mathcal{V}|_Z \otimes \det N_{Z/U} \otimes \Sym^m N_{Z/U}\bigr)[-c]
+    \]
+    for $m \ge 0$. This is the Koszul or formal-neighborhood computation.
+
+    Apply the derived global sections functor $R\Gamma(X, -)$ to this filtered object $R\Gamma_Z(\mathcal{V})$. A finite filtration on a complex gives a spectral sequence whose $E_1$-page is built from the graded pieces:
+    \[
+    E_1^{p,q} = H^{p+q}\Bigl(R\Gamma\bigl(X, \operatorname{gr}^{-p} R\Gamma_Z(\mathcal{V})\bigr)\Bigr) \Rightarrow H^{p+q}\bigl(R\Gamma_Z(X,\mathcal{V})\bigr) = H_Z^{p+q}(X,\mathcal{V}).
+    \]
+
+    Now plug in the description of the graded pieces:
+    \[
+    \operatorname{gr}^{-p} R\Gamma_Z(\mathcal{V}) \simeq i_*\bigl(\mathcal{V}|_Z \otimes \det N_{Z/A_D} \otimes \Sym^{m(p)} N_{Z/A_D}\bigr)[-c].
+    \]
+
+    Then
+    \[
+    R\Gamma\bigl(X, \operatorname{gr}^{-p} R\Gamma_Z(\mathcal{V})\bigr) \simeq R\Gamma\bigl(X, i_*(\mathcal{V}|_Z \otimes \det N_{Z/A_D} \otimes \Sym^{m(p)} N_{Z/A_D})\bigr)[-c].
+    \]
+
+    Taking cohomology, we obtain
+    \[
+    E_1^{p,q} = H^{p+q-c}\bigl(X, i_*(\mathcal{V}|_Z \otimes \det N_{Z/A_D} \otimes \Sym^{m(p)} N_{Z/A_D})\bigr).
+    \]
+    Use adjunction for the closed immersion $i : Z \hookrightarrow X$:
+    \[
+    R\Gamma(X, i_* E) \cong R\Gamma(Z, E),
+    \]
+    hence $H^r(X, i_* E) \cong H^r(Z, E)$. Therefore,
+    \[
+    E_1^{p,q} \cong H^{p+q-c}\bigl(Z, \mathcal{V}|_Z \otimes \det N_{Z/A_D} \otimes \Sym^{m(p)} N_{Z/A_D}\bigr).
+    \]
+
+    If you package the finitely many symmetric powers into a single direct sum, this is exactly the family of groups
+    \[
+    R^i\Gamma\bigl(Z, \mathcal{V} \otimes \det N_{Z/A_D} \otimes \Sym N_{Z/A_D}\bigr)
+    \]
+    appearing on the $E_1$-page. The spectral sequence converges to the local cohomology:
+    \[
+    E_\infty^{p,q} \Rightarrow H_Z^{p+q}(X, \mathcal{V}).
+    \]
+
+    Therefore: bounds, vanishing, and finiteness for all the $E_1^{p,q}$ groups
+    \[
+    R^i\Gamma(Z, \mathcal{V} \otimes \det N_{Z/A_D} \otimes \Sym^m N_{Z/A_D})
+    \] imply the corresponding properties for the abutment $H_Z^*(X, \mathcal{V})$.
+    \end{remark}
+
+
+
+    \textbf{3. Using that $Z$ is an vector bundle over the fixed locus $F$}
+
+Recall the general theory of algebraic varieties with a $\C^\times$-action.
+Let $Z$ be a smooth variety (or algebraic space) with a $\C^\times$-action, and $F \subset Z$ the fixed locus.
+
+General facts: The fixed locus $F$ is smooth. At a fixed point $x\in F$, the tangent representation $T_x Z$ is a finite-dimensional $\C^\times$-representation, so it decomposes into weight spaces
+\[
+T_x Z \;=\; \bigoplus_{w\in\Z} (T_x Z)_w,
+\]
+where $t\in\C^\times$ acts on $(T_x Z)_w$ via $t^w$. The tangent space to $F$ is exactly the weight–zero subspace:
+\[
+T_x F = (T_x Z)_0.
+\]
+The sum of the nonzero weight spaces is the normal space:
+\[
+N_{F/Z,x} \;\cong\; \bigoplus_{w\ne 0}(T_x Z)_w.
+\]
+
+    Each $Z_\delta(\pi)$ is the total space of a bundle of affine spaces over the fixed-point locus $F = F_{\delta,Z}(\pi) \subset A_D^{\mathcal G(\pi)}$. Formally, there is a vector bundle $N_{F/Z}$ on $F$ and
+    \[
+    Z \cong \underline{\Spec}_F \Sym N_{F/Z}^\vee.
+    \]
+
+    $F$ is the $\mathcal G(\pi)$-fixed locus inside $Z$. The $\C^\times$-action along the fibers gives a splitting of the tangent bundle at $F$ into weight-zero (tangent to $F$) and positive-weight directions. Those positive-weight directions form the normal bundle $N_{F/Z}$.
+
+    The flow of the $\C^\times$-action identifies a neighbourhood of $F$ in $Z$ with the total space of the normal bundle $N_{F/Z}$.
+    \[
+    Z \cong \underline{\Spec}_F \Sym N_{F/Z}^\vee
+    \]
+
+    For such an affine bundle, cohomology on $Z$ can be computed by pushing down to the base:
+    \[
+    R\Gamma\bigl(Z,\mathcal E\bigr) \simeq R\Gamma\bigl(F,\,\mathcal E|_F \otimes \Sym N_{F/Z}^\vee\bigr)
+    \]
+    for any vector bundle $\mathcal E$ on $Z$. Applying this with $\mathcal E = \mathcal V \otimes \det N_{Z/A_D} \otimes \Sym N_{Z/A_D}$, we restrict to $F$ and push forward along the affine fibers to produce the extra factor $\Sym N_{F/Z}^\vee$:
+    \[
+    R^i\Gamma\bigl(Z,\mathcal V\otimes \det N_{Z/A_D}\otimes \Sym N_{Z/A_D}\bigr)
+    \simeq
+    R^i\Gamma\bigl(F,\mathcal V\otimes \det N_{Z/A_D}\otimes \Sym N_{Z/A_D}\otimes \Sym N_{F/Z}^\vee\bigr).
+    \]
+    \textbf{4. Weight estimates and vanishing of invariants}
+
+    Now we are looking at a finite rank vector bundle on $F$ with an action of $\mathcal G(\pi) \cong \C^\times_+ \times \C^\times_-$. Each fiber decomposes as a sum of characters
+    \[
+    \bigoplus_{(a,b)\in\Z^2} E_{(a,b)}, \qquad (t_+,t_-)\cdot e = t_+^a t_-^b\, e.
+    \]
+
+    The normal bundle $N_{Z/A_D}$ has strictly positive $\C^\times_-$-weights along $Z$. So every weight of $\Sym N_{Z/A_D}$ is a sum of strictly positive weights. Similarly, $N_{F/Z}^\vee$ has strictly positive $\C^\times_-$-weights, so $\Sym N_{F/Z}^\vee$ also has strictly positive $\C^\times_-$-weights.
+
+    All weights coming from the two symmetric powers thus have $b>0$ for the $\C^\times_-$-coordinate. Tensoring with the finite-rank bundle $\mathcal V$ only shifts these weights by a bounded amount. Therefore, the set of $\C^\times_-$-weights occurring in the total tensor product is contained in a finite union of half-lines $\{b \ge b_0\}$, i.e.\ is bounded below by an increasing linear function of $n_-$, as in the hypothesis of Proposition~6.2.
+
+    From the explicit description of the strata $Z_\delta(\pi)$, the coordinates $(n_+,n_-)$ along them satisfy approximately $n_- \sim -\delta$ and $n_+ \gg 0$ when $\delta\gg 0$. In particular, for a fixed partition $\pi=(\pi_+,\pi_-)$ and a deformation type $\mf t$ with defect
+\[
+\delta = \defect(\pi_-) = g(\pi_-) - k(\pi_-) - \deg t(\pi_-),
+\]
+we have
+\[n_- := \deg t(\pi_-) = g(\pi_-) - k(\pi_-) - \delta = \text{(constant depending on }\pi)-\delta\]
+Moreover, the total degree constraint gives
+$D = s(\pi) + n_+ + n_-$
+where $s(\pi)$ is the number of splitting edges, so one gets
+\[n_+ = D - s(\pi) - n_- = \text{(constant depending on }\pi,D)+\delta\]
+
+By hypothesis, the $\C^\times_\pm$-weights at the fixed-point fibers $F_n(\pi)$ satisfy linear lower bounds in the coordinates $(n_+, n_-)$. Specifically, each weight $w$ appearing in the fibers decomposes according to the $\C^\times_+ \times \C^\times_-$ action, and we have
+\[
+w_+(n_+,n_-) \;\ge\; A_+ n_+ + B_+,\qquad
+w_-(n_+,n_-) \;\ge\; A_- n_- + B_-
+\]
+Note that we showed admissible classes satisfy this hypothesis in a previous section.
+    Plugging into the lower bound for \(\C^\times_+\)-weights of \(\mathcal E\), we have 
+    \[
+    w_+(n_+,n_-) \;\ge\; A_+ n_+ + B_+ \;\ge\; A_+(\text{const}'+\delta)+B_+ = A_+\,\delta + \text{const}.
+    \]
+    Since \(A_+ > 0\), there exists \(\delta_0\) such that for all \(\delta \ge \delta_0\), \(w_+ > 0\) for every \(\C^\times_+\)-weight in \(\mathcal E|_{F_n(\pi)}\) and hence in all of \(R^i\Gamma(F,\mathcal E)\).
+
+    However, \(\C^\times_+\)-invariants must have weight 0. If all weights are greater than 0, there are no invariants:
+    \[
+    R^i\Gamma(F,\mathcal E)^{\C^\times_+} = 0 \quad \text{for }\delta \gg 0.
+    \]
+    Since \(\mathcal G(\pi) = \C^\times_+ \times \C^\times_-\), invariants under \(\mathcal G(\pi)\) are a subspace of \(\C^\times_+\)-invariants, so we conclude that 
+    \[
+    R^i\Gamma(F,\mathcal E)^{\mathcal G(\pi)} = 0 \quad \text{for }\delta \gg 0.
+    \]
+    Tracing back the identifications, we find that 
+    \[
+    R^i\Gamma_Z(A_D,\mathcal V)^{\mathcal G} = 0 \quad \text{for }\delta \gg 0.
+    \]
+
+    \textbf{5. How this finishes coherence of the pushforward}
+
+    On the good open $A_D^\circ$, the quotient $[A_D^\circ/\mathcal G]$ is essentially $[\pt/\C^\times_\Delta]\times Q$ with $Q$ proper over $B$. For an admissible class $\alpha$, the $\mathcal G$-invariant part of $R\Gamma(A_D^\circ,\alpha)$ is the same as the pushforward of $\alpha^{\C^\times_\Delta}$ from $Q$, so it is coherent over $B$ by properness.
+
+    The complement of $A_D^\circ$ is filtered by closed unions of strata built from $Z_\delta(\pi)$ and $W_\delta(\pi)$. Proposition~6.2 and the proof above state: for each layer in this filtration, the local cohomology invariants are finitely generated, and for all sufficiently large $\delta$ they actually vanish. Inducting over the filtration, adding these finitely many contributing layers does not break finite generation of invariants in global cohomology.
+
+    Combining both sides (good open plus finitely many bad strata) yields that the $\mathcal G$-invariant cohomology of any admissible complex is finitely generated in each degree and zero in high degrees. This is exactly what is needed to conclude that $RF_*\alpha$ is a bounded complex of coherent sheaves on $B$.
+    \end{remark}
+
+    \subsection{How to generalize}
+You want the same conclusion:
+\begin{itemize}
+\item
+A completion $\widetilde{\mathcal{M}}_{g,I}([pt/G])$ of $\Bun_G$ over stable curves.
+\item
+A forgetful map $F:\widetilde{\mathcal{M}}_{g,I}([pt/G])\to\overline{\mathcal{M}}_{g,I}$.
+\item
+For an ``admissible'' class $\alpha$, the derived pushforward $RF_*\alpha$ is bounded coherent.
+\end{itemize}
+
+Everything in the proof is local on an étale chart $B\to\overline{\mathcal{M}}_{g,I}$, where you reduce to:
+\[
+\widetilde{\mathcal{M}}|_B \simeq [A/\mathcal{G}]
+\quad\text{and need}\quad
+H^p(A,\alpha)^{\mathcal{G}}\ \text{f.g.\ over }\mathcal{O}_B,\ \text{and }=0\text{ for }p\gg0.
+\]
+
+\subsection*{Replace ``Gieseker bubbles for $\mathbb{C}^\times$'' by a $G$-compactification at nodes}
+
+In the $\mathbb{C}^\times$ case, degeneration is ``gluing parameter goes to $0,\infty$'' so you insert a $\mathbb{P}^1$ with degree $1$ line bundle.
+
+For general reductive $G$, the gluing at a node is an element of $G$ (after choosing trivializations on the normalization), so you need a compactification of $G$ that controls limits of this gluing element. Two workable patterns emerge:
+
+\paragraph{Wonderful compactification.}
+The wonderful compactification of (adjoint) $G$ has boundary divisors indexed by simple roots, and strata indexed by parabolic subgroups. This is the most literal analogue of ``add $0,\infty$''.
+
+\paragraph{Loop-group and parahoric picture.}
+Alternatively, interpret a node as a puncture with two branches and allow reductions to opposite parahoric subgroups; limits are then controlled by faces of an affine alcove.
+
+Your job is to pick one model and make it modular: objects are ``principal $G$-bundles on a modification plus extra structure at bubbles/branches'' such that automorphisms are controlled and limits exist.
+
+In the \(\C^\times\) proof, you killed automorphisms by trivializing the bundle at enough points$ \sigma_v$, and \(\mathcal G=(\C^\times)^V\) acts by rescaling trivializations.
+
+For general $G$:
+    \begin{itemize}
+        \item Trivialize the $G$-bundle at enough marked points on each stable component. The stabilizer is then “global automorphisms of the bundle fixing those fibers”, typically finite if you choose enough points and stay in a stable locus.
+        \item The analogue of $(\C^\times)^V$ is usually $G^V$ or a product of Levi factors, but you want a reductive group acting on a finite-type chart. Expect:
+        \[
+        A \text{ (algebraic space)}\quad \text{with}\quad \mathcal G\text{ reductive},\quad \widetilde{\mathcal M}|_B\simeq [A/\mathcal G].
+        \]
+        Key constraint: invariants $(-)^{\mathcal G}$ must be exact. That forces $\mathcal G$ reductive.
+    \end{itemize}
+    In the \(\C^\times\) case: genus bounds \(\Rightarrow\) \(A^\circ\) finite type and \([A^\circ/\mathcal G]\simeq [pt/\C^\times_\Delta]\times Q\) with \(Q\to B\) proper.
+
+    You need the same structure:
+    \begin{itemize}
+        \item A numerical stability condition (generalizing “genus bounds”) that cuts out a finite-type open \(A^\circ\subset A\).
+        \item A factorization of the quotient: residual “central automorphisms” times a proper coarse moduli \(Q\) over \(B\).
+    \end{itemize}
+
+    For nonabelian \(G\), this is where you typically impose some combination of:
+    \begin{itemize}
+        \item degree bounds for associated line bundles along dominant weights,
+        \item semistability conditions on each component,
+        \item parahoric type bounds at nodes.
+    \end{itemize}
+
+    If you cannot make \(Q\) proper, the whole induction on the bad strata collapses because the base case “good open contributes coherent pushforward” fails.
+
+Recreate the stratification and weight analysis
+
+    This is the engine of the proof. You need:
+    \begin{itemize}
+        \item A stratification of \(A\setminus A^\circ\) by closed \(\mathcal G\)-invariant pieces.
+        \item Each stratum built from a \(\C^\times\)-attractor/repeller geometry so you can do weight arguments.
+    \end{itemize}
+
+    In the \(\C^\times\) paper, each stratum looks like “affine space bundle over a fixed locus \(F_n(\pi)\)” for a subgroup \(\mathcal G(\pi)\cong \C^\times_+\times\C^\times_-\).
+
+    For \(G\), the replacement is:
+    \begin{itemize}
+        \item Choose a 1-PS \(\lambda:\C^\times\to \mathcal G\) (or two commuting ones) that controls the degeneration type.
+        \item Use Bialynicki–Birula / KN stratification for the \(\lambda\)-action on the local chart \(A\).
+        \item Identify strata as affine bundles over fixed loci, with normal bundles carrying strictly positive weights.
+    \end{itemize}
+
+    This is the part that must be made completely explicit, otherwise you cannot prove the local cohomology vanishing.
+
+    \[
+    5. \text{Redefine “admissible classes” so the same weight bounds hold}
+    \]
+
+    The only property of admissible classes used in Proposition 6.2 is:
+
+    on fibers over fixed loci \(F_n(\pi)\), the \(\C^\times_\pm\)-weights are bounded below by linear functions of the discrete parameters \((n_+,n_-)\).
+
+    So in your generalization, define admissibility to guarantee the same statement for your chosen torus \((\C^\times)^2\subset \mathcal G(\pi)\) or for the relevant cocharacters.
+
+    A practical way to ensure this: build admissible classes from:
+    \begin{itemize}
+        \item evaluation bundles at markings,
+        \item determinant line bundles associated to representations of \(G\),
+        \item (possibly) boundary divisors in the compactification.
+    \end{itemize}
+
+    Then prove a lemma: weight of each generator is affine-linear in the defect parameters, hence any finite combination is bounded below linearly.
+
+    \[
+    6. \text{Repeat the local cohomology argument verbatim}
+    \]
+
+    Once 2–5 are in place, the proof structure barely changes:
+    \begin{itemize}
+        \item Local cohomology along smooth closed \(Z\subset U\) reduces to cohomology on \(Z\) of \(\mathcal V\otimes \det N\otimes \Sym N\).
+        \item If \(Z\to F\) is an affine bundle, push down to \(F\) and pick up \(\Sym N_{F/Z}^\vee\).
+        \item Those symmetric algebras contribute strictly positive weights in one direction.
+        \item Your admissibility makes the other direction’s weights go to \(+\infty\) as defect \(\delta\to\infty\).
+        \item Therefore \(\mathcal G(\pi)\)-invariants vanish for \(\delta\gg0\), and for finite \(\delta\) they are finitely generated.
+        \item Induct up the filtration to conclude coherence.
+    \end{itemize}
+
+Three choke points:
+\begin{enumerate}
+    \item Making $A$ an algebraic space with reductive $\mathcal G$ after rigidification.
+    \item Producing a proper quotient $Q/B$ on the good open $A^\circ$.
+    \item Getting an explicit \(\C^\times\)-weight bookkeeping on fixed loci that is linear in discrete defect data.
+\end{enumerate}
 \section{Pablo's modifications}
 
 \subsection{Setup}
@@ -724,6 +2167,160 @@ extension $K \to K'$ and a dotted arrow making the entire diagram commute:
 \]
 In particular, $\mathcal{X}_G(C_S)$ is complete over $S$.
 \end{theorem}
+
+\section{Generalization}
+Let $S = \C[[s]], S^* = \C((s))$ and $B$ be an $S$-scheme.  Let $C_S \to S$ be a projective flat family of curves with generic fiber $\C_{S^*}$ smooth and special fiber $C_0$ nodal with unique node $p$. Let $C_B = C_S \times_S B$.
+
+Solis defines the stack $\mathcal{X}_G(C_S)$ whose points evaluated at a test scheme $B/S$ are given by elements $(C'_B,P_B)$ where $C'_B$ is a twisted modification of $C_B$ and $P_B$ is an admissible $G$-bundle on $C'_B$. This stack is over a fixed curve $C_S$ and Solis shows that it is algebraic, locally of finite type, and complete over $S$. It contains $M_G(C_S)$ and $M_G(C_{S^*})$ as dense open substacks, and the complement of $M_G(C_{S^*})$ is a divisor with normal crossings.
+
+In this section, we discuss how to generalize Solis' construction to families of curves by working over the universal curve over the moduli stack of stable curves $\overline{\mathfrak{M}}_{g,I}$. Let $\pi:\overline{\mathfrak{C}_{g,I}} \to \overline{\mathfrak{M}}_{g,I}$ be the universal curve over the moduli stack of stable curves of genus $g$ with $I$ marked points. 
+
+Let $\pi:C\to B$ be a prestable family of nodal curves. Let
+\[
+\Sigma := \mathrm{Sing}(C/B)\subset C
+\]
+be the relative singular locus. It is finite étale over $B$ after restricting to the locus where the number of nodes is constant; globally it is at least finite unramified in good situations. \red{Maybe need to consider the stratification of $B$ by modular type of the fibers of $C/B$.}
+\begin{definition}
+    
+
+A \textbf{modification of $C/B$} is a proper morphism $m:C'\to C$ over $B$ such that:
+\begin{enumerate}
+\item $C'\to B$ is flat prestable curve, and $m$ is finitely presented and projective.
+
+\item $m$ is an isomorphism away from the nodes:
+\[
+m:\; C'\setminus m^{-1}(\Sigma)\ \xrightarrow{\sim}\ C\setminus \Sigma.
+\]
+
+\item \textbf{Fiberwise description at nodes:} for every geometric point $b\to B$ and every node $p\in \Sigma_b\subset C_b$, the fiber of $m_b:C'_b\to C_b$ over $p$ is either a point (no modification at that node) or a chain of $\mathbb P^1$'s meeting the two branches in the standard way, and $m_b$ contracts that chain to $p$ and is an isomorphism elsewhere.
+\end{enumerate}
+
+A \textbf{length $\le n$ condition} can be stated as:
+\begin{itemize}
+\item for every $b$ and every node $p\in \Sigma_b$, the chain over $p$ has at most $n$ components.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Twisted nodal curves over a base]\label{def:twisted-curve}
+Let $B$ be a scheme over $\C$.
+A \emph{twisted nodal curve over $B$} is a proper Deligne--Mumford stack
+\[
+\pi:\mathcal C \longrightarrow B
+\]
+such that:
+
+\begin{enumerate}
+\item
+The geometric fibers of $\pi$ are connected, one--dimensional, and the
+coarse moduli space
+\[
+C := \mathcal C_{\mathrm{coarse}}
+\]
+is a nodal curve over $B$.
+
+\item
+Let $\mathcal U \subset \mathcal C$ be the complement of the relative
+singular locus $\mathrm{Sing}(\mathcal C/B)$.  
+Then the restriction
+\[
+\mathcal U \hookrightarrow \mathcal C
+\]
+is an open immersion.
+
+\item
+For any geometric point $p:\Spec k\to \mathcal C$ mapping to a node of the
+fiber over $b\in B$, there exists an integer $k\ge1$ and an element
+$t\in \mathfrak m_{B,b}$ such that, étale-locally on $B$ at $b$ and strictly
+henselian locally on $\mathcal C$ at $p$, there is an isomorphism
+\[
+\Spec \mathcal O_{\mathcal C,p}^{sh}
+\;\cong\;
+\Bigl[\,\Spec\bigl(\mathcal O_{B,b}^{sh}[u,v]/(uv-t)\bigr)\ \big/\ \mu_k\,\Bigr],
+\]
+where $\zeta\in\mu_k$ acts by
+\[
+(u,v)\longmapsto(\zeta u,\zeta^{-1}v).
+\]
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+    A \textbf{twisted modification of $C/B$} is a twisted nodal curve $\mathcal{C} \to B$ whose coarse moduli space $\overline{\mathcal{C}}$ is a modification of $C/B$.
+\end{definition}
+
+We define a stack $\mathcal{X}_{G,g,I}$ over $\overline{\mathfrak{M}}_{g,I}$ whose points over a test scheme $B \to \overline{\mathfrak{M}}_{g,I}$ are given by pairs $(C'_B,P_B)$ where $C'_B$ is a twisted modification of the pullback $C_B$ of the universal curve $\overline{\mathfrak{C}_{g,I}}$ to $B$, and $P_B$ is an admissible $G$-bundle on $C'_B$. We need to show that this stack is algebraic and locally of finite type. \red{Is this a consequence of Solis' result?}
+
+Let $\Sigma_0, \sigma_{0,i}$ be a fixed stable curve of genus $g$ with $I$ marked points. Let $B$ be an affine etale neighborhood of the point $[\Sigma_0,\sigma_{0,i}]$ in $\overline{\mathfrak{M}}_{g,I}$. Let $\mathcal{X}_{G,g,I}\vert_B$ be the fiber of $F$ over the map $B \to \overline{\mathfrak{M}}_{g,I}$, where $F:\mathcal{X}_{G,g,I} \to \overline{\mathfrak{M}}_{g,I}$ is the natural projection. 
+
+We need to produce a local chart $A$ for the stack $\mathcal{X}_{G,g,I}\vert_B$. This stack $A$ will be a category fibered over $B$. We need to show that the stack $A$ is represented by an algebraic space and then display $\mathcal{X}_{G,g,I}\vert_B$ as a quotient stack $[A/H]$ for some reductive group $H$ acting on $A$.
+
+To produce a quotient presentation of $\mathcal X\vert_B$ we rigidify by choosing
+additional smooth sections on the universal curve.
+Let $V$ be the set of stable components of $\Sigma_0$ (equivalently, the stable
+vertices of its dual graph). After possibly refining $B$ \'etale-locally, choose
+sections
+\[
+\sigma_v : B \to \Sigma \qquad (v\in V)
+\]
+with image in the smooth locus of $\Sigma\to B$, such that each stable component
+of each geometric fiber of $\Sigma\to B$ meets at least one $\sigma_v$.
+
+\begin{definition}[Local chart $A$ over $B$]
+\label{def:local-chart-A-global-G}
+Define a category fibered in groupoids
+\(A\to (\Sch/B)\) by the following assignment.
+For a $B$--scheme $T\to B$, an object of $A(T)$ is a triple
+\[
+(\mathcal C'_T \xrightarrow{m} \Sigma_T,\; \mathcal P_T\to \mathcal C'_T,\; (t_v)_{v\in V})
+\]
+where:
+\begin{enumerate}[(i)]
+  \item $\Sigma_T := \Sigma\times_B T$;
+  \item $m: \mathcal C'_T \to \Sigma_T$ is a twisted modification of $\Sigma_T/T$
+        (of the fixed length bound, e.g. $\le \rank(G)$);
+  \item $\mathcal P_T$ is an admissible principal $G$--bundle on $\mathcal C'_T$;
+  \item for each $v\in V$, a \emph{trivialization at $\sigma_v$} is an isomorphism
+        \[
+        t_v : (\sigma_{v,T})^*\mathcal P_T \xrightarrow{\ \sim\ } G_T,
+        \]
+        where $\sigma_{v,T}:T\to \Sigma_T$ is the base change of $\sigma_v$ and
+        $G_T$ denotes the trivial $G$--torsor on $T$.
+\end{enumerate}
+A morphism in $A(T)$ is an isomorphism of twisted modifications and $G$--bundles
+compatible with all trivializations $t_v$.
+Pullback along a morphism of $B$--schemes $T'\to T$ is defined by base change.
+\end{definition}
+
+There is a natural forgetful morphism $A\to \mathcal X\vert_B$ which forgets the
+trivializations $(t_v)_{v\in V}$.
+Let
+\[
+H := G^V
+\]
+(the product over $v\in V$), acting on $A$ by changing the trivializations:
+for $h=(h_v)\in H(T)$ one sends $t_v$ to $h_v\circ t_v$.
+Since $H$ is reductive, invariants on $H$--representations are exact over $\C$.
+
+\begin{proposition}[Quotient presentation]
+\label{prop:quotient-presentation-global-G}
+After possibly refining $B$ \'etale-locally so that the chosen trivializations
+exist Zariski-locally on $T$, the forgetful map induces an equivalence of stacks
+over $B$
+\[
+\mathcal X\vert_B \;\simeq\; [A/H].
+\]
+\end{proposition}
+
+Add a “Standing hypotheses for the FTT argument” paragraph:
+	•	\mathcal X_{G,g,I} algebraic and lft over \overline{\mathfrak M}_{g,I}.
+	•	After étale localization B, \mathcal X|_B\simeq [A/H] with A smooth algebraic space and H reductive.
+	•	Existence of A^\circ\subset A with proper quotient Q/B.
+	•	Existence of the KN/BB strata and the weight bounds for admissible classes.
+
+
+
+
+
 
 \section{Finiteness for Fixed Curves}
 
