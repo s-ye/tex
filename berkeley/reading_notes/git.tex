@@ -145,4 +145,228 @@ U_R \cong \PGL(n+1) \times \mathbb A^{n\nu - n}.
 
 Hence $U_R$ is a globally trivial principal fibre bundle with respect to the action of $\PGL(n+1)$, with base space $\mathbb A^{n\nu - n}$.
 \end{proposition}
+\begin{proof}
+
+Fix an $R$-partition and the associated open set $U_R \subset X$.
+On $U_R$, define sections $\lambda_j$ by
+\[
+\lambda_{\mu(1)} := 1, \qquad
+\lambda_j := \lambda_{\mu(x(j))}\,
+\frac{D_{0,1,\dots,\widehat{\mu(x(j))},\dots,n,j}}
+     {D_{0,1,\dots,n}}
+\quad (0 \le j \le n).
+\]
+
+These satisfy $\lambda_j \in \Gamma(U_R, L_j \otimes L_{\mu(1)}^{-1})$.
+
+We define
+\[
+\phi = (\phi_1,\phi_2) : U_R \longrightarrow PGL(n+1) \times A_R
+\]
+as follows.
+
+Identifying $PGL(n+1)$ with the open subset $\{\det \neq 0\} \subset \mathbb P^{(n+1)^2-1}$
+with homogeneous coordinates $a_{ij}$, define $\phi_1$ by
+\[
+(\phi_1)^*(a_{ij}) = (-1)^j\, X_i^{(j)} \otimes \lambda_j^{-1}.
+\]
+
+Define $\phi_2$ by, for $k \ge 1$,
+\[
+(\phi_2)^*(x_i^{(n+k)}) =
+\frac{D_{0,1,\dots,\widehat{i},\dots,n,n+k}}
+     {D_{0,1,\dots,n}}\,
+\frac{\lambda_i}{\lambda_{\mu(k)}}.
+\]
+
+Then $\phi$ is a $PGL(n+1)$-equivariant isomorphism
+\[
+U_R \;\cong\; PGL(n+1) \times A_R.
+\]
+Unraveling over a field, a point of $U_R$ corresponds to a tuple of points $(p_0,\ldots,p_m)$ in $(\mathbb P^n)^{m+1}$ satisfying the conditions defining $U_R$. Writing $p_j = [v_j]$ with $v_j \in k^{n+1} \setminus \{0\}$ with $\det [v_0 \mid v_1 \mid \cdots \mid v_n] \neq 0$, the map $\phi$ sends this point to
+\[\inv{A}, \inv{A} v_{n+1}, \ldots, \inv{A} v_m\]
+where $A = [v_0 \mid v_1 \mid \cdots \mid v_n]$.
+\end{proof}
+
+What is this R-partition formalism really saying? When $\nu = 1$, then we are forced to take $R = \set{S_1}$ and $S_1 = \set{0,1,\ldots,n}$. The definition of $U_R$ reads $D_{0,1,\ldots,n} \neq 0$, so  $U_R$ is those tuples of points $(p_0,\ldots,p_{n+1})$ for which the points $p_0,\ldots,p_n$ are not colinear and $p_{n+1}$ is not in any of the coordinate hyperplanes determined by them, i.e. $n+2$ points in $\P^n$ in general position. Then there exists a unique projective transformation $g \in PGL(n+1)$ sending $p_i$ to $e_i$ for $i=0,\ldots,n$ and sending $p_{n+1}$ to $[1:1:\cdots:1]$. So in particular $U_R = \PGL(n+1)$ in this case.
+
+We can also study the case when $n=2$, $\nu = 2$ and $S_1 = \set{0,1}$ and $S_2 = \set{1,2}$. We are then thinking about $m = n+\nu+1=5$ points in $\P^2$, say $(p_0,p_1,p_2,p_3,p_4)$. The set $U_R$ is then cut out by the nonvanishing of the determinants $D_{0,1,2} $, $D_{1,2,3}$, $D_{0,2,3}$, $D_{0,2,4}$, and $D_{0,1,4}$. Geometrically this means that $p_0,p_1,p_2$ are not colinear, $p_3$ does not lie on the lines $p_1p_2$ and $p_0p_2$, and $p_4$ does not lie on the lines $p_0p_1$ and $p_0p_2$. Then we can uniquely normalize $p_0,p_1,p_2$ to be the coordinate points $[1:0:0]$, $[0:1:0]$, $[0:0:1]$, and normalize $p_3$ and $p_4$ to be $[1,1,a]$ and $[b,1,1]$.
+
+
+\begin{definition}
+    For fixed $m$ let $U_{reg} \subset (\mathbb P^n)^{m+1}$ be union of all $U_R$ where $R$ runs through all R-partitions of $\{0,1,\ldots,n\}$ with $\nu = m - n$.
+\end{definition}
+
+\begin{proposition}[Proposition 3.3]
+Let $x = (x^{(0)},x^{(1)},\dots,x^{(m)})$ be a geometric point of $(\mathbb P^n)^{m+1}$. Then the following are equivalent:
+\begin{enumerate}
+\item The stabilizer $S(x)$ is $0$-dimensional.
+\item There do not exist disjoint proper linear subspaces $L'$ and $L''$ of $\mathbb P^n$ such that every $x^{(i)}$ lies in either $L'$ or $L''$.
+\item $x$ is a geometric point of $U_{\mathrm{reg}}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Let $k$ be the algebraically closed field over which $x$ is defined. For simplicity, we shall write $\mathbb P$ for $\mathbb P^n_k$, and $U_R$ for $U_R \times_k \Spec k$, etc., in the course of this proof.
+
+First, the implication $(1)\Rightarrow(2)$ is clear; for in suitable homogeneous coordinates $\{X_i\}$, one may assume that
+\[
+L' \subset \{X_0 = X_1 = \cdots = X_r = 0\}, \qquad
+L'' \subset \{X_{r+1} = \cdots = X_n = 0\}.
+\]
+Then the subgroup of transformations
+\[
+\begin{pmatrix}
+\alpha I_{r+1} & 0 \\
+0 & \beta I_{n-r}
+\end{pmatrix}
+\subset PGL(n+1)
+\]
+leaves $x$ fixed.
+
+Secondly, $(3)\Rightarrow(1)$ is an immediate consequence of the equivariant trivialization $U_R \cong PGL(n+1) \times \mathbb A^{n\nu - n}$ and the fact that $PGL(n+1)$ acts freely on itself by left translation.
+
+Thirdly, we will prove that $(2)\Rightarrow(3)$. By virtue of $(2)$, all the points $x^{(i)}$ cannot lie in one hyperplane, hence we can choose $n+1$ of the $x^{(i)}$ which are not in one hyperplane, say $x^{(0)},x^{(1)},\dots,x^{(n)}$. Without loss of generality, we may assume that these have homogeneous coordinates $x^{(j)}_i = \delta_{ij}$.
+
+Now for each $n+k$ between $n+1$ and $m$, let $S_k$ be the set of integers $i$ such that
+\[
+D_{0,1,\dots,\widehat{i},\dots,n,n+k} \neq 0,
+\]
+i.e.\ $x^{(n+k)}$ is not in the hyperplane spanned by
+$x^{(0)},\dots,\widehat{x^{(i)}},\dots,x^{(n)}$.
+
+Then I claim that there is no partition of the set $\{0,1,\dots,n\}$ into two disjoint subsets $T'$ and $T''$ such that every $S_k$ is contained in either $T'$ or $T''$. For if there were, and if one let $L'$ (resp.\ $L''$) be the linear subspace defined by $X_i = 0$ for all $i \in T'$ (resp.\ $i \in T''$), then every point $x^{(k)}$ would lie in $L' \cup L''$, contradicting~(2).
+
+It follows immediately from a combinatorial argument that a suitable set of subsets $S_i \subset S_j$ is an $R$-partition $R$ and that $x \in U_R$.
+\end{proof}
+It thus follows that $U_{reg}$ is the locus of prestable points in the following sense. Let $G$ be a reductive algebraic group
+acting via $\sigma$, on $X$ scheme of finite type over a field $k$. Now suppose that $L$ is an invertible sheaf on $X$ and that
+$\phi$ is a $G$-linearization of $L$.
+The key concepts are the following.
+
+\begin{definition}[Mumford, Definition 1.7]
+Let $x$ be a geometric point of $X$.
+\begin{enumerate}
+\item[(a)]
+$x$ is \emph{pre-stable} (with respect to $\sigma$) if there exists
+an invariant affine open subset $U \subset X$ such that
+$x \in U$ and every $G$-orbit in $U$ is closed in $U$ 
+
+
+
+\item[(b)]
+$x$ is \emph{semi-stable} (with respect to $\sigma,L,\phi$) if there exists
+a section $s \in H^0(X,L^{\otimes n})$ for some $n>0$ such that
+$s(x)\neq 0$, the open subset $X_s$ is affine, and $s$ is invariant.
+Equivalently, if $\phi_n : \sigma^*(L^{\otimes n}) \to p_2^*(L^{\otimes n})$
+is the induced linearization, then
+\[
+\phi_n(\sigma^* s) = p_2^*(s).
+\]
+
+\item[(c)]
+$x$ is \emph{stable} (with respect to $\sigma,L,\phi$) if there exists
+a section $s \in H^0(X,L^{\otimes n})$ for some $n>0$ such that
+$s(x)\neq 0$, the open subset $X_s$ is affine, $s$ is invariant,
+and the action of $G$ on $X_s$ is closed.
+\end{enumerate}
+\end{definition}
+
+A single closed orbit can sit inside a region where nearby orbits are wildly non-closed. That gives bad quotient behavior. You cannot form a reasonable local quotient around such a point.
+
+For example, consider the action of $\Gm$ on $\A^2$ by
+\[t \cdot (x,y) = (tx, t^{-1}y).\] The origin is a closed orbit, but any neighborhood of the origin contains points whose orbits are not closed (e.g. points on the hyperbolas $xy = c \neq 0$). Thus the origin is not prestable.
+
+Prestable points are exactly those that sit inside a region where no orbit collapses onto another. This is the weakest hypothesis under which local quotients look like honest orbit spaces.
+
+\begin{definition}[Mumford, Definition 0.6]
+Given an action of $G/S$ on $X/S$, a pair $(Y,\phi)$ consisting of a pre-scheme $Y$
+over $S$ and an $S$-morphism $\phi : X \to Y$ is called a \emph{geometric quotient}
+(of $X$ by $G$) if the following conditions are satisfied:
+
+\begin{enumerate}
+\item[(i)]
+$\phi \circ \sigma = \phi \circ p_2$ (as in Definition~0.5).
+
+\item[(ii)]
+$\phi$ is surjective, and the image of $\Psi$ is $X \times_Y X$ (cf.\ Definition~0.4).
+Equivalently, the geometric fibres of $\phi$ are precisely the orbits of the geometric
+points of $X$ (for geometric points over an algebraically closed field of sufficiently
+high transcendence degree).
+
+\item[(iii)]
+$\phi$ is submersive, i.e.\ a subset $U \subset Y$ is open if and only if
+$\phi^{-1}(U)$ is open in $X$. Likewise, $U' \subset Y'$ is open if and only if
+$\phi^{-1}(U')$ is open in $X'$.
+
+\item[(iv)]
+The fundamental sheaf $\mathcal O_Y$ is the subsheaf of $\phi_*(\mathcal O_X)$ consisting
+of invariant functions. That is, if $f \in \Gamma(U,\phi_*(\mathcal O_X))
+= \Gamma(\phi^{-1}(U),\mathcal O_X)$, then $f \in \Gamma(U,\mathcal O_Y)$ if and only if
+the diagram
+\[
+\begin{tikzcd}
+G \times \phi^{-1}(U) \ar[r,"\sigma"] \ar[d,"p_2"'] &
+\phi^{-1}(U) \ar[d,"F"] \\
+\phi^{-1}(U) \ar[r,"F"] &
+\mathbb A^1
+\end{tikzcd}
+\]
+commutes, where $F$ is the morphism defined by $f$.
+\end{enumerate}
+\end{definition}
+
+
+Our next step is to construct a geometric quotient of $U_{\mathrm{reg}}$ by $PGL(n+1)$.
+Let $U_1,\dots,U_N$ be the open subsets $U_R$ of $U_{\mathrm{reg}}$ and the subsets obtained
+from these by permuting the coordinates. Let $(Z_i,\phi_i)$ be the geometric quotient
+of $U_i$ by $PGL(n+1)$. For all pairs $i,j$, $U_i\cap U_j$ is an invariant open subset
+of $U_i$ and $U_j$. Therefore, by Corollary~3.2, if $\sigma_i : Z_i \to U_i$ is the global
+section of $\phi_i$, we know:
+\[
+PGL(n+1)\times \sigma_i^{-1}(U_i\cap U_j) \;\cong\;
+U_i\cap U_j \;\cong\;
+PGL(n+1)\times \sigma_j^{-1}(U_i\cap U_j).
+\]
+
+In other words, both $\sigma_i^{-1}(U_i\cap U_j)$ and $\sigma_j^{-1}(U_i\cap U_j)$ are
+geometric quotients of $U_i\cap U_j$ by $PGL(n+1)$; therefore, they are canonically
+isomorphic. We use this isomorphism to glue together $Z_i$ and $Z_j$. For any three of
+the quotients $Z_i,Z_j,Z_k$, these identifications are obviously compatible. Therefore,
+we have defined a pre-scheme $Z$ and a morphism $\phi : U_{\mathrm{reg}} \to Z$. Clearly,
+$U_{\mathrm{reg}}$ is a locally trivial principal fibre bundle over $Z$; a fortiori,
+$(Z,\phi)$ is a geometric quotient of $U_{\mathrm{reg}}$ by $PGL(n+1)$. However, $Z$ is
+very far from being a scheme, let alone being quasi-projective.
+
+Although $Z$ is not quasi-projective, it carries various invertible sheaves. To
+investigate these, we make use of the theory of descent: by SGA~8, \S1, the set of
+invertible sheaves on $Z$ is isomorphic to the set of invertible sheaves on
+$U_{\mathrm{reg}}$ plus descent data for $\phi$. But $\phi$-descent data is precisely the
+same as a $PGL(n+1)$-linearization, since:
+\[
+U_{\mathrm{reg}} \times_Z U_{\mathrm{reg}} \;\cong\; PGL(n+1)\times U_{\mathrm{reg}}.
+\]
+
+But $L_i^{\,n+1}$ admits a $PGL(n+1)$-linearization. Therefore, there is an invertible
+sheaf $M_i$ on $Z$ such that
+\[
+L_i^{\,n+1} \;\cong\; \phi^*(M_i).
+\]
+
+Moreover, the section
+\[
+(D_{\alpha_0,\dots,\alpha_n})^{n+1} \in
+\Gamma\!\left(U_{\mathrm{reg}}, L_{\alpha_0}^{\,n+1}\otimes\cdots\otimes L_{\alpha_n}^{\,n+1}\right)
+\]
+is invariant in the $SL(n+1)$-linearization of this sheaf, hence in the
+$PGL(n+1)$-linearization of this sheaf. Therefore, according to SGA~8, \S1, there is a
+section $E_{\alpha_0,\dots,\alpha_n}$ of
+\[
+M_{\alpha_0}\otimes\cdots\otimes M_{\alpha_n}
+\]
+such that
+\[
+(D_{\alpha_0,\dots,\alpha_n})^{n+1} = \phi^*(E_{\alpha_0,\dots,\alpha_n}).
+\]
+
 \end{document}
