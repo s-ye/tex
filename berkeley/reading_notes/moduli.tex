@@ -5,8 +5,18 @@
 \usepackage{listings}
 \usepackage{bookmark}
 \usepackage{tikz}
-\usepackage{/Users/songye03/Desktop/math_tex/style/quiver}
-\usepackage{/Users/songye03/Desktop/math_tex/style/scribe}
+
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
+
 \usepackage{fancyhdr}
 
 \usepackage{parskip} % Automatically respects blank lines
@@ -1585,6 +1595,14 @@ It is clear that fine implies coarse, and best approximation implies unique.
     Suppose that a reductive group \(G\) acts on an affine variety \(X = \Spec R\). Then the functor of points \[\mathcal{F} : (\text{Schemes}/k)^{op} \to \text{Sets}, \quad S \mapsto X(S)/G(S)\] is best approximated by the affine GIT quotient $X \to X//G$ induced by the inclusion of invariant rings \(R^{G} \hookrightarrow R\). Moreover, the stable quotient \(X^{s}/G\) is a coarse moduli space for the quotient functor $X^{s}/G$.
 \end{example}
 
+\begin{remark}
+    The coarse quotient $X^s/G$ is a fine moduli space if and only if the
+    $G$-action on $X^s$ is free. In general, finite stabilizers give a
+    Deligne--Mumford stack $[X^s/G]$ whose coarse moduli space is $X^s/G$; the
+    obstruction to the existence of a universal family is exactly the nontrivial
+    stabilizer groups.
+\end{remark}
+
 \subsection{Cohomology modules and direct images}
 
 Let $A$ be a finitely generated algebra over $k$. We shall consider the
@@ -1738,7 +1756,7 @@ equivalently, those for which all $2\times 2$ minors vanish, is denoted by
 \]
 \end{definition}
 
-\begin{proposition}[Prop.\ 9.56]
+\begin{proposition}
 Given a matrix $\Psi \in \Mat_{N,1}\bigl(H^0(L)\bigr)$, the following two
 conditions are equivalent.
 \begin{enumerate}[(1)]
@@ -1755,7 +1773,7 @@ sheaf homomorphism determined by $\Psi$,
 \begin{proof}
 $(2)\Rightarrow (1)$ is clear, so we will show $(1)\Rightarrow (2)$.
 
-You have a matrix
+Given a matrix
 \[
 \Psi=(\psi_{ij})\in \Mat_{N,1}(H^0(L)).
 \]
@@ -1914,6 +1932,7 @@ $GL(N,N)$-orbits in $\mathcal U(L)\subset \Mat_{N,1}\bigl(H^0(L)\bigr)$. We are 
 $\Mat_{N,1}\bigl(H^0(L)\bigr)$ by $GL(N,N)$ to construct a coarse moduli space for the Picard functor
 $\Pic_C^d$. We need to spell out a linearization of the action. We fix the character $\chi : \GL(N,N) \to k^*$ induced by
 \[(A,B)\mapsto \det(A)\det(B)\]
+Moreover let $\SL(N,N)$ be the kernel of this character.
 It turns out that with respect to this character, we have \begin{align*}
 \Mat^{s}_{N,1}\bigl(H^0(L)\bigr) = \Mat^{ss}_{N,1}\bigl(H^0(L)\bigr) &= \mathcal U(L)
 \end{align*}
@@ -1932,17 +1951,104 @@ Therefore the projective GIT quotient is a projective variety. In this case, sin
 
 \begin{theorem}
 The projective GIT quotient
-\[\Mat^{s}_{N,1}\bigl(H^0(L)\bigr)\big/GL(N,N)\]
+\[\Mat^{s}_{N,1}\bigl(H^0(L)\bigr)\big/GL(N,N) = \Proj k[\Mat_{N,1}\bigl(H^0(L)\bigr)]^{SL(N,N)}
+\]
 is a projective variety whose underlying set is in natural bijection with $\Pic^d C$.
 \end{theorem}
+
+\begin{remark}
+Note that in general for any reductive $G$ and character $\chi$,
+\[
+\bigoplus_{m\ge0} k[X]^{G,\chi^m}
+\;\cong\;
+k[X]^{\ker\chi}
+\]
+as a graded ring, and the projective quotient can be written using either description.
+\end{remark}
+
+\begin{remark}[The stable quotient as a geometric quotient]
+Let $G$ be a reductive group acting on a projective variety $X$ with a fixed
+linearization. Then there are open subsets
+\[
+X^{s} \subset X^{ss} \subset X
+\]
+of stable and semistable points. A fundamental theorem of GIT asserts that the
+quotient
+\[
+\pi : X^{s} \longrightarrow X^{s}/G
+\]
+exists and is a \emph{geometric quotient}. Concretely, this means:
+
+\begin{enumerate}[(i)]
+\item (\textbf{Orbit fibers}) $\pi(x)=\pi(x')$ if and only if $x'$ lies in the
+$G$--orbit of $x$. In particular, the points of $X^{s}/G$ are in bijection with
+$G$--orbits in $X^{s}$.
+
+\item (\textbf{Topological quotient}) The map $\pi$ is surjective and open, and
+$X^{s}/G$ carries the quotient topology.
+
+\item (\textbf{Invariant functions}) The structure sheaf is the sheaf of
+invariants:
+\[
+\mathcal O_{X^{s}/G} = (\pi_*\mathcal O_{X^{s}})^G.
+\]
+
+\item (\textbf{Closed orbits and finite stabilizers}) Every $G$--orbit in $X^{s}$
+is closed in $X^{s}$ and has finite stabilizer. Consequently, $X^{s}/G$ is a
+genuine orbit space in the sense of algebraic geometry.
+\end{enumerate}
+
+In particular, $X^{s}/G$ is always quasi--projective, and it is projective if
+and only if $X^{s}=X^{ss}$, in which case $X^{s}/G = X^{ss}//G$. By contrast,
+the projective GIT quotient $X^{ss}//G$ is only a categorical quotient in
+general: distinct orbits in $X^{ss}$ may be identified, and points correspond
+to closed orbits in orbit closures (S--equivalence classes). Thus the stable
+quotient $X^{s}/G$ is the part of the GIT quotient that behaves as a true moduli
+space of objects. In the example of the Picard functor above, since all semistable points are stable, the projective GIT quotient turns out to be a geometric quotient.
+\end{remark}
+
+\begin{remark}[Set-theoretic vs.\ functorial moduli]
+Saying that a variety $M$ has underlying set $\Pic^d(C)$ only means that its
+$k$-points classify isomorphism classes of degree $d$ line bundles on $C$.
+This is a purely set-theoretic statement: it records which objects exist, but
+not how they vary in algebraic families.
+
+By contrast, to say that $M$ represents the Picard functor $\Pic_C^d$ means
+that for every scheme $S$ there is a natural bijection
+\[
+\Hom(S,M) \;\cong\; \Pic_C^d(S),
+\]
+identifying morphisms $S \to M$ with families of degree $d$ line bundles on
+$C \times S$, up to the standard equivalence. Equivalently, $M$ carries a
+universal (Poincar\'e) line bundle $\mathcal P$ on $C \times M$ such that every
+family over $S$ is obtained uniquely, up to twisting by a line bundle from $S$,
+by pullback:
+\[
+\mathcal L \;\cong\; (\id_C \times f)^*\mathcal P \quad \text{for a unique } f:S\to M.
+\]
+
+Thus representability encodes not only the set of isomorphism classes, but the
+entire functorial behavior of line bundles in families and under base change.
+This is the extra structure that makes $M$ a genuine moduli space rather than
+just a parameter set.
+\end{remark}
+
+
+\begin{theorem}
+    The quotient variety \[\Mat^{s}_{N,1}\bigl(H^0(L)\bigr)\big/GL(N,N)\] represents the Picard functor \(\Pic_C^d\). In particular, it is a fine moduli space for line bundles of degree \(d\) on \(C\).
+\end{theorem}
+
+In order to prove this theorem, we will first establish that the moduli problem admits a coarse moduli space structure. Then we will upgrade this to a fine moduli space structure by constructing a universal family, classically known as a Poincar\'e line bundle.
+
+
 \begin{proposition}\label{prop:11.24}
-Let $L \in \Pic^{2d}C$, where $d \ge 2g$, and let $N=d+1-g$, as in
-Section~9.4(a). Then the projective quotient
+Let $L \in \Pic^{2d}C$, where $d \ge 2g$, and let $N=d+1-g$. Then the projective quotient
 \[
 \Mat^{s}_{N,1}\bigl(H^0(L)\bigr)\big/GL(N,N)
 \]
 is a coarse moduli space for the Picard functor $\Pic_C^d$.
 \end{proposition}
+
 
 \begin{corollary}\label{cor:11.25}
 The isomorphism class of the variety
@@ -1953,16 +2059,106 @@ depends only on $C$ and $d$, and not on the line bundle $L \in \Pic^{2d}C$.
 \end{corollary}
 
 \begin{proof}[Proof of Proposition~\ref{prop:11.24}]
-For each finitely generated $k$-algebra $A$, our aim is to find a natural
+    Since line bundles satisfy Zariski descent and morphisms into a fixed scheme form a Zariski sheaf, it suffices to construct the correspondence functorially for affine schemes \(S=\Spec A\). Compatibility on overlaps ensures the maps glue uniquely to arbitrary base schemes. Therefore, for each finitely generated $k$-algebra $A$, our aim is to find a natural
 bijection between line bundles $\Xi$ on $C_A$ such that $\deg \Xi_t = d$ at
 every $t \in \Spm A$, up to equivalence, and morphisms $\Spm A \to J_d$.
 
-Let $\widetilde{\Xi} := L_A \otimes \Xi$. Then by Theorem~11.18 both of
+Let $\widetilde{\Xi} := L_A \otimes \Xi$. Then both of
 $H^0(\Xi)$ and $H^0(\widetilde{\Xi})$ are locally free $A$-modules of rank $N$,
 and their fibres at a point $t\in\Spm A$ are the spaces
-$H^0(C,\Xi_t)$ and $H^0(C,\widetilde{\Xi}_t)$. There then exists a bilinear
-homomorphism of $A$-modules:
-\begin{equation}\label{eq:11.3}
+$H^0(C,\Xi_t)$ and $H^0(C,\widetilde{\Xi}_t)$.
+
+\begin{remark}
+    Here we are invoking the following fact. Suppose $\cE$ is a vector bundle on
+    $C_A$ with $H^1(C_A,\cE)=0$. Then $H^0(C_A,\cE)$ is a locally free
+    $A$-module, and for every ring homomorphism $f : A \to A'$, the base change
+    homomorphism
+    \[H^0(C_A,\cE) \otimes_A A' \longrightarrow H^0(C_{A'},\cE \otimes_A A')\]
+    is an isomorphism. This is an incarnation of the more general theory of cohomology and base change. For the sake of completeness, we state the relevant result here without proof.
+
+\begin{theorem}[Grauert; cohomology and base change, curve case]
+Let $\pi : X \to S$ be a proper flat morphism, with $S$ reduced and locally Noetherian, and let $\cF$ be a coherent sheaf on $X$ flat over $S$. Suppose that for some $p\ge0$ the function
+\[
+s \longmapsto h^p(X_s,\cF_s)
+\]
+is locally constant on $S$. Then:
+\begin{enumerate}[(i)]
+\item $R^p\pi_*\cF$ is locally free on $S$;
+\item for every morphism $f:T\to S$, the natural base change map
+\[
+f^*(R^p\pi_*\cF)\;\longrightarrow\;R^p\pi'_*(\cF_T)
+\]
+is an isomorphism, where $\pi':X_T:=X\times_S T\to T$.
+\end{enumerate}
+In particular, when $\dim X_s=1$ and $H^1(X_s,\cF_s)=0$ for all $s$, then $\pi_*\cF$ is locally free and commutes with arbitrary base change.
+\end{theorem}
+
+In topology and complex geometry, a map can have all fibers homeomorphic (or diffeomorphic) and still not be a fiber bundle; extra conditions are needed to guarantee local triviality. Similarly, in algebraic geometry, given a proper morphism $\pi:X\to S$ and a coherent sheaf $\cF$, you can have all fibers $H^0(X_s,\cF_s)$ with the same dimension, but $\pi_*\cF$ may not be locally free, and base change can fail. Grauert's theorem upgrades a set of vector spaces depending on $s$ into a vector bundle on $S$, providing the crucial finiteness and continuity conditions that allow sheaf cohomology to behave well under base change.
+
+\begin{remark}[How Grauert is used in the Jacobian construction]
+We apply this with
+\[
+\pi : C_A = C \times \Spec A \longrightarrow \Spec A,
+\qquad \cF=\Xi \text{ or } \widetilde{\Xi}=L_A\otimes\Xi^{-1},
+\]
+where $\Xi$ is a family of line bundles of degree $d\ge 2g$.
+
+For every $t\in\Spec A$ we have, by Riemann--Roch,
+\[
+H^1(C,\Xi_t)=0, \qquad h^0(C,\Xi_t)=d+1-g=:N,
+\]
+and the same for $\widetilde{\Xi}$. Hence the hypotheses of Grauert are satisfied for $p=0$.
+
+Therefore
+\[
+\pi_*\Xi \;\cong\; H^0(C_A,\Xi),
+\qquad
+\pi_*\widetilde{\Xi} \;\cong\; H^0(C_A,\widetilde{\Xi})
+\]
+are locally free $A$-modules of rank $N$, and for every $A\to A'$,
+\[
+H^0(C_A,\Xi)\otimes_A A' \;\xrightarrow{\sim}\; H^0(C_{A'},\Xi\otimes_A A'),
+\]
+\[
+H^0(C_A,\widetilde{\Xi})\otimes_A A' \;\xrightarrow{\sim}\; H^0(C_{A'},\widetilde{\Xi}\otimes_A A').
+\]
+
+This is the key input that upgrades the fiberwise vector spaces
+$H^0(C,\Xi_t)$ into vector bundles on $\Spec A$, allowing one to choose
+local bases and construct the matrix-valued morphism
+$\Spec A \to \Mat_{N,1}(H^0(L))$ functorially.
+\end{remark}
+
+\begin{example}[What Grauert is saying in elementary terms]
+Let $\pi:\P^1_S \to S$ be the projection and take $\cF=\cO_{\P^1_S}(n)$.
+
+For every $s\in S$,
+\[
+H^1(\P^1,\cO(n))=0 \quad (n\ge0), 
+\qquad h^0(\P^1,\cO(n))=n+1.
+\]
+
+Grauert’s theorem implies
+\[
+\pi_*\cO_{\P^1_S}(n) \;\cong\; \cO_S^{\oplus (n+1)},
+\]
+and for all $T\to S$,
+\[
+H^0(\P^1_S,\cO(n))\otimes_{\cO_S}\cO_T
+\;\cong\;
+H^0(\P^1_T,\cO(n)).
+\]
+
+The intuition is that the vector spaces $H^0(\P^1,\cO(n))$ fit together into a
+vector bundle over $S$ with constant fiber dimension, and global sections
+commute with base change.
+\end{example}
+
+
+\end{remark}
+
+There then exists a bilinear
+homomorphism of $A$-modules: \begin{equation}\label{eq:11.3}
 H^0(\Xi) \times H^0(\widetilde{\Xi})
 \;\longrightarrow\;
 H^0(L)\otimes_k A.
@@ -1982,13 +2178,15 @@ This maps into the closed subvariety
 \[
 \Mat_{N,1}\bigl(H^0(L)\bigr)\subset \Mat_N\bigl(H^0(L)\bigr)
 \]
-defined by the vanishing of the $2\times 2$ minors and, moreover, into the
-open set $\Mat^s_{N,1}\bigl(H^0(L)\bigr)$, since for all $t\in\Spm A$ the
+defined by the vanishing of the $2\times 2$ minors because each fiber matrix factors as
+column vector of $H^0(\Xi_t)$ tensor row vector of $H^0(\widetilde{\Xi}_t)$.
+
+Moreover, the image lies in theopen set $\Mat^s_{N,1}\bigl(H^0(L)\bigr)$, since for all $t\in\Spm A$ the
 line bundles $\Xi_t$ and $\widetilde{\Xi}_t$ are generated by global
 sections. We will denote this map by
 \[
 \widetilde{\varphi}:\Spm A \longrightarrow \Mat^s_{N,1}\bigl(H^0(L)\bigr),
-\],
+\]
 and the composition of $\widetilde{\varphi}$ with the quotient map by
 \[
 \varphi:\Spm A \longrightarrow J_d
@@ -1996,8 +2194,389 @@ and the composition of $\widetilde{\varphi}$ with the quotient map by
 \]
 
 The map $\varphi$ depends only on the equivalence class of $\Xi$
-(in the sense of Definition~11.22) and not on the choice of $S,\widetilde S$.
+(in the sense of Definition \ref{def:families-line-bundles}) and not on the choice of $S,\widetilde S$.
+
+We now take an affine open cover
+\[
+\Spm A = U_1 \cup \cdots \cup U_n
+\]
+such that the $A$-modules $H^0(\Xi)$ and $H^0(\widetilde{\Xi})$ restrict to free
+modules on each $U_i$. For each $i$, by choosing free bases of
+$H^0(\Xi)|_{U_i}$ and $H^0(\widetilde{\Xi})|_{U_i}$ we obtain a map
+\[
+\widetilde{\varphi}_i : U_i \longrightarrow \Mat^s_{N,1}\bigl(H^0(L)\bigr)
+\]
+and on intersections $U_i \cap U_j$ the maps
+$\widetilde{\varphi}_i$ and $\widetilde{\varphi}_j$ differ only by the choice of
+free bases of $H^0(\Xi)|_{U_i \cap U_j}$ and
+$H^0(\widetilde{\Xi})|_{U_i \cap U_j}$. It follows that the corresponding maps
+\[
+\varphi_i : U_i \longrightarrow J_d
+\quad\text{and}\quad
+\varphi_j : U_j \longrightarrow J_d
+\]
+agree on the intersection $U_i \cap U_j$, and by gluing we therefore obtain a
+morphism
+\[
+\varphi : \Spm A \longrightarrow J_d.
+\]
+
+This is called the \emph{classifying map} for the family of line bundles $\Xi$.
+Let $\Xi, \Xi'$ be two line bundles on $C_A$ which are locally equivalent as
+families of line bundles on $C$. By this we mean that there is an open cover of
+$\Spm A$ as above, such that on each open set the restrictions
+$\Xi|_{U_i}$ and $\Xi'|_{U_i}$ are equivalent.
+
+For these line bundles the classifying maps
+\[
+\varphi, \varphi' : \Spm A \longrightarrow J_d
+\]
+are the same, and in particular we see that $\varphi$ depends only on the
+equivalence class of $\Xi$ (Definition~11.22). This verifies the first
+requirement for $J_d$ to be a coarse moduli space: we have constructed a natural
+transformation of functors
+\[
+\Pic^d_C \longrightarrow J_d.
+\]
+Over an algebraically
+closed field $k$ this is bijective essentially because over an algebraically closed field, geometric points correspond to $k$-points. Over non-closed fields, points correspond to Galois orbits of geometric points, and bijectivity on $k$-points is false in general. (Recall that a geometric point of a $k$-scheme $X$ is a morphism
+\[
+\Spec \Omega \to X
+\]
+where $\Omega$ is an algebraically closed field. Equivalently: a point of $X(\bar k)$ together with an embedding $k\hookrightarrow\bar k$.)
+
+Finally, we have to show universality. Suppose that we have
+a natural transformation
+\[
+\psi : \Pic^d_C \longrightarrow Y
+\]
+for some variety $Y$. Over the product
+$C \times \Mat_{N,1}\bigl(H^0(L)\bigr)$ there is a tautological homomorphism of
+vector bundles
+\[
+\mathcal{O}^{\oplus N}_{C \times \Mat}
+\longrightarrow
+\bigl(L \otimes \mathcal{O}_{\Mat}\bigr)^{\oplus N}.
+\]
+
+Restricted to the open set
+$C \times \Mat^s_{N,1}\bigl(H^0(L)\bigr)$, this map has rank~$1$ at each point, and
+its image is a line bundle. We denote this line bundle on
+$C \times \Mat^s_{N,1}\bigl(H^0(L)\bigr)$ by $\mathcal{Q}$, called the
+\emph{universal line bundle}. Composing the natural transformation
+\[
+\Mat^s_{N,1}\bigl(H^0(L)\bigr) \longrightarrow \Pic^d_C,
+\]
+defined in the obvious way by the pullback of $\mathcal{Q}$, with $\psi$ gives a
+natural transformation of functors
+\[
+\Mat^s_{N,1}\bigl(H^0(L)\bigr)
+\longrightarrow \Pic^d_C
+\overset{\psi}{\longrightarrow} Y.
+\]
+
+Since the line bundle $\mathcal{Q}$ is trivial on $GL(N,N)$--orbits, it follows
+that the corresponding morphism
+\[
+\Mat^s_{N,1}\bigl(H^0(L)\bigr) \longrightarrow Y
+\]
+descends to the quotient, and so we obtain a morphism
+\[
+J_d \longrightarrow Y
+\]
+with the required properties. Here we are invoking the fact that $J_d$ is a geometric quotient, which is true here because
+\[
+\Mat^s_{N,1}(H^0(L)) = \Mat^{ss}_{N,1}(H^0(L)) \qedhere
+\]
 \end{proof}
+
+Now we are ready to upgrade the coarse moduli space structure of $J_d$ to a fine
+moduli space structure by constructing a universal family of line bundles
+on $C \times J_d$. We recall some preliminaries which we will apply to the universal line bundle $\mathcal Q$. 
+
+Let $G$ be a linearly reductive algebraic group acting on an affine variety $X=\Spm R$, and
+let $M$ be an $R$-module with a $G$-linearisation, i.e. $G$-action on $M$ as a $k$-vector space, compatible with the $G$-action on $R$ in the sense that
+\[
+g\cdot(rm) = (g\cdot r)(g\cdot m)\]
+Thus $M$ is also a representation of $G$ and has a subset of invariants $M^G\subset M$
+which, by definition of a linearisation, is an $R^G$-module.
+
+\begin{lemma}[11.26]
+If $M$ is a finitely generated module over a Noetherian ring $R$, then $M^G$ is
+finitely generated as an $R^G$-module.
+\end{lemma}
+
+\begin{proof}
+The idea of the proof is the same as that of Hilbert's Theorem~4.51. Denote by
+$M'\subset M$ the submodule generated by $M^G$. Since $R$ (and $M$) are
+Noetherian, it follows that $M'$ is finitely generated. Letting
+$m_1,\dots,m_n\in M'$ be generators, the map
+\[
+R\oplus\cdots\oplus R \longrightarrow M',
+\qquad
+(a_1,\dots,a_n)\longmapsto a_1m_1+\cdots+a_nm_n
+\]
+is surjective, and hence by linear reductivity the induced map
+\[
+R^G\oplus\cdots\oplus R^G \longrightarrow (M')^G = M^G
+\]
+is surjective, so that $M^G$ is generated as an $R^G$-module by
+$m_1,\dots,m_n$.
+\end{proof}
+
+\begin{proposition}[11.27]
+Suppose that all orbits of $G$ on $\Spm R$ are free closed orbits and that $M$ is
+a locally free $R$-module. Then $M^G$ is a locally free $R^G$-module and
+\[
+M \cong M^G \otimes_{R^G} R.
+\]
+\end{proposition}
+
+\begin{proof}
+Let $I\subset R$ be the ideal of an orbit, with corresponding maximal ideal
+$\mathfrak m = I\cap R^G \subset R^G$. Then $M/IM$ is a $k[G]$-module with a
+$G$-linearisation and so is a free $k[G]$-module by Lemma~9.49. By linear
+reductivity we can find $m_1,\dots,m_r\in M^G$ whose residue classes
+$\overline m_1,\dots,\overline m_r\in M/IM$ are a free basis, and hence the
+natural homomorphism of $R$-modules
+\[
+M^G\otimes_{R^G} R \longrightarrow M
+\]
+is an isomorphism along each orbit. Since, by Lemma~11.26, $M^G$ is finitely
+generated, it follows from Nakayama's Lemma that this homomorphism is
+surjective. But it is also injective because $M$ is locally free.
+\end{proof}
+
+\begin{remark}
+The proposition establishes the existence and uniqueness of descent data for
+locally free sheaves under the hypotheses stated. More precisely:
+
+You have an affine geometric quotient
+\[
+\pi:\ X=\Spec R \;\to\; Y=\Spec R^G
+\]
+with all orbits free and closed.
+
+A $G$-linearised vector bundle on $X$ is the same as a locally free $R$-module $M$ with a compatible $G$-action.
+
+To say that $M$ descends means: There exists a vector bundle $E_0$ on $Y$ such that $M \cong \pi^*E_0$. To say it descends uniquely means if $M \cong \pi^*E_0 \cong \pi^*E_1$, then $E_0 \cong E_1$.
+
+The proposition constructs
+\(E_0 \leftrightarrow M^G\)
+and proves:
+
+\begin{itemize}
+\item $M^G$ is locally free over $R^G$,
+\item the natural map
+\(M^G \otimes_{R^G} R \;\longrightarrow\; M\)
+is an isomorphism.
+\end{itemize}
+
+This is exactly:
+
+\(M \cong \pi^*(M^G).\)
+
+So the descended bundle exists.
+For uniqueness, suppose
+\(M \cong N \otimes_{R^G} R\)
+for some locally free $R^G$-module $N$.
+
+Take invariants:
+
+\(M^G \cong (N \otimes_{R^G} R)^G.\)
+
+But because the orbits are free and closed and $G$ is linearly reductive, one proves:
+
+\((N \otimes_{R^G} R)^G \cong N.\)
+
+So:
+
+\(N \cong M^G.\)
+
+Therefore any descent must equal $M^G$. No choice.
+
+So uniqueness is automatic once the invariant functor behaves well, which is exactly what linear reductivity + freeness give you.
+
+\end{remark}
+
+Let $X$ be affine with a $G$-linearisation by a character $\chi$. Then
+
+\[
+X//_\chi G = \Proj \bigoplus_{n\ge0} R^{G,\chi^n}.
+\]
+
+A basic fact from GIT:
+
+For any homogeneous invariant $f\in R^{G,\chi^n}$ with $n>0$,
+
+\[
+D_+(f) \subset X//_\chi G
+\]
+
+is affine, and
+
+\[
+\Phi^{-1}(D_+(f)) = X_f^{ss}
+\]
+
+is affine, with
+
+\[
+\Phi^{-1}(D_+(f)) \to D_+(f)
+\]
+
+equal to the affine quotient map
+
+\[
+\Spec R_{(f)} \longrightarrow \Spec (R_{(f)})^G.
+\]
+
+In particular, the projective quotient map in the direction of some character
+$\chi\in\Hom(G,\mathbb G_m)$,
+\[
+\Phi=\Phi_\chi:X^{ss}\longrightarrow X//_\chi G,
+\]
+is locally an affine quotient map.
+
+\begin{corollary}[11.28]
+Suppose that all semistable points are stable and that every orbit of the action
+$G$ on $X^{ss}=X^s$ is a free closed orbit. Then, given a vector bundle $E$ on
+$X$ with a $G$-linearisation, there exists a vector bundle $E_0$ on $X^s/G$ such
+that
+\[
+E \cong \Phi^*E_0.
+\]
+\end{corollary}
+
+\begin{proof}
+	The proof reduces to the affine case:
+	1. Cover \(X//_{\chi} G\) by affines \(U_i = D_+(f_i)\).
+	2. On each \(U_i\),
+\(\Phi^{-1}(U_i) \to U_i\)
+is an affine quotient \(\Spec R_i \to \Spec R_i^G\).
+	3. Over each affine piece, Proposition 11.27 applies:
+equivariant locally free modules descend uniquely.
+	4. The descended bundles glue because everything was G-equivariant and the quotient is geometric.
+\end{proof}
+
+
+$\mathcal Q$ had the property that
+\[
+(1 \times \tilde{\varphi})^*\mathcal Q \cong \Xi
+\]
+under
+\[
+1 \times \tilde{\varphi} : C \times \Spm A \longrightarrow
+C \times \Mat^s_{N,1}\bigl(H^0(L)\bigr).
+\]
+
+
+
+Let $R$ be the coordinate ring of the affine variety
+$\Mat_{N,1}\bigl(H^0(L)\bigr)$. There is a tautological homomorphism of
+$R$-modules
+\[
+\tau : R^{\oplus N} \longrightarrow R^{\oplus N} \otimes_k H^0(L)
+\]
+given in the obvious way by matrix multiplication. Given a linear map
+$f : H^0(L) \to k$, we then get a homomorphism of $R$-modules as the
+composition
+\[
+\phi_f : R^{\oplus N}
+\xrightarrow{\ \tau\ }
+R^{\oplus N} \otimes_k H^0(L)
+\xrightarrow{\ 1 \otimes f\ }
+R^{\oplus N} \otimes_k k
+= R^{\oplus N}.
+\]
+
+When $f$ is the evaluation map at a point $p \in C$ this homomorphism
+has rank $\le 1$ everywhere, and on the open set
+$\Mat^s_{N,1}\bigl(H^0(L)\bigr)$ its image is precisely the line bundle
+\[
+\mathcal Q_p := \mathcal Q|_{p \times \Mat}.
+\]
+
+The group $GL(N) \times GL(N)$ acts on $R$, and using this action we let
+it act on the source and target $R^{\oplus N}$ of the homomorphism
+$\phi_f$, respectively, by
+\[
+\begin{pmatrix}
+f_1\\ \vdots\\ f_N
+\end{pmatrix}
+\longmapsto
+A
+\begin{pmatrix}
+g \cdot f_1\\ \vdots\\ g \cdot f_N
+\end{pmatrix},
+\qquad
+\begin{pmatrix}
+f_1\\ \vdots\\ f_N
+\end{pmatrix}
+\longmapsto
+\begin{pmatrix}
+g \cdot f_1\\ \vdots\\ g \cdot f_N
+\end{pmatrix}
+B^{t,-1}.
+\]
+
+The map $\phi_f$ is then a $GL(N) \times GL(N)$-homomorphism, and in
+particular $GL(N) \times GL(N)$ acts on the $R$-module $\mathcal Q_p$.
+Similarly, the universal line bundle $\mathcal Q$ carries a
+$GL(N) \times GL(N)$-linearisation, under which $(t,t^{-1}) \in
+GL(N) \times GL(N)$ acts nontrivially. However, this element acts
+trivially on the line bundle $\mathcal Q \otimes \mathcal Q_p^{-1}$ with
+its induced linearisation, and so this line bundle possesses a
+$GL(N,N)$-linearisation. Applying Corollary~11.28, we conclude that
+$\mathcal Q \otimes \mathcal Q_p^{-1}$ is the pullback of some line
+bundle
+\[
+\mathcal P_d \in \Pic(C \times J_d).
+\]
+
+This is called the \emph{Poincar\'e line bundle}.
+
+
+
+\begin{lemma}[11.30]
+Let $\Xi$ be a line bundle on $C_A$ with classifying map
+$\varphi : \Spm A \to J_d$. Then $\Xi$ is equivalent to the pullback
+$(1 \times \varphi)^*\mathcal P_d$ via
+$1 \times \varphi : C_A \to C \times J_d$.
+\end{lemma}
+
+\begin{proof}
+Let $\mathcal L = (1 \times \varphi)^*\mathcal P_d$. By construction of
+the classifying map, $\Xi$ is already locally isomorphic to $\mathcal
+L$. In other words,
+\[
+\Xi|_{C \times U_i} \cong \mathcal L|_{C \times U_i}
+\]
+over some affine open cover $\Spm A = U_1 \cup \cdots \cup U_n$. Thus
+\[
+M := H^0(\Xi \otimes \mathcal L^{-1})
+\]
+is an invertible $A$-module, and the natural homomorphism
+\[
+\mathcal L \otimes_A M \longrightarrow \Xi
+\]
+is an isomorphism. Hence $\Xi$ and $\mathcal L$ are equivalent.
+\end{proof}
+This completes the proof that $J_d$ is a fine moduli space for the Picard functor
+$\Pic_C^d$.
+
+
+\begin{remark}
+The reason the Picard moduli problem admits a fine moduli space is that every
+line bundle has the same automorphism group $\mathbb G_m$, acting centrally.
+Thus the moduli stack of line bundles is a $\mathbb G_m$--gerbe over its coarse
+space. One can rigidify globally by this universal $\mathbb G_m$, killing all
+stabilizers at once. After rigidification the inertia is trivial, and the
+resulting moduli problem is representable by a scheme, namely the Jacobian.
+This uniformity of automorphism groups is special to rank one and fails in
+higher rank, where stabilizers vary and obstruct the existence of a fine moduli
+space.
+\end{remark}
 
 
 \section{References}

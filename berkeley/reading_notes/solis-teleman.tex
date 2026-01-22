@@ -21,6 +21,7 @@
 \DeclareMathOperator{\Chmb}{Ch}
 \DeclareMathOperator{\pt}{pt}
 \DeclareMathOperator{\defect}{defect}
+\DeclareMathOperator{\Sing}{Sing}
 
 \usepackage{parskip} % Automatically respects blank lines
 \setlength{\parskip}{1em} % Adds more space between paragraphs
@@ -105,14 +106,14 @@ fibers are connected complex projective curves of genus $g$ with at worst
 nodal singularities, carrying a collection of smooth marked points
 $\sigma_i : B \to C$ which are indexed by an ordered set $I$.
 
-A point is \emph{special} if it is a node or a marked point.  Special points
+A point is \textbf{special} if it is a node or a marked point.  Special points
 are required to be pairwise disjoint.  We shall always assume that any
-rational component of $C$ has at least \emph{two} special points.
+rational component of $C$ has at least \textbf{two} special points.
 
-We reserve the notation $(\Sigma,\sigma_i)$ for families of \emph{stable}
+We reserve the notation $(\Sigma,\sigma_i)$ for families of \textbf{stable}
 marked curves.  Recall that a marked curve is stable if each component of
 genus $0$ carries at least $3$ special points and each component of genus
-$1$ carries at least $1$ special point.  The \emph{stabilization morphism}
+$1$ carries at least $1$ special point.  The \textbf{stabilization morphism}
 $\operatorname{st} : C \to C^{st}$ blows down every unstable rational curve
 in $C$.  Stabilization can be implemented by a pluricanonical embedding and
 thus works in families.
@@ -165,7 +166,7 @@ which satisfy the \textbf{Gieseker condition}:
 
 \begin{definition}
 The stack $\widetilde{\mathcal M}_{g,I}([pt/\C^\times])$ of
-\emph{Gieseker $\C^\times$-bundles on stable genus $g$, $I$-marked curves}
+\textbf{Gieseker $\C^\times$-bundles on stable genus $g$, $I$-marked curves}
 is a fibred category (over $\C$-schemes).  Its objects are tuples
 $(B,C,\sigma_i,\mathcal P)$ consisting of
 \begin{enumerate}
@@ -264,11 +265,11 @@ valuation ring.  Then the topological type $(\gamma,d)$ of the generic
 fiber is obtained from $(\gamma_0,d_0)$ by a finite sequence of the
 following elementary operations on degree-labelled modular graphs:
 \begin{enumerate}
-\item[\textnormal{(1)}] \emph{Resolving a self-node.}
+\item[\textnormal{(1)}] \textbf{Resolving a self-node.}
 Remove a loop (self-edge) at a vertex $v$ and increase its genus label
 from $g_v$ to $g_v+1$, leaving the multi-degree $d_v$ unchanged.
 
-\item[\textnormal{(2)}] \emph{Resolving a splitting node.}
+\item[\textnormal{(2)}] \textbf{Resolving a splitting node.}
 Let $v_1,v_2$ be two vertices joined by at least one edge.  Replace
 $v_1,v_2$ and all edges between them by a single vertex $v$ with
 \[
@@ -285,7 +286,7 @@ some deformation.
 
 \begin{proof}[Sketch of proof]
 Any deformation of a prestable curve over a complete DVR can only
-\emph{smooth} existing nodes; new nodes do not appear.  Thus the only
+\textbf{smooth} existing nodes; new nodes do not appear.  Thus the only
 possible changes to the modular graph are obtained by resolving
 nodes of $C_0$.
 
@@ -307,7 +308,7 @@ them leaves the others as self-nodes on the glued component, which
 explains the appearance of loops in~(2).
 
 To see which degree labels can occur, normalize $C_0$ at the nodes
-which are \emph{not} smoothed in the deformation and look at each
+which are \textbf{not} smoothed in the deformation and look at each
 connected component separately.  Flatness of the family forces the
 total degree of the line bundle on each component of the
 normalization to stay constant.  This exactly yields the degree
@@ -555,7 +556,7 @@ principal $\C^\times$--bundle.
 
 \begin{definition}
 Let $\mathbf{Art}_\C$ be the category of local Artinian $\C$--algebras with
-residue field~$\C$.  The \emph{deformation functor} of
+residue field~$\C$.  The \textbf{deformation functor} of
 $(C,\sigma_i,\mathcal P)$ is the functor
 \[
 \Def_{(C,\sigma_i,\mathcal P)} : \mathbf{Art}_\C \longrightarrow \mathbf{Sets}
@@ -602,7 +603,7 @@ H^2\bigl(C,\mathcal T_C(-\sum_i\sigma_i)\bigr)=0.
 The key point is that $\mathcal T_C$ is a line bundle (even if $C$ is nodal),
 so its cohomology is concentrated in degrees $\le1$.
 
-For the bundle, one has the classical \emph{Atiyah class} of a principal
+For the bundle, one has the classical \textbf{Atiyah class} of a principal
 bundle $\mathcal P$ over a scheme $C$, which produces an extension of vector
 bundles
 \[
@@ -613,7 +614,7 @@ bundles
 \]
 Here $\operatorname{ad}\mathcal P$ is the adjoint bundle (for
 $G=\C^\times$ this is just $\mathcal O_C$), and $\mathcal D$ is called the
-\emph{Atiyah bundle} of $\mathcal P$.  Twisting by $-\sum_i\sigma_i$ to fix
+\textbf{Atiyah bundle} of $\mathcal P$.  Twisting by $-\sum_i\sigma_i$ to fix
 the marked points, we obtain:
 \begin{equation}
 \label{eq:Atiyah-seq}
@@ -812,7 +813,7 @@ whose fiber at a point is quasi-isomorphic to
 \[
 \bigl[ H^0(C,\mathcal D) \longrightarrow H^1(C,\mathcal D) \bigr],
 \]
-with $H^0$ in degree $-1$ and $H^1$ in degree~$0$.  The \emph{virtual
+with $H^0$ in degree $-1$ and $H^1$ in degree~$0$.  The \textbf{virtual
 dimension} of the stack is by definition the rank of this two--term complex,
 namely
 \[
@@ -962,14 +963,14 @@ where the union is over all multi-degree-labelled modular graphs
 $(\gamma',d')$ obtained from $(\gamma,d)$ by finite combinations of the
 following elementary operations:
 \begin{enumerate}
-  \item[\textnormal{1.}] \emph{Self node:} Lower the genus of a vertex by $1$
+  \item[\textnormal{1.}] \textbf{Self node:} Lower the genus of a vertex by $1$
     and add a self-edge.
 
-  \item[\textnormal{2.}] \emph{Splitting node:} Split a vertex $v$ into two
+  \item[\textnormal{2.}] \textbf{Splitting node:} Split a vertex $v$ into two
     vertices $v_1$ and $v_2$, connected by an edge, with
     $g_{v_1}+g_{v_2}=g_v$ and $d_{v_1}+d_{v_2}=d_v$.
 
-  \item[\textnormal{3.}] \emph{Gieseker bubbling:} Replace an edge connecting a
+  \item[\textnormal{3.}] \textbf{Gieseker bubbling:} Replace an edge connecting a
     stable vertex $v$ to a stable vertex $v'$ with two edges connected to a
     new common vertex having $g=0$ and $d=1$, while subtracting $1$ from
     either $d_v$ or $d_{v'}$.  (Note that $v$ may equal $v'$.) \qedhere
@@ -1038,14 +1039,14 @@ Denote by $\widetilde{\mathcal M}|_B$ the fiber of $F$ over $B \to \overline{\ma
 \[
 F : \widetilde{\mathcal M}_{g,I}([\pt/\C^\times]) \to \overline{\mathcal M}_{g,I}.
 \]
-We will present $\widetilde{\mathcal M}|_B$ as a quotient stack by trivializing the bundles at special points. Recall that for a prestable curve $C$ with a special point $\sigma : B \to C$, a \emph{trivialization} at $\sigma$ of a principal $\C^\times$-bundle $\mathcal P \to C$ is an isomorphism
+We will present $\widetilde{\mathcal M}|_B$ as a quotient stack by trivializing the bundles at special points. Recall that for a prestable curve $C$ with a special point $\sigma : B \to C$, a \textbf{trivialization} at $\sigma$ of a principal $\C^\times$-bundle $\mathcal P \to C$ is an isomorphism
 \[
 t : \sigma^*\mathcal P \xrightarrow{\;\sim\;} \C^\times
 \]
 with the trivial bundle over $B$. (We may need to refine $B$ for $t$ to exist.)
 
 \begin{definition}[3.3]
-The \emph{local chart} $A$ for $\widetilde{\mathcal M}|_B$ is the stack of Gieseker bundles over the curve $\Sigma \to B$, equipped with a trivialization $t_v$ at each $\sigma_v$; isomorphisms are required to be compatible with the trivializations.
+The \textbf{local chart} $A$ for $\widetilde{\mathcal M}|_B$ is the stack of Gieseker bundles over the curve $\Sigma \to B$, equipped with a trivialization $t_v$ at each $\sigma_v$; isomorphisms are required to be compatible with the trivializations.
 \end{definition}
 
 Denote by $A_D \subset A$ the connected component of bundles of total degree $D$.
@@ -1089,13 +1090,13 @@ $A_G^\circ$ first, where the total degree is the genus $G = g(\gamma_0)$,
 and then extend the definitions using these isomorphisms.
 
 \begin{definition}[Genus bounds]\label{def:genus-bounds}
-A Gieseker bundle $(\mathcal P,C)$ of total degree $G$ \emph{meets the genus
+A Gieseker bundle $(\mathcal P,C)$ of total degree $G$ \textbf{meets the genus
 bounds} if its restriction to any subcurve $S\subset C$ has degree no less
 than the genus $g(S)$.  (Likewise, a Gieseker bundle $(\mathcal P,C)$ of
 total degree $D$ meets the genus bounds if the $(G-D)\sigma_+$-twist of
 $\mathcal P$ does.)
 
-The \emph{stable subspace} $A_G^\circ\subset A_G$ comprises the bundles
+The \textbf{stable subspace} $A_G^\circ\subset A_G$ comprises the bundles
 meeting the genus bounds.  For general total degree $D$, the space
 $A_D^\circ$ is the appropriate twist of $A_G^\circ$.
 \end{definition}
@@ -1116,7 +1117,7 @@ only finitely many topological-type strata.
 
 The stable subspace $A_D^\circ \subset A_D$ is the open component in a
 stratification we will use to prove our main theorem.  To define it and
-study its properties, we first introduce a \emph{deformation type}
+study its properties, we first introduce a \textbf{deformation type}
 stratification of $A_D$, refining the stratification by topological type.
 We then define spaces $Z_\delta(\pi)$, $W_\delta(\pi)$ which retract to
 their fixed point sets under distinguished $\C^\times$-actions.
@@ -1136,7 +1137,7 @@ self-intersection of the boundary divisor; but the double cover defined by
 labeling the nodes is locally an intersection of two separate divisors.
 
 \begin{definition}[4.1]
-A \emph{deformation map}
+A \textbf{deformation map}
 \[
 c : \gamma \longrightarrow \gamma'
 \]
@@ -1183,9 +1184,9 @@ modular graph $\gamma$, and a multi-degree
 $d : V_\tau \to \Z$.\qed
 \end{proposition}
 
-We call $c:\gamma_0\to\gamma$ the \emph{deformation type} (with respect to
+We call $c:\gamma_0\to\gamma$ the \textbf{deformation type} (with respect to
 $\Sigma_0$) of any curve $\Sigma$ parametrized by $B_c$.  Likewise, the
-\emph{deformation type} of a Gieseker bundle $\mathcal P$ of multi-degree
+\textbf{deformation type} of a Gieseker bundle $\mathcal P$ of multi-degree
 $d$ on such a curve is the triplet $t = (c,\tau,d)$. 
 
 \subsection{Local cohomology}
@@ -2063,8 +2064,7 @@ For the remainder of this section we fix a simple group $G$ and further
 fix an integer $k = k_G$ defined as follows. Let $\eta_i$ be the vertices of $\Al$. Define $k_i$ as the minimum integer such that $k_i \cdot \eta_i \in \hom(\C^\times, T)$ and set $k_G = \text{lcm}(k_i)$. The $\eta_i$ correspond to the maximal parahorics $P_i$ of $LG$ and further any parahoric $P$ is conjugate to a subgroup of some $P_i$. It follows readily that $k = k_G$ is the minimum value of $k$ for which the statement of Corollary~4.3 holds for any particular parahoric $P$.
 
 
-We recall some of the notation from~2.3.  Namely,
-$S = \Spec\C[[s]]$, $S^* = \Spec\C((s))$, $S_0 = \Spec\C[[s]]/(s) = \Spec\C$,
+Let $S = \Spec\C[[s]]$, $S^* = \Spec\C((s))$, $S_0 = \Spec\C[[s]]/(s) = \Spec\C$,
 $C_0 = C_{S_0}$.  For $B$ an $S$--scheme we set $B^* = B\times_S S^*$,
 $B_0 = B\times_S S_0$.  We also have $D_S = \Spec\C[[x,y]]$ considered as an $S$--scheme
 via $s\mapsto xy$ and $D_0 = \Spec\C[[x,y]]/(xy)$.  Further, we set
@@ -2203,7 +2203,7 @@ A \textbf{length $\le n$ condition} can be stated as:
 
 \begin{definition}[Twisted nodal curves over a base]\label{def:twisted-curve}
 Let $B$ be a scheme over $\C$.
-A \emph{twisted nodal curve over $B$} is a proper Deligne--Mumford stack
+A \textbf{twisted nodal curve over $B$} is a proper Deligne--Mumford stack
 \[
 \pi:\mathcal C \longrightarrow B
 \]
@@ -2279,7 +2279,7 @@ where:
   \item $m: \mathcal C'_T \to \Sigma_T$ is a twisted modification of $\Sigma_T/T$
         (of the fixed length bound, e.g. $\le \rank(G)$);
   \item $\mathcal P_T$ is an admissible principal $G$--bundle on $\mathcal C'_T$;
-  \item for each $v\in V$, a \emph{trivialization at $\sigma_v$} is an isomorphism
+  \item for each $v\in V$, a \textbf{trivialization at $\sigma_v$} is an isomorphism
         \[
         t_v : (\sigma_{v,T})^*\mathcal P_T \xrightarrow{\ \sim\ } G_T,
         \]
@@ -2310,17 +2310,625 @@ over $B$
 \mathcal X\vert_B \;\simeq\; [A/H].
 \]
 \end{proposition}
+We need to establish the following properties of the stack $\mathcal X_{G,g,I}$:
+\begin{enumerate}
+\item $\mathcal X_{G,g,I}$ is algebraic and locally of finite type over $\overline{\mathfrak M}_{g,I}$.
 
-Add a “Standing hypotheses for the FTT argument” paragraph:
-	•	\mathcal X_{G,g,I} algebraic and lft over \overline{\mathfrak M}_{g,I}.
-	•	After étale localization B, \mathcal X|_B\simeq [A/H] with A smooth algebraic space and H reductive.
-	•	Existence of A^\circ\subset A with proper quotient Q/B.
-	•	Existence of the KN/BB strata and the weight bounds for admissible classes.
+\item After \'etale localization to $B\to\overline{\mathfrak M}_{g,I}$, we have
+\[
+\mathcal X_{G,g,I}\vert_B\;\simeq\; [A/H]
+\]
+where $A$ is a smooth algebraic space and $H=G^V$ is reductive.
+
+\item There exists an open subspace $A^\circ\subset A$ (defined by a numerical stability condition generalizing the genus bounds) such that the quotient $[A^\circ/H]$ factors as
+\[
+[A^\circ/H] \;\simeq\; [\pt/Z(G)_0] \times Q
+\]
+where $Q\to B$ is a proper moduli space.
+
+\item The complement $A\setminus A^\circ$ admits a stratification by closed $H$-invariant pieces $Z_\delta(\pi)$ and $W_\delta(\pi)$, each an affine bundle over a fixed-point locus $F_\delta(\pi)$ under a subgroup $H(\pi)\cong (\C^\times)^2$ of $H$.
+
+\item For admissible $K$-theory classes $\alpha$ on $\mathcal X_{G,g,I}$, the weights of the fibers of $\alpha$ over the fixed loci $F_\delta(\pi)$ are bounded below by linear functions of the discrete defect parameters $(n_+,n_-)$ in a way that forces vanishing of $H(\pi)$-invariants for sufficiently large defect.
+\end{enumerate}
+
+These properties, combined with the local cohomology argument from \S 6, imply that for any admissible class $\alpha$, the $H$-invariant part of $R\Gamma(A,\alpha)$ is a finitely generated $\mathcal O_B$-module that vanishes in high degrees. Since this holds étale-locally over $B$ and the stack structure descends, we conclude that the derived pushforward
+\[
+RF_* \alpha : \mathcal X_{G,g,I} \longrightarrow \overline{\mathfrak M}_{g,I}
+\]
+is a bounded complex of coherent sheaves, where $F$ is the forgetful map forgetting the bundle and the modification.
+\subsection{Step 1: Algebraicity and finite type of $\mathcal X_{G,g,I}$}
+
+\begin{proposition}\label{prop:X-algebraic}
+The stack $\mathcal X_{G,g,I}$ is an algebraic stack, locally of finite type over
+$\overline{\mathfrak M}_{g,I}$. In particular, the projection
+\[
+F:\mathcal X_{G,g,I}\to \overline{\mathfrak M}_{g,I}
+\]
+is algebraic and locally of finite type.
+\end{proposition}
+
+\begin{proof}
+We decompose the definition of $\mathcal X_{G,g,I}$ into three pieces:
+twisted curves and their modifications, principal $G$--bundles, and the
+admissibility condition.
+
+\medskip
+\noindent\textbf{Step 1: Twisted curves.}
+Let $\mathfrak M^{tw}_{g,I}$ denote the stack of twisted stable curves of genus
+$g$ with $I$ markings.
+By Abramovich--Vistoli \cite{abramovich-vistoli}
+$\mathfrak M^{tw}_{g,I}$ is a Deligne--Mumford
+stack, locally of finite type over $\C$, equipped with a representable morphism
+\[
+\mathfrak M^{tw}_{g,I}\to \overline{\mathfrak M}_{g,I}
+\]
+sending a twisted curve to its coarse stable curve.
+
+\medskip
+\noindent\textbf{Step 2: Twisted modifications.}
+Let $\mathsf{TwMdf}_{\le r,g,I}$ be the stack over $\overline{\mathfrak M}_{g,I}$
+whose objects over a scheme $B\to \overline{\mathfrak M}_{g,I}$ are twisted
+modifications of length $\le r$ of the pulled--back universal curve $\Sigma_B\to B$.
+
+Étale--locally on $\overline{\mathfrak M}_{g,I}$, the universal curve is
+simultaneously versal at all nodes. Fix an \'etale chart $B \to \overline{\mathfrak M}_{g,I}$ and pull back the universal curve
+\[
+\Sigma := \overline{\mathfrak C}_{g,I}\times_{\overline{\mathfrak M}_{g,I}} B \to B.
+\]
+
+Let $\Sigma^{\mathrm{sing}} := \Sing(\Sigma/B)\subset \Sigma$. Over the locus in $B$ where the number of nodes is constant, $\Sigma^{\mathrm{sing}}\to B$ is finite \'etale (after possibly refining $B$ \'etale). Concretely this means you can label the nodes locally on $B$, giving disjoint sections
+\[
+p_1,\dots,p_m: B \to \Sigma
+\]
+landing in the singular locus.
+
+Around each $p_j$, the family $\Sigma\to B$ has the standard node-smoothing normal form:
+\'etale-locally on $\Sigma$ and $B$,
+\[
+\Sigma \;\sim\; \Spec\bigl(\mathcal O_B[x,y]/(xy-t_j)\bigr)
+\]
+for some function $t_j \in \Gamma(B,\mathcal O_B)$.
+Here $t_j=0$ is exactly the boundary divisor where the $j$-th node persists.
+
+Simultaneously versal at all nodes means after an \'etale refinement of $B$, you can choose these local coordinates for all nodes at once, and the deformation space near your point looks like a normal crossings divisor cut out by $\prod_j t_j=0$.
+
+
+Twisted modifications of bounded length
+are obtained by inserting chains of $\P^1$'s and taking balanced root stacks at
+the nodes. Standard results on expanded degenerations and twisted curves imply
+that $\mathsf{TwMdf}_{\le r,g,I}$ is an algebraic stack, locally of finite type over
+$\overline{\mathfrak M}_{g,I}$.
+
+\begin{proposition}[ACFW: twisted expansions are algebraic and lft]
+\label{prop:ACFW-twisted-expansions-algebraic}
+There exist algebraic stacks
+\[
+\mathcal T^{\mathrm{tw}}
+\qquad\text{and}\qquad
+\mathfrak T^{\mathrm{tw}}
+\]
+called the stacks of \textbf{twisted expanded pairs} and \textbf{twisted expanded
+degenerations}, with the following properties.
+
+\begin{enumerate}[(1)]
+\item (\textbf{Moduli interpretation})
+For any scheme $S$, objects of $\mathcal T^{\mathrm{tw}}(S)$ (resp.\
+$\mathfrak T^{\mathrm{tw}}(S)$) are flat families over $S$ whose geometric
+fibers are \textbf{standard $r$--twisted expansions} of the universal pair
+$(\A^1,0)$ (resp.\ of the universal degeneration $\A^2\to \A^1$), in the sense
+of \cite[Def.\ 2.4.2]{ACFW}.
+In particular, these families are obtained from the basic local node
+$xy=t$ by inserting chains of $\P^1$'s and equipping the resulting nodes with
+balanced stabilizers (equivalently, by iterated balanced root constructions at
+the boundary).
+
+\item (\textbf{Algebraicity and finiteness})
+The stacks $\mathcal T^{\mathrm{tw}}$ and $\mathfrak T^{\mathrm{tw}}$ are algebraic
+(indeed Deligne--Mumford) and locally of finite type (equivalently, locally of
+finite presentation) over $\Spec\Z$.
+Moreover, the locus of expansions of length $\le r$ is an open substack
+\[
+\mathcal T^{\mathrm{tw}}_{\le r}\subset \mathcal T^{\mathrm{tw}},
+\qquad
+\mathfrak T^{\mathrm{tw}}_{\le r}\subset \mathfrak T^{\mathrm{tw}},
+\]
+and is locally of finite type.
+This follows from \cite[Lem.\ 3.1.3]{ACFW} (and the discussion surrounding it).
+
+\item (\textbf{Base change})
+For any morphism $S'\to S$, formation of twisted expansions commutes with base
+change: the pullback of a twisted expansion family over $S$ is a twisted
+expansion family over $S'$.
+Equivalently, $\mathcal T^{\mathrm{tw}}$ and $\mathfrak T^{\mathrm{tw}}$ define
+categories fibered in groupoids over schemes.
+\end{enumerate}
+\end{proposition}
+
+\begin{example}[Twisted expansions of the universal node]
+    The fundamental example: a single smoothing node
+
+    Start with the universal local model of a node:
+    \[
+    U \;=\; \Spec \C[x,y,t]/(xy-t) \;\longrightarrow\; \Spec \C[t].
+    \]
+    The central fiber $t=0$ has a node. For $t\neq0$ it is smooth.
+    Everything about twisted expansions is already visible here.
+
+    \medskip\noindent\textbf{1. Untwisted expansion of length 1}
+
+    Replace the single node by one $\mathbb P^1$.
+    Geometrically: you blow up the ideal $(x,t)$ or $(y,t)$. The central fiber becomes:
+    \[
+    (\text{branch})\;-\;\mathbb P^1\;-\;(\text{branch})
+    \]
+    Locally this is controlled by parameters $t_0,t_1$ with
+    $t_0 t_1 = t$.
+
+    The moduli of such expansions is:
+    \[
+    \Spec \C[t_0,t_1] \big/ \mathbb{G}_m
+    \]
+    where $\lambda \in \mathbb{G}_m$ acts by
+    $(t_0,t_1) \mapsto (\lambda t_0, \lambda^{-1} t_1)$.
+
+    This is exactly Jun Li's expansion stack.
+
+    \medskip\noindent\textbf{2. Untwisted expansion of length $n$}
+
+    Insert a chain of $n$ rational curves.
+    Local equation:
+    \[
+    t_0 t_1 \cdots t_n = t.
+    \]
+    Moduli stack:
+    \[
+    [\Spec \C[t_0,\dots,t_n] / (\mathbb{G}_m)^n].
+    \]
+    Each $\mathbb{G}_m$ rescales one intermediate component.
+
+    This is the local chart of the stack of expansions.
+
+    \medskip\noindent\textbf{3. Now twist it: add stabilizers at the new nodes}
+
+    Pick an integer $k$.
+    Replace each node in the expanded curve by the stacky node:
+    \[
+    [\Spec \C[u,v]/(uv=t_i) \;/\; \mu_k],
+    \qquad
+    \zeta\cdot(u,v) = (\zeta u, \zeta^{-1} v).
+    \]
+    This is a root stack along the divisor $t_i=0$.
+
+    Geometrically:
+    \begin{itemize}
+    \item coarse space: the expanded curve
+    \item stack structure: $\mu_k$ sitting at the nodes
+    \end{itemize}
+
+    This is what ``twisted expansion'' means.
+
+    \medskip\noindent\textbf{4. Twisted expansion stack}
+
+    Now let:
+    \begin{itemize}
+    \item the length vary
+    \item the parameters $t_i$ vary
+    \item the twisting orders $k$ vary (or be bounded)
+    \end{itemize}
+
+    The resulting moduli problem is exactly the ACFS stack $\mathfrak T^{\mathrm{tw}}$.
+
+    Every object of $\mathfrak T^{\mathrm{tw}}$ is built by:
+    \[
+    \text{node} \;\longrightarrow\;
+    \text{chain of }\mathbb{P}^1\text{s} \;\longrightarrow\;
+    \text{stacky nodes}.
+    \]
+
+    No global curve geometry is involved. It is purely local.
+\end{example}
 
 
 
+\begin{example}[Admissibility for $G=SL_2$]
+\label{ex:SL2-admissible}
+
+Suppose $C$ has a single node and let $\mathcal C'$ be a twisted modification of
+$C$ whose fiber over the node is a chain of $m$ rational curves
+\[
+R_1 \cup R_2 \cup \cdots \cup R_m,
+\]
+with stabilizer $\mu_k$ at each twisted node. Let $\mathcal P$ be a principal
+$SL_2$--bundle on $\mathcal C'$.
+
+At each twisted node, $\mathcal P$ determines (up to conjugacy) a homomorphism
+\[
+\rho_i : \mu_k \to SL_2(\C).
+\]
+After choosing a maximal torus, each $\rho_i$ is of the form
+\[
+\rho_i(\zeta)
+=
+\begin{pmatrix}
+\zeta^{a_i} & 0 \\
+0 & \zeta^{-a_i}
+\end{pmatrix}
+\qquad
+\text{for some } a_i \in \Z/k\Z.
+\]
+The tuple $(a_1,\dots,a_m)$ records the local type of $\mathcal P$ along the
+expanded node.
+
+The cocharacter lattice of $SL_2$ is $X_*(T)\cong \Z$, so
+$X_*(T)\otimes_\Z \Q \cong \Q$ has dimension one. Solis's admissibility condition
+therefore specializes to:
+\begin{enumerate}[(i)]
+\item $a_i \neq 0$ for all $i$;
+\item the set $\{a_1,\dots,a_m\}$ is $\Q$--linearly independent in $\Q$.
+\end{enumerate}
+Since any two nonzero elements of $\Q$ are $\Q$--linearly dependent, condition
+(ii) forces $m\le 1$. Hence an admissible twisted modification for $SL_2$ contains
+at most one twisted rational component over each node, and its associated
+character $a\in \Z/k\Z$ must be nonzero.
+
+Equivalently, on the unique inserted component $R\simeq \P^1$, the associated
+rank--$2$ vector bundle splits as
+\[
+\mathcal P|_R \;\cong\; \mathcal O_{\P^1}(a)\oplus \mathcal O_{\P^1}(-a)
+\qquad\text{with } a\neq 0.
+\]
+\end{example}
+
+\noindent\textbf{Step 3: $G$--bundles on twisted curves.}
+Let $\Bun_G^{tw}\to \mathfrak M^{tw}_{g,I}$ be the stack assigning to a twisted
+curve $\mathcal C\to B$ the groupoid of principal $G$--bundles on $\mathcal C$.
+For reductive $G$, this stack is algebraic and locally of finite presentation over
+$\mathfrak M^{tw}_{g,I}$ (by standard results on principal bundles on proper
+Deligne--Mumford stacks).
+
+\medskip
+\noindent\textbf{Step 4: The ambient stack.}
+Form the fiber product
+\[
+\mathcal Y :=
+\mathsf{TwMdf}_{\le r,g,I}
+\times_{\mathfrak M^{tw}_{g,I}}
+\Bun_G^{tw}.
+\]
+An object of $\mathcal Y(B)$ is a twisted modification
+$\mathcal C'_B\to \Sigma_B$ together with a principal $G$--bundle on
+$\mathcal C'_B$. By Steps~2 and~3, $\mathcal Y$ is an algebraic stack, locally of
+finite type over $\overline{\mathfrak M}_{g,I}$.
+
+\medskip
+\noindent\textbf{Step 5: Admissibility.}
+The admissibility condition is a restriction on the local monodromy homomorphisms
+$\mu_k\to G$ at the twisted nodes, requiring the associated rational cocharacters
+to lie in a fixed finite set and satisfy a linear independence condition.
+After restricting to strata where the set of nodes is locally constant, these
+local types are discrete invariants and are locally constant in families.
+Since only finitely many types are allowed, the admissible locus defines an
+open-and-closed substack
+\[
+\mathcal X_{G,g,I}\subset \mathcal Y.
+\]
 
 
+\begin{lemma}[Local constancy of monodromy types]
+\label{lem:local-constancy-monodromy}
+
+Let $B$ be a scheme and let $\Sigma_B \to B$ be a prestable family of curves.
+Let $\mathcal Y$ be the stack over $B$ whose objects are twisted modifications
+$\mathcal C'_B \to \Sigma_B$ together with principal $G$--bundles $\mathcal P_B$ on
+$\mathcal C'_B$.
+
+Assume that, after possibly replacing $B$ by an \'etale cover, the following hold:
+\begin{enumerate}[(i)]
+\item The relative singular locus $\Sing(\Sigma_B/B)$ is a disjoint union of sections
+\[
+p_1,\dots,p_m : B \to \Sigma_B.
+\]
+\item Over each $p_j$, the stabilizer group of the twisted curve $\mathcal C'_B$ is
+constant and equal to $\mu_{k_j}$.
+\end{enumerate}
+
+Then for each $j$, the conjugacy class of the local monodromy homomorphism
+\[
+\rho_j : \mu_{k_j} \longrightarrow G
+\]
+is locally constant on $B$.
+
+Equivalently, $\mathcal Y|_B$ decomposes as a disjoint union of open-and-closed substacks
+indexed by the tuples
+\[
+([\rho_1],\dots,[\rho_m]) \in \prod_{j=1}^m \Hom(\mu_{k_j},G)/G.
+\]
+
+\end{lemma}
+
+\begin{proof}
+Fix $j$. Restriction of $(\mathcal C'_B,\mathcal P_B)$ to the residual gerbe of the twisted
+point over $p_j$ gives a principal $G$--bundle on $B\mu_{k_j}\times B$. Such a bundle is
+equivalent to a morphism
+\[
+B \longrightarrow \Hom(\mu_{k_j},G)/G.
+\]
+The target is a finite discrete algebraic space. Hence this morphism is locally constant
+on $B$. This proves the claim.
+\end{proof}
+
+\begin{corollary}[Admissible locus]
+\label{cor:admissible-open-closed}
+
+With notation as above, suppose that for each $j$ we fix a finite subset
+\[
+\mathcal A_j \subset \Hom(\mu_{k_j},G)/G.
+\]
+Define $\mathcal X_{G,g,I}|_B \subset \mathcal Y|_B$ to be the full substack of objects
+whose local monodromies satisfy $[\rho_j] \in \mathcal A_j$ for all $j$.
+
+Then $\mathcal X_{G,g,I}|_B$ is an open-and-closed substack of $\mathcal Y|_B$.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:local-constancy-monodromy}, $\mathcal Y|_B$ decomposes into a disjoint
+union of open-and-closed substacks indexed by the tuples $([\rho_1],\dots,[\rho_m])$.
+Since only finitely many types are allowed, the admissible locus is the union of finitely
+many connected components, hence open and closed.
+\end{proof}
+
+\begin{lemma}[Local constancy for chains of twisted components]
+\label{lem:local-constancy-chains}
+
+Assume the hypotheses of Lemma~\ref{lem:local-constancy-monodromy}. Suppose moreover that
+over each section $p_j$, the fiber of $\mathcal C'_B \to \Sigma_B$ is a chain of twisted
+rational curves
+\[
+R_{j,1} \cup \cdots \cup R_{j,\ell_j}
+\]
+with twisted nodes $q_{j,1},\dots,q_{j,\ell_j}$, and that the stabilizer groups at these
+twisted nodes are constant and equal to $\mu_{k_{j,1}},\dots,\mu_{k_{j,\ell_j}}$.
+
+Then for every pair $(j,r)$, the conjugacy class of the local monodromy homomorphism
+\[
+\rho_{j,r} : \mu_{k_{j,r}} \longrightarrow G
+\]
+is locally constant on $B$. Consequently, $\mathcal Y|_B$ decomposes as a disjoint union of
+open-and-closed substacks indexed by the finite set of tuples
+\[
+([\rho_{j,r}])_{j,r}.
+\]
+\end{lemma}
+
+\begin{proof}
+Each twisted node $q_{j,r}$ defines a closed substack
+$B\mu_{k_{j,r}} \times B \subset \mathcal C'_B$. Restriction of $\mathcal P_B$ to this gerbe
+defines a morphism
+\[
+B \to \Hom(\mu_{k_{j,r}},G)/G,
+\]
+which is locally constant because the target is discrete. The conclusion follows by
+taking the product over all twisted nodes.
+\end{proof}
+
+\begin{remark}
+The key point is that a principal $G$--bundle on a twisted curve carries, at each twisted
+node, a discrete invariant: a conjugacy class of homomorphisms $\mu_k \to G$. In a flat
+family these invariants cannot vary continuously. Hence the moduli stack splits into
+connected components indexed by local monodromy data, and admissibility simply selects
+some of these components.
+\end{remark}
+
+\medskip
+\noindent\textbf{Conclusion.}
+Being an open-and-closed substack of the algebraic stack $\mathcal Y$,
+$\mathcal X_{G,g,I}$ is algebraic and locally of finite type over
+$\overline{\mathfrak M}_{g,I}$. This proves the proposition.
+\end{proof}
+
+\subsection{Step 2: Etale presentation by an algebraic space}
+Fix a geometric point $[\Sigma_0,\sigma_{0,i}] \in \overline{\mathfrak M}_{g,I}$ and let
+$B\to \overline{\mathfrak M}_{g,I}$ be an affine \'etale neighborhood. Let
+\[
+\Sigma := \overline{\mathfrak C}_{g,I}\times_{\overline{\mathfrak M}_{g,I}} B \to B
+\]
+be the pulled-back universal curve. Let $V$ be the set of stable components of $\Sigma_0$
+(equivalently, the stable vertices of its dual graph). After possibly refining $B$
+\'etale-locally, choose sections
+\[
+\sigma_v : B \to \Sigma \qquad (v\in V)
+\]
+landing in the smooth locus of $\Sigma\to B$ such that every stable component of every
+geometric fiber meets at least one $\sigma_v$.
+
+Let $\mathcal X|_B := \mathcal X_{G,g,I}\times_{\overline{\mathfrak M}_{g,I}} B$.
+
+\begin{definition}[Framed chart]
+\label{def:framed-chart}
+Define a category fibered in groupoids $A\to(\Sch/B)$ by the following assignment.
+For a $B$--scheme $T\to B$, an object of $A(T)$ is a triple
+\[
+(\mathcal C'_T \xrightarrow{m} \Sigma_T,\ \mathcal P_T,\ (t_v)_{v\in V})
+\]
+where:
+\begin{enumerate}[(i)]
+\item $\Sigma_T := \Sigma\times_B T$;
+\item $m:\mathcal C'_T\to \Sigma_T$ is a twisted modification (with the chosen length bound);
+\item $\mathcal P_T$ is an admissible principal $G$--bundle on $\mathcal C'_T$;
+\item for each $v\in V$, a \textbf{framing} is an isomorphism of $G$--torsors
+\[
+t_v : (\sigma_{v,T})^*\mathcal P_T \xrightarrow{\ \sim\ } G_T.
+\]
+\end{enumerate}
+Morphisms are isomorphisms of $(\mathcal C'_T,m,\mathcal P_T)$ compatible with all $t_v$.
+\end{definition}
+
+Let
+\[
+H := G^V
+\]
+act on $A$ by changing framings: for $h=(h_v)\in H(T)$ send $t_v$ to $h_v\circ t_v$.
+There is a forgetful morphism
+\[
+\pi: A \longrightarrow \mathcal X|_B
+\]
+forgetting the framings.
+
+\begin{lemma}[The framing map is an $H$--torsor]
+\label{lem:framing-torsor}
+The morphism $\pi:A\to \mathcal X|_B$ is representable and smooth. For any $T\to\mathcal X|_B$
+corresponding to $(\mathcal C'_T\to \Sigma_T,\mathcal P_T)$, the fiber product
+$A\times_{\mathcal X|_B} T \to T$ is a principal $H$--bundle for the fppf topology.
+\end{lemma}
+
+\begin{proof}
+Fix $T\to\mathcal X|_B$ as above. For each $v\in V$, the sheaf
+\[
+\Isom\bigl((\sigma_{v,T})^*\mathcal P_T,\ G_T\bigr)
+\]
+is a (right) $G$--torsor on $T$. Taking the product over $v\in V$ gives an $H=G^V$--torsor,
+which is functorially identified with $A\times_{\mathcal X|_B}T$.
+Since $H$ is smooth affine, torsors are representable and smooth over $T$.
+\end{proof}
+
+\begin{lemma}[Trivial stabilizers on the framed chart]
+\label{lem:framed-trivial-stabilizers}
+After possibly shrinking $B$ \'etale-locally and restricting to the locus where the
+admissible bundles have automorphism group equal to the center $Z(G)$ on each stable
+component, the stack $A$ has trivial stabilizers. Hence $A$ is an algebraic space.
+\end{lemma}
+
+\begin{proof}
+Let $(\mathcal C'_T,\mathcal P_T,(t_v))\in A(T)$ and let $\varphi$ be an automorphism.
+By definition $\varphi$ is an automorphism of $\mathcal P_T$ commuting with the framings,
+so it restricts to the identity on each framed fiber $(\sigma_{v,T})^*\mathcal P_T$.
+
+On the chosen open locus, any automorphism of $\mathcal P_T$ over a stable component is given
+by multiplication by a (necessarily constant) element of $Z(G)$. The framing at one point on
+that component forces this element to be $1$. Since every stable component meets some
+$\sigma_v$, the automorphism is trivial everywhere. Thus $\varphi=\mathrm{id}$, so stabilizers
+are trivial and $A$ is an algebraic space.
+\end{proof}
+
+\red{Here we need an analog of the FTT statement “\(\Aut(\mathcal P)\) is computed by deleting the Gieseker bubbles.”}
+
+\begin{example}[Why a single framing does not rigidify $G$--bundles]\label{ex:SL2-framing-fails}
+Let $C=\P^1$ and $G=\SL_2$.  Consider the rank--$2$ vector bundle
+\[
+E \;=\; \mathcal O_{\P^1}(1)\oplus \mathcal O_{\P^1}(-1),
+\qquad \det(E)\cong \mathcal O_{\P^1},
+\]
+and let $\mathcal P$ be the associated principal $\SL_2$--bundle.
+
+Automorphisms of $\mathcal P$ are the same as determinant--$1$
+automorphisms of $E$.  There is a unipotent subgroup
+\[
+U
+\;=\;
+\left\{
+\begin{pmatrix}
+1 & s \\
+0 & 1
+\end{pmatrix}
+\;\middle|\;
+s\in H^0\!\bigl(\P^1,\Hom(\mathcal O(-1),\mathcal O(1))\bigr)
+\right\}
+\;\subset\;
+\Aut(\mathcal P).
+\]
+Since $\Hom(\mathcal O(-1),\mathcal O(1))\cong \mathcal O(2)$ and
+$H^0(\P^1,\mathcal O(2))\cong \C^3$, we obtain
+\[
+U \cong \Ga^3.
+\]
+In particular, $\Aut(\mathcal P)$ is positive--dimensional and far larger
+than the center of $\SL_2$.
+
+Now fix a point $p\in\P^1$ and choose a framing
+$t:\mathcal P|_p \cong \SL_2$, equivalently a basis of $E_p$.
+An element of $U$ preserves this framing if and only if it acts trivially
+on the fiber $E_p$, i.e.\ if $s(p)=0$.  The subspace of sections vanishing at
+$p$ has dimension $2$:
+\[
+\{s\in H^0(\P^1,\mathcal O(2)) \mid s(p)=0\}\cong \C^2.
+\]
+Therefore,
+\[
+\Aut(\mathcal P,t) \;\supset\; \Ga^2,
+\]
+and the framed bundle still has a positive--dimensional automorphism group.
+
+This shows that, unlike the case $G=\C^\times$, a single trivialization
+point does \textbf{not} rigidify a $G$--bundle for general reductive $G$.
+Non--central infinitesimal automorphisms coming from
+$H^0(C,\ad(\mathcal P))$ may vanish at a point while remaining nonzero
+globally.
+\end{example}
+
+\begin{lemma}[Central automorphisms are constant]
+Let $P \to X$ be a principal $G$--bundle over a connected scheme $X$.  
+Any automorphism $\Phi$ of $P$ over $X$ is uniquely determined by a section
+$g$ of the adjoint bundle $\Ad(P) = P \times^G G$ via
+\[
+\Phi(p) = p \cdot g(p).
+\]
+If $\Phi$ is \textbf{central}, i.e.\ if $g(p)\in Z(G)$ for all $p\in P$, then
+$g$ is constant along the fibers of $P$ and therefore descends to a morphism
+\[
+z : X \longrightarrow Z(G).
+\]
+If moreover $X$ is connected and $G$ is semisimple (so that $Z(G)$ is finite),
+then $z$ is constant, hence there exists a fixed $z\in Z(G)$ such that
+\[
+\Phi(p) = p \cdot z \qquad \text{for all } p\in P.
+\]
+\end{lemma}
+
+\begin{proof}
+For any automorphism $\Phi$, $G$--equivariance implies
+$\Phi(p) = p \cdot g(p)$ for a unique map $g:P\to G$ satisfying
+$g(p\cdot h) = h^{-1} g(p) h$, hence defining a section of $\Ad(P)$.
+If $g(p)\in Z(G)$, then $h^{-1} g(p) h = g(p)$ for all $h\in G$, so $g$ is
+constant along $G$--orbits and descends to a morphism $z:X\to Z(G)$.
+If $X$ is connected and $Z(G)$ is finite, any such morphism is constant.
+\end{proof}
+
+
+\begin{proposition}[Algebraic-space chart]
+The stack $A$ is represented by an algebraic space.
+\end{proposition}
+
+\begin{proof}
+It suffices to show that geometric points of $A$ have trivial automorphism groups.
+Let $(C\to\Sigma,\mathcal P,(t_v))$ be a geometric point.
+
+On the open locus where admissible bundles on stable components have only central
+automorphisms (i.e.\ $\Aut(\mathcal P|_{C_v})\subseteq Z(G)$ for each stable component
+$C_v$), any automorphism of $\mathcal P$ restricts on $C_v$ to multiplication by a central
+element of $G$. Compatibility with the framing at $\sigma_v$ forces this element to be $1$.
+Since every stable component contains some $\sigma_v$, the automorphism is trivial
+globally. Hence $A$ has trivial stabilizers and is an algebraic space.
+\end{proof}
+
+
+\begin{proposition}[Quotient presentation]
+\label{prop:quotient-presentation}
+After possibly refining $B$ \'etale-locally (and restricting to the open locus of
+Lemma~\ref{lem:framed-trivial-stabilizers}), the natural map induces an equivalence of
+stacks over $B$:
+\[
+\mathcal X_{G,g,I}|_B \;\simeq\; [A/H],
+\]
+where $A$ is a smooth algebraic space over $B$ and $H=G^V$ is reductive.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:framing-torsor}, $\pi:A\to\mathcal X|_B$ is a principal $H$--bundle and
+$H$ acts simply transitively along fibers by changing framings. Descent along the torsor
+$\pi$ identifies the quotient stack $[A/H]$ with $\mathcal X|_B$.
+Reductivity of $H$ follows from reductivity of $G$, and smoothness of $A\to B$ follows from
+smoothness of $\pi$ together with algebraicity of $\mathcal X|_B\to B$.
+\end{proof}
 
 \section{Finiteness for Fixed Curves}
 
@@ -2515,6 +3123,12 @@ condition is much more restrictive.
 \end{enumerate}
 \end{remark}
 
+\section{References}
+\begin{enumerate}
+    \bibitem{abramovich-vistoli} D. Abramovich and A. Vistoli, \textit{Compactifying the space of stable maps}, J. Amer. Math. Soc. 15 (2002), no. 1, 27–75.
+    \bibitem{behrend-fantechi} K. Behrend and B. Fantechi, \textit{The intrinsic normal cone}, Invent. Math. 128 (1997), no. 1, 45–88.
+    \bibitem{ACFW} D. Abramovich, C. Cadman, B. Fantechi, and J. Wise, \textit{Expanded degenerations and pairs}, preprint, arXiv:1208.6322.
 
+\end{enumerate}
 
 \end{document}

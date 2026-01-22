@@ -5,7 +5,7 @@
 \usepackage{listings}
 \usepackage{bookmark}
 \usepackage{tikz}
-
+\usepackage[all]{xy}
 \makeatletter
 \def\input@path{{../../style/}}
 \makeatother
@@ -17,28 +17,44 @@
 
 \usepackage{../../style/scribe}
 \usepackage{fancyhdr}
+\DeclareMathOperator{\Al}{Al}
+\DeclareMathOperator{\Chmb}{Ch}
+\DeclareMathOperator{\pt}{pt}
+\DeclareMathOperator{\defect}{defect}
+\DeclareMathOperator{\Sing}{Sing}
 
 \usepackage{parskip} % Automatically respects blank lines
 \setlength{\parskip}{1em} % Adds more space between paragraphs
 \setlength{\parindent}{0pt} % Removes paragraph indentation
 
-\begin{document}
-
-
-\lhead{Songyu Ye}
-\rhead{\today}
-\cfoot{\thepage}
-
-\title{Title}
-
+% ---------- Title ----------
+\title{Short Note: Title}
 \author{Songyu Ye}
 \date{\today}
+
+\begin{document}
 \maketitle
 
+\section{Introduction}
+Purpose. Context. Main observation.
 
-\begin{abstract}
-Abstract
-\end{abstract}
+\section{Main result}
 
-\tableofcontents
+\begin{theorem}
+Statement.
+\end{theorem}
+
+\begin{proof}
+Proof.
+\end{proof}
+
+\section{Remarks / examples}
+
+\begin{remark}
+Comments.
+\end{remark}
+
+\bibliographystyle{alpha}
+\bibliography{references}
+
 \end{document}
