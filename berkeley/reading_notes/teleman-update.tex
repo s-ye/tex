@@ -332,6 +332,110 @@ $\mathcal X_{G,g,I}$ is algebraic and locally of finite type over
 $\overline{\mathcal M}_{g,I}$. This proves the proposition.
 \end{proof}
 
+\begin{lemma}[Simultaneous versal smoothing of all nodes]
+\label{lem:simultaneous-versal-nodes}
+Let $(\Sigma_0,\sigma_{0,i})$ be a stable marked curve over an algebraically closed
+field of characteristic $0$, and let $p_1,\dots,p_m\in \Sigma_0$ be its nodes.
+Let $\pi:\overline{\mathcal C}_{g,I}\to \overline{\mathcal M}_{g,I}$ be the universal
+curve and let $x:=[\Sigma_0,\sigma_{0,i}]\in \overline{\mathcal M}_{g,I}$.
+
+Then there exists an affine \'etale neighborhood $B\to \overline{\mathcal M}_{g,I}$
+of $x$ with pulled-back family $\Sigma_B:=\overline{\mathcal C}_{g,I}\times_{\overline{\mathcal M}_{g,I}}B\to B$
+such that the following hold.
+
+\begin{enumerate}[(1)]
+\item (\emph{Simultaneous standard form at the nodes})  
+For each $i=1,\dots,m$ there exists an \'etale neighborhood
+$U_i\subset \Sigma_B$ of the relative node lying over $p_i$ and an element
+$t_i\in \mathcal O_B(B)$ such that there is an isomorphism of $B$--schemes
+\[
+U_i \;\cong\; \Spec\bigl(\mathcal O_B[u_i,v_i]/(u_iv_i-t_i)\bigr)
+\]
+sending the relative node to the locus $(u_i=v_i=t_i=0)$.
+
+\item (\emph{Independence of smoothing parameters})  
+After possibly shrinking $B$, the functions $t_1,\dots,t_m$ define a morphism
+\[
+t=(t_1,\dots,t_m):B \longrightarrow \A^m
+\]
+which is smooth (equivalently, \'etale after completing at $x$), and whose
+coordinates $t_i$ cut out the boundary divisors corresponding to the nodes:
+the locus in $B$ where the $i$th node persists is exactly $\{t_i=0\}$.
+
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}[Proof sketch of Proposition~\ref{prop:X-algebraic} via reduction to Solis]
+Fix an affine étale chart $B\to\overline{\mathcal M}_{g,I}$ as above, and write
+\[
+\Sigma_B := \overline{\mathcal C}_{g,I}\times_{\overline{\mathcal M}_{g,I}} B,
+\qquad
+\Sigma_B^{\mathrm{sm}} := \Sigma_B \setminus \Sing(\Sigma_B/B).
+\]
+Let $p_1,\dots,p_m$ be the relative nodes, and let
+$\Sigma_{B,i}^{\mathrm{loc}}\subset \Sigma_B$ be small étale neighborhoods of $p_i$
+identified with the standard smoothings
+\[
+\Spec\mathcal O_B[u_i,v_i]/(u_iv_i-t_i)\to B.
+\]
+Write $\Sigma_{B,i}^{\mathrm{punct}}:=\Sigma_{B,i}^{\mathrm{loc}}\setminus\{p_i\}$.
+
+\medskip
+\noindent\emph{Description of objects.}
+By definition, an object of $\mathcal X_{G,g,I}(B)$ is a pair $(\mathcal C'_B,P_B)$
+where $\mathcal C'_B\to\Sigma_B$ is a twisted modification and $P_B$ is an admissible
+$G$--bundle on $\mathcal C'_B$.
+Since $\mathcal C'_B\to\Sigma_B$ is an isomorphism over $\Sigma_B^{\mathrm{sm}}$, this
+is equivalently the data of:
+\begin{enumerate}[(i)]
+\item a principal $G$--bundle $P^{\mathrm{sm}}$ on $\Sigma_B^{\mathrm{sm}}$;
+\item for each $i$, a twisted modification
+$\mathcal C'_{B,i}\to\Sigma_{B,i}^{\mathrm{loc}}$ together with a $G$--bundle
+$P_i$ on $\mathcal C'_{B,i}$;
+\item isomorphisms
+\[
+P^{\mathrm{sm}}\vert_{\Sigma_{B,i}^{\mathrm{punct}}}
+\;\xrightarrow{\sim}\;
+P_i\vert_{\Sigma_{B,i}^{\mathrm{punct}}}
+\]
+for each $i$, satisfying the evident compatibility on overlaps;
+\item such that each $(\mathcal C'_{B,i},P_i)$ is admissible at the twisted nodes.
+\end{enumerate}
+The equivalence follows because twisted modifications and principal $G$--bundles
+satisfy étale descent, and the admissibility condition is local at twisted nodes.
+
+\medskip
+\noindent\emph{Identification with the fiber product.}
+For each $i$, Solis’s stack $\mathcal X_G(C_{S_i})\times_{S_i}B$ classifies exactly the
+local admissible data $(\mathcal C'_{B,i},P_i)$, and carries a natural restriction map
+\[
+\rho_i:\mathcal X_G(C_{S_i})\times_{S_i}B \longrightarrow \Bun_G(\Sigma_{B,i}^{\mathrm{punct}})
+\]
+given by restricting $P_i$ to the punctured neighborhood.
+Likewise, restriction defines a morphism
+\[
+\rho:\Bun_G(\Sigma_B^{\mathrm{sm}})\longrightarrow \prod_i \Bun_G(\Sigma_{B,i}^{\mathrm{punct}}).
+\]
+
+By the description above, giving $(\mathcal C'_B,P_B)\in\mathcal X_{G,g,I}(B)$ is
+equivalent to giving objects of $\mathcal X_G(C_{S_i})\times_{S_i}B$ for each $i$ and an
+object of $\Bun_G(\Sigma_B^{\mathrm{sm}})$ whose images under the maps $\rho_i$ and
+$\rho$ agree.  This is precisely the groupoid of $B$--points of the $2$--fiber product
+\[
+\Bigl(\prod_{i=1}^m \mathcal X_G(C_{S_i})\times_{S_i}B\Bigr)
+\times_{\prod_i \Bun_G(\Sigma_{B,i}^{\mathrm{punct}})} \Bun_G(\Sigma_B^{\mathrm{sm}}).
+\]
+Functoriality in $B$ shows this identification is compatible with pullback, hence
+defines an equivalence of stacks over $B$.
+
+\medskip
+\noindent\emph{Conclusion.}
+Since each $\mathcal X_G(C_{S_i})$ is algebraic and locally of finite type by Solis,
+and $\Bun_G(\Sigma_B^{\mathrm{sm}})$ is algebraic and locally of finite type, the same
+holds for $\mathcal X_{G,g,I}\vert_B$.
+As algebraicity and local finite type are étale–local on the base, the result follows
+globally.
+\end{proof}
 
 \subsection{Etale presentation by an algebraic space}
 Fix a geometric point $[\Sigma_0,\sigma_{0,i}] \in \overline{\mathcal M}_{g,I}$ and let
@@ -457,6 +561,29 @@ So the difficulty is that on the full stack $\mathcal X$ there is no way to unif
 
 I wanted to ask your thoughts on the best way to proceed conceptually: either (1) work on $\mathcal X^{\mathrm{rs}}$ and then try to extend results from this open substack, or (2) attempt a genuinely stacky version of the local chart and redo the local cohomology argument with stabilizers present.
 
+\section{Questions Jan 27}
+\begin{enumerate}
+    \item I also wanted to ask about the moduli problem I’ve set up and the basic algebraicity statement. I defined the stack $\mathcal X_{G,g,I}$ of admissible G-bundles on twisted modifications of the universal curve, and I wrote a proof sketch that the projection
+\[F : \mathcal X_{G,g,I} \to \overline{\mathcal M}_{g,I}\]
+is algebraic and locally of finite type, by decomposing it into: twisted curves and expansions, principal $G$-bundles on twisted curves, and then cutting out the admissible locus as an open-and-closed substack.
+
+I’d like to sketch this argument for you and ask whether it sounds essentially correct, or whether there is something subtle I’m missing — for example about boundedness, effectivity of descent, or whether admissibility really behaves as an open-and-closed condition in families.
+
+    \item In the FTT argument, after étale localization one presents the moduli stack as $[A/H]$ with $A$ an algebraic space, by rigidifying bundles with framings at points. In the $G$-bundle case, this fails on the full stack because framings do not kill non-central automorphisms, so the natural “framed” chart is only an Artin stack, not an algebraic space.
+
+Conceptually, how does one usually overcome this kind of obstruction?
+Is the right approach to restrict to a regularly stable locus where framings rigidify, and then try to extend results from that open substack, or is there a standard way to work directly with stacky local charts in a situation like this?
+
+    \item I think I now understand formally what admissibility says — it restricts the $\mu_k \to G$ data at twisted nodes to a finite set of rational cocharacters and a linear independence condition — but I still don't really have a geometric or representation-theoretic picture in my head.
+
+Could you explain how you think about admissibility conceptually? For example, how it relates to Atiyah-Bott, and what geometric behavior it is really controlling?
+
+    \item I feel like I'm still reasoning about these objects in a very hands-off way.
+Is there a good toy model of this whole setup — a simpler moduli problem or a lower-rank/group case — where the roles of twisted curves, admissibility, and the boundary are completely explicit and one can really see what is going on?
+\end{enumerate}
+
+\section{Answer 1/27}
+Teleman basically said that there is no way to get an atlas of the full stack $\Bun_G(C)$ (or your $\mathcal X_{G,g,I}$) by an algebraic space modulo a fixed reductive group. This is because even for smooth curves, the stabilizers are already too big. He said that the correct approach can be found in Teleman-Woodward, that he expects there to be an explicit formula as that which he works out in that paper, and his suggestion is to do it for $G = \GL_2$ or perhaps $G = E_8$ and to do the case with two components meeting at a node.
 
 \section{References}
 \begin{enumerate}

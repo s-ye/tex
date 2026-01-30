@@ -1,0 +1,994 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+\DeclareMathOperator{\Eul}{Eul}
+\DeclareMathOperator{\Ind}{Ind}
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Teleman Woodward}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+Abstract
+\end{abstract}
+
+\tableofcontents
+\section{Overview of the finiteness theorem from Teleman Woodward}
+Let $G$ be a connected reductive group and $\mf M = \Bun_G(C)$ the moduli stack of $G$-bundles on a smooth projective curve $C$. The goal of Teleman-Woodward is to compute the index of certain $K$-theory classes on $\mf M$, generalizing the Verlinde formula for line bundles.
+
+However, our goal is to merely establish the finiteness of the index in the case of nodal curves. Abstracting from the paper, the finiteness theorem has the following structure:
+\begin{enumerate}
+    \item Stratify the full stack $\mathfrak{M}$ by Harder–Narasimhan type $\mathfrak{M} = \bigsqcup_\xi \mathfrak{M}_\xi$. \red{Include some explanation of HN type here.}
+    \item Filter $R\Gamma(\mathfrak{M},E)$ by local cohomology along the closed unions $\bigcup_{\xi' \ge \xi} \mathfrak{M}_{\xi'}$.
+    \item Show that admissibility forces the local terms for $\xi$ sufficiently large to vanish.
+    \item Deduce that only finitely many strata contribute, hence the index is finite.
+\end{enumerate}
+
+\subsection*{Admissible classes (Teleman--Woodward)}
+
+Let $\Sigma$ be a smooth projective curve, $G$ a connected reductive group, and
+$\mf M=\Bun_G(\Sigma)$ the moduli stack of $G$--bundles.  Let $\mathcal E$ denote
+the universal $G$--bundle on $\Sigma\times\mf M$, and for a finite--dimensional
+representation $V$ of $G$ write $\mathcal E^*V$ for the associated vector bundle.
+
+Teleman--Woodward single out the following natural $K$--theory classes on $\mf M$:
+
+\begin{enumerate}[(i)]
+\item $E_x^*V\in K^0(\mf M)$, the restriction of $\mathcal E^*V$ to $\{x\}\times\mf M$,
+for a point $x\in\Sigma$;
+
+\item $E_C^*V := \mathcal E^*V/[C]\in K^{-1}(\mf M)$, the slant product of $\mathcal E^*V$
+with a $1$--cycle $C$ on $\Sigma$;
+
+\item $E_\Sigma^*V := R\pi_*(\mathcal E^*V\otimes\sqrt K)\in K^0(\mf M)$, the Dirac index
+bundle along $\Sigma$, where $\pi:\Sigma\times\mf M\to\mf M$ and $\sqrt K$ is a square
+root of the canonical bundle of $\Sigma$;
+
+\item $D_\Sigma V := \det^{-1}E_\Sigma^*V$, the inverse determinant of cohomology.
+\end{enumerate}
+
+The classes in (i)--(iii) are called the \emph{Atiyah--Bott generators}.  The classes
+in (iv) are determinant line bundles on $\mf M$.
+
+The first Chern class of any determinant line bundle
+$\mathcal L$ defines an invariant quadratic form
+\[
+h_\mathcal L\in H^4(BG;\R)\cong \Sym^2(\mf g^*)^G \cong
+\{\text{invariant symmetric bilinear forms on }\mf g\},
+\]
+called the \emph{level} of $\mathcal L$.  Let $c$ denote the distinguished quadratic
+form corresponding to the canonical bundle
+$\mathcal K=\det E_\Sigma^*\mf g$.
+
+\begin{definition}[Teleman--Woodward]
+A line bundle $\mathcal L$ on $\mf M$ is called \emph{admissible} if the shifted
+quadratic form
+\[
+h_\mathcal L + c
+\]
+is positive definite on $\mf g$. An \emph{admissible class} in $K^*(\mf M)$ is any finite product of an admissible line
+bundle with Atiyah--Bott generators.
+\end{definition}
+
+\subsection*{Shatz stratification}
+
+Recall that any $G$--bundle over $\Sigma$ admits a canonical reduction of structure
+group to a standard parabolic subgroup $P\subset G$, for which the associated
+bundle with Levi structure group is semistable. 
+
+\begin{remark}
+    For a principal $G$-bundle $P$ on a smooth curve $\Sigma$, there is a Harder–Narasimhan (HN) theory generalizing the usual HN filtration of vector bundles. The outcome is a canonical reduction of $P$ to a parabolic subgroup $P\subset G$. “Canonical” means: determined functorially by $P$ (up to unique isomorphism), not a choice. The defining property is that if you pass from $P$ (the parabolic) to its Levi quotient $L=P/R_u(P)$, the induced $L$-bundle is semistable.
+“Standard parabolic” means: a parabolic containing a fixed Borel $B$ (chosen once), so parabolics are indexed by subsets of simple roots.
+
+Intuition: this parabolic reduction packages “the most destabilizing” subobject(s) of the bundle.
+\end{remark}
+
+
+Topologically, this reduction
+is classified by a coweight of $P/[P,P]$; we identify this with a (possibly
+fractional) dominant coweight $\xi$ of $\mf g$, called the \emph{instability type}
+of the original bundle.  Then $P$ is the standard parabolic subgroup defined by
+$\xi$; we denote it by $P_\xi$ and its Levi subgroup by $G_\xi$.  If $\mf M_\xi$
+denotes the stack of $G$--bundles of type $\xi$, we have an algebraic
+stratification 
+\[
+\mf M = \bigsqcup_\xi \mf M_\xi .
+\]
+Sending a $P_\xi$--bundle to its associated Levi bundle defines a morphism
+from $\mf M_\xi$ to the stack $\mf M^{ss}_{G_\xi,\xi}$ of semistable principal
+$G_\xi$--bundles of type $\xi$; the fibres are quotient stacks of affine spaces
+by unipotent groups (equivalently the corresponding Lie algebra is nilpotent).  The virtual normal bundle for the morphism
+$\mf M^{ss}_{G_\xi,\xi} \to \mf M$ is the complex
+\[
+\nu_\xi = R\pi_*\mathcal E^*(\mf g/\mf g_\xi)[1].
+\]
+
+Its $K$--theory Euler class should be the alternating sum of exterior powers
+\[
+\lambda_{-1}(\nu_\xi^\vee) := \sum_p (-1)^p \wedge^p(\nu_\xi^\vee),
+\]
+but for now this infinite sum is only a formal expression, whose meaning is to
+be spelled out.
+
+\subsection*{Local cohomology}
+
+Finite open unions of Shatz strata
+\[
+\mf M_{\le \xi} = \bigcup_{\mu\le \xi} \mf M_\mu
+\]
+can be presented as quotient stacks of smooth quasi--projective varieties by
+reductive groups.  The cohomology with supports over $\mf M_\xi$ of a vector
+bundle $\mathcal E$ is
+\[
+H^\bullet_{\mf M_\xi}(\mf M_{\le \xi},\mathcal E_{\le \xi})
+= H^{\bullet + d_\xi}(\mf M_\xi, \mathcal R_\xi \mathcal E),
+\tag{1.9}
+\]
+where $d_\xi$ is the codimension of $\mf M_\xi$ and $\mathcal R_\xi \mathcal E$
+denotes the sheaf of "$\mathcal E$--valued residues along $\mf M_\xi$." In particular \[\mathcal R_\xi \mathcal E \;:=\; i_\xi^! (\mathcal E_{\le \xi})[-d_\xi]\]
+
+where \(i_\xi:\mf M_\xi\hookrightarrow \mf M_{\le \xi}\) is the inclusion and $i^!$ is the extraordinary pullback (local duality functor).
+
+This is a stacky derived version of the fact that for a smooth closed subvariety $Z \subset X$, local cohomology along $Z$ equals cohomology on $Z$ twisted by the normal bundle and shifted by codimension.
+
+\red{Basically I think we need to find the right stratification and Dan HL has a machine that produces such stratifications, known as $\theta$-stratifications. }
+
+\subsection*{Role of the Shatz stratification in Teleman--Woodward}
+
+The proof of the finiteness theorem in \cite{TelemanWoodward} is organized around
+the Harder--Narasimhan (Shatz) stratification of the moduli stack
+\[
+\mf M=\Bun_G(\Sigma)=\bigsqcup_{\xi}\mf M_\xi,
+\]
+indexed by dominant rational coweights $\xi$.  This stratification plays the role
+of a Morse stratification for the Yang--Mills functional, and replaces compactness
+in the non--finite--type stack $\mf M$.
+
+\medskip
+\noindent\textbf{(1) Filtration by supports.}
+The partial order on instability types defines an increasing filtration by open
+substacks
+\[
+\mf M_{\le \xi} := \bigcup_{\mu\le\xi}\mf M_\mu.
+\]
+For any sheaf or complex $\mathcal E$ on \(\mf M\), this filtration produces a filtration on derived global sections
+$R\Gamma(\mf M,\mathcal E)$
+by the subcomplexes
+$R\Gamma_{\mf M_{\le \xi_k}}(\mf M,\mathcal E)$.
+
+\begin{remark}[General mechanism of local cohomology filtration]
+    Suppose you have a space/stack $X$ and an increasing sequence of open substacks
+$\emptyset = U_0 \subset U_1 \subset U_2 \subset \cdots \subset X$
+with closed complements
+$Z_k := X \setminus U_k$. In our situation \(X = \mf M\), \(U_k = \mf M_{\le \xi_k}\), \(Z_k = \bigcup_{\mu > \xi_k} \mf M_\mu\). For any sheaf or complex $\mathcal E$ on $X$, there is a canonical exact triangle\begin{align*}
+R\Gamma_{Z_k}(X,\mathcal E)
+\;\to\;
+R\Gamma(X,\mathcal E)
+\;\to\;
+R\Gamma(U_k,\mathcal E|_{U_k})
+\;\to\;
+\end{align*}
+This triangle is the definition of local cohomology with supports in $Z_k$.
+\end{remark}
+
+
+The decreasing family of closed substacks $Z_k=X\setminus U_k$ induces a
+decreasing filtration $F^k:=R\Gamma_{Z_k}(X,\mathcal E)$ of $R\Gamma(X,\mathcal E)$.
+Its successive graded pieces are
+\[
+\gr^k F \simeq R\Gamma_{Z_k\setminus Z_{k+1}}(U_{k+1},\mathcal E|_{U_{k+1}}).
+\]
+In the Shatz situation (refining the indexing so that $U_k=U_{k-1}\sqcup \mf M_{\xi_k}$),
+this becomes
+\[
+\gr^{k-1}F \simeq R\Gamma_{\mf M_{\xi_k}}(\mf M_{\le\xi_k},\mathcal E_{\le\xi_k}).
+\]
+Equivalently there is a spectral sequence with
+\[
+E_1^{\xi,*} = R\Gamma_{\mf M_\xi}(\mf M_{\le\xi},\mathcal E_{\le\xi})
+\quad\Longrightarrow\quad
+R\Gamma(\mf M,\mathcal E).
+\]
+
+\medskip
+\noindent\textbf{(2) Reduction to semistable Levi moduli.}
+Each stratum $\mf M_\xi$ carries a canonical morphism
+\[
+\mf M_\xi \longrightarrow \mf M^{ss}_{G_\xi,\xi}
+\]
+to the moduli stack of semistable principal $G_\xi$--bundles of fixed topological
+type, whose fibres are quotient stacks of affine spaces by unipotent groups.
+This identifies $\mf M_\xi$ as a bundle of unstable directions over a semistable
+core.
+
+\medskip
+\noindent\textbf{(3) Virtual normal complex.}
+The stratification provides a uniform description of the virtual normal complex
+of $\mf M^{ss}_{G_\xi,\xi}$ in $\mf M$:
+\[
+\nu_\xi = R\pi_*\mathcal E^*(\mf g/\mf g_\xi)[1].
+\]
+Consequently, local cohomology along $\mf M_\xi$ may be expressed formally as
+\[
+R\Gamma_{\mf M_\xi}(\mf M_{\le\xi},\mathcal E)
+\simeq
+R\Gamma\bigl(\mf M_\xi,
+\mathcal E\otimes \lambda_{-1}(\nu_\xi^\vee)^{-1}\bigr),
+\]
+where $\lambda_{-1}(\nu_\xi^\vee)$ is the $K$--theoretic Euler class of the normal
+complex.
+
+\medskip
+\noindent\textbf{(4) Weight decomposition and admissibility.}
+The representation $\mf g/\mf g_\xi$ decomposes into positive $\xi$--weight
+spaces.  This induces a natural grading on $\nu_\xi$ and hence on
+$\lambda_{-1}(\nu_\xi^\vee)^{-1}$.  Admissibility of the twisting line bundle
+forces all sufficiently unstable types $\xi$ to contribute only strictly negative
+weights, so that the formal inverse Euler class becomes summable and the local
+contributions vanish for $\xi$ sufficiently large.
+
+\medskip
+\noindent\textbf{(5) Finiteness.}
+Since only finitely many instability types can contribute nontrivially, the
+local--cohomology filtration terminates after finitely many steps.  This yields
+the finiteness of the index.
+
+\medskip
+In summary, the Shatz stratification supplies a canonical filtration, a reduction
+to semistable Levi moduli, and a uniform normal complex whose weight decomposition
+is controlled by admissibility.  All finiteness statements in
+\cite{TelemanWoodward} are ultimately consequences of this structure.
+
+
+\section{Toy model: $G=\GL_2$ on a smooth curve}
+
+Let $\Sigma$ be a smooth projective curve of genus $g\ge 2$ over $\C$, and let
+\[
+\mf M=\Bun_{\GL_2}(\Sigma)
+\]
+be the moduli stack of rank $2$ vector bundles on $\Sigma$.
+We explain explicitly the Shatz stratification, the Levi description of strata,
+the virtual normal complex, and the weight bookkeeping behind the
+Teleman--Woodward finiteness mechanism in this case.
+
+\subsection{Harder--Narasimhan type and Shatz strata}
+
+Every $E\in \mf M$ admits a unique Harder--Narasimhan filtration
+\[
+0\subset L \subset E,
+\qquad M:=E/L,
+\]
+where $L$ is a line subbundle of maximal slope.  Write
+\[
+\deg(L)=d_1,\qquad \deg(M)=d_2,\qquad m:=d_1-d_2\ge 0.
+\]
+Then $E$ is semistable iff $m=0$ (equivalently $d_1=d_2$).
+
+The Shatz (HN) stratum of type $(d_1,d_2)$ is the locally closed substack
+\[
+\mf M_{d_1,d_2}\subset \mf M
+\]
+parametrizing bundles whose HN filtration has graded pieces $(L,M)$ of degrees
+$(d_1,d_2)$ (so $m>0$ on unstable strata).  One has the stratification
+\[
+\mf M=\bigsqcup_{d_1\ge d_2}\mf M_{d_1,d_2}.
+\]
+
+\subsection{Parabolic and Levi}
+
+Fix the standard Borel $B\subset \GL_2$ of upper triangular matrices.
+For $m>0$, the destabilizing reduction is to the standard parabolic
+\[
+P=\left\{\begin{pmatrix} * & * \\ 0 & * \end{pmatrix}\right\},
+\]
+with Levi subgroup
+\[
+G_\xi \cong \GL_1\times \GL_1
+\quad\text{(diagonal matrices).}
+\]
+Equivalently, the associated dominant coweight (instability type) may be taken as
+\[
+\xi=\left(\frac m2,-\frac m2\right)\in \mf t_\Q,
+\]
+so that the positive root $\alpha$ satisfies $\alpha(\xi)=m$.
+
+\subsection{Semistable Levi core and structure of the stratum}
+
+A principal $G_\xi$--bundle is the same as a pair of line bundles $(L,M)$, hence
+the moduli stack of semistable $G_\xi$--bundles of type $(d_1,d_2)$ is
+\[
+\mf M^{ss}_{G_\xi,\xi}\;\cong\;\Pic^{d_1}(\Sigma)\times \Pic^{d_2}(\Sigma).
+\]
+There is a canonical morphism
+\[
+q:\mf M_{d_1,d_2}\longrightarrow \Pic^{d_1}(\Sigma)\times \Pic^{d_2}(\Sigma),
+\qquad E\mapsto (L,E/L).
+\]
+Fixing $(L,M)$, the fibre of $q$ over $(L,M)$ classifies extensions
+\[
+0\to L\to E\to M\to 0,
+\]
+hence is governed by
+\[
+\Ext^1(M,L)\cong H^1(\Sigma,L\otimes M^{-1}).
+\]
+Automorphisms of a given extension (fixing $(L,M)$) come from
+\[
+\Hom(M,L)\cong H^0(\Sigma,L\otimes M^{-1}),
+\]
+which is a unipotent group (additively) acting on the affine space
+$H^1(\Sigma,L\otimes M^{-1})$ by the usual change-of-splitting.
+Thus the fibre is a quotient stack
+$\Bigl[H^1(\Sigma,L\otimes M^{-1})\Big/\;H^0(\Sigma,L\otimes M^{-1})\Bigr]$
+making $\mf M_{d_1,d_2}$ a (stacky) affine fibration over the semistable Levi core.
+
+\subsection{Virtual normal complex}
+
+The tangent complex of $\Bun_G$ at a $G$--bundle $E$ is
+\[
+T_{\mf M,E}\simeq R\Gamma(\Sigma,\End(E))[1].
+\]
+Over the Levi core $(L,M)$ the adjoint representation decomposes as
+\[
+\End(L\oplus M)
+\;=\;
+\underbrace{\End(L)\oplus\End(M)}_{\mf g_\xi}
+\;\oplus\;
+\underbrace{\Hom(M,L)\oplus \Hom(L,M)}_{\mf g/\mf g_\xi}.
+\]
+Along the stratum $\mf M_{d_1,d_2}$, the relevant (unstable) normal directions
+are governed by the positive--weight root space $\Hom(M,L)$, and the virtual normal
+complex for the inclusion of the Levi moduli into $\mf M$ is
+\[
+\nu_\xi \;\simeq\; R\Gamma(\Sigma, L\otimes M^{-1})[1].
+\]
+Equivalently, $\nu_\xi$ has cohomology
+\[
+H^{-1}(\nu_\xi)\cong H^0(\Sigma,L\otimes M^{-1}),
+\qquad
+H^0(\nu_\xi)\cong H^1(\Sigma,L\otimes M^{-1}).
+\]
+
+\subsection{$K$--theoretic Euler class and its formal inverse}
+
+Formally, the $K$--theory Euler class of the dual normal complex is
+\[
+\lambda_{-1}(\nu_\xi^\vee)
+=\sum_{p\ge 0}(-1)^p\wedge^p(\nu_\xi^\vee).
+\]
+Because $\nu_\xi$ is a shifted cohomology complex, its inverse Euler class
+expands into exterior powers of the $H^0$--piece and symmetric powers of the
+$H^1$--piece.  Schematically one may think of
+\[
+\lambda_{-1}(\nu_\xi^\vee)^{-1}
+\sim
+\frac{\Sym^\bullet\bigl(H^1(\Sigma,L\otimes M^{-1})^\vee\bigr)}
+{\Lambda^\bullet\bigl(H^0(\Sigma,L\otimes M^{-1})^\vee\bigr)}
+\]
+an infinite sum in ordinary $K$--theory which is made meaningful in
+Teleman--Woodward by working in a suitable completion determined by $\xi$--weights.
+
+\subsection{Weight bookkeeping: linear vs.\ quadratic growth}
+
+The one--parameter subgroup $\xi$ acts on $\Hom(M,L)$ with weight $\alpha(\xi)=m$.
+Consequently, $\xi$ acts on $H^i(\Sigma,L\otimes M^{-1})$ with weight $m$, and hence
+on the graded summand
+\[
+\Sym^p\bigl(H^1(\Sigma,L\otimes M^{-1})^\vee\bigr)
+\]
+with weight $p\,m$.  This is the \emph{linear} growth in the instability parameter $m$.
+
+On the other hand, a determinant line bundle $\mathcal L$ on $\mf M$ has a
+level $h_{\mathcal L}\in \Sym^2(\mf g^*)^G$, and Teleman--Woodward introduce the
+canonical correction $c$ coming from $\mathcal K=\det E_\Sigma^*\mf g$.
+For an \emph{admissible} $\mathcal L$, the form $h_{\mathcal L}+c$ is positive
+definite, so
+\[
+(h_{\mathcal L}+c)(\xi,\xi)\to +\infty \quad\text{as } \|\xi\|\to\infty.
+\]
+In the $\GL_2$ normalization $\xi=(m/2,-m/2)$ and the standard invariant form
+$(X,Y)=\tr(XY)$ on diagonal matrices gives
+\[
+(\xi,\xi)=\frac{m^2}{2},
+\]
+so $(h_{\mathcal L}+c)(\xi,\xi)$ grows like a positive constant times $m^2$.
+In Teleman--Woodward's local cohomology calculation, twisting by $\mathcal L$
+shifts the $\xi$--weight spectrum by a \emph{negative} amount with leading term
+\[
+-(h_{\mathcal L}+c)(\xi,\xi)\sim -\kappa m^2 \qquad (\kappa>0).
+\]
+
+Thus, on the $\xi$--stratum, the inverse Euler class contributes graded pieces with
+weights growing at most \emph{linearly} in $m$ (e.g.\ $p\,m$), while an admissible
+twist shifts weights by a \emph{quadratic} negative term $\sim-\kappa m^2$.
+This is the mechanism behind the eventual vanishing of sufficiently unstable
+strata in the Teleman--Woodward finiteness theorem.
+
+\subsection*{Why $\xi$--invariants control finiteness of the index}
+
+Let $\Sigma$ be a smooth projective curve and $\mf M=\Bun_G(\Sigma)$.
+For a class $\mathcal E\in K^*(\mf M)$ one defines its index by the Euler
+characteristic
+\[
+\Ind(\mf M,\mathcal E)\;:=\;\chi(\mf M,\mathcal E)
+\;=\;\sum_i(-1)^i\dim H^i(\mf M,\mathcal E),
+\]
+whenever the right-hand side is finite.
+
+Since $\mf M$ is not of finite type, finiteness is proved by filtering
+$\mf M$ by finite-type open substacks using the Shatz stratification
+\[
+\mf M=\bigsqcup_{\xi}\mf M_\xi,
+\qquad
+\mf M_{\le \xi}:=\bigcup_{\mu\le\xi}\mf M_\mu.
+\]
+The open substacks $\mf M_{\le\xi}$ form an increasing filtration of $\mf M$,
+and for any complex $\mathcal E$ on $\mf M$ this induces a filtration of
+$R\Gamma(\mf M,\mathcal E)$ by local cohomology with supports in the complements.
+Equivalently, there is a spectral sequence whose $E_1$--page is built from the
+local cohomology complexes
+\[
+E_1^{\xi,*}\;=\;R\Gamma_{\mf M_\xi}(\mf M_{\le\xi},\mathcal E_{\le\xi})
+\quad\Longrightarrow\quad
+R\Gamma(\mf M,\mathcal E).
+\]
+In particular, finiteness of $\Ind(\mf M,\mathcal E)$ follows once one knows:
+\begin{enumerate}[(a)]
+\item for each $\xi$, the contribution of $R\Gamma_{\mf M_\xi}(\mf M_{\le\xi},\mathcal E_{\le\xi})$
+to Euler characteristic is finite-dimensional; and
+\item all but finitely many $\xi$ contribute trivially.
+\end{enumerate}
+
+Teleman--Woodward identify each local term by a purity/local-duality statement:
+\[
+R\Gamma_{\mf M_\xi}(\mf M_{\le\xi},\mathcal E_{\le\xi})
+\simeq
+R\Gamma\bigl(\mf M_\xi,\mathcal R_\xi\mathcal E\bigr)[d_\xi],
+\qquad
+\mathcal R_\xi\mathcal E:= i_\xi^!(\mathcal E_{\le\xi})[-d_\xi],
+\]
+where $d_\xi=\codim(\mf M_\xi,\mf M_{\le\xi})$ and $i_\xi:\mf M_\xi\hookrightarrow\mf M_{\le\xi}$
+is the inclusion.
+
+
+Moreover, the residue object $\mathcal R_\xi\mathcal E$ may be expressed
+formally in terms of the virtual normal complex
+\[
+\nu_\xi=R\pi_*\mathcal E^*(\mf g/\mf g_\xi)[1]
+\]
+as
+\[
+\mathcal R_\xi\mathcal E\;\sim\;
+\mathcal E|_{\mf M_\xi}\otimes \Eul(\nu_\xi)^{-1}.
+\]
+
+\begin{remark}
+Let $X$ be an algebraic stack, let $i:Z\hookrightarrow X$ be a closed immersion,
+and let $\mathcal E$ be a (bounded) complex of coherent sheaves on $X$.
+Recall that the \emph{local cohomology} of $\mathcal E$ with supports in $Z$ is
+defined by the exact triangle
+\[
+R\Gamma_Z(X,\mathcal E)\;\longrightarrow\;R\Gamma(X,\mathcal E)
+\;\longrightarrow\;R\Gamma(X\setminus Z,\mathcal E|_{X\setminus Z})\;\longrightarrow,
+\]
+or, equivalently, by the functor of sections with supports
+$R\Gamma_Z(X,-)=R\Gamma(X,R\Gamma_Z(-))$.
+Local duality packages these groups as ordinary cohomology on $Z$:
+one defines the \emph{residue object} along $Z$ by
+\[
+\mathcal R_Z(\mathcal E)\;:=\; i^!(\mathcal E)[-\codim(Z)],
+\]
+so that (under standard hypotheses, e.g.\ $i$ a local complete intersection)
+\[
+R\Gamma_Z(X,\mathcal E)\;\simeq\;R\Gamma\bigl(Z,\mathcal R_Z(\mathcal E)\bigr)[\codim(Z)].
+\]
+In Teleman--Woodward's setting one takes $X=\mf M_{\le\xi}$ and $Z=\mf M_\xi$, so
+\[
+\mathcal R_\xi\mathcal E := i_\xi^!(\mathcal E_{\le\xi})[-d_\xi],
+\qquad d_\xi=\codim(\mf M_\xi,\mf M_{\le\xi}).
+\]
+
+\smallskip
+\noindent\textbf{Why an Euler factor appears.}
+If $i:Z\hookrightarrow X$ is a \emph{regular embedding} between smooth schemes
+with normal bundle $N_{Z/X}$, then $i^!$ is controlled by the normal directions.
+At the level of $K$--theory one has the standard identity
+\begin{equation}
+\label{eq:regular-embed-euler}
+\bigl[i^!(\mathcal E)\bigr]
+=
+\bigl[i^*(\mathcal E)\bigr]\cdot \lambda_{-1}(N_{Z/X}^\vee)^{-1}
+\qquad\text{in }K^0(Z),
+\end{equation}
+where
+\[
+\lambda_{-1}(W):=\sum_{p\ge 0}(-1)^p[\wedge^p W]
+\]
+is the $K$--theoretic Euler class.
+Heuristically, local cohomology measures ``principal parts along $Z$'',
+and principal parts are obtained by expanding in the normal directions; the
+inverse Euler class $\lambda_{-1}(N_{Z/X}^\vee)^{-1}$ is the $K$--theoretic avatar
+of this expansion.
+
+\smallskip
+\noindent\textbf{Virtual normal complex.}
+In the Shatz situation, $\mf M_\xi\hookrightarrow \mf M_{\le\xi}$ is not presented
+globally as a single regular embedding into a smooth ambient space.  Instead,
+Teleman--Woodward use the fact that $\mf M_\xi$ maps to a finite--type semistable
+Levi stack $\mf M^{ss}_{G_\xi,\xi}$ with fibres quotient stacks of affine spaces
+by unipotent groups, and there is a canonical \emph{virtual normal complex}
+(perfect complex playing the role of $N_{Z/X}$)
+\[
+\nu_\xi \;=\; R\pi_*\mathcal E^*(\mf g/\mf g_\xi)[1]
+\qquad\text{on }\mf M^{ss}_{G_\xi,\xi},
+\]
+whose pullback to $\mf M_\xi$ controls the unstable directions transverse to the
+Levi moduli.  Consequently, the $K$--theory Euler class is defined by
+\[
+\Eul(\nu_\xi^\vee)\;:=\;\lambda_{-1}(\nu_\xi^\vee),
+\]
+and the same formal identity as \eqref{eq:regular-embed-euler} holds with
+$N_{Z/X}$ replaced by $\nu_\xi$:
+\begin{equation}
+\label{eq:virtual-euler}
+\bigl[\mathcal R_\xi\mathcal E\bigr]
+=
+\bigl[\mathcal E|_{\mf M_\xi}\bigr]\cdot \lambda_{-1}(\nu_\xi^\vee)^{-1}.
+\end{equation}
+\end{remark}
+
+
+
+\subsubsection{The polarized inverse Euler class and the formula for $\Eul(\nu_\xi)^{-1}_+$}
+
+We explain the origin of Teleman--Woodward's formula
+\[
+\Eul(\nu_\xi)^{-1}_+
+:=
+\Sym\Bigl(
+R\pi_*\mathcal E^*(\mf p_\xi/\mf g_\xi)[1]^\vee
+\ \oplus\
+R\pi_*\mathcal E^*(\mf g/\mf p_\xi)[1]
+\Bigr)\ \otimes\
+\det\Bigl(R\pi_*\mathcal E^*(\mf g/\mf p_\xi)[1]\Bigr)[d_\xi],
+\tag{$\ast$}
+\]
+It is a formal inverse to the Euler class with a weight decomposition satisfing the key properties that only weights $\le 0$ occur and each weight space is finite.
+
+\medskip
+\noindent\textbf{(1) $\xi$--weights and the parabolic splitting.}
+Fix a maximal torus $T\subset G$ and a Borel $B\supset T$.
+For a dominant rational coweight $\xi\in X_*(T)\otimes\Q$, let
+$P_\xi$ be the associated \emph{standard} parabolic subgroup (so $B\subset P_\xi$),
+and let $G_\xi$ be its Levi subgroup.  At the Lie algebra level one has a canonical
+$\xi$--weight decomposition
+\[
+\mf g = \mf g_\xi \oplus \mf n_\xi \oplus \mf n_\xi^-,
+\qquad
+\mf n_\xi=\bigoplus_{\langle\alpha,\xi\rangle>0}\mf g_\alpha,
+\quad
+\mf n_\xi^-=\bigoplus_{\langle\alpha,\xi\rangle<0}\mf g_\alpha.
+\]
+Equivalently,
+\[
+\mf p_\xi=\mf g_\xi\oplus \mf n_\xi,
+\qquad
+\mf g/\mf g_\xi \cong (\mf p_\xi/\mf g_\xi)\oplus (\mf g/\mf p_\xi),
+\]
+where $\mf p_\xi/\mf g_\xi\cong \mf n_\xi$ carries strictly \emph{positive} $\xi$--weights
+and $\mf g/\mf p_\xi\cong \mf n_\xi^-$ carries strictly \emph{negative} $\xi$--weights.
+
+\medskip
+\noindent\textbf{(2) The virtual normal complex and its $\xi$--grading.}
+Let $\mf M_\xi$ be the Shatz stratum of instability type $\xi$ and let
+$\mf M^{ss}_{G_\xi,\xi}$ be the semistable Levi moduli.
+
+Sending a $P_\xi$--bundle to its associated Levi bundle defines a morphism
+$q_\xi:\mf M_\xi\to \mf M^{ss}_{G_\xi,\xi}$.
+The fibres are quotient stacks of affine spaces by unipotent groups.
+The deformation theory transverse to the Levi directions is governed by the
+perfect complex on $\mf M^{ss}_{G_\xi,\xi}$
+\[
+\nu_\xi:= R\pi_*\mathcal E^*(\mf g/\mf g_\xi)[1],
+\]
+whose pullback along $q_\xi$ controls the virtual normal directions along the stratum and 
+where \[\pi:\Sigma\times \mf M^{ss}_{G_\xi,\xi}\to \mf M^{ss}_{G_\xi,\xi}\] and
+$\mathcal E$ is the universal bundle.
+Using the splitting above,
+\[
+\nu_\xi \simeq \nu_\xi^+ \oplus \nu_\xi^-,
+\qquad
+\nu_\xi^+ := R\pi_*\mathcal E^*(\mf p_\xi/\mf g_\xi)[1],
+\quad
+\nu_\xi^- := R\pi_*\mathcal E^*(\mf g/\mf p_\xi)[1].
+\]
+Thus $\nu_\xi$ carries a canonical $\Z$--grading by $\xi$--weights: $\nu_\xi^+$ has
+strictly positive weights and $\nu_\xi^-$ has strictly negative weights.
+
+\medskip
+\noindent\textbf{(3) Why an ``inverse Euler class'' is not a genuine $K$--class.}
+For a vector bundle $W$, the $K$--theoretic Euler class is
+\[
+\lambda_{-1}(W^\vee)=\sum_{p\ge 0}(-1)^p[\wedge^p W^\vee].
+\]
+Even for a line bundle $L$, the inverse of $1-L^\vee$ is \emph{not} a finite $K$--class:
+\[
+(1-L^\vee)^{-1} = \sum_{n\ge 0}(L^\vee)^n
+\qquad\text{(a formal geometric series).}
+\]
+Teleman--Woodward therefore work in a \emph{completion} of equivariant $K$--theory
+determined by the $\xi$--weights.  In such a completion one is allowed to expand
+$1-L^\vee$ as a geometric series \emph{in whichever direction is convergent in the chosen
+completion}.  This is the meaning of the phrase ``prefers $\xi$--negative eigenvalues.''
+
+\medskip
+\noindent\textbf{(4) The basic one--dimensional identity and the determinant correction.}
+Let $\Gm$ act on a one--dimensional representation of weight $w\neq 0$, so the character is $t^w$.
+Then
+\[
+(1-t^w)^{-1}
+=
+\sum_{n\ge 0} t^{nw}
+\qquad\text{as a formal series in the direction of weights }w,w,2w,\dots.
+\]
+If we instead want an expansion which involves only \emph{nonpositive} weights (i.e.\ which
+``prefers negative eigenvalues''), we rewrite
+\[
+(1-t^w)^{-1} = -t^{-w}\,(1-t^{-w})^{-1}
+= -t^{-w}\sum_{n\ge 0} t^{-nw}.
+\]
+Compared to the naive geometric series, this introduces a prefactor $-t^{-w}$.
+In higher rank, multiplying these prefactors over all negative--weight lines produces a
+\emph{determinant factor}. 
+
+\medskip
+\noindent\textbf{(5) From weights to a polarized inverse for a split complex.}
+Suppose a perfect complex $K$ carries a $\xi$--grading and splits as
+\[
+K \simeq K^+ \oplus K^-,
+\]
+where all $\xi$--weights in $K^+$ are $>0$ and all $\xi$--weights in $K^-$ are $<0$.
+Then \[\lambda_{-1}(K^\vee)=\lambda_{-1}((K^+)^\vee)\cdot \lambda_{-1}((K^-)^\vee)\]
+and one defines a \emph{polarized inverse} $\lambda_{-1}(K^\vee)^{-1}_+$ by inverting
+each factor in the completion which expands in the direction of \emph{$\xi$--negative weights}.
+The outcome is the standard schematic identity
+\begin{equation}
+\label{eq:polarized-euler}
+\lambda_{-1}(K^\vee)^{-1}_+
+\;=\;
+\Sym\bigl((K^+)^\vee \oplus K^-\bigr)\ \otimes\ \det(K^-)\,[\mathrm{shift}],
+\end{equation}
+where:
+\begin{itemize}
+\item $\Sym(-)$ denotes the total symmetric algebra
+$\Sym^\bullet(-)=\bigoplus_{n\ge 0}\Sym^n(-)$, interpreted in $K$--theory (or in the
+corresponding completed $K$--group) as a formal power series;
+\item $\det(K^-)$ is the determinant line of the perfect complex $K^-$, which precisely
+packages the product of the one--dimensional prefactors in \textbf{(4)};
+\item $[\mathrm{shift}]$ is the cohomological degree shift dictated by local duality/purity
+(and in the Shatz situation becomes $[d_\xi]$).
+\end{itemize}
+
+
+\begin{remark}[Origin of the determinant factor in the polarized inverse]
+\label{rem:det-factor}
+Let $\Gm$ act with a $\Z$--grading, and let $W$ be a finite--rank $\Gm$--equivariant
+vector bundle with \emph{strictly negative} weights.
+Write the $K$--theoretic Euler class as
+\[
+\lambda_{-1}(W^\vee)=\prod_{i}(1-L_i^\vee),
+\]
+after splitting $W=\bigoplus_i L_i$ into $\Gm$--eigenlines (locally on the base).
+Formally,
+\[
+(1-L_i^\vee)^{-1}=\sum_{n\ge 0}(L_i^\vee)^n
+\]
+is the geometric expansion in nonnegative powers of $L_i^\vee$.
+However, if $L_i$ has \emph{negative} $\xi$--weight, then $L_i^\vee$ has \emph{positive}
+weight, so this expansion lives in the completion which prefers \emph{positive} weights.
+To invert in the opposite completion (the one preferring negative weights), we rewrite
+\[
+(1-L_i^\vee)^{-1}
+= -\,L_i\cdot (1-L_i)^{-1}
+= -\,L_i\sum_{n\ge 0} L_i^{n},
+\]
+which is now a series in nonnegative powers of $L_i$ (hence in nonpositive weights).
+The price paid for using this expansion is the prefactor $(-L_i)$.
+
+Multiplying over $i$ gives
+\[
+\lambda_{-1}(W^\vee)^{-1}\Big|_{\text{prefer negative}}
+=
+\Bigl(\prod_i (-L_i)\Bigr)\cdot \prod_i (1-L_i)^{-1}
+=
+(-1)^{\rank W}\,\det(W)\cdot \Sym(W),
+\]
+where $\Sym(W):=\bigoplus_{n\ge 0}\Sym^n(W)$.
+Up to the harmless sign $(-1)^{\rank W}$ (often suppressed in $K$--theory conventions),
+this explains the appearance of the factor $\det(W)$ in the polarized inverse.
+
+For a perfect complex $K^-$ of strictly negative weights, the same argument applied
+to any local splitting into graded line bundles (together with the multiplicativity
+of $\lambda_{-1}$ in $K$--theory) produces the factor $\det(K^-)$ in the polarized inverse
+$\lambda_{-1}(K^\vee)^{-1}_+$.
+\end{remark}
+
+\noindent\textbf{(6) Specialization to $\nu_\xi$.}
+Apply \eqref{eq:polarized-euler} to $K=\nu_\xi$ and the splitting
+$\nu_\xi\simeq \nu_\xi^+\oplus \nu_\xi^-$ from \textbf{(2)}.
+Then $(K^+)^\vee=(\nu_\xi^+)^\vee$ and $K^-=\nu_\xi^-$, and we obtain
+\[
+\Eul(\nu_\xi)^{-1}_+
+:=
+\lambda_{-1}(\nu_\xi^\vee)^{-1}_+
+=
+\Sym\bigl((\nu_\xi^+)^\vee \oplus \nu_\xi^-\bigr)\ \otimes\ \det(\nu_\xi^-)\,[d_\xi].
+\]
+Unwinding the definitions of $\nu_\xi^\pm$ gives exactly the formula $(\ast)$ above.
+
+\subsubsection*{Weight bookkeeping and the finiteness mechanism}
+
+Fix an instability type $\xi$ and consider the local contribution supported on the Shatz stratum
+$\mf M_\xi$.  Teleman--Woodward control this contribution by analysing the
+$\xi$--weight decomposition of the \emph{polarized inverse Euler factor}
+$\Eul(\nu_\xi)^{-1}_+$ and its tensor product with an admissible class
+$\mathcal E$.
+
+\medskip
+\noindent\textbf{(A) The determinant weight and the quadratic form $c(\xi,\xi)$.}
+Recall the polarized inverse Euler factor (cf.\ \cite[\S1.10--1.11]{TelemanWoodward})
+\begin{equation}
+\label{eq:polarized-eul}
+\Eul(\nu_\xi)^{-1}_+
+:=
+\Sym\Bigl(
+R\pi_*\mathcal E^*(\mf p_\xi/\mf g_\xi)[1]^\vee
+\ \oplus\
+R\pi_*\mathcal E^*(\mf g/\mf p_\xi)[1]
+\Bigr)\ \otimes\
+\det\Bigl(R\pi_*\mathcal E^*(\mf g/\mf p_\xi)[1]\Bigr)[d_\xi].
+\tag{$\ast$}
+\end{equation}
+The second tensor factor is a determinant line bundle
+\[
+\det\Bigl(R\pi_*\mathcal E^*(\mf g/\mf p_\xi)[1]\Bigr).
+\]
+Because $\mf g/\mf p_\xi$ is a direct sum of root spaces $\mf g_\alpha$ with
+$\langle\alpha,\xi\rangle<0$, the one--parameter subgroup determined by $\xi$
+acts on $\mf g/\mf p_\xi$ with strictly \emph{negative} weights.  Consequently,
+the induced $\Gm$--action on the determinant line above has a well-defined
+$\xi$--weight which may be computed as a signed sum of these negative integers,
+counted with the appropriate cohomological multiplicities coming from
+$R\pi_*$.
+
+Teleman--Woodward package this total determinant weight by a distinguished
+invariant quadratic form
+\[
+c\in \Sym^2(\mf g^*)^G,
+\]
+namely the quadratic form attached (via Grothendieck--Riemann--Roch) to the
+canonical bundle
+\[
+\mathcal K := \det(E_\Sigma^*\mf g)
+\qquad\text{on }\mf M.
+\]
+With this notation, the determinant factor in \eqref{eq:polarized-eul} has
+$\xi$--weight
+\begin{equation}
+\label{eq:weight-is-c}
+\wt_\xi\Bigl(\det(R\pi_*\mathcal E^*(\mf g/\mf p_\xi)[1])\Bigr)=c(\xi,\xi).
+\end{equation}
+In Teleman--Woodward's conventions, $c(\xi,\xi)$ is \emph{negative} when $\xi$
+is viewed in the compact real form $i\mf t_k$; equivalently, $c$ is negative
+definite on $i\mf t_k$.
+
+
+\begin{proof}[Justification of \eqref{eq:weight-is-c}]
+Fix $\xi$ and let $\lambda_\xi:\Gm\to G$ be the canonical one--parameter subgroup.
+Consider the determinant line
+\[
+\mathcal D_\xi = \det \Bigl(R\pi_*\mathcal E^*(\mf g/\mf p_\xi)[1]\Bigr)
+\]
+which appears in the polarized inverse Euler class $\Eul(\nu_\xi)^{-1}_+$.
+
+As a $T$--module (and hence as a $\lambda_\xi$--module),
+\[
+\mf g/\mf p_\xi\;\cong\;\bigoplus_{\langle\alpha,\xi\rangle<0}\mf g_\alpha,
+\]
+a direct sum of root spaces on which $\lambda_\xi$ acts with weights
+$\langle\alpha,\xi\rangle<0$.
+The corresponding trace form is
+\[
+\Tr_{\mf g/\mf p_\xi}(\eta,\eta)
+\;=\;\sum_{\langle\alpha,\xi\rangle<0}\langle\alpha,\eta\rangle^2
+\qquad (\eta\in \mf t),
+\]
+because $\eta$ acts on $\mf g_\alpha$ by the scalar $\langle\alpha,\eta\rangle$.
+
+Now compare with the adjoint trace form:
+\[
+\Tr_{\mf g}(\eta,\eta)\;=\;\sum_{\alpha\in \Phi}\langle\alpha,\eta\rangle^2,
+\]
+since $\eta$ acts trivially on $\mf t$ and by $\langle\alpha,\eta\rangle$ on $\mf g_\alpha$.
+The root system is symmetric $\alpha\leftrightarrow -\alpha$, so the sum over
+$\{\alpha:\langle\alpha,\xi\rangle<0\}$ is exactly half the sum over all roots:
+\[
+\Tr_{\mf g/\mf p_\xi}(\eta,\eta)\;=\;\frac12\,\Tr_{\mf g}(\eta,\eta).
+\]
+Therefore the level of $\mathcal D_\xi$ is
+\[
+\mathrm{lev}(\mathcal D_\xi)
+\;=\;\Tr_{\mf g/\mf p_\xi}
+\;=\;\frac12\,\Tr_{\mf g}.
+\]
+
+There is the classical indentification of the level of the Pfaffian square root $\mathcal K^{-1/2}$
+\[
+c\;:=\;-\frac12\,\Tr_{\mf g},
+\]
+where $\mathcal K=\det(E_\Sigma^*\mf g)$ is the canonical bundle on $\mf M$.
+Combining with the computation above gives
+\[
+\mathrm{lev}(\mathcal D_\xi) = -c.
+\]
+However the shift $[1]$ in the determinant line $\mathcal D_\xi$: \begin{align*}
+    \det \Bigl(R\pi_*\mathcal E^*(\mf g/\mf p_\xi)[1]\Bigr) = \det \Bigl(R\pi_*\mathcal E^*(\mf g/\mf p_\xi)\Bigr)^{-1}
+\end{align*} leaves us with $c$ as desired.
+\end{proof}
+
+\medskip
+\noindent\textbf{(B) Tensoring by an admissible class $\mathcal E$.}
+Lemma \cite[\S1.11]{TelemanWoodward} concerns the $\xi$--invariant part of
+\[
+\mathcal E\otimes \Eul(\nu_\xi)^{-1}_+,
+\qquad
+\bigl(\mathcal E\otimes \Eul(\nu_\xi)^{-1}_+\bigr)^{\xi\text{-inv}},
+\]
+i.e.\ the weight--$0$ subobject for the $\Gm$--action defined by $\xi$.
+
+Write $\mathcal E$ as a product
+\[
+\mathcal E \;=\; \mathcal L\ \otimes\ (\text{Atiyah--Bott generators}),
+\]
+where $\mathcal L$ is a determinant line bundle and the remaining factors are
+built from the Atiyah--Bott generators $E_x^*V$, $E_C^*V$, $E_\Sigma^*V$.
+
+\medskip
+\noindent\textbf{(B1) Quadratic shift from $\mathcal L$.}
+By Grothendieck--Riemann--Roch, the first Chern class of $\mathcal L$ determines
+an invariant quadratic form
+\[
+h=h_{\mathcal L}\in \Sym^2(\mf g^*)^G,
+\]
+called the \emph{level} of $\mathcal L$.  Teleman--Woodward's GRR calculation
+shows that, on the $\xi$--stratum, the $\xi$--weight contributed by $\mathcal L$
+has leading behaviour controlled by this level:
+\begin{equation}
+\label{eq:L-weight}
+\wt_\xi(\mathcal L)\sim h(\xi,\xi),
+\qquad\text{quadratic in }\xi.
+\end{equation}
+Combining \eqref{eq:L-weight} with the determinant contribution
+\eqref{eq:weight-is-c} coming from $\Eul(\nu_\xi)^{-1}_+$, the \emph{net} quadratic
+behaviour is governed by
+\begin{equation}
+\label{eq:h-plus-c}
+(h+c)(\xi,\xi).
+\end{equation}
+
+Recall that $\mathcal L$ is \emph{admissible} precisely when $h+c$ is positive
+definite on $\mf g$, equivalently when
+\[
+(h+c)(\xi,\xi)\to +\infty\qquad\text{as }\|\xi\|\to\infty.
+\]
+
+\medskip
+\noindent\textbf{(B2) Linear perturbation from Atiyah--Bott factors.}
+The remaining factors in $\mathcal E$ are Atiyah--Bott generators attached to
+representations $V$ of $G$.  Their $\xi$--weights are governed by ordinary
+representation theory: if $\lambda$ is a weight of $V$, then $\xi$ acts with
+weight $\langle\lambda,\xi\rangle$.  In particular, these contributions are at
+most \emph{linear} in $\xi$:
+\begin{equation}
+\label{eq:AB-linear}
+\wt_\xi(\text{Atiyah--Bott factors}) = O(\|\xi\|).
+\end{equation}
+
+\medskip
+\noindent\textbf{(C) Finite-dimensionality of the $\xi$--invariant part.}
+The polarized inverse Euler factor $\Eul(\nu_\xi)^{-1}_+$ has a $\xi$--weight
+decomposition with two crucial properties:
+\begin{enumerate}[(i)]
+\item only weights $\le 0$ occur; and
+\item each weight space has finite multiplicity.
+\end{enumerate}
+These follow from the fact that in \eqref{eq:polarized-eul} the symmetric algebra
+is generated by strictly negative $\xi$--weight summands.
+
+Fix $\xi$.  The weight--$0$ piece of
+$\mathcal E\otimes \Eul(\nu_\xi)^{-1}_+$
+is obtained by summing those weight spaces of $\Eul(\nu_\xi)^{-1}_+$ whose weights
+cancel the (finite) set of weights appearing in $\mathcal E$.  Since each weight
+space of $\Eul(\nu_\xi)^{-1}_+$ has finite multiplicity, it follows that
+\begin{equation}
+\label{eq:finite-invariants}
+\bigl(\mathcal E\otimes \Eul(\nu_\xi)^{-1}_+\bigr)^{\xi\text{-inv}}
+\ \text{is finite-dimensional.}
+\end{equation}
+This is the first conclusion of \cite[\S1.11]{TelemanWoodward}.
+
+\medskip
+\noindent\textbf{(D) Eventual vanishing for $\|\xi\|\gg 0$.}
+Now let $\xi$ vary in the dominant cone.  The symmetric algebra part of
+$\Eul(\nu_\xi)^{-1}_+$ produces weights by taking symmetric powers of
+negative--weight generators.  The possible weights contributed in this way move
+away from $0$ in steps controlled by the individual $\xi$--weights of the
+generators; these steps scale \emph{linearly} in $\xi$ (because root weights
+$\langle\alpha,\xi\rangle$ are linear in $\xi$).
+
+On the other hand, twisting by an admissible line bundle $\mathcal L$ produces
+the quadratic shift \eqref{eq:h-plus-c}.  Combining with the linear perturbation
+\eqref{eq:AB-linear} from Atiyah--Bott generators, the net effect is that the set
+of $\xi$--weights appearing in
+$\mathcal E\otimes \Eul(\nu_\xi)^{-1}_+$
+is translated by a term which grows like $(h+c)(\xi,\xi)$, up to linear error.
+Since $(h+c)(\xi,\xi)$ grows quadratically while all available ``corrections''
+coming from symmetric powers grow at most linearly, it follows that for $\|\xi\|$
+sufficiently large the total $\xi$--weight $0$ cannot occur.  Equivalently, there
+exists $B>0$ such that
+\begin{equation}
+\label{eq:eventual-vanishing}
+\|\xi\|>B \quad\Longrightarrow\quad
+\bigl(\mathcal E\otimes \Eul(\nu_\xi)^{-1}_+\bigr)^{\xi\text{-inv}}=0.
+\end{equation}
+This is the second conclusion of \cite[\S1.11]{TelemanWoodward}.
+
+\medskip
+\noindent\textbf{(E) Consequence for finiteness of the index.}
+The local cohomology filtration of $R\Gamma(\mf M,\mathcal E)$ by Shatz supports
+has graded pieces controlled by the strata $\mf M_\xi$.
+Identifying the residue contribution along $\mf M_\xi$ with the $\xi$--invariant
+part of $\mathcal E\otimes \Eul(\nu_\xi)^{-1}_+$, the finiteness statement
+\eqref{eq:finite-invariants} gives finite-dimensionality of each stratum
+contribution, while the vanishing \eqref{eq:eventual-vanishing} shows that only
+finitely many $\xi$ contribute.  Therefore the local-to-global spectral sequence
+has only finitely many nonzero columns, and the index $\Ind(\mf M,\mathcal E)$ is
+finite.
+
+
+
+\section{References}
+\begin{enumerate}
+    \bibitem{TelemanWoodward} Teleman, C., \& Woodward, C. (2012). The index formula on the moduli of G-bundles. Annals of Mathematics, 176(2), 601-77.
+\end{enumerate}
+\end{document}
