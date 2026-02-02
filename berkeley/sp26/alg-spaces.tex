@@ -1,0 +1,444 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Title}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+    Abstract
+\end{abstract}
+
+\tableofcontents
+
+\section{}
+\begin{definition}
+    An \emph{algebraic space} over a base scheme $S$ is a functor $X \colon (\text{Sch}/S)^{op} \to \text{Sets}$ satisfying
+    \begin{enumerate}
+        \item $X$ is a sheaf in the fppf topology,
+        \item the diagonal morphism $\Delta \colon X \to X \times_S X$ is representable by schemes,
+        \item there exists a surjective étale morphism $U \to X$ from a scheme $U$.
+    \end{enumerate}
+\end{definition}
+
+
+By definiton, if $x\in X$ is a point of an algebraic space $X$, then $x$ admits an étale neighborhood $U \to X$ where $U$ is a scheme.
+
+
+\begin{example}[An \'{e}tale map need not induce an isomorphism on ordinary local rings]
+    Let
+    \[
+        X = \Spec \mathbb{C}[t,t^{-1}] \qquad
+        Y = \Spec \mathbb{C}[u,u^{-1}],
+    \]
+    and let $f\colon Y \to X$ be the finite morphism given by $t = u^2$.
+    This morphism is \'{e}tale: indeed, locally it is given by adjoining a root of
+    $g(T)=T^2-t$, and on $Y$ we have $g'(u)=2u\in \mathbb{C}[u,u^{-1}]^{\times}$.
+
+    Consider the generic point $\eta\in X$, so $\mathcal{O}_{X,\eta}=\kappa(\eta)=\mathbb{C}(t)$.
+    Let $\eta'\in Y$ be the generic point lying over $\eta$, so
+    $\mathcal{O}_{Y,\eta'}=\kappa(\eta')=\mathbb{C}(u)=\mathbb{C}(t^{1/2})$.
+    The induced map on local rings
+    \[
+        \mathcal{O}_{X,\eta}=\mathbb{C}(t) \longrightarrow \mathcal{O}_{Y,\eta'}=\mathbb{C}(t^{1/2})
+    \]
+    coming from $t\mapsto u^2$ is not an isomorphism.
+\end{example}
+
+In this example, we are making use of the following general criterion for \'{e}taleness:
+\begin{definition}[Standard \'{e}tale]\label{def:standard-etale}
+    Let $R$ be a ring and let $g,f\in R[x]$. Assume that $f$ is monic and that the
+    formal derivative $f'$ maps to a unit in the localization
+    \[
+        R[x]_g/(f).
+    \]
+    In this case the ring map
+    \[
+        R \longrightarrow R[x]_g/(f)
+    \]
+    is said to be \emph{standard \'{e}tale}.
+\end{definition}
+
+\begin{lemma}\label{lem:standard-etale-basic}
+    Let $R \to R[x]_g/(f)$ be standard \'{e}tale.
+    \begin{enumerate}
+        \item[(1)] The ring map $R \to R[x]_g/(f)$ is \'{e}tale.
+        \item[(2)] For any ring map $R\to R'$, the base change
+              \[
+                  R' \longrightarrow R'[x]_{g'}/(f')
+                  \qquad\text{with } R'[x]_{g'}/(f') \cong R'\otimes_R \bigl(R[x]_g/(f)\bigr)
+              \]
+              is standard \'{e}tale (where $f',g'$ denote the images of $f,g$ in $R'[x]$).
+        \item[(3)] Any principal localization of $R[x]_g/(f)$ is standard \'{e}tale over $R$.
+        \item[(4)] A composition of standard \'{e}tale maps need not be standard \'{e}tale in general.
+    \end{enumerate}
+\end{lemma}
+
+The example shows that the ordinary local ring $\mathcal{O}_{X,x}$ is not preserved
+under passing to an \'{e}tale neighborhood. The correct object that is invariant under passing to an \'{e}tale neighborhood is not theordinary local ring $\mathcal{O}_{X,x}$ but the \emph{\'{e}tale stalk} of the structure sheaf, which is canonically identified with a strict henselization of the ordinary local ring.
+
+
+
+\begin{definition}
+    Given a site $(\mathcal{C}, J)$, a point of the associated topos $\mathbf{Sh}(\mathcal{C}, J)$ is (equivalently) a functor
+    $$p^{-1} : \mathbf{Sh}(\mathcal{C}, J) \to \mathbf{Sets}$$
+    that is left exact and has a right adjoint (a ``geometric morphism'' $\mathbf{Sets} \to \mathbf{Sh}(\mathcal{C}, J)$). The stalk of a sheaf $\mathcal{F}$ at the point $p$ is $p^{-1}(\mathcal{F})$.
+\end{definition}
+
+Points are not objects of $\mathcal{C}$ a priori; they are topos-theoretic. One can show a geometric point of $X$ is a morphism
+\[
+    \bar{x}\colon \Spec(\Omega) \to X
+\]
+with $\Omega$ separably closed. It lies over an underlying (ordinary) point $x \in |X|$, and choosing $\bar{x}$ is equivalent to choosing an embedding
+\[
+    \kappa(x) \hookrightarrow \Omega
+\]
+into a separably closed field.
+
+The subtlety is:
+\begin{itemize}
+    \item The étale stalk $(\mathcal{O}_X)_{\bar{x}}$ is a stalk in the étale topology, and stalks are taken at points of the étale topos, i.e.\ geometric points, not just underlying Zariski points.
+    \item The strict henselization $(\mathcal{O}_{X,x})^{\mathrm{sh}}$ is not determined by $x$ alone: it depends on a choice of a separable closure of the residue field $\kappa(x)$ inside some separably closed field. That choice is precisely the extra datum carried by $\bar{x}$.
+\end{itemize}
+
+So if you specify only $x$, then $(\mathcal{O}_{X,x})^{\mathrm{sh}}$ is well-defined only up to noncanonical isomorphism; once you specify $\bar{x}$, it becomes canonical. Let $X$ be an algebraic space.
+\begin{itemize}
+    \item An underlying point $x\in|X|$ does not determine a canonical local ring. Any attempt to define $\mathcal O_{X,x}$ requires choosing an \'{e}tale chart and a lift of $x$, and different choices need not agree.
+    \item A geometric point $\bar x\to X$, however, does determine a canonical local ring:
+    \[
+        \mathcal O_{X,\bar x}:=(\mathcal O_X)_{\bar x},
+    \]
+    which is invariant under \'{e}tale pullback.
+\end{itemize}
+
+\begin{definition}[\'{E}tale local ring]
+    Let $X$ be an algebraic space and let $\bar x\colon \Spec(\Omega)\to X$ be a geometric point lying over $x\in |X|$.
+    The \emph{\'{e}tale local ring} of $X$ at $\bar x$ is the stalk
+    \[
+        \mathcal{O}_{X,\bar x} := (\mathcal{O}_X)_{\bar x} = \varinjlim_{(U,\bar u)\to (X,\bar x)} \Gamma(U,\mathcal{O}_U)
+    \]
+    of the structure sheaf on the \'{e}tale site $X_{\'{e}t}$.
+\end{definition}
+If $X$ is a scheme (or after choosing an \'{e}tale chart $U\to X$ with a lift of $\bar x$), the following lemma above identifies this canonically with the strict henselization
+\[
+    \mathcal{O}_{X,\bar x} \;\cong\; \bigl(\mathcal{O}_{X,x}\bigr)^{sh}.
+\]
+
+\begin{lemma}[Stacks Project, Lemma 59.33.1]
+    Let $S$ be a scheme and let $\bar s$ be a geometric point of $S$ lying over $s\in S$.
+    Let $\kappa=\kappa(s)$ and let $\kappa^{\mathrm{sep}}\subset \kappa(\bar s)$ denote the separable algebraic closure of $\kappa$ inside $\kappa(\bar s)$.
+    Then there is a canonical identification
+    \[
+        \bigl(\mathcal{O}_{S,s}\bigr)^{sh} \;\cong\; (\mathcal{O}_S)_{\bar s},
+    \]
+    where the left-hand side is the strict henselization of the local ring at $s$, and the right-hand side is the stalk of the structure sheaf on the \'{e}tale site $S_{\'{e}t}$ at the geometric point $\bar s$.
+\end{lemma}
+
+Even though the etale local ring is defined as a colimit over all etale neighborhoods, it can be computed from any single etale neighborhood. This is a consequence of the following proposition about weakly etale maps, and the fact that etale maps are weakly etale.
+
+\begin{definition}
+    A map $f \colon A \to B$ of rings is called weakly étale if it is flat and the diagonal map $B \otimes_A B \to B$ is also flat.
+\end{definition}
+
+\begin{proposition}
+    Let $A \to B$ be a weakly étale map of local rings. Then the induced map on strict henselizations $A^{sh} \to B^{sh}$ is an isomorphism, provided you choose the strict henselizations compatibly (pick a separable closure of $\kappa(x)$, and take the separable closure of $\kappa(y)$ inside it) where $x$ and $y$ are the closed points of $\Spec A$ and $\Spec B$ respectively.
+\end{proposition}
+
+\begin{definition}[Ideal sheaves on an algebraic space]
+Let $X$ be an algebraic space.
+An \emph{ideal sheaf} $I \subset \mathcal O_X$ is a subsheaf of rings of the
+structure sheaf on the \'{e}tale site $X_{\'{e}t}$ such that, \'{e}tale-locally,
+it is an ideal in the usual sense.
+
+Concretely, choosing an \'{e}tale surjection $U \to X$ with $U$ a scheme,
+an ideal sheaf $I \subset \mathcal O_X$ is equivalent to an ideal
+$I_U \subset \mathcal O_U$ such that the pullbacks of $I_U$ to
+$U \times_X U$ via the two projections agree.
+\end{definition}
+
+\begin{remark}[Ideal sheaves versus local rings on algebraic spaces]
+There is an important asymmetry between ideal sheaves and local rings on an
+algebraic space.
+
+\smallskip
+\noindent
+\textbf{(1) Ideal sheaves descend \'{e}tale-locally.}
+Ideal sheaves are sheaf-theoretic objects on the \'{e}tale site.
+Because \'{e}tale morphisms are flat and the \'{e}tale topology admits effective
+descent for quasi-coherent sheaves, an ideal of $\mathcal O_X$ may be defined
+on any \'{e}tale chart $U \to X$ and uniquely descended to $X$.
+In particular, closed subspaces and formal completions of algebraic spaces are
+defined \'{e}tale-locally on schemes.
+
+\smallskip
+\noindent
+\textbf{(2) Ordinary local rings do \emph{not} descend \'{e}tale-locally.}
+The ordinary local ring $\mathcal O_{X,x}$ at a point $x \in |X|$ is defined as a
+filtered colimit over Zariski neighborhoods of $x$.
+Since \'{e}tale morphisms need not identify Zariski neighborhoods, passing to an
+\'{e}tale chart generally changes the ordinary local ring.
+Thus ordinary local rings are not invariant under \'{e}tale pullback.
+
+\smallskip
+\noindent
+\textbf{(3) The correct local object is the \'{e}tale stalk.}
+The local invariant preserved by \'{e}tale morphisms is instead the
+\'{e}tale stalk $(\mathcal O_X)_{\bar x}$ at a geometric point
+$\bar x \colon \Spec(\Omega)\to X$, which is canonically identified with the
+strict henselization $(\mathcal O_{X,x})^{sh}$.
+Unlike the Zariski local ring, this object is \'{e}tale-local by construction.
+
+\smallskip
+\noindent
+In summary, ideal sheaves are global objects defined by \'{e}tale descent, while
+ordinary local rings depend on the Zariski topology and are not compatible with
+\^{e}tale localization. This distinction underlies the use of \'{e}tale topology
+and formal geometry in the theory of algebraic spaces.
+\end{remark}
+
+\subsection*{The \'{e}tale topology over $\mathbf C$}
+
+Even when $X$ is a scheme of finite type over $\mathbf C$, the \'{e}tale topology is
+strictly finer than the Zariski topology and leads to a genuinely different notion
+of locality.
+\begin{example}
+    Over $\mathbf{C}$, finite étale morphisms are exactly finite unbranched coverings in the analytic topology. Consider the map
+    \[
+        \mathbb{G}_m \to \mathbb{G}_m,\quad z\mapsto z^n
+    \]
+    is finite étale but not Zariski locally trivial.
+
+    \[
+        X=\Spec \mathbf C[t,t^{-1}],\qquad Y=\Spec \mathbf C[u,u^{-1}],\qquad t=u^n.
+    \]
+    Then
+    \[
+        \mathbf{C}[u,u^{-1}] \cong \mathbf{C}[t,t^{-1}][T]/(T^n-t).
+    \]
+    So $Y \to X$ is finite (monic polynomial).
+
+    For étale: use the standard criterion for $A[T]/(f)$ with $f$ monic.
+    Here $f(T) = T^n - t$, so $f'(T) = nT^{n-1}$. In $B = \mathbf{C}[u,u^{-1}]$,
+    $f'(u) = n u^{n-1}$,
+    which is a unit since $u$ is invertible on $\mathbb{G}_m$. Hence the map is étale everywhere.
+
+    However, this map is not Zariski locally trivial: there is no Zariski open cover of $X$ over which the map splits as a disjoint union of copies of the base. Equivalently, on rings this says: for each i, the $A_i$-algebra
+    $A_i[T]/(T^n-t)$
+    \quad\text{with } $A_i=\Gamma(U_i,\mathcal{O}_X)$
+    splits as a product $A_i\times\cdots\times A_i$. That happens iff $T^n-t$ factors into linear factors over $A_i$, i.e.\ iff $t$ admits an $n$-th root in $A_i$:
+    $t = s_i^n$ \quad\text{in } $A_i$.
+
+    But $X=\Spec \mathbf{C}[t,t^{-1}]$ is irreducible, so at least one $U_i$ contains the generic point. For that $U_i$, the inclusion of rings
+    $\mathbf{C}(t)\hookrightarrow \operatorname{Frac}(A_i)$
+    holds, and $t=s_i^n$ in $A_i$ would imply $t$ is an $n$-th power in the function field $\mathbf{C}(t)$. That is false: in $\mathbf{C}(t)$, the element $t$ has valuation $1$ at $t=0$, so it cannot be an $n$-th power (an $n$-th power would have valuation divisible by $n$). Contradiction.
+
+
+\end{example}
+
+Let $x\in X$ be a closed point and let $\bar x$ be a geometric point lying over $x$.
+Since $\kappa(x)=\mathbf C$ is already separably closed, the \'{e}tale local ring is
+given by
+\[
+    \mathcal{O}^{\acute et}_{X,\bar x}
+    \;=\;
+    (\mathcal{O}_{X,x})^{sh}
+    \;=\;
+    (\mathcal{O}_{X,x})^{h},
+\]
+the henselization of the Zariski local ring.
+In general this ring is strictly larger than $\mathcal{O}_{X,x}$, although the two
+have the same completion:
+\[
+    \widehat{\mathcal{O}_{X,x}}
+    \;\cong\;
+    \widehat{\mathcal{O}^{\acute et}_{X,\bar x}}.
+\]
+
+Thus completion only captures the formal neighborhood of $x$, while the \'{e}tale
+local ring retains the minimal henselian enlargement required to solve \'{e}tale
+equations (via Hensel's lemma).
+In this sense, \'{e}tale locality is strictly stronger than Zariski locality even
+over $\mathbf C$.
+
+\section{Elliptic curves and contractions}
+
+A smooth elliptic curve in $\mathbb{P}^2$ is a smooth plane cubic $E \subset \mathbb{P}^2$. As a divisor $E \sim 3H$, so
+\[
+    E^2 = (3H)^2 = 9,
+\]
+so it is not $(-1)$.
+
+You can produce an elliptic curve of self-intersection $-1$ on a blowup of $\mathbb{P}^2$: blow up $n$ distinct points $p_1, \dots, p_n$ on a smooth cubic $E$, and let $\widetilde{E}$ be the strict transform. Then
+\[
+    \widetilde{E}^2 = E^2 - \sum_{i=1}^n (\operatorname{mult}_{p_i} E)^2 = 9 - n,
+\]
+so choosing $n = 10$ gives $\widetilde{E}^2 = -1$.
+
+
+For a smooth projective surface $X$, the classical Castelnuovo contraction theorem says that a curve that can be contracted by a morphism $X \to Y$ to a smooth surface is necessarily a smooth rational curve with self-intersection $-1$.
+
+More generally, if a proper birational morphism from a smooth surface contracts a single irreducible curve to a point and the target is a scheme, then the exceptional curve has to be $\mathbb{P}^1$ (in particular, genus $0$). An elliptic curve can't be the exceptional locus of such a contraction to a scheme.
+
+Artin developed criteria ensuring that certain negative-definite curves on surfaces admit contractions in the category of algebraic spaces (even when no contraction exists as a scheme).
+
+\begin{definition}Let $X$ be a surface (algebraic space or scheme). A proper curve $C \subset X$ is \emph{contractible in the sense of Artin} if there exists a proper surjective morphism
+    \[f \colon X \to Y
+    \]to an algebraic space $Y$ such that
+    \begin{enumerate}
+        \item $f$ is an isomorphism on $X \setminus C$,
+        \item $f(C) = \{p\}$ is a single point,
+        \item $Y$ is separated and of finite type over the base field,
+        \item (usually imposed) $f_* \mathcal{O}_X = \mathcal{O}_Y$ (so you are not introducing extra connected components in the fibers; this is the ``Stein'' condition).
+    \end{enumerate}
+\end{definition}
+
+
+If $C$ is an elliptic curve with $C^2 < 0$ and it is "contractible" in Artin's sense, then:
+\begin{itemize}
+    \item A contraction $f \colon X \to Y$ exists in the category of algebraic spaces.
+    \item The target $Y$ is an algebraic space (of finite type, separated) which is a scheme away from the point $p$.
+\end{itemize}
+
+Let $S$ be a finite type scheme over a field $k$.
+\begin{theorem}[Existence of contractions, Artin]\label{thm:existence-contractions}
+    Let $Y' \subset X'$ be a closed subset of an algebraic space $X'$ of finite type
+    over a base scheme $S$, and let $\mathfrak X'$ be the formal completion of $X'$
+    along $Y'$.
+    Given a formal modification
+    \[
+        f_1 \colon \mathfrak X' \longrightarrow \mathfrak X_1,
+    \]
+    there exists a modification
+    \[
+        f \colon X' \longrightarrow X,
+        \qquad Y \subset X,
+    \]
+    together with an isomorphism $\varphi$ between the completion of $f$ along $Y$
+    and the given formal modification $f_1$.
+    The pair $(f,\varphi)$ is determined up to unique isomorphism.
+\end{theorem}
+
+\begin{theorem}[Artin, Formal Moduli II, Thm.\ 6.2]\label{thm:artin-formal-modification}
+    Let $\mathfrak X'$ be a formal algebraic space, let
+    $Y' = V(I')$
+    be the closed formal subspace defined by a defining ideal $I' \subset \mathcal O_{\mathfrak X'}$,
+    and let
+    $f \colon Y' \longrightarrow Y$ be a proper morphism.
+
+    Suppose the following conditions hold:
+
+    \begin{enumerate}[(i)]
+        \item For every coherent sheaf $\mathcal F$ on $\mathfrak X'$, we have
+              \[
+                  R^1 f_*\bigl(I'^n \mathcal F / I'^{n+1}\mathcal F\bigr) = 0
+                  \qquad \text{for } n \gg 0.
+              \]
+
+        \item For every $n \ge 0$, the natural morphism of sheaves on $Y_0 := V(I')_{\mathrm{red}}$
+              \[
+                  f_*\bigl(\mathcal O_{\mathfrak X'} / I'^n\bigr)
+                  \times_{f_* \mathcal O_{Y'}} \mathcal O_Y
+                  \;\longrightarrow\;
+                  \mathcal O_Y
+              \]
+              is surjective.
+    \end{enumerate}
+
+    Then there exists a formal modification
+    $
+        \widehat f \colon \mathfrak X' \longrightarrow \mathfrak X
+    $
+    and a defining ideal $I \subset \mathcal O_{\mathfrak X}$ such that
+    $
+        V(I) = Y
+    $
+    and such that $\widehat f$ induces the given morphism
+    $f \colon Y' \to Y$.
+\end{theorem}
+
+\begin{theorem}[Knutson, Thm.\ III.6.2]\label{thm:knutson-contraction}
+    Let $X'$ be a nonsingular algebraic space of finite type over a field $k$, and let
+    $Y' \subset X'$ be a closed nonsingular subspace.
+    Assume that $\dim X' = d$ and $\dim Y' = d-1$, and that $Y'$ is proper over $k$.
+    Let
+    \[
+        \mathcal L := N^\vee_{Y'/X'}
+    \]
+    denote the conormal bundle of $Y'$ in $X'$, and assume that $\mathcal L$ is ample on $Y'$.
+
+    Then there exists a proper birational morphism
+    \[
+        f \colon X' \longrightarrow X
+    \]
+    to an algebraic space $X$ such that:
+    \begin{enumerate}
+        \item $f$ is an isomorphism over $X \setminus \{p\}$,
+        \item $f(Y') = \{p\}$ is a single point,
+        \item $f^{-1}(p) = Y'$.
+    \end{enumerate}
+    In other words, $Y'$ can be contracted to a point in the category of algebraic spaces.
+\end{theorem}
+
+\begin{proof}
+    The proof proceeds by reducing the problem to Artin's formal algebraization
+    theorem (Theorem~\ref{thm:artin-formal-modification}).
+
+    Let $\mathfrak X' := \widehat{X'}_{Y'}$ denote the formal completion of $X'$ along
+    $Y'$, with defining ideal $I' \subset \mathcal O_{\mathfrak X'}$.
+    Since $Y'$ is a smooth divisor in the smooth space $X'$, the graded pieces of the
+    $I'$-adic filtration are given by
+    \[
+        I'^n / I'^{n+1} \;\cong\; \operatorname{Sym}^n(N^\vee_{Y'/X'}).
+    \]
+
+    Because $Y'$ is proper and the conormal bundle $N^\vee_{Y'/X'}$ is ample, Serre
+    vanishing implies that for any coherent sheaf $\mathcal F$ on $X'$,
+    \[
+        H^1\!\left(Y', \operatorname{Sym}^n(N^\vee_{Y'/X'}) \otimes \mathcal F|_{Y'}\right) = 0
+        \quad \text{for } n \gg 0.
+    \]
+    This verifies condition~(i) of Theorem~\ref{thm:artin-formal-modification}.
+
+    As for condition~(ii), we have $Y=\{p\}$ a point, so $\mathcal O_Y=k$.
+    Writing $A_n:=\Gamma\bigl(Y',\mathcal O_{\mathfrak X'}/I'^n\bigr)$ and $A_0:=\Gamma\bigl(Y',\mathcal O_{Y'}\bigr)$, Artin's map in~(ii) becomes the ring map
+    \[
+        A_n\times_{A_0} k \longrightarrow k,
+    \]
+    where $k\to A_0$ is the structure map. This map is the projection to the second factor, hence is automatically surjective. Thus, in this special case, Artin's condition~(ii) is automatic.
+\end{proof}
+
+
+
+
+\end{document}
