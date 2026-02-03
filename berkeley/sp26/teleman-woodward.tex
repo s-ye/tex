@@ -23,6 +23,7 @@
 \setlength{\parindent}{0pt} % Removes paragraph indentation
 \DeclareMathOperator{\Eul}{Eul}
 \DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\pt}{pt}
 
 \begin{document}
 
@@ -615,12 +616,13 @@ $\mf M^{ss}_{G_\xi,\xi}$ be the semistable Levi moduli.
 
 Sending a $P_\xi$--bundle to its associated Levi bundle defines a morphism
 $q_\xi:\mf M_\xi\to \mf M^{ss}_{G_\xi,\xi}$.
-The fibres are quotient stacks of affine spaces by unipotent groups.
+\red{The fibres are quotient stacks of affine spaces by unipotent groups. Whenever we define our stratification, we need to make sure this is true.}
 The deformation theory transverse to the Levi directions is governed by the
 perfect complex on $\mf M^{ss}_{G_\xi,\xi}$
 \[
 \nu_\xi:= R\pi_*\mathcal E^*(\mf g/\mf g_\xi)[1],
 \]
+\red{How did Teleman-Woodward identify this? Is there some general theory?}
 whose pullback along $q_\xi$ controls the virtual normal directions along the stratum and 
 where \[\pi:\Sigma\times \mf M^{ss}_{G_\xi,\xi}\to \mf M^{ss}_{G_\xi,\xi}\] and
 $\mathcal E$ is the universal bundle.
@@ -986,6 +988,567 @@ has only finitely many nonzero columns, and the index $\Ind(\mf M,\mathcal E)$ i
 finite.
 
 
+\section{General idea}
+
+Let $S = \C[[s]], S^* = \C((s))$ and $B$ be an $S$-scheme.  Let $C_S \to S$ be a projective flat family of curves with generic fiber $\C_{S^*}$ smooth and special fiber $C_0$ nodal with unique node $p$. Let $C_B = C_S \times_S B$.
+
+Solis \cite{solis} defines the $S$-stack $\mathcal{X}_G(C_S)$ whose points evaluated at a test scheme $B/S$ are given by elements $(C'_B,P_B)$ where $C'_B$ is a twisted modification of $C_B$ and $P_B$ is an admissible $G$-bundle on $C'_B$. This stack is over a fixed curve $C_S$ and Solis shows that it is algebraic, locally of finite type, and complete over $S$. It contains $M_G(C_S)$ and $M_G(C_{S^*})$ as dense open substacks, and the complement of $M_G(C_{S^*})$ is a divisor with normal crossings.
+
+In this section, we discuss how to generalize Solis' construction to families of curves by working over the universal curve over the moduli stack of stable curves $\overline{\mathfrak{M}}_{g,I}$. Let $\pi:\overline{\mathcal{C}_{g,I}} \to \overline{\mathfrak{M}}_{g,I}$ be the universal curve over the moduli stack of stable curves of genus $g$ with $I$ marked points.
+
+Let $\pi:C\to B$ be a prestable family of nodal curves. Let
+\[
+\Sigma := \mathrm{Sing}(C/B)\subset C
+\]
+be the relative singular locus. It is finite étale over $B$ after restricting to the locus where the number of nodes is constant; globally it is at least finite unramified in good situations.
+\begin{definition}
+    
+
+A \textbf{modification of $C/B$} is a proper morphism $m:C'\to C$ over $B$ such that:
+\begin{enumerate}
+\item $C'\to B$ is flat prestable curve, and $m$ is finitely presented and projective.
+
+\item $m$ is an isomorphism away from the nodes:
+\[
+m:\; C'\setminus m^{-1}(\Sigma)\ \xrightarrow{\sim}\ C\setminus \Sigma.
+\]
+
+\item For every geometric point $b\to B$ and every node $p\in \Sigma_b\subset C_b$, the fiber of $m_b:C'_b\to C_b$ over $p$ is either a point (no modification at that node) or a chain of $\mathbb P^1$'s meeting the two branches in the standard way, and $m_b$ contracts that chain to $p$ and is an isomorphism elsewhere.
+\end{enumerate}
+\end{definition}
+
+A \textbf{length $\le n$ condition} can be stated as:
+\begin{itemize}
+\item for every $b$ and every node $p\in \Sigma_b$, the chain over $p$ has at most $n$ components.
+\end{itemize}
+
+\begin{definition}[Twisted nodal curves over a base]\label{def:twisted-curve}
+Let $B$ be a scheme over $\C$.
+A \textbf{twisted nodal curve over $B$} is a proper Deligne--Mumford stack
+\[
+\pi:\mathcal C \longrightarrow B
+\]
+such that:
+
+\begin{enumerate}
+\item
+The geometric fibers of $\pi$ are connected, one--dimensional, and the
+coarse moduli space $\overline{\mathcal C}$ is a nodal curve.
+
+\item
+Let $\mathcal U \subset \mathcal C$ be the complement of the relative
+singular locus $\mathrm{Sing}(\mathcal C/B)$.  
+Then the restriction
+\[
+\mathcal U \hookrightarrow \mathcal C
+\]
+is an open immersion.
+
+\item
+For any geometric point $p:\Spec k\to \mathcal C$ mapping to a node of the
+fiber over $b\in B$, there exists an integer $k\ge1$ and an element
+$t\in \mathfrak m_{B,b}$ such that, étale-locally on $B$ at $b$ and strictly
+henselian locally on $\mathcal C$ at $p$, there is an isomorphism
+\[
+\Spec \mathcal O_{\mathcal C,p}^{sh}
+\;\cong\;
+\Bigl[\,\Spec\bigl(\mathcal O_{B,b}^{sh}[u,v]/(uv-t)\bigr)\ \big/\ \mu_k\,\Bigr],
+\]
+where $\zeta\in\mu_k$ acts by
+\[
+(u,v)\longmapsto(\zeta u,\zeta^{-1}v).
+\]
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+    A \textbf{twisted modification of $C/B$} is a twisted nodal curve $\mathcal{C} \to B$ whose coarse moduli space $\overline{\mathcal{C}}$ is a modification of $C/B$.
+\end{definition}
+
+Let $r = \operatorname{rk}(G)$. The ordered simple roots $\{\alpha_0,\alpha_1,\dots,\alpha_r\}$ determine
+ordered vertices $\{\eta_0,\dots,\eta_r\}$ determined by the conditions
+\[
+\langle \eta_i,\alpha_j\rangle = 0 \text{ for } i\neq j
+\quad\text{and}\quad
+\langle \eta_0,\alpha_0\rangle =1.
+\]
+If we write $\theta = \sum_{i=1}^r n_i\alpha_i$ and set $n_0=1$ then one can
+check these conditions can be expressed as
+\begin{equation}
+\label{eq:alpha-eta}
+\langle \alpha_i,\eta_j\rangle = \frac{1}{n_i}\delta_{i,j}.
+\end{equation}
+
+Following \cite{solis}, if $C'_B$ is a twisted modification of length $\le r$, then a 
+$G$--bundle on $C'_B$ is called \textbf{admissible} if the co--characters determining the 
+equivariant structure at all nodes are linearly independent over $\mathbb{Q}$ and are given by 
+a subset of $\{\eta_0,\dots,\eta_r\}$.
+
+\begin{definition}
+    We define a stack $\mathcal{X}_{G,g,I}$ over $\overline{\mathfrak{M}}_{g,I}$ whose points over a test scheme $B \to \overline{\mathfrak{M}}_{g,I}$ are given by pairs $(C'_B,P_B)$ where $C'_B$ is a twisted modification of the pullback $C_B$ of the universal curve $\overline{\mathfrak{C}_{g,I}}$ to $B$, and $P_B$ is an admissible $G$-bundle on $C'_B$. 
+\end{definition}
+
+\begin{proposition}\label{prop:X-algebraic}
+The projection
+\[
+F:\mathcal X_{G,g,I}\to \overline{\mathcal M}_{g,I}
+\]
+is algebraic and locally of finite type.
+\end{proposition}
+
+\subsection{The $\PGL_2$ toy model: gluing at a node and the wonderful compactification}
+
+Let $\widetilde C$ be a smooth connected curve and fix two distinct points
+$p,q\in \widetilde C$.  Let $C$ be the nodal curve obtained by identifying
+$p\sim q$, and write $\nu:\widetilde C\to C$ for the normalization; the node
+$x\in C$ satisfies $\nu^{-1}(x)=\{p,q\}$.
+
+\subsubsection*{1. A point of $G$ produces a $G$--bundle on the nodal curve}
+
+Let $G=\PGL_2(\C)$ (or any algebraic group).  Fix a principal $G$--bundle
+$E$ on $\widetilde C$ together with framings (trivializations of the fibres as
+$G$--torsors)
+\[
+f_p:E|_p\xrightarrow{\sim} G,
+\qquad
+f_q:E|_q\xrightarrow{\sim} G.
+\]
+Given $g\in G$, define a $G$--equivariant isomorphism of $G$--torsors
+\[
+\phi_g:E|_p\longrightarrow E|_q
+\]
+by the composite
+\[
+E|_p \xrightarrow{\,f_p\,} G \xrightarrow{\,\cdot g\,} G \xrightarrow{\,f_q^{-1}\,} E|_q,
+\]
+where $x\mapsto xg$ denotes right multiplication (any consistent left/right
+convention works).
+
+Using $\phi_g$, one descends $E$ from $\widetilde C$ to a principal $G$--bundle
+on the nodal curve $C$: informally, one glues the two fibres $E|_p$ and $E|_q$
+over the branches of the node using the identification $\phi_g$.  Denote the
+resulting descended bundle by $E(\phi_g)$.
+
+Equivalently, a principal $G$--bundle on $C$ is the same as a principal $G$--bundle
+on $\widetilde C$ together with an identification of the fibres over $p$ and $q$;
+the isomorphism $\phi_g$ is exactly such an identification.  Thus, once the data
+$(E,f_p,f_q)$ is fixed, the element $g\in G$ determines a principal $G$--bundle
+on $C$.
+
+\subsubsection*{2. Rephrasing the gluing as a $\Delta(G)$--reduction}
+
+Consider the $G\times G$--torsor $E|_p\times E|_q$ over $\Spec\C$.
+An isomorphism $\phi:E|_p\to E|_q$ is equivalent to the choice of a point in the
+contracted product
+\[
+(E|_p\times E|_q)/\Delta(G),
+\]
+since $\Delta(G)$ acts by simultaneous change of trivializations, and the graph
+of $\phi$ is a $\Delta(G)$--orbit.
+
+Equivalently, giving $\phi$ is the same as giving a reduction of structure group
+\[
+E|_p\times E|_q
+\quad\text{from }G\times G\text{ to }\Delta(G)\subset G\times G.
+\]
+This is the sense in which one identifies $G\simeq (G\times G)/\Delta(G)$ and
+interprets the gluing map $\phi_g$ as a $\Delta(G)$--reduction at the pair
+$(p,q)$.
+
+\subsubsection*{3. One--parameter families and the need for compactification}
+
+A morphism
+\[
+\gamma:\Spec\C[t^{\pm 1}]\longrightarrow G
+\]
+gives a family of gluing maps $\phi_{\gamma(t)}$, hence a family of principal
+$G$--bundles on the fixed nodal curve $C$ parametrized by $t\in\C^\times$.
+However, $\gamma$ may fail to extend to $t=0$ as a morphism
+$\Spec\C[t]\to G$.  A basic example is
+\[
+t\longmapsto \diag(t,t^{-1})\in \SL_2(\C)\twoheadrightarrow \PGL_2(\C),
+\]
+which ``goes to infinity'' in $G$.  In that case the family of glued bundles on
+$C$ has no \emph{a priori} limit inside the original moduli problem.  One remedy
+is to enlarge the parameter space $G$ to a compactification $\overline G$, so
+that $\gamma$ extends and the boundary value can be given a modular
+interpretation.
+
+\subsubsection*{4. For $G=\PGL_2$, the wonderful compactification is $\P^3$}
+
+An element of $G=\PGL_2(\C)$ may be represented by a $2\times 2$ matrix up to
+overall scaling,
+\[
+g=\begin{pmatrix}a&b\\c&d\end{pmatrix},
+\qquad (a,b,c,d)\neq 0,
+\]
+giving an open embedding
+\[
+\PGL_2 \hookrightarrow \P^3,\qquad [a:b:c:d],
+\]
+whose image is the open subset $\{ad-bc\neq 0\}$.  The boundary is the quadric
+\[
+\{ad-bc=0\}\subset \P^3,
+\]
+which is the locus of rank $\le 1$ matrices.  Concretely,
+\[
+\{ad-bc=0\}
+=
+\{\text{rank}\le 1\}
+=
+\bigl\{[u v^T]: u\in \C^2\setminus\{0\},\, v\in(\C^2)^\vee\setminus\{0\}\bigr\}/\C^\times
+\cong \P^1\times \P^1,
+\]
+sending a rank--one matrix $uv^T$ to the pair $([u],[v])$.
+
+\subsubsection*{5. Modular meaning of boundary points: Borel reductions at $p$ and $q$}
+
+Let $B\subset \PGL_2$ be a Borel subgroup (e.g.\ the image of upper triangular
+matrices).  Then
+\[
+G/B \cong \P^1
+\]
+is the flag variety.  In this case, the boundary of the wonderful
+compactification admits an identification
+\[
+\partial\overline G:=\overline G\setminus G \ \cong\ (G/B)\times (G/B)
+\cong \P^1\times \P^1.
+\]
+
+Given a point $(s_p,s_q)\in (G/B)\times (G/B)$, the framings $f_p,f_q$ identify
+the fibres $E|_p\simeq G$ and $E|_q\simeq G$, and hence:
+\begin{itemize}
+\item the point $s_p\in G/B$ is the same as a $B$--reduction of the framed fibre $E|_p$;
+\item the point $s_q\in G/B$ is the same as a $B$--reduction of the framed fibre $E|_q$.
+\end{itemize}
+Thus allowing the gluing parameter to land in the boundary replaces an honest
+identification $E|_p\simeq E|_q$ (equivalently a $\Delta(G)$--reduction of
+$E|_p\times E|_q$) by weaker boundary data: a $B\times B$--reduction of the
+$G\times G$--torsor $E|_p\times E|_q$.
+
+In other words, the ``completed'' moduli problem includes:
+\begin{itemize}
+\item a principal $G$--bundle $E$ on $\widetilde C$, and
+\item either a $\Delta(G)$--reduction at $(p,q)$ (giving a genuine $G$--bundle on $C$),
+\item or a boundary datum consisting of $B$--reductions at $p$ and $q$
+(i.e.\ a $B\times B$--reduction).
+\end{itemize}
+This is the simplest instance of completing a moduli problem by allowing
+controlled degenerations at the node.
+
+\subsubsection*{6. Relation to the affine/loop--group story}
+
+In the affine story one replaces the finite--dimensional parameter space $G$ by
+loop--group data (often together with loop rotation $\C^\times$).  The boundary
+of an affine compactification encodes parahoric reductions (equivalently,
+coweight data) at the node; this is where affine Weyl combinatorics enters.
+For $G=\PGL_2$ in the finite--dimensional toy model, the boundary is merely
+$(G/B)^2$, whereas in the affine case the boundary stratifies by affine Weyl
+data and leads to admissibility constraints.
+
+\subsubsection*{7. A concrete limit computation}
+
+Let $\gamma(t)=[\diag(t,t^{-1})]\in \PGL_2$.  In homogeneous coordinates
+$[a:b:c:d]$ on $\P^3$, this is
+\[
+[t:0:0:t^{-1}] = [t^2:0:0:1].
+\]
+As $t\to 0$ this tends to $[0:0:0:1]$, a rank--one matrix, hence a boundary point.
+Under $\partial\overline G\cong \P^1\times \P^1$, this point corresponds to a
+pair of flags, i.e.\ to a choice of Borels at $p$ and $q$, which is exactly the
+$B\times B$--reduction boundary datum described above.
+
+Let $S=\C[[t]]$ and take a family $C\to S$ smoothing a node, locally $xy=t$. Near the node you have two formal branches and the “middle” is a punctured disc in the generic fiber.
+To give a $G$-bundle on a curve, it is enough to give it on the complement of a point and on the formal disc, plus an identification on the punctured disc.
+
+That identification is a transition function in $G(\!(z)\!)$, i.e. an element of $LG$. In particular, if we allow limits of such transition functions, we are forced into allowing other “integral models” on the disc, i.e. parahorics. 
+
+The classification of parahorics is affine-Weyl/alcove combinatorics. In partiuclar, parahorics are classified by facets of the fundamental alcove, and maximal parahorics correspond to vertices of the alcove, which are labeled by the $\eta_i$.
+
+\begin{remark}[Why the $\eta_i$ should be viewed as \emph{parahoric types}]
+\label{rem:eta-parahoric}
+The slogan is that in Solis' compactification one is not parametrizing ordinary
+$G$--bundles alone, but rather torsors under a \emph{sheaf of groups}
+$\mathcal G$ which agrees with $G$ away from the nodes and is replaced by a
+\emph{parahoric} subgroup of the loop group near each node.  The labels
+$\eta_i$ encode precisely which parahoric is allowed.
+
+\smallskip
+\noindent\textbf{(1) $G$--bundles as torsors for a sheaf of groups.}
+Let $C$ be a smooth curve.  Write
+\[
+\mathcal G^{\mathrm{std}}(U):=\Hom_{\mathrm{Sch}}(U,G)
+\]
+for the usual sheaf of groups on $C$.
+A principal $G$--bundle $E$ determines a $\mathcal G^{\mathrm{std}}$--torsor by
+\[
+\mathcal F_E(U):=\Gamma(U,E|_U),
+\]
+and conversely $\mathcal G^{\mathrm{std}}$--torsors are the same thing as
+principal $G$--bundles (this is the standard equivalence between $G$--bundles and
+$G$--torsors).
+
+\smallskip
+\noindent\textbf{(2) Modifying the local structure group: parabolics and parahorics.}
+Fix a point $p\in C$ with a formal parameter $z$.
+Let $D=\Spec\C[[z]]$ and $D^\times=\Spec\C((z))$.
+A principal $G$--bundle may be described by giving it on $C\setminus\{p\}$ and on
+$D$, together with a gluing isomorphism on the overlap $D^\times$; after
+choosing trivialisations this gluing is an element of the loop group
+\[
+G((z))=LG.
+\]
+
+Now let $P\subset G$ be a parabolic subgroup.  Set
+\[
+L^+_P G:=\{\gamma\in G[[z]] \mid \gamma(0)\in P\}\subset G[[z]].
+\]
+One may package the condition ``a $G$--bundle with reduction to $P$ at $p$''
+by replacing the local gauge group $G[[z]]$ on the disc by $L^+_P G$.
+Equivalently, define a new sheaf of groups $\mathcal G^P$ on a neighborhood of
+$p$ by
+\[
+\mathcal G^P(D)=L^+_P G,
+\qquad
+\mathcal G^P(D^\times)=G((z)),
+\]
+and gluing this with $\mathcal G^{\mathrm{std}}|_{C\setminus\{p\}}$ along the
+overlap $D^\times$.
+Then $\mathcal G^P$--torsors are exactly quasi--parabolic $G$--bundles
+(i.e.\ $G$--bundles on $C$ with a $P$--reduction at $p$).
+
+More generally one may replace $L^+_P G$ by any \emph{parahoric} subgroup
+$K\subset G((z))$ (in the sense of Bruhat--Tits), obtaining a sheaf of groups
+$\mathcal G^K$ whose torsors are ``$G$--bundles with parahoric structure at $p$''.
+For \emph{exotic} parahorics these torsors need not be identifiable with ordinary
+$G$--bundles plus extra structure; they are genuinely new objects.
+
+\smallskip
+\noindent\textbf{(3) Where the $\eta_i$ enter.}
+Parahoric subgroups of $G((z))$ are classified by facets of the affine alcove,
+and the \emph{vertices} of the fundamental alcove correspond to \emph{maximal}
+parahorics.  The affine simple roots $\{\alpha_0,\alpha_1,\dots,\alpha_r\}$ have
+dual ``vertex'' coweights $\{\eta_0,\dots,\eta_r\}$, and one may view $\eta_i$ as
+labels for these maximal parahorics:
+\[
+\eta_i \quad\longleftrightarrow\quad \text{a maximal parahoric } \mathcal P_{\eta_i}\subset G((z)).
+\]
+Thus, specifying ``$\eta_i$ at a node'' should be interpreted as specifying that
+the local structure group near that node is the parahoric $\mathcal P_{\eta_i}$,
+i.e.\ that we are working with torsors for the corresponding modified sheaf of
+groups.
+
+\smallskip
+\noindent\textbf{(4) Conceptual rephrasing of admissibility.}
+In this language, Solis' admissibility condition is a finiteness restriction on
+the allowed local group schemes at the nodes: on a twisted modification one only
+allows those parahoric types indexed by the finite set
+$\{\eta_0,\dots,\eta_r\}$ (and imposes a further independence condition when
+several nodes occur).  This is why it is natural to think of the $\eta_i$ as
+\emph{parahoric types}.
+\end{remark}
+
+\begin{definition}[$\mathcal P$--parahoric $G$--bundles at a point]
+\label{def:parahoric-torsor}
+Fix a smooth curve $C$ over $\C$ and a point $p\in C$ with a choice of formal
+parameter $z$ at $p$, so that the completed local ring is $\widehat{\mathcal O}_{C,p}\cong\C[[z]]$
+and the punctured disc is $D^\times=\Spec\C((z))$.
+Let
+\[
+\mathcal P\ \subset\ G((z))
+\]
+be a \emph{parahoric} subgroup (for instance a \emph{maximal} parahoric, i.e.\ one
+corresponding to a vertex of the fundamental alcove).
+
+Define a sheaf of groups $\mathcal G^{\mathcal P}$ on $C$ by gluing the standard
+sheaf $\mathcal G^{\mathrm{std}}$ away from $p$ with the local sheaf determined by
+$\mathcal P$ at $p$ as follows:
+\begin{itemize}
+\item if $U\subset C$ is an open subset with $p\notin U$, set
+\(\mathcal G^{\mathcal P}(U):=\mathcal G^{\mathrm{std}}(U)=\Hom_{\mathrm{Sch}}(U,G)\);
+\item for the formal disc $D=\Spec\C[[z]]$ and punctured disc $D^\times=\Spec\C((z))$, set
+\[
+\mathcal G^{\mathcal P}(D):=\mathcal P,\qquad \mathcal G^{\mathcal P}(D^\times):=G((z)),
+\]
+with restriction map given by the inclusion $\mathcal P\hookrightarrow G((z))$;
+\item on the overlap $(C\setminus\{p\})\cap D^\times\simeq D^\times$, we identify both
+restrictions with $G((z))$ and glue.
+\end{itemize}
+
+A \emph{$\mathcal P$--parahoric $G$--bundle on $C$ (with parahoric structure of type $\mathcal P$ at $p$)} is a
+$\mathcal G^{\mathcal P}$--torsor on $C$.
+Equivalently, it is the data of:
+\begin{enumerate}[(i)]
+\item a principal $G$--bundle $E$ on $C\setminus\{p\}$;
+\item a $\mathcal P$--torsor $E_D$ on the formal disc $D$ (i.e.\ a principal homogeneous space under the group
+$\mathcal P=\mathcal G^{\mathcal P}(D)$);
+\item an identification of the induced $G((z))$--torsors over $D^\times$.
+\end{enumerate}
+
+When $\mathcal P=L^+_P G=\{\gamma\in G[[z]]\mid \gamma(0)\in P\}$ for a parabolic $P\subset G$, this recovers the usual notion
+of a quasi--parabolic $G$--bundle with a $P$--reduction at $p$.
+When $\mathcal P$ is a maximal parahoric corresponding to a vertex $\eta_i$ of the fundamental alcove, we say the parahoric structure at $p$ is \emph{of type $\eta_i$}.
+\end{definition}
+
+\begin{proposition}[Normalization description of parahoric bundles]
+Let $C$ be a nodal curve with normalization
+$\nu:\widetilde C\to C$ and nodes $x_i$ with preimages
+$\nu^{-1}(x_i)=\{p_i,q_i\}$.
+Fix parahoric subgroups
+$\mathcal P_i\subset G((z_i))$ at each node.
+
+A $\mathcal G^{\mathcal P}$--torsor on $C$ is equivalent to:
+
+\begin{enumerate}
+\item a principal $G$--bundle $E$ on $\widetilde C$;
+
+\item for each $i$, $\mathcal P_i$--torsors
+$E_{p_i}$ and $E_{q_i}$ on the formal discs at $p_i,q_i$
+whose restrictions to the punctured discs agree with
+$E|_{\widetilde C\setminus\{p_i,q_i\}}$;
+
+\item for each $i$, a gluing class
+\[
+[\phi_i]\in
+\mathcal P_i \backslash G((z_i)) / \mathcal P_i ,
+\]
+giving an identification of the punctured restrictions
+$E_{p_i}|_{D^\times}\cong E_{q_i}|_{D^\times}$.
+\end{enumerate}
+
+If the node is stacky with stabilizer $\mu_k$,
+one must additionally specify homomorphisms
+$\rho_i:\mu_k\to \mathcal P_i$
+and require the gluing to be $\mu_k$--equivariant.
+\end{proposition}
+\subsection*{How the compactification includes ordinary bundles}
+
+How does this compactify $G$-bundles on a nodal curve? Ordinary bundles sit inside as the trivial parahoric structure.
+
+\medskip
+\noindent\textbf{(1) Ordinary bundles on nodal curves.}
+Choose trivializations of $E$ on formal discs at $p,q$. Then a $G$-bundle on $C$ is the same as
+\begin{itemize}
+\item a principal $G$-bundle $E$ on $\widetilde C$, and
+\item an identification of fibers $E_p\simeq E_q$.
+\end{itemize}
+After choosing framings, that identification is an element $g\in G$.
+So the gluing parameter space for bundles on the fixed nodal curve is $G$.
+
+Equivalently (using discs), the gluing is a loop $\gamma(z)\in G((z))$ which actually lies in $G[[z]]$ and has the same value at $z=0$ on both branches, so it descends across the node. Concretely, the descent condition forces you into the ``diagonal'' subgroup
+\[
+\Delta(G[[z]])\subset G[[z]]\times G[[z]].
+\]
+
+\medskip
+\noindent\textbf{(2) Parahoric bundles enlarge the allowed local data.}
+Now pick a parahoric $\mathcal P\subset G((z))$. A $\mathcal P$-parahoric torsor on $C$ is (after choosing local trivializations) given by a double coset
+\[
+[\gamma]\in \mathcal P\backslash G((z))/\mathcal P,
+\]
+i.e.\ you allow gluing by any loop $\gamma(z)$, but you declare two loops equivalent if they differ by ``integral'' gauge transformations on each side lying in $\mathcal P$.
+
+This enlarges the moduli because $\mathcal P\backslash G((z))/\mathcal P$ contains more than the constant loops $G$.
+
+\medskip
+\noindent\textbf{(3) Where ordinary bundles sit inside: the hyperspecial case.}
+There is a distinguished maximal parahoric, the \emph{hyperspecial}
+\[
+\mathcal P_0:=G[[z]]\subset G((z)).
+\]
+Then
+\[
+\mathcal P_0\backslash G((z))/\mathcal P_0
+\]
+contains the constant loops $G$ as an open subset (the big cell) in the Bruhat decomposition
+\begin{align*}
+G((z)) &= \bigsqcup_{\lambda\in X_*(T)_+} \mathcal P_0 z^\lambda \mathcal P_0 
+\end{align*} where $X_*(T)_+$ are the dominant coweights. The constant loops correspond to $\lambda=0$.
+
+In words:
+\begin{itemize}
+\item trivial parahoric structure means: at the node you are not allowing any degeneration of the local group scheme; you keep the standard integral model $G[[z]]$;
+\item ordinary $G$-bundles on $C$ correspond to those parahoric torsors whose gluing class can be represented by a constant loop (equivalently, whose local modification at the node is trivial).
+\end{itemize}
+
+\subsection*{$G$--bundles on twisted chains}
+
+In the previous section we saw that associated to the singleton sets
+$\{i\}\subset \{0,\dots,r+1\}$ there is a moduli space parametrizing $G$--bundles
+on a twisted nodal curve, and further the moduli space can be identified with an
+orbit of the wonderful embedding of the loop group.  In this section we
+introduce a more general moduli problem which we show is isomorphic to the orbit
+$O_I$ in the wonderful embedding for any $I\subset \{0,\dots,r+1\}$.
+
+\medskip
+
+Let $R_n$ denote the rational chain of projective lines with $n$ components;
+Figure~3.1 in the introduction depicts a chain of length $3$.  There is an action
+of $\C^\times$ on $R_n$ which scales each component.  Let $p_0,\dots,p_n$ denote
+the fixed points of this action.
+
+Recall that $u,v$ are $k$th roots of $x,y$ which are our coordinates near a node.
+Let $p',p''$ denote the closed points of $\Spec \C[[u]]$ and $\Spec \C[[v]]$.
+Finally, let $D^{1/k}_n$ be the curve obtained from
+\[
+\Spec \C[[u]]\ \sqcup\ R_n\ \sqcup\ \Spec \C[[v]]
+\]
+by identifying $p'$ with $p_0$ and $p''$ with $p_n$.
+
+The group $\mu_k$ acts on $D^{1/k}_n$ through its usual action on $u,v$ and
+through the inclusion $\mu_k\subset \C^\times$ on the chain $R_n$.
+For an $n$--tuple $(\beta_0,\dots,\beta_n)\in \Hom(\C^\times,T)^n$, we can speak
+about the equivariant $G$--bundles on $D^{1/k}_n$ with equivariant structure at
+$p_i$ determined by $\beta_i$.  We refer to this equivalently as $G$--bundles on
+\[
+\bigl[D^{1/k}_n/\mu_k\bigr]
+\]
+of type $(\beta_0,\dots,\beta_n)$.
+
+Further, we can also glue $\bigl[D^{1/k}_n/\mu_k\bigr]$ to $C_0-p_0$ to obtain a
+curve $C_{n,[k]}$.  Let $C_n$ denote the coarse moduli space of $C_{n,[k]}$.
+We call $C_n$ a \emph{modification} of $C_0$ and $C_{n,[k]}$ a \emph{twisted
+modification} of $C_0$.
+
+\medskip
+
+Recall the specific cocharacters $\eta_0,\dots,\eta_r$ defined in \emph{(3.1)} in
+\S3.2.  For $I=\{i_1,\dots,i_n\}\subset \{0,\dots,r\}$, let
+$T_{G,I}\!\bigl([D^{1/k}_n/\mu_k]\bigr)$ denote the moduli space of pairs $(P,\tau)$
+where $P$ is a $G$--bundle on $\bigl[D^{1/k}_n/\mu_k\bigr]$ of type
+$(\eta_{i_1},\dots,\eta_{i_n})$ and $\tau$ is a trivialization on
+\[
+\bigl[\Spec \C((u))\times \C((v))/\mu_k\bigr].
+\]
+Let $H=\Aut(P)$; then restriction to $\Spec \C[[u]]$ and $\Spec \C[[v]]$ realizes
+\[
+H\ \subset\ (L_u G)^{\mu_k}\times (L_u G)^{\mu_k}.
+\]
+
+\begin{theorem}[{\cite[Thm.\ 3.4.7]{solis}}]
+Let $I\subset \{0,\dots,r\}$ and $T_{G,I}\!\bigl([D^{1/k}_n/\mu_k]\bigr)$ be as
+above.  Then there is an isomorphism
+\[
+T_{G,I}(C_{0,[k]})
+\xrightarrow{\ \Psi^{\eta_I}\ }
+(L_u G)^{\mu_k}\times (L_u G)^{\mu_k}/H
+\xrightarrow{\ \eta_I^{-1}(\ )\eta_I\ }
+\frac{L_{\mathrm{poly}}G\times L_{\mathrm{poly}}G}
+{Z(L_I)\times Z(L_I)\cdot P_I^{\Delta,\pm}}.
+\]
+Here $\Psi^{\eta_I}$ is as in \emph{(3.10)} and $\eta_I^{-1}(\ )\eta_I$ is
+described in Proposition~3.4.5.  Let
+\[
+i:\ [D^{1/k}_n/\mu_k]\ \longrightarrow\ C_{0,[k]}
+\]
+be the natural map.  Then
+\[
+i^*:\ T_{G,I}(C_{0,[k]})\ \longrightarrow\ [D^{1/k}_n/\mu_k]
+\]
+is an isomorphism.  In particular,
+$T_{G,I}(C_{0,[k]})$ and $T_{G,I}\!\bigl([D^{1/k}_n/\mu_k]\bigr)$ are isomorphic to
+an orbit in the wonderful embedding of $L_{\mathrm{poly}}^{\times}G$.
+\end{theorem}
 
 \section{References}
 \begin{enumerate}
