@@ -3,11 +3,7 @@
 \usepackage{amsmath,amsthm,amssymb,amsfonts, scrlayer-scrpage, color, comment, graphicx, environ}
 \usepackage{xcolor}
 \usepackage{bbm}
-\makeatletter
-\def\input@path{{../../style/}}
-\makeatother
-
-\usepackage{../../style/macros}
+\usepackage{macros}
 \usepackage{tikz-cd}
 \usepackage{mdframed}
 \usepackage[shortlabels]{enumitem}
@@ -60,11 +56,9 @@
     { \begin{mdframed}[backgroundcolor=gray!20] \textbf{Remark #1}}
     {  \end{mdframed}}
 
-\makeatletter
-\def\input@path{{../../style/}}
-\makeatother
-
-\usepackage{../../style/macros}
+\newenvironment{definition}[1][Definition]
+    { \begin{mdframed}[backgroundcolor=gray!20] \textbf{Definition #1}}
+    {  \end{mdframed}}
 
 
 \usepackage{parskip}

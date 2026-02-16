@@ -1,0 +1,1919 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+
+
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0pt}
+
+
+\newcommand{\fg}{\mathfrak g}
+\DeclareMathOperator{\Frac}{Frac}
+\begin{document}
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Title}
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+\begin{abstract}
+Abstract
+\end{abstract}
+
+\tableofcontents
+
+\section{Virtual normal bundles for stacks}
+
+For a smooth embedding of smooth algebraic stacks $f:X\longrightarrow Y$, the \emph{virtual normal bundle} is the class in $K^0(X)$ given by
+\[
+N_{X/Y}=[f^{*}T_Y]-[T_X].
+\]
+To compute this class one compares the tangent complexes of $X$ and $Y$. In the setting of moduli of principal bundles, the comparison arises from the short exact sequence of $G$–representations
+\[
+0\to\mathfrak{g}_\xi\to\mathfrak{g}\to\mathfrak{g}/\mathfrak{g}_\xi\to0.
+\]
+
+\section{Tangent complex of $\Bun_G(C)$}
+
+Let $C$ be a smooth projective curve and
+\[
+\pi:C\times\Bun_G\to\Bun_G
+\]
+the projection. Denote by $\mathcal{P}$ the universal $G$–bundle and set
+\[
+\operatorname{ad}(\mathcal{P})=\mathcal{P}\times^{G}\mathfrak{g}.
+\]
+Standard deformation theory of principal bundles gives
+\begin{itemize}
+\item infinitesimal automorphisms: $H^0(C,\operatorname{ad} P)$,
+\item infinitesimal deformations: $H^1(C,\operatorname{ad} P)$,
+\item obstructions: $H^2(C,\operatorname{ad} P)=0$.
+\end{itemize}
+Hence the tangent complex of $\Bun_G$ is
+\[
+\mathbb{T}_{\Bun_G}\simeq R\pi_{*}\operatorname{ad}(\mathcal{P})[1],
+\]
+where the shift places automorphisms in degree $-1$ and deformations in degree $0$.
+
+\section{Harder–Narasimhan strata}
+
+Fix a dominant cocharacter $\xi\in X_{*}(T)_{+}$. It determines group–theoretic data
+\begin{itemize}
+\item a parabolic subgroup $P(\xi)\subset G$,
+\item its unipotent radical $U(\xi)$,
+\item the Levi quotient $L(\xi)=P(\xi)/U(\xi)$.
+\end{itemize}
+
+\subsection{Reductions of structure group}
+
+Let $P$ be a principal $G$–bundle on $C$.
+
+\paragraph{Definition.}
+A \emph{reduction of $P$ to $P(\xi)$} is a principal $P(\xi)$–bundle $\mathcal{P}_{\xi}$ on $C$ equipped with an isomorphism
+\[
+P\simeq \mathcal{P}_{\xi}\times^{P(\xi)}G.
+\]
+Equivalently, it is a section $s:C\to P/P(\xi)$ of the associated fibration with fiber $G/P(\xi)$.
+
+From such a reduction one obtains the induced Levi bundle
+\[
+\operatorname{gr}_{\xi}(P)=\mathcal{P}_{\xi}/U(\xi),
+\]
+a principal $L(\xi)$–bundle, playing the role of an associated graded object.
+
+\subsection{Canonical (Harder–Narasimhan) reduction}
+
+Among all reductions of $P$ to $P(\xi)$ there is a unique \emph{canonical} one, characterized by:
+
+\begin{enumerate}
+\item \textbf{Semistability of the Levi bundle:}
+The bundle $\operatorname{gr}_{\xi}(P)$ is semistable as a principal $L(\xi)$–bundle.
+
+\item \textbf{Prescribed numerical type:}
+For every character $\chi:P(\xi)\to\mathbb{G}_m$,
+\[
+\deg(\chi_{*}(\mathcal{P}_{\xi}))=\langle\chi,\xi\rangle.
+\]
+
+\item \textbf{Maximal destabilizing property:}
+For any reduction $\mathcal{P}_{Q}$ of $P$ to a parabolic $Q\subset G$ with type $\xi(Q)$,
+\[
+\xi(Q)\le \xi
+\]
+in the dominance order.
+\end{enumerate}
+
+The Harder–Narasimhan stratum $\mathfrak{M}_{\xi}$ consists of pairs $(P,\mathcal{P}_{\xi})$ where $\mathcal{P}_{\xi}$ is the canonical reduction of $P$.
+
+\section{Tangent complex of the stratum}
+
+Let $\mathfrak{M}^{\mathrm{ss}}_{L(\xi),\xi}$ be the moduli of semistable Levi bundles of type $\xi$. Denote by $\mathcal{P}_{\xi}$ the universal $P(\xi)$–bundle and set
+\[
+\operatorname{ad}_{\xi}(\mathcal{P}_{\xi})=\mathcal{P}_{\xi}\times^{L(\xi)}\mathfrak{g}_{\xi}.
+\]
+The tangent complex of the Levi core is
+\[
+\mathbb{T}_{\mathfrak{M}^{\mathrm{ss}}_{L(\xi),\xi}}\simeq R\pi_{*}\operatorname{ad}_{\xi}(\mathcal{P}_{\xi})[1].
+\]
+
+\section{The virtual normal complex}
+
+Over the stratum the universal $G$–bundle is induced from $\mathcal{P}_{\xi}$, and the exact sequence of Lie algebras gives a distinguished triangle
+\[
+R\pi_{*}(\mathcal{P}_{\xi}\times^{L(\xi)}\mathfrak{g}_{\xi})[1]
+\to
+R\pi_{*}(\mathcal{P}_{\xi}\times^{L(\xi)}\mathfrak{g})[1]
+\to
+R\pi_{*}(\mathcal{P}_{\xi}\times^{L(\xi)}(\mathfrak{g}/\mathfrak{g}_{\xi}))[1].
+\]
+The first term represents the tangent complex of the stratum and the middle term the restriction of the tangent complex of $\Bun_G$. Hence the cone is the \emph{virtual normal complex}
+\[
+\nu_{\xi}\simeq R\pi_{*}(\mathcal{P}_{\xi}\times^{L(\xi)}(\mathfrak{g}/\mathfrak{g}_{\xi}))[1].
+\]
+In $K$–theory,
+\[
+[\nu_{\xi}]=[f^{*}\mathbb{T}_{\Bun_G}]-[\mathbb{T}_{\mathfrak{M}^{\mathrm{ss}}_{L(\xi),\xi}}].
+\]
+
+\section{Lattice interpretation of parahoric subgroups}
+Let $LG = G((z))$ be the loop group of a connected reductive group $G$ over $\C$.
+Let $\{\alpha_0,\alpha_1,\dots,\alpha_r\}$ be the affine simple roots, and let
+$\{\eta_0,\eta_1,\dots,\eta_r\}$ be the dual vertices of the fundamental alcove,
+characterized by $\langle \alpha_i,\eta_j\rangle=\delta_{ij}/n_i$.
+
+For any subset $I\subset\{0,\dots,r\}$, let $F_I$ be the facet obtained by
+imposing $\alpha_i=0$ for $i\in I$ and $\alpha_j>0$ for $j\notin I$.
+The associated \emph{parahoric subgroup} of $LG$ is
+\[
+\mathcal P_I = \mathrm{Stab}_{LG}(F_I),
+\]
+equivalently the $\C[[z]]$--points of the Bruhat--Tits parahoric group scheme
+attached to $F_I$.
+
+\begin{itemize}
+\item The singleton subsets $I=\{i\}$ correspond to the \emph{vertices}
+      $\eta_i$ and hence to the \emph{maximal parahoric subgroups}
+      $\mathcal P_{\eta_i}$.
+
+\item For $i>0$, the reduction map
+      $\mathcal P_{\eta_i}\twoheadrightarrow P_i\subset G$
+      identifies the special fiber with the standard maximal parabolic $P_i$
+      determined by the finite simple root $\alpha_i$. See Kumar's book. 
+
+\item The vertex $\eta_0$ is the special (hyperspecial) vertex of the alcove,
+      and its parahoric is
+      \[
+      \mathcal P_{\eta_0}=G[[z]]=L^{+}G .
+      \]
+\end{itemize}
+
+
+\begin{proposition}[Vertex parahorics for $SL_3$]
+Let $K=\C((z))$ and $\mathcal O=\C[[z]]$.  
+Fix the standard basis $e_1,e_2,e_3$ of $K^3$ and define lattices
+\[
+\begin{aligned}
+L_0 &= \mathcal O e_1 \oplus \mathcal O e_2 \oplus \mathcal O e_3,\\[2mm]
+L_1 &= \mathcal O e_1 \oplus \mathcal O e_2 \oplus z\,\mathcal O e_3,\\[2mm]
+L_2 &= \mathcal O e_1 \oplus z\,\mathcal O e_2 \oplus z\,\mathcal O e_3 .
+\end{aligned}
+\]
+These represent the three vertices $\{\eta_0\},\{\eta_1\},\{\eta_2\}$ of a fundamental alcove in the Bruhat--Tits building of $SL_3(K)$.
+
+The corresponding maximal parahoric subgroups are
+\[
+\mathcal P_{\eta_i}=\Stab_{SL_3(K)}(L_i).
+\]
+Explicitly:
+
+\begin{enumerate}
+\item[\textbf{(i)}] \textbf{Hyperspecial vertex $\eta_0$.}
+\[
+\mathcal P_{\eta_0}=SL_3(\mathcal O)
+=\Bigl\{\,g=(g_{ij})\in SL_3(K)\; \big|\; g_{ij}\in \mathcal O \text{ for all } i,j \Bigr\}.
+\]
+
+\item[\textbf{(ii)}] \textbf{Vertex $\eta_1$ (type $2|1$).}
+\[
+\mathcal P_{\eta_1}
+=\Bigl\{
+g\in SL_3(K)\; \big|\; gL_1=L_1
+\Bigr\}
+= \left\{
+\begin{pmatrix}
+\mathcal O & \mathcal O & z^{-1}\mathcal O\\
+\mathcal O & \mathcal O & z^{-1}\mathcal O\\
+z\mathcal O & z\mathcal O & \mathcal O
+\end{pmatrix}
+\cap SL_3(K)
+\right\}.
+\]
+
+Equivalently, if $D_1=\mathrm{diag}(1,1,z)$, then
+\[
+\mathcal P_{\eta_1}
+=\{\, g\in SL_3(K)\mid D_1^{-1}gD_1\in SL_3(\mathcal O)\,\}.
+\]
+
+\item[\textbf{(iii)}] \textbf{Vertex $\eta_2$ (type $1|2$).}
+\[
+\mathcal P_{\eta_2}
+=\Bigl\{
+g\in SL_3(K)\; \big|\; gL_2=L_2
+\Bigr\}
+= \left\{
+\begin{pmatrix}
+\mathcal O & z^{-1}\mathcal O & z^{-1}\mathcal O\\
+z\mathcal O & \mathcal O & \mathcal O\\
+z\mathcal O & \mathcal O & \mathcal O
+\end{pmatrix}
+\cap SL_3(K)
+\right\}.
+\]
+
+Equivalently, with $D_2=\mathrm{diag}(1,z,z)$,
+\[
+\mathcal P_{\eta_2}
+=\{\, g\in SL_3(K)\mid D_2^{-1}gD_2\in SL_3(\mathcal O)\,\}.
+\]
+\end{enumerate}
+\end{proposition}
+
+\begin{remark}[Geometric interpretation]
+The reductions modulo $z$ of these parahorics recover the classical parabolics of $SL_3(\C)$:
+\[
+\begin{aligned}
+\mathcal P_{\eta_0}/\mathcal P_{\eta_0}^+ &\cong SL_3(\C),\\
+\mathcal P_{\eta_1}/\mathcal P_{\eta_1}^+ &\cong P_{(2|1)}(\C)
+  \quad\text{(stabilizer of a plane)},\\
+\mathcal P_{\eta_2}/\mathcal P_{\eta_2}^+ &\cong P_{(1|2)}(\C)
+  \quad\text{(stabilizer of a line)}.
+\end{aligned}
+\]
+Thus the vertices of the affine building correspond to integral models whose special fibers are the three standard parabolics of $SL_3$.
+\end{remark}
+
+Therefore we see that specifying a parahoric structure of type $\mathcal P_{\eta_i}$ at $p$ gives us a reduction of the structure group of the bundle at $p$ to the parabolic $P_i$, i.e. a choice of $i$-dimensional subspace of the fiber at $p$.
+
+\section{Spreading out stacks}
+
+Let $\mathcal C$ be a site and let $U\in\mathrm{Ob}(\mathcal C)$ such that the
+representable presheaf $h_U$ is a sheaf.  Denote by
+\[
+j:\mathcal C/U \longrightarrow \mathcal C
+\]
+the localization functor.
+
+\begin{lemma}[Stacks Project, §8.13]
+There is a 2--equivalence between
+\begin{enumerate}
+    \item stacks $\mathcal S\to \mathcal C/U$, and
+    \item pairs $(\mathcal T,p)$ consisting of a stack $\mathcal T\to\mathcal C$
+          together with a morphism of stacks
+          $p:\mathcal T\to \mathcal C/U$ over $\mathcal C$.
+\end{enumerate}
+\end{lemma}
+
+\begin{definition}[Pushforward of a stack over $U$]
+Let $p:\mathcal S\to \mathcal C/U$ be a stack over the slice site.
+Define a stack $j_!\mathcal S\to\mathcal C$ as follows:
+\begin{enumerate}
+    \item as a category fibered in groupoids, $j_!\mathcal S=\mathcal S$;
+    \item the structure morphism is the composition
+          $j\circ p: j_!\mathcal S\to \mathcal C$.
+\end{enumerate}
+The assumption that $h_U$ is a sheaf ensures that descent for morphisms to $U$
+is effective, so $j_!\mathcal S$ is a stack over $\mathcal C$.
+\end{definition}
+
+Conversely, if $\mathcal T\to\mathcal C$ is a stack endowed with a morphism
+$p:\mathcal T\to \mathcal C/U$, then $\mathcal T$ is automatically a stack
+over the slice site $\mathcal C/U$.
+
+\begin{theorem}
+The constructions $\mathcal S\mapsto j_!\mathcal S$ and $(\mathcal T,p)\mapsto \mathcal T$ are mutually inverse, giving a 2--equivalence between stacks over $\mathcal C/U$ and stacks over $\mathcal C$ equipped with a morphism to $\mathcal C/U$.
+\end{theorem}
+
+\subsection{Change of base schemes}
+Given a morphism $S\to S'$ of base schemes, any algebraic stack over $S$ can be viewed as an algebraic stack over $S'$.
+
+\begin{lemma}
+Let $\Sch_{\mathrm{fppf}}$ be the big fppf site. Let $S\to S'$ be a morphism in
+this site. The constructions described above
+give an isomorphism of $2$--categories
+\[
+\left\{
+\text{$2$--category of algebraic stacks $\mathcal X$ over $S$}
+\right\}
+\;\xleftrightarrow{\ \sim\ }\;
+\left\{
+\begin{array}{c}
+\text{$2$--category of pairs $(\mathcal X',f)$ consisting of an}\\
+\text{algebraic stack $\mathcal X'$ over $S'$ and a morphism}\\
+\text{$f:\mathcal X'\to (\Sch/S)_{\mathrm{fppf}}$ of algebraic stacks over $S'$}
+\end{array}
+\right\}.
+\]
+\end{lemma}
+
+
+\begin{definition}[{\cite[Definition~94.19.2]{stacks-project}}]
+Let $\Sch_{\mathrm{fppf}}$ be the big fppf site. Let $S\to S'$ be a morphism in
+this site. If $p:\mathcal X\to (\Sch/S)_{\mathrm{fppf}}$ is an algebraic stack
+over $S$, then $\mathcal X$ \emph{viewed as an algebraic stack over $S'$} is the
+algebraic stack
+\[
+\mathcal X \longrightarrow (\Sch/S')_{\mathrm{fppf}}
+\]
+obtained by applying Construction~A of Lemma~94.19.1 to $\mathcal X$.
+\end{definition}
+
+Conversely, if we start with an algebraic stack $\mathcal X'$ over $S'$ and we
+want to get an algebraic stack over $S$, we consider the $2$--fiber product
+\[
+\mathcal X'_S
+=
+(\Sch/S)_{\mathrm{fppf}}
+\times_{(\Sch/S')_{\mathrm{fppf}}}
+\mathcal X',
+\]
+which is an algebraic stack over $S'$
+Moreover, it comes equipped with a natural $1$--morphism
+\[
+p:\mathcal X'_S \longrightarrow (\Sch/S)_{\mathrm{fppf}},
+\]
+and hence  it corresponds in a canonical way to an algebraic
+stack over $S$.
+ 
+\section{Induced stacks over the moduli of curves}
+Let $S = \Spec \C[[s]]$. 
+Recall that Solis fixes a curve $C$ over $S$ whose generic fiber is smooth and whose special fiber is a nodal curve with a single node. In particular, $C$ is classified by a morphism $f:S\to\overline{\mathcal M}_{g,I}$. Solis defines an $S$-stack whose $B$-points are given by twisted local modifications $C'_B$ of our fixed family $C/S$ and admissible $G$-bundles $P'_B$ on $C'_B$. He christens this stack $\cX_G(C)$ and shows that it is algebraic over $S$, locally of finite type over $S$, and complete over $S$.
+
+In general, let
+\[
+\pi:C\longrightarrow S=\Spec \C[[s]]
+\]
+be a stable $I$--marked curve and let
+\[
+f:S\longrightarrow \overline{\mathcal M}_{g,I}
+\]
+be the induced morphism to the moduli stack of stable curves.
+
+Suppose we are given a stack of ``widgets on $C$'' over $S$,
+\[
+\mathcal W_C \longrightarrow S,
+\qquad
+\mathcal W_C(U)=
+\left\{
+  \text{widgets on } C_U=C\times_S U
+\right\}.
+\]
+
+\begin{definition}
+The \emph{induced widget stack over $\overline{\mathcal M}_{g,I}$}
+is the stack
+\[
+\mathcal W := j_!(\mathcal W_C)
+   \longrightarrow \overline{\mathcal M}_{g,I}
+\]
+obtained from the localization construction with $U=S$ and
+$j:(\mathrm{Sch}/S)\to(\mathrm{Sch}/\overline{\mathcal M}_{g,I})$.
+\end{definition}
+Note that the general theory described above ensures that $\mathcal W$ is an algebraic stack over $\overline{\mathcal M}_{g,I}$.
+\begin{proposition}[Description on test schemes]
+Let $g:T\to\overline{\mathcal M}_{g,I}$ be a test scheme.
+Set
+\[
+T_S := T\times_{\overline{\mathcal M}_{g,I}} S .
+\]
+Then
+\[
+\boxed{
+  \mathcal W(T)=\mathcal W_C(T_S).
+}
+\]
+\end{proposition}
+
+\begin{proof}[Interpretation]
+The fiber product $T_S$ parametrizes pairs
+\[
+(t\in T,\; s\in S,\;
+  \alpha: C_t \xrightarrow{\sim} C_s),
+\]
+that is, points of $T$ whose associated curve is identified with
+a base change of the fixed family $C/S$.
+Evaluating the original stack $\mathcal W_C$ on this scheme produces
+widgets on the identified curve, which by definition gives
+$\mathcal W(T)$.
+\end{proof}
+
+\section{Cartier divisors on algebraic stacks}
+
+Let $\mathcal{X}$ be an algebraic stack. An effective Cartier divisor on $\mathcal{X}$ is one of the following equivalent pieces of data:
+\begin{enumerate}
+  \item \textbf{Ideal sheaf description:} A quasi-coherent sheaf of ideals
+\[
+\mathcal{I}\subset \mathcal{O}_{\mathcal{X}}
+\]
+such that étale-locally on $\mathcal{X}$ the ideal is generated by a single non-zero-divisor.
+
+Equivalently, $\mathcal{I}$ is an invertible $\mathcal{O}_{\mathcal{X}}$-module embedded in $\mathcal{O}_{\mathcal{X}}$.
+\item \textbf{Local equation description:} 
+There exists a smooth surjective atlas
+$p:U\to \mathcal X$
+with $U$ a scheme such that the pullback ideal $p^{-1}\mathcal I\subset \mathcal O_U $is an ordinary Cartier divisor on the scheme U, and the two pullbacks to $U\times_{\mathcal X}U$ agree.
+\item \textbf{Line bundle and section description:} A line bundle $\mathcal L$ on $\mathcal X$, together with a global section $s\in H^0(\mathcal X,\mathcal L)$ such that étale-locally the pair $(\mathcal L,s)$ is isomorphic to $(\mathcal O_{\mathcal X}, f)$ with $f$ a non-zero-divisor. The divisor is the vanishing locus $V(s).$
+\end{enumerate}
+
+
+\begin{definition}[Simple normal crossing divisors]
+Let $\mathcal{X}$ be an algebraic stack locally of finite type over a field and
+$\mathcal{D}\subset \mathcal{X}$ a closed substack. We say $\mathcal{D}$ is a \emph{simple normal crossing divisor} on $\mathcal{X}$ if:
+\begin{enumerate}
+  \item $\mathcal{D}$ is a Cartier divisor on $\mathcal{X}$, and
+  \item there exists a smooth surjective morphism (atlas)
+    $p: U\to \mathcal{X}$
+    with $U$ a scheme such that
+    $D_U := p^{-1}(\mathcal{D})\subset U$
+    is an SNC divisor in the usual scheme-theoretic sense.
+\end{enumerate}
+\end{definition}
+
+
+
+\section{The determinant line bundle on $\mathcal X_{G,g,I}$.}
+Let
+\[
+\pi:\ \mathcal{C} \to \mathcal{X}_{G,g,I}
+\]
+be the universal (twisted) curve/modification, and let $\mathcal{P}$ be the universal torsor under the relevant Bruhat--Tits/parahoric group scheme $\mathcal{G}$ on $\mathcal{C}$.
+
+\begin{enumerate}
+\item \textbf{A representation of the group scheme $\mathcal{G}$.}
+
+Pick $\rho:G\to \mathrm{GL}(V)$ and at each parahoric type a compatible ``integral model'' (lattice) so that $\rho$ extends to a morphism of group schemes
+\[
+\rho:\ \mathcal{G} \to \mathrm{GL}(\mathcal{V})
+\]
+on $\mathcal{C}$. Equivalently, you get an associated vector bundle
+\[
+\mathcal{V}_\rho := \mathcal{P}\times^{\mathcal{G}} \mathcal{V}
+\]
+on $\mathcal{C}$.
+
+\item \textbf{Perfectness of $R\pi_*\mathcal{V}_\rho$.}
+
+For a proper 1-dimensional DM morphism $\pi$ and a vector bundle $\mathcal{V}_\rho$, the derived pushforward $R\pi_*\mathcal{V}_\rho$ is a perfect complex of amplitude $[0,1]$ in the usual settings (the same hypothesis Teleman--Woodward implicitly uses on $\Sigma\times \mathfrak{M}\to \mathfrak{M}$).
+
+\item \textbf{Determinant functor.}
+
+Once $R\pi_*\mathcal{V}_\rho$ is perfect, the determinant construction gives an invertible sheaf
+\[
+\mathcal{L}_{\det}(\rho)\ :=\ \det R\pi_*(\mathcal{V}_\rho)
+\ \in\ \mathrm{Pic}(\mathcal{X}_{G,g,I}).
+\]
+This is functorial in families, so it really is a line bundle on the stack.
+\end{enumerate}
+
+\medskip
+
+\noindent\emph{Why this is compatible with the smooth-locus determinant.}
+
+On the open substack where your object is an honest $G$-bundle on a smooth curve, $\mathcal{G}$ restricts to the constant group scheme $G$ and $\mathcal{V}_\rho$ restricts to the usual associated bundle $\mathcal{E}_\rho$. Then
+\[
+\det R\pi_*(\mathcal{V}_\rho)\big|_{\text{smooth locus}}
+=
+\det R\pi_*(\mathcal{E}_\rho),
+\]
+so it extends the familiar determinant-of-cohomology line bundle.
+
+
+
+\medskip
+
+\subsection{Bruhat--Tits (parahoric) group schemes \`a la Rapoport and comparison}
+\label{subsec:rapoport-bt-comparison}
+
+We briefly recall the notion of a Bruhat--Tits (parahoric) group scheme used by
+Rapoport--Pappas and explain why Sol\'is' local group schemes coincide with it.
+
+\paragraph{Rapoport--Pappas.}
+Let $S$ be a scheme and let $C\to S$ be a (possibly nodal) curve. Fix a connected
+reductive group $G$ over the generic locus of $C$.  A \emph{Bruhat--Tits group
+scheme} over $C$ (with generic fiber $G$) is a smooth affine group scheme
+\(\mathcal G\to C\) such that
+\begin{enumerate}[(i)]
+  \item the restriction of $\mathcal G$ to the open subset where $C\to S$ is
+        smooth (equivalently, away from the marked points / nodes where we
+        impose level structure) is the constant group scheme $G$;
+  \item for every geometric point $x\in C$ lying over a point of $S$, the
+        base change of $\mathcal G$ to the completed local ring
+        \(\widehat{\mathcal O}_{C,x}\) is isomorphic to the \emph{Bruhat--Tits
+        parahoric model} of $G$ corresponding to some facet in the affine
+        building of $G$ over the local field
+        \(\Frac(\widehat{\mathcal O}_{C,x})\).
+\end{enumerate}
+Equivalently, after choosing a local parameter $z$ at $x$ (so
+\(\widehat{\mathcal O}_{C,x}\simeq \C[[z]]\) in our equal--characteristic setting),
+condition (ii) says that
+\(\mathcal G(\C[[z]])\subset G(\C((z)))\)
+identifies with a \emph{parahoric subgroup} (the stabilizer of a facet) and that
+$\mathcal G$ is the corresponding smooth affine $\C[[z]]$--model.
+(See e.g.\ \cite{pappas-rapoport} and, for the equal--characteristic global
+picture used in geometric representation theory, \cite{richarz-thesis}.)
+
+\paragraph{Sol\'is.}
+In our situation we fix, at each marked point / (stacky) node, a parahoric
+subgroup \(\mathcal P\subset G((z))\) (for instance a vertex parahoric
+\(\mathcal P_{\eta_i}\), or a standard parabolic parahoric
+\(L^+_P G=\{\gamma\in G[[z]]\mid \gamma(0)\in P\}\)).  Sol\'is' construction
+produces a smooth affine group scheme \(\mathcal G^{\mathcal P}\) over the formal
+disc \(D=\Spec \C[[z]]\) characterized by
+\[
+\mathcal G^{\mathcal P}(D)=\mathcal P,\qquad
+\mathcal G^{\mathcal P}(D^\times)=G((z)),
+\]
+with restriction map induced by the inclusion \(\mathcal P\hookrightarrow G((z))\).
+This is exactly the Bruhat--Tits parahoric model attached to the facet
+stabilized by $\mathcal P$: by Bruhat--Tits theory, parahoric subgroups of
+\(G((z))\) are precisely the \(\C[[z]]\)-points of (unique up to unique
+isomorphism) smooth affine parahoric group schemes over \(\Spec\C[[z]]\).
+Consequently, the global group scheme on the curve obtained by gluing the
+constant group scheme $G$ away from the boundary with these local models at the
+chosen points satisfies Rapoport--Pappas' conditions and is therefore a
+Bruhat--Tits (parahoric) group scheme in their sense.
+
+\paragraph{Representations (what data is needed).}
+To define the determinant line bundle we need a representation of the group
+scheme $\mathcal G$ on the universal curve.  Concretely, the input consists of
+\begin{enumerate}[(1)]
+  \item an algebraic representation $\rho:G\to \GL(V)$ over $\C$;
+  \item for each parahoric type that occurs on our curves (each facet / vertex
+        label), a choice of an \(\mathcal P\)-stable lattice
+        \(\Lambda\subset V\otimes_\C \C((z))\), i.e.
+        \(\rho(\mathcal P)\cdot\Lambda\subset\Lambda\).
+\end{enumerate}
+A choice of such lattices is equivalent to an extension of $\rho$ to a morphism
+of group schemes on the disc
+\(\rho:\mathcal G^{\mathcal P}\to \GL(\Lambda)\).
+Gluing these local extensions with the constant representation away from the
+boundary yields a global morphism
+\(\rho:\mathcal G\to \GL(\mathcal V)\) on the universal curve and hence an
+associated vector bundle
+\(\mathcal V_\rho=\mathcal P\times^{\mathcal G}\mathcal V\).
+
+\subsection{Determinant of cohomology line bundles and level}
+\label{subsec:det-linebundle-level}
+
+
+
+We explain how to construct a natural ``determinant of cohomology'' line bundle on
+the compactified stack $\cX_{G,g,I}$ of admissible $G$--bundles on twisted local
+modifications, and how its numerical behavior is governed by the \emph{level}
+(i.e.\ an invariant bilinear form on $\fg$).
+
+\subsubsection*{Universal curve and universal torsor}
+By definition, an object of $\cX_{G,g,I}$ over a test scheme $B$ consists of a
+family of twisted local modifications
+\[
+\pi_B:C'_B\to B
+\]
+of the pullback curve $C_B\to B$ together with an admissible $G$--bundle in the
+sense of Sol\'is. Equivalently (using Sol\'is' comparison between parahoric
+torsors on the coarse space and honest $G$--bundles on the associated stacky
+curve), this is a torsor under a sheaf of groups $\cG_B$ on $C'_B$ such that
+$\cG_B|_{C'_B\setminus\{\text{nodes/stacky points}\}}\cong G$, while at each
+(node/stacky) point it is given by a fixed parahoric Bruhat--Tits local model.
+Gluing in families yields the universal twisted curve
+\[
+\pi:\cC\longrightarrow \cX_{G,g,I}
+\]
+together with a universal sheaf of groups $\cG$ on $\cC$ and a universal
+$\cG$--torsor $\cP$ on $\cC$.
+
+\subsubsection*{Representations and associated vector bundles}
+To a usual algebraic representation $\rho:G\to \GL(V)$ one must add local
+integral data at each allowed parahoric type: for each parahoric subgroup
+$\cP_{\eta}\subset G((z))$ occurring on our objects, choose a
+$\cP_{\eta}$--stable lattice
+\[
+\Lambda_{\eta}\ \subset\ V\otimes_{\C}\C((z)),
+\qquad
+\rho(\cP_{\eta})\cdot \Lambda_{\eta}\subset \Lambda_{\eta}.
+\]
+Such a choice is equivalent to an extension of $\rho$ to a morphism of group
+schemes on the formal disc (the corresponding Bruhat--Tits model)
+\[
+\rho:\cG_{\eta}\longrightarrow \GL(\Lambda_{\eta}).
+\]
+These local extensions glue with the constant representation away from the
+boundary to give a global morphism of group sheaves on $\cC$
+\[
+\rho:\cG\longrightarrow \GL(\cV),
+\]
+hence an associated vector bundle on the universal curve
+\[
+\cE_{\rho}\ :=\ \cP\times^{\cG}\cV \in \Vect(\cC).
+\]
+
+\subsubsection*{Determinant of cohomology on $\cX_{G,g,I}$}
+Since $\pi:\cC\to \cX_{G,g,I}$ is a proper flat family of (twisted) curves and
+$\cE_{\rho}$ is locally free on $\cC$, the derived pushforward
+$R\pi_*\cE_{\rho}$ is a perfect complex of Tor-amplitude $[0,1]$ on
+$\cX_{G,g,I}$. Therefore the Knudsen--Mumford determinant functor produces an
+\emph{honest} line bundle
+\[
+\boxed{\quad
+\cL_{\det}(\rho)\ :=\ \det R\pi_*(\cE_{\rho})^{-1}\ \in\ \Pic(\cX_{G,g,I}).
+\quad}
+\]
+By construction, on the open substack where the universal curve is smooth and
+the admissible object is an honest $G$--bundle, $\cE_{\rho}$ restricts to the
+usual associated vector bundle, hence $\cL_{\det}(\rho)$ restricts to the
+classical determinant of cohomology line bundle on $\Bun_G$.
+
+\subsubsection*{Level and dependence on the representation}
+The isomorphism class of $\cL_{\det}(\rho)$ depends on $\rho$. Recall that for $G$ simple, $\rho$ defines an invariant symmetric bilinear form on
+$\fg=\Lie(G)$
+\[
+\kappa_{\rho}(x,y)\ :=\ \Tr\bigl(d\rho(x)\,d\rho(y)\bigr),
+\qquad x,y\in \fg,
+\]
+and since $\Sym^2(\fg^{\*})^{G}$ is one-dimensional for $G$ simple, there is a
+unique scalar $m_{\rho}$ (an integer after fixing the basic normalization)
+such that
+\[
+\kappa_{\rho}\ =\ m_{\rho}\,\kappa_{\mathrm{bas}}.
+\]
+We call $m_{\rho}$ the \emph{level} (Dynkin index) of $\rho$. In particular,
+tensor products and direct sums behave additively:
+\[
+\cL_{\det}(\rho_1\oplus \rho_2)\cong \cL_{\det}(\rho_1)\otimes \cL_{\det}(\rho_2),
+\qquad
+m_{\rho_1\oplus\rho_2}=m_{\rho_1}+m_{\rho_2}.
+\]
+The level governs the leading (quadratic) term in the Hilbert--Mumford/\,$\Theta$
+numerical invariant associated to $\cL_{\det}(\rho)$: along a degeneration of
+type $\xi$ (dominant rational coweight) the weight of $\cL_{\det}(\rho)$ grows as
+\[
+\mathrm{wt}_{\xi}\bigl(\cL_{\det}(\rho)\bigr)
+\sim
+-\,m_{\rho}\,\langle \xi,\xi\rangle_{\mathrm{bas}}
+\;+\;
+(\text{terms at most linear in }\xi),
+\]
+For $\Bun_G(C)$ of a smooth curve and simple simply connected $G$, 
+the level $m_{\rho}$ is the only invariant of $\rho$ that matters for the isomorphism class of $\cL_{\det}(\rho)$, and $\cL_{\det}(\rho)$ is ample if and only if $m_{\rho}>0$. The ample generator of $\Pic(\Bun_G(C)) \cong \mathbb{Z}$ is the determinant line bundle associated to the adjoint representation, which has level $m_{\mathrm{adj}}=2h^\vee$ where $h^\vee$ is the dual Coxeter number of $G$.
+
+
+For $\cX_{G,g,I}$, the situation is more complicated and it is not clear at all. In order to get a stratification we need a condition like $\ell$ is positive on unstable directions (so $\mu$ goes to -$\infty$ appropriately), and $b$ is positive definite on nontrivial filtrations.
+
+
+\subsection{The diagonal construction at a twisted node}
+
+Let $C_{0,[k]}$ be a twisted nodal curve with a single twisted node $p$.
+Let $C_0$ be its coarse moduli space and, by abuse of notation,
+also write $p\in C_0$ for the node.
+Assume the stabilizer of $p\in C_{0,[k]}$ is $\mu_k$.
+Then
+\[
+C_{0,[k]}\times_{C_0} D_0 \;\cong\; [D_0^{1/k}/\mu_k],
+\]
+where
+\[
+D_0=\Spec \C[[x,y]]/(xy),
+\qquad
+D_0^{1/k}=\Spec \C[[u,v]]/(uv),
+\]
+with $u^k=x$ and $v^k=y$.
+
+\medskip
+
+For a parahoric subgroup $\mathcal P$ with Levi decomposition
+$\mathcal P=L\ltimes U$, set
+\[
+\mathcal P^{\Delta}=\Delta(L)\ltimes (U\times U).
+\]
+One constructs a sheaf of groups $\mathcal G^{\Delta}$ over $C_0$
+such that
+\[
+\mathcal G^{\Delta}(\widehat{\mathcal O}_{C_0,p})=\mathcal P^{\Delta},
+\qquad
+\mathcal G^{\Delta}|_{C_0-p}=G^{\mathrm{std}}
+\]
+
+Let $\mathcal M_{\mathcal G^{\Delta}}(C_0)$ denote the moduli stack of
+$\mathcal G^{\Delta}$--torsors on $C_0$ and let
+$T_{\mathcal G^{\Delta}}(C_0)$ denote the moduli space of pairs
+$(\mathcal F,\tau)$ where $\mathcal F\in
+\mathcal M_{\mathcal G^{\Delta}}(C_0)$ and
+$\tau$ is a trivialization of $\mathcal F$ over $C_0-p$.
+Define $T_{\mathcal G^{\Delta}}(D_0)$ similarly.
+
+\medskip
+
+Let $\eta\in \Hom(\C^\times,T)\otimes_\Z\Q$ and consider the moduli stack
+$\mathcal M_{G,\eta}(C_{0,[k]})$ of $G$--bundles on $C_{0,[k]}$
+with equivariant structure at $p$ determined by $\eta$. In particular, a choice of $\eta$ determines by restriction to $\mu_k \subset \C^\times$ a $\mu_k$--equivariant structure on the fiber of the $G$--bundle at $p$.
+\begin{remark}
+  Near a twisted node $p$, the curve looks like
+  \[
+  [D^{1/k}/\mu_k]
+  \]
+  where
+  \[
+  D^{1/k} = \Spec \C[[u,v]]/(uv),
+  \quad
+  \zeta\cdot(u,v)=(\zeta u,\zeta^{-1} v).
+  \]
+  So the geometric point has stabilizer group $\mu_k$ and a $G$-bundle on this stack must carry a compatible $\mu_k$-action.
+\end{remark}
+Note that there are two ways that the cocharacter data is being used, on the coarse side to determine the parahoric type and on the stacky side to determine the equivariant structure at the node. 
+
+Let $T_{G,\eta}(C_{0,[k]})$ denote the moduli space of pairs
+$(P,\tau)$ with $P\in \mathcal M_{G,\eta}(C_{0,[k]})$
+and $\tau$ a trivialization of $P$ over $C_{0,[k]}-p$.
+Define $T_{G,\eta}([D_0^{1/k}/\mu_k])$ similarly.
+
+\begin{proposition}
+Suppose $k\eta\in \Hom(\C^\times,T)$ and set $\mathcal P=\mathcal P(\eta)$.
+Choose $k$th roots $u,v$ of $x,y$ so that
+$D_0^{1/k}=\C[[u,v]]/(uv)$.
+Let
+\[
+i_{0,[k]}:[D_0^{1/k}/\mu_k]\to C_{0,[k]},
+\qquad
+i_0:D_0\to C_0
+\]
+be the natural maps.
+Set
+\[
+G^{\Delta}_{u,v}
+=
+\{(g_1,g_2)\in L_u^+G\times L_v^+G \mid g_1(0)=g_2(0)\}.
+\]
+
+Then there are isomorphisms
+\[
+T_{\mathcal G^{\Delta}}(D_0)
+\xleftarrow{\;i_0^*\;}
+T_{\mathcal G^{\Delta}}(C_0)
+\xrightarrow{\;\Xi_{C_0}\;}
+T_{G,\eta}(C_{0,[k]})
+\xrightarrow{\;i_{0,[k]}^*\;}
+T_{G,\eta}([D_0^{1/k}/\mu_k]),
+\]
+and these are compatible with the loop group descriptions
+\[
+T_{\mathcal G^{\Delta}}(C_0)
+\;\longrightarrow\;
+LG\times LG/\mathcal P^{\Delta(\eta)},
+\]
+\[
+T_{G,\eta}(C_{0,[k]})
+\;\longrightarrow\;
+(L_uG\times L_vG)^{\mu_k}/(G^{\Delta}_{u,v})^{\mu_k}.
+\]
+Moreover $\Xi_{C_0}$ descends to an isomorphism of stacks
+\[
+\Xi:\;
+\mathcal M_{\mathcal G^{\Delta}}(C_0)
+\;\xrightarrow{\;\sim\;}
+\mathcal M_{G,\eta}(C_{0,[k]}).
+\]
+\end{proposition}
+
+\begin{remark} This theorem gives a comparison between stacky data and coarse data. In particular, to give a $G$-bundle of type $\eta$ on $C_{0,[k]}$ is equivalent to giving a $\mathcal G^{\Delta}$-torsor on $C_0$ (via $\Xi$). After choosing a representation $\rho$ (and the requisite local integral data so that $\rho$ extends across the parahoric model), the equivalence $\Xi$ transports associated vector bundles.
+\end{remark}
+
+Solis also proves an expanded version of this result to deal with chains of rational curves. 
+Let $R_n$ denote the rational chain of projective lines with $n$-components. There is an action of $\C^\times$ on $R_n$ which scales
+each component. Let $p_0, \ldots, p_n$ denote the fixed points of this action.
+
+Recall $u, v$ are $k$th roots of $x, y$ which are our coordinates near a node. Let $p', p''$ be
+denote the closed points of $\operatorname{Spec}\C[[u]]$, $\operatorname{Spec}\C[[v]]$ and
+finally let $D_n^{\frac{1}{k}}$ be the curve obtained from
+$\operatorname{Spec}\C[[u]] \sqcup R_n \sqcup \operatorname{Spec}\C[[v]]$ by identifying $p'$
+with $p_0$ and $p''$ with $p_n$.
+
+The group $\mu_k$ acts on $D_n^{\frac{1}{k}}$ through its usual action on $u, v$ and through the
+inclusion $\mu_k \subset \C^\times$ on the chain $R_n$. For an $n$-tuple
+$(\beta_0, \ldots, \beta_n) \in \hom(\C^\times, T)^n$, we can speak about the equivariant
+$G$-bundles on $D_n^{\frac{1}{k}}$ with equivariant structure at $p_i$ determined by $\beta_i$.
+We refer to this equivalently as a $G$-bundles on $[D_n^{\frac{1}{k}}/\mu_k]$ of type
+$(\beta_1, \ldots, \beta_n)$.
+
+Further, we can also glue $[D_n^{\frac{1}{k}}/\mu_k]$ to $C_0 - p_0$ to obtain a curve
+$C_{n,[k]}$. Let $C_n$ denote the coarse moduli space of $C_{n,[k]}$.
+
+We call $C_n$ a \textit{modification} of $C_0$ and $C_{n,[k]}$ a \textit{twisted
+modification} of $C_0$.
+
+Recall the specific co-characters $\eta_0, \ldots, \eta_r$. For
+$I = \{i_1, \ldots, i_n\} \subset \{0, \ldots, r\}$, let $T_{G,I}([D_n^{\frac{1}{k}}/\mu_k])$
+denote the moduli space of pairs $(P, \tau)$ where $P$ is a $G$-bundles on
+$[D_n^{\frac{1}{k}}/\mu_k]$ of type $(\eta_{i_1}, \ldots, \eta_{i_n})$ and $\tau$ is a
+trivialization on $[\operatorname{Spec}\C((u)) \times \C((v))/\mu_k]$. Let $H = Aut(P)$ then
+restriction to $\operatorname{Spec}\C[[u]]$ and $\operatorname{Spec}\C[[v]]$ realizes
+$H \subset (L_u G)^{\mu_k} \times (L_u G)^{\mu_k}$.
+
+\begin{theorem}
+Let $I \subset \{0, \ldots, r\}$ and $T_{G,I}([D_n^{\frac{1}{k}}/\mu_k])$ be as above.
+Then there is an isomorphism
+\[
+T_{G,I}(C_{0,[k]}) \xrightarrow{\;\Psi^{\eta_I}\;} (L_u G)^{\mu_k} \times (L_u G)^{\mu_k}/H
+\xrightarrow{\;\eta_I^{-1}(\;)\eta_I\;}
+\frac{L_{poly}G \times L_{poly}G}{Z(L_I) \times Z(L_I) \cdot \mathcal{P}_I^{\Delta,\pm}}.
+\]
+where $\Psi^{\eta_I}$ is as in \textnormal{(3.10)} and $\eta_I^{-1}(\;)\eta_I$ is described
+in proposition 3.4.5. Let $i\colon [D_n^{\frac{1}{k}}/\mu_k] \to C_{n,[k]}$ be the natural map. Then $i^*\colon T_{G,I}(C_{n,[k]}) \to [D_n^{\frac{1}{k}}/\mu_k]$ is an isomorphism. In
+particular, $T_{G,I}(C_{n,[k]})$, $T_{G,I}([D_n^{\frac{1}{k}}/\mu_k])$ are isomorphic to an
+orbit in the wonderful embedding of $\overline{L_{poly}^\times G}$. Moreover, the isomorphism $T_{G,I}(C_{n,[k]}) \cong T_{G,I}([D_n^{\frac{1}{k}}/\mu_k])$ descends to an isomorphism of stacks
+\[\mathcal{M}_{G,I}(C_{n,[k]}) \cong \mathcal{M}_{G,I}([D_n^{\frac{1}{k}}/\mu_k]).\]
+\end{theorem}
+
+I want to write this theorem to give a comparison between the stacky and coarse data once we have introduced modifications. In particular, we can construct the parahoric Bruhat-Tits group scheme $\mathcal{G}^\Delta$ on $C_n$ by gluing the local constructions at each node, using the choice of parabolic data $I$.
+
+We spell this out precisely. At the $i$th node, let the parahoric subgroup $\mathcal P_i$ with Levi decomposition $\mathcal P_i=L_i\ltimes U_i$, set
+\[
+\mathcal P_i^{\Delta}=\Delta(L_i)\ltimes (U_i\times U_i).
+\]
+One constructs a sheaf of groups $\mathcal G^{\Delta}$ over $C_n$
+such that
+\[
+\mathcal G^{\Delta}(\widehat{\mathcal O}_{C_n,p_i})=\mathcal P_i^{\Delta},
+\qquad
+\mathcal G^{\Delta}|_{C_n-\set{p_0,\dots,p_n}}=G^{\mathrm{std}}
+\]
+Then similar arguments give an isomorphism 
+\[
+\mathcal{M}_{G,I}(C_{n,[k]}) \cong \mathcal{M}_{\mathcal{G}^\Delta}(C_n).
+\]
+Therefore, once for each parabolic type $I$ one fixes a representation
+\[
+\rho_I:\mathcal G_I^\Delta \longrightarrow \GL(\mathcal V_I)
+\]
+of the corresponding affine Bruhat--Tits group scheme, the universal
+$\mathcal G_I^\Delta$--torsor on $C_n$ produces, via the associated bundle
+construction, a vector bundle on the universal curve over the stratum
+of type $I$. Under the identification
+\[
+\mathcal{M}_{G,I}(C_{n,[k]})
+\cong
+\mathcal{M}_{\mathcal{G}_I^\Delta}(C_n),
+\]
+this agrees with the associated bundle constructed from the corresponding
+$G$--bundle on the stacky curve.
+
+
+Thus the question is, given a parabolic type $I$, how do we write down suitable representations
+\[
+\rho_I:\mathcal G_I^\Delta \longrightarrow \GL(\mathcal V_I)
+\]
+of the corresponding affine Bruhat--Tits group scheme? Fix \(\rho:G\to\GL(V)\).
+For each parahoric type \(I\) (at each node \(p_i\)), choose \(\mathcal P_i\)-stable lattices \(\Lambda_{i,x}\subset V\otimes\C((x))\) and \(\Lambda_{i,y}\subset V\otimes\C((y))\) whose Levi reductions agree; equivalently choose an extension of \(\rho\) to the local Bruhat-Tits model and impose the diagonal Levi condition. These local extensions glue (because away from the nodes the group scheme is constant) to give \(\rho_I:\mathcal G_I^\Delta\to\GL(\mathcal V_I)\).
+
+\begin{remark}
+  A morphism of group schemes over \(C_n\)
+  \[
+  \rho_I:\mathcal G_I^\Delta \longrightarrow \GL(\mathcal V_I)
+  \]
+  is equivalent to the following local–global data:
+    1.	On the smooth locus \(U:=C_n\setminus\{p_0,\dots,p_n\}\): choose an algebraic representation
+  \[
+  \rho:G\to \GL(V),
+  \]
+  and set \(\mathcal V_I|_U := V\otimes_\C \mathcal O_U\).
+    2.	At each node \(p_i\): you must extend \(\rho\) from the generic fiber to the parahoric integral model
+  \[
+  \rho:\mathcal P_i^\Delta \to \GL(\Lambda_i)
+  \]
+  for some \(\mathcal P_i^\Delta\)-stable lattice \(\Lambda_i\) over the completed local ring \(\widehat{\mathcal O}_{C_n,p_i}\cong \C[[x,y]]/(xy)\).
+
+  So the whole problem is: construct \(\Lambda_i\) stable under \(\mathcal P_i^\Delta\).
+
+  2. Reduce to lattices on the two branches + a Levi compatibility
+
+  Let \(\tilde C_n\) be the normalization at the node \(p_i\), with preimages \(p_i',p_i''\) and local parameters \(x\) and \(y\) on the two branches. Then
+  \[
+  \widehat{\mathcal O}_{C_n,p_i}\cong \C[[x,y]]/(xy)
+  \quad\text{and}\quad
+  \Frac(\C[[x,y]]/(xy))\cong \C((x))\times \C((y)).
+  \]
+
+  Your diagonal parahoric sits naturally in the product:
+  \[
+  \mathcal P_i^\Delta=\Delta(L_i)\ltimes (U_i\times U_i)\subset \mathcal P_i(\C((x)))\times \mathcal P_i(\C((y))).
+  \]
+
+  A representation of \(\mathcal P_i^\Delta\) on a “node lattice” is equivalent to:
+    •	a \(\mathcal P_i\)-stable lattice \(\Lambda_{i,x}\subset V\otimes \C((x))\),
+    •	a \(\mathcal P_i\)-stable lattice \(\Lambda_{i,y}\subset V\otimes \C((y))\),
+    •	plus a compatibility along the Levi: the induced \(L_i\)-lattices (or reductions) match so that the diagonal \(L_i\) acts.
+
+  Concretely: since \(\mathcal P_i\to L_i\) is the Levi quotient, you want the two reductions
+  \(\Lambda_{i,x}/x\Lambda_{i,x}\)
+  \qquad\text{and}\qquad
+  \(\Lambda_{i,y}/y\Lambda_{i,y}\)
+  to carry the same \(L_i\)-module structure (so that \(\Delta(L_i)\) acts via the same representation on both sides). This is the “diagonal” condition.
+
+Canonical way to choose the branch lattices from \(\eta_I\)
+
+  Fix \(I\) and the corresponding coweight data \(\eta_I\) (or a vertex \(\eta\) in the simplest case). The standard construction is:
+    1.	Restrict \(\rho\) to the torus \(T\). Then \(V\) decomposes into weights:
+  \(V=\bigoplus_{\lambda\in X^*(T)} V_\lambda\).
+    2.	Pair weights with the coweight \(\eta_I\) to get rational numbers \(\langle \lambda,\eta_I\rangle\).
+    3.	Define an \(\eta_I\)-lattice in \(V\otimes \C((z))\) by
+  \[
+  \Lambda(\eta_I)\;:=\;\bigoplus_{\lambda} z^{-\lceil \langle \lambda,\eta_I\rangle\rceil}\,V_\lambda\ \subset\ V\otimes \C((z)).
+  \]
+
+  Then a basic fact from Bruhat-Tits/Moy-Prasad theory is:
+    •	\(\Lambda(\eta_I)\) is stable under the parahoric \(\mathcal P(\eta_I)\subset G((z))\),
+    •	hence \(\rho\) extends to a map of group schemes on the disc
+  \[
+  \mathcal G_{\eta_I}\to \GL(\Lambda(\eta_I)).
+  \]
+
+  For a node \(p_i\), you do this twice:
+  \[
+  \Lambda_{i,x}:=\Lambda_x(\eta_{i})\subset V\otimes \C((x)),
+  \qquad
+  \Lambda_{i,y}:=\Lambda_y(\eta_{i})\subset V\otimes \C((y)).
+  \]
+  Because the same \(\eta_i\) is used on both branches, the resulting Levi actions match, and you get a canonical action of \(\mathcal P_i^\Delta\) on the “node module”
+  \(\Lambda_{i,\Delta}:=\{(s_x,s_y)\in \Lambda_{i,x}\oplus \Lambda_{i,y}\mid \text{their Levi reductions agree}\}\).
+  This \(\Lambda_{i,\Delta}\) is the correct object over \(\C[[x,y]]/(xy)\) that \(\mathcal P_i^\Delta\) preserves.
+
+  That gives your local extension at \(p_i\), and gluing over all nodes gives the global \(\rho_I:\mathcal G_I^\Delta\to \GL(\mathcal V_I)\).
+
+
+  If \(G=\GL_n\) and \(\rho\) is the standard representation, then “choosing a \(\mathcal P\)-stable lattice” is literally choosing a lattice chain. A parahoric of type \(I\) corresponds to a block decomposition \(n=n_1+\cdots+n_m\), with Levi \(L\simeq \GL_{n_1}\times\cdots\times \GL_{n_m}\). On the \(x\)-branch pick a lattice \(\Lambda_{x}\subset \C((x))^n\) whose reduction mod \(x\) carries the corresponding flag of type \((n_1,\dots,n_m)\). Similarly pick \(\Lambda_{y}\subset \C((y))^n\). The diagonal condition \(\Delta(L)\) is exactly: the induced graded pieces (or the Levi framings) are identified across the node. Then \(\mathcal P^\Delta\) is precisely the subgroup of \(\mathcal P_x\times \mathcal P_y\) preserving \((\Lambda_x,\Lambda_y)\) with the same Levi action.
+\end{remark}
+
+Thus in this way we can write down very many line bundles on our moduli stack $\cX_{G,g,I}$ by choosing representations of the Bruhat--Tits group schemes on the universal curve, and then passing to the determinant of cohomology. These line bundles give a numerical criterion in the sense of Halpern-Leistner in the following way. 
+
+More precisely, to obtain a scale--invariant numerical invariant in the sense
+of Halpern--Leistner, one must normalize the weight by a quadratic norm on
+cocharacters. A map
+\[
+f:\Theta=[\A^1/\mathbb G_m]\longrightarrow \cX_{G,g,I}
+\]
+determines, at the special fiber, a rational cocharacter
+\(
+\xi\in X_*(T)_\Q
+\)
+encoding the associated parahoric reduction.
+For a line bundle $\cL\in\Pic(\cX_{G,g,I})$, the pullback $f^*\cL$ is a
+$\mathbb G_m$--linearized line bundle on $\A^1$, hence determined by an integer
+weight $\wt_{\cL}(f)$, namely the weight of $\mathbb G_m$ on the fiber
+$\cL|_{f(0)}$.
+
+Fix a positive definite invariant quadratic form
+\[
+\langle -,-\rangle_{\mathrm{bas}}
+\in \Sym^2(\mf{g}^{*})^G,
+\]
+normalized once and for all (for $G$ simple this is unique up to scale).
+We define the norm
+\[
+\|\xi\|^2 := \langle \xi,\xi\rangle_{\mathrm{bas}}.
+\]
+The normalized numerical invariant attached to $\cL$ is then
+\[
+M_{\cL}(f)
+:=
+\frac{-\,\wt_{\cL}(f)}{\|\xi\|}.
+\]
+
+This quantity is invariant under reparametrization
+$\xi\mapsto n\xi$ and hence depends only on the filtration.
+A point is $\cL$--semistable if $M_{\cL}(f)\ge 0$ for all nontrivial
+$\Theta$--filtrations $f$.
+
+In the case $\cL=\cL_{\det}(\rho)$, the leading term of
+$\wt_{\cL}(f)$ is quadratic in $\xi$:
+\[
+\wt_{\cL_{\det}(\rho)}(f)
+=
+-\,m_\rho\,\langle \xi,\xi\rangle_{\mathrm{bas}}
+\;+\;(\text{terms at most linear in }\xi),
+\]
+where $m_\rho$ is the level (Dynkin index) of the representation.
+Thus determinant line bundles provide precisely the type of
+quadratic numerical function required for the Halpern--Leistner
+$\Theta$--stratification on $\cX_{G,g,I}$.
+
+The difficulty here is the following question. Given an unstable point of $\cX_{G,g,I}$, is there a maximally destabilizing one parameter subgroup? In the classical GIT case, this recovers Kempf’s optimal 1-PS theorem.
+
+
+For \(\Bun_G(C)\) on a smooth projective curve, the maximally destabilizing $\Theta$-filtration is exactly the Harder-Narasimhan reduction of the bundle, and the “optimal” cocharacter is the HN type.
+
+For the compactified/parahoric setting, the expected answer is the analogous one:
+an unstable admissible object should have a canonical parahoric HN reduction (compatible with your diagonal local models at the nodes), and the associated $\xi$ should minimize \(M_{\cL_{\det}(\rho)}\).
+
+\red{I think we need to examine general theory of the Harder-Narasimhan filtration for $G$-bundles, which has been worked out for smooth curves. The hope is that we can generalize it to nodal curves, and then prove the analagous theorem that such a filtration minimizes the numerical invariant associated to the determinant line bundle $\cL_{\det}(\rho)$. Note that any HN theory for nodal $G$-bundles should provide the data of a parabolic subgroup (i.e. a cocharacter up to conjugacy as well as a degree.}
+
+\section{Saturday Feb 14, 2026}
+I was wondering what it means to say that the theta line bundle on $\Bun_G(C)$ is ample on the moduli stack of $G$-bundles on a smooth projective curve $C$. A quick search of the literature suggests that there is no definition of ampleness for line bundles on stacks, but that the following is the correct interpretation.
+
+Let $\mathrm{Bun}_G^{ss}(C)\subset \mathrm{Bun}_G(C)$ be the semistable open substack. It admits a (good/coarse) moduli space $M_G(C)$ (for $G$ semisimple; over $\mathbb{C}$ this is the usual projective moduli variety). On $M_G(C)$ the theta line bundle descends to witness its projectivity, in particular it embeds $M_G(C)$ into projective space. 
+
+Intimately related to this is the fact that the theta line bundle defines a stratification of $\Bun_G(C)$. On $\mathrm{Bun}_G(C)$ one has the determinant (theta) line bundle
+$\mathcal{L}_{\det}$ whose numerical weight along a degeneration gives a numerical invariant $\mathrm{wt}_{\mathcal{L}_{\det}}$.
+
+A reduction of a $G$-bundle $\mathcal E$ to a parabolic $P\subset G$ is by definition a $P$-bundle $\mathcal E_P$ together with an isomorphism $\mathcal E_P \times^P G \cong \mathcal E$. This is equivalent to giving a section $C\to \mathcal E/P$ of the associated fiber bundle with fiber $G/P$. 
+
+Suppose we have a reduction
+$\mathcal E_P \to C$ with $\mathcal E \cong \mathcal E_P\times^P G$. Take any representation $V$ of $G$. Then the $G$-bundle $\mathcal E$ gives a vector bundle
+$\mathcal E(V):=\mathcal E\times^G V$, but since $\mathcal E$ comes from $\mathcal E_P$, we also have
+$\mathcal E(V)\cong \mathcal E_P\times^P V$.
+
+Now $P$ preserves the flag $0\subset F_1\subset \cdots \subset F_r=V$. Therefore each $F_i$ is a $P$-subrepresentation, and we obtain subbundles $\mathcal E_P(F_i)\subset \mathcal E_P(V)=\mathcal E(V)$. The filtration
+\[0 \subset \mathcal E_P(F_1)
+\subset \cdots
+\subset \mathcal E_P(F_r)=\mathcal E(V)\] is called the filtration of the associated vector bundle.
+
+This gives a filtration type, but no numerical direction yet. We enrich this notion by introduction of 1-PS reduction is a parabolic reduction $\mathcal E_P$, together with a dominant cocharacter $\lambda:\mathbb G_m \to P$ (equivalently into a Levi of $P$). This cocharacter gives a decomposition of $V$ into weight spaces $V=\bigoplus V_n$ where $V_n$ is the subspace of $V$ on which $\lambda(t)$ acts by $t^n$. Given the weight decomposition, we can recover the filtration by taking all weight spaces up to some cutoff:
+\[F_{\le n}V := \bigoplus_{m\le n} V_m\]
+For most $n$, $F_{\le n}V$ will be the same as $F_{\le n-1}V$, but at certain critical values of $n$ we get a jump in the filtration. The following theorem of Harder-Narasimhan says that for any unstable $G$-bundle $\mathcal E$, there is a canonical 1-PS reduction $(P, \mathcal E_P, \mu)$ where $P$ is a parabolic subgroup, $\mathcal E_P$ is a reduction of $\mathcal E$ to $P$, and $\mu$ is a dominant cocharacter of $P$ such that the associated filtration of any representation $V$ of $G$ is the Harder-Narasimhan filtration of the associated vector bundle $\mathcal E(V)$.
+
+\subsection{The Harder-Narasimhan filtration}
+
+Let $G$ be a connected reductive group over $\C$, let
+$C$ be a smooth projective curve, and let
+$\mathcal E$ be a principal $G$--bundle on $C$.
+
+\paragraph{Degrees associated to reductions.}
+Let $P\subset G$ be a parabolic subgroup and let $\mathcal E_P$
+be a reduction of $\mathcal E$ to $P$.
+For any character
+\[
+\chi:P\to \mathbb G_m,
+\]
+one gets a line bundle
+$\mathcal L_{\chi}(\mathcal E_P) :=\mathcal E_P\times^{P,\chi}\A^1$ on $C$, and hence an integer
+$\deg \mathcal L_{\chi}(\mathcal E_P)\in\Z$.
+
+\begin{definition}
+  Let us say that the bundle $\mathcal E$ is Ramanathan-semistable if for every parabolic
+reduction $(P,\mathcal E_P)$ and every dominant character $\chi$ of $P$,
+\[
+\deg \mathcal L_{\chi}(\mathcal E_P)\le 0 .
+\] It is enough to check this numerical criterion against the maximal parabolics.
+\end{definition}
+
+\paragraph{Type of a reduction.}
+Fix a maximal torus $T\subset G$ and a Borel subgroup $B\supset T$.
+For a standard parabolic $P\supset B$ with Levi subgroup $L$, let
+$\{\chi_i\}$ denote the fundamental characters of $P$
+(trivial on $[L,L]$).  
+
+The degrees
+\[
+d_i := \deg \mathcal L_{\chi_i}(\mathcal E_P)
+\]
+determine a rational coweight
+\[
+\mu(P,\mathcal E_P)\in X_*(T)_\Q^{+}
+\]
+characterized by
+\[
+\langle \chi_i,\mu(P,\mathcal E_P)\rangle
+=
+-\,d_i .
+\]
+This coweight is called the \emph{type} of the reduction. Using the Weyl group action, we can conjugate $\mu(P,\mathcal E_P)$ to a dominant coweight. Among all parabolic reductions of $\mathcal E$, the set of types
+$\mu(P,\mathcal E_P)$ has a unique maximal element for the dominance order.
+This element is denoted
+\[
+\mu(\mathcal E)\in X_*(T)_\Q^{+}
+\]
+and called the \emph{Harder--Narasimhan (HN) type} of $\mathcal E$. The associated parabolic subgroup is
+\[
+P_{\mathrm{HN}}
+=
+P(\mu(\mathcal E))
+=
+\left\{
+g\in G \;\middle|\;
+\lim_{t\to0}\mu(t)g\mu(t)^{-1}
+\ \text{exists}
+\right\},
+\]
+where $\mu$ is any integral multiple of $\mu(\mathcal E)$.
+
+\begin{theorem}
+There exists a unique reduction
+$\mathcal E_{P_{\mathrm{HN}}}$
+of $\mathcal E$ to $P_{\mathrm{HN}}$ such that:
+
+\begin{enumerate}
+\item[(i)] \textbf{Prescribed type:}
+\[
+\mu(P_{\mathrm{HN}},\mathcal E_{P_{\mathrm{HN}}})
+=
+\mu(\mathcal E).
+\]
+
+\item[(ii)] \textbf{Semistable Levi quotient:}
+if $L_{\mathrm{HN}}$ is a Levi subgroup of $P_{\mathrm{HN}}$, then the induced
+principal $L_{\mathrm{HN}}$--bundle
+\[
+\mathcal E_{L_{\mathrm{HN}}}
+=
+\mathcal E_{P_{\mathrm{HN}}}/U_{\mathrm{HN}}
+\]
+is semistable.
+
+\item[(iii)] \textbf{Maximal destabilizing property:}
+for every other reduction $(Q,\mathcal E_Q)$,
+\[
+\mu(Q,\mathcal E_Q)\le \mu(\mathcal E).
+\]
+Equality holds only when the reduction is isomorphic to
+$\mathcal E_{P_{\mathrm{HN}}}$.
+\end{enumerate}
+\end{theorem}
+
+The pair
+\[
+(P_{\mathrm{HN}},\mathcal E_{P_{\mathrm{HN}}})
+\]
+is called the \emph{Harder--Narasimhan reduction} of $\mathcal E$.
+It is characterized entirely by the bundle $\mathcal E$ itself and does not depend on a choice of representation of $G$. Note that choosing a representation $\rho:G\to \GL(V)$ and applying the associated bundle construction to the HN reduction gives the HN filtration of the associated vector bundle $\mathcal E(V)$.
+
+
+\subsection{Very close degenerations}
+One can reformulate the numerical Hilbert--Mumford criterion in terms of
+stacks. The quotient stack $[\A^1/\mathbb G_m]$ has two
+geometric points $1$ and $0$ which are the images of the points of the same name
+in $\A^1$. For any algebraic stack $\cM$ and
+$f:[\A^1/\mathbb G_m]\to \cM$ we will write
+$f(0),f(1)\in \cM(k)$ for the points given by the images of
+$0,1\in \A^1(k)$.
+
+\begin{definition}[Very close degenerations]
+Let $\cM$ be an algebraic stack over $k$ and $x\in \cM(K)$ a geometric point for
+some algebraically closed field $K/k$. A \emph{very close degeneration} of $x$ is a morphism
+$f:[\A^1_K/\mathfrak G_{m,K}]\to \cM$ with $f(1)\simeq x$ and $f(0)\not\simeq x$.
+\end{definition}
+
+We emphasize that $f(0)$ is an object that lies in the
+closure of a $K$ point of $\cM_K$, which only happens for stacks and orbit
+spaces, but if $X=\cM$ is a scheme, then there are no very close degenerations.
+
+\begin{definition}[$\cL$-stability]
+Let $\cM$ be an algebraic stack over $k$, locally of finite type with affine
+diagonal and $\cL$ a line bundle on $\cM$. A geometric point $x\in \cM(K)$ is
+called \emph{$\cL$-stable} if
+\begin{enumerate}
+\item for all very close degenerations $f:[\A^1_K/\mathfrak G_{m,K}]\to \cM$ of $x$ we have
+\[
+\wt(f^*\cL) < 0
+\]
+and
+\item $\dim_K(\Aut_{\cM}(x))=0$.
+\end{enumerate}
+\end{definition}
+
+We can also introduce the notion of $\cL$-semistable points, by requiring only $\le$ in (1) and dropping condition (2).
+
+\subsection{Very close degenerations of $G$-bundles}
+
+For a cocharacter
+\[
+\lambda:\mathbb G_m \to G
+\]
+we denote by $P_\lambda$, $U_\lambda$, $L_\lambda$ the corresponding parabolic
+subgroup, its unipotent radical and the Levi subgroup.
+
+The source of degenerations is the following analog of the Rees construction.
+Given $\lambda:\mathbb G_m\to G$ we obtain a homomorphism of group schemes over $\mathbb G_m$:
+\[
+\mathrm{conj}_\lambda :
+P_\lambda \times \mathbb G_m \longrightarrow P_\lambda \times \mathbb G_m,
+\qquad
+(p,t)\longmapsto (\lambda(t)p\lambda(t)^{-1},t).
+\]
+This homomorphism extends to a morphism of
+group schemes over $\A^1$:
+\[
+\mathrm{gr}_\lambda :
+P_\lambda \times \A^1 \longrightarrow P_\lambda \times \A^1
+\]
+in such a way that
+\[
+\mathrm{gr}_\lambda(p,0)
+=
+\lim_{t\to 0}\lambda(t)p\lambda(t)^{-1}
+\in L_\lambda\times 0.
+\]
+These morphisms are $\mathbb G_m$-equivariant with respect to the action
+$(\mathrm{conj}_\lambda,\mathrm{act})$ on $P_\lambda\times \A^1$.
+
+Given a $P_\lambda$-bundle $\cE_\lambda$ on a scheme $X$, this morphism defines
+a $P_\lambda$-bundle on $X\times[\A^1/\mathbb G_m]$ by
+\[
+\mathrm{Rees}(\cE_\lambda,\lambda)
+:=
+\bigl[((\cE_\lambda\times \A^1)\times^{\mathrm{gr}_\lambda}_{\A^1}
+(P_\lambda\times \A^1))/\mathbb G_m\bigr],
+\]
+where $\times^{\mathrm{gr}_\lambda}_{\A^1}$ denotes the bundle induced via the
+morphism $\mathrm{gr}_\lambda$, i.e.\ we take the product over $\A^1$ and divide
+by the diagonal action of the group scheme
+$P_\lambda\times \A^1/\A^1$, which acts on the right factor via
+$\mathrm{gr}_\lambda$.
+
+By construction this bundle satisfies
+\[
+\mathrm{Rees}(\cE_\lambda,\lambda)|_{X\times 1}\cong \cE_\lambda
+\]
+and
+\[
+\mathrm{Rees}(\cE_\lambda,\lambda)|_{X\times 0}
+\cong
+\cE_\lambda/U_\lambda \times_{L_\lambda} P_\lambda ,
+\]
+which is the analog of the associated graded bundle.
+
+\begin{remark} We unravel this construction in more detail, since it is the key to understanding the source of very close degenerations of $G$-bundles. Start with the trivial family $E_\lambda\times \mathbb A^1$ on $X\times \mathbb A^1$. Twist its $P_\lambda$-structure along $\mathbb A^1$ by $\mathrm{gr}_\lambda$; over $t\neq 0$ this is just conjugation by $\lambda(t)$, over $t=0$ it collapses the $U_\lambda$-part. Because $\lambda$ gives a grading, this twisting is $\mathbb G_m$-equivariant, so it descends to $X\times[\mathbb A^1/\mathbb G_m]$.
+
+The output is a $\mathbb G_m$-equivariant family, i.e. a map $[\mathbb A^1/\mathbb G_m]\to \Bun_{P_\lambda}$, and then extending structure group gives a map to $\Bun_G$.
+\
+
+Over $t=1$, $\mathrm{gr}_\lambda$ is just the identity automorphism, so nothing changes:
+\[
+\mathrm{Rees}(E_\lambda,\lambda)|_{t=1}\cong E_\lambda.
+\]
+
+Over $t=0$, the twisting morphism becomes project to the Levi $P_\lambda = L_\lambda \ltimes U_\lambda \to L_\lambda$. The bundle is given by the formula
+\[
+\mathrm{Rees}(E_\lambda,\lambda)|_{t=0}
+\cong
+(E_\lambda/U_\lambda)\times_{L_\lambda} P_\lambda.
+\]
+where $E_\lambda/U_\lambda$ is the quotient $L_\lambda$-bundle given by dividing the $P_\lambda$-bundle $E_\lambda$ by the unipotent radical $U_\lambda$, and then we extend structure group back to $P_\lambda$ via the inclusion $L_\lambda\subset P_\lambda$.
+
+Heinloth shows that every very close degeneration of $G$-bundles arises from the Rees construction applied to a parabolic reduction. We have already seen that given $\lambda:\mathbb G_m\to G$ and a reduction $E_\lambda$ of $E$ to $P_\lambda$, the Rees construction gives a very close degeneration. We unpack the converse. 
+A map
+\[
+f:[\mathbb A^1/\mathbb G_m]\to \Bun_G(X)
+\]
+is a $\mathbb G_m$-equivariant $G$-bundle $\mathcal E$ on $X\times \mathbb A^1$. Consider special fiber
+$X\times [0/\mathbb G_m] \subset X\times [\A^1/\mathbb G_m]$. Because $0$ is fixed by scaling, the restriction
+$\mathcal E_0 := \mathcal E|_{X\times[0/\mathbb G_m]}$ is a $G$-bundle together with a \(\mathbb G_m\)-action. Choosing a trivialization of $\mathcal E_0$ gives a homomorphism
+$\mathbb G_m \to \Aut(\mathcal E_0)\cong G$ and changing trivialization changes this homomorphism by conjugation, so we get a well-defined cocharacter $\lambda:\mathbb G_m\to G$ up to conjugation. 
+
+
+Once we have extracted the cocharacter $\lambda$, we recover the
+parabolic reduction as an \emph{attractor subbundle}.
+Let $\mathcal E$ be the $\mathbb G_m$-equivariant $G$-bundle on
+$X\times \mathbb A^1$ corresponding to
+$f:[\mathbb A^1/\mathbb G_m]\to \Bun_G(X)$, and write
+$E:=\mathcal E|_{X\times\{1\}}$ for the general fiber.
+
+Choose a local trivialization of $\mathcal E$ in the fpqc topology over
+$X\times \mathbb A^1$, so that over such a trivializing open the
+$\mathbb G_m$-action is given by $\lambda$ up to $G$-conjugacy. In this
+local model, a point of the fiber $E_x$ may be written as a frame
+$g\in G$, and the $\mathbb G_m$-action transports it by conjugation,
+so the condition that the orbit has a limit as $t\to 0$ is exactly
+\[
+\lim_{t\to0} \lambda(t)\,g\,\lambda(t)^{-1}\ \text{exists}.
+\]
+By definition this is equivalent to $g\in P_\lambda$. Therefore the
+subset of points of $E$ whose $\mathbb G_m$-orbit admits a limit is
+stable under the right action of $P_\lambda$ and defines a principal
+$P_\lambda$-subbundle
+\[
+E_\lambda \subset E.
+\]
+Equivalently, $E_\lambda$ is the reduction of $E$ corresponding to the
+canonical $\mathbb G_m$-fixed section of the associated bundle
+$E\times^G(G/P_\lambda)$ coming from the special fiber at $t=0$.
+
+Finally, applying the Rees construction to $(E_\lambda,\lambda)$ yields
+a $\mathbb G_m$-equivariant family of $G$-bundles on $X\times \mathbb A^1$,
+and by construction it agrees with $\mathcal E$ over $\mathbb A^1\setminus\{0\}$;
+the $\mathbb G_m$-equivariant extension across $0$ is unique, hence the
+Rees family recovers $\mathcal E$.
+\end{remark}
+
+Heinloth shows that these two mechanisms are inverse to each other, so that the data of a very close degeneration is precisely the data of a parabolic reduction together with a cocharacter. This is the key to understanding the numerical criterion for stability in terms of parabolic reductions.
+
+\begin{lemma}
+Let $G$ be a split reductive group over $k$. Given a very close degeneration
+\[
+f:[\A^1/\mathbb G_m]\to \Bun_G
+\]
+corresponding to a family $\cE$ of $G$-bundles on
+$X\times[\A^1/\mathbb G_m]$, there exist:
+\begin{enumerate}
+\item a cocharacter $\lambda:\mathbb G_m\to G$, canonical up to conjugation,
+\item a reduction $\cE_\lambda$ of the bundle $\cE$ to $P_\lambda$,
+\item an isomorphism
+\[
+\cE \cong \mathrm{Rees}(\cE_\lambda|_{X\times 1},\lambda).
+\]
+\end{enumerate}
+\end{lemma}
+
+
+\begin{remark}[The case of $\GL(V)$]
+A cocharacter $\lambda:\mathbb G_m\to \GL(V)$ is the same as a $\mathbb Z$-grading
+\[
+V=\bigoplus V_n,
+\quad \lambda(t)|_{V_n}=t^n.
+\]
+Then $P_\lambda$ is the stabilizer of the induced filtration
+\[
+F^{\ge m}V:=\bigoplus_{n\ge m}V_n,
+\]
+and $L_\lambda\cong \prod \GL(V_n)$. A reduction $E_\lambda$ of a $\GL(V)$-bundle is the same as a filtration of the associated vector bundle by subbundles (with weights). The Rees construction is literally the usual Rees module construction that deforms a filtered vector bundle to its graded.
+\end{remark}
+
+
+\begin{theorem}
+A $G$-bundle $E$ is $\mathcal{L}_{\det}$-stable if and only if for all reductions $E_P$ to maximal parabolic
+subgroups $P \subset G$ we have $\deg(E_P \times_P \Lie(P)) < 0$.
+\end{theorem}
+
+\begin{proof}
+We have ave to compute the weight of $\mathcal L_{\det}$ on very
+close degenerations.
+
+Let us choose $T\subset B\subset G$ a maximal torus and a Borel subgroup
+and
+\[
+\lambda:\mathbb G_m\to G
+\]
+a dominant cocharacter, i.e.
+\[
+\langle \lambda,\alpha\rangle \ge 0
+\]
+for all roots such that
+\[
+\mathfrak g_\alpha \subset \Lie(B).
+\]
+Let us denote by $I$ the set of positive simple roots with respect to
+$(T,B)$ and by
+\[
+I_P:=\{\alpha_i\in I \mid \lambda(\alpha_i)=0\}
+\]
+the simple roots $\alpha_i$ for which $-\alpha_i$ is also a root of
+$P_\lambda$.
+For $j\in I$ let us denote by
+\[
+\tilde\omega_j \in X_*(T)_\mathbb R
+\]
+the cocharacter defined by
+\[
+\tilde\omega_j(\alpha_i)=\delta_{ij},
+\]
+and by $P_j$ the corresponding maximal parabolic subgroup.
+
+Then
+\[
+\lambda:\mathbb G_m \to Z(L_\lambda)\subset L_\lambda\subset P_\lambda.
+\]
+Thus for any very close degeneration
+$f:[\mathbb A^1/\mathbb G_m]\to \Bun_G$
+given by $\mathrm{Rees}(\mathcal E_\lambda,\lambda)$ the bundle
+$\mathcal L_{\det}$ defines a morphism
+\[
+\mathrm{wt}_{\mathcal L}:
+X_*\!\left(Z_\lambda\right)
+\subset
+\Aut_{\Bun_G}(f(0))
+\to \mathbb Z.
+\]
+
+Then the weight function is additive in the cocharacter so it is enough to compute for one fundamental direction at a time. Write
+$
+\lambda=\sum_{j\in I-I_P} a_j\tilde\omega_j
+$ for some $a_j>0$. Then
+\[
+\mathrm{wt}(\mathcal L_{\det}|_{f(0)})
+=
+\mathrm{wt}_{\mathcal L}(\lambda)
+=
+\sum_{j\in I-I_P} a_j\,\mathrm{wt}_{\mathcal L}(\tilde\omega_j).
+\]
+For each $j$ we get a decomposition
+\[
+\Lie(G)=\bigoplus_i \Lie(G)_i,
+\]
+where $\Lie(G)_i$ is the subspace of the Lie algebra on which
+$\tilde\omega_j$ acts with weight $i$.
+Each of these spaces is a representation of $L_\lambda$ and also of the
+Levi subgroups $L_j$ of $P_j$.
+Using this decomposition we find as in the case of vector bundles:
+\begin{align*}
+\mathrm{wt}_{\mathcal L}(\tilde\omega_j)
+&=
+-\mathrm{wt}_{\mathbb G_m}
+\!\left(
+\det H^*(C,\,
+\mathcal E_{0,\lambda}\times^{L_\lambda}\Lie(G)_i)
+\right) \\
+&=
+\sum_i i\cdot
+\chi\!\left(
+\mathcal E_{0,\lambda}\times^{L_\lambda}\Lie(G)_i
+\right) \\
+&=
+\sum_i i\Bigl(
+\deg(\mathcal E_{0,\lambda}\times^{L_\lambda}\Lie(G)_i)
++\dim(\Lie(G)_i)(1-g)
+\Bigr) \\
+&=
+2\sum_{i>0}
+i\,
+\deg(\mathcal E_{0,\lambda}\times^{L_\lambda}\Lie(G)_i).
+\end{align*}
+because the decomposition is symmetric with respect to $i\mapsto -i$ and so the terms with $1-g$ cancel out.
+Now
+\[
+\deg(\mathcal E_{0,\lambda}\times^{L_\lambda}\Lie(G)_i)
+=
+\deg\!\left(
+\det(\mathcal E_{0,\lambda}\times^{L_\lambda}\Lie(G)_i)
+\right).
+\]
+Since the Levi subgroups of maximal parabolics have only a
+one-dimensional space of characters, all of these degrees are positive
+multiples of
+\[
+\det(\Lie(P_j)).
+\]
+\end{proof}
+
+\begin{remark} This agrees with the seemingly different numerical criterion of Ramanathan stability, basically for the reason that $\det \Ad_{\Lie(P)}$ is a positive multiple of the unique dominant character of $P$.
+
+  Let us examine some of the Lie theory here to understand.
+ Note that for a maximal parabolic, there is a unique dominant character (up to scaling). For semisimple \( G \), any parabolic \( P \) has
+\[X^*(P)\cong X^*(L)\cong X^*(Z(L))\]
+where \( L \) is a Levi and \( Z(L) \) its center.
+If \( P \) is maximal, then \( Z(L) \) is 1-dimensional, hence
+\( X^*(P)\cong \mathbb Z \).
+Choosing a Borel \( B\subset P \) picks out a notion of dominant characters, i.e. the submonoid \( \mathbb Z_{\ge 0}\cdot \lambda_P \) generated by a single primitive dominant character \( \lambda_P \).
+Therefore Ramanathan stability for maximal parabolics:
+\[
+\deg(E_P(\chi))<0\ \text{for all dominant }\chi
+\]
+is equivalent to checking it just for \( \chi=\lambda_P \).
+The point is
+\[
+\deg(E_P\times^P \Lie(P))=\deg\bigl(E_P(\det\Ad_{\Lie(P)})\bigr).
+\]
+Write \( \Lie(P)=\Lie(L)\oplus \mathfrak u \). The determinant of the adjoint action on \( \Lie(L) \) is trivial for semisimple reasons (the adjoint weights are roots summing to 0), so
+\[
+\det(\Ad_{\Lie(P)})=\det(\Ad_{\mathfrak u}).
+\]
+But \( \det(\Ad_{\mathfrak u}) \) is the character corresponding to the weight
+\( 2\rho_P := \sum_{\alpha\in \Phi^+ \setminus \Phi_L^+}\alpha \),
+i.e. the sum of the positive roots appearing in \( \mathfrak u \). This is a dominant character of \( P \), and for a maximal parabolic it is a positive multiple of the generator \( \lambda_P \):
+\[
+\det(\Ad_{\mathfrak u}) = m_P\cdot \lambda_P\quad (m_P>0).
+\]
+Therefore the numerical criterion for stability is
+\[\deg(E_P \times^{P,\lambda_P} \A^1)<0 \iff \deg(E_P\times^P \Lie(P))<0.\] In fact these numbers are positive multiples of each other, so the two criteria are exactly equivalent.
+\end{remark}
+
+\begin{remark}
+  [Conceptual viewpoint] 
+The weight computation for the determinant line bundle admits a conceptual
+interpretation independent of coordinates or root combinatorics.
+The key point is that a very close degeneration determines two pieces of
+data:
+
+\begin{enumerate}
+\item a cocharacter
+\[
+\lambda:\mathbb G_m \to G,
+\]
+which specifies the direction of the degeneration, and
+
+\item a reduction $E_{\lambda}$ of the general fiber to the corresponding parabolic $P_\lambda$
+\end{enumerate}
+
+These two objects naturally pair.
+Given a $P_\lambda$-bundle $E_\lambda$ on the curve $C$, there is a map
+\[
+\deg(E_\lambda \times^P \cdot):
+X^*(P_\lambda) \longrightarrow \mathbb Z.
+\]
+Since characters factor through the Levi quotient,
+\[
+X^*(P_\lambda)=X^*(L_\lambda)=X^*(Z(L_\lambda)),
+\]
+and note that $Z(L_\lambda)$ is a torus by structure theory of reductive groups. The cocharacter $\lambda$ factors through the center of the Levi $\lambda \in X_*(Z(L_\lambda))$
+so there is a canonical pairing
+\[
+\langle \lambda,\deg(E_\lambda \times^P \cdot )\rangle \in \mathbb Z.
+\]
+This relates to the determinant line bundle as follows. The determinant line bundle is defined using the adjoint representation:
+\[
+\mathcal L_{\det}=\det R\Gamma(C,\Ad(E)).
+\]
+The cocharacter $\lambda$ induces a grading
+\[
+\mathfrak g=\bigoplus_i \mathfrak g_i,
+\]
+and hence a decomposition of the associated graded adjoint bundle
+\[
+\Ad(E_0)
+=
+\bigoplus_i
+E_{0,\lambda}\times^{L_\lambda}\mathfrak g_i .
+\]
+The $\mathbb G_m$-weight on the determinant line is therefore
+\[
+\mathrm{wt}_{\mathcal L_{\det}}(f)
+=
+\sum_i i\,
+\chi\!\left(
+E_{0,\lambda}\times^{L_\lambda}\mathfrak g_i
+\right).
+\] 
+The determinant line is a moment-map functional, and this pairing is the algebraic analogue of the Kempf–Ness pairing between a 1-PS and a moment map value.
+
+
+After applying Riemann--Roch and using the symmetry of the adjoint
+representation, only degree terms remain, yielding
+\[
+\mathrm{wt}_{\mathcal L_{\det}}(f)
+=
+\langle \lambda,\deg(E_\lambda)\rangle .
+\]
+In the case $G=\GL_n$, this recovers the familiar expression
+\[
+\sum_i (\text{weight}_i)\cdot(\deg \operatorname{gr}^i),
+\]
+namely the pairing between a weighted filtration and the degrees of its
+graded pieces.
+\end{remark}
+
+This theorem of Heinloth \cite{heinloth} is precisely the way we need to generalize the notion of stability to our compactified moduli stack $\cX_{G,g,I}$. We need to understand the very close degenerations of points of $\cX_{G,g,I}$, and then apply the numerical criterion to determine which points are semistable with respect to the determinant line bundles we have constructed.
+
+Note that we need to know that the stack $\cX_{G,g,I} \to \overline{\mathcal{M}}_{g,I}$ has affine diagonal in order to apply Heinloth's theory of $\cL$-stability. Honestly maybe not worth worrying about this.
+
+\begin{lemma}[Affine diagonal]
+\label{lem:affine-diagonal}
+The morphism $\cX_{G,g,I}\to \overline{\cM}_{g,I}$ has affine diagonal.
+\end{lemma}
+
+\begin{proof}[Sketch]
+Fix a test scheme $B$ and two objects of $\cX_{G,g,I}(B)$ lying over the same
+family of curves $C_B\to B$, i.e.\ two twisted local modifications
+$\pi:C'_B\to B$ together with admissible bundles on $C'_B$ in the sense of
+Sol\'is.  Equivalently, we may view each admissible bundle as a torsor under an
+affine group scheme $\cG_B$ on $C'_B$ (the Bruhat--Tits/parahoric group scheme
+determined by the local types at the stacky points/nodes).
+
+Let $\cP_1,\cP_2$ be the corresponding $\cG_B$--torsors on $C'_B$.
+The sheaf $\Isom_{C'_B}(\cP_1,\cP_2)$ on $B$ is the pushforward along $\pi$ of
+the sheaf of isomorphisms on $C'_B$:
+\[
+\Isom_B\bigl((C'_B,\cP_1),(C'_B,\cP_2)\bigr)
+\;\cong\;
+\pi_*\Isom_{C'_B}(\cP_1,\cP_2).
+\]
+Now $\Isom_{C'_B}(\cP_1,\cP_2)$ is a torsor under the group scheme
+$\Aut(\cP_1):=\cP_1\times^{\cG_B}\cG_B$, which is affine over $C'_B$ since
+$\cG_B$ is affine.  Since $\pi:C'_B\to B$ is proper and of finite presentation,
+the relative Weil restriction $\Res_{C'_B/B}$ sends affine $C'_B$--schemes to
+affine $B$--schemes; hence $\pi_*\Isom_{C'_B}(\cP_1,\cP_2)$ is representable by
+an affine $B$--scheme.  This identifies the relative diagonal of
+$\cX_{G,g,I}\to \overline{\cM}_{g,I}$ with an affine morphism.
+\end{proof}
+
+
+
+\section{Sunday, Feb 15}
+We need to think about very close degenerations of points of $\cX_{G,g,I}$. In the smooth case, these are given by 1-PS reductions to parabolic subgroups. In our compactified setting, we expect that they are given by parahoric reductions to the local Bruhat--Tits group schemes at the nodes, together with a cocharacter of the Levi that gives the numerical direction. We need to understand how to construct these degenerations, and then apply Heinloth's criterion to determine which points are semistable with respect to the determinant line bundles we have constructed.
+
+We must first classify all very close degenerations of $\cX_{G,g,I}$. We first survey some general theory introduced by Heinloth.
+
+\begin{lemma}
+Let $\mathcal M$ be an algebraic stack locally of finite type over
+$k=\bar{k}$ with quasi-affine diagonal.
+
+\begin{enumerate}
+\item For any very close degeneration
+\[
+f:[\mathbb A^1/\mathbb G_m]\to \mathcal M
+\]
+the induced morphism
+\[
+\lambda_f:\mathbb G_m=\Aut_{[\mathbb A^1/\mathbb G_m]}(0)
+\longrightarrow \Aut_{\mathcal M}(f(0))
+\]
+is nontrivial.
+
+\item The restriction functor
+\[
+\mathcal M([\mathbb A^1/\mathbb G_m])
+\to
+\varprojlim \mathcal M([\Spec(k[x]/x^n)/\mathbb G_m])
+\]
+is an equivalence of categories.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+As the statement produces the point $f(1)$ out of a formal datum let us
+explain briefly why this is possible: The composition
+\[
+\phi:\mathbb D=\Spec k[[x]] \to \mathbb A^1 \to [\mathbb A^1/\mathbb G_m]
+\]
+is faithfully flat, because both morphisms are flat and the map is
+surjective, because both points of $[\mathbb A^1/\mathbb G_m]$
+are in the image.
+
+By our assumptions $\mathcal M$ is a stack for the fppf topology, we therefore see that $\mathcal M([\mathbb A^1/\mathbb G_m])$ can be
+described as objects in $\mathcal M(k[[x]])$ together with a descent
+datum with respect to $\phi$.
+
+Moreover, the canonical map
+\[
+\mathcal M(\mathbb D)
+\overset{\sim}{\longrightarrow}
+\varprojlim \mathcal M(k[x]/(x^n))
+\]
+is an equivalence of categories: this follows for example, because the
+statement holds for schemes and choosing a smooth presentation
+$X\to \mathcal M$ one can reduce to this statement.
+
+In particular this explains already that an element of
+\[
+\varprojlim \mathcal M([\Spec(k[x]/x^n)/\mathbb G_m])
+\]
+will produce a $k[[x]]$-point of $\mathcal M$. The problem now lies in
+constructing a descent datum for this morphism, as
+\[
+\mathbb D\times_{[\mathbb A^1/\mathbb G_m]}\mathbb D
+=
+\Spec\!\bigl(
+k[[x]]\otimes_{k[x]}k[x,t,t^{-1}]
+\otimes_{k[y]}k[[y]]
+\bigr),
+\]
+where the last tensor product is taken via $y=xt$.
+The ring on the right hand side is not complete and the formal descent
+data coming form an element in
+\[
+\varprojlim \mathcal M([\Spec(k[x]/x^n)/\mathbb G_m])
+\]
+only seems to induce a descent datum on the completion of the above ring.
+
+Let us deduce (1). First note that this holds automatically if
+$\mathcal M$ is a scheme, because then $f(1)$ is a closed point and $f(0)$ lies in the closure of $f(1)$, and therefore must equal $f(1)$. This implies that there are no very close degenerations of schemes and so (1) is vacuously true for schemes.
+
+In general choose a smooth presentation $p:X\to \mathcal M$.
+If $\lambda_f$ is trivial, we can lift the morphism
+\[
+f|_0:[0/\mathbb G_m]\to \Spec k \to \mathcal M
+\]
+to
+\[
+\tilde f_0:[0/\mathbb G_m]\to X .
+\]
+Since $p$ is smooth, we can inductively lift this morphism to obtain
+an element in
+\[
+\varprojlim X([\Spec(k[x]/x^n)/\mathbb G_m]).
+\]
+Thus we reduced (1) to the case $\mathcal M=X$.
+\end{proof}
+
+\begin{lemma}
+For any cocharacter $\lambda:\mathbb G_m \to G$ and any geometric point
+$x \in X(K)$ that is not a fixed point of $\lambda$, the equivariant map
+\[
+f_{\lambda,x}:\mathbb A^1_K \to X
+\]
+defines a very close degeneration
+\[
+\bar f_{\lambda,x}:[\mathbb A^1_K/\mathbb G_{m,K}] \to [X/G].
+\]
+Moreover, any very close degeneration in the stack $[X/G]$ is of the form
+$\bar f_{\lambda,x}$ for some $x,\lambda$.
+\end{lemma}
+
+\begin{proof}
+Since $f_{\lambda,x}(0)$ is a fixed point of $\lambda$ and $x$ is not, we have
+$\bar f(0)\neq \bar f(1)$, thus $\bar f$ is a very close degeneration. Conversely let
+\[
+f:[\mathbb A^1/\mathbb G_m]\to [X/G]
+\]
+be any very close degeneration.
+We need to find a $\mathbb G_m$-equivariant morphism\[
+\begin{array}{ccc}
+\mathbb A^1 & \to & X \\
+\downarrow  &     & \downarrow \pi \\
+\bigl[\mathbb A^1/\mathbb G_m\bigr] & \to & \bigl[X/G\bigr]
+\end{array}
+\]
+Since $\pi:X\to [X/G]$ is a $G$-bundle, the pull-back
+\[
+p: X\times_{[X/G]}[\mathbb A^1/\mathbb G_m]
+\to [\mathbb A^1/\mathbb G_m]
+\]
+is a $G$-bundle on $[\mathbb A^1/\mathbb G_m]$.
+A section of this bundle $p$ is precisely a $\mathbb G_m$-equivariant morphism $\mathbb A^1\to X$ lifts $f$ because $p$ is the fiber product of $f$ and $\pi$. Thus we reduce to the classification of $\mathbb G_m$-equivariant $G$-bundles on $\mathbb A^1$.
+\end{proof}
+
+\begin{lemma}
+Let $G$ be a reductive group and $\mathcal P$ a $G$-bundle on
+$[\mathbb A^1/\mathbb G_m]$. Denote by $\mathcal P_0$ the fiber of
+$\mathcal P$ over $0\in \mathbb A^1$.
+
+\begin{enumerate}
+\item
+If there exists $x_0\in \mathcal P_0(k)$ (e.g.\ this holds if $k=\bar k$),
+then there exists a cocharacter
+\[
+\lambda:\mathbb G_m \to G,
+\]
+unique up to conjugation, and an isomorphism of $G$-bundles
+\[
+\mathcal P \cong
+\bigl[(\mathbb A^1\times G)/(\mathbb G_m,(\mathrm{act},\lambda))\bigr].
+\]
+Moreover, $\mathcal P$ has a canonical reduction to $P_\lambda$, the parabolic subgroup defined by $\lambda$.
+
+\item
+Let $G_0:=\Aut_G(\mathcal P_0)$ and $\lambda:\mathbb G_m \to G_0$ be the cocharacter defined by $\mathcal P|_{[0/\mathbb G_m]}$. Note that since $0$ is a fixed point of the $\mathbb G_m$-action, $\mathbb G_m$ acts on $\mathcal P_0$ whose automorphism group is $G$ and therefore this gives a cocharacter $\lambda:\mathbb G_m\to G_0$.
+
+
+Consider the $G_0$-bundle $\mathcal P^{G_0}:=\Isom_G(\mathcal P,\mathcal P_0)$
+on $[\mathbb A^1/\mathbb G_m]$. Then
+\[
+\mathcal P^{G_0}
+\cong
+\bigl[(\mathbb A^1\times G_0)/(\mathbb G_m,(\mathrm{act},\lambda))\bigr],
+\]
+i.e.
+\[
+\mathcal P \cong
+\Isom_{G_0}
+\!\left(
+[(\mathbb A^1\times G_0)/(\mathbb G_m,(\mathrm{act},\lambda))],
+\mathcal P_0
+\right).
+\]
+
+Moreover, $\mathcal P^{G_0}$ has a canonical reduction to
+$P_{0,\lambda}\subset G_0$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}[Proof of Lemma 1.7]
+The second part follows from the first, as the $G_0$-bundle
+\[
+\mathcal P^{G_0}=\Isom_G(\mathcal P_0,\mathcal P_0)
+\]
+has a canonical point $\mathrm{id}$. We added (2), because it gives an intrinsic statement,
+independent of choices.
+
+To prove (1) note that $x_0$ defines an isomorphism
+\[
+G \xrightarrow{\sim} \Aut_G(\mathcal P_0)
+\]
+and a section
+\[
+[\Spec k/\mathbb G_m]\to \mathcal P|_{[0/\mathbb G_m]} .
+\]
+This induces a section
+\[
+[\Spec k/\mathbb G_m]\to \mathcal P/P_\lambda .
+\]
+As the map
+\[
+\pi:\mathcal P/P_\lambda \to [\mathbb A^1/\mathbb G_m]
+\]
+is smooth, any section can be lifted infinitesimally to
+$\Spec k[x]/x^n$ for all $n\ge0$.
+Inductively the obstruction to the existence of a
+$\mathbb G_m$-equivariant section is an element in
+\[
+H^1\!\left(
+B\mathbb G_m,
+T_{(\mathcal P/P_\lambda)/\mathbb A^1,0}
+\otimes (x^{n-1})/(x^n)
+\right)=0,
+\]
+and the choices of such liftings form a torsor under
+\[
+H^0\!\left(
+B\mathbb G_m,
+T_{(\mathcal P/P_\lambda)/\mathbb A^1,0}
+\otimes (x^{n-1})/(x^n)
+\right).
+\]
+
+Now by construction $\mathbb G_m$ acts with negative weight on
+\[
+T_{\mathcal P/P_\lambda,0}
+=\Lie(G)/\Lie(P_\lambda),
+\]
+and it also acts with negative weight on the cotangent space
+\[
+(x)/(x^2),
+\]
+so there exists a canonical $\mathbb G_m$-equivariant reduction
+$\mathcal P_\lambda$ of $\mathcal P$ to $P_\lambda$.
+
+Similarly, the vanishing of $H^1$ implies that we can also find a
+compatible family of $\lambda$-equivariant sections
+\[
+[(\Spec k[t]/t^n)/\mathbb G_m]\to \mathcal P
+\]
+and by Lemma~1.5 this defines a section over
+\[
+[\mathbb A^1/\mathbb G_m],
+\]
+i.e.\ a morphism of $G$-bundles
+\[
+[(\mathbb A^1\times G)/(\mathbb G_m,\lambda)]\to \mathcal P.
+\]
+\end{proof}
+\begin{remark}We unpack this statement in more elementary terms. The key point is that
+$\mathbb G_m$-equivariant $G$-bundles on $\mathbb A^1$ are classified by
+cocharacters
+\[
+\lambda:\mathbb G_m \to G
+\]
+up to conjugation.
+
+In the forward direction, let $\mathcal P$ be a
+$\mathbb G_m$-equivariant $G$-bundle on $\mathbb A^1$.
+Since $0\in\mathbb A^1$ is fixed by the $\mathbb G_m$-action,
+the induced action on the fiber $\mathcal P_0$ defines a homomorphism
+\[
+\lambda:\mathbb G_m \to \Aut_G(\mathcal P_0)\cong G,
+\]
+well-defined up to conjugation after choosing an identification
+$\mathcal P_0 \cong G$.
+Because $\mathbb A^1\setminus\{0\}\cong \mathbb G_m$ is a single
+$\mathbb G_m$-orbit, equivariance forces the action on every other fiber
+to be determined by this same cocharacter; thus the entire equivariant
+structure is encoded by $\lambda$.
+
+Conversely, given a cocharacter
+\[
+\lambda:\mathbb G_m \to G,
+\]
+one constructs a $\mathbb G_m$-equivariant $G$-bundle on $\mathbb A^1$
+by starting with the trivial bundle
+\[
+\mathbb A^1 \times G \to \mathbb A^1
+\]
+and defining the $\mathbb G_m$-action by
+\[
+t\cdot (x,g) := (t x,\lambda(t)g).
+\]
+The quotient
+\[
+[(\mathbb A^1\times G)/(\mathbb G_m,(\mathrm{act},\lambda))]
+\]
+is then a $\mathbb G_m$-equivariant $G$-bundle on $\mathbb A^1$.
+Changing the trivialization of the fiber over $0$ conjugates $\lambda$,
+so the resulting bundle depends only on the conjugacy class of
+$\lambda$.
+\end{remark}
+
+
+
+\section{References}
+\begin{enumerate}
+  \bibitem{balaji} TORSORS ON SEMISTABLE CURVES AND DEGENERATIONS
+  \bibitem{heinloth} Hilbert-Mumford stability on algebraic stacks and applications to G-bundles on curves
+\end{enumerate}
+\end{document}

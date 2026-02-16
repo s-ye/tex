@@ -4,7 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{listings}
 \usepackage{bookmark}
-\usepackage{tikz}
+\usepackage{tikz-cd}
 
 \makeatletter
 \def\input@path{{../../style/}}
@@ -24,6 +24,8 @@
 \DeclareMathOperator{\Eul}{Eul}
 \DeclareMathOperator{\Ind}{Ind}
 \DeclareMathOperator{\pt}{pt}
+\DeclareMathOperator{\sm}{sm}
+\DeclareMathOperator{\Sing}{Sing}
 
 \begin{document}
 
@@ -1371,7 +1373,7 @@ $\mathcal P$ at $p$ as follows:
 \mathcal G^{\mathcal P}(D):=\mathcal P,\qquad \mathcal G^{\mathcal P}(D^\times):=G((z)),
 \]
 with restriction map given by the inclusion $\mathcal P\hookrightarrow G((z))$;
-\item on the overlap $(C\setminus\{p\})\cap D^\times\simeq D^\times$, we identify both
+\item on the overlap $(C\setminus\{p\})\cap D \simeq D^\times$, we identify both
 restrictions with $G((z))$ and glue.
 \end{itemize}
 
@@ -1386,7 +1388,10 @@ $\mathcal P=\mathcal G^{\mathcal P}(D)$);
 \end{enumerate}
 
 When $\mathcal P=L^+_P G=\{\gamma\in G[[z]]\mid \gamma(0)\in P\}$ for a parabolic $P\subset G$, this recovers the usual notion
-of a quasi--parabolic $G$--bundle with a $P$--reduction at $p$.
+of a quasi--parabolic $G$--bundle with a $P$--reduction at $p$. 
+In particular $L^+_{P_J}G$ corresponds to the facet containing the hyperspecial vertex $\eta_0$ together with the vertices $\eta_j$ for $j\in J$.
+
+
 When $\mathcal P$ is a maximal parahoric corresponding to a vertex $\eta_i$ of the fundamental alcove, we say the parahoric structure at $p$ is \emph{of type $\eta_i$}.
 \end{definition}
 
@@ -1471,6 +1476,170 @@ In words:
 \item ordinary $G$-bundles on $C$ correspond to those parahoric torsors whose gluing class can be represented by a constant loop (equivalently, whose local modification at the node is trivial).
 \end{itemize}
 
+
+
+\subsection*{Fixed nodal curve}
+
+Let $C_{0,[k]}$ be a twisted nodal curve with a single twisted node $p$.
+Let $C_0$ be its coarse moduli space and, by abuse of notation, also write
+$p\in C_0$ for the coarse node. The stabilizer of $p\in C_{0,[k]}$ is $\mu_k$,
+and in particular
+\[
+C_{0,[k]}\times_{C_0} D_0 \;\cong\; \Bigl[\,D_0^{1/k}/\mu_k\,\Bigr],
+\]
+
+For a parahoric $\mathcal P$, let $\mathcal L\mathcal U$ be its Levi
+decomposition and set
+\[
+\mathcal P^{\Delta} \;:=\; \Delta(\mathcal L)\ltimes (\mathcal U\times \mathcal U).
+\]
+One can construct a sheaf of groups $\mathcal G^{\Delta}$
+over $C_0$ such that
+\[
+\mathcal G^{\Delta}(\widehat{\mathcal O}_{C_0,p})=\mathcal P^{\Delta},
+\qquad
+\mathcal G^{\Delta}\big|_{C_0-p}=\mathcal G^{\mathrm{std}}.
+\]
+Let $\mathcal M_{\mathcal G^{\Delta}}(C_0)$ denote the moduli stack of
+$\mathcal G^{\Delta}$--torsors on $C_0$ and let $T_{\mathcal G^{\Delta}}(C_0)$
+denote the moduli space of pairs $(\mathcal F,\tau)$ where
+$\mathcal F\in \mathcal M_{\mathcal G^{\Delta}}(C_0)$ and $\tau$ is a
+trivialization of $\mathcal F$ over $C_0-p$. Define $T_{\mathcal G^{\Delta}}(D_0)$
+similarly.
+
+Let $\eta\in \Hom(\C^\times,T)\otimes_{\Z}\Q$ and consider the moduli stack
+$\mathcal M_{G,\eta}(C_{0,[k]})$ of $G$--bundles on $C_{0,[k]}$ with equivariant
+structure at $p$ determined by $\eta$. Let $T_{G,\eta}(C_{0,[k]})$ denote the
+moduli space of pairs $(P,\tau)$ with $P\in \mathcal M_{G,\eta}(C_{0,[k]})$ and
+$\tau$ a trivialization of $P$ on $C_{0,[k]}-p$. Define
+$T_{G,\eta}\bigl([D_0^{1/k}/\mu_k]\bigr)$ similarly.
+
+\begin{proposition}[{\cite[Prop.\ 3.4.5]{solis}}]
+\label{prop:solis-345}
+Suppose $k\eta\in \Hom(\C^\times,T)$ and set $\mathcal P=\mathcal P(\eta)$.
+Let
+\[
+D_0=\Spec\C[[x,y]]/(xy),
+\qquad
+\Bigl[\,D_0^{1/k}/\mu_k\,\Bigr]
+\ \ \text{as above.}
+\]
+Choose $k$th roots $u,v$ of $x,y$ so that $D_0^{1/k}=\C[[u,v]]/(uv)$.
+Let
+\[
+i_{0,[k]}:\Bigl[\,D_0^{1/k}/\mu_k\,\Bigr]\longrightarrow C_{0,[k]},
+\qquad
+i_0:D_0\longrightarrow C_0
+\]
+be the natural maps. Let
+\[
+G^{\Delta}_{u,v}
+:=\Bigl\{(g_1,g_2)\in L_u^+G\times L_v^+G \ \Big|\ g_1(0)=g_2(0)\Bigr\}.
+\]
+Then we have isomorphisms fitting into the diagram
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+T_{\mathcal G^{\Delta}}(D_0)
+&
+T_{\mathcal G^{\Delta}}(C_0)
+\arrow[l,"i_0^{*}"']
+\arrow[r,"\Xi_{C_0}"]
+\arrow[d,"\Psi^{\mathcal P^\Delta}_{C}"']
+&
+T_{G,\eta}(C_{0,[k]})
+\arrow[r,"i_{0,[k]}^{*}"]
+\arrow[d,"\Psi^{\eta}_{C}"]
+&
+T_{G,\eta}\Bigl(\bigl[D_0^{1/k}/\mu_k\bigr]\Bigr)
+\\
+{} % <--- placeholder row 1
+&
+LG\times LG\,/\,\mathcal P^{\Delta,\eta}
+\arrow[r,"\eta^{-1}(\ \cdot\ )\eta"']
+&
+(L_uG\times L_vG)^{\mu_k}\big/\bigl(G^\Delta_{u,v}\bigr)^{\mu_k}
+&
+{}  % <--- placeholder column 4
+&
+\end{tikzcd}
+\]
+
+where $\Xi_{C_0}$ is defined to be
+\[
+\Xi_{C_0}
+:=\bigl(\Psi^{\eta}_{C}\bigr)^{-1}\circ \eta(\ \cdot\ )\eta^{-1}\circ
+\Psi^{\mathcal P^\Delta}_{C},
+\]
+$\Psi^{\mathcal P^\Delta}_{C}$ is the map in \emph{(3.8)}, $\Psi^{\eta}_{C}$ is
+the map in \emph{(3.10)}, and the bottom horizontal map is the product map
+\[
+g(z)\mathcal P
+\longmapsto
+\eta(w)\,g(w^{k})\,\eta^{-1}(w)\cdot (L_w^+G)^{\mu_k}.
+\]
+The isomorphism $\Xi_{C_0}$ descends to an isomorphism of stacks
+\[
+\Xi:\ \mathcal M_{\mathcal G^{\mathcal P}}(C_0)\ \xrightarrow{\ \sim\ }\ 
+\mathcal M_{G,\eta}(C_{0,[k]}).
+\]
+\end{proposition}
+
+\subsection*{Connection with $L^{\times}_{\mathrm{poly}}G$}
+
+In Chapter~2 a stacky orbit closure $\partial X^{aff,poly}$ was constructed,
+analogous to the boundary of the wonderful compactification of a semisimple
+adjoint group.  In particular, the boundary components are smooth and intersect
+transversely.  Let $r=\rank(G)$.  There are $2^{r+1}-1$ boundary orbits
+labeled by the nonempty subsets of $\{0,\dots,r\}$.
+
+\begin{proposition}[{\cite[Prop.\ 3.4.6]{solis}}]
+\label{prop:solis-346}
+Let $L_I$, $\mathcal P_I^{\pm}$, $\mathcal U_I^{\pm}$ be as in \emph{(3.2)} of
+Section~3.2 and let $Z_0(L_I)$ be the connected component of the center
+$Z(L_I)$.  Define
+\[
+\mathcal P_I^{\Delta,\pm}
+:= \Delta(L_I)\ltimes (\mathcal U_I^+\times \mathcal U_I^-).
+\]
+Then the orbit $\mathcal O_I$ in the boundary of $X^{aff,poly}$ is
+\[
+\mathcal O_I
+=
+\frac{L_{\mathrm{poly}}G\times L_{\mathrm{poly}}G}
+     {\,Z_0(L_I)\times Z_0(L_I)\cdot \mathcal P_I^{\Delta,\pm}}.
+\]
+
+In particular, the orbit $\mathcal O_I$ fibers over
+\[
+LG/\mathcal P_I \times LG/\mathcal P_I^{-}
+\]
+with fiber the adjoint Levi
+\[
+L_{I,\mathrm{ad}} = L_I/Z_0(L_I).
+\]
+Furthermore,
+when $I=\{i\}$ is a singleton the group $Z_0(L_I)$ is trivial, while for
+$|I|>1$ one has $Z_0(L_I)=Z(L_I)$.
+\end{proposition}
+
+\begin{remark}
+The isomorphisms of Proposition~\ref{prop:solis-345} allow one to identify
+the singleton orbit $\mathcal O_{\{i\}}$ with the moduli spaces
+\[
+T_{G,\eta_i}\!\left(\Bigl[D_0^{1/k}/\mu_k\Bigr]\right)
+\qquad\text{and}\qquad
+T_{G,\eta_i}(C_{0,[k]}),
+\]
+where $\eta_i$ is the $i$th vertex of the affine alcove.
+The natural expectation is that the moduli problem
+$T_{G,\eta_i}\!\left(\bigl[D_0^{1/k}/\mu_k\bigr]\right)$
+can further degenerate to moduli problems parametrized by the higher
+codimensional orbits in
+$\C^\times\times L_{\mathrm{poly}}G$, and similarly for
+$T_{G,\eta_i}(C_{0,[k]})$.
+This is established in the next subsection.
+\end{remark}
+
 \subsection*{$G$--bundles on twisted chains}
 
 In the previous section we saw that associated to the singleton sets
@@ -1483,9 +1652,7 @@ $O_I$ in the wonderful embedding for any $I\subset \{0,\dots,r+1\}$.
 \medskip
 
 Let $R_n$ denote the rational chain of projective lines with $n$ components;
-Figure~3.1 in the introduction depicts a chain of length $3$.  There is an action
-of $\C^\times$ on $R_n$ which scales each component.  Let $p_0,\dots,p_n$ denote
-the fixed points of this action.
+There is an action of $\C^\times$ on $R_n$ which scales each component.  Let $p_0,\dots,p_n$ denote the fixed points of this action.
 
 Recall that $u,v$ are $k$th roots of $x,y$ which are our coordinates near a node.
 Let $p',p''$ denote the closed points of $\Spec \C[[u]]$ and $\Spec \C[[v]]$.
@@ -1550,6 +1717,609 @@ $T_{G,I}(C_{0,[k]})$ and $T_{G,I}\!\bigl([D^{1/k}_n/\mu_k]\bigr)$ are isomorphic
 an orbit in the wonderful embedding of $L_{\mathrm{poly}}^{\times}G$.
 \end{theorem}
 
+
+\subsection{Refined stratification of $\mathcal X_{G,g,I}$}
+
+Let $C/B$ be a prestable curve with dual graph $\Gamma$, and let
+$(C'_B,P_B)$ be an object of $\mathcal X_{G,g,I}$; that is, $C'_B$ is a twisted
+modification of $C_B$ and $P_B$ is an admissible $G$--bundle on $C'_B$.
+
+For each vertex $v\in V(\Gamma)$ let $\xi_v$ denote the Harder--Narasimhan
+type of the restriction of $P_B$ to the normalization component indexed by $v$.
+For each node $e\in E(\Gamma)$ we have two additional pieces of boundary data:
+
+\begin{enumerate}
+\item a \emph{parahoric type}
+      \[
+        I_e\subset \{0,\dots,r\},
+      \]
+      specifying the parahoric subgroup
+      $\mathcal P_{I_e}\subset G((z))$ which governs the local structure of
+      the bundle at $e$;
+
+\item a \emph{relative position label}
+      \[
+        \mathbf w_e \in
+        W_{I_e}\backslash \widetilde W / W_{I_e},
+      \]
+      equivalently an orbit
+      $O_e\subset \mathcal P_{I_e}\backslash G((z))/\mathcal P_{I_e}$
+      describing the gluing of the two branches at $e$.
+\end{enumerate}
+
+Let $\tau_e$ denote the length of the modification chain over the node $e$.
+Collect the data into
+\[
+\alpha=(\Gamma,\tau,\mathbf I,\mathbf w,\boldsymbol{\xi}),
+\qquad
+\mathbf I=(I_e)_{e\in E(\Gamma)},\;
+\mathbf w=(\mathbf w_e)_{e\in E(\Gamma)},\;
+\boldsymbol{\xi}=(\xi_v)_{v\in V(\Gamma)} .
+\]
+
+\begin{definition}
+The \emph{refined stratum} of type $\alpha$ is the locally closed substack
+\[
+\mathcal X_\alpha \subset \mathcal X_{G,g,I}
+\]
+consisting of objects $(C'_B,P_B)$ such that:
+\begin{enumerate}[(i)]
+\item the coarse curve $C_B$ has dual graph $\Gamma$ and the modification
+      lengths at the nodes are $\tau_e$;
+
+\item for every vertex $v$, the restriction of $P_B$ to the corresponding
+      normalization component has Harder--Narasimhan type $\xi_v$;
+
+\item at each node $e$, the parahoric structure of $P_B$ is of type $I_e$,
+      and the gluing of the two branches lies in the orbit $O_e$
+      corresponding to $\mathbf w_e$.
+\end{enumerate}
+\end{definition}
+
+The collection $\{\mathcal X_\alpha\}_\alpha$ forms a stratification of
+$\mathcal X_{G,g,I}$, and its closure relations are governed by:
+\begin{itemize}
+\item the usual specialization of dual graphs and modification lengths;
+\item the dominance order on the HN types $\xi_v$;
+\item the Bruhat order on the double cosets
+      $W_{I_e}\backslash \widetilde W / W_{I_e}$.
+\end{itemize}
+
+\begin{remark}[Why Shatz data alone is insufficient]
+For a smooth curve the Shatz stratification indexed by HN types $\xi$
+is adequate, because a $G$--bundle has no additional local structure.
+On a nodal curve, however, two bundles with identical Shatz types on the
+normalization can differ essentially at the node.
+
+
+Consider two objects: (1) a genuine $G$-bundle on the nodal curve with gluing element $g\in G \subset G((z))$, and (2) a limit object where the gluing is $z^\lambda \in G((z))$ with $\lambda>0$.
+
+Both have the same normalization bundles, the same HN type $\xi_v=0$, and the same parahoric type $I_e=\{0\}$. However, (1) lies in the open stratum corresponding to actual $G$-bundles, while (2) lies in a boundary stratum of the wonderful compactification.
+
+
+\smallskip
+\noindent\textbf{(1) Parahoric choice.}
+The admissible object is not an honest $G$--bundle but a torsor under a
+sheaf of groups that equals $G$ away from the nodes and a parahoric
+$\mathcal P_{I_e}$ near each node.  
+Different choices of $I_e$ give non--isomorphic deformation theories and
+different normal complexes, so they must label distinct strata.
+
+\smallskip
+\noindent\textbf{(2) Relative position.}
+Even after fixing $I_e$, the gluing of the two branches is classified by
+orbits in
+$\mathcal P_{I_e}\backslash G((z))/\mathcal P_{I_e}$,
+indexed by double cosets
+$W_{I_e}\backslash\widetilde W/W_{I_e}$.
+These correspond to different boundary directions in the wonderful
+compactification and produce different weights in the local Euler factors.
+
+\smallskip
+Hence Shatz types $\boldsymbol{\xi}$ describe only the instability on the
+normalization components; they do not control the parahoric structure nor
+the affine--Weyl relative position at the nodes.
+A filtration of $R\Gamma(\mathcal X_{G,g,I},\mathcal E)$ analogous to the
+Teleman--Woodward argument therefore requires the refined indexing
+$(\Gamma,\tau,\mathbf I,\mathbf w,\boldsymbol{\xi})$.
+\end{remark}
+
+\red{Requires proof and I am not even sure it is true}
+\begin{lemma}
+\label{lem:finite-type-open}
+For any fixed combinatorial type (graph $\Gamma$ + expansion length bound + allowed parahoric types $I_e$ in a finite set) and any bound on $(\boldsymbol{\xi}_v, \mathbf{w}_e)$, the open substack $\mathcal{X}_{\le \alpha}$ is algebraic and of finite type over an étale chart of $\overline{\mathfrak{M}}_{g,I}$.
+\end{lemma}
+\subsection{Virtual normal complex and local cohomology for a refined stratum}
+
+Fix a refined type
+\[
+\alpha=(\Gamma,\tau,\mathbf I,\mathbf w,\boldsymbol\xi)
+\]
+as in the refined stratification of $\mathcal X_{G,g,I}$, and let
+\[
+i_\alpha:\mathcal X_\alpha \hookrightarrow \mathcal X_{\le \alpha}
+\]
+be the inclusion into a finite--type open substack $\mathcal X_{\le \alpha}$
+obtained by bounding the HN types on vertices, the modification lengths, and
+restricting the node data to the prescribed finite sets
+$(I_e,\mathbf w_e)$.
+
+Let
+\[
+\pi:\mathcal C_{\le \alpha}\longrightarrow \mathcal X_{\le \alpha}
+\]
+be the universal twisted modification and let $\mathcal P$ be the universal
+(parahoric) $G$--torsor on $\mathcal C_{\le \alpha}$.
+Write
+\[
+\ad(\mathcal P):=\mathcal P\times^G \mf g
+\]
+for the adjoint vector bundle on $\mathcal C_{\le \alpha}$.
+
+\subsubsection*{1. Tangent complexes: global principle}
+
+A basic deformation--theoretic fact (for principal bundles on a curve, and
+likewise for torsors under a smooth affine group scheme on a twisted curve) is:
+\begin{equation}
+\label{eq:tangent-bundle-stack}
+T_{\Bun_G,\mathcal P}\ \simeq\ R\pi_*\ad(\mathcal P)[1].
+\end{equation}
+Intuitively: first--order deformations of $\mathcal P$ are controlled by
+$H^1(\ad(\mathcal P))$ and infinitesimal automorphisms by $H^0(\ad(\mathcal P))$,
+hence the shift $[1]$.
+
+In our setting, $\mathcal X_{\le \alpha}$ is not just $\Bun_G$ on a fixed curve:
+it also includes the expansion/twisting data.  However, after fixing
+$\Gamma$ and bounding $\tau$, the expansion part is finite type and its
+tangent directions are independent of the bundle instability directions.
+Thus, for the purpose of the \emph{normal directions to the refined stratum},
+one isolates the contribution coming from the $G$--torsor deformation theory,
+which is governed by \eqref{eq:tangent-bundle-stack}.
+(One can either include the expansion tangent complex everywhere and cancel it
+in cones below, or simply work relative to the expansion stack.)
+
+\subsubsection*{2. The ``Levi/parahoric core'' controlling the stratum}
+
+By definition of the refined stratum $\mathcal X_\alpha$:
+
+\begin{itemize}
+\item for each vertex $v\in V(\Gamma)$, the restriction of $\mathcal P$
+to the corresponding normalization component has instability type $\xi_v$,
+hence admits a canonical reduction to a parabolic $P_{\xi_v}\subset G$
+with Levi $G_{\xi_v}$;
+
+\item for each node $e\in E(\Gamma)$, the local structure group is the
+parahoric $\mathcal P_{I_e}\subset G((z))$, and the gluing lies in the orbit
+indexed by $\mathbf w_e\in W_{I_e}\backslash\widetilde W/W_{I_e}$.
+\end{itemize}
+
+Package these constraints into a subsheaf of Lie algebras
+\[
+\ad_\alpha(\mathcal P)\ \subset\ \ad(\mathcal P)
+\]
+on $\mathcal C_{\le\alpha}$ defined as follows:
+
+\begin{enumerate}[(i)]
+\item on the smooth locus away from the nodes, $\ad_\alpha(\mathcal P)=\ad(\mathcal P)$;
+
+\item on the normalization component corresponding to $v$, $\ad_\alpha(\mathcal P)$
+is the Lie algebra bundle associated to the \emph{Levi} reduction, i.e.
+\[
+\ad_\alpha(\mathcal P)|_{C_v^{\sm}}
+\;=\;
+\mathcal P_{G_{\xi_v}}\times^{G_{\xi_v}} \mf g_{\xi_v}
+\ \subset\
+\mathcal P|_{C_v^{\sm}}\times^G \mf g;
+\]
+
+\item at a node $e$, $\ad_\alpha(\mathcal P)$ is the Lie algebra of the
+\emph{parahoric Levi} dictated by $I_e$ and the chosen orbit $\mathbf w_e$.
+Concretely, after choosing a formal parameter $z$ and trivializing on the punctured
+disc, the allowed gauge transformations are $\mathcal P_{I_e}$, and the orbit
+$\mathbf w_e$ fixes a relative position; infinitesimally, this replaces
+$\mf g((z))$ by the Lie algebra $\mf p_{I_e}\subset \mf g((z))$ and, on the stratum,
+by the Levi subalgebra $\mf l_{I_e}\subset \mf p_{I_e}$.
+\end{enumerate}
+
+Define the \emph{unstable quotient sheaf}
+\[
+\mathcal Q_\alpha\ :=\ \ad(\mathcal P)\big/\ad_\alpha(\mathcal P).
+\]
+
+This $\mathcal Q_\alpha$ is the geometric object which simultaneously encodes:
+\begin{itemize}
+\item the usual unstable normal directions on components (root spaces outside $\mf g_{\xi_v}$), and
+\item the boundary/gluing directions at nodes (tangent directions to the Schubert
+strata in $\mathcal P_{I_e}\backslash G((z))/\mathcal P_{I_e}$ determined by $\mathbf w_e$).
+\end{itemize}
+
+\subsubsection*{3. Definition of the virtual normal complex $\nu_\alpha$}
+
+\begin{definition}[Virtual normal complex for the refined stratum]
+\label{def:virtual-normal-alpha}
+The \emph{virtual normal complex} to $\mathcal X_\alpha$ inside $\mathcal X_{\le\alpha}$
+(relative to the fixed expansion data) is the perfect complex on $\mathcal X_\alpha$
+\[
+\nu_\alpha \ :=\ R\pi_*(\mathcal Q_\alpha)[1]\Big|_{\mathcal X_\alpha}.
+\]
+\end{definition}
+
+\subsubsection*{4. Justification: why this is the correct normal complex}
+
+The key point is that the refined stratum is cut out by imposing
+\emph{linear conditions on infinitesimal gauge data}, encoded by the inclusion
+$\ad_\alpha(\mathcal P)\subset \ad(\mathcal P)$.
+
+Indeed, the standard deformation theory gives the tangent complex to the ambient
+moduli (again, relative to expansions) as $R\pi_*\ad(\mathcal P)[1]$.  On the stratum,
+allowed first--order deformations are precisely those preserving:
+\begin{itemize}
+\item the HN--Levi reductions on each component, and
+\item the parahoric type and relative position orbit at each node,
+\end{itemize}
+which infinitesimally means deformations governed by $R\pi_*\ad_\alpha(\mathcal P)[1]$.
+
+Since $\ad_\alpha(\mathcal P)\to\ad(\mathcal P)\to\mathcal Q_\alpha$ is exact,
+pushing forward and shifting yields a distinguished triangle
+\[
+R\pi_*\ad_\alpha(\mathcal P)[1]
+\ \longrightarrow\
+R\pi_*\ad(\mathcal P)[1]
+\ \longrightarrow\
+R\pi_*\mathcal Q_\alpha[1]
+\ \longrightarrow,
+\]
+which identifies $R\pi_*\mathcal Q_\alpha[1]$ as the cone of
+$T_{\mathcal X_\alpha}\to T_{\mathcal X_{\le\alpha}}$.
+This is exactly what ``normal complex'' means in derived deformation theory.
+
+\subsubsection*{5. Local cohomology term attached to $\mathcal X_\alpha$}
+
+Let $\mathcal E$ be a coherent sheaf or perfect complex on $\mathcal X_{\le\alpha}$.
+Define the local cohomology of $\mathcal E$ with supports in $\mathcal X_\alpha$ by
+\[
+R\Gamma_{\mathcal X_\alpha}(\mathcal X_{\le\alpha},\mathcal E)
+\ :=\
+R\Gamma\bigl(\mathcal X_{\le\alpha},\,R\Gamma_{\mathcal X_\alpha}(\mathcal E)\bigr),
+\]
+characterized by the exact triangle
+\[
+R\Gamma_{\mathcal X_\alpha}(\mathcal X_{\le\alpha},\mathcal E)
+\ \to\
+R\Gamma(\mathcal X_{\le\alpha},\mathcal E)
+\ \to\
+R\Gamma(\mathcal X_{\le\alpha}\setminus \mathcal X_\alpha,\mathcal E)
+\ \to.
+\]
+
+\red{Needs proof and I am not even sure it is true}
+\begin{lemma}\label{lem:local-purity}
+Each inclusion $i_\alpha:\mathcal X_\alpha\hookrightarrow \mathcal X_{\le\alpha}$ is (derived) lci/perfect so that
+\[
+R\Gamma_{\mathcal X_\alpha}(\mathcal X_{\le\alpha},\mathcal E)
+\;\simeq\;
+R\Gamma\bigl(\mathcal X_\alpha,\, i_\alpha^!\mathcal E\bigr)[d_\alpha]
+\]
+for a codimension shift $d_\alpha$.
+Then there is a purity/local-duality identification:
+\[
+R\Gamma_{\mathcal X_\alpha}(\mathcal X_{\le\alpha},\mathcal E)
+\ \simeq\
+R\Gamma\bigl(\mathcal X_\alpha,\ \mathcal R_\alpha(\mathcal E)\bigr)[d_\alpha],
+\]
+where $d_\alpha$ is the (virtual) codimension and
+\[
+\mathcal R_\alpha(\mathcal E)\ :=\ i_\alpha^!(\mathcal E)[-d_\alpha]
+\]
+is the residue object along $\mathcal X_\alpha$.
+\end{lemma}
+
+\subsubsection*{6. Relation to the inverse Euler class (formal, but canonical once polarized)}
+
+Under the same lci/perfectness hypotheses, the extraordinary pullback $i_\alpha^!$
+is controlled by the normal complex.  In $K$--theory this yields the formal identity
+\[
+[\mathcal R_\alpha(\mathcal E)]
+\ \sim\
+[\mathcal E|_{\mathcal X_\alpha}]\cdot \Eul(\nu_\alpha^\vee)^{-1}.
+\]
+Here $\sim$ means equality in the appropriate \emph{completed} (equivariant)
+$K$--group determined by a chosen polarization/weight convention, exactly as in
+Teleman--Woodward: one must choose a direction of expansion so that the inverse
+Euler factor is summable and weight spaces are finite.
+
+In the refined situation, the relevant weight data comes from:
+\begin{itemize}
+\item the one--parameter subgroups determined by the vertex instability types
+$\xi_v$ (componentwise Shatz data), and
+\item the parahoric/relative position label $(I_e,\mathbf w_e)$ at each node,
+which fixes the affine--Weyl combinatorics of the boundary directions and thus
+the weight decomposition of the node contribution to $\mathcal Q_\alpha$.
+\end{itemize}
+
+Consequently, the local cohomology term attached to the refined stratum is:
+\[
+R\Gamma_{\mathcal X_\alpha}(\mathcal X_{\le\alpha},\mathcal E)
+\ \simeq\
+R\Gamma\Bigl(\mathcal X_\alpha,\ 
+\mathcal E|_{\mathcal X_\alpha}\otimes \Eul(\nu_\alpha^\vee)^{-1}
+\Bigr)[d_\alpha],
+\]
+interpreted in the same completed sense as Teleman--Woodward (and with a polarized
+inverse Euler class if one wants uniform ``weights $\le 0$'' properties).
+
+
+\subsubsection*{The analogue of the virtual normal complex $\nu_\alpha$}
+
+For each refined stratum $\mathcal X_\alpha$, you want:
+\begin{itemize}
+\item a ``semistable Levi core'' stack $\mathcal Y_\alpha$ (finite type), and
+\item a morphism $q_\alpha:\mathcal X_\alpha\to \mathcal Y_\alpha$ whose fibers are ``unstable directions'' (affine/unipotent), so that the normal theory is controlled by a perfect complex pulled back from $\mathcal Y_\alpha$.
+\end{itemize}
+
+\medskip\noindent\textbf{3.1 What $\mathcal Y_\alpha$ should be}
+
+Let $\nu:\widetilde C\to C$ be the normalization of the underlying curve (over the relevant base). Over $\mathcal X_\alpha$, you have:
+\begin{itemize}
+\item components $\widetilde C_v$ indexed by vertices $v$,
+\item marked points corresponding to original markings plus the preimages of nodes (two per edge),
+\item at each preimage of a node: a specified parahoric type $I_e$ and a relative-position orbit $\mathbf w_e$.
+\end{itemize}
+
+Define $\mathcal Y_\alpha$ as the product over vertices $v$ of moduli of semistable $G_{\xi_v}$-bundles on $\widetilde C_v$ with the prescribed parahoric structures at the special points (the ones lying over nodes), together with whatever matching constraints encode $\mathbf w_e$ (often best phrased as belonging to a fixed Schubert cell in an affine flag space).
+
+\medskip\noindent\textbf{3.2 What $\nu_\alpha$ should be}
+
+Let $\pi:\mathcal C_\alpha\to \mathcal X_\alpha$ be the universal (twisted) curve and $\mathcal P$ the universal parahoric $G$-torsor (or $\mathcal G$-torsor for the Bruhat--Tits group scheme $\mathcal G$ that equals $G$ away from nodes).
+
+Define a subsheaf of Lie algebras $\ad_\alpha(\mathcal P)\subset \ad(\mathcal P)$ consisting of infinitesimal automorphisms that preserve:
+\begin{itemize}
+\item the vertexwise canonical $P_{\xi_v}$-reductions on each normalization component, and
+\item the edge constraints (parahoric type $I_e$ and relative-position orbit $\mathbf w_e$) at each node.
+\end{itemize}
+
+Then set the quotient
+\[
+\mathcal Q_\alpha := \ad(\mathcal P)/\ad_\alpha(\mathcal P),
+\]
+and define the virtual normal complex
+\[
+\nu_\alpha := R\pi_*(\mathcal Q_\alpha)[1]\quad\in \Perf(\mathcal X_\alpha).
+\]
+
+\medskip\noindent\textbf{What you must check here (deformation theory input)}
+
+You need:
+\begin{enumerate}
+\item \textbf{Tangent complex for parahoric torsors:}
+$T_{\mathcal X,\,(C',P)}\simeq R\Gamma(C',\ad(P))[1]$ still holds in the parahoric/twisted nodal setting.
+
+\item \textbf{Compatibility of ``refined stratum constraints'' with deformation theory:}
+The tangent complex of $\mathcal X_\alpha$ is the subcomplex cut out by $\ad_\alpha(\mathcal P)$, so the quotient controls the normal directions.
+
+\item \textbf{Perfectness:}
+$\ad(\mathcal P)$, $\ad_\alpha(\mathcal P)$, and $\mathcal Q_\alpha$ are perfect on the curve (ideally vector bundles), so $\nu_\alpha$ is perfect of amplitude $[-1,0]$ after shifting.
+\end{enumerate}
+
+This replaces TW’s formula \(R\pi_*\mathcal E^*(\mf g/\mf g_\xi)[1]\).
+
+\subsection{An explicit refined stratification in the one--node, two--component case}
+
+\subsubsection*{Setup}
+Let $C=C_1\cup_x C_2$ be a connected nodal curve over $\C$ with a single node $x$,
+where $C_1,C_2$ are smooth and meet transversely at $x$.
+Let $\nu:\widetilde C=C_1\sqcup C_2\to C$ be the normalization and write
+$\nu^{-1}(x)=\{p\in C_1,\ q\in C_2\}$.
+Fix a connected reductive group $G$.
+
+Fix a formal parameter $z$ at $p$ and $q$ (after choosing étale neighborhoods if desired),
+so that the formal discs are $D_p=\Spec\C[[z]]$, $D_q=\Spec\C[[z]]$ and the punctured discs
+are $D_p^\times=\Spec\C((z))$, $D_q^\times=\Spec\C((z))$.
+Write $LG:=G((z))$ and $L^+G:=G[[z]]$.
+
+\subsubsection*{Gluing description of $\Bun_G(C)$}
+Let $\Bun_G(C_i,p)$ denote the stack of $G$--bundles on $C_i$ equipped with a framing
+(trivialization) along $D_p$ (respectively $D_q$).
+Then a $G$--bundle on $C$ is equivalent to a triple
+\[
+(E_1,\tau_p)\in \Bun_G(C_1,p),\qquad (E_2,\tau_q)\in \Bun_G(C_2,q),\qquad
+\gamma\in LG,
+\]
+modulo the change of framings by $L^+G\times L^+G$, acting by
+\[
+(a,b)\cdot (E_1,\tau_p,E_2,\tau_q,\gamma)
+=
+(E_1,a\cdot\tau_p,\ E_2,b\cdot\tau_q,\ a\,\gamma\,b^{-1}).
+\]
+Equivalently,
+\begin{equation}
+\label{eq:BunC-gluing}
+\Bun_G(C)\ \simeq\
+\Bigl[\bigl(\Bun_G(C_1,p)\times \Bun_G(C_2,q)\times LG\bigr)\big/\bigl(L^+G\times L^+G\bigr)\Bigr].
+\end{equation}
+(One can formulate \eqref{eq:BunC-gluing} invariantly without choosing $z$ by working with
+torsors over punctured formal neighborhoods; the displayed model is the usual ``loop group''
+presentation after choosing parameters.)
+
+\subsubsection*{Parahoric variant and the refined labels}
+Fix a parahoric subgroup $\mathcal P\subset LG$.
+For definiteness, you may keep in mind either the hyperspecial parahoric
+$\mathcal P=L^+G$ or a maximal parahoric corresponding to a vertex $\eta_i$ of the
+fundamental alcove in the affine--Weyl combinatorics.
+
+Replacing the local gauge group $L^+G$ by $\mathcal P$ gives the parahoric gluing stack
+\begin{equation}
+\label{eq:X-parahoric-gluing}
+\Bun_{\mathcal P}(C)
+\ :=\
+\Bigl[\bigl(\Bun_G(C_1,p)\times \Bun_G(C_2,q)\times LG\bigr)\big/\bigl(\mathcal P\times \mathcal P\bigr)\Bigr],
+\end{equation}
+with $(a,b)\in\mathcal P\times\mathcal P$ acting as above.
+
+The double coset space $\mathcal P\backslash LG/\mathcal P$ carries a stratification by
+$\mathcal P\times\mathcal P$--orbits.  Fix an indexing set $\Omega_{\mathcal P}$ for these
+orbits; for example one may take
+\[
+\Omega_{\mathcal P}\;=\;W_{\mathcal P}\backslash W_{\mathrm{aff}}/W_{\mathcal P},
+\]
+and denote the orbit corresponding to $w\in\Omega_{\mathcal P}$ by $\mathcal O_w\subset LG$.
+
+\begin{definition}[Orbit--type strata]
+\label{def:orbit-strata}
+For $w\in\Omega_{\mathcal P}$ define the locally closed substack
+\[
+\Bun_{\mathcal P}(C)_w
+\ :=\
+\Bigl[\bigl(\Bun_G(C_1,p)\times \Bun_G(C_2,q)\times \mathcal O_w\bigr)\big/\bigl(\mathcal P\times \mathcal P\bigr)\Bigr]
+\ \subset\ \Bun_{\mathcal P}(C).
+\]
+\end{definition}
+
+\begin{remark}[Why this is genuinely new on nodal curves]
+Even if one fixes a ``Shatz type on each component'', the gluing parameter $\gamma\in LG$
+may move in distinct $\mathcal P$--double cosets, and the closure relations of these orbits
+(Bruhat order in $\Omega_{\mathcal P}$) contribute additional boundary directions at the node.
+Thus Shatz data alone does not control the boundary geometry once parahoric/loop--group
+gluing is allowed.
+\end{remark}
+
+\subsubsection*{Refinement by Shatz types on the components}
+Let $\Bun_G(C_i)_{\xi_i}\subset \Bun_G(C_i)$ be the Shatz stratum of instability type $\xi_i$,
+and let $\Bun_G(C_i,p)_{\xi_i}$ be its pullback to framed bundles.
+(Equivalently: the HN type is a condition on the underlying bundle and does not depend on the framing.)
+
+\begin{definition}[Refined strata]
+\label{def:refined-strata}
+A \emph{refined label} is a triple
+\[
+\alpha=(\xi_1,\xi_2,w),
+\qquad \xi_i\ \text{dominant rational coweights},\quad w\in\Omega_{\mathcal P}.
+\]
+Define the refined stratum
+\begin{equation}
+\label{eq:X-alpha}
+\mathcal X_\alpha
+\ :=\
+\Bigl[\bigl(\Bun_G(C_1,p)_{\xi_1}\times \Bun_G(C_2,q)_{\xi_2}\times \mathcal O_w\bigr)\big/\bigl(\mathcal P\times \mathcal P\bigr)\Bigr]
+\ \subset\ \Bun_{\mathcal P}(C).
+\end{equation}
+\end{definition}
+
+\begin{remark}[Closure order]
+Let $\le$ denote the partial order on Shatz types (dominance order) and let $\le_{\mathrm{Br}}$
+denote the Bruhat order on $\Omega_{\mathcal P}$.
+In all standard situations (e.g.\ hyperspecial $\mathcal P=L^+G$ or more generally any parahoric),
+one expects the closure relations to satisfy
+\[
+\overline{\mathcal X_{\xi_1,\xi_2,w}}
+\ \supset\
+\mathcal X_{\xi_1',\xi_2',w'}
+\qquad\Longleftrightarrow\qquad
+\xi_1'\le \xi_1,\ \xi_2'\le \xi_2,\ \text{and } w'\le_{\mathrm{Br}} w.
+\]
+In particular, for a fixed bound $\Xi_1,\Xi_2$ and a fixed $w_0$, the union
+\[
+\mathcal X_{\le(\Xi_1,\Xi_2,w_0)}
+:=
+\bigcup_{\xi_1\le\Xi_1,\ \xi_2\le\Xi_2,\ w\le_{\mathrm{Br}} w_0}\ \mathcal X_{\xi_1,\xi_2,w}
+\]
+is a \emph{finite union} of strata (the Bruhat interval is finite, and Shatz truncations are finite).
+This is the basic finite--type truncation used for index finiteness arguments.
+\end{remark}
+
+\subsubsection*{A workable virtual normal complex for $\mathcal X_\alpha\subset \mathcal X_{\le\alpha}$}
+
+Write $\pi_i:C_i\times \Bun_G(C_i)\to \Bun_G(C_i)$ for the projections,
+and let $\mathcal E_i$ be the universal $G$--bundle on $C_i\times \Bun_G(C_i)$.
+Let $P_{\xi_i}\subset G$ be the canonical parabolic of type $\xi_i$ and $G_{\xi_i}$ its Levi.
+
+On the smooth--curve side, the Teleman--Woodward normal complex for the Shatz stratum
+is (after pulling back to the semistable Levi core)
+\[
+\nu_{\xi_i}^{(i)}
+\ :=\
+R(\pi_i)_*\bigl(\mathcal E_i^*(\mf g/\mf g_{\xi_i})\bigr)[1].
+\]
+
+On the node side, the orbit closure $\overline{\mathcal O_w}$ carries a normal complex
+for the locally closed embedding $\mathcal O_w\hookrightarrow \overline{\mathcal O_w}$:
+\[
+\nu_w^{\mathrm{node}}
+\ :=\
+\mathbb L_{\mathcal O_w/\overline{\mathcal O_w}}[-1],
+\]
+a perfect complex concentrated in degrees $[-1,0]$ whenever $\overline{\mathcal O_w}$
+is normal with rational singularities (as happens for Schubert varieties in the standard cases).
+Pull this back to $\mathcal X_\alpha$ via the projection to the $LG$--factor.
+
+\begin{definition}[Candidate normal complex on the refined stratum]
+\label{def:nu-alpha}
+Define the (virtual) normal complex on $\mathcal X_\alpha$ by
+\begin{equation}
+\label{eq:nu-alpha}
+\nu_\alpha
+\ :=\
+\nu_{\xi_1}^{(1)}\ \oplus\ \nu_{\xi_2}^{(2)}\ \oplus\ \nu_w^{\mathrm{node}}.
+\end{equation}
+\end{definition}
+
+\begin{remark}[Justification for \eqref{eq:nu-alpha}]
+Heuristically, the refined stratum $\mathcal X_\alpha$ is cut out by three independent
+conditions:
+(i) the Shatz condition on $C_1$, (ii) the Shatz condition on $C_2$, and
+(iii) the orbit--type condition at the node (the $\mathcal P$--double coset of the gluing).
+Infinitesimally these contribute transverse deformation directions:
+the first two are measured by the smooth--curve deformation theory of $G$--bundles
+(TW's $\nu_{\xi_i}^{(i)}$), and the third is measured by the deformation theory of the
+orbit embedding in the local loop--group parameter space.
+The direct sum in \eqref{eq:nu-alpha} is the cleanest way to package this additivity;
+it becomes canonical after choosing a presentation \eqref{eq:X-parahoric-gluing} and
+identifying tangent complexes via the standard quotient formula
+$T_{[X/H]}\simeq [T_X\to \mf h]$.
+\end{remark}
+
+\subsubsection*{Local cohomology terms for the refined filtration}
+Fix an ordering of refined labels so that $\mathcal X_{\le\alpha}$ is open and
+$\mathcal X_\alpha$ is locally closed with complement a union of ``more unstable'' labels.
+Let $i_\alpha:\mathcal X_\alpha\hookrightarrow \mathcal X_{\le\alpha}$ be the inclusion.
+
+For a sheaf/complex $\mathcal E$ on $\mathcal X_{\le\alpha}$ define
+\[
+R\Gamma_{\mathcal X_\alpha}(\mathcal X_{\le\alpha},\mathcal E)
+:=R\Gamma\bigl(\mathcal X_{\le\alpha},\,R\Gamma_{\mathcal X_\alpha}(\mathcal E)\bigr),
+\qquad
+\mathcal R_\alpha(\mathcal E):=i_\alpha^!(\mathcal E)[-\codim(\mathcal X_\alpha)].
+\]
+
+Under standard purity hypotheses (e.g.\ $\mathcal X_\alpha$ regularly embedded in a smooth
+ambient presentation of $\mathcal X_{\le\alpha}$, or more generally lci in the derived sense),
+one expects an identification parallel to the smooth--curve story:
+\begin{equation}
+\label{eq:localcoh-alpha}
+R\Gamma_{\mathcal X_\alpha}(\mathcal X_{\le\alpha},\mathcal E)
+\ \simeq\
+R\Gamma\Bigl(\mathcal X_\alpha,\ \mathcal E|_{\mathcal X_\alpha}\otimes \Eul(\nu_\alpha)^{-1}\Bigr)[d_\alpha],
+\end{equation}
+where $d_\alpha=\codim(\mathcal X_\alpha,\mathcal X_{\le\alpha})$ and $\Eul(\nu_\alpha)$
+denotes the $K$--theoretic Euler class of the perfect complex $\nu_\alpha$.
+
+\begin{remark}[What one must check to use \eqref{eq:localcoh-alpha}]
+To make \eqref{eq:localcoh-alpha} a theorem (rather than a guiding formula), one needs:
+\begin{enumerate}[(1)]
+\item a filtration by finite--type opens $\mathcal X_{\le\alpha}$ and a locally closed stratification
+$\mathcal X_{\le\alpha}=\bigsqcup_{\beta\le\alpha}\mathcal X_\beta$ with good closure relations;
+\item a purity/local--duality statement identifying $i_\alpha^!$ in terms of a normal complex;
+\item perfectness of $\nu_\alpha$ (and compatibility with base change over the global base);
+\item a $\Gm$--grading on $\nu_\alpha$ (from Shatz $1$--PS data on the components and the standard
+weight grading on the Schubert normal directions) so that a \emph{polarized inverse Euler class}
+can be defined in a completed equivariant $K$--theory;
+\item an admissibility condition ensuring eventual vanishing of the $\Gm$--weight--$0$ part of
+$\mathcal E\otimes \Eul(\nu_\alpha)^{-1}_+$ for $\alpha$ sufficiently unstable.
+\end{enumerate}
+The one--node model above is useful because each item can be tested explicitly:
+(2)--(4) reduce to the known smooth--curve Shatz theory on $C_i$ and to standard properties
+of Schubert strata in $\mathcal P\backslash LG/\mathcal P$.
+\end{remark}
 \section{References}
 \begin{enumerate}
     \bibitem{TelemanWoodward} Teleman, C., \& Woodward, C. (2012). The index formula on the moduli of G-bundles. Annals of Mathematics, 176(2), 601-77.

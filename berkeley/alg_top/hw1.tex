@@ -1,0 +1,409 @@
+\documentclass[12pt]{article}  % or any other class
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/psetconfig}
+\title{Homework 1}
+\author{Songyu Ye}
+\date{\today}
+
+\begin{document}
+\psettitle
+
+
+\begin{problem}[1]
+Find the fundamental group of the complement of two Hopf--linked circles in $\mathbb{R}^3$.
+\end{problem}
+
+\begin{solution}
+    The knot complement will have the same fundamental group if we pass to the one point compactification $S^3=\mathbb{R}^3\cup\{\infty\}$, so we may work in $S^3$ instead of $\mathbb{R}^3$. Let $L=K_1\sqcup K_2\subset \mathbb{R}^3$ be the Hopf link. Choose disjoint closed tubular neighborhoods
+$N_i \cong S^1\times D^2$
+of each $K_i$. Then $S^3\setminus L$ deformation retracts onto
+\[
+M:=S\setminus \operatorname{int}(N_1\cup N_2),
+\]
+because each $N_i\setminus K_i$ deformation retracts onto $\partial N_i$ by pushing radially in the normal disk direction. In view of the standard decomposition of $S^3$ into two solid tori, we can identify $S^3\setminus \operatorname{int}(N_1)$ with a solid torus under this identification $K_2$ becomes the core $S^1\times\{0\}$.
+
+Inside a solid torus $S^1\times D^2$, remove an open tubular neighborhood of the core $S^1\times\{0\}$. We obtain
+\[
+S^1\times \bigl(D^2\setminus \operatorname{int}(D^2_{\varepsilon})\bigr) \cong S^1\times (S^1\times I) \cong T^2\times I.
+\]
+That is exactly $M$. Therefore
+\[
+\mathbb{R}^3\setminus L \simeq M \cong T^2\times I \simeq T^2,
+\]
+so
+\[
+\pi_1(\mathbb{R}^3\setminus L)\cong \pi_1(T^2)\cong \mathbb{Z}^2.
+\]
+\end{solution}
+
+
+\begin{problem}[2]
+A (small) category $\mathcal C$ may be localized by inverting a collection $M$ of morphisms: for each arrow $x \xrightarrow{f} y$ in $M$, adjoin an arrow $x \xleftarrow{\,f^{-1}\,} y$ and impose the relations $f\circ f^{-1} = \mathrm{id}_y$, $f^{-1}\circ f = \mathrm{id}_x$, together with all formal compositions of arrows and all relations between arrows forced by associativity.
+
+\begin{enumerate}
+\item Show that if the morphisms in $M$ were already invertible, the natural functor $\lambda:\mathcal C\to \mathcal C_M$ to the localization is an equivalence of categories.
+
+\item Show that the localization functor $\lambda:\mathcal C\to \mathcal C_M$ is characterized as follows, among categories where $\lambda(M)$ lands in invertible morphisms: every functor $\varphi:\mathcal C\to \mathcal D$ which takes morphisms in $M$ to invertible morphisms in $\mathcal D$ factors uniquely via $\lambda$.
+
+\item Show that in the category $\mathrm{Top}$ of topological spaces and continuous maps, inverting homotopy equivalences has the same effect as modding out the Hom spaces (continuous maps) by the homotopy equivalence relation.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\begin{enumerate}
+    \item 
+Let $\mathcal{C}_M$ be the localization obtained by formally adjoining inverses to all $m\in M$, and let $\lambda:\mathcal{C}\to \mathcal{C}_M$ be the canonical functor.
+
+Assume every $m\in M$ is already an isomorphism in $\mathcal{C}$. Define a functor
+\[
+\rho:\mathcal{C}_M\longrightarrow \mathcal{C}
+\]
+as follows. On objects, $\rho$ is the identity. On morphisms, any morphism in $\mathcal{C}_M$ is represented by a finite zigzag built from morphisms in $\mathcal{C}$ and the formal inverses $m^{-1}$ for $m\in M$. Send each genuine arrow $f$ to $f$, and each formal inverse $m^{-1}$ to the actual inverse $m^{-1}\in\mathcal{C}$. Because the defining relations in $\mathcal{C}_M$ are exactly $m\circ m^{-1}=\mathrm{id}$ and $m^{-1}\circ m=\mathrm{id}$ plus associativity, this assignment respects relations and gives a well-defined functor.
+
+
+Then $\rho\circ \lambda=\mathrm{id}_{\mathcal{C}}$ strictly. Moreover, $\lambda\circ \rho\simeq \mathrm{id}_{\mathcal{C}_M}$ strictly as well, because on generators the composite $\lambda\rho$ acts as the identity. Hence $\lambda$ is an equivalence of categories.
+
+\item
+Let $\mathcal{D}$ be any category and $\varphi:\mathcal{C}\to\mathcal{D}$ a functor such that $\varphi(m)$ is invertible in $\mathcal{D}$ for all $m\in M$.
+
+\textit{Existence of the factorization.} Define $\widetilde{\varphi}:\mathcal{C}_M\to\mathcal{D}$ by:
+\begin{itemize}
+\item On objects: $\widetilde{\varphi}(x)=\varphi(x)$.
+\item On arrows: on a generating arrow $f$ from $\mathcal{C}$, set $\widetilde{\varphi}(\lambda(f))=\varphi(f)$; on a formal inverse $m^{-1}$ in $\mathcal{C}_M$, set
+\[
+\widetilde{\varphi}(m^{-1}):= \varphi(m)^{-1}.
+\]
+\end{itemize}
+Extend multiplicatively to composites. The relations in $\mathcal{C}_M$ are satisfied because $\varphi(m)\varphi(m)^{-1}=\mathrm{id}$, etc., so this is well-defined and yields a functor $\widetilde{\varphi}$ with $\widetilde{\varphi}\circ\lambda=\varphi$.
+
+\textit{Uniqueness.} Any functor $\psi:\mathcal{C}_M\to\mathcal{D}$ with $\psi\circ\lambda=\varphi$ must agree with $\varphi$ on all arrows of $\mathcal{C}$, and must send the formal inverse $m^{-1}$ to $\psi(m)^{-1}=\varphi(m)^{-1}$. Since $\mathcal{C}_M$ is generated by these under composition, $\psi=\widetilde{\varphi}$. Hence the factorization is unique.
+
+\item 
+Let $W$ be the class of homotopy equivalences in $\mathrm{Top}$. Consider the localization
+\[
+\lambda:\mathrm{Top}\longrightarrow \mathrm{Top}[W^{-1}].
+\]
+
+Let $\mathrm{hTop}$ denote the homotopy category. If $f,g:X\to Y$ are homotopic, choose a homotopy $H:X\times I\to Y$. Let $i_0,i_1:X\to X\times I$ be the inclusions at $0,1$. Then $H\circ i_0=f$ and $H\circ i_1=g$.
+
+But $i_0$ and $i_1$ are homotopy equivalences (with projection $p:X\times I\to X$ as a homotopy inverse). In the localized category, $\lambda(i_0)$ and $\lambda(i_1)$ become isomorphisms. Therefore
+\[
+\lambda(f)=\lambda(H)\circ \lambda(i_0)=\lambda(H)\circ \lambda(i_1)=\lambda(g).
+\] where $\lambda(i_0) = \lambda(i_1)$ because $i_0$ and $i_1$ are themselves homotopic. Hence $\lambda$ factors through the quotient by homotopy:
+\[
+\mathrm{Top}\xrightarrow{q}\mathrm{hTop}\xrightarrow{\overline{\lambda}}\mathrm{Top}[W^{-1}].
+\]
+
+Every morphism in the localization is represented by an honest map $X\to Y$. A morphism in $\mathrm{Top}[W^{-1}]$ is represented by a zigzag
+\[
+X \xleftarrow{w_1} X_1 \xrightarrow{f_1} X_2 \xleftarrow{w_2} \cdots \xrightarrow{f_n} Y,
+\]
+where $w_i\in W$. Because each $w_i$ is a homotopy equivalence, choose a homotopy inverse $w_i^{-1}$. In the localization, $\lambda(w_i)^{-1}=\lambda(w_i^{-1})$. Thus the above zigzag is represented by a single continuous map $X\to Y$ well-defined up to homotopy.
+
+So the induced map
+\[
+[X,Y]\longrightarrow \mathrm{Hom}_{\mathrm{Top}[W^{-1}]}(X,Y)
+\]
+is surjective.
+
+It is also injective. If $\lambda(f)=\lambda(g)$ in $\mathrm{Top}[W^{-1}]$, then there is a zigzag of homotopy equivalences relating them. This shows $f$ and $g$ are equal precisely when they are homotopic. Hence $\overline{\lambda}:\mathrm{hTop}\to \mathrm{Top}[W^{-1}]$ is fully faithful.
+
+Therefore $\overline{\lambda}$ is an isomorphism of categories:
+\[
+\mathrm{Top}[W^{-1}] \;\cong\; \mathrm{hTop}.
+\]
+\end{enumerate}
+\end{solution}
+
+\begin{problem}[3]
+Which of the following spaces are homotopy equivalent? Prove it, or explain why they are not.
+
+\begin{enumerate}
+\item The standard solid torus $\{(r-2)^2+z^2\le 1\}\subset \mathbb{R}^3$ and its complement in $S^3=\mathbb{R}^3\cup\{\infty\}$.
+
+\item $\mathbb{CP}^2$ and the quotient $S^2\times S^2/(\mathbb{Z}/2)$ by the swapping symmetry.
+
+\item A torus (surface) and the sphere $S^2$ plus two arcs joining the North and South poles (disjoint except at the poles).
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\begin{enumerate}
+\item \textbf{Yes.} The standard solid torus $V\subset \mathbb{R}^3\subset S^3$ is homeomorphic to $S^1\times D^2$, hence deformation retracts onto its core circle $S^1\times\{0\}$, so $V\simeq S^1$.
+
+Its complement in $S^3$ is also a solid torus: $S^3$ admits a genus-$1$ Heegaard splitting
+\[
+S^3 = V \cup_{\partial V} V',
+\]
+where both $V$ and $V'$ are solid tori with common boundary a torus. Hence $S^3\setminus \operatorname{int}(V)=V'$ is again homeomorphic to $S^1\times D^2$, so it also retracts onto $S^1$. Therefore $V\simeq V'$.
+
+\item \textbf{Yes.} Unordered pairs of points on $\mathbb{CP}^1$ correspond to effective degree-$2$ divisors, hence to lines in $H^0(\mathbb{CP}^1,\mathcal{O}(2))\cong \mathbb{C}^3$. Thus the quotient is $\mathbb{CP}^2$, so it is certainly homotopy equivalent to $\mathbb{CP}^2$. The map sending an unordered pair $\{p,q\} \subset \mathbb{CP}^1$ to the quadratic form vanishing at $p$ and $q$ defines a continuous bijection
+\[
+(S^2 \times S^2)/(\mathbb{Z}/2) = \mathrm{Sym}^2(\mathbb{CP}^1) \longrightarrow \mathbb{CP}^2.
+\]
+Since both spaces are compact Hausdorff, this is a homeomorphism.
+
+\item \textbf{No.} Let $Y$ be the space obtained from $S^2$ by attaching two arcs between the north and south poles, disjoint except at endpoints. Choose an embedded path $\gamma$ in $S^2$ from north to south and collapse $\gamma$ to a point. This is a deformation retraction of $S^2$ onto $S^2\vee S^1$ relative to the poles, and after attaching the two arcs it shows
+\[
+Y \simeq S^2 \vee S^1 \vee S^1.
+\]
+Hence
+\[
+\pi_1(Y)\cong F_2
+\]
+(the free group on two generators). But the torus $T^2$ has
+\[
+\pi_1(T^2)\cong \mathbb{Z}^2,
+\]
+which is abelian. Since fundamental groups are homotopy invariants and $F_2\ncong \mathbb{Z}^2$, the torus is not homotopy equivalent to $Y$.
+\end{enumerate}
+\end{solution}
+
+\begin{definition}[(CW--approximation)]
+    Let $Y$ be a topological space. A \textit{CW--approximation} of $Y$ is a CW complex $X$ together with a map $f:X\to Y$ such that for every CW complex $Z$, the induced map $f_*:[Z,X]\to [Z,Y]$ is a bijection, where $[-,-]$ denotes the set of homotopy classes of maps.
+\end{definition}
+
+\begin{definition}[(Homotopy equivalence)]
+    A map $f:X\to Y$ is a \textit{homotopy equivalence} if there exists a map $g:Y\to X$ such that $f\circ g\simeq \mathrm{id}_Y$ and $g\circ f\simeq \mathrm{id}_X$.
+\end{definition}
+
+\begin{problem}[4]
+Consider the raviolo $X$ obtained gluing two copies of the closed unit disk $D$ together everywhere except at the origin. (So there are two points where $0$ used to be.)
+
+Show that the natural projection $S^2\to X$ (collapsing along the $z$--axis) is a CW--approximation but not a homotopy equivalence.
+
+Suggestion: Replace $S^2$ with the homotopy equivalent ``genuine raviolo'' which identifies the exteriors of the open $\varepsilon$--disks $D_\varepsilon\subset D$ in two copies of $D$. This should handle the lifting of maps from finite CW--complexes. For general ones, you need the homotopy extension lemmas in Hatcher, Chapter~0.
+\end{problem}
+
+\begin{solution}
+Fix $0<\varepsilon<1$ and form the \emph{genuine raviolo} $R_\varepsilon$ by taking two copies $D_+,D_-$ of the closed unit disk and identifying the exteriors $D_\pm\setminus D_\varepsilon$ by the identity. This space is homotopy equivalent to $S^2$. There is a natural collapse map
+\[
+c:R_\varepsilon\longrightarrow X
+\]
+which is the identity on the common exterior $D\setminus D_\varepsilon$ and collapses each inner disk $D_\varepsilon\subset D_\pm$ to the points $0_\pm\in X$. On the open set $X\setminus\{0_\pm\}\cong D\setminus\{0\}$ the map $c$ is a homeomorphism.
+
+Let $Z$ be a finite CW complex and $f:Z\to X$ a map. Define the \emph{bad set}
+\[
+A=f^{-1}(\{0_+,0_-\}).
+\]
+Because $Z$ has finitely many cells, $A$ is contained in a finite subcomplex $K\subset Z$. The lifting problem only occurs on $A$, since over $X\setminus\{0_\pm\}$ the map $c$ is invertible.
+
+For each cell $e$ of $K$ choose a small closed neighborhood $N(e) \supset A \cap e$ inside that cell. Using the contractibility of cells, homotope $f$ rel $\partial e$ so that on $N(e)$ the map takes on the constant value $0_+$ or $0_-$, and on $e\setminus N(e)$ it avoids $0_\pm$. After performing this modification for all cells of $K$ we obtain a map $f'\simeq f$ with the properties
+
+\begin{itemize}
+\item $f'$ is constant with value $0_\pm$ on a neighborhood $N(A)=\bigcup N(e)$,
+\item $f'(Z\setminus N(A))\subset X\setminus\{0_\pm\}\cong D\setminus\{0\}$.
+\end{itemize}
+
+On $Z\setminus N(A)$ the lift is uniquely determined by the inverse of $c$. On each component of $N(A)$ the map $f'$ is constant, so we may choose an arbitrary constant lift into the disk fiber $D_\varepsilon\subset R_\varepsilon$. These choices glue continuously along the boundary because the forced lift on $Z\setminus N(A)$ approaches the boundary circle $\partial D_\varepsilon$. Thus $f'$ admits a continuous lift $\tilde f:Z\to R_\varepsilon$ with $c\circ\tilde f\simeq f$. 
+
+The argument for injectivity is similar. Let $H:Z\times I\to X$ be a homotopy between $c\circ\tilde f_0$ and $c\circ\tilde f_1$. Let $B=H^{-1}(\{0_+,0_-\})$ be the bad set of the homotopy. For finite $Z$, $B$ lies in a finite subcomplex of $Z\times I$. Modify $H$ rel boundary so that on a neighborhood $N(B)$ it is constant at $0_\pm$, outside it avoids $0_\pm$. Then on the complement, $H$ lifts uniquely to $R_\varepsilon$ and on $N(B)$ we can choose constant lifts.
+
+This produces a lifted homotopy
+\[
+\widetilde{H}:Z\times I\to R_\varepsilon
+\]
+from $\tilde f_0$ to $\tilde f_1$.
+
+If $Z$ has infinitely many cells, the set $A=f^{-1}(\{0_\pm\})$ may meet infinitely many of them, so the above cell--by--cell modification cannot be carried out directly.  However, Hatcher shows that every CW pair $(Z,K)$ with $K$ a subcomplex has the Homotopy Extension Property.
+
+Choose an increasing sequence of finite subcomplexes
+\[
+K_1 \subset K_2 \subset \cdots \subset Z, \qquad \bigcup_n K_n = Z.
+\]
+Restrict $f$ to $K_n$:
+\[
+f_n := f|_{K_n} : K_n \to X.
+\]
+Now the bad set $A_n = f_n^{-1}(\{0_\pm\})$ meets only finitely many cells (since $K_n$ is finite), so the finite argument applies and we get lifts on each $K_n$. To make the lifts agree, we use the Homotopy Extension Property for the CW pair $(K_{n+1},K_n)$. Taking the union of the lifts on $K_n$ gives a lift on all of $Z$.
+
+
+
+The space $X$ is not locally contractible at the points $0_\pm$: any small neighborhood of $0_+$ deformation retracts onto a punctured disk, which has fundamental group $\mathbb Z$. Every space having the homotopy type of a CW complex is locally contractible; hence $X$ cannot be homotopy equivalent to $S^2$. Therefore the projection $S^2\to X$ is a CW--approximation but not a homotopy equivalence.
+\end{solution}
+
+
+\begin{problem}[5]
+Compute the groups $H_*(\mathbb{RP}^n;\mathbb{Z})$, $H_*(\mathbb{RP}^n;\mathbb{Z}/2)$, $H^*(\mathbb{RP}^n;\mathbb{Z})$, $H^*(\mathbb{RP}^n;\mathbb{Z}/2)$ in two ways:
+\begin{itemize}
+\item From the chain/cochain complexes,
+\item By universal coefficient formulas, starting from $H_*(\mathbb{RP}^n;\mathbb{Z})$.
+\end{itemize}
+\end{problem}
+
+\begin{solution}
+The CW structure of $\mathbb{RP}^n$ has one cell $e^k$ in each dimension $0\le k\le n$.  
+With $\mathbb Z$--coefficients the cellular boundary maps are
+\[
+d_k : C_k \cong \mathbb Z \longrightarrow C_{k-1}\cong \mathbb Z,
+\qquad
+d_k =
+\begin{cases}
+0, & k \text{ odd},\\
+2, & k \text{ even},
+\end{cases}
+\quad (1\le k\le n).
+\]
+
+From the chain complex
+\[
+0\longrightarrow 
+\mathbb Z \xrightarrow{d_n} 
+\mathbb Z \xrightarrow{d_{n-1}}
+\cdots
+\xrightarrow{d_2}
+\mathbb Z \xrightarrow{d_1}
+\mathbb Z \longrightarrow 0,
+\]
+one obtains $H_0(\mathbb{RP}^n;\mathbb Z)\cong \mathbb Z$. For $0<k<n$,
+\[
+H_k(\mathbb{RP}^n;\mathbb Z)\cong
+\begin{cases}
+\mathbb Z/2, & k \text{ odd},\\
+0, & k \text{ even}.
+\end{cases}
+\]
+
+In top degree,
+\[
+H_n(\mathbb{RP}^n;\mathbb Z)\cong
+\begin{cases}
+\mathbb Z, & n \text{ odd (orientable case)},\\
+0, & n \text{ even}.
+\end{cases}
+\]
+
+Over $\mathbb Z/2$ the multiplication by $2$ becomes $0$, so all differentials vanish.  
+Hence
+\[
+H_k(\mathbb{RP}^n;\mathbb Z/2)\cong \mathbb Z/2
+\qquad \text{for all }0\le k\le n.
+\]
+
+The cellular cochain groups are $\Hom(C_k,\mathbb Z)\cong \mathbb Z$, and the coboundaries
+$d^{k}=\Hom(d_{k+1},\mathbb Z)$ satisfy
+\[
+d^{k}=
+\begin{cases}
+0, & k \text{ even},\\
+2, & k \text{ odd},
+\end{cases}
+\qquad (d^{k}:C^{k}\to C^{k+1}).
+\]
+
+Computing cohomology gives $H^0(\mathbb{RP}^n;\mathbb Z)\cong \mathbb Z$. For $0<k<n$,
+\[
+H^k(\mathbb{RP}^n;\mathbb Z)\cong
+\begin{cases}
+\mathbb Z/2, & k \text{ even},\\
+0, & k \text{ odd}.
+\end{cases}
+\] In top degree,
+\[
+H^n(\mathbb{RP}^n;\mathbb Z)\cong
+\begin{cases}
+\mathbb Z, & n \text{ odd},\\
+\mathbb Z/2, & n \text{ even}.
+\end{cases}
+\]
+The $\mathbb Z/2$ in the even case follows from the universal coefficient theorem since  
+$H_{\,n-1}(\mathbb{RP}^n;\mathbb Z)\cong \mathbb Z/2$.
+
+
+Again all coboundaries vanish over $\mathbb Z/2$, so
+\[
+H^k(\mathbb{RP}^n;\mathbb Z/2)\cong \mathbb Z/2
+\qquad\text{for all }0\le k\le n.
+\]
+
+The universal coefficient theorem for cohomology gives
+\[
+0\longrightarrow 
+\Ext^1_{\mathbb Z}(H_{k-1}(X;\mathbb Z),\mathbb Z)
+\longrightarrow 
+H^k(X;\mathbb Z)
+\longrightarrow 
+\Hom(H_k(X;\mathbb Z),\mathbb Z)
+\longrightarrow 0.
+\]
+Using
+\[
+\Hom(\mathbb Z,\mathbb Z)=\mathbb Z,\qquad
+\Hom(\mathbb Z/2,\mathbb Z)=0,\qquad
+\Ext^1(\mathbb Z/2,\mathbb Z)\cong \mathbb Z/2,
+\]
+and the homology from part (1) reproduces the cohomology groups above.
+
+UCT for homology gives
+\[
+0\longrightarrow 
+H_k(X;\mathbb Z)\otimes \mathbb Z/2
+\longrightarrow 
+H_k(X;\mathbb Z/2)
+\longrightarrow 
+\Tor_1^{\mathbb Z}(H_{k-1}(X;\mathbb Z),\mathbb Z/2)
+\longrightarrow 0.
+\]
+Since $\Tor_1(\mathbb Z/2,\mathbb Z/2)\cong \mathbb Z/2$, inserting the groups from (1) yields  
+$H_k(\mathbb{RP}^n;\mathbb Z/2)\cong \mathbb Z/2$ for all $0\le k\le n$,  
+in agreement with part (2).
+\end{solution}
+
+\begin{problem}[6]
+Determine the ring structure on $H^*(\mathbb{RP}^3\times \mathbb{RP}^3;\mathbb{Z}/2)$ and $H^*(\mathbb{RP}^3\times \mathbb{RP}^3;\mathbb{Z})$.
+\end{problem}
+
+\begin{solution}
+Write $H^*(\mathbb{RP}^3;\mathbb{Z}/2)\cong (\mathbb{Z}/2)[\alpha]/(\alpha^4)$ with $|\alpha|=1$.
+Write $\alpha_1,\alpha_2\in H^1(\mathbb{RP}^3\times \mathbb{RP}^3;\mathbb{Z}/2)$ be the pullbacks from the two factors. By Künneth (over a field) and naturality of cup product,
+\[
+H^*(\mathbb{RP}^3\times \mathbb{RP}^3;\mathbb{Z}/2)
+\;\cong\;
+(\mathbb{Z}/2)[\alpha_1,\alpha_2]/(\alpha_1^4,\alpha_2^4),
+\qquad |\alpha_1|=|\alpha_2|=1,
+\]
+with graded-commutativity (over $\mathbb{Z}/2$ this is just commutativity).
+Recall that the cohomology ring of $\mathbb{RP}^3$ with $\mathbb{Z}$--coefficients is
+\[
+H^*(\mathbb{RP}^3;\mathbb{Z})\cong
+\begin{cases}
+\mathbb{Z}, & *=0,\\
+\mathbb{Z}/2, & *=2,\\
+\mathbb{Z}, & *=3,\\
+0, & \text{otherwise},
+\end{cases}
+\]
+and the only nontrivial products are those forced by the unit (all products of positive-degree classes vanish for degree reasons).
+
+Let $u\in H^2(\mathbb{RP}^3;\mathbb{Z})\cong \mathbb{Z}/2$ be the torsion generator and $\omega\in H^3(\mathbb{RP}^3;\mathbb{Z})\cong \mathbb{Z}$ the orientation class. On $X:=\mathbb{RP}^3\times \mathbb{RP}^3$, write
+\[
+u_1=p_1^*(u),\quad \omega_1=p_1^*(\omega),\qquad
+u_2=p_2^*(u),\quad \omega_2=p_2^*(\omega).
+\]
+Then the external product classes generate the ``tensor part'' of cohomology, and Künneth gives the additive groups:
+\[
+H^k(X;\mathbb{Z})\cong
+\begin{cases}
+\mathbb{Z}, & k=0,\\
+(\mathbb{Z}/2)\{u_1,u_2\}, & k=2,\\
+\mathbb{Z}\{\omega_1,\omega_2\} \oplus \mathbb{Z}/2\{\tau\}, & k=3,\\
+\mathbb{Z}/2\{u_1u_2\}, & k=4,\\
+(\mathbb{Z}/2)\{u_1\omega_2,\ \omega_1u_2\}, & k=5,\\
+\mathbb{Z}\{\omega_1\omega_2\}, & k=6,\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+Here $\tau\in H^3(X;\mathbb{Z})$ is the extra $\mathbb{Z}/2$ coming from the $\mathrm{Tor}$-term in the integral Künneth theorem.
+
+Cup products among $u_i,\omega_i$ are determined by:
+graded-commutativity, $u_i^2=0$ and $u_i\omega_i=0$ (degree reasons on each factor), and the nonzero cross products
+\[
+u_1u_2\in H^4,\qquad
+u_1\omega_2,\ \omega_1u_2\in H^5,\qquad
+\omega_1\omega_2\in H^6
+\]
+\end{solution}
+\end{document}

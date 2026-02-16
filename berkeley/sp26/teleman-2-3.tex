@@ -1,0 +1,289 @@
+
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+\DeclareMathOperator{\Eul}{Eul}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\pt}{pt}
+\DeclareMathOperator{\sm}{sm}
+\DeclareMathOperator{\Sing}{Sing}
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Title}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+Abstract
+\end{abstract}
+
+\tableofcontents
+
+\section{Teleman Woodward}
+Let $C$ be a smooth projective curve and $\mathfrak{M}=\mathrm{Bun}_G(C)$. Fix an ``admissible class''
+\[
+\mathcal{E}=\mathcal{L}\otimes(\text{Atiyah--Bott generators})
+\]
+where $\mathcal{L}$ is a determinant line bundle of level $h=h_{\mathcal{L}}$, and $c$ is the canonical level coming from $\mathcal{K}=\det(E_C^*\mathfrak{g})$. Admissible means $h+c$ is positive definite.
+
+\textbf{Goal:} show the index $\mathrm{Ind}(\mathfrak{M},\mathcal{E})=\chi(\mathfrak{M},\mathcal{E})$ is well-defined (finite) even though $\mathfrak{M}$ is not finite type.
+
+
+\subsection{Shatz stratification and finite-type exhaustions}
+
+There is the Harder--Narasimhan (Shatz) stratification
+\[
+\mathfrak{M}=\bigsqcup_{\xi}\mathfrak{M}_\xi
+\]
+indexed by dominant rational coweights $\xi$. The partial order on $\xi$ gives open substacks
+\[
+\mathfrak{M}_{\le \xi}:=\bigcup_{\mu\le \xi}\mathfrak{M}_\mu,
+\]
+and a key geometric input is: each $\mathfrak{M}_{\le \xi}$ is of finite type (and can be presented as a quotient of a quasi-projective variety by a reductive group \red{Why is this important? Do I need a stratification with this property?}). This gives an exhaustion of $\mathfrak{M}$ by finite-type opens.
+
+
+
+\subsection{Filter $R\Gamma(\mathfrak{M},\mathcal{E})$ by local cohomology along the strata}
+
+From the increasing opens $\mathfrak{M}_{\le \xi}$, you get a filtration of $R\Gamma(\mathfrak{M},\mathcal{E})$ whose graded pieces are local cohomology complexes supported on the successive strata:
+\[
+\gr_\xi \simeq R\Gamma_{\mathfrak{M}_\xi}(\mathfrak{M}_{\le \xi},\mathcal{E}_{\le \xi}).
+\]
+
+So finiteness of the global index reduces to:
+\begin{enumerate}
+\item each local term has finite Euler characteristic, and
+\item all but finitely many $\xi$ have zero contribution.
+\end{enumerate}
+
+
+
+\subsection{Purity/local duality converts local cohomology into cohomology on the stratum}
+
+Finite open unions of Shatz strata
+\[
+\mf M_{\le \xi} = \bigcup_{\mu\le \xi} \mf M_\mu
+\]
+can be presented as quotient stacks of smooth quasi--projective varieties by
+reductive groups.  
+Recall that local cohomology $R\Gamma_Z(X, -)$ is defined using the closed subset $Z \subset X$:
+\[
+R\Gamma_Z(X, \mathcal{E})
+:= R\!\operatorname{Hom}_X(R\underline{\Gamma}_Z\mathcal{O}_X, \mathcal{E}).
+\]
+
+\begin{lemma}
+    Let $i:Z\hookrightarrow X$ be a closed immersion of schemes. By construction there is an adjunction between $Ri_*$ and $i^!$ and so unwinding we find that local cohomology along $Z$ may be computed as
+\[
+R\Gamma_Z(X,\mathcal{E}) \simeq R\Gamma\bigl(Z,\, i^!(\mathcal{E})\bigr),
+\]
+\end{lemma}
+
+\begin{lemma}[https://stacks.math.columbia.edu/tag/0AU3]
+    Let $i:Z\hookrightarrow X$ be a regular embedding of codimension $d$ between smooth schemes, with normal bundle $N=N_{Z/X}$. One has the formula
+\[
+i^!(\mathcal{E}) \simeq Li^*(\mathcal{E})\otimes \omega_{Z/X}[d], \qquad \omega_{Z/X}\cong \det(N)^{-1}.
+\]
+\end{lemma}
+Applying these two lemmas together to the map of stacks $i_\xi:\mf M_\xi\hookrightarrow \mf M_{\le \xi}$ (which is a regular embedding of codimension $d_\xi$) gives the following formula for local cohomology along the stratum $\mf M_\xi$.
+\[
+H^\bullet_{\mf M_\xi}(\mf M_{\le \xi},\mathcal E_{\le \xi})
+= H^{\bullet}(\mf M_\xi, \mathcal R_\xi \mathcal E),
+\]
+where $d_\xi$ is the codimension of $\mf M_\xi$ and $\mathcal R_\xi \mathcal E$
+denotes the sheaf of "$\mathcal E$--valued residues along $\mf M_\xi$." In particular \[\mathcal R_\xi \mathcal E \;:=\; i_\xi^! (\mathcal E_{\le \xi})\] where \(i_\xi:\mf M_\xi\hookrightarrow \mf M_{\le \xi}\) is the inclusion and $i^!$ is the extraordinary pullback. \red{What is the mechanism that lets us do this for stacks?}
+
+
+Moreover, the residue object $\mathcal R_\xi\mathcal E$ may be expressed formally as
+\[
+\mathcal R_\xi\mathcal E = 
+\mathcal E|_{\mf M_\xi}\otimes \Eul(\nu_\xi)^{-1}[d_\xi]
+\]
+where $\nu_\xi$ is the virtual normal complex 
+\[
+\nu_\xi=R\pi_*\mathcal E^*(\mf g/\mf g_\xi)[1]
+\]
+
+
+\subsection{Identify the virtual normal complex $\nu_\xi$}
+\red{The virtual normal complex is identified via deformation theory.}
+Each stratum $\mathfrak{M}_\xi$ maps to a finite-type ``semistable Levi core''
+\[
+q_\xi:\mathfrak{M}_\xi \longrightarrow \mathfrak{M}^{\mathrm{ss}}_{G_\xi,\xi},
+\]
+and the transverse deformation theory is governed by the perfect complex
+\[
+\nu_\xi = R\pi_*\mathcal{E}^*(\mathfrak{g}/\mathfrak{g}_\xi)[1]
+\quad \text{on } \mathfrak{M}^{\mathrm{ss}}_{G_\xi,\xi}.
+\]
+We might just have to think really hard about deformation theory to work this out, once I identify a line bundle on the moduli stack that gives me a notion of stability.
+
+
+\section{Solis compactification}
+
+\begin{definition}[$\mathcal P$--parahoric $G$--bundles at a point]
+\label{def:parahoric-torsor}
+Fix a smooth curve $C$ over $\C$ and a point $p\in C$ with a choice of formal
+parameter $z$ at $p$, so that the completed local ring is $\widehat{\mathcal O}_{C,p}\cong\C[[z]]$
+and the punctured disc is $D^\times=\Spec\C((z))$.
+Let
+\[
+\mathcal P\ \subset\ G((z))
+\]
+be a \emph{parahoric} subgroup (for instance a \emph{maximal} parahoric, i.e.\ one
+corresponding to a vertex of the fundamental alcove).
+
+Define a sheaf of groups $\mathcal G^{\mathcal P}$ on $C$ by gluing the standard
+sheaf $\mathcal G^{\mathrm{std}} = \Hom_{\mathrm{Sch}}(-,G)$ away from $p$ with the local sheaf determined by
+$\mathcal P$ at $p$ as follows:
+\begin{itemize}
+\item if $U\subset C$ is an open subset with $p\notin U$, set
+\(\mathcal G^{\mathcal P}(U):=\mathcal G^{\mathrm{std}}(U)=\Hom_{\mathrm{Sch}}(U,G)\);
+\item for the formal disc $D=\Spec\C[[z]]$ and punctured disc $D^\times=\Spec\C((z))$, set
+\[
+\mathcal G^{\mathcal P}(D):=\mathcal P,\qquad \mathcal G^{\mathcal P}(D^\times):=G((z)),
+\]
+with restriction map given by the inclusion $\mathcal P\hookrightarrow G((z))$;
+\item on the overlap $(C\setminus\{p\})\cap D^\times\simeq D^\times$, we identify both
+restrictions with $G((z))$ and glue.
+\end{itemize}
+
+A \emph{$\mathcal P$--parahoric $G$--bundle on $C$ (with parahoric structure of type $\mathcal P$ at $p$)} is a
+$\mathcal G^{\mathcal P}$--torsor on $C$.
+Equivalently, it is the data of:
+\begin{enumerate}[(i)]
+\item a principal $G$--bundle $E$ on $C\setminus\{p\}$;
+\item a $\mathcal P$--torsor $E_D$ on the formal disc $D$ (i.e.\ a principal homogeneous space under the group
+$\mathcal P=\mathcal G^{\mathcal P}(D)$);
+\item an identification of the induced $G((z))$--torsors over $D^\times$.
+\end{enumerate}
+
+When $\mathcal P=L^+_P G=\{\gamma\in G[[z]]\mid \gamma(0)\in P\}$ for a parabolic $P\subset G$, this recovers the usual notion
+of a quasi--parabolic $G$--bundle with a $P$--reduction at $p$.
+When $\mathcal P$ is a maximal parahoric corresponding to a vertex $\eta_i$ of the fundamental alcove, we say the parahoric structure at $p$ is \emph{of type $\eta_i$}.
+\end{definition}
+
+\subsection{Refined stratification of $\mathcal X_{G,g,I}$}
+Let $C/B$ be a prestable curve with dual graph $\Gamma$, and let
+$(C'_B,P_B)$ be an object of $\mathcal X_{G,g,I}$; that is, $C'_B$ is a twisted
+modification of $C_B$ and $P_B$ is an admissible $G$--bundle on $C'_B$.
+
+For each vertex $v\in V(\Gamma)$ let $\xi_v$ denote the Harder--Narasimhan
+type of the restriction of $P_B$ to the normalization component indexed by $v$.
+For each node $e\in E(\Gamma)$ we have two additional pieces of boundary data:
+
+\begin{enumerate}
+\item a \emph{parahoric type}
+      \[
+        I_e\subset \{0,\dots,r\},
+      \]
+      specifying the parahoric subgroup
+      $\mathcal P_{I_e}\subset G((z))$ which governs the local structure of
+      the bundle at $e$;
+
+\item a \emph{relative position label}
+      \[
+        \mathbf w_e \in
+        W_{I_e}\backslash \widetilde W / W_{I_e},
+      \]
+      equivalently an orbit
+      $O_e\subset \mathcal P_{I_e}\backslash G((z))/\mathcal P_{I_e}$
+      describing the gluing of the two branches at $e$. We include this data to mod out by changes of trivialization on each side.
+\end{enumerate}
+
+Let $\tau_e$ denote the length of the modification chain over the node $e$.
+Collect the data into
+\[
+\alpha=(\Gamma,\tau,\mathbf I,\mathbf w,\boldsymbol{\xi}),
+\qquad
+\mathbf I=(I_e)_{e\in E(\Gamma)},\;
+\mathbf w=(\mathbf w_e)_{e\in E(\Gamma)},\;
+\boldsymbol{\xi}=(\xi_v)_{v\in V(\Gamma)} .
+\]
+
+\begin{definition}
+The \emph{refined stratum} of type $\alpha$ is the locally closed substack
+\[
+\mathcal X_\alpha \subset \mathcal X_{G,g,I}
+\]
+consisting of objects $(C'_B,P_B)$ such that:
+\begin{enumerate}[(i)]
+\item the coarse curve $C_B$ has dual graph $\Gamma$ and the modification
+      lengths at the nodes are $\tau_e$;
+
+\item for every vertex $v$, the restriction of $P_B$ to the corresponding
+      normalization component has Harder--Narasimhan type $\xi_v$;
+
+\item at each node $e$, the parahoric structure of $P_B$ is of type $I_e$,
+      and the gluing of the two branches lies in the orbit $O_e$
+      corresponding to $\mathbf w_e$.
+\end{enumerate}
+\end{definition}
+
+The collection $\{\mathcal X_\alpha\}_\alpha$ forms a stratification of
+$\mathcal X_{G,g,I}$, and its closure relations are governed by:
+\begin{itemize}
+\item the usual specialization of dual graphs and modification lengths;
+\item the dominance order on the HN types $\xi_v$;
+\item the Bruhat order on the double cosets
+      $W_{I_e}\backslash \widetilde W / W_{I_e}$.
+\end{itemize}
+
+\begin{remark}
+For a smooth curve the Shatz stratification indexed by HN types $\xi$
+is adequate, because a $G$--bundle has no additional local structure.
+On a nodal curve, however, two bundles with identical Shatz types on the
+normalization can differ essentially at the node.
+
+Consider two objects: (1) a genuine $G$-bundle on the nodal curve with gluing element $g\in G \subset G((z))$, and (2) a limit object where the gluing is $z^\lambda \in G((z))$ with $\lambda>0$.
+
+Both have the same normalization bundles, the same HN type $\xi_v=0$, and the same parahoric type $I_e=\{0\}$. However, (1) lies in the open stratum corresponding to actual $G$-bundles, while (2) lies in a boundary stratum of the wonderful compactification.
+\end{remark}
+
+\begin{lemma}
+\label{lem:finite-type-open}
+For any fixed combinatorial type (graph $\Gamma$ + expansion length bound + allowed parahoric types $I_e$ in a finite set) and any bound on $(\boldsymbol{\xi}_v, \mathbf{w}_e)$, the open substack $\mathcal{X}_{\le \alpha}$ is algebraic and of finite type over an étale chart of $\overline{\mathfrak{M}}_{g,I}$.
+\end{lemma}
+
+\begin{enumerate}
+    \item \red{Do I need to find a presentation of this stratum as a quotient of a quasi-projective variety by a reductive group?} The answer is yes this is important because once you show that only finitely many strata contribute, this is how each contribution has finitely many weight spaces.
+
+\item \red{Do you expect the formula \[
+i^!(\mathcal{E}) \simeq Li^*(\mathcal{E})\otimes \omega_{Z/X}[d], \qquad \omega_{Z/X}\cong \det(N)^{-1}.
+\] to hold for me in this situation? What do I need to know about the embedding $i:\mathcal{X}_\alpha \hookrightarrow \mathcal{X}_{\le \alpha}$ to be able to apply this?} Shouldn't be a problem because deformation theory is controlled by $H^2$ of the stack which vanishes because we are on a curve.
+
+\item \red{How do I identify the virtual normal complex $\nu_\alpha$?} Atiyah Bott.
+\end{enumerate}
+
+Apparently there should be a completely canonical way of writing down a stratification, once you choose a line bundle on the moduli stack $\cX_{G,g,I}$. This line bundle should give you a notion of stability, and the strata should be indexed by the instability types. \red{How do I write down this line bundle? How is it done in the case of $G$-bundles on a smooth curve?}
+
+\end{document}
