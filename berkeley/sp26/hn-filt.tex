@@ -1,0 +1,728 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\DeclareMathOperator{\Shatz}{Shatz}
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Harder–Narasimhan filtration}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+In this lecture, we will discuss the Harder-Narasimhan filtration of vector bundles on a smooth projective curve. Then we give the generalization of the HN filtration to principal $G$-bundles, which gives rise to the Shatz stratification of the moduli stack of $G$-bundles. Finally, we will give a stack-theoretic interpretation of the numerical criterion for stability in terms of very close degenerations.
+\end{abstract}
+
+\tableofcontents
+
+\section{Vector bundles on curves}
+Let $C$ be a smooth projective curve over an algebraically closed field $k$. Throughout, all vector bundles are assumed to be algebraic vector bundles on $C$.
+\subsection{Basic definitions}
+
+
+\begin{definition}[Degree]
+Let $E$ be a vector bundle on $C$. The \textbf{degree} of $E$ is
+\[
+\deg(E) := \deg(\det E),
+\]
+where $\det E = \bigwedge^{\operatorname{rk}(E)} E$ is the determinant line bundle.
+\end{definition}
+
+\begin{definition}[Slope]
+The \textbf{slope} of a nonzero vector bundle $E$ is
+\[
+\mu(E) := \frac{\deg(E)}{\operatorname{rk}(E)}.
+\]
+\end{definition}
+
+\begin{definition}[Semistable and stable bundles]
+A vector bundle $E$ is called
+\begin{itemize}
+    \item \textbf{semistable} if for every proper nonzero subbundle
+    $F \subset E$ one has
+    \[
+    \mu(F) \le \mu(E),
+    \]
+    \item \textbf{stable} if for every proper nonzero subbundle
+    $F \subset E$ one has
+    \[
+    \mu(F) < \mu(E).
+    \]
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Maximal slope]
+For a nonzero vector bundle $E$, define
+\[
+\mu_{\max}(E)
+:= \sup \{\, \mu(F) \mid 0 \neq F \subset E \text{ a subbundle} \,\}.
+\]
+\end{definition}
+
+\begin{theorem}[Existence of maximal destabilizing subbundle]
+For every nonzero vector bundle $E$ on $C$, there exists a unique
+maximal subbundle $E_1 \subset E$ such that
+\[
+\mu(E_1)=\mu_{\max}(E),
+\]
+and $E_1$ is semistable.
+This is called the \textbf{maximal destabilizing subbundle}.
+\end{theorem}
+
+
+\begin{definition}[Harder--Narasimhan filtration]
+Let $E$ be a nonzero vector bundle on $C$. The
+\textbf{Harder--Narasimhan (HN) filtration} of $E$ is the unique filtration by subbundles
+\[
+0 = E_0 \subset E_1 \subset \cdots \subset E_\ell = E
+\]
+such that
+\begin{enumerate}
+    \item each quotient
+    \[
+    \operatorname{gr}_i^{HN}(E) := E_i/E_{i-1}
+    \]
+    is semistable;
+    \item the slopes strictly decrease:
+    \[
+    \mu\!\left(\operatorname{gr}_1^{HN}(E)\right)
+    >
+    \mu\!\left(\operatorname{gr}_2^{HN}(E)\right)
+    >
+    \cdots
+    >
+    \mu\!\left(\operatorname{gr}_\ell^{HN}(E)\right).
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Existence and uniqueness]
+Every vector bundle $E$ on $C$ admits a unique Harder--Narasimhan filtration.
+\end{theorem}
+
+If $E$ is already semistable, then the HN filtration is trivial: $0 \subset E$. If $E$ is not semistable, then the first step of the HN filtration is given by the maximal destabilizing subbundle $E_1$, and we can proceed inductively on the quotient $E/E_1$. 
+
+
+\begin{definition}[HN slopes]
+The numbers
+\[
+\mu_i(E)
+:= \mu\!\left(\operatorname{gr}_i^{HN}(E)\right)
+\]
+are called the \textbf{HN slopes} of $E$. One writes
+\[
+\mu_1(E) > \mu_2(E) > \cdots > \mu_\ell(E).
+\]
+and put $\mu_{\max}(E):=\mu_1(E)$ and $\mu_{\min}(E):=\mu_\ell(E)$.
+\end{definition}
+
+\begin{definition}[HN type]
+The collection of ranks and degrees of the graded pieces
+\[
+\bigl(\operatorname{rk}(\operatorname{gr}_i^{HN}(E)),
+\deg(\operatorname{gr}_i^{HN}(E))\bigr)_{i=1}^\ell
+\]
+(or equivalently their slopes with multiplicities)
+is called the \textbf{Harder--Narasimhan type} of $E$.
+\end{definition}
+
+
+\begin{definition}[HN polygon]
+The \textbf{Harder--Narasimhan polygon} of $E$ is the piecewise-linear
+concave polygon in $\mathbb R^2$ obtained by joining the points
+\[
+(0,0),\ 
+\bigl(\operatorname{rk}(E_1),\deg(E_1)\bigr),\ 
+\ldots,\ 
+\bigl(\operatorname{rk}(E),\deg(E)\bigr).
+\]
+Its slopes are exactly the HN slopes of $E$.
+\end{definition}
+
+\subsection{Vector bundles on $\P^1$}
+In this section, we work out the notion of stability and the HN filtration for vector bundles on $\P^1$. We begin with the classification of vector bundles on $\P^1$.
+\begin{theorem}[Grothendieck's theorem]
+Every vector bundle on $\P^1$ is isomorphic to a direct sum of line bundles
+\[
+\mathcal O_{\P^1}(a_1) \oplus \cdots \oplus \mathcal O_{\P^1}(a_n)
+\]
+for unique integers $a_1 \ge \cdots \ge a_n$.
+\end{theorem}
+It is clear that if we write $E$ in the above form, then the vector bundle $E$ has slope \[\mu(E) = \frac{a_1 + \cdots + a_n}{n}\] The Harder Narasimhan filtration of $E$ is completely explicit. If we let $b_1 > \cdots > b_m$ be the distinct values of the $a_i$ and write $E$ as
+\[
+E \cong \mathcal O_{\P^1}(b_1)^{\oplus r_1} \oplus \cdots \oplus \mathcal O_{\P^1}(b_m)^{\oplus r_m},
+\]
+then the HN filtration of $E$ is given by
+\begin{align*}
+0 = E_0 \subset E_1 \subset \cdots \subset E_m = E,
+\end{align*}
+where $E_i = \mathcal O_{\P^1}(b_1)^{\oplus r_1} \oplus \cdots \oplus \mathcal O_{\P^1}(b_i)^{\oplus r_i}$. Then $E$ is semistable if and only if $E$ is isomorphic to a direct sum of line bundles of the same degree, and $E$ is stable if and only if $E$ is a line bundle. If $\rank E \geq 2$ then $\cO(d) \subset E$ is a proper subbundle of the same slope as $E$.
+
+\subsection{The moduli of bundles}
+Let $\Bun_{r,d}(\P^1)$ be the moduli stack of vector bundles on $\P^1$ of rank $r$ and degree $d$. The above discussion shows that if $r$ does not divide $d$ then $\Bun_{r,d}^{\mathrm{ss}}(\P^1)$ is empty. 
+
+\begin{example}
+    If $r\mid d$ then $\Bun_{r,d}^{\mathrm{ss}}(\P^1)$ is a single point, corresponding to the unique semistable bundle $\cO(d/r)^{\oplus r}$. This point has automorphism group $\GL_r$, and so the open stratum in the HN stratification of $\Bun_{r,rm}(\P^1)$ is $B\GL_r$, corresponding to the splitting type $\cO(m)^{\oplus r}$.
+
+The boundary is the union of all other splitting types:
+\[\mathrm{Bun}_{r,rm}(\mathbb P^1)\setminus \mathrm{Bun}^{ss}_{r,rm}(\mathbb P^1)
+\ =\ \bigcup_{\substack{a_1\ge\cdots\ge a_r\\ \sum a_i=rm\\ (a_i)\neq (m,\dots,m)}} \mathcal S_{(a_i)}\] 
+where $\mathcal S_{(a_i)}$ is the stratum corresponding to the splitting type $\cO(a_1)\oplus\cdots\oplus \cO(a_r)$. 
+
+What do the closure relations look like? The minimal deviation from semistability is when we move one summand up and one down, i.e. the stratum corresponding to $(m+1,\, m,\,\dots,\, m,\, m-1)$. We see that the HN polygon of this sequence lies above that of the semistable stratum.
+
+In general, the closure of $\mathcal S_{(a_i)}$ consists of all strata $\mathcal S_{(b_i)}$ such that the HN polygon of $(b_i)$ lies above that of $(a_i)$. It is those sequences $(b_i)$ so that $(b_i) - (a_i)$ is a nonnegative linear combination of the vectors $(1, -1, 0, \dots, 0), (0, 1, -1, 0, \dots, 0), \dots, (0, \dots, 0, 1, -1)$, i.e. the positive roots of $\GL_r$.
+\end{example}
+
+
+\begin{example}
+When $r$ does not divide $d$, the semistable locus is empty, and the open stratum is the one which is closest to semistability, i.e. write
+$d=qr+s$ with $0\le s<r$. Then the most balanced splitting type is $(q+1)^s\, q^{\,r-s}$.
+
+This type minimizes all partial sums, hence is the minimal element in the dominance order. This is the open stratum because for a fixed type $\tau$, the corresponding locus
+$\mathcal S_\tau \subset \mathrm{Bun}_{r,d}(\mathbb P^1)$
+is locally closed. By upper semicontinuity of the HN polygon in families, the HN polygon can only go upward (more unstable) in a family, so the open stratum is the one with the lowest HN polygon.
+\end{example}
+
+\section{The Shatz stratification}
+Let $G$ be a connected reductive group over $\C$. Let $C$ be a smooth projective curve over $\C$, and $\Bun_G(C)$ be the moduli stack of $G$-bundles on $C$. Let $\cE$ be a principal $G$-bundle on $C$.
+
+Fix a maximal torus $T\subset G$ and a Borel subgroup $B\supset T$. For a standard parabolic $P\supset B$ with Levi subgroup $L$, let $\{\chi_i\}$ denote the fundamental characters of $P$.
+
+For vector bundles, the Harder Narasimhan filtration gives a filtration by subbundles. For principal $G$-bundles, this is replaced by a reduction of structure group to a parabolic subgroup. 
+This data gives rise to Shatz stratification of $\Bun_G(C)$ is a stratification by locally closed substacks. It is useful to keep in mind the toy model of the HN stratification of $\Bun_{r,d}(\P^1)$. 
+
+
+\begin{definition}
+A reduction of $\mathcal E$ to a subgroup $P\subset G$ is a principal $P$-bundle $\mathcal E_P$ on $C$ together with an isomorphism
+$\mathcal E_P\times^P G \;\cong\; \mathcal E$.
+If $\chi:P\to \mathbb G_m$ is a character, there is an associated line bundle
+\[\mathcal L_\chi(\mathcal E_P):=\mathcal E_P\times^P \mathbb A^1_\chi\]
+and its degree $\deg \mathcal L_\chi(\mathcal E_P)\in \mathbb Z$.
+\end{definition}
+
+\begin{definition}
+  Let us say that the bundle $\mathcal E$ is \textbf{Ramanathan-semistable} if for every parabolic
+reduction $(P,\mathcal E_P)$ and every dominant character $\chi$ of $P$,
+\[
+\deg \mathcal L_{\chi}(\mathcal E_P)\le 0 .
+\] It is enough to check this numerical criterion against the maximal parabolics.
+\end{definition}
+In general, a $P$--reduction $E_P$ determines an element $\mu(E_P)\in X_*(T)_\mathbb Q$ (its slope/HN type)
+such that for every character $\chi\in X^*(P)$ one has
+\[
+\deg\bigl(E_P\times^P \chi\bigr)=\langle \chi,\mu(E_P)\rangle,
+\]
+where $\chi$ is viewed as a weight of $T$ by restriction.
+The degrees
+\[
+d_i := \deg \mathcal L_{\chi_i}(\mathcal E_P)
+\]
+determine a rational coweight
+\[
+\mu(P,\mathcal E_P)\in X_*(T)_\Q^{+}
+\]
+characterized by
+\[
+\langle \chi_i,\mu(P,\mathcal E_P)\rangle
+=
+-\,d_i .
+\]
+This coweight is called the \textbf{type} of the reduction. Using the Weyl group action, we can conjugate $\mu(P,\mathcal E_P)$ to a dominant coweight. Among all parabolic reductions of $\mathcal E$, the set of types
+$\mu(P,\mathcal E_P)$ has a unique maximal element for the dominance order.
+This element is denoted
+\[
+\mu(\mathcal E)\in X_*(T)_\Q^{+}
+\]
+and called the \textbf{Harder--Narasimhan (HN) type} of $\mathcal E$. The associated parabolic subgroup is
+\[
+P_{\mathrm{HN}}
+=
+P(\mu(\mathcal E))
+=
+\left\{
+g\in G \;\middle|\;
+\lim_{t\to0}\mu(t)g\mu(t)^{-1}
+\ \text{exists}
+\right\}
+\]
+where $\mu$ is any integral multiple of $\mu(\mathcal E)$. 
+
+\subsection{Stability for $\GL_r$ bundles} 
+We show that the Ramanathan semistability condition for $\GL_r$-bundles recovers the usual slope semistability for vector bundles, and the character pairing formula gives the degree of the associated line bundle in terms of the slope of the reduction. Let $C$ be a smooth projective curve and let $E$ be a vector bundle of rank $r$,
+viewed as a principal $\GL_r$--bundle.
+Fix an integer $k$ with $1\le k\le r-1$ and let $P\subset \GL_r$ be the maximal parabolic stabilizing a $k$--dimensional subspace. 
+\[
+P=\left\{
+\begin{pmatrix}
+A & *\\
+0 & D
+\end{pmatrix}
+\ \middle|\ 
+A\in \GL_k,\ D\in \GL_{r-k}
+\right\}.
+\]
+A reduction of $E$ to $P$ is equivalent to the choice of a rank $k$ subbundle
+$F\subset E$, with quotient bundle $Q:=E/F$. Any character of $P$ factors through the Levi quotient
+$L\simeq \GL_k\times \GL_{r-k}$ and is of the form
+\[
+\chi_{a,b}(A,D)=(\det A)^a(\det D)^b,\qquad a,b\in \mathbb Z.
+\]
+The standard (fundamental) dominant character for this maximal parabolic is
+\[
+\chi_k(A,D)=(\det A)^{\,r-k}(\det D)^{-k}.
+\]
+For the reduction $E_P$ corresponding to $F\subset E$, the associated line bundle is
+\[
+\mathcal L_{\chi_k}(E_P)
+:=E_P\times^P \mathbb A^1_{\chi_k}
+\ \cong\
+(\det F)^{\,r-k}\otimes (\det Q)^{-k}.
+\]
+Taking degrees and using $\deg Q=\deg E-\deg F$ yields
+\begin{align*}
+\deg \mathcal L_{\chi_k}(E_P)
+&=(r-k)\deg(\det F)-k\deg(\det Q)\\
+&=(r-k)\deg F-k(\deg E-\deg F)\\
+&=r\,\deg F-k\,\deg E.
+\end{align*}
+Thus the Ramanathan inequality $\deg \mathcal L_{\chi_k}(E_P)\le 0$ is equivalent to
+\[
+r\deg F-k\deg E\le 0
+\qquad\Longleftrightarrow\qquad
+\mu(F)\le \mu(E),
+\]
+recovering the usual slope semistability for vector bundles.
+
+Let $T\subset \GL_r$ be the diagonal torus with character lattice
+$X^*(T)=\mathbb Z\varepsilon_1\oplus \cdots \oplus \mathbb Z\varepsilon_r$
+(where $\varepsilon_i(\mathrm{diag}(t_1,\dots,t_r))=t_i$) and cocharacter lattice
+$X_*(T)=\mathbb Z e_1\oplus \cdots \oplus \mathbb Z e_r$
+(where $e_i:\mathbb G_m\to T$ is $t\mapsto \mathrm{diag}(1,\dots,1,t,1,\dots,1)$).
+The pairing is $\langle \varepsilon_i,e_j\rangle=\delta_{ij}$.
+
+For the reduction $E_P$ coming from $F\subset E$, define the associated (rational) coweight
+\[
+\mu(E_P)
+:=\big(\underbrace{\mu(F),\dots,\mu(F)}_{k\ \text{times}},
+\underbrace{\mu(Q),\dots,\mu(Q)}_{r-k\ \text{times}}\big)\ \in\ X_*(T)_\mathbb Q.
+\]
+The restriction of $\chi_k$ to $T$ is the weight
+\[
+\chi_k|_T=(r-k)(\varepsilon_1+\cdots+\varepsilon_k)-k(\varepsilon_{k+1}+\cdots+\varepsilon_r).
+\]
+Therefore
+\begin{align*}
+\langle \chi_k,\mu(E_P)\rangle
+&=\Big\langle (r-k)\sum_{i=1}^k\varepsilon_i-k\sum_{i=k+1}^r\varepsilon_i,\ 
+\ (\mu(F)^k,\mu(Q)^{r-k})\Big\rangle\\
+&=(r-k)\cdot k\,\mu(F)-k\cdot (r-k)\,\mu(Q)\\
+&=k(r-k)\bigl(\mu(F)-\mu(Q)\bigr).
+\end{align*}
+Since $\mu(Q)=\deg Q/(r-k)$ and $\mu(F)=\deg F/k$, a short computation shows
+\[
+k(r-k)\bigl(\mu(F)-\mu(Q)\bigr)=r\,\deg F-k\,\deg E.
+\]
+Combining with the earlier degree computation gives the pairing identity
+\[
+\deg\bigl(E_P\times^P \chi_k\bigr)=\langle \chi_k,\mu(E_P)\rangle.
+\]
+\begin{theorem}[Harder--Narasimhan filtration for $G$-bundles]
+Let $\cE$ be a principal $G$-bundle on $C$. Then $\cE$ determines a unique parabolic reduction
+$(P_{\mathrm{HN}},\mathcal E_{P_{\mathrm{HN}}})$ of $\mathcal E$ satisfying the following properties:
+\begin{enumerate}
+\item[(i)] \textbf{Prescribed type:}
+\[
+\mu(P_{\mathrm{HN}},\mathcal E_{P_{\mathrm{HN}}})
+=
+\mu(\mathcal E).
+\]
+
+\item[(ii)] \textbf{Semistable Levi quotient:}
+if $L_{\mathrm{HN}}$ is a Levi subgroup of $P_{\mathrm{HN}}$, then the induced
+principal $L_{\mathrm{HN}}$--bundle
+\[
+\mathcal E_{L_{\mathrm{HN}}}
+=
+\mathcal E_{P_{\mathrm{HN}}}/U_{\mathrm{HN}}
+\]
+is semistable.
+
+\item[(iii)] \textbf{Maximal destabilizing property:}
+for every other reduction $(Q,\mathcal E_Q)$,
+\[
+\mu(Q,\mathcal E_Q)\le \mu(\mathcal E).
+\]
+Equality holds only when the reduction is isomorphic to
+$\mathcal E_{P_{\mathrm{HN}}}$.
+\end{enumerate}
+\end{theorem}
+
+The pair
+\[
+(P_{\mathrm{HN}},\mathcal E_{P_{\mathrm{HN}}})
+\]
+is called the \textbf{Harder--Narasimhan reduction} of $\mathcal E$.
+It is characterized entirely by the bundle $\mathcal E$ itself and does not depend on a choice of representation of $G$. Note that choosing a representation $\rho:G\to \GL(V)$ and applying the associated bundle construction to the HN reduction gives the HN filtration of the associated vector bundle $\mathcal E(V)$.
+
+
+\subsection{Very close degenerations}
+In this section, we give a stack-theoretic interpretation of semistability in terms of very close degenerations. The quotient stack $[\A^1/\mathbb G_m]$ has two
+geometric points $1$ and $0$ which are the images of the points of the same name
+in $\A^1$. For any algebraic stack $\cM$ and
+$f:[\A^1/\mathbb G_m]\to \cM$ we will write
+$f(0),f(1)\in \cM(k)$ for the points given by the images of
+$0,1\in \A^1(k)$.
+
+\begin{definition}[Very close degenerations]
+Let $\cM$ be an algebraic stack over $k$ and $x\in \cM(K)$ a geometric point for
+some algebraically closed field $K/k$. A \textbf{very close degeneration} of $x$ is a morphism
+$f:[\A^1_K/\mathbb G_{m,K}]\to \cM$ with $f(1)\simeq x$ and $f(0)\not\simeq x$.
+\end{definition}
+
+We textbfasize that $f(0)$ is an object that lies in the
+closure of a $K$ point of $\cM_K$, which only happens for stacks and orbit
+spaces, but if $X=\cM$ is a scheme, then there are no very close degenerations.
+
+\begin{definition}[$\cL$-stability]
+Let $\cM$ be an algebraic stack over $k$, locally of finite type with affine
+diagonal and $\cL$ a line bundle on $\cM$. A geometric point $x\in \cM(K)$ is
+called \textbf{$\cL$-stable} if
+\begin{enumerate}
+\item for all very close degenerations $f:[\A^1_K/\mathfrak G_{m,K}]\to \cM$ of $x$ we have
+\[
+\wt(f^*\cL) < 0
+\]
+and
+\item $\dim_K(\Aut_{\cM}(x))=0$.
+\end{enumerate}
+\end{definition}
+
+We can also introduce the notion of $\cL$-semistable points, by requiring only $\le$ in (1) and dropping condition (2).
+
+
+\begin{proposition}
+A very close degeneration
+\[
+f:[\A^1/\mathbb G_m]\to \Bun_G(C)
+\]
+corresponding to a family $\cE$ of $G$-bundles on
+$X\times[\A^1/\mathbb G_m]$ is equivalent to the following data:
+\begin{enumerate}
+\item a cocharacter $\lambda:\mathbb G_m\to G$, canonical up to conjugation,
+\item a reduction $\cE_\lambda$ of the bundle $\cE$ to $P_\lambda$,
+\item an isomorphism
+\[
+\cE \cong \mathrm{Rees}(\cE_\lambda|_{X\times 1},\lambda).
+\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\textbf{First we describe how to start with Lie algebra data and produce a very close degeneration.} For a cocharacter
+\[
+\lambda:\mathbb G_m \to G
+\]
+we denote by $P_\lambda$, $U_\lambda$, $L_\lambda$ the corresponding parabolic
+subgroup, its unipotent radical and the Levi subgroup.
+
+The source of degenerations is the following analog of the Rees construction. Given $\lambda:\mathbb G_m\to G$ we obtain a homomorphism of group schemes over $\mathbb G_m$:
+\[
+\mathrm{conj}_\lambda :
+P_\lambda \times \mathbb G_m \longrightarrow P_\lambda \times \mathbb G_m,
+\qquad
+(p,t)\longmapsto (\lambda(t)p\lambda(t)^{-1},t).
+\]
+This homomorphism extends to a morphism of
+group schemes over $\A^1$:
+\[
+\mathrm{gr}_\lambda :
+P_\lambda \times \A^1 \longrightarrow P_\lambda \times \A^1
+\]
+in such a way that
+\[
+\mathrm{gr}_\lambda(p,0)
+=
+\lim_{t\to 0}\lambda(t)p\lambda(t)^{-1}
+\in L_\lambda\times 0.
+\]
+These morphisms are $\mathbb G_m$-equivariant with respect to the action
+$(\mathrm{conj}_\lambda,\mathrm{act})$ on $P_\lambda\times \A^1$. Over $t=1$, $\mathrm{gr}_\lambda$ is just the identity automorphism, so nothing changes:
+\[
+\mathrm{Rees}(E_\lambda,\lambda)|_{t=1}\cong E_\lambda.
+\]Over $t=0$, the twisting morphism becomes project to the Levi $P_\lambda = L_\lambda \ltimes U_\lambda \to L_\lambda$. The bundle is given by the formula
+\[
+\mathrm{Rees}(E_\lambda,\lambda)|_{t=0}
+\cong
+(E_\lambda/U_\lambda)\times_{L_\lambda} P_\lambda.
+\]
+where $E_\lambda/U_\lambda$ is the quotient $L_\lambda$-bundle given by dividing the $P_\lambda$-bundle $E_\lambda$ by the unipotent radical $U_\lambda$, and then we extend structure group back to $P_\lambda$ via the inclusion $L_\lambda\subset P_\lambda$.
+
+
+Given a $P_\lambda$-bundle $\cE_\lambda$ on a scheme $X$, this morphism defines
+a $P_\lambda$-bundle on $X\times[\A^1/\mathbb G_m]$ by
+\[
+\mathrm{Rees}(\cE_\lambda,\lambda)
+:=
+\bigl[((\cE_\lambda\times \A^1)\times^{\mathrm{gr}_\lambda}_{\A^1}
+(P_\lambda\times \A^1))/\mathbb G_m\bigr],
+\]
+where $\times^{\mathrm{gr}_\lambda}_{\A^1}$ denotes the bundle induced via the
+morphism $\mathrm{gr}_\lambda$, i.e.\ we take the product over $\A^1$ and divide
+by the diagonal action of the group scheme
+$P_\lambda\times \A^1/\A^1$, which acts on the right factor via
+$\mathrm{gr}_\lambda$.
+
+By construction this bundle satisfies
+\[
+\mathrm{Rees}(\cE_\lambda,\lambda)|_{X\times 1}\cong \cE_\lambda
+\]
+and
+\[
+\mathrm{Rees}(\cE_\lambda,\lambda)|_{X\times 0}
+\cong
+\cE_\lambda/U_\lambda \times_{L_\lambda} P_\lambda ,
+\]
+which is the analog of the associated graded bundle.
+
+\textbf{Now we describe how to start with a very close degeneration and extract the Lie algebra data.}
+A map
+\[
+f:[\mathbb A^1/\mathbb G_m]\to \Bun_G(X)
+\]
+is a $\mathbb G_m$-equivariant $G$-bundle $\mathcal E$ on $X\times \mathbb A^1$. Consider special fiber
+$X\times [0/\mathbb G_m] \subset X\times [\A^1/\mathbb G_m]$. Because $0$ is fixed by scaling, the restriction
+$\mathcal E_0 := \mathcal E|_{X\times[0/\mathbb G_m]}$ is a $G$-bundle together with a \(\mathbb G_m\)-action. 
+
+Trivializing $\mathcal E_0$ at a point gives a homomorphism
+$\mathbb G_m \to \Aut(\mathcal E_0)\cong G$ and changing trivialization changes this homomorphism by conjugation, so we get a well-defined cocharacter $\lambda:\mathbb G_m\to G$ up to conjugation. 
+
+With $\lambda$, we recover the parabolic reduction as  attractor subbundle. Write
+$E:=\mathcal E|_{X\times\{1\}}$ for the general fiber. Choose a local trivialization of $\mathcal E$ in the fpqc topology over
+$X\times \mathbb A^1$, so that over such a trivializing open the
+$\mathbb G_m$-action is given by $\lambda$ up to $G$-conjugacy. In this
+local model, a point of the fiber $E_x$ may be written as a frame
+$g\in G$, and the $\mathbb G_m$-action transports it by conjugation,
+so the condition that the orbit has a limit as $t\to 0$ is exactly
+\[
+\lim_{t\to0} \lambda(t)\,g\,\lambda(t)^{-1}\ \text{exists}.
+\]
+By definition this is equivalent to $g\in P_\lambda$. Therefore the
+subset of points of $E$ whose $\mathbb G_m$-orbit admits a limit is
+stable under the right action of $P_\lambda$ and defines a principal
+$P_\lambda$-subbundle
+\[
+E_\lambda \subset E.
+\]
+Equivalently, $E_\lambda$ is the reduction of $E$ corresponding to the
+canonical $\mathbb G_m$-fixed section of the associated bundle
+$E\times^G(G/P_\lambda)$ coming from the special fiber at $t=0$.
+
+Finally, applying the Rees construction to $(E_\lambda,\lambda)$ yields
+a $\mathbb G_m$-equivariant family of $G$-bundles on $X\times \mathbb A^1$,
+and by construction it agrees with $\mathcal E$ over $\mathbb A^1\setminus\{0\}$;
+the $\mathbb G_m$-equivariant extension across $0$ is unique, hence the
+Rees family recovers $\mathcal E$.
+\end{proof}
+
+\subsection{Determinant of cohomology}
+The determinant of cohomology line bundle $\mathcal L_{\det}$ on $\Bun_G(C)$ is defined by
+\[\mathcal L_{\det}|_E
+=\det H^*(C,\, E\times^G \Lie(G))
+\]where $\Lie(G)$ is the adjoint representation of $G$ on its Lie algebra. The following result gives a numerical criterion for $\mathcal L_{\det}$-semistability in terms of the degrees of the associated line bundles for reductions to maximal parabolics, which is equivalent to Ramanathan semistability.
+
+\begin{theorem}
+A $G$-bundle $E$ is $\mathcal{L}_{\det}$-semistable if and only if it is Ramanathan-semistable, i.e. if and only if
+for all reductions $E_P$ to maximal parabolic
+subgroups $P \subset G$ we have $\deg(E_P \times_P \Lie(P)) \leq 0$
+\end{theorem}
+
+\begin{proof}
+We have to compute the weight of $\mathcal L_{\det}$ on very
+close degenerations. Choose $T\subset B\subset G$ a maximal torus and a Borel subgroup
+and a dominant cocharacter $\lambda:\mathbb G_m\to G$.
+
+Let us denote by $I$ the set of positive simple roots with respect to
+$(T,B)$ and by
+\[
+I_P:=\{\alpha_i\in I \mid \lambda(\alpha_i)=0\}
+\]
+the simple roots $\alpha_i$ for which $-\alpha_i$ is also a root of
+$P_\lambda$.
+For $j\in I$ let us denote by
+\[
+\tilde\omega_j \in X_*(T)_\mathbb R
+\]
+the cocharacter defined by
+\[
+\tilde\omega_j(\alpha_i)=\delta_{ij},
+\]
+and by $P_j$ the corresponding maximal parabolic subgroup.
+
+Then
+\[
+\lambda:\mathbb G_m \to Z(L_\lambda)\subset L_\lambda\subset P_\lambda.
+\]
+Thus for any very close degeneration
+$f:[\mathbb A^1/\mathbb G_m]\to \Bun_G$
+given by $\mathrm{Rees}(\mathcal E_\lambda,\lambda)$ the bundle
+$\mathcal L_{\det}$ defines a morphism
+\[
+\mathrm{wt}_{\mathcal L}:
+X_*\!\left(Z_\lambda\right)
+\subset
+\Aut_{\Bun_G}(f(0))
+\to \mathbb Z.
+\]
+
+Then the weight function is additive in the cocharacter so it is enough to compute for one fundamental direction at a time. Write
+$
+\lambda=\sum_{j\in I-I_P} a_j\tilde\omega_j
+$ for some $a_j>0$. Then
+\[
+\mathrm{wt}(\mathcal L_{\det}|_{f(0)})
+=
+\mathrm{wt}_{\mathcal L}(\lambda)
+=
+\sum_{j\in I-I_P} a_j\,\mathrm{wt}_{\mathcal L}(\tilde\omega_j).
+\]
+For each $j$ we get a decomposition
+\[
+\Lie(G)=\bigoplus_i \Lie(G)_i,
+\]
+where $\Lie(G)_i$ is the subspace of the Lie algebra on which
+$\tilde\omega_j$ acts with weight $i$.
+Each of these spaces is a representation of $L_\lambda$ and also of the
+Levi subgroups $L_j$ of $P_j$.
+Using this decomposition we find as in the case of vector bundles:
+\begin{align*}
+\mathrm{wt}_{\mathcal L}(\tilde\omega_j)
+&=
+-\mathrm{wt}_{\mathbb G_m}
+\!\left(
+\det H^*(C,\,
+\mathcal E_{0,\lambda}\times^{L_\lambda}\Lie(G)_i)
+\right) \\
+&=
+\sum_i i\cdot
+\chi\!\left(
+\mathcal E_{0,\lambda}\times^{L_\lambda}\Lie(G)_i
+\right) \\
+&=
+\sum_i i\Bigl(
+\deg(\mathcal E_{0,\lambda}\times^{L_\lambda}\Lie(G)_i)
++\dim(\Lie(G)_i)(1-g)
+\Bigr) \\
+&=
+2\sum_{i>0}
+i\,
+\deg(\mathcal E_{0,\lambda}\times^{L_\lambda}\Lie(G)_i).
+\end{align*}
+because the decomposition is symmetric with respect to $i\mapsto -i$ and so the terms with $1-g$ cancel out.
+Now
+\[
+\deg(\mathcal E_{0,\lambda}\times^{L_\lambda}\Lie(G)_i)
+=
+\deg\!\left(
+\det(\mathcal E_{0,\lambda}\times^{L_\lambda}\Lie(G)_i)
+\right).
+\]
+Since the Levi subgroups of maximal parabolics have only a
+one-dimensional space of characters, all of these degrees are positive multiples of $\det(\Lie(P_j))$. 
+\end{proof}
+
+\subsection{Stratification of $\Bun_G(C)$}
+The stratification of $\Bun_G(C)$ is indexed by the HN type $\mu(\mathcal E)$, which is a dominant rational coweight. The open stratum corresponds to the semistable locus, and the closed stratum corresponds to the most unstable bundles. The closure relations are given by the dominance order on coweights: the closure of the stratum corresponding to $\mu$ consists of all strata corresponding to $\nu$ such that $\nu \leq \mu$ in the dominance order.
+
+\subsection{The Shatz stratification for $\SL_2$ bundles in high genus}
+Let $G=\SL_2$ and $C$ be a smooth projective curve of genus $g\ge 2$. An $\SL_2$-bundle is a rank-2 vector bundle $E$ with $\det E\simeq \mathcal O_C$. 
+\begin{itemize}
+\item $E$ is semistable iff every line subbundle $L\subset E$ satisfies $\deg L\le 0$.
+\item If $E$ is unstable, it has a unique maximal destabilizing line subbundle $L\subset E$ with $\deg L>0$. Then automatically
+$E/L \simeq L^{-1}$
+because $\det E\simeq \mathcal O$.
+\end{itemize}
+The HN type is determined by the integer
+$n=\deg L \in \mathbb Z_{>0}$ corresponding to the dominant rational coweight proportional to $n \alpha^\vee$. Thus the Shatz stratification is:
+\[
+\Bun_{\SL_2}(C)
+=
+\bigsqcup_{n\geq 0} \Shatz_n
+\]
+where $\Shatz_n$ is the locus of unstable bundles with $\deg(L_{\max})=n$ and there is an open stratum $\Bun_{\SL_2}^{ss}=\Shatz_0$ of semistable bundles.
+
+Fix $n\ge 1$. For each line bundle $L\in \Pic^n(C)$, consider extensions
+\[0\to L \to E \to L^{-1}\to 0\]
+These extensions are classified by
+\[
+\Ext^1(L^{-1},L)\cong H^1(C,L^2).
+\]
+There is a natural stack
+\[
+\mathcal E_n \to \Pic^n(C)
+\]
+whose fiber over $L$ is the quotient stack
+$[H^1(C,L^2)/\mathbb G_m]$ where $\mathbb G_m=\Aut(L)$ acts by scaling the extension class, i.e. scalar automorphisms of $L \hookrightarrow E$. Then $\Shatz_n$ is obtained from $\mathcal E_n$ by removing the sublocus where the resulting $E$ admits a line subbundle of degree $>n$ as that would mean the maximal destabilizing degree is larger than $n$.
+
+
+Let $\deg(L^2)=2n$. By Riemann-Roch and Serre duality,
+$h^1(L^2)=h^0(K\otimes L^{-2})$.
+\begin{itemize}
+\item If $2n>2g-2$ (i.e. $n\ge g$), then $\deg(K\otimes L^{-2})<0$, so
+$h^1(L^2)=0$.
+Hence every extension splits, and we get a map of stacks $\pi:\Shatz_n\to \Pic^n$ taking $E$ to its maximal destabilizing line subbundle $L_{\max}$. The automorphism group of $E$ as an $\SL(2)$-bundle is those upper trinagular shears \begin{align*}
+\begin{pmatrix}a & b\\
+0 & a\end{pmatrix} \quad a\in \mathbb{G}_m, b\in H^0(C,L^2)
+\end{align*} so the fiber of $\pi$ over a point $L$ is the classifying stack $B\big(\mathbb G_m \ltimes H^0(C,L^2)\big)$.
+
+\item If $1\le n\le g-1$, then $h^1(L^2)$ can be positive, and one has
+\[h^1(L^2)=h^0(K\otimes L^{-2})=g-1-2n + h^0(L^2)\]
+with $h^0(L^2)$ varying (it jumps precisely on Brill-Noether loci). So the fibers of $\Shatz_n\to\Pic^n$ have varying dimension, but there is a large open subset where the dimension is constant.
+\end{itemize}
+
+
+For $\SL_2$, dominance order is just order on the integer $n$, so the closure of $\Shatz_n$ contains $\Shatz_m$ for all $m\ge n$.
+and in particular $\Bun_{\SL_2}^{\textrm{ss}}$ is the open stratum.
+
+For an unstable $\SL_2$-bundle, the canonical reduction is always to a Borel $B\subset \SL_2$ (stabilizer of a line), i.e. it is exactly the canonical line subbundle $L_{\max}\subset E$.
+
+The associated Levi is $T\simeq \mathbb G_m$, and the induced $T$-bundle is essentially $L_{\max}$ (up to the $\SL_2$ determinant constraint), which is automatically semistable because $T$ is a torus.
+
+\begin{remark}
+    For $n\geq g$, the structure of the map $\pi: \Shatz_n \to \Pic^n$ is best captured by the language of inertia stacks. Recall that for any algebraic stack $\mathcal{X}$, the inertia stack $I\mathcal{X}$ is defined as the fiber product
+\[
+I\mathcal{X} = \mathcal{X} \times_{\mathcal{X} \times \mathcal{X}} \mathcal{X}
+\] where the maps to $\mathcal{X} \times \mathcal{X}$ are given by the diagonal and the identity. The inertia stack parametrizes pairs $(x, g)$ where $x$ is a point of $\mathcal{X}$ and $g$ is an automorphism of $x$. In our case, the fiber of $\pi$ over a point $L$ in $\Pic^n$ can be identified with the classifying stack of the automorphism group of the corresponding unstable bundle, which is precisely captured by the inertia stack of $\Shatz_n$. In particular, we see that the inertia of $\Shatz_n$ over $\Pic^n$ is given by the group $\mathbb{G}_m \ltimes H^0(C, L^2)$.
+\end{remark}
+
+
+\end{document}

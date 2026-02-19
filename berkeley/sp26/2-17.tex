@@ -1,0 +1,292 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+
+
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0pt}
+
+
+\newcommand{\fg}{\mathfrak g}
+
+\DeclareMathOperator{\Frac}{Frac}
+\begin{document}
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Title}
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+\begin{abstract}
+Abstract
+\end{abstract}
+
+\tableofcontents
+
+
+Let $S = \Spec \C[[s]]$. 
+Recall that Solis fixes a curve $C$ over $S$ whose generic fiber is smooth and whose special fiber is a nodal curve with a single node. In particular, $C$ is classified by a morphism $f:S\to\overline{\mathcal M}_{g,I}$. 
+
+Solis defines an $S$-stack whose $B$-points are given by twisted local modifications $C'_B$ of our fixed family $C/S$ and admissible $G$-bundles $P'_B$ on $C'_B$. He christens this stack $\cX_G(C)$ and shows that it is algebraic over $S$, locally of finite type over $S$, and complete over $S$.
+
+We spread out the stack $\cX_G(C)$ along $S$ to get a stack $\cX_{G,g,I}$ over $\overline{\mathcal M}_{g,I}$ whose structure morphism is algebraic and locally of finite type for formal reasons. 
+
+\subsection{The diagonal construction at a twisted node}
+
+Let $R_n$ denote the rational chain of projective lines with $n$-components. There is an action of $\C^\times$ on $R_n$ which scales
+each component. Let $p_0, \ldots, p_n$ denote the fixed points of this action. Let $u, v$ are $k$th roots of $x, y$ which are our coordinates near a node. 
+
+Let $p', p''$ be
+denote the closed points of $\operatorname{Spec}\C[[u]]$, $\operatorname{Spec}\C[[v]]$ and
+finally let $D_n^{\frac{1}{k}}$ be the curve obtained from
+$\operatorname{Spec}\C[[u]] \sqcup R_n \sqcup \operatorname{Spec}\C[[v]]$ by identifying $p'$
+with $p_0$ and $p''$ with $p_n$.
+
+The group $\mu_k$ acts on $D_n^{\frac{1}{k}}$ through its usual action on $u, v$ and through the
+inclusion $\mu_k \subset \C^\times$ on the chain $R_n$. For an $n$-tuple
+$(\beta_0, \ldots, \beta_n) \in \hom(\C^\times, T)^n$, we can speak about the equivariant
+$G$-bundles on $D_n^{\frac{1}{k}}$ with equivariant structure at $p_i$ determined by $\beta_i$.
+We refer to this equivalently as a $G$-bundles on $[D_n^{\frac{1}{k}}/\mu_k]$ of type
+$(\beta_1, \ldots, \beta_n)$. In particular, a choice of $\beta$ determines by restriction to $\mu_k \subset \C^\times$ a $\mu_k$--equivariant structure on the fiber of the $G$--bundle at $p$.
+
+Further, we can also glue $[D_n^{\frac{1}{k}}/\mu_k]$ to $C_0 - p_0$ to obtain a curve
+$C_{n,[k]}$. Let $C_n$ denote the coarse moduli space of $C_{n,[k]}$.
+
+At the $i$th node, let the parahoric subgroup $\mathcal P_i$ with Levi decomposition $\mathcal P_i=L_i\ltimes U_i$, set
+\[
+\mathcal P_i^{\Delta}=\Delta(L_i)\ltimes (U_i\times U_i).
+\]
+One constructs a sheaf of groups $\mathcal G^{\Delta}$ over $C_n$
+such that
+\[
+\mathcal G^{\Delta}(\widehat{\mathcal O}_{C_n,p_i})=\mathcal P_i^{\Delta},
+\qquad
+\mathcal G^{\Delta}|_{C_n-\set{p_0,\dots,p_n}}=G^{\mathrm{std}}
+\]
+Then Solis shows there is an isomorphism 
+\[
+\mathcal{M}_{G,I}(C_{n,[k]}) \cong \mathcal{M}_{\mathcal{G}^\Delta}(C_n).
+\]
+
+\subsection{Constructing a vector bundle}
+Working on $\mathcal M_{G,I}(C_{n,[k]})$, let $\rho:G\to \GL(V)$ be a fixed
+representation. For a $G$--bundle $\mathcal E$ on the stacky curve
+$C_{n,[k]}$ we form the associated vector bundle
+\[
+\mathcal V \;:=\; \mathcal E\times^G V .
+\]
+Away from the stacky points this is the usual associated bundle.  At a
+stacky point $p_i$ with stabilizer $\mu_k$, the chosen type
+$\beta_i:\C^\times\to T\subset G$ restricts to a homomorphism
+$\beta_i|_{\mu_k}:\mu_k\to G$, which is precisely the local
+$\mu_k$--equivariant structure on the $G$--torsor $\mathcal E$ near
+$p_i$.  Applying $\rho$ yields an induced $\mu_k$--representation on the
+geometric fiber $\mathcal V|_{p_i}$, namely the action of $\mu_k$ on $V$
+via $\rho\circ \beta_i|_{\mu_k}$.
+
+Consequently, fixing $\rho$ once and for all, the universal $G$--torsor
+on the universal stacky curve $\pi:\mathcal C\to \cX_{G,g,I}$ (when it
+exists, e.g. on the stack of $G$--bundles, or after the usual
+rigidification) determines a canonically associated vector bundle
+$\mathcal V$ on $\mathcal C$.  We define the determinant of cohomology
+line bundle by
+$\cL_{\det}(\rho)\;:=\;\det R\pi_*\mathcal V$ which is a line bundle on $\cX_{G,g,I}$.
+
+Let us take $\rho: G\to \Lie(G)$ to be the adjoint representation. This is the line bundle we will use to construct the $\Theta$-stratification on $\cX_{G,g,I}$.
+
+\subsection{Very close degenerations}
+One can reformulate the numerical Hilbert--Mumford criterion in terms of
+stacks. The quotient stack $[\A^1/\mathbb G_m]$ has two
+geometric points $1$ and $0$ which are the images of the points of the same name
+in $\A^1$. For any algebraic stack $\cM$ and
+$f:[\A^1/\mathbb G_m]\to \cM$ we will write
+$f(0),f(1)\in \cM(k)$ for the points given by the images of
+$0,1\in \A^1(k)$.
+
+\begin{definition}[Very close degenerations]
+Let $\cM$ be an algebraic stack over $k$ and $x\in \cM(K)$ a geometric point for
+some algebraically closed field $K/k$. A \emph{very close degeneration} of $x$ is a morphism
+$f:[\A^1_K/\mathbb G_{m,K}]\to \cM$ with $f(1)\simeq x$ and $f(0)\not\simeq x$.
+\end{definition}
+
+We emphasize that $f(0)$ is an object that lies in the
+closure of a $K$ point of $\cM_K$, which only happens for stacks and orbit
+spaces, but if $X=\cM$ is a scheme, then there are no very close degenerations.
+
+\begin{definition}[$\cL$-stability]
+Let $\cM$ be an algebraic stack over $k$, locally of finite type with affine
+diagonal and $\cL$ a line bundle on $\cM$. A geometric point $x\in \cM(K)$ is
+called \emph{$\cL$-stable} if
+\begin{enumerate}
+\item for all very close degenerations $f:[\A^1_K/\mathfrak G_{m,K}]\to \cM$ of $x$ we have
+\[
+\wt(f^*\cL) < 0
+\]
+and
+\item $\dim_K(\Aut_{\cM}(x))=0$.
+\end{enumerate}
+\end{definition}
+
+We can also introduce the notion of $\cL$-semistable points, by requiring only $\le$ in (1) and dropping condition (2).
+
+\subsection{Very close degenerations of $G$-bundles}
+For a cocharacter
+\[
+\lambda:\mathbb G_m \to G
+\]
+we denote by $P_\lambda$, $U_\lambda$, $L_\lambda$ the corresponding parabolic
+subgroup, its unipotent radical and the Levi subgroup.
+
+The source of degenerations is the following analog of the Rees construction.
+Given $\lambda:\mathbb G_m\to G$ we obtain a homomorphism of group schemes over $\mathbb G_m$:
+\[
+\mathrm{conj}_\lambda :
+P_\lambda \times \mathbb G_m \longrightarrow P_\lambda \times \mathbb G_m,
+\qquad
+(p,t)\longmapsto (\lambda(t)p\lambda(t)^{-1},t).
+\]
+This homomorphism extends to a morphism of
+group schemes over $\A^1$:
+\[
+\mathrm{gr}_\lambda :
+P_\lambda \times \A^1 \longrightarrow P_\lambda \times \A^1
+\]
+in such a way that
+\[
+\mathrm{gr}_\lambda(p,0)
+=
+\lim_{t\to 0}\lambda(t)p\lambda(t)^{-1}
+\in L_\lambda\times 0.
+\]
+These morphisms are $\mathbb G_m$-equivariant with respect to the action
+$(\mathrm{conj}_\lambda,\mathrm{act})$ on $P_\lambda\times \A^1$.
+
+Given a $P_\lambda$-bundle $\cE_\lambda$ on a scheme $X$, this morphism defines
+a $P_\lambda$-bundle on $X\times[\A^1/\mathbb G_m]$ by
+\[
+\mathrm{Rees}(\cE_\lambda,\lambda)
+:=
+\bigl[((\cE_\lambda\times \A^1)\times^{\mathrm{gr}_\lambda}_{\A^1}
+(P_\lambda\times \A^1))/\mathbb G_m\bigr],
+\]
+where $\times^{\mathrm{gr}_\lambda}_{\A^1}$ denotes the bundle induced via the
+morphism $\mathrm{gr}_\lambda$, i.e.\ we take the product over $\A^1$ and divide
+by the diagonal action of the group scheme
+$P_\lambda\times \A^1/\A^1$, which acts on the right factor via
+$\mathrm{gr}_\lambda$.
+
+By construction this bundle satisfies
+\[
+\mathrm{Rees}(\cE_\lambda,\lambda)|_{X\times 1}\cong \cE_\lambda
+\]
+and
+\[
+\mathrm{Rees}(\cE_\lambda,\lambda)|_{X\times 0}
+\cong
+\cE_\lambda/U_\lambda \times_{L_\lambda} P_\lambda ,
+\]
+which is the analog of the associated graded bundle.
+
+\begin{lemma}
+Let $G$ be a split reductive group over $k$. Given a very close degeneration
+\[
+f:[\A^1/\mathbb G_m]\to \Bun_G
+\]
+corresponding to a family $\cE$ of $G$-bundles on
+$X\times[\A^1/\mathbb G_m]$, there exist:
+\begin{enumerate}
+\item a cocharacter $\lambda:\mathbb G_m\to G$, canonical up to conjugation,
+\item a reduction $\cE_\lambda$ of the bundle $\cE$ to $P_\lambda$,
+\item an isomorphism
+\[
+\cE \cong \mathrm{Rees}(\cE_\lambda|_{X\times 1},\lambda).
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{theorem}
+A $G$-bundle $E$ is $\mathcal{L}_{\det}$-stable if and only if for all reductions $E_P$ to maximal parabolic
+subgroups $P \subset G$ we have $\deg(E_P \times_P \Lie(P)) < 0$.
+\end{theorem}
+
+
+This theorem of Heinloth \cite{heinloth} is precisely the way we need to generalize the notion of stability to our compactified moduli stack $\cX_{G,g,I}$. We need to understand the very close degenerations of points of $\cX_{G,g,I}$, and then apply the numerical criterion to determine which points are semistable with respect to the determinant line bundles we have constructed.
+
+Note that we need to know that the stack $\cX_{G,g,I} \to \overline{\mathcal{M}}_{g,I}$ has affine diagonal in order to apply Heinloth's theory of $\cL$-stability. 
+
+
+\section{Monday, Feb 16, 2026}
+Fix a geometric point
+\[
+x_0\in \cX_{G,g,I}(k)
+\]
+packaged as a stacky curve $C_0'$ together with a $G$-bundle $\cP$ whose local isotropy data at the stacky nodes are prescribed by $\eta_i$.
+
+A very close degeneration of $x_0$ is a morphism
+\[f:\Theta:=[\A^1/\mathbb G_m]\to \cX_{G,g,I}\]
+with $f(1)\simeq x_0$ and $f(0)\not\simeq x_0$.
+
+By construction we get $\mathbb G_m \to \Aut(x_0)$, where $\Aut(x_0)$ is those bundle automorphisms of $\cP$ covering the stacky curve $C_0'$. By restricting to the stacky node $p_i$, we get a homomorphism
+\[
+\lambda_{f,i}:=\ev_{p_i}\circ \lambda_f:\mathbb G_m\to Z_G(\eta_i).
+\]
+well defined up to conjugation by $Z_G(\eta_i)$.
+Also by restricting to the generic point of $C_0'$, we get a homomorphism
+\[\lambda_{f,\mathrm{gen}}:\mathbb G_m\to G
+\]
+well defined up to conjugation by $G$.
+
+Choose an invariant norm $\|\cdot\|$ on $X_*(T)_\R$. We should take the sum of the squares of the norms of $\lambda_{f,i}$ and $\lambda_{f,\mathrm{gen}}$ to get a norm $\|\lambda_f\|_{sum}$ on the space of very close degenerations of $x_0$.
+
+Thus we can define the numerical invariant
+\[M_\cL(f)\ :=\ \frac{-\,\mu_\cL(f)}{\|\lambda_f\|_{sum}}\]
+
+A maximally destabilizing $\Theta$-filtration of $x$ (with respect to \(\cL\) and $\|\cdot\|$) is a map $f_{\mathrm{HN}}:\Theta\to \cX$ with $f_{\mathrm{HN}}(1)=x$ such that
+\[
+M_\cL(f_{\mathrm{HN}})
+=
+\sup\Bigl\{\,M_\cL(f)\ :\ f:\Theta\to \cX,\ f(1)=x,\ f \text{ nontrivial}\Bigr\}.
+\]
+
+The theorem that will give us a stratification is the following:
+\begin{theorem}[Need to prove]
+  For any $x\in \cX_{G,g,I}(k)$, there exists a unique maximally destabilizing $\Theta$-filtration $f_{\mathrm{HN}}:\Theta\to \cX_{G,g,I}$ of $x$ with respect to $\mathcal L_{\det}$ and any invariant norm on $X_*(T)_\R$. 
+\end{theorem}
+
+
+\subsection{Worked example for $\SL(3)$}
+We consider the case where $G = \SL(3)$ and we expand the nodal curve $C_0$ with a single node $p$ by a single copy of $\P^1$. We take the local isotropy data at $p$ to be given by $\eta_1$ and $\eta_2$ which are the two nontrivial vertices of the fundamental alcove of $\SL(3)$. Recall that our line bundle is the determinant of cohomology line bundle associated to the adjoint representation. 
+
+
+\section{Meeting remarks}
+\begin{itemize}
+    \item Constantin emphasized the ordering of the labels and simple roots, recommended looking in Kausz to see if the data is ordered or not.
+    \item Constantin said that the uniqueness part of the theorem is not necessary and that the key part of the setup is to have something as depicited in Kirwan. Dan also has remarks about this if I want to make it precise. He mentioned that in Quantization Conjecture Revisited, he describes a general machine that is enough to establish the finiteness of the pushforward.
+    \item Constantin also said that the Frenkel Teleman Tolland paper admits generalization to larger tori, and that there is still work to be done there and to think about how the bubbling data should be organized.
+    \item Constantin said to work on the $\SL(2)$ case for the Solis moduli problem, where things are concrete and labels are just integers. 
+\end{itemize} 
+
+\end{document}

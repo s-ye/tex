@@ -27,6 +27,7 @@
 
 
 \newcommand{\fg}{\mathfrak g}
+
 \DeclareMathOperator{\Frac}{Frac}
 \begin{document}
 
@@ -1179,7 +1180,7 @@ $0,1\in \A^1(k)$.
 \begin{definition}[Very close degenerations]
 Let $\cM$ be an algebraic stack over $k$ and $x\in \cM(K)$ a geometric point for
 some algebraically closed field $K/k$. A \emph{very close degeneration} of $x$ is a morphism
-$f:[\A^1_K/\mathfrak G_{m,K}]\to \cM$ with $f(1)\simeq x$ and $f(0)\not\simeq x$.
+$f:[\A^1_K/\mathbb G_{m,K}]\to \cM$ with $f(1)\simeq x$ and $f(0)\not\simeq x$.
 \end{definition}
 
 We emphasize that $f(0)$ is an object that lies in the
@@ -1203,7 +1204,6 @@ and
 We can also introduce the notion of $\cL$-semistable points, by requiring only $\le$ in (1) and dropping condition (2).
 
 \subsection{Very close degenerations of $G$-bundles}
-
 For a cocharacter
 \[
 \lambda:\mathbb G_m \to G
@@ -1561,7 +1561,7 @@ The $\mathbb G_m$-weight on the determinant line is therefore
 E_{0,\lambda}\times^{L_\lambda}\mathfrak g_i
 \right).
 \] 
-The determinant line is a moment-map functional, and this pairing is the algebraic analogue of the Kempf–Ness pairing between a 1-PS and a moment map value.
+The -determinant line is a moment-map functional, and this pairing is the algebraic analogue of the Kempf–Ness pairing between a 1-PS and a moment map value.
 
 
 After applying Riemann--Roch and using the symmetry of the adjoint
@@ -1909,7 +1909,205 @@ so the resulting bundle depends only on the conjugacy class of
 $\lambda$.
 \end{remark}
 
+\section{Monday, Feb 16, 2026}
+Fix a geometric point
+\[
+x_0\in \cX_{G,g,I}(k)
+\]
+i.e. an admissible object on a fixed special fiber (a twisted local modification of the nodal curve).
 
+Concretely, we package $x_0$ as a (possibly expanded) nodal curve $C_0'$ (with stacky structure at nodes), a Bruhat--Tits/parahoric group scheme $\cG$ on $C_0'$ (constant $G$ on the smooth locus, parahoric models at the special points/nodes), and a $\cG$-torsor $\cP$ on $C_0'$ (the admissible bundle).
+
+At each parahoric point $p$, the local parahoric group $\cG(\widehat{\cO}_{p})$ has a pro-unipotent radical and a Levi quotient:
+\[
+1\to \cG_p^+\to \cG_p\to L_p\to 1,
+\]
+and globally we form the Levi quotient group scheme
+\[
+\cL:=\cG/\cG^+
+\]
+where $\cG^+$ is the "pro-unipotent part" supported at the parahoric points; on the smooth locus $\cG^+=1$.
+
+The torsor $\cP$ induces an $\cL$-torsor $\cP_{\cL}:=\cP/\cG^+$, and hence a reductive quotient of automorphisms
+\[
+\Aut(x_0)\twoheadrightarrow
+\Aut^{\mathrm{red}}(x_0)
+:=\Gamma\bigl(C_0',\,\Ad_{\cL}(\cP_{\cL})\bigr),
+\qquad
+\Ad_{\cL}(\cP_{\cL})=\cP_{\cL}\times^{\cL}\cL.
+\]
+For each special point $p$, restriction/evaluation gives a homomorphism
+\[
+\mathrm{ev}_p:\Aut^{\mathrm{red}}(x_0)\ \longrightarrow\ \Aut^{\mathrm{red}}(x_0)|_p \cong L_p,
+\]
+well-defined up to $L_p$-conjugacy once you choose a trivialization of the fiber at $p$. Let
+\[
+H:=\Aut^{\mathrm{red}}(x_0)=\Gamma\bigl(C_0',\Ad_{\cL}(\cP_{\cL})\bigr).
+\]
+A tuple \((\lambda_p)_p\in\prod_p\Hom(\mathbb G_m,L_p)\) lies in the image iff there exists a global cocharacter
+$\lambda:\mathbb G_m\to H$ and $g\in H$ such that $\mathrm{ev}_p(g)\lambda_p\mathrm{ev}_p(g)^{-1}=\mathrm{ev}_p(\lambda)$ for all $p$.
+
+\begin{example}
+Let $G=SL_3$ and fix the standard maximal torus
+\[
+T=\left\{\diag(t_1,t_2,t_3)\;:\; t_1t_2t_3=1\right\},
+\qquad
+X_*(T)=\{(a,b,c)\in\Z^3:\ a+b+c=0\},
+\]
+where the cocharacter $(a,b,c)$ means
+\[
+t\longmapsto \diag(t^a,t^b,t^c).
+\]
+
+\paragraph{Boundary type.}
+Let $C_0'$ be the curve obtained by inserting a single exceptional component
+$R\simeq \P^1$ at the node of the coarse special fiber, so that $R$ meets the
+two branches of the normalization at two new nodes
+\[
+p_1,\;p_2\in C_0'.
+\]
+Assume the parahoric type at $p_1$ is the vertex $\eta_1$ (block type $2|1$)
+and at $p_2$ is the vertex $\eta_2$ (block type $1|2$).
+
+Equivalently, at $p_1$ the Levi quotient is
+\[
+L_{\eta_1}\cong \left\{\begin{pmatrix}A&0\\0&t\end{pmatrix}:
+A\in GL_2,\ t\in\Gm,\ \det(A)\,t=1\right\},
+\]
+and at $p_2$ the Levi quotient is
+\[
+L_{\eta_2}\cong \left\{\begin{pmatrix}t&0\\0&A\end{pmatrix}:
+A\in GL_2,\ t\in\Gm,\ t\,\det(A)=1\right\}.
+\]
+
+\paragraph{Weyl groups at the two nodes.}
+Let $W=S_3$ be the Weyl group of $SL_3$. The Levi Weyl groups are the stabilizers
+of the corresponding block decompositions:
+\[
+W_1 \cong S_2=\langle (12)\rangle \subset S_3,
+\qquad
+W_2 \cong S_2=\langle (23)\rangle \subset S_3.
+\]
+Thus $W_1$ permutes the first two coordinates of $(a,b,c)$ and $W_2$ permutes the
+last two.
+
+\paragraph{Reductive automorphisms in this boundary type.}
+Let $x_0$ be an admissible object of this boundary type. Passing to the Levi
+quotient of the local parahorics gives a Levi group scheme $\cL$ on $C_0'$, and
+the reductive quotient of automorphisms is
+\[
+H:=\Aut^{\mathrm{red}}(x_0)=\Gamma\!\bigl(C_0',\,\Ad_{\cL}(\cP_{\cL})\bigr).
+\]
+
+For this \emph{mixed} type $(\eta_1,\eta_2)$, the only cocharacters that can act
+compatibly at both nodes are those factoring through the common maximal torus:
+\[
+L_{\eta_1}\cap L_{\eta_2}=T \subset SL_3.
+\]
+Accordingly, the cocharacter lattice of $H$ (in the generic situation where
+there are no extra global reductive automorphisms coming from $\cP_{\cL}$) is
+identified with $X_*(T)$.
+
+\paragraph{Local evaluations and the image condition.}
+Evaluation at the two nodes gives homomorphisms (well-defined up to conjugacy)
+\[
+\ev_{p_1}:H\to L_{\eta_1},\qquad \ev_{p_2}:H\to L_{\eta_2},
+\]
+hence on cocharacters a map
+\[
+X_*(H)\ \longrightarrow\ X_*(L_{\eta_1})/W_1 \times X_*(L_{\eta_2})/W_2.
+\]
+Under the identification $X_*(H)\cong X_*(T)$, this becomes the diagonal map
+\[
+X_*(T)\ \longrightarrow\ X_*(T)/W_1 \times X_*(T)/W_2,
+\qquad
+\xi \longmapsto \big([\xi]_{W_1},[\xi]_{W_2}\big).
+\]
+In particular, the image is exactly
+\[
+\Im=\left\{\big([\xi]_{W_1},[\xi]_{W_2}\big)\ :\ \xi\in X_*(T)\right\}.
+\]
+
+\paragraph{Interpretation as ``HN types'' in this boundary stratum.}
+A very close degeneration
+\[
+f:\Theta=[\A^1/\Gm]\to \cX_{G,g,I}
+\]
+with special fiber $f(0)\simeq x_0$ determines a cocharacter
+\[
+\bar\lambda_f:\Gm\to H
+\]
+(up to $H$-conjugacy), hence a class $\xi_f\in X_*(H)$ up to Weyl, and therefore
+a pair of local classes
+\[
+\big([\xi_f]_{W_1},[\xi_f]_{W_2}\big)\ \in\ X_*(T)/W_1\times X_*(T)/W_2.
+\]
+Necessarily this pair lies in the diagonal image $\Im$ above. Concretely, if
+\[
+\xi=(a,b,c)\in X_*(T),\quad a+b+c=0,
+\]
+then
+\[
+[\xi]_{W_1}=\{(a,b,c),(b,a,c)\},
+\qquad
+[\xi]_{W_2}=\{(a,b,c),(a,c,b)\}.
+\]
+Thus in the $(\eta_1,\eta_2)$ one-bubble boundary type, the possible numerical
+directions contributed by very close degenerations are indexed by a single
+global cocharacter $\xi\in X_*(T)$, recorded at the two nodes modulo the two
+different rank-one Weyl groups.
+\end{example}
+
+Let us hope that in the most general case, we have an identification $\Aut(x_0)^{\mathrm{red}}= T$ the maximal torus of $G$. Pick a point $x_0$ of $\cX_{G,g,I}$ and a very close degeneration $f:\Theta\to \cX_{G,g,I}$ with special fiber $x_0$. Then $f$ determines a cocharacter $\lambda_f:\Gm\to T$ and we need to compute $\wt(f^*\mathcal L_{\det}\vert_0) \in \Pic(B\Gm)\cong \Z$ in terms of $\lambda_f$. The smooth case suggests that the answer should depend on a parabolic reduction of $x_0$ determined by $\lambda_f$. There is hope because recall that $\lambda_f \in X_*(T)$ determines a parabolic $P_\lambda$ in $G$ unique up to conjugation.
+
+\subsection{General calcuation of $H$}
+
+Let $U\subset C_0'$ be the complement of the nodes, and for each node $p$ let $D_p^\times$ be the punctured formal neighborhood. Then an automorphism of \(\cP\) is the same as an automorphism on U, i.e. a section of \(\Ad(\cP)|_U\), together with compatible automorphisms on each $D_p^\times$.
+
+\begin{remark}[General guiding calculation]
+  Let $G$ be a group and $P$ be a principal $G$-bundle on a smooth scheme $X$. Then the automorphisms of $P$ are given by the global sections of the adjoint bundle $\Ad(P) = P \times^G G$ where $G$ acts on itself by conjugation.
+
+  An automorphism of the principal bundle $P$ over $X$ is a $G$-equivariant map
+  $\phi : P \to P$
+  over $X$.
+
+  Given such a $\phi$, define
+  $\phi(p)=p\cdot a(p)$
+  for some uniquely determined $a(p)\in G$.
+  $G$-equivariance implies
+  $a(pg)=g^{-1}a(p)g$,
+  so $a$ is precisely a section of the associated bundle
+  \[
+  P\times^G G=\Ad(P).
+  \]
+  Conversely, any section $s\in \Gamma(X,\Ad(P))$ defines an automorphism by $p \mapsto p\cdot s(\pi(p))$.
+
+  There is also a local description of this. Choose an open cover $\{U_i\}$ over which $P|_{U_i} \cong U_i \times G$. An automorphism on $U_i$ is then given by a map $a_i : U_i \to G$ acting by right multiplication.
+
+  If the transition functions of $P$ are $g_{ij}:U_{ij}\to G$, compatibility on overlaps requires $a_j = g_{ij}^{-1} a_i g_{ij}$. Exactly this conjugation-gluing condition says that the collection $\{a_i\}$ is a global section of $\Ad(P)$.
+\end{remark}
+
+We have seen that every very close degeneration $f:\Theta\to \Bun_G(X)$ with special fiber $E_0$ determines a map $\lambda_f:\Gm\to \Aut(E_0/X)$, an automorphism of the bundle $E_0$ covering $X$. Evaluating locally (or after trivialization) to get a cocharacter in $G$, and Heinloth shows that the conjugacy class of this cocharacter does not depend on the choice of $x\in X$ where we trivialized.
+
+
+Pick an invariant norm $\|\cdot\|$ on $X_*(T)_\R$.
+For any very close degeneration $f:\Theta\to \cX_{G,g,I}$ with special fiber $x_0$, we need to think about the Levi reduction at the nodes of the expansion, recall that there is an evaluation map \[
+\mathrm{ev}_p:\Aut^{\mathrm{red}}(x_0)\to L_p
+\] where changing trivializations at the nodes changes the evaluation map by conjugation by an element of $L_p$. Thus the local evaluation of $\lambda_f$ at the node $p$ is well-defined up to $L_p$-conjugacy. Choosing embeddings $L_p\subset G$ compatible with the common maximal torus $T$, we can view the local evaluation of $\lambda_f$ at $p$ as a cocharacter of $G$ well-defined up to conjugation. Thus by fixing an invariant norm on $X_*(T)_\R$, we can talk about the norm of $\xi \in \Aut(f(0))$ as the sum of the norms of the local evaluations at the nodes of the expansion, plus a term coming from the bundle away from the nodes.
+Thus we have a numerical invariant
+\[M_\cL(f)\ :=\ \frac{-\,\mu_\cL(f)}{\|\xi_f\|}\]
+
+A maximally destabilizing $\Theta$-filtration of $x$ (with respect to \(\cL\) and $\|\cdot\|$) is a map $f_{\mathrm{HN}}:\Theta\to \cX$ with $f_{\mathrm{HN}}(1)=x$ such that
+\[
+M_\cL(f_{\mathrm{HN}})
+=
+\sup\Bigl\{\,M_\cL(f)\ :\ f:\Theta\to \cX,\ f(1)=x,\ f \text{ nontrivial}\Bigr\}.
+\]
+
+The theorem that will give us a stratification is the following:
+\begin{theorem}[Need to prove]
+  For any $x\in \cX_{G,g,I}(k)$, there exists a unique maximally destabilizing $\Theta$-filtration $f_{\mathrm{HN}}:\Theta\to \cX_{G,g,I}$ of $x$ with respect to $\mathcal L_{\det}$ and any invariant norm on $X_*(T)_\R$. 
+\end{theorem}
 
 \section{References}
 \begin{enumerate}

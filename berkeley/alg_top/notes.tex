@@ -1,0 +1,132 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
+\usepackage{fancyhdr}
+
+\DeclareMathOperator{\St}{St}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Complex Manifolds}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+
+\end{abstract}
+
+\section{Feb 17}
+Let $\Gr(k,n)$ denote the Grassmannian of $k$-planes in $V$, a real or complex vector space of dimension $n$. We will not distinguish since the statements we make will be true for both cases. For the real Grassmannian, we take homology with $\Z/2$ coefficients, and for the complex Grassmannian, we take homology with $\Z$ coefficients.
+\begin{theorem} 
+    For a CW complex $X$, $\R, \C, \H$-vector bundles over $X$ up to isomorphism are classified by homotopy classes of maps to the infinite Grassmannian $Gr_k(\mathbb{C}^\infty) = \lim_{n\to\infty} Gr_k(\mathbb{C}^n)$.
+\end{theorem}
+
+\begin{remark}
+    $\Sp(n) = U(2n) \cap GL(n, \H)$ is the compact symplectic group acts on $\H^n$ by left multiplication and commutes with the right $\H$-action which is the structure map for $\H$-vector bundles. 
+\end{remark}
+Recall that the Schubert stratification is given by row echelon form for matrices. Let $T\subset V$ be a subspace of dimension $k$. Write $T$ as the row space of a $k\times n$ matrix. We can perform row operations to put it in row echelon form, and this depends only on $T$. In particular, $T$ has a canonical basis but it does not depend continuously on $T$. It may jump whenever the pivots move. The Schubert stratification is given by the locus where the pivots are fixed. Therefore, it is enough to give an increasing sequence $\sigma_p$ of pivot positions or a sequence $s$ of $0$'s and $1$'s of length $n$ with exactly $k$ $1$'s. 
+
+\begin{example}
+    Let us row reduce from right to left. For example in $\Gr(2,4)$ \begin{align*}
+        \begin{bmatrix}
+            * & 0 & * & 1 \\
+            * & 1 & 0 & 0
+        \end{bmatrix}
+    \end{align*}
+    corresponds to the sequence $s = (0,1,0,1)$ and the pivot positions $\sigma_1 = 2, \sigma_2 = 4$. The dimension is given by \begin{align*}
+        \dim S_\sigma = \sum_{p=1}^k (\sigma_p - p) = (2-1) + (4-2) = 3 = \sum_{1s \in s} \text{total number of 0s to the left} = 1 + 2
+    \end{align*}
+\end{example}
+
+There are two inclusions called $i,j$ of $\Gr(k,n)$ into $\Gr(k,n+1)$ and $\Gr(k+1,n+1)$ given by $T \mapsto T\oplus e_{n+1}$ and $T \mapsto e_0 \oplus T$ respectively. 
+
+\subsection{Some generalities}
+These cells define a CW decomposition. They give a basis of $\Z$ homology for $\C,\H$ or $\Z/2$ homology for $\R$. It is obvious for $\C,\H$ because there are no attaching maps, but for $\R$ you have to argue that the attaching maps have even degree. The closure of $S_{\sigma}$ is the union of cells $S_{\tau}$ if $\tau_p \leq \sigma_p$ for all $p$< meaning no pivot of $\sigma$ is to the left of the corresponding pivot of $\tau$. Poincare duality is implemented by reverseing the sequence of $0s$ and $1s$, reverse the order of the basis and check the intersectino of the cells. Most $\overline{S_\sigma}$ are singular but the singularities have codimension at least $2$ and thusd efine fundamental classes and can use the intersection pairing to check poincare duality. In particular they are normal varieties.
+
+\subsection{The inclusions $i$,$j$}
+What are the smallest cells $i,j$ are missing?
+For $i$ we are missing \begin{align*}
+    \begin{bmatrix}
+        F_k \vert M \vert e_0
+    \end{bmatrix} 
+\end{align*} where $F_k$ is the antidiagonal identity, $M$ is stars in the top row and 0s elsewhere, and $e_0$ is $1,0,\dots,0$ in the last column. This corresponds to the sequence $s = 11\dots10\dots01$ and is of dimension $n-k$.
+
+For $j$ we are missing \begin{align*}
+    \begin{bmatrix}
+        * \vert F_{k+1} \vert 0
+    \end{bmatrix}
+\end{align*}
+corresponds to the sequence $01\dots10\dots0$ and is of dimension $k+1$.
+
+\begin{corollary}
+    [Approximation theorem] If $\dim X < n-k$ or $\dim X < 2(n-k)$ in the complex case, then a map $X \to \Gr_\R(k,n+1)$ or $X \to \Gr_\C(k,n+1)$ can be homotoped to a map $X \to \Gr(k,n)$. In particular $\Gr(k,n+1)/\Gr(k,n)$ is $(n-k-1)$-connected or $(2(n-k)-1)$-connected in the complex case.
+
+    If $\dim X < k+1$ or $\dim X < 2(k+1)$ in the complex case, then a map $X \to \Gr_\R(k+1,n+1)$ or $X \to \Gr_\C(k+1,n+1)$ can be homotoped to a map $X \to \Gr(k,n)$. In particular $\Gr(k+1,n+1)/\Gr(k,n)$ is $k$-connected or $2k+1$-connected in the complex case.
+\end{corollary}
+
+
+\begin{corollary}
+    [Stability for classification of vector bundles] If $\dim X < n-k-1$ or $\dim X < 2(n-k)-1$ in the complex case, then $\Vect^k(X) = [X, \Gr(k,n)]$.
+\end{corollary}
+Note that we lost one dimension because we need to leave room for the homotopy.
+
+\begin{corollary}
+    If $\dim X < k+1$ or $\dim X < 2(k+1)$ in the complex case, then any vector bundle of rank $k+1$ has a nonvanishing section. 
+\end{corollary}
+This also follows from transversality.
+
+\subsection{Stiefel manifodls and classifing spaces}
+Recall that $T^k \to \Gr(k,n)$ is the tautological subbundle of $\R^n$ or $\C^n$. We have the frame bundle $\St(k,n)$ given by basis of $k$-planes. Gram Schmidt tells us that orthonormal frames $\hookrightarrow$ frames is a homotopy equivalence so we have $\St(k,n) \to \Gr(k,n)$ is a principal $GL_k$-bundle and $\St^{on}(k,n) \to \Gr(k,n)$ is a principal $O(k)$-bundle or $U(k)$-bundle. 
+
+What is the codimension of the complement of $\St(k,n)$ in $\Mat_{k,n}$? Well $\Mat(k,n)$ is stratified by rank and the largest stratum in the complement of $\St(k,n)$ is given by rank $k-1$ matrices which has codimension $n-k+1$. 
+
+\begin{corollary}
+    If $\dim X < n-k$ or $\dim X < 2(n-k)+1$ then $[X,\St(k,n)] = *$. In particiular $\St(k,\infty)$ and $\St^{on}(k,\infty)$ are contractible.
+\end{corollary}
+
+Thus we have stumbled upon the fact that $\St^{on}(k,\infty)$ is a contractible space with a free $O(k)$ or $U(k)$ action and $\Gr(k,\infty)$ is the quotient. 
+
+\begin{definition}
+    Let $G$ be a topological group which is nice in the sense that it has the homotopy type of a CW complex. A CW complex with a principal $G$ bundle $EG\to BG$ with contractible total space is called a \textbf{classifing space} for $G$.
+\end{definition}
+
+\begin{theorem}
+    $EG\to BG$ is unique up to homology equivalence, canonical up to homotopy if you choose the base point $*$ in $BG$ and identify the fiber over $*$ with $G$. Moreover, isomorphism classes of principal $G$-bundles over a CW complex $X,*$ with trivialization over $*$ are in bijection with homotopy classes of pointed maps $[X, BG]$.
+\end{theorem}
+In fact $(2)$ implies $(1)$ because we have identified $BG$ as a functor out of the homotopy category of pointed CW complexes, and the functor is unique up to natural isomorphism.
+
+\begin{remark}
+    $G$ is connected if and only if $BG$ is simply connected. Extreme cases are $G$ is discrete, then $EG$ is the universal cover of $BG$. 
+\end{remark}
+
+\begin{remark}
+    $G$ discrete, $X$ is connected. Then $[X, BG]$ is the set of homomorphisms $\pi_1(X) \to G$ up to conjugation, whereas $[X, BG]_* = \Hom(\pi_1(X), G)$. The first is isomorphism classes of principal $G$-bundles, the second is isomorphism classes of principal $G$-bundles with a trivialization at the base point.
+\end{remark}
+Next we are have two models of $BU(k) \to BU(k+1)$. One is the obvious inclusion, and the other model gives it as a fiber bundle with fiber $S^{2k+1}$. 
+\end{document}
