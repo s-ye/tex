@@ -41,6 +41,8 @@
 
 \end{abstract}
 
+\tableofcontents
+
 \section{Feb 17}
 Let $\Gr(k,n)$ denote the Grassmannian of $k$-planes in $V$, a real or complex vector space of dimension $n$. We will not distinguish since the statements we make will be true for both cases. For the real Grassmannian, we take homology with $\Z/2$ coefficients, and for the complex Grassmannian, we take homology with $\Z$ coefficients.
 \begin{theorem} 
@@ -129,4 +131,135 @@ In fact $(2)$ implies $(1)$ because we have identified $BG$ as a functor out of 
     $G$ discrete, $X$ is connected. Then $[X, BG]$ is the set of homomorphisms $\pi_1(X) \to G$ up to conjugation, whereas $[X, BG]_* = \Hom(\pi_1(X), G)$. The first is isomorphism classes of principal $G$-bundles, the second is isomorphism classes of principal $G$-bundles with a trivialization at the base point.
 \end{remark}
 Next we are have two models of $BU(k) \to BU(k+1)$. One is the obvious inclusion, and the other model gives it as a fiber bundle with fiber $S^{2k+1}$. 
+
+\section{Feb 19}
+Last time we showed that $\Gr_C(n,\infty)$ is a model for $BU(n)$. Note that there are parallel stories for $O(n)$ over $\R$ and $\Sp(n)$ over $\H$ but we will now live over $\C$.
+
+The Grassmannian $\Gr(n,\infty)$ classifies iso classes of rank $n$ complex vector bundles, and we have a principal $U(n)$-bundle $\St^{on}(n,\infty) \to \Gr(n,\infty)$ which is the universal principal $U(n)$-bundle with total space contractible. 
+
+We also know that we have embeddings $\Gr(n,\infty) \to \Gr(n+1,\infty)$ which is highly connected. One can think of inductively building $BU(n+1)$ from $BU(n)$ by attaching an extra cell of real dim $2n+2$ ($n+1$, $4n+4$ in the real and quaternionic cases) at each step.
+
+\begin{example}
+    If $n=0$ then $\Gr(1,\infty) = k\P^\infty$. $\H\P^\infty$ is $BSU(2)$  and the homotopy equivalence $SU(2) \hookrightarrow \GL_1(\H)$ shows that $\SU(2)$ bundles are the same as $\H$-line bundles. 
+\end{example}
+
+Observe that $U(n) \hookrightarrow U(n+1)$ has quotient $S^{2n+1}$ from the action of $U(n+1)$ on the unit sphere in $\C^{n+1}$. This gives a fiber bundle $S^{2n+1} \to BU(n) \to BU(n+1)$ which is the other model of the inclusion $BU(n) \to BU(n+1)$.
+
+\begin{proposition}
+    The total space of the fiber bundle $\St^{on}(n+1,\infty) \times S^{2n+1} \to \Gr(n+1,\infty)$ is homotopy equivalent to $\Gr(n,\infty)$ and the fiber bundle map is homotopic to the inclusion $\Gr(n,\infty) \to \Gr(n+1,\infty)$. Note that there is a natural lift $\Gr(n,\infty) \to \St^{on}(n+1,\infty)$ which is a homotopy equivalence.
+\end{proposition}
+
+This gives a nonprincipal fiber bundle $S^{2n+1} \to \Gr(n,\infty) \to \Gr(n+1,\infty)$.
+
+\begin{proof}
+    A map $X \to \St_\C(n+1,\infty)\times_{U(n+1)} S^{2n+1}$ classifies up to isomorphism a complex vector bundle of rank $n+1$ together with a section of unit norm. This is equivalent (up to isomorphism and rescaling of hermitian metrics (which is a contractible space)) to $E^{n+1} \to X, s$ where $s$ is a nonvanishing section. This is equivalent to a rank $n$ vector bundle by taking the quotient. Thus the target space $\St_\C(n+1,\infty)\times_{U(n+1)} S^{2n+1}$ is a classifying space for rank $n$ vector bundles, and thus homotopy equivalent to $\Gr(n,\infty)$. The map to the base $\Gr(n+1,\infty)$ classifies the stabilized bundle of rank $n+1$ and so is homotopy equivalent to natural map.
+\end{proof}
+
+Now let us consider the general construction, note that $S^{2n+1} = U(n+1)/U(n)$ is a homogeneous space. Let $G$ be a nice topological group. Let $H$ be a closed subgroup of $G$.
+
+Let $EG\to BG$ be the classifiing space for principal $G$-bundles. Suppose that $H\to G\to G/H$ is a prinicpal $H$-bundle, in particular locally trivial. This is always true for Lie groups. 
+
+\begin{theorem}
+    $EG/H$ is a classifing space for $H$. In particular, in the diagram below, there is a unique up to homotopy lifting of this map which is a homotopy equivalence. 
+\begin{center}
+\begin{tikzcd}
+EG \arrow[r, "f"] \arrow[d, "p"'] 
+& EG/H \arrow[d, "q"] \\
+BH \arrow[r] \arrow[ru, dotted, "h"] 
+& BG
+\end{tikzcd}
+\end{center}
+\end{theorem}
+
+\begin{proof}
+    First we need a lemma. Isomorphism classes of principal $H$-bundles on $X$ are the same as isomorphism classes of principal $G$ bundles together with a section of associated $G/H$-bundle up to homotopy of sections. This is saying that if $P \to X$ is a principal $H$-bundle, then you can form $Q = P\times_H G$ which is a principal $G$-bundle. A section of $Q/H$ is the same as an isomorphism of $Q$ with a bundle of the form $P\times_H G$.
+\end{proof}
+
+Now we can build classifing spaces for all Lie groups. Recall from the Peter Weyl theorem that every compact Lie group has a faithful finite dimensional unitary representation, faithful being the key word here. This gives us $G \hookrightarrow U(n)$ for some $n$. So we can build a classifing space for $G$ using our favorite model for $BU(n)$ and then dividing by $G$ \begin{align*}
+    EU(n) \to EU(n)/G = BG
+\end{align*} and the good thing here is that this makes $BG$ into an increasing union of compact manifolds which stabilize in homology. This is the story of classifing spaces for compact Lie groups.
+
+\begin{remark}
+[Slice theorem for quotients] When groups act on spaces, you have to be careful when you take quotients. It might not be Hausdorff for example. Let $G$ be a possibly noncompact Lie group acting properly on a normal Hausdorff space $X$. (Normal means that have seperation of closed sets by open neighborhoods. Urysohn's lemma says that this means we can separate by values of continuous functions.) Then there is a slice through each point: for each $x\in X$, there is a $G_x$-invariant neighborhood $S$ of $x$ such that the natural map $G\times_{G_x} S \to X$ is an equivariant homeomorphism onto a $G$-invariant neighborhood of the orbit $G\cdot x$. This gives a linear local model using the normal space at the orbit. \red{insert more remark}
+\end{remark}
+
+\subsection{Three classical theorems}
+\begin{theorem}[Leray Hirsch]
+    Let $F\to E \xrightarrow{p} B$ be a connected fiber bundle over a CW base. Let $R$ be a coefficient ring for cohomology, i.e a quotient of $\Z$ or somehting between $\Z$ or $\Q$. Suppose $H^*(F;R)$ is a free $R$-module on $\alpha_1,\dots, \alpha_k$ and that there exist classes $a_1,\dots,a_k \in H^*(E;R)$ such that $a_i\vert_F = \alpha_i$. \red{Note that this is a strong assumption because there is some subtely about identification of $F$ with the fiber over a point in $B$.}
+    
+    Then the map $H^*(F;R)\otimes_R H^*(B;R) \to H^*(E;R)$ given by $x\otimes y \mapsto p^*y \cup a_i$ is an isomorphism of $R$-modules.
+\end{theorem}
+\begin{remark}
+    This recovers Kunneth formula for the product $E = F\times B$ by taking $a_i = \alpha_i \otimes 1$. If $F$ has $R$-torsion, this cannot work because of Kunneth.
+\end{remark}
+
+\begin{example}
+    [Nonexamples] $\R \to S^1$. $S^3 \subset \C^2 \to S^2 = \C\P^1$ the Hopf fibration. In the second case, we compute \begin{align*}
+        H^*(\S^3; \Q) &= \Q \oplus \Q[-3] \\
+        H^*(S^2; \Q) \otimes H^*(\S^1; \Q) &= \Q \oplus \Q[-1] \oplus \Q[-2] \oplus \Q[-3]
+        \end{align*}
+\end{example}
+
+What is happening is that there is a grid \begin{align*}
+    \Z & 0 & \Z \\
+    \Z & 0 & \Z \\
+\end{align*} and there is a differential $d_2$ from the $\Z$ in the bottom right to the $\Z$ in the top left which kills the $\Z$ in the bottom right and the $\Z$ in the top left. 
+
+\begin{proof}
+    Idea of proof. Build $B$ from its skeleta $B_n$ and check that the map remains an iso at each step from the LES and the five lemma. \begin{align*}
+        H^{*-1}(B_n) \to H^*(B_{n+1}, B_n) \to H^*(B_{n+1}) \to H^*(B_n) \to H^{*+1}(B_{n+1}, B_n)
+    \end{align*}
+    Tensor with $H^*(F)$. Also have a sequence for $\pi^{-1}(B_n)$. Get a map from $H^*(F)\otimes H^*(B_n)$ to $H^*(\pi^{-1}(B_n))$ and check that it is an iso at each step. The key iput is that we have a map between the original complexes.
+\end{proof}
+
+Variant with the same proof: $E' \hookrightarrow E$ two fiber bundles over $B$. Use $H^*(F,F';R)$ and $H^*(E,E';R)$. Same hypothesis and conclusions.
+
+\begin{example}
+    $U(n-1) \to U(n) \to S^{2n-1}$ will work, even though $U(n)$ is not homotopy equivlent to a product of odd spheres. Rationally it is, but integality is the issue.
+\end{example}
+
+The second classical theorem is an application of Leray.
+\begin{theorem}
+    [Thom isomorphism theorem] Let $E^r \to X$ be a real vector bundle of rank $r$ with a metric. Let $D(E)$ be the unit disk bundle and $\partial D(E)$ be the unit sphere bundle. \textbf{Assume} that $E$ is relatively orientable for a ring $R$. Then there exist a class $\theta\in H^r(D(E), \partial D(E); R)$ 
+    which restricts to the preferred generator in each fiber. Consequently by Leray, $\theta$ is such that the map $H^*(X;R) \to H^{*+r}(D(E), \partial D(E); R)$ given by $x \mapsto x\cup\theta$ is an isomorphism.
+\end{theorem}
+$E$ is relatively orientable means that we can choose orientations of the fibers which vary continuously over the base.
+If $R = \Z/2$ there is no condition. If $X$ is an oriented manifold then $(D^r,\partial D^r)$ becomes an oriented manifold with boundary, and then $E$ is Poincare dual to the zero section of $E$. $\theta$ is called the Thom class of $E$ and the isomorphism is called the Thom isomorphism.
+
+The theorem is ok if you just have disk bundles and its boundary. One has disk bundles which do not come from vector bundles. The third theorem is the Gysin sequence but we will not get there today. This will show that $H^*(\Gr(n,\infty))$ is a polynomial ring on $n$ generators of degree $2,4,\dots, 2n$ called the Chern classes.
+
+
+\begin{definition}
+    The Euler class of $E^r$ is the image of $\theta$ under the map $H^r(D(E), \partial D(E); R) \to H^r(D(E); R) = H^r(X; R)$ given by inclusion. 
+\end{definition}
+
+If $X$ is compact oriented manifold, then $PD(e)$ is the zero locus of a gneric section (transversal intersection with the zero section of $E$).
+
+\subsection{Line bundles and chern classes}
+Recall isomorpihsm classes of real, complex, quaternionic line bundles are classified by $BO(1) = \R\P^\infty$, $BU(1) = \C\P^\infty$, $B\SU(2) = \H\P^\infty$ respectively, and the cohomologies are (use the positive generators)
+\begin{align*}
+    H^*(\R\P^\infty; \Z/2) &= \lim_{n\to\infty} H^*(\R\P^n; \Z/2) = \Z/2[w], \deg w = 1 \\
+    H^*(\C\P^\infty; \Z) &= \lim_{n\to\infty} H^*(\C\P^n; \Z) = \Z[c], \deg c = 2 \\
+    H^*(\H\P^\infty; \Z) &= \lim_{n\to\infty} H^*(\H\P^n; \Z) = \Z[p], \deg p = 4
+\end{align*}
+
+\begin{proposition}
+    $w,c$ are the Euler classes of the respective line bundles over $\R\P^\infty$ and $\C\P^\infty$ respectively. For $\C\P^\infty$, we use $\cO(1)$ the dual of the tautological sub line bundle. 
+\end{proposition}
+
+\begin{proof}
+    A linear section has zero locus a hyperplane, the PD of the positive generator of cohomology.
+\end{proof}
+
+\begin{definition}[Characteristic classes]
+    For a real line bundle $L\to X$ classified by $k_L: X \to \R\P^\infty$, the Stiefel-Whitney class of $L$ is $w(L) = k_L^* w$. For a complex line bundle $L\to X$ classified by $k_L: X \to \C\P^\infty$, the Chern class of $L$ is $c(L) = k_L^* c$. 
+\end{definition}
+
+\begin{theorem}
+    $w_1(L) = w(L)$ and $c_1(L) = c(L)$ determine the isomorphism class of $L$. Moreover, \begin{align*}
+        w_1(L\otimes L') &= w_1(L) + w_1(L') \\
+        c_1(L\otimes L') &= c_1(L) + c_1(L')
+    \end{align*}
+\end{theorem}
+
 \end{document}

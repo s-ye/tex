@@ -2097,7 +2097,7 @@ The first step is to form the corresponding formal scheme as the limit of the $X
 
 \subsection{Step 2: Algebraization of formal schemes}
 The next step, once we have a formal scheme $X$ over $\Spf R$, is to ask
-whether there exists a scheme $X$, flat and of finite type over $R$, whose formal
+whether there exists a scheme $X$, flat and of finite type over the complete local ring $R$, whose formal
 completion along the closed fiber is $X$. In this case, following Artin, we say
 that the formal scheme $X$ is \textbf{effective/algebraizable}. This is not always possible and in that case we can go
 no further. However, there is a good case in which it is possible, namely when
@@ -2295,9 +2295,8 @@ bundle on the formal completion $\widehat X\cong \mathcal X$ lifting that
 restriction to $X_0$. This is a contradiction and therefore $\mathcal X$ is not effective.
 \end{example}
 
-\subsection{Step 3: Descending}
-The third and most difficult step is to descend from a family over a complete
-local ring \(R\) to a family defined over a scheme of finite type over \(k\).
+\subsection{Step 3: Descending to a finite type base}
+The third and most difficult step is to descend from a family over a complete local ring \(R\) to a family defined over a scheme of finite type over \(k\).
 More specifically, we ask for a scheme \(S\) of finite type over \(k\), a scheme
 \(X\) flat and of finite type over \(S\), and a point \(s_0 \in S\), such that
 the fiber of \(X\) over \(s_0\) is \(X_0\), and the formal completion of \(X\)
@@ -2375,6 +2374,419 @@ sending $x'$ to $x_1$ and $x_2$, respectively, and inducing
 isomorphisms on the residue fields at $x',x_1,x_2$.
 \end{theorem}
 
+\section{Application to formal contractions}
+This section follows an internal talk which I gave in Martin Olsson's seminar in the spring of 2026. We outline some of the content in \cite{artin-i} and \cite{artin-ii}. 
+All algebraic spaces are defined over a field $\Spec k$. Artin works over a base algebraic space $S$ over $k$, but we will not need this level of generality.
+
+
+\subsection{Motivating example}
+Let $E \subset \mathbb{P}^2$ be a smooth plane cubic.
+Choose a point $p_1$ on $E$ and blow up $\mathbb{P}^2$ at $p_1$. Take the unique point $p_2$ on the strict transform of $E$ living over $p_1$ and blow up at $p_2$. Continue this process, taking the unique $p_i$ on the strict transform of $E$ living over $p_{i-1}$ and blowing up at $p_i$ for $i=3,\dots,n$,
+and let
+\[
+\pi : X' = \operatorname{Bl}_{\{p_1,\dots,p_n\}}(\mathbb{P}^2)
+\longrightarrow
+\mathbb{P}^2
+\]
+be the blowup at these points.
+Let $\widetilde{E} \subset X'$ be the strict transform of $E$.
+Then
+\[
+\widetilde{E}^2
+=
+E^2 - \sum_{i=1}^n (\operatorname{mult}_{p_i} E)^2
+=
+9 - n,
+\]
+since each $p_i$ is a smooth point of $E$ and
+$\operatorname{mult}_{p_i} E = 1$.
+
+Choosing $n = 10$, we obtain
+\[
+\widetilde{E}^2 = -1.
+\]
+
+Thus $\widetilde{E}$ is a smooth irreducible curve with
+negative self-intersection.
+The intersection matrix of
+\[
+Y' := \widetilde{E}
+\]
+is simply $(-1)$, which is negative definite.
+By Artin's contraction criterion, there exists a proper morphism
+$f : X' \longrightarrow X$ to an algebraic space $X$ which contracts $\widetilde{E}$ to a point $p := f(\widetilde{E})$ and is an isomorphism away from $\widetilde{E}$.
+
+\noindent\textbf{$X$ is not a scheme.} Suppose, for contradiction, that $X$ is a scheme. Then $p$ admits an affine open neighbourhood
+\[
+U = \operatorname{Spec} R.
+\]
+Choose $g \in R$ with $g(p) \neq 0$.
+The vanishing locus
+\[
+D := V(g) \subset U \subset X
+\]
+is a curve not containing $p$.
+Since $f$ is an isomorphism away from $\widetilde{E}$,
+the inverse image
+\[
+f^{-1}(D) \subset X'
+\]
+is a curve that does not intersect $\widetilde{E}$.
+Let
+\[
+D_0 := \pi\bigl(f^{-1}(D)\bigr) \subset \mathbb{P}^2.
+\]
+Then $D_0$ is a plane curve which intersects the original cubic
+$E \subset \mathbb{P}^2$ only at the point $p_1$.
+Let
+\[
+D_0|_{E} = mp_1
+\]
+as a divisor on $E$. It is a general fact that if a plane curve $D_0$ intersects a smooth plane cubic $E$ in a divisor $D = \sum m_i P_i$, then $\sum m_i P_i = 0$ in the group law on $E$. This implies that
+\[
+mp_1 = 0
+\]
+in the group law on $E$. But we can choose $p_1$ to be a non-torsion point of $E$, so this is a contradiction.
+
+\subsection{Artin's contraction criterion}
+
+\begin{definition}
+A \textbf{modification} consists of a proper morphism of algebraic spaces
+    \[
+        f : X' \to X,
+    \]
+    together with a closed subset $Y \subset X$, such that the restriction
+\[
+    f : X' \setminus f^{-1}(Y) \longrightarrow X \setminus Y
+\]
+is an isomorphism.
+\end{definition}
+
+The key example to keep in mind: \begin{example}
+    Let $X$ be a scheme, $\cI \subset \cO_X$ a coherent ideal sheaf, and $Y = V(\cI)$ the closed subscheme defined by $\cI$. The blowup of $X$ along $\cI$ \begin{align*}
+    \operatorname{Bl}_\cI(X) = \operatorname{Proj} \bigoplus_{n \geq 0} \cI^n
+    \end{align*} is a modification of $X$ along $Y$.
+\end{example}
+
+\begin{proposition}\label{prop:main-example}
+Let $X'$ be an algebraic space and let $Y' \subset X'$ be a closed
+subspace such that the ideal sheaf $I' = \mathcal I(Y')$ is locally
+principal. Let
+\[
+f_0 : Y' \to Y
+\]
+be a proper morphism.
+
+Suppose the following two conditions hold, the first being an obstruction-vanishing condition and the second being a lifitng condition for functions.
+
+\begin{enumerate}
+\item For every coherent sheaf $F$ on $Y'$,
+\[
+R^1 f_{0*}\left(F \otimes (I'/I'^2)^{\otimes n}\right)=0
+\quad\text{for } n \gg 0.
+\]
+
+\item For every $n$, the canonical map
+\[
+f_{0*}(\mathcal O_{X'}/I'^n)
+\times_{f_{0*}(\mathcal O_{Y'})}
+\mathcal O_Y
+\longrightarrow
+\mathcal O_Y
+\]
+is surjective where $\cO_Y\to f_{0*}(\mathcal O_{Y'})$ is the map coming from the contraction $f_0 : Y' \to Y$ and the map $f_{0*}(\mathcal O_{X'}/I'^n) \to f_{0*}(\mathcal O_{Y'})$ is the natural map coming from the inclusion $Y' \subset X'$.
+\end{enumerate}
+
+Then there exists a modification
+\[
+f : X' \to X
+\]
+and a closed subspace $Y \subset X$ whose set-theoretic restriction
+to $Y$ is $f_0$.
+\end{proposition}
+
+\begin{corollary}
+Suppose $Y'$ is proper over $\Spec k$. Then $Y'$ can be contracted to a point in $X'$ if condition \textup{(i)} of \ref{prop:main-example} holds. In particular, this is so in the following cases:
+
+\begin{enumerate}
+\item[(a)] $X'$ and $Y'$ are non-singular of dimensions $d$ and $d-1$
+respectively, and the conormal bundle of $Y'$ in $X'$ is ample.
+
+\item[(b)] $X'$ is regular of dimension $2$, and
+$Y' = C_1 \cup \cdots \cup C_r$ is a complete connected curve on $X'$
+with negative definite intersection matrix
+$\big\| (C_i \cdot C_j) \big\|$,
+the $C_i$ being the irreducible components of $Y'$.
+\end{enumerate}
+\end{corollary}
+
+
+\begin{proof}
+Note condition~(ii) of \ref{prop:main-example} holds automatically when $Y = \Spec k$. The map in question is \begin{align*}
+f_{0*}(\mathcal O_{X'}/I'^n)
+\times_{H^0(Y',\mathcal O_{Y'})} k \to k
+\end{align*} and since we have the constant functions $k\to \cO_{X'}$, the projection will be surjective. We are simply asking do constant functions on the base lift to the $n$-th infinitesimal neighborhood?
+
+We now explain why condition~(i) holds in cases~(a) and~(b).
+
+\textbf{Case (a).}
+Follows immediately from the properness of $Y'$ which allows us to apply Serre vanishing to the ample line bundle $I'/I'^2$ on $Y'$.
+
+\textbf{Case (b).}
+Since $X'$ is regular of dimension $2$, the divisor $Y'$ is Cartier and
+\[
+I'/I'^2 \cong \mathcal O_{Y'}(-Y').
+\]
+We want to show that this line bundle is ample on $Y'$. Since $Y'$ is a complete connected curve, it suffices to show that the degree of $I'/I'^2$ on every irreducible component of $Y'$ is positive. Computing, we find that \begin{align*}
+\deg(I'/I'^2|_{C_i})
+&=
+\deg(\mathcal O_{Y'}(-Y')|_{C_i})
+=
+\deg(\mathcal O_{C_i}(-Y'))
+=
+-Y' \cdot C_i
+\end{align*}
+However, it is not going to be true that this degree is positive for every $i$, there can be some $i$ such that $Y' \cdot C_i \geq 0$. The workaround here is that we are only thinking about set theoretic contractions, so we can replace $Y'$ by a different effective divisor with the same support as $Y'$. 
+
+It is a fact from linear algebra that if $M$ is symmetric negative definite and $M_{ii} < 0$ and $M_{ij} \geq 0$ for $i \neq j$, then all of the entries of $M^{-1}$ are negative.
+Let $M$ be the intersection matrix of $Y'$ and consider the vector $a = (a_i)$ defined by $(-M)^{-1} \vec{1}$ and clear denominators to make $a$ integral. Then $Z = \sum a_i C_i$ is a effective divisor with the same support as $Y'$ with the property that $Z \cdot C_i = -1$ for every $i$. Replacing $Y'$ by $Y' + NZ$ for $N \gg 0$ gives a divisor with positive degree on every component, hence ample.
+\end{proof}
+
+\subsection{Jacobian ideal}
+Let $f:\widehat{A} \to \widehat{B}$ be a finite type map of Noetherian adic rings. This means that $I\widehat{B}$ is an ideal of definition of $\widehat{B}$, and $\widehat{B}/I\widehat{B}$ is a finitely generated $\widehat{A}/I\widehat{A}$-algebra. 
+
+This means for some ideal of definition $I \subset \widehat{A}$, we can write
+\[
+\widehat{B}
+\cong
+\widehat{A}\langle x_1,\dots,x_n\rangle/(f_1,\dots,f_m),
+\]
+where $\widehat{A}\langle x_1,\dots,x_n\rangle$
+denotes the $I$-adic completion of the polynomial ring
+$\widehat{A}[x_1,\dots,x_n]$, i.e. the ring of restricted power series whose coefficients tend to $0$ in the $I$-adic topology.
+\begin{definition}
+Let
+\[
+J = \left(\frac{\partial f_i}{\partial x_j}\right)
+\]
+be the $m\times n$ Jacobian matrix, where differentiation is
+performed termwise on restricted power series. The \emph{Jacobian ideal}
+\[
+\mathcal{J}(\widehat{B}/\widehat{A})
+\subset \widehat{B}
+\]
+is the ideal generated by the residues in $\widehat{B}$
+of the $n\times n$ minors of $J$. If $m<n$, this ideal is defined to be $0$.
+\end{definition}
+
+\begin{proposition}
+The Jacobian ideal is independent of the choice of presentation and commutes with etale localization, i.e. if $\widehat{B}'$ is an étale $\widehat{B}$-algebra, then $\cJ(B') = \cJ(B)\widehat{B}'$.
+\end{proposition}
+
+\begin{remark}
+The Jacobian ideal detects where the module of differentials
+$\Omega_{B/A}$ fails to vanish. Since for morphisms of finite presentation, formal étaleness is equivalent to $\Omega_{B/A}=0$, the vanishing of the Jacobian ideal characterizes the locus where the morphism is formally étale. The relevant statement is that for a morphism of rings $f:A \to B$ of finite presentation, $f$ is etale if and only if $\Omega_{B/A}=0$ and $f$ is flat. 
+\end{remark}
+
+\subsection{Cramer/Fitting ideal}
+Let $A$ be any ring and let $M$ be a finitely presented $A$-module.
+Choose a presentation
+\[
+L_1 \xlongrightarrow{f} L_0 \longrightarrow M \longrightarrow 0,
+\]
+with $L_i$ free $A$-modules of finite type.
+Let $N$ be the rank of $L_0$.
+
+For an integer $0 \leq d \leq N$, consider the homomorphism of $A$-modules
+\[
+\bigwedge^{N-d} L_1 \;\otimes\; \bigwedge^{d} L_0
+\longrightarrow
+\bigwedge^{N} L_0 \;\cong\; A,
+\]
+sending
+\[
+v_1 \wedge \cdots \wedge v_{N-d}
+\;\otimes\;
+u_1 \wedge \cdots \wedge u_d
+\longmapsto
+f(v_1) \wedge \cdots \wedge f(v_{N-d})  
+\wedge
+u_1 \wedge \cdots \wedge u_d.
+\]
+The image of this map is an ideal $\operatorname{Cr}_d(M) \subset A$.
+\begin{itemize}
+    \item The ideal $\operatorname{Cr}_d(M)$ is independent of the choice of presentation, and is called the \emph{Cramer ideal} of $M$.
+    \item $\operatorname{Cr}_d(M)$ is the unit ideal if and only if
+$M$ is locally generated on $\operatorname{Spec} A$ by $d$ elements.
+\end{itemize}
+Recall the presentation of $\widehat{B}$ as a quotient of a restricted power series ring over $\widehat{A}$:
+\[\widehat{B}
+\cong
+\widehat{A}\langle x_1,\dots,x_n\rangle/(f_1,\dots,f_m) \cong \widehat{A}\langle x_1,\dots,x_n\rangle/\mathfrak{a}
+\] We define $\mathcal{C}(\overline{B})$ to be the residue in $\overline{B}$ of the Cramer ideal
+$\operatorname{Cr}_n(\mf a)$:
+\begin{equation*}
+\mathcal{C}(\overline{B})
+=
+(\operatorname{Cr}_n(\mf a) + \mathfrak{a})
+/ \mathfrak{a}.
+\end{equation*}
+
+\begin{proposition}
+    The Cramer ideal $\mathcal{C}(\overline{B})$ is independent of the choice of presentation of $\widehat{B}$ and commutes with étale localization.
+\end{proposition}
+
+\begin{remark}
+    The Cramer ideal detects where the kernel of the presentation fails to be generated by the expected number of equations. When solving a linear system $Ax=b$, Cramer's rule says that the vanishing of minors witnesses the failure of the system to have maximal rank.
+\end{remark}
+
+
+\subsection{Formal modifications and algebraization}
+Let $X$ be a formal algebraic space with defining ideal $\mathcal{I}$, and assume the closed algebraic subspace
+$Y = V(\mathcal{I})$ is of finite type over $k$. This roughly means that $X$ is assembled from formal affine schemes $\operatorname{Spf}(A)$ where $(A,I)$ is a Noetherian adic ring, quotiented by an etale equivalence relation.
+
+In order to state the precise definition of what a formal modification is, we need to introduce the Jacobian ideal and the Cramer (Fitting) ideal of a morphism of formal algebraic spaces. 
+
+We are now prepared to give the definition of a formal modification. Let
+\[
+\widehat{f} : \widehat{X}' \to \widehat{X}
+\]
+be a proper morphism of formal algebraic spaces of finite type.
+
+\begin{definition}
+We say $\widehat{f}$ is a \textbf{formal modification along $Y$} if the following conditions hold:
+\begin{itemize}
+    \item \textbf{Formal étaleness outside $Y$.}
+    Let $\mathcal{J}(\widehat{f})$ denote the Jacobian ideal
+    and $\mathcal{C}(\widehat{f})$ the Cramer (Fitting) ideal of $\widehat{f}$.
+    Then both ideals contain an ideal of definition of $\widehat{X}'$. This roughly says that $\widehat{f}$ is formally étale and locally a complete intersection outside $Y'$.
+    \item \textbf{Monomorphism outside $Y$.}
+    Let
+    \[
+    \Delta : \widehat{X}' \longrightarrow
+    \widehat{X}' \times_{\widehat{X}} \widehat{X}'
+    \]
+    be the diagonal morphism.
+    Let $\mathcal{I}'$ be the ideal defining the diagonal,
+    and let $\mathcal{I}''$ be a defining ideal of
+    $\widehat{X}' \times_{\widehat{X}} \widehat{X}'$. Then there exists $N \gg 0$ such that
+    \[
+    (\mathcal{I}'')^N \mathcal{I}' = 0.
+    \]
+    \item \textbf{Formal surjectivity outside $Y$.}
+    Let $R$ be a complete discrete valuation ring whose residue field is of finite type over $S$.
+    Let $Z = \operatorname{Spf}(R)$. Then every adic morphism
+    \[
+    Z \to \widehat{X}
+    \]
+    whose closed point maps outside $Y$
+    lifts to a morphism
+    \[
+    Z \to \widehat{X}'
+    \]
+\end{itemize}
+\end{definition}
+The most forthcoming examples of formal modifications is the following: if $f : X' \to X$ is a modification, then we can complete along $Y$ and $Y' = f^{-1}(Y)$ to get a proper morphism of formal algebraic spaces $\widehat{f} : \widehat{X}' \to \widehat{X}$ which is a formal modification along $Y$. A major result of Artin is that the converse also holds: every formal modification can be algebraized to a modification.
+
+\begin{theorem}
+    Given a formal modification $\widehat{f} : \widehat{X}' \to \widehat{X}$ along $Y$, there exists a modification $g: X' \to X$ and an isomorphism of formal modifications $\phi:\widehat{f} \cong \widehat{g}$. The pair $(g,\phi)$ is unique up to unique isomorphism.
+\end{theorem}
+
+In order to apply the above result, Artin gives a mechanism for constructing formal modifications. The following theorem says that to construct a formal modification, it is enough to construct a contraction on the closed fiber and check two extension conditions that we saw earlier.
+\begin{theorem}\label{thm:artin-formal-modif}
+Let $\mathfrak X'$ be a formal algebraic space, let
+$Y' = V(I') \subset \mathfrak X'$ be the closed subspace defined by
+a defining ideal $I'$, and let
+$f : Y' \to Y$ be a proper morphism of algebraic spaces.
+Assume
+\begin{enumerate}
+\item For every coherent sheaf $F$ on $\mathfrak X'$, we have
+\[
+R^1 f_*(I'^n F / I'^{n+1} F) = 0
+\quad\text{for } n \gg 0.
+\]
+\item For every $n$, the natural map of sheaves on $Y$
+\[
+f_*(\mathcal O_{\mathfrak X'}/I'^n)
+\times_{f_*(\mathcal O_{Y'})}
+\mathcal O_Y
+\longrightarrow
+\mathcal O_Y
+\]
+is surjective.
+\end{enumerate}
+
+Then there exists a formal algebraic space $\mathfrak X$
+and a defining ideal $I \subset \mathcal O_{\mathfrak X}$
+such that $V(I)=Y$ and a formal modification
+\[
+\widehat f : \mathfrak X' \to \mathfrak X
+\]
+whose restriction to $Y'$ is the given morphism $f$.
+\end{theorem}
+
+\subsection{Proof sketch}
+In this section, I will give a sketch of the proof of Theorem \ref{thm:artin-formal-modif}. We are showing that given a formal modification $\widehat{f} : \widehat{X}' \to \widehat{X}$ along $Y$, we can algebraize it to a modification $g : X' \to X$.
+
+The strategy is to re-phrase the construction as a modular problem, i.e. representability of a suitable functor on noetherian affine schemes \(Z=\Spec A\).  
+
+We assign to $Z$ the set of triples consisting of
+\begin{enumerate}
+    \item a closed subset $C\subset Z$,
+    \item a map on the complement $g_V:V:=Z\setminus C\to U$
+	\item an adic map on the formal completion $\Spf(\widehat A)\to \mathfrak X$ subject to a compatibility (commutative diagram) condition, where $\widehat A$ is the $I$-adic completion of $A$, $I$ being the defining ideal of $C$ in $Z$.
+\end{enumerate}
+
+Artin then shows that this functor is representable by an algebraic space $X$ of finite type over $k$, using criteria which he developed in \cite{artin-i}.
+
+\begin{theorem}[Artin representability criterion]
+Let $F$ be a contravariant functor from $k$-schemes to sets. Then $F$ is represented by a locally separated algebraic space (respectively, a separated algebraic space) locally of finite type over $k$ if and only if the following conditions hold:
+
+\begin{enumerate}
+\item[\textup{[0]}] (\textbf{Sheaf condition})  
+$F$ is a sheaf for the étale topology.
+
+\item[\textup{[1]}] (\textbf{Finite presentation})  
+$F$ is locally of finite presentation.
+
+\item[\textup{[2]}] (\textbf{Effective pro-representability})  
+$F$ is effectively pro-representable.
+
+\item[\textup{[3]}] (\textbf{Representable diagonal})  
+For every $k$-scheme $X$ of finite type and $\xi,\eta \in F(X)$, the condition $\xi = \eta$ is represented by a (closed) subscheme of $X$.
+
+\item[\textup{[4]}] (\textbf{Openness of formal étaleness})  
+Let $X$ be an $k$-scheme of finite type and let $\xi : X \to F$ be a morphism. If $\xi$ is formally étale at a point $x \in X$, then it is formally étale in a neighborhood of $x$.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+    Recall that functor $F$ is pro-representable at a point if ts restriction to Artinian local rings looks like
+\[
+\Hom(\Spf R, -)
+\]
+for some complete local ring $R$. It is effectively pro-representable if formal solutions glue to a genuine formal object, i.e. if we have a compatible family of elements $\xi_n \in F(\Spec R/\mathfrak{m}^n)$, then there exists $\xi \in F(\Spf R)$ such that $\xi|_{\Spec R/\mathfrak{m}^n} = \xi_n$ for every $n$.
+
+Recall that a morphism of functors
+$\xi : X \to F$
+is formally étale at a point if:
+
+For every square-zero extension $A \to A/I$ every lifting problem
+$\Spec A/I \to X$ over $\Spec A \to F$ has a unique solution.
+\end{remark}
+
+Establishing the effective pro representability condition is where we must invoke the two conditions in the statement of the theorem. So suppose we are given compatible contraction data $\xi_n \in F(R/\mathfrak m^{n+1})$
+for all $n$.
+
+We must construct a unique $\xi \in F(R)$
+lifting all the $\xi_n$. To extend from level $n$ to $n+1$, we analyze the short exact sequence
+\[0 \to I'^n/I'^{n+1}
+\to \mathcal O/I'^{n+1}
+\to \mathcal O/I'^n
+\to 0\]
+The hypotheses of the theorem allow us to construct $\mathcal A = \varprojlim_n f_*(\mathcal O_{\mathfrak X'}/I'^n)$ whose relative formal spectrum $\mathfrak X := \operatorname{Spf}_Y(\mathcal A)$ represents the restriction of the functor $F$ to the category of complete local rings.
+
+At this point we have constructed a formal algebraic space $\mathfrak X $representing the contraction functor on complete local rings. However, this is only a formal object. The remaining step is algebraization: to show that $\mathfrak X$ is the formal completion of an honest algebraic space $X$ along $Y$. This is highly nontrivial and uses Artin's deep algebraization theorem.
 
 \section{Algebraic spaces}
 Our discussion of deformation theory and moduli has led us to the conclusion that the best we can hope for is to construct a family of deformations over a base scheme $S$ that is unique only up to étale localization on $S$. This motivates the following definition of algebraic spaces, which are designed to be the correct generalization of schemes in which we can still do geometry, but where we allow objects that are only locally schemes in the étale topology.
@@ -2626,162 +3038,9 @@ equations (via Hensel's lemma).
 In this sense, \'{e}tale locality is strictly stronger than Zariski locality even
 over $\mathbf C$.
 
-\section{Artin contractions and approximations}
-In this section we take a closer look at some of Artin's results, namely the theorems proven in \cite{artin-i}, \cite{artin-ii}, and \cite{artin-alg}. These theorems are fundamental to the theory of algebraic spaces and stacks, and they provide powerful tools and rich examples. 
 
-\subsection{Contractions in algebraic spaces}
-
-
-
-A smooth elliptic curve in $\mathbb{P}^2$ is a smooth plane cubic $E \subset \mathbb{P}^2$. As a divisor $E \sim 3H$, so
-\[
-    E^2 = (3H)^2 = 9,
-\]
-so it is not $(-1)$.
-
-You can produce an elliptic curve of self-intersection $-1$ on a blowup of $\mathbb{P}^2$: blow up $n$ distinct points $p_1, \dots, p_n$ on a smooth cubic $E$, and let $\widetilde{E}$ be the strict transform. Then
-\[
-    \widetilde{E}^2 = E^2 - \sum_{i=1}^n (\operatorname{mult}_{p_i} E)^2 = 9 - n,
-\]
-so choosing $n = 10$ gives $\widetilde{E}^2 = -1$.
-
-
-For a smooth projective surface $X$, the classical Castelnuovo contraction theorem says that a curve that can be contracted by a morphism $X \to Y$ to a smooth surface is necessarily a smooth rational curve with self-intersection $-1$.
-
-More generally, if a proper birational morphism from a smooth surface contracts a single irreducible curve to a point and the target is a scheme, then the exceptional curve has to be $\mathbb{P}^1$ (in particular, genus $0$). An elliptic curve can't be the exceptional locus of such a contraction to a scheme.
-
-Artin developed criteria ensuring that certain negative-definite curves on surfaces admit contractions in the category of algebraic spaces (even when no contraction exists as a scheme).
-
-\begin{definition}Let $X$ be a surface (algebraic space or scheme). A proper curve $C \subset X$ is \textbf{contractible in the sense of Artin} if there exists a proper surjective morphism
-    \[f \colon X \to Y
-    \]to an algebraic space $Y$ such that
-    \begin{enumerate}
-        \item $f$ is an isomorphism on $X \setminus C$,
-        \item $f(C) = \{p\}$ is a single point,
-        \item $Y$ is separated and of finite type over the base field,
-        \item (usually imposed) $f_* \mathcal{O}_X = \mathcal{O}_Y$ (so you are not introducing extra connected components in the fibers; this is the ``Stein'' condition).
-    \end{enumerate}
-\end{definition}
-
-
-If $C$ is an elliptic curve with $C^2 < 0$ and it is "contractible" in Artin's sense, then:
-\begin{itemize}
-    \item A contraction $f \colon X \to Y$ exists in the category of algebraic spaces.
-    \item The target $Y$ is an algebraic space (of finite type, separated) which is a scheme away from the point $p$.
-\end{itemize}
-
-Let $S$ be a finite type scheme over a field $k$.
-\begin{theorem}[Existence of contractions, Artin]\label{thm:existence-contractions}
-    Let $Y' \subset X'$ be a closed subset of an algebraic space $X'$ of finite type
-    over a base scheme $S$, and let $\mathfrak X'$ be the formal completion of $X'$
-    along $Y'$.
-    Given a formal modification
-    \[
-        f_1 \colon \mathfrak X' \longrightarrow \mathfrak X_1,
-    \]
-    there exists a modification
-    \[
-        f \colon X' \longrightarrow X,
-        \qquad Y \subset X,
-    \]
-    together with an isomorphism $\varphi$ between the completion of $f$ along $Y$
-    and the given formal modification $f_1$.
-    The pair $(f,\varphi)$ is determined up to unique isomorphism.
-\end{theorem}
-
-\begin{theorem}[Artin, Formal Moduli II, Thm.\ 6.2]\label{thm:artin-formal-modification}
-    Let $\mathfrak X'$ be a formal algebraic space, let
-    $Y' = V(I')$
-    be the closed formal subspace defined by a defining ideal $I' \subset \mathcal O_{\mathfrak X'}$,
-    and let
-    $f \colon Y' \longrightarrow Y$ be a proper morphism.
-
-    Suppose the following conditions hold:
-
-    \begin{enumerate}[(i)]
-        \item For every coherent sheaf $\mathcal F$ on $\mathfrak X'$, we have
-              \[
-                  R^1 f_*\bigl(I'^n \mathcal F / I'^{n+1}\mathcal F\bigr) = 0
-                  \qquad \text{for } n \gg 0.
-              \]
-
-        \item For every $n \ge 0$, the natural morphism of sheaves on $Y_0 := V(I')_{\mathrm{red}}$
-              \[
-                  f_*\bigl(\mathcal O_{\mathfrak X'} / I'^n\bigr)
-                  \times_{f_* \mathcal O_{Y'}} \mathcal O_Y
-                  \;\longrightarrow\;
-                  \mathcal O_Y
-              \]
-              is surjective.
-    \end{enumerate}
-
-    Then there exists a formal modification
-    $
-        \widehat f \colon \mathfrak X' \longrightarrow \mathfrak X
-    $
-    and a defining ideal $I \subset \mathcal O_{\mathfrak X}$ such that
-    $
-        V(I) = Y
-    $
-    and such that $\widehat f$ induces the given morphism
-    $f \colon Y' \to Y$.
-\end{theorem}
-
-\begin{theorem}[Knutson, Thm.\ III.6.2]\label{thm:knutson-contraction}
-    Let $X'$ be a nonsingular algebraic space of finite type over a field $k$, and let
-    $Y' \subset X'$ be a closed nonsingular subspace.
-    Assume that $\dim X' = d$ and $\dim Y' = d-1$, and that $Y'$ is proper over $k$.
-    Let
-    \[
-        \mathcal L := N^\vee_{Y'/X'}
-    \]
-    denote the conormal bundle of $Y'$ in $X'$, and assume that $\mathcal L$ is ample on $Y'$.
-
-    Then there exists a proper birational morphism
-    \[
-        f \colon X' \longrightarrow X
-    \]
-    to an algebraic space $X$ such that:
-    \begin{enumerate}
-        \item $f$ is an isomorphism over $X \setminus \{p\}$,
-        \item $f(Y') = \{p\}$ is a single point,
-        \item $f^{-1}(p) = Y'$.
-    \end{enumerate}
-    In other words, $Y'$ can be contracted to a point in the category of algebraic spaces.
-\end{theorem}
-
-\begin{proof}
-    The proof proceeds by reducing the problem to Artin's formal algebraization
-    theorem (Theorem~\ref{thm:artin-formal-modification}).
-
-    Let $\mathfrak X' := \widehat{X'}_{Y'}$ denote the formal completion of $X'$ along
-    $Y'$, with defining ideal $I' \subset \mathcal O_{\mathfrak X'}$.
-    Since $Y'$ is a smooth divisor in the smooth space $X'$, the graded pieces of the
-    $I'$-adic filtration are given by
-    \[
-        I'^n / I'^{n+1} \;\cong\; \operatorname{Sym}^n(N^\vee_{Y'/X'}).
-    \]
-
-    Because $Y'$ is proper and the conormal bundle $N^\vee_{Y'/X'}$ is ample, Serre
-    vanishing implies that for any coherent sheaf $\mathcal F$ on $X'$,
-    \[
-        H^1\!\left(Y', \operatorname{Sym}^n(N^\vee_{Y'/X'}) \otimes \mathcal F|_{Y'}\right) = 0
-        \quad \text{for } n \gg 0.
-    \]
-    This verifies condition~(i) of Theorem~\ref{thm:artin-formal-modification}.
-
-    As for condition~(ii), we have $Y=\{p\}$ a point, so $\mathcal O_Y=k$.
-    Writing $A_n:=\Gamma\bigl(Y',\mathcal O_{\mathfrak X'}/I'^n\bigr)$ and $A_0:=\Gamma\bigl(Y',\mathcal O_{Y'}\bigr)$, Artin's map in~(ii) becomes the ring map
-    \[
-        A_n\times_{A_0} k \longrightarrow k,
-    \]
-    where $k\to A_0$ is the structure map. This map is the projection to the second factor, hence is automatically surjective. Thus, in this special case, Artin's condition~(ii) is automatic.
-\end{proof}
-
-
-\subsection{Algebraic approximation}
-
-Let $A$ be a Noetherian ring and $\mf m$ be an ideal. Suppose we are given a moduli functor
+\section{Algebraic approximation}
+This section exposits some of Artin's results on algebraic approximation, which he details in \cite{artin-alg}. Let $A$ be a Noetherian ring and $\mf m$ be an ideal. Suppose we are given a moduli functor
 \[
     F : (A\text{-algebras}) \longrightarrow (\text{sets}),
 \]
