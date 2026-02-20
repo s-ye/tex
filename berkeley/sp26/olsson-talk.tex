@@ -220,6 +220,14 @@ Let $M$ be the intersection matrix of $Y'$ and consider the vector $a = (a_i)$ d
 \section{Formal modifications and algebraization}
 In this section, I will explain what a formal modification is and explain how algebraization works. This will help us understand the criterion in \ref{prop:main-example}.
 
+The contraction theorem we saw fits into a general three-step strategy in deformation theory:
+\begin{enumerate}
+    \item
+Construct a formal solution by solving the problem on all infinitesimal thickenings.
+\item Algebraize the formal object to obtain an honest scheme over a complete local base.
+\item Descend from the complete local base to a finite type base, obtaining an algebraic space or stack.
+\end{enumerate}
+
 
 
 Let $X$ be a formal algebraic space with defining ideal $\mathcal{I}$, and assume the closed algebraic subspace
@@ -237,7 +245,7 @@ We say $\widehat{f}$ is a \textbf{formal modification along $Y$} if the followin
     \item \textbf{Formal étaleness outside $Y$.}
     Let $\mathcal{J}(\widehat{f})$ denote the Jacobian ideal
     and $\mathcal{C}(\widehat{f})$ the Cramer (Fitting) ideal of $\widehat{f}$.
-    Then both ideals contain an ideal of definition of $\widehat{X}'$. This roughly says that $\widehat{f}$ is formally étale and locally a complete intersection outside $Y'$.
+    Then both ideals contain an ideal of definition of $\widehat{X}'$. This roughly says that $\widehat{f}$ is formally \textbf{étale} and \textbf{locally a complete intersection} outside $Y'$.
     \item \textbf{Monomorphism outside $Y$.}
     Let
     \[
@@ -251,7 +259,7 @@ We say $\widehat{f}$ is a \textbf{formal modification along $Y$} if the followin
     \[
     (\mathcal{I}'')^N \mathcal{I}' = 0.
     \]
-    \item \textbf{Formal surjectivity outside $Y$.}
+    \item \textbf{Formal surjectivity outside $Y$. (Valuative criterion for formal modifications.)}
     Let $R$ be a complete discrete valuation ring whose residue field is of finite type over $S$.
     Let $Z = \operatorname{Spf}(R)$. Then every adic morphism
     \[
@@ -367,15 +375,6 @@ lifting all the $\xi_n$. To extend from level $n$ to $n+1$, we analyze the short
 The hypotheses of the theorem allow us to construct $\mathcal A = \varprojlim_n f_*(\mathcal O_{\mathfrak X'}/I'^n)$ whose relative formal spectrum $\mathfrak X := \operatorname{Spf}_Y(\mathcal A)$ represents the restriction of the functor $F$ to the category of complete local rings.
 
 At this point we have constructed a formal algebraic space $\mathfrak X $representing the contraction functor on complete local rings. However, this is only a formal object. The remaining step is algebraization: to show that $\mathfrak X$ is the formal completion of an honest algebraic space $X$ along $Y$. This is highly nontrivial and uses Artin's deep algebraization theorem.
-
-\section{Closing remarks}
- In this problem we are in some sense “deforming the contraction problem along the $I'$-adic direction". Given a formal family of deformations of some object, we may ask whether it extends to an actual family over a base algebraic space of finite type. Artin essentially gives us tools to answer this question in a very general setting. Generally, the mechanism for reasoning about these problems is: 
- \begin{enumerate}
-    \item Construct formal completion of your moduli problem $F$ represented by a formal algebraic space $\widehat{X}$ over the base $\Spf R$ of a complete local ring $R$.
-    \item With a formal family $\widehat{X}$ over $\Spf R$ in hand, ask if there is a algebraic space $X$ over $R$ whose formal completion along a closed subspace is the given formal family.
-    \item Descend the algebraic space $X$ over $R$ to an algebraic space over a finite type base over $k$.
- \end{enumerate}
-
 
 
 \section{References}

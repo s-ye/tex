@@ -1,0 +1,165 @@
+
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+
+
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0pt}
+
+
+\newcommand{\fg}{\mathfrak g}
+
+\DeclareMathOperator{\Frac}{Frac}
+\begin{document}
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Title}
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+\begin{abstract}
+    Abstract
+\end{abstract}
+
+\tableofcontents
+
+\section{The setup}
+Recall that we have a line bundle $\mathcal L:=\mathcal L_{\det}$ on $\cX:=\cX_{G,g,I}$ and an invariant norm $\|\cdot\|$ on $X_*(T)_\mathbb R$.
+
+For a point $x\in \cX(k)$ and a nontrivial $f:\Theta\to \cX$ with $f(1)\simeq x$, define
+$$\mu(x,f)\;:=\;\frac{\mathrm{wt}_{\mathcal L}(f)}{\|\lambda_f\|},$$
+where $\mathrm{wt}_{\mathcal L}(f)$ is the $\mathbb G_m$-weight on the fiber of $\mathcal L$ at the special point $f(0)$, and $\lambda_f$ is the associated cocharacter data of $f$ coming from the action of $\mathbb G_m$ on the object $f(0)$.
+
+We wanted to prove the following theorem.
+\begin{theorem}[Need to prove]
+    For any $x\in \cX_{G,g,I}(k)$, there exists a (unique up to something) maximally destabilizing $\Theta$-filtration $f_{\mathrm{HN}}:\Theta\to \cX_{G,g,I}$ of $x$ with respect to $\mathcal L_{\det}$ and any invariant norm on $X_*(T)_\R$.
+\end{theorem}
+
+Constantin remarked that the uniqueness part of the theorem is not important for our application, and that we can get away with existence of a maximally destabilizing $\Theta$-filtration for each $x\in \cX(k)$, provided that we can organize the points $x$ into strata in such a way which mirrors the setup of the Kirwan Ness stratification.
+
+\section{Kirwan Ness stratification}
+This section follows \cite{kirwan}.
+Suppose we have linear action of a reductive group $G$
+on a projective variety $X$, singular or nonsingular, defined over an algebraically closed field. Let $T \subset G$ be a maximal torus, $V$ the representation giving the linearization.
+Pick an invariant norm on the cocharacter lattice of $G$. Then Kirwan and Ness construct a stratification of $X$ into locally closed subvarieties \begin{align*}
+    X = \bigsqcup_{\beta \in \mathcal B} S_\beta,
+\end{align*} \textbf{The index set $\mathcal B$ is in correspondence with connected components $Z \subset X^{\beta}$ of the fixed locus of a dominant cocharacter $\beta$ of $T$ such that the semistable locus $Z^\circ$ of the divided action of the Levi subgroup $L_\beta$ on $Z$ is nonempty.}
+
+If the fixed loci is connected, then the index set $\mathcal B$ can be identified with the set of
+$G$ conjugacy classes of rays in $X_*(G) \otimes \R$ together with the condition that the associated “center” $Z_\beta^{ss}$ is nonempty. Note that every cocharacter of $G$ is $G$-conjugate to a dominant cocharacter of $T$. It is harmless to choose a rational dominant cocharacter $\beta$ in each conjugacy class as they determine the same parabolic subgroup $P_\beta$ and the same stratum $S_\beta$. Note that one cannot simply group the components together under a single conjugacy class of rays, as each connected component $Z_i$ could possibly a different weight of the linearized line bundle.
+
+
+Then we have a weight decomposition \begin{align*}
+    V = \bigoplus_{\chi} V_\chi,
+\end{align*}
+and so for any point $x\in X$, we can write its homogeneous coordinates as $x = [v]$ for some $v\in V$ with $v = \sum_\chi v_\chi$. For a point $x$, let $W_x$ be the set of weights appearing in its support, meaning the set of $\chi$ such that $v_\chi \neq 0$. Then Kirwan identifies $\beta$ as the closest point to $0$ in $\mathrm{Conv}(W_x)$.
+
+Alternatively, we can identify $\beta$ as the $G$-conjugacy class of ray which minimzes the following function on $X_*(G) \otimes \R$:
+\begin{align*}
+    \lambda \mapsto \frac{\mu(x,\lambda)}{\|\lambda\|}.
+\end{align*}
+where $\mu(x,\lambda)$ is defined as the minimum $\lambda$-weight of the nonzero coordinates of $x$.
+\begin{align*}
+\mu(x,\lambda)= \min_{\chi \in W_x}\langle \chi, \lambda \rangle
+\end{align*}
+
+For each $\beta\in \mathcal B$, pick a dominant rational representative of the corresponding conjugacy class of rays which we also denote by $\beta$. The unstable strata are indexed by those $Z$ with dominant $\beta$ for which
+the semistable locus $Z^\circ \subset Z$ of the divided $L$-action on $\mathcal L$
+is not empty. 
+
+In particular we look at the fixed locus 
+$X^\beta = \{ x \in X \mid \beta(t)\cdot x = x \ \forall t \}$ and take a connected component $Z \subset X^\beta$. Now define the attracting set:
+\[Y=\{ x \in X \mid \lim_{t\to\infty} \lambda(t)\cdot x \in Z \}\] which gives us a natural map $\varphi: Y \to Z$ defined by the limit of the $T$-flow. 
+
+\begin{proposition}
+    $\varphi : Y \to Z$ is a locally trivial fibration in affine spaces. At a point $z\in Z$, the tangent space decomposes into weight spaces under $\beta$ as:
+\begin{align*}
+    T_zX = T_zZ \oplus (T_zX)_{>0}
+\end{align*}
+The positive-weight directions integrate to affine fibers.
+\end{proposition}
+
+Now we describe what $Z^\circ$ is. Let $L = Z_G(\beta)$
+be the Levi subgroup. $\beta$ acts on the fiber of the linearized line bundle $\mathcal L$ over $Z$ by the character $\beta$.
+
+To remove the destabilizing contribution, one twists the linearization by subtracting this character. After twisting, the central $\mathbb G_m$ coming from $\beta$ acts trivially, and so we are left with a genuine GIT problem for the Levi $L$ acting on $Z$. Let $Z^\circ$ be the semistable locus for this GIT problem, and put $Y^\circ = \varphi^{-1}(Z^\circ)$.
+
+To recover the stratum $S_\beta$, we take the $G$-orbit of $Y^\circ$, i.e. $S = G \cdot Y^\circ$ and then one can show that we have the following isomorphism of $G$-varieties:
+\[S \cong G \times^{P_{\beta}} Y^\circ\]
+where we are dividing by the relation \begin{align*}
+    (g, y) \sim (gp^{-1}, py) \quad \forall p \in P_\beta.
+\end{align*}
+So geometrically, we see $S \sim (G/P) \times (\text{affine}) \times Z^\circ$.
+
+\begin{proposition}
+To recap, in this setup, we have the following properties:
+\begin{enumerate}
+\item[(i)]
+$Y$ is a fiber bundle over $Z$, with affine spaces as fibers, under the
+morphism $\varphi$ defined by the limiting value of the $T$-flow.
+
+\item[(ii)]
+$Y$ is stabilized by the parabolic subgroup $P \subset G$ whose nilpotent
+Lie algebra radical $\mathfrak u$ is spanned by the negative $T$-eigenspaces
+in $\mathfrak g$.
+
+\item[(iii)]
+The $G$-orbit $S$ of $Y^\circ$ is isomorphic to $G \times^P Y^\circ$.
+Under $\varphi$, it fibers in affine spaces over $G \times^P Z^\circ$,
+if we let $P$ act on $Z^\circ$ via its reductive quotient $L$.
+
+\item[(iv)]
+The various $S$, together with $X^\circ = X^{ss}$, smoothly stratify $X$.
+
+\item[(v)]
+$Z^\circ$ has a projective, good quotient under $L$; $X^{ss}$ has a good projective quotient under $G$.
+\end{enumerate}
+\end{proposition}
+
+
+
+
+
+
+
+Then there is a smooth locally closed subvariety $Y_\beta \subset X$ acted on by a parabolic subgroup $P_\beta$ of $G$ such that
+\begin{equation}\label{eq:KN-stratum}
+    S_\beta \cong G \times_{P_\beta} Y_\beta^{ss}.
+\end{equation}
+
+There is also a nonsingular closed subvariety $Z_\beta \subset X$
+and a locally trivial fibration
+\begin{equation}\label{eq:KN-fibration}
+    P_\beta : Y_\beta^{ss} \longrightarrow Z_\beta^{ss},
+\end{equation}
+whose fibres are all affine spaces.
+Here $Z_\beta^{ss}$ is the set of semistable points of $Z_\beta$
+under the action of the Levi subgroup $L_\beta$ of $P_\beta$.
+
+\section{Refernences}
+Kirwan Cohomology of quotients in symplectic and algebraic geometry, 1984.
+\end{document}
