@@ -1,0 +1,150 @@
+
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+
+
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0pt}
+
+\DeclareMathOperator{\len}{len}
+\newcommand{\fg}{\mathfrak g}
+\newcommand{\Rees}{Rees}
+
+\DeclareMathOperator{\Frac}{Frac}
+\begin{document}
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Title}
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+\begin{abstract}
+    Abstract
+\end{abstract}
+
+\tableofcontents
+
+\section{Feb 24}
+Let $X$ be complex variety, $X = \bigsqcup X_j$ locally closed decomposition.
+\begin{definition}
+    A sheaf $\cF$ on $X$ is \emph{constructible} if $\cF|_{X_j}$ is a local system of finite type for each $j$, for some locally closed decomposition $X = \bigsqcup X_j$. Put $D^b_c(X)$ the bounded derived category of constructible sheaves on $X$, those guys with constructible cohomology sheaves.
+\end{definition}
+
+\begin{theorem}
+    The six functors and Verdier duality preserve $D^b_c(X)$.
+\end{theorem}
+
+Special case:
+Let $i:X\to Y$ be a locally closed embedding. Recall that we have the pushforward with support $i_!$ defined on stalks by \begin{align*}
+(i_!\cF)_y = \begin{cases}
+    \cF_x & y = i(x)\\
+    0 & y\notin i(X)
+\end{cases}
+\end{align*}
+\begin{proposition}
+    $i_!$ is exact.
+\end{proposition}
+ 
+\begin{definition}
+    The exception pullback $i^!$ is explicitly defined by the formula
+\begin{align*}
+    U \mapsto \lim_{V \subset Y, V\cap \overline{X}=U} {s\in \cF(V) \mid \mathrm{Supp}(s) \subset V}
+\end{align*}
+In the special case $i_x:\{x\}\to X$ is the inclusion of a point, we have this computes the costalk
+\begin{align*}
+i_x^!\cF = \lim_{U\ni x} \{s\in \cF(U) \mid \mathrm{Supp}(s) \subset U\}
+\end{align*}
+\end{definition}
+
+\begin{proposition}
+    Let $i:X\to Y$ be a locally closed embedding. Then there is a derived adjunction
+\begin{align*}
+    \mathrm{Hom}_{D^b_c(Y)}(i_!\cF, \cG) \cong \mathrm{Hom}_{D^b_c(X)}(\cF, i^!\cG)
+\end{align*}
+\end{proposition}
+Note that if $j$ is a closed embedding $i_! = i_*$, and if $i$ is an open embedding $i^! = i^*$.
+
+\begin{theorem}
+    Let $i:Z\to X$ be a closed embedding, $j:U\to X$ the complementary open embedding. Then $i^*\circ j_! = i^! \circ Rj_* = j^* \circ i_* = 0$.
+    There are also distinguished triangles
+\begin{align*}
+    j_!j^! F \to F \to i_*i^* F \to j_!j^! F[1]
+\end{align*}
+and \begin{align*}
+    i_!i^! F \to F \to Rj_*j^* F \to i_!i^! F[1]
+\end{align*}
+\end{theorem}
+
+\begin{theorem}[Verdier duality]
+    Suppose $f:X\to Y$ is locally compact and Hausdorff and $Rf_!$ has finite cohomological dimension. Then there exists a right adjoint $f^!:D^*(Y;k) \to D^*(X;k)$. Let $p:X\to *$ be the collapse map. The dualizing complex is defined by $\omega_X := p^!k$. Then we have a duality functor $\mathbb D: D^*(X;k) \to D^*(X;k)$ defined by $\mathbb D(\cF) = R\mathrm{Hom}(\cF, \omega_X)$.
+\end{theorem}
+
+Check. Let $i:Z\to X$ be a closed embedding, $j:U\to X$ the complementary open embedding. Consider $j_! k_{X\setminus Z}$. This is the sheaf of locally constant functions on $X$ supported on $X\setminus Z$. Take further to be $X=S^1$ and $Z=\{p\}$ a point. 
+
+Recall that $j_!$ is defined by the formula for $j$ open
+\begin{align*}
+    j_!F(U) = \{s\in F(j^{-1}(U)) \mid j\vert_{\mathrm{Supp}(s)}: \mathrm{Supp}(s) \to U \text{ is proper}\}
+\end{align*}
+On open sets $U \subset X$ not containing $p$ we get locally constant functions. On open sets $U$ containing $p$, we get the locally constant functions, so we get 2 copies of $k$ because removing the point disconnected the interval. Those sections there whose image has proper support in $U$ must be those which vanish everywhere. So we get $j_! k_{X\setminus Z}(U) = 0$ for $U$ containing $p$. 
+
+Check: Give an interpretatino of $H^k(X,Z,k)$ and prove the long exact sequence of relative cohomology.
+Claim: $H^*(S^1,*;k) = \Gamma(S^1, j_! k_{S^1\setminus \{p\}})$.
+
+\subsection{}
+Consider the nilpotent cone of $\sl(2)$:
+
+\begin{align*}
+    \tilde{\mathcal{N}} = \set{ A = \begin{pmatrix}
+    x & y\\
+    z & -x
+\end{pmatrix}, [u:v] \in \mathbb P^1 | Ax = 0} \cong T^*\C\P^1
+\end{align*}
+\begin{align*}
+\mathcal N = \set{ \begin{pmatrix}
+    x & y\\
+    z & -x
+\end{pmatrix} \in \sl(2) \mid x^2 + yz = 0}
+\end{align*}
+Call the map $\mu: \tilde{\mathcal{N}} \to \mathcal{N}$ the projection to the first factor. It is the moment map.
+What are the fibers of $\tilde{\mathcal{N}}$? Pass to Jordan forms of $N$. The matrix $N = \begin{pmatrix}
+    0 & 1\\
+    0 & 0
+\end{pmatrix}$ has fiber $*$ and the matrix $N = 0$ has fiber $\C\P^1$. 
+
+Consider the complement $U$ of $0$ in $\mathcal N$. Divide out by the scaling action. It will be a real 3 manifold. Reasoning about the (transitive) adjoint action of $SU(2)$ on $U$ we see that $U \cong \R \times L$ with $L = S^3/\Z_2 = \R\P^3 = SO(3)$ is the unit cotangent bundle of $S^2$.
+
+Now consider $R\Gamma k_U$. We observed $(Rj_* k_U)$ is the cohomology of $\R\P^3$, the neighborhood of the cone point (up to homotopy). We can comppute $R\mu_* k_{\tilde{\mathcal{N}}}$ using proper base change. Consider the distinguished triangle
+\begin{align*}
+    k_{\mathcal N} \to R\mu_* k_{\tilde{\mathcal{N}}} \to i_* k_0[-2]
+\end{align*}
+
+Then if $2$ is invertible in $k$, we can split the triangle and get $R\mu_* k_{\tilde{\mathcal{N}}} \cong k_{\mathcal N} \oplus i_* k_0[-2]$. 
+
+Exercise: calculate the costalk $i^!R\mu_* k_{\tilde{\mathcal{N}}}$ and the map $i^! R\mu_* k_{\tilde{\mathcal{N}}} \to i^* R\mu_* k_{\tilde{\mathcal{N}}}$.
+
+We have to parse $i_0^!$. It is sections which vanish relative to the boundary. Then we have the Springer map $\mu$ and we are thinking about pulling back sections. Unwinding, we find that $i_0^! R\mu_* k_{\tilde{\mathcal{N}}}$ identifies with $C^*(DS^2, \partial DS^2)$ is the cohomology of $P^1$ shifted by the Thom class.
+\end{document}

@@ -1,0 +1,244 @@
+
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+
+
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0pt}
+
+\DeclareMathOperator{\len}{len}
+\newcommand{\fg}{\mathfrak g}
+\newcommand{\Rees}{Rees}
+
+\DeclareMathOperator{\Frac}{Frac}
+\begin{document}
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Title}
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+\begin{abstract}
+    Abstract
+\end{abstract}
+
+\tableofcontents
+
+\section{The setup}
+Recall that we have a line bundle $\mathcal L:=\mathcal L_{\det}$ on $\cX:=\cX_{G,g,I}$ and an invariant norm $\|\cdot\|$ on $X_*(T)_\mathbb R$.
+
+For a point $x\in \cX(k)$ and a nontrivial $f:\Theta\to \cX$ with $f(1)\simeq x$, define
+$$\mu(x,f)\;:=\;\frac{\mathrm{wt}_{\mathcal L}(f)}{\|\lambda_f\|},$$
+where $\mathrm{wt}_{\mathcal L}(f)$ is the $\mathbb G_m$-weight on the fiber of $\mathcal L$ at the special point $f(0)$, and $\lambda_f$ is the associated cocharacter data of $f$ coming from the action of $\mathbb G_m$ on the object $f(0)$.
+
+We wanted to prove the following theorem.
+\begin{theorem}[Need to prove]
+    For any $x\in \cX_{G,g,I}(k)$, there exists a (unique up to something) maximally destabilizing $\Theta$-filtration $f_{\mathrm{HN}}:\Theta\to \cX_{G,g,I}$ of $x$ with respect to $\mathcal L_{\det}$ and any invariant norm on $X_*(T)_\R$.
+\end{theorem}
+
+\subsection{$\Theta$-degenerations}
+Recall that for $G$-bundles on a smooth curve, given a $G$-bundle $\cE$, a cocharacter $\lambda:\mathbb G_m\to G$ up to conjugacy, and a reduction of $\cE$ to a $P_\lambda$-bundle, the $G$-bundle $\Rees(\cE_\lambda,\lambda)\times_{P_\lambda} G$ on $C\times \mathbb A^1$ is a $\Theta$-degeneration of $\cE$. In fact, all $\Theta$-degenerations arise in this way.
+
+We will see that for $\cX_{G,g,I}$, the $\Theta$-degenerations are given by the same data as in the smooth case, except we ask that the reduction preserves the isotropy at the nodes, i.e. \begin{align*}
+    \lambda \in \bigcap_p X_*(Z_G(\eta_p))
+\end{align*}
+
+
+
+A $\Theta$-map produces a generic object $x=f(\Theta^\times)$, a special fiber $x_0=f(0)$, and a canonical homomorphism
+\[
+\mathbb{G}_m \to \Aut_X(x_0),
+\]
+because $0 \simeq B\mathbb{G}_m$.
+
+Restrict the Solis bundle to the smooth locus of the curve. A $\Theta$-degeneration there corresponds to the usual degeneration of a $G$-bundle, which is equivalent to choosing a reduction to a parabolic determined by a cocharacter
+\[
+\lambda :\mathbb{G}_m \to G
+\] well defined up to conjugacy in $G$.
+Recall that we are considering $G$-bundles on stacky curves with prescribed isotropy $\mu_k \to G$ at the nodes specified by $\eta_p$, restricted to $\mu_k \subset \mathbb{G}_m$. 
+Let
+\[
+A=\mathbb{C}[[u,v]]/(uv),\qquad \mathcal{U}_k=[\Spec A/\mu_k],
+\]
+with
+\[
+\zeta\cdot (u,v)=(\zeta u,\zeta^{-1}v).
+\]
+
+A local Solis object at the node is an honest \(G\)-bundle on \(\mathcal{U}_k\). Since \(\Spec A\) is local and affine, after choosing a trivialization on \(\Spec A\), such a bundle is determined by the stabilizer action
+\[
+\eta:\mu_k\to G
+\]
+up to conjugacy. Thus, locally, the node type is exactly \(\eta\), equivalently a rational coweight \(\eta\) with \(k\eta\in X_*(T)\).
+
+A \(\Theta\)-degeneration of this local object is a \(G\)-bundle on
+\[
+\mathcal{U}_k\times \Theta
+=
+\Bigl[\Spec A\times \mathbb{A}^1 \big/ (\mu_k\times \mathbb{G}_m)\Bigr].
+\]
+Note that an argument in descent implies that the fiber product of two quotients $[X/G]\times_S [Y/H]$ is $[X\times_S Y / G\times H]$, and so the $G$ and $H$ actions must necessarily commute.
+
+After trivializing on \(\Spec A\times \mathbb{A}^1\), the equivariant structure is given by
+\[
+\mu_k\times \mathbb{G}_m \to G.
+\]
+Because the restriction to \(\mu_k\) on the generic fiber must be \(\eta\), the extra datum is a cocharacter
+\[
+\lambda:\mathbb{G}_m\to Z_G(\eta),
+\]
+up to conjugacy in \(Z_G(\eta)\). Since $\lambda$ is defined up to conjugacy in $G$, in particular we can conjugate it into the maximal torus $T$ of $G$ and thus this condition becomes trivial.
+
+Explicitly, after choosing a trivialization, the total space is
+\[
+G\times \Spec A\times \mathbb{A}^1,
+\]
+with \((\zeta,s)\in \mu_k\times \mathbb{G}_m\) acting by
+\[
+(\zeta,s)\cdot (u,v,t,g)
+=
+(\zeta u,\zeta^{-1}v,st,\eta(\zeta)\lambda(s)\,g),
+\]
+assuming left multiplication on the \(G\)-factor. 
+
+For any representation \(V\) of \(G\), the associated vector bundle on \(\mathcal{U}_k\) becomes the \(\mu_k\)-equivariant \(A\)-module
+\[
+A\otimes V,
+\]
+where \(\mu_k\) acts diagonally (on \(A\) and through \(\eta\) on \(V\)). Since \(\lambda\) commutes with \(\eta\), we get a simultaneous decomposition
+\[
+V=\bigoplus_{\chi\in \widehat{\mu_k}}\ \bigoplus_{m\in \mathbb{Z}} V_{\chi,m},
+\]
+where \(\mu_k\) acts on \(V_{\chi,m}\) by \(\chi\), and \(\lambda\) has weight \(m\).
+
+The Rees family is
+\[
+\mathcal{R}_{\lambda}(V)
+=
+\bigoplus_{\chi,m} t^{-m}\bigl(A\otimes V_{\chi,m}\bigr)
+\subset
+A[t,t^{-1}]\otimes V.
+\]
+This is \((\mu_k\times \mathbb{G}_m)\)-equivariant on \(\Spec A\times \mathbb{A}^1\), hence descends to \(\mathcal{U}_k\times \Theta\). Its fibers are:
+\[
+\mathcal{R}_{\lambda}(V)|_{t\neq 0}\cong A\otimes V,
+\qquad
+\mathcal{R}_{\lambda}(V)|_{t=0}
+\cong
+\bigoplus_{\chi,m} A\otimes V_{\chi,m}.
+\]
+So the special fiber is the associated graded for the \(\lambda\)-filtration in the category of \(\mu_k\)-equivariant bundles.
+
+\subsection{Weight analysis}
+Let \(\mathcal{C}\) be a twisted nodal curve with one stacky node
+\(p \simeq B\mu_k\),
+of type
+\(\eta:\mu_k \to G\),
+corresponding to \(\eta\). Let
+\(\nu:\widetilde{\mathcal{C}}\to \mathcal{C}\)
+be the normalization. Write $\ad(\mathcal{E})$
+for the adjoint bundle.
+
+\subsubsection{Normalization exact sequence at a twisted node}
+
+Locally on the balanced node
+\[
+\mathcal{U}_k=\bigl[\Spec \mathbb{C}[[u,v]]/(uv) / \mu_k\bigr],
+\]
+one has the usual exact sequence
+\[
+0\to \mathcal{O}_{\mathcal{U}_k}\to \nu_*\mathcal{O}_{\widetilde{\mathcal{U}}_k}\to \iota_*\mathcal{O}_{B\mu_k}\to 0,
+\]
+where \(\iota:B\mu_k\hookrightarrow \mathcal{U}_k\) is the node.
+
+Tensoring with \(\ad(\mathcal{E})\), one gets
+\[
+0\to \ad(\mathcal{E})\to \nu_*\nu^*\ad(\mathcal{E})\to \iota_*Q_p\to 0,
+\]
+with
+\[
+Q_p \cong \mathfrak{g}
+\]
+as a \(\mu_k\)-representation, where \(\mu_k\) acts through $\Ad\circ \eta$.
+
+So in the determinant-of-cohomology sequence, the node term is the cohomology of the skyscraper sheaf \(\iota_*Q_p\).
+
+\subsubsection{Global sections of the node term}
+
+Because the support is \(B\mu_k\), in characteristic 0 we have
+\[
+H^0(B\mu_k,Q_p)=Q_p^{\mu_k}, \qquad H^{>0}(B\mu_k,Q_p)=0.
+\]
+
+Therefore
+\[
+H^0(\iota_*Q_p)=\mathfrak{g}^{\mu_k}.
+\]
+
+If \(\eta\) is given by \(\eta\), this is exactly the Levi Lie algebra:
+\[
+\mathfrak{g}^{\mu_k}=\mathfrak{z}_{\mathfrak{g}}(\eta)=:\mathfrak{l}_\eta.
+\]
+
+So the normalization exact sequence contributes
+\(\mathfrak{l}_\eta\)
+at the node.
+
+\subsubsection{Determinant of cohomology}
+
+From the exact sequence,
+\[
+\det R\Gamma(\mathcal{C},\ad(\mathcal{E}))
+\cong
+\det R\Gamma(\widetilde{\mathcal{C}},\nu^*\ad(\mathcal{E}))
+\otimes
+\det(\mathfrak{l}_\eta)^{-1}.
+\]
+
+Hence for a \(\Theta\)-degeneration defined by a cocharacter $\lambda:\mathbb{G}_m\to Z_G(\eta)$
+the node contribution to the \(\lambda\)-weight for the inverse of the determinant-of-cohomology line bundle is $\wt_\lambda(\det \mathfrak{l}_\eta)$.
+
+As an \(L_\eta\)-representation,
+\[
+\mathfrak{l}_\eta
+=
+\mathfrak{t}
+\oplus
+\bigoplus_{\alpha:\langle \alpha,\eta\rangle=0}\mathfrak{g}_\alpha.
+\]
+
+Now \(\lambda \in X_*(T) \subset X_*(L_\eta)\) and on \(\mathfrak{t}\), the adjoint action has weight 0, on \(\mathfrak{g}_\alpha\), the weight is \(\langle \alpha,\lambda\rangle\), and root spaces occur in pairs \(\mathfrak{g}_\alpha,\mathfrak{g}_{-\alpha}\), whose weights sum to 0. The symmetry gives us that
+\[
+\mathrm{wt}_\lambda(\det \mathfrak{l}_\eta)=0.
+\]
+
+This discussion implies that the node contribution to the weight of the determinant-of-cohomology line bundle is zero, so we can ignore it when computing the weight. In particular, the stability condition for the determinant-of-cohomology line bundle on the moduli $\cX_{G,g,I}$ is the same as the stability condition for the determinant-of-cohomology line bundle on the moduli of $G$-bundles on smooth curves.
+
+\subsection{}
+So fix an HN type. What is the fiber of the map $\cX_{G,g,I} \to \Bun_G$? Oh the subtle thing is that a point in $\cX_{G,g,I}$ may have possibly been expanded, and may be unstable on components that were introduced by expansion. 
+
+\end{document}

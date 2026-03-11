@@ -26,8 +26,9 @@
 \setlength{\parskip}{1em}
 \setlength{\parindent}{0pt}
 
-
+\DeclareMathOperator{\len}{len}
 \newcommand{\fg}{\mathfrak g}
+\newcommand{\Rees}{Rees}
 
 \DeclareMathOperator{\Frac}{Frac}
 \begin{document}
@@ -87,6 +88,10 @@ where $\mu(x,\lambda)$ is defined as the minimum $\lambda$-weight of the nonzero
 \mu(x,\lambda)= \min_{\chi \in W_x}\langle \chi, \lambda \rangle
 \end{align*}
 
+\begin{proposition}
+    [Hilbert-Mumford criterion for semistability] A point $x$ is semistable if and only if $\mu(x,\beta) \geq 0$ for all dominant cocharacters $\beta$.
+\end{proposition}
+
 For each $\beta\in \mathcal B$, pick a dominant rational representative of the corresponding conjugacy class of rays which we also denote by $\beta$. The unstable strata are indexed by those $Z$ with dominant $\beta$ for which
 the semistable locus $Z^\circ \subset Z$ of the divided $L$-action on $\mathcal L$
 is not empty. 
@@ -104,23 +109,19 @@ The positive-weight directions integrate to affine fibers.
 \end{proposition}
 
 Now we describe what $Z^\circ$ is. Let $L = Z_G(\beta)$
-be the Levi subgroup. $\beta$ acts on the fiber of the linearized line bundle $\mathcal L$ over $Z$ by the character $\beta$.
-
-To remove the destabilizing contribution, one twists the linearization by subtracting this character. After twisting, the central $\mathbb G_m$ coming from $\beta$ acts trivially, and so we are left with a genuine GIT problem for the Levi $L$ acting on $Z$. Let $Z^\circ$ be the semistable locus for this GIT problem, and put $Y^\circ = \varphi^{-1}(Z^\circ)$.
+be the Levi subgroup. $\beta$ acts on the fiber of the linearized line bundle $\mathcal L$ over $Z$ by the Hilbert-Mumford weight $\mu(x,\beta)$. Let $\chi$ be the character of $L$ given by this action. Twisting down by $\chi$, the action of $L$ on $Z$ is trivial on the fiber of the linearized line bundle, and so we can talk about semistability for the $L$-action on $Z$ with respect to the trivial linearization. We define $Z^\circ$ to be the semistable locus for this GIT problem, and put $Y^\circ = \varphi^{-1}(Z^\circ)$. Note that if we did not twist down by $\chi$, then the action on the fiber would be nontrivial and so the semistable locus would be empty, since $\beta: \mathbb G_m \to L$ is a one-parameter subgroup of $L$ which violates the Hilbert-Mumford criterion for semistability.
 
 To recover the stratum $S_\beta$, we take the $G$-orbit of $Y^\circ$, i.e. $S = G \cdot Y^\circ$ and then one can show that we have the following isomorphism of $G$-varieties:
 \[S \cong G \times^{P_{\beta}} Y^\circ\]
 where we are dividing by the relation \begin{align*}
     (g, y) \sim (gp^{-1}, py) \quad \forall p \in P_\beta.
 \end{align*}
-So geometrically, we see $S \sim (G/P) \times (\text{affine}) \times Z^\circ$.
-
 \begin{proposition}
-To recap, in this setup, we have the following properties:
+In this setup, we have the following properties:
 \begin{enumerate}
-\item[(i)]
+\item[(i)][Bialynicki-Birula decomposition]
 $Y$ is a fiber bundle over $Z$, with affine spaces as fibers, under the
-morphism $\varphi$ defined by the limiting value of the $T$-flow.
+morphism $\varphi$ defined by the limiting value of the $T$-flow. The fibers of the affine bundle are the positive weight spaces in the tangent space of $X$ at the limit point.
 
 \item[(ii)]
 $Y$ is stabilized by the parabolic subgroup $P \subset G$ whose nilpotent
@@ -128,9 +129,9 @@ Lie algebra radical $\mathfrak u$ is spanned by the negative $T$-eigenspaces
 in $\mathfrak g$.
 
 \item[(iii)]
-The $G$-orbit $S$ of $Y^\circ$ is isomorphic to $G \times^P Y^\circ$.
-Under $\varphi$, it fibers in affine spaces over $G \times^P Z^\circ$,
-if we let $P$ act on $Z^\circ$ via its reductive quotient $L$.
+$S$ is equivariantly isomorphic to $G \times^P Y^\circ$. In particular \begin{align*}
+    S \cong G \times^P Y^\circ \cong (G \times^P Z^\circ) \times \mathbb A^n 
+\end{align*} where the fibers of the affine bundle are the positive weight spaces in the tangent space of $X$ at the limit point, if we let $P$ act on $Z^\circ$ via its reductive quotient $L$.
 
 \item[(iv)]
 The various $S$, together with $X^\circ = X^{ss}$, smoothly stratify $X$.
@@ -140,26 +141,410 @@ $Z^\circ$ has a projective, good quotient under $L$; $X^{ss}$ has a good project
 \end{enumerate}
 \end{proposition}
 
+\section{Lattices in $\SL(2)$}
+Let $F=\C((z))$, $\mathcal O=\C[[z]]$, $G=\SL_2(F)$.
+Let
+$$\Lambda_0:=\mathcal O e_1\oplus \mathcal O e_2,\qquad
+\Lambda_1:=\mathcal O e_1\oplus z\,\mathcal O e_2,$$
+and
+$$P_0:=\Stab_G(\Lambda_0)=\SL_2(\mathcal O),\qquad
+P_1:=\Stab_G(\Lambda_1).$$
 
+Let
+\[
+S:=\begin{pmatrix}1&0\\0&z\end{pmatrix}\in \GL_2(F).
+\]
+Then $S\Lambda_0=\Lambda_1$. Hence
+\[
+P_1=\Stab_G(\Lambda_1)=\Stab_G(S\Lambda_0)=S\,\Stab_G(\Lambda_0)\,S^{-1}=S P_0 S^{-1},
+\]
+because conjugation by $S$ preserves determinant 1, so $S P_0 S^{-1}\subset \SL_2(F)$ and it is exactly the stabilizer of $S\Lambda_0$.
 
+Conjugation by $S$ gives a bijection of double coset sets
+\begin{align*}
+    P_1\backslash G/P_1 &\xrightarrow{\sim} P_0\backslash G/P_0,\\
+    P_1 g P_1 &\mapsto P_0 (S^{-1} g S) P_0.
+\end{align*}
 
+Moreover we know that $P_0\backslash G/P_0$ is in bijection with the set of dominant cocharacters of $\SL_2$, which is $\Z_{\geq 0}$, via the Cartan decomposition \begin{align*}
+    G = \bigsqcup_{n\geq 0} P_0 \begin{pmatrix} z^n & 0 \\ 0 & z^{-n} \end{pmatrix} P_0.
+\end{align*}
 
+Hence $P_1\backslash G/P_1$ is also in bijection with $\Z_{\geq 0}$.
 
+\subsection{Heinloth's weight formula for $\SL_2$ and the nodal contribution on $X_{\mathrm{Solis}}$}
 
-Then there is a smooth locally closed subvariety $Y_\beta \subset X$ acted on by a parabolic subgroup $P_\beta$ of $G$ such that
-\begin{equation}\label{eq:KN-stratum}
-    S_\beta \cong G \times_{P_\beta} Y_\beta^{ss}.
+Let $C$ be a smooth projective curve and $E$ a principal $\SL_2$--bundle on $C$.
+Let $\mathcal L_{\det}$ denote the determinant of cohomology line bundle on
+$\Bun_{\SL_2}(C)$ associated to the adjoint representation $\Ad$.
+
+\subsubsection*{1. Smooth case: Heinloth's formula for $\SL_2$}
+
+A maximal parabolic of $\SL_2$ is a Borel subgroup $B\subset \SL_2$, so a reduction
+$E_B$ is equivalently a line subbundle
+\[
+L\ \subset\ V:=E\times^{\SL_2}\C^2
+\qquad\text{with}\qquad
+\det(V)\cong\mathcal O_C.
+\]
+Let $T\subset B$ be a maximal torus.  As a $T$--representation,
+\[
+\mf{sl}_2 \;=\; \mf t \oplus \mf g_+ \oplus \mf g_-,
+\]
+where $\mf g_+$ (resp.\ $\mf g_-$) is the positive (resp.\ negative) root space
+and $\mf t$ has weight $0$.
+Under the Borel reduction determined by $L$, the positive root bundle is
+\[
+E_B\times^B \mf g_+ \ \cong\ L^{\otimes 2}.
+\]
+
+Let $f:\Theta=[\A^1/\Gm]\to \Bun_{\SL_2}(C)$ be the very close degeneration
+$\Rees(E_B,\check\omega)$ attached to the fundamental cocharacter $\check\omega$
+(the unique maximal parabolic direction for $\SL_2$).
+Heinloth's computation (\cite[\S1.F.c]{Heinloth}) gives
+\begin{equation}
+\label{eq:heinloth-sl2-weight}
+\wt_{\mathcal L_{\det}}(f)
+\;=\;
+2\sum_{i>0} i\cdot \deg\!\big(E_{0,\check\omega}\times^{L_{\check\omega}}\Lie(G)_i\big)
+\;=\;
+2\deg(L^{\otimes 2})
+\;=\;
+4\deg(L),
+\end{equation}
+up to the choice of convention $t\to 0$ versus $t\to\infty$ in the definition of the weight.
+
+\subsubsection*{2. The nodal/bubble contribution on $X_{\mathrm{Solis}}$}
+
+Now let $x\in D_0\subset X_{\mathrm{Solis}}$ be a hyperspecial boundary point.
+Thus $x$ is represented by an admissible $\SL_2$--bundle $E'$ on a twisted
+modification
+\[
+m:C'\longrightarrow C_0
+\]
+of the nodal curve $C_0$, obtained by inserting an exceptional chain over the node.
+Let $f:\Theta\to X_{\mathrm{Solis}}$ be a very close degeneration with $f(1)=x$ and
+special fiber $f(0)$ an associated graded object carrying a Borel reduction $E'_B$.
+Let
+\[
+L'\ \subset\ V':=E'\times^{\SL_2}\C^2
+\]
+be the corresponding line subbundle on $C'$ (so $\det(V')\cong\mathcal O_{C'}$).
+The same representation--theoretic identification as above gives
+\[
+E'_B\times^B \mf g_+\ \cong\ (L')^{\otimes 2}.
+\]
+Therefore Heinloth's degree formula applies verbatim, but with degree computed on $C'$:
+\begin{equation}
+\label{eq:solis-weight-total-degree}
+\wt_{\mathcal L_{\det}}(f)
+\;=\;
+2\,\deg_{C'}\!\big((L')^{\otimes 2}\big)
+\;=\;
+4\,\deg_{C'}(L').
 \end{equation}
 
-There is also a nonsingular closed subvariety $Z_\beta \subset X$
-and a locally trivial fibration
-\begin{equation}\label{eq:KN-fibration}
-    P_\beta : Y_\beta^{ss} \longrightarrow Z_\beta^{ss},
+Write $C'$ as the union of the strict transform of the normalization and the
+exceptional chain:
+\[
+C' \;=\; \widetilde C \ \cup\  (\text{exceptional chain}),
+\]
+with intersection along the two attaching points.  Additivity of degree gives
+\begin{equation}
+\label{eq:degree-split}
+\deg_{C'}(L')
+\;=\;
+\deg_{\widetilde C}\!\big(L'|_{\widetilde C}\big)
+\;+\;
+\deg_{\mathrm{chain}}\!\big(L'|_{\mathrm{chain}}\big).
 \end{equation}
-whose fibres are all affine spaces.
-Here $Z_\beta^{ss}$ is the set of semistable points of $Z_\beta$
-under the action of the Levi subgroup $L_\beta$ of $P_\beta$.
+The first term is the usual Harder--Narasimhan/Rees contribution coming from the
+smooth part.  The second term is the nodal/bubble contribution.
 
-\section{Refernences}
+In the hyperspecial stratum $D_0$, the local gluing class at the node is labeled
+by a dominant coweight
+\[
+\lambda\in X_*(T)_+\cong\Z_{\ge 0}.
+\]
+Geometrically, the associated graded local model is a bubble carrying the split
+bundle
+\[
+\mathcal O_{\P^1}(\lambda)\oplus \mathcal O_{\P^1}(-\lambda),
+\]
+and the graded Borel reduction picks out the summand $\mathcal O_{\P^1}(\lambda)$.
+Hence on each bubble component we have
+\[
+L'|_{\P^1}\cong \mathcal O_{\P^1}(\lambda),
+\qquad\text{so}\qquad
+\deg_{\P^1}(L'|_{\P^1})=\lambda.
+\]
+For an exceptional chain, the same statement holds with $\lambda$ equal to the
+\emph{total} relative position across the chain (distributed among components), so
+\begin{equation}
+\label{eq:node-degree}
+\deg_{\mathrm{chain}}\!\big(L'|_{\mathrm{chain}}\big)=\lambda.
+\end{equation}
+
+Combining \eqref{eq:solis-weight-total-degree}, \eqref{eq:degree-split}, and
+\eqref{eq:node-degree} yields the advertised decomposition of the weight:
+\begin{equation}
+\label{eq:solis-weight-final}
+\wt_{\mathcal L_{\det}}(f)
+\;=\;
+4\Bigl(\deg_{\widetilde C}\!\big(L'|_{\widetilde C}\big)\;+\;\lambda\Bigr),
+\qquad (\SL_2,\ x\in D_0).
+\end{equation}
+
+The $\Theta$-degeneration determines a B-reduction $E'_B$ of the graded object $E'$ on $C'$, $L'$ is the line bundle associated to that B-reduction (equivalently the line subbundle $L'\subset V'$), and the nodal contribution is $\deg(L'|_{\text{chain}})$, which can vary with the reduction even when the ambient hyperspecial double-coset label $\lambda$ is fixed.
+
+\subsubsection*{A. Degree on a nodal curve: normalization + a len correction}
+
+Let $C_0$ be an integral projective nodal curve with a single node $p\in C_0$,
+and let $\nu:\widetilde C\to C_0$ be the normalization. Write
+$\nu^{-1}(p)=\{p_x,p_y\}$.
+
+\begin{lemma}[Degree of a rank-$1$ torsion-free sheaf at a node]
+\label{lem:degree-normalization-len}
+Let $F$ be a rank-$1$ torsion-free coherent sheaf on $C_0$. Then
+$\widetilde F:=\nu^*F$ is a line bundle on $\widetilde C$, and there is a
+canonical exact sequence
+\begin{equation}
+\label{eq:nu-push-exact}
+0 \longrightarrow F \longrightarrow \nu_*\widetilde F \longrightarrow Q \longrightarrow 0,
+\end{equation}
+where $Q$ is a skyscraper sheaf supported at $p$. Moreover,
+\begin{equation}
+\label{eq:deg-split-len}
+\deg_{C_0}(F)
+\;=\;
+\deg_{\widetilde C}(\widetilde F)
+\;+\;
+\len(Q).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Since $F$ is rank-$1$ torsion-free on a nodal curve, it is locally free away
+from $p$, and pulling back to the normalization removes the singularity, so
+$\widetilde F=\nu^*F$ is a line bundle on $\widetilde C$. The natural adjunction
+map $F\to \nu_*\nu^*F=\nu_*\widetilde F$ is an isomorphism away from $p$, hence
+its cokernel $Q$ is supported at $p$, giving \eqref{eq:nu-push-exact}.
+
+Taking Euler characteristics in \eqref{eq:nu-push-exact} yields
+\[
+\chi(C_0,F)=\chi(C_0,\nu_*\widetilde F)-\chi(C_0,Q)=\chi(\widetilde C,\widetilde F)-\len(Q),
+\]
+since $\chi(C_0,\nu_*\widetilde F)=\chi(\widetilde C,\widetilde F)$ and
+$\chi(C_0,Q)=\len(Q)$. The same argument with $F=\cO_{C_0}$ gives
+\[
+\chi(C_0,\cO_{C_0})=\chi(\widetilde C,\cO_{\widetilde C})-\len(\nu_*\cO_{\widetilde C}/\cO_{C_0}),
+\]
+and $\len(\nu_*\cO_{\widetilde C}/\cO_{C_0})=1$ for a node. Using the
+definition $\deg_X(G):=\chi(X,G)-\chi(X,\cO_X)$ for rank-$1$ torsion-free $G$ on
+a proper curve $X$, the len terms combine to give \eqref{eq:deg-split-len}.
+(Equivalently, one may take \eqref{eq:deg-split-len} as the definition of
+$\deg_{C_0}(F)$ for torsion-free rank-$1$ sheaves.)
+\end{proof}
+
+\subsubsection*{B. Interpreting the hyperspecial invariant $\lambda$ in the $D_0$ case}
+
+In the hyperspecial stratum $D_0$ we do \emph{not} necessarily insert an
+exceptional chain of $\P^1$'s. Instead the local invariant
+\[
+\lambda\in X_*(T)_+\cong \Z_{\ge 0}
+\]
+is read off from the hyperspecial double coset
+$\SL_2(\cO)\backslash \SL_2(F)/\SL_2(\cO)$ via the Cartan decomposition:
+\[
+g \in \SL_2(\cO)\,
+\begin{pmatrix} z^\lambda & 0 \\ 0 & z^{-\lambda}\end{pmatrix}
+\,\SL_2(\cO).
+\]
+
+Let $f:\Theta\to X_{\mathrm{Solis}}$ be a very close degeneration with $f(1)=x$
+and let $E'^{\mathrm{gr}}=f(0)$ be the associated graded object. The $\Theta$-limit
+supplies a Borel reduction $E'^{\mathrm{gr}}_B$, hence a line subsheaf
+\[
+L \subset V:=E'^{\mathrm{gr}}\times^{\SL_2}\C^2
+\]
+of the associated rank-$2$ bundle on $C_0$. In general $L$ is only rank-$1$
+torsion-free at the node. Applying Lemma~\ref{lem:degree-normalization-len}
+to $F=L$ gives
+\begin{equation}
+\label{eq:D0-degree-normalization-plus-lambda}
+\deg_{C_0}(L)
+\;=\;
+\deg_{\widetilde C}(\nu^*L)
+\;+\;
+\len(Q_L),
+\qquad
+Q_L:=\nu_*\nu^*L/L.
+\end{equation}
+
+\begin{remark}[Where $\lambda$ enters]
+\label{rem:lambda-as-len}
+For the \emph{associated graded} local model of type $\lambda$ (i.e.\ after
+conjugating the gluing to the diagonal representative and taking the Borel line
+picked out by the $\Theta$-limit), the failure of $L$ to be locally free at the
+node is measured precisely by $\lambda$, in the sense that
+\[
+\len(Q_L)=\lambda.
+\]
+Thus in the $D_0$ case (with no exceptional chain inserted) the ``nodal term''
+appearing in the weight computation is a \emph{len correction at the node},
+not a degree on a bubble.
+\end{remark}
+
+\subsubsection*{C. Consequence for the $\mathcal L_{\det}$-weight in the $D_0$ case}
+
+Heinloth's formula gives, for $\SL_2$ and the adjoint determinant line bundle,
+\[
+\wt_{\cL_{\det}}(f)=4\,\deg_{C_0}(L)
+\]
+(up to the $t\to 0$ versus $t\to\infty$ convention). Combining with
+\eqref{eq:D0-degree-normalization-plus-lambda} and
+Remark~\ref{rem:lambda-as-len} yields
+\[
+\wt_{\cL_{\det}}(f)
+\;=\;
+4\Bigl(\deg_{\widetilde C}(\nu^*L)\;+\;\lambda\Bigr),
+\qquad (\SL_2,\ x\in D_0).
+\]
+
+
+\subsection{The $D_1$ case}
+Changing the trivializations on each branch by parahoric gauge transformations $p_x\in \mathcal P_x$, $p_y\in \mathcal P_y$ changes $\gamma$ by
+\[
+\gamma \mapsto p_y^{-1}\,\gamma\,p_x.
+\]
+    Let $E_x$ be a $\mathcal{P}_x$-torsor on the $x$-disc and $E_y$ a $\mathcal{P}_y$-torsor on the $y$-disc.
+    \begin{itemize}
+        \item Over the punctured discs they become $G((z))$-torsors (since $\mathcal{P}_{\bullet} \hookrightarrow G((z))$).
+        \item Choose trivializations on the punctured discs:
+        \begin{align*}
+            \tau_x: E_x|_{D_x^\times} &\xrightarrow{\sim} G((z)),\\
+            \tau_y: E_y|_{D_y^\times} &\xrightarrow{\sim} G((z)).
+        \end{align*}
+        \item The gluing isomorphism (descent datum) is an isomorphism of $G((z))$-torsors
+        \begin{align*}
+            \phi: E_x|_{D_x^\times} &\xrightarrow{\sim} E_y|_{D_y^\times}.
+        \end{align*}
+    \end{itemize}
+
+Let us explain how to model descent datum on the nodal curve. 
+Let $\cP= \cL\ltimes \cU$ be the parahoric with Levi $\cL$ and pro-unipotent radical $\cU$. Solis sets
+\[
+P^\Delta := \Delta(\cL) \ltimes (\cU\times \cU) \subset LG\times LG\]
+Consider the map
+\[
+\Phi: LG\times LG \longrightarrow LG, \qquad (g_1,g_2)\longmapsto g_2\,g_1^{-1}.
+\]
+
+If $(g_1,g_2)$ is changed by an element of $P^\Delta$, say
+\[
+(g_1,g_2)\mapsto (g_1 u_1 \ell,\ g_2 u_2 \ell)
+\quad\text{with }u_i\in U,\ \ell\in L,
+\]
+then
+\[
+g_2 u_2 \ell \cdot (g_1 u_1 \ell)^{-1}
+=
+g_2\ (u_2 \,\ell\,\ell^{-1}\,u_1^{-1})\ g_1^{-1}
+=
+g_2\,u_2\,u_1^{-1}\,g_1^{-1}.
+\]
+So the Levi cancels and $\Phi$ changes by
+\[
+\Phi \mapsto u_2\cdot \Phi \cdot u_1^{-1}.
+\]
+
+Conclusion: $\Phi$ descends to a map of quotients
+\[
+(LG\times LG)/\cP^\Delta \longrightarrow U\backslash LG/U.
+\]
+This quotient is the framed version of the local moduli at the node:
+\begin{enumerate}
+    \item $g_1$ is a trivialization on the $u$-branch punctured disc,
+    \item $g_2$ is a trivialization on the $v$-branch punctured disc,
+    \item modding out by $\cU\times\cU$ is change trivializations by parahoric-unipotent gauge on each branch.
+    \item modding out by $\Delta(\cL)$ forces the Levi parts on the two branches to match (this is the descent compatibility across the node).
+\end{enumerate}
+
+
+
+We can further quotient
+\[
+U\backslash LG/U \twoheadrightarrow \cP\backslash LG/\cP
+\]
+because $\cP=L\ltimes U$ and this recovers the relative position invariants $\cP\backslash LG/\cP \cong W_I\backslash \widetilde{W}/W_I$ from which we will extract the nodal contribution to the weight.
+
+The local parameter space before taking invariants is refined
+\[(LG\times LG)/P^\Delta \to U\backslash LG/U \to \cP\backslash LG/\cP\]
+
+The local node chart $(LG\times LG)/\mathcal{P}^\Delta$ refines the relative-position in $\mathcal{P}\backslash LG/\mathcal{P}\simeq W_I\backslash\widetilde{W}/W_I$. A $\Theta$-filtration supplies a $1$-PS $\lambda:\mathbb{G}_m\to \Delta(L)$ which acts with strictly positive weights on the pro-unipotent factor $U$. Therefore the $\mathbb{G}_m$-limit $t\to 0$ contracts the $U$-coordinates in the corresponding Bruhat/Schubert cell, and the limit lands in the unique $T$-fixed point in the Schubert closure, i.e. the point indexed by the minimal-len double-coset representative $w_{\min}\in W_I\backslash\widetilde{W}/W_I$.
+
+This aids our calculation of the Hilbert Mumford weight as follows. Given a $\Theta$-degeneration $f:\Theta\to X_{\mathrm{Solis}}$. Over $\A^1$ you get a family of line bundles (your $L'$ coming from the reduction, or the positive-root line $(L')^{\otimes 2}$ in $\ad$). The degree on the exceptional chain is constant in flat families, so you may compute it on the special fiber $t=0$.
+
+So you are allowed to replace your original local point (with complicated $U$-coordinates) by its $\Gm$-limit (the associated graded) without changing the degree you are computing.
+
+Locally at the node, your object gives a point in a Schubert stratum of the partial affine flag variety $\Fl_I = LG/\mathcal{P}$ (or a refinement thereof). Flowing by the cocharacter $\lambda$ contracts $U$ and lands at some $T$-fixed point in the Schubert closure. The $T$-fixed points in $LG/\mathcal{P}$, under the action of $T$ on $LG/\mathcal{P}$ via left multiplication, are precisely $\{w\mathcal{P}\}_{w \in \widetilde{W}}$, where $w\mathcal{P} \in LG/\mathcal{P}$.
+
+
+I suspect that the point indexed by the minimal double-coset representative
+$w_{\min}\in W_I\backslash \widetilde W/W_I$.
+
+Thus the local geometry of your degeneration becomes "the $T$-fixed point $w_{\min}$" plus a chain of $\P^1$'s corresponding to the simple reflections appearing in a reduced word for $w_{\min}$.
+
+On $\Fl_I$, the Picard group is generated by the standard line bundles $\mathcal L_\alpha$ whose degrees are normalized by
+\[
+\deg(\mathcal L_\alpha|_{\P^1_\alpha})=1
+\]
+on the basic Schubert curve $\P^1_\alpha$ corresponding to a simple affine reflection $\alpha\notin I$.
+
+So if your local line bundle (coming from the fundamental weight/Borel reduction) is the pullback of one of these generators (or a known combination), then its degree on any $1$–cycle is computed by counting how many times that $1$–cycle traverses the corresponding $\P^1_\alpha$'s. Take a reduced expression
+$w_{\min}=s_{\alpha_1}s_{\alpha_2}\cdots s_{\alpha_r}$
+in simple affine reflections (with $\alpha_i\notin I$ in the partial flag setting). The corresponding Schubert variety contains a canonical chain of Schubert curves
+\[
+\P^1_{\alpha_1}\cup \P^1_{\alpha_2}\cup\cdots\cup \P^1_{\alpha_r}
+\]
+connecting the base point to $w_{\min}$.
+
+Then for a line bundle $\mathcal L$ whose degree on $\P^1_\alpha$ is known, you get
+\[
+\deg(\mathcal L\text{ on that chain})
+=
+\sum_{j=1}^r \deg\bigl(\mathcal L|_{\P^1_{\alpha_j}}\bigr).
+\]
+
+In $\SL_2$, $D_1$ case there is only one surviving simple direction (say $\alpha_0$), so every reduced word for $w_{\min}$ uses $\alpha_0$ exactly $n$ times, and
+\[
+\deg(\mathcal L|_{\text{chain}})=n\cdot \deg(\mathcal L|_{\P^1_{\alpha_0}}).
+\]
+With the standard normalization $\deg(\mathcal L|_{\P^1_{\alpha_0}})=1$, this is just $n$.
+
+That is exactly why the "combinatorial number" attached to $w_{\min}$ becomes the degree.
+
+\noindent\rule{\textwidth}{0.5pt}
+
+How this feeds your $\mathcal L_{\det}$-weight calculation
+
+Heinloth's weight for $\SL_2$ is
+\[
+\wt_{\mathcal L_{\det}}(f)=2\deg\big(E'_B\times^B\mf g_+\big)
+=2\deg\big((L')^{\otimes 2}\big)=4\deg(L').
+\]
+So once you identify $\deg(L'|_{\text{chain}})$ with the integer $n$ coming from $w_{\min}$, the nodal contribution to the weight is immediately $4n$ (up to your sign convention).
+
+If you want the next step prove $\deg(L'|_{\text{chain}})=n$ the clean proof route is:
+- identify the chain with the Schubert \(\P^1\)-chain in the partial affine flag variety attached to $w_{\min}$,
+- use that \(\Pic(LG/P_1)\cong \Z\) and degrees are normalized on the basic Schubert \(\P^1\),
+- and observe that $w_{\min}=(s_0s_1)^n$ traverses that \(\P^1\) exactly $n$ times.
+
+On the node, after taking the associated graded, the local data gives a map from the exceptional chain (a chain of \(\P^1\)’s) into the relevant Schubert closure in the partial affine flag $LG/P_I$. Each irreducible component of the chain maps to a Schubert curve \(\P^1_\alpha\)
+
+Recall we are trying to compute the degree of the determinant of cohomology line bundle associated to the adjoint representation.
+
+\section{References}
+Teleman Quantization Conjecture Revisited.
 Kirwan Cohomology of quotients in symplectic and algebraic geometry, 1984.
 \end{document}

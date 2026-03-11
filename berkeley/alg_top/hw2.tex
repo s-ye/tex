@@ -1,0 +1,891 @@
+\documentclass[12pt]{article}  % or any other class
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/psetconfig}
+\title{Homework 1}
+\author{Songyu Ye}
+\date{\today}
+
+\begin{document}
+\psettitle
+\begin{problem}[1]
+The Schubert cells $S_{\sigma} \subset \Gr_{\C}(m;n)$ are labeled by sequences $\sigma$ with $(n-m)$ $0$'s and $m$ $1$'s: the
+rows of an $m\times n$ matrix span a subspace belonging to $S_{\sigma}$ iff the (standard) row-reduction pivots
+appear in the reversed sequence of $1$-positions.
+\begin{enumerate}
+\item Show that $S_{\sigma}$ appears in the closure of $S_{\tau}$ iff no $1$ in $\tau$ precedes the matching $1$ in $\sigma$.
+\item Show that, while reversing the ordering of the basis vectors of $\C^n$ to $e_n,\dots,e_1$ leads to a
+different stratification, the two stratifications determine the same homology basis.
+\item Show that Poincar\'e duality is implemented on homology by reversing the indexing sequence.
+\end{enumerate}
+\noindent\textit{Suggestion:} Check the intersections of cells of complementary dimension (and their closures)
+from the two stratifications.
+
+\noindent\textit{Remark:} This also holds for the real Grassmannian mod $2$; but to run this argument, one needs
+to check that the cell attaching maps are $0$ mod $2$, and that the singularities of cell closures are in
+real codimension $\ge 2$, to confidently know that intersections compute cup-products.
+\end{problem}
+
+\begin{solution}
+Write the $1$-positions of $\sigma$ as
+\[
+1\le i_1<i_2<\cdots<i_m\le n,
+\]
+and similarly write the $1$-positions of $\tau$ as
+\[
+1\le j_1<j_2<\cdots<j_m\le n.
+\]
+Thus the Schubert cell $S_\sigma$ consists of those $m$-planes whose row-reduced echelon form has pivots in columns $i_1,\dots,i_m$.
+
+\begin{enumerate}
+\item We claim that
+\[
+S_\sigma\subset \overline{S_\tau}
+\qquad\Longleftrightarrow\qquad
+j_r\le i_r \text{ for all } r=1,\dots,m.
+\]
+This is exactly the condition that no $1$ in $\tau$ lies strictly to the left of the matching $1$ in $\sigma$.
+
+Indeed, for a subspace $V\in \Gr_{\C}(m;n)$, let
+\[
+F_k=\langle e_1,\dots,e_k\rangle
+\]
+be the standard flag. The Schubert cell $S_\sigma$ is characterized by the rank conditions
+\[
+\dim(V\cap F_k)=\#\{r: i_r\le k\}.
+\]
+Its closure $\overline{S_\sigma}$ is therefore characterized by the inequalities
+\[
+\dim(V\cap F_k)\ge \#\{r: i_r\le k\}
+\qquad\text{for all }k.
+\]
+Hence $S_\sigma\subset \overline{S_\tau}$ iff every $V\in S_\sigma$ satisfies the inequalities defining $\overline{S_\tau}$, i.e.
+\[
+\#\{r:i_r\le k\}\ge \#\{r:j_r\le k\}
+\qquad\text{for all }k.
+\]
+This is equivalent to
+\[
+j_r\le i_r\qquad\text{for all }r,
+\]
+since saying that the counting function for the $j_r$'s is bounded above by that for the $i_r$'s is exactly saying the $r$th pivot of $\tau$ does not occur to the right of the $r$th pivot of $\sigma$.
+
+\item Now reverse the ordered basis of $\C^n$ from
+\[
+e_1,\dots,e_n
+\quad\text{to}\quad
+e_n,\dots,e_1.
+\]
+This gives a second Schubert cell decomposition of $\Gr_{\C}(m;n)$.
+If $\sigma=(\sigma_1,\dots,\sigma_n)$, let
+\[
+\sigma^\vee=(\sigma_n,\dots,\sigma_1)
+\]
+be the reversed binary string. Then the Schubert cell for the reversed flag indexed by $\sigma$ is the same geometric set as the Schubert cell for the original flag indexed by $\sigma^\vee$.
+
+The point is that the two cell decompositions are related by the linear automorphism
+\[
+R:\C^n\to\C^n,\qquad e_i\mapsto e_{n+1-i}.
+\]
+This induces a homeomorphism
+\[
+R:\Gr_{\C}(m;n)\to \Gr_{\C}(m;n)
+\]
+sending the Schubert decomposition for the standard flag to the Schubert decomposition for the reversed flag. Hence corresponding cells in the two decompositions represent the same homology classes up to permutation.
+
+More concretely, in each real dimension there is exactly one Schubert cell for each binary string of the corresponding inversion number, and the two decompositions are carried to one another by a homeomorphism of the Grassmannian. Therefore the two cell decompositions determine the same cellular homology basis.
+
+\item We now identify Poincar\'e duality. Let $[\overline{S_\sigma}]$ denote the homology class of the Schubert variety indexed by $\sigma$ in the standard decomposition, and let $[\overline{S'_\tau}]$ denote the corresponding class for the reversed decomposition.
+
+By part (2), the reversed decomposition gives the same homology basis, so we may identify
+\[
+[\overline{S'_\tau}]=[\overline{S_{\tau^\vee}}].
+\]
+
+Now consider complementary-dimensional cells. The key fact is that
+\[
+S_\sigma\cap S'_\tau\neq \varnothing
+\]
+if and only if $\tau=\sigma$, and in that case the intersection is transverse and consists of a single point. To see this, note that the standard cell allows free entries to the right of pivots, whereas the opposite cell allows free entries to the left of pivots. When the patterns differ, one condition forces a nonzero entry exactly where the other forces zero, and hence no matrix can satisfy both sets of conditions. When the patterns agree, the only matrix satisfying both sets of conditions is the one with $1$'s in the pivot positions and $0$'s everywhere else, which is a single point. 
+
+
+In particular $[\overline{S_\sigma}] \cdot [\overline{S'_\tau}]
+=
+\delta_{\sigma\tau}$.
+Therefore Poincar\'e duality sends
+\[
+[\overline{S_\sigma}]
+\longmapsto
+[\overline{S_{\sigma^\vee}}].
+\]
+
+\end{enumerate}
+\end{solution}
+
+\begin{problem}[2]
+In $\Gr_{\C}(2,4)$, determine which Schubert cell closures are singular and which are smooth.
+\end{problem}
+
+\begin{solution}
+There are six Schubert cells in $\Gr_{\C}(2,4)$, indexed by the binary strings
+\[
+1100,\quad 1010,\quad 1001,\quad 0110,\quad 0101,\quad 0011.
+\]
+Their complex dimensions are
+\[
+0,\quad 1,\quad 2,\quad 2,\quad 3,\quad 4.
+\]
+
+The closure of the top cell is the whole Grassmannian, hence smooth.
+The closures of the 0- and 1-dimensional cells are obviously smooth.
+So the only possible issue is the two-dimensional and three-dimensional Schubert varieties.
+
+
+Let the standard flag be
+\[
+F_1=\langle e_1\rangle \subset
+F_2=\langle e_1,e_2\rangle \subset
+F_3=\langle e_1,e_2,e_3\rangle \subset
+\C^4 .
+\]
+If the 1-positions are $i_1<i_2$, then the closure $\overline{S_\sigma}$ consists of planes $V$ satisfying $\dim(V\cap F_{i_r}) \ge r$.
+\begin{enumerate}
+    \item 1001. The incidence condition reads $\dim(V\cap F_1)\ge 1$ and $\dim(V\cap F_4)\ge 2$. The first condition says $V$ contains $e_1$, and the second condition is automatic. Every such $V$ is determined by a choice of line in the quotient $\C^4/\langle e_1\rangle\cong \C^3$, so $\overline{S_{1001}}\cong \Gr(1,3)$ is smooth.
+
+
+\item 0110. The incidence condition reads $\dim(V\cap F_2)\ge 1$ and
+$V\subset F_3$. Therefore $\overline{S_{1001}}$ is the variety of planes in $F_3$ intersecting $F_2$ in dimension at least 1. The intersection condition is automatic.
+
+Hence
+\[
+\overline{S_{0110}}=\Gr(2,F_3)\cong \Gr(2,3)
+\] is smooth.
+
+\item 0101. The incidence condition reads $\dim(V\cap F_2)\ge 1$ and $\dim(V\cap F_4)\ge 2$. The second condition is automatic, so we are left thinking about planes $V$ which contain a line in $F_2$. Pick a line $L\subset F_2$ and pick another direction $v \in \C^4/L$ to get a plane $V=\langle L,v\rangle$. 
+
+If the direction $v$ does not lie in $F_2/L$ then $V$ is a smooth point of $\overline{S_{0101}}$, since it is uniquely determined by the choice of $L$ and $v$ and these give local smooth coordinates near $V$. 
+
+
+The exceptional case is when \(v\in F_2/L\), in which case
+\[
+V=F_2.
+\]
+Here many different choices of \(L\subset F_2\) give the same plane \(F_2\), so the above parametrization fails to be locally one-to-one. 
+To prove that \(F_2\) is actually singular, consider the affine chart of \(\Gr(2,4)\) around \(F_2\) consisting of graphs of linear maps
+\[
+A:F_2\to \langle e_3,e_4\rangle,
+\qquad
+A=\begin{pmatrix} a&b\\ c&d\end{pmatrix}.
+\]
+Then \(V=\Gamma(A)\) lies in \(\overline{S_{0101}}\) exactly when
+\[
+\dim(V\cap F_2)\ge 1,
+\]
+which is equivalent to the existence of a nonzero vector \((x,y)\) such that
+\[
+A\binom{x}{y}=0.
+\]
+Thus
+\[
+V\in \overline{S_{0101}}
+\quad\Longleftrightarrow\quad
+\det(A)=ad-bc=0.
+\]
+So near \(F_2\), the Schubert variety is the hypersurface
+\[
+ad-bc=0
+\]
+in \(\A^4\). This is clearly singular.
+\end{enumerate}
+\end{solution}
+
+
+
+\begin{problem}[3]
+Let $V \to X$ be a complex vector bundle of rank $r$ and $p : \Fl(V ) \to X$ the associated bundle of full
+flag varieties. We showed in class the explicit splitting principle,
+\[
+H^{*}(\Fl(V);\Z)
+\;=\;
+H^{*}(X;\Z)[x_1,\dots,x_r]\Big/\Big(\prod_i(1+x_i)=c_{\bullet}(V)\Big)
+\]
+with $c_{\bullet}(V) \in H^{\mathrm{ev}}(X)$ the total Chern class $1+c_1+c_2+\cdots$ and the
+$x_i \in H^{2}(\Fl(V))$ the first Chern classes of the sub-quotient line bundles $L_i = V_i/V_{i-1}$.
+
+Prove that integration along the fiber $p_* : H^{*}(\Fl(V);\Z) \to H^{*}(X;\Z)$, applied to a class given by a
+polynomial $f(x_1,\dots,x_r)\in H^{*}(X)[x_1,\dots,x_r]$, is given by
+\[
+p_*(f)
+=
+\Delta^{-1}\sum_{\sigma\in S_r}\varepsilon(\sigma)\,
+f\bigl(x_{\sigma(1)},\dots,x_{\sigma(r)}\bigr),
+\qquad
+\Delta=\prod_{i<j}(x_i-x_j).
+\]
+\noindent\textit{Remark:} Part of the exercise is to check that the right-hand side is a symmetric polynomial in the
+$x_i$, so that the answer makes sense. Mind the sign which appears when permuting the line bundles
+$L_i$, from a change in orientation on the flag varieties.
+\end{problem}
+
+\begin{solution}
+Let
+\[
+A:=H^*(X;\Z),\qquad
+R:=A[x_1,\dots,x_r]\Big/\Big(\prod_i(1+x_i)=c_\bullet(V)\Big)
+\cong H^*(\Fl(V);\Z).
+\]
+Write
+\[
+\Delta=\prod_{i<j}(x_i-x_j).
+\]
+
+We first record two facts.
+
+\medskip
+
+\noindent\textbf{(1) \(p_*\) is \(A\)-linear.}
+Since \(p:\Fl(V)\to X\) is an oriented fiber bundle with compact fiber \(\Fl(\C^r)\),
+integration along the fiber satisfies the projection formula
+\[
+p_*\bigl(p^*a\smile \alpha\bigr)=a\smile p_*(\alpha),
+\qquad a\in A,\ \alpha\in H^*(\Fl(V)).
+\]
+Thus \(p_*\) is \(A\)-linear.
+
+\medskip
+
+\noindent\textbf{(2) On each fiber, \(\Delta\) integrates to \(r!\).}
+On a fiber \(F=\Fl(\C^r)\), the classes \(x_i\) restrict to the Chern roots of the tautological splitting, and
+\[
+H^*(F;\Z)\cong \Z[x_1,\dots,x_r]/(e_1,\dots,e_r),
+\]
+where \(e_i\) are the elementary symmetric polynomials. The top cohomology \(H^{2\binom r2}(F;\Z)\cong \Z\) is generated by the class of
+\[
+\prod_{i=1}^r x_i^{r-i}.
+\]
+Now
+\[
+\Delta=\prod_{i<j}(x_i-x_j)
+\]
+is alternating, and its highest monomial is
+\[
+x_1^{r-1}x_2^{r-2}\cdots x_{r-1}
+\]
+with coefficient \(1\). Since every permutation of the \(x_i\) induces a diffeomorphism of the fiber, and permuting two adjacent line bundles reverses the complex orientation of the fiber by a sign \(-1\), each term in the expansion of \(\Delta\) contributes the same fiber integral, namely \(1\). There are \(r!\) terms, so
+\[
+\int_F \Delta = r!.
+\]
+Equivalently,
+\[
+p_*(\Delta)=r!.
+\]
+
+\medskip
+
+Now define
+\[
+T(f):=\Delta^{-1}\sum_{\sigma\in S_r}\varepsilon(\sigma)\,
+f(x_{\sigma(1)},\dots,x_{\sigma(r)}).
+\]
+We claim that \(T(f)\in A\), and that \(T=p_*\).
+
+Indeed, the numerator
+\[
+\Alt(f):=\sum_{\sigma\in S_r}\varepsilon(\sigma)\,
+f(x_{\sigma(1)},\dots,x_{\sigma(r)})
+\]
+is alternating in the \(x_i\). Hence it is divisible by \(\Delta\), so \(T(f)\) is a symmetric polynomial in the \(x_i\). But in the cohomology ring \(R\), every symmetric polynomial in the \(x_i\) can be expressed in terms of the elementary symmetric polynomials, which are the Chern classes \(c_i(V)\in A\). Therefore \(T(f)\in A\), as claimed.
+
+Also, \(T\) is \(A\)-linear, since antisymmetrization is \(A\)-linear.
+
+It remains to show that \(T\) and \(p_*\) agree. Since both are \(A\)-linear maps
+\[
+R\to A,
+\]
+it suffices to compare them on each fiber. Thus we may reduce to the case \(X=\mathrm{pt}\), where
+\[
+R=H^*(\Fl(\C^r);\Z).
+\]
+
+In this case, \(T\) vanishes on every class of degree \(<2\binom r2\), because antisymmetrization raises divisibility by \(\Delta\), so the quotient has degree strictly less than top degree unless \(f\) already contains the top alternating part. Thus \(T\) is an \(A\)-linear functional supported in top degree, just like \(p_*\).
+
+Moreover,
+\[
+T(\Delta)
+=
+\Delta^{-1}\sum_{\sigma\in S_r}\varepsilon(\sigma)\,
+\Delta(x_{\sigma(1)},\dots,x_{\sigma(r)}).
+\]
+Since \(\Delta\) is alternating,
+\[
+\Delta(x_{\sigma(1)},\dots,x_{\sigma(r)})=\varepsilon(\sigma)\Delta,
+\]
+so
+\[
+T(\Delta)=\Delta^{-1}\sum_{\sigma\in S_r}\varepsilon(\sigma)^2\Delta
+=\Delta^{-1}\sum_{\sigma\in S_r}\Delta
+=r!.
+\]
+But we already saw that \(p_*(\Delta)=r!\). Since top cohomology of the fiber is rank one, this determines the fiber integration map uniquely. Hence
+\[
+T(f)=p_*(f)
+\]
+for all \(f\in R\).
+
+Therefore
+\[
+p_*(f)
+=
+\Delta^{-1}\sum_{\sigma\in S_r}\varepsilon(\sigma)\,
+f(x_{\sigma(1)},\dots,x_{\sigma(r)}).
+\]
+This is the desired formula.
+\end{solution}
+
+\begin{problem}[4]
+The generalized flag variety $\Fl(n_1,\dots,n_k)$ consists of flags
+\[0=V_0\subset V_1\subset \cdots \subset V_k=V\]
+dimensions $\dim V_i = n_1+\cdots+n_i$.
+(It is a smooth manifold.)
+Prove that its cohomology ring can
+be presented as the quotient ring of
+the subring of $\Z[x_1,\dots,x_N]$ (with $\deg x_i=2$) of invariants under the subgroup
+$S_{n_1}\times\cdots\times S_{n_k}\subset S_N$,
+modulo the ideal generated by
+the $S_N$-invariant homogeneous polynomials of positive degree.
+(Here, $N=n_1+\cdots+n_k$.)
+Exhibit this in the case of $\Fl(1,N-1)=\C\P^{N-1}$.
+
+\noindent\textit{Hint:} The full flag variety is a fiber bundle over $\Fl(n_1,\dots,n_k)$ with fiber a product of full flag
+varieties of sub-quotients $V_i/V_{i-1}$.
+\end{problem}
+
+\begin{solution}
+Let
+\[
+N=n_1+\cdots+n_k,
+\qquad
+Y=\Fl(1,\dots,1)=\Fl(\C^N),
+\qquad
+X=\Fl(n_1,\dots,n_k).
+\]
+There is a natural projection
+\[
+\pi:Y\to X
+\]
+which sends a complete flag
+\[
+0=L_0\subset L_1\subset\cdots\subset L_N=\C^N
+\]
+to the partial flag obtained by forgetting the intermediate steps inside each block:
+\[
+0\subset L_{n_1}\subset L_{n_1+n_2}\subset\cdots\subset L_N=\C^N.
+\]
+
+On \(Y\), let
+\[
+x_i=c_1(L_i/L_{i-1})\in H^2(Y;\Z),\qquad i=1,\dots,N.
+\]
+By the standard computation for the full flag variety,
+\[
+H^*(Y;\Z)\cong \Z[x_1,\dots,x_N]/I_+^{S_N},
+\]
+where \(I_+^{S_N}\) is the ideal generated by the symmetric polynomials of positive degree.
+
+We claim that
+\[
+H^*(X;\Z)\cong
+\Z[x_1,\dots,x_N]^{S_{n_1}\times\cdots\times S_{n_k}}/I_+^{S_N}.
+\]
+
+\medskip
+
+First, describe the fiber of \(\pi\). Fix a partial flag
+\[
+0=V_0\subset V_1\subset\cdots\subset V_k=\C^N,
+\qquad
+\dim(V_i/V_{i-1})=n_i.
+\]
+To refine this to a complete flag is exactly to choose a complete flag in each quotient
+\[
+V_i/V_{i-1}.
+\]
+Hence the fiber is
+\[
+F\cong \Fl(V_1/V_0)\times\Fl(V_2/V_1)\times\cdots\times \Fl(V_k/V_{k-1})
+\cong \Fl(\C^{n_1})\times\cdots\times \Fl(\C^{n_k}).
+\]
+
+By Leray--Hirsch, \(H^*(Y;\Z)\) is a free \(H^*(X;\Z)\)-module with basis the cohomology of the fiber. In particular, \(\pi^*:H^*(X;\Z)\to H^*(Y;\Z)\) is injective.
+
+We now identify its image. Over \(X\), there are tautological bundles
+\[
+0=\mathcal V_0\subset \mathcal V_1\subset\cdots\subset \mathcal V_k=\underline{\C}^N
+\]
+with
+\[
+\rank(\mathcal V_i/\mathcal V_{i-1})=n_i.
+\]
+Pulling back to \(Y\), the quotient \(\pi^*(\mathcal V_i/\mathcal V_{i-1})\) splits as the direct sum of the tautological line bundles in the \(i\)-th block:
+\[
+\pi^*(\mathcal V_i/\mathcal V_{i-1})
+\cong
+\bigoplus_{j=m_{i-1}+1}^{m_i} (L_j/L_{j-1}),
+\qquad
+m_i=n_1+\cdots+n_i.
+\]
+Therefore the Chern classes of \(\mathcal V_i/\mathcal V_{i-1}\) pull back to the elementary symmetric polynomials in the variables
+\[
+x_{m_{i-1}+1},\dots,x_{m_i}.
+\]
+So the image of \(\pi^*\) is contained in the subring
+\[
+\Z[x_1,\dots,x_N]^{S_{n_1}\times\cdots\times S_{n_k}}/I_+^{S_N}.
+\]
+
+Conversely, every polynomial symmetric in each block is a polynomial in the elementary symmetric functions of that block, hence is a polynomial in the Chern classes of the bundles \(\mathcal V_i/\mathcal V_{i-1}\). Thus every block-symmetric class lies in the image of \(\pi^*\). Therefore
+\[
+\operatorname{Im}(\pi^*)
+=
+\Z[x_1,\dots,x_N]^{S_{n_1}\times\cdots\times S_{n_k}}/I_+^{S_N}.
+\]
+Since \(\pi^*\) is injective, this proves
+\[
+H^*(\Fl(n_1,\dots,n_k);\Z)
+\cong
+\frac{\Z[x_1,\dots,x_N]^{S_{n_1}\times\cdots\times S_{n_k}}}{\bigl(\Z[x_1,\dots,x_N]^{S_N}_{>0}\bigr)}.
+\]
+
+\medskip
+
+For \(\Fl(1,N-1)=\C\P^{N-1}\), the subgroup is \(S_1\times S_{N-1}\cong S_{N-1}\), so the invariant ring is
+\[
+\Z[x_1,\dots,x_N]^{S_{N-1}}
+=
+\Z[x_1,e_1(x_2,\dots,x_N),\dots,e_{N-1}(x_2,\dots,x_N)].
+\]
+Modulo the ideal generated by the positive-degree \(S_N\)-invariants, we have
+\[
+e_1(x_1,\dots,x_N)=x_1+e_1(x_2,\dots,x_N)=0,
+\]
+so \(e_1(x_2,\dots,x_N)=-x_1\), and similarly all higher block-symmetric generators reduce to powers of \(x_1\). The top relation comes from
+\[
+\prod_{i=1}^N(1+x_i)=1,
+\]
+which implies \(x_1^N=0\). Hence
+\[
+H^*(\C\P^{N-1};\Z)\cong \Z[x_1]/(x_1^N),
+\qquad \deg x_1=2,
+\]
+as expected.
+\end{solution}
+
+\section*{Some classical results}
+These are important enough that you should go over the proofs carefully. If you run into difficulty,
+you can find them in Hatcher \emph{Algebraic Topology}.
+
+\begin{problem}[5: Leray--Hirsch theorem]
+Let $E\to X$ be a fiber bundle over a path-connected CW base, with fiber $F$. Assume that
+\begin{enumerate}
+\item $H^{*}(F;\Z)$ is a free $\Z$-module with basis $\alpha_1,\dots,\alpha_n$, and
+\item there exist classes $a_1,\dots,a_n$ in $H^{*}(E;\Z)$ restricting to the $\alpha_i$ on a fiber $F$.
+\end{enumerate}
+Conclude that $H^{*}(E;\Z)$ is a free module over $H^{*}(X;\Z)$ with basis $a_1,\dots,a_n$.
+
+\noindent\textit{Suggestion:} Use induction on the $n$-skeleta of $X$, exploiting the long exact sequence and the fact
+that the bundle is homeomorphic to a product when restricted to each cell.
+
+\noindent\textit{Remark:} If $E_0 \subset E$ is a fiber sub-bundle, the analogous result holds for the relative cohomology
+$H^{*}(E,E_0;\Z)$, with the same argument.
+\end{problem}
+
+\begin{solution}
+We first treat the case that $B$ is a finite--dimensional CW complex,
+by induction on $\dim B$.
+
+If $\dim B=0$, then $B$ is a discrete set of points and $E$ is a disjoint
+union of copies of $F$, so the result is immediate.
+
+Now suppose $\dim B=n$, and let $B'\subset B$ be obtained by removing
+one interior point from each $n$--cell.  Let $E'=p^{-1}(B')$.
+There is a commutative diagram with exact rows
+\[
+\begin{tikzcd}
+\cdots \arrow[r] &
+H^*(B,B')\otimes H^*(F) \arrow[r] \arrow[d,"\Phi"] &
+H^*(B)\otimes H^*(F) \arrow[r] \arrow[d,"\Phi"] &
+H^*(B')\otimes H^*(F) \arrow[r] \arrow[d,"\Phi"] &
+\cdots \\
+\cdots \arrow[r] &
+H^*(E,E') \arrow[r] &
+H^*(E) \arrow[r] &
+H^*(E') \arrow[r] &
+\cdots
+\end{tikzcd}
+\]
+where $\Phi(b\otimes c_j)=p^*(b)\smile c_j$.
+The top row is exact since tensoring with the free module $H^*(F)$
+preserves exactness, and the bottom row is the long exact sequence
+of the pair $(E,E')$.
+
+By induction, $\Phi:H^*(B')\otimes H^*(F)\to H^*(E')$ is an isomorphism.
+To show that \[\Phi:H^*(B,B')\otimes H^*(F)\to H^*(E,E')\]
+is also an isomorphism, choose small disk neighborhoods
+$U_\alpha\subset e^n_\alpha$ of the deleted points and set
+$U=\bigcup_\alpha U_\alpha$, $U'=U\cap B'$.
+By excision,
+\[
+H^*(B,B')\cong H^*(U,U'),
+\qquad
+H^*(E,E')\cong H^*(p^{-1}(U),p^{-1}(U')).
+\]
+Over each $U_\alpha$ the bundle is trivial, so
+\[
+H^*(p^{-1}(U),p^{-1}(U'))
+\cong
+H^*(U,U')\otimes H^*(F)
+\]
+by the relative Künneth theorem.
+Hence the left-hand $\Phi$ is an isomorphism.
+The five--lemma now implies that
+\[
+\Phi:H^*(B)\otimes H^*(F)\longrightarrow H^*(E)
+\]
+is an isomorphism.
+
+If $B$ is an infinite CW complex, apply the above argument
+to the skeleta $B^n$.
+Since $(B,B^n)$ is $n$--connected,
+so is $(E,p^{-1}(B^n))$,
+and passing to the direct limit over $n$ gives the result
+for arbitrary CW complexes.
+
+Finally, for an arbitrary base space $B$, choose a CW approximation
+$f:A\to B$ and consider the pullback bundle $f^*(E)\to A$.
+The map $f^*(E)\to E$ induces isomorphisms on homotopy groups,
+hence on cohomology.
+Since the theorem holds over $A$, naturality of $\Phi$
+implies it holds over $B$.
+
+\end{solution}
+
+\begin{problem}[6]
+Use the Leray--Hirsch theorem to prove that the integral cohomology ring of the unitary group $U(n)$
+is an exterior algebra with generators in degrees $1,3,\dots,2n-1$.
+
+\noindent\textit{Hint:} Consider the quotients $U(n)/U(n-1)$.
+
+\noindent\textit{Remark:} For the compact symplectic group $\Sp(n)=\GL(n;\H)\cap U(2n)$, the same argument gives
+exterior generators in degrees $3,7,\dots,4n-1$.
+\end{problem}
+
+\begin{solution}
+Induct on $n$. The case $n=1$ is clear since
+$U(1)=S^1$.
+
+Assume the result holds for $U(n-1)$.
+Consider the fibration
+\[
+U(n-1)\longrightarrow U(n)\longrightarrow S^{2n-1}.
+\]
+Since $S^{2n-1}$ is $(2n-2)$--connected, the pair
+$(U(n),U(n-1))$ is $(2n-2)$--connected.
+Hence
+\[
+H^i(U(n);\Z)\longrightarrow H^i(U(n-1);\Z)
+\]
+is an isomorphism for $i\le 2n-3$.
+
+By induction,
+\[
+H^*(U(n-1);\Z)
+\cong
+\Lambda_{\Z}[x_1,\dots,x_{2n-3}],
+\]
+where the $x_{2k-1}$ are generators in degree $2k-1$.
+Let $c_{2k-1}\in H^{2k-1}(U(n);\Z)$ be classes restricting to
+$x_{2k-1}$ on $U(n-1)$.
+
+The products of distinct $x_{2k-1}$ form an additive basis of
+$H^*(U(n-1);\Z)$.
+Since these are restrictions of the corresponding products of
+$c_{2k-1}$, the Leray--Hirsch theorem applies and shows that
+\[
+H^*(U(n);\Z)
+\]
+is additively generated by all products of distinct
+$c_{2k-1}$ together with one new generator
+\[
+x_{2n-1}\in H^{2n-1}(U(n);\Z)
+\]
+coming from $H^{2n-1}(S^{2n-1};\Z)$.
+
+By graded-commutativity, the square of every odd-degree class vanishes,
+so the ring structure is exterior:
+\[
+H^*(U(n);\Z)
+\cong
+\Lambda_{\Z}[x_1,x_3,\dots,x_{2n-1}].
+\]
+\end{solution}
+
+\begin{problem}[7: Thom isomorphism theorem]
+Let $E\xrightarrow{\,p\,} X$ be a fiber bundle with fibers closed $n$-disks over a CW complex $X$
+(finite and connected if you like, for simplicity). Let $\partial E \to X$ be the restriction of the bundle to the boundary spheres.
+\begin{enumerate}
+\item Show that the quotient space $E/\partial E$ inherits a natural CW structure from $X$.
+\item Show that $E$ can always be relatively oriented when $X$ is simply connected: that is, one can
+continuously choose an orientation---a generator of $H^n(D^n,\partial D^n)$---of every fiber.
+\item If $E$ is relatively oriented, show that there exists a class $\Theta \in H^n(E,\partial E;\Z)$ restricting to the
+orientation in each disk fiber. This is the Thom class.
+\end{enumerate}
+Conclude from Leray Hirsch that cupping with $\Theta$ gives an isomorphism
+\[H^k(X;\Z)\to H^{n+k}(E,\partial E;\Z)\]
+
+\noindent\textit{Remark.} When $E$ is a product, this is also called the suspension isomorphism. The Thom isomorphism is a twisted
+version of the suspension isomorphisms, provided you have the orientation.
+\end{problem}
+
+\begin{solution}
+
+    \begin{enumerate}
+        \item Let $X$ be a CW complex with skeleta $X^{-1}=\varnothing\subset X^0\subset X^1\subset\cdots$. Put
+        \[
+        E^k:=p^{-1}(X^k),\qquad \partial E^k := p^{-1}(X^k)\cap \partial E=p^{-1}(X^k) \text{ inside }\partial E.
+        \]
+        Then $(E^k,\partial E^k)$ is a subpair of $(E,\partial E)$, and we get an increasing filtration
+        \[
+        \partial E \subset E^0\cup \partial E \subset E^1\cup \partial E\subset \cdots \subset E\cup \partial E = E.
+        \]
+        Pass to the quotient $E/\partial E$; denote the image of $E^k\cup \partial E$ by $(E/\partial E)^k$. This gives a filtration
+        \[
+        *\;=\;(E/\partial E)^{-1}\subset (E/\partial E)^0 \subset (E/\partial E)^1\subset \cdots
+        \]
+        whose successive quotients are wedges of spheres, hence it is a CW structure.
+
+        To see that the successive quotients are wedges of spheres, we argue as follows
+For each $k$-cell $e^k_\alpha\subset X$, the restriction of the bundle to $e^k_\alpha$ is trivial because $e^k_\alpha\cong D^k$ is contractible:
+\[p^{-1}(e^k_\alpha)\cong e^k_\alpha\times D^n\]
+        \[
+       \partial\bigl(p^{-1}(\overline e^k)\bigr)
+=
+p^{-1}(\partial \overline e^k)
+\;\cup\;
+\bigl(\partial E \cap p^{-1}(\overline e^k)\bigr)
+        \]
+        Thus the piece you attach when going from $X^{k-1}$ to $X^k$ is the pair
+        \[
+        \bigl(D^k\times D^n,\; (\partial D^k\times D^n)\cup (D^k\times S^{n-1})\bigr),
+        \]
+        whose quotient is
+        \[
+        (D^k\times D^n)\big/ \bigl((\partial D^k\times D^n)\cup (D^k\times S^{n-1})\bigr)
+        \;\cong\; S^{k+n}
+        \]
+        In particular, the quotient $E/\partial E$ has one $(n+k)$-cell for each $k$-cell of $X$.
+
+\item We prove that the disk bundle $p:(E,\partial E)\to X$ is relatively orientable when $X$ is simply connected.
+
+Fix a basepoint $x_0\in X$ and choose an orientation of the fiber
+\[
+(E_{x_0},\partial E_{x_0})\cong (D^n,S^{n-1}).
+\]
+
+For any path $\gamma:[0,1]\to X$ with $\gamma(0)=x_0$, the pullback bundle
+\[
+\gamma^*(E,\partial E)\to [0,1]
+\]
+is trivial since $[0,1]$ is contractible. Hence there exists a homeomorphism of pairs
+\[
+\Psi_\gamma:
+(\gamma^*E,\gamma^*\partial E)
+\;\xrightarrow{\cong}\;
+([0,1]\times D^n,\ [0,1]\times S^{n-1}).
+\]
+Requiring $\Psi_\gamma$ to preserve the chosen orientation on the fiber over $0$
+determines an orientation on every fiber along $\gamma$.
+Thus the orientation at $x_0$ transports along $\gamma$ to an orientation at $\gamma(1)$.
+
+If $\gamma_0$ and $\gamma_1$ are homotopic rel endpoints, then pulling back the bundle along the homotopy $H:[0,1]^2\to X$ gives a trivial bundle over the square.
+Using a trivialization that preserves the orientation over $(0,0)$ shows that the transported orientations along $\gamma_0$ and $\gamma_1$ agree.
+Hence the transported orientation depends only on the homotopy class of the path.
+
+Since $\pi_1(X)=0$, any two paths with the same endpoints are homotopic rel endpoints.
+Therefore the transported orientation is independent of path and defines a well-defined orientation on every fiber.
+
+Finally, over a sufficiently small trivializing neighborhood $U\subset X$,
+the transported orientations correspond to a constant choice of generator in
+\[
+H^n(D^n,S^{n-1})\cong \mathbb Z.
+\]
+Thus there exists an open cover $\{U_\alpha\}$ of $X$ and trivializations of pairs
+\[
+\phi_\alpha:
+(p^{-1}(U_\alpha),\partial E\cap p^{-1}(U_\alpha))
+\xrightarrow{\cong}
+(U_\alpha\times D^n,\ U_\alpha\times S^{n-1})
+\]
+such that on overlaps $U_{\alpha\beta}$ the transition maps
+$\phi_\beta\circ\phi_\alpha^{-1}$
+are fiberwise orientation-preserving homeomorphisms of $(D^n,S^{n-1})$.
+This proves relative orientability.
+
+\item 
+Recall that in the quotient $E/\partial E$, each $k$-cell of $X$ contributes one
+$(n+k)$-cell
+\[
+(D^k\times D^n)\big/\bigl((\partial D^k\times D^n)\cup(D^k\times S^{n-1})\bigr)
+\cong S^{n+k}.
+\]
+Thus $E/\partial E$ has one $(n+k)$-cell for each $k$-cell of $X$.
+
+Now assume $E$ is relatively oriented. Then each fiber $D^n$ is oriented compatibly in local trivializations, so each product cell $D^k\times D^n$ acquires the product orientation. With these choices, the cellular boundary map on $E/\partial E$ is the same as the cellular boundary map on $X$, shifted up by $n$. In particular,
+\[
+C_{n+k}(E/\partial E;\Z)\cong C_k(X;\Z),
+\qquad
+C^{n+k}(E/\partial E;\Z)\cong C^k(X;\Z),
+\]
+and under these identifications the cellular coboundary agrees with that of $X$. This is because in $E/\partial E$, the whole vertical boundary has been collapsed away, so the only part of the boundary relevant which contributes to the cellular boundary map is precisely the boundary coming from the base.
+
+Let $1\in C^0(X;\Z)$ be the constant $0$-cochain taking the value $1$ on every
+$0$-cell of $X$. Since $d1=0$, it determines a cellular $n$-cocycle on
+$E/\partial E$. Let
+\[
+\Theta\in \widetilde H^n(E/\partial E;\Z)\cong H^n(E,\partial E;\Z)
+\]
+be the corresponding cohomology class.
+
+We claim that $\Theta$ restricts to the orientation generator on each fiber.
+Indeed, if $x$ is a $0$-cell of $X$, then the fiber quotient
+\[
+E_x/\partial E_x \cong D^n/S^{n-1}\cong S^n
+\]
+is exactly the $n$-cell of $E/\partial E$ lying over $x$, and by construction
+$\Theta$ evaluates as $1$ on this cell. Hence
+\[
+\Theta|_{(E_x,\partial E_x)}
+\in H^n(E_x,\partial E_x;\Z)\cong \Z
+\]
+is the chosen orientation generator.
+
+For an arbitrary point $x\in X$, choose a path from $x$ to some $0$-cell.
+Since the bundle over an interval is trivial as a bundle of pairs, and the
+trivialization is orientation-preserving, the restriction of $\Theta$ to the
+fibers is constant along the path. Therefore $\Theta$ restricts to the
+orientation generator on every fiber.
+    \end{enumerate}
+
+    Finally, apply the relative Leray--Hirsch theorem to the fiber bundle of pairs
+\[
+(D^n,S^{n-1}) \longrightarrow (E,\partial E)\xrightarrow{\,p\,} X.
+\]
+Since
+\[
+H^i(D^n,S^{n-1};\Z)\cong
+\begin{cases}
+\Z,& i=n,\\
+0,& i\neq n,
+\end{cases}
+\]
+the fiber cohomology is free on a single generator, namely the orientation class. By construction, the Thom class
+\[
+\Theta\in H^n(E,\partial E;\Z)
+\]
+restricts to \(u\) on every fiber. Hence Leray--Hirsch gives an isomorphism
+\[
+H^*(X;\Z)\otimes H^*(D^n,S^{n-1};\Z)\xrightarrow{\;\sim\;} H^*(E,\partial E;\Z),
+\qquad
+a\otimes u\longmapsto p^*(a)\smile\Theta.
+\]
+Since the relative cohomology of the fiber is concentrated in degree \(n\), this yields the Thom isomorphism.
+\end{solution}
+
+
+\begin{problem}[8: the Gysin sequence]
+Let $p:E\to X$ be a fiber bundle with fibers closed $n$-disks, with $X$ a finite connected CW complex.  Note that $H^{*}(X)\cong H^{*}(E)$ via $p^{*}$, because the fibers of $p$ are contractible.
+Let $e$ be the image of $\Theta$ in $H^n(X)$ under the map $H^n(E,\partial E)\to H^n(E)$. This is the Euler class of $E$.
+\begin{enumerate}
+\item Show that $\Theta\smile\Theta=\Theta\smile p^{*}e$ in $H^{2n}(E,\partial E;\Z)$, and conclude that $e$ is $2$-torsion when $n$ is odd.
+\item From the pair $(E,\partial E)$, establish the long exact Gysin sequence
+\[
+\cdots \to H^{k-n}(X;\Z)\xrightarrow{\ \smile e\ } H^k(X;\Z)\xrightarrow{\ p^{*}\ } H^k(\partial E;\Z)\to \cdots
+\]
+and write down an analogous sequence for homology.
+\item Let $n$ be even and assume that $H^{*}(\partial E;\Q)$ is a polynomial ring in some even variables $x_i$.
+Show that $H^{*}(X;\Q)=\Q[y_i,e]$ for some classes $y_i$ with $p^{*}y_i=x_i$.
+\end{enumerate}
+
+\noindent\textit{Remark.} Statement (3) applies to any coefficient ring $R$ instead of $\Q$.
+An example with $\Z$ is the fiber bundle $S^{2n+1}\to BU(n)\to BU(n+1)$ of classifying spaces for complex vector bundles,
+which shows, by induction, that the cohomology rings of infinite Grassmannians $\Gr(n,\infty)$ are polynomial rings in the Chern classes.
+See also Hatcher, \S4D for help with this question; 4D.6 has the real version with coefficients in $\Z/2$.
+\end{problem}
+
+\begin{solution}
+\begin{enumerate}
+    \item Let $j : H^n(E,\partial E;\Z) \to H^n(E;\Z)$ be the natural map. By definition of the Euler class,
+    $j(\Theta) = p^*e$. Hence
+    Since $j(\Theta) \in H^n(E)$, we get
+    $\Theta \smile \Theta = \Theta \smile j(\Theta) = \Theta \smile p^*e$.
+    That is the desired identity.
+
+    Now suppose $n$ is odd. Since $\deg \Theta = n$, graded commutativity gives
+    \[\Theta \smile \Theta = (-1)^n \Theta \smile \Theta = -\Theta \smile \Theta\]
+    so $2\Theta \smile \Theta = 0$.
+    Using the identity above, $2\Theta \smile p^*e = 0$. Now apply the Thom isomorphism:
+    \[
+    H^n(X;\Z) \xrightarrow{\;\sim\;} H^{2n}(E,\partial E;\Z), \qquad a \mapsto \Theta \smile p^*a.
+    \]
+    Under this isomorphism, $\Theta \smile p^*e$ corresponds exactly to $e$. Hence $2e = 0$.
+
+    \item Start with the long exact sequence of the pair $(E,\partial E)$:
+    \[
+    \cdots \to H^k(E,\partial E) \xrightarrow{j} H^k(E) \xrightarrow{i^*} H^k(\partial E) \xrightarrow{\delta} H^{k+1}(E,\partial E) \to \cdots
+    \]
+
+    Now identify the first and second terms using:
+    \begin{itemize}
+        \item Thom isomorphism: $\tau :
+        H^{k-n}(X) \xrightarrow{\;\sim\;} H^k(E,\partial E)$, $a \mapsto \Theta \smile p^*a$,
+        \item Contractibility of fibers: $p^* : H^k(X) \xrightarrow{\sim} H^k(E)$.
+    \end{itemize}
+
+    Under these identifications, the map $j : H^k(E,\partial E) \to H^k(E)$ becomes cup product with $e$. Indeed
+    \[
+    j(\Theta \smile p^*a) = j(\Theta) \smile p^*a = p^*e \smile p^*a = p^*(e \smile a),
+    \] where the first equality follows from the module structure of relative cohomology, and the rest follows from the fact that $p^*$ is a ring homomorphism, in fact an isomorphism. We see that the composition $(p^*)^{-1}\circ j\circ \tau
+\;:\;
+H^{k-n}(X)\to H^k(X)$ is precisely $a \longmapsto e \smile a$.
+
+    Thus the long exact sequence becomes
+    \[
+    \cdots \to H^{k-n}(X;\Z) \xrightarrow{\ \smile e\ } H^k(X;\Z) \xrightarrow{\ p^*\ } H^k(\partial E;\Z) \xrightarrow{\delta} H^{k-n+1}(X;\Z) \to \cdots.
+    \]
+    For the homology version, using the long exact sequence of the pair in homology together with Poincaré-dual pushforward/Thom identifications:
+    \[
+    \cdots \to H_k(\partial E;\Z) \to H_k(X;\Z) \xrightarrow{\ \cap e\ } H_{k-n}(X;\Z) \to H_{k-1}(\partial E;\Z) \to \cdots.
+    \]
+    Equivalently, the map $H_k(X) \to H_{k-n}(X)$ is cap product with the Euler class.
+
+    \item Assume $n$ is even and $H^*(\partial E;\Q) \cong \Q[x_i]$ is a polynomial ring on even-degree generators $x_i$. Consider the Gysin sequence with $\Q$-coefficients:
+    \[
+    \cdots \to H^{k-n}(X;\Q) \xrightarrow{\ \smile e\ } H^k(X;\Q) \xrightarrow{\ p^*\ } H^k(\partial E;\Q) \xrightarrow{\delta} H^{k-n+1}(X;\Q) \to \cdots.
+    \]
+
+    Since $n$ is even and each $x_i$ has even degree, every monomial in the $x_i$ has even degree. Thus $H^{\text{odd}}(\partial E;\Q) = 0$.
+
+    Now look at the exact sequence in odd degree. If $k$ is even, then $k-n+1$ is odd, so the target of $\delta$ is an odd-degree group of $X$. Inductively, all odd cohomology of $X$ vanishes, and then $\delta = 0$. Hence for every even class in $H^*(\partial E;\Q)$, there is a lift to $H^*(X;\Q)$. Choose $y_i \in H^*(X;\Q)$ such that $p^*y_i = x_i$. 
+    
+    Now we show that $H^*(X;\Q)$ is generated by the $y_i$ together with $e$. Take any class $a \in H^*(X;\Q)$. Its pullback $p^*a \in H^*(\partial E;\Q)$ is a polynomial in the $x_i$, say
+    $p^*a = f(x_i) = p^*f(y_i)$.
+    So $p^*(a - f(y_i)) = 0$.
+    By exactness of the Gysin sequence, $a - f(y_i) = e \smile b$ for some $b \in H^{*-n}(X;\Q)$.
+    Repeating the same argument on $b$, and inducting on degree, shows that $a$ lies in the subring generated by the $y_i$ and $e$. Thus
+    \[
+    H^*(X;\Q) = \Q[y_i,e].
+    \]
+\end{enumerate}
+\end{solution}
+\end{document}

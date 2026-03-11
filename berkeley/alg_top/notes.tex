@@ -200,10 +200,10 @@ Now we can build classifing spaces for all Lie groups. Recall from the Peter Wey
         \end{align*}
 \end{example}
 
-What is happening is that there is a grid \begin{align*}
+What is happening is that there is a grid \[\begin{bmatrix}
     \Z & 0 & \Z \\
     \Z & 0 & \Z \\
-\end{align*} and there is a differential $d_2$ from the $\Z$ in the bottom right to the $\Z$ in the top left which kills the $\Z$ in the bottom right and the $\Z$ in the top left. 
+\end{bmatrix}\] and there is a differential $d_2$ from the $\Z$ in the bottom right to the $\Z$ in the top left which kills the $\Z$ in the bottom right and the $\Z$ in the top left. 
 
 \begin{proof}
     Idea of proof. Build $B$ from its skeleta $B_n$ and check that the map remains an iso at each step from the LES and the five lemma. \begin{align*}
@@ -261,5 +261,474 @@ Recall isomorpihsm classes of real, complex, quaternionic line bundles are class
         c_1(L\otimes L') &= c_1(L) + c_1(L')
     \end{align*}
 \end{theorem}
+
+\section{Feb 24}
+\subsection{Suspensions and smash product}
+You should think of smash product as a tensor product. This becomes precise in linearized, i.e. stable homotopy theory. Also we need base points to talk about smash products. 
+\begin{example}
+    $I,0 \wedge I,0$ is not very interesting. $S^m \wedge S^n$ is $S^{m+n}$. To see this, identify $S^m,*$ with the unit cube $I^m,\partial I^m$ so that \begin{align*}
+    S^m \wedge S^n &= (I^m \wedge I^n) / (\partial I^m \wedge I^n \cup I^m \wedge \partial I^n) \\
+    &\cong I^{m+n} / \partial I^{m+n} \cong S^{m+n}
+    \end{align*}
+\end{example}
+
+\begin{definition}
+    The reduced suspension of a pointed space $X,*$ is $\Sigma X = S^1 \wedge X$. If $X$ does not have a base point, we can add one by taking the disjoint union with a point and declaring that to be the base point, the space $X_+$. Then declare the unreduced suspension $\Sigma X$ to be the reduced suspension of $X_+$.
+\end{definition}
+To think of a suspension, you can think of a double cone on $X$ and collapse a copy of $X$ that stretches from the top of the cone to the bottom.
+
+\begin{theorem}
+    $X$ based space. Then $G$-bundles on $\Sigma X$ with a trivialization at the based point are in bijection with based homotopy classes of maps $[X, G]_*$. 
+\end{theorem}
+
+\begin{proof}
+    Bundles are trivial on the cones over $X$. Only info is the gluing along $X,*$ which is given by a map $X \to G$ up to homotopy.
+\end{proof}
+
+\begin{corollary}
+    $[\Bun_G(\Sigma X)]_* = [\Sigma X, BG]_* = [X, \Sigma BG]_*$
+\end{corollary}
+
+Recall that $\Map_*(\Sigma X, Y)\cong \Map_*(X, \Omega Y)$ where $\Omega Y$ is the based loop space of $Y$ if $X$ is Hausdorff.
+
+\begin{corollary}
+    The classifing map of the standard $G$ bundle $\Sigma G \to BG$ induces a homotopy equivalence $G \to \Omega BG$ which preserves the group structure up to homotopy. 
+\end{corollary}
+
+\subsection{Line bundles on spheres}
+For $n>0$ then we can compute \begin{align*}
+    [\Bun_{\GL(1)}(S^n)]_* &= [S^{n-1}, \GL(1)]_* 
+\end{align*}
+Note that $[S^{n-1}, \pm 1] = \pm 1$ if $n=1$ and $*$ if $n>1$. Also note that $[S^{n-1}, S^1] = \Z$ if $n=2$ and $*$ if $n\neq 2$. This is because any $S^{n-1}$ with $n>2$ is simply connected so maps lift to $\R$, the universal cover of $S^1$, which is contractible.
+
+\begin{remark}
+    The Eilenberg-MacLane space of type $\pi,n$ where $\pi$ is an abelian group and $n$ is an integer is the unique up to homotopy, connected based space $K(\pi,n)$ such that $\pi_n(K(\pi,n)) = \pi$ and $\pi_m(K(\pi,n)) = 0$ for $m\neq n$. 
+\end{remark}
+
+We have met a couple examples of Eilenberg-MacLane spaces: $K(\Z/2,1) = \R\P^\infty$ and $K(\Z,2) = \C\P^\infty$. $S^1$ is a $K(\Z,1)$. Note that $\H\P^\infty$ is not a $K(\Z,4)$ because there are higher homotopy groups. A cool example is that $K(\Z/n,1)$ is the total space of the sphere bundle of $\cO(1)^n$ over $\C\P^\infty$, also known as $S^\infty/\Z/n$ where $\Z/n$ acts by $n$-th roots of unity on the unit sphere in $\C^\infty$.
+
+\begin{theorem}
+    If $X$ is a CW complex, then $[X, K(\pi,n)]_* = H^n(X; \pi)$. This implies that $K(\pi,n)$ is unique up to homotopy, i.e. $K(\pi,n)$ is canonical in the homotopy category. When $n=1$ we get that \begin{align*}
+        [X, K(\pi,n)]_* = \Hom(\pi_1(X), \pi)
+    \end{align*}
+    Moreover the equality is functorial in $X$ and is induced by $f:X \to K(\pi,n)$ goes to $f_*\iota_n$ where $\iota_n$ is the distinguished class in $H^n(K(\pi,n); \pi)$, classified by the identity map $K(\pi,n) \to K(\pi,n)$.
+    Removing the basepoints divides by the conjugation action of $\pi$ on $\Hom(\pi_1(X), \pi)$.\begin{align*}
+        [X, K(\pi,n)] = \prod_{\text{connected components}} \Hom(\pi_1(X_c), \pi)/\Ad(\pi  )
+    \end{align*}
+\end{theorem}
+
+\begin{corollary}
+    $\Pic_\R(X) \cong H^1(X; \Z/2)$ and $\Pic_\C(X) \cong H^2(X; \Z)$ given by $L \mapsto w_1(L)$ and $L \mapsto c_1(L)$ respectively.
+\end{corollary}
+
+Beware that there is a choice of sign in the complex case. Note that for us, the distinguished class $\iota_2 \in H^2(\C\P^\infty; \Z)$ is the Chern class of the dual $\cO(1)$ of the tautological line bundle $\cO(-1)$. 
+
+\begin{remark}
+    $\Sigma G$ to $BG$ reduces to $S^2 = \Sigma S^1$ to $\C\P^\infty$ but we have to be careful about the orientation, i.e. the choice of $\theta \mapsto e^{i\theta}$ in the $S^1$ which is getting suspended actually corresponds to $\cO(-1)$. This is because we get $z$ which has a pole at infinity, whereas $O(1)$ has a zero infinity.
+\end{remark}
+
+\begin{proof}
+    Proof that homotopy classes of maps $[X, \C\P^\infty]_* = H^2(X; \Z)$. The proof is by induction on skeleta. Let $X_n$ be the $n$-skeleton of $X$. Write $X_2 = \vee S^2$ because $\C\P^\infty$ is simply connected and so $X_1$ can be contracted. Cellular approximation says that we can just look at maps to $\C\P^1$. We get one integer for each $2$-cell. This defines a class in $H^2(X_2; \Z)$. If that class is zero, we can contract that map from $X_2$. How to go further?
+
+    Inductive step from $X_n$ to $X_{n+1}$. Suppose first $n \geq 3$. Here $H^2(X_{n+1},\Z) \to H^2(X_n; \Z)$ is an isomorphism. Need to show that maps to $\C\P^\infty$ extend uniquely. But this is true because the map $S^n \to \C\P^\infty$ is nullhomotopic for $n\geq 3$ and so the map will extend across all disks that we are attaching to get $X_{n+1}$.
+
+    The question is could there be $2$-extensions? No. Can deform the guarenteed homotopy to keep it fixed on $S^n$. This is a topological argument. You have to squint just right.
+
+    Now consider $n=3$. Have a map $H^2(X_3; \Z) \to H^2(X_2; \Z)$ which we assume is surjective, i.e. for every $\omega_2 \in H^2(X_2; \Z)$ there is a $\omega_3 \in H^2(X_3; \Z)$ which restricts to $\omega_2$. We know that for $\phi$ the attaching map of a $3$ disk, we must have $\phi^* \omega_2 = 0 \in H^2(S^2; \Z)$. Else, a differential out of $\omega_2$ would block the extension. Induction shows that a map out of $\partial D^3$ was contractible in $\C\P^\infty$ and so argue as before.
+\end{proof}
+\subsection{Additivity}
+We will give two arguments for the facts \begin{align*}
+    w_1(L\otimes L') &= w_1(L) + w_1(L') \\
+    c_1(L\otimes L') &= c_1(L) + c_1(L')
+\end{align*}
+
+\begin{proof}
+    [Complex case] Have two maps $\phi,\phi': X \to \C\P^\infty$ classifying $L$ and $L'$ and we want to understand the tensor product bundle. What is the tensor product? It is the pullback of $\cO(1,1) = \cO(1)\boxtimes \cO(1)$ on $\C\P^\infty \times \C\P^\infty$ along the map $\phi\times \phi': X \to \C\P^\infty \times \C\P^\infty$. The map $t: \C\P^\infty \times \C\P^\infty \to \C\P^\infty$ classifying $\cO(1,1)$. We need to show that $t^* c_1 = c$ where $c$ is the first Chern class of $\cO(1,1)$. But then we compute \begin{align*}
+        c_1(\cO(1,1)) \in H^2(\C\P^\infty \times \C\P^\infty; \Z) &\cong H^2(\C\P^\infty; \Z) \oplus H^2(\C\P^\infty; \Z) 
+    \end{align*} agrees with $c_1 \oplus c_1$ because restrictions are $\cO(1)$ on each factor. Thus \begin{align*}
+        t\circ (\phi\times \phi')^* c_1 &= (\phi\times \phi')^* (c_1 \oplus c_1) 
+    \end{align*}
+\end{proof}
+
+\begin{remark}
+    Behind the theorem we see that $\C\P^\infty$ is up to homotopy a topological abelian group, and the tensor product of line bundles is given by the group structure, i.e. $\C\P^\infty \cong \Sym^\infty \C\P^1$. For generalized cohomology theories $c_1(L\otimes L')$ defines a 1 parameter formal group, and this quantity $c_1(L\otimes L')$ very nearly determines the cohomology theory. This is due to Quillen and is now christened chromatic homotopy theory.
+\end{remark}
+
+
+\begin{definition}
+    Let $V$ over $X$ be a complex vector bundle of rank $r$. Form $\P V$ the projectivization of $V$ which is a fiber bundle $\pi$ over $X$ with fiber $\C\P^{r-1}$. Over $\P V$ there is a hyperplane bundle $\cO(1)$ which is the dual of the tautological line bundle. Let $\omega = c_1(\cO(1))$. Observe that $1,\dots, \omega^{r-1}$ form a basis for $H^*(\P V_*,\Z)$ over each fiber. By the Leray Hirsch theorem \begin{align*}
+        H^*(\P V; \Z) &\cong \bigoplus_{i=0}^{r-1} \pi^* H^i(X; \Z) \cup \omega^i
+    \end{align*}
+This implies that there exist a unique relation \begin{align*}
+        \omega^r + c_1(V) \cup \omega^{r-1} + \dots + c_r(V) = 0
+\end{align*} with $c_i(V) \in H^{2i}(X; \Z)$. These are called the Chern classes of $V$. The sum \begin{align*}
+    c(V) = 1 + c_1(V) + \dots + c_r(V)
+\end{align*} is called the total Chern class of $V$.
+\end{definition}
+
+\begin{theorem}
+    \begin{enumerate}
+        \item For $V = L$ the new definition of $c_1$ agrees with the old one.
+        \item For any $V$, the top Chern class $c_r(V)$ is the Euler class of $V$ as a real bundle, i.e. the Thom class of $E$ restricted to the zero section.
+        \item The Chern classes detect complex conjugation, i.e. $c_i(\overline{V}) = (-1)^i c_i(V)$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    To check (1) note that $\P V = X$ and the equation is $\omega + c_1(L) = 0$ but $L = \cO(-1)$ and so that is ok. Postpone (2) and (3).
+\end{proof}
+
+\subsection{Characteristic properties}
+\begin{theorem}
+    \begin{enumerate}
+        \item The classes $c_k(V)$ are functorial in $V$, i.e. for $f: X \to Y$ with $V$ a vector bundle over $Y$, we have $c_k(f^* V) = f^* c_k(V)$.
+        \item $c(L) = 1 + c_1(L)$ for line bundles.
+        \item[Whitney sum] For $V = L_1 \oplus L_2$ a direct sum of line bundles, we have $c(V) = c(L_1) \cup c(L_2)$.
+        \item The above properties completely characterize the Chern classes, i.e. if $c_k'(V)$ is another collection of classes satisfying the above properties, then $c_k'(V) = c_k(V)$ for all $k$ and all $V$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Quick proof of (3). Think about the total space $\P(V\oplus W)$. Inside you have $\P V$ and $\P W$ as disjoint submanifolds. Moreover, observe that $\P(V\oplus W) \setminus \P V$ is a bundle over $\P W$ by projection in homogeneous coordinates. Thus we can compute \begin{align*}
+        H^*(\P(V\oplus W)) & \cong H^*_{\P W}(\P(V\oplus W))
+    \end{align*}
+    cohomology with supports. Consider now the expression \begin{align*}
+        (\sum c_i(V) \cup \omega^{r-i}) \cup (\sum c_j(W) \cup \omega^{s-j})
+    \end{align*}
+    where $r,s$ are the ranks of $V,W$. The left is 0 in $\P(V)$ and the right is 0 in $\P(W)$, i.e. the left comes from $H^*_{\P W}(\P(V\oplus W))$ and the right comes from $H^*_{\P V}(\P(V\oplus W))$. Thus the cup product is supported nowhere and thus must be zero. But $\sum_m \omega^{r+s-m} \cup c_m(V\oplus W)$ was the only monic equation that could be zero, so we get the desired formula.
+\end{proof}
+
+\section{Feb 26}
+\subsection{Cohomology of flag varieties}
+Any universal identity involving chern classes need only be checked on unordered direect sums of line bundles. Given $\pi:V^r\to X$ we get the full flag variety $\Fl(V)$ which is a bundle over $X$ whose points over $x$ are full flags in the fiber $V_x$. Choose a hermitian metric. Over $\Fl(V)$ we have a filtration of $\pi^*V$ by complete flags with subquotients $L_i$ which gets that $\pi^*(V) \cong \bigoplus L_i$. The metric is what lets us split the filtration, and so in algebraic geometry we cannot necessarily do this. Observe that $\Fl(V)$ is a iterated fiber bundfle of projective spaces of decreasing dimension.
+
+Let $x_i \in H^2(\Fl(V); \Z)$ be the first Chern class of $L_i$. An application of Leray Hirsch implies the following \begin{theorem}
+    $H^^*(\Fl(V); \Z) \cong H^*(X; \Z)\langle x_1^{i_1}\dots x_r^{i_r} \rangle$ where $0\leq i_k \leq r-k$ as a vector space. As an algebra \begin{align*}
+        H^*(\Fl(V); \Z) &\cong H^*(X; \Z)[x_1,\dots, x_r]/\langle \prod(1 + x_i) = c(V) \rangle
+    \end{align*}
+    There is an action of $S^r$ on $H^*(\Fl(V); \Z)$ by permuting the $x_i$ and $\pi^* H^*(X; \Z) \hookrightarrow H^*(\Fl(V); \Z)$ is the inclusion of the $S^r$-invariants. 
+\end{theorem}
+
+Having a metric, $\Fl(\C^r) \cong U(r)/U(1)^r$ where $S^n$ acts on the right by permuting the columns.
+
+Note that if $X=\mathrm{pt}$, then $V\cong \mathbb{C}^r$ is just a fixed vector space and
+\[
+\Fl(V)=\Fl_r.
+\] The relation becomes
+\[
+\prod_{i=1}^r (1+x_i)=c(V)=1
+\]
+since all higher Chern classes of a bundle on a point vanish. Equating homogeneous parts gives
+\[
+e_1(x)=e_2(x)=\cdots=e_r(x)=0,
+\]
+so the cohomology ring of the full flag variety is the coinvariant algebra of the symmetric group $S_r$:
+\[
+H^*(\Fl_r;\mathbb{Z})\cong \mathbb{Z}[x_1,\dots,x_r]/(e_1,\dots,e_r)
+= \mathbb{Z}[x_1,\dots,x_r]\big/\langle \mathbb{Z}[x]^{S_r}_+\rangle,
+\]
+	For the relative flag bundle, the fiber part has cohomology given by the coinvariants, the base part by the invariants, and the total cohomology is the tensor product of the two. 
+
+\subsection{Properties of the $c_i$}
+$c_k(V^\vee) = (-1)^k c_k(V)$ because we have already seen that the equality holds for $c_1$ and the splitting principle implies that it holds for all $c_k$.
+
+The splitting principle also implies that the top Chern class $c_r(V)$ is the Euler class of $V$ as a real bundle. It is true for line bundles and then the Euler class of $V\oplus W$ is the cup product of the Euler classes of $V$ and $W$.
+
+\begin{proposition}
+    The Euler class of $V\oplus W$ is the cup product of the Euler classes of $V$ and $W$.
+\end{proposition}
+
+\begin{proof}
+    We show that it is true for the Thom classes, and recall that the Euler class is the restriction of the Thom class to the zero section. The Thom class is the unique class in $H^{\dim_\R V}(D(V), \partial D(V); \Z)$ which restricts to the preferred generator in each fiber. $V,W$ being complex have preferred orientation. Clearly $\Theta_v \cup \Theta_w$ satisfies the right property.
+\end{proof}
+
+Aside, a priori we have $\Theta_v \cup \Theta_w$ is a class in $H^*(D(V)\times D(W), D(V)\times \partial D(W) \cup \partial D(V)\times D(W); \Z)$ but this is isomorphic to $H^*(D(V\oplus W), \partial D(V\oplus W); \Z)$. The Euler class can be explicitly represented using distrubtions and differential forms.
+
+\begin{remark}
+    [Geometric argument for euler product formula]
+    If $X$ is a compact oriented manifold, then $PD(e(V))$ is the zero locus of a generic section of $V$, which can be made smooth by transversality. Then same for $W$ and $V\oplus W$. The zero loci coincide after pertubation because cup product corresponds to intersection.
+\end{remark}
+
+\begin{remark}
+    For a generic transverse section $s$,
+    \begin{align*}
+        Z(s) \subset X
+    \end{align*}
+    is a smooth codimension-$k$ submanifold and
+    \begin{align*}
+        PD(e(V)) = [Z(s)] \in H_{n-k}(X).
+    \end{align*}
+    Cup product corresponds to transverse intersection:
+    \begin{align*}
+        PD(e(V) \cup e(W)) = [Z(s_V)] \cap [Z(s_W)].
+    \end{align*}
+
+    Now take $V = N_{X/Y}$. Suppose $i : X \hookrightarrow Y$ is an oriented embedding of codimension $k$, with normal bundle $N := N_{X/Y}$. There is a fundamental identity:
+    \begin{align*}
+        i^* i_*(\alpha) = \alpha \cup e(N) \quad \text{for } \alpha \in H^*(X).
+    \end{align*}
+    This is the self-intersection formula.
+
+    The geometric meaning is as follows: $i_*$ corresponds to pushing forward cycles from $X$ into $Y$, and pulling back $i^*$ amounts to intersecting again with $X$. The correction factor is the Euler class of the normal bundle. Thus
+    \begin{align*}
+        X \cdot X = e(N_{X/Y})
+    \end{align*}
+    inside $H^*(X)$. So cupping with the Euler class of the normal bundle is precisely the operation of intersecting with $X$ inside $Y$.
+\end{remark}
+
+
+Stabliity of chern classes. Observe that $c_*(V\oplus \C) = c_*(V)$ because the extra factor is $1$. In general vector bundles over $X$ form a symmetric monoidal category under direct sum and tensor product. Iso classes form a commutative semiring, and we can take an additive group completion to a commutative ring $K^0(X)$, if $X$ is compact and Hausdorff. 
+
+The objects in $K^0(X)$ are formal differences of stable isomorphism classes of finite rank vector bundles, where $V$ and $W$ are stably isomorphic if there exists some $E$ such that $V\oplus E \cong W \oplus E$. This can be simplified since every $E$ can be complemented to a trivial bundle, so $V$ and $W$ are stably isomorphic if there exists some $n$ such that $V\oplus \C^n \cong W \oplus \C^n$. Then the Chern classes refine to a map \begin{align*}
+    c_*: K^0(X) \to \prod H^{2k}(X; \Z)
+\end{align*}
+by defining $c_*(V-W) = c_*(V)/c_*(W)$.
+This is an exponential like map, turning sums into products.
+
+\begin{proposition}
+    $c_*$ is well defined and turns sums into products. Moreover, if $X$ is compact, the a priori infinite series terminates.
+\end{proposition}
+
+\begin{example}
+    $X = \C\P^\infty$ and consider the class $[-\cO(1)] \in K^0(\C\P^\infty)$. Then $c_*(-\cO(1)) = 1/c_*(\cO(1))$ which is $1/(1+c) = 1 - c + c^2 - c^3 + \dots$.
+\end{example}
+
+$c_*$ of a tensor product. Let $x_i,y_j$ be the Chern roots of $V,W$ respectively. Then the Chern roots of $V\otimes W$ are $x_i + y_j$. The proof is by the splitting principle.    
+
+\subsection{Aside on algebraic geometry}
+In algebraic geometry, we study coherent sheaves. A sheaf $S$ is coherent if locally, there is a presentation of $S$ as the cokernel of a map of finite rank vector bundles. 
+
+It is a theorem that on a complex projective manifold, every coherent sheaf has a \textbf{finite} resolution by finite rank algebraic vector bundles. In fact, you can stop at the dimension of the manifold.
+
+This is a combination of two theorems. Hilbert syzygy theorem is about doing this locally. The second theorem is about doing this globally, there are enough vector bundles by projectivity.
+
+Use this to functorially define the Chern classes of a coherent sheaf $S$ by taking a resolution by vector bundles and then taking the alternating product of the Chern classes of the vector bundles in the resolution. The result is independent of the choice of resolution. This feeds into the Hirzebruch Riemann Roch theorem.
+
+\subsection{Equivariant cohomology and equivariant Euler classes}
+$X$ space, $G$ compact Lie group acting on $X$. Can form the Borel construction $X_G = EG \times_G X$ which is a fiber bundle over $BG$ with fiber $X$. Put $H^*_G(X) = H^*(X_G)$. 
+
+Extreme special cases.
+If $G$ acts trivially on $X$, then $X_G = BG \times X$ and if $BG$ has no torsion in cohomology, then $H^*_G(X) = H^*(BG) \otimes H^*(X)$.
+
+If $G$ acts freely on $X$, then $X_G = X/G$ and so $H^*_G(X) = H^*(X/G)$.
+
+Application. If $\pi:V\to X$ is a vector bundle of rank $r$, it carries a natural $U(1)$ action on the fibers. 
+
+\begin{proposition}
+    The equivariant Euler class $e_{U(1)}(V) \in H^*_{U(1)}(X)$ is \begin{align*}
+        \sum_{i=0}^r c_i(V) \cup \omega^{r-i}
+    \end{align*} where $\omega$ is the generator of $H^*_{U(1)}(\mathrm{pt}) = H^*(\C\P^\infty)$.
+\end{proposition}
+\begin{proof}
+    $V$ becomes a vector bundle over $X\times \C\P^\infty$ by tensoring the pullback with $\cO(1)$. The equivariant Euler class is simply the Euler class of this new bundle, a class in $H^*(X\times \C\P^\infty)$. Now use the formula for the Chern roots of a tensor product.
+\end{proof}
+
+\subsection{Hirzebruch Riemann Roch}
+Note that this generalizes to the Atiyah-Singer index theorem.
+Let $X$ projective algebraic complex manifold and $S$ a coherent sheaf on $X$. Denote by $\chi(X,S) = \sum (-1)^i \dim H^i(X,S)$ the Euler characteristic of $S$. Let $t_i$ denote the Chern roots of the tangent bundle $TX$, and let $s_i$ be the Choern roots of $S$. Define the Chern character of $S$ to be \begin{align*}
+    \ch(S) = \sum e^{s_i} = \sum_{k=0}^\infty \frac{1}{k!} \sum s_i^k
+\end{align*} in rational cohomology. Define the Todd class of $X$ to be \begin{align*}
+    \td(X) = \prod \frac{t_i}{1-e^{-t_i}} = \prod \frac{t_i}{1 - (1-t_i + t_i^2/2! - t_i^3/3! + \dots)} = \prod \frac{t_i}{t_i - t_i^2/2! + t_i^3/3! - \dots}
+\end{align*} Then \begin{align*}
+    \chi(X,S) = \int_X \ch(S) \cup \td(X)
+\end{align*}
+
+\section{March 3}
+Today we will do integration along fibers of a bundle. Application will be segre calsses, transgresssions of classes, cohomology of $BU(n)$ and $U(n)$, cohomology of $\Gr(k,n)$, and Bott periodicity.
+
+\subsection{Integration along the fiber}
+This is also known as a transfer map, anytime the map goes the wrong way. Let $M$ be compact oriented manifold, then we have a map called capping with the fundamental class $[M]$ \begin{align*}
+    \int_M: H^*(M) \to H^{*-n}(\mathrm{pt})
+\end{align*} where $n$ is the dimension of $M$ and this goes the wrong way for cohomology because it goes the same way as the map $M \to *$.
+
+We can do this for any fiber bundle $\pi: E \to B$ with compact oriented fibers of dimension $d$ and the fibers are oriented in a locally constant way. \begin{theorem}
+    There is a map $\pi_*: H^*(E) \to H^{*-d}(B)$ where $d$ is the dimension of the fibers, which is functorial in pullback, i.e. given a pullback square \begin{center}
+    \begin{tikzcd}
+        E' \arrow[r] \arrow[d] & E \arrow[d, "\pi"] \\
+        B' \arrow[r] & B
+    \end{tikzcd}
+    \end{center}
+    we have $\pi'_* f^* = f^* \pi_*$, and satisfies the projection formula \begin{align*}
+        \pi_*(\pi^* \alpha \cup \beta) = \alpha \cup \pi_* \beta
+    \end{align*}
+
+Additional functoriality comes in layers of fiber bundles. If $F' \to E' \to B'$ is a fiber bundle and $F \to E \to B$ is a fiber bundle and we have a map of fiber bundle, then we have $(\pi \circ \pi')_* = \pi_* \circ \pi'_*$. 
+\end{theorem}
+When $B$ is a manifold, this plays well with Poincare duality. Before we define the map, first we give a partial generalization when $B$ is also a manifold. Note that the transfer map could be defined using Poincare duality on both sides and the pushforward of homology classes. This needs not the fiber bundle structure. Let $f:E\to B$ be a proper map of oriented connected manifolds. Note the fibers need not be manifolds. Then there is a functorial $f_*: H^*(E) \to H^{*-d}(B)$ where $d = \dim E - \dim B$ which extends the previous construction when $f$ is a fiber bundle. 
+
+\begin{proof}
+    The map is simply the composition \begin{align*}
+        H^*(E) &\xrightarrow{PD} H_{\dim E - *}(E) \\
+        &\xrightarrow{f_*} H_{\dim E - *}(B) \\
+        &\xrightarrow{PD^{-1}} H^{*-d}(B)
+    \end{align*}
+    where the middle map is the pushforward of homology classes. This relies on the base to be a manifold. Remark that this fails if $B$ is not orietned, then it can be salvaged by twisted coefficients in the orientation sheaf provided $f$ is relatively oriented, meaning $f^*(or_B) \cong or_E$. We can give a second construction by following the map as an embedding followed by projection. If $B$ is finite dimensional, then we can factor $f$ as an proper embedding $E \hookrightarrow B \times \R^N$ followed by projection to $B$ for some large $N$. Just use Whitney embedding theorem to get the embedding and then use the projection. Then just have to define the pushforward for proper embedding of manifolds. Recall the tubular neighborhood theorem. If $i:X\to Y$ is a proper embedding then there exists $X \hookrightarrow N_{X/Y}$ the normal bundle of $X$ in $Y$ and an open embedding $N_{X/Y} \hookrightarrow Y$ which is the identity on $X$. The oriented assumption implies that this is oriented. Then Thom implies that we have a Thom isomorphism $H^*(X) \cong H^{* + \dim N_{X/Y}}(D(N_{X/Y}), S(N_{X/Y}))$. Handle the projection using Kunneth formula.
+\end{proof}
+Remark that the transfer map can operate on the level of differential forms if we have a submersion and the fibers don't pose singularities. 
+
+\subsection{Application: segre class of a vector bundle}
+Let $\pi: V \to X$ be a vector bundle and $\P\pi: \P V \to X$ be the projectivization of $V$. We have the hyperplane bundle $\cO(1)$ on $\P V$ and its first Chern class $\omega$. \begin{definition}
+    The Segre class of $V$ is defined to be \begin{align*}
+    s(V) = \P\pi_* \left( \frac{1}{1-\omega} \right) = \P\pi_* (1 + \omega + \omega^2 + \dots)
+\end{align*}
+\end{definition}
+\begin{theorem}
+    $s(V) = c(V)^{-1}$, i.e. the Segre class is the multiplicative inverse of the Chern class.
+\end{theorem}
+\begin{remark}
+    In algebraic geometry, can define $s$ of a bundle of projective varieties (cone). In complex AG, things are real codimension 2, thus we get fundamental class and can use this to integrate down. 
+\end{remark}
+
+\begin{proof}
+    \textbf{The transfer map is is always a module map over the cohomology of the base}, i.e. $f_*(f^* \alpha \cup \beta) = \alpha \cup f_* \beta$. This is also called the projection formula.
+
+    Given this, the theorem is equivalent to the identity \begin{align*}
+        \P\pi_*(\frac{1}{1-\omega} \cdot \P\pi^* c(V)) = 1
+    \end{align*} But $1-\omega$ is the total Chern class of the tautological line bundle $\cO(-1)$. Tautological and complement $= \P\pi^* V$. Thus the term $\frac{1}{1-\omega} \cdot \P\pi^* c(V) = c_*(V/\cO(-1))$ so it is equal to $1 + c_1 + \dots + c_{r-1}$ where $r$ is the rank of $V$. The pushforward of this is a constant. Now check it for $\P^{r-1}$
+    \end{proof}
+    
+    \subsection{Chern classes of $T\P^n$}
+    What is $T\P^n$? At a point $L\in \C^{n+1}$, the tangent space is the infinitesimal deformations of $L$ inside $\C^{n+1}$. If you draw the picture of a line close to another line, you see that it is the graph of a function from $L$ to $\C^{n+1}/L$. Thus the tangent space is $\Hom(L, \C^{n+1}/L)$.
+    We compute $T\P^n = (\C^{n+1}/L) \otimes L^\vee$ and an exact sequence \begin{align*}
+        0 \to \cO \to \cO(1)^{\oplus n+1} \to T\P^n \to 0
+    \end{align*} where the first map is the diagonal embedding. Now take Chern classes. \begin{align*}
+        c(T\P^n) &= c(\cO(1)^{\oplus n+1})/c(\cO) \\
+        &= (1+c)^{n+1}
+    \end{align*} In particular $c_n (T\P^n) = \binom{n+1}{n} c^n = (n+1) c^n$ is the Euler class and we can check that \begin{align*}
+        \int_{\P^n} c_n(T\P^n) = n+1 = \chi(\P^n)
+    \end{align*}
+
+    \subsection{Cohomology of $\Gr(k,n)$}
+    We have bundles \begin{align*}
+        0 \to T \to \underline{\C}^n \to Q \to 0
+    \end{align*} where $T$ is the tautological bundle of rank $k$ and $Q$ is the quotient bundle of rank $n-k$. We have classes $c_i(T)$ and $c_j(Q)$ and the identity \begin{align*}
+        c(T) \cup c(Q) = 1
+    \end{align*} The first observation is that these generators are redundant. In fact, $c_i(Q)$ can be expressed in terms of $c_j(T)$ and vice versa, e.g. $c_1(Q) = -c_1(T)$. One might worry that if one throws away half of the generators, then one might lose the relations. The second observation is that this is no issue, because relations are recovered from the condition that $c(T) \cup c(Q) = 1$. The third observation is that there are no other relations. 
+
+    \begin{proof}
+        There is a fiber bundle $\Fl(k)\times \Fl(n-k) \hookrightarrow \Fl(n) \to \Gr(k,n)$ so \[H^*(\Gr(k,n)) = [\Z[x_i]/(e_i = 0)]^{S^k \times S^{n-k}}\] The $S_k$ invariants correspond to $c_i(T)$ and the $S_{n-k}$ invariants correspond to $c_j(Q)$. 
+    \end{proof}
+    More generally for $\pi:V\to X$ and $\Gr \pi: \Gr(k,V) \to X$ the Grassmannian bundle, we have $H^*(\Gr(k,V)) = H^*(X)\langle c_i(T), c_j(Q) \rangle/\langle c(T) \cup c(Q) = c(V) \rangle$.
+
+    \subsection{Cohomology of $BU(n)$ and $U(n)$}
+
+    Write \begin{align*}
+    BU(n) &= \Gr(n, \infty) 
+    \end{align*} from which it becomes clear that \begin{align*}
+    H^*(BU(n); \Z) &\cong \Z[c_1,\dots, c_n]
+    \end{align*} where $c_i$ are the universal chern classes, in the sense that any vector bundle $V$ over $X$ is classified by a map $f: X \to BU(n)$ and $c_i(V) = f^* c_i$. 
+
+    Now we can do transgression to get the cohomology of $U(n)$. Consider transgression on a mapping space with source $M$ and target $X$. Produce cohomology classes in $H^*(\mathrm{Map}(M,X))$ so called tautological classes. There is an evaluation map $\mathrm{Map}(M,X) \times M \to X$. Given $\alpha \in H^*(X)$, we can pull it back to $\mathrm{Map}(M,X) \times M$ and then use Kunneth to get components in $H^*(M)$.
+
+    Fun example where $X = BU(n)$ and $M = \Sigma$ is a closed surface. Get tautological classes in $H^*(\mathrm{Map}(\Sigma, BU(n)))$ from $c_i$ and a basis of $H^*(\Sigma)$. 
+
+    \begin{theorem}[Atiyah-Bott, Proceedings of Royal Society, 1980s, "Yang Mills"]
+        In this case, the cohomology of $\mathrm{Map}(\Sigma, BU(n))$ is freely generated by these classes as an algebra.
+    \end{theorem}
+    For us, consider the case $M = S^1,*$. Consider the maps \begin{align*}
+        (S^1, *) \times \Omega BU(n) &\to BU(n) \\
+        S^1 \wedge U(n) &\to BU(n)
+    \end{align*}
+    where keep in mind $U(n) = \Omega BU(n)$ homotopy equivaelnt. We have the fiber bundle $U(n-1) \to U(n) \to S^{2n-1}$ where the last map is claled $q$. Then \begin{theorem}
+        \begin{align*}
+            \int_{S^1} ev^* c_i &= q^* vol_{S^{2n-1}}
+        \end{align*}
+    \end{theorem}
+\begin{corollary}
+    The classes in $H^{2k-1}(U(n))$ pulled back from $H^{2k-1}(S^{2k-1})$are defined on any $U(n)$ for $n\geq k$. This implies the Leray assumption and we can compute $H^*(U(n))$ as the exterior algebra on the transgressions of the $c_i$.
+\end{corollary}
+
+\section{March 10}
+\subsection{Symmetric functions and grassmannians}
+There is a duality isomorphism \begin{align*}
+    \Gr(k,n) &\cong \Gr(n-k,n) \\
+        (T \to \C^n \to Q) &\mapsto (\overline T^{\perp} \to \overline{C^n} \to \overline Q^{\perp})
+\end{align*} note that $T \mapsto T^\perp$ is complex antilinear, so we need to conjugate to get a complex linear map. The chern roots change sign.
+
+\begin{theorem}
+    $D$ is compattible with Schubert stratification. On labels, one exchanges $0$s and $1$s and reverses the sequence. On partitions, one takes the dual. If $\lambda$ fits in the $k\times (n-k)$ box, then $\lambda^D$ will fit in the $(n-k)\times k$ box. 
+\end{theorem}
+
+Why do Schubert cells map to cells? We need to show that if $\dim(T\cap F_q)$ jumps at $q = i_1, i_2, \dots$, then $\dim(T^\perp \cap F_{q}^D)$ jumps at $n - i_1, n - i_2, \dots$. This is a linear algebra fact.
+
+This duality is also witnessed by an algebraic duality in the ring of symmetric polynomials. Let $R$ be the ring of symmetric polynomials in infinite variables. 
+
+\begin{theorem}
+    The map $s_\lambda \in R \mapsto PD(\Sigma_\lambda)\in H^{2|\lambda|}(\Gr(k,n))$ is a surjective ring hommorphism. The homogeneous variables are either the Chern roots of $Q$ or the negative Chern roots of $T$. They are interchanged by the duality isomorphism and it interchanges the partition labels. In particular \begin{align*}
+        PD(\Sigma_\lambda) \cdot PD(\Sigma_\mu) = \sum_\nu c_{\lambda\mu}^\nu PD(\Sigma_\nu)
+    \end{align*} are the Littlewood-Richardson coefficients, which coincide with the structure constants of the Schur functions. Using the negatiev Chern roots of $T$ we can also write \begin{align*}
+        c_i(T) = (-1)^i e_i(x_1,\dots, x_k) &= (-1)^i S_{(1^i)} \\
+        c_j(Q) = s_j(x_1,\dots, x_k) = S_{(j)}
+    \end{align*} where $e_i$ is the $i$-th elementary symmetric function and $s_j$ is the $j$-th complete symmetric function.
+\end{theorem}
+
+A proof of this theorem follows from the Pieri formula.
+
+\begin{theorem}
+    The Pieri formula states that \begin{align*}
+        c(Q) \cap [\Sigma_\lambda] &= \sum_{\nu} [\Sigma_\nu] 
+    \end{align*} where the sum is over $\nu$ obtained from $\lambda$ by adding a horizontal strip, i.e. adding boxes to $\lambda$ with no two in the same column.
+\end{theorem}
+
+\begin{remark}
+    Schur Weyl duality considers the two sided action of $GL_k$ and $S_n$ on $(\C^k)^{\otimes n}$.
+\end{remark}
+
+Constantin doesn't want to do the proofs so we will just explain the logic. The geometric proof of Pieri. Look at $\Gr(k,n)$ and understand the multiplication of $c_*(Q)$ on homogeneous polynomials. Pass to the flag bundle of $Q$ over $\Gr(k,n)$. Every Schubert variety $\Sigma_\lambda$ has a rational section, regular over the Schubert cell. This is because $Q$ can be trivialized over the Schubert cell, the basis coming from restricting the total coordinates of $C^n\to Q$ complimenting the pivot coordinates. Use the identity $p_*(p^* c(Q) \cap \sigma_\lambda) = c(Q) \cap p_* \sigma_\lambda$ where upstairs you have a formula. 
+
+\begin{remark}
+    Similar idea can be used to prove that $[\Sigma_\lambda]$ is the Schur function $s_\lambda$ in the Chern roots of $Q$. Use $\Fl(k) \to \Fl(T) \to \Gr(k,n)$ with Chern roots $\rho_i$ of $T$ for $i=1,\dots, k$. The fact is that $\Fl(T)$ has a stratification lifting the one in $\Gr(k)$. There are $k!$ strata over each $\Sigma_\lambda$, namely the strata of $\Fl(k)$. $\Fl(k)$ is an iterated fiber bundle of projective spaces. The fact is $PD(\Sigma_\lambda) = p_* PD(\rho_1^{\lambda_1 + k - 1} \cup \dots \cup \rho_k^{\lambda_k})$. The wrong way map in cohomology here becomes the correct map in homology, so we get the zero locus of maps generically bijective to $\Sigma_\lambda$.
+\end{remark}
+
+Recall that we have the Jacobi-Trudi formula \begin{align*}
+    \sum_{\sigma\in S_n} (-1)^\sigma \prod_{i=1}^k s_{\lambda_i + n - i} = \frac{A}{B}
+\end{align*} where $A$ is the determinant of the matrix with $(i,j)$-entry $s_{\lambda_i + j - i}$ and $B$ is $A$ with $\lambda_i = 0$. Then the fact above is about the application of the Jacobi-Trudi formula to monomials. 
+
+Repeating the argument in $K$ thoery gives the character formula for representations of $\GL(n)$ as Schur functions. We get a bunch of theorems \begin{theorem}
+    \begin{enumerate}
+        \item $H^0(\Fl(k), L_\lambda) = S_\lambda$ is the highest weight representation of $\GL(k)$ with highest weight $\lambda$.
+        \item (Bott improvement) $H^{>0} = 0$ if $\lambda$ is dominant.
+        \item $\sum (-1)^i H^i$ conincudes with the pushforward $p_!$ in K theory
+        \item $p_!$ in K theory obeys the same formula.
+    \end{enumerate}
+\end{theorem}
+
+\subsection{Bott periodicity theorem}
+We didn't give the definition of homotopy groups yet but we can give a weak version of the statement.
+
+\begin{theorem}
+    $\pi_k(U) = 0$ for $k$ even and $\pi_k(U) = \Z$ for $k$ odd, where $U = \lim U(n)$ is the infinite unitary group.
+\end{theorem}
+Let's state the better version.
+\begin{theorem}
+    There is a homotopy equivalence \begin{align*}
+        \beta: BU \to \Omega^0 U
+    \end{align*} where $\Omega^0 U$ is the connected component of the based loop space of $U$ containing the constant loop. In particular, $\Omega U \simeq \Z \times BU$.
+\end{theorem}
+
+\begin{remark}
+    Grouplike monoid structure of $\Omega U$ (any space honestly) means that $\Omega U \simeq \Z \times \Omega^0 U$ where $\Z$ is the fundamental group of $U$. To see this, note that as a space $U(n)$ is homeomorphic to $U(1) \times SU(n)$ the map to the first component being the determinant, and the map is split by $u \in \R \mapsto \diag(u, 1, \dots, 1)$. 
+\end{remark}
+
+We can state the Bott map. Realize $BU$ as limit of Grassmannian. Note that $\Omega SU(n)$ is maps $I \to SU(n)$ sending the endpoints to the identity. We can consider $P_{I,-I}(SU(2n))$ the space of paths in $SU(2n)$ sending the endpoints to $\pm I$. Note that $P_{I,-I}(SU(2n))$ is homotopy equivalent to $\Omega SU(2n)$ because we can simply choose any path from $I$ to $-I$ and concatenate.
+
+This receives a map from $\lim \Gr(n, 2n)$. The map will go to minimal geodesics in $SU(2n)$. We will send $T\in \Gr(n, 2n)$ as follows. Write $\C^{2n} = T \oplus T^\perp$ and define a path in $SU(2n)$ by sending $t \in I$ to $e^{\pi i t} \Proj_T + e^{-\pi i t} \Proj_{T^\perp}$. 
+
+\begin{theorem}
+    The image is a union of cells in a cell decomposition of a cellular approximation of $P_{I,-I}(SU(2n))$. The other cells has dimension $2n+2$. In particular we get all the lower cells.
+\end{theorem}
+
+Sources of the cell decomposition. \begin{enumerate}
+    \item Morse theory a la Bott.
+    \item Algebra. Coarsening of the Bruhat decomposition of $\Omega SU$.
+\end{enumerate}
+Part of the story is that there is an algebraic version of $\Omega U$. We can consider the Laurent polynomial loop group and its flag variety. 
+    $L_{poly}\GL_n(\C)$ is the subgroup of invertibles in $\Mat_n(\C[z,z^{-1}])$. Note that $U(n) \hookrightarrow \GL_n(\C)$ is a homotopy equivalence by the polar decomposition because $M$ invertible implies that $M = up$ and $P$ the positive definite part is contractible. 
+
+    \begin{theorem}
+        $L_{poly}\GL_n(\C) \hookrightarrow L\GL_n(\C)$ is a homotopy equivalence. The right hand side is a CW complex because you can filter by the order of zeros and poles.
+    \end{theorem} 
+
+    We can get this form Bott or an analog of Schubert decomposition. We consider Bott's argument. Morse theory. Consider the energy functional on $P_{I,-I}(SU(2n))$ given by $E(\gamma) = \int_0^1 \|\gamma'(t)\|^2 dt$. The critical points are precisely the geodesics from $I$ to $-I$. Note that $L_{sm} GL(n) \subset L_{cts} GL(n)$ is a homotopy equivalence by general nonsense so thinking about derivatives is harmless. The critical points are precisely the image of the map $\lim \Gr(n, 2n) \to P_{I,-I}(SU(2n))$. Gradient flow defines a cell decomposition of $P_{I,-I}(SU(2n))$. The dimension of the cells is computable from the Hessian of $E$.
 
 \end{document}

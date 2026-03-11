@@ -1,0 +1,1722 @@
+
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+
+
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0pt}
+
+\DeclareMathOperator{\len}{len}
+\newcommand{\fg}{\mathfrak g}
+\newcommand{\Rees}{Rees}
+
+\DeclareMathOperator{\Frac}{Frac}
+\begin{document}
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Title}
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+\begin{abstract}
+    Abstract
+\end{abstract}
+
+\tableofcontents
+
+\section{The setup}
+Recall that we have a line bundle $\mathcal L:=\mathcal L_{\det}$ on $\cX:=\cX_{G,g,I}$ and an invariant norm $\|\cdot\|$ on $X_*(T)_\mathbb R$.
+
+For a point $x\in \cX(k)$ and a nontrivial $f:\Theta\to \cX$ with $f(1)\simeq x$, define
+$$\mu(x,f)\;:=\;\frac{\mathrm{wt}_{\mathcal L}(f)}{\|\lambda_f\|},$$
+where $\mathrm{wt}_{\mathcal L}(f)$ is the $\mathbb G_m$-weight on the fiber of $\mathcal L$ at the special point $f(0)$, and $\lambda_f$ is the associated cocharacter data of $f$ coming from the action of $\mathbb G_m$ on the object $f(0)$.
+
+We wanted to prove the following theorem.
+\begin{theorem}[Need to prove]
+    For any $x\in \cX_{G,g,I}(k)$, there exists a (unique up to something) maximally destabilizing $\Theta$-filtration $f_{\mathrm{HN}}:\Theta\to \cX_{G,g,I}$ of $x$ with respect to $\mathcal L_{\det}$ and any invariant norm on $X_*(T)_\R$.
+\end{theorem}
+
+\section{The case for $\SL_2$}
+
+A $G^\Delta$-torsor $\mathcal{F}$ on $C_0$ together with a trivialization $\tau$ on $C_0-p$ identifies $\mathcal{F}$ by gluing across the node.
+\begin{itemize}
+    \item The gluing datum is a point of the quotient $(LG\times LG)/\mathcal{P}^\Delta$.
+\end{itemize}
+Once you trivialize away from $p$, the remaining local moduli at the node is encoded by a class $[g_1,g_2]$ modulo $\mathcal{P}^\Delta$.
+
+On the local loop description, $\lambda$ acts by conjugation on the gluing datum $(g_1, g_2) \in LG \times LG$ (up to the usual left/right conventions):
+\[
+(g_1, g_2) \mapsto (\lambda(t) \, g_1 \, \lambda(t)^{-1}, \lambda(t) \, g_2 \, \lambda(t)^{-1})
+\]
+and then take the class in $(LG \times LG)/\mathcal{P}^\Delta$.
+
+Then $f(0)$ is the limit of this class as $t \to 0$, provided the limit exists in the stack quotient (it does for the destabilizing $\lambda$'s relevant to $\Theta$-stratifications).
+
+\section{Weight of determinant of cohomology}
+
+Let $C$ be a proper curve (smooth/twisted/nodal doesn't matter for this formal step) and let $F$ be a $\mathbb{G}_m$-equivariant vector bundle on $C$ (in your case $F = \ad(\mathcal{E})|_{t=0}$ coming from the Rees family).
+
+Define
+\[
+\det R\Gamma(C, F) := \bigotimes_{q \geq 0} \det H^q(C, F)^{(-1)^q}.
+\]
+Each $H^q(C, F)$ is a finite-dimensional $\mathbb{G}_m$-representation, so $\det H^q(C, F)$ is a 1-dimensional $\mathbb{G}_m$-representation, hence has an integer weight.
+
+
+
+If a finite-dimensional $\mathbb{G}_m$-representation $V$ decomposes as
+\[
+V = \bigoplus_{i \in \mathbb{Z}} V_i, \quad \mathbb{G}_m \text{ acts on } V_i \text{ by } t^i,
+\]
+then $\det(V) \cong \bigotimes_i \det(V_i)$, and $\det(V_i)$ has weight $i \cdot \dim V_i$. Therefore
+\[
+\mathrm{wt}(\det V) = \sum_i i \cdot \dim V_i. 
+\]
+Apply this to $V = H^q(C, F)$:
+\[
+\mathrm{wt}\bigl(\det H^q(C, F)\bigr) = \sum_i i \cdot \dim H^q(C, F)_i.
+\]
+Now take the determinant of cohomology:
+\[
+\mathrm{wt}\bigl(\det R\Gamma(C, F)\bigr) = \sum_q (-1)^q \mathrm{wt}\bigl(\det H^q(C, F)\bigr).
+\]
+Arranging gives
+\[
+\mathrm{wt}\bigl(\det R\Gamma(C, F)\bigr) = \sum_q (-1)^q \sum_i i \cdot \dim H^q(C, F)_i = \sum_i i \cdot \sum_q (-1)^q \dim H^q(C, F)_i.
+\]
+But $\sum_q (-1)^q \dim H^q(C, F)_i$ is exactly the Euler characteristic of the $i$-weight piece:
+\[
+\chi(C, F_i) := \sum_q (-1)^q \dim H^q(C, F_i),
+\]
+where $F_i$ is the $\mathbb{G}_m$-weight-$i$ subbundle/sheaf (or graded piece) of $F$. So you get the fundamental identity
+\[
+\boxed{\mathrm{wt}\bigl(\det R\Gamma(C, F)\bigr) = \sum_i i \cdot \chi(C, F_i)}.
+\]
+
+Applying Riemann-Roch to each $F_i$ gives
+\[
+\mathrm{wt}\bigl(\det R\Gamma(C, F)\bigr) = \sum_i i \cdot \bigl(\deg(F_i) + \mathrm{rk}(F_i) \cdot (1 - g)\bigr).
+\]
+
+
+\subsection{Why we use $L_\lambda$}
+
+At $t=0$ the $G$-bundle has reduced structure group to the Levi $L_\lambda$, and the graded pieces of the adjoint representation are representations of $L_\lambda$ (not canonically of all of $P_\lambda$, and not canonically tied to the original $G$-torsor without choosing a splitting). The associated bundle construction has to use the structure group that actually acts on the graded pieces.
+
+Concretely:
+
+\begin{enumerate}
+    \item \textbf{What you actually have at $t=0$}
+    
+    The Rees/associated-graded limit of a $P_\lambda$-reduction is not a $P_\lambda$-bundle with extra extension data; it is canonically an $L_\lambda$-bundle
+    \[
+    E_{0,\lambda}=E_{P_\lambda}\times^{P_\lambda} L_\lambda
+    \]
+    (the unipotent radical is ``killed'' in the associated graded). This $L_\lambda$-bundle is the intrinsic datum of the special fiber.
+    
+    So any vector bundle you write down on the special fiber must be built functorially from $E_{0,\lambda}$.
+    
+    \item \textbf{Why $\Lie(G)_i$ is an $L_\lambda$-representation}
+    
+    You have a cocharacter $\lambda:\mathbb{G}_m\to Z(L_\lambda)$. The weight space decomposition
+    \[
+    \Lie(G)=\bigoplus_i \Lie(G)_i
+    \]
+    is defined by the $\mathbb{G}_m$-action $\mathrm{Ad}\circ \lambda$.
+    
+    Because $\lambda(\mathbb{G}_m)\subset Z(L_\lambda)$, the adjoint action of $L_\lambda$ commutes with $\mathrm{Ad}(\lambda(t))$. Therefore each $\Lie(G)_i$ is stable under $L_\lambda$, i.e.\ it is a genuine $L_\lambda$-representation.
+    
+    By contrast, the unipotent radical $U_\lambda\subset P_\lambda$ does not preserve the individual weight spaces: it raises weights. So there is no canonical $P_\lambda$-action on $\Lie(G)_i$ compatible with the grading (except on the associated graded, where $U_\lambda$ acts trivially).
+    
+    Hence the correct structure group for the graded pieces is $L_\lambda$.
+    
+    \item \textbf{Determinant of cohomology is applied to the actual sheaf on the curve}
+    
+    The determinant-of-cohomology line $\det R\Gamma(C,\,\ad(\mathcal{E})|_{t=0})$ depends only on the vector bundle $\ad(\mathcal{E})|_{t=0}$ on $C$. But we want to compute its $\mathbb{G}_m$-weight, so we use the decomposition into $\lambda$-weight pieces:
+    \[
+    \ad(\mathcal{E})|_{t=0}
+    \cong \bigoplus_i \bigl(E_{0,\lambda}\times^{L_\lambda}\Lie(G)_i\bigr),
+    \]
+    where each summand has $\mathbb{G}_m$-weight $i$. On a nodal curve $C_0$, this is not a true statement about vecetor bundles on $C_0$ and we repair the calculation by passing to the normalization exact sequence.
+
+    \[\det R\Gamma(C_0,F)\ \cong\ \det R\Gamma(\widetilde C,\nu^*F)\ \otimes\ \det H^0(Q)^{-1}\]
+    
+    This decomposition is what allows the identity
+    \[
+    \mathrm{wt}\bigl(\det R\Gamma(C,\ad(\mathcal{E})|_{t=0})\bigr)
+    =\sum_i i\cdot \chi\bigl(C,\;E_{0,\lambda}\times^{L_\lambda}\Lie(G)_i\bigr).
+    \]
+    
+    So the fiber product over $L_\lambda$ appears because it is the canonical way to form the graded summands as vector bundles on $C$ from the special-fiber Levi bundle.
+    
+    \item \textbf{Relation to the parabolic reduction}
+    
+    You can also write
+    \[
+    E_{0,\lambda}\times^{L_\lambda}\Lie(G)_i
+    \cong
+    E_{P_\lambda}\times^{P_\lambda} \gr_i\Lie(G),
+    \]
+    where $\gr_i\Lie(G)$ means the associated graded for the $P_\lambda$-stable filtration on $\Lie(G)$. This is the same statement: $U_\lambda$ acts trivially on $\gr_i$, so the action factors through $L_\lambda$. Using $L_\lambda$ just packages this cleanly.
+\end{enumerate}
+The quantity 
+\[
+\sum_i i\Bigl(\deg(\mathcal E_{0,\lambda}\times^{L_\lambda}\Lie(G)_i)
++\dim(\Lie(G)_i)(1-g)\Bigr)
+\] becomes \[
+2\sum_{i>0} i\;\deg(\mathcal E_{0,\lambda}\times^{L_\lambda}\Lie(G)_i).
+\] because roots come in pairs, hence the $1-g$ term cancels cancels out.
+
+\section{The limit of conjugation of lambda as t goes to 0 kills the unipotnet part}
+Let $P_\lambda \subset G$ be the parabolic attached to a cocharacter $\lambda : \mathbb{G}_m \to G$. Its unipotent radical is
+\[
+U_\lambda = \{g \in G : \lim_{t \to 0} \lambda(t) \, g \, \lambda(t)^{-1} = 1\}.
+\]
+This is a standard characterization: $\lambda$ acts with positive weights on $\Lie(U_\lambda)$, so conjugation scales those directions by positive powers of $t$, hence sends them to $0$ in the Lie algebra and to $1$ in the group.
+
+Concretely, in $G = \mathrm{SL}_2$, with
+\[
+\lambda(t) = \begin{pmatrix} t & 0 \\ 0 & t^{-1} \end{pmatrix}, \qquad u(x) = \begin{pmatrix} 1 & x \\ 0 & 1 \end{pmatrix} \in U,
+\]
+one computes
+\[
+\lambda(t) \, u(x) \, \lambda(t)^{-1} = \begin{pmatrix} 1 & t^{2} x \\ 0 & 1 \end{pmatrix} \longrightarrow \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \quad (t \to 0).
+\]
+So conjugation by $\lambda(t)$ kills the unipotent part in the limit, while it fixes the Levi $L_\lambda$ (because $\lambda(\mathbb{G}_m) \subset Z(L_\lambda)$).
+
+On a smooth curve the bundle is glued by transition functions $g_{ij} \in G(\mathcal{O}(U_{ij}))$ on overlaps (or $g(z) \in LG$ if you work formally at a point). The $\Theta$-degeneration modifies these transition functions by conjugation with $\lambda(t)$, and the limit $t \to 0$ produces the associated graded because it kills the weight-raising (unipotent) part of the $P_\lambda$-data.
+
+A precise local description is:
+
+\begin{enumerate}
+    \item \textbf{Start with a $P_\lambda$-reduction}
+    
+    Given $E$ and a reduction $E_{P_\lambda}$, you can choose a cover $\{U_i\}$ and trivializations so that the transition functions lie in $P_\lambda$:
+    \[
+    p_{ij} \in P_\lambda(\mathcal{O}(U_{ij})).
+    \]
+
+    \item \textbf{Form the Rees family by conjugating glue}
+    
+    Define a family over $\mathbb{A}^1$ by replacing $p_{ij}$ with
+    \[
+    p_{ij}(t) := \lambda(t) \, p_{ij} \, \lambda(t)^{-1} \in P_\lambda(\mathcal{O}(U_{ij})) \subset G(\mathcal{O}(U_{ij})).
+    \]
+    For $t \neq 0$, $p_{ij}(t)$ defines a $G$-bundle isomorphic to $E$ (it's just a change of trivialization).
+
+    \item \textbf{Take $t \to 0$: why this becomes associated graded}
+    
+    Write $p_{ij} = \ell_{ij} \, u_{ij}$ with $\ell_{ij} \in L_\lambda$, $u_{ij} \in U_\lambda$ (locally). Then
+    \[
+    \lambda(t) \, p_{ij} \, \lambda(t)^{-1} = \lambda(t) \ell_{ij} \lambda(t)^{-1} \cdot \lambda(t) u_{ij} \lambda(t)^{-1}.
+    \]
+    \begin{itemize}
+        \item Since $\lambda(\mathbb{G}_m) \subset Z(L_\lambda)$, the Levi part is unchanged:
+        \[
+        \lambda(t) \ell_{ij} \lambda(t)^{-1} = \ell_{ij}.
+        \]
+        \item Since $\lambda$ contracts $U_\lambda$, the conjugated unipotent term tends to $1$ in the Rees/limit sense.
+    \end{itemize}
+    
+    So the special fiber glue is effectively just $\ell_{ij}$, i.e.\ it defines the $L_\lambda$-bundle
+    \[
+    E_{0,\lambda} = E_{P_\lambda} \times^{P_\lambda} L_\lambda,
+    \]
+    and the resulting $G$-bundle at $t=0$ is the canonical ``graded'' object attached to $(E_{P_\lambda}, \lambda)$ (often described as the $P_\lambda$-bundle with the $U_\lambda$-extension split to its associated graded).
+
+    \item \textbf{Where the ``element of $G$'' story is actually correct}
+    
+    If you work formally at a point with a punctured disc trivialization, then a $G$-bundle is classified by a loop $g(z) \in LG$, and the $\Theta$-degeneration looks like
+    \[
+    g(z) \mapsto \lambda(t) \, g(z) \, \lambda(t)^{-1}.
+    \]
+    So you are "following gluing data under conjugation" but the gluing data lives in $G(\mathcal{O}(U_{ij}))$ or $LG$, not a single global element of $G$.
+\end{enumerate}
+
+\subsection{Compatibility with $\mu_k$}
+At a stacky node $p$ with stabilizer $\mu_k$, the bundle has prescribed local monodromy
+\[
+\iota_\eta:\mu_k\to G
+\]
+up to conjugacy.
+
+\begin{itemize}
+    \item A $\Theta$-degeneration adds a $\mathbb{G}_m$-stabilizer at $t=0$, so the stabilizer at $(p,0)$ is $\mu_k\times \mathbb{G}_m$.
+    \item To define a $G$-bundle over $\mathcal{C}\times \Theta$ (hence a map $\Theta\to X_\eta$), you must give a homomorphism
+    \[
+    \mu_k\times \mathbb{G}_m \to G
+    \]
+    restricting to $\iota_\eta$ on $\mu_k$ and to $\lambda$ on $\mathbb{G}_m$.
+\end{itemize}
+
+This exists iff the images commute, i.e.
+\[
+\boxed{\lambda(\mathbb{G}_m)\subset Z_G(\iota_\eta(\mu_k))}.
+\]
+
+So only such $\lambda$'s are allowed as $\Theta$-filtrations within the $\eta$-component.
+
+The HN $\Theta$-filtration (i.e. your choice of $\lambda$, equivalently $P_\lambda$-reduction on $C_0\setminus\{p\}$) restricts to a $P_\lambda$-reduction on each $\widetilde C_j\setminus\{p_\pm\}$, and extends across the smooth points $p_\pm$ on the normalization.
+
+Therefore on each component $\widetilde C_j$, the special fiber $\nu^*F$ admits the familiar weight decomposition
+$$\nu^*F \cong \bigoplus_i F_i$$
+(with $F_i = E_{0,\lambda}\times^{L_\lambda}\mathfrak{g}_i$ on that component), and the $\mathbb{G}_m$-weight of $\det R\Gamma(\widetilde C_j,F)$ is computed by
+$$\sum_i i\cdot \chi(\widetilde C_j,F_i).$$
+
+Note that after Riemann Roch this becomes \begin{align*}
+    2\sum_{i>0} i\cdot \deg(E_{0,\lambda},L_\lambda \times \mathfrak{g}_i)
+\end{align*}
+
+In the smooth case, once we arrive here, we try to reduce to the maximal parabolic case, where $L_\lambda=L_j$ has one-dimensional character group:
+$X^*(L_j) \cong \mathbb{Z} \quad \text{(for } G \text{ semisimple, } P_j \text{ maximal).}$
+Equivalently, any character of $L_j$ is an integral multiple of the fundamental weight $\omega_j$ (restricted to $L_j$), or of the canonical generator $\det(\Lie(P_j))$ that Heinloth uses. For any associated vector bundle $V = E_{0,\lambda} \times^{L_j} W$ on a smooth curve,
+\[
+\deg(V) = \deg(\det V) = \deg(E_{0,\lambda} \times^{L_j} \det W).
+\]
+Each $\det W$ is a positive multiple of the generator of $X^*(L_j)$.
+Take $W = \Lie(G)_i$ (a representation of $L_j$). Then $\det(\Lie(G)_i)$ is a character of $L_j$, hence
+\[
+\det(\Lie(G)_i) \;=\; m_{i,j} \cdot \chi_j
+\quad \text{for some } m_{i,j} \in \mathbb{Z},
+\]
+where $\chi_j$ is the chosen generator. 
+
+Fix $T\subset B\subset G$ and simple roots $\Delta=\{\alpha_1,\dots,\alpha_r\}$. Let $P_j$ be the maximal parabolic corresponding to $\alpha_j$. Take the dominant cocharacter $\widetilde\omega_j$ characterized by
+\[
+\langle \alpha_i,\widetilde\omega_j\rangle=\delta_{ij}.
+\]
+
+Then $\widetilde\omega_j$ defines a $\mathbb{Z}$-grading of $\mathfrak{g}=\Lie(G)$:
+\[
+\mathfrak{g}=\bigoplus_{i\in\mathbb{Z}}\mathfrak{g}_i,\qquad
+\mathfrak{g}_i=\{x\in\mathfrak{g}:\Ad(\widetilde\omega_j(t))x=t^i x\}.
+\]
+
+Root decomposition gives
+\[
+\mathfrak{g} = \mathfrak{t} \oplus \bigoplus_{\alpha\in\Phi}\mathfrak{g}_\alpha,
+\] which further refines to the grading by $\widetilde\omega_j$:
+\[
+\mathfrak{g}_i = \bigoplus_{\alpha:\langle\alpha,\widetilde\omega_j\rangle=i}\mathfrak{g}_\alpha
+\quad\text{for }i\neq 0,
+\]
+and $\mathfrak{g}_0$ contains $\mathfrak{t}$ plus root spaces with $\langle\alpha,\widetilde\omega_j\rangle=0$, i.e.\ roots in the Levi.
+
+On $W=\mathfrak{g}_i$, $\widetilde\omega_j(t)$ acts by $t^i$ on every vector by definition. Therefore on the determinant line $\det(\mathfrak{g}_i)$,
+$\widetilde\omega_j(t)$ acts by $t^{i\cdot \dim(\mathfrak{g}_i)}$ so indeed $\det(\mathfrak{g}_i)$ is a positive multiple of the generator $\chi_j$ of $X^*(L_j)$.
+
+Having established 
+\[
+\det(\mathfrak{g}_i) = m_{i,j} \, \chi_j
+\quad \text{in } X^*(L_j),
+\qquad m_{i,j} \ge 0.
+\]
+we find that
+\[
+\mathrm{wt}_{\mathcal{L}}(\widetilde{\omega}_j)
+=
+2\Big(\sum_{i>0} i \, m_{i,j}\Big) \cdot \deg\bigl(E_{0,\lambda} \times^{L_j} \chi_j\bigr).
+\]
+and in particular the constant in front of $\deg(E_{0,\lambda} \times^{L_j} \chi_j)$ is positive. Therefore the sign of $\mathrm{wt}_{\mathcal{L}}(\widetilde{\omega}_j)$ is the same as the sign of $\deg(E_{0,\lambda} \times^{L_j} \chi_j)$, which is what allows us to reduce to the maximal parabolic case.
+
+\subsection{What is $Q$}
+
+$Q$ is only defined as ``the cokernel of the normalization map'':
+\[
+0 \to F \to \nu_* \nu^* F \to Q \to 0,
+\]
+so to compute $\det H^0(Q)^{-1}$ you need to know what the map $F \to \nu_* \nu^* F$ is at the node.
+
+Concretely, you need the following data:
+\textbf{The fiber identification at the node (the gluing isomorphism)}
+    
+    On the normalization, you have fibers $F_{p_+}$ and $F_{p_-}$. To descend to the node you need an identification
+    \[
+    \phi: F_{p_+} \xrightarrow{\sim} F_{p_-}
+    \]
+    coming from the principal bundle's gluing datum. For $F = \ad(E_0)$, $\phi$ is $\ad(\gamma)$ for the relative position $\gamma = g_2 g_1^{-1}$ in your $LG \times LG / \mathcal{P}^\Delta$ chart.
+    Let $\nu:\widetilde C\to C_0$ normalize the node $p$, with preimages $p_+,p_-$. Set $F=\ad(E_0)$ on $C_0$. Then the normalization map $F\to \nu_*\nu^*F$ induces on stalks at $p$:
+    \[
+    F_p \longrightarrow (\nu_*\nu^*F)_p \cong (\nu^*F)_{p_+}\oplus (\nu^*F)_{p_-}.
+    \]
+
+In chosen trivialisations on each branch, identify the fibers
+    \[
+    (\nu^*F)_{p_+}\cong \mathfrak{g},\qquad (\nu^*F)_{p_-}\cong \mathfrak{g}.
+    \]
+The bundle $F$ on the nodal curve is obtained by descending $\nu^*F$ with a gluing map
+    \[
+    \phi:\mathfrak{g} \xrightarrow{\sim}\mathfrak{g}
+    \]
+(coming from the principal gluing element $h=g_2^{-1}g_1$ via $\phi=\Ad(h)$, in the convention from the previous message).
+
+Then $F_p$ is the graph of $\phi$:
+    \[
+    F_p \;\cong\; \Gamma(\phi)\;:=\;\{(x,\phi(x))\mid x\in \mathfrak{g}\}\ \subset\ \mathfrak{g}\oplus \mathfrak{g},
+    \]
+and the map $F_p\to \mathfrak{g}\oplus\mathfrak{g}$ is the inclusion of this graph.
+
+Therefore
+    \[
+    Q_p \;\cong\; (\mathfrak{g}\oplus \mathfrak{g})\big/\Gamma(\phi). \tag{A}
+    \]
+
+So invariance of $Q$ is invariance of this quotient under changing $\phi$ according to $\mathcal{P}^\Delta$.
+
+\medskip
+
+\noindent 2) How $\phi$ changes when $(g_1,g_2)$ is changed by $\mathcal{P}^\Delta$
+
+Changing $(g_1,g_2)$ by $(p_1,p_2)\in \mathcal{P}^\Delta$ is exactly changing the trivializations on the two branches. On the adjoint fibers, this changes the identifications $(\nu^*F)_{p_\pm}\cong\mathfrak{g}$ by the automorphisms
+\[
+A:=\Ad(p_1)\in \Aut(\mathfrak{g}),\qquad B:=\Ad(p_2)\in \Aut(\mathfrak{g}).
+\]
+
+A gluing map $\phi$ written in old coordinates becomes, in new coordinates,
+    \[
+    \phi' \;=\; B\circ \phi \circ A^{-1}. \tag{B}
+    \]
+(This is the same ``change-of-coordinates'' formula as before; note it is $\circ A^{-1}$ because you first convert a $+$-vector from new coords to old, apply $\phi$, then convert the $-$-vector from old coords to new.)
+
+\medskip
+
+\noindent 3) Why $Q_p$ is invariant: graphs are carried to graphs
+
+Consider the invertible linear map
+    \[
+    T:=A\oplus B:\ \mathfrak{g}\oplus\mathfrak{g} \longrightarrow \mathfrak{g}\oplus\mathfrak{g},
+    \qquad (x,y)\mapsto (Ax,By).
+    \]
+Then
+    \[
+    T\bigl(\Gamma(\phi)\bigr)=\Gamma(\phi'). \tag{C}
+    \]
+Proof: if $(x,\phi(x))\in \Gamma(\phi)$, then
+    \[
+    T(x,\phi(x))=(Ax,B\phi(x)).
+    \]
+Write $x'=Ax$. Then $x=A^{-1}x'$, so
+    \[
+    (Ax,B\phi(x))=(x',\,B\phi(A^{-1}x'))=(x',\,\phi'(x')),
+    \]
+which is exactly a point of $\Gamma(\phi')$. Conversely, every $(x',\phi'(x'))$ arises this way.
+
+Now mod out by the graphs: since $T$ is an isomorphism carrying $\Gamma(\phi)$ onto $\Gamma(\phi')$, it induces a canonical isomorphism of quotients
+    \[
+    (\mathfrak{g}\oplus\mathfrak{g})/\Gamma(\phi)\ \xrightarrow{\ \sim\ }\ (\mathfrak{g}\oplus\mathfrak{g})/\Gamma(\phi'). \tag{D}
+    \]
+
+By (A), these quotients are exactly $Q_p$ computed in the two choices of representative. Hence $Q_p$ is invariant up to canonical isomorphism. Since $Q$ is a skyscraper at $p$, this proves invariance of $Q$.
+
+\medskip
+
+\noindent 4) Where $\mathcal{P}^\Delta$ enters (and what we actually used)
+
+In the argument above, we used only that $p_1,p_2$ act as invertible automorphisms on the adjoint fiber, so that $A=\Ad(p_1)$, $B=\Ad(p_2)$ are invertible and we can form $T=A\oplus B$. That already shows invariance under any change of trivialization.
+
+$\mathcal{P}^\Delta$ is the specific subgroup of changes of trivialization that Solís allows at the node (Levi diagonally, unipotents independently). So invariance under $\mathcal{P}^\Delta$ is a fortiori true.
+
+What $\mathcal{P}^\Delta$ controls is not whether $Q$ is invariant, but which presentations $(g_1,g_2)$ represent the same geometric bundle, i.e.\ which changes of trivialization are allowed in the moduli problem.
+
+Let $\mathcal{P}\subset LG$ be any parahoric and $\mathcal{P}^\Delta\subset \mathcal{P}\times\mathcal{P}$
+be defined by the formula
+\[\mathcal{P}^\Delta = \Delta(\cL) \ltimes (\cU \times \cU)\] where $\cP = \cL\cU$ is the Levi decomposition of $\cP$.
+
+For a class $[g_1,g_2]\in (LG\times LG)/\mathcal{P}^\Delta$, set
+\[
+h:=g_2^{-1}g_1\in LG.
+\]
+Then
+\[
+[g_1,g_2]\ \longmapsto\ \mathcal{P}\,h\,\mathcal{P} \in \mathcal{P}\backslash LG/\mathcal{P}
+\]
+is well-defined.
+
+Reason: if $(g_1,g_2)\mapsto (g_1p_1,\ g_2p_2)$ with $(p_1,p_2)\in \mathcal{P}^\Delta\subset \mathcal{P}\times\mathcal{P}$, then
+\[
+h\mapsto h'=p_2^{-1}hp_1
+\]
+with $p_1,p_2\in \mathcal{P}$, hence $\mathcal{P} h' \mathcal{P}=\mathcal{P} h \mathcal{P}$. This gives the map to the $\cP$-affine grassmannian which is how we will extract the notion of degree of $Q$ at the node.
+
+When $\cP = LG^+$ then we have the Cartan decomposition $LG = \bigsqcup_{\lambda} LG^+ \lambda(z) LG^+$, so the double quotient $\mathcal{P}\backslash LG/\mathcal{P}$ is identified with $X_*(T)_+$. In this case, the map above gives a well-defined notion of degree of $Q$ at the node.
+
+When $\cP = \cP_{\eta_1}$ we need to find the right mechanism to extract the degree. The suggestion is to look at the labels $W_I \backslash W / W_I$ of the "Bruhat" decomposition \begin{align*}
+    LG = \bigsqcup_{w\in W_I \backslash W / W_I} \cP_{\eta_1} w \cP_{\eta_1}
+\end{align*}
+
+
+\begin{theorem}[Richarz, Thm.~1.4]
+Let $a$ (resp.\ $a'$) be a facet contained in the closure of the
+alcove $a_C$, and let $P_a$ (resp.\ $P_{a'}$) be the associated
+parahoric subgroup. Then there is a bijection
+\[
+W_a\backslash W / W_{a'} \;\xrightarrow{\ \sim\ }\; P_a\backslash G(F)/P_{a'},
+\qquad
+W_a\, w\, W_{a'} \longmapsto P_a\, n_w\, P_{a'},
+\]
+where $n_w$ denotes a representative of $w$ in $N(F)$.
+\end{theorem}
+
+\begin{lemma}[Node degree from parahoric relative position, $\mathrm{SL}_2$]
+Fix a vertex parahoric $\mathcal{P}_I$ and let $\chi$ generate $X^*(\mathcal{L}_I)$. For a class $[g_1,g_2]\in (LG\times LG)/\mathcal{P}_I^\Delta$, let $w\in W_I\backslash\widetilde{W}/W_I$ be its relative position. Let $t^{n\alpha^\vee}$ be the minimal-length representative of $w$. Then the local degree contributed by $\chi$ at the node equals $\langle \chi, n\alpha^\vee\rangle$.
+\end{lemma}
+
+By Richarz's bijection (or the $L^+P$--orbit decomposition of the affine
+flag variety), each $w\in W_I\backslash \widetilde W/W_I$ admits a unique
+minimal-length representative. In type $\widetilde A_1$ these are precisely
+the translations $t^{n\alpha^\vee}$ ($n\ge 0$). For $h=\dot t^{n\alpha^\vee}$
+the Levi loop is $\ell(z)=\alpha^\vee(z^n)$ (up to $\cL_I(\cO)$-factors), so
+\[
+\chi(\ell(z)) = z^{\langle \chi,\;n\alpha^\vee\rangle}\cdot (\text{unit}),
+\]
+and therefore $\ord_z(\chi(\ell(z)))=\langle \chi,\;n\alpha^\vee\rangle$.
+
+
+\begin{remark}
+    [Key fact?] Now, what is your node degree? It is computed from a character \(\chi\in X^*(\cL_I)\) by applying $\chi$ to the Levi part of the associated graded of h and taking \(\ord_z\).
+This is the degree formula at a stacky node with parahoric structure.
+
+
+Work in the simplest local model: a nodal curve obtained by gluing two formal discs along the punctured disc. Let
+\[
+\Spec \mathcal{O}_+,\ \Spec \mathcal{O}_- \quad (\mathcal{O}_\pm = k[[z]])
+\]
+be the two branches, and glue along
+\[
+\Spec F,\quad F=k((z))
+\]
+via the identity on $F$.
+
+A line bundle $L$ on the node is equivalent to:
+\begin{itemize}
+    \item a trivial line on each branch, and
+    \item a gluing isomorphism on the overlap, i.e.\ multiplication by some $f(z)\in F^\times$.
+\end{itemize}
+
+Changing trivialisations multiplies $f$ by units from $\mathcal{O}_+^\times$ and $\mathcal{O}_-^\times$, so the only invariant is
+\[
+\ord_z(f)\in\mathbb{Z}.
+\]
+
+And this integer is exactly the local ``degree contribution'' at the node: it is the obstruction to extending a nonvanishing section across the node, and it is the local term that appears in determinant-of-cohomology computations (it is the length/index of the corresponding lattice inclusion).
+
+So: the integer you can canonically extract from node gluing for a line bundle is $\ord_z(f)$.
+
+Now take your parahoric local datum. After choosing branch trivialisations, you have a transition element $h\in LG=G(F)$ describing how the two branch trivialisations are related on the overlap.
+
+A character $\chi\in X^*(\mathcal{L}_I)$ gives a 1-dimensional representation of the Levi $\mathcal{L}_I$, hence a line bundle on the moduli with the property that its local gluing scalar is $\chi$ applied to the Levi part of the transition.
+
+Why Levi? Because:
+\begin{itemize}
+    \item $\chi$ is defined on the Levi quotient $\mathcal{P}_I\twoheadrightarrow \mathcal{L}_I$;
+    \item the pro-unipotent radical $\mathcal{U}_I$ maps to $1$ under any character (unipotent groups have no nontrivial characters);
+    \item therefore only the Levi component of $h$ can affect the induced line.
+\end{itemize}
+
+So the induced local gluing function is
+\[
+f(z)=\chi(\ell(z))\in F^\times,
+\]
+where $\ell(z)\in LL_I$ is the image of $h$ in the Levi loop group (the ``Levi part'').
+
+On the nose, $h$ is only well-defined up to $\mathcal{P}_I$-left/right multiplication. To produce a well-defined $\ell(z)$ (modulo $\mathcal{L}_I(\mathcal{O})$-units) you use exactly the same mechanism as in the smooth HN/Rees story:
+\begin{itemize}
+    \item a compatible $\Theta$-degeneration provides an associated-graded projection that kills the $\mathcal{U}_I$-ambiguity and lands in the Levi;
+    \item the remaining ambiguity is multiplication by $\mathcal{L}_I(\mathcal{O})$, and applying $\chi$ sends that to $\mathcal{O}^\times$, which does not change $\ord_z$.
+\end{itemize}
+
+So $\ord_z(\chi(\ell(z)))$ is well-defined from the original class.
+
+
+\subsection{Intermediate quotient}
+If you write the allowed change as
+\[
+(g_1,g_2)\mapsto(g_1p_1,\;g_2p_2),\qquad (p_1,p_2)\in \mathcal{P}^\Delta,
+\]
+then with $h=g_2^{-1}g_1$ you get
+\[
+h\mapsto h' = p_2^{-1} h\, p_1,
+\]
+and the defining feature of $\mathcal{P}^\Delta=\Delta(\mathcal{L})\ltimes(\mathcal{U}\times\mathcal{U})$ is that $p_1,p_2$ have the same Levi component.
+
+Make that explicit: choose a Levi splitting (noncanonical) so you can write
+\[
+p_1=\ell\,u_1,\qquad p_2=\ell\,u_2,\qquad \ell\in \mathcal{L},\;u_1,u_2\in \mathcal{U}.
+\]
+Then
+\[
+h' = (\ell u_2)^{-1} h (\ell u_1)=u_2^{-1}\,\ell^{-1}h\ell\,u_1.
+\]
+
+This shows there is a natural intermediate quotient before you forget that the two Levi's were the same:
+
+\textbf{Intermediate space}
+
+First mod out by the independent $\mathcal{U}$-factors on the left and right:
+\[
+\mathcal{U}\backslash LG/\mathcal{U}.
+\]
+Then remember that you are still allowed to replace $h$ by $\ell^{-1}h\ell$ (the same $\ell$ on both sides), i.e.\ by diagonal Levi conjugation. So the intermediate object is the stack quotient
+\[
+\boxed{\ [\,\mathcal{U}\backslash LG/\mathcal{U}\,]/\mathcal{L}\ }\qquad(\mathcal{L}\text{ acts by }h\mapsto \ell^{-1}h\ell).
+\]
+
+\textbf{Maps}
+
+You have a factorization
+\[
+(LG\times LG)/\mathcal{P}^\Delta
+\;\longrightarrow\;
+[\,\mathcal{U}\backslash LG/\mathcal{U}\,]/\mathcal{L}
+\;\longrightarrow\;
+\mathcal{P}\backslash LG/\mathcal{P}.
+\]
+\begin{itemize}
+    \item The first arrow sends $[g_1,g_2]$ to the $\mathcal{L}$-conjugacy class of the $\mathcal{U}$-double-coset of $h=g_2^{-1}g_1$.
+    \item The second arrow is the further coarsening where you now allow independent Levi factors on the left and right, i.e.\ you quotient further by $\mathcal{L}\times \mathcal{L}$ acting by $h\mapsto \ell_2^{-1}h\ell_1$, which is exactly what passes from ``same Levi'' to the usual $\mathcal{P}$-double-cosets (since $\mathcal{P}=\mathcal{L}\ltimes\mathcal{U}$).
+\end{itemize}
+\end{remark}
+
+Following the $\Theta$-degeneration to $0$ gives a $T$-fixed point in $LG/P$.
+
+\section{Theory of parabolic Schubert varieties}
+
+Fix:
+\begin{itemize}
+    \item a loop group $G(F)$ (think $G(k((z)))$),
+    \item a parahoric $P_a \subset G(F)$ attached to a facet $a$ (for $\mathrm{GL}_n$: stabilizer of a certain periodic lattice chain / partial flag).
+\end{itemize}
+
+Then there is a decomposition into double cosets
+\[
+G(F) \;=\; \bigsqcup_{w \in W_a \backslash \widetilde{W} / W_a} P_a \, n_w \, P_a,
+\]
+where:
+\begin{itemize}
+    \item $\widetilde{W}$ is the (extended) affine Weyl group,
+    \item $W_a \subset \widetilde{W}$ is the subgroup attached to the facet $a$ (generated by the affine simple reflections that fix $a$),
+    \item $n_w$ is any representative of $w$ in the normalizer $N(F) \subset G(F)$.
+\end{itemize}
+
+Consider the partial affine flag variety
+\[
+\mathrm{Fl}_a := G(F)/P_a.
+\]
+
+Pick the standard point $E \in \mathrm{Fl}_a$ (the ``standard flag''/``standard lattice chain'').
+
+For each $w \in \widetilde{W}$, let $wE$ denote the translate of that standard flag (represented by $n_w \cdot E$).
+
+Now let $P_a$ act on $\mathrm{Fl}_a$ by left multiplication. The orbits are exactly the Schubert cells (often called $P_a$-Schubert cells in this parabolic setting):
+\[
+X_w^\circ \;:=\; P_a \cdot (wE) \;\subset\; \mathrm{Fl}_a.
+\]
+
+Key point: if you change $w$ by left/right multiplication by $W_a$, you don't change the orbit. Precisely,
+\[
+P_a \cdot (wE) = P_a \cdot (w'E)
+\quad\Longleftrightarrow\quad
+w' \in W_a\, w\, W_a.
+\]
+So the cells are naturally indexed by
+\[
+W_a \backslash \widetilde{W} / W_a,
+\]
+exactly like the double-coset decomposition of $G(F)$.
+
+The Schubert variety is the closure
+\[
+X_w := \overline{X_w^\circ}.
+\]
+
+
+\subsection*{Minimal-length representatives and dimension}
+
+Each double coset $W_a w W_a$ contains a unique element of minimal length $w_{\min}$ (length in the Coxeter group sense).
+
+Geometrically:
+\begin{itemize}
+    \item $X_w^\circ$ is isomorphic to an affine space $\mathbb{A}^{\ell(w_{\min})}$,
+    \item $\dim X_w = \ell(w_{\min})$,
+    \item closure relations are governed by the Bruhat order on these minimal representatives.
+\end{itemize}
+
+
+\subsection{The formula}
+$\mu^{\mathcal L}(f)
+=
+\mu_{\mathrm{sm}}(f)\;-\;\sum_{p\in \mathrm{nodes}}\langle \chi_p,\xi_p\rangle$ where $\chi_p$ is the character of the Levi $\mathcal{L}_I$ coming from the choice of $\eta_i$ at the node $p$, and $\xi_p$ is the limit of conjugation by $\lambda$ on the equivariant parameter $\eta_i$, where $\lambda$ is the cocharacter defined by the parabolic reduction on the smooth locus.
+
+We need to think about the choice of 1PS which maximizes this quantity. The term $\mu_{\mathrm{sm}}(f)$ coming from the smooth locus is maximized by the HN filtration, one question we can ask is does this same data minimize the node contribution, so that their difference is also maximized?
+
+
+The vertices of the fundamental alcove for $\SL_3$ correspond to the cocharacters $0, \omega_1^\vee, \omega_2^\vee.$ Consider the index ${1}$. Then $X^*(L_{1})$ is spanned by the fundamental weight $\omega_1$. 
+
+Let $\lambda$ be a 1PS subgroup of $G$. We need to think about what are the possible values of $\lim_{t\to 0} \lambda(t) \cdot \eta_i$ for the conjugation action of $\lambda$ on the equivariant parameter $\eta_i$. 
+
+
+\section{}
+Let $G$ be a simple simply connected Lie group over the complex numbers and let $E$ be a principal $G$-bundle on a projective curve $C$ with a single node. Let $\nu:\widetilde C\to C$ be the normalization, and consider the normalization exact sequence
+\[
+0\to \mathcal{O}_C\to \nu_*\mathcal{O}_{\widetilde C}\to k_p\to 0
+\]
+Tensoring with $\ad(E)$ gives
+\[0\to \ad(E)\to \nu_*\nu^*\ad(E)\to Q\to 0.\]
+The term $Q$ is a skyscraper at the node $p$, and is isomorphic to $\ad(\mf g)$.
+
+Now we can generalize this to a torsor over the sheaf of groups $\cG$ which is given by $G$ on the smooth locus and by a parahoric $\cP^{\Delta} \subset LG \times LG$ given by $\cP^{\Delta} = \Delta(\cL) \ltimes (\cU \times \cU)$ at the node. Then we can still form the normalization sequence and get a skyscraper $Q$ at the node, which we give the following interpretation of using the Lie algebra model and thinking about the corkernel of $\times z$ on the loop algebra.
+
+Let $\mathcal F$ be a $\mathcal G$-torsor.
+
+Define
+\[
+\Ad(\mathcal F)=\mathcal F \times^{\mathcal G} \Lie(\mathcal G).
+\]
+This is finite rank over C. We again have the normalization exact sequence:
+\[
+0 \to \Ad(\mathcal F)
+\to \nu_* \nu^*\Ad(\mathcal F)
+\to Q \to 0.
+\]
+We compute in the completed local ring at the node $D = \Spec \widehat{\mathcal{O}}_{C,p}$, which is the union of two formal discs glued along the punctured disc.
+
+On each branch we make the identificaiton with formal power series $\mathbb{C}[[z]]$. The parahoric Lie algebra is a lattice inside the loop algebra:
+\[
+\Lie(\mathcal{G})|_D \subset \mathfrak{g}((z))\oplus \mathfrak{g}((z)).
+\] 
+
+Concretely, if the parahoric is defined by a cocharacter $\eta$,
+\[
+\Lie(\mathcal{G})|_D
+=
+\Delta\left(
+\mathfrak t[[z]]
+\oplus
+\bigoplus_{\alpha:\langle\alpha,\eta\rangle=0}
+\mathfrak g_\alpha[[z]]
+\right)
+\oplus
+\bigoplus_{\alpha:\langle\alpha,\eta\rangle>0}
+\left(
+\mathfrak g_\alpha[[z]]
+\oplus
+\mathfrak g_\alpha[[z]]
+\right).
+\]
+To compute the fiber at the node,
+\[
+Q_p
+=
+Q \otimes_{\widehat{\mathcal{O}}_{C,p}} \mathbb{C},
+\]
+which equals quotient by the maximal ideal.
+
+This is the same as
+\[
+M/(z)
+\cong
+\operatorname{coker}(M \xrightarrow{\times z} M)
+\]
+for a free $\mathbb{C}[[z]]$-module $M$.
+\red{Note that this whole passage of computation is wrong because $\coker(\phi\otimes k)$ is not the same as $\coker(\phi)\otimes k$ in general.}
+
+
+Therefore the special fiber Lie algebra is
+\[
+\Lie(\mathcal G)|_{p}
+\;\cong\;
+\Delta(\mathfrak l)\ \oplus\ \mathfrak u\ \oplus\ \mathfrak u \subset \mathfrak{g}\oplus \mathfrak{g},
+\]
+The weight of the cocharacter $\lambda: \mathbb{G}_m \to G$ is then given by the formula \[
+w_\lambda\bigl(H^0(Q)\bigr)
+=
+\sum_{\alpha\in\Phi_L}\langle \alpha,\lambda\rangle
+\;+\;
+2\sum_{\alpha\in\Phi_U}\langle \alpha,\lambda\rangle,
+\] Note that the Levi contribution vanishes because roots in $\Phi_L$ come in pairs, so this simplifies to
+\[
+\wt_\lambda\bigl(H^0(Q)\bigr)
+=
+2\sum_{\alpha\in\Phi_U}\langle \alpha,\lambda\rangle
+\] summing over all those $\alpha$ such that $\langle \alpha,\eta\rangle>0$.
+
+\section{}
+It follows from the above discussion that for one node whose parahoric is defined by $\eta$, we let $\Phi_U = \{\alpha\in\Phi:\langle\alpha,\eta\rangle>0\}$ be the set of roots in the unipotent radical of the parabolic defined by $\eta$. Then there is the formulas
+\begin{align*}
+    \wt\det R\Gamma(C_0,\ad(E_0)) &= \wt\det R\Gamma(\widetilde C,\nu^*\ad(E_0)) - \wt\det H^0(Q) \\
+&= 2\sum_{i>0} i\cdot \deg(E_{0,\lambda},L_\lambda \times \mathfrak{g}_i) - 2\sum_{\alpha\in\Phi_U}\langle \alpha,\lambda\rangle
+\end{align*}
+But right now as is, this doesn't depend on the data of the torsor. For a nodal curve with normalization $\widetilde{C}$ and two branches $p_+, p_-$, a $\mathcal{G}^\Delta$-torsor (with fixed parahoric type $\eta$) has, locally at the node:
+\begin{itemize}
+    \item two ``lattices'' (or parahoric trivializations) on the two branches,
+    \item and a gluing / relative position between them.
+\end{itemize}
+
+After choosing trivializations on the punctured discs, this relative position is measured by a double coset
+\[
+\mu \in P \backslash G((z)) / P
+\quad \text{(or more precisely } W_I\backslash \widetilde{W}/ W_I\text{, with translation part } t^\mu\text{)}.
+\]
+so that we can identity $\mu$ with a dominant cocharacter of $G$.
+The key point: a nontrivial $\mu$ shifts lattices by $z^{\langle\alpha,\mu\rangle}$ on root spaces, and those shifts change the dimension/weight of the finite quotient that becomes $H^0(Q)$. ChatGPT suggests that the $\mu$ contribution to the weight should give a formula like 
+\begin{align*}
+2\sum_{\alpha\in\Phi_U}\langle \alpha,\mu\rangle \cdot \langle \alpha,\lambda\rangle 
+\end{align*}
+
+\subsection{}
+Because Q is exactly the defect of matching the two lattices at the node, and that defect is controlled by the relative position of those lattices.
+
+So the geometry of
+\[
+(LG\times LG)/P^\Delta
+\;\longrightarrow\;
+P\backslash G((z))/P
+\]
+is not decorative — it is literally the mechanism that determines the finite-dimensional vector space $H^0(Q)$ whose $\lambda$-weight you are computing.
+
+Let me explain this cleanly.
+
+\medskip
+
+\noindent\textbf{1) What $Q$ measures}
+
+From the normalization sequence
+\[
+0 \to \Ad(\mathcal F)
+\to \nu_* \nu^*\Ad(\mathcal F)
+\to Q \to 0,
+\]
+the stalk $Q_p$ is the cokernel of the matching condition at the node.
+
+Locally that condition says: sections on the two branches must agree after applying the gluing.
+
+If you trivialize on the punctured discs, that matching condition becomes
+\[
+s_- = \Ad_g(s_+),
+\]
+where $g\in G((z))$ is the gluing element coming from trivilizations on two punctured disks. Note that $g$ is only defined up to $g \mapsto u_- \ell g \ell^{-1} u_+^{-1}$ for $u_\pm \in \mathcal{U}$ and $\ell \in \mathcal{L}$.
+
+Thus
+\[
+Q_p
+\cong
+\frac{\mathfrak{g}((z))}{\mathfrak{p}_- + \Ad_g(\mathfrak{p}_+)},
+\]
+where $\mathfrak{p}_\pm$ are the parahoric Lie algebra lattices.
+
+
+
+
+\noindent\textbf{2) Why the double coset appears}
+
+Changing trivializations by $\mathcal{P}^\Delta$ modifies $g$ by
+\[
+g \mapsto u_-\,\ell\,g\,\ell^{-1}\,u_+^{-1}.
+\]
+
+But the finite length of the lattice quotient — hence $\dim H^0(Q)$ and its weight — depends only on:
+\[
+\text{the translation part } t^\mu \text{ of } g.
+\]
+
+And that translation part is precisely the invariant classified by
+\[
+P\backslash G((z))/P.
+\]
+
+So the geometry is encoding: which lattice shift occurs root-by-root.
+
+
+\subsection{Weight computation}
+Rootwise:
+\[
+\Ad_{t^\mu}(\mathfrak{g}_\alpha)
+=
+z^{\langle\alpha,\mu\rangle}\mathfrak{g}_\alpha.
+\]
+
+Therefore the finite quotient contains
+\[
+\mathfrak{g}_\alpha[[z]]
+\,/\,
+z^{\langle\alpha,\mu\rangle}\mathfrak{g}_\alpha[[z]],
+\]
+of dimension $\langle\alpha,\mu\rangle$.
+
+Now restrict along $\lambda$.
+
+On $\mathfrak{g}_\alpha$, $\lambda$ acts with weight $\langle\alpha,\lambda\rangle$.
+
+So that root contributes
+\[
+\langle\alpha,\mu\rangle \cdot \langle\alpha,\lambda\rangle.
+\]
+
+Summing over relevant roots gives
+\[
+\wt_\lambda\bigl(H^0(Q)\bigr)
+=
+2\sum_{\alpha\in\Phi_U}
+\langle\alpha,\mu\rangle\,\langle\alpha,\lambda\rangle.
+\]
+
+\subsection{}
+Let $g$ lie in the double coset corresponding to some affine Weyl element $w t^\mu$.
+
+Write:
+\[
+g = p_-\, w\, t^\mu\, p_+.
+\]
+
+Now compute
+\[
+\Ad_g(\mathfrak{p})
+=
+\Ad_{p_-}\Ad_w\Ad_{t^\mu}\Ad_{p_+}(\mathfrak{p}).
+\]
+\begin{itemize}
+    \item $\Ad_{p_\pm}$ preserves the lattice $\mathfrak{p}$.
+    \item $\Ad_w$ permutes root spaces but does not change powers of $z$.
+    \item $\Ad_{t^\mu}$ changes powers of $z$.
+\end{itemize}
+
+Finite length depends only on the valuation shifts --- i.e.\ the exponents of $z$.
+
+Therefore:
+\[
+\boxed{
+\text{length of } \mathfrak{p} + \Ad_g(\mathfrak{p})
+\text{ depends only on } \mu.
+}
+\]
+
+The Weyl part only relabels which root contributes.
+\[
+G((z))
+=
+\bigsqcup_{x \in W_F \backslash \widetilde{W} / W_F}
+P\, \dot{x}\, P,
+\]
+with $\dot{x}$ a minimal representative.
+
+Each $x$ has a translation part $\mu$.
+
+That translation part is what contributes to the valuation shifts.
+
+\medskip
+
+\noindent\textbf{4) Why this still justifies the weight formula}
+
+Rootwise:
+\[
+\Ad_{w t^\mu}(\mathfrak{g}_\alpha)
+=
+z^{\langle w^{-1}\alpha, \mu\rangle}\mathfrak{g}_{w\alpha}.
+\]
+\section{}
+Near the node $p$ we have:
+\begin{itemize}
+    \item two formal branches $D_+ = \Spec \mathbb{C}[[z]]$, $D_- = \Spec \mathbb{C}[[z]]$,
+    \item and their punctured discs $D_\pm^\times = \Spec \mathbb{C}((z))$.
+\end{itemize}
+
+\medskip
+
+\noindent\textbf{1) What the torsor gives on each branch}
+
+A $\mathcal{G}^\Delta$-torsor $\mathcal{F}$ gives:
+\begin{itemize}
+    \item a $G((z))$-torsor on each punctured disc $D_\pm^\times$,
+    \item together with a parahoric reduction on each full disc $D_\pm$.
+\end{itemize}
+
+After choosing trivializations on $D_\pm^\times$, we identify both fibers with $G((z))$.
+
+The parahoric reduction on $D_\pm$ then determines a subgroup
+\[
+P \subset G((z)),
+\]
+and on Lie algebras a lattice
+\[
+\mathfrak{p} \subset \mathfrak{g}((z)).
+\]
+
+So:
+\[
+\boxed{
+\text{Each branch gives a } \mathfrak{p}\text{-lattice inside } \mathfrak{g}((z)).
+}
+\]
+
+\medskip
+
+\noindent\textbf{2) Where the two lattices come from}
+
+The two branches produce:
+\[
+L_+ = \mathfrak{p},
+\qquad
+L_- = \Ad_g(\mathfrak{p}),
+\]
+inside the same $\mathfrak{g}((z))$, after trivialization and using the gluing element $g$, where $g$ comes from the data of the choice of two trivializations on the punctured discs and the gluing of the two branches.
+
+\subsection{Local description of $Q_p$}
+After you identify the two punctured branches (choose a trivialization on $D_+^\times$ and transport the $D_-^\times$ trivialization via the torsor's gluing), you can view both branch lattices as $\mathbb{C}[[z]]$-lattices inside the same Tate space $V := \mathfrak{g}((z))$:
+\[
+L_+ \subset V, \qquad L_- \subset V.
+\]
+
+Then sections of $\nu^*\ad(\mathcal{F})$ over the two formal branches are
+\[
+\Gamma(D_+, \nu^*\ad(\mathcal{F})) = L_+, \qquad \Gamma(D_-, \nu^*\ad(\mathcal{F})) = L_-,
+\]
+so
+\[
+\Gamma(D_+ \sqcup D_-, \nu^*\ad(\mathcal{F})) = L_+ \oplus L_-.
+\]
+
+A section on the nodal neighborhood descends iff it is a section on the punctured disc that extends to both branches, i.e.\ iff it lies in the intersection:
+\[
+\Gamma(D, \ad(\mathcal{F})) \cong L_+ \cap L_- \subset V.
+\]
+Under the map $\ad(\mathcal{F}) \to \nu_* \nu^* \ad(\mathcal{F})$, this embeds as the diagonal
+\[
+L_+ \cap L_- \hookrightarrow L_+ \oplus L_-, \qquad s \mapsto (s, s).
+\]
+
+Therefore the skyscraper stalk is
+\[
+\boxed{
+Q_p \cong (L_+ \oplus L_-) \big/ \Delta(L_+ \cap L_-).
+}
+\]
+
+Equivalently (non-canonically but very useful for dimensions/weights),
+\[
+\boxed{
+Q_p \cong \bigl(L_+ / (L_+ \cap L_-)\bigr) \oplus \bigl(L_- / (L_+ \cap L_-)\bigr).
+}
+\]
+We can compute dimensions/weights using this description $
+\dim\Bigl(\frac{L_+^\alpha}{L_+^\alpha\cap L_-^\alpha}\Bigr)
++
+\dim\Bigl(\frac{L_-^\alpha}{L_+^\alpha\cap L_-^\alpha}\Bigr)
+=
+|\langle\alpha,\mu\rangle|\,\dim(\mathfrak g_\alpha)$
+
+This implies that the weight contribution from the node is
+$\wt H^0(Q)^{-1} = \sum_{\alpha} |\langle\alpha,\mu\rangle| \cdot \langle\alpha,\lambda\rangle \cdot \dim(\mathfrak g_\alpha)$.
+
+\subsubsection*{Why this is finite-dimensional}
+
+It is finite-dimensional exactly when $L_+$ and $L_-$ are commensurable in the strong sense that $L_+ / (L_+ \cap L_-)$ and $L_- / (L_+ \cap L_-)$ are finite-dimensional. This holds in your situation because $L_-$ is obtained from $L_+$ by conjugation by an element representing a bounded relative position (translation part $t^\mu$), so rootwise you get quotients like
+\[
+\mathfrak{g}_\alpha[[z]] / z^{\langle \alpha, \mu \rangle} \mathfrak{g}_\alpha[[z]],
+\]
+which are finite-dimensional.
+
+\noindent\textbf{4) Rootwise picture}
+
+Write the parahoric lattice rootwise:
+\[
+\mathfrak{p}
+=
+\mathfrak{t}[[z]]
+\oplus
+\bigoplus_{\alpha}
+z^{m_\eta(\alpha)}\mathfrak{g}_\alpha[[z]].
+\]
+
+Then:
+\[
+\Ad_{t^\mu}(\mathfrak{p})
+=
+\mathfrak{t}[[z]]
+\oplus
+\bigoplus_{\alpha}
+z^{m_\eta(\alpha)+\langle\alpha,\mu\rangle}
+\mathfrak{g}_\alpha[[z]].
+\]
+
+So the rootwise quotient contributing to $Q_p$ is
+\[
+z^{m_\eta(\alpha)}\mathfrak{g}_\alpha[[z]]
+\Big/
+z^{m_\eta(\alpha)+\langle\alpha,\mu\rangle}
+\mathfrak{g}_\alpha[[z]]
+\cong
+\mathfrak{g}_\alpha\otimes
+\mathbb{C}[z]/(z^{\langle\alpha,\mu\rangle}).
+\]
+
+This is exactly the vector space you described:
+\[
+\mathfrak{g}_\alpha[1,z,\dots,z^{\langle\alpha,\mu\rangle-1}].
+\]
+
+\medskip
+
+\noindent\textbf{5) Important clarification}
+
+The lattices are not the torsors on the punctured discs themselves.
+
+They are:
+\[
+\boxed{
+\text{the Lie algebra lattices determined by the parahoric reductions on the full discs.}
+}
+\]
+
+The punctured disc trivializations only let you compare the two branches inside a single $\mathfrak{g}((z))$.
+
+\subsection{Mar 2}
+
+Over the node you have
+\[
+\Lie(P^\Delta)
+=
+\Delta(\mathfrak l[[x,y]]/(xy))
+\;\oplus\;
+\mathfrak u[[x]] \oplus \mathfrak u[[y]] \subset \mathfrak{g}[[x]] \oplus \mathfrak{g}[[y]]].
+\]
+where we interpret $\Delta(\mathfrak l[[x,y]]/(xy))$ as those pairs of power series $f(x),g(y)$ that agree at $0$.
+
+\subsubsection*{After normalization}
+
+On branch $+$:
+\[
+L_+ = \mathfrak{l}[[x]] \oplus \mathfrak{u}[[x]].
+\]
+
+On branch $-$:
+\[
+L_- = \mathfrak{l}[[y]] \oplus \mathfrak{u}[[y]].
+\]
+
+These live inside:
+\[
+\mathfrak{g}((x)) \quad\text{and}\quad \mathfrak{g}((y)).
+\]
+
+\subsubsection*{After trivialization and gluing}
+
+Choose trivializations on the punctured discs.
+
+The torsor gluing gives $g \in G((x))$ (after identifying $y = x^{-1}$ on the overlap).
+
+Its translation part is $t^\mu$.
+
+Transport the minus branch lattice via $g$ and identify both inside $\mathfrak{g}((x))$:
+\[
+L_+ = \mathfrak{l}[[x]] \oplus \mathfrak{u}[[x]],
+\]
+\[
+L_- = \Ad_{t^\mu}\bigl(\mathfrak{l}[[x]] \oplus \mathfrak{u}[[x]]\bigr).
+\]
+
+\subsubsection*{Rootwise description}
+
+For each root $\alpha$,
+\[
+L_+^\alpha = x^{m(\alpha)} \mathfrak{g}_\alpha[[x]],
+\]
+\[
+L_-^\alpha = x^{m(\alpha)+\langle\alpha,\mu\rangle} \mathfrak{g}_\alpha[[x]].
+\]
+
+Now the intersection is
+\[
+x^{m(\alpha)+\max(0,\langle\alpha,\mu\rangle)} \mathfrak{g}_\alpha[[x]].
+\]
+
+\subsubsection*{The defect (this is $Q_p$)}
+
+\[
+Q_p = L_+/(L_+\cap L_-) \;\oplus\; L_-/(L_+\cap L_-).
+\]
+
+Rootwise:
+
+If $\langle\alpha,\mu\rangle>0$:
+\[
+L_+^\alpha/(L_+\cap L_-)^\alpha \cong \mathfrak{g}_\alpha \otimes \mathbb{C}[[x]]/(x^{\langle\alpha,\mu\rangle}).
+\]
+
+If $\langle\alpha,\mu\rangle<0$, the same holds on the minus branch.
+
+Dimension:
+\[
+\dim Q_p^\alpha = |\langle\alpha,\mu\rangle| \cdot \dim(\mathfrak{g}_\alpha).
+\]
+
+\subsubsection*{$\lambda$-weight}
+
+$\lambda$ acts on $\mathfrak{g}_\alpha$ with weight $\langle\alpha,\lambda\rangle$.
+
+Each copy contributes that weight.
+
+Therefore:
+\[
+\boxed{\wt_\lambda(\det Q_p) = \sum_{\alpha} |\langle\alpha,\mu\rangle| \langle\alpha,\lambda\rangle \dim(\mathfrak{g}_\alpha)}.
+\]
+
+\subsection{}
+If you think about the functor of points of $
+\mf p^\Delta = \Delta(\mf l) \ltimes (\mf u \times \mf u) \subset \mf g \oplus \mf g$ applied to the test ring $R = \C[[x,y]]/(xy)$, i.e. the completed local ring of the node which can be written \begin{align*}
+    R = \C[[x]] \times_\C \C[[y]]
+\end{align*}
+then we see that \[
+\mathfrak p^\Delta (R)
+=
+\Bigl\{(X(x),Y(y))\in \mathfrak p[[x]]\oplus \mathfrak p[[y]]
+\ :\
+\pi_{\mathfrak l}\bigl(X(0)\bigr)=\pi_{\mathfrak l}\bigl(Y(0)\bigr)\in \mathfrak l
+\Bigr\}\]
+
+A $\mathcal{G}^\Delta$-torsor on the nodal formal neighborhood $D=\Spec R$ is a $P^\Delta$-torsor $\mathcal{F}_D$. After choosing a trivialization of $\mathcal{F}_D$, the adjoint bundle identifies with $\Lie(P^\Delta)$, and restricting to the two branches yields two parahoric Lie lattices $L_+=\mathfrak{p}[[x]]\subset\mathfrak{g}((x))$ and $L_-=\mathfrak{p}[[y]]\subset\mathfrak{g}((y))$. Comparing these trivializations with those coming from the $G$-torsor on the punctured branches produces transition functions $g_+(x)\in G((x))$, $g_-(y)\in G((y))$, well-defined up to the left action of $P^\Delta$. Transporting the $y$-branch to the $x$-branch using $g:=g_-g_+^{-1}$ lets us compare two lattices inside $\mathfrak{g}((x))$, and the node skyscraper is
+\[
+Q_p\cong (L_+\oplus \Ad_gL_-)/\Delta(L_+\cap \Ad_gL_-)
+\]
+For parahorics we have the Bruhat-type decomposition
+\[
+G((t))
+=
+\bigsqcup_{w \in W_I \backslash \widetilde{W} / W_I}
+P\, w\, P.
+\]
+
+Pick a minimal-length representative
+\[
+w t^\mu \in \widetilde{W}.
+\]
+
+So write
+\[
+g = p_-\, w\, t^\mu\, p_+.
+\]
+
+Since
+\[
+L_+ = \mathfrak{p}[[t]]
+\]
+and $\mathfrak{p}$ is stable under $\Ad(P)$, we have
+\[
+\Ad_{p_+}(L_+) = L_+,
+\quad
+\Ad_{p_-}(L_-) = L_-.
+\]
+
+Therefore
+\[
+\Ad_g(L_-) = \Ad_{w t^\mu}(L_-).
+\]
+
+So the outer $P$-factors do not change the lattice. Now examine
+\[
+\Ad_{w t^\mu}.
+\]
+
+The adjoint action gives
+\[
+\Ad_{w t^\mu}(\mathfrak{g}_\alpha) = t^{\langle w^{-1}\alpha,\mu\rangle}\mathfrak{g}_{w\alpha}.
+\]
+
+Inside $L_+ = \mathfrak{p}[[t]]$ we have
+\[
+\mathfrak{g}_\alpha[[t]].
+\]
+
+After applying $t^\mu$,
+\[
+\Ad_{t^\mu}(\mathfrak{g}_\alpha[[t]]) = t^{\langle \alpha, \mu\rangle}\mathfrak{g}_\alpha[[t]].
+\]
+
+Now compare the two lattices:
+\[
+\mathfrak{g}_\alpha[[t]]
+\quad \text{and} \quad
+t^{\langle \alpha,\mu\rangle}\mathfrak{g}_\alpha[[t]].
+\]
+
+Their quotient has dimension
+\[
+|\langle \alpha,\mu\rangle|.
+\]
+
+\section{}
+Using the convention $\tilde W = W \ltimes X_*(T)$, the action for the representative $t^\mu n(w)$
+\[
+\Ad_{t^\mu}(\mathfrak g_\alpha t^n) = \mathfrak g_\alpha t^{n+\langle \alpha,\mu\rangle},
+\qquad
+\Ad_{n(w)}(\mathfrak g_\alpha t^n)=\mathfrak g_{w\alpha} t^n.
+\] from which we get that the shift in valuation is given by $\langle w\alpha,\mu\rangle$:
+\[
+\Ad_{t^\mu n(w)}(\mathfrak g_\alpha t^n)=\mathfrak g_{w\alpha}\, t^{n+\langle w\alpha,\mu\rangle}.
+\]
+
+
+\section{}
+The lattice $L_+=\mathfrak p[[t]]$ contains, rootwise, a lattice of the form
+\[
+L_+^{\beta}=t^{m(\beta)}\mathfrak g_\beta[[t]]
+\qquad(\beta\in\Phi),
+\]
+where $m(\beta)\in\mathbb Z$ encodes the parahoric type (hyperspecial means $m(\beta)=0$).
+
+Apply $x$ to the $\alpha$-piece of $L_-$ (which is also $t^{m(\alpha)}\mathfrak g_\alpha[[t]]$ after trivialization):
+\[
+\Ad_x\bigl(t^{m(\alpha)}\mathfrak g_\alpha[[t]]\bigr)
+=
+t^{m(\alpha)+\langle w\alpha,\mu\rangle}\,\mathfrak g_{w\alpha}[[t]].
+\]
+
+So in the $\beta:=w\alpha$ root space we are comparing the two lattices
+\[
+L_+^\beta = t^{m(\beta)}\mathfrak g_\beta[[t]]
+\quad\text{and}\quad
+\Ad_x(L_-)^\beta = t^{m(w^{-1}\beta)+\langle \beta,\mu\rangle}\mathfrak g_\beta[[t]].
+\]
+
+Therefore the defect contributed by the $\beta$-root space is
+\[
+\boxed{
+\bigl|\,m(\beta)\;-\;\bigl(m(w^{-1}\beta)+\langle \beta,\mu\rangle\bigr)\,\bigr|
+\cdot \dim(\mathfrak g_\beta).
+}
+\]
+For each weight space $g_\beta$ the $\lambda$-weight is $\langle \beta,\lambda\rangle$, so the total $\lambda$-weight contribution from the node is
+\[
+\boxed{\sum_{\beta\in\Phi} \bigl|\,m(\beta)\;-\;\bigl(m(w^{-1}\beta)+\langle \beta,\mu\rangle\bigr)\,\bigr| \cdot \langle \beta,\lambda\rangle \cdot \dim(\mathfrak g_\beta)}.
+\]
+where $
+m_\eta(\beta)=\left\lceil -\langle \beta,\eta\rangle \right\rceil$ coming from the description of the parahoric as generated by those affine root spaces $t^n\mathfrak g_\beta$ for which $n+\langle \beta,\eta\rangle \ge 0$.
+
+
+\section{}
+In each root space $\mathfrak{g}_\beta((t))$, any parahoric lattice is of the form
+$t^{a_\beta}\,\mathfrak{g}_\beta[[t]]$.
+So suppose
+\[
+L_+^\beta = t^{a_\beta}\mathfrak{g}_\beta[[t]],
+\qquad
+(\Ad_g L_-)^\beta = t^{b_\beta}\mathfrak{g}_\beta[[t]].
+\]
+Then
+\[
+(L_+\cap \Ad_g L_-)^\beta = t^{\max(a_\beta,b_\beta)}\mathfrak{g}_\beta[[t]].
+\]
+Hence
+\[
+\dim\frac{L_+^\beta}{(L_+\cap \Ad_g L_-)^\beta}=\max(0,b_\beta-a_\beta),
+\]
+\[
+\dim\frac{(\Ad_g L_-)^\beta}{(L_+\cap \Ad_g L_-)^\beta}=\max(0,a_\beta-b_\beta).
+\]
+Now your symmetric presentation of $Q_p$ implies
+\[
+\dim(Q_p^\beta)=\max(0,b_\beta-a_\beta)+\max(0,a_\beta-b_\beta)=|a_\beta-b_\beta|.
+\]
+
+So the correct general formula is
+\[
+\boxed{
+\wt_\lambda(\det Q_p)=\sum_{\beta\in\Phi} |a_\beta-b_\beta|\;\langle\beta,\lambda\rangle\;\dim(\mathfrak{g}_\beta).
+}
+\]
+
+\subsection{Matching your $m(\beta)$, $w$, $\mu$}
+
+In the parahoric setup one typically has
+\[
+a_\beta = m(\beta),\qquad
+b_\beta = m(w^{-1}\beta)+\langle\beta,\mu\rangle
+\]
+(after choosing the convention $g=t^\mu n(w)$ and expressing everything in the $\beta$-root space).
+
+Substituting gives exactly your expression:
+\[
+\sum_{\beta\in\Phi}\bigl|\,m(\beta)-\bigl(m(w^{-1}\beta)+\langle\beta,\mu\rangle\bigr)\,\bigr|\cdot \langle\beta,\lambda\rangle\cdot \dim(\mathfrak{g}_\beta).
+\]
+
+So yes: that formula is computing the $\lambda$-weight of $\det(Q_p)$ for the symmetric defect quotient you wrote. \red{This is also not right.}
+
+
+\section{Structure theory of lie algebras}
+
+For $\mathfrak{g}$ with root system $\Phi$,
+\[
+\mathfrak{g}
+=
+\mathfrak{h}
+\oplus
+\bigoplus_{\alpha\in\Phi}
+\mathfrak{g}_\alpha.
+\]
+
+Choosing simple roots $\Delta$ gives:
+\begin{itemize}
+    \item positive roots $\Phi^+$
+    \item Borel
+\end{itemize}
+\[
+\mathfrak{b}
+=
+\mathfrak{h}
+\oplus
+\bigoplus_{\alpha>0}
+\mathfrak{g}_\alpha
+\]
+
+Parabolic from $I\subset\Delta$:
+\[
+\mathfrak{p}_I
+=
+\mathfrak{h}
+\oplus
+\bigoplus_{\alpha\in\Phi_I}
+\mathfrak{g}_\alpha
+\oplus
+\bigoplus_{\alpha\in\Phi^+\setminus\Phi_I^+}
+\mathfrak{g}_\alpha
+\]
+with
+\[
+\mathfrak{l}_I
+=
+\mathfrak{h}
+\oplus
+\bigoplus_{\alpha\in\Phi_I}
+\mathfrak{g}_\alpha,
+\qquad
+\mathfrak{u}_I
+=
+\bigoplus_{\alpha\in\Phi^+\setminus\Phi_I^+}
+\mathfrak{g}_\alpha.
+\]
+
+\medskip
+
+\noindent\textbf{2. Affine Lie algebra}
+
+Consider the (untwisted) affine Lie algebra
+\[
+\widehat{\mathfrak{g}}
+=
+\mathfrak{g}((t))
+\oplus
+\mathbb{C} K
+\oplus
+\mathbb{C} d.
+\]
+
+Roots are affine roots
+\[
+\alpha + n\delta,
+\qquad
+\alpha\in\Phi,\ n\in\mathbb{Z}.
+\]
+
+Root spaces:
+\[
+\widehat{\mathfrak{g}}_{\alpha+n\delta}
+=
+\mathfrak{g}_\alpha t^n.
+\]
+
+Imaginary roots:
+\[
+n\delta \quad (n\neq 0).
+\]
+
+\medskip
+
+\noindent\textbf{3. Choosing positive affine roots}
+
+Choose:
+\begin{itemize}
+    \item positive finite roots $\Phi^+$,
+    \item declare affine roots positive by:
+\end{itemize}
+\[
+\alpha+n\delta > 0
+\quad \text{if either}
+\begin{cases}
+n>0\\
+n=0 \text{ and } \alpha>0.
+\end{cases}
+\]
+
+This defines the affine Borel
+\[
+\widehat{\mathfrak{b}}
+=
+\widehat{\mathfrak{h}}
+\oplus
+\bigoplus_{\text{positive affine roots}}
+\widehat{\mathfrak{g}}_\beta.
+\]
+
+This corresponds to the Iwahori in the loop group model.
+
+\medskip
+
+\noindent\textbf{4. Affine parabolic via subset of affine simple roots}
+
+The affine Dynkin diagram has simple roots
+\[
+\widehat{\Delta}
+=
+\{\alpha_0,\alpha_1,\dots,\alpha_r\}
+\]
+where
+\[
+\alpha_0 = -\theta + \delta.
+\]
+
+Choose $J\subset \widehat{\Delta}$.
+
+Define:
+\begin{itemize}
+    \item $\widehat{\Phi}_J =$ root subsystem generated by $J$,
+    \item $\widehat{\Phi}_J^+$ its positive part.
+\end{itemize}
+
+Then the affine parabolic is
+\[
+\widehat{\mathfrak{p}}_J
+=
+\widehat{\mathfrak{h}}
+\oplus
+\bigoplus_{\beta\in\widehat{\Phi}_J}
+\widehat{\mathfrak{g}}_\beta
+\oplus
+\bigoplus_{\beta\in\widehat{\Phi}^+\setminus \widehat{\Phi}_J^+}
+\widehat{\mathfrak{g}}_\beta.
+\]
+
+\medskip
+
+\noindent\textbf{5. Levi and unipotent pieces}
+
+Levi:
+\[
+\widehat{\mathfrak{l}}_J
+=
+\widehat{\mathfrak{h}}
+\oplus
+\bigoplus_{\beta\in\widehat{\Phi}_J}
+\widehat{\mathfrak{g}}_\beta.
+\]
+
+This is a Kac--Moody subalgebra (finite or affine type depending on $J$).
+
+Unipotent radical:
+\[
+\widehat{\mathfrak{u}}_J
+=
+\bigoplus_{\beta\in\widehat{\Phi}^+\setminus \widehat{\Phi}_J^+}
+\widehat{\mathfrak{g}}_\beta.
+\]
+
+Then
+\[
+\boxed{
+\widehat{\mathfrak{p}}_J
+=
+\widehat{\mathfrak{l}}_J
+\ltimes
+\widehat{\mathfrak{u}}_J.
+}
+\]
+
+This is the direct affine analogue of the finite case.
+
+\medskip
+
+\noindent\textbf{6. Loop algebra interpretation (parahoric model)}
+
+Inside $\mathfrak{g}((t))$, affine roots correspond to
+\[
+\alpha + n\delta
+\leftrightarrow
+\mathfrak{g}_\alpha t^n.
+\]
+
+Parahoric Lie algebras correspond to half-space conditions
+\[
+n + \langle \alpha,\eta\rangle \ge 0.
+\]
+
+Thus
+\[
+\mathfrak{p}_\eta
+=
+\mathfrak{h}[[t]]
+\oplus
+\bigoplus_{\alpha,n\;:\;n+\langle\alpha,\eta\rangle\ge 0}
+\mathfrak{g}_\alpha t^n.
+\]
+Levi part:
+\[
+\mathfrak{l}_\eta
+=
+\mathfrak{h}
+\oplus
+\bigoplus_{\alpha,n\;:\;n+\langle\alpha,\eta\rangle=0}
+\mathfrak{g}_\alpha t^n.
+\]
+
+Unipotent radical:
+\[
+\mathfrak u_\eta
+=
+t\,\mathfrak h[[t]]
+\;\oplus\;
+\bigoplus_{\alpha,n:\; n+\langle\alpha,\eta\rangle>0}
+\mathfrak g_\alpha t^n
+\]
+
+\section{}
+Then we have the projection $\widehat{\mathfrak{p}}_J \to \widehat{\mathfrak{l}}_J$. Compatibility of pairs $X^+,X^-$ means that the projections of $X^\pm$ to $\widehat{\mathfrak{l}}_J$ agree. Thus we are thinking about pairs $(X,Y)\in \mathfrak p_\eta \oplus \Ad_g(\mathfrak p_\eta)$ 
+where we say that $(X,Y)$ is compatible if $\pi_\eta(X)=\pi_\eta(\Ad_{g^{-1}}Y)$. Then the quotient $Q_p$ is the cokernel of the diagonal embedding of the compatible pairs into $\mathfrak p_\eta \oplus \Ad_g(\mathfrak p_\eta)$.
+
+
+\section{}
+Recall that the subgroup $P_\eta^\Delta \subset LG \times LG$ is defined as $P_\eta^\Delta = \Delta(L_\eta) \ltimes (U_\eta \times U_\eta)$, where $\Delta(L_\eta)$ is the diagonal embedding of the Levi $L_\eta$ into $LG \times LG$, and $U_\eta$ is the unipotent radical of the parahoric subgroup $P_\eta$.
+An element
+\[
+(p_x,p_y)\in P_\eta^\Delta(R)
+\subset P_\eta(\C[[x]])\times P_\eta(\C[[y]])
+\]
+is just a pair of integral parahoric elements on each branch whose images in the reductive quotient \(L_\eta(\C)\) agree. Passing to the adjoint bundle, we get a pair of parahoric Lie algebra elements
+\[  (X_x,X_y)\in \mathfrak p_\eta(\C[[x]])\times \mathfrak p_\eta(\C[[y]]) \]
+whose projection to the Levi $\mathfrak l_\eta$ also agree. 
+
+
+\section{We need to compare these lattices}
+Let
+\[
+\Lambda_x=\mathfrak{p}_\eta(\mathbb{C}[[x]])\subset \mathfrak{g}((x)),\qquad
+\Lambda_y=\mathfrak{p}_\eta(\mathbb{C}[[y]])\subset \mathfrak{g}((y))
+\]
+be the two parahoric lattices coming from the two branches of the node.
+
+To compare them you must first place them in the same loop algebra.
+
+\medskip\noindent\textbf{1. Identify the two punctured branches}
+
+On the punctured neighborhood of the node the two branches meet. Concretely
+\[
+\mathbb{C}((x))\cong \mathbb{C}((y))
+\]
+via the normalization of $R=\mathbb{C}[[x,y]]/(xy)$. After choosing this identification, both lattices can be viewed inside
+\[
+\mathfrak{g}((z)).
+\]
+So we obtain two lattices
+\[
+\Lambda_x,\Lambda_y\subset \mathfrak{g}((z)).
+\]
+
+\medskip\noindent\textbf{2. Relative position of lattices}
+
+Two lattices in the loop algebra differ by an element of the loop group. That is, there exists
+\[
+g\in LG
+\]
+such that
+\[
+\Lambda_y = \Ad_g(\Lambda_x).
+\]
+This is a consequence of general Bruhat-Tits theory.
+But the choice of $g$ is not unique:
+\begin{itemize}
+    \item changing trivialization on the $x$-branch multiplies $g$ on the left by $P_\eta$,
+    \item changing trivialization on the $y$-branch multiplies $g$ on the right by $P_\eta$.
+\end{itemize}
+
+Therefore the invariant of the pair of lattices is the double coset
+\[
+[g] \in P_\eta \backslash LG / P_\eta.
+\]
+This is exactly the parahoric affine Grassmannian orbit.
+
+\medskip\noindent\textbf{3. Minimal representative}
+
+Every double coset has a unique minimal representative
+\[
+t^\mu
+\]
+with $\mu\in X_*(T)$ dominant relative to the Levi.
+
+Thus after adjusting trivializations by elements of $P_\eta$,
+\[
+\Lambda_y = \Ad_{t^\mu}(\Lambda_x).
+\]
+This coweight $\mu$ measures the difference between the two lattices.
+
+\medskip\noindent\textbf{4. Interpretation on root spaces}
+
+Decompose
+\[
+\mathfrak{g}=\mathfrak{t}\oplus\bigoplus_{\beta}\mathfrak{g}_\beta.
+\]
+The action of $t^\mu$ shifts each root space by
+\[
+t^\mu : z^k\mathfrak{g}_\beta \mapsto z^{k+\langle\beta,\mu\rangle}\mathfrak{g}_\beta.
+\]
+Thus the lattices differ by integer shifts $\langle\beta,\mu\rangle$ in the valuation of each root space.
+
+So concretely
+\[
+\Lambda_y \cap \mathfrak{g}_\beta((z))
+=
+z^{\langle\beta,\mu\rangle}
+(\Lambda_x \cap \mathfrak{g}_\beta((z))).
+\]
+
+\medskip\noindent\textbf{5. Levi compatibility}
+
+Because your group is
+\[
+P_\eta^\Delta=\Delta(L_\eta)\ltimes(U_\eta\times U_\eta),
+\]
+the Levi parts of the lattices already agree. Therefore $\mu$ lies in the coweight lattice of the Levi center, so it only shifts the root spaces corresponding to $U_\eta$.
+
+Summing over $\alpha$ gives
+\[
+\wt_\lambda(\det Q_p)
+=
+\sum_{\alpha\in\Phi}
+\bigl|\,b_{w\alpha}-\bigl(a_\alpha+\langle w\alpha,\mu\rangle\bigr)\,\bigr|
+\;\langle w\alpha,\lambda\rangle\;\dim(\mathfrak g_\alpha).
+\]
+
+
+\section{References}
+ON THE IWAHORI WEYL GROUP Timo Richarz
+\end{document}
