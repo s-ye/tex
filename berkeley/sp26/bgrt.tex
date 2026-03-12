@@ -116,20 +116,21 @@ Claim: $H^*(S^1,*;k) = \Gamma(S^1, j_! k_{S^1\setminus \{p\}})$.
 
 \subsection{}
 Consider the nilpotent cone of $\sl(2)$:
-
 \begin{align*}
     \tilde{\mathcal{N}} = \set{ A = \begin{pmatrix}
     x & y\\
     z & -x
 \end{pmatrix}, [u:v] \in \mathbb P^1 | Ax = 0} \cong T^*\C\P^1
 \end{align*}
-\begin{align*}
+Note that specifiying $\ell = [u:v]$ gives a line in $\C^2$, and asking for a nilpotent $A$ to vanish on $\ell$ actually reduces to a map $\C^2/\ell \to \ell$, because Jordan canonical form implies that $A$ nilpotent and traceless implies that $A^2 = 0$ is precisely equivalent to $\im A = \ker A$.
+
+We have the map $\mu: \tilde{\mathcal{N}} \to \mathcal{N}$ the projection to the first factor. \begin{align*}
 \mathcal N = \set{ \begin{pmatrix}
     x & y\\
     z & -x
 \end{pmatrix} \in \sl(2) \mid x^2 + yz = 0}
 \end{align*}
-Call the map $\mu: \tilde{\mathcal{N}} \to \mathcal{N}$ the projection to the first factor. It is the moment map.
+It is the moment map.
 What are the fibers of $\tilde{\mathcal{N}}$? Pass to Jordan forms of $N$. The matrix $N = \begin{pmatrix}
     0 & 1\\
     0 & 0

@@ -400,10 +400,10 @@ This implies that there exist a unique relation \begin{align*}
 
 \section{Feb 26}
 \subsection{Cohomology of flag varieties}
-Any universal identity involving chern classes need only be checked on unordered direect sums of line bundles. Given $\pi:V^r\to X$ we get the full flag variety $\Fl(V)$ which is a bundle over $X$ whose points over $x$ are full flags in the fiber $V_x$. Choose a hermitian metric. Over $\Fl(V)$ we have a filtration of $\pi^*V$ by complete flags with subquotients $L_i$ which gets that $\pi^*(V) \cong \bigoplus L_i$. The metric is what lets us split the filtration, and so in algebraic geometry we cannot necessarily do this. Observe that $\Fl(V)$ is a iterated fiber bundfle of projective spaces of decreasing dimension.
+Any universal identity involving chern classes need only be checked on unordered direct sums of line bundles. Given $\pi:V^r\to X$ we get the full flag variety $\Fl(V)$ which is a bundle over $X$ whose points over $x$ are full flags in the fiber $V_x$. Choose a hermitian metric. Over $\Fl(V)$ we have a filtration of $\pi^*V$ by complete flags with subquotients $L_i$ which gets that $\pi^*(V) \cong \bigoplus L_i$. The metric is what lets us split the filtration, and so in algebraic geometry we cannot necessarily do this. Observe that $\Fl(V)$ is a iterated fiber bundle of projective spaces of decreasing dimension.
 
 Let $x_i \in H^2(\Fl(V); \Z)$ be the first Chern class of $L_i$. An application of Leray Hirsch implies the following \begin{theorem}
-    $H^^*(\Fl(V); \Z) \cong H^*(X; \Z)\langle x_1^{i_1}\dots x_r^{i_r} \rangle$ where $0\leq i_k \leq r-k$ as a vector space. As an algebra \begin{align*}
+    $H^*(\Fl(V); \Z) \cong H^*(X; \Z)\langle x_1^{i_1}\dots x_r^{i_r} \rangle$ where $0\leq i_k \leq r-k$ as a vector space. As an algebra \begin{align*}
         H^*(\Fl(V); \Z) &\cong H^*(X; \Z)[x_1,\dots, x_r]/\langle \prod(1 + x_i) = c(V) \rangle
     \end{align*}
     There is an action of $S^r$ on $H^*(\Fl(V); \Z)$ by permuting the $x_i$ and $\pi^* H^*(X; \Z) \hookrightarrow H^*(\Fl(V); \Z)$ is the inclusion of the $S^r$-invariants. 
@@ -566,6 +566,26 @@ When $B$ is a manifold, this plays well with Poincare duality. Before we define 
 \end{proof}
 Remark that the transfer map can operate on the level of differential forms if we have a submersion and the fibers don't pose singularities. 
 
+
+\begin{remark}
+    Anytime Leray Hirsch holds, then $H^*(E)\cong H^*(B)\otimes H^*(F)$ and the map $\pi_*$ just integrates the fiber direction.For example, if
+$u=\sum_i \pi^*(\alpha_i)\,c_i$
+with $c_i|_F$ a basis of $H^*(F)$, then
+\[\pi_*(u)=\sum_i \alpha_i \int_F c_i|_F\]
+
+
+
+In this case, the copy of $H^*(B)$ sits inside $H^*(E)$ as the part with fiber degree 0. Fiber integration projects onto that part by pairing with the top fiber class.
+
+For the flag bundle, this becomes:
+\[
+H^*(\Fl(V))\cong \bigoplus_I \pi^*H^*(X)\cdot m_I(x_1,\dots,x_r),
+\]
+and $\pi_*$ extracts the coefficient of the unique monomial $m_I$ representing the top class of the flag fiber. For $\GL(n)$, the flag fiber is $\Fl_n$ and the top class is $x_1^{n-1}x_2^{n-2}\cdots x_{n-1}$. This can also be expressed symbolically as the algebraic operation of taking a polynomial $f \in H^*(X)[x_1,\dots,x_n]$ and applying \begin{align*}
+    \pi_*(f) = \text{coefficient of } x_1^{n-1}x_2^{n-2}\cdots x_{n-1} \text{ in } f = \Delta^{-1} \sum_{\sigma \in S_n} \mathrm{sgn}(\sigma) f(x_{\sigma(1)},\dots, x_{\sigma(n)})
+\end{align*}
+where $\Delta = \prod_{i<j} (x_i - x_j)$ is the Vandermonde determinant. Note that the sum is alternating and every alternating polynomial is divisible by $\Delta$, whose quotient is a symmetric polynomial (and hence a pullback from the base). 
+\end{remark}
 \subsection{Application: segre class of a vector bundle}
 Let $\pi: V \to X$ be a vector bundle and $\P\pi: \P V \to X$ be the projectivization of $V$. We have the hyperplane bundle $\cO(1)$ on $\P V$ and its first Chern class $\omega$. \begin{definition}
     The Segre class of $V$ is defined to be \begin{align*}
