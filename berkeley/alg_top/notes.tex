@@ -18,6 +18,8 @@
 \usepackage{fancyhdr}
 
 \DeclareMathOperator{\St}{St}
+\DeclareMathOperator{\Spin}{Spin}
+\DeclareMathOperator{\Sq}{Sq}
 
 \usepackage{parskip} % Automatically respects blank lines
 \setlength{\parskip}{1em} % Adds more space between paragraphs
@@ -751,4 +753,97 @@ Part of the story is that there is an algebraic version of $\Omega U$. We can co
 
     We can get this form Bott or an analog of Schubert decomposition. We consider Bott's argument. Morse theory. Consider the energy functional on $P_{I,-I}(SU(2n))$ given by $E(\gamma) = \int_0^1 \|\gamma'(t)\|^2 dt$. The critical points are precisely the geodesics from $I$ to $-I$. Note that $L_{sm} GL(n) \subset L_{cts} GL(n)$ is a homotopy equivalence by general nonsense so thinking about derivatives is harmless. The critical points are precisely the image of the map $\lim \Gr(n, 2n) \to P_{I,-I}(SU(2n))$. Gradient flow defines a cell decomposition of $P_{I,-I}(SU(2n))$. The dimension of the cells is computable from the Hessian of $E$.
 
+    \section{March 12}
+    Characteristic classes for real bundles. Chern classes for $G$-bundles, i.e. $\Sp(n), O(n), SO(n)$, etc. Why the argument for $U$ does not work for $O$ and $SO$. Main theorem about $H^*(BO,BSO;\Z)$. Stiefel Whitney at $p=2$. Pontrjagin away from $p=2$. Proof for $BSO(n)$ and $\Z[1/2]$ coefficients. SW classes and Steenrod squares. Integral patching, the Bockstein homomorphism.
+
+    \subsection{}
+    Recall $G$ bundles on $X$ are classified by homotopy classes of maps $X \to BG$, and the universal chern classes live in $H^*(BG)$. For example the cohomology of $BU(n)$ is a polynomial ring on the universal chern classes $c_i$. 
+
+    A cheating method to define characterstic classes is to embed groups into $U(n)$ and pull back the chern classes. For example $\Sp(n) \hookrightarrow U(2n)$ by splitting $\H$ as $\C\oplus \C j$. It turns out that you get nothing new as $H^*(B\Sp(n)) = \Z[c_2, c_4, \dots, c_{2n}]$ where $c_{2i}$ is the pullback of the $2i$-th chern class. In particular the chern roots come in pairs $x_i, -x_i$ and note that $1+x_i$ and $1-x_i$ multiply to $1-x_i^2$. 
+    
+    There is analagous story for $O(n)$ and $SO(n)$ but we first must pass to the complexification $E \mapsto E \otimes \C$ to get a complex vector bundle and then take the chern classes. 
+
+    We define $p_i(E) = (-1)^i c_{2i}(E\otimes \C)$ to be the $i$-th Pontrjagin class. It lives in $H^{4i}(BO;\Z)$ and vanishes after $i \geq n/2$. They satisfy an analagous Whitney sum formula, taken in $\Z[1/2]$ coefficients. We do not use $c_{odd}$ because they are two torsion. Since $E\cong E^\vee$ as real bundles, their complexifications $E\otimes \C$ and $E^\vee \otimes \C$ are isomorphic as complex bundles, but they also have opposite complex structures so $c_i(E\otimes \C) = (-1)^i c_i(E^\vee \otimes \C)$. Thus $c_{odd}(E\otimes \C)$ are two torsion.
+
+    \begin{remark}
+        Sometimes can define an extra interesting characteristic class for $SO$ bundles called the Euler class. Need $SO$ because of orientability to define the Thom class. Can define this by looking at the disk bundle rel sphere bundle on the universal $SO$ bundle over $BSO(n)$ and taking the Thom class. Thus we get a class $e_{2n} \in H^{2n}(BSO(2n))$ with the property that its pullback along any map $X \to BSO(2n)$ is the Euler class of the corresponding bundle. This is because Thom classes are functorial. In $BSO(2n+1)$ we also have an Euler class but iti s two torsion. 
+    \end{remark}
+
+    \begin{remark}
+        Defining the Euelr class with $\Z$ coefficients requires orientability. It is always ok with $\Z/2$ coefficients. On a compact $\Z$-oriented manifold $M$ \begin{align*}
+        \int_M e(TM) = \chi(M)
+        \end{align*} and an analagous formula holds for non-orientable manifolds with $\Z/2$ coefficients.
+    \end{remark}
+
+    \begin{remark}
+        Another usefuul property of $e$. Say $p:E\to X$ isa fiber fundle with fibers compact oriented manifolds, dim $d$. We have a relative Euler class for the vertical tangent bundle Integration along the fiber gives a map $p_*: H^*(E) \to H^{*-d}(X)$. Precomposing with capping with the Euler class gives a map $H^{*-d}(X) \to H^*(E) \to H^{*-d}(X)$ which is \textbf{prop} multiplication by the Euler characteristic of the fiber. This is true because its a module map, so follow where $1$ goes.
+        \end{remark}
+
+        \begin{remark}
+            Cohomology with coefficients. For nonorientable bundles $E$ can define a class $\tilde e(E) \in H^n(X; or_E)$ where $or_E$ is the orientation sheaf of $E$. Then can integrate the fiber $M$ with twisted coefficients in the orientation sheaf to get $\int_M \tilde e(TM) = \chi(M)$. Morally this is about twisted functions along twisted measures, twisted in the sense that they both carry monodromy in the same way so that the monodromy cancels out and we get a well defined number.
+        \end{remark}
+
+        \begin{theorem}
+            $H^*(BO;\Z/2) = \Z/2[w_1, w_2, \dots]$ where $w_i$ is the $i$-th Stiefel Whitney class. They satisfy the Whitney sum formula \begin{align*}
+                w(E\oplus F) = w(E) \cup w(F)
+            \end{align*} We also have the splitting principle, i.e given $E \to X$, we can form the flag bundle $\Fl(E) \to X$ and pull back $E$ to $\Fl(E)$, then it splits as a sum of line bundles. Moreover the pullback in cohomology is injective, so we can define the Stiefel Whitney classes by the formula \begin{align*}
+                w(E) = \prod (1 + x_i)
+            \end{align*} where $x_i$ are the Stiefel Whitney roots, i.e. the first Stiefel Whitney classes of the line bundles in the splitting. The pullback identifies $H^*(X)$ with the subalgebra of $H^*(\Fl(E))$ invariant under the action of $W$.
+            $w_1(E)$ is the obstruction to orientability of $E$. \begin{align*}
+                H^*(BSO;\Z/2) = \Z/2[w_2, w_3, \dots] 
+            \end{align*}
+In particular passing to orientability kills only $w_1$. Analagously we have \begin{align*}
+    H^*(BSU(n);\Z) = \Z[c_2, c_3, \dots, c_n]
+\end{align*} kills only the first chern class, the obstruction to finding a section of the "orientation sheaf", which is the canonical bundle.
+Also fact: $w_n(E) = e(E) \in H^n(X;\Z/2)$.
+        \end{theorem}
+
+        \begin{proposition}
+            $c_1$ mod $2$ is $w_{2i}$. For example $c_n$ mod $2$ is the Euler class mod $2$, which is the top Stiefel Whitney class. 
+        \end{proposition}
+        Postponed until later.
+\begin{example}
+    $e(\R\P^2) = 1$ mod $2$. This is true but has nothing to do with Chern classes. What about $\R\P^3$?
+\end{example}
+The main theorem says that these are all the classes, but we have to say how mod 2 and $\Z[1/2]$ fit together.
+
+\begin{theorem}
+    Let $n$ even. Then \begin{align*}
+        H^*(BSO(n);\Z) &\cong F \oplus T_2
+    \end{align*} where $F$ is a free $\Z$-module and $T_2$ is the 2-torsion. 
+This will be split. $T_2$ is canonical, $F$ is a quotient in general, but in this case, $F$ will be a sub.
+
+Also \begin{align*}
+    H^*(BSO(n);\Z[1/2]) &\cong \Z[1/2][\tilde{p}_1, \tilde{p}_2, \dots, \tilde{p}_{n/2 - 1}, e_{n}]
+\end{align*} where we write $\tilde{p}_i$ to emphasize that they are pulled back from $BO(n)$ and $e_n$ is the Euler class. We also have the top $p_{n/2}$ but we don't need to write it because it is the square of the Euler class. 
+
+Also we have \begin{align*}
+    H^*(BO(n);\Z[1/2]) &\cong \Z[1/2][p_1, p_2, \dots, p_{\lfloor n/2 \rfloor}]
+\end{align*} subject to the relation $p_i = w_{2i}^2$ mod 2. 
+
+For $n$ odd, $H^*(BSO(n);\Z[1/2]) = \Z[1/2][\tilde{p_1}, \tilde{p_2}, \dots, \tilde{p_{\lfloor n/2 \rfloor}}]$.
+\end{theorem}
+
+\begin{remark}
+    The $p_i$ and $\tilde{p_i}$ are defined in the $\Z$ cohomology and the subring $\Z[\tilde{p}_1, \tilde{p}_2, \dots]$ (including $e$ if even) is saturated in $H^*(BSO(n);\Z)$. Equivalently the $p_i, \tilde{p}_i$ and $e$ generate the torsion free part of the cohomology. 
+\end{remark}
+
+You might know that $\pi_1 \SO(n) = \Z/2$ for $n\geq 3$ and so it has a double cover $\Spin(n)$. If you look at the cohomology $H^*(B\Spin(n);\Z)$, you lose  $w_2$. But in $B \Spin(n)$ $p_1$ becomes divisible by $4$ if $n=3$ and $2$ if $n\geq 4$. This example is to show that these statements that hold for $BSO(n)$ are very delicate and good, that we do have all of the integral cohomology.
+
+
+Let $n$ even. We can give an inductive computation of $\Z[1/2]$ cohomology of $BSO(n)$ using the fiber bundle $SO(n+1)/SO(n) \to BSO(n) \to BSO(n+1)$ where the fiber is $S^n = S(E)$ where $E = \R^{n+1}$ is the standard representation. Then study the Gysin sequence for the pair $D(E),S(E)$ and we get a long exact sequence with $\Z[1/2]$ coefficients.
+
+\begin{align*}
+    \dots \to H^k(D(E), S(E)) \to H^k(D(E)) \to H^k(S(E)) \to H^{k+1}(D(E), S(E)) \to \dots
+\end{align*} which can now be identified \begin{align*}
+    \dots \to H^{k-n-1}(BSO(n+1)) \to H^k(BSO(n+1)) \to H^k(BSO(n)) \to H^{k-n}(BSO(n+1)) 
+\end{align*} where the first map is capping with the Euler class and is in fact $0$ since it is 2 torsion. Another fact is that the map $H^k(BSO(n)) \to H^{k-n}(BSO(n+1))$ is integration along the sphere fiber. So the image misses the Euler class, so we get what we are supposed to get.
+
+$n$ odd is similar but Constantin doesn't want to do it. $BO$ is similar but there is no Euler class.
+
+\begin{remark}
+    Stiefel Whitney classes are algebraically independent. But they are not independent cohomologically. In particular, there are universal cohomology operations with $\Z/2$ coefficients, functorial in $X$, called Steenrod power operations $\Sq^i: H^*(X;\Z/2) \to H^{*+i}(X;\Z/2)$ and we have the total square \begin{align*}
+    \Sq = \Sq^0 + \Sq^1 + \Sq^2 + \dots
+\end{align*} which is an algebra homomorphism. The Wu relation gives a formula for the action of $\Sq$ on the Stiefel Whitney classes, in particular we can write it as quadratics in the Stiefel Whitney classes. "So only the $w_{2^k}$ are algebraically independent."
+\end{remark}
 \end{document}

@@ -1,0 +1,337 @@
+\documentclass[12pt]{article}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/psetconfig}
+\title{Homework 3}
+\author{Songyu Ye}
+\date{\today}
+
+\begin{document}
+\psettitle
+
+\begin{problem}[1 (Hatcher AT, 4.1.3)]
+For an H-space $(X,*)$ with multiplication
+\[
+\mu \colon X\times X \to X,
+\]
+show that the natural group operation on $\pi_n(X,*)$ can also be defined by the rule
+\[
+(f+g)(x)=\mu(f(x),g(x)).
+\]
+
+Recall that an $H$-space is a space $X$ together with a point $e\in X$ and a continuous map $\mu\colon X\times X\to X$ such that $\mu(e,x)$ and $\mu(x,e)$ are homotopic to $x$ through $(X,e)$-based homotopies, meaning that the homotopies fix the basepoint $e$ for all $x\in X$. The point $e$ is called the unit of the H-space, and $\mu$ is called the multiplication. An immediate consequence of the definition is $\mu(e,e) = e$.
+\end{problem}
+
+\begin{solution}
+Represent classes in $\pi_n(X,e)$ by maps $f,g:I^n\to X$ with $f|_{\partial I^n}=g|_{\partial I^n}=e$.
+
+Define the usual sum by concatenation in the last coordinate:
+\[
+(f+g)(u,t)=
+\begin{cases}
+f(u,2t), & 0\le t\le \tfrac12,\\
+g(u,2t-1), & \tfrac12\le t\le 1,
+\end{cases}
+\]
+and define a second operation by
+\[
+(f\star g)(u,t)=\mu(f(u,t),g(u,t)).
+\]
+Since $\mu(e,e)=e$, this is again a based map.
+
+These two operations satisfy the interchange law
+\[
+(f_1\star g_1)+(f_2\star g_2)=(f_1+f_2)\star(g_1+g_2),
+\]
+which follows immediately from the definitions.
+Moreover, the constant map at $e$ is a unit for $\star$ up to based homotopy, since
+\[
+\mu(f,e)\simeq f,\qquad \mu(e,f)\simeq f
+\]
+through based maps, and it is also the unit for $+$.
+Hence the Eckmann--Hilton argument implies that $+$ and $\star$ agree.
+Therefore
+\[
+[f]+[g]=[\mu\circ(f,g)].
+\]
+\end{solution}
+
+\begin{problem}[2 (Hatcher, 4.1.20)]
+Show that $[X,Y]$ is finite if $X$ is a finite CW complex and $\pi_i(Y)$ is finite for $i\le \dim X$.
+\end{problem}
+
+\begin{solution}
+We argue by induction on the skeleta of $X$. Let $X^k$ denote the $k$-skeleton.
+Since $X$ is a finite CW complex, only finitely many skeleta occur, and $X=X^m$ for $m=\dim X$.
+
+For $k=0$, $X^0$ is a finite set of points, so
+\[
+[X^0,Y]\cong \pi_0(Y)^{\# X^0},
+\]
+which is finite because $Y$ has finitely many components: indeed $\pi_0(Y)$ is finite since $\pi_i(Y)$ is finite for $i\le m$, in particular for $i=0$.
+
+Assume $[X^{k-1},Y]$ is finite. The space $X^k$ is obtained from $X^{k-1}$ by attaching finitely many $k$-cells. For a fixed map
+\[
+f\colon X^{k-1}\to Y,
+\]
+its extensions over one $k$-cell correspond to nullhomotopies of the attaching map in $Y$, and whenever extensions exist, the set of extension classes is a torsor under $\pi_k(Y)$. Since only finitely many $k$-cells are attached, the set of possible extensions of $f$ to $X^k$ is finite because $\pi_k(Y)$ is finite.
+
+Thus each class in $[X^{k-1},Y]$ has only finitely many lifts to $[X^k,Y]$. Since the base set $[X^{k-1},Y]$ is finite by induction, it follows that $[X^k,Y]$ is finite. Inducting up to $k=m$ gives that $[X,Y]$ is finite.
+\end{solution}
+
+\begin{problem}[3]
+Determine $\pi_1(\R\P^n)$ and $\pi_n(\R\P^n)$. Use this to show that:
+\begin{enumerate}[(a)]
+    \item there is no retraction of the inclusion $\R\P^k \subset \R\P^n$;
+    \item the action of $\pi_1(\R\P^n)$ on $\pi_n(\R\P^n)$ is trivial if $n$ is odd and nontrivial when $n$ is even.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+For $n\ge 2$, the antipodal map on $S^n$ defines a two-sheeted covering
+\[
+p:S^n\to \R\P^n.
+\]
+Hence
+\[
+\pi_1(\R\P^n)\cong \Z/2\Z.
+\]
+
+More generally, if $q:\widetilde X\to X$ is a covering map, then for every $j\ge 2$ the induced map
+\[
+q_*:\pi_j(\widetilde X)\xrightarrow{\ \cong\ }\pi_j(X)
+\]
+is an isomorphism. Indeed, every based map $S^j\to X$ lifts uniquely to $\widetilde X$ once a basepoint upstairs is chosen, since $S^j$ is simply connected for $j\ge 2$; the same holds for homotopies because $S^j\times I$ is also simply connected. Applying this to $p:S^n\to \R\P^n$, we get
+\[
+\pi_j(\R\P^n)\cong \pi_j(S^n)\qquad (j\ge 2).
+\]
+In particular,
+\[
+\pi_n(\R\P^n)\cong \pi_n(S^n)\cong \Z.
+\]
+
+We now prove the two assertions.
+
+\begin{enumerate}[(a)]
+    \item Suppose $k<n$ and there were a retraction
+    \[
+    r:\R\P^n\to \R\P^k
+    \]
+    of the inclusion
+    \[
+    i:\R\P^k\hookrightarrow \R\P^n.
+    \]
+    Then
+    \[
+    r\circ i=\id_{\R\P^k},
+    \]
+    so functoriality gives
+    \[
+    r_*\circ i_*=\id_{\pi_k(\R\P^k)}.
+    \]
+    Thus $i_*$ must be injective.
+
+    But by the covering-space fact above,
+    \[
+    \pi_k(\R\P^k)\cong \pi_k(S^k)\cong \Z,
+    \]
+    while
+    \[
+    \pi_k(\R\P^n)\cong \pi_k(S^n)=0
+    \]
+    since $k<n$ and $S^n$ is $(n-1)$-connected. Therefore
+    \[
+    i_*:\pi_k(\R\P^k)\to \pi_k(\R\P^n)
+    \]
+    is a map
+    \[
+    \Z\to 0,
+    \]
+    which is not injective. This is a contradiction. Hence no such retraction exists.
+
+    \item The action of $\pi_1(\R\P^n)$ on $\pi_n(\R\P^n)$ is induced by deck transformations of the universal cover
+    \[
+    p:S^n\to \R\P^n.
+    \]
+    Since
+    \[
+    \pi_1(\R\P^n)\cong \Z/2\Z,
+    \]
+    the nontrivial element acts by the nontrivial deck transformation, namely the antipodal map
+    \[
+    a:S^n\to S^n,\qquad a(x)=-x.
+    \]
+    Under the identification
+    \[
+    \pi_n(\R\P^n)\cong \pi_n(S^n)\cong \Z,
+    \]
+    this action is therefore multiplication by the degree of $a$. We know that $\deg(a)=(-1)^{n+1}$ because $-I$ acting on $S^n \subset \R^{n+1}$ has determinant $(-1)^{n+1}$. Hence the action is multiplication by $+1$ if $n$ is odd and by $-1$ if $n$ is even. Hence the action is trivial when $n$ is odd and nontrivial when $n$ is even.
+\end{enumerate}
+\end{solution}
+
+\begin{problem}[4]
+Let $* \in A \subset X$ and let $P^*_A X$ be the space of paths in $X$ starting at the basepoint $*$ and ending in $A$. Note the inclusion
+\[
+j\colon \Omega X \hookrightarrow P^*_A X,
+\]
+and the endpoint projection
+\[
+p\colon P^*_A X \to A.
+\]
+Show from the definitions that:
+\begin{enumerate}[(a)]
+    \item $\pi_{n-1}(P^*_A X)\cong \pi_n(X,A)$ for $n>0$;
+    \item the induced map
+    \[
+    j_* \colon \pi_{n-1}(\Omega X)\to \pi_{n-1}(P^*_A X)
+    \]
+    agrees with the map
+    \[
+    \pi_n(X)\to \pi_n(X,A);
+    \]
+    \item the induced map
+    \[
+    p_* \colon \pi_{n-1}(P^*_A X)\to \pi_{n-1}(A)
+    \]
+    agrees with the connecting map
+    \[
+    \partial
+    \]
+    in the long exact homotopy sequence for $(X,A)$.
+\end{enumerate}
+
+\medskip
+
+\noindent\textit{Comment.}
+The sequence of maps
+\[
+\Omega X \xrightarrow{\,j\,} P^*_A X \xrightarrow{\,p\,} A
+\]
+is an example of a fibration. We will see that fibrations also lead to long exact homotopy sequences. In this case, we have a principal fibration with structure group $\Omega X$: in a homotopical sense, $A$ is the quotient of $P^*_A X$ by $\Omega X$. Morally, quotienting out by $\Omega X$ forgets all about the path, except for its endpoint in $A$.
+\end{problem}
+
+\begin{solution}
+We use the adjunction between maps into a path space and maps out of a cylinder.
+A based map
+\[
+S^{n-1}\to P_A^*X
+\]
+is the same thing as a map
+\[
+F\colon S^{n-1}\times I\to X
+\]
+such that $F(s,0)=*$ for all $s$ and $F(s,1)\in A$ for all $s$. Collapsing $(S^{n-1}\times \{0\})\cup (\{s_0\}\times I)$
+to the basepoint identifies this with a based map of pairs
+$(D^n,S^{n-1})\to (X,A)$.
+Passing to homotopy classes gives
+\[
+\pi_{n-1}(P_A^*X)\cong \pi_n(X,A),
+\qquad n>0.
+\]
+This proves (a).
+
+For (b), under this identification, a based loop in $\Omega X$ is a map
+$S^{n-1}\to \Omega X$
+which adjoints to a based map $D^n/S^{n-1}=S^n\to X$
+Composing with
+\[
+j\colon \Omega X\hookrightarrow P_A^*X
+\]
+just regards such a loop as a path whose endpoint is the basepoint, viewed as a point of $A$. Therefore the induced map
+\[
+j_*\colon \pi_{n-1}(\Omega X)\to \pi_{n-1}(P_A^*X)
+\]
+corresponds exactly to the natural map
+\[
+\pi_n(X)\to \pi_n(X,A).
+\]
+
+For (c), under the same adjunction, the endpoint projection
+\[
+p\colon P_A^*X\to A
+\]
+sends a path to its endpoint. Thus on a representative $F\in \pi_n(X,A)$, which is a map
+\[
+F\colon (D^n,S^{n-1})\to (X,A)
+\]
+of a relative class, the induced map records the restriction
+\[
+F|_{S^{n-1}}\colon S^{n-1}\to A.
+\]
+But this is exactly the connecting morphism
+\[
+\partial\colon \pi_n(X,A)\to \pi_{n-1}(A)
+\]
+in the long exact sequence of the pair. Hence $p_*$ agrees with $\partial$.
+\end{solution}
+
+\begin{problem}[5]
+Recall that an element $\alpha\in \pi_n(X,*)$ is a based homotopy class of based maps $S^n\to X$.
+\begin{enumerate}[(a)]
+    \item Choose a representative map $f$ for $\alpha$, and check that the induced map
+    \[
+    f_* \colon H_n(S^n;\Z)\to H_n(X;\Z)
+    \]
+    does not depend on the choice of $f$.
+    \item Check that the Hurewicz map
+    \[
+    h\colon \pi_n(X,x)\to H_n(X),
+    \]
+    which sends $\alpha\mapsto f_*(1)$, is a group homomorphism.
+    \item Show that if $\alpha,\beta\in \pi_n(X)$ are related by the action of $\pi_1$, then $h(\alpha)=h(\beta)$. Reformulate this in terms of free homotopy classes of maps $S^n\to X$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\begin{enumerate}[(a)]
+    \item If $f,g\colon S^n\to X$ are based homotopic, then the induced maps on singular homology are equal. Therefore $f_*=g_*$ on
+    \[
+    H_n(S^n;\Z),
+    \]
+    so $f_*(1)$ depends only on the based homotopy class $\alpha=[f]$.
+
+    \item We show that
+    \[
+    h\colon \pi_n(X,*)\to H_n(X;\Z),
+    \qquad
+    h([f])=f_*(1),
+    \]
+    is additive. The group law on $\pi_n(X,*)$ is defined using the pinch map
+    \[
+    q\colon S^n\to S^n\vee S^n.
+    \]
+    If $\alpha=[f]$ and $\beta=[g]$, then
+    \[
+    \alpha+\beta=[(f\vee g)\circ q].
+    \]
+    On homology, $q_*$ sends the fundamental class $[S^n]$ to the sum of the fundamental classes of the two wedge summands. This can be easily verified by observing that $H^n(S^n\vee S^n;\Z) \cong H^n(S^n;\Z) \oplus H^n(S^n;\Z)$ and writing $q_*(1) = (a,b)$, and then reasoning about the the degree of the projections $S^n\vee S^n \to S^n$ to conclude that $a=b=1$. Hence
+    \[
+    h(\alpha+\beta)
+    =((f\vee g)\circ q)_*(1)
+    =(f\vee g)_*\bigl(q_*(1)\bigr)
+    =f_*(1)+g_*(1)
+    =h(\alpha)+h(\beta).
+    \]
+
+    \item The action of $\pi_1(X,*)$ on $\pi_n(X,*)$ can be understood in the cubical model as follows. Represent
+    $\alpha\in\pi_n(X,x_0)$
+    by
+    $F:(I^n,\partial I^n)\to (X,x_0)$.
+    Write a point as $(u,t)\in I^{n-1}\times I$. For each fixed $u$,
+    $t\mapsto F(u,t)$
+    is a loop at $x_0$.
+
+    Let $\gamma$ be a loop at $x_0$. The $\pi_1$-action is
+    $(\gamma\cdot F)(u,-)=\gamma * F(u,-) * \gamma^{-1}$. Then $F$ and $\gamma\cdot F$ are freely homotopic via the map which slurps up the conjugation by $\gamma$. It does not fix the boundary, so it is a free homotopy, not a based one. Singular homology is invariant under free homotopy, so if $\alpha$ and $\beta$ lie in the same $\pi_1$-orbit, then
+    \[
+    h(\alpha)=h(\beta).
+    \] This is because a homotopy between $\alpha$ and $\beta$ induces a chain homotopy between the induced maps on singular chains, hence an equality on homology.
+    
+    This result is equivalent to saying that for $n\ge 2$ the Hurewicz map factors through free homotopy classes of maps $S^n\to X$:
+    \[
+    \pi_n(X,*)/\pi_1(X,*)\longrightarrow H_n(X;\Z).
+    \]
+\end{enumerate}
+\end{solution}
+\end{document}

@@ -1701,11 +1701,11 @@ An elementary transformation on $V$ at some $y\in \pi^{-1}(z)$ effects an elemen
 transformation on $\pi_*V$ at $z$, with a subspace of the same codimension 
 (the original $S$, plus the sum of the other fibres).  
 So the degrees of the two bundles change by the same amount.  
-Transforming all the way to the trivial bundle $\C^r$ gives the relation
+Transforming all the way to the trivial bundle $\cO^r$ gives the relation
 \[
 \deg \pi_*V - \deg V
-= \deg \pi_* \C^r - \deg \C^r
-= r \cdot \deg \pi_* \C.
+= \deg \pi_* \cO^r - \deg \cO^r
+= r \cdot \deg \pi_* \cO.
 \]
 So we need to show that $\deg \pi_* \cO = -b/2$.  
 We now consider the dual vector bundle $(\pi_* \cO)^\vee$, 
@@ -1723,41 +1723,101 @@ With notation as in the proof above,
 \]
 More generally,
 \[
-(\pi_* (V^\vee))^\vee \cong \pi_* \big(V^\vee(V)(B)\big).
+(\pi_* (V))^\vee \cong \pi_* \bigl(V^\vee \otimes \cO(B)\bigr)
 \]
-\end{lemma}
+\end{lemma}\begin{proof}
+We first prove
+\[
+(\pi_*\cO_R)^\vee \cong \pi_*\cO_R(B).
+\]
+Let \(\cM_R\) and \(\cM_{\P^1}\) denote the sheaves of meromorphic functions. Since
+\(\pi\) is finite, there is a trace morphism
+\[
+\Tr_\pi:\pi_*\cM_R \to \cM_{\P^1}.
+\]
+We claim that
+\[
+\Tr_\pi\bigl(\pi_*\cO_R(B)\bigr)\subset \cO_{\P^1}.
+\]
 
-\begin{proof}
-To exhibit the duality, we must construct a perfect pairing between the two direct image bundles.  
-For a meromorphic function on $R$, define its trace $\mathrm{Tr}_\pi a$ along $\pi$ 
-to be the sum of the values along the fibres of $\pi$ (with multiplicities, at branch points): 
-this is a meromorphic function on $\P^1$.
-
-A key point is that the trace of a function in $\cO(B)$ is in fact holomorphic: 
-the order of the pole on $R$ is too small to create a pole on $\P^1$.  
-(The trace will have growth less than $|z|^{-1}$ in a local coordinate, 
-as can be checked in the local form of $\pi$.)
-
-Define now a bilinear pairing
-\begin{equation}
-\pi_* \cO \;\times\; \pi_* \cO\big((B)\big)
-\;\longrightarrow\; \cO,
+This is a local computation. Near a ramification point \(x\in R\) of index \(n\), with
+\(z=\pi(x)\), choose coordinates \(w\) at \(x\) and \(t\) at \(z\) such that
+\[
+t=w^n.
+\]
+Then locally
+\[
+B=(n-1)x,
 \qquad
-\varphi \times \psi \;\longmapsto\; \mathrm{Tr}_\pi(\varphi\cdot\psi),
-\end{equation}
-where the sections $\varphi,\psi$ of the sheaves on $U\in\P^1$ are being viewed as functions 
-on $\pi^{-1}(U)$, multiplied pointwise and fed into the trace.  
-This is bilinear over $\cO_{\P^1}$.
+\cO_R(B)_x = w^{-(n-1)}\C\{w\}.
+\]
+Thus a local section of \(\cO_R(B)\) has an expansion
+\[
+\psi(w)=\sum_{m\ge -(n-1)} a_m w^m.
+\]
+Its trace is
+\[
+\Tr_\pi(\psi)=\sum_{j=0}^{n-1}\psi(\zeta^j w)
+=\sum_{m\ge -(n-1)} a_m \Bigl(\sum_{j=0}^{n-1}\zeta^{jm}\Bigr) w^m,
+\]
+where \(\zeta=e^{2\pi i/n}\). Since
+\[
+\sum_{j=0}^{n-1}\zeta^{jm}=
+\begin{cases}
+n,& n\mid m,\\
+0,& n\nmid m,
+\end{cases}
+\]
+only the terms with \(n\mid m\) survive. But the only multiple of \(n\) among the integers
+\(m\ge -(n-1)\) and \(m<0\) is none, so no negative power survives. Hence
+\(\Tr_\pi(\psi)\) is holomorphic in \(t\).
 
-To check that this is a perfect duality between direct image bundles, 
-we can pass to the local form $w \mapsto z = w^n$ of the map; 
-then $\cO_w$ has basis $\{1,w,\dots,w^{n-1}\}$ over $\cO_z$, 
-while $\cO_w(B)$ has basis $\{1,w^{-1},\dots,w^{-(n-1)}\}$.  
-The trace sums the values at $w,\zeta w,\dots,\zeta^{n-1} w$, 
-where $\zeta = e^{2\pi i/n}$, and we obtain from the above equation the natural pairing between the two bases.
+Therefore we obtain an \(\cO_{\P^1}\)-bilinear pairing
+\[
+\pi_*\cO_R \times \pi_*\cO_R(B)\to \cO_{\P^1},
+\qquad
+(\varphi,\psi)\mapsto \Tr_\pi(\varphi\psi),
+\]
+and hence a morphism
+\[
+\pi_*\cO_R(B)\to (\pi_*\cO_R)^\vee.
+\]
 
-For general $V$, the same argument applies, but now the trace pairing must include the trace pairing 
-on $V \times V^\vee$ as well as $\mathrm{Tr}_\pi$.  
+To show that this is an isomorphism, it suffices to check stalkwise. At an unramified point,
+the map is obviously perfect. At a ramification point with local form \(t=w^n\), the
+\(\cO_{\P^1,z}\)-module \(\cO_{R,x}\) has basis
+\[
+1,w,\dots,w^{n-1},
+\]
+while \(\cO_R(B)_x\) has basis
+\[
+1,w^{-1},\dots,w^{-(n-1)}.
+\]
+The pairing satisfies
+\[
+\Tr_\pi(w^i\cdot w^{-j})=
+\begin{cases}
+n,& i=j,\\
+0,& i\neq j,
+\end{cases}
+\]
+so the matrix of the pairing is \(nI_n\), hence invertible. Thus the pairing is perfect, and
+\[
+(\pi_*\cO_R)^\vee \cong \pi_*\cO_R(B).
+\]
+
+The same argument, after local trivialization of \(V\), gives
+\[
+(\pi_*V)^\vee \cong \pi_*(V^\vee\otimes \cO_R(B)).
+\]
+Indeed, the pairing is
+\[
+\pi_*V \times \pi_*(V^\vee\otimes \cO_R(B))\to \cO_{\P^1},
+\qquad
+(s,\lambda)\mapsto \Tr_\pi(\lambda(s)),
+\]
+and in a local frame it is the tensor product of the scalar trace pairing above with the natural
+evaluation pairing \(V\times V^\vee\to \cO_R\).
 \end{proof}
 
 \begin{exercise}

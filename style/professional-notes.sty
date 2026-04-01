@@ -16,11 +16,10 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{titlesec}
-\makeatletter
-\def\input@path{{../../style/}}
-\makeatother
 
-\usepackage{../../style/macros}
+\RequirePackage{./macros}
+
+
 % Theorem Environments
 \newtheoremstyle{mystyle}% name
   {10pt}% space above
@@ -42,6 +41,7 @@
 \newtheorem{exercise}[theorem]{Exercise}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{fact}[theorem]{Fact}
+\newtheorem{solution}[theorem]{Solution}
 
 % Section formatting
 \titleformat{\section}

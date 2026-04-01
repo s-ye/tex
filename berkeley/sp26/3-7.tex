@@ -383,4 +383,221 @@ G[[z]]\, t^\mu\, G[[z]]\]
 
 \subsection{}
 What should parabolic reduction look like when I have a stabilizer $\mu_k$ at the node of my (stacky) curve? Note that equivariant data $\mu_k \to G$ will be prescribed to be $0$ or $\omega_i^\vee$.
+
+\subsection{}
+Why are we thinking about compactifing the loop group of $G$? The point is that we have the equivalence of descent datum for $G$-bundles on a nodal curve $C$ via the two following equivalences.
+
+One is to descent along the normalization $\nu:\tilde{C}\to C$ and prescribe a gluing element $g\in G$ at the node. The other is to reason about the double coset construction.
+Consider a nodal curve $C_0$ with a single node $p$. Then $\Spec \widehat{\mathcal O}_{C_0,p} \cong \Spec \CC[[x,y]]/(xy) = D_0$, so the punctured neighborhood is $D_0^\ast = \Spec \CC((x)) \times \CC((y))$.
+
+
+Thus $LG \times LG$ takes the role of $LG$, while $G^\Delta = G(\CC[[x,y]]/(xy))$ takes the role of $L^+G$. Let $L_{C_0}G := G(C\setminus\{p\})$ be the global gauge group on the complement of the node. The double coset construction therefore yields
+\[
+T \xrightarrow{\;\Psi_{C_0}\;} L_x G \times L_y G / G^\Delta, \qquad
+\mathcal M_G(C_0) \xrightarrow{\;\Psi\;} L_{C_0}G \backslash \bigl(L_x G \times L_y G\bigr)/G^\Delta .
+\]
+Note that the two factors of $L_x G \times L_y G$ identify with the choice of trivialization of the $G$-bundle on the two branches of the node. Besides the trivialization on $C_0\setminus\{p\}$, you also choose a trivialization on the formal neighborhood of the node.
+
+The point is that for framed bundles, every double coset representing a bundle has a regular representative
+$(g_x,g_y)\in G[[x]]\times G[[y]]$ and the quantity
+$g=g_x(0)g_y(0)^{-1}$ is independent of the remaining gauge actions.
+
+Therefore there is a well-defined map
+\[L_{C_0}G\backslash (L_xG\times L_yG)/G^\Delta
+\;\longrightarrow\;
+G\]
+sending the double coset to the framed gluing element. It is an isomorphism because the bundle is necessarily trivial on the complement of the node. There are many different trivializations of it, related by $L_{C_0}G$ and those different trivializations produce different pairs $(g_x,g_y)$, but the same gluing element $g=g_x(0)g_y(0)^{-1}$.
+
+Here we are crucially using the fact that for $G$ semisimple and simply connected, every $G$-bundle on an affine curve, in particular $C_0\setminus\{p\}$, is trivial. This is not true, for example, for $G=GL_n$ where $n=1$ gives line bundles which can certainly be nontrivial on affine curves. 
+
+
+\begin{proposition}
+Let $R = \CC[[x,y]]/(xy)$. For an affine algebraic group $G$ over $\CC$, there is a natural bijection
+\[
+\bigl(G[[x]] \times G[[y]]\bigr) / G(R) \cong G,
+\]
+where $G(R) = \{(h_x,h_y) \in G[[x]] \times G[[y]] \mid h_x(0)=h_y(0)\}$ acts on the right by $(g_x,g_y)\cdot(h_x,h_y)=(g_xh_x,\;g_yh_y)$. The bijection is given by $[(g_x,g_y)] \mapsto g_x(0)\,g_y(0)^{-1}$.
+\end{proposition}
+
+\begin{proof}
+Since $R \cong \CC[[x]] \times_{\CC} \CC[[y]]$ and $G$ is affine, the functor of points sends this fiber product of rings to a fiber product of groups: $G(R) \cong G[[x]] \times_{G} G[[y]]$. 
+
+\textbf{Well-definedness.} Let $(h_x,h_y)\in G(R)$. Then $(g_xh_x,g_yh_y)$ maps to $g_x(0)\,h_x(0)\,h_y(0)^{-1}\,g_y(0)^{-1}$. Since $h_x(0)=h_y(0)$, this equals $g_x(0)\,g_y(0)^{-1}$. Thus the map descends to the quotient.
+
+\textbf{Surjectivity.} Given $g\in G$, the class of $(g,1)$ maps to $g\cdot 1^{-1}=g$.
+
+\textbf{Injectivity.} Suppose $g_x(0)g_y(0)^{-1}=g_x'(0)g_y'(0)^{-1}$. Then $c:=g_x(0)^{-1}g_x'(0)=g_y(0)^{-1}g_y'(0)\in G$. Set $h_x := g_x^{-1}g_x' \in G[[x]]$, $h_y := g_y^{-1}g_y' \in G[[y]]$. Then $h_x(0)=c=h_y(0)$, so $(h_x,h_y)\in G(R)$ and $(g_x,g_y)\cdot(h_x,h_y)=(g_x',g_y')$. Thus the two pairs represent the same class in the quotient.
+
+Therefore the map $[(g_x,g_y)] \mapsto g_x(0)g_y(0)^{-1}$ is a bijection.
+\end{proof}
+
+
+\section{}
+A boundary point of $\overline{PSL_2}$ records $\ell_x \subset E_{p_x}$ and $\ell_y \subset E_{p_y}$, one-dimensional subspaces of the fibers at the two branches of the node. This determines an exceptional $\mathbf{P}^1$ at the node and considering a bundle on the new curve whose restriction to the $\mathbf{P}^1$ is $\mathcal{O}(1) \oplus \mathcal{O}(-1)$. In particular, on the exceptional component $B \cong \mathbb{P}^1$, the rank-2 bundle of minimal nontrivial type is
+\[
+E_B \cong \mathcal{O}(1) \oplus \mathcal{O}(-1).
+\]
+
+Inside it there is a canonical subbundle
+\[
+\mathcal{O}(1) \hookrightarrow E_B,
+\]
+namely the positive Harder--Narasimhan summand.
+
+Its fibers at the two attachment points are lines
+\[
+\mathcal{O}(1)|_0 \subset E_B|_0, \qquad \mathcal{O}(1)|_\infty \subset E_B|_\infty.
+\]
+
+When you glue $E_B$ to the bundles on the two main components, these two fibers are identified with distinguished lines
+\[
+\ell_x \subset E_{p_x}, \qquad \ell_y \subset E_{p_y}.
+\]
+
+However, the wonderful compactification $\overline{PSL(2)}$ cannot distinguish between the degenerations $\diag(z,z^{-1})$ and $\diag(z^{2},z^{-2})$, which is why we can consider the loop compactification.
+
+\section{Central issues}
+
+On a stacky curve $X$, there is a natural map
+\[
+\Bun_{SL_2}(X) \longrightarrow \Bun_{PSL_2}(X).
+\]
+
+An $SL_2$-bundle determines a $PSL_2$-bundle by quotienting by the center. The converse is not automatic. Given a $PSL_2$-bundle $Q$ on $X$, an $SL_2$-lift of $Q$ is an $SL_2$-bundle $P$ together with an isomorphism
+\[
+P/\mu_2 \cong Q.
+\]
+
+The groupoid of such lifts is:
+\begin{itemize}
+    \item empty if the obstruction class $\delta(Q) \in H^2(X, \mu_2)$ is nonzero;
+    \item a torsor under $H^1(X, \mu_2)$ if $\delta(Q) = 0$.
+\end{itemize}
+\subsection{What ``plus isotropy data'' means at a stacky node}
+
+Now take the twisted node
+\[
+X_{\mathrm{loc}} = \Bigl[\Spec \mathbb{C}[[u,v]]/(uv) \,/\, \mu_2\Bigr].
+\]
+
+A principal $H$-bundle on $X_{\mathrm{loc}}$ is equivalent to:
+\begin{itemize}
+    \item an $H$-bundle on the cover $\Spec \mathbb{C}[[u,v]]/(uv)$,
+    \item together with $\mu_2$-equivariance.
+\end{itemize}
+
+If the bundle on the cover is trivial, the equivariance is exactly a homomorphism
+\[
+\rho: \mu_2 \to H
+\]
+up to conjugacy.
+
+So locally at the twisted node:
+\begin{itemize}
+    \item a $PSL_2$-bundle has isotropy representation $\bar{\rho}: \mu_2 \to PSL_2$;
+    \item an $SL_2$-lift is a choice of $\rho: \mu_2 \to SL_2$ such that
+    \[
+    \pi \circ \rho = \bar{\rho}, \qquad \pi: SL_2 \to PSL_2.
+    \]
+\end{itemize}
+
+
+\subsection{Why this matters here}
+
+In the adjoint compactification, the center is invisible, so the boundary object naturally gives only adjoint local data, i.e. a $PSL_2$-type degeneration. To interpret it as honest $SL_2$-bundle data on the twisted curve, you must choose how the stabilizer $\mu_2$ acts in $SL_2$, not just in $PSL_2$.
+
+For the central issue Teleman is pointing to, the relevant local lift is the nontrivial central one
+\[
+\mu_2 \hookrightarrow Z(SL_2) = \{\pm I\} \subset SL_2.
+\]
+
+After passing to $PSL_2$, this becomes trivial. So the adjoint picture forgets exactly that bit.
+
+For the twisted nodal curve $C_{0,[2]}$, Solis writes the local uniformization using the $\mu_2$-fixed loop groups and the $\mu_2$-fixed diagonal subgroup,
+\[
+M_G(C_{0,[2]}) \to (L_{C_0}G)^{\mu_2} \backslash (L_uG \times L_vG)^{\mu_2} / (G^\Delta)^{\mu_2},
+\]
+precisely because the twisted node carries this stabilizer action. The twisted modification is introduced so that the fiber over the node is $[R_n/\mu_k]$, with prescribed equivariant structure at the $\mu_k$-fixed points.
+
+\section{Interpretation of the moduli problem with diagonal Levi condition}
+Let $C_0$ be a nodal curve with a single node $p$, and let
+\[
+\widehat{\mathcal O}_{C_0,p}\cong \C[[x,y]]/(xy)
+\]
+be the completed local ring at the node. If $P\subset G$ is a parabolic subgroup with Levi decomposition
+\[
+P=L\ltimes U,
+\]
+then the local model on the two branches is not given by two independent copies of $P$, but rather by the subgroup
+\[
+P^\Delta:=\Delta(L)\ltimes (U\times U)\subset P\times P.
+\]
+Equivalently, an element of $P^\Delta$ is a pair
+\[
+(\ell u_+,\ell u_-),\qquad \ell\in L,\ u_\pm\in U,
+\]
+so that the two branches carry independent unipotent data but share the same Levi component.
+
+Solis uses this subgroup to define a sheaf of groups $\mathcal G^\Delta$ on $C_0$ by requiring
+\[
+\mathcal G^\Delta|_{C_0-p}=\mathcal G^{\mathrm{std}},
+\qquad
+\mathcal G^\Delta(\widehat{\mathcal O}_{C_0,p})=P^\Delta.
+\]
+Thus a $\mathcal G^\Delta$-torsor is an ordinary $G$-bundle away from the node, together with a parahoric structure at $p$ in which the two branches are coupled through a common Levi factor.
+
+The significance of the diagonal Levi condition is that it encodes the fact that a boundary object at the node is a \emph{single} degeneration, not two unrelated parabolic decorations on the two branches. If one allowed all of $P\times P$, then the two branches would carry independent Levi data, hence independent graded pieces. In contrast, the subgroup $P^\Delta=\Delta(L)\ltimes (U\times U)$ forces the two branches to have the same associated graded object, while still allowing separate extension data on each branch via the two unipotent factors.
+
+In the case $G=\SL_2$ and $P=B$ a Borel, we have $L=T$ and $U\simeq \Ga$, so
+\[
+P^\Delta=\Delta(T)\ltimes (U\times U).
+\]
+A $B$-reduction on a single branch is the same as the choice of a line in the fiber, so branchwise one sees two lines
+\[
+\ell_+\subset E_{p_+},
+\qquad
+\ell_-\subset E_{p_-}.
+\]
+For $\SL_2$, these two lines already determine the coarse boundary datum, which is why the corresponding boundary component is coarsely $\PP^1\times \PP^1$. However, the diagonal copy of $T$ remains essential: it records that the graded pieces on the two branches come from one common torus symmetry, rather than two unrelated torus actions.
+
+This is precisely what appears in the Gieseker bubbling picture. After inserting a rational bubble
+\[
+R\simeq \PP^1
+\]
+at the node, the limiting bundle on $R$ has the form
+\[
+\mathcal E_R\simeq \mathcal O(1)\oplus \mathcal O(-1).
+\]
+The distinguished summand $\mathcal O(1)$ determines lines in the fibers at the two attaching points of $R$, yielding the pair $(\ell_+,\ell_-)$. The point of the diagonal Levi is not to add further coarse moduli beyond these two lines, but to express that both endpoint lines arise from the \emph{same} graded object $\mathcal O(1)\oplus \mathcal O(-1)$ and hence carry the same Levi automorphism group. In this sense, the diagonal Levi condition is the group-theoretic formulation of the fact that the two branchwise flags arise from one bubbled degeneration.
+
+
+\subsection{}
+Again let $G = SL_2$ which is semisimple and simply connected.
+Now we consider the decomposition of the Solis moduli stack \begin{align*}
+    \cX_{G,g,I} = M_G(C^*) \cup \overline{D_0} \cup \overline{D_1}
+\end{align*} where $D_i = M_{G,\eta_i}(C_0)$ is the locus of bundles on the nodal curve $C_0$ with local type $\eta_i$, and we have written the decompsition as a union of the closures of the $D_i$. Note that the $D_i$ themselves do not exhaust the entire boundary. In this case, I suspect that we have \begin{align*}
+    \overline{D_0} = D_0 \cup D_{0,1},
+    \qquad
+    \overline{D_1} = D_1 \cup D_{0,1}, 
+\end{align*}  Recall that $D_{0,1}$ is the locus of bundles on $C_0$ with one expanded component, and the first ordered node is labeled by $\eta_0$ and the second ordered node is labeled by $\eta_1$. The admissibility conditions insist that the local types are linearly independent, taken in the affine coweight lattice which of rank $r+1 = 2$ in this case. Thus admissibility simply means no repeats.
+
+$D_{0,1}$ should be interpreted as the locus of bundles on $C_0$ with local type $\eta_0 + \eta_1$. In particular, suppose we have a principal $G$-bundle $P$ on  twisted curve of order $k$ whose equivariant structure at the node is $\eta$, whose image in the affine coweight lattice lies in the face spanned by $\set{\eta_{i_j}}$.
+
+Let $D'_1$ be the iterated blowup of $D = \Spec \mathbb{C}[[u,v]]$ such that $D' \xrightarrow{\pi} \Spec \mathbb{C}[[u,v]]$ is a modification of length $\le n-1$, and let $\mathcal{E}(\eta_I)$ be the bundle on $[D'/\mu_k]$ determined by fixing the equivariant structure at the $j$-th node in $\pi^{-1}(0,0)$ to be $\eta_{i_j}$. Because $\eta, \eta_I$ lie in the same face, they determine isomorphic bundles, hence $\mathcal{E}(\eta_I)$ yields an object in $\mathcal{X}_G(C_0)$ extending $\mathcal{E}$.
+
+For $G=\SL_2$, the affine alcove is an interval with endpoints corresponding to $\eta_0$ and $\eta_1$. Then:
+\begin{itemize}
+    \item $D_0$ corresponds to one endpoint,
+    \item $D_1$ corresponds to the other endpoint,
+    \item $D_{0,1}$ corresponds to the open edge between them.
+\end{itemize}
+
+Note that $D_{0,1}$ corresponds to the Iwahori subgroup, which is the intersection of the two maximal parahorics corresponding to $D_0$ and $D_1$. It is those loops which are regular on the punctured disc and whose value at the origin lies in the Borel $B$. Thus we see that indeed $D_{0,1}$ is the data of an expanded component carrying the standard split bundle \(\cO(1)\oplus \cO(-1)\), together with its distinguished line subbundle \(\cO(1)\).
+
+The takeaway is that $D_0$ corresponds to gluing data in $G$ and $D_{0,1}$ corresponds to gluing data in $\P^1 \times \P^1$.
+
+\subsection{}
+Still some issue with the center. Recall that we will take $G$ simple, connected, and simply connected.
+
+The main source of confusion is that it appears to me that the equivariant data of the $\eta$ is being used in two different ways. The first is the determine which boundary stratum we are in for the adjoint group $G/Z(G)$, and the second is to lift to the simply connected cover $G$ and determine the local type of the $G$-bundle on the twisted curve. 
 \end{document}
