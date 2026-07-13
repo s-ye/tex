@@ -1,0 +1,3999 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Math Journal}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\tableofcontents
+
+\section{June 23}
+
+Let $M$ be a smooth manifold of dimension $n$, and let $x^1,\ldots,x^n$ be local coordinates. The coordinate vector fields are denoted $\partial_\mu := \frac{\partial}{\partial x^\mu}$ and the dual coordinate one-forms are denoted $dx^\mu$. The convention is that repeated indices, one upstairs and one downstairs, are summed over. Thus $V = V^\mu \partial_\mu$
+means
+\[
+    V = \sum_{\mu=1}^n V^\mu \frac{\partial}{\partial x^\mu}.
+\]
+
+Upper indices are vector-type indices, while lower indices are covector-type indices. A vector field has components $V^\mu$, while a one-form has components $\alpha_\mu$:
+\[
+    \alpha = \alpha_\mu dx^\mu.
+\]
+If $g$ is a metric, then
+\[
+    g = g_{\mu\nu} dx^\mu \otimes dx^\nu.
+\]
+The inverse metric is denoted $g^{\mu\nu}$ and is characterized by
+\[
+    g^{\mu\alpha}g_{\alpha\nu} = \delta^\mu_\nu.
+\]
+The metric allows us to raise and lower indices. For example, we can lower the index of a vector field $V$ to get a one-form whose components are
+\[
+    V_\nu = g_{\nu\mu}V^\mu,
+\]
+If $h_{\mu\nu}$ is a symmetric $(0,2)$-tensor, then $h^\mu{}_{\nu} = g^{\mu\alpha}h_{\alpha\nu}$
+and its trace is
+\[
+    h = h^\mu{}_{\mu} = g^{\mu\nu}h_{\mu\nu}.
+\]
+The trace is an example of a contraction, which is the operation of pairing an upper index with a lower index and summing over that index.
+The expression $\nabla^\mu h_{\mu\nu}$
+is also a contraction. Since
+\[
+    \nabla^\mu = g^{\mu\alpha}\nabla_\alpha,
+\]
+we have
+\[
+    \nabla^\mu h_{\mu\nu}
+    = g^{\mu\alpha}\nabla_\alpha h_{\mu\nu}.
+\]
+This contracts the derivative index $\alpha$ with the first tensor index $\mu$ of $h$. The remaining free index is $\nu$, so $\nabla^\mu h_{\mu\nu}$ is a one-form. This is called the divergence of $h$:
+\[
+    (\operatorname{div} h)_\nu = \nabla^\mu h_{\mu\nu}.
+\]
+In coordinate-free notation, if $e_1,\ldots,e_n$ is a local orthonormal frame, then
+\[
+    (\operatorname{div}h)(Y)
+    = \sum_{i=1}^n (\nabla_{e_i}h)(e_i,Y).
+\]
+The ordinary derivative $\partial_\mu$ differentiates components in a coordinate chart. The covariant derivative $\nabla_\mu$ differentiates tensors geometrically. It includes correction terms that account for how the chosen frame changes from point to point, these correction terms are the Christoffel symbols.
+
+For a vector field $V = V^\nu\partial_\nu$, one has
+\[
+    \nabla_\mu V^\lambda
+    = \partial_\mu V^\lambda + \Gamma^\lambda_{\mu\nu}V^\nu.
+\]
+where the Christoffel symbols $\Gamma^\lambda_{\mu\nu}$ are defined by
+\[
+    \nabla_{\partial_\mu}\partial_\nu
+    = \Gamma^\lambda_{\mu\nu}\partial_\lambda.
+\]
+Thus $\Gamma^\lambda_{\mu\nu}$ are the local coefficients of the connection in the coordinate frame. They are not tensors; they depend on the chosen local frame or coordinates.
+
+For a one-form $\alpha = \alpha_\nu dx^\nu$, the covariant derivative is
+\[
+    \nabla_\mu \alpha_\nu
+    = \partial_\mu \alpha_\nu - \Gamma^\lambda_{\mu\nu}\alpha_\lambda.
+\]
+The minus sign appears because one-forms transform by the dual representation. For the Levi-Civita connection of $g$, the Christoffel symbols are
+\[
+    \Gamma^\rho_{\mu\nu}
+    = \frac12 g^{\rho\sigma}
+    \left(
+    \partial_\mu g_{\nu\sigma}
+    + \partial_\nu g_{\mu\sigma}
+    - \partial_\sigma g_{\mu\nu}
+    \right).
+\]
+The curvature tensor measures the failure of covariant derivatives to commute. For vector fields $X,Y,Z$, define
+\[
+    R(X,Y)Z
+    = \nabla_X\nabla_YZ
+    - \nabla_Y\nabla_XZ
+    - \nabla_{[X,Y]}Z.
+\]
+Geometrically, $R(X,Y)Z$ measures the infinitesimal difference between parallel-transporting $Z$ around a small parallelogram in the $X$-$Y$ plane in the two possible orders.
+
+In coordinates,
+\[
+    R(\partial_\mu,\partial_\nu)\partial_\sigma
+    = R_{\mu\nu\sigma}{}^\rho \partial_\rho.
+\]
+Thus $R_{\mu\nu\sigma}{}^\rho$ has three input indices and one output index. It can be regarded as the components of a $(1,3)$-tensor. The Ricci tensor is a contraction of the Riemann curvature tensor.
+\[
+    R_{\mu\nu} = R_{\rho\mu\nu}{}^\rho.
+\]
+\begin{claim}
+    Let $g$ be a Riemannian metric and $h$ a symmetric $(0,2)$-tensor. Consider the one-parameter family of metrics
+    \[
+        g(t) = g + t h.
+    \]
+    Suppose that $R_{\mu\nu}=0$ and the divergence-free condition $\nabla^\mu h_{\mu\nu}=0$ holds. Let $\Delta = \nabla_\rho\nabla^\rho$ be the rough Laplacian. The Lichnerowicz equation for $h$ \begin{align*}
+        \Delta h_{\mu\nu}
+        + 2 R_\mu{}^\alpha{}_\nu{}^\beta h_{\alpha\beta}
+        = 0.
+    \end{align*} establishes the condition for $h$ to be an infinitesimal deformation of the Ricci-flat metric $g$, that is $g(t)$ is Ricci-flat to first order in $t$.
+\end{claim}
+\red{Key takeaway:} The Lichnerowicz equation is a linear equation. A standard Kähler Hodge-theoretic fact is that on a Kähler manifold, the Laplacian preserves the $(p,q)$-decomposition. Therefore, we can split the solution space of the Lichnerowicz equation into types. In complex coordinates $z_a$, the types are $h_{a\bar b}$ of type $(1,1)$ or $h_{ab}$ of type $(2,0)$.
+
+If one perturbs the metric by $g_{a\bar b}\mapsto g_{a\bar b}+h_{a\bar b}$, then the splitting of the complexified tangent bundle
+\[T_\mathbb C M = T^{1,0}M\oplus T^{0,1}M\]
+is preserved and thus the complex structure $J$ is preserved. In this case, one is only changing the Hermitian metric compatible with that $J$.
+
+If one perturbs the metric by $g_{ab}\mapsto g_{ab}+h_{ab}$, then relative to the original complex structure, the new Ricci-flat metric is no longer purely of type $(1,1)$. Instead of changing the Kähler form, it is changing which tangent directions count as holomorphic.
+
+\section{June 24}
+Infinitesimal deformations of the complex structure form the tangent space to the moduli space of complex structures. Recall that a complex structure on a manifold $M$ is a system of local coordinates $z^1,\ldots,z^n$ such that the transition functions are holomorphic. An almost complex structure is a smooth bundle map $J:TM\to TM$ such that $J^2=-\operatorname{id}$.
+
+Given a complex structure, one can define an almost complex structure by declaring $J(\partial_{x^a}) = \partial_{y^a}$ and $J(\partial_{y^a}) = -\partial_{x^a}$, where $z^a = x^a + i y^a$. Conversely, the failure of almost complex structure $J$ to be integrable is measured by the Nijenhuis tensor
+\[
+    N(X,Y) = [X,Y] + J[JX,Y] + J[X,JY] - [JX,JY].
+\]
+
+\begin{theorem}
+    [Newlander-Nirenberg] An almost complex structure $J$ is integrable if and only $T^{1,0}M$ is involutive, that is $[T^{1,0}M,T^{1,0}M]\subseteq T^{1,0}M$ if and only if $N=0$.
+\end{theorem}
+
+\begin{proof}
+    We first show that the Nijenhuis tensor detects the involutivity of the complex tangent distributions. Complexify the real tangent bundle $T_{\mathbb C}M := TM\otimes_{\mathbb R}\mathbb C$.
+    Since $J^2=-\operatorname{id}$, the complexified endomorphism $J$ has eigenvalues $i$ and $-i$. Hence
+    \[
+        T_{\mathbb C}M = T^{1,0}M \oplus T^{0,1}M,
+    \]
+    where $T^{1,0}M$ is the $i$-eigenbundle and $T^{0,1}M$ is the $-i$-eigenbundle. We extend the Lie bracket and $N$ complex-bilinearly to sections of $T_{\mathbb C}M$.
+
+    Let $U,V\in \Gamma(T^{1,0}M)$. Then $JU=iU$ and $JV=iV$. We compute
+    \begin{align*}
+        N(U,V)
+         & = [U,V] + J[iU,V] + J[U,iV] - [iU,iV] \\
+         & = [U,V] + iJ[U,V] + iJ[U,V] + [U,V]   \\
+         & = 2[U,V] + 2iJ[U,V].
+    \end{align*}
+    Decompose the bracket according to type:
+    \[
+        [U,V] = A+B,
+        \qquad
+        A\in \Gamma(T^{1,0}M),
+        \quad
+        B\in \Gamma(T^{0,1}M).
+    \]
+    Since $JA=iA$ and $JB=-iB$, we get
+    \begin{align*}
+        N(U,V)
+         & = 2(A+B)+2i(iA-iB)    \\
+         & = 2(A+B)+2(-A+B)      \\
+         & = 4B =4([U,V])^{0,1}.
+    \end{align*}
+    Thus, for $U,V\in \Gamma(T^{1,0}M)$,
+    \[
+        N(U,V)=0
+        \quad\Longleftrightarrow\quad
+        ([U,V])^{0,1}=0
+        \quad\Longleftrightarrow\quad
+        [U,V]\in \Gamma(T^{1,0}M).
+    \]
+    So the vanishing of $N$ on two $(1,0)$ vector fields is precisely the condition that $T^{1,0}M$ is involutive.
+
+    Next, if $U\in \Gamma(T^{1,0}M)$ and $V\in \Gamma(T^{0,1}M)$, then $JU=iU$ and $JV=-iV$, so
+    \begin{align*}
+        N(U,V)
+         & = [U,V] + J[iU,V] + J[U,-iV] - [iU,-iV] \\
+         & = [U,V] + iJ[U,V] - iJ[U,V] - [U,V]     \\
+         & =0.
+    \end{align*}
+    The computation for two $(0,1)$ vector fields is the complex conjugate of the computation above. Hence $N=0$ is equivalent to the involutivity of either $T^{1,0}M$ or $T^{0,1}M$.
+
+    Now we check that the involutivity of $T^{0,1}M$ is equivalent to the existence of local holomorphic coordinates. If $J$ comes from holomorphic coordinates
+    $z^1,\ldots,z^n$, then
+    \[
+        T^{0,1}M
+        =
+        \operatorname{span}_{\mathbb C}
+        \left\{
+        \frac{\partial}{\partial \overline z^1},
+        \ldots,
+        \frac{\partial}{\partial \overline z^n}
+        \right\},
+    \]
+    and this distribution is visibly closed under Lie bracket. The converse direction is the difficult part. The problem is to show that the formal condition
+    \[
+        [\Gamma(T^{0,1}M),\Gamma(T^{0,1}M)]
+        \subseteq
+        \Gamma(T^{0,1}M)
+    \]
+    actually produces local holomorphic coordinates. Choose ordinary smooth complex coordinates $z=(z^1,\ldots,z^n)$ near a point $p$. These coordinates are not assumed to be holomorphic for $J$.
+    After shrinking the coordinate neighborhood, the bundle $T^{0,1}_J M$ can be
+    written as the span of vector fields
+    \[
+        \overline L_i
+        =
+        \frac{\partial}{\partial \overline z^i}
+        +
+        \sum_{j=1}^n a_i^j(z,\overline z)
+        \frac{\partial}{\partial z^j},
+        \qquad i=1,\ldots,n.
+    \]
+    The functions $a_i^j$ measure the failure of $J$ to be the standard complex
+    structure in these coordinates. If $J$ were already the standard complex
+    structure, then all $a_i^j$ would vanish.
+
+    A function $f$ is $J$-holomorphic precisely when
+    \[
+        \overline L_i f=0
+    \]
+    for every $i$. Equivalently,
+    \[
+        \frac{\partial f}{\partial \overline z^i}
+        +
+        \sum_{j=1}^n a_i^j
+        \frac{\partial f}{\partial z^j}
+        =
+        0.
+    \]
+    Writing $A=(a_i^j)$, this system can be expressed schematically as
+    \[
+        \overline\partial_J f = \overline\partial f + A(\partial f)=0.
+    \]
+    Thus constructing holomorphic coordinates means finding $n$ complex-valued
+    functions $w^1,\ldots,w^n$ satisfying
+    \[
+        \overline\partial_J w^a=0
+    \]
+    and such that $dw^1,\ldots,dw^n$ are linearly independent.
+
+    One tries to find the new coordinates as a small correction of the original
+    smooth coordinates:
+    \[
+        w=z+u,
+    \]
+    where $u=(u^1,\ldots,u^n)$
+    is an unknown vector-valued function. The equation $\overline\partial_J w=0$
+    becomes
+    \[
+        \overline\partial(z+u)+A\partial(z+u)=0.
+    \]
+    Since $\overline\partial z=0$ and $\partial z=I$, this becomes
+    \[
+        \overline\partial u = -A(I+\partial u).
+    \]
+    The analytic input is that, locally, the ordinary $\overline\partial$-operator
+    has a right inverse. That is, on a sufficiently small ball in $\mathbb C^n$,
+    there is an integral operator $T$ such that, morally,
+    \[
+        \overline\partial T\alpha = \alpha
+    \]
+    for suitable $\overline\partial$-closed $(0,1)$-forms $\alpha$. This part of the argument is more technical than what has been presented here, and we refer the reader to the original paper of Newlander and Nirenberg for details.
+    Applying $T$ to the equation above gives the fixed-point problem
+    \[
+        u = -T\bigl(A(I+\partial u)\bigr).
+    \]
+    Thus solving the nonlinear $\overline\partial$-equation is reduced to finding a
+    fixed point of the map
+    \[
+        u \longmapsto -T\bigl(A(I+\partial u)\bigr).
+    \]
+    At the chosen point $p$, one may choose the initial smooth coordinates so that
+    $J(p)$ is the standard complex structure. This gives
+    \[
+        A(p)=0.
+    \]
+    After shrinking the coordinate neighborhood, $A$ can be made small in an
+    appropriate analytic norm. The operator $T$ satisfies estimates in these norms,
+    and with $A$ sufficiently small the map
+    \[
+        u \longmapsto -T\bigl(A(I+\partial u)\bigr)
+    \]
+    becomes a contraction on a suitable space of functions. The contraction mapping
+    principle then produces a solution $u$ up to an error term which vanishes if we have the following compatibility condition.
+
+    Thus far, we have not invoked the involutivity condition on $T^{0,1}_J M$. The role of this condition is to guarantee that the nonlinear
+    $\overline\partial$-equation is compatible. For the ordinary
+    $\overline\partial$-equation $\overline\partial u=\alpha$
+    one must have
+    \[
+        \overline\partial\alpha=0,
+    \]
+    because $\overline\partial^2=0$. In the present problem the right-hand side is $\alpha=-A(I+\partial u)$
+    The involutivity condition on $T^{0,1}_J M$ is equivalent to a Maurer--Cartan
+    equation for $A$, schematically
+    \[
+        \overline\partial A + \frac12[A,A]=0.
+    \]
+    The resulting functions $w^1,\ldots,w^n$ are holomorphic with respect to the almost complex structure $J$. Moreover, since $u$ is small, $w$ has differential close to the identity. After shrinking the neighborhood if necessary, $dw^1,\ldots,dw^n$ are linearly independent.
+\end{proof}
+
+\begin{exercise}
+    Let $J$ be an almost complex structure on a smooth manifold $M$. Consider a small deformation of $J$ by a smooth endomorphism $\epsilon:TM\to TM$. Linearize the equation
+    $(J+\epsilon)^2=-\operatorname{id}$ to obtain
+    \[
+        J\epsilon+\epsilon J=0.
+    \]
+    Conclude that the pure-type components of $\epsilon$ vanish.
+\end{exercise}
+
+\begin{solution}
+    Expanding gives $J^2+J\epsilon+\epsilon J+\epsilon^2=-\operatorname{id}$.
+    Since $J^2=-\operatorname{id}$, and since $\epsilon^2$ is second order in
+    the deformation, the first-order condition is
+    \[
+        J\epsilon+\epsilon J=0.
+    \]
+    We now analyze this equation in complex coordinates. Let $z^1,\ldots,z^n$
+    be local complex coordinates for the original complex structure. Then
+    \[
+        T_{\mathbb C}M=T^{1,0}M\oplus T^{0,1}M,
+    \]
+    and $J$ acts by
+    \[
+        J(\partial_a)=i\partial_a,
+        \qquad
+        J(\partial_{\overline a})=-i\partial_{\overline a}.
+    \]
+    Write the components of $\epsilon$ as
+    \[
+        \epsilon(\partial_a)
+        =
+        \epsilon^b{}_a\partial_b
+        +
+        \epsilon^{\overline b}{}_a\partial_{\overline b},
+    \]
+    and
+    \[
+        \epsilon(\partial_{\overline a})
+        =
+        \epsilon^b{}_{\overline a}\partial_b
+        +
+        \epsilon^{\overline b}{}_{\overline a}\partial_{\overline b}.
+    \]
+    The pure-type components are $\epsilon^b{}_a$ and $\epsilon^{\overline b}{}_{\overline a}$ because they preserve the decomposition
+    \[
+        T_{\mathbb C}M=T^{1,0}M\oplus T^{0,1}M.
+    \]
+    Apply the linearized equation $J\epsilon+\epsilon J=0$
+    to $\partial_a$. Since $J(\partial_a)=i\partial_a$, we get
+    \[
+        J\epsilon(\partial_a)+i\epsilon(\partial_a)=0.
+    \]
+    Substituting the expansion of $\epsilon(\partial_a)$ gives
+    \begin{align*}
+        0
+         & =
+        J\left(
+        \epsilon^b{}_a\partial_b
+        +
+        \epsilon^{\overline b}{}_a\partial_{\overline b}
+        \right)
+        +
+        i\left(
+        \epsilon^b{}_a\partial_b
+        +
+        \epsilon^{\overline b}{}_a\partial_{\overline b}
+        \right)                                           \\
+         & =
+        i\epsilon^b{}_a\partial_b
+        -
+        i\epsilon^{\overline b}{}_a\partial_{\overline b}
+        +
+        i\epsilon^b{}_a\partial_b
+        +
+        i\epsilon^{\overline b}{}_a\partial_{\overline b} \\
+         & =
+        2i\epsilon^b{}_a\partial_b.
+    \end{align*}
+    Therefore $\epsilon^b{}_a=0$.
+    A similar computation applied to $\partial_{\overline a}$ applies. Thus the pure-type components of $\epsilon$ vanish, and we conclude that in fact $\epsilon \in \Omega^{0,1}(T^{1,0}M) \oplus \Omega^{1,0}(T^{0,1}M)$.
+\end{solution}
+
+\begin{exercise}
+    Linearize the equation $N_{J+\epsilon}=0$, where $N$ is the Nijenhuis tensor, and conclude that $\overline\partial\epsilon_{\mathrm{hol}}=0$.
+\end{exercise}
+\begin{solution}
+    Since the original complex structure is integrable, $N_J=0$. Thus the first-order condition for $J+\epsilon$ to remain integrable is $\delta N_J(\epsilon)=0$.
+    Replacing $J$ by $J+\epsilon$ and keeping only the terms linear in $\epsilon$, we get
+    \[\delta N_J(\epsilon)(X,Y)=\epsilon[JX,Y]+J[\epsilon X,Y]+\epsilon[X,JY]+J[X,\epsilon Y]-[\epsilon X,JY]-[JX,\epsilon Y]\]
+    $\epsilon$ only has mixed-type components. Thus we may write $\epsilon(\partial_a)=\epsilon^{\overline c}{}_a\partial_{\overline c}$ and $\epsilon(\partial_{\overline a})=\epsilon^c{}_{\overline a}\partial_c$. The holomorphic part of $\epsilon$ is $\epsilon_{\mathrm{hol}}=(\epsilon^c{}_{\overline a}\partial_c)d\overline z^a$, which is an element of $\Omega^{0,1}(T^{1,0}M)$.
+    To obtain the equation for $\epsilon_{\mathrm{hol}}$, take $X=\partial_{\overline a}$ and $Y=\partial_{\overline b}$. Then $JX=-iX$ and $JY=-iY$. Since coordinate vector fields commute, $[JX,Y]=0$ and $[X,JY]=0$. Therefore the linearization reduces to \[\delta N_J(\epsilon)(X,Y)=J[\epsilon X,Y]+J[X,\epsilon Y]-[\epsilon X,JY]-[JX,\epsilon Y]\]
+    Since $\epsilon X=\epsilon^c{}_{\overline a}\partial_c$ and $\epsilon Y=\epsilon^c{}_{\overline b}\partial_c$, we have $[\epsilon X,Y]=[\epsilon^c{}_{\overline a}\partial_c,\partial_{\overline b}]=-\partial_{\overline b}(\epsilon^c{}_{\overline a})\partial_c$, hence $J[\epsilon X,Y]=-i\partial_{\overline b}(\epsilon^c{}_{\overline a})\partial_c$. Similarly, $[X,\epsilon Y]=\partial_{\overline a}(\epsilon^c{}_{\overline b})\partial_c$, so $J[X,\epsilon Y]=i\partial_{\overline a}(\epsilon^c{}_{\overline b})\partial_c$.
+    Next, $[\epsilon X,JY]=[\epsilon^c{}_{\overline a}\partial_c,-i\partial_{\overline b}]=i\partial_{\overline b}(\epsilon^c{}_{\overline a})\partial_c$, so $-[\epsilon X,JY]=-i\partial_{\overline b}(\epsilon^c{}_{\overline a})\partial_c$. Finally, $[JX,\epsilon Y]=[-i\partial_{\overline a},\epsilon^c{}_{\overline b}\partial_c]=-i\partial_{\overline a}(\epsilon^c{}_{\overline b})\partial_c$, so $-[JX,\epsilon Y]=i\partial_{\overline a}(\epsilon^c{}_{\overline b})\partial_c$.
+
+
+    Adding these four terms gives $\delta N_J(\epsilon)(\partial_{\overline a},\partial_{\overline b})=2i(\partial_{\overline a}\epsilon^c{}_{\overline b}-\partial_{\overline b}\epsilon^c{}_{\overline a})\partial_c$. Therefore the linearized equation $\delta N_J(\epsilon)=0$ implies $\partial_{\overline a}\epsilon^c{}_{\overline b}-\partial_{\overline b}\epsilon^c{}_{\overline a}=0$.
+    But this is exactly the condition $\overline\partial\epsilon_{\mathrm{hol}}=0$. Indeed, for $\epsilon_{\mathrm{hol}}=(\epsilon^c{}_{\overline b}\partial_c)d\overline z^b$, the exterior derivative $\overline\partial\epsilon_{\mathrm{hol}}$ has components given by the antisymmetrized expression $\partial_{\overline a}\epsilon^c{}_{\overline b}-\partial_{\overline b}\epsilon^c{}_{\overline a}$. Hence $\overline\partial\epsilon_{\mathrm{hol}}=0$.
+    The conjugate computation, obtained by taking $X=\partial_a$ and $Y=\partial_b$, gives $\partial\epsilon_{\mathrm{anti\text{-}hol}}=0$.
+\end{solution}
+\begin{exercise}
+    Check that an infinitesimal coordinate change modifies the complex structure by an exact term. More precisely, if the coordinate change is generated by a vector field $v$, then, up to conventional constants, $J'=J+\overline\partial v_{\mathrm{hol}}+\partial v_{\mathrm{anti\text{-}hol}}$.
+\end{exercise}
+\begin{solution}
+    Let $x'$ be a new coordinate system and let $M=(\partial x/\partial x')$ be the Jacobian matrix. The matrix of $J$ in the new coordinates is $J'=M^{-1}JM$. Infinitesimally, suppose the coordinate change is generated by a vector field $v=v^i\partial_i$. Then $M^i{}_j=\delta^i{}_j+\partial_jv^i$. Write $M=I+B$, where $B^i{}_j=\partial_jv^i$. To first order, $M^{-1}=I-B$. Therefore $J'=(I-B)J(I+B)=J+JB-BJ$, so $\delta J=J'-J=JB-BJ$.
+    Now work in complex coordinates and write $v=v^a\partial_a+v^{\overline a}\partial_{\overline a}$. The holomorphic part is $v_{\mathrm{hol}}=v^a\partial_a$, and the anti-holomorphic part is $v_{\mathrm{anti\text{-}hol}}=v^{\overline a}\partial_{\overline a}$.
+    First apply $\delta J=JB-BJ$ to $\partial_{\overline b}$. Since $J\partial_{\overline b}=-i\partial_{\overline b}$, we get $\delta J(\partial_{\overline b})=J(B\partial_{\overline b})-B(J\partial_{\overline b})=J(\partial_{\overline b}v)+i\partial_{\overline b}v$.
+    We have $\partial_{\overline b}v=(\partial_{\overline b}v^a)\partial_a+(\partial_{\overline b}v^{\overline a})\partial_{\overline a}$. Applying $J$ gives $J(\partial_{\overline b}v)=i(\partial_{\overline b}v^a)\partial_a-i(\partial_{\overline b}v^{\overline a})\partial_{\overline a}$. Hence $\delta J(\partial_{\overline b})=2i(\partial_{\overline b}v^a)\partial_a$. This is the component of $\delta J$ mapping $T^{0,1}M$ to $T^{1,0}M$, so $(\delta J)_{\mathrm{hol}}=2i\overline\partial v_{\mathrm{hol}}$.
+    Next apply $\delta J$ to $\partial_b$. Since $J\partial_b=i\partial_b$, we get $\delta J(\partial_b)=J(B\partial_b)-B(J\partial_b)=J(\partial_bv)-i\partial_bv$. Since $\partial_bv=(\partial_bv^a)\partial_a+(\partial_bv^{\overline a})\partial_{\overline a}$, this gives $\delta J(\partial_b)=-2i(\partial_bv^{\overline a})\partial_{\overline a}$. This is the component of $\delta J$ mapping $T^{1,0}M$ to $T^{0,1}M$, so $(\delta J)_{\mathrm{anti\text{-}hol}}=-2i\partial v_{\mathrm{anti\text{-}hol}}$.
+    Therefore, to first order, $J'=J+2i\overline\partial v_{\mathrm{hol}}-2i\partial v_{\mathrm{anti\text{-}hol}}$. The constants $2i$ and $-2i$ depend on the normalization used to identify variations of $J$ with mixed-type tensors. Suppressing these harmless constants, the geometric statement is $J'=J+\overline\partial v_{\mathrm{hol}}+\partial v_{\mathrm{anti\text{-}hol}}$.
+    Thus the holomorphic part of an infinitesimal deformation changes by a $\overline\partial$-exact term: $\epsilon_{\mathrm{hol}}\sim \epsilon_{\mathrm{hol}}+\overline\partial v_{\mathrm{hol}}$.
+\end{solution}
+
+\red{Key takeaway:} In summary, we see that infinitesimal deformations of complex structure are represented by $\overline\partial$-closed elements of $\Omega^{0,1}(T^{1,0}M)$ modulo $\overline\partial$-exact elements.
+
+\begin{theorem} Let $M$ be a complex manifold. Then the space of infinitesimal deformations of the complex structure is naturally identified with the Dolbeault cohomology group $H^{0,1}(M,T^{1,0}M)$.
+\end{theorem}
+
+\begin{example}
+    Let $M$ be a Calabi-Yau threefold. The Hodge diamond of $M$ is
+    \[
+        \begin{matrix}
+              &   &         & 1       &         &   &   \\
+              &   & 0       &         & 0       &   &   \\
+              & 0 &         & h^{1,1} &         & 0 &   \\
+            1 &   & h^{2,1} &         & h^{2,1} &   & 1 \\
+              & 0 &         & h^{1,1} &         & 0 &   \\
+              &   & 0       &         & 0       &   &   \\
+              &   &         & 1       &         &   &
+        \end{matrix}
+    \]
+    Recall that Kahler classes live in $H^{1,1}(M,\mathbb{R})$, and moreover they form a cone whose boundary is determined by the vanishing of the volume of certain holomorphic subvarieties. This is because the relation $\omega^n/n! = dV$ for a Kähler form $\omega$ and the volume form $dV$ implies that the volume of any holomorphic subvariety is given by integrating $\omega^k/k!$ over that subvariety. Thus the boundary is cut out by the vanishing of the volume of certain holomorphic subvarieties. It is a fact that this cone is open in $H^{1,1}(M,\mathbb{R})$, so the dimension of the Kähler cone is $h^{1,1}$. Therefore, $h^{1,1}$ counts the infinitesimal deformations of the Kähler class.
+
+    $h^{2,1}$ counts the infinitesimal deformations of the complex structure. This is because there is a wedge pairing $TM \otimes \Lambda^2 TM \to \Lambda^3 TM \cong \mathcal{O}_M$, which gives an isomorphism $TM \cong \Lambda^2 TM^*$. Therefore, $H^{0,1}(M,T^{1,0}M) \cong H^{0,1}(M,\Lambda^2 T^{1,0}M^*) \cong H^{2,1}(M)$.
+\end{example}
+
+Thus far, we have only considered infinitesimal deformations of complex structure. The question is when these infinitesimal deformations can be integrated to actual deformations of complex structure. This question amounts to solving $(\overline\partial + A)^2 = 0$ for a small perturbation $A \in \Omega^{0,1}(T^{1,0}M)$. The Tian-Todorov theorem states that for a Calabi-Yau manifold, all infinitesimal deformations of complex structure are unobstructed. In other words, the moduli space of complex structures is smooth and has dimension $h^{2,1}$.
+
+\subsection{The $SU(2)$ example in Freed--Hopkins--Teleman}
+
+Let $G$ be a connected compact Lie group with torsion-free fundamental group. In the first Freed--Hopkins--Teleman paper, the authors compute the twisted equivariant $K$-theory of $G$ acting on itself by conjugation. In later parts of the story, this group is identified with the Verlinde algebra of the loop group $LG$, after matching the twisting on $G//G$ with the level of the loop group. More precisely, if $\tau$ is a level of $LG$, then the corresponding twisting of $K_G(G)$ is not just $\tau$, but rather
+\[
+    \zeta(\tau)=\mathfrak g+\check h+\tau,
+\]
+where $\mathfrak g$ is the degree shift coming from the adjoint representation and $\check h$ is the dual Coxeter twisting.
+
+Let $X$ be a local quotient groupoid. A twisting of $K$-theory on $X$ is defined by choosing a local equivalence $P \longrightarrow X$
+and then choosing a graded $\mathbb T$-central extension of $P$. Thus an object of the groupoid $\operatorname{Twist}(X)$ is a pair $(P,L)$
+where $P\to X$ is a local equivalence and $L$ is a graded $\mathbb T$-central extension of $P$. This category is defined so that two local quotient groupoids $X,X'$ which present the same stack have equivalent categories of twistings.
+
+If $P=(P_0,P_1)$ is a topological groupoid with objects $P_0$ and morphisms $P_1$, a graded $\mathbb T$-central extension consists of a graded principal $\mathbb T$-bundle
+\[
+    L\longrightarrow P_1
+\]
+over the space of arrows, together with multiplication isomorphisms
+\[
+    L_g\otimes L_f \longrightarrow L_{g\circ f}
+\]
+for composable arrows $f,g$, satisfying the evident associativity condition over triples of composable arrows. Equivalently, one can think of this as a new groupoid $\widetilde P$ with the same objects as $P$, equipped with a central extension
+\[
+    \mathbb T \longrightarrow \widetilde P \longrightarrow P
+\]
+and with a compatible $\mathbb Z/2$-grading.
+
+The reason one allows the preliminary local equivalence $P\to X$ is that twistings should be invariant under changing presentations of the quotient stack. For example, if $X=M//G$ is a global quotient, then a different atlas for the same quotient stack should produce the same category of twistings.
+
+The isomorphism classes of geometric twistings are classified by cohomological data.
+For a local quotient groupoid $X$, the set of isomorphism classes $\pi_0\operatorname{Twist}(X)$ fits into a set-theoretically split extension
+\[
+    \check H^2(X;\mathbb T)
+    \longrightarrow
+    \pi_0\operatorname{Twist}(X)
+    \longrightarrow
+    \check H^1(X;\mathbb Z/2)
+\]
+with group law twisted by the cocycle
+\[
+    c(\epsilon,\mu)=\beta(\epsilon\smile\mu),
+\]
+where $\beta:H^2(X;\mathbb Z/2)\to H^3(X;\mathbb Z)$ is the Bockstein homomorphism. In particular the group law on $\pi_0\operatorname{Twist}(X)$ is written
+$(\epsilon,\tau)+(\mu,\sigma) = (\epsilon+\mu,\tau+\sigma+\beta(\epsilon\smile\mu))$
+
+\begin{example}[$SU(2)$ acting on itself by conjugation]
+    Let $G=SU(2)$, acting on itself by conjugation. The relevant quotient groupoid is $SU(2)//SU(2)$. For the conjugation action, the Borel construction is homotopy equivalent to the free loop space $ESU(2)\times_{SU(2)}SU(2)\simeq LBSU(2)$.
+    The evaluation fibration
+    \[
+        SU(2)\simeq \Omega BSU(2)\longrightarrow LBSU(2)\longrightarrow BSU(2)
+    \]
+    has a section given by constant loops. Since \(SU(2)\simeq S^3\) and
+    \[
+        H^*(BSU(2);\mathbb Z)\cong \mathbb Z[c_2],\qquad |c_2|=4,
+    \]
+    the low-degree Serre spectral sequence gives
+    \[
+        H^1_{SU(2)}(SU(2);\mathbb Z/2)=0,
+        \qquad
+        H^3_{SU(2)}(SU(2);\mathbb Z)\cong \mathbb Z.
+    \]
+    Thus, ignoring the parity shift, a twisting is determined by a single integer $n\in \mathbb Z$. This integer will appear below as the exponent of a character $L^n$ of the maximal torus.
+
+    Let
+    \[
+        U_+=SU(2)\setminus\{-1\},
+        \qquad
+        U_-=SU(2)\setminus\{+1\}.
+    \]
+    These are invariant open subsets for the conjugation action, and they cover $SU(2)$. Each $U_\pm$ is equivariantly contractible to a central point, so
+    \[
+        K^0_{SU(2)}(U_\pm)\cong R(SU(2)),
+        \qquad
+        K^1_{SU(2)}(U_\pm)=0.
+    \]
+    The intersection $U_+\cap U_-$ is equivariantly homotopy equivalent to the conjugacy class of a noncentral element. This conjugacy class is $SU(2)/T$.
+    where $T\cong U(1)$ is a maximal torus. Therefore
+    \[
+        K^0_{SU(2)}(U_+\cap U_-)
+        \cong
+        K^0_{SU(2)}(SU(2)/T)
+        \cong
+        K^0_T(\mathrm{pt})
+        \cong
+        R(T),
+    \]
+    and
+    \[
+        K^1_{SU(2)}(U_+\cap U_-)=K^1_T(\mathrm{pt})= \widetilde{K}^0_T(S^1)=\widetilde{K}^0(S^1) \otimes R(T)=0.
+    \]
+    Write $R(T)=\mathbb Z[L,L^{-1}]$ where $L$ is the defining character of $T$. The Weyl group acts by $L\longmapsto L^{-1}$. Recall that
+    \[
+        R(SU(2))\cong R(T)^W \cong \bigoplus_{k\ge 0} \Z\rho_k \cong \Z[\rho_1]
+    \]
+    where $\rho_k=L^k+L^{k-2}+\cdots+L^{-k}$ is the irreducible representation of $SU(2)$ of highest weight $k$. The group law is given by the Clebsch--Gordan formula
+    \[
+        \rho_k\otimes\rho_\ell
+        \cong
+        \rho_{k+\ell}\oplus\rho_{k+\ell-2}\oplus\cdots\oplus\rho_{|k-\ell|}.
+    \]
+    The twisting $n$ restricts trivially to $U_+$ and to $U_-$. However, after choosing trivializations on $U_+$ and $U_-$, their ratio on the overlap is the equivariant line bundle corresponding to $L^n\in R(T)$.
+    Thus the Mayer--Vietoris sequence for twisted equivariant $K$-theory becomes
+    \[
+        0
+        \longrightarrow
+        K^{\tau+0}_{SU(2)}(SU(2))
+        \longrightarrow
+        R(SU(2))\oplus R(SU(2))
+        \xrightarrow{\;\phi\;}
+        R(T)
+        \longrightarrow
+        K^{\tau+1}_{SU(2)}(SU(2))
+        \longrightarrow
+        0,
+    \]
+    where
+    \[
+        \phi(a,b)=a-L^n b.
+    \]
+    To compute the kernel and cokernel, use the fact that $R(T)$ is a free module of rank $2$ over $R(SU(2))$, with basis $\{1,L\}$. We also use the identity
+    \[
+        L^n=L\rho_{n-1}-\rho_{n-2}.
+    \]
+    With respect to the basis $\{1,L\}$ of $R(T)$, the map $\phi: R(SU(2))\oplus R(SU(2))\to R(T)$ is represented by the matrix
+    \[
+        \begin{pmatrix}
+            1 & \rho_{n-2}  \\
+            0 & -\rho_{n-1}
+        \end{pmatrix}.
+    \]
+    It follows that the kernel vanishes and that the cokernel is $R(SU(2))/(\rho_{n-1})$.
+    Hence
+    \[
+        K^{\tau+0}_{SU(2)}(SU(2))=0
+    \]
+    while
+    \[
+        K^{\tau+1}_{SU(2)}(SU(2))
+        \cong
+        R(SU(2))/(\rho_{n-1})
+    \]
+\end{example}
+
+\section{June 25}
+The $SU(2)$ computation above has two apparent shifts. First, the nonzero twisted $K$-group occurs in odd degree:
+\[
+    K^{\tau+1}_{SU(2)}(SU(2))
+    \cong
+    R(SU(2))/(\rho_{n-1}).
+\]
+Second, the integer $n$ appearing in the $K$-theory twisting corresponds to loop group level $n-2$, not level $n$. Both phenomena are explained by the Freed--Hopkins--Teleman formula
+\[
+    \zeta(\tau)=\mathfrak g+\check h+\tau.
+\]
+Here $\tau$ on the right is the loop group level, while $\zeta(\tau)$ is the corresponding twisting of equivariant $K$-theory on $G//G$.
+
+The term $\mathfrak g$ is the twisting associated to the adjoint representation of $G$. More generally, if $V\to X$ is a real vector bundle, then $V$ defines a twisting of complex $K$-theory, called the Thom or Clifford twisting of $V$. Locally, this twisting is modeled by the Clifford algebra bundle $\operatorname{Cl}(V)\longrightarrow X$.
+Its characteristic data are $(\dim V,\, w_1(V),\, \beta w_2(V)) \in H^0(X;\mathbb Z/2)\oplus H^1(X;\mathbb Z/2)\oplus H^3(X;\mathbb Z)$.
+The $H^0$-component records the parity shift in $K$-theory.
+
+For connected $G$, the adjoint representation is oriented, so $w_1(\mathfrak g)=0$.
+For $G=\SU(2)$, the adjoint representation is $\Spin^c$ because the adjoint representation $\SU(2) \to \SO(3)$ identifies $\SU(2)$ as the spin double cover of $\SO(3)$, i.e. $\SU(2)\cong \Spin(3)$. There is a characteristic class characterization of $\Spin$-bundles, which says that a real vector bundle $V$ is $\Spin$ if and only if $w_1(V)=0$ and $w_2(V)=0$. Then of course $\beta w_2(V)=0$ as well, i.e. $\mf g$ is $\Spin^c$.
+
+The term $\check h$ is obtained by first transgressing the adjoint representation and then applying the Pfaffian construction. The adjoint representation defines a class
+$\operatorname{ad}\in KO^0(BG)$.
+Since the Borel construction for the conjugation action satisfies
+\[
+    EG\times_G G\simeq LBG,
+\]
+a twisting on $G//G$ can be regarded as a twisting on the free loop space $LBG$.
+
+There is an evaluation map
+\[
+    \operatorname{ev}:S^1\times LBG\longrightarrow BG,
+    \qquad
+    \operatorname{ev}(t,\gamma)=\gamma(t).
+\]
+There is a transgression map $\sigma:H^k(BG;A)\longrightarrow H^{k-1}(LBG;A)$, which is defined by pulling back along the evaluation map and then slanting with the fundamental class of the circle. In general, the slant product is a map $H^k(X\times Y;A)\times H_m(X;\mathbb Z)
+    \longrightarrow
+    H^{k-m}(Y;A)$ which in topological cohomology models integration along the fiber. Transgressing the adjoint class gives
+\[
+    \sigma(\operatorname{ad})
+    \in
+    KO^{-1}(LBG).
+\]
+There is a natural map
+\[
+    \operatorname{pfaff}:KO^{-1}(X)\longrightarrow \operatorname{Twist}(X),
+\]
+which sends a real $KO^{-1}$-class to its graded Pfaffian gerbe.
+
+\begin{remark}
+    We recall that a concrete model for $KO^{-1}(X)$ is by families of real skew-adjoint Fredholm operators. In general, there are Fredholm models for $KO$ can be organized uniformly using Clifford algebras. The group $KO^0(X)$ is represented by families of real Fredholm operators, and more generally $KO^{-r}(X)$ may be modeled by families of Fredholm operators with $r$ Clifford symmetries, or equivalently by appropriate $\operatorname{Cl}_r$-linear Fredholm operators.
+
+    More precisely, recall that the complex $K$-theory of a space $X$ is represented by the space of Fredholm operators on a separable complex Hilbert space $\mathcal H$. \begin{align*}
+        KU^0(X) & =[X,\operatorname{Fred}(\mathcal H)]
+    \end{align*}
+    The $\Z/2$-graded version of complex $K$-theory is represented by the space of odd skew-adjoint Fredholm operators on a $\Z/2$-graded separable complex Hilbert space $\mathcal H=\mathcal H^0\oplus \mathcal H^1$:
+    \begin{align*}
+        KU^{-1}(X) & =[X,\operatorname{Fred}^{\mathrm{odd}}(\mathcal H)].
+    \end{align*} Given an ungraded Fredholm operator $A$, one can form the odd skew-adjoint operator $T_A$ on $\mathcal H\oplus \mathcal H$ defined by
+    \[
+        T_A=\begin{pmatrix}
+            0  & A^* \\
+            -A & 0
+        \end{pmatrix}
+    \]
+    The reason we pass to odd skew-adjoint operators is that we can package the entire $KU$-spectrum into a single space. Let $\Cl_n$ be the complex Clifford algebra on $n$ generators, and let $S_n$ be the irreducible $\Cl_n$-module. Let $\operatorname{Fred}^n(\mathcal H)
+        \subset
+        \operatorname{Fred}(S_n\otimes \mathcal H)$ be the space of skew-adjoint Fredholm operators on $\mathcal H$ which are odd with respect to a $\Z/2$-grading and which graded commute with $n$ Clifford symmetries. Then the spaces $\operatorname{Fred}^n(\mathcal H)$ form an $\Omega$-spectrum representing $KU$. In particular, one has
+    \begin{align*}
+        \operatorname{Fred}^{(n)}(\mathcal H)
+        \simeq
+        \Omega^n\operatorname{Fred}^{(0)}(\mathcal H)
+    \end{align*}
+\end{remark}
+
+Thus the representing space for $KO^{-1}(X)$ is the space of graded odd skew-adjoint Fredholm operators on $\mathcal H \oplus \mathcal H$ anticommuting with the fixed $\operatorname{Cl}_1$-generator $J$. These are in bijection with ungraded skew-adjoint Fredholm operators on $\mathcal H$ via the map \[A
+    \longmapsto
+    F_A=
+    \begin{pmatrix}
+        0 & A \\
+        A & 0
+    \end{pmatrix}\]
+Thus a class in $KO^{-1}(X)$ can be represented by a continuous family $\{A_x\}_{x\in X}$ of skew-adjoint Fredholm operators. Remark that the kernel of this family will fail to be a vector bundle because the eigenvalues of $A_x$ may cross $0$ as $x$ varies. Consider $B_x = i A_x$, which is self-adjoint and therefore has a real spectrum.
+
+For $\lambda\in \R_{>0}$, let $U_\lambda \subset X$ be the open set of points $x\in X$ such that $\lambda$ is not in the spectrum of $B_x$. Consider the vector bundle $E_\lambda\to U_\lambda$ whose fiber is the span of eigenvectors of $B_x$ with
+$|\text{eigenvalue}|<\lambda$. This is finite-dimensional because $A_x$, hence $B_x$, is Fredholm.
+
+Suppose $\lambda<\mu$. On $U_\lambda\cap U_\mu$, we have two finite-dimensional bundles $E_\lambda\subset E_\mu$. The quotient $E_{\lambda,\mu}:=E_\mu/E_\lambda$ has fibers spanned by eigenvectors with eigenvalues in the interval $(\lambda,\mu)$. Since this interval avoids $0$, the restricted operator $A_x|_{E_{\lambda,\mu,x}}$ is invertible and skew-adjoint. Thus on the overlap $U_\lambda\cap U_\mu$, we get a finite-dimensional real vector bundle $E_{\lambda,\mu}$ equipped with an invertible skew-adjoint endomorphism.
+
+
+For a finite-dimensional real vector bundle $E$ with a skew-symmetric form or skew-adjoint operator, there is a Pfaffian line bundle which satisfies $\operatorname{Pfaff}(E)^2\cong \det(E)$. We construct a graded gerbe which assigns to the overlap $U_\lambda\cap U_\mu$ the Pfaffian line bundle
+\[
+    L_{\lambda,\mu}
+    :=
+    \operatorname{Pf}(E_{\lambda,\mu})
+\] It is also $\mathbb Z/2$-graded by the parity of the rank $\deg L_{\lambda,\mu} = \dim E_{\lambda,\mu}\pmod 2$.
+
+On the triple overlap
+$U_\lambda\cap U_\mu\cap U_\nu$
+we have a direct sum decomposition
+\[E_{\lambda,\nu}
+    \cong
+    E_{\lambda,\mu}\oplus E_{\mu,\nu}\]
+which gives an isomorphism of Pfaffian lines
+\[
+    \operatorname{Pf}(E_{\lambda,\nu})
+    \cong
+    \operatorname{Pf}(E_{\lambda,\mu})
+    \otimes
+    \operatorname{Pf}(E_{\mu,\nu})\]
+and this realizes the cocycle condition for the graded gerbe $\operatorname{Pfaff}(A)$. At the level of characteristic classes, the Pfaffian construction sends a $KO^{-1}$-class to a twisting with components $(\sigma w_1,\, \sigma w_2,\, x)$
+where $2x=\sigma p_1$.
+
+Thus the $\check h$ twisting associated to the adjoint representation is $\check h = \operatorname{pfaff}(\sigma(\operatorname{ad}))$ and its components are
+\[
+    \check h
+    =
+    \left(
+    \sigma w_1(\operatorname{ad}),\,
+    \sigma w_2(\operatorname{ad}),\,
+    \frac12\sigma p_1(\operatorname{ad})
+    \right).
+\]
+For connected simply connected simple $G$, the first two components vanish and the last component is the dual Coxeter number:
+\[
+    \check h=h^\vee\in H^3_G(G;\mathbb Z)\cong \mathbb Z.
+\]
+For $SU(2)$, one has $h^\vee=2$.
+
+Thus for $G=SU(2)$ and loop group level $k$, one obtains
+$\zeta(k) = (1,0,k+2)$, i.e we have an identification of the twisted equivariant $K$-theory of $SU(2)$ with twisting $\zeta(k)$ with the Verlinde algebra of the loop group $LSU(2)$ at level $k$.
+\begin{align*}
+    K^{\zeta(k)+0}_{SU(2)}(SU(2)) & =0,                         \\
+    K^{\zeta(k)+1}_{SU(2)}(SU(2)) & \cong R(SU(2))/(\rho_{k+1})
+\end{align*}
+
+\begin{example}[Central extensions and projective representations]
+    Let $G$ be a compact Lie group. A central extension of $G$ by
+    $\mathbb T=U(1)$ is an exact sequence of topological groups
+    \[
+        \mathbb T\longrightarrow \widetilde G^\tau\longrightarrow G
+    \]
+    such that $\mathbb T$ maps into the center of $\widetilde G^\tau$.
+
+    From the point of view of group cohomology, central extensions are
+    classified by degree-two cohomology with coefficients in $\mathbb T$:
+    \[
+        H^2_{\mathrm{grp}}(G;\mathbb T).
+    \]
+    Indeed, after choosing a set-theoretic section
+    \[
+        s:G\to \widetilde G^\tau,
+    \]
+    one obtains a $2$-cocycle
+    \[
+        \alpha:G\times G\to \mathbb T
+    \]
+    by the formula
+    \[
+        s(g)s(h)=\alpha(g,h)s(gh).
+    \]
+    The associativity of multiplication in $\widetilde G^\tau$ is exactly the
+    cocycle condition for $\alpha$.
+
+    In the topological setting, the same classification is often written using
+    the classifying space. The groupoid $\mathrm{pt}//G$ has geometric
+    realization $BG$, so group cohomology can be interpreted as cohomology of
+    $BG$:
+    \[
+        H^2_{\mathrm{grp}}(G;\mathbb T)
+        \cong
+        H^2(BG;\mathbb T).
+    \]
+    Now use the exponential sequence of sheaves
+    \[
+        0\longrightarrow \mathbb Z
+        \longrightarrow \mathbb R
+        \longrightarrow \mathbb T
+        \longrightarrow 0.
+    \]
+    Since the sheaf $\mathbb R$ is fine, its higher sheaf cohomology vanishes,
+    and the connecting homomorphism identifies
+    \[
+        H^2(BG;\mathbb T)
+        \cong
+        H^3(BG;\mathbb Z).
+    \]
+    Since equivariant cohomology is defined by the Borel construction, we also
+    have
+    \[
+        H^3_G(\mathrm{pt};\mathbb Z)
+        =
+        H^3(EG\times_G\mathrm{pt};\mathbb Z)
+        =
+        H^3(BG;\mathbb Z).
+    \]
+    Thus FHT's statement that central extensions of $G$ by $\mathbb T$ are
+    classified by
+    \[
+        H^3_G(\mathrm{pt};\mathbb Z)
+    \]
+    is the same as the usual statement that central extensions are classified
+    by $H^2_{\mathrm{grp}}(G;\mathbb T)$, after applying the exponential
+    sequence.
+
+    Given such a central extension, a $\tau$-projective representation of $G$
+    is an honest representation of $\widetilde G^\tau$ on which the central
+    circle $\mathbb T$ acts by its defining character:
+    \[
+        z\in \mathbb T
+        \quad\text{acts as}\quad
+        z\cdot \operatorname{id}.
+    \]
+    Let $R^\tau(G)$ denote the Grothendieck group of these representations.
+    Then the twisted equivariant $K$-theory of a point is
+    \[
+        K^{\tau+k}_G(\mathrm{pt})
+        =
+        \begin{cases}
+            R^\tau(G), & k=0, \\
+            0,         & k=1.
+        \end{cases}
+    \]
+    This is the twisted analogue of the ordinary identity
+    \[
+        K^0_G(\mathrm{pt})=R(G),
+        \qquad
+        K^1_G(\mathrm{pt})=0.
+    \]
+
+    More generally, let $S$ be a $G$-space, and suppose the twisting
+    $\tau\in H^3_G(S;\mathbb Z)$ is pulled back from the point. Then $\tau$ is
+    represented by the same central extension
+    \[
+        \mathbb T\longrightarrow \widetilde G^\tau\longrightarrow G.
+    \]
+    A $\widetilde G^\tau$-equivariant vector bundle on $S$ decomposes according
+    to the weight by which the central circle $\mathbb T$ acts on the fibers.
+    Since $\mathbb T$ is central, this weight decomposition is preserved by the
+    group action. The twisted group $K^{\tau+k}_G(S)$ is the weight-one summand
+    of $K^k_{\widetilde G^\tau}(S)$, namely the summand where
+    $z\in\mathbb T$ acts as multiplication by $z$.
+\end{example}
+
+\section{June 26}
+Recall the type $A$ Schubert polynomials $\mf S_w$, which are indexed by permutations $w\in S_n$. The stable way to label them is by a finite string of integers $a=(a_1,\dots,a_n)$ which represents the infinite permutation $1\mapsto a_1, 2\mapsto a_2, \dots, n\mapsto a_n$ and then one fills in the remaining values in increasing order using the positive integers not already appearing among $a_1,\dots,a_n$.
+
+The reason for this labeling is that the Schubert polynomials are stable under the natural inclusions $S_n\subset S_{n+1}$, and every permutation in $S_\infty$ can be represented by a finite string of integers. There is a map \begin{align*}
+    \mathbb Z[x_1,x_2,\dots] & \longrightarrow H^*(\Fl_n(\mathbb C);\mathbb Z) \cong \mathbb Z[x_1,\dots,x_n]/(e_1,\dots,e_n) \\
+    x_i                      & \longmapsto c_1(\mathcal L_i) \text{ for } i=1,\dots,n,                                        \\
+    x_i                      & \longmapsto 0 \text{ for } i>n
+\end{align*}
+where $\mathcal L_i = S_i/S_{i-1}$ are the successive quotients of the tautological line bundle over the flag variety. The reason why we formulate the theory like this is because of the following theorem, proved in ?:
+\begin{theorem}
+    The Schubert polynomials $\mf S_w$ for $w\in S_\infty$ form a $\mathbb Z$-basis for the polynomial ring $\mathbb Z[x_1,x_2,\dots]$. The image of $\mf S_w$ in $H^*(\Fl_n(\mathbb C);\mathbb Z)$ is the Schubert class $[\Omega_w]$ if $w\in S_n$, and is zero otherwise.
+\end{theorem}
+To see this, look at the leading terms \begin{align*}
+    LT(\mf S_w) = x_1^{a_1}x_2^{a_2}\cdots x_n^{a_n}
+\end{align*} where $a_i = \#\{j>i\mid w(j)<w(i)\}$ is the number of inversions of $w$ starting at $i$.
+
+Another fact about $\mf S_w$ is that it is a polynomial of degree $\ell(w)$, it is symmetric in $x_i$ and $x_{i+1}$ if and only if $w(i)<w(i+1)$. In particular, $\mf S_w$ is a polynomial in $x_1,\dots,x_n$ when $w(i)<w(i+1)$ for all $i>n$. We are now ready to refine the theorem above to a homogeneous and symmetric statement:
+
+\begin{theorem}
+    For a sequence $r = (r_0,r_1,\dots,r_k)$ where $0 = r_0 < r_1 < \cdots < r_k = n$, let $P(r,d)$ be the submodule of $\mathbb Z[x_1,\dots,x_d]$ consisting of homogeneous polynomials of degree $d$ which are symmetric in the variables $x_i$ and $x_{i+1}$ whenever $r_j < i < r_{j+1}$ for some $j$.
+
+    Then the polynomials $\mf S_w$ as $w$ ranges of sequences of length $d$ and with $w(i)<w(i+1)$ whenever $r_j < i < r_{j+1}$ for some $j$ form a $\mathbb Z$-basis for $P(r,d)$.
+\end{theorem}
+
+\begin{remark}
+    The sequence $r$ should be interpreted as the type $A$ parabolic data. For
+    $G=\GL_n$, it determines the standard parabolic subgroup $P_r\subset G$
+    which stabilizes a partial flag
+    \[
+        0\subset V_{r_1}\subset V_{r_2}\subset\cdots\subset V_{r_k}=\mathbb C^n,
+        \qquad
+        \dim V_{r_j}=r_j.
+    \]
+    Equivalently, the Levi factor has block sizes $r_1-r_0,r_2-r_1,\ldots,r_k-r_{k-1}$, so its Weyl group is $S_{r_1-r_0}\times S_{r_2-r_1}\times\cdots\times S_{r_k-r_{k-1}}$. This is why the polynomial is required to be symmetric in $x_i$ and
+    $x_{i+1}$ whenever $r_j<i<r_{j+1}$: the adjacent transposition $s_i$
+    lies inside one of the Levi blocks. A geometric way to think about this is that the cohomology of the generalized flag variety $G/P_r$ is generated by the Chern classes of the successive quotients of the tautological flagging, and these have to be symmetric in the variables corresponding to the same Levi block.
+
+
+    The condition $w(i)<w(i+1)$ whenever $r_j<i<r_{j+1}$ picks out precisely the minimal-length representatives for the quotient of Weyl groups $S_n/(S_{r_1-r_0}\times S_{r_2-r_1}\times\cdots\times S_{r_k-r_{k-1}})$, and hence they index the Schubert classes on the partial flag variety
+    $G/P_r$.
+
+    In particular, the Borel case corresponds to $r=(0,1,2,\ldots,n)$.
+    Every block has size $1$, so there are no symmetry conditions and no
+    restrictions on descents. At the opposite extreme, the Grassmannian $\operatorname{Gr}(m,n)$ corresponds to $r=(0,m,n)$ so the only allowed descent is at $m$.
+\end{remark}
+
+We now need the generalization of this theorem to type $C$ Schubert polynomials. We follow the notation of Billey--Haiman. In type $A$, the root space is \begin{align*}
+    P_n = \Q\langle x_1,\dots,x_n\rangle/\Q\langle x_1+\cdots+x_n\rangle
+\end{align*} and the Weyl group is $S_n$. The cohomology ring is \begin{align*}
+    \Q[P_n]/I_n \cong \Q[x_1,\dots,x_n]/(p_1,\dots,p_n)
+\end{align*} where $p_i = x_1^i+\cdots+x_n^i$ is the $i$-th power sum. Notice that $(p_1,\dots,p_n)$ generates the ideal $I_n$ of symmetric polynomials with no constant term, just as $(e_1,\dots,e_n)$ does.
+
+In type $C$, the root space is \begin{align*}
+    P_n = \Q\langle x_1,\dots,x_n\rangle
+\end{align*} with simple roots $\alpha_i = x_i - x_{i+1}$ for $i=1,\dots,n-1$ and $\alpha_n = 2x_n$. The Weyl group is the hyperoctahedral group $B_n$, the group of signed permutations of $\{\pm 1,\dots,\pm n\}$, i.e self maps $w:\{\pm 1,\dots,\pm n\}\to\{\pm 1,\dots,\pm n\}$ such that $w(-i)=-w(i)$.
+
+Then the type $C$ Schubert polynomials will live in the ring \begin{align*}
+    \varprojlim \Q[P_n]/I_n \cong \varprojlim H^*(\Sp_{2n}/B_n;\Q) \cong \Q[x_1,x_2,\dots]/(p_2,p_4,\dots)
+\end{align*} Note that the even powers vanish because $B_\infty$ has the generator $1\mapsto -1$ which puts $p_{2k}$ in the invariant ideal.  Inside this ring, we have a subring
+\begin{align*}
+    R = \Q[x_1,x_2,\dots,p_1,p_3,\dots]
+\end{align*}
+as the subring of power series in $x_1,x_2,\dots$ which are polynomials in the $x_i$ and in the odd power sums $p_1,p_3,\dots$.
+\begin{theorem}
+    [Billey--Haiman] The type $C$ Schubert polynomials $\mf C_w$ for $w\in B_\infty$ form a $\Q$-basis for the ring $R$.
+\end{theorem}
+
+Now consider the submodule $R_d$ of $R$ consisting of homogeneous polynomials of degree $d$, where the grading on $R$ is given by $\deg x_i = 1$ and $\deg p_{2k+1} = 2k+1$. It has a basis of homogeneous type $C$ Schubert polynomials $\mf C_w$ for $w\in B_\infty$ of length $\ell(w)=d$.
+
+Now consider a $GSp(2r)$ bundle $(V,\omega)$ over a base $X$. It is rank $2r$ and puts us in type $C_r$. To this bundle we can associate the map \begin{align*}
+    V: R & \to H^*(X;\Q)                                           \\
+    x_i  & \longmapsto c_1(\mathcal L_i) \text{ for } i=1,\dots,r, \\
+    x_i  & \longmapsto 0 \text{ for } i>r
+\end{align*} and extend the map multiplicatively to the power sums $p_{2k+1}$.
+
+\begin{definition}
+    A homogeneous polynomial $P$ of degree $d$ in $R_d$ is said to be \textbf{Fulton positive} if for every fully flagged ample $GSp(2r)$ bundle $(V,\omega)$ on a complete variety $X$ of dimension $d$, if $V(P) \in H^{2d}(X;\Q)$ is positive degree, i.e. $\int_X V(P) > 0$.
+\end{definition}
+
+Then the conjecture is that the Fulton positive polynomials are exactly those nonzero polynomials which are nonnegative linear combinations of type $C$ Schubert polynomials $\mf C_w$.
+
+\subsection{Sketch of Fulton's type $A$ proof}
+
+We now recall the structure of Fulton's proof in type $A$. The theorem says that if
+\[
+    P=\sum_w a_w\mf S_w \in P(r,d),
+\]
+then $P$ is numerically positive for $r$-filtered ample vector bundles if and only if $P\ne 0$ and all coefficients satisfy $a_w\geq 0$.
+
+The proof has two directions. First, one proves that each Schubert polynomial $\mf S_w$ is numerically positive. Let $E$ be an $r$-filtered ample vector bundle on a complete variety $X$ of dimension $d$, and assume $\ell(w)=d$. Choose $m$ large enough so that $w$ is represented by a permutation of $\{1,\ldots,m\}$. Let $V$ be the trivial bundle of rank $m$ on $X$, equipped with a fixed complete flag
+\[
+    V_1\subset V_2\subset\cdots\subset V_m=V.
+\]
+Consider the vector bundle
+\[
+    H=\operatorname{Hom}(V,E)\longrightarrow X.
+\]
+Since $V$ is trivial, $H\cong E^{\oplus m}$, so $H$ is ample whenever $E$ is ample.
+
+Inside $H$, Fulton defines a degeneracy locus $Q_w$. A point of $H$ is a homomorphism $f:V_x\to E_x$. If $F_p=E/E_p$ denotes the quotient bundles in the filtration of $E$, then $Q_w$ is cut out by the rank inequalities
+\[
+    \operatorname{rank}(V_q\to F_p)
+    \leq
+    \#\{i\leq r_p: w(i)<q\}.
+\]
+Equivalently, $Q_w$ is the universal degeneracy locus for the tautological map $\pi^*V\longrightarrow \pi^*E$ on the total space $H$, where $\pi:H\to X$ is the projection. The degeneracy locus formula gives
+\[
+    [Q_w]
+    =
+    \mf S_w(\pi^*E)\cap [H].
+\]
+Now let
+\[
+    s:X\longrightarrow H
+\]
+be the zero section. Pulling back along the zero section gives
+\[
+    \mf S_w(E)\cap [X]
+    =
+    s^*[Q_w].
+\]
+Thus the desired degree is the degree of the refined intersection of the cone $Q_w\subset H$ with the zero section.
+
+The key positivity input is the Fulton--Lazarsfeld theorem on cone classes.
+
+\begin{theorem}[Fulton--Lazarsfeld]
+    Let $X$ be a complete variety, let $H\to X$ be an ample vector bundle of rank $N$, and let $C\subset H$ be a nonzero closed cone of pure dimension $N$. Let
+    \[
+        s:X\longrightarrow H
+    \]
+    be the zero section. Then the refined Gysin pullback $s^*[C]\in A_0(X)$
+    has strictly positive degree:
+    \[
+        \deg s^*[C]>0.
+    \]
+\end{theorem}
+Applying this to $C=Q_w$ gives
+\[
+    \deg(\mf S_w(E)\cap [X])
+    =
+    \deg s^*[Q_w]
+    >0.
+\]
+Therefore every nonnegative linear combination of the $\mf S_w$ is numerically positive.
+
+The nontrivial geometric point is that $Q_w$ is indeed a nonzero cone of the correct dimension. Fulton proves this by reducing locally to the corresponding matrix Schubert variety. More precisely, after trivializing the bundles and flags, the rank conditions defining $Q_w$ become the usual rank conditions defining a matrix Schubert variety; these varieties are irreducible and have codimension $\ell(w)$. Since $H$ has dimension $\dim X+\operatorname{rank}H$ and $Q_w\subset H$ has codimension $\ell(w)=d=\dim X$, the cone $Q_w$ has the dimension needed for the Fulton--Lazarsfeld cone theorem.
+
+For the converse, suppose
+\[
+    P=\sum_w a_w\mf S_w
+\]
+has some negative coefficient, say $a_u<0$. Fulton constructs a test example which isolates this coefficient. Let $\Fl$ be a flag variety, with its tautological flag. The Schubert varieties and opposite Schubert varieties are dual bases for the Chow ring. Thus one may choose an opposite Schubert variety $\Omega^u$ of dimension $d$ such that
+\[
+    \int_{\Omega^u} \mf S_w = \delta_{w,u}.
+\]
+Consequently, for the tautological filtered bundle restricted to $\Omega^u$, one has
+\[
+    \int_{\Omega^u} P
+    =
+    \sum_w a_w\int_{\Omega^u}\mf S_w
+    =
+    a_u<0.
+\]
+This produces a negative value, but the tautological filtered bundle on $\Omega^u$ is not necessarily ample. To fix this, Fulton uses a same perturbation trick to make the test bundle ample without changing the sign of the intersection number.
+
+\red{For completeness, we could spell out the divided difference operators in type $C$. We could also be more precise about passing to GSp bundles.}
+
+\subsection{Type $C$ analog}
+We recall the type $C$ degeneracy locus formula, established in Fulton's paper on degeneracy loci for all classical types.
+Let \(V\to X\) be a rank \(2n\) symplectic bundle with form
+\(V\otimes V\to L\), and let
+\[
+    0=E_0\subset E_1\subset\cdots\subset E_n=E\subset V,
+    \qquad
+    0=F_0\subset F_1\subset\cdots\subset F_n=F\subset V
+\]
+be complete Lagrangian flags. Extend the flags by $ E_{n+i}=E_{n-i}^{\perp}$ and $F_{n+i}=F_{n-i}^{\perp}$. Let
+\[
+    W(C_n)=\{w\in S_{2n}:w(i)+w(2n+1-i)=2n+1\}.
+\]
+For \(w\in W(C_n)\), define
+\[
+    X_w=
+    \left\{
+    x\in X:
+    \dim(E_p(x)\cap F_q(x))
+    \geq
+    \#\{i\leq p:w(i)\leq q\}
+    \text{ for all }p,q
+    \right\}.
+\]
+We also introduce the length and codimension of \(w\): \begin{align*}
+    \ell(w)               & =\#\{(i,j):1\leq i<j\leq n,w(i)>w(j)\} + \#\{(i,j):1\leq i\leq j\leq n,w(i)+w(j)>2n+1\}, \\
+    \operatorname{cod}(w) & = \#\{(i,j):1\leq i<j\leq n,w(i)<w(j)\} + \#\{(i,j):1\leq i\leq j\leq n,w(i)+w(j)<2n+1\}
+\end{align*} and these satisfy $\ell(w)+\operatorname{cod}(w)= \dim \Fl_n = n^2$.
+
+Set $x_i=-c_1(E_i/E_{i-1})$ and $y_i=-c_1(F_{n+1-i}/F_{n-i})$ and $z=c_1(L)$ and $v=\frac12 z$.Define
+\[
+    c_i=
+    e_i(x_1+v,\ldots,x_n+v)
+    +
+    e_i(y_1+v,\ldots,y_n+v),
+\]
+and let
+\[
+    \Delta=\Delta_{\rho(n)}(c),
+    \qquad
+    \rho(n)=(n,n-1,\ldots,1).
+\]
+For \(1\le i<n\), let \(\partial_i\) be the divided difference operator
+switching \(x_i\) and \(x_{i+1}\), and let
+\[
+    \partial_n(P)
+    =
+    \frac{
+    P(x_1,\ldots,x_n)
+    -
+    P(x_1,\ldots,x_{n-1},-x_n-z)
+    }{2x_n+z}.
+\]
+Then Fulton defines
+\[
+    P_w
+    =
+    \partial_{w^{-1}}
+    \left(
+    \prod_{i+j\le n}(x_i-y_j)\Delta
+    \right)
+\]
+\begin{theorem}[Fulton, type \(C\) degeneracy loci]
+    As classes in $A_{\dim X-\operatorname{cod}(w)}(X)$, one has
+    \[
+        [X_w]=P_w\cap [X]
+    \]
+\end{theorem}
+There seems to ambiguity surrounding what a double Schubert polynomial is in types $B$, $C$, and $D$. There is a paper by Kresch and Tamvakis which defines double Schubert polynomials in types $B$, $C$, and $D$.
+
+\section{June 28}
+Fulton gives a forumla for the class of a degeneracy locus in terms of a polynomial in the Chern classes of the bundles involved.
+
+
+In types $B,C,D$, the top kernel $P_{w_0}(X,Y)$ represents the diagonal only modulo the ideal of relations, so different polynomial lifts give different families of representing polynomials. Each such choice has geometric significance, but the polynomial family is not canonical in the same way as type $A$. They also explicitly say that their double Schubert polynomials differ from the ones implicit in Fulton and in Lascoux-Pragacz. However, the single Schubert polynomials obtained by setting $Y=0$ are the same as those of Lascoux-Pragacz, and they are also the same as those of Billey-Haiman up to a change of variables. \[
+    \mathfrak C_w^{\mathrm{LPR}}(x)
+    =
+    \mathfrak C_w^{\mathrm{BH}}(z)\big|_{z_i=-x_i,\; p_{2r+1}(X)=-p_{2r+1}(Z)/2}\]
+
+We now emulate the Fulton-Lazarsfeld argument in type $C$. Let $E$ be a rank $2n$ symplectic bundle with form $E\otimes E\to L$, and let $V$ be a rank $2n$ trivial bundle, equipped with a fixed complete Lagrangian flag \[
+    0 = V_0\subset V_1\subset\cdots\subset V_n \subset V\]
+let $H=\operatorname{Hom}(V,E)$. Then $H$ is ample whenever $E$ is ample. Inside $H$, we have the universal degeneracy locus $Q_w$ cut out by the rank inequalities
+\[
+    \dim(V_p \to E/E_q) \leq \#\{i\leq p: w(i)\leq q\}.
+\] for $w\in W(C_n)$. The degeneracy locus formula gives
+\[
+    [Q_w]
+    =
+    \mf C_w(\pi^*E)\cap [H].
+\]
+Now let
+\[
+    s:X\longrightarrow H
+\]
+be the zero section. Pulling back along the zero section gives
+\[
+    \mf S_w(E)\cap [X]
+    =
+    s^*[Q_w].
+\]
+Thus the desired degree is the degree of the refined intersection of the cone $Q_w\subset H$ with the zero section. The hope is that we can apply the Fulton--Lazarsfeld theorem on cone classes to conclude that $\deg s^*[Q_w]>0$.
+
+The issue with the setup here is that it is not good enough to look at the $\Hom$ bundle from a trivial bundle to $E$. This considers the space of all maps from a trivial bundle to $E$, but we need to consider the space of maps which preserve the symplectic form. This is cut out by quadratic equations, so it is not a vector bundle.
+
+We need to more carefully read the Tamvakis-Kresch paper to see how they reason about this issue. Perhaps it is also worth writing Tamvakis to ask about this.
+
+\section{June 29}
+
+We are going to carefully go through the Kresch--Tamvakis paper
+\emph{Double Schubert polynomials and degeneracy loci for the classical groups}. The goal is to understand the type $C$ double Schubert polynomial theory, its relation to Schur $Q$-functions and $\widetilde Q$-polynomials, and how these polynomials represent symplectic and Lagrangian degeneracy loci.
+
+\subsection{Classical Schur functions and Schur $Q$-functions}
+
+The ordinary Schur functions $s_\lambda$ arise naturally in ordinary representation theory. They are the characters of irreducible polynomial representations of $GL_n$, and they also appear through the Frobenius characteristic map for ordinary representations of the symmetric group $S_n$.
+
+The Schur $Q$-functions arise from a spin or projective analogue of this story. Instead of ordinary representations of $S_n$, one studies projective representations of $S_n$. A projective representation is a homomorphism $S_n \longrightarrow PGL(V)$.
+Equivalently, it is a genuine linear representation of a central extension
+\[
+    1 \longrightarrow \{\pm 1\}
+    \longrightarrow \widetilde S_n
+    \longrightarrow S_n
+    \longrightarrow 1.
+\]
+A representation of $\widetilde S_n$ is called a spin representation if the central element $z=-1$ acts as $-1$.
+
+The irreducible spin representations are indexed by strict partitions
+\[
+    \lambda=(\lambda_1>\lambda_2>\cdots>\lambda_\ell>0).
+\]
+
+
+\subsection{Odd cycle types and odd power sums}
+
+Conjugacy classes in $S_n$ are indexed by partitions
+\[
+    \mu=(1^{m_1}2^{m_2}3^{m_3}\cdots)
+\]
+of $n$, recording cycle type. If $C_\mu\subset S_n$ is the conjugacy class of cycle type $\mu$, then its preimage in the double cover $\widetilde S_n$ may either remain one conjugacy class or split into two conjugacy classes.
+
+Spin characters vanish on nonsplit conjugacy classes. Indeed, let $\chi$ be the character of a spin representation. Since the central element $z=-1$ acts by $-1$, one has
+\[
+    \chi(zg)=-\chi(g).
+\]
+But if $g$ and $zg$ are conjugate in $\widetilde S_n$, then class-function invariance gives
+\[
+    \chi(zg)=\chi(g).
+\]
+Therefore $\chi(g)=0$ for any $g$ whose conjugacy class does not split in the double cover.
+
+
+In the stable spin-character theory, the relevant conjugacy classes are the classes whose cycle types have only odd parts. Let
+\[
+    \operatorname{OP}(n)
+    =
+    \{\mu\vdash n : \text{all parts of }\mu\text{ are odd}\}.
+\]
+These are called odd partitions of $n$. Consequently, the Frobenius characteristic for spin representations lands in the subring generated by the odd power sums:
+\[
+    \Gamma
+    =
+    \mathbb Q[p_1,p_3,p_5,\dots].
+\]
+One has a spin Frobenius characteristic of the schematic form
+\[
+    \operatorname{ch}^{-}(\chi^\lambda)
+    =
+    \sum_{\mu\in \operatorname{OP}(n)}
+    c_{\lambda,\mu}\,
+    \chi^\lambda(\mu)\,
+    p_\mu,
+\]
+where $\lambda$ is a strict partition, $\mu$ runs over odd partitions, and $c_{\lambda,\mu}$ is a normalization factor depending on conventions. Up to normalization, this Frobenius characteristic is the Schur $Q$-function $Q_\lambda$.
+
+\begin{theorem}
+    The Schur $Q$-functions $Q_\lambda$ for strict partitions $\lambda$ form an additive $\Z$-basis for $\Gamma$.
+\end{theorem}
+
+Thus the two key indexing sets are strict partitions which index irreducible spin representations of $\widetilde S_n$, and odd partitions $\operatorname{OP}(n)$, which index the conjugacy classes which split in the double cover. There are of course the same number of strict partitions of $n$ as odd partitions of $n$.
+
+\subsection{$Q$ and $\widetilde Q$ polynomials}
+
+Schur functions have determinantal formulas. For example, the Jacobi--Trudi formula says
+\[
+    s_\lambda
+    =
+    \det\left(h_{\lambda_i-i+j}\right).
+\]
+There is also a dual Jacobi--Trudi formula in terms of elementary symmetric functions.
+
+Schur $Q$-functions have Pfaffian formulas. For a strict partition $\lambda$, one defines two-row functions $Q_{a,b}$ and then sets
+\[
+    Q_\lambda
+    =
+    \operatorname{Pf}
+    \left(
+    Q_{\lambda_i,\lambda_j}
+    \right)
+\] for even-length strict partitions $\lambda$. If $\lambda$ has odd length, one appends a zero part so that the length is even.
+
+Kresch--Tamvakis use not the classical Schur $Q$-functions directly, but the geometric $\widetilde Q$-polynomials of Pragacz--Ratajski. These are modeled on Schur's $Q$-functions, but they are normalized for Schubert calculus on maximal isotropic Grassmannians.
+
+Let $X=(x_1,\dots,x_n)$.
+First define
+\[
+    \widetilde Q_i(X)=e_i(X),
+\]
+where $e_i(X)$ is the $i$th elementary symmetric polynomial. For nonnegative integers $i,j$, define
+\[
+    \widetilde Q_{i,j}(X)
+    =
+    \widetilde Q_i(X)\widetilde Q_j(X)
+    +
+    2\sum_{k=1}^j (-1)^k
+    \widetilde Q_{i+k}(X)\widetilde Q_{j-k}(X).
+\]
+Since $\widetilde Q_i=e_i$, this can also be written as
+\[
+    \widetilde Q_{i,j}(X)
+    =
+    e_i(X)e_j(X)
+    +
+    2\sum_{k=1}^j (-1)^k
+    e_{i+k}(X)e_{j-k}(X).
+\]
+
+Now let $\lambda=(\lambda_1,\dots,\lambda_r)$
+be a partition of even length $r$. Then define
+\[
+    \widetilde Q_\lambda(X)
+    =
+    \operatorname{Pf}
+    \left[
+        \widetilde Q_{\lambda_i,\lambda_j}(X)
+        \right]_{1\le i<j\le r}.
+\]
+If $\lambda$ has odd length, one appends a zero part and uses the same definition.
+
+The $\widetilde Q_\lambda$ have the property that, after substituting Chern roots of tautological bundles, they represent Schubert classes on Lagrangian Grassmannians. To formulate this more precisely, let us set up some notation. Let
+\[
+    \mathcal D_n
+    =
+    \{\lambda\text{ strict}: \lambda\subset \rho_n\}.
+\]
+If $\lambda\in \mathcal D_n$, its complement $\lambda'$ is defined by $\lambda'=\rho_n\setminus \lambda$.
+
+This complement operation is the type $C$ version of Poincare duality on the Lagrangian Grassmannian. The Schubert class indexed by $\lambda'$ is dual to the Schubert class indexed by $\lambda$.
+
+
+The Weyl group of type $C_n$ is the hyperoctahedral group $W_n$. It consists of signed permutations of $\{1,\dots,n\}$. Its elements are written using bars for negative entries, for example
+\[
+    (\overline{3},1,\overline{2}).
+\]
+The group $W_n$ is generated by simple reflections
+\[
+    s_0,s_1,\dots,s_{n-1},
+\]
+where $s_i$ for $i\ge 1$ interchanges $i$ and $i+1$, while $s_0$ changes the sign of the first entry.
+
+The maximal Grassmannian elements in $W_n$ are indexed by strict partitions $\lambda\subset \rho_n$. The corresponding signed permutation $w_\lambda$ is obtained by putting the parts of $\lambda$ as barred entries and the complementary parts as unbarred entries:
+\[
+    w_\lambda
+    =
+    (\overline{\lambda_1},\dots,\overline{\lambda_\ell},
+    \lambda'_k,\dots,\lambda'_1),
+\]
+where $k=\ell(\lambda')$.
+
+
+\begin{theorem}
+    $\widetilde Q_\lambda$ represent Schubert classes on the Lagrangian Grassmannian:
+    \[
+        [\Omega_\lambda]
+        =
+        \widetilde Q_\lambda(E^*)\cap [LG(n,2n)].
+    \] where $E^*$ is the dual of the tautological bundle on $LG(n,2n)$.
+\end{theorem}
+
+In variables $X=(x_1,\dots,x_n)$ and $Y=(y_1,\dots,y_n)$, Kresch--Tamvakis define the reproducing kernel
+\[
+    \widetilde Q(X,Y)
+    =
+    \sum_{\lambda\in \mathcal D_n}
+    \widetilde Q_\lambda(X)
+    \widetilde Q_{\lambda'}(Y),
+\]
+$\widetilde Q(X,Y)$ represents the diagonal class on the Lagrangian Grassmannian, written in dual Schubert bases:
+\[
+    [\Delta]
+    =
+    \sum_{\lambda\in\mathcal D_n}
+    [\Omega_\lambda]\otimes [\Omega_{\lambda'}].
+\]
+
+The group $W_n$ acts on the polynomial ring $\mathbb Z[X]$ by
+\[
+    s_i(x_i)=x_{i+1},
+    \qquad
+    s_i(x_{i+1})=x_i
+    \quad
+    \text{for } i\ge 1,
+\]
+and
+\[
+    s_0(x_1)=-x_1,
+\]
+with all other variables fixed.
+\begin{definition}
+    [Type $C$ divided difference operators]
+    The divided difference operators are
+    \[
+        \partial_i(f)
+        =
+        \frac{f-s_i f}{x_i-x_{i+1}}
+        \quad
+        \text{for } i\ge 1,
+    \]
+    and
+    \[
+        \partial_0(f)
+        =
+        \frac{f-s_0 f}{2x_1}.
+    \]
+\end{definition}
+Kresch--Tamvakis use the modified convention
+\[
+    \partial_i'=-\partial_i
+    \quad
+    \text{for } i\ge 1,
+    \qquad
+    \partial_0'=\partial_0.
+\]
+Let $w_0$ denote the longest element of $W_n$.
+\begin{definition}[Type $C$ double Schubert polynomials]
+    For each $w\in W_n$, Kresch--Tamvakis define the type $C$ double Schubert polynomial by
+    \[
+        \mathfrak C_w(X,Y)
+        =
+        (-1)^{n(n-1)/2}
+        \partial'_{w^{-1}w_0}
+        \left(
+        \Delta(X,Y)\widetilde Q(X,Y)
+        \right).
+    \]
+\end{definition}
+This should be compared with the type $A$ definition:
+\[
+    \mathfrak S_w(X,Y)
+    =
+    \partial_{w^{-1}w_0}\Delta(X,Y).
+\]
+The type $C$ formula has the extra factor $\widetilde Q(X,Y)$, which accounts for the isotropic/Lagrangian geometry.
+
+
+\subsection{Relation to degeneracy loci}
+Let $X$ be an algebraic variety. Let $V$ be a symplectic vector bundle of rank $2n$, and let $E,F\subset V$
+be Lagrangian subbundles. Suppose $E,F$ have a complete isotropic flaggings and let \begin{align*}
+    x_i=-c_1(E_{n+1-i}/E_{n-i}),\qquad
+    y_i=-c_1(F_i/F_{i-1}).
+\end{align*} There is an injective group homomorphism $\phi:W_n\to S_{2n}$ with image \[
+    \phi(W_n)=\{w\in S_{2n}:w(i)+w(2n+1-i)=2n+1\}\]
+For $w\in W_n$, let $X_w$ be the degeneracy locus defined by the rank conditions
+\[
+    \dim(E_p\cap F_q)\geq \#\{i\le p: \phi(w)(i)> 2n-q\}
+\]
+Suppose that $X_w$ has pure codimension $\ell(w)$ in $X$ and that $X$ is Cohen--Macaulay. Then Kresch--Tamvakis prove that
+\begin{theorem}
+    [Kresch--Tamvakis] As classes in $A_{\dim X-\ell(w)}(X)$, one has
+    \[
+        [X_w]
+        =
+        \mathfrak C_w(X,Y)\cap [X].
+    \]
+\end{theorem}
+
+We should distinguish two related formulas. First, there is the formula for a degeneracy locus on an arbitrary base $\mathfrak X$ carrying a Lagrangian subbundle $E\subset V$ and a fixed isotropic flag $F_\bullet\subset V$. Second, there is the formula inside the cohomology ring of the Lagrangian Grassmannian bundle itself. The latter is obtained from the former by taking
+\[
+    \mathfrak X=LG(V),
+    \qquad
+    E=\mathcal L,
+    \qquad
+    F_i=\pi^*F_i,
+\]
+where $\mathcal L\subset \pi^*V$ is the tautological Lagrangian subbundle on $LG(V)$.
+
+Thus, if
+\[
+    \pi:LG(V)\to X
+\]
+is the Lagrangian Grassmannian bundle of a symplectic bundle $V\to X$ and
+$F_\bullet$ is a complete isotropic flag of subbundles of $V$, then the relative Schubert locus in the Grassmannian bundle is
+\[
+    \Omega_\lambda(F_\bullet)
+    =
+    \left\{
+    (x,L_x)\in LG(V):
+    \dim\bigl(L_x\cap F_{n+1-\lambda_i}(x)\bigr)\ge i
+    \text{ for }1\le i\le \ell(\lambda)
+    \right\}.
+\]
+Equivalently, $\Omega_\lambda(F_\bullet)$ is the degeneracy locus of the maps
+\[
+    \mathcal L
+    \longrightarrow
+    \pi^*(V/F_{n+1-\lambda_i}).
+\]
+If this locus has the expected codimension $|\lambda|$, then its class in
+$CH^{|\lambda|}(LG(V))$ is obtained from the Pragacz--Ratajski formula by substituting
+\[
+    E^*=\mathcal L^*,
+    \qquad
+    F_i^*=\pi^*(F_i^*).
+\]
+Thus
+\[
+    [\Omega_\lambda(F_\bullet)]
+    =
+    \mathfrak C_\lambda\bigl(c(\mathcal L^*),c(\pi^*F_\bullet^*)\bigr)
+    \in CH^{|\lambda|}(LG(V)).
+\]
+In particular, this is generally a double or flagged formula depending on the Chern classes of the reference flag $F_\bullet$. It has the explicit expansion
+\[
+\begin{aligned}
+    [\Omega_\lambda(F_\bullet)]
+    ={}&
+    (-1)^{\ell(\lambda)+|\lambda'|}
+    \sum_\alpha \widetilde Q_\alpha(\mathcal L^*)
+    \sum_\beta
+    (-1)^{e(\alpha,\beta)+|\beta|}
+    \widetilde Q_{(\alpha\cup\beta)'}(\pi^*F^*) \\
+    &\qquad\qquad\cdot
+    \det\left(
+        c_{\beta_i-\lambda'_j}
+        \bigl(\pi^*F_{n-\lambda'_j}^*\bigr)
+    \right)
+    \in CH^{|\lambda|}(LG(V)).
+\end{aligned}
+\]
+Here the first sum is over all $\alpha\in \mathcal D_n$, and the second sum is over all $\beta\in \mathcal D_n$ such that $\beta\supset \lambda'$, $\ell(\beta)=\ell(\lambda')$, and $\alpha\cap\beta=\varnothing$. 
+
+\subsection{Why the theory is subtler than type $A$}
+
+In type $A$, the top double Schubert polynomial is essentially canonical. One starts from the top class
+\[
+    \Delta(X,Y)=\prod_{i+j\le n}(x_i-y_j)
+\]
+and applies divided differences.
+
+In types $B$, $C$, and $D$, the top kernel representing the diagonal is only determined modulo the ideal of relations in the Chow ring of the isotropic flag bundle. Therefore different polynomial lifts of the same cohomology class can lead to different families of representing polynomials. This is why there is some ambiguity around what the ``double Schubert polynomials'' in types $B$, $C$, and $D$ should be.
+
+Kresch--Tamvakis make a particular choice of kernel $\Delta(X,Y)\widetilde Q(X,Y)$
+because it has good algebraic and geometric properties. First, its restriction to the symmetric-group part $S_n\subset W_n$ is closely related to ordinary type $A$ double Schubert polynomials, so it has positivity properties there. Second, for maximal Grassmannian elements, it recovers the Pragacz--Ratajski $\widetilde Q$-polynomials and gives explicit Pfaffian/determinantal formulas for Lagrangian degeneracy loci.
+
+
+
+\subsection{The failure of the naive Hom-bundle strategy and a possible flag-bundle replacement}
+
+We now isolate the difficulty with trying to imitate Fulton--Lazarsfeld directly in type $C$.
+
+In type $A$, the basic construction is linear. Let $E\to X$ be a filtered vector bundle and let $V$ be a trivial vector bundle with a fixed flag. Fulton considers
+\[
+    H=\operatorname{Hom}(V,E)\longrightarrow X.
+\]
+Since $V$ is trivial, one has
+\[
+    H\cong E^{\oplus \operatorname{rk} V}.
+\]
+Thus if $E$ is ample, then $H$ is ample. Inside $H$ there is a universal degeneracy locus $Q_w$ cut out by rank conditions on the tautological map
+\[
+    \pi^*V\longrightarrow \pi^*E.
+\]
+Fiberwise, $Q_w$ is a matrix Schubert variety. Therefore $Q_w$ is a closed cone of the expected dimension inside the ample vector bundle $H$. Pulling $Q_w$ back along the zero section gives the Schubert polynomial evaluated on $E$:
+\[
+    s^*[Q_w]=\mathfrak S_w(E)\cap [X].
+\]
+The Fulton--Lazarsfeld cone theorem then gives
+\[
+    \deg s^*[Q_w]>0.
+\]
+This is the engine behind Fulton's positivity theorem.
+
+The naive type $C$ analogue would be to take a symplectic vector bundle $E\to X$ and look at
+\[
+    H=\operatorname{Hom}(V,E),
+\]
+where $V$ is a fixed trivial symplectic vector bundle with a fixed isotropic flag. This is still a vector bundle, and it may be ample if $E$ is ample. However, this is too large: it parametrizes all linear maps, not maps compatible with the symplectic forms. If we impose rank conditions in this full Hom-bundle, we get ordinary type $A$ determinantal geometry rather than type $C$ geometry.
+
+The local reason is simple. Suppose a symplectic vector space has a Lagrangian splitting
+\[
+    W=L\oplus L^*.
+\]
+A Lagrangian subspace transverse to $L^*$ is the graph of a map
+\[
+    A:L\to L^*.
+\]
+The graph is Lagrangian if and only if $A$ is symmetric, i.e.
+\[
+    A\in \operatorname{Sym}^2(L^*)\subset \operatorname{Hom}(L,L^*).
+\]
+Thus type $A$ sees arbitrary matrices, while type $C$ sees symmetric matrices. For example, the zero locus in the space of arbitrary $2\times 2$ matrices has codimension $4$, whereas the zero locus in the space of symmetric $2\times 2$ matrices has codimension $3$. This matches
+\[
+    \dim LG(2,4)=3.
+\]
+\begin{remark}[The graph trick in type $A$ and its failure in type $C$]
+    In type $A$, the ``morphism'' and ``two-flag'' viewpoints on degeneracy loci are essentially equivalent. Suppose
+    \[
+        \varphi:A\to B
+    \]
+    is a morphism of vector bundles, with a flag $A_\bullet$ in $A$ and a flag $B_\bullet$ in $B$. Consider the graph
+    \[
+        \Gamma_\varphi\subset A\oplus B.
+    \]
+    Then rank conditions on $\varphi$ can be rewritten as incidence conditions for the subbundle $\Gamma_\varphi$ inside the single ambient bundle $A\oplus B$. For example,
+    \[
+        \Gamma_\varphi\cap (A_p\oplus B_q)
+        =
+        \{(a,\varphi(a)):a\in A_p,
+        \ \varphi(a)\in B_q\},
+    \]
+    and therefore
+    \[
+        \dim\bigl(\Gamma_\varphi\cap (A_p\oplus B_q)\bigr)
+        =
+        \dim A_p-
+        \operatorname{rank}(A_p\to B/B_q).
+    \]
+    Thus an upper bound on the rank of $A_p\to B/B_q$ is equivalent to a lower bound on the dimension of an intersection of subbundles. This is the basic reason type $A$ rank degeneracy loci and relative-position degeneracy loci are two presentations of the same geometry.
+
+    In type $C$, this graph trick does not preserve the symplectic geometry. In particular, degeneracy loci in type $C$ can only be interpreted as the relative position of two flags. Otherwise, the theory does not admit a universal Chern-class formula.
+\end{remark}
+
+Kresch--Tamvakis tried considering only isotropic morphisms. For a morphism $\psi:V\to Q$
+from a symplectic bundle $V$ to a rank $n$ bundle $Q$, the isotropic condition is that the composite
+\[
+    Q^*\longrightarrow V^*\cong V\xrightarrow{\psi} Q
+\]
+vanishes. This is a quadratic condition on $\psi$. Therefore the space of isotropic morphisms is not a vector subbundle of $\operatorname{Hom}(V,Q)$; it is a quadratic cone. Its open locus of surjective maps is geometrically good, since if $\psi$ is surjective then
+\[
+    \ker(\psi)\subset V
+\]
+is a Lagrangian subbundle. In that case the morphism degeneracy locus is equivalent to the usual Lagrangian incidence locus, and the Kresch--Tamvakis formula applies. However, the boundary of the surjective locus is not well-behaved.
+
+\begin{example}[No universal formula for isotropic morphism degeneracy loci]
+    Let $n = 2$ and $\lambda = \rho_2 = (2,1)$.
+    Consider the variety
+    \[
+        \mathfrak X=LQ_1(2,4)\times \mathbb P^1.
+    \] where $LQ_1(2,4)$ is the Lagrangian Quot scheme parametrizing rank $2$ degree $1$ coisotropic quotients of a trivial rank $4$ symplectic bundle.
+    There is a trivial rank $4$ symplectic bundle $V$ with a fixed isotropic flag
+    \[
+        F_1\subset F_2\subset V,
+    \]
+    and there is a universal isotropic morphism. Let $E$ denote the universal rank $2$ subbundle appearing in the construction. The relevant degeneracy locus is the locus where
+    \[
+        E(a)\to (V/F_2)(a)
+    \]
+    is the zero map. Equivalently, this is the isotropic morphism degeneracy locus attached to $\lambda=(2,1)$.
+
+    The Chow ring of $\mathfrak X$ has tautological classes $h,z,p$ satisfying
+    \[
+        CH^*(\mathfrak X)
+        =
+        \mathbb Z[h,z,p]/(h^4,\ z^4+2h^2z^2,\ p^2).
+    \]
+    Kresch--Tamvakis compute
+    \[
+        c_1(E^*)=2h+z+p,
+        \qquad
+        c_2(E^*)=h^2+hz+hp.
+    \]
+    If the usual Lagrangian degeneracy-locus formula applied, then for
+    $\lambda=(2,1)$ one would expect
+    \[
+        [X_\lambda]
+        =
+        \widetilde Q_{2,1}(E^*)
+        =
+        c_1(E^*)c_2(E^*),
+    \]
+    since $E^*$ has rank $2$. Expanding gives
+    \[
+        c_1(E^*)c_2(E^*)
+        =
+        2h^3+3h^2z+3h^2p+hz^2+2hzp.
+    \]
+
+    However, the actual degeneracy locus has a different class. Let $L\subset \mathbb P^3$
+    be the line parametrizing one-dimensional subspaces of the fixed Lagrangian $F_2$. Then $[L]=h^2$.
+    Kresch--Tamvakis identify the degeneracy locus as a hypersurface in $\pi^{-1}(L)$ cut out by an equation of class $z+p$.
+    Hence the actual class is
+    \[
+        [X_\lambda]
+        =
+        h^2(z+p)
+        =
+        h^2z+h^2p.
+    \]
+    This is not equal to
+    \[
+        \widetilde Q_{2,1}(E^*)=c_1(E^*)c_2(E^*).
+    \]
+
+    More strongly, $h^2z+h^2p$ is not expressible as a polynomial in the Chern classes of $E$ alone. Since $V$ and the flag $F_\bullet$ are trivial in this example, allowing the Chern classes of $V,F_1,F_2$ adds no information. Thus there cannot be a universal formula depending only on the Chern classes of the original bundles for arbitrary isotropic morphism degeneracy loci.
+\end{example}
+
+This suggests that the correct replacement should not be a Hom-bundle over $X$. Instead, one should work over the relative isotropic flag bundle or Lagrangian Grassmannian bundle. Let
+\[
+    \pi:Y\to X
+\]
+be, for example, the Lagrangian Grassmannian bundle $Y=LG(E)$ or the complete isotropic flag bundle associated to $E$. On $Y$ there are tautological Lagrangian or isotropic subbundles. Locally, if $\mathcal L$ is a tautological Lagrangian, the relevant linearized type $C$ geometry is modeled by vector bundles such as $\operatorname{Sym}^2(\mathcal L^*)$.
+Thus the more plausible strategy is to look for cones not inside a Hom-bundle over $X$, but inside vector bundles over the flag bundle.
+
+One would like to construct a closed cone $C_w\subset A$
+whose zero-section pullback gives the relative Schubert class on $Y$:
+\[
+    z^*[C_w]=[\Omega_w]_{\mathrm{rel}}\in A^*(Y).
+\]
+If $A$ is ample on $Y$, then Fulton--Lazarsfeld cone positivity may be applied upstairs. Afterward, one would push the resulting class down along
+\[
+    \pi:Y\to X,
+\]
+or intersect it with a section of $Y\to X$ coming from a chosen Lagrangian subbundle.
+
+\subsection{D-branes and mirror symmetry}
+A $d$-dimensional quantum field theory assigns a number, known as a \textbf{partition function}, to each closed $d$-manifold. Roughly speaking, in general one can think of a quantum field theory as a functor from a geometric category to a linear category.
+
+We will largely focus on theories for which the partition function is defined not just for a closed manifold but
+for an oriented $d$-manifold with a boundary whose connected components have been labelled with elements of fixed set $B_0$, the set of \textbf{boundary conditions.}
+
+\section{June 30}
+Today I traveled back to Berkeley and only managed to do some light reading. I read up to section 2.6 in the D-Brane and mirror symmetry book. I also read a little bit about regular sequences and CM rings from Matsumura's book. I also browsed a little bit from the Bombay lectures on affine Lie algebras.
+
+\section{July 1}
+Let $E,\omega:E\otimes E\to L$ be a symplectic bundle of rank $2n$ over a projective variety $X$. Let $0=E_0\subset E_1\subset\cdots\subset E_n$ be a complete isotropic flag of subbundles. In particular, this gives a section $s$ of the Lagrangian flag bundle $\pi:\Fl_C(E)\to X$. Suppose $E$ is positive in the sense that the tautological line bundle $\mathcal O(1)$ on $\Fl_C(E)$ is ample.
+
+Suppose you succeed in constructing, for each $w$, a vector bundle
+\[
+    A_w\to Y:=\Fl_C(E)
+\]
+and a closed cone $C_w\subset A_w$ such that
+\[z^*[C_w]=[\Omega_w]_{\mathrm{rel}}\in A^*(Y)\]
+If $A_w$ is ample and $C_w$ has the correct dimension, Fulton–Lazarsfeld gives
+\[\deg_Y [\Omega_w]_{\mathrm{rel}}>0\]
+However we are interested in the corresponding positivity statement on $X$. Let $s:X\to Y$ be the section of the Lagrangian flag bundle coming from the chosen isotropic flag $E_\bullet$. Then the hope is that we could pull back the cone $C_w \subset A_w$ along $s$ to get a cone $s^*C_w\subset s^*A_w$ over $X$. If $s^*A_w$ is ample and $s^*C_w$ has the correct dimension, then Fulton–Lazarsfeld would give
+\[\deg_X s^*[\Omega_w]_{\mathrm{rel}}>0\]
+
+There is some general theory that could help us.
+If $A_w$ is ample on $Y$, then $s^*A_w$ is automatically ample on $X$, because pullbacks of ample vector bundles along arbitrary morphisms are ample. However the dimension condition is not automatic. You need to know that $s^*C_w$ is nonzero and has pure dimension equal to $\operatorname{rank}(s^*A_w)=\operatorname{rank}(A_w)$.
+
+\red{This doesn't work.}
+
+\subsection{}
+
+The correct analogue of Fulton's type $A$ model should not be the full Hom-bundle. In type $A$, one starts with a trivial flagged bundle $V$ and a filtered bundle $Q$, and considers
+\[
+    H=\operatorname{Hom}(V,Q).
+\]
+Fiberwise, after choosing bases compatible with the two flags, this is a space of matrices. The degeneracy loci used by Fulton are locally matrix Schubert varieties: they are cut out by rank conditions on submatrices. This is what makes $Q_w\subset H$ a closed cone of the expected dimension.
+
+In type $C$, the analogous local model is obtained by linearizing the isotropic condition. Let $W$ be a symplectic vector space and let $L\subset W$ be a Lagrangian subspace. After choosing an opposite Lagrangian $L'$, we may write
+\[
+    W=L\oplus L'.
+\]
+Using the symplectic form, $L'$ is identified with $L^\vee$. A Lagrangian subspace $M\subset W$ transverse to $L'$ is the graph of a map
+\[
+    A:L\longrightarrow L^\vee.
+\]
+The graph is Lagrangian if and only if the bilinear form corresponding to $A$ is symmetric. Therefore the local chart of the Lagrangian Grassmannian near $L$ is not
+\[
+    \operatorname{Hom}(L,L^\vee),
+\]
+but rather
+\[
+    \operatorname{Sym}^2(L^\vee).
+\]
+Thus ordinary matrices in type $A$ should be replaced by symmetric matrices in type $C$.
+
+Now let $\pi:Y=\Fl_C(E)\to X$ be the complete isotropic flag bundle. On $Y$ we have the tautological isotropic flag
+\[
+    0=\mathcal E_0\subset \mathcal E_1\subset\cdots\subset \mathcal E_n=\mathcal L\subset \pi^*E,
+\]
+where $\mathcal L$ is the tautological Lagrangian subbundle. The linearized type $C$ geometry is modeled by the vector bundle
+\[
+    A:=\operatorname{Sym}^2(\mathcal L^\vee)\otimes \pi^*L.
+\]
+Here the factor $\pi^*L$ appears because the original symplectic form has values in the line bundle $L$, i.e. $E\otimes E\to L$. Fiberwise, over a point $(x,F_\bullet)\in Y$, the fiber of $A$ is
+\[
+    A_{(x,F_\bullet)}
+    =
+    \operatorname{Sym}^2(F_n^\vee)\otimes L_x.
+\]
+The flag $\mathcal E_\bullet$ induces a filtration on $\mathcal L$ and hence on $\mathcal L^\vee$ and $\operatorname{Sym}^2(\mathcal L^\vee)$.
+
+
+Therefore one can hope to define, fiberwise, closed cones
+\[
+    C_w^{\mathrm{sym}}\subset \operatorname{Sym}^2(F_n^\vee)\otimes L_x
+\]
+by symmetric-matrix rank conditions relative to the flag $F_\bullet$. These cones should play the type $C$ role of matrix Schubert varieties. Globally, this would give a closed cone
+\[
+    C_w\subset A
+\]
+whose zero-section pullback should represent the single type $C$ Schubert class
+\[
+    z^*[C_w]
+    =
+    \mathfrak C_w(\mathcal E_\bullet,0)
+    \in A^*(Y).
+\]
+Pulling back further along the section $s:X\to Y$ coming from the original flag $E_\bullet$ would then give
+\[
+    s^*z^*[C_w]
+    =
+    \mathfrak C_w(E_\bullet,0).
+\]
+\subsection{Grassmannian}
+Let $\pi\colon LG(E)\to X$ with tautological Lagrangian subbundle $\mathcal{L}\subset \pi^*E$.
+Given a fixed Lagrangian flag $0=F_0\subset F_1\subset\cdots\subset F_n\subset E$
+the Schubert variety in the Lagrangian Grassmannian is defined by incidence conditions
+\[
+    \Omega_\lambda
+    =
+    \left\{ (x,L_x)\in LG(E) : \dim(L_x\cap F_{n+1-\lambda_i})\ge i
+    \right\},
+\]
+for a strict partition $\lambda\subset \rho_n=(n,n-1,\ldots,1)$, up to convention.
+
+
+In the nonrelative case, there is a theorem of Pragacz--Ratajski that its class in the cohomology of the Lagrangian Grassmannian is given by a $\widetilde{Q}$-polynomial in the Chern roots of the dual tautological bundle $\mathcal{L}^\vee$
+\[
+    [\Omega_\lambda]
+    =
+    \widetilde{Q}_\lambda(\mathcal{L}^\vee)
+\]
+In the relative case, Kresch--Tamvakis give a formula for the class of the degeneracy locus in terms of the Chern classes of $\mathcal{L}^\vee$ and the Chern roots of the fixed isotropic flag $F_\bullet$.
+
+
+Now, locally near a chosen Lagrangian $L_0$, choose an opposite Lagrangian $L_0'$, so
+\[
+    E_x=L_0\oplus L_0'.
+\]
+Then nearby Lagrangians transverse to $L_0'$ are graphs of symmetric maps
+\[
+    T\colon L_0\to L_0^\vee.
+\]
+Thus in the local model $\operatorname{Sym}^2(L_0^\vee)$, the Schubert conditions become symmetric determinantal conditions on $T$.
+
+\subsection{Flag variety}
+Let $\pi\colon \Fl_C(E)\to X$ be the complete isotropic flag bundle with tautological isotropic flag bundles
+\[
+    0=\mathcal E_0\subset \mathcal E_1\subset\cdots\subset \mathcal E_n=\mathcal L\subset \pi^*E
+    \]
+    Given a fixed Lagrangian flag $0=F_0\subset F_1\subset\cdots\subset F_n\subset E$, the Schubert variety in the Lagrangian flag bundle is defined by incidence conditions
+\[
+    \Omega_w =
+    \left\{
+    \mathcal E_\bullet\in \Fl_C(E_x) : \dim(\mathcal E_p\cap F_q)\ge r_w(p,q)
+    \right\}
+\]
+for $w\in W(C_n)$, for the rank-control matrix \(r_w\) attached to $w\in W(C_n)$. The rank-control matrix is defined by
+\[
+    r_w(p,q)
+    =
+    \#\{i\le p : w(i)> 2n-q\}.
+\]
+Consider the vector bundle $A=\operatorname{Sym}^2(\mathcal{L}^\vee)\otimes \pi^*L$ over $\Fl_C(E)$. We can conisder the cone $C_w\subset A$ cut out by the determinantal conditions on the fibers of $A$ over each point of $\Fl_C(E)$.
+
+More precisely, a point of $A=\operatorname{Sym}^2(\mathcal L^\vee)\otimes \pi^*L$
+over a flagged Lagrangian \(0=\mathcal E_0\subset\cdots\subset
+\mathcal E_n=\mathcal L\) is a symmetric map
+\[
+    T:\mathcal L\to \mathcal L^\vee\otimes \pi^*L.
+\]
+For every pair \((p,q)\), restricting the corresponding symmetric bilinear
+form to \(\mathcal E_p\times \mathcal E_q\) gives a map
+\[
+    T_{p,q}:\mathcal E_p
+    \longrightarrow
+    \mathcal E_q^\vee\otimes \pi^*L.
+\]
+These are the rectangular blocks of the symmetric matrix \(T\). A flagged
+symmetric matrix Schubert cone should be defined by rank inequalities
+\[
+    \operatorname{rank}(T_{p,q})\le r_w(p,q)
+\]
+
+
+
+\red{I have no idea how to define $C_\lambda$ in the Grassmannian case.}
+\begin{claim} Let $z\colon \Fl_C(E)\to A$ be the zero section. Then
+    \[z^*[C_w]=[\Omega_w] \in A^*(\Fl_C(E))\]
+\end{claim}
+It is known that
+\[[\Omega_w]
+=
+\mathfrak C_w(\mathcal E_\bullet,\pi^*F_\bullet)\]
+
+
+If we are able to prove this claim, then we can apply the Fulton--Lazarsfeld cone theorem to conclude that $\deg z^*[C_w]>0$, as a class in the Chow ring of $\Fl_C(E)$, provided the ampleness of $A$ and the dimension of $C_w$ are verified. This seems to require theory about symmetric matrix Schubert varieties, which I have not seen in the literature.
+ We would then like to pull the entire construction back along the section $s\colon X\to \Fl_C(E)$ coming from the original Lagrangian flag $E_\bullet$. The issues are that we need $s^*C_w$ has the correct dimension. 
+
+
+\subsection{D-Branes and Mirror symmetry}
+Recall that boundary conditions are labelled by a fixed set $B_0$. A $2D$ TFT implies the assignment of the interval labeled by $a,b$ to a vector space $\cO_{ba}$. We can form a $\C$-linear category $\cC$ whose objects are the boundary conditions $B_0$ and whose morphisms are given by
+\[\Hom_\cC(a,b)=\cO_{ba}
+\]
+The basic open-string joining surface gives composition
+\[O_{ab}\otimes O_{bc}\to O_{ac}\] rendering $\cC$ a $\C$-linear category. 
+
+There is a pairing \[
+O_{ab}\otimes O_{ba}
+\longrightarrow
+O_{aa}
+\xrightarrow{\omega_a}
+\mathbb C\]
+where the map $\omega_a$ is the trace map coming from the cap of the open string $a\to a$. It is a perfect pairing due to the existence of the coevaluation map $\C \to O_{ab}\otimes O_{ba}$, coming from the diagram which looks like a half of an annulus, with suitable labeled boundary conditions. The composition of appropriate cobordisms is isotopic to the identity cobordism, to which we assume that the theory assigns the identity map. This implies that the pairing is perfect.
+
+Moreover there is the compatibility of the pairing \begin{align*}
+    \omega_a(\alpha\otimes \beta) = \omega_b(\beta\otimes \alpha)
+\end{align*}
+
+\section{July 5}
+I am trying to work out an example of a symmetric matrix Schubert variety in $\Fl_C(E)$. In particular, consider the map of bundles covering a projective variety $X$\begin{align*}
+    \Fl_C(E)\to LG(E)
+\end{align*} given by forgetting the flag. Let $\pi,\pi'$ be the projections to $X$. Over $\Fl_C(E)$ and $LG(E)$, we have the relative tangent bundles $T_{\Fl_C(E)/X}$ and $T_{LG(E)/X}$. Trivializing the flag bundle $\Fl_C(E)$ over an open set $U\subset X$ induces coordinates on the fibers of $T_{\Fl_C(E)/X}$. Then the setup is locally modeled by symmetrix matrix Schubert varieties.
+
+Let $W=F\oplus F^\vee$ be a four-dimensional symplectic vector space, with
+\[
+    F=\langle e_1,e_2\rangle,
+    \qquad
+    F_1=\langle e_1\rangle,
+    \qquad
+    F_2=F.
+\]
+Let $f_1,f_2$ be the dual basis of $F^\vee$. The extended fixed isotropic flag is
+\[
+    F_1=\langle e_1\rangle,
+    \qquad
+    F_2=\langle e_1,e_2\rangle,
+    \qquad
+    F_3=F_1^\perp=\langle e_1,e_2,f_2\rangle,
+    \qquad
+    F_4=W.
+\]
+A nearby Lagrangian plane transverse to $F^\vee$ is the graph
+\[
+    E_2=L_T=\Gamma(T)
+\]
+of a symmetric map
+\[
+    T:F\to F^\vee,
+    \qquad
+    T=
+    \begin{pmatrix}
+        a & b\\
+        b & c
+    \end{pmatrix}.
+\]
+Thus
+\[
+    L_T=
+    \left\langle
+        e_1+a f_1+b f_2,
+        e_2+b f_1+c f_2
+    \right\rangle.
+\]
+A line in $L_T$ near the line generated by $e_1$ is obtained by first taking
+\[
+    v_u=e_1+u e_2\in F
+\]
+and then graphing by $T$. Hence the moving line is
+\[
+    E_1
+    =
+    \left\langle
+        g_1
+    \right\rangle,
+    \qquad
+    g_1
+    =
+    e_1+u e_2+(a+ub)f_1+(b+uc)f_2.
+\]
+Therefore the big cell of the full isotropic flag variety near the reference flag is coordinatized by
+\[
+    (u,a,b,c).
+\]
+Here $u$ is the flag coordinate moving the line inside the Lagrangian plane, while $a,b,c$ are the symmetric-matrix coordinates moving the Lagrangian plane. Infinitesimally, these are coordinates on
+\[
+    T_{F_\bullet}\Fl_C(W)
+    \cong
+    \operatorname{Hom}(F_1,F/F_1)
+    \oplus
+    \operatorname{Sym}^2(F^\vee).
+\]
+Thus we have local coordinates $(u,a,b,c)$ on the Lagrangian flag variety $\Fl_C(W)$ whose weights under the torus $T\subset Sp(W)$ are given by the positive roots of $C_2$, so $u$ has weight $x_1-x_2$, $a$ has weight $2x_1$, $b$ has weight $x_1+x_2$, and $c$ has weight $2x_2$. 
+
+We embed $W(C_2)$ into $S_4$ as the permutations satisfying
+\[
+    w(i)+w(5-i)=5.
+\]
+For $w\in W(C_2)$, use the rank-control matrix
+\[
+    r_w(p,q)=\#\{i\le p:w(i)>4-q\},
+    \qquad
+    1\le p,q\le 4.
+\]
+
+The eight rank matrices are as follows. 
+\[
+\scriptsize
+\begin{array}{c|c|c@{\qquad}c|c|c}
+    w & \ell_C(w) & \bigl(r_w(p,q)\bigr)
+    &
+    w & \ell_C(w) & \bigl(r_w(p,q)\bigr)
+    \\
+    \hline
+    1234 & 0 &
+    \begin{pmatrix}
+        0&0&0&1\\
+        0&0&1&2\\
+        0&1&2&3\\
+        1&2&3&4
+    \end{pmatrix}
+    &
+    1324 & 1 &
+    \begin{pmatrix}
+        0&0&0&1\\
+        0&1&1&2\\
+        0&1&2&3\\
+        1&2&3&4
+    \end{pmatrix}
+    \\[5mm]
+
+    2143 & 1 &
+    \begin{pmatrix}
+        0&0&1&1\\
+        0&0&1&2\\
+        1&1&2&3\\
+        1&2&3&4
+    \end{pmatrix}
+    &
+    2413 & 2 &
+    \begin{pmatrix}
+        0&0&1&1\\
+        1&1&2&2\\
+        1&1&2&3\\
+        1&2&3&4
+    \end{pmatrix}
+    \\[5mm]
+
+    3142 & 2 &
+    \begin{pmatrix}
+        0&1&1&1\\
+        0&1&1&2\\
+        1&2&2&3\\
+        1&2&3&4
+    \end{pmatrix}
+    &
+    3412 & 3 &
+    \begin{pmatrix}
+        0&1&1&1\\
+        1&2&2&2\\
+        1&2&2&3\\
+        1&2&3&4
+    \end{pmatrix}
+    \\[5mm]
+
+    4231 & 3 &
+    \begin{pmatrix}
+        1&1&1&1\\
+        1&1&2&2\\
+        1&2&3&3\\
+        1&2&3&4
+    \end{pmatrix}
+    &
+    4321 & 4 &
+    \begin{pmatrix}
+        1&1&1&1\\
+        1&2&2&2\\
+        1&2&3&3\\
+        1&2&3&4
+    \end{pmatrix}
+\end{array}
+\]
+Here $\ell_C$ denotes Coxeter length in type $C_2$, not the ordinary inversion length in $S_4$. For example.
+
+We can now read off the local equations from the incidence conditions
+\[
+    \dim(E_p\cap F_q)\ge r_w(p,q).
+\]
+In the chart above, the relevant equations are:
+\[
+\begin{array}{c|c|c}
+    w & \ell_C(w) & \text{local equations in }(u,a,b,c) \\
+    \hline
+    1234 & 0 & \text{none} \\
+    1324 & 1 & ac-b^2=0 \\
+    2143 & 1 & a+bu=0 \\
+    2413 & 2 & a=0,\ b=0 \\
+    3142 & 2 & a+bu=0,\ b+cu=0,\ ac-b^2=0 \\
+    3412 & 3 & a=0,\ b=0,\ c=0 \\
+    4231 & 3 & u=0,\ a=0,\ b=0 \\
+    4321 & 4 & u=0,\ a=0,\ b=0,\ c=0
+\end{array}
+\]
+These equations should be understood as equations for $\Omega_w$ inside the local chart of $\Fl_C(W)$ near the reference flag.
+
+Let us explain two representative entries. For $w=1324$, the rank matrix imposes
+\[
+    \dim(E_2\cap F_2)\ge 1.
+\]
+Since $E_2=L_T$ and $F_2=F$, we have
+\[
+    E_2\cap F_2=\ker(T).
+\]
+Thus the condition is $\dim\ker(T)\ge 1$, equivalently
+\[
+    \det(T)=ac-b^2=0.
+\]
+For $w=2143$, the essential condition is that
+\[
+    E_1\subset F_3.
+\]
+Since
+\[
+    E_1=\langle e_1+u e_2+(a+ub)f_1+(b+uc)f_2\rangle
+\]
+and
+\[
+    F_3=\langle e_1,e_2,f_2\rangle,
+\]
+this is equivalent to the vanishing of the $f_1$-coefficient:
+\[
+    a+bu=0.
+\]
+Similarly, the condition $E_1\subset F_2$ gives both
+\[
+    a+ub=0,
+    \qquad
+    b+uc=0,
+\]
+and the condition $E_2\subset F_2$ gives
+\[
+    a=b=c=0.
+\]
+
+The equations are homogeneous for the root grading. The normal cone has the formal property that refined pullback along the zero section recovers the fundamental class of the subvariety. A weighted root-homogeneous cone is instead a flat Groebner-type degeneration for the torus weight filtration.
+
+Now we can consider the tangent cone to $\Omega_w$ which gives a cone inside our vector bundle $T_{\Fl_C(E)/X}$. The tangent cone is cut out by the initial terms of the equations above. \[
+\operatorname{gr}_{\mathfrak m}(I_{\Omega_w})
+\subset
+\operatorname{gr}_{\mathfrak m}\mathcal O_{\Fl_C(W),F_\bullet}
+\cong
+\operatorname{Sym}(T_{F_\bullet}^\vee\Fl_C(W)).
+\]
+Then \[C_{F_\bullet}\Omega_w
+=
+\operatorname{Spec}
+\left(
+\operatorname{gr}_{\mathfrak m}\mathcal O_{\Omega_w,F_\bullet}
+\right)\]
+
+Let
+\[
+    \pi:\Fl_C(E)\to X
+\]
+be the relative symplectic flag bundle, with tautological isotropic flag
+\(\mathcal S_\bullet\), and let \(F_\bullet\) be a fixed isotropic flag on
+\(E\).  The relative Schubert variety
+\[
+    \Omega_w(F_\bullet)\subset \Fl_C(E)
+\]
+is defined by incidence conditions between \(\mathcal S_\bullet\) and
+\(\pi^*F_\bullet\).  Its class is represented by the double type \(C\)
+Schubert polynomial
+\[
+    [\Omega_w(F_\bullet)]
+    =
+    \mathfrak C_w(\mathcal S_\bullet,\pi^*F_\bullet).
+\]
+If a second isotropic flag \(E_\bullet\) gives a section $\sigma:X\to \Fl_C(E)$ then we can consider \[C_{D}\Omega_w(F_\bullet) \subset \sigma^*T_{\Fl_C(E)/X}\] where $
+D:=i^{-1}(Z)=\sigma^{-1}\Omega_w(F_\bullet)=\{x\in X:\sigma(x)\in \Omega_w(F_\bullet)\}$ is the locus where the two flags $E_\bullet$ and $F_\bullet$ satisfy the Schubert incidence conditions indexed by $w$ and the normal cone of $D$ inside $\Omega_w(F_\bullet)$ is defined by
+\[
+C_D\Omega_w(F_\bullet)
+:=
+\operatorname{Spec}_D
+\left(
+\bigoplus_{k\ge 0}
+\mathcal I_D^k/\mathcal I_D^{k+1}
+\right)\]
+inside the vector bundle $\sigma^*T_{\Fl_C(E)/X}$, where $ \mathcal I_D $ is the ideal sheaf of $D$ inside $\Omega_w(F_\bullet)$.
+
+Then if this cone has the correct dimension and the bundle $\sigma^*T_{\Fl_C(E)/X}$ is ample, Fulton--Lazarsfeld cone positivity gives
+\[\deg s^*\bigl[C_{\sigma(X)}\Omega_w(F_\bullet)\bigr] >0\]
+where $s:X\to \sigma^*T_{\Fl_C(E)/X}$
+is the zero section. By deformation to the normal cone\[
+s^*\bigl[C_{\sigma(X)}\Omega_w(F_\bullet)\bigr]
+=
+\sigma^![\Omega_w(F_\bullet)]\]
+and this refined intersection has been identified with the double type \(C\) Schubert polynomial evaluated on the two flags:
+\[
+\sigma^![\Omega_w(F_\bullet)]
+=
+\mathfrak C_w(E_\bullet,F_\bullet)\cap [X].
+\]
+Suppose that we choose a $\sigma$ so that $\sigma^*T_{\Fl_C(E)/X}$ is ample. 
+
+\section{July 6}
+\begin{definition}[Normal cone]
+    Let $i:Z\hookrightarrow Y$
+    be a closed subscheme, and let $\mathcal I\subset \mathcal O_Y$ be the ideal sheaf defining $Z$. The \emph{normal cone} of $Z$ in $Y$ is the cone over $Z$ defined by
+    \[
+        C_ZY
+        :=
+        \operatorname{Spec}_Z
+        \left(
+            \bigoplus_{n\geq 0}
+            \mathcal I^n/\mathcal I^{n+1}
+        \right).
+    \]
+\end{definition}
+There is always a natural surjection \begin{align*}
+    \Sym_{\mathcal O_Z}(\mathcal I/\mathcal I^2)
+    \longrightarrow
+    \bigoplus_{n\geq 0}
+    \mathcal I^n/\mathcal I^{n+1}
+\end{align*} which sends a product of sections of $\mathcal I/\mathcal I^2$ to the corresponding product of sections of $\mathcal I^n/\mathcal I^{n+1}$. The failure of this map to be injective is measured by extra relations among these products. However, if $Z\hookrightarrow Y$ is a regular embedding, then this map is injective and the normal cone is a vector bundle, namely the normal bundle $N_{Z/Y}$. 
+
+This is because regular embeddings are locally cut out by a regular sequence. Recall that a sequence $f_1,\dots,f_r\in A$ in a commutative ring $A$ is called a regular sequence if the following two conditions hold:
+\begin{enumerate}
+    \item $f_1 $is not a zero divisor in $A$.
+    \item For each $i=2,\dots,r,$ the image of $f_i$ is not a zero divisor in the quotient $A/(f_1,\dots,f_{i-1})$  
+\end{enumerate} An important local model to keep in mind is 
+$A=k[x_1,\dots,x_m]$ and $I=(x_1,\dots,x_d)$. Then $I/I^2$ is freely generated over $A/I$ by the classes of $x_1,\dots,x_d$ and $I^n/I^{n+1}$ is freely generated over $A/I$ by degree n monomials $x_1^{a_1}\cdots x_d^{a_d}$
+Therefore \[\bigoplus_{n\geq 0} I^n/I^{n+1}
+\cong(A/I)[\xi_1,\dots,\xi_d]\] where $\xi_i$ corresponds to the class of $x_i$ in $I/I^2$. 
+
+We will now explain the existence of a deformation to the normal cone. Given a closed embedding $i:X\hookrightarrow Y$, we can construct a flat family $M_XY$ over $\P^1$ together with a closed embedding of $X\times \P^1$ in $M$ so that \begin{enumerate}
+    \item Over $\A^1$, the family $M$ is isomorphic to the trivial family $Y\times \A^1$ and the embedding of $X\times \A^1$ is the trivial embedding $i\times \id_{\A^1}$.
+    \item The fiber over $\infty$ is the normal cone is the sum of two effective Cartier divisors, the projectivization of the normal cone $\P(C_{X/Y}\oplus \mathcal O)$ and the blowup $ \tilde Y $ of $Y$ along $X$.
+\end{enumerate}
+
+The construction is as follows. Let $M_XY
+:=
+\operatorname{Bl}_{X\times\{\infty\}}(Y\times \mathbb P^1).$ The structure morphism $M_XY\to \P^1$ is the composition of the blowup map with the projection to $\P^1$. \red{It is flat.} 
+
+Since the normal cone to $X\times\{\infty\}$ in $Y\times \P^1$ is $C\oplus \cO$, the exceptional divsior in this blow-up is $\P(C\oplus \mathcal O)$. 
+
+A general fact about blowups is that the exceptional divisor of a blow-up is the projectivized normal cone of the center of the blow-up. This is because 
+$A\hookrightarrow B$  is a closed subscheme with ideal sheaf $\mathcal I\subset \mathcal O_B$, then the exceptional divisor is the inverse image of $A$ and is computed by restricting the Rees algebra to $A$. Since $\cO_A\cong \cO_B/\mathcal I$, we get
+\[
+\left(\bigoplus_{n\geq 0}\mathcal I^n\right)\otimes_{\mathcal O_Y}\mathcal O_Z
+\cong
+\bigoplus_{n\geq 0}\mathcal I^n/\mathcal I^{n+1}\]
+Therefore
+\[
+E
+=
+\operatorname{Proj}_Z
+\left(
+\bigoplus_{n\geq 0}
+\mathcal I^n/\mathcal I^{n+1}
+\right)\] is the projectivization of the normal cone of $A$ in $B$.
+Since the embedding
+\[
+    X\times\{\infty\}\hookrightarrow Y\times\mathbb P^1
+\]
+is the product of the embedding \(X\hookrightarrow Y\) with the point embedding
+\[
+    \{\infty\}\hookrightarrow \mathbb P^1,
+\]
+the normal directions split into the normal directions of \(X\) inside $Y$ and the normal direction of the point \(\{\infty\}\) inside \(\mathbb P^1\), giving a trivial line bundle.  Therefore the exceptional divisor is $\mathbb P\left( C_{X\times\{\infty\}}(Y\times\mathbb P^1) \right)$.
+
+The embedding of $X$ in $M_\infty$ is the zero section of embedding of $X$ in $C$ followed by the canonical embedding of $C$ in $\P(C\oplus \mathcal O)$. THe divisors $\P(C\oplus \mathcal O)$ and $\tilde Y$ meet in $\P(C)$ embedded as the hyperplane at infinity in $\P(C\oplus \mathcal O)$ and the exceptional divisor of the blowup $\tilde Y$.
+
+In particular, the image of $X$ in $M_\infty$ is disjoint from $\tilde Y$. Let $M^\circ$ be the complement of $\tilde Y$ in $M$. Then $M^\circ$ is a flat family over $\P^1$ whose fiber over $\infty$ is the normal cone $C_{X/Y}$ and whose fiber over $\A^1$ is the trivial family $Y\times \A^1$.
+
+The setup is locally modeled by $X = V(I) \subset Y = \operatorname{Spec}A$ for some ideal \(I\subset A\). Choose an affine coordinate \(T\) near $\infty$ identifying $\mathbb P^1\setminus\set{0}$ with \(\mathbb A^1\).
+Then $Y\times \mathbb A^1=\operatorname{Spec}A[T]$
+and the center of the blow-up $X\times\{\infty\}\subset Y\times\mathbb A^1$
+is cut out by the ideal $(I,T)\subset A[T]$. 
+Thus the blowup near $\infty$ is modeled on the Rees algebra of the ideal $(I,T) \subset A[T]$.
+\[
+    \operatorname{Bl}_{X\times\{\infty\}}(Y\times\mathbb A^1)
+    =
+    \operatorname{Proj}
+    \left(
+        \bigoplus_{n\geq 0}(I,T)^n
+    \right).
+\]The scheme $\operatorname{Proj}S^\bullet$
+is covered by the usual affine blow-up charts. If \(a\) runs through a set of
+generators of the ideal \((I,T)\), then the corresponding affine chart is $\operatorname{Spec}S_{(a)}$
+where
+\[
+    S_{(a)}
+    =
+    \left\{
+        \frac{s}{a^n}
+        \ \middle|\
+        s\in S^n
+    \right\}
+\]
+In particular, there are charts corresponding to generators \(a\in I\), and
+also a chart corresponding to the generator \(T\). The fiber over \(\infty\) is cut out by the equation \(T=0\).  For $a\in I$ the exceptional divisor $\P(C\oplus \mathcal O)$ is cut out in $\Spec S_{(a)}$ by the equation $a/1 = 0$. The exceptional divisor being the inverse image of the center $X\times\{\infty\}=V(I,T)$, we compute the inverse image of $V(I,T)$ in the chart $\Spec S_{(a)}$. The pullback of the ideal $(I,T)$ becomes principal because every $i\in I$ satisfies $i=a\cdot \frac ia$
+and $T=a\cdot \frac Ta$. So on this chart, $(I,T)\mathcal O_M=(a)$ and therefore the inverse image of $V(I,T)$ is locally cut out by $a=0$.
+
+The blowup $\tilde Y$ is cut out by $T/a=0$. To see this, set $T/a=0$ in $S_{(a)}$. Then terms involving $T$ disappear, and one gets
+\[
+S_{(a)}/(T/a)
+\cong
+\left\{
+\frac{s}{a^n}\ \middle|\ s\in I^n
+\right\}\]
+
+But this is precisely the a-chart of
+\[
+\operatorname{Proj}\left(\bigoplus_{n\ge 0}I^n\right)
+=
+\operatorname{Bl}_XY\]
+
+So the equations $\frac Ta=0$ on the $a$-charts glue to the strict transform $\widetilde Y$. Thus the description of the fiber over \(\infty\) follows from the factorization $T = (T/a)\cdot (a/1)$ in the chart \(\Spec S_{(a)}\).
+
+\begin{remark}[The tubular-neighborhood interpretation]
+    The embedding of \(X\) in the projective bundle \(\mathbb P(N\oplus \mathcal O_X)\) is analogous to a tubular neighborhood of a submanifold in differential topology. There are two key features that make this analogy precise.
+    First, there is a natural projection
+    \[
+        q:\mathbb P(N\oplus \mathcal O_X)\to X.
+    \]
+    Second, the copy of \(X\) inside \(\mathbb P(N\oplus \mathcal O_X)\) is cut
+    out as the zero scheme of a regular section of a vector bundle of rank
+    \(d\). Using the quotient convention for projective bundles, there is a
+    universal quotient line bundle
+    \[
+        q^*(N\oplus \mathcal O_X)
+        \twoheadrightarrow
+        \mathcal O_{\mathbb P(N\oplus \mathcal O_X)}(1).
+    \]
+    The summand \(N\subset N\oplus \mathcal O_X\) induces a morphism
+    \[
+        q^*N
+        \longrightarrow
+        \mathcal O_{\mathbb P(N\oplus \mathcal O_X)}(1).
+    \]
+    Equivalently, this is a section of the vector bundle of rank $= \codim(X,Y)$
+    \[
+        \xi
+        :=
+        q^*N^\vee\otimes
+        \mathcal O_{\mathbb P(N\oplus \mathcal O_X)}(1).
+    \]
+    The zero scheme of this section is precisely the locus where the quotient $N_x\oplus k\twoheadrightarrow L$
+    kills the \(N_x\)-summand. Equivalently, the quotient factors through the
+    distinguished summand $k\subset N_x\oplus k$.
+    The set of points in \(\mathbb P(N\oplus \mathcal O_X)\) where the quotient
+    kills the \(N_x\)-summand is exactly the image of $X$ under the embedding $X\hookrightarrow \mathbb P(N\oplus \mathcal O_X)$.
+    Consequently, in Chow groups, the class of \(X\) in
+    \(\mathbb P(N\oplus \mathcal O_X)\) is represented by the top Chern class:
+    \[
+        [X]
+        =
+        c_d(\xi)
+        \cap
+        [\mathbb P(N\oplus \mathcal O_X)].
+    \]
+\end{remark}
+There is a specialization homomorpism $\sigma: Z_k(Y)\to Z_k(C_{X/Y})$ defined by the formula \begin{align*}
+    \sigma([V])
+    =
+    [C_{V\cap X}V]
+\end{align*} which respects rational equivalence and therefore descends to a homomorphism $\sigma: A_k(Y)\to A_k(C_{X/Y})$. 
+\begin{example}
+    For a regular embedding $i:X\hookrightarrow Y$ of codimension $d$, there is a Gysin map \[i^*:A_k(Y)\to A_{k-d}(X)\] defined as the composite \begin{align*}
+        A_k(Y)\xrightarrow{\sigma} A_k(C_{X/Y})\xrightarrow{0^*} A_{k-d}(X)
+    \end{align*} where $0^*$ is the inverse of the flat pullback $\pi^*:A_{k-d}(X)\to A_k(C_{X/Y})$ along the vector bundle projection $\pi:C_{X/Y}\to X$. $\pi^*$ is an isomorphism because of the homotopy property of Chow groups. In topology, $0^*$ is interpreted as integration along the fiber of the vector bundle $C_{X/Y}\to X$, with inverse map given by cupping with the Thom class of the vector bundle. 
+
+    Some important proeprties are that if $Y$ is pure of dimension $n$ then $i^*[Y]=[X]$ and the excess intersection formula $i^*i_*[\alpha] = c_d(N_{X/Y})\cap [\alpha]$ for $\alpha\in A_k(X)$.
+
+    If $X$ is smooth variety over the base field $k$, then the diagonal embedding $\Delta:X\hookrightarrow X\times X$ is a regular embedding of codimension $\dim(X)$ and the intersection product on $A_*(X)$ is defined by \begin{align*}
+        A_k(X)\otimes A_l(X)\xrightarrow{\times} A_{k+l}(X\times X)\xrightarrow{\Delta^*} A_{k+l-\dim(X)}(X)
+    \end{align*} where $\times$ is the exterior product.
+\end{example}
+More generally, we can define an intersection product given a closed regular embedding $i:X\hookrightarrow Y$ and a morphism $f:V\to Y$ of schemes, where $V$ is pure of dimension $k$. Let $W$ be the fiber product $W=V\times_Y X$ so that we have a cartesian diagram \begin{center}
+\begin{tikzcd}
+    W \arrow[r, "j"] \arrow[d, "g"] & V \arrow[d, "f"] \\
+    X \arrow[r, "i"] & Y
+\end{tikzcd}
+\end{center}
+Let $N = g^*N_{X/Y}$ be a vector bundle of rank $d$ on $W$ and let $\pi:N\to W$ be the projection. 
+Let $\mathcal I\subset \mathcal O_Y$
+be the ideal sheaf of \(X\subset Y\), and let $\mathcal J\subset \mathcal O_V$
+be the ideal sheaf of \(W\subset V\). Since \(W=f^{-1}(X)\) scheme-theoretically,
+\(\mathcal J\) is generated by the pullback of \(\mathcal I\):
+\[
+    \mathcal J=f^{-1}\mathcal I\cdot \mathcal O_V.
+\]
+Therefore we obtain a surjection of graded
+\(\mathcal O_W\)-algebras
+\[
+    \bigoplus_{n\geq 0}
+    f^*\left(\mathcal I^n/\mathcal I^{n+1}\right)
+    \twoheadrightarrow
+    \bigoplus_{n\geq 0}
+    \mathcal J^n/\mathcal J^{n+1}.
+\]
+The left hand side models the pullback of the normal bundle \(N_{X/Y}\) along \(g:W\to X\) and the right hand side models the normal cone of \(W\) in \(V\).
+Thus the surjection of graded algebras above induces a closed embedding of
+cones
+\[
+    C = C_WV\hookrightarrow N=g^*N_{X/Y}.
+\]
+\(V\) is purely \(k\)-dimensional, and \red{thus the normal cone \(C_WV\) is also
+purely \(k\)-dimensional}. Hence it determines a \(k\)-cycle $[C_WV]\in A_k(N)$
+The intersection product of \(V\) by \(X\) on \(Y\) is defined to be
+\[
+    X\cdot V
+    :=
+    s^*[C_WV]
+    \in
+    A_{k-d}(W).
+\]
+\section{July 7}
+\begin{definition}[Distinguished varieties and the canonical decomposition]
+    Write the fundamental cycle of \(C\) as
+    \[
+        [C]=\sum_{i=1}^r m_i[C_i],
+    \]
+    where \(C_1,\dots,C_r\) are the irreducible components of \(C\), and
+    \(m_i\) is the geometric multiplicity of \(C_i\) in \(C\).
+
+    Let $\pi:N\to W$ be the vector bundle projection. For each \(i\), define
+    \[
+        Z_i:=\pi(C_i)\subset W.
+    \]
+    The subvarieties \(Z_1,\dots,Z_r\subset W\) are called the \emph{distinguished varieties} of the intersection of
+    \(V\) by \(X\). Let $N_i:=\pi^{-1}(Z_i)\subset N$ be the restriction of the vector bundle \(N\) to $Z_i$. Since \(C_i\subset N_i\), we may apply the zero-section Gysin map for
+    \(N_i\). If $s_i$ denotes the zero section, set
+    \[
+        \alpha_i:=s_i^*[C_i]\in A_{k-d}(Z_i).
+    \]
+    Then, after pushing forward to \(W\), the intersection product has the
+    canonical decomposition
+    \[
+        X\cdot V
+        =
+        \sum_{i=1}^r m_i\alpha_i.
+    \]
+\end{definition}
+Given a closed subset $S \subset V$, we can define the part of $X\cdot V$ supported on $S$ by taking the sum of the terms in the canonical decomposition whose distinguished varieties are contained in $S$. 
+
+\begin{example}
+    Let $D_1 = 2A + B$ and $D_2 = A + 2B$ be two divisors on $\P^2$ where $A$ and $B$ are lines meeting in a point $P$. Let $X = D_1\times D_2$, $Y = \P^2\times \P^2$, $V = \P^2$ and $f:V\to Y$ be the diagonal embedding. Choose coordinates near \(P=A\cap B\) so that $A=(x=0)$, $B=(y=0)$. Then $D_1=2A+B$, $D_2=A+2B$ are locally defined by $s_1=x^2y$, $s_2=xy^2$. Thus the scheme-theoretic intersection on the diagonal is defined by $J=(x^2y,xy^2)=xy(x,y)$.
+
+Since $X=D_1\times D_2\subset \mathbb P^2\times \mathbb P^2,$ its normal bundle is the direct sum of the normal line bundle of $D_1$ in the first factor and the normal line bundle of $D_2$ in the second factor:
+\[
+N_{X/Y}
+\cong
+p_1^*\mathcal O(D_1)|_X
+\oplus
+p_2^*\mathcal O(D_2)|_X\] The pulled-back normal bundle is $N=f^*N_{X/Y}
+\cong
+\mathcal O_{\mathbb P^2}(D_1)|_W
+\oplus
+\mathcal O_{\mathbb P^2}(D_2)|_W$. The normal cone $C_WV\subset N|_W$ has components lying over $A$, $B$, $P$. To see this, we can compute the normal cone locally at $P$.
+The normal cone near $P$ is modeled by \[C_WV=\operatorname{Spec}\operatorname{gr}_J k[x,y]\] Since the pulled-back normal bundle is locally trivial with fiber coordinates $U,V$ corresponding to the two equations $f_1,f_2$, the cone embeds into this rank two bundle. The relation $yf_1=xf_2$ gives the equation $yU=xV$ on the cone. Thus locally the cone is described by
+$$k[x,y,U,V]/(x^2y,xy^2,yU-xV).$$
+The minimal primes are $(x,U)$, $(y,V)$, $(x,y)$. The first maps to $A=(x=0)$, the second maps to $B=(y=0)$, and the third maps to the point $P=(x=y=0)$. Therefore the irreducible components of $C_WV$ have images $A$, $B$, $P$ in $W$. These are the distinguished varieties.
+
+Along a general point of $A$, the function $y$ is invertible, so $J=(x^2,x)=(x)$. The leading term of $s_2=xy^2$ is linear in the normal direction to $A$, whereas $s_1=x^2y$ vanishes to order $2$. Therefore the component of the normal cone over $A$ maps into the second summand $\mathcal O(D_2)|_A\subset N|_A$. The quotient is $\mathcal O(D_1)|_A$, and hence the contribution from $A$ is $\alpha= c_1(\mathcal O(D_1)|_A)\cap [A]$. \red{This part of the argument invokes the excess intersection formula.} Thus
+$$\deg\alpha = D_1\cdot A = (2A+B)\cdot A = 2A^2+B\cdot A = 3.$$ The case of $B$ is symmetric, giving a contribution $\beta = c_1(\mathcal O(D_2)|_B)\cap [B]$ of degree $3$.
+
+It remains to compute the contribution over $P$. Locally at $P$, put $R=k[x,y]$, $J=(x^2y,xy^2)$. Let $U,V$ be the fiber coordinates corresponding to the two generators $x^2y$ and $xy^2$. The Rees relation is $yU=xV$, because $y(x^2y)=x(xy^2)$. Hence the normal cone is locally described by $k[x,y,U,V]/(x^2y,xy^2,yU-xV)$.
+
+
+
+The component lying over $P$ has generic prime $(x,y)$. Localizing at this prime makes $U$ and $V$ units. The relation $yU=xV$ then gives $y=x\frac{V}{U}$. Substituting into $x^2y$ and $xy^2$, both equations become multiples of $x^3$. Thus the length of the local ring at this generic point is $3$. Therefore the component over $P$ occurs with multiplicity $3$.
+
+Since this component is the whole fiber $N_P$, the zero-section Gysin map sends its fundamental class to $[P]$. Hence the point contribution is $3[P]$.
+
+This local calculation near $P$ detects all components meeting a neighborhood of $P$. To see that there are no other distinguished varieties, we also check away from $P$. On $A\setminus\{P\}$ and $B\setminus\{P\}$, the ideal $J$ is locally principal, generated by $x$ and $y$, respectively. Therefore the normal cone is a line bundle over $A\setminus\{P\}$ and $B\setminus\{P\}$, respectively. Since $|W|=A\cup B$ and the opens $A\setminus\{P\}$, $B\setminus\{P\}$, a neighborhood of $P$ cover $W$, these computations account for all irreducible components of the normal cone. Therefore the distinguished varieties are $A$, $B$, $P$.
+
+Therefore the canonical decomposition is
+$$X\cdot V = \alpha+\beta+3[P],$$
+where $\alpha$ and $\beta$ are zero-cycles of degree $3$ on $A$ and $B$, respectively.
+\end{example}
+
+\begin{proposition}[Excess intersection formula for vector bundles]\label{prop:excess-intersection-vector-bundles}
+    Let $\pi:E\to W$ be a vector bundle of rank $d$, and let $F\subset E$ be a vector subbundle of rank $d'$. Let $Q:=E/F$ be the quotient bundle, of rank $e=d-d'$. If $s:W\hookrightarrow E$ denotes the zero section, then
+$$s^*[F] = c_e(Q)\cap [W] = c_{d-d'}(E/F)\cap [W].$$
+\end{proposition}
+
+\begin{proof}
+Let $\rho:E\to Q=E/F$ be the quotient map. The subbundle $F\subset E$ is the inverse image of the zero section of $Q$:
+$$F=\rho^{-1}(0_Q).$$
+
+Equivalently, $F$ is the zero scheme of a tautological section of the vector bundle $\rho^*Q\to E$. Indeed, at a point $v\in E_w$, the tautological section is given by the image of $v$ in the quotient $Q_w=E_w/F_w$. This section vanishes precisely when $v\in F_w$. Hence its zero scheme is $F$.
+
+Since this section is regular, the class of $F$ in $E$ is
+$$[F] = c_e(\rho^*Q)\cap [E].$$ This follows from the fact that the zero scheme of a regular section represents the top Chern class.
+Applying the zero-section Gysin map $s^*:A_*(E)\to A_{*-d}(W)$ gives
+$$s^*[F] = s^*\left(c_e(\rho^*Q)\cap [E]\right).$$
+By compatibility of Chern classes with pullback,
+$$s^*c_e(\rho^*Q) = c_e(s^*\rho^*Q).$$
+But $s^*\rho^*Q = (\rho\circ s)^*Q$. Since $\rho\circ s$ is the zero section of $Q$, this pullback is just $Q$ on $W$. Therefore
+$$s^*c_e(\rho^*Q) = c_e(Q).$$
+Also, $s^*[E]=[W]$, because $s^*$ is the inverse of flat pullback along $\pi:E\to W$, and $[E]=\pi^*[W]$. Thus
+$$s^*[F] = c_e(Q)\cap [W].$$
+Since $Q=E/F$, this gives
+$$s^*[F] = c_{d-d'}(E/F)\cap [W]. $$
+\end{proof}
+
+Applying Proposition \ref{prop:excess-intersection-vector-bundles}
+$i:X\hookrightarrow Y$ regular of codimension d, and $f:V\to Y$ with scheme-theoretic inverse image $W=f^{-1}(X)$ and with the further assumption that $i':
+W\hookrightarrow V$ is itself a regular embedding of codimension $d'$, with normal bundle $N'=N_{W/V}$ gives the easy excess intersection formula in the Chow ring of $W$:
+\[s^*[N']
+=
+c_{d-d'}(N/N')\cap [W].\]
+There is a more general excess intersection formula which we now state and prove. To do so involves first defining the refined Gysin pullback. Let
+\[
+\begin{tikzcd}
+X' \arrow[r, hook, "i'"] \arrow[d,"g"'] & Y' \arrow[d,"f"] \\
+X \arrow[r, hook, "i"'] & Y
+\end{tikzcd}
+\]
+be a Cartesian square, where $i:X\hookrightarrow Y$ is a regular embedding of codimension $d$, with normal bundle $N_{X/Y}$. The refined Gysin pullback associated to $i$ is a map \[i^!:A_k(Y')\longrightarrow A_{k-d}(X')\] It is "refined" because it does not only pull cycles on $Y$ back to $X$; it pulls cycles on any $Y'\to Y$ back to the corresponding fiber product $X'=Y'\times_Y X$.
+
+
+Take an irreducible $k$-dimensional subvariety $V\subset Y'$. Let $W:=V\times_Y X\subset X'$. Then $W$ is the scheme-theoretic intersection of $V$ with $X$. The normal cone $C_WV$ is naturally a closed cone inside $g^*N_{X/Y}|_W$.
+
+Fulton defines
+$$i^![V] := s^*[C_WV]\in A_{k-d}(W),$$
+where $s:W\hookrightarrow g^*N_{X/Y}|_W$ is the zero section. Then one pushes this class forward along $W\hookrightarrow X'$ and regards it as a class in $A_{k-d}(X')$. Extending linearly gives $i^!:Z_k(Y')\to A_{k-d}(X')$. Fulton then shows that this passes to rational equivalence.
+
+Equivalently, Fulton describes $i^!$ as the composite
+$$Z_k(Y') \xrightarrow{\sigma} Z_k(C_{X'}Y') \longrightarrow A_k(g^*N_{X/Y}) \xrightarrow{s^*} A_{k-d}(X').$$
+Here $\sigma$ is specialization to the normal cone, the middle arrow comes from the closed embedding $C_{X'}Y'\hookrightarrow g^*N_{X/Y}$, and $s^*$ is the zero-section Gysin map. 
+
+
+\begin{remark}
+    There are three important special cases of the refined Gysin pullback: \begin{enumerate}
+        \item Proper/transverse intersection. If $W=V\times_Y X$ has the expected dimension $k-d$, then the normal cone behaves as expected, and $i^![V]=[W]$. 
+
+        \item Excess intersection. Suppose $W\hookrightarrow V$ is itself a regular embedding of codimension $d'$, with normal bundle $N'=N_{W/V}$. Then $C_WV=N'$, and $N'$ embeds into $N:=g^*N_{X/Y}$. The excess bundle is $E=N/N'$. Then
+$$i^![V] = c_{d-d'}(E)\cap[W].$$
+So refined Gysin pullback says: if the intersection has excess dimension, cut it down by the top Chern class of the excess normal bundle.
+
+\item Self-intersection. If $Y'=X$ and $f=i:X\to Y$, then $X'=X\times_Y X=X$. The refined pullback of $[X]$ is $i^![X]=c_d(N_{X/Y})\cap[X]$. This is the self-intersection formula:
+$$i^!i_*[X]=c_d(N_{X/Y})\cap[X].$$
+So the refined pullback captures the idea that a subvariety intersects itself by its Euler/top Chern class.
+\end{enumerate}
+\end{remark}
+We are now prepared to state the general excess intersection formula. 
+\begin{theorem}
+    [Excess intersection formula]
+Let $i,i'$ be regular embeddings of codimension $d,d'$ with normal bundles $N,N'$, respectively. Let the following diagram be cartesian:
+\[
+\begin{tikzcd}
+X'' \arrow[r] \arrow[d,"q"'] & Y'' \arrow[d,"p"] \\
+X' \arrow[r,"i'"] \arrow[d,"g"'] & Y' \arrow[d,"f"] \\
+X \arrow[r,"i"'] & Y .
+\end{tikzcd}
+\]
+
+
+For any $\alpha\in A_k(Y'')$, there are two ways to pull $\alpha$ down to $X''$. First, using the original embedding $i:X\hookrightarrow Y$, one obtains $i^!(\alpha)\in A_{k-d}(X'')$. Second, using the pulled-back embedding $i':X'\hookrightarrow Y'$, one obtains $(i')^!(\alpha)\in A_{k-d'}(X'')$. The second class has dimension $k-d'$, which is too large by $e=d-d'$. The correction is the top Chern class of the pulled-back excess bundle:
+$$i^!(\alpha) = c_e(q^*E)\cap (i')^!(\alpha) \in A_{k-d}(X'').$$
+\end{theorem}
+\begin{proof}
+Take $\alpha=[V]$, where $V\subset Y''$ is a subvariety. The relevant intersection locus is $V\cap X''$. There is a normal cone $C=C_{V\cap X''}V$.
+
+This same cone can be viewed in two different ambient vector bundles: $C\subset q^*N'$, and also, through the inclusion $N'\hookrightarrow g^*N$, $C\subset q^*g^*N$.
+
+Now form the projective bundles
+$$Q'=\mathbb P(q^*N'\oplus 1), \qquad Q=\mathbb P(q^*g^*N\oplus 1).$$
+The inclusion $q^*N'\hookrightarrow q^*g^*N$ induces $Q'\hookrightarrow Q$. Let $\xi'$ and $\xi$ be the universal quotient bundles on $Q'$ and $Q$, respectively. The key exact sequence is
+$$0\to \xi'\to \xi|_{Q'}\to r^*(q^*E)\to 0,$$
+where $r:Q'\to X''$ is the projection. Therefore by Whitney's formula
+$$c_d(\xi|_{Q'}) = c_{d'}(\xi')\,c_e(r^*q^*E).$$
+
+Now \ref{prop:formulas-for-intersections} says that a Gysin pullback can be computed by compactifying the cone and applying the top Chern class of the universal quotient bundle. So using the larger normal bundle $q^*g^*N$, one gets
+$$i^!(\alpha) = r_*\left(c_d(\xi)\cap [\mathbb P(C\oplus 1)]\right).$$
+
+Using the smaller normal bundle $q^*N'$, one gets
+$$(i')^!(\alpha) = r_*\left(c_{d'}(\xi')\cap [\mathbb P(C\oplus 1)]\right).$$
+Restricting $c_d(\xi)$ to $Q'$, Whitney gives
+$c_d(\xi) = c_{d'}(\xi')\,c_e(r^*q^*E)$
+on $\mathbb P(C\oplus 1)\subset Q'$. Therefore
+$$
+\begin{aligned}
+i^!(\alpha)
+&= r_*\left(c_d(\xi)\cap [\mathbb P(C\oplus 1)]\right) \\
+&= r_*\left(c_{d'}(\xi')\,c_e(r^*q^*E)\cap [\mathbb P(C\oplus 1)]\right).
+\end{aligned}
+$$
+Now use the projection formula for $r:\mathbb P(C\oplus 1)\to X''$. Since by the functoriality of Chern classes
+$$c_e(r^*q^*E)=r^*c_e(q^*E)$$
+we can pull the excess Chern class outside the pushforward:
+$$
+r_*\left(c_{d'}(\xi')\,r^*c_e(q^*E)\cap [\mathbb P(C\oplus 1)]\right)
+= c_e(q^*E)\cap r_*\left(c_{d'}(\xi')\cap [\mathbb P(C\oplus 1)]\right).
+$$
+But the second factor is exactly $(i')^!(\alpha)$. Therefore $i^!(\alpha) = c_e(q^*E)\cap (i')^!(\alpha).$ 
+\end{proof}
+
+\begin{example}[Fulton, Example 6.1.3]
+Let $Y=\mathbb P^2$, and let $X_1\subset Y$ be the reducible plane curve $X_1=V(xy)$. Thus $X_1$ is the union of the two coordinate lines $V(x)\cup V(y)$. Let $X_2=V(x)$ be one of these lines, and let $P=V(x,y)$ be the point where the two components of $X_1$ meet. The point of the example is that the canonical decomposition of an intersection product need not be symmetric in the two factors, even though the final intersection class is symmetric in the Chow group.
+
+Consider the regular embedding $X_1\hookrightarrow Y$ and take $V=X_2$. Then $W=X_1\cap X_2=X_2$. Since $X_2$ is contained in $X_1$, the embedding $W=X_2\hookrightarrow V=X_2$ is the identity. Hence the normal cone $C_WV=C_{X_2}X_2$ is the zero bundle over $X_2$. Therefore the only distinguished variety is $X_2$, and the contribution is
+$$X_1\cdot X_2 = c_1(\mathcal O(X_1)|_{X_2})\cap [X_2].$$
+Since $X_1$ is a plane conic, as a Cartier divisor $\mathcal O(X_1)\cong \mathcal O_{\mathbb P^2}(2)$. Restricting to the line $X_2\cong \mathbb P^1$, we get $\mathcal O(X_1)|_{X_2}\cong \mathcal O_{\mathbb P^1}(2)$. Thus
+$$\deg(X_1\cdot X_2)=2.$$
+
+Now consider the regular embedding $X_2\hookrightarrow Y$ and take $V=X_1$. Again $W=X_1\cap X_2=X_2$. But now the relevant normal cone is $C_WV=C_{X_2}X_1$. This cone remembers the way $X_2$ sits as one component of the reducible curve $X_1=V(xy)=V(x)\cup V(y)$.
+
+Work locally near $P=V(x,y)$. Replace $Y$ by $\mathbb A^2=\operatorname{Spec}k[x,y]$. Then $X_1=\operatorname{Spec} k[x,y]/(xy)$. Inside $X_1$, the component $X_2=V(x)$ is modeled by ideal $I=(x)\subset k[x,y]/(xy)$. Therefore
+$$C_{X_2}X_1 = \operatorname{Spec}_{X_2}\left(\bigoplus_{n\geq 0} I^n/I^{n+1}\right).$$
+Fulton notes that this graded algebra is described by
+$$k[x,y,T]/(x,yT) \xrightarrow{\sim} \bigoplus_{n\geq 0} I^n/I^{n+1},$$
+where $T$ maps to the class of $x$ in degree $1$. Thus the cone has two irreducible components: $x=y=0$ and $x=T=0$. The first component maps to the point $P=V(x,y)$, while the second component maps onto the line $X_2=V(x)$. Therefore, for the intersection product of $X_1$ by $X_2$, the distinguished varieties are $X_2$ and $P$.
+
+The final Chow class is symmetric, but the canonical decomposition need not be. Indeed, in $A^*(\mathbb P^2)$, if $H$ is the hyperplane class, then $[X_1]=2H$, $[X_2]=H$. Hence $[X_1]\cdot [X_2]=2H^2$. Thus, after pushing forward to $Y=\mathbb P^2$, both orders give the same zero-cycle class of degree $2$.
+
+The asymmetry is in the normal cones: $C_{X_2}X_2$ versus $C_{X_2}X_1$. The first cone only sees $X_2$, whereas the second cone remembers that $X_2$ is a component of the reducible curve $X_1$ and that the other component meets it at $P$. Hence the distinguished varieties differ.
+\end{example}
+
+\section{July 8}
+
+Fulton and Lazarsfeld apply their positivity theorem for cone classes to degeneracy loci of vector bundle maps. Let $X$ be a projective variety and let $E,F$ be vector bundles on $X$ of ranks $e$ and $f$. They consider three kinds of bundle maps:
+$$
+\begin{array}{ll}
+\mathrm{(A)} & u:E\to F, \quad u \text{ arbitrary},\\[2mm]
+\mathrm{(B)} & u:E^\vee\to E\otimes L, \quad u \text{ symmetric},\\[2mm]
+\mathrm{(C)} & u:E^\vee\to E\otimes L, \quad u \text{ skew-symmetric},
+\end{array}
+$$
+where $L$ is a line bundle in cases $\mathrm{(B)}$ and $\mathrm{(C)}$. In each case they define the rank degeneracy locus
+$$D_k(u)=\{x\in X:\operatorname{rank}u(x)\le k\}.$$
+For skew-symmetric maps one restricts to even $k$, since a skew-symmetric matrix has even rank.
+
+The expected codimensions are
+$$
+\begin{array}{ll}
+\mathrm{(A)} & m_k=(e-k)(f-k),\\[2mm]
+\mathrm{(B)} & m_k=\binom{e-k+1}{2},\\[2mm]
+\mathrm{(C)} & m_k=\binom{e-k}{2}.
+\end{array}
+$$
+These are respectively the codimensions of the rank $\le k$ loci in the space of all matrices, symmetric matrices, and skew-symmetric matrices.
+
+The main point is that each of these degeneracy loci arises as the inverse image of a tautological cone. In case $\mathrm{(A)}$, the relevant vector bundle is $\operatorname{Hom}(E,F)\to X$. Inside it there is a tautological cone $\Omega_k\subset \operatorname{Hom}(E,F)$ whose fiber over $x\in X$ consists of the linear maps $E_x\to F_x$ of rank at most $k$. A bundle map $u:E\to F$ determines a section $v:X\to \operatorname{Hom}(E,F)$, and
+$$D_k(u)=v^{-1}(\Omega_k).$$
+
+Similarly, in the symmetric case the relevant vector bundle is $S^2(E)\otimes L\to X$, and $\Omega_k$ is the cone whose fiber consists of symmetric maps $E_x^\vee\to E_x\otimes L_x$ of rank at most $k$. In the skew-symmetric case the relevant vector bundle is $\Lambda^2(E)\otimes L\to X$, and $\Omega_k$ is the cone whose fiber consists of skew-symmetric maps $E_x^\vee\to E_x\otimes L_x$ of rank at most $k$.
+
+Fulton and Lazarsfeld prove the following non-emptiness statement. 
+
+\begin{theorem}
+Suppose that $\dim X\ge m_k$ and that the appropriate ambient vector bundle
+$$
+\begin{array}{ll}
+\operatorname{Hom}(E,F) & \text{in case } \mathrm{(A)},\\[1mm]
+S^2(E)\otimes L & \text{in case } \mathrm{(B)},\\[1mm]
+\Lambda^2(E)\otimes L & \text{in case } \mathrm{(C)}
+\end{array}
+$$
+is ample. Then $D_k(u)\neq \varnothing$. More generally, $D_k(u)$ meets every subvariety $Y\subseteq X$ of dimension at least $m_k$.
+\end{theorem}
+Another result of the same flavor is the following theorem of Graham.
+\begin{theorem}[Graham]
+Let $X$ be a complete irreducible variety of dimension $d$, and let $V$ be
+a vector bundle of rank $N$ on $X$. Let $L$ be a line bundle on $X$, and
+suppose that $V$ is equipped with an $L$-valued quadratic form
+\[
+    q:V\longrightarrow V^\vee\otimes L.
+\]
+Suppose that $S^2(V^*)\otimes L$ is ample. If $q$ has constant rank $r>0$ on $X$, then $d\le N-r$.
+Equivalently, if $d>N-r$
+then $q$ cannot have constant rank $r$; in particular, its rank must drop
+somewhere on $X$.
+\end{theorem}
+In particular, if $d > 0$ and $S^2(V^*)\otimes L$ is ample, then $q$ must drop rank somewhere on $X$. Originally these results worried me because I thought that positivity would preclude the existence of nondegenerate forms. However the point is that the ampleness hypothesis in Graham's theorem is incompatible with the existence of an everywhere nondegenerate $L$-valued quadratic form on a positive-dimensional projective variety.
+
+Suppose $\operatorname{rank}E=N$ and that there is a nondegenerate $L$-valued quadratic form $q:E\longrightarrow E^\vee\otimes L$. Then $q$ is an isomorphism. Taking determinants gives
+$$\det E \cong \det(E^\vee\otimes L) \cong (\det E)^{-1}\otimes L^N.$$
+Hence $(\det E)^2\cong L^N$. Numerically, this says
+$$2c_1(E)=N c_1(L).$$
+
+Now consider $B:=S^2(E^\vee)\otimes L$. Since $\operatorname{rank}S^2(E^\vee)=\binom{N+1}{2}$ and $c_1(S^2(E^\vee))=-(N+1)c_1(E)$, we get
+$$c_1(B) = -(N+1)c_1(E) + \binom{N+1}{2}c_1(L).$$
+Using $2c_1(E)=Nc_1(L)$, this becomes
+$$c_1(B) = -(N+1)c_1(E) + \frac{N(N+1)}{2}c_1(L) = 0.$$
+Thus, if a nondegenerate $L$-valued quadratic form exists, then $\det\bigl(S^2(E^\vee)\otimes L\bigr)$ is numerically trivial and in particular cannot be ample.
+
+\subsection{A Hom-bundle construction over the isotropic flag bundle}
+
+Let $(E,\omega)$ be a rank $2n$ symplectic vector bundle on $X$, and let
+\[
+    p:\Fl^{\mathrm{iso}}(E)\longrightarrow X
+\]
+be the relative isotropic flag bundle. On $\Fl^{\mathrm{iso}}(E)$ there is a tautological isotropic flag
+\[
+    L_1\subset S\subset p^*E.
+\]
+Now let $A$ be a vector bundle on $X$, equipped with a flag
+\[
+    A_1\subset A_2\subset\cdots\subset A.
+\]
+Over $\Fl^{\mathrm{iso}}(E)$ consider the Hom bundle
+\[
+    \mathcal H=\operatorname{Hom}(p^*A,S).
+\]
+A point of $\mathcal H$ is a pair
+\[
+    (L_1\subset S,\ f:p^*A\to S).
+\]
+Since $S$ is Lagrangian, the image of $f$ is automatically isotropic.Inside $\mathcal H$ one can impose ordinary type $A$ rank conditions using the tautological flag, that is conditions of the form
+\[
+    \operatorname{rank}\bigl(p^*A_i\to S/L_j\bigr)\le r_{ij}
+\]
+These are ordinary determinantal conditions on maps between vector bundles. Thus, upstairs on $\Fl^{\mathrm{iso}}(E)$, their classes are computed by type $A$ Schubert-polynomial/Porteous-type formulas in the Chern roots of the bundles appearing in the two flags.
+
+The resulting diagram has the form
+\[
+\begin{tikzcd}
+D_{\varpi} \arrow[r, hook] \arrow[d] & \mathcal H=\operatorname{Hom}(p^*A,S) \arrow[d] \\
+\mathrm{Fl}^{\mathrm{iso}}(E) \arrow[r, "p"'] & X
+\end{tikzcd}
+\]
+Its class $[D_w]\in A_{\dim \mathcal H-\ell(w)}(\mathcal H)$ in Chow homology after identifing $A^*(\mathcal H)$ with $A^*(\Fl^{\mathrm{iso}}(E))$ via the Gysin map $0^*$ which is inverse to the flat pullback isomorphism $\mathcal H\to \Fl^{\mathrm{iso}}(E)$
+\[
+    0^*[D_{\varpi}]
+    =
+    \mathfrak S_{\varpi}(p^*a_\bullet;y_\bullet) \cap [\Fl^{\mathrm{iso}}(E)]\in A_{\text{top}-\ell(w)}(\Fl^{\mathrm{iso}}(E)).
+\]
+where $\mathfrak S_w(p^*a_\bullet;y_\bullet)\in A^{\ell(w)}(B)$ is a type $A$ Schubert polynomial and $a_\bullet$ and $y_\bullet$ are the Chern roots of the bundles $A_\bullet$ and $S_\bullet$, respectively.
+
+Then we can push forward along the structure map of the isotropic flag bundle
+\[
+    p_*[D_{\varpi}]\in A^\bullet(X).
+\]
+In small rank, for instance when $\operatorname{rank}E=4$, the isotropic flag bundle parametrizes
+\[
+    L_1\subset S\subset E_x,
+\]
+with $S$ Lagrangian. If
+\[
+    L_2=S/L_1,\qquad
+    y_i=c_1(L_i^\vee),
+\]
+then fiberwise
+\[
+    H^*(\Sp_4/B;\mathbb Q)
+    \cong
+    \frac{\mathbb Q[y_1,y_2]}
+    {(y_1^2+y_2^2,\ y_1^2y_2^2)}.
+\]
+The pushforward
+\[
+    p_*:A^\bullet(\Fl^{\mathrm{iso}}(E))\to A^{\bullet-4}(X)
+\]
+is integration over the fiber $\Sp_4/B$. For example,
+\[
+    p_*(y_1^3y_2)=1,\qquad
+    p_*(y_1^2y_2^2)=0,\qquad
+    p_*(y_1y_2^3)=-1.
+\]
+Thus a type $A$ degeneracy class upstairs, expressed as a polynomial in the Chern roots $y_1,y_2$ and the Chern roots of $A_\bullet$, becomes a type $C$ class on $X$ after applying $p_*$.
+
+\section{July 9}
+Today we are reading FHT's paper on twisted equivariant K theory with complex coefficients. We begin by reviewing some basic results in the nontwisted case.
+
+Let $G$ be a compact Lie group and let $X$ be a finite $G$-CW complex. Write
+$R(G)=K_G^0(\mathrm{pt})$ for the complex representation ring of $G$, and let
+$I_G \subset R(G)$ be the augmentation ideal, i.e.
+$I_G=\ker(R(G)\to \mathbb Z)$, where a virtual representation is sent to its
+virtual dimension.
+
+The equivariant $K$-theory $K_G^*(X)$ is naturally an $R(G)$-module. Let
+$EG$ be a contractible free $G$-space, and let
+$X_G=EG\times_G X$ denote the Borel construction. There is a natural map
+\[\alpha:K_G^*(X)\to K^*(X_G)\] induced by pulling an equivariant vector bundle
+on $X$ back to $EG\times X$ and then descending it to $EG\times_G X$.
+
+There is the Milnor model for $EG$, which is the infinite join of copies of $G$. For spaces $X_1,\dots,X_n$, the join is
+\[
+X_1 * \cdots * X_n
+= \left.\Delta^{n-1}\times X_1\times\cdots\times X_n \right/ \sim,
+\]
+where $(t_1,\dots,t_n;x_1,\dots,x_n)$ has $t_i\ge 0$, $\sum t_i=1$, and $x_i$ is discarded when $t_i=0$. Write points as $t_1x_1+\cdots+t_nx_n$.
+
+Taking $X_i=G$ gives Milnor's model. It has free right $G$-action because if $t_i$ is nonzero, then $g_ih = g_i$ implies that $h=e$. To show $E_G$ is contractible, it is enough to show every map from a sphere is null-homotopic. Since $S^k$ is compact and $E_G$ has the direct limit topology, any continuous map $f:S^k\to E_G$ has image contained in some finite stage $E_G^n$. Now choose a fixed element $e\in G$ in the (n+1)-st copy of $G$. Inside $E_G^{n+1}=E_G^n * G$, we can cone $f$ to the point $e$. Explicitly,
+\[H(u,x)=(1-u)e+u f(x)\]
+
+Let $\widetilde U_i = \{t_1g_1+\cdots+t_ng_n : t_i\neq 0\} \subset E_G^n$, a $G$-invariant open set, descending to $U_i = \widetilde U_i/G \subset B_G^n$. Every join point has some nonzero coordinate, so
+\[
+B_G^n = U_1\cup\cdots\cup U_n.
+\]
+On $\widetilde U_i$ the free $G$-action normalizes the $i$-th coordinate to $e$, so $U_i$ is modeled by $\{t_i>0\}$, which contracts to the point $e$ in the $i$-th copy of $G$ by letting $t_i\to 1$ and all other $t_j\to 0$. Therefore $U_i$ is contractible. Let $\widetilde K^*(B_G^n)=\ker\big(\epsilon: K^*(B_G^n)\to K^*(\mathrm{pt})\big)$. Since $U_i$ is contractible, any $x\in\widetilde K^*(B_G^n)$ satisfies $x|_{U_i}=0$, i.e.\ $x\in K^*(B_G^n,U_i)$.
+
+\begin{claim}
+For $x_1,\dots,x_n\in\widetilde K^*(B_G^n)$, the product $x_1\cdots x_n=0$. Equivalently, $\big(\widetilde K^*(B_G^n)\big)^n=0$.
+\end{claim}
+\begin{proof}
+Since $x_i$ vanishes on $U_i$, the product lies in
+\[
+K^*(B_G^n,\,U_1\cup\cdots\cup U_n) = K^*(B_G^n,B_G^n)=0. \qedhere
+\]
+\end{proof}
+
+
+Since $E_G^n$ is a free $G$-space, $K_G^*(E_G^n)\cong K^*(B_G^n)$. The projection $E_G^n\to\mathrm{pt}$ induces
+\[
+\alpha_n : R(G) = K_G^*(\mathrm{pt}) \longrightarrow K_G^*(E_G^n) = K^*(B_G^n),
+\]
+sending a representation $V$ to the class of the associated bundle $E_G^n\times_G V \to B_G^n$. Composing with $\epsilon$ (rank) recovers the usual augmentation $R(G)\to\mathbb Z,\ V\mapsto\dim V$, whose kernel is $I_G$. This implies that $\alpha_n(I_G) \subset \widetilde K^*(B_G^n)$, so $\alpha_n(I_G)^n=0$ by the claim.
+Hence $\alpha_n$ factors as
+\[
+R(G) \longrightarrow R(G)/I_G^n \longrightarrow K^*(B_G^n).
+\]
+
+For a $G$-space $X$, $K_G^*(X)$ is an $R(G)$-module. The projection $X\times E_G^n\to X$ induces
+\[
+\alpha_n : K_G^*(X)\longrightarrow K_G^*(X\times E_G^n) \cong K^*\!\big((X\times E_G^n)/G\big).
+\]
+For $a\in I_G^n$, $x\in K_G^*(X)$: $\alpha_n(ax)=\alpha_n(a)\alpha_n(x)=0$, so $I_G^n K_G^*(X)\subset\ker\alpha_n$ so we have a map
+\[
+\alpha_n : K_G^*(X)/I_G^n K_G^*(X) \longrightarrow K_G^*(X\times E_G^n).
+\]
+Letting $n$ vary gives a map of pro-objects
+\[\{\alpha_n : K_G^*(X)/I_G^n K_G^*(X)\}_n \longrightarrow \{K_G^*(X\times E_G^n)\}_n\]
+
+Recall that if $R$ is a ring and $I$ is an ideal, $M$ is an $R$-module, then $M$ can be equipped with the $I$-adic topology, where a basis of open neighborhoods of $0$ is given by the submodules $I^nM$. Then the Hausdorff completion of $M$, defined as the universal Hausdorff complete topological $R$-module $\widehat M_{\mathrm{Haus}}$, together with a continuous map $\iota:M\to \widehat M_{\mathrm{Haus}}$ such that for every Hausdorff complete topological $R$-module $N$, every continuous $R$-linear map $f:M\to N$ factors uniquely through $\iota$, can be identified with the inverse limit
+\[\widehat M = \varprojlim_n M/I^nM
+\]
+
+
+
+\begin{theorem}[Atiyah--Segal completion theorem]
+Let $G$ be a compact Lie group and let $X$ be a compact $G$-space so that $K_G^*(X)$ is a finitely generated $R(G)$-module. Then the maps \begin{align*}
+    \alpha_n:K_G^*(X)/I_G^nK_G^*(X)\longrightarrow K^*(X_G^n)
+\end{align*}
+induced by the projection $EG^n\times X\to X$ give an isomorphism of pro-rings.
+\end{theorem}
+
+It is worth being precise about what this means. If $C$ is any category, we can define the category of pro-objects $\mathrm{pro}(C)$ as follows. An object of $\mathrm{pro}(C)$ is a inverse system $\{X_i\}_{i\in I}$ of objects of $C$, indexed by directed sets $S$. 
+
+A pro-group may naturally be associated to a topological group $A$ by considering $\set{A/I_\alpha}$ where $I_\alpha$ runs over the directed set of open normal subgroups of $A$. Conversely, a pro-group $\set{A_i}$ may be topologized as a subgroup of the product $\prod_i A_i$, where each $A_i$ is given the discrete topology. 
+
+In this way we get two functors $P:\mathrm{TopGrp}\to\mathrm{pro}(\mathrm{Grp})$ and $T:\mathrm{pro}(\mathrm{Grp})\to\mathrm{TopGrp}$. $T\circ P(A)$ is isomorphic to $A$ if and only if $A$ is Hausdorff and complete and has a neighbourhood-basis at its neutral element consisting of subgroups. Moreover, $P \circ T(\set{A_i})$ is isomorphic to $\set{A_i}$ if and only if the inverse system $\set{A_i}$ is Mittag-Leffler, i.e.\ for each $i$ there exists $j\ge i$ such that $\mathrm{im}(A_k\to A_i)=\mathrm{im}(A_j\to A_i)$ for all $k\ge j$.
+
+\begin{example}
+If $X=\mathrm{pt}$, then $K_G^*(X)=R(G)$, and the theorem says
+$R(G)^{\wedge}_{I_G}\cong K^*(BG)$.
+Thus $K^*(BG)$ is the completed representation ring of $G$ at the augmentation
+ideal.
+\end{example}
+
+\begin{example}
+When $G=S^1$, then $R(S^1)=\mathbb Z[t,t^{-1}]$, and
+$I_G=(t-1)$. The theorem gives
+$K^*(BS^1)\cong \mathbb Z[t,t^{-1}]^{\wedge}_{(t-1)}\cong \mathbb Z[[u]]$,
+where $u=1-t$. This matches the fact that $BS^1=\mathbb CP^\infty$ and
+$K^0(\mathbb CP^\infty)\cong \mathbb Z[[u]]$.
+\end{example} 
+
+\begin{example}
+
+If $G$ acts freely on $X$, then $X_G\simeq X/G$. In this case
+$K_G^*(X)\cong K^*(X/G)$, and the augmentation ideal acts nilpotently in the
+relevant sense. Thus the theorem reduces to the expected identification
+$K_G^*(X)\cong K^*(X/G)$.
+\end{example}
+
+\begin{corollary}
+    $\alpha_n$ induces an isomorphism \begin{align*}
+        \widehat{\alpha}:K_G^*(X)^{\wedge}_{I_G}\longrightarrow \varprojlim_n K^*(X_G^n)
+    \end{align*}
+\end{corollary}
+In general the right hand side cannot be automatically identified with $K^*(X_G)$, because the inverse limit functor is not exact. There is the Milnor exact sequence
+\[
+0\longrightarrow \varprojlim_n^1 K^{*-1}(X_G^n)\longrightarrow K^*(X_G)\longrightarrow \varprojlim_n K^*(X_G^n)\longrightarrow 0
+\] The $\varprojlim^1$ term vanishes if the inverse system $\{K^*(X_G^n)\}_n$ satisfies the Mittag-Leffler condition. Note that for homology, we instead would be considering a filtered colimit. Filtered colimits are exact in abelian groups, homology commutes with filtered colimits, and therefore we have $H_*(X_G)\cong \varinjlim_n H_*(X_G^n)$. In cohomology, we instead have an inverse limit, which is not exact in general. More informally, singular chains are required to be finite support whereas singular cochains are not.
+
+\begin{corollary}
+    The kernels $K_n = \ker\big(K^*(X_G)\to K^*(X_G^n)\big)$ define the $I_G$-adic topology on $K^*(X_G)$, and the completion of $K^*(X_G)$ with respect to this topology is isomorphic to the completed equivariant $K$-theory. Since an $I_G$-adic quotient system has surjective transition maps, the system is Mittag-Leffler.
+\end{corollary}
+
+\subsection{Proof}
+First one establishes the following prelimilary result.
+Let $T=S^1$ with standard representation $\rho$, so $R(T)\cong\mathbb Z[\rho,\rho^{-1}]$,
+$\epsilon(\rho)=1$, and $I_T=\ker\epsilon=(\xi)$ where $\xi:=1-\rho$. Then Milnor's model $E_T^n = T*\cdots*T$ ($n$ copies) is identified with the unit sphere
+$S^{2n-1}\subset\mathbb C^n$, with $T$ acting by scalar multiplication.
+
+Let $G$ act on $E_T^n$ via $\theta:G\to T$, let $X$ be a compact $G$-space with
+$K:=K_G^*(X)$ finite over $R(G)$ (an $R(T)$-module via $\theta^*$). The completion-theorem map is
+\[
+\alpha_n: K_G^*(X)\longrightarrow K_G^*(X\times E_T^n)=K_G^*(X\times S^{2n-1}).
+\]
+
+\begin{lemma}
+    Let $\theta:G\to T$ model the action of $G$ on $E_T$. Then the homomorphisms \begin{align*}
+        \alpha_n:K_G^*(X)/I_T^nK_G^*(X)\longrightarrow K_G^*(X\times S^{2n-1})
+    \end{align*}
+    induced by the projection $X\times E_T^n\to X$ give an isomorphism of pro-rings.
+\end{lemma}
+
+\begin{proof}
+Consider $(X\times D^{2n}, X\times S^{2n-1})$, $D^{2n}\subset\mathbb C^n$.
+Equivariant contractibility of $D^{2n}$ gives $K_G^*(X\times D^{2n})\cong K$, and the Thom isomorphism gives $K_G^*(X\times D^{2n}, X\times S^{2n-1})\cong K$. The boundary map
+\[K_G^*(X\times D^{2n},X\times S^{2n-1})\to K_G^*(X\times D^{2n})\] is multiplication by the
+equivariant Euler class
+\[
+\lambda_{-1}\big((\mathbb C^n)^*\big) = (1-\rho)^n = \xi^n
+\] which follows from the splitting principle since $\mathbb C^n\cong\rho^{\oplus n}$. The long exact sequence of the pair thus reads
+\[
+\cdots \to K \xrightarrow{\xi^n} K \xrightarrow{\alpha_n} K_G^*(X\times S^{2n-1}) \to K \xrightarrow{\xi^n} K \to \cdots,
+\]
+giving a short exact sequence
+\[
+0\to K/\xi^nK \xrightarrow{\alpha_n} K_G^*(X\times S^{2n-1}) \to {}_{\xi^n}K \to 0,
+\] where ${}_{\xi^n}K:=\{x\in K:\xi^nx=0\}$ is the $\xi^n$-torsion submodule of $K$. 
+
+One checks that the torsion term vanishes in the pro-limit.
+Since $K$ is Noetherian over $R(G)$, the chain
+${}_{\xi}K\subset{}_{\xi^2}K\subset\cdots$ stabilizes at some $k$:
+${}_{\xi^{k}}K={}_{\xi^{k+1}}K=\cdots$, so ${}_{\xi^{n+k}}K={}_{\xi^k}K$ for all $n$, and $\xi^k$
+kills it. The transition map $K_G^*(X\times S^{2n+2k-1})\to K_G^*(X\times S^{2n-1})$ then yields
+$\beta_n$ inverse to $\alpha_n$ pro-systematically, so
+\[
+\{K/\xi^nK\}_n \;\cong_{\mathrm{pro}}\; \{K_G^*(X\times S^{2n-1})\}_n,
+\]
+which can be rewritten as
+\[
+\big\{K_G^*(X)/I_T^nK_G^*(X)\big\}_n \;\cong_{\mathrm{pro}}\; \big\{K_G^*(X\times E_T^n)\big\}_n \qedhere
+\]
+\end{proof}
+
+\begin{remark}[Euler classes in complex $K$-theory]
+Let $E^*$ be a multiplicative generalized cohomology theory. Suppose
+$V\to X$ is an $E$-oriented real rank $r$ vector bundle. An $E$-orientation is
+a Thom class
+\[
+    u_E(V)\in E^r(D(V),S(V)),
+\]
+where $D(V)$ and $S(V)$ are the disk and sphere bundles of $V$. Equivalently,
+\[
+    u_E(V)\in \widetilde E^r(\operatorname{Th}(V)).
+\]
+The Euler class of $V$ in $E$-cohomology is defined by pulling the Thom class
+back along the zero section $s:X\to D(V)$:
+\[
+    e_E(V):=s^*u_E(V)\in E^r(X).
+\]
+For ordinary cohomology and an oriented real vector bundle, this recovers the
+usual Euler class. If $V$ is a complex rank $r$ vector bundle, then its
+ordinary cohomological Euler class is the top Chern class:
+\[
+    e_H(V)=c_r(V).
+\]
+For complex $K$-theory, complex vector bundles are canonically $K$-oriented.
+The $K$-theory Thom class of a complex vector bundle $V\to X$ is represented
+by the Koszul complex on the total space of $V$:
+\[
+    0
+    \longrightarrow
+    \pi^*\wedge^r V^*
+    \longrightarrow
+    \cdots
+    \longrightarrow
+    \pi^*V^*
+    \longrightarrow
+    \mathcal O_V
+    \longrightarrow
+    0.
+\]
+The differential is contraction with the tautological section of $\pi^*V$.
+Away from the zero section, this section is nonzero and the complex is exact.
+Therefore the complex defines a relative $K$-class $u_K(V)\in K^0(D(V),S(V))$ which gives rise to the Euler class $e_K(V)=s^*u_K(V)\in K^0(X)$. On the zero section, the tautological section becomes zero, so the differential
+in the Koszul complex becomes zero. Therefore the class of the restricted
+complex is just the alternating sum of its terms:
+\[
+    e_K(V)=\lambda_{-1}(V^*)
+    =
+    \sum_{i=0}^r(-1)^i[\wedge^iV^*].
+\]
+\end{remark}
+
+Now we establish the same lemma for $T = U(1)^r$. 
+Atiyah--Segal use the following flexibility about the choice of universal
+space. Suppose $E_G$ and $\widetilde E_G$ are two models for the universal
+free $G$-space. Thus both are contractible free $G$-spaces, and hence there
+are $G$-homotopy equivalences
+\[
+    f:\widetilde E_G\to E_G,
+    \qquad
+    g:E_G\to \widetilde E_G.
+\]
+Assume that
+\[
+    E_G=\bigcup_n E_G^n,
+    \qquad
+    \widetilde E_G=\bigcup_n \widetilde E_G^n
+\]
+are filtrations by compact $G$-subspaces. Since each $\widetilde E_G^n$ is compact, its image under $f$ is compact in
+$E_G$. Hence there exists some $k$ such that
+\[
+    f(\widetilde E_G^n)\subset E_G^{n+k}.
+\]
+Similarly, for each $n$ there exists some $m$ such that
+\[
+    g(E_G^n)\subset \widetilde E_G^{n+m}.
+\]
+Therefore $f$ and $g$ induce morphisms of inverse systems
+\[
+    \left\{K_G^*(X\times E_G^n)\right\}_n
+    \rightleftarrows
+    \left\{K_G^*(X\times \widetilde E_G^n)\right\}_n.
+\]
+
+The composites are induced by $g\circ f$ and $f\circ g$. Since these are
+$G$-homotopic to the identity maps on $\widetilde E_G$ and $E_G$ respectively,
+and since the relevant compact homotopies land in sufficiently large finite
+stages, the induced composites agree with the identity in the pro-category.
+Hence
+\[
+    \left\{K_G^*(X\times E_G^n)\right\}_n
+    \cong_{\mathrm{pro}}
+    \left\{K_G^*(X\times \widetilde E_G^n)\right\}_n.
+\]
+
+Thus the pro-object associated to finite approximations of $EG$ does not
+depend on the chosen model or on the chosen compact exhaustion. More generally, one may index by all compact $G$-subspaces $C\subset E_G$.
+This gives the inverse system
+\[
+    \left\{K_G^*(X\times C)\right\}_{C\subset E_G}.
+\]
+If $\mathcal C'$ is any cofinal family of compact $G$-subspaces, meaning that
+for every compact $C\subset E_G$ there exists $C'\in \mathcal C'$ with
+$C\subset C'$, then
+\[
+    \left\{K_G^*(X\times C)\right\}_{C\subset E_G}
+    \cong_{\mathrm{pro}}
+    \left\{K_G^*(X\times C')\right\}_{C'\in\mathcal C'}.
+\]
+Atiyah--Segal use this flexibility to model $E_{T^m}$ as a product of Milnor models for $E_T$ and $E_H$, with a cofinal family of compact subspaces is given by $E_T^p\times E_H^q$
+Consequently,
+\[
+    \left\{
+        K_G^*(X\times E_{T^m}^n)
+    \right\}_n
+    \cong_{\mathrm{pro}}
+    \left\{
+        K_G^*(X\times E_T^p\times E_H^q)
+    \right\}_{p,q}.
+\]
+Now set $R=R(T^m)$. Let $\mathfrak a\subset R$ be the ideal generated by $I_T$, and
+$\mathfrak b\subset R$ the ideal generated by $I_H$, where $H=T^{m-1}$. Since
+\[
+R(T^m)\cong R(T)\otimes R(H),
+\]
+the augmentation ideal is
+\[
+I_{T^m}=\mathfrak a+\mathfrak b.
+\]
+Atiyah--Segal compare this one-variable filtration with the two-variable filtration
+$\mathfrak a^p+\mathfrak b^q$.
+The reason these define the same pro-system is the inclusions
+$\mathfrak a^n+\mathfrak b^n \subset (\mathfrak a+\mathfrak b)^n$
+and $(\mathfrak a+\mathfrak b)^{p+q-1} \subset \mathfrak a^p+\mathfrak b^q$.
+
+A two-variable pro-isomorphism can be proved one variable at a time, and thus it is enough to prove that the maps
+\[
+\alpha_{p,q}:
+K/(\mathfrak a^p+\mathfrak b^q)K
+\longrightarrow
+K_G^*(X\times E_T^p\times E_H^q)
+\]
+define a pro-isomorphism, where $K=K_G^*(X)$. This factors as
+\[
+K/(\mathfrak a^p+\mathfrak b^q)K
+\longrightarrow
+K_G^*(X\times E_T^p)\otimes_R R/\mathfrak b^q
+\longrightarrow
+K_G^*(X\times E_T^p\times E_H^q).
+\]
+The first arrow applies the already-proved $S^1$-case in the $T$-direction. The second
+arrow applies the inductive hypothesis to $H=T^{m-1}$, now with $X\times E_T^p$ in place
+of $X$.
+
+For the inductive step to apply, $K_G^*(X\times E_T^p)$ must
+remain finite over $R(G)$; This follows from the exact sequence \begin{align*}
+    0
+\longrightarrow
+K/\xi^pK
+\longrightarrow
+K_G^*(X\times E_T^p)
+\longrightarrow
+{}_{\xi^p}K
+\longrightarrow
+0
+\end{align*} which expresses $K_G^*(X\times E_T^p)$ as an extension of two finitely generated $R(G)$-modules, since submodules and quotients of finitely generated modules are finitely generated.
+
+We are now prepared to establish the theorem for $U(m)$. Let $U = U(m)$ and $T$ be the diagonal maximal torus, and let $j:T\hookrightarrow U$
+denote the inclusion. The goal is to prove the completion theorem for $U$,
+assuming it is already known for the torus $T$.
+
+The key input is the following proposition of Atiyah. 
+For every compact $U$-space $X$, restriction along $j:T\hookrightarrow U$
+gives $j^*:K_U^*(X)\longrightarrow K_T^*(X)$.
+
+\begin{proposition}[Atiyah]\label{prop:atiyah}
+There is a functorial homomorphism of $K_U^*(X)$-modules $j_*:K_T^*(X)\longrightarrow K_U^*(X)$ such that
+\[
+    j_*\circ j^*=\mathrm{id}_{K_U^*(X)}.
+\]
+\end{proposition}
+
+When $X=\mathrm{pt}$, the map $j_*:R(T)\to R(U)$
+is holomorphic induction. It sends a dominant weight $\lambda$ of $T$ to the
+irreducible representation of $U$ with highest weight $\lambda$. For general
+$X$, this is holomorphic induction in families, geometrically modeled on the
+flag manifold $U/T$.
+
+The consequence is that $K_U^*(X)$ is a natural direct summand of $K_T^*(X)$:
+\[
+    K_T^*(X)\cong j^*K_U^*(X)\oplus \ker(j_*).
+\]
+Similarly, $K_U^*(X\times E_U^n)$
+is a natural direct summand of $K_T^*(X\times E_U^n)$. Now consider the map appearing in the completion theorem:
+\[
+    \alpha_n:
+    K_U^*(X)/I_U^nK_U^*(X)
+    \longrightarrow
+    K_U^*(X\times E_U^n).
+\]
+By functoriality of $j^*$ and $j_*$, these maps fit into the commutative
+diagram
+\[
+\begin{tikzcd}
+K_U^*(X)/I_U^nK_U^*(X)
+    \arrow[r,"\alpha_n"]
+    \arrow[d,"j^*"']
+&
+K_U^*(X\times E_U^n)
+    \arrow[d,"j^*"]
+\\
+K_T^*(X)/I_U^nK_T^*(X)
+    \arrow[r,"\eta_n"]
+    \arrow[u,"j_*"']
+&
+K_T^*(X\times E_U^n)
+    \arrow[u,"j_*"']
+\end{tikzcd}
+\]
+where the vertical composites $j_*\circ j^*$ are the identity on the
+$U$-equivariant groups. Therefore the $U$-equivariant pro-system is a direct
+summand of the corresponding $T$-equivariant pro-system. Hence it is enough to
+show that
+\[
+    \eta_n:
+    K_T^*(X)/I_U^nK_T^*(X)
+    \longrightarrow
+    K_T^*(X\times E_U^n)
+\]
+defines an isomorphism of pro-objects.
+
+We now compare this with the torus case. There are two points. First, the $I_U$-adic and $I_T$-adic topologies coincide on any
+$R(T)$-module. Indeed, under the restriction $R(U)\longrightarrow R(T)$
+we have $I_U\subset I_T$ and, because $R(T)$ is finite over $R(U)$, the two induced adic topologies are
+equivalent. Equivalently, there exists $k$ such that
+\[
+    I_T^k\subset I_UR(T).
+\]
+Consequently, for any $R(T)$-module $M$,
+\[
+    \{M/I_U^nM\}_n
+    \cong_{\mathrm{pro}}
+    \{M/I_T^nM\}_n.
+\]
+Second, $E_U$ is also a universal free $T$-space. Indeed, $E_U$ is
+contractible and free as a $U$-space; after restricting the action along
+$T\subset U$, it remains contractible and free as a $T$-space. Therefore the
+chosen compact stages $E_U^n$ may be used as a cofinal system of compact
+approximations to $E_T$. Hence
+\[
+    \{K_T^*(X\times E_U^n)\}_n
+    \cong_{\mathrm{pro}}
+    \{K_T^*(X\times E_T^n)\}_n.
+\]
+
+Putting these together, the map $\eta_n$ is identified, in the pro-category,
+with the torus completion map
+\[
+    K_T^*(X)/I_T^nK_T^*(X)
+    \longrightarrow
+    K_T^*(X\times E_T^n).
+\]
+This is an isomorphism of pro-objects by Step 2. Therefore $\{\eta_n\}$ is a
+pro-isomorphism.
+
+Since the $U$-equivariant map $\{\alpha_n\}$ is a direct summand of
+$\{\eta_n\}$ via the splitting $j_*\circ j^*=\mathrm{id}$, it follows that
+$\{\alpha_n\}$ is also a pro-isomorphism. Hence the completion theorem holds
+for $U(m)$.
+
+ Embed $G$ in a unitary group $U$. If $X$ is a compact
+$G$-space, then $\overline X = U\times_G X = (U\times X)/G$ is a compact $U$-space,
+and $K_U^*(\overline X)$ is naturally isomorphic to $K_G^*(X)$ as an $R(U)$-module
+Moreover $K_U^*(\overline X)$ is finite over $R(U)$ if and
+only if $K_G^*(X)$ is finite over $R(G)$, since $R(G)$ is finite over $R(U)$
+
+Also
+\[
+\overline X\times E_U^n = (U\times_G X)\times E_U^n \cong U\times_G (X\times E_U^n),
+\]
+so that
+\[
+K_U^*(\overline X\times E_U^n)\cong K_G^*(X\times E_U^n).
+\]
+Thus the result for the $U$-space $\overline X$ tells one that the homomorphisms
+\[
+K_G^*(X)/I_G^n\cdot K_G^*(X)\longrightarrow K_G^*(X\times E_U^n)
+\]
+define an isomorphism of pro-rings; and the proof is completed by observing that
+$E_U$ is a universal space for $G$, and \red{that the $I_U$-adic and $I_G$-adic
+topologies coincide on any $R(G)$-module.}
+\section{July 10}
+
+Let $X$ be a locally compact Hausdorff space, and let $X^+ = X\sqcup\{\infty\}$ denote its
+one-point compactification. Compactly supported $K$-theory is defined by
+\[
+K_c(X) = \ker\big(K(X^+)\longrightarrow K(\{\infty\})\big) = \widetilde K(X^+)
+\]
+Since $K(\{\infty\})\cong K(\mathrm{pt})\cong\mathbf Z$, the restriction map sends a virtual
+bundle $[E]-[F]\in K(X^+)$ to
+\[
+[E_\infty]-[F_\infty] = \operatorname{rank}(E)-\operatorname{rank}(F).
+\]
+
+
+The condition that $[E]-[F]$ restricts to zero at $\infty$ means that $[E_\infty]=[F_\infty]$
+in $K(\mathrm{pt})$. After stabilizing by adding trivial bundles to $E$ and $F$, one may
+choose an actual isomorphism $\varphi: E|_U\xrightarrow{\sim}F|_U$ on some neighborhood $U$
+of $\infty$. If $C=X^+\setminus U$, then $C\subset X$ is compact, and $\varphi$ identifies
+$E$ and $F$ on $X\setminus C$.
+
+So a class in $K_c(X)$ is a virtual bundle on $X$ together with a trivialization near
+infinity. Equivalently, one may represent such a class by a triple $(E,F,\varphi)$, where $E$
+and $F$ are vector bundles on $X$, and
+\[
+\varphi: E|_{X\setminus C}\xrightarrow{\sim}F|_{X\setminus C}
+\]
+is an isomorphism outside some compact subset $C\subset X$. Compactly supported $K$-theory can also be modeled by bounded complexes of vector bundles
+\[
+E^\bullet:\qquad 0\longrightarrow E^0\xrightarrow{d_0}E^1\xrightarrow{d_1}\cdots
+\xrightarrow{d_{n-1}}E^n\longrightarrow 0
+\]
+which are exact outside a compact subset of $X$: there is a compact set $C\subset X$ such
+that $E^\bullet|_{X\setminus C}$ is exact. To see how such a complex gives a compactly supported class, form the even and odd parts
+\[
+E^{\mathrm{ev}} = \bigoplus_{i\text{ even}}E^i,
+\qquad
+E^{\mathrm{odd}} = \bigoplus_{i\text{ odd}}E^i.
+\]
+After choosing Hermitian metrics, let $d^*$ denote the adjoint of the differential and set
+$D=d+d^*$. The operator $D$ exchanges parity: $D^+: E^{\mathrm{ev}}\to E^{\mathrm{odd}}$.
+
+On $X\setminus C$, exactness of the complex implies that the Laplacian $D^2=dd^*+d^*d$ has no
+kernel. Hence
+\[
+D^+: E^{\mathrm{ev}}|_{X\setminus C}\xrightarrow{\sim} E^{\mathrm{odd}}|_{X\setminus C}
+\]
+is an isomorphism. Therefore the complex determines the triple $(E^{\mathrm{ev}},
+E^{\mathrm{odd}}, D^+)$, and hence a class in $K_c(X)$.
+
+Thus $\widetilde K(X^+)$ is isomorphic to the set of bounded complexes of vector bundles on
+$X$ which are exact outside a compact subset, modulo the usual relative $K$-theoretic
+equivalence relation: one allows stabilization, homotopy of the differential, addition of
+everywhere exact complexes, and enlargement to a common compact support. Equivalently,
+\[
+K_c(X) \cong \varinjlim_{C\subset X\text{ compact}} K(X,X\setminus C)
+\]
+For any complex vector bundle $\pi:V\to X$ of rank $r$ over a
+compact space $X$, there is a canonical class $\lambda_V$ living in the \emph{compactly supported}
+$K$-theory of the total space $V$. This class is the $K$-theoretic analogue of the Thom
+class in ordinary cohomology.
+
+Contraction with $s$ gives maps
+$\iota_s:\pi^*\Lambda^kV^*\to\pi^*\Lambda^{k-1}V^*$, and these assemble into the
+\emph{Koszul complex}:
+\[
+0\longrightarrow \pi^*\Lambda^rV^* \xrightarrow{\iota_s} \pi^*\Lambda^{r-1}V^*
+\xrightarrow{\iota_s} \cdots \xrightarrow{\iota_s} \pi^*V^* \xrightarrow{\iota_s}
+\mathcal O_V \longrightarrow 0.
+\]
+Restricted to a single point $v\in V_x$, this is just ordinary linear algebra on the
+fiber $V_x$:
+\[
+0\to \Lambda^rV_x^* \xrightarrow{\iota_v} \Lambda^{r-1}V_x^* \to \cdots \to
+V_x^* \xrightarrow{\iota_v} \mathbf C \to 0.
+\]
+This complex is exact acyclic away from the zero section. If $v\neq 0$, pick any linear functional $\alpha\in V_x^*$ with $\alpha(v)=1$. Exterior multiplication by $\alpha$ then satisfies the identity
+\[
+\iota_v(\alpha\wedge\omega) + \alpha\wedge\iota_v(\omega) = \omega,
+\]
+which exhibits $\iota_v$ and $(\alpha\wedge -)$ as mutually inverse up to homotopy.
+
+Thus the Koszul complex fails to be exact along the zero section, which is compact inside $V$ since $X$ is compact. Thus we get a class
+\[
+\lambda_V\in K_c(V).
+\] and a Thom isomorphism
+\[
+K(X)\longrightarrow K_c(V), \qquad x\longmapsto \pi^*x\cdot\lambda_V.
+\]for every complex
+vector bundle $V\to X$. 
+\begin{example} Let $X = *$ and $V = \C$ be the trivial complex line bundle. The Koszul complex collapses to the two-term complex
+\[
+0\longrightarrow \underline{\mathbf C} \xrightarrow{\ z\ } \underline{\mathbf C}
+\longrightarrow 0,
+\]
+where the differential at the point $z\in\mathbf C$ is multiplication by the
+scalar $z$. We get a class
+\[
+\lambda_{\mathbf C}\in K_c(\mathbf C).
+\]
+in the compactly supported $K$-theory of $\mathbf R^2$, which is
+by definition the $K^{-2}$-group of a point:
+\[
+K_c(\mathbf C) = K_c(\mathbf R^2) = K^{-2}(\mathrm{pt}).
+\]
+\end{example}
+Given a class $x\in K(X)$ on any compact $X$, and the class
+$b\in K_c(\mathbf R^2)$ constructed above, form their external product
+\[
+x\boxtimes b \ \in\ K_c(X\times\mathbf R^2) \cong K^{-2}_c(X)
+\]
+Thus external multiplication by $b$ defines a map, the \textbf{Bott homomorphism}. 
+\[
+\beta: K(X)\longrightarrow K^{-2}(X), \qquad \beta(x) = x\boxtimes b,
+\]
+
+\begin{theorem}
+[Bott periodicity]
+\[
+\beta: K(X) \xrightarrow{\ \sim\ } K^{-2}(X)
+\]
+is an isomorphism for every compact $X$.
+\end{theorem}
+Thus the statement of Bott peroidicity is precisely the special case of the Thom isomorphism in $K$-theory for trivial line bundles. We will prove the theorem following Atiyah 68. Atiyah constructs an inverse $\alpha: K^{-2}(X) \to K(X)$ which has the following properties:
+\begin{enumerate}
+    \item $\alpha$ is natural in $X$.
+    \item $\alpha$ is a $K(X)$-module homomorphism.
+    \item $\alpha(b) = 1$.
+\end{enumerate} Then for formal reasons, $\alpha$ is the inverse of $\beta$. To see this, let $X$ locally compact and
+\[
+K(X)=\ker\big(K(X^+)\to K(\{\infty\})\big),
+\qquad
+K^{-2}(X)=\ker\big(K^{-2}(X^+)\to K^{-2}(\{\infty\})\big),
+\]
+and since $X^+,\{\infty\}$ are compact, naturality of $\alpha$ gives a commuting square
+\[
+\begin{tikzcd}
+K^{-2}(X^+) \arrow[r] \arrow[d,"\alpha"] & K^{-2}(\{\infty\}) \arrow[d,"\alpha"] \\
+K(X^+) \arrow[r] & K(\{\infty\}).
+\end{tikzcd}
+\]
+Hence $\alpha$ carries the kernel of the top row into the kernel of the bottom row, so it
+restricts to
+\[
+\alpha_X: K^{-2}(X)\longrightarrow K(X)
+\]
+for every locally compact $X$. Since $K^{-q}(X)=K(\mathbf R^q\times X)$, replacing $X$ by
+$\mathbf R^q\times X$ gives natural maps $\alpha_{\mathbf R^q\times X}: K^{-2-q}(X)\longrightarrow K^{-q}(X)$ for every $q\ge 0$.
+
+The second axiom guarentees compatibility with products. The module axiom (A2) states that $\alpha(ua)=\alpha(u)a$ for $u\in K^{-2}(X)$,
+$a\in K(X)$. Pass to an external product where we have
+$u\boxtimes v = p_X^*u\cdot p_Y^*v$ and $\alpha(p_X^*u)=p_X^*\alpha(u)$, which implies the square
+\[
+\begin{tikzcd}
+K^{-2}(X)\otimes K(Y) \arrow[r,"\boxtimes"] \arrow[d,"\alpha\otimes 1"] & K^{-2}(X\times Y) \arrow[d,"\alpha"] \\
+K(X)\otimes K(Y) \arrow[r,"\boxtimes"] & K(X\times Y)
+\end{tikzcd}
+\]
+commutes. Replacing $X,Y$ by $\mathbf R^q\times X$, $\mathbf R^p\times X$ and pulling back
+along the diagonal $\Delta:X\to X\times X$ turns this into the analogous square with
+$K^{-q-2}(X)\otimes K^{-p}(X)$, $K^{-q-p-2}(X)$, $K^{-q}(X)\otimes K^{-p}(X)$, and
+$K^{-q-p}(X)$ in place of the four corners, which says precisely that $\alpha(xy)=\alpha(x)y$.
+
+\begin{proposition}[Atiyah, Proposition 1.5]
+Suppose $\alpha:K^{-2}(X)\to K(X)$ is a natural transformation satisfying (A1)--(A3). Then
+the Bott homomorphism $\beta:K(X)\to K^{-2}(X)$, $x\mapsto xb$, and $\alpha$ are inverse
+isomorphisms. Consequently $K(X)\cong K^{-2}(X)$ naturally for every compact space $X$.
+\end{proposition}
+
+\begin{proof}[Idea of the proof]
+By the extension above, $\alpha$ is defined in every degree and satisfies
+$\alpha(xy)=\alpha(x)y$. For $x\in K(X)$,
+\[
+\alpha(\beta(x)) = \alpha(xb) = x\,\alpha(b) = x
+\]
+by (A2) and (A3), so $\alpha\beta=\mathrm{id}$.
+
+
+There is an involution $\widetilde{(\cdot)}:K^{-2}(X)\to K^{-2}(X)$ induced by the involution on $\mathbf R^2$ given by $(x,y)\mapsto(-x,-y)$. For $x,y\in K^{-2}(X)$, regard $xy$ as a compactly supported
+class on $\mathbf R^2_u\times\mathbf R^2_v\times X$. Let
+$\widetilde x$ denote the pullback of $x$ under the reflection
+$u\mapsto -u$. The map
+$T(u,v)=(-v,u)$ is a rotation through $\pi/2$, hence is homotopic
+to the identity and induces the identity on compactly supported
+$K$-theory. On the other hand, $T$ exchanges the two
+$\mathbf R^2$-factors and reflects the factor supporting $x$, so
+$T^*(xy)=y\widetilde x$. Therefore $xy=y\widetilde x$. Similarly,
+the rotation $(u,v)\mapsto(v,-u)$ gives $xy=\widetilde yx$. Hence for $y\in K^{-2}(X)$,
+\[
+\beta\alpha(y)
+=
+\alpha(y)b
+=
+\alpha(yb)
+=
+\alpha(b\widetilde y)
+=
+\alpha(b)\,\widetilde y
+=
+\widetilde y,
+\]
+where we use the extended module property, the commutation relation
+$yb=b\widetilde y$, and the normalization $\alpha(b)=1$.
+
+Thus
+\[
+\beta\alpha=\widetilde{(\cdot)}.
+\]
+Since $\widetilde{(\cdot)}$ is an involution, it is an automorphism. On the other hand, $\alpha\beta=\mathrm{id}$
+by (A2) and (A3). Hence $\beta$ is injective and $\alpha$ is surjective, while
+$\beta\alpha$ being an automorphism implies that $\alpha$ is injective and
+$\beta$ is surjective. Therefore $\alpha$ and $\beta$ are inverse
+isomorphisms and $y\mapsto \widetilde y$ is the identity on $K^{-2}(X)$.
+\end{proof}
+
+\section{July 11}
+Let $M$ be a compact smooth manifold, $E,F$ two smooth vector bundles over $M$, and let
+\[d:\mathscr D(E)\to\mathscr D(F)\] be a linear elliptic differential operator ($\mathscr
+D(E)$ denotes the space of smooth sections of $E$). Recall that $d$ is elliptic if its symbol $\sigma(d)$ is invertible on the cotangent bundle $T^*M$ away from the zero section.
+
+Then $d$ is a Fredholm operator, that is it has closed range and
+\[
+\dim\operatorname{Ker}d < \infty, \qquad \dim\operatorname{Coker}d < \infty.
+\]
+The index is defined by
+\[
+\operatorname{index}d = \dim\operatorname{Ker}d - \dim\operatorname{Coker}d.
+\]
+It has the important property of being invariant under perturbation of $d$, and in
+particular depends only on the highest order terms of $d$.
+
+Suppose now that $Q$ is another smooth vector bundle over $M$. If $Q$ were trivial then $d$
+would extend to an operator by tensoring with $Q$:
+\[
+d_Q:\mathscr D(E\otimes Q)\longrightarrow \mathscr D(F\otimes Q).
+\]
+If $Q$ is not trivial we can construct extensions $d_Q$ locally and then piece these
+together by partitions of unity. The resulting operator is not unique but its highest
+order terms are, and so any two choices for $d_Q$ have the same index. This is because if $d$ is of order \(m\) then it can be written in local coordinates as
+\[
+    d=\sum_{|\alpha|\le m}a_\alpha(x)\partial^\alpha.
+\]
+After choosing a connection on \(Q\), one replaces ordinary derivatives by
+covariant derivatives and obtains an operator of the form
+\[
+    d_Q=\sum_{|\alpha|\le m}
+    \bigl(a_\alpha(x)\otimes\operatorname{id}_Q\bigr)\nabla^\alpha.
+\]
+If the connection is changed from \(\nabla\) to $\nabla'=\nabla+A$
+then \(A\) is a bundle-valued \(1\)-form and hence an operator of order
+zero. Expanding $(\nabla+A)^\alpha$
+shows that the unique term containing \(m\) derivatives is $\nabla^\alpha$
+every other term contains at least one factor of \(A\), and therefore has
+order at most \(m-1\). Consequently, $d_Q'$ and $d_Q$ differ by an operator which
+has order at most \(m-1\).
+
+Thus, having fixed $E,F,d$, the map $Q\mapsto \operatorname{index}d_Q$
+is well defined and extends by linearity to give a homomorphism
+\[
+K(M)\longrightarrow \mathbf Z
+\]
+which will be denoted by $\operatorname{index}_d$. Actually $K$ here refers to the
+category of smooth vector bundles, but the usual kind of approximation implies that this
+is isomorphic to the ordinary $K$ of continuous vector bundles.
+
+\subsection{Families of operators}
+We want now to consider families of operators. Thus let $X$ be a compact space and let
+$E$ be a family of vector bundles over $M$ parametrized by $X$. This really means that
+$E$ is a vector bundle over $M\times X$ which is smooth in the $M$-direction. If $F$ is
+another such family then a family $d$ of differential operators from $E$ to $F$ is a
+family
+\[
+d_x:\mathscr D(E_x)\longrightarrow \mathscr D(F_x)
+\]
+with suitable continuity in $x$ ($E_x$ denotes the restriction of $E$ to $M\times\{x\}$).
+If all the $d_x$ are elliptic (of the same order) we shall say that $d$ is an
+\textbf{elliptic family}. 
+
+\begin{theorem}
+    An elliptic family has an index in $K(X)$.
+\end{theorem}
+
+\begin{proof}
+If $\dim\ker d_x$ and $\dim\operatorname{coker}d_x$ are locally constant in $x$, then
+$\ker d_x$ and $\operatorname{coker}d_x$ assemble into vector bundles $\ker d,
+\operatorname{coker}d\to X$, and
+\[
+\operatorname{ind}(d) = [\ker d] - [\operatorname{coker}d] \in K(X).
+\]
+Restricting this class to a point $x$ recovers the ordinary Fredholm index:
+\[
+\operatorname{rank}(\ker d_x) - \operatorname{rank}(\operatorname{coker}d_x) =
+\operatorname{ind}(d_x).
+\]
+However, the dimension $x\mapsto\dim\ker d_x$ need not be locally constant. A finite-dimensional
+model is $T_t:\mathbf C\to\mathbf C$, $T_t(z)=tz$: for $t\ne 0$, $\ker T_t=0$, while
+$\ker T_0=\mathbf C$. The kernels do not form a bundle over the parameter line.
+
+The appropriate construction is to replace smooth sections by Sobolev spaces. If $d_x$ has
+order $m$, choose a Sobolev index $s$ and extend $d_x$ to a bounded operator
+\[
+d_x: H^s(M,E_x)\longrightarrow H^{s-m}(M,F_x).
+\]
+Ellipticity implies each $d_x$ is Fredholm: $\dim\ker d_x<\infty$,
+$\dim\operatorname{coker}d_x<\infty$, and the image of $d_x$ is closed. As $x$ varies,
+these Sobolev spaces form Hilbert bundles $\mathcal H_E,\mathcal H_F\to X$, and the
+operators form a continuous bundle map $d:\mathcal H_E\to\mathcal H_F$. So an elliptic
+family gives a continuous family of Fredholm operators.
+
+The key step is to modify the family by a finite-dimensional auxiliary space so that the
+modified family becomes surjective. Since each $d_x$ is Fredholm, $\operatorname{coker}
+d_x = H^{s-m}(M,F_x)/\operatorname{im}d_x$ is finite-dimensional. Near a fixed $x_0\in X$,
+choose finitely many vectors in the target Hilbert space whose images span the cokernels
+of $d_x$ for $x$ near $x_0$. By compactness of $X$, finitely many such neighborhoods
+suffice, and combining the local choices gives:
+\begin{itemize}
+\item a finite-dimensional vector space $P$;
+\item the trivial bundle $\underline P = X\times P$;
+\item a continuous bundle map $\phi:\underline P\to \mathcal H_F$;
+\end{itemize}
+such that
+\[
+T = d+\phi : \mathcal H_E\oplus\underline P \longrightarrow \mathcal H_F
+\]
+is surjective over every point of $X$, i.e.\ $T_x(u,p) = d_x(u)+\phi_x(p)$ is onto for all
+$x$.
+
+Because $T_x$ is surjective and Fredholm, its kernel is finite-dimensional; surjectivity
+is an open condition for Fredholm operators, so kernel dimension is locally constant, and
+the kernels form a genuine finite-dimensional vector bundle $\ker T\to X$. Atiyah defines
+\[
+\operatorname{ind}(d) = [\ker T] - [\underline P] \in K(X).
+\]
+For
+a single Fredholm operator $d$, if $P\to\operatorname{coker}d$ is an isomorphism and
+$T=d+\phi$ is surjective, there is an exact sequence
+\[
+0\to \ker d \to \ker T \to P \to \operatorname{coker}d \to 0.
+\]
+Exactness in $K$-theory gives $[\ker T]-[P] = [\ker d]-[\operatorname{coker}d]$, so the
+stabilized formula reproduces the usual Fredholm index. For a family, the same formula
+still makes sense even when $\ker d_x$ and $\operatorname{coker}d_x$ do not separately
+form bundles.
+
+The class $[\ker T]-[\underline P]$ does not depend on the choice of $P$ or $\phi$.
+Given two choices $(P_0,\phi_0)$, $(P_1,\phi_1)$ producing surjective stabilized families,
+pass to the common stabilization $P_0\oplus P_1$: adding an extra trivial summand changes
+the kernel bundle by exactly the same trivial summand, so the virtual class is unchanged.
+Schematically, $[\ker T]-[P]$ is stable under $T\rightsquigarrow T\oplus\operatorname{id}_R$,
+since
+\[
+[\ker(T\oplus\operatorname{id}_R)] - [P\oplus R]
+= [\ker T\oplus R] - [P\oplus R] = [\ker T]-[P].
+\]
+A homotopy between different choices gives the same $K$-class as well, since vector
+bundles over $X\times[0,1]$ restrict to isomorphic $K$-classes at the two ends. Hence the
+index class is canonical.
+\end{proof}
+\begin{remark}
+    Alternatively, one can use the fact that the space of Fredholm operators is a classifying space for $K$-theory. A continuous family of Fredholm operators parametrized by $X$ gives a map $f:X\to\operatorname{Fred}(\mathcal H)$, and the homotopy class of this map corresponds to an element of $K(X)$. The index of the family is then defined as this element in $K(X)$.
+\end{remark}
+
+The index of an elliptic family is a homotopy invariant and so depends only on the
+highest order terms. Thus if $Q$ is a family of vector bundles over $M$ (parametrized
+also by $X$) then, just as before, we can form $d_Q$, an elliptic family from $E\otimes Q$
+to $F\otimes Q$, and $\operatorname{index}d_Q\in K(X)$ will be independent of choices
+made. Then
+\[
+Q\mapsto \operatorname{index}d_Q
+\]
+extends by linearity to give a homomorphism
+\[
+\operatorname{index}_d : K(M\times X)\longrightarrow K(X).
+\]
+$K(M\times X)$ should stand for the Grothendieck group of bundles smooth in the
+$M$-direction, but the usual kind of approximation shows that this coincides with the
+ordinary Grothendieck group.
+
+If $Q$ is a family of trivial bundles over $M$, i.e.\ $Q$ is a bundle on $M\times X$
+induced from a bundle $Q_0$ on $X$, then there is an obvious choice for $d_Q$, and (when
+$\dim\operatorname{Ker}d_x$ is constant) we clearly have
+\[
+\operatorname{Ker}d_Q \cong \operatorname{Ker}d\otimes Q_0, \qquad
+\operatorname{Coker}d_Q \cong \operatorname{Coker}d\otimes Q_0,
+\]
+so that $\operatorname{index}d_Q = (\operatorname{index}d)\otimes Q_0$. In fact the
+definition of $\operatorname{index}d_Q$ in the general case shows that this formula
+always holds. Thus
+\[
+\operatorname{index}_d : K(M\times X)\longrightarrow K(X) \tag{2.1}
+\]
+is a $K(X)$-module homomorphism.
+
+\subsection{Functoriality}
+
+If $Y$ is another compact space and $f:Y\to X$ a continuous map, we can consider the
+induced family $f^*(d)$ of elliptic operators parametrized by $Y$. The definition of
+$\operatorname{index}_d$ shows that it is functorial, i.e.\ we have a commutative
+diagram
+\[
+\begin{tikzcd}
+K(M\times X) \arrow[r,"\operatorname{index}_d"] \arrow[d,"(1\times f)^*"] & K(X) \arrow[d,"f^*"] \\
+K(M\times Y) \arrow[r,"\operatorname{index}_{f^*(d)}"] & K(Y).
+\end{tikzcd}
+\]
+
+In particular if $X$ is a point (so that $M\times X = M$ and $d$ is just an elliptic
+operator on $M$) we can consider the \emph{constant family} $f^*(d)$ parametrized by any
+compact space $Y$, $f:Y\to\mathrm{pt}$ being the constant map. By a slight abuse of
+notation we shall omit the symbol $f^*$ and write
+\[
+\operatorname{index}_d : K(M\times Y)\longrightarrow K(Y)
+\]
+instead of $\operatorname{index}_{f^*(d)}$.
+
+\begin{proposition}[Index of elliptic families]\label{prop:index-elliptic-families}
+Let $d$ be an elliptic differential operator on a compact manifold $M$. For any smooth
+vector bundle $Q$ on $M$ let $d_Q$ be an extension of $d$ to $Q$ (i.e.\ symbolically
+$\sigma(d_Q)=\sigma(d)\otimes\mathrm{Id}_Q$). Then
+\[
+Q\mapsto \operatorname{index}d_Q
+\]
+defines a homomorphism
+\[
+\operatorname{index}_d : K(M)\longrightarrow \mathbf Z.
+\]
+Moreover there is a functorial extension of this to compact spaces $X$, so that for each
+$X$
+\[
+\operatorname{index}_d : K(M\times X)\longrightarrow K(X)
+\]
+is a $K(X)$-module homomorphism.
+\end{proposition}
+
+\subsection{Proof of periodicity}
+We shall apply Proposition \ref{prop:index-elliptic-families} with $M$ being the complex projective line $P_1(\mathbf
+C)$ and $d$ being the $\bar\partial$ operator from functions to forms of type $(0,1)$:
+\[
+f \mapsto \frac{\partial f}{\partial\bar z}\,d\bar z.
+\]
+For any holomorphic vector bundle $Q$ over $P_1(\mathbf C)$ the operator $\bar\partial$ has
+a natural extension $\bar\partial_Q$ and it is well known by Dolbeault's theorem that
+\[
+\operatorname{Ker}\bar\partial_Q \cong H^0(P_1,\mathcal O(Q)), \qquad
+\operatorname{Coker}\bar\partial_Q \cong H^1(P_1,\mathcal O(Q)),
+\]
+where $H^0,H^1$ denote the cohomology groups of the sheaf $\mathcal O(Q)$ of germs of
+holomorphic sections of $Q$. Now for $Q=1$ the trivial line bundle we have
+\[
+H^0\cong \mathbf C, \qquad H^1=0,
+\]
+while for the dual $H^{-1}$ of the standard line bundle $H$ over $P_1$ we have $H^0=H^1=0$. Thus for the homomorphism
+\[
+\operatorname{index}_{\bar\partial} : K(P_1)\longrightarrow \mathbf Z
+\]
+we have
+\[
+\operatorname{index}_{\bar\partial}(1-H^{-1}) = 1.
+\]
+
+We now identify $P_1$ with the $2$-sphere $S^2$ and so with the one-point compactification
+of $\mathbf R^2$. Thus we have the exact sequence
+\[
+0 \to K(\mathbf R^2) \to K(P_1) \xrightarrow{\ \epsilon\ } \mathbf Z \to 0,
+\]
+where $\epsilon$ is the augmentation. The elements $1-H$ and $1-H^{-1}$ are in the kernel
+of $\epsilon$ and hence are elements of $K(\mathbf R^2)$. In fact by convention $1-H^{-1}$ is the Bott generator $b$ of $K(\mathbf R^2)$, so we have
+\[
+\operatorname{index}_{\bar\partial}(b) = 1 \tag{normalization}
+\]
+Let $\alpha$ be the composition
+\[
+K^{-2}(X) = K(\mathbf R^2\times X) \longrightarrow K(S^2\times X)
+\xrightarrow{\operatorname{index}_{\bar\partial}} K(X).
+\]
+The functoriality and $K(X)$-module property of $\operatorname{index}_{\bar\partial}$ imply that $\alpha$ has properties (A1) and (A2) above. Property (A3) from the normalization shows that $\alpha(b)=1$. 
+\section{July 13}
+The Grothendieck group $K_G(X)$ of $G$-equivariant vector bundles on a compact $G$-space $X$ is a module over the representation ring $R(G)$. 
+
+A complex $G$-module $V$ has a canonical element $\lambda_V\in K_G(V)$ defined by the exterior algebra of the dual bundle $\Lambda^*V^*$, with maps given by contraction with the tautological section of $V$. The complex $\Lambda^*V^*$ on $V$ has a natural extension to the compactification $\P(V\oplus\mathbf C)$. In particular there is a map \[
+j:K_G(V)\longrightarrow K_G\bigl(\mathbf P(V\oplus\mathbf C)\bigr)\]
+from relative to absolute $K$-theory $K_G\bigl(\mathbf P(V\oplus\mathbf C),\mathbf P(V)\bigr)
+\longrightarrow
+K_G\bigl(\mathbf P(V\oplus\mathbf C)\bigr)$ and the image of $\lambda_V$ under this map is \begin{align*}
+    j(\lambda_V) = \sum_{k=0}^{\dim V}(-1)^k H^{-i} \lambda^i(V^*)
+\end{align*} where $H$ is the hyperplane bundle on $\P(V\oplus\mathbf C)$ and $\lambda^i(V^*)$ is the $i$-th exterior power of the dual bundle $V^*$. This can be explained in coordinates. 
+Consider
+\[
+\mathbf P(V\oplus\mathbf C) = \operatorname{Proj} S,
+\qquad
+S = \operatorname{Sym}(V^*\oplus\mathbf C t).
+\]
+Let $n=\dim V$. On the affine chart $t\neq 0$, we identify $[v:t]\mapsto v/t$, so this
+chart is $V$.
+
+Choose a basis $x_1,\dots,x_n$ of $V^*$. The usual Koszul complex on
+$V=\operatorname{Spec}\operatorname{Sym}(V^*)$ is the Koszul complex of the coordinate
+functions $x_1,\dots,x_n$:
+\[
+0\to \operatorname{Sym}(V^*)\otimes\Lambda^nV^* \to\cdots\to
+\operatorname{Sym}(V^*)\otimes V^* \to \operatorname{Sym}(V^*) \to 0.
+\]
+The differential is contraction with the universal vector $\sum_i x_ie_i$. To extend this to projective space, we must regard it as a complex of graded $S$-modules
+whose differentials have degree $0$. Each coordinate $x_i$ has homogeneous degree $1$, so
+multiplication by $x_i$ raises degree by $1$. To make the Koszul differential
+degree-preserving, the $i$-th term must be shifted by $-i$:
+\[
+0\to S(-n)\otimes\Lambda^nV^* \to\cdots\to S(-1)\otimes V^* \to S\to 0.
+\]
+Indeed, the differential
+\[
+S(-i)\otimes\Lambda^iV^* \longrightarrow S(-(i-1))\otimes\Lambda^{i-1}V^*
+\]
+is given by multiplication by linear forms $x_j$, which have degree $1$, so it has total
+degree $0$.
+
+Now sheafify on $\operatorname{Proj}S$. Since
+$\widetilde{S(-i)} = \mathcal O_{\mathbf P(V\oplus\mathbf C)}(-i)$, the resulting complex
+is
+\[
+0\to \mathcal O(-n)\otimes\Lambda^nV^* \to\cdots\to \mathcal O(-1)\otimes V^* \to
+\mathcal O \to 0.
+\]
+Writing $H=\mathcal O(-1)$ for the tautological line bundle, this becomes
+\[
+0\to H^n\otimes\Lambda^nV^* \to\cdots\to H\otimes V^* \to \mathcal O \to 0.
+\]
+\begin{theorem}
+    For any compact $G$-space $X$ and any complex $G$-module $V$, multiplication by $\lambda_V$ gives an isomorphism
+\begin{align*}
+    K_G(X) \xrightarrow{\ \sim\ } K_G(V\times X), \qquad x\longmapsto \pi^*x\cdot\lambda_V,
+\end{align*}
+\end{theorem}
+\begin{proof}
+    We have only to construct a map $\alpha:K_G(V\times X)\to K_G(X)$ which is functorial in compact $X$, a $K_G(X)$-module homomorphism, and satisfies $\alpha(\lambda_V)=1 \in R(G)$. 
+
+    Consider the Dolbeault complex on the projective space $\mathbf P(V\oplus\mathbf C)$. Using a $G$-invariant hermitian metric, we construct the elliptic operator $\bar\partial+\bar\partial^*:\Omega^+ \to \Omega^-$ where $\Omega^+$ is the bundle of smooth forms of type $(0,\mathrm{even})$ and $\Omega^-$ is the bundle of smooth forms of type $(0,\mathrm{odd})$.  
+
+    The key fact is that for any holomorphic $G$-vector bundle $Q$ on $\mathbf P(V\oplus\mathbf C)$, $D$ has a natural extension $D_Q$ and we have natural $G$-equivariant isomorphisms \begin{align*}
+        \ker D_Q \cong H^{\text{even}}(\mathbf P(V\oplus\mathbf C),\mathcal O(Q)) \\
+        \operatorname{coker}D_Q \cong H^{\text{odd}}(\mathbf P(V\oplus\mathbf C),\mathcal O(Q)).
+    \end{align*}
+from which it follows that the index of $D_Q$ is the alternating sum of cohomology groups \begin{align*}
+    \operatorname{index}D_Q = \sum_{i=0}^{\dim V}(-1)^i H^i(\mathbf P(V\oplus\mathbf C),\mathcal O(Q)) \in K_G(\mathbf P(V\oplus\mathbf C))
+    \end{align*}
+    Let $Q = \lambda_V$ be the Koszul complex. Using the fact that the line bundles $H^i$ for $-n\leq i \leq 0$ have no higher cohomology, we can identify the virtual index of the Dolbeault operator as the Euler characteristic of the Koszul complex of the skyscraper sheaf at the origin, which is $1 \in K_G(*)$. Finally we define the required map $\alpha$ as the composition \begin{align*}
+        K_G(V\times X) \cong K_G(\mathbf P(V\oplus\mathbf C)\times X,\mathbf P(V)\times X) \xrightarrow{\operatorname{index}_{D_{\lambda_V}}} K_G(X)
+    \end{align*} which has all the required properties.
+\end{proof}
+Letting $G = U(n)$ and $V = \mathbf C^n$ be the standard representation and $X$ is a free $G$-space with orbit space $Y = X/G$, we have \begin{align*}
+    K_G(X) \cong K(Y) \\
+    K_G(V\times X) \cong K(E)
+\end{align*} where $E = V\times_G X$ is the associated vector bundle over $Y$. Moreover the element $\lambda_V \in K_G(V\times X)$ identifies with the Thom class $\lambda_E \in K(E)$. Thus as a special case of the equivariant periodicity theorem, we recover the Thom isomorphism in $K$-theory for complex vector bundles.
+
+More generally, if $H$ is another group and $Y$ is an $H$-space with $E$ an $H$-vector bundle, we can take $G = U(n) \times H$ and we get $K_G(X) \cong K_H(Y)$ and $K_G(V\times X) \cong K_H(E)$, so that the equivariant periodicity theorem gives a Thom isomorphism in $K$-theory for complex vector bundles with group action.
+
+\begin{theorem}
+    Let $E$ be an $H$-vector bundle over a compact $H$-space $Y$. Then multiplication by the Thom class $\lambda_E \in K_H(E)$ gives an isomorphism
+    \begin{align*}
+        K_H(Y) \xrightarrow{\ \sim\ } K_H(E), \qquad x\longmapsto \pi^*x\cdot\lambda_E
+    \end{align*}
+\end{theorem}
+
+\begin{example}
+    The long exact sequence in $K$-theory for the pair $B(E),S(E)$ gives a six term exact sequence \begin{align*}
+        0\longrightarrow K_G^1(S(V))
+\longrightarrow R(G)
+\xrightarrow{\ \cdot\lambda_{V}\ }
+R(G)
+\longrightarrow K_G^0(S(V))
+\longrightarrow0.
+    \end{align*}
+    where $\lambda_V$ is the Euler class \begin{align*}
+        \lambda_V = \sum_{i=0}^{\dim V}(-1)^i [\Lambda^i(V^*)] \in R(G)
+    \end{align*} This identifies the equivariant $K$-theory of the sphere $S(V)$ as the kernel and cokernel of multiplication by the Euler class in the representation ring.
+\end{example}
+
+The equivariant Bott periodicity theorem has an important application to the
+restriction map from a compact Lie group to its maximal torus.
+
+Let \(V\) be a complex \(G\)-representation. Replacing
+\(\mathbf P(V\oplus\mathbf C)\) by \(\mathbf P(V)\), the Dolbeault operator on
+\(\mathbf P(V)\) defines a natural homomorphism
+\[
+    \operatorname{index}_D:
+    K_G(\mathbf P(V)\times X)
+    \longrightarrow
+    K_G(X).
+\]
+The cohomology of projective space implies that
+the Dolbeault index of the trivial bundle is
+\[
+    \operatorname{index}_D(1)=1\in K_G(X).
+\]
+
+Consequently, the pullback
+\[
+    K_G(X)
+    \longrightarrow
+    K_G(\mathbf P(V)\times X)
+\]
+admits a natural left inverse, namely the index map
+\(\operatorname{index}_D\). In particular, this pullback is injective.
+
+Now specialize to $V=\mathbf C^n$ and $G=U(n)\times H$
+where \(H\) acts trivially on \(\mathbf C^n\). Since
+\[
+    \mathbf P(\mathbf C^n)
+    \cong
+    U(n)/(U(n-1)\times U(1))
+\]
+equivariant induction identifies $
+    K_G(\mathbf P(\mathbf C^n)\times X)
+    \cong
+    K_{U(n-1)\times U(1)\times H}(X)$ and hence the restriction map
+\[
+    K_{U(n)\times H}(X)
+    \longrightarrow
+    K_{U(n-1)\times U(1)\times H}(X)
+\]
+has a functorial left inverse. Iterating this construction gives split injections
+\begin{align*}
+    K_{U(n)\times H}(X)
+    \longrightarrow
+    K_{U(n-1)\times U(1)\times H}(X) 
+    \longrightarrow
+    \cdots 
+    \longrightarrow
+    K_{U(1)^n\times H}(X)
+\end{align*}
+This argument implies the earlier invoked result Proposition \ref{prop:atiyah}. This argument factorizes the pushforward along the projection from the complete flag bundle, that is the Gysin map for the projection $\operatorname{Fl}(E)\longrightarrow X$.
+
+\subsection{Spinor case}
+When $V$ is a real vector space, the appropriate compactification is the sphere $V^+$. The elliptic operator we need is the Dirac operator. If $\dim V \cong 0 \pmod 8$ then the total Spin bundle $S$ of the sphere decomposes into two halves $S^+$ and $S^-$, and the Dirac operator is a map interchanging these two halves. Write $D:S^+\to S^-$ for the Dirac operator, whose adjoint is $D^*:S^-\to S^+$. 
+\begin{remark}
+    Let $M$ be an oriented Riemannian manifold of dimension $m$, and suppose $M$ is spin. The oriented orthonormal frame bundle $P_{\mathrm{SO}}(TM)\to M$
+lifts to a principal $\operatorname{Spin}(m)$-bundle
+$P_{\operatorname{Spin}}(TM)\to M$. Let $\Delta_m$ denote the complex spin representation of $\operatorname{Spin}(m)$. The associated
+spinor bundle is
+\[
+S = P_{\operatorname{Spin}}(TM)\times_{\operatorname{Spin}(m)}\Delta_m.
+\]
+The spin representation comes equipped with Clifford multiplication
+\[
+c: T^*M\otimes S \longrightarrow S,
+\]
+satisfying $c(\xi)^2 = -\|\xi\|^2$. Suppose $m=2r$ is even. In the complex Clifford algebra there is a chirality element
+\[
+\omega = i^r c(e_1)\cdots c(e_{2r}),
+\]
+where $e_1,\dots,e_{2r}$ is an oriented orthonormal frame. This operator satisfies $\omega^2 = 1$.
+Hence the spin representation decomposes into the $\pm1$-eigenspaces of $\omega$:
+\[
+\Delta_{2r} = \Delta_{2r}^+\oplus\Delta_{2r}^-
+\]
+The Levi-Civita connection on $TM$ lifts to a connection on the spinor bundle,
+\[
+\nabla^S : \Gamma(S) \longrightarrow \Gamma(T^*M\otimes S).
+\]
+The \textbf{Dirac operator} is the composition
+\[
+D : \Gamma(S) \xrightarrow{\ \nabla^S\ } \Gamma(T^*M\otimes S)
+\xrightarrow{\ c\ } \Gamma(S).
+\]
+Locally, in an orthonormal frame $e_1,\dots,e_m$,
+\[
+D = \sum_{j=1}^m c(e_j)\nabla^S_{e_j}.
+\]
+Its principal symbol is
+\[
+\sigma_D(x,\xi) = i\,c(\xi)
+\]
+up to the conventional factor of $i$. Since $c(\xi)^2 = -\|\xi\|^2$, Clifford
+multiplication by $\xi\neq 0$ is invertible. Hence $D$ is elliptic.
+
+
+The representation theory of the
+real Clifford algebras asks when the complex spin representation $\Delta_m$ is the complexification of a real representation. This is equivalent to asking for $J:\Delta_m\to\Delta_m$ an antilinear map such that $J^2 = 1$ and $J$ commutes with the action of $\operatorname{Spin}(m)$. 
+
+When $m\equiv0\pmod8$ there is indeed such a map $J$. When $m \cong 4 \pmod 8$ there is an antilinear map $J$ such that $J^2 = -1$ so we say that $\Delta_m$ is quaternionic. In the other cases, there is no such map $J$ and we get purely complex representations. 
+\end{remark}
+If we regard $V^+$ as the homogeneous space $\Spin(V+1)/\Spin(V)$, then the Dirac operator is a homogeneous operator. If $V$ is a $\Spin$ G-module, meaning that the action of $V$ factors through a given homoomorphism $G\to \Spin(V)$, then $D$ is $G$-invariant and induces an index \begin{align*}
+    \operatorname{index}_D:KO_G(V^+\times X) \longrightarrow KO_G(X)
+\end{align*}
+The Dirac operator is $D^+:\Gamma(S^+)\longrightarrow \Gamma(S^-)$. More generally, for a real vector bundle $Q\to V^+$, one may twist the Dirac operator:
+\[
+D_Q^+:
+\Gamma(S^+\otimes Q)
+\longrightarrow
+\Gamma(S^-\otimes Q)\]
+For any real $G$-equivariant vector bundle $Q\to V^+$, twisting the Dirac
+operator by $Q$ gives an equivariant index
+$\operatorname{index}_D(Q)\in RO(G)$. Atiyah wants to find class
+$u\in KO_G(V)=\widetilde{KO}_G(V^+)$ such that
+$\operatorname{index}_D(u)=1$.
+
+Clifford multiplication gives a canonical identification
+$S\otimes S\cong\operatorname{End}(S)\cong\Cl(TV^+)\cong\Lambda^*T^*V^+$.
+Under this identification, the twisted Dirac operator $D_S$ becomes the de
+Rham operator $d+d^*$ on differential forms. Indeed,
+$(d+d^*)^2=dd^*+d^*d=\Delta$, so the kernel of $d+d^*$ is the space of
+harmonic forms. By Hodge theory, this kernel is naturally isomorphic to
+$H^*(V^+;\mathbf R)$.
+
+The relevant representation-theoretic identities in $RO(\Spin(8n))$ are
+\[(\Delta^+-\Delta^-)^2=\sum_i(-1)^i\Lambda^i(V)\]
+\[(\Delta^++\Delta^-)(\Delta^+-\Delta^-)=\Lambda^{4n}_+-\Lambda^{4n}_-\]
+where $\Lambda^{4n}_\pm$ are the $\pm1$-eigenspaces of the Hodge star operator
+on middle-dimensional forms. The identities follow from formal character expansions.
+
+\begin{remark}
+Let $W$ be the real $8n$-dimensional defining representation of $\operatorname{Spin}(8n)$,
+$W_{\mathbf C}$ its complexification, and $T\subset\operatorname{Spin}(8n)$ a maximal
+torus. The weights of $W_{\mathbf C}$ are $\pm x_1,\dots,\pm x_{4n}$; for $t\in T$, write
+$z_j=e^{x_j}(t)$ for the corresponding eigenvalues.
+
+The weights of $\Delta=\Delta^+\oplus\Delta^-$ are $\tfrac12(\varepsilon_1x_1+\cdots+
+\varepsilon_{4n}x_{4n})$, $\varepsilon_j\in\{\pm1\}$, with $\Delta^\pm$ distinguished by
+the parity of the number of minus signs. Hence
+\[
+\chi_{\Delta^++\Delta^-} = \prod_{j=1}^{4n}\big(e^{x_j/2}+e^{-x_j/2}\big),
+\qquad
+\chi_{\Delta^+-\Delta^-} = \prod_{j=1}^{4n}\big(e^{x_j/2}-e^{-x_j/2}\big),
+\]
+To get the first identity, start by squaring
+\[
+\chi_{(\Delta^+-\Delta^-)^2}
+= \prod_{j=1}^{4n}\big(e^{x_j/2}-e^{-x_j/2}\big)^2
+= \prod_{j=1}^{4n}\big(e^{x_j}+e^{-x_j}-2\big).
+\]
+For a representation $E$ with weights $\mu$, $\chi_{\lambda_{-1}(E)}=\prod_\mu(1-e^\mu)$,
+where $\lambda_{-1}(E)=\sum_k(-1)^k\Lambda^kE$. Since $W_{\mathbf C}$ has weights $\pm x_j$,
+\[
+\chi_{\lambda_{-1}(W_{\mathbf C})}
+= \prod_{j=1}^{4n}(1-e^{x_j})(1-e^{-x_j})
+= \prod_{j=1}^{4n}\big(2-e^{x_j}-e^{-x_j}\big)
+= \prod_{j=1}^{4n}\big(e^{x_j}+e^{-x_j}-2\big),
+\]
+using that $4n$ is even. The characters agree, so in the representation ring
+\[
+(\Delta^+-\Delta^-)^2 = \lambda_{-1}(W_{\mathbf C}) = \sum_{k=0}^{8n}(-1)^k\Lambda^kW_{\mathbf C}.
+\]
+
+The second identity is similar. The product of the two characters is
+\[
+\chi_{(\Delta^++\Delta^-)(\Delta^+-\Delta^-)}
+= \prod_{j=1}^{4n}\big(e^{x_j/2}+e^{-x_j/2}\big)\big(e^{x_j/2}-e^{-x_j/2}\big)
+= \prod_{j=1}^{4n}\big(e^{x_j}-e^{-x_j}\big).
+\]
+The middle exterior power $\Lambda^{4n}W_{\mathbf C}$ is preserved by the Hodge star, and
+since the ambient dimension is $8n$, $*^2=1$ on $\Lambda^{4n}W_{\mathbf C}$, so
+\[
+\Lambda^{4n}W_{\mathbf C} = \Lambda^{4n}_+\oplus\Lambda^{4n}_-,
+\]
+the $\pm1$-eigenspaces of $*$. The virtual character of their difference is the
+equivariant trace \[\chi_{\Lambda^{4n}_+-\Lambda^{4n}_-}(t) = \operatorname{Tr}(t*\mid
+\Lambda^{4n}W_{\mathbf C})\] Decomposing $W_{\mathbf C}=\bigoplus_{j=1}^{4n}(L_{x_j}\oplus
+L_{-x_j})$, the trace factors, with each summand contributing $e^{x_j}-e^{-x_j}$, so
+\[
+\chi_{\Lambda^{4n}_+-\Lambda^{4n}_-} = \prod_{j=1}^{4n}\big(e^{x_j}-e^{-x_j}\big).
+\]
+This matches $\chi_{(\Delta^++\Delta^-)(\Delta^+-\Delta^-)}$, so
+\[
+(\Delta^++\Delta^-)(\Delta^+-\Delta^-) = \Lambda^{4n}_+-\Lambda^{4n}_-.
+\]
+
+Thus, in the representation ring,
+\[
+(\Delta^+-\Delta^-)^2 = \sum_{k=0}^{8n}(-1)^k\Lambda^kW_{\mathbf C},
+\qquad
+(\Delta^++\Delta^-)(\Delta^+-\Delta^-) = \Lambda^{4n}_+-\Lambda^{4n}_-.
+\]
+Since all relevant representations admit real forms in dimension $8n$, both identities
+descend from the complex representation ring to $RO(\operatorname{Spin}(8n))$.
+\end{remark}
+
+
+
+
+The first identity identifies the difference of the two twisted Dirac
+operators with the even-minus-odd de Rham operator. Therefore
+$\operatorname{index}_D(S^+)-\operatorname{index}_D(S^-)
+=\chi(V^+)$. Since $V^+\cong S^{8n}$, its only nonzero cohomology groups are
+$H^0(S^{8n};\mathbf R)\cong\mathbf R$ and
+$H^{8n}(S^{8n};\mathbf R)\cong\mathbf R$, so
+$\chi(V^+)=2$. Hence
+$\operatorname{index}_D(S^+)-\operatorname{index}_D(S^-)=2$ in $RO(G)$.
+
+The second identity identifies the sum of the two twisted Dirac operators
+with the signature operator. Therefore
+$\operatorname{index}_D(S^+)+\operatorname{index}_D(S^-)
+=\operatorname{sign}(V^+)$. Since
+$H^{4n}(S^{8n};\mathbf R)=0$, the middle-dimensional intersection form is
+trivial, and thus $\operatorname{sign}(V^+)=0$.
+
+Together these two identities imply that
+$\operatorname{index}_D(S^+)=1$ and
+$\operatorname{index}_D(S^-)=-1$.
+
+To obtain a class in the reduced group
+$\widetilde{KO}_G(V^+)=KO_G(V)$, subtract the fiber of $S^+$ at the point at
+infinity. Thus define
+$u=[S^+]-[S^+_\infty]$. This class restricts to zero at infinity, so
+$u\in KO_G(V)$. Since the untwisted Dirac index of the sphere is zero, subtracting the constant bundle $S^+_\infty$ does not change the index.
+Therefore
+$\operatorname{index}_D(u)=1$.
+
+\begin{theorem}
+    Let $V$ be a real $\Spin$ G-module of dimension $8n$. Then the real Bott class is represented by the reduced half-spinor bundle
+$u=[S^+]-[S^+_\infty]\in KO_G(V)$, normalized by the condition
+$\operatorname{index}_D(u)=1$.
+\end{theorem}
+
+\subsection{FHT}
+Let $G$ be compact and let $X$ be a $G$-space. After complexification,
+$R(G)\otimes_{\mathbb Z}\mathbb C$ is identified with the ring of algebraic
+class functions on $G_\mathbb C$. Its spectrum is the affine quotient
+$Q=G_\mathbb C//G_\mathbb C$, whose points correspond to semisimple conjugacy
+classes. Thus an equivariant $K$-group $K_G^*(X)\otimes \mathbb C$ may be regarded as
+a sheaf over $Q$. 
+
+The Atiyah--Segal theorem describes the completed stalk at
+the identity conjugacy class. FHT instead describe the completed stalk at an
+arbitrary semisimple conjugacy class.
+
+In the untwisted case, the expected local formula has the shape
+$K_G^*(X)^{\wedge}_g \cong H_{Z(g)}^*(X^g)$,
+after applying the equivariant Chern character. Here $X^g$ is the fixed-point
+set of $g$, and $Z(g)$ is the centralizer of $g$.
+
+FHT prove the twisted analogue. If $\tau$ is a twisting of equivariant
+$K$-theory, then their theorem identifies the completed stalk at $g$ with
+twisted equivariant cohomology of the fixed-point set:
+${}^{\tau}K_G^*(X)^{\wedge}_g
+\cong
+{}^{\tau}H_{Z(g)}^*(X^g;{}^{\tau}L(g))$.
+The new object ${}^{\tau}L(g)$ is an equivariantly flat line bundle on $X^g$
+determined by the twisting $\tau$.
+
+When $g=1$, we have $X^1=X$, $Z(1)=G$, and the flat line bundle
+${}^{\tau}L(1)$ is trivial. Therefore the FHT theorem reduces to the
+Atiyah--Segal completion theorem together with the twisted Chern character:
+${}^{\tau}K_G^*(X)^{\wedge}_{I_G}\cong {}^{\tau}H_G^*(X)$.
+
+So Atiyah--Segal explains why the Chern character only sees the formal
+neighborhood of the identity. FHT globalize this by looking at all formal
+neighborhoods in $G_\mathbb C//G_\mathbb C$. In this sense, their twisted
+equivariant Chern character is a globalized completion theorem: instead of
+only completing at the augmentation ideal, one completes at every conjugacy
+class and obtains fixed-point cohomology with twisting-dependent coefficients.
+\end{document}

@@ -1,0 +1,245 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+
+
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\begin{document}
+
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Twistings}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+    Abstract
+\end{abstract}
+
+\tableofcontents
+
+\begin{definition}
+    A \textbf{prespectrum} is a sequence of pointed spaces $X_n$ together with maps $\Sigma X_n \to X_{n+1}$.
+\end{definition}
+Using the adjunction $\Sigma \dashv \Omega$, we can equivalently give maps $X_n \to \Omega X_{n+1}$.
+
+\begin{definition}
+    An \textbf{$\Omega$-spectrum} is a prespectrum such that the maps $X_n \to \Omega X_{n+1}$ are weak equivalences. The 0th space $X_0$ of an $\Omega$-spectrum is called an \textbf{infinite loop space}.
+\end{definition}
+$\Omega$-spectra are the particularly good representatives among pre-spectra. They are (after geometric realization) the fibrant objects in the stable model structure on prespectra. Given a pointed topological space $X$, its suspension spectrum $\Sigma^\infty X$ is far from being an $\Omega$-spectrum. However $X$ can be resolved by an $\Omega$-spectrum $Q\Sigma^\infty X$.
+
+\begin{definition}
+    Let $Q: \Top_* \to \Top_*$ be the \textbf{free infinite loop space} functor given as the colimit
+    \[
+        QX \coloneqq \varinjlim_k \Omega^k \Sigma^k X.
+    \]
+\end{definition}
+
+Then $(Q\Sigma^\infty X)_n \coloneqq Q(\Sigma^n X)$ is the $\Omega$-spectrum corresponding to the suspension spectrum of $X$. It is an $\Omega$-spectrum. Moreover, the map $\Sigma^\infty X \to Q\Sigma^\infty X$ is a stable equivalence.
+
+\begin{definition}
+    A prespectrum is \textbf{connective} if all of its stable homotopy groups vanish in negative degrees. \begin{align*}
+        \pi_n(X) \coloneqq \varinjlim_k \pi_{n+k}(X_k) = 0, \quad n < 0.
+    \end{align*}
+\end{definition}
+
+
+A \textbf{$E_\infty$ space} is a space with a multiplication that is commutative and associative up to all coherent higher homotopies. The notion of $E_\infty$ spaces can be made precise using the language of operads.
+We say that an $E_\infty$ space is \textbf{group-like} if $\pi_0(X)$ is a group under the multiplication. For the sake of writing, we will simply give some examples.
+
+\begin{example}
+    The infinite symmetric product $\mathrm{Sym}^\infty(X)$ of a pointed space $X$ is an $E_\infty$ space under addition of formal points. The Dold--Thom theorem says that $\pi_n(\mathrm{Sym}^\infty(X)) \cong \tilde{H}_n(X)$.
+\end{example}
+
+\begin{theorem}
+    The following homotopy theories are equivalent:
+    \begin{itemize}
+        \item group-like $E_\infty$ spaces;
+        \item connective spectra;
+        \item infinite loop spaces.
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    We describe the correspondences. First, let $E$ be a connective spectrum. After replacing $E$ by an equivalent $\Omega$-spectrum, we may assume that its structure maps give weak equivalences
+    \[
+        E_n \simeq \Omega E_{n+1}
+    \]
+    for all $n\geq 0$. Its zeroth space
+    \[
+        \Omega^\infty E := E_0
+    \]
+    is therefore an infinite loop space: it admits compatible deloopings
+    \[
+        E_0 \simeq \Omega E_1 \simeq \Omega^2 E_2 \simeq \cdots.
+    \]
+    Moreover, $\Omega^\infty E$ naturally has the structure of a group-like $E_\infty$ space. Intuitively, each $n$-fold loop-space presentation $E_0 \simeq \Omega^n E_n$
+    gives an action of the little $n$-cubes operad, and the compatibility as $n\to\infty$ gives an $E_\infty$ structure. The group-like condition follows because
+    \[
+        \pi_0(\Omega^\infty E)=\pi_0(E)
+    \]
+    is a group. Conversely, let $X$ be a group-like $E_\infty$ space. The $E_\infty$ structure means that $X$ is a homotopy-coherently commutative monoid. Since $X$ is group-like, its monoid of connected components $\pi_0(X)$ is a group. We send $X$ to the connective spectrum $B^\infty X$ obtained by delooping $X$ infinitely many times.
+
+
+    Finally, by definition, an infinite loop space is a space $X$ together with compatible deloopings
+    \[
+        X\simeq \Omega X_1,\qquad X_1\simeq \Omega X_2,\qquad X_2\simeq \Omega X_3,\quad \ldots .
+    \]
+    This data is equivalently an $\Omega$-spectrum
+    \[
+        E=(X,X_1,X_2,\ldots)
+    \]
+    whose zeroth space is $X$. Since the spectrum begins in degree $0$, it is connective. Conversely, the zeroth space of any connective $\Omega$-spectrum is an infinite loop space.
+\end{proof}
+
+We explain how the delooping construction $B^\infty$ works for topological abelian monoids. The construction for general group-like $E_\infty$ spaces is similar but more complicated. For a precise treatment, see the Segal model on $A_\infty$ and $E_\infty$ spaces.
+
+For a topological monoid $M$, one defines its classifying space $BM$ by the bar construction. More precisely,
+\[BM := |B_\bullet(*,M,*)|\]
+where the simplicial space $B_\bullet(,M,)$ has
+$B_q(*,M,*)=M^q$. The face maps multiply adjacent entries or delete an endpoint, and the degeneracy maps insert the unit element.
+
+If $M$ is a well-behaved topological monoid, there is a natural map $M\to \Omega BM.$. This map is not always a weak equivalence. It becomes a weak equivalence when $M$ is grouplike and sufficiently nice. More generally, $\Omega BM$ is the group completion of $M$.
+
+If $A$ is a topological abelian monoid, then so is $BA$. In particular, we can interate the bar construction and the adjunction between $\Sigma$ and $\Omega$ to get a sequence of spaces produces \[B^\infty X = (X,BX,B^2X,\dots)\]
+
+\subsection{The stable homotopy hypothesis}
+A symmetric monoidal category is a category $\cC$ equipped with a bifunctor $\otimes:\cC\times \cC\to \cC$ that is associative and commutative up to coherent isomorphisms, and an object $1\in \cC$ that is a unit for $\otimes$.
+
+\begin{definition}
+    A \textbf{Picard $n$-groupoid} is a symmetric monoidal $n$-groupoid in which every object is invertible under the monoidal structure.
+\end{definition}
+
+Given a Picard $n$-groupoid $\cC$, we can form its classifying space $B\cC$. Recall that this is the geometric realization of the nerve of $\cC$. The nerve of $\cC$ is a simplicial set whose $k$-simplices are given by sequences of composable morphisms in $\cC$ of length $k$.
+
+The symmetric monoidal structure on $\cC$ induces an $E_\infty$ structure on $B\cC$. Moreover, the group-like condition is satisfied because every object of $\cC$ is invertible. Therefore, $B\cC$ is a group-like $E_\infty$ space, and hence corresponds to a connective spectrum. The stable homotopy hypothesis says that this construction gives an equivalence between the homotopy theory of Picard $n$-groupoids and the homotopy theory of connective spectra whose homotopy groups vanish are concentrated in degrees between $0$ and $n$. To summarize, we have the result from May's paper "Symmetric monoidal and permutative categories."
+
+\begin{theorem}
+    Let $\cC$ be an $n$-groupoid. Then the classifying space $B\cC$ is an $E_\infty$ space. If moreover $\cC$ is a Picard $n$-groupoid, then $B\cC$ is a group-like $E_\infty$ space.
+\end{theorem}
+\begin{proof}
+    A permutative category is a strict symmetric monoidal category, in the sense that the associativity and unit laws are equalities. The commutativity is still allowed to be up to isomorphism. The reason for considering this stricter notion is that iterated products in a permutative category are unambiguously defined, then all the remaining coherences concern permutations of factors.
+
+    May shows that every monoidal category is naturally equivalent to a strict monoidal category, and every symmetric monoidal category is naturally equivalent to a permutative category.
+
+    Next May says that for a fixed permutative category $\mathcal A$ and for each permutation $\sigma\in \Sigma_j$, the symmetry determines natural transformations $c_\sigma:\square^j\to \square^j$ where $\Sigma_j$ acts by permuting the $j$ factors.
+
+    Then Lemma 4.3 states that for every $j\geq 0$, there is a $\Sigma_j$-equivariant functor
+    \[
+        c_j:\widetilde{\Sigma}_j\times \mathcal A^j\to \mathcal A.
+    \]
+    where $\widetilde{\Sigma}_j$ is the translation category of the symmetric group $\Sigma_j$. Concretely, on objects,
+    \[c_j(\sigma,A_1,\dots,A_j)
+        =
+        A_{\sigma^{-1}(1)}\square\cdots\square A_{\sigma^{-1}(j)}\]
+    Lemma 4.4 says the $c_j$ are compatible with substitution of products into products. This is the operad composition condition. The classifying space functor $B:\mathrm{TopCat}\to \mathrm{Top}$ preserves products, so the $c_j$ induce maps
+    \[B\widetilde{\Sigma}_j\times (B\mathcal A)^j\to B\mathcal A.\]
+    There is an $E_\infty$ operad $\cD$ modeled on $D(j)  = B\widetilde{\Sigma}_j$, so the above maps give $B\mathcal A$ the structure of an algebra over $\cD$.
+\end{proof}
+
+\section{Twistings}
+Freed Hopkins Teleman define the notion of a twisting for a topological stack $X$ which is locally a quotient groupoid. Instead of working with stacks, one can also work with topological groupoids, up to suitable equivalence relations which express the idea that two groupoids are "the same stack" if they become equivalent after passing to a common refinement of open covers.
+
+\begin{definition}
+    A \textbf{topological groupoid} is a groupoid object in the category of topological spaces. Concretely, it consists of a space of objects $X_0$, a space of morphisms $X_1$, and structure maps $s,t:X_1\to X_0$ (source and target), $e:X_0\to X_1$ (identity), $i:X_1\to X_1$ (inverse), and $m:X_1\times_{X_0} X_1\to X_1$ (composition) satisfying the usual groupoid axioms.
+\end{definition}
+
+\begin{definition}
+    A local equivalence is a continuous functor $F:X\to Y$ so that for all $y_0 \in Y_0$, there exists an open set $U\subset Y_0$ containing $y_0$ and a lift $U \to \widetilde{X_0}$ so that the following diagram commutes (where the top square is a pullback):
+    \[
+        \begin{tikzcd}[
+                row sep=2.2em,
+                column sep=3.2em,
+                cells={nodes={inner sep=1pt}}
+            ]
+            & \widetilde X_0 \arrow[r] \arrow[d] & X_0 \arrow[d] \\
+            & Y_1 \arrow[r, "t"] \arrow[d, "s"'] & Y_0 \\
+            U \arrow[r] \arrow[uur, dashed] & Y_0 &
+        \end{tikzcd}
+    \]
+Groupoids $X,Y$ are called \textbf{weakly equivalent} if there is a zig-zag diagram of local equivalences between $X$ and $Y$.
+\end{definition}
+
+The key example to keep in mind is the Cech groupoid associated to an open cover $\cU = \{U_i\}$ of a topological space $S$. Let $S_{\cU}$ be the groupoid whose objects are $\coprod_i U_i$ and whose morphisms are $\coprod_{i,j} U_i\cap U_j$. Then $S_{\cU}$ is weakly equivalent but not equivalent to $S$ as topological groupoids. 
+
+Denote by $[X]$ the coarse moduli space of $X$, which is the quotient of $X_0$ by the equivalence relation generated by $s(x)\sim t(x)$ for all $x\in X_1$. Given $U \subset [X]$, we can consider the restriction $X|_U$ of $X$ given by the full subgroupoid of objects whose isomorphism class lies in $U$. 
+
+\begin{definition}
+    We say that a topological groupoid $X$ is \textbf{locally a quotient groupoid} if for every point $x\in [X]$, there exists an open neighborhood $U$ of $x$ such that $X|_U$ is weakly equivalent to a quotient groupoid $S//G$ where $G$ is a compact Lie group acting on a Hausdorff space $S$.
+\end{definition}
+
+\begin{definition}
+A \textbf{principal $T$-bundle} $\eta$ over a topological groupoid $X$ is a principal $T$-bundle $P\to X_0$ together with an isomorphism of $T$-bundles $s^*P \cong t^*P$ over $X_1$ which is associative.
+\end{definition}
+
+A grading is a function $\epsilon:X\to \Z/2$ where $\Z/2$ is regarded as a discrete groupoid. Pairs $(\eta,\epsilon)$ of a principal $T$-bundle and a grading are called $\Z/2$-graded $T$-twistings. They form a symmetric monoidal category. The notion of a twisting lives one categorical level higher in the following sense.
+
+\begin{definition}
+    A \textbf{graded $T$-central extension} $L$ of $X$ is the data of a $\Z/2$-graded $T$-bundle on $X_1$ along with isomorphisms $\pi_1^*L \otimes \pi_2^*L \cong m^*L$ over $X_1\times_{X_0} X_1$ subject to cocycle conditions. 
+\end{definition}
+
+Equivalently, it is the data of a grading $\epsilon:X\to B\Z/2$ and a groupoid $\widetilde{X}$ with the same objects as $X$ and morphisms given by a $T$-bundle over $X_1$. Then the projection $\widetilde{X}\to X$ has fibers $BT$. Let $\mathrm{CXT}(X)$ be the category of graded $T$-central extensions of $X$. It is a symmetric monoidal category under graded tensor product. We are now ready to define twistings of $K$-theory for a local quotient groupoid $X$. Roughly, they are graded central extensions of $X$ up to suitable equivalence relations. 
+
+\begin{definition}
+Let $X$ be a local quotient groupoid. The \textbf{$2$-groupoid of twistings}
+$\mathrm{Tw}(X)$ is defined as follows.
+
+An object of $\mathrm{Tw}(X)$ is a triple $(P,L,n)$, where
+$P \to X$ is a local equivalence, $L$ is a graded $T$-central extension
+of $P$, and $n:X\to \mathbb Z/2$ is a locally constant function recording
+the degree shift in $K$-theory. A $1$-morphism
+\[
+(P,L,n)\longrightarrow (P',L',n')
+\]
+exists only when $n=n'$. It is represented by a triple $(Q,p,\eta)$, where
+\[
+p:Q\to P\times_X P'
+\]
+is a local equivalence, and
+\[
+\eta:p^*L \xrightarrow{\sim} p^*L'
+\]
+is an isomorphism of graded $T$-central extensions over $Q$. A $2$-morphism between two such $1$-morphisms is given after passing to
+a common refinement. More explicitly, if $(Q,p,\eta)$ and $(Q',p',\eta')$
+are two $1$-morphisms, then a $2$-morphism between them is represented by
+a local equivalence
+\[
+R\to Q\times_{P\times_X P'}Q'
+\]
+together with an isomorphism between the pullbacks of $\eta$ and $\eta'$
+over $R$. These representatives are identified after further common
+refinement.
+\end{definition}
+
+Let $H^*(X, R)$ denote the cohomology of the geometric realization of $X$ with coefficients in $R$. Recall that the Bockstein homomorphism $\beta:H^2(X,\Z/2)\to H^3(X,\Z)$ is the connecting homomorphism associated to the short exact sequence of coefficients
+\[0\to \Z \xrightarrow{\cdot 2} \Z \to \Z/2 \to 0.\]
+\begin{proposition}
+    The set of isomorphism classes of objects in $\mathrm{Tw}(X)$ is in bijection with \[H^0(X,\Z/2)\times H^1(X,\Z/2)\times H^3(X,\Z)\] The group law realizes this set as an extension of $H^0(X,\Z/2)\times H^1(X,\Z/2)$ by $H^3(X,\Z)$, with $2$-cocycle given by $\beta(\cdot \cup \cdot)$ where $\beta:H^2(X,\Z/2)\to H^3(X,\Z)$ is the Bockstein homomorphism.
+\end{proposition}
+\end{document}

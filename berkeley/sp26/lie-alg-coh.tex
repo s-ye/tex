@@ -1,0 +1,2892 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\DeclareMathOperator{\Id}{Id}
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Lie Algebra Cohomology and the fusion rules}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+
+\end{abstract}
+
+\tableofcontents
+
+\section{Lie algebra cohomology}
+
+Let $\mf g$ be a finite dimensional complex Lie algebra. Consider the category $C(\mf g)$ of $U(\mf g)$-modules where $1\in U(\mf g)$ acts as the identity. If $\mf q \subset \mf g$ is a Lie subalgebra, then we have the restriction functor $\Res_{\mf q}^{\mf g}:C(\mf g)\to C(\mf q)$.
+
+It has two adjoint functors: the left adjoint is the induction functor $\Ind_{\mf q}^{\mf g}:C(\mf q)\to C(\mf g)$, defined by \[\Ind_{\mf q}^{\mf g}(V)=U(\mf g)\otimes_{U(\mf q)} V\] Left adjoints preserve colimits, and in particular, they are right exact. In this setting, the induction functor is exact, because by PBW, we can choose a vector space complement $\mf s$ of $\mf q$ in $\mf g$, and then $U(\mf g)\cong U(\mf s)\otimes U(\mf q)$ as $U(\mf q)$-modules, so $U(\mf g)$ is a free $U(\mf q)$-module, in particular, it is flat. Being exact, it preserves projective objects, 
+
+The right adjoint is the coinduction functor $\Coind_{\mf q}^{\mf g}:C(\mf q)\to C(\mf g)$, defined by \[\Coind_{\mf q}^{\mf g}(V)=\Hom_{U(\mf q)}(U(\mf g),V)\] By similar arguments, it is also exact, and preserves injective objects.
+
+These functors are important because they allow us to construct the standard resolution of any $U(\mf g)$-module $V$ by projective (or injective) modules. The starting point is the Koszul resolution of the trivial module $\C$, which is the complex
+\[
+X_n = U(\mathfrak g)\otimes_{\mathbb C}\Lambda^n \mathfrak g,
+\]
+and regard $X_n$ as a $U(\mathfrak g)$-module by having $\mathfrak g$
+act by left translation on $U(\mathfrak g)$ and by $0$ on
+$\Lambda^n \mathfrak g$. The \textbf{Koszul resolution} is the sequence
+of $U(\mathfrak g)$-modules and maps
+\[
+0 \longleftarrow \mathbb C
+\stackrel{\epsilon}{\longleftarrow} X_0
+\stackrel{\partial_0}{\longleftarrow} X_1
+\stackrel{\partial_1}{\longleftarrow} X_2
+\stackrel{\partial_2}{\longleftarrow} \cdots
+\]
+with $\epsilon$ and $\partial_n$ given by
+\[
+\epsilon(u)=\text{constant term of }u,
+\qquad
+u\in U(\mathfrak g)\otimes_{\mathbb C}\mathbb C \cong U(\mathfrak g),
+\]
+and
+\begin{align*}
+\partial_{n-1}(u\otimes X_1\wedge\cdots\wedge X_n)
+&=
+\sum_{i=1}^n (-1)^{i+1}
+\bigl(uX_i\otimes X_1\wedge\cdots\wedge \widehat{X_i}\wedge\cdots\wedge X_n\bigr)
+\nonumber\\
+&\quad
++\sum_{k<\ell} (-1)^{k+\ell}
+\bigl(u\otimes [X_k,X_\ell]\wedge X_1\wedge\cdots\wedge \widehat{X_k}
+\wedge\cdots\wedge \widehat{X_\ell}\wedge\cdots\wedge X_n\bigr).
+\end{align*}
+
+Applying induction and coinduction to the Koszul resolution, we get a projective and an injective resolution of any $U(\mathfrak g)$-module $V$. The existence of these resolutions allows us to compute the derived functors of the invariants functor, which is defined by $\Hom_{U(\mathfrak g)}(\C,\cdot)$, where $\C$ is the trivial $U(\mathfrak g)$-module.
+
+
+The \textbf{invariants functor} is left exact, and its right derived functor is called the \textbf{Lie algebra cohomology}. Applying the invariants functor $\Hom_{U(\mathfrak g)}(\C,\cdot)$ to the standard resolution, we get a complex whose terms are \[C^n(\mathfrak g,V)=\Hom_{U(\mathfrak g)}(X_n,V)\cong \Hom_{\mathbb C}(\Lambda^n \mathfrak g,V),\] with induced differentials, whose cohomology is the Lie algebra cohomology $H^n(\mathfrak g,V)$.
+
+More generally, writing the invariants functor as $\Hom_{U(\mathfrak g)}(\C,\cdot)$, we can consider the derived functors of $\Hom_{U(\mathfrak g)}(W,\cdot)$ for any $U(\mathfrak g)$-module $W$. We denote them by $\Ext_{U(\mathfrak g)}^n(W,\cdot)$. 
+
+\begin{proposition}
+For each \(n\ge 0\), the functor \(\Ext^n(\cdot,V)\) is the \(n\)-th right derived functor of \(\Hom(\cdot,V)\). Moreover, for \(U,V \in \mathcal C(\mathfrak g)\), there is a natural isomorphism
+\[
+\Ext^n_{\mathcal C(\mathfrak g)}(U,V)
+\cong
+H^n\bigl(\mathfrak g,\Hom_{\mathbb C}(U,V)\bigr).
+\]
+\end{proposition}
+
+\begin{example}
+    Let $\mf g$ be a real Lie algebra, and let $G$ be a Lie group with Lie algebra $\mf g$. Let $\mf g$ act on $C^\infty(G)$ by left translation. Then the cochains are
+\[
+C^n(\mathfrak g,C^\infty(G))=\Hom(\Lambda^n\mathfrak g,C^\infty(G)).
+\] which we can identify with the space of smooth $n$-forms on $G$. In particular 
+\[
+\Omega^n(G)\cong \Hom(\Lambda^n\mathfrak g,C^\infty(G))
+\] and the differential on the cochain complex corresponds to the de Rham differential on $\Omega^n(G)$. Therefore, the Lie algebra cohomology $H^n(\mathfrak g,C^\infty(G))$ is isomorphic to the de Rham cohomology $H^n_{\text{dR}}(G)$.
+
+In genearl, this is different from $H^\bullet(\mathfrak g,\mathbb C)$ which computes the cohomology of the complex of left-invariant forms. For compact connected $G$, these happen to agree by averaging, but not in general.
+\end{example}
+
+\begin{example}Let \(\mathfrak a\) be an abelian Lie algebra, usually equipped with an action of \(\mathfrak g\). Since \(\mathfrak a\) is abelian, its Lie bracket is zero, but \(\mathfrak g\) may still act nontrivially by derivations, that is, via a Lie algebra homomorphism
+\[
+\mathfrak g \to \mathfrak{gl}(\mathfrak a).
+\]
+
+This example is motivated by extensions. Suppose one wants a Lie algebra \(\mathfrak e\) fitting into a short exact sequence
+\[
+0 \longrightarrow \mathfrak a \longrightarrow \mathfrak e \longrightarrow \mathfrak g \longrightarrow 0
+\]
+with \(\mathfrak a\) an abelian ideal. Then, as a vector space, \(\mathfrak e\) is of the form
+\[
+\mathfrak e \cong \mathfrak g \oplus \mathfrak a,
+\]
+but the Lie bracket is generally twisted:
+\[
+[(X,a),(Y,b)]
+=
+\bigl([X,Y], X\cdot b - Y\cdot a + \omega(X,Y)\bigr),
+\]
+where
+\[
+\omega:\Lambda^2\mathfrak g \to \mathfrak a
+\]
+is an alternating bilinear map.
+
+The Jacobi identity for this bracket holds if and only if \(\omega\) is a \(2\)-cocycle in the Lie algebra cohomology complex $C^\bullet(\mathfrak g,\mathfrak a)$. Changing the choice of splitting changes \(\omega\) by a coboundary. Therefore equivalence classes of such abelian extensions are classified by
+\[
+H^2(\mathfrak g,\mathfrak a).
+\]
+\end{example}
+
+\begin{example}
+    We give an analytic model for coinduction $\Ind_{\mathfrak q}^{\mathfrak g}(V)$, and then showing that the holomorphic sections from Borel-Weil sit naturally inside it. Let $G_0 = U(n)$ be a compact group and $L_0$ be a closed block diagonal subgroup. This is the real form of the complex setting where $G = \GL_n(\C)$ and $P$ is a parabolic subgroup. The key observation is that $G_0/L_0 \cong G/P$ where $L_0 = P \cap G_0$. This homeomorphism allows us to equip $G_0/L_0$ with a complex structure. 
+
+    Take a finite-dimensional representation $\chi$ of $L_0$ on $V$. From this, one forms the homogeneous vector bundle
+$Y=G_0\times_{L_0}V \to G_0/L_0$. A smooth section of this bundle is the same thing as a smooth function
+$\varphi:G_0\to V$
+satisfying the equivariance condition
+$\varphi(g_0\ell_0)=\chi(\ell_0)^{-1}\varphi(g_0)$
+for all $g_0\in G_0$ and $\ell_0\in L_0$.
+
+The complex structure on $G_0/L_0$ allows us to talk about holomorphic sections of $Y$. In particular, write \[\mathfrak g=\mathfrak g_0^{\mathbb C}=\mathfrak{gl}(n,\mathbb C),
+\qquad
+\mathfrak l=\mathfrak l_0^{\mathbb C},
+\qquad
+\mathfrak q=\mathfrak l\oplus \mathfrak u\]
+where $\mathfrak u$ is the nilpotent radical of $\mathfrak q$, in this case the Lie algebra of block strictly lower triangular matrices. A smooth section $\varphi$ is holomorphic if and only if it is annihilated by the action of $\mathfrak u$. This makes sense because 
+$T_{eL_0}(G_0/L_0)\cong \mathfrak g_0/\mathfrak l_0$, and so after complexification, we have
+\[T_{eL_0}(G_0/L_0)\otimes_{\mathbb R}\mathbb C
+\cong
+(\mathfrak g_0/\mathfrak l_0)\otimes_{\mathbb R}\mathbb C\] Now from the parabolic $\mathfrak q=\mathfrak l\oplus \mathfrak u$, one gets a decomposition
+\[\mathfrak g=\mathfrak u^- \oplus \mathfrak l \oplus \mathfrak u\] Modding out by $\mathfrak l$,
+\[\mathfrak g/\mathfrak l \cong \mathfrak u^- \oplus \mathfrak u\] is exactly the decomposition into holomorphic and antiholomorphic tangent spaces.
+
+Now given a holomorphic section $\varphi$, we construct an element of $\Hom_\C(U(\mathfrak g),V)$ and then show that it is in fact $U(\mathfrak q)$-linear. This will give rise to an embedding of the space of holomorphic sections into $\Coind_{\mathfrak q}^{\mathfrak g}(V)$. For $u\in U(\mf g)$ \begin{align*}
+    \varphi_0(u)=(u\varphi)(1)
+\end{align*} It turns a section into its infinite jet at the identity. To show $\varphi_0\in \Coind_{\mathfrak q}^{\mathfrak g}(V)$, one must show
+$\varphi_0(uq)=q^{\mathrm{tr}}(\varphi_0(u))$
+with the appropriate action convention, where the transpose appears because of convention
+$(u\cdot \psi)(u')=\psi(u'u)$. The condition
+$\varphi(g_0\ell_0)=\chi(\ell_0)^{-1}\varphi(g_0)$
+differentiates to a relation for $\mathfrak l$. This gives the required compatibility with the $\mathfrak l$-part of $\mathfrak q$. The condition
+$Z\varphi=0$ for $Z\in \mathfrak u$
+says exactly that differentiation in the $\mathfrak u$-directions vanishes. This gives the required compatibility with the $\mathfrak u$-part.
+
+It is not necessarily onto for two reasons. First, $I_{\mathfrak q}^{\mathfrak g}(V)$ contains formal power series, not only convergent ones. So some elements of $I_{\mathfrak q}^{\mathfrak g}(V)$ are only formal jets, not jets of actual holomorphic functions. Second, even if a formal series converges locally, it may fail to glue to a global holomorphic section on all of $G_0/L_0$.
+
+
+\end{example}
+
+\section{Lie algebra homology and Poincare duality}
+The \textbf{coinvariants functor} \begin{align*}
+    V\mapsto V_{\mathfrak g}=\C\otimes_{U(\mathfrak g)} V = V/\mathfrak g V
+\end{align*} is right exact and its left derived functor is called the \textbf{Lie algebra homology}. 
+
+\begin{theorem}
+    [Poincare Duality]
+\end{theorem}
+
+\section{Lie algebra cohomology and the fusion rules}
+Let \(\mathfrak g\) be the Lie algebra of the compact, simple, simply connected Lie group \(G\) and let \(\mathfrak t \subset \mathfrak g\) be a Cartan subalgebra. Choose a positive root system \(\Phi\), let \(\mathfrak n \subset \mathfrak g_{\mathbb C}\) be the maximal nilpotent subalgebra spanned by the root vectors \(\{e_{-\alpha}\mid \alpha\in \Phi\}\), and \(B \subset G_{\mathbb C}\) the Borel subgroup with Lie algebra
+\[
+\mathfrak b=\mathfrak n\oplus \mathfrak t .
+\]
+We shall make use of the \textbf{basic} inner product on \(\mathfrak g\), the unique ad-invariant inner product in which the highest root \(\alpha_{\max}\) has square-length \(2\); \(\{\xi_i\}\) will denote an orthonormal basis of \(\mathfrak g\) in this inner product. Recall that a weight of \(\mathfrak g\) is called \textbf{singular} if it is orthogonal to one of the positive roots, \textbf{regular} otherwise, \textbf{dominant} if all inner products with the positive roots are non-negative. A distinguished dominant regular weight is \(\rho\), the half-sum of the positive roots. Holomorphic \(G_{\mathbb C}\)-equivariant line bundles over the flag variety
+\[
+Y:=G_{\mathbb C}/B
+\]
+are all of the form
+\[
+L_\lambda = G_{\mathbb C}\times_B \mathbb C_\lambda,
+\]
+corresponding to holomorphic characters \(\lambda\) of \(B\), thus to weights of \(\mathfrak g\). For instance, the canonical bundle \(K_Y\) corresponds to \((-2\rho)\). 
+
+\begin{proposition}
+Let \(L_\lambda\) be the homogeneous holomorphic line bundle on the flag variety
+\[
+Y=G_{\mathbb C}/B \simeq G/T
+\]
+associated to a weight \(\lambda\). Then $L_\lambda$ admits a \(G\)-invariant Hermitian metric, unique up to scaling. The \(G\)-invariant Hermitian curvature of \(L_\lambda\) is positive if and only if \(\lambda\) is dominant regular.
+\end{proposition}
+
+\begin{proof}
+    A $G$-invariant Hermitian metric on $L_\lambda$ is determined completely by its value on that one fiber, because G acts transitively on $Y$. This is well defined because the stabilizer of $y_0$ inside $G$ is $T$, and $T$ acts on the fiber by the unitary character $\lambda$. Since $G$ is compact, characters of $T$ are unitary, so $T$ preserves the chosen Hermitian norm on the fiber. The fiber is one-dimensional, so any two Hermitian norms differ by a positive scalar.
+
+Since \(L_\lambda\) is homogeneous, its \(G\)-invariant Hermitian metric and its curvature are determined by their values at the basepoint \(y_0=eB\). At that point,
+\[
+T_{y_0}^{1,0}Y \cong \mathfrak g_{\mathbb C}/\mathfrak b
+\cong \bigoplus_{\alpha\in\Phi^+} V_\alpha,
+\]
+where the \(V_\alpha\) are the one-dimensional root spaces. The curvature form defines a \(T\)-invariant Hermitian form
+\[
+H_\lambda(v,w)=i\Theta_\lambda(v,\overline{w})
+\]
+on \(T_{y_0}^{1,0}Y\). But if $v\in V_\alpha$ and $w\in V_\beta$ with $\alpha\neq \beta$, then $H_\lambda(v,\overline{w})$ has T-weight $\alpha-\beta$, so $T$-invariance forces it to vanish. Hence different root spaces are orthogonal.
+
+Thus positivity of the curvature is equivalent to positivity on each root line \(V_\alpha\). On each one-dimensional root line, the curvature is just multiplication by some scalar $c_\alpha(\lambda)$. That scalar depends linearly on $\lambda$, because tensoring line bundles adds curvatures:
+\[
+L_{\lambda+\mu}\cong L_\lambda\otimes L_\mu, \quad
+\Theta_{\lambda+\mu}=\Theta_\lambda+\Theta_\mu
+\] To determine the linear function $c_\alpha(\lambda)$, note that it depends only on the restriction of $\lambda$ to the rank-one torus associated to $\alpha^\vee$.
+
+More precisely, for each root $\alpha$, consider the corresponding $\mf sl_2$-triple and let $S_\alpha\subset G_{\mathbb C}$ be the corresponding connected subgroup. Its Borel $B_\alpha$ is
+$B_\alpha = S_\alpha \cap B$. Then
+$S_\alpha/B_\alpha \cong \mathbb P^1$
+is the root curve through the basepoint, tangent to the root line $V_\alpha$. The restricted bundle is
+\[L_\lambda|_{S_\alpha/B_\alpha}
+\cong
+S_\alpha \times_{B_\alpha} \mathbb C_{\lambda|_{B_\alpha}}\]
+and depends only on the character
+$\lambda|_{B_\alpha}$. The character $\lambda|_{B_\alpha}$ is determined by its restriction to the maximal torus $T_\alpha$ of $S_\alpha$, and by definition of the coroot, the restriction $\lambda|_{T_\alpha}$ satisfies $\lambda |_{T_\alpha}\circ \alpha^\vee = \langle \lambda,\alpha^\vee\rangle$. 
+In summary, the line bundle $L_\lambda$ restricts to a homogeneous line bundle on
+$S_\alpha/B_\alpha \cong \mathbb P^1$,
+and this restricted bundle is
+$L_\lambda|_{S_\alpha/B_\alpha}\cong \mathcal O(\langle \lambda,\alpha^\vee\rangle)$. The curvature of $L_\lambda$ in the tangent direction $V_\alpha$ is the same as the curvature of $\mathcal O(\langle \lambda,\alpha^\vee\rangle)$ on $\mathbb P^1$ at the basepoint.
+
+In the affine coordinate $z$ on $\mathbb P^1$, with the standard local frame $s$ of $\mathcal O(m)$, take the standard invariant metric (unique up to scaling, and scaling does not affect curvature) on $\mathcal O(m)$ such that
+$\|s(z)\|^2=(1+|z|^2)^{-m}$.
+Then
+\[\log \|s\|^2=-m\log(1+|z|^2)\]
+so the Chern curvature is \[
+\Theta = -\partial\bar\partial \log \|s\|^2
+= m\partial\bar\partial \log(1+|z|^2)\]
+Hence
+\[i\Theta = m\omega_{\mathrm{FS}}\]
+where $\omega_{\mathrm{FS}}$ is the Fubini-Study form.
+
+Hence the curvature is positive if and only if
+\[
+\langle \lambda,\alpha^\vee\rangle>0
+\qquad
+\text{for all } \alpha\in\Phi^+.
+\]
+This is exactly the condition that \(\lambda\) be dominant regular.
+\end{proof}
+
+Denote by \(\ell(\lambda)\) the number of positive roots having a negative inner product with the regular weight \(\lambda\). Equivalently, \(\ell(\lambda)\) is the length of the unique element \(w\in W\) such that \(w\cdot \lambda\) is dominant regular. The cohomology of the line bundle \(L_\lambda\) is given by the Borel-Weil-Bott theorem:
+
+\begin{theorem}
+    If the shifted weight $\lambda+\rho$ is regular, then $H^q(Y,L_\lambda)$ is zero for $q\neq \ell(\lambda)$, and is the irreducible representation of $G$ with highest weight $w\cdot \lambda$ for $q=\ell(\lambda)$, for the unique $w\in W$ such that $w\cdot \lambda$ is dominant regular. If $\lambda+\rho$ is singular, then $H^q(Y,L_\lambda)=0$ for all $q$.
+\end{theorem}
+
+The proof will be given in the next section, following the approach of Lurie.
+
+\subsection{Proof of Borel-Weil-Bott}
+
+
+\begin{theorem}
+If $G$ is semisimple and simply connected, then the forgetful functor from the groupoid of equivariant line bundles on $X$ to the groupoid of line bundles on $X$ is an equivalence of categories.
+\end{theorem}
+
+\begin{proof}
+The forgetful functor is faithful by construction. To see that it is full, we must show that every isomorphism $\mathcal L \to \mathcal L'$ of equivariant line bundles is actually $G$-equivariant. To specify such an isomorphism is to specify a nowhere vanishing section of the equivariant line bundle $\mathcal L^{-1} \otimes \mathcal L'$. This line bundle is trivial, hence $G$ acts by a character on its space of global sections. Since $G$ is semisimple, this character must be trivial, and any global section is invariant.
+
+It remains to show that the forgetful functor is essentially surjective. In other words, we must show that any line bundle $\mathcal L$ on $X$ admits an action of $G$, compatible with the action of $G$ on $X$. Let $a : G \times X \to X$ classify the action of $G$ on $X$, and let
+\[
+\pi_1 : G \times X \to G, \qquad \pi_2 : G \times X \to X
+\]
+be the projections. Let $\mathcal M = a^*\mathcal L \otimes \pi_2^*\mathcal L^{-1}$. Since $X$ is simply connected (for example, by the Bruhat decomposition), its Picard variety is trivial, so the fibers of a connected family of line bundles on $X$ are all isomorphic. In particular, $\mathcal M$ is trivial on each fiber of $\pi_1$, hence $\mathcal M \simeq \pi_1^*\mathcal N$ for some line bundle $\mathcal N$ on $G$.
+
+Since $H^2(G,\mathbb Z)=0$, any line bundle on $G$ is topologically trivial. As $G$ is Stein, such a line bundle is holomorphically trivial. Thus $\mathcal M$ is trivial, so $a^*\mathcal L \simeq \pi_2^*\mathcal L$. Consequently there exists a projective action of $G$ on $\mathcal L$ compatible with its action on $X$. This corresponds to a central extension $\widetilde G$ of $G$ by $\mathbb C^\times$. Since $G$ is simply connected, this extension splits. Hence $G$ acts on $\mathcal L$.
+\end{proof}
+
+
+Equivariant line bundles on $X$ are classified by one-dimensional representations of $B$. Let $U$ be the unipotent radical of $B$ and $T$ a maximal torus, so that $B = TU$. Then such representations correspond to characters of $T$. This is because $U$ is unipotent, so as a variety it is isomorphic to $\mathbb C^n$, and any algebraic group homomorphism
+$\phi : \mathbb C^n \to \mathbb C^\times$
+must be constant. To see this, one can differentiate at the identity:
+$d\phi : \mathbb C^n \to \mathbb C$, but $\mathbb C^n$ is nilpotent as a Lie algebra (coming from $U$), while $\mathbb C$ is abelian with no nilpotents compatible with multiplicative structure. The only possibility is $d\phi=0$, hence $\phi=1$ and since $\chi$ is trivial on $U$, it factors through $B \twoheadrightarrow B/U \cong T$.
+
+
+Let $\Lambda$ denote the character group of $T$. For each $\lambda \in \Lambda$, let $\mathcal L_\lambda$ denote the line bundle $\mathcal L_\lambda \cong G\times^B \mathbf C_{-\lambda}$. The minus sign is the convention adopted by Lurie.
+
+\begin{theorem}
+If $-\lambda$ is not dominant, then $H^0(X,\mathcal L_\lambda)=0$. If $-\lambda$ is dominant, then $H^0(X,\mathcal L_\lambda)$ is an irreducible representation of $G$ with lowest weight $\lambda$ and highest weight $w_0\cdot \lambda$.
+\end{theorem}
+
+\begin{proof}
+Let $V = H^0(X,\mathcal L_\lambda)$. Identify $V$ with the space of holomorphic functions $v$ on $G$ satisfying
+\[
+v(gb) = \lambda(b)v(g), \qquad b \in B.
+\]
+Then $G$ acts by left translation $(gv)(x)=v(gx)$. Let $U'$ be the unipotent radical of the opposite Borel. Let $V_0 \subset V$ be the subspace of vectors invariant under $U'$. Then $V_0$ consists of functions satisfying $v(ux)=v(x)$ for all $u \in U'$. Since $U'B$ is dense in $G$, $V_0$ is at most one-dimensional. If nonzero, it is generated by a function $v$ with $v(1)=1$. For $t \in T$,
+\[
+(tv)(1) = v(t) = \lambda(t)v(1),
+\]
+so $tv = \lambda(t)v$, and hence $V$ is irreducible with lowest weight $\lambda$. This is only possible if $-\lambda$ is dominant. 
+
+If $-\lambda$ is dominant, one constructs such a function $v$ using the Bruhat decomposition and checks that it extends holomorphically.
+To construct the function $v$, let $B' = U'T$ be a Borel subgroup opposite to $B$, and consider the Bruhat decomposition of $G$ into double cosets
+\[
+G = \bigsqcup_{w \in W} B' w B.
+\]
+The \textbf{big cell} is $U'B$, which is biholomorphic to $U' \times B$. Hence the condition
+\[
+v(ub) = \lambda(b)
+\]
+determines $v$ uniquely on $U'B$.
+
+We must show that this holomorphic function extends to all of $G$. Since $v$ is algebraic on $U'B$, it suffices to show that $v$ has no poles along Bruhat cells of codimension $1$.
+
+Let $C$ be such a cell, corresponding to a simple root $\alpha$. If $v$ had a pole along $C$, then since $v$ has no zeros on $U'B$, it would approach infinity near every point of $C$. Recall that at the generic point $\eta_C$, the local ring is a DVR, so we can talk about the order of vanishing of $v$ at $\eta_C$. The order of vanishing is negative if and only if $v$ has a pole along $C$. However, this is not quite the same as saying that $v$ approaches infinity near every point of $C$, because the generic point $\eta_C$ does not necessarily know about all of the closed points. However it does guarentee that there is an open dense subset of $C$ such that $v$ approaches infinity near every point of this subset.
+Write
+\[
+C \cup U'B = SB,
+\]
+where $S$ is the subgroup generated by $U'$ and the root subgroup corresponding to $\alpha$. Let $G'$ denote the universal cover of a Levi factor of $S$ whose maximal torus is contained in $T$. Then $G' \simeq \mathrm{SL}_2(\mathbb{C})$.
+
+Pulling everything back to $G'$, we reduce to proving the statement for $G = G'$. Now identify $G$ with $\mathrm{SL}_2(\mathbb{C})$, $B$ with upper triangular matrices, and $U'$ with lower triangular unipotent matrices. Identifying $T$ with diagonal matrices, the character $\lambda$ is given by
+\[
+\begin{pmatrix}
+t & 0 \\
+0 & t^{-1}
+\end{pmatrix}
+\mapsto t^k
+\]
+for some integer $k$. On the big cell, the function $v$ is given by
+\[
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+\mapsto a^k.
+\]
+
+This function extends holomorphically to all of $G$ if and only if $k \ge 0$, i.e.\ if and only if $-\lambda$ is dominant.
+\end{proof}
+We now need to closely examine the cohomology of line bundles in the simplest special case, \(G=\mathrm{SL}_2(\mathbb{C})\).
+In this case \(X=\mathbb{P}^1\).
+We let \(K\) denote the canonical bundle of \(X\); \(K\) has degree \(-2\).
+Let \(n\) be an integer.
+
+Fix once and for all an equivariant line bundle \(\mathcal{O}(n)\) of degree \(n\) on \(\mathbb{P}^1\); then $\mathcal{O}(n)\otimes K^{\otimes n+1}$
+has degree \(-n-2\).
+By Serre duality, the groups
+$H^0(\mathbb{P}^1,\mathcal{O}(n))$ and 
+$H^1\bigl(\mathbb{P}^1,\mathcal{O}(n)\otimes K^{\otimes n+1}\bigr)$
+are (non-canonically) dual, and therefore isomorphic as representations of \(G\).
+Fix also a \(G\)-isomorphism \(\phi\) between these vector spaces.
+
+Now let \(\mathcal{L}\) be any equivariant line bundle of degree \(n\) on \(\mathbb{P}^1\).
+Then there exists an isomorphism
+\[
+\alpha: \mathcal{L}\simeq \mathcal{O}(n).
+\]
+The isomorphism \(\phi\) gives rise to an isomorphism
+\[
+\phi' \colon H^0(\mathbb{P}^1,\mathcal{L})
+\xrightarrow{\sim}
+H^1\bigl(\mathbb{P}^1,\mathcal{L}\otimes K^{\otimes n+1}\bigr).
+\] The claim is that $\phi'$ depends only on $\phi$ and not on the choice of $\alpha$. To see this, any other choice of isomorphism $\alpha'$ has $\alpha' = c\alpha$ for some nonzero scalar $c$. Then \[\phi'_{\alpha'}
+=
+\bigl(cH^1(\alpha\otimes \mathrm{id})\bigr)^{-1}\circ \phi \circ \bigl(cH^0(\alpha)\bigr)
+=
+\bigl(H^1(\alpha\otimes \mathrm{id})\bigr)^{-1}\circ \phi \circ H^0(\alpha)
+=
+\phi'_\alpha\]
+
+
+The functoriality lets this fiberwise construction glue for families. \begin{proposition}
+    For any \(\mathbb{P}^1\)-bundle
+\[
+\pi \colon E \to S
+\]
+and any line bundle \(\mathcal{L}\) on \(E\) having degree \(n\) on fibers, we obtain a natural isomorphism
+\[
+\pi_*\mathcal{L}
+\simeq
+R^1\pi_*\bigl(\mathcal{L}\otimes K^{\otimes n+1}\bigr)
+\]
+\end{proposition}
+
+\begin{proof}
+Take an open cover \(\{U_i\to S\}\) over which the \(\mathbb P^1\)-bundle trivializes:
+\[
+E|_{U_i}\simeq \mathbb P^1\times U_i.
+\]
+On each \(U_i\), after perhaps twisting by a line bundle from the base, one can write
+\[
+\mathcal L|_{E|_{U_i}}
+\simeq
+\pr_1^*\mathcal O(n)\otimes \pi^*M_i
+\]
+for some line bundle \(M_i\) on \(U_i\). Then on \(E|_{U_i}\) one has a completely explicit relative version of the fiberwise isomorphism:
+\[
+\pi_*\mathcal L|_{U_i}
+\simeq
+M_i\otimes H^0(\mathbb P^1,\mathcal O(n)),
+\]
+and
+\[
+R^1\pi_*\bigl(\mathcal L\otimes K^{\otimes n+1}\bigr)|_{U_i}
+\simeq
+M_i\otimes H^1\bigl(\mathbb P^1,\mathcal O(n)\otimes K^{\otimes n+1}\bigr).
+\]
+Thus on \(U_i\), the fixed isomorphism
+\[
+\phi:
+H^0(\mathbb P^1,\mathcal O(n))
+\xrightarrow{\sim}
+H^1\bigl(\mathbb P^1,\mathcal O(n)\otimes K^{\otimes n+1}\bigr)
+\]
+induces a local isomorphism
+\[
+\Phi_i:
+\pi_*\mathcal L|_{U_i}
+\xrightarrow{\sim}
+R^1\pi_*\bigl(\mathcal L\otimes K^{\otimes n+1}\bigr)|_{U_i}.
+\]
+
+The issue is whether the \(\Phi_i\) agree on overlaps \(U_{ij}:=U_i\cap U_j\). This is where we use the functoriality of the construction. On $E_{ij}:=E|_{U_{ij}}$
+the two chosen identifications
+\[
+\alpha_i:\mathcal L|_{E|_{U_i}}
+\xrightarrow{\sim}
+\pr_1^*\mathcal O(n)\otimes \pi^*M_i,
+\qquad
+\alpha_j:\mathcal L|_{E|_{U_j}}
+\xrightarrow{\sim}
+\pr_1^*\mathcal O(n)\otimes \pi^*M_j
+\]
+differ by an isomorphism
+\[
+\beta_{ij}:
+\pr_1^*\mathcal O(n)\otimes \pi^*M_j
+\xrightarrow{\sim}
+\pr_1^*\mathcal O(n)\otimes \pi^*M_i
+\]
+such that
+\[
+\alpha_i=\beta_{ij}\circ \alpha_j.
+\]
+Since both sides have relative degree \(n\), any such isomorphism is necessarily of the form
+\[
+\beta_{ij}=\id_{\pr_1^*\mathcal O(n)}\otimes \gamma_{ij}
+\]
+for some isomorphism
+\[
+\gamma_{ij}:M_j\xrightarrow{\sim} M_i
+\]
+on \(U_{ij}\).
+
+Accordingly, the transition map on the left-hand side is
+\[
+H^0(\mathbb P^1,\mathcal O(n))\otimes M_j
+\xrightarrow{\id\otimes \gamma_{ij}}
+H^0(\mathbb P^1,\mathcal O(n))\otimes M_i,
+\]
+and on the right-hand side it is
+\[
+H^1\bigl(\mathbb P^1,\mathcal O(n)\otimes K^{\otimes n+1}\bigr)\otimes M_j
+\xrightarrow{\id\otimes \gamma_{ij}}
+H^1\bigl(\mathbb P^1,\mathcal O(n)\otimes K^{\otimes n+1}\bigr)\otimes M_i.
+\]
+Thus the two local isomorphisms \(\Phi_i\) and \(\Phi_j\) agree on \(U_{ij}\), and therefore glue to a global isomorphism.
+\end{proof}
+
+If \(n\ge -1\), these are the only direct images which do not vanish.
+Applying the (degenerate) Leray spectral sequence to this isomorphism, we obtain the following:
+
+\begin{theorem}
+Let $\pi : E \to S$ be a $\mathbb P^1$-bundle with relative canonical bundle $K$, and let $\mathcal L$ be a line bundle on $E$ of degree $n \ge -1$ on fibers. Then
+\[
+H^i(E,\mathcal L) \cong H^{i+1}(E,\mathcal L \otimes K^{\otimes n+1}).
+\]
+\end{theorem}
+
+\begin{proof}
+    $R^1\pi_*\cL = 0$ because the line bundle $\cL$ has no cohomology on the fibers $\cL|_{E_s} \cong \cO_{\P^1}(n)$ for $s \in S$. This is because the sheaf $R^1\pi_*\cL$ has stalks given by $H^1(E_s,\cL|_{E_s})$, and a sheaf with zero stalks is zero. 
+
+    The Leray spectral sequence is
+\[E_2^{p,q}=H^p\bigl(S,R^q\pi_*\mathcal L\bigr)\Longrightarrow H^{p+q}(E,\mathcal L)\]
+Because $R^1\pi_*\mathcal L=0$, only the row $q=0$ survives. So the spectral sequence degenerates and gives $H^i(E,\mathcal L)\cong H^i\bigl(S,\pi_*\mathcal L\bigr)$
+\end{proof}
+
+Let $\rho$ be half the sum of positive roots and set $\mathcal L^\lambda = \mathcal L_{\lambda-\rho}$.
+
+\begin{lemma}
+Let $\alpha$ be a simple root and suppose $\langle \alpha^\vee,\lambda\rangle \ge 0$. Then there is a canonical isomorphism
+\[
+H^i(X,\mathcal L^\lambda) \cong H^{i+1}(X,\mathcal L^{w_\alpha(\lambda)}),
+\]
+where $w_\alpha$ is the simple reflection.
+\end{lemma}
+
+\begin{proof}
+Let $P$ be the minimal parabolic corresponding to $\alpha$. Then $X$ is a $\mathbb P^1$-bundle over $G/P$, and the restriction of $\cL^\lambda$ to the fibers has degree $\langle \alpha^\vee,\lambda\rangle - 1 \geq -1$.
+
+The relative canonical bundle of the projection is $K = \cL_{-\alpha}$. To see this, note that the vertical tangent space of $\pi$ at $eB$ is
+\[\mathfrak p_\alpha/\mathfrak b \cong \mathfrak g_{-\alpha}\]
+which is a one-dimensional $B$-module of weight $-\alpha$. Therefore the relative cotangent line has weight $\alpha$ and by the convention $\cL_{-\alpha}$ has weight $\alpha$, so $\cL_{-\alpha}$ is the relative canonical bundle.
+Then
+\[
+\mathcal L^{w_\alpha(\lambda)}
+=
+\mathcal L_{w_\alpha(\lambda)-\rho}
+=
+\mathcal L_{\lambda - \rho - \langle \alpha^\vee,\lambda\rangle \alpha}
+=
+\mathcal L^\lambda \otimes K^{\otimes \langle \alpha^\vee,\lambda\rangle}
+\] and the previous theorem gives the desired isomorphism.
+\end{proof}
+
+\begin{proof}[Proof of Borel-Weil-Bott]
+Now let \(w\in W\) be such that \(w(\lambda)\) is dominant, and choose a reduced expression
+\[
+w = w_1\cdots w_{\ell(w)}
+\]
+with corresponding simple roots \(\alpha_1,\dots,\alpha_{\ell(w)}\). Then for each \(i\) one has
+\[
+\langle \alpha_i^\vee, w_{i+1}\cdots w_{\ell(w)}(\lambda)\rangle \ge 0.
+\]
+Applying the lemma repeatedly, we obtain isomorphisms
+\[
+H^{i+\ell(w)}(X,\mathcal L^\lambda)\cong H^i(X,\mathcal L^{w(\lambda)}).
+\]
+
+If \(\lambda\) is singular, then there is a simple root \(\alpha\) such that
+\[
+\langle \alpha^\vee, w(\lambda)\rangle = 0,
+\]
+so that \(w(\lambda)\) is fixed by the reflection through \(\alpha\). The lemma then yields isomorphisms
+\[
+H^i(X,\mathcal L^{w(\lambda)})\cong H^{i+1}(X,\mathcal L^{w(\lambda)})
+\]
+for every \(i\). On the other hand, these groups vanish for \(i=0\) by the Borel-Weil theorem. It follows that all the cohomology groups of \(\mathcal L^\lambda\) vanish.
+
+Now suppose \(\lambda\) is regular, and that \(w(\lambda)\) is dominant. Then the isomorphism above shows that \(H^i(X,\mathcal L^\lambda)\) vanishes for \(i<\ell(w)\), and that
+\[
+H^{\ell(w)}(X,\mathcal L^\lambda)
+\]
+is dual to the irreducible representation of \(G\) of highest weight \(w(\lambda)-\rho\). It remains to show that for regular \(\lambda\), the groups
+\[
+H^i(X,\mathcal L^\lambda)
+\]
+vanish for \(i>\ell(\lambda)\). Serre duality gives $H^i(X,\mathcal L^\lambda)^\vee \cong H^{n-i}(X,\mathcal L^{-\lambda})$ because the canonical bundle $K_X$ is $\mathcal L_{-2\rho} = L^{\rho}$ and $(L_\lambda)^\vee = L_{-\lambda}$. Now the desired result follows because $\ell(-\lambda) = n - \ell(\lambda)$, so that $n-i < \ell(-\lambda)$, where $n$ is the complex dimension of $X$.
+\end{proof}
+
+
+\subsection{Generalized BWB and the case of maximal parabolics}
+
+The loop group theory, as we shall approach it, is modeled on the Borel--Weil--Bott theorem for the generalized flag manifolds
+\[
+Y_P = G_{\mathbb C}/P,
+\]
+corresponding to parabolic subgroups \(P\subset G_{\mathbb C}\). Recall that the generalized Borel--Weil--Bott theorem asserts that the cohomology
+\[
+H^\bullet(Y_P;E)
+\]
+lives in only one degree, provided the holomorphic bundle \(E\) arises from an irreducible representation of \(P\). When we considered the case of the full flag variety \(Y=G_{\mathbb C}/B\), we had only to consider line bundles because $B$ is solvable, so all its irreducible representations are one-dimensional. 
+
+A parabolic subgroup \(P\) factors as a semidirect product
+\[
+P \cong R_{\mathbb C}\ltimes U
+\]
+of a complex reductive subgroup \(R_{\mathbb C}\) and a unipotent group \(U\). If \(E\) is irreducible, then \(U\) acts trivially, so \(E\) is an irreducible representation of \(R_{\mathbb C}\). It may therefore be realized as the space of holomorphic sections of an equivariant line bundle \(L_\lambda\) over the flag manifold
+\[
+R_{\mathbb C}/(B\cap R_{\mathbb C}) \cong P/B
+\]
+of the semisimple part of \(R_{\mathbb C}\), for some dominant character \(\lambda\) of \(B\). The higher cohomology of \(L_\lambda\) over \(P/B\) vanishes by the usual Borel--Weil--Bott theorem.
+
+Considering the holomorphic fibration
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+P/B \arrow[r] & G_{\mathbb C}/B \arrow[d] \\
+& G_{\mathbb C}/P
+\end{tikzcd}
+\]
+we obtain
+\[
+H^\bullet(Y_P;E) = H^\bullet(Y;L_\lambda).
+\]
+The Borel--Weil--Bott theorem for \(Y\) therefore gives the following.
+
+
+\begin{proposition}
+The bundle \(E\) has holomorphic sections if and only if \(\lambda\) is dominant. Its higher cohomology vanishes if and only if \((\lambda+\rho)\) is dominant.
+\end{proposition}
+
+Splitting the Lie algebra $\mathfrak r = \mathfrak r' \oplus \mathfrak l$
+of \(R_{\mathbb C}\) into its semisimple $r' = [\mathfrak r,\mathfrak r]$ and abelian $\mf l = Z(\mathfrak r)$ part decomposes the weight \(\lambda\) as
+\[
+\lambda = \lambda' + \lambda^{\perp},
+\]
+where \(\lambda'\) is the highest weight of \(E\) for \(\mathfrak r'\), and \(\lambda^{\perp}\) is the character by which \(\mathfrak l\) acts. When \(P\) is maximal parabolic, \(\mathfrak l\) is one-dimensional and \(\mathfrak r'\) has rank exactly one less than \(\mathfrak g\). More precisely, the simple roots
+\[
+\alpha_1,\dots,\alpha_{r-1}
+\]
+of \(\mathfrak r'\) are all the simple roots of \(\mathfrak g\), save one. The missing root \(\alpha_r\) does not lie in \(\mathfrak l\), except in the uninteresting case when \(\mathfrak g'\) is a summand in \(\mathfrak g\), but rather projects to a nonzero antidominant weight \(-\mu\) of \(\mathfrak g'\), since the inner products $\alpha_k\cdot \alpha_r$ are non-positive.
+
+Let \(\beta\in \mathfrak l\) be the element for which
+\[
+\beta\cdot \alpha_r = 1
+\]
+in the basic inner product; it is the smallest integral character of \(\mathfrak l\subset \mathfrak t\). Call the integer
+\[
+h = \lambda^{\perp}/\beta
+\]
+the \textbf{level} of \(E\). We want to express, in terms of \(\lambda'\) and \(h\), the condition that \(\lambda+\rho\) be dominant. First note that
+\[
+\lambda \text{ is dominant }
+\Longleftrightarrow
+\lambda' \text{ is dominant and } \lambda'\cdot \mu \le h.
+\]
+This reformulates the conditions
+\[
+\lambda\cdot \alpha_k \ge 0
+\quad\text{and}\quad
+\lambda\cdot \alpha_r \ge 0.
+\]
+Further, let \(\rho'\) be the half-sum of the positive roots of \(\mathfrak r'\). Then \(\rho'\) is the projection of \(\rho\) to \(\mathfrak r'\), and so we may write
+\[
+\rho-\rho' = c\beta
+\]
+for some constant \(c\). Therefore the previous proposition may be reformulated as follows.
+
+\begin{proposition}
+The bundle \(E\) has holomorphic sections if and only if
+\[
+\lambda'\cdot \mu \le h.
+\]
+Its higher cohomology vanishes if and only if
+\[
+(\lambda'+\rho')\cdot \mu \le h+c.
+\]
+\end{proposition}
+
+It follows, since \(\mu\) is dominant, that only finitely many bundles \(E\) can have holomorphic sections at a given level \(h\).
+
+\subsection{Loop groups}
+By a representation of a topological group \(G\) we shall always mean a complete locally convex complex topological vector space \(E\) on which \(G\) acts \(\mathbb C\)-linearly and continuously, in the sense that
+\[
+(g,\xi)\longmapsto g\cdot \xi
+\]
+is a continuous map
+\[
+G\times E \to E.
+\]
+We are primarily interested in unitary representations on Hilbert spaces, but it is convenient to work in a more general framework. The natural action of the circle group \(\mathbb T\) on \(S^1\) by rotation gives rise to representations of \(\mathbb T\) on any of the following vector spaces:
+\begin{itemize}
+    \item the smooth functions \(S^1\to \mathbb C\),
+    \item the continuous functions \(S^1\to \mathbb C\),
+    \item any of the Banach spaces \(L^p(S^1;\mathbb C)\) for \(1\le p<\infty\),
+    \item the space of distributions on \(S^1\),
+\end{itemize}
+Note however there is no such action on \(L^\infty(S^1;\mathbb C)\). The problem is the required continuity of the action map $\mathbb T\times L^\infty(S^1)\to L^\infty(S^1)$. In particular, for each fixed $f\in L^\infty$, we would need
+\[\|a\cdot f-f\|_\infty\to 0\]
+as $a\to 1$. An example of this failure is $f=\mathbf 1_{A}$, where $A\subset S^1$ is an arc. If $a\neq 1$ is a very small rotation, then $aA$ differs from $A$ on a small arc of positive measure. Hence $\|a\cdot f-f\|_\infty=1$ for every sufficiently small nontrivial rotation $a$. 
+
+
+We shall not want to regard these representations of \(\mathbb T\) as interestingly different, so we make the following definition: representations \(E\) and \(E'\) of a group \(G\) are said to be \textbf{essentially equivalent} if there is a continuous linear map
+\[
+E\to E'
+\]
+which is injective, has dense image, and is equivariant with respect to \(G\). Note that this is not an equivalence relation, and even worse a reducible representation can be essentially equivalent to an irreducible one. 
+
+A representation of the loop group
+$LG=C^\infty(S^1,G)$
+is called \textbf{positive energy} if it extends to an action of the rotation group $S^1_{\mathrm{rot}}$ on the circle, compatibly with the semidirect product $LG\rtimes S^1_{\mathrm{rot}}$, and such that the generator of $S^1_{\mathrm{rot}}$ acts with only positive characters.
+
+\begin{theorem}
+    Up to essential equivalence, every positive energy representation of $LG$ \begin{enumerate}
+        \item is projective
+        \item is completely reducible, i.e. a discrete direct sum of irreducible
+representations
+    \item is unitary
+    \item extends to a holomorphic projective representation of the complexified loop group $L G_{\mathbb C}$
+    \item admits a (projective) intertwining action of $\Diff^+(S^1)$.
+    \end{enumerate}
+\end{theorem}
+
+To describe all positive-energy representations, it is enough to classify the irreducible ones. Projectivity means that the representation is actually a representation of a central extension of $LG$ by $\mathbb C^\times$. Moreover, by definition, we also have a representation of the rotation group $S^1_{\mathrm{rot}}$ on the same vector space, so we really have an action of the semidirect product $S^1_{\mathrm{rot}}\ltimes \widetilde{LG}$.
+
+We can pass to the Lie algebra level and recover the representations of the group by restricting to the integrable ones. Let $\widehat{L\mathfrak g}$ denote the affine Kac-Moody extension of the loop algebra $L\mathfrak g$. It is a central extension by a one-dimensional center, and the central element acts by a scalar called the \textbf{level} of the representation.
+\begin{align*}
+    1\to \mathbb C^\times \to \widehat{L\mathfrak g} \to L\mathfrak g \to 0
+\end{align*}
+The presence of the rotation group $S^1_{\mathrm{rot}}$ gives rise to the derivation operator $d$ on $\widehat{L\mathfrak g}$, which acts by the degree of the loop, i.e. we pass to $\widetilde{L\mathfrak g}
+=
+\widehat{L\mathfrak g}\oplus \mathbb C d$
+For the affine Kac-Moody algebra, an irreducible highest-weight module is called integrable if the Chevalley generators $e_i,f_i$ for all affine simple roots act locally nilpotently. 
+
+\begin{theorem}
+For a compact, simple, simply connected Lie group $G$, the irreducible positive-energy representations of $LG$
+are classified by integrable highest-weight representations of the affine Kac-Moody extension $\widetilde{L\mathfrak g}$ at level $k\in \mathbb Z_{\ge 0}$.
+\end{theorem}
+
+The representations of $\widetilde{L\mathfrak g}$ at level $k$ are classified by their highest weights, which are dominant integral weights of the finite-dimensional Lie algebra $\mathfrak g$ satisfying the bound \begin{align*}
+    \langle \lambda,\theta^\vee\rangle \le k
+\end{align*} and are classified by the lattice points of the fundamental alcove at level $k$. The representations of $LG$ obtained from these representations of $\widetilde{L\mathfrak g}$ are called \textbf{positive energy representations at level $k$}. When $k=0$, the only positive energy representation is the trivial representation. 
+
+We can index irreducible positive energy representations by triples $(\lambda,k)$ where $\lambda$ is a dominant integral weight of $\mathfrak g$ satisfying the bound above, and $k\in \mathbb Z_{\ge 0}$ is the level. Note that the lowest energy can always be normalized to be zero because for an action of $\widetilde{L\mathfrak g}$, the $d$-action is determined up to adding a scalar, and is in fact determined by the $\widehat{L\mf g}$ action up to adding a scalar, essentially by the triangular decomposition of $\widehat{L\mathfrak g}$.
+
+In general, using the data of the highest weight $\lambda$ and the level $k$, one defines a highest-weight vector $v_{\lambda,k}$ by
+\begin{align*}
+    \widehat{\mathfrak n}_+v_{\lambda,k}&=0 \\
+hv_{\lambda,k}&=\lambda(h)v_{\lambda,k}\qquad (h\in \mathfrak h) \\
+Kv_{\lambda,k}&=kv_{\lambda,k}
+\end{align*} and then induce from the Borel subalgebra $\widehat{\mathfrak b} = \widehat{\mathfrak n}_+ \oplus \mathfrak h \oplus \mathbb C K$ \begin{align*}
+    M(\lambda,k)
+=
+U(\widehat{L\mathfrak g})\otimes_{U(\widehat{\mathfrak b}_+)} \mathbf C_{\lambda,k}
+\end{align*} The energy-$m$ piece is spanned by monomials in the negative modes of total degree $m$. 
+\begin{align*}
+    M(\lambda,k)&\cong U(\widehat{\mathfrak n}_-)\otimes V_\lambda \\
+M(\lambda,k)[m]&\cong U(\widehat{\mathfrak n}_-)_{m}\otimes V_\lambda
+\end{align*}
+
+Let $V(0,1)$ denote the irreducible positive energy representation of $LG$ at level $1$ with highest weight $0$. This is called the \textbf{basic representation} of $LG$. 
+
+\begin{example}
+    Let $\mf g_\C = \sl_2$. Let $e_n,f_n,h_n$ denote $e\otimes t^n,f\otimes t^n,h\otimes t^n$ where $e,f,h$ are the standard Chevalley generators of $\sl_2$. Then the basic representation $V(0,1)$ has a highest weight vector denoted $\ket{0}$ where $e_n\lvert 0\rangle=h_n\lvert 0\rangle=f_n\lvert 0\rangle=0$ for $n\ge 0$, and $K$ acts by $1$. The energy grading is given by the degree in the PBW sense, and in particular $e_{-m},f_{-m},h_{-m}$ have energy $m$. The energy-$0$ piece is spanned by $\ket{0}$, the energy-$1$ piece is spanned by $e_{-1}\ket{0},f_{-1}\ket{0},h_{-1}\ket{0}$, and the energy-$2$ piece is spanned by the $e_2,f_2,h_2$ applied to $\ket{0}$, as well as the PBW monomials of degree $2$ in the degree $1$ terms, and so on. Therefore, we see that \begin{align*}
+        V(0,1)[0] &\cong \mathbf C \\
+V(0,1)[1] &\cong \sl_2 \\
+V(0,1)[2] &\cong \sl_2 \oplus \mathrm{Sym}^2(\sl_2)
+    \end{align*}
+\end{example}
+
+\subsection{Lie algebra extensions}
+
+Extensions of $L\mathfrak{g}$ correspond precisely to invariant symmetric bilinear forms on $\mathfrak{g}$. Given such a form $\langle \ , \ \rangle$, we can construct a central extension $\widetilde{L\mathfrak{g}}$ of $L\mathfrak{g}$ as follows.
+
+As a vector space
+$\widehat{L\mathfrak{g}} = L\mathfrak{g} \oplus \mathbb{R}$
+and the bracket is given by
+\begin{equation}
+    [(\xi,\lambda), (\eta,\mu)] = ([\xi,\eta],  \omega(\xi,\eta))
+\end{equation}
+for $\xi,\eta \in L\mathfrak{g}$ and $\lambda,\mu \in \mathbb{R}$, where
+$\omega : L\mathfrak{g} \times L\mathfrak{g} \to \mathbb{R}$ is the bilinear map
+\begin{equation} \label{eq:4.2.2}
+    \omega(\xi,\eta) = \frac{1}{2\pi} \int_0^{2\pi} \langle \xi(\theta), \eta'(\theta)\rangle  d\theta
+\end{equation}
+and $\langle \ , \ \rangle$ is a symmetric invariant form on the Lie algebra
+$\mathfrak{g}$. 
+
+In order to define a Lie algebra structure on $\widehat{L\mathfrak{g}}$, $\omega$ must be skew and we must have the Jacobi identity. 
+\begin{equation}\label{eq:jacobi}
+    \omega([\xi,\eta],\zeta) + \omega([\eta,\zeta],\xi) + \omega([\zeta,\xi],\eta) = 0.
+\end{equation}
+The skew-symmetry of $\omega$ follows from the invariance of $\langle \ , \ \rangle$ and integration by parts. The Jacobi identity is a consequence of the invariance of $\langle \ , \ \rangle$.
+
+There are essentially no other cocycles on $L\mathfrak{g}$ than the $\omega$ given
+by \eqref{eq:4.2.2}. To make this precise, notice that $\omega$ is invariant under
+conjugation by constant loops, i.e.\ $\omega(\xi,\eta) = \omega(g\xi, g\eta)$
+for $g \in G$, where $g\xi, g\eta$ are the adjoint action of $g$ on $\xi,\eta$.
+
+\begin{remark}
+    We elaborate a little on the invariance of $\omega$ under the adjoint action of $G$. Recall that for a Lie algebra $\mathfrak{a}$, a $2$-cocycle with trivial coefficients is a bilinear form $\omega : \mathfrak{a}\times\mathfrak{a}\to \mathbb{R}$ that is skew-symmetric and satisfies the cocycle condition
+    \[
+        \delta\omega(\xi,\eta,\zeta) =
+        \omega([\xi,\eta],\zeta) + \omega([\eta,\zeta],\xi) + \omega([\zeta,\xi],\eta) = 0.
+    \]
+    On the loop algebra $L\mathfrak{g}$, the group $G$ (constant loops) acts by conjugation:
+    \[
+        (g\cdot \xi)(\theta) = \mathrm{Ad}_g \xi(\theta).
+    \]
+    If we push forward a cocycle $\omega$ by $g$, we get a new cocycle
+    \[
+        (g\cdot \omega)(\xi,\eta) = \omega(g^{-1}\cdot \xi,  g^{-1}\cdot \eta).
+    \]
+This transformation preserves the cohomology class. It is enough to check that the infinitesimal version of this transformation, given by the Lie algebra $\mathfrak{g}$, preserves the cohomology class, because $G$ is connected, and the action of $G$ on cocycles is obtained by exponentiating the infinitesimal $\mathfrak g$-action.
+
+
+So it is enough to check that for $\zeta\in \mathfrak{g}$
+    \[
+        [\omega] = [\omega + (\zeta\cdot\omega)] \in H^2(L\mathfrak{g};\mathbb{R}).
+    \]
+    where the infinitesimal action is given by
+    \[
+        (\zeta\cdot \omega)(\xi,\eta) = \frac{d}{dt}|_{t=0}\big( \exp(t\zeta)\cdot \omega \big)(\xi,\eta).
+    \]
+    Use $\operatorname{Ad}_{\exp(-t\zeta)} = \exp(-t\operatorname{ad}\zeta)
+        = \mathrm{id}-t\operatorname{ad}\zeta + o(t)$. Then
+    \begin{align*}
+        (\exp(t\zeta)\cdot \omega)(\xi,\eta)
+         & = \omega\Big((\mathrm{id}-t\operatorname{ad}\zeta)\xi,\ (\mathrm{id}-t\operatorname{ad}_\zeta)\eta\Big) + o(t) \\
+         & = \omega(\xi,\eta)- t\omega([\zeta,\xi],\eta)- t\omega(\xi,[\zeta,\eta])+o(t).
+    \end{align*}
+    Differentiating at $t=0$ gives
+    \[
+        (\zeta \cdot \omega)(\xi,\eta)
+        = - \omega([\zeta,\xi],\eta) - \omega(\xi,[\zeta,\eta])
+    \]
+
+    Define the $1$-cochain $\phi_\zeta(\xi) := \omega(\zeta, \xi)$ and compute its coboundary:
+    \[
+        (\delta\phi_\zeta)(\xi, \eta) = -\phi_\zeta([\xi, \eta]) = -\omega(\zeta, [\xi, \eta]).
+    \]
+    Now compare $(\zeta\cdot\omega)$ with $\delta\phi_\zeta$:
+    \begin{align*}
+        (\zeta\cdot\omega)(\xi, \eta) - (\delta\phi_\zeta)(\xi, \eta)
+         & = -\omega([\zeta, \xi], \eta) - \omega(\xi, [\zeta, \eta]) + \omega(\zeta, [\xi, \eta]).
+    \end{align*} By the cyclic sum identity, this is zero.
+    Therefore, $(\zeta\cdot\omega) = \delta\phi_\zeta$
+    is a coboundary, and $[\omega] = [\omega + (\zeta\cdot\omega)]$ in $H^2(L\mathfrak{g};\mathbb{R})$.
+\end{remark}
+
+So the extension defined by $\alpha$ is also given by the invariant cocycle
+\[
+    \int_G g\cdot\alpha dg
+\]
+obtained by averaging $\alpha$ over the compact group $G$ because they are in the same cohomology class in $H^2(L\mathfrak{g};\mathbb{R})$. Therefore, every cocycle of $L\mathfrak{g}$ is equivalent in cohomology to a $G$-invariant cocycle. Having reduced to the case of $G$-invariant cocycles, we can now classify all such cocycles.
+
+\begin{proposition}[Invariant cocycles]\label{prop:invariant_cocycles}
+    If $\mathfrak{g}$ is semisimple then the only continuous $G$-invariant
+    cocycles on the Lie algebra $L\mathfrak{g}$ are those given by
+    \eqref{eq:4.2.2}.
+\end{proposition}
+
+\begin{proof}
+    A cocycle $\alpha : L\mathfrak{g} \times L\mathfrak{g} \to \mathbb{R}$
+    extends to a complex bilinear map
+    $\alpha : L\mathfrak{g}_{\mathbb{C}} \times L\mathfrak{g}_{\mathbb{C}} \to \mathbb{C}$.
+    An element $\xi \in L\mathfrak{g}_{\mathbb{C}}$ can be expanded in a Fourier series
+    $\sum \xi_k z^k$, with $\xi_k \in \mathfrak{g}_{\mathbb{C}}$. By continuity $\alpha$ is
+    completely determined by its values on elements of the form $\xi_p z^p$.
+    Let us write
+    \[
+        \alpha_{p,q}(\xi,\eta) = \alpha(\xi z^p, \eta z^q), \quad \xi,\eta \in \mathfrak{g}_{\mathbb{C}}.
+    \]
+    Then $\alpha_{p,q}$ is a $G$-invariant bilinear map
+    $\mathfrak{g}_{\mathbb{C}} \times \mathfrak{g}_{\mathbb{C}} \to \mathbb{C}$, which is necessarily symmetric, and
+    $\alpha_{p,q} = -\alpha_{q,p}$. The cocycle identity \eqref{eq:jacobi} translates into the statement
+    \begin{equation} \label{eq:coeffs}
+        \alpha_{p+q,r} + \alpha_{q+r,p} + \alpha_{r+p,q} = 0
+    \end{equation}
+    for all $p,q,r$. Putting $q=r=0$ we find $\alpha_{p,0}=0$ for all $p$. Letting $r = -p-q$ we find
+    \[
+        \alpha_{p+q,-p-q} = \alpha_{p,-p} + \alpha_{q,-q},
+    \]
+    whence
+    \[
+        \alpha_{p,-p} = p  \alpha_{1,-1}.
+    \]
+    Putting $r = n-p-q$ in \ref{eq:coeffs} we find
+    \[
+        \alpha_{n-p-q,p+q} = \alpha_{n-p,p} + \alpha_{n-q,q},
+    \]
+    whence
+    \[
+        \alpha_{n-k,k} = k \alpha_{n-1,1}.
+    \]
+    This implies that $\alpha_{p,q} = 0$ if $p+q \neq 0$, for
+    \[
+        n\alpha_{n-1,1} = \alpha_{0,n} = 0.
+    \]
+    Returning to $\xi = \sum \xi_p z^p$ and $\eta = \sum \eta_q z^q$, we have
+    \[
+        \alpha(\xi,\eta) = \sum p  \alpha_{1,-1}(\xi_p, \eta_{-p})
+        = \frac{i}{2\pi} \int_0^{2\pi} \alpha_{1,-1}(\xi(\theta), \eta'(\theta)) d\theta,
+    \]
+\end{proof}
+
+Proposition \ref{prop:invariant_cocycles} determines the universal central extension of $L\mathfrak{g}$.
+We can reformulate it in the following way. 
+
+For any finite dimensional Lie algebra $\mathfrak{g}$, let $K$ denote the dual vector space of invariant symmetric bilinear forms on $\mathfrak{g}$. Then there is a universal invariant symmetric bilinear form
+\begin{equation} \label{eq:4.2.6}
+    \langle \ , \ \rangle_K : \mathfrak{g} \times \mathfrak{g} \to K
+\end{equation} which sends $(x,y)$ to the linear functional $\beta \mapsto \beta(x,y)$. It is universal in the sense that every $\mathbb{R}$-valued form arises by a unique linear map $K \to \mathbb{R}$. The cocycle $\omega_K$ given by
+\begin{equation} \label{eq:4.2.7}
+    \omega_K(\xi,\eta) = \frac{1}{2\pi} \int_0^{2\pi}
+    \langle \xi(\theta), \eta'(\theta)\rangle_K  d\theta
+\end{equation}
+defines an extension of $L\mathfrak{g}$ by $K$, known as the \textbf{universal central extension} of $L\mathfrak{g}$.
+
+For semisimple groups $K$ can be identified with $H^3(\mathfrak{g};\mathbb{R})$,
+because a bilinear form $\langle \ , \ \rangle$ on $\mathfrak{g}$ gives rise to an
+invariant skew $3$-form
+\[
+    (\xi,\eta,\zeta) \mapsto \langle \xi,[\eta,\zeta]\rangle,
+\]
+and all elements of $H^3(\mathfrak{g};\mathbb{R})$ are so obtained. When $\mathfrak{g}$ is simple then $K = \mathbb{R}$, and in general $K$ is a finite-dimensional vector space of dimension equal to the number of simple factors of $\mathfrak{g}$.
+
+When $G$ is simple as is in our setup, then the universal central extension corresponds to the generator $1\in H^3(\mathfrak{g};\Z) \cong \Z$, and the associated bundle construction gives rise to the \textbf{fundamental line bundle} on the loop group $LG$ \begin{align*}
+    \cL = LG \times_{S^1} \R
+\end{align*} 
+
+In general, for $G$ compact, simple, simply connected, the line bundles on $LG$ are classified by the level
+\[
+\Pic(LG)\cong H^2(LG;\mathbb Z)\cong H^3(G,\Z) \cong \mathbb Z
+\] by the transgression homomorphism. 
+\begin{remark}
+Let
+\[
+\ev:S^1\times LG\to G,\qquad (\theta,\gamma)\mapsto \gamma(\theta),
+\]
+be the evaluation map. If \(\eta\in \Omega^3(G)\) is a closed \(3\)-form, its \textbf{transgression} is the \(2\)-form
+\[
+\tau(\eta):=\int_{S^1}\ev^*\eta \in \Omega^2(LG).
+\]
+Equivalently, at a loop \(\gamma\in LG\) and tangent vectors \(X,Y\in T_\gamma LG\),
+\[
+\tau(\eta)_\gamma(X,Y)
+=
+\int_{S^1}
+\eta\bigl(\gamma(\theta)\bigr)\bigl(X(\theta),Y(\theta),\dot\gamma(\theta)\bigr)\,d\theta.
+\]
+Since fiber integration commutes with the exterior derivative,
+if \(\eta\) is closed then \(\tau(\eta)\) is closed as well.
+
+For the basic integral class \([\eta]\in H^3(G;\mathbb Z)\), the transgressed class
+\[
+[\tau(\eta)]\in H^2(\Omega G;\mathbb Z)
+\]
+is the generator. Using the evaluation fibration
+\[
+\Omega G \longrightarrow LG \xrightarrow{\ev_1} G
+\]
+together with the section given by constant loops, one has a homotopy equivalence
+\[
+LG\simeq \Omega G\times G.
+\]
+Since \(H^2(G;\mathbb Z)=0\) for \(G\) compact, simple, and simply connected, it follows that
+\[
+H^2(LG;\mathbb Z)\cong H^2(\Omega G;\mathbb Z)\cong \mathbb Z,
+\]
+\end{remark}
+
+\begin{remark}
+If \(G\) is compact, connected, simple, and simply connected, then
+\[
+H^2(G;\mathbb Z)=0.
+\]
+It is enough to show $\pi_2(G)=0$.
+Consider the fibration
+\[
+T \longrightarrow G \longrightarrow G/T,
+\]
+where \(T\) is a maximal torus. Since \(T\cong (S^1)^r\), we have
+\[
+\pi_2(T)=0.
+\]
+The long exact sequence in homotopy gives
+\[
+\pi_2(T)\longrightarrow \pi_2(G)\longrightarrow \pi_2(G/T)\longrightarrow \pi_1(T)\longrightarrow \pi_1(G).
+\]
+Because \(\pi_2(T)=0\) and \(G\) is simply connected, so that \(\pi_1(G)=0\), the map
+\[
+\pi_2(G/T)\longrightarrow \pi_1(T)
+\]
+is an isomorphism. This implies that \(\pi_2(G)=0\). Since \(G\) is simply connected, we also have
+\[
+H_1(G;\mathbb Z)=0.
+\]
+By the Hurewicz theorem, the first nontrivial homology group agrees with the first nontrivial homotopy group, so
+\[H_2(G;\mathbb Z)=0.
+\]
+The universal coefficient theorem then gives
+\[
+H^2(G;\mathbb Z)
+\cong
+\Hom(H_2(G;\mathbb Z),\mathbb Z)\oplus \Ext(H_1(G;\mathbb Z),\mathbb Z)
+=0.
+\]
+\end{remark}
+
+\subsection{The main theorem}
+Let $c = \alpha_{\max} \cdot \rho + 1$ denote the dual Coxeter number of $\mathfrak{g}$, where $\alpha_{\max}$ is the highest root of $\mathfrak{g}$ and $\rho$ is the half-sum of the positive roots. 
+\subsection{Fusion as holomorphic induction}
+
+\section{Fusion ring and Verlinde formula}
+
+\subsection{General theory}
+\begin{definition}[Fusion rule]
+Let $A$ be a finite set with an involution $*$. Let
+\[
+\mathbb{Z}_+[A] := \bigoplus_{a\in A} \mathbb{Z}_+\, a
+\]
+be the free monoid generated by $A$, where $\mathbb{Z}_+ := \mathbb{Z}_{\ge 0}$. The involution $*$ of $A$ extends to an involution of $\mathbb{Z}_+[A]$. A \textbf{fusion rule} on $A$ is a map $F:\mathbb{Z}_+[A]\to \mathbb{Z}$ satisfying:
+\begin{enumerate}[(f1)]
+\item $F(0)=1$,
+\item $F(a)>0$ for some $a\in A$,
+\item $F(x)=F(x^*)$, for $x\in \mathbb{Z}_+[A]$,
+\item $F(x+y)=\sum_{\lambda\in A} F(x+\lambda)\,F(y+\lambda^*)$, for $x,y\in \mathbb{Z}_+[A]$.
+\end{enumerate}
+The fusion rule $F$ is called \textbf{nondegenerate} if:
+\begin{enumerate}[(f5)]
+\item For any $a\in A$, there exists $\lambda_a\in A$ such that $F(a+\lambda_a)\neq 0$.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}
+Let $F:\mathbb{Z}_+[A]\to \mathbb{Z}$ be a nondegenerate fusion rule. Then the abelian group
+\[
+\mathbb{Z}[A] := \bigoplus_{a\in A} \mathbb{Z}\, a
+\]
+acquires a product \begin{equation}\label{eq:fusion-product}
+a\cdot b = \sum_{\lambda\in A} F(a+b+\lambda^*)\,\lambda,
+\qquad a,b\in A.
+\end{equation} making $\mathbb{Z}[A]$ into a commutative ring with identity.
+
+Moreover, it admits a unique linear form $t:\mathbb{Z}[A]\to \mathbb{Z}$ (called the \textbf{trace}) satisfying:
+\begin{enumerate}[(a)]
+\item $t(a\cdot b^*)=\delta_{a,b}$ for $a,b\in A$,
+\item $t\left(\prod_{a\in A} a^{n_a}\right)=F\left(\sum_{a\in A} n_a a\right)$, for any $n_a\in \mathbb{Z}_+$.
+\end{enumerate}
+
+Further, $*$ is a ring homomorphism of $\mathbb{Z}[A]$ and $\mathbb{Z}[A]$ is a Gorenstein ring.
+
+The ring $\mathbb{Z}[A]$ together with the trace form $t$ is called the \textbf{fusion ring} associated to $F$. Observe that $t$ is $*$-invariant.
+\end{proposition}
+
+
+\begin{definition}
+Let $F$ be a nondegenerate fusion rule on a finite set $A$. For any genus $g\ge 0$, define (by induction on $g$) a map
+\[
+F_g:\mathbb{Z}_+[A]\to \mathbb{Z}
+\]
+by
+\[
+F_0 = F, \qquad
+F_g(x) = \sum_{\lambda\in A} F_{g-1}(x+\lambda+\lambda^*), \quad g\ge 1,\ x\in \mathbb{Z}_+[A].
+\]
+
+Also define the \textbf{Casimir element}
+\begin{equation}\label{eq:casimir}
+\Omega = \sum_{\lambda\in A} \lambda\cdot \lambda^* \in \mathbb{Z}[A].
+\end{equation}
+
+For any $x\in \mathbb{Z}[A]$, let $\mu_x:\mathbb{Z}[A]\to \mathbb{Z}[A]$ be multiplication by $x$, i.e.\ $y\mapsto xy$. Let $\operatorname{Tr}(x)$ denote the trace of $\mu_x$. Then
+\begin{equation}\label{eq:trace}
+\operatorname{Tr}(x)
+= \sum_{\lambda\in A} \langle x\cdot \lambda,\lambda\rangle
+= \sum_{\lambda\in A} t(x\cdot \lambda\cdot \lambda^*)
+= t(x\cdot \Omega).
+\end{equation}
+\end{definition}
+
+\begin{proposition}
+For $g\ge 1$ and any nondegenerate fusion rule on a finite set $A$ and any $a_1,\dots,a_n\in A$,
+\begin{equation}\label{eq:Fg-formula}
+F_g(a_1+\cdots + a_n)
+= t(a_1\cdots a_n \cdot \Omega^g)
+= \operatorname{Tr}(a_1\cdots a_n \cdot \Omega^{g-1}),
+\end{equation}
+where $t$ is the trace as above. In fact, \eqref{eq:Fg-formula} remains true for $g=0$ as well.
+\end{proposition}
+
+\begin{proof}
+By the definition of $F_g$,
+\[
+F_g(a_1+\cdots + a_n)
+= \sum_{\lambda_1,\dots,\lambda_g\in A}
+F_0\bigl(a_1+\cdots + a_n + \lambda_1+\lambda_1^* + \cdots + \lambda_g+\lambda_g^*\bigr).
+\]
+\[
+= \sum_{\lambda_1,\dots,\lambda_g\in A}
+t\bigl(a_1\cdots a_n \cdot \lambda_1\cdot \lambda_1^* \cdots \lambda_g\cdot \lambda_g^*\bigr)
+\]
+\[
+= t(a_1\cdots a_n \cdot \Omega^g).
+\]
+The second equality in \eqref{eq:Fg-formula} follows from \eqref{eq:trace}.
+\end{proof}
+
+\begin{corollary}\label{cor:casimir}
+With the notation and assumptions as above, for any $a_1,\dots,a_n\in A$ and $g\ge 0$,
+\begin{equation}\label{eq:character-sum}
+F_g(a_1+\cdots + a_n)
+= \sum_{\chi\in S_A} \chi(a_1)\cdots \chi(a_n)\, \chi(\Omega)^{g-1}.
+\end{equation}
+Moreover, for any $\chi\in S_A$,
+\begin{equation}\label{eq:omega-eigen}
+\chi(\Omega) = \sum_{\lambda\in A} |\chi(\lambda)|^2.
+\end{equation}
+\end{corollary}
+
+\subsection{Vacua on $\P^1$}
+Let $\mathfrak g$ be a simple (finite-dimensional) Lie algebra over $\mathbb{C}$ and let $c \ge 1$ be the level.
+In this section, we take $\Sigma = \mathbb{P}^1$, where $\mathbb{P}^1$ is thought of as $\mathbb{A}^1 \cup \{\infty\}$.
+Let $\vec{p} = (p_1,\dots,p_s)$ be an $s$-tuple of distinct points in $\mathbb{A}^1$ and let
+$\vec{\lambda} = (\lambda_1,\dots,\lambda_s)$ be an $s$-tuple of weights with each $\lambda_i \in D_c$ (we take $s \ge 1$). Let $V(\lambda_i)$ be the irreducible representation of $\mathfrak g$ with highest weight $\lambda_i$, and let $V(\vec{\lambda}) = V(\lambda_1) \otimes \cdots \otimes V(\lambda_s)$.
+
+\begin{definition}
+    Let $\theta$ be the highest root of $\mathfrak g$ and let $x_\theta \in \mathfrak g_\theta$ be a nonzero (highest) root vector.
+    Define the operator $\varphi = \varphi_{(\vec{p},\vec{\lambda})} : V(\vec{\lambda}) \to V(\vec{\lambda})$ by
+    \[
+        \varphi(v_1 \otimes \cdots \otimes v_s)
+        = \sum_{i=1}^s p_i\,v_1 \otimes \cdots \otimes (x_\theta \cdot v_i) \otimes \cdots \otimes v_s,
+        \qquad v_i \in V(\lambda_i),
+    \]
+\end{definition}
+
+Let $\mathfrak{sl}_2(\theta)\subset\mathfrak g$ be the subalgebra spanned by
+$\{ \mathfrak g_\theta, \mathfrak g_{-\theta}, \theta^\vee \}$.
+Then $\mathfrak{sl}_2(\theta)$ is isomorphic to $\mathfrak{sl}_2$ under the map
+\[
+    X \mapsto x_\theta,\qquad
+    Y \mapsto x_{-\theta},\qquad
+    H \mapsto \theta^\vee,
+\]
+where $x_{-\theta} \in \mathfrak g_{-\theta}$ is chosen so that $[x_\theta, x_{-\theta}] = \theta^\vee$.
+
+Decompose $V(\lambda_i)$ under the action of $\mathfrak{sl}_2(\theta)$:
+\[
+    V(\lambda_i) = \bigoplus_{n \ge 0} V(\lambda_i)_{(n)},
+\]
+where $V(\lambda_i)_{(n)}$ denotes the isotypic component of $V(\lambda_i)$ (under the action of $\mathfrak{sl}_2(\theta)$)
+with highest weight the nonnegative integer $n$.
+
+\begin{theorem}[Vacua on $\mathbb{P}^1$]\label{thm:vacua-on-p1}\leavevmode
+    \begin{enumerate}
+        \item[(a)]
+              \[
+                  \mathbb{V}_{\mathbb{P}^1}(\vec{p},\vec{\lambda})
+                  \simeq
+                  \frac{V(\vec{\lambda})}{\mathfrak g \cdot V(\vec{\lambda}) + \mathrm{Im}\,\varphi^{c+1}}.
+              \]
+              In particular, for $c \gg 0$ (for fixed $\vec{\lambda}$),
+              $\mathbb{V}_{\mathbb{P}^1}(\vec{p},\vec{\lambda})$
+              coincides with the space of covariants $V(\vec{\lambda})/(\mathfrak g \cdot V(\vec{\lambda}))$.
+        \item[(b)]
+              \[
+                  \mathbb{V}_{\mathbb{P}^1}^\dagger(\vec{p},\vec{\lambda})
+                  \simeq
+                  \{\, \mathfrak g\text{-module maps } f: V(\vec{\lambda}) \to \mathbb{C}
+                  \mid f\circ\varphi^{c+1}=0 \,\}.
+              \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proposition}[Vacua on $\mathbb{P}^1$ for $\mathfrak{sl}_2$]\label{prop:vacua-on-p1-sl2}
+    \leavevmode
+    \begin{enumerate}
+        \item For any $\vec\lambda=(n_1,n_2,n_3)\in\Z_+^3$, the space
+              \[
+                  W(\vec\lambda)/\mathfrak{sl}_2\cdot W(\vec\lambda)
+              \]
+              is at most $1$-dimensional, where
+              \[
+                  W(\vec\lambda):=W(n_1)\otimes W(n_2)\otimes W(n_3),
+                  \quad\text{and}\quad
+                  \Z_+:=\Z_{\ge0}.
+              \]
+              Moreover, it is $1$-dimensional if and only if
+              \begin{equation}\label{eq:cond1}
+                  n_1+n_2+n_3\in2\Z_+
+              \end{equation} and the sum of any two of $\{n_1,n_2,n_3\}$ is at least as large as the third.
+
+        \item Let $\mathfrak g=\mathfrak{sl}_2$,
+              $\vec\lambda=(n_1,n_2,n_3)\in[c]^3$ and
+              $\vec p=(p_1,p_2,p_3)$ with distinct $p_i\in\A^1$, where
+              $[c]:=\{0,1,\dots,c\}$.
+              Then the space of covacua
+              $\mathbb V_{\P^1}(\vec p,\vec\lambda)$
+              (equivalently, the space of vacua) is at most $1$-dimensional.
+              Moreover, it is $1$-dimensional if and only if $n_1+n_2+n_3 \in 2\Z_+$, the sum of any two of $\{n_1,n_2,n_3\}$ is at least as large as the third, and
+              \begin{equation}\label{eq:cond2}
+                  n_1+n_2+n_3 \le 2c
+              \end{equation}
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}
+        \item This follows from the Clebsch-Gordan formula for the tensor-product decomposition of $\mathfrak{sl}_2$-representations. Recall that the Clebsch-Gordan formula says that \begin{align*}
+                  W(m)\otimes W(n) \;=\;\bigoplus_{k=0}^{\min(m,n)} W(m+n-2k). \end{align*} Applying this to the triple tensor product, we find that \begin{align*}
+                  W(n_1)\otimes W(n_2)\otimes W(n_3)
+                  \;=\;
+                  \bigoplus W\bigl(n_1+n_2+n_3-2(k+l)\bigr)
+            \end{align*} where $0\le k\le\min(n_1,n_2)$ and $0\le l\le\min(n_1+n_2-2k,n_3)$. We are interested in the case that the trivial representation $W(0)$ appears in this decomposition.
+
+            We need the highest weight to be 0:
+            \[
+            n_1+n_2+n_3-2(k+l)=0
+            \quad\Longleftrightarrow\quad
+            k+l = \tfrac{1}{2}(n_1+n_2+n_3).
+            \]
+From this we get the parity condition. We must also have $k,l\ge0$ and within the allowed ranges, so this equation must admit nonnegative integer solutions $k,l$ satisfying:
+            \[
+            k\le\min(n_1,n_2), \quad l\le\min(n_1+n_2-2k,n_3).
+            \]
+            Such $k,l$ exist if and only if the three integers $n_1,n_2,n_3$ satisfy the triangle inequalities:
+            \[
+            n_i \le n_j + n_k \quad\text{for all } \{i,j,k\}=\{1,2,3\}.
+            \]
+        \item The further numerical condition comes from the requirement that $\varphi^{c+1}=0$ on the trivial representation. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{corollary}
+\begin{enumerate}[(a)]
+\item
+The space $\mathbb V_{\P^1}(\vec p,\vec\lambda)$ is naturally isomorphic to the quotient of $[V(\vec\lambda)]_{\mathfrak g}$ by the image of the subspace
+\[
+V(\vec\lambda)_F
+:=\bigoplus_{n_1+n_2+n_3>2c}V(\vec\lambda)_{(n_1,n_2,n_3)}
+\]
+under the canonical projection
+$V(\vec\lambda)\to[V(\vec\lambda)]_{\mathfrak g}$,
+where
+\[
+V(\vec\lambda)_{(n_1,n_2,n_3)}:=
+V(\lambda_1)_{(n_1)}\otimes V(\lambda_2)_{(n_2)}\otimes V(\lambda_3)_{(n_3)}.
+\]
+
+\item
+Similarly,
+\[
+\mathbb V_{\P^1}^\dagger(\vec p,\vec\lambda)
+\simeq
+\{\,f:V(\vec\lambda)\to\C\text{ $\mathfrak g$-module map }|\ f\text{ vanishes on }V(\vec\lambda)_F\,\}.
+\]
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+\leavevmode
+\begin{enumerate}
+    \item By virtue of Theorem \ref{thm:vacua-on-p1}
+\begin{equation}\label{eq:phi-statement}
+\varphi^{c+1}(V(\vec\lambda))+\mathfrak g\cdot V(\vec\lambda)
+=
+V(\vec\lambda)_F+\mathfrak g\cdot V(\vec\lambda).
+\tag{1}
+\end{equation}
+Decompose $V(\vec\lambda)$ under $\mathfrak{sl}_2(\theta)$:
+\begin{equation}\label{eq:decomposition}
+V(\vec\lambda)
+=
+\left(\bigoplus_{n_1+n_2+n_3>2c}V(\vec\lambda)_{(n_1,n_2,n_3)}\right)
+\oplus
+\left(\bigoplus_{n_1+n_2+n_3\le2c}V(\vec\lambda)_{(n_1,n_2,n_3)}\right).
+\tag{2}
+\end{equation}
+
+The operator $\varphi$ clearly keeps each $V(\vec\lambda)_{(n_1,n_2,n_3)}$ stable.  
+Further, if $n_1+n_2+n_3>2c$, then by Theorem~2.3.2(a) and Proposition~2.3.3(b),
+\begin{equation}\label{eq:phi-large}
+\varphi^{c+1}\big(V(\vec\lambda)_{(n_1,n_2,n_3)}\big)
++\mathfrak{sl}_2(\theta)\cdot V(\vec\lambda)_{(n_1,n_2,n_3)}
+=
+V(\vec\lambda)_{(n_1,n_2,n_3)}.
+\tag{3}
+\end{equation}
+If $n_1+n_2+n_3\le2c$, then by Proposition~2.3.3 and Theorem~2.3.2(a),
+\begin{equation}\label{eq:phi-small}
+\varphi^{c+1}\big(V(\vec\lambda)_{(n_1,n_2,n_3)}\big)
+\subset
+\mathfrak{sl}_2(\theta)\cdot V(\vec\lambda)_{(n_1,n_2,n_3)}.
+\tag{4}
+\end{equation}
+
+Combining \eqref{eq:decomposition}-\eqref{eq:phi-small}, we get
+\[
+V(\vec\lambda)_F+\mathfrak g\cdot V(\vec\lambda)
+=\operatorname{Im}(\varphi^{c+1})+\mathfrak g\cdot V(\vec\lambda),
+\]
+which proves \eqref{eq:phi-statement} and hence the (a)-part of the corollary.
+    \item This follows from (a) by duality. \qedhere
+\end{enumerate}
+\end{proof}
+
+\subsection{Fusion Ring of a Simple Lie Algebra}
+In this section, we outline the construction of the fusion ring $R_c(\mathfrak{g})$ associated to a simple Lie algebra $\mathfrak{g}$ at level $c > 0$. It will be indexed by the set $D_c$ of dominant integral weights $\lambda$ of $\mathfrak{g}$ satisfying the bound $\langle \lambda, \theta^\vee \rangle \le c$ where $\theta$ is the highest root of $\mathfrak{g}$.
+
+\begin{definition}
+Define the function
+\[
+F_c:\mathbb{Z}_+[D_c]\to \mathbb{Z}_+
+\]
+by $F_c(0)=1$ (for the zero element of $\mathbb{Z}_+[D_c]$) and, for any $s\ge 1$ and $\lambda_i\in D_c$,
+\[
+F_c(\lambda_1+\cdots+\lambda_s)
+=
+\dim \mathcal V_{\mathbb P^1}(\vec p,\vec\lambda),
+\]
+where $\vec p=(p_1,\dots,p_s)$ are any distinct points in $\mathbb P^1$, $\vec\lambda=(\lambda_1,\dots,\lambda_s)$, and $\mathcal V_{\mathbb P^1}(\vec p,\vec\lambda)$ denotes the space of covacua on $\mathbb P^1$ with respect to the weights $\vec\lambda$ attached to the points $\vec p$. 
+
+Define the involution $* : D_c\to D_c$ by
+\[
+\lambda^* := -w_0\lambda,
+\]
+where $w_0$ is the longest element of the Weyl group of $\mathfrak g$. Thus, $\lambda^*$ is the highest weight of the dual module $V(\lambda)^*$.
+\end{definition}
+
+The corresponding fusion ring $\mathbb{Z}[D_c]$ is called the \textbf{fusion ring of $\mathfrak g$ at level $c$}, denoted by $R_c(\mathfrak g)$. By definition, as a $\mathbb{Z}$-module, it is freely generated by the isomorphism classes $\{[V(\lambda)]\}_{\lambda\in D_c}$, and the fusion product $\otimes^c$ at level $c$ is given by:
+\begin{equation}
+[V(\lambda)]\otimes^c [V(\mu)]
+:=
+\sum_{\nu\in D_c}
+\dim \mathcal V_{\mathbb P^1}(\lambda,\mu,\nu^*)\,[V(\nu)],
+\end{equation}
+where $\mathcal V_{\mathbb P^1}(\lambda,\mu,\nu^*)$ denotes the space of covacua on $\mathbb P^1$ with respect to the weights $(\lambda,\mu,\nu^*)$ attached to any three distinct points in $\mathbb P^1$.
+
+We can give another formula for the fusion product coming from the fusion rules for $\sl_2$ and the Clebsch-Gordan rules. In particular, the fusion product is a truncated version of the usual tensor product
+
+\begin{proposition}
+For any $\lambda,\mu\in D_c$, the fusion product $[V(\lambda)]\otimes^c [V(\mu)]$
+is the isomorphism class of the quotient $Q_{\lambda,\mu}$ of $V(\lambda)\otimes V(\mu)$
+by the $\mathfrak g$-submodule $K_{\lambda,\mu}$ generated by
+\[
+\bigoplus_{p+q+r>2c}
+\bigl( V(\lambda)_{(p)} \otimes V(\mu)_{(q)} \bigr)_{(r)},
+\]
+where $\bigl( V(\lambda)_{(p)} \otimes V(\mu)_{(q)} \bigr)_{(r)}$ denotes the isotypic component of
+$V(\lambda)_{(p)} \otimes V(\mu)_{(q)}$ corresponding to the irreducible representation indexed by $r$
+of $\mathfrak{sl}_2(\theta)$.
+
+In particular, $Q_{\lambda,\mu}$ has no components $V(\nu)$ with $\nu\notin D_c$.
+\end{proposition}
+
+\begin{proof}
+    [Idea of proof]  $\nu\notin D_c$ means
+$\nu(\theta^\vee)\ge c+1$. Now suppose $V(\nu)\subset V(\lambda)\otimes V(\mu)$. Inside $V(\nu)$, consider the $\mathfrak{sl}_2(\theta)$-submodule $V_1$ generated by the highest-weight vector of $V(\nu)$. Since that highest-weight vector has $\theta^\vee$-weight $\nu(\theta^\vee)$, it follows that
+\[
+V_1 \cong \text{the irreducible $\mathfrak{sl}_2(\theta)$-module of highest weight } \nu(\theta^\vee).
+\]
+Thus $V_1$ lies in the $(r)$-isotypic part with $r=\nu(\theta^\vee)$. On the other hand, $V_1$ must occur in some summand
+\[
+\bigl(V(\lambda)_{(p)}\otimes V(\mu)_{(q)}\bigr)_{(\nu(\theta^\vee))}
+\]
+for some $p,q\ge 0$. Now, for an $\mathfrak{sl}_2$ tensor product, the irreducible of highest weight $r$ can occur in $V(p)\otimes V(q)$ only if
+\[
+r\le p+q.
+\]
+Therefore, in our situation,
+\[
+p+q\ge \nu(\theta^\vee).
+\] If $\nu\notin D_c$, then $\nu(\theta^\vee)\ge c+1$ and hence
+\[
+p+q+r
+\;\ge\;
+\nu(\theta^\vee)+\nu(\theta^\vee)
+\;=\;
+2\nu(\theta^\vee)
+\;\ge\;
+2c+2
+\;>\;
+2c \qedhere
+\]
+We next show that, for any $\nu \in D_c$, the multiplicity 
+\[
+m_{\lambda,\mu}^\nu := \dim \mathcal V_{\mathbb P^1}(\lambda,\mu,\nu^*)
+\]
+of $[V(\nu)]$ in $[V(\lambda)] \otimes^c [V(\mu)]$ coincides with the multiplicity 
+$n_{\lambda,\mu}^\nu$ of $V(\nu)$ in $Q_{\lambda,\mu}$.
+\begin{align*}
+m_{\lambda,\mu}^\nu
+&= \dim \Bigl\{
+\text{$\mathfrak g$-module maps } 
+f : V(\lambda)\otimes V(\mu)\otimes V(\nu^*) \to \mathbb C \\
+&\qquad\qquad\text{such that $f$ vanishes on }
+\bigoplus_{p+q+r>2c}
+V(\lambda)_{(p)} \otimes V(\mu)_{(q)} \otimes V(\nu^*)_{(r)}
+\Bigr\} \\
+&= \dim \Bigl\{
+\text{$\mathfrak g$-module maps } 
+\bar f : V(\lambda)\otimes V(\mu) \to V(\nu) \\
+&\qquad\qquad\text{such that $\bar f$ vanishes on }
+\bigl(V(\lambda)_{(p)} \otimes V(\mu)_{(q)}\bigr)_{(r)}
+\text{ with } p+q+r>2c
+\Bigr\} \\
+&= n_{\lambda,\mu}^\nu
+\end{align*}
+\end{proof}
+
+\subsection{Geometric interpretation of the fusion product}
+Fix a level $c>0$. Let $G$ be the simple simply-connected complex algebraic group with Lie algebra $\mathfrak g$ and let $\widehat{\bar G}=\widehat{G}_{0_1}$ be the corresponding affine Kac--Moody group (corresponding to the basic weight $0_1\in \widehat D$), which is a $\mathbb G_m$-central extension of the formal loop group $\bar G((t))$. Let $\widehat{\mathcal P}\subset \widehat{\bar G}$ be the parahoric subgroup, which is the inverse image of $\bar G[[t]]$ under the central extension $\bar p:\widehat{\bar G}\to \bar G((t))$. The central extension uniquely splits over $\bar G[[t]]$ and hence
+\[
+\widehat{\mathcal P}\simeq \mathbb G_m \times \bar G[[t]].
+\]
+
+Recall the infinite Grassmannian $\bar X_G$, which is an ind-projective variety with $\mathbb C$-points
+\[
+\bar X_G(\mathbb C)=G((t))/G[[t]].
+\]
+Then $\widehat{\bar G}$ acts on $\bar X_G$ through $\bar p$ via the action of $\bar G((t))$ on $\bar X_G$.
+
+Let $\mathfrak g$ be a simple Lie algebra over $\mathbb C$ and let $W$ be its Weyl group. Then $W$ acts naturally on the weight lattice
+\[
+P\subset \mathfrak h^*,
+\qquad
+P:=\{\lambda\in \mathfrak h^*:\lambda(\alpha_i^\vee)\in \mathbb Z
+\text{ for all the simple coroots } \alpha_i^\vee\},
+\]
+and hence also on
+\[
+P_{\mathbb R}:=P\otimes_{\mathbb Z}\mathbb R.
+\]
+
+Let $Q\subset P$ be the root lattice and let $Q_{lg}\subset Q$ be the sublattice generated by the long roots (if all the root lengths are equal, we call them long roots). Let
+\[
+h^\vee := 1+\rho(\theta^\vee)
+\]
+be the dual Coxeter number, where $\rho$ is the half sum of positive roots of $\mathfrak g$ and $\theta$ is the highest root.
+
+
+Let $W_c$ be the affine Weyl group of $\mathfrak g$ at level $c$, which is, by definition, the group of affine transformations of $P_{\mathbb R}$ generated by $W$ and the translation
+\[
+\lambda \longmapsto \lambda + (c+h^\vee)\theta.
+\]
+Since each long root is $W$-conjugate to $\theta$, $W_c$ is the semidirect product of $W$ by the lattice
+\[
+(c+h^\vee)Q_{lg}.
+\]
+
+For any $\alpha\in \Delta$, where $\Delta$ is the set of all the roots of $\mathfrak g$, and $n\in \mathbb Z$, define the affine wall
+\[
+H_{\alpha,n}
+=
+\{\lambda\in P_{\mathbb R}:\langle \lambda,\alpha\rangle = n(c+h^\vee)\}.
+\]
+Let
+\[
+H:=\bigcup_{\alpha\in \Delta,\; n\in \mathbb Z} H_{\alpha,n}.
+\]
+
+The connected components of $P_{\mathbb R}\setminus H$ are called \textbf{alcoves}. Then, the closure of any alcove is a fundamental domain for the action of $W_c$ on $P_{\mathbb R}$ and $W_c$ acts simply transitively on the set of alcoves. In particular, $W_c$ acts freely on $P_{\mathbb R}\setminus H$. Moreover, $W_c$ is a Coxeter group. The \textbf{fundamental alcove} is defined by
+\[
+A^\circ
+:=
+\{\lambda\in P_{\mathbb R}:\lambda(\alpha_i^\vee)>0
+\text{ for all the simple coroots } \alpha_i^\vee
+\text{ and } \lambda(\theta^\vee)<c+h^\vee\}.
+\]
+Its closure in $P_{\mathbb R}$ is clearly given by
+\[
+A
+=
+\{\lambda\in P_{\mathbb R}:\lambda(\alpha_i^\vee)\ge 0
+\text{ for all the simple coroots } \alpha_i^\vee
+\text{ and } \lambda(\theta^\vee)\le c+h^\vee\}.
+\]
+Then, it is easy to see that
+\begin{equation}
+A^\circ = A\setminus H.
+\end{equation}
+Denote the shifted action of $W_c$ on $P_{\mathbb R}$ by $*$, which is defined by
+\[w*\lambda = w(\lambda+\rho)-\rho\]
+Let $W'_c$ denote the set of minimal-length representatives of the cosets in $W_c/W$. Minimal length representatives $w\in W'_c$ can be recognized by the property that
+$\ell(ws_i)>\ell(w)$ for every simple reflection $s_i\in W$.
+
+Recall the statement of affine Borel--Weil--Bott (BWB) theorem for the affine Grassmannian $\bar X_G$. Consider the affine flag variety $\bar X_G(B)=\bar G((t))/\bar{\mathcal B}$ with
+\[\bar{\mathcal B}=ev_0^{-1}(B)\subset \bar G[[t]]\] There is a natural projection $\pi:\bar X_G(B)\to \bar X_G$ with fibers $\bar{G}[[t]]/\bar{\mathcal B}\simeq G/B$. 
+
+Let \(\widehat{\mathcal B}\subset \widehat{\bar G}\) be the inverse image of \(\bar{\mathcal B}\). Since the central extension splits over \(\bar G[[t]]\), we have
+\[
+\widehat{\mathcal B}\cong \mathbb G_m\times \bar{\mathcal B}.
+\]
+Hence, to construct a \(\widehat{\bar G}\)-equivariant vector bundle on \(\bar X_G(B)\), it is enough to specify a representation of \(\widehat{\mathcal B}\).
+
+Given a finite-dimensional \(B\)-module \(M\), define a \(\widehat{\mathcal B}\)-module \(M_c^*\) by letting the central factor \(\mathbb G_m\) act via the character \(z\mapsto z^{-c}\), and letting \(\bar{\mathcal B}\) act through the evaluation homomorphism
+\[
+ev_0:\bar{\mathcal B}\to B
+\]
+and the dual representation \(M^*\). The resulting \(\widehat{\mathcal B}\)-module \(M_c^*\) gives rise to a \(\widehat{\bar G}\)-equivariant vector bundle \(\mathcal L_c^B(M)\) on \(\bar X_G(B)\). We then define \(\mathcal L_c(V)\) to be the direct image of \(\mathcal L_c^B(V)\) under the projection \(\pi:\bar X_G(B)\to \bar X_G\).
+
+We need to check that this pushforward is actually a vector bundle and has the desired fiber $V(\lambda)^*$, giving part (a). This follows from classical BWB on the fiber, along with Grauert's theorem that lets us promote fiberwise cohomology into a vector bundle on the base.
+
+\begin{theorem}[Affine Borel--Weil--Bott for $\bar X_G(B)$]\label{thm:affine-bwb}
+Let $\lambda\in P$ be an integral weight and consider the $\widehat{\bar G}$-equivariant line bundle $\mathcal L_c^B(\lambda)$
+on the affine flag variety $\bar X_G(B)$.
+
+\begin{enumerate}[(1)]
+\item (Singular case)  
+If $\lambda+\rho$ lies on an affine wall, i.e.\ $\lambda+\rho\in H$, then
+\[
+H^i\bigl(\bar X_G(B),\mathcal L_c^B(\lambda)\bigr)=0
+\quad\text{for all } i.
+\]
+
+\item (Regular case)  
+If $\lambda+\rho\notin H$, then there exists a unique element $w\in W'_c$ such that $w*\lambda \in D_c$
+For this $w$, one has
+\[
+H^i\bigl(\bar X_G(B),\mathcal L_c^B(\lambda)\bigr)=0
+\quad\text{for } i\neq \ell(w),
+\]
+and
+\[
+H^{\ell(w)}\bigl(\bar X_G(B),\mathcal L_c^B(\lambda)\bigr)
+\simeq \mathcal H\bigl((w*\lambda)_c\bigr)^*
+\]
+as $\widehat{\mathfrak g}$-modules.
+\end{enumerate}
+\end{theorem}
+
+\begin{lemma}
+    \leavevmode
+\begin{enumerate}
+\item[(a)]
+Let $V$ be a finite-dimensional representation of $G$. Then there exists a $\widehat{\bar G}$-equivariant vector bundle $\mathcal L_c(V)$ over $\bar X_G$ such that the fiber of $\mathcal L_c(V)$ over the base point $\bar o\in \bar X_G$, which is a module for $\bar p^{-1}(\bar G[[t]])\simeq \mathbb G_m\times \bar G[[t]]$, is acted by the $\mathbb G_m$-factor via the character $z\mapsto z^{-c}$ and $\bar G[[t]]$ acts through the representation $V^*$ of $G$ under the evaluation map $\bar G[[t]]\to G$, $t\mapsto 0$.
+\item[(b)] Let $D$ be the set of dominant integral weights of $\mathfrak g$. For any $\lambda\in D$ such that $\lambda+\rho\in H$, 
+\[
+H^i(\bar X_G,\mathcal L_c(V(\lambda)))=0
+\quad\text{for all } i\ge 0,
+\]
+\item[(c)]
+For $\mu\in D_c$ and $w\in W'_c$, 
+\[
+H^i(\bar X_G,\mathcal L_c(V(w^{-1}*\mu)))=0
+\quad\text{unless } i=\ell(w),
+\]
+and
+\[
+H^{\ell(w)}(\bar X_G,\mathcal L_c(V(w^{-1}*\mu)))
+\simeq \mathcal H(\mu_c)^*
+\]
+as a module of the Lie algebra $\widehat{\mf g}$. Thus,
+\[
+H^{\ell(w)}(\bar X_G,\mathcal L_c(V(w^{-1}*\mu)))^{\hat{\mathfrak g}^-}
+\simeq V(\mu)^*
+\]
+where
+\[
+\hat{\mathfrak g}^- := \mathfrak g \otimes (t^{-1}\mathbb C[t^{-1}])
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    [Idea of proof] The cohomology of the upstairs line bundle agrees with the cohomology of the downstairs bundle. This follows from the fact that $R^q\pi_*\mathcal L_c^B(\lambda)=0 $ for $q>0$, which again follows from classical BWB on the fiber, along with the Leray spectral sequence \begin{align*}
+        E_2^{p,q}
+=
+H^p\bigl(\bar X_G,\; R^q\pi_*\mathcal F\bigr)
+\Longrightarrow
+H^{p+q}\bigl(\bar X_G(B),\mathcal F\bigr)
+    \end{align*} for $\cF = \mathcal L_c^B(\lambda)$. The entire spectral sequence has only one nonzero row, so it immediately degenerates and gives \begin{align*}
+        H^i\bigl(\bar X_G(B),\mathcal L_c^B(\lambda)\bigr)
+\cong
+H^i\bigl(\bar X_G,\mathcal L_c(V(\lambda))\bigr).
+    \end{align*}
+The cohomology computations in parts (b) and (c) then follow from Theorem \ref{thm:affine-bwb}. Recall that \(\mathcal H(\mu_c)\) is the integrable highest-weight module of level \(c\) with highest finite-dimensional \(\mathfrak g\)-type \(V(\mu)\). If
+\[
+\hat{\mathfrak g}^{-}:=\mathfrak g\otimes t^{-1}\mathbb C[t^{-1}],
+\]
+then \(\mathcal H(\mu_c)\) is generated from its highest-weight space by the action of \(\hat{\mathfrak g}^{-}\). The highest-weight space is canonically identified with \(V(\mu)\), and all other weight spaces are obtained by applying negative loop operators.
+
+Passing to the dual module, the \(\hat{\mathfrak g}^{-}\)-invariants in \(\mathcal H(\mu_c)^*\) are exactly the linear functionals which vanish on the subspace generated by the negative loop modes, i.e.\ on \(\hat{\mathfrak g}^{-}\mathcal H(\mu_c)\). Hence
+\[
+\bigl(\mathcal H(\mu_c)^*\bigr)^{\hat{\mathfrak g}^{-}}
+\cong
+\left(\mathcal H(\mu_c)\big/\hat{\mathfrak g}^{-}\mathcal H(\mu_c)\right)^*
+\cong
+V(\mu)^* \qedhere
+\]
+\end{proof}
+
+\begin{definition}
+For any $\lambda,\mu\in D_c$, define the following (a priori different from $\otimes^c$) product $\otimes_F^c$:
+\begin{equation}
+[V(\lambda)]\otimes_F^c [V(\mu)]
+=
+\chi_{\mathfrak g}\bigl(\bar X_G,\mathcal L_c(V(\lambda)\otimes V(\mu))\bigr)^*,
+\end{equation}
+where for any finite-dimensional $G$-module $V$, we define the virtual $G$-module
+\begin{equation}
+\chi_{\mathfrak g}(\bar X_G,\mathcal L_c(V))
+:=
+\sum_{i\ge 0} (-1)^i
+\bigl[
+H^i(\bar X_G,\mathcal L_c(V))^{\hat{\mathfrak g}^{-}}
+\bigr]
+\in R_c(\mathfrak g)
+\end{equation}
+
+As shown below in the following Lemma \ref{lem:fusion-product-via-affine-bwb}, the above sum is a finite sum and it is determined there. In particular, it lies in $R_c(\mathfrak g)$. Let
+\[
+H^i\bigl(\bar X_G,\mathcal L_c(V(\lambda)\otimes V(\mu))\bigr)
+\cong
+\bigoplus_{\nu\in D_c}
+d_i^{\lambda,\mu}(\nu)\,\mathcal H(\nu)^*,
+\]
+as $\hat{\mathfrak g}$-modules, for some (unique) $d_i^{\lambda,\mu}(\nu)\in \mathbb Z_+$. Then
+\begin{equation}
+[V(\lambda)]\otimes_F^c [V(\mu)]
+=
+\sum_{\nu\in D_c}
+\left(
+\sum_{i\ge 0} (-1)^i d_i^{\lambda,\mu}(\nu)
+\right)
+[V(\nu)].
+\end{equation}
+\end{definition}
+
+\begin{lemma}[Fusion product via affine BWB]\label{lem:fusion-product-via-affine-bwb}
+For any $\lambda,\mu\in D_c$ we have
+\begin{equation}
+[V(\lambda)]\otimes_F^c [V(\mu)]
+=
+\sum_{\nu\in D_c}\;
+\sum_{w\in W'_c}
+(-1)^{\ell(w)}\, n_{w^{-1}*\nu}^{\lambda,\mu}\,[V(\nu)],
+\end{equation}
+where
+\[
+n_{w^{-1}*\nu}^{\lambda,\mu}
+:=
+\dim\left(
+\Hom_{\mathfrak g}\bigl(V(w^{-1}*\nu),\,V(\lambda)\otimes V(\mu)\bigr)
+\right)
+\]
+\end{lemma}
+
+\begin{proof}
+Decompose $V(\lambda)\otimes V(\mu)$ as a $\mathfrak g$-module and index accordingly:
+\begin{equation}\label{eq:decomp}
+V(\lambda)\otimes V(\mu)
+\simeq
+\left(
+\bigoplus_{\nu\in D_c}\;\bigoplus_{w\in W'_c}
+n^{\lambda,\mu}_{w^{-1}*\nu}\, V(w^{-1}*\nu)
+\right)
+\;\oplus\;
+\bigoplus_{\gamma\in D\cap(H-\rho)}
+d^{\lambda,\mu}_\gamma\, V(\gamma),
+\end{equation}
+for some multiplicities $d^{\lambda,\mu}_\gamma\in\mathbb Z_{\ge0}$.
+
+Applying Lemma~4.2.10, we compute
+\begin{align*}
+H^i\bigl(\bar X_G,\mathcal L_c(V(\lambda)\otimes V(\mu))\bigr)
+&\simeq
+\bigoplus_{\nu\in D_c}\;\bigoplus_{w\in W'_c}
+n^{\lambda,\mu}_{w^{-1}*\nu}\,
+H^i\bigl(\bar X_G,\mathcal L_c(V(w^{-1}*\nu))\bigr) \\
+&\quad\oplus
+\bigoplus_{\gamma\in D\cap(H-\rho)}
+d^{\lambda,\mu}_\gamma\,
+H^i\bigl(\bar X_G,\mathcal L_c(V(\gamma))\bigr).
+\end{align*}
+
+The terms indexed by $\gamma\in D\cap(H-\rho)$ vanish in cohomology. The remaining terms vanish unless $i=\ell(w)$, and for $i=\ell(w)$ we have
+\[
+H^{\ell(w)}\bigl(\bar X_G,\mathcal L_c(V(w^{-1}*\nu))\bigr)
+\simeq \mathcal H(\nu)^*.
+\]
+Hence
+\begin{equation}\label{eq:cohomology}
+H^i\bigl(\bar X_G,\mathcal L_c(V(\lambda)\otimes V(\mu))\bigr)
+\simeq
+\bigoplus_{\substack{\nu\in D_c \\ w\in W'_c,\ \ell(w)=i}}
+n^{\lambda,\mu}_{w^{-1}*\nu}\,
+\mathcal H(\nu)^*.
+\end{equation}
+
+Taking $\hat{\mathfrak g}^{-}$-invariants and using
+\[
+\bigl(\mathcal H(\nu)^*\bigr)^{\hat{\mathfrak g}^{-}} \simeq V(\nu)^*,
+\]
+we obtain
+\[
+H^i\bigl(\bar X_G,\mathcal L_c(V(\lambda)\otimes V(\mu))\bigr)^{\hat{\mathfrak g}^{-}}
+\simeq
+\bigoplus_{\substack{\nu\in D_c \\ w\in W'_c,\ \ell(w)=i}}
+n^{\lambda,\mu}_{w^{-1}*\nu}\, V(\nu)^*.
+\]
+
+Therefore,
+\begin{align*}
+\chi_{\mathfrak g}\bigl(\bar X_G,\mathcal L_c(V(\lambda)\otimes V(\mu))\bigr)
+&=
+\sum_{i\ge0} (-1)^i
+\left[
+H^i\bigl(\bar X_G,\mathcal L_c(V(\lambda)\otimes V(\mu))\bigr)^{\hat{\mathfrak g}^{-}}
+\right] \\
+&=
+\sum_{\nu\in D_c}\;\sum_{w\in W'_c}
+(-1)^{\ell(w)}\, n^{\lambda,\mu}_{w^{-1}*\nu}\,[V(\nu)^*] \qedhere
+\end{align*} 
+\end{proof}
+We are prepared to show that the fusion product $\otimes_F^c$ coincides with the original fusion product $\otimes^c$.
+Recall the BGG resolution of the integrable highest-weight module \(\mathcal H(\nu)\):
+\[
+\cdots \xrightarrow{\delta_{p+1}} F_p \xrightarrow{\delta_p} F_{p-1}
+\xrightarrow{\delta_{p-1}} \cdots \xrightarrow{\delta_1} F_0
+\xrightarrow{\epsilon} \mathcal H(\nu)\to 0,
+\]
+where
+\[
+F_p=\bigoplus_{\substack{w\in W_c'\\ \ell(w)=p}}
+\widehat M\bigl(V(w^{-1}*\nu),c\bigr)
+\]
+
+Tensoring with the evaluation $\tilde{\mf g}$-module \(V_z(\mu)\) where the center acts by 0 and action of the loop algebra factors through evaluation at $z\in \C$, we obtain an exact complex of \(\hat{\mathfrak g}\)-modules
+\[
+\cdots \xrightarrow{\delta_{p+1}\otimes \mathrm{id}} F_p\otimes V_z(\mu)
+\xrightarrow{\delta_p\otimes \mathrm{id}} F_{p-1}\otimes V_z(\mu)
+\xrightarrow{\delta_{p-1}\otimes \mathrm{id}} \cdots
+\xrightarrow{\delta_1\otimes \mathrm{id}} F_0\otimes V_z(\mu)
+\to \mathcal H(\nu)\otimes V_z(\mu)\to 0.
+\]
+
+Now apply the right-exact functor
+\[
+\mathbb C\otimes_{U(\hat{\mathfrak g}^-)}(-),
+\]
+where \(\mathbb C\) is the trivial \(U(\hat{\mathfrak g}^-)\)-module. Since each
+\(\widehat M(V,c)\otimes V_z(\mu)\) is free as a \(U(\hat{\mathfrak g}^-)\)-module, this computes the Lie algebra homology
+\[
+H_\bullet\bigl(\hat{\mathfrak g}^-,\,\mathcal H(\nu)\otimes V_z(\mu)\bigr).
+\]
+
+Thus we obtain a complex of \(\mathfrak g\)-modules
+\[
+\cdots \xrightarrow{\widehat\delta_{p+1}} \widehat F_p
+\xrightarrow{\widehat\delta_p} \widehat F_{p-1}
+\xrightarrow{\widehat\delta_{p-1}} \cdots
+\xrightarrow{\widehat\delta_1} \widehat F_0 \to 0,
+\]
+with
+\[
+\widehat F_p
+:=
+\mathbb C\otimes_{U(\hat{\mathfrak g}^-)}\bigl(F_p\otimes V_z(\mu)\bigr),
+\]
+
+Using the decomposition of \(F_p\) and the isomorphism
+\[
+\widehat M(V,c)\otimes V_z(\mu)\cong U(\hat{\mathfrak g}^-)\otimes_{\mathbb C}(V\otimes V_z(\mu))
+\]
+as \(U(\hat{\mathfrak g}^-)\)-modules, we get
+\begin{align*}
+\widehat F_p
+&\cong
+\bigoplus_{\substack{w\in W_c'\\ \ell(w)=p}}
+\mathbb C\otimes_{U(\hat{\mathfrak g}^-)}
+\bigl(\widehat M(V(w^{-1}*\nu),c)\otimes V_z(\mu)\bigr) \\
+&\cong
+\bigoplus_{\substack{w\in W_c'\\ \ell(w)=p}}
+\bigl(V(w^{-1}*\nu)\otimes V_z(\mu)\bigr) \\
+&\cong
+\bigoplus_{\substack{w\in W_c'\\ \ell(w)=p}}
+\bigl(V(w^{-1}*\nu)\otimes V(\mu)\bigr),
+\end{align*}
+where in the last step we use that \(V_z(\mu)\cong V(\mu)\) as a \(\mathfrak g\)-module. The homology of this complex is precisely
+\[
+H_p\bigl(\hat{\mathfrak g}^-,\,\mathcal H(\nu)\otimes V_z(\mu)\bigr).
+\]
+Now we can compute
+\begin{align*}
+\sum_{w\in W_c'} (-1)^{\ell(w)}\, n^{\lambda,\mu}_{w^{-1}*\nu}
+&=
+\sum_{p\ge 0} (-1)^p
+\sum_{\substack{w\in W_c' \\ \ell(w)=p}}
+\dim \Hom_{\mathfrak g}\bigl(V(\lambda),\, V(w^{-1}*\nu)\otimes V(\mu)\bigr) \\
+&=
+\sum_{p\ge 0} (-1)^p
+\dim \Hom_{\mathfrak g}\bigl(V(\lambda),\, \widehat F_p\bigr) \\
+&=
+\sum_{i\ge 0} (-1)^i
+\dim \Hom_{\mathfrak g}\bigl(V(\lambda),\, H_i(\widehat F_\bullet)\bigr) \\
+&=
+\sum_{i\ge 0} (-1)^i
+\dim \Hom_{\mathfrak g}\bigl(V(\lambda),\,
+H_i(\hat{\mathfrak g}^-,\, \mathcal H(\nu)\otimes V_z(\mu))\bigr).
+\end{align*}
+We have already identified the left hand side as the coefficient of $[V(\nu)]$ in $[V(\lambda)]\otimes_F^c [V(\mu)]$. The $i=0$ term on the right hand side is the multiplicity of $V(\lambda)$ in the coinvariants
+$H_0\bigl(\hat{\mathfrak g}^-,\,\mathcal H(\nu)\otimes V_z(\mu)\bigr)$, which is precisely equal to the Verlinde number $\dim \mathcal V_{\mathbb P^1}(\lambda,\mu,\nu^*)$.
+
+Therefore, the coincidence of the two products $\otimes_F^c$ and $\otimes^c$ would follow from vanishing of the numbers
+\[\dim \Hom_{\mathfrak g}\bigl(V(\lambda),\,
+H_i\bigl(\hat{\mathfrak g}^-,\, \mathcal H(\nu)\otimes V_z(\mu)\bigr)\bigr) = 0
+\quad\text{for } i>0.\]
+This vanishing result was established by Teleman \cite{teleman1995}.
+
+\subsection{The Verlinde formula}
+
+Consider the map induced by holomorphic induction
+\[
+\xi_c:R(\mathfrak g)\to R_c(\mathfrak g)
+\] characterized by the formula \begin{align*}
+    \xi_c([V(\lambda)])
+=
+\chi_{\mathfrak g}\bigl(\bar X_G,\mathcal L_c(V(\lambda))\bigr)^*
+\end{align*}
+If $\lambda+\rho\in H$, then affine BWB gives vanishing, so
+$\xi_c([V(\lambda)])=0$. If $\lambda+\rho\notin H$, then there is a unique $w\in W_c'$ and $\lambda_0\in D_c$ such that
+$\lambda = w^{-1}*\lambda_0$,
+and then
+\[\xi_c([V(\lambda)]) = (-1)^{\ell(w)}[V(\lambda_0)]\]
+
+\begin{theorem}
+    $\xi_c:R(\mathfrak g)\to R_c(\mathfrak g)$ is a surjective ring homomorphism with respect to the product \(\otimes_F^c\) in \(R_c(\mathfrak g)\).
+\end{theorem}
+ As an immediate consequence of \(\xi_c\) being a ring homomorphism with respect to the product \(\otimes_F^c\) in \(R_c(\mathfrak g)\), we get that \(\otimes_F^c\) is associative (since \(\xi_c\) is surjective).
+\begin{proof}
+For any finite-dimensional \(G\)-module \(V\), define the virtual \(\hat{\mathfrak g}\)-module
+\[
+\chi\bigl(\bar X_G,\mathcal L_c(V)\bigr)
+:=
+\sum_{i\ge 0}(-1)^i\, H^i\bigl(\bar X_G,\mathcal L_c(V)\bigr).
+\]
+
+We show that for any \(\lambda\in D\), \(w\in W_c\) with \(w^{-1}*\lambda\in D\), and finite-dimensional \(G\)-module \(V\),
+\begin{equation}\label{eq:relation}
+\chi\bigl(\bar X_G,\mathcal L_c(V(\lambda)\otimes V)\bigr)
+=
+(-1)^{\ell(w)}
+\chi\bigl(\bar X_G,\mathcal L_c(V(w^{-1}*\lambda)\otimes V)\bigr).
+\end{equation}
+In particular,
+\begin{equation}
+\chi_{\mathfrak g}\bigl(\bar X_G,\mathcal L_c(V(\lambda)\otimes V)\bigr)
+=
+(-1)^{\ell(w)}
+\chi_{\mathfrak g}\bigl(\bar X_G,\mathcal L_c(V(w^{-1}*\lambda)\otimes V)\bigr).
+\end{equation}
+
+Since \(V\) is a \(G\)-module, from the Leray spectral sequence applied to the locally trivial \(G/B\)-fibration
+\[
+\bar X_G(B)\to \bar X_G
+\]
+with respect to the vector bundle \(\mathcal L_c^B(\mathbb C_\lambda\otimes V)\) and the classical BWB theorem, we get
+\begin{align}
+\chi\bigl(\bar X_G,\mathcal L_c(V(\lambda)\otimes V)\bigr)
+&=
+\chi\bigl(\bar X_G(B),\mathcal L_c^B(\mathbb C_\lambda\otimes V)\bigr) \nonumber\\
+&=
+\sum_{\beta\in P_V} n_\beta\, \chi\bigl(\bar X_G(B),\mathcal L_c^B(\lambda+\beta)\bigr),
+\end{align}
+where the vector bundle \(\mathcal L_c^B(M)\) over \(\bar X_G(B)\) for any finite-dimensional \(B\)-module \(M\) is as before, \(\mathbb C_\lambda\) denotes the \(1\)-dimensional representation of \(B\) corresponding to the character \(e^\lambda\), \(P_V\) is the set of weights of \(V\), and the character
+\[
+\operatorname{ch}(V)=\sum_{\beta\in P_V} n_\beta e^\beta
+\]
+Then we compute
+\begin{align}
+\chi\bigl(\bar X_G,\mathcal L_c(V(w^{-1}*\lambda)\otimes V)\bigr)
+&=
+\sum_{\beta\in P_V} n_\beta\, \chi\bigl(\bar X_G(B),\mathcal L_c^B(w^{-1}*\lambda+\beta)\bigr) \nonumber\\
+&=
+\sum_{\beta\in P_V} n_\beta\, \chi\bigl(\bar X_G(B),\mathcal L_c^B(w^{-1}*(\lambda+\beta))\bigr) \text{ since } n_\beta=n_{v\beta} \nonumber\\
+&=
+(-1)^{\ell(w)}
+\sum_{\beta\in P_V} n_\beta\, \chi\bigl(\bar X_G(B),\mathcal L_c^B(\lambda+\beta)\bigr),
+\end{align} which proves the desired claim.
+
+Now suppose $\lambda+\rho$ lies on the affine wall
+$H_{\alpha,n}=\{\eta\in P_{\mathbb R}:\langle \eta,\alpha\rangle=n(c+h^\vee)\}$. The affine Weyl element \begin{align*}
+    w = s_\alpha\cdot \tau_{-\frac{2n(c+h^\vee)\alpha}{\langle \alpha,\alpha\rangle}}
+\end{align*} fixes the point $\lambda+\rho$ under the shifted action and therefore $w * \lambda = \lambda$. Applying the relation (\ref{eq:relation}) to this $w$ gives
+\begin{align*}
+    \chi\bigl(\bar X_G,\mathcal L_c(V(\lambda)\otimes V)\bigr)
+=
+(-1)^{\ell(w)}
+\chi\bigl(\bar X_G,\mathcal L_c(V(\lambda)\otimes V)\bigr)
+\end{align*} So the vanishing of $\chi\bigl(\bar X_G,\mathcal L_c(V(\lambda)\otimes V)\bigr)$ follows from the fact that $\ell(w)$ is odd, which can be checked by a direct computation.
+
+
+We are now ready to prove that \(\xi_c\) is a ring homomorphism with respect to the product \(\otimes_F^c\) in \(R_c(\mathfrak g)\), i.e., for \(\lambda,\mu\in D\),
+\begin{equation}
+\xi_c([V(\lambda)\otimes V(\mu)])
+=
+\xi_c([V(\lambda)])\otimes_F^c \xi_c([V(\mu)]).
+\end{equation}
+
+If at least one of \(\lambda\) or \(\mu\) (say \(\lambda\)) is such that \(\lambda+\rho\in H\), then both sides vanish.
+So assume that both of \(\lambda+\rho\) and \(\mu+\rho\) lie in \(P\setminus H\), i.e., there exists \(v,w\in W_c'\) and \(\lambda_0,\mu_0\in D_c\) such that
+\[
+\lambda=v^{-1}*\lambda_0
+\qquad\text{and}\qquad
+\mu=w^{-1}*\mu_0.
+\]
+
+Then
+\begin{align*}
+\xi_c([V(\lambda)\otimes V(\mu)])
+&=
+\chi_{\mathfrak g}\bigl(\bar X_G,\mathcal L_c(V(\lambda)\otimes V(\mu))\bigr)^* \\
+&=
+(-1)^{\ell(v)+\ell(w)}
+\chi_{\mathfrak g}\bigl(\bar X_G,\mathcal L_c(V(\lambda_0)\otimes V(\mu_0))\bigr)^* \text{ by Weyl antisymmetry}\\
+&=
+(-1)^{\ell(v)+\ell(w)}
+\xi_c([V(\lambda_0)])\otimes_F^c \xi_c([V(\mu_0)]) \text{ by definition}
+\\
+&=
+\xi_c([V(\lambda)])\otimes_F^c \xi_c([V(\mu)]) \qedhere
+\end{align*}
+\end{proof}
+
+Let \[T_c=\{t\in T:\ e^\beta(t)=1 \text{ for all } \beta\in (c+h^\vee)Q_{\mathrm{lg}}\}\] where \(Q_{\mathrm{lg}}\) is the lattice generated by the long roots. Then \(T_c\) is a finite subgroup of the maximal torus \(T\), and let \(T_c^{\mathrm{reg}} = \set{t\in T_c : e^\alpha(t)\neq 1 \text{ for all } \alpha\in \Phi}\)
+ be the finite set of level-c regular torus points. Let $\kappa:\mf t^*\to \mf t$ be the basic invariant form normalized so that $\kappa(\theta,\theta)=2$ where $\theta$ is the highest root. Then 
+ \begin{align*}
+    D_c &\cong T_c^{\mathrm{reg}}/W \\
+    \mu &\mapsto \exp\left( \frac{2\pi i\,\kappa(\mu+\rho)}{c+h^\vee} \right)
+ \end{align*} because if $x\in \mathfrak t^*$, then exponentiating
+$\frac{2\pi i x}{c+h^\vee}$
+kills $(c+h^\vee)$-multiples in the character lattice, and regular points are represented by alcove points, and the shifted points $\mu + \rho$ for $\mu \in D_c$ are precisely the alcove points in the fundamental domain of the shifted action. Let $\mathrm{ch}_t([V])=\operatorname{tr}(t\mid V)$
+
+\begin{corollary}[Character factorization]
+For any $t \in T_c^{\mathrm{reg}}$, the character
+\[
+\mathrm{ch}_t : R(\mathfrak g) \to \mathbb C
+\]
+factors through $R_c(\mathfrak g)$ via $\xi_c$ to give an algebra homomorphism
+\[
+\mathrm{ch}_{t,c} : R_c(\mathfrak g) \to \mathbb C.
+\]
+Moreover, the set $\{\mathrm{ch}_{t,c}\}_{t \in T_c^{\mathrm{reg}}/W}$ bijectively parametrizes the set
+\[
+S_{D_c} := \mathrm{Hom}_{\mathrm{alg}}(R_c(\mathfrak g), \mathbb C).
+\]
+\end{corollary}
+
+\begin{proof} We will check that $\mathrm{ch}_t$ vanishes on the kernel of $\xi_c$. Recall that the relations in the kernel of $\xi_c$ are generated by the affine Weyl antisymmetry and the affine wall vanishing. We will check that $\mathrm{ch}_t$ vanishes on these relations using the Weyl character formula. We may assume
+\[
+t = \exp\left( \frac{2\pi i\,\kappa(\mu+\rho)}{c+h^\vee} \right),
+\] for $\mu \in D_c$. 
+
+By the Weyl character formula, for any $\lambda \in D$,
+\[
+\mathrm{ch}_t([V(\lambda)]) =
+\frac{\sum_{w\in W} \epsilon(w)\, e^{w(\lambda+\rho)}(t)}
+     {\sum_{w\in W} \epsilon(w)\, e^{w\rho}(t)}.
+\]
+
+Since $t$ is regular, the denominator is nonzero. Thus it suffices to show for $v\in W$, $\beta \in (c+h^\vee)Q_{\mathrm{lg}}$ we have the affine Weyl antisymmetry
+\begin{align*}
+\sum_{w\in W} \epsilon(w)
+e^{\frac{2\pi i}{c+h^\vee}\langle w(\lambda+\rho),\mu+\rho\rangle}
+=
+\epsilon(v\tau_\beta)
+\sum_{w\in W} \epsilon(w)
+e^{\frac{2\pi i}{c+h^\vee}\langle w(\lambda+\rho+\beta),\mu+\rho\rangle},
+\end{align*}
+and also the affine wall vanishing
+\begin{align*}
+\sum_{w\in W} \epsilon(w)
+e^{\frac{2\pi i}{c+h^\vee}\langle w(\lambda+\rho),\mu+\rho\rangle}
+=0
+\quad \text{if } \lambda+\rho \in H.
+\end{align*}
+
+For $\beta \in (c+h^\vee)Q_{\mathrm{lg}}$, one has $\epsilon(\tau_\beta)=1$, and
+\[
+\langle \beta,\mu+\rho\rangle \in (c+h^\vee)\mathbb Z,
+\]
+so the exponential is invariant. This proves the first claim. 
+To prove the second claim, suppose $\lambda+\rho \in H_{\alpha,n}$. Then there exists
+\[
+w_0 = s_\alpha \tau_{-\frac{2n(c+h^\vee)\alpha}{\langle \alpha,\alpha\rangle}}
+\]
+fixing $\lambda+\rho$. Since $\ell(w_0)$ is odd, the sum is zero. Thus $\mathrm{ch}_t$ vanishes on the kernel of $\xi_c$, so factors through $R_c(\mathfrak g)$. Since $\xi_c$ is surjective and $\mathrm{ch}_t$ is an algebra homomorphism,
+$\mathrm{ch}_{t,c}$ is an algebra homomorphism.
+
+Finally, the isomorphism
+\[
+\gamma : R(\mathfrak g)\otimes \mathbb C \xrightarrow{\sim} \mathbb C[T/W],
+\]
+implies that the map $t\mapsto \mathrm{ch}_{t,c}$ is injective. We know $|T_c/W|=|D_c|$ adn therefore $|S_{D_c}| \geq |D_c|$. Moreover $|S_{D_c}| \leq |D_c|$ since $|S_{D_c}| \le \dim_{\C} (R_c(\mathfrak g) \otimes \mathbb C) = |D_c|$. Thus $t\mapsto \mathrm{ch}_{t,c}$ is a bijection between $T_c^{\mathrm{reg}}/W$ and $S_{D_c}$, and $|S_{D_c}|=|D_c|$ which also implies that the fusion ring $R_c(\mathfrak g)$ is semisimple.
+\end{proof}
+
+\begin{theorem}[Verlinde formula]
+Let $\mathfrak g$ be any simple Lie algebra and let $c>0$ be any central charge. Let
+\[
+(\Sigma,\vec p)=(p_1,\dots,p_s)
+\]
+be an irreducible smooth $s$-pointed curve of any genus $g\ge 0$ (where $s\ge 1$), and let
+\[
+\vec\lambda=(\lambda_1,\dots,\lambda_s)
+\]
+be a collection of weights in $D_c$. Then
+\begin{equation*}
+\dim \mathcal V_\Sigma(\vec p,\vec\lambda)
+=
+|T_c|^{\,g-1}
+\sum_{\mu\in D_c}
+\left(
+\prod_{i=1}^s \mathrm{ch}_{t_\mu}\bigl([V(\lambda_i)]\bigr)
+\right)
+\cdot
+\prod_{\alpha\in \Delta_+}
+\left(
+2\sin\left(\frac{\pi}{c+h^\vee}\langle \mu+\rho,\alpha\rangle\right)
+\right)^{2-2g},
+\end{equation*}
+where $\Delta_+$ is the set of positive roots of $\mathfrak g$, $h^\vee$ is the dual Coxeter number,
+$T_c$ is as in Definition~4.2.5,
+\[
+\kappa:\mathfrak h^*\to \mathfrak h
+\]
+is the isomorphism induced from the normalized invariant form, and
+\[
+t_\mu:=\exp\left(\frac{2\pi i\,\kappa(\mu+\rho)}{c+h^\vee}\right)\in T_c.
+\]
+
+Moreover,
+\begin{equation}
+|T_c|=(c+h^\vee)^\ell |P/Q|\,|Q/Q_{\mathrm{lg}}|,
+\end{equation}
+where $\ell$ is the rank of $\mathfrak g$, $P$ (resp.\ $Q$) is the weight (resp.\ root) lattice, and $Q_{\mathrm{lg}}$ is the sublattice of $Q$ generated by the long roots.
+
+In particular, for $g=1$, $s=1$, and $\vec\lambda=(0)$,
+\[
+\dim \mathcal V_\Sigma(\vec p,\vec\lambda)=|D_c|.
+\]
+\end{theorem}
+
+\begin{proof}
+By generalities of fusion rules and Corollary~\ref{cor:casimir}
+\begin{equation}
+\dim \mathcal V_\Sigma(\vec p,\vec\lambda)
+=
+\sum_{\chi\in S_{D_c}}
+\chi([V(\lambda_1)])\cdots \chi([V(\lambda_s)])\, \chi(\Omega)^{g-1},
+\end{equation}
+where $S_{D_c}$ is the set of algebra homomorphisms
+\[
+R_c(\mathfrak g)\to \mathbb C
+\]
+and
+\begin{equation}
+\chi(\Omega)=\sum_{\nu\in D_c} |\chi([V(\nu)])|^2.
+\end{equation}
+We have seen that
+\begin{equation}
+S_{D_c}=\{\mathrm{ch}_{t_\mu,c}\}_{\mu\in D_c}.
+\end{equation}
+
+We now determine $\chi(\Omega)$ for any $\chi=\mathrm{ch}_{t_\mu,c}$.
+Let $L^2(T_c)$ be the space of $\mathbb C$-valued functions on $T_c$ with inner product
+\[
+\langle f,g\rangle
+=
+\frac{1}{|T_c|}\sum_{t\in T_c} f(t)\overline{g(t)}.
+\]
+
+For any $\mu\in D_c$, consider the function on $T_c$:
+\[
+J_\mu(t)=\sum_{w\in W}\epsilon(w)e^{w(\mu+\rho)}(t).
+\]
+
+Since $J_\mu$ is $W$-anti-invariant, i.e.
+\[
+J_\mu(vt)=\epsilon(v)\,J_\mu(t),\qquad v\in W,\ t\in T_c,
+\]
+it vanishes on $T_c\setminus T_c^{\mathrm{reg}}$. Of course, $|J_\mu|^2$ is $W$-invariant. Thus
+\begin{equation}
+\sum_{\nu\in D_c} |J_\mu(t_\nu)|^2
+=
+\frac{|T_c|}{|W|}\,\|J_\mu\|^2.
+\end{equation}
+Now, we claim that for any $\mu\in D_c$, the characters $\{e^{w(\mu+\rho)}|_{T_c}\}_{w\in W}$
+are distinct. Equivalently, for $w\neq 1$,
+\[
+e^{w(\mu+\rho)}|_{T_c}\neq e^{\mu+\rho}|_{T_c}.
+\]
+It is equivalent to the assertion that
+\[
+\langle w(\mu+\rho)-(\mu+\rho),\lambda\rangle \notin (c+h^\vee)\mathbb Z
+\quad \text{for some } \lambda\in P.
+\]
+If not, assuming
+\[
+\langle w(\mu+\rho)-(\mu+\rho),\lambda\rangle \in (c+h^\vee)\mathbb Z
+\quad\text{for all }\lambda\in P,
+\]
+there exists $\beta\in (c+h^\vee)Q_{\mathrm{lg}}$ such that
+\[
+w(\mu+\rho)-(\mu+\rho)=\beta,
+\]
+Thus,
+\[
+\tau_{-\beta}\cdot w(\mu+\rho)=\mu+\rho,
+\]
+which is a contradiction since $\mu+\rho\in A^\circ$ the interior of the shifted fundamental alcove and there is no nontrivial affine Weyl element fixing a point in the interior of the fundamental alcove.
+This proves that \(\{e^{w(\mu+\rho)}|_{T_c}\}_{w\in W}\) are distinct characters.
+
+Thus, by the orthogonality relation for the finite group \(T_c\), we get
+\begin{equation}
+\|J_\mu\|^2=|W|.
+\end{equation}
+
+Taking \(\chi=\mathrm{ch}_{t_\mu,c}\) in (4), we get
+\begin{align}
+\chi(\Omega)
+&=
+\sum_{\nu\in D_c}\left|\mathrm{ch}_{t_\mu,c}([V(\nu)])\right|^2 \nonumber\\
+&=
+\frac{\sum_{\nu\in D_c}|J_\nu(t_\mu)|^2}
+{\prod_{\alpha\in \Delta}(e^\alpha(t_\mu)-1)},
+\qquad \text{by the Weyl character formula} \nonumber\\
+&=
+\frac{\sum_{\nu\in D_c}|J_\mu(t_\nu)|^2}
+{\prod_{\alpha\in \Delta}(e^\alpha(t_\mu)-1)},
+\qquad \text{by the definition of } J_\mu \nonumber\\
+&=
+\frac{|T_c|}
+{\prod_{\alpha\in \Delta_+}
+\left(
+2\sin\left(\frac{\pi}{c+h^\vee}\langle \mu+\rho,\alpha\rangle\right)
+\right)^2}
+\end{align} where the last step splits the product over all roots into a product over positive roots and their negatives, and uses the identity \[(e^\alpha(t_\mu)-1)(e^{-\alpha}(t_\mu)-1)
+=
+4\sin^2\left(\frac{\pi}{c+h^\vee}\langle \mu+\rho,\alpha\rangle\right)\]
+Finally
+\[
+|T_c|=[P:(c+h^\vee)Q_{\mathrm{lg}}] = 
+[P:Q]\,[Q:Q_{\mathrm{lg}}]\,[Q_{\mathrm{lg}}:(c+h^\vee)Q_{\mathrm{lg}}] = (c+h^\vee)^\ell |P/Q|\,|Q/Q_{\mathrm{lg}}|.
+\]
+This proves the Verlinde formula.
+\end{proof}
+
+\section{Quasiparabolic bundles}
+\subsection{Stability conditions}
+Let $\mf S$ be the category of quasicompact separated schemes over $\mathbb C$. Let \((\Sigma,\vec p)\) be an \(s\)-pointed smooth projective curve (where \(s\ge 1\)) and let
+\[\vec P=(P_1,\dots,P_s)
+\]be a collection of standard parabolic subgroups of a connected, simple, simply connected affine algebraic group \(G\). 
+\begin{definition}[Quasi-parabolic moduli stack]
+A \textbf{quasi-parabolic \(G\)-bundle of type \(\vec P\)} over \((\Sigma,\vec p)\) is, by definition, a \(G\)-bundle \(E\) over \(\Sigma\) together with sections \(\sigma_i\) of \(E/P_i\) at \(p_i\), i.e.\ elements of the fiber \(E_{p_i}/P_i\). The \textbf{quasi-parabolic moduli stack} $\Parbun_G(\Sigma,\vec P)$
+is the category over \(\mathfrak S\) whose objects are pairs \((E,\vec \sigma)\), where \(E\) is a \(G\)-bundle over \(\Sigma\times S\) (for any scheme \(S\in \mathfrak S\)) and
+\[
+\vec \sigma=(\sigma_1,\dots,\sigma_s)
+\]
+consists of sections
+\[
+\sigma_i \text{ of } E|_{p_i\times S}/P_i.
+\]
+
+Let \((E',\vec \sigma')\) be another such pair, where \(E'\) is a \(G\)-bundle over \(\Sigma\times S'\). A morphism from \((E,\vec \sigma)\) to \((E',\vec \sigma')\) consists of a pair \((f,\bar f)\) making the following diagram commutative, where
+\[
+f:E\to E'
+\]
+is a \(G\)-equivariant morphism and
+\[
+\bar f:S\to S'
+\]
+is a morphism,
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+E \arrow[r,"f"] \arrow[d,"\pi"'] & E' \arrow[d,"\pi'"] \\
+\Sigma\times S \arrow[r,"\Id_\Sigma\times \bar f"'] & \Sigma\times S'
+\end{tikzcd}
+\]
+Moreover, we require that, for all \(1\le i\le s\),
+\[
+\sigma_i'\circ (\Id_\Sigma\times \bar f)|_{p_i\times S}
+=
+f_{p_i}\circ \sigma_i,
+\]
+where
+\[
+f_{p_i}:E/P_i\to E'/P_i
+\]
+is the induced map from \(f\).
+\end{definition}
+
+It is easy to see that \(\Parbun_G(\Sigma,\vec P)\) is a groupoid fibration over \(\mathfrak S\) where \((E,\vec \sigma)\) is mapped to \(S\) and \((f,\bar f)\) is mapped to \(\bar f\).
+
+\begin{theorem}
+Let \((\Sigma,\vec p)\) be an \(s\)-pointed (for any \(s\ge 1\)) projective curve and let $\vec P=(P_1,\dots,P_s)$
+be standard parabolic subgroups of a connected, reductive algebraic group \(G\). Then $\Parbun_G(\Sigma,\vec P)$
+is a smooth (algebraic) stack. Moreover, if \(\Sigma\) is smooth and irreducible, then
+\[
+\dim \Parbun_G(\Sigma,\vec P)
+=
+(g-1)\dim G + \sum_{i=1}^s \dim G/P_i,
+\]
+\end{theorem}
+Fix a maximal compact subgroup \(K\) of \(G\). Define the fundamental alcove
+\[
+\Phi_0=\{\, h\in \mathfrak h : \alpha_i(h)\ge 0 \ \text{and}\ \theta(h)\le 1,\ \text{for all simple roots } \alpha_i \,\},
+\]
+where \(\theta\) is the highest root.
+
+For any semisimple element \(x\in \mathfrak g\), define the corresponding Kempf's parabolic subalgebra
+\[
+\mathfrak p(x):=\{\, v\in \mathfrak g : \lim_{t\to -\infty} \Ad(\exp(tx))\cdot v \ \text{exists in } \mathfrak g \,\},
+\]
+and let \(P(x)\) be the corresponding parabolic subgroup of \(G\). Then, for \(h\in \Phi_0\), \(P(h)\) is the standard parabolic subgroup such that its Levi subgroup \(L(h)\) containing \(H\) has for its simple roots
+\[
+S_h:=\{\alpha_i : \alpha_i(h)=0\}.
+\]
+\begin{lemma}
+The map
+\[
+\Phi_0 \longrightarrow K/\Ad K,\qquad
+h \longmapsto [\exp(2\pi i h)],
+\]
+is a bijection, where \(K/\Ad K\) denotes the set of \(K\)-orbits in \(K\) under the adjoint action and \([\exp(2\pi i h)]\) denotes the \(K\)-orbit of \(\exp(2\pi i h)\).
+\end{lemma}
+
+\begin{definition}
+    A \textbf{parabolic} $G$-bundle of type $\vec P$ over $(\Sigma,\vec p)$ is a quasi-parabolic $G$-bundle of type $\vec P$ over $(\Sigma,\vec p)$ together with the data of parabolic weights \[\vec \tau = (\tau_1,\dots,\tau_s)\] where $\tau_i \in \Phi_0$ is a parabolic weight for the point $p_i$.
+\end{definition}
+
+\begin{definition}
+A \(G\)-bundle \(E \to \Sigma\) is called \textbf{semistable} (resp.\ \textbf{stable}) if for any standard maximal parabolic subgroup \(Q_k\) of \(G\) (\(1\le k\le \ell\)) and any section \(\mu\) of \(E/Q_k \to \Sigma\),
+\[
+\deg \mu^*\bigl(\mathcal L_{Q_k}(-\omega_k)\bigr) \le 0
+\quad (\text{resp.\ } < 0).
+\]
+where \(\mathcal L_{Q_k}(-\omega_k)\) is the homogeneous line bundle over
+\(G/Q_k\) associated, under our convention, to the character \(\omega_k\) of
+\(Q_k\), spread out fiberwise over the total space of the \(G/Q_k\)-bundle
+\(E/Q_k\). Equivalently,
+\[
+\mathcal L_{Q_k}(-\omega_k)
+=
+(E\times \mathbb C_{\omega_k})/Q_k
+\longrightarrow E/Q_k,
+\]
+where \(Q_k\) acts on \(\mathbb C_{\omega_k}\) via the character \(\omega_k\). Equivalently, a \(G\)-bundle \(E \to \Sigma\) is called \textbf{semistable} (resp.\ \textbf{stable}) if for any standard proper parabolic subgroup \(P\) of \(G\) and any section \(\mu\) of \(E/P \to \Sigma\),
+\[
+\deg \mu^*\bigl(T_v(E/P)\bigr) \ge 0
+\quad (\text{resp.\ } > 0).
+\]
+where \(T_v(E/P)\) is the vertical tangent bundle of the fibration \(E/P \to \Sigma\).
+These alternative definitions remain valid for any connected reductive group \(G\) provided we take the fundamental weights \(\omega_k\) to vanish on the center \(Z(\mathfrak g)\subset \mathfrak h\) and replace \(\omega_k\) by some positive multiple \(d\omega_k\) so that \(d\omega_k\) is a character of \(T\).
+
+
+A \(G\)-bundle \(E\) over \(\Sigma\) is called \textbf{polystable} if it has a reduction \(E_L\) to a Levi subgroup \(L\)
+(of a parabolic subgroup \(P\) of \(G\)) such that the \(L\)-bundle \(E_L\) is stable and for any character \(\chi\) of \(L\) which is trivial when restricted to the center of \(G\), we have
+\[
+\deg\bigl(E_L \times^L \C_\chi\bigr)=0,
+\]
+where \(\C_\chi\) is the 1-dimensional representation of \(L\) given by the character \(\chi\).
+
+A vector bundle \(\mathcal V\) over \(\Sigma\) of rank \(r\) is called \textbf{polystable} if the associated frame bundle \(F(\mathcal V)\) is polystable as a \(\GL_r\)-bundle. 
+\end{definition}
+A vector bundle \(\mathcal V\) over \(\Sigma\) is semistable (resp.\ stable) if and only if the associated frame bundle \(F(\mathcal V)\) (which is a principal \(\GL_n\)-bundle for \(n=\operatorname{rank}\mathcal V\)) is semistable (resp.\ stable). \(\mathcal V\) is polystable if and only if it is a direct sum of stable vector bundles all of which have the same slope.
+
+\begin{definition}
+Let \((E,\vec\tau,\vec\sigma)\) be a parabolic \(G\)-bundle over \((\Sigma,\vec p)\).
+Then it is called \textbf{parabolic semistable} (resp.\ \textbf{parabolic stable})
+if for any standard maximal parabolic subgroup \(Q_k\) (\(1\le k\le \ell\)) and any section
+\(\mu\) of \(E/Q_k \to \Sigma\), we have
+\begin{equation}\label{eq:parabolic-degree}
+\deg \mu^*\bigl(\mathcal L_{Q_k}(-\omega_k)\bigr)
++
+\sum_{j=1}^s \omega_k\bigl(\bar w_j^{-1}\tau_j\bigr)
+\le 0
+\quad (\text{resp.\ } < 0).
+\end{equation}
+
+Here
+\[
+\bar w_j := W_{P_j}\, w_j\, W_{Q_k} \in W_{P_j}\backslash W / W_{Q_k}
+\]
+is the unique element such that, taking any \(e_j\in E_{p_j}\) and writing
+\[
+\sigma_j = e_j g_j P_j,
+\qquad
+\mu(p_j)= e_j h_j Q_k,
+\quad \text{for some } g_j,h_j\in G,
+\]
+we have
+\begin{equation}
+h_j \in g_j P_j w_j Q_k.
+\end{equation}
+
+It is easy to see that \(\bar w_j\) does not depend on the choices of \(e_j,g_j,h_j\).
+This \(\bar w_j\) is called the \textbf{relative position} of \(\mu\) with respect to the
+quasi-parabolic structure at \(p_j\).
+
+The number on the left side of \eqref{eq:parabolic-degree} is called the \textbf{parabolic degree}
+(denoted \(\mathrm{pardeg}\,\mu^*\mathcal L_{Q_k}(-\omega_k)\))
+of the parabolic bundle \(E\) with respect to the section \(\mu\)
+and the line bundle \(\mathcal L_{Q_k}(-\omega_k)\)
+for the parabolic markings \(\vec\tau=(\tau_1,\dots,\tau_s)\).
+\end{definition}
+
+\begin{lemma}
+Let \(G\) be a connected reductive group and let \(E\to \Sigma\) be a \(G\)-bundle. Then semistability of \(E\) is equivalent to that of \(\operatorname{ad}E\), where \(\operatorname{ad}E\) is the vector bundle associated to \(E\) via the adjoint representation of \(G\) on \(\mathfrak g\).
+\end{lemma}
+Warning that this equivalence does not hold in general for stability. This lemma follows from a more general theorem which says that under certain conditions, semistability and polystability are preserved under extension of structure group.
+
+\begin{theorem}
+Let \(f \colon G \to G'\) be a map of connected reductive groups with
+\(f(Z^\circ(G)) \subset Z^\circ(G')\).
+If \(E \to \Sigma\) is a semistable (resp.\ polystable) principal \(G\)-bundle, then the induced
+\(G'\)-bundle \(E(G') := E \times^G G'\) is semistable (resp.\ polystable).
+\end{theorem}
+
+\subsection{Equivariant bundles for a finite group action}
+\begin{theorem}\label{thm:galois-cover}
+Let \((\Sigma,\vec p)\) be a smooth irreducible projective \(s\)-pointed curve with \(s \ge 1\), and let
+\[
+\vec d = (d_1,\dots,d_s), \qquad d_i \ge 2.
+\]
+Assume that if \(\Sigma \cong \mathbb P^1\), then \(s \ge 3\). Then there exists a smooth irreducible projective curve \(\widehat{\Sigma}\) and a finite Galois cover
+\[
+\pi \colon \widehat{\Sigma} \to \Sigma
+\]
+with Galois group \(A\) such that \(A\) acts freely on \(\widehat{\Sigma} \setminus \pi^{-1}(\vec p)\), andfor any \(\hat p_i \in \pi^{-1}(p_i)\), the isotropy subgroup $A_{\hat p_i} \subset A$
+    is cyclic of order \(d_i\). Here \(\vec p = \{p_1,\dots,p_s\} \subset \Sigma\), and the data \((\vec p,\vec d)\) is called a \emph{signature} on \(\Sigma\).
+
+Conversely, any smooth irreducible projective curve \(\widehat{\Sigma}\) with a faithful action of a finite group \(A\) arises in this way by taking $\Sigma = \widehat{\Sigma}/A$
+where \(\vec p = (p_1,\dots,p_s)\) are the ramification points of \(\pi\), and $d_i = |A_{\hat p_i}|$
+is the order of the isotropy subgroup at any point \(\hat p_i\) lying over \(p_i\).
+\end{theorem}
+
+\begin{theorem}[Local normal form for equivariant bundles]\label{thm:local-equivariant}
+Let \(G\) be a connected affine algebraic group and let
+\[
+\mathcal E \to \mathbb D_R := \Spec R[[t]]
+\]
+be an \(A\)-equivariant principal \(G\)-bundle, where \(A\) is a finite group acting on \(\mathbb D_R\).
+Assume that \(\mathcal E\) is trivial as a (nonequivariant) \(G\)-bundle. Then there exists a \(G\)-bundle trivialization
+\[
+\mathcal E \xrightarrow{\sim} \mathbb D_R \times G
+\]
+such that the \(A\)-action takes the form
+\[
+\gamma \odot (x,g)
+=
+\bigl(\gamma x,\ \theta_\gamma(x(0))\, g\bigr),
+\]
+for all \(\gamma \in A\), \(x \in \mathbb D_R\), \(g \in G\), where
+\[
+\theta_\gamma : \Spec R \to G
+\]
+is a morphism. Moreover, for any \(x^0 \in \Spec R\), the induced group homomorphism
+\[
+\theta(x^0) : A \to G, \qquad \gamma \mapsto \theta_\gamma(x^0),
+\]
+is well-defined up to conjugacy. This conjugacy class is called the \emph{type} of \(\mathcal E\) at \(x^0\).
+\end{theorem}
+The point of the theorem is that a priori, after trivializing the underlying $G$-bundle, the $A$-action looks like \[
+\gamma\cdot (x,g)=\bigl(\gamma x,\alpha_\gamma(x)\,g\bigr)\]
+where each $\alpha_\gamma:\mathbb D_R\to G$
+is a morphism. The action on the fiber could vary with the base, but the theorem says that we can choose a trivialization so that the action on the fiber is constant in the base variable.
+
+\begin{proof}[Proof sketch]
+Choose a trivialization \(\mathcal E \cong \mathbb D_R \times G\). Then the
+\(A\)-action is given by
+\[
+\gamma \cdot (x,g)
+=
+\bigl(\gamma x,\ \alpha_\gamma(x)\, g\bigr),
+\]
+where \(\alpha_\gamma \in G(R[[t]])\). The compatibility of the action implies
+that \(\alpha = (\alpha_\gamma)\) is a nonabelian \(1\)-cocycle:
+\[
+\alpha_{\gamma_1\gamma_2}(x)
+=
+\alpha_{\gamma_1}(x)\,\alpha_{\gamma_2}(\gamma_1^{-1}x).
+\]
+Thus \(\alpha\) defines a class
+\[
+[\alpha] \in H^1\bigl(A, G(R[[t]])\bigr).
+\]
+
+Evaluation at \(t=0\) gives a homomorphism
+\[
+e^0 : G(R[[t]]) \to G(R),
+\]
+and hence a map
+\[
+\hat e^0 : H^1\bigl(A, G(R[[t]])\bigr) \to H^1\bigl(A, G(R)\bigr).
+\]
+Let \(\alpha^0 := e^0(\alpha)\); this is a cocycle with values in \(G(R)\).
+
+The key point is that the map \(\hat e^0\) is injective.
+Kumar proves this by checking the vanishing
+\[
+H^1\bigl(A, G(R[[t]])^+_\beta\bigr) = 1,
+\]
+for all 1-cocycle twists \(\beta\), where
+\[
+G(R[[t]])^+ := \ker\bigl(G(R[[t]]) \to G(R)\bigr).
+\]
+The twisted group \(G(R[[t]])^+_\beta\) is the same underlying group as \(G(R[[t]])^+\) but with the \(A\)-action twisted by the cocycle \(\beta\) \begin{align*}
+\gamma \odot_\beta g
+&=
+\beta_\gamma(\gamma g)\,\beta_\gamma^{-1}
+\end{align*} It is a fact that this is enough to imply the injectivity of \(\hat e^0\).
+
+Injectivity implies that
+\[
+[\alpha] = [\alpha^0] \in H^1\bigl(A, G(R[[t]])\bigr).
+\]
+Thus there exists \(\tau \in G(R[[t]])\) such that
+\[
+\tau(\gamma x)^{-1}\,\alpha_\gamma(x)\,\tau(x)
+=
+\alpha_\gamma(x(0)).
+\]
+Changing trivialization by \(\tau\), the action becomes
+\[
+\gamma \odot (x,g)
+=
+\bigl(\gamma x,\ \alpha_\gamma(x(0))\, g\bigr).
+\]
+Setting \(\theta_\gamma := \alpha_\gamma|_{t=0}\), we obtain the desired form.
+The uniqueness of \(\theta(x^0)\) up to conjugacy follows from the ambiguity in
+the choice of trivialization.
+\end{proof}
+
+Let \((\Sigma,\vec p)\) be an \(s\)-pointed curve and let
+\(\vec d=(d_1,\dots,d_s)\) be a collection of positive integers attached to \(\vec p\).
+Fix a Galois cover
+\[
+\pi:\widehat\Sigma \to \Sigma
+\]
+with Galois group \(A\). Choose preimages
+$
+\widehat{\vec p}=(\widehat p_1,\dots,\widehat p_s)\in \widehat\Sigma$
+of \(\vec p\), and generators
+$
+\vec\gamma=(\gamma_1,\dots,\gamma_s)
+$
+of the isotropy groups \(\bigl(A_{\widehat p_1},\dots,A_{\widehat p_s}\bigr)\).
+
+\begin{theorem}[Drinfeld--Simpson]
+    Let $S$ be a $\C$-scheme and $E\to \Sigma\times S$ be a $G$-bundle. Then there exists an etale cover $S'\to S$ such that the pullback of $E$ to $\Sigma\times S'$ is trivial.
+\end{theorem}
+For any \(A\)-equivariant principal \(G\)-bundle \(\widehat E\) over \(\widehat\Sigma\),
+the restriction \(\widehat E|_{\widehat{\mathbb D}_{\widehat p_j}}\) to the formal disc
+\(\widehat{\mathbb D}_{\widehat p_j}\subset \widehat\Sigma\) is trivial as a \(G\)-bundle, since the formal disk is complete over \(\mathbb C\) and has no nontrivial etale cover. 
+Since \(\widehat p_j\) is fixed by \(A_{\widehat p_j}\), this restriction carries an
+\(A_{\widehat p_j}\)-equivariant structure.
+
+This determines a homomorphism (well-defined up to conjugacy)
+\[
+\theta_j : A_{\widehat p_j} \longrightarrow G,
+\]
+called the \emph{type} of \(\widehat E\) at \(\widehat p_j\). Let \(\tau_j \in \Phi_0\) be the unique element such that $\exp(2\pi i\, \tau_j)$
+is conjugate to \(\theta_j(\gamma_j)\). The \emph{local type} of \(\widehat E\) is the tuple
+\[
+\vec\tau = (\tau_1,\dots,\tau_s).
+\]
+
+
+
+\begin{definition}\label{def:AG_functor}
+    Let \((\Sigma,\vec p)\) be as above, and let \(\vec\tau=(\tau_1,\dots,\tau_s)\)
+be markings with \(\tau_j \in \Phi_0\) rational, so that
+\[
+\tau_j = \frac{\overline\tau_j}{d_j}, \qquad \exp(2\pi i\, \overline\tau_j)=1.
+\]
+Fix a Galois cover \(\pi:\widehat\Sigma \to \Sigma\) with group \(A\) associated to
+\((\Sigma,\vec p,\vec d)\), together with lifts \(\widehat p_j\) and generators
+\(\gamma_j \in A_{\widehat p_j}\). Define a functor
+\[
+\mathcal F^{A,\vec\tau}_{G,\widehat\Sigma^*} : \mathbf{Alg} \to \mathbf{Set}
+\]
+by setting, for any \(\C\)-algebra \(R\),
+\[
+\mathcal F^{A,\vec\tau}_{G,\widehat\Sigma^*}(R)
+=
+\left\{
+(\widehat E_R, \widehat\sigma_R)
+\ \middle|\
+\begin{array}{l}
+\widehat E_R \text{ is an } A\text{-equivariant principal } G\text{-bundle over } \widehat\Sigma_R,\\[4pt]
+\widehat E_R|_{\widehat\Sigma^*_R \times_R x} \text{ has local type } \vec\tau \text{ for all } x \in \Spec R,\\[4pt]
+\widehat\sigma_R \text{ is an } A\text{-equivariant section of } \widehat E_R \text{ over } \widehat\Sigma^*_R
+\end{array}
+\right\}\bigg/\sim,
+\]
+where
+\[
+\Sigma^* := \Sigma \setminus \{p_1,\dots,p_s\}, 
+\qquad
+\widehat\Sigma^* := \pi^{-1}(\Sigma^*),
+\]
+and \(A\) acts trivially on \(R\). Two pairs \((\widehat E_R,\widehat\sigma_R)\) and \((\widehat E'_R,\widehat\sigma'_R)\)
+are equivalent if there exists an isomorphism of \(A\)-equivariant \(G\)-bundles
+\[
+\widehat\theta_R : \widehat E_R \xrightarrow{\sim} \widehat E'_R
+\]
+over \(\widehat\Sigma_R\) such that
+\[
+\widehat\theta_R \circ \widehat\sigma_R = \widehat\sigma'_R.
+\] We denote the equivalence class by \([\widehat E_R,\widehat\sigma_R]\).
+\end{definition}
+
+Choose a local parameter \(\widehat t_j\) of \(\widehat\Sigma\) around \(\widehat p_j\)
+such that the generator \(\gamma_j\) of the isotropy group \(A_{\widehat p_j}\)
+acts on \(\widehat t_j\) via
+\begin{equation}
+\gamma_j \cdot \widehat t_j
+=
+e^{-\frac{2\pi i}{d_j}}\, \widehat t_j,
+\qquad
+t_j := (\widehat t_j)^{d_j},
+\end{equation}
+so that \(t_j\) is a local parameter for \(\Sigma\) at \(p_j\).
+Such a local parameter \(\widehat t_j\) exists.
+
+
+For any parabolic subgroup \(P \subset G\), define the parahoric subgroup scheme $\mathcal P \subset \widehat G((t))$
+\begin{equation}
+\mathcal P := \operatorname{ev}_0^{-1}(P),
+\end{equation}
+\begin{theorem}
+Suppose that
+\[
+\theta(\tau_j) < 1 \quad \text{for all } 1 \le j \le s,
+\]
+where \(\theta\) is the highest root of \(G\).
+Then the functor
+\[
+\mathcal F^{A,\vec\tau}_{G,\widehat\Sigma^*}
+\]
+is representable, and is represented by the ind-scheme 
+\[
+\overline X_{\vec P}
+=
+\prod_{j=1}^s \overline X_G(P_j),
+\]
+where \(P_j = P(\tau_j)\) is the standard parabolic subgroup of \(G\),
+and \(\overline X_G(P_j)\) is the corresponding partial affine flag variety,
+which is an ind-projective variety.
+\end{theorem}
+
+\begin{proof}[Proof sketch of Theorem 6.1.12]
+The proof constructs a natural map
+\[
+\mathfrak S:
+\mathcal F^{A,\vec\tau}_{G,\widehat\Sigma^*}(R)
+\longrightarrow
+\overline X_{\vec P}(R)
+\]
+and then proves that it is bijective.
+
+\medskip
+
+\noindent\textbf{Forward construction.}
+Let $[\widehat E_R,\widehat\sigma_R]\in \mathcal F^{A,\vec\tau}_{G,\widehat\Sigma^*}(R)$. Since local trivializations may not exist globally over $\Spec R$, first pass to an étale cover $\Spec R'\to \Spec R$ such that the restrictions $\widehat E_{R'}|_{(\widehat{\mathbb D}_j)_{R'}}$
+are trivial for all $j$.
+
+By the local normal form theorem for equivariant bundles, we may choose local sections $\widehat\mu_j$ over $(\widehat{\mathbb D}_j)_{R'}$ satisfying
+\[
+\gamma_j\cdot \widehat\mu_j
+=
+\widehat\mu_j\cdot \exp(2\pi i\tau_j)
+\]
+Now restrict the given section $\widehat\sigma_{R'}$ to the punctured formal disc and compare it with $\widehat\mu_j$. We get
+\[
+\widehat\mu_j^*
+=
+\widehat\sigma_{R'}^*\cdot \widehat\beta_j,
+\qquad
+\widehat\beta_j\in G(R'((\widehat t_j))).
+\]
+Define $\beta_j:=\widehat\beta_j\cdot \widehat t_j^{\overline\tau_j}$.
+Using the identities
+\[
+\gamma_j\cdot \widehat t_j=e^{-2\pi i/d_j}\widehat t_j
+\]
+and
+\[
+\gamma_j\cdot \widehat\mu_j
+=
+\widehat\mu_j\cdot \exp(2\pi i\tau_j),
+\]
+one checks that
+\[
+\gamma_j\cdot \beta_j=\beta_j.
+\]
+Hence $\beta_j$ descends to an element of $G(R'((t_j)))$.
+
+Next one checks independence of the local adapted trivialization. Suppose another adapted local trivialization is chosen:
+\[
+\widehat\mu_j'=\widehat\mu_j\cdot \widehat f_j,
+\qquad
+\widehat f_j\in G(R'[[\widehat t_j]]).
+\]
+Since both $\widehat\mu_j$ and $\widehat\mu_j'$ satisfy the same local type condition, $\widehat f_j$ satisfies the twisted equivariance condition
+\[
+\gamma_j\cdot \widehat f_j
+=
+\exp(2\pi i\tau_j)^{-1}\widehat f_j\exp(2\pi i\tau_j).
+\]
+The corresponding descended loops $\beta_j$ and $\beta_j'$ differ by
+\[
+f_j=(\widehat t_j)^{-\overline{\tau_j}}\widehat f_j(\widehat t_j)^{\overline{\tau_j}}.
+\]
+The technical heart of the proof is to show that $f_j\in \mathcal P_j(R')$
+This is proved by decomposing $G$ into root subgroups and checking valuations root-by-root. The hypothesis $\theta(\tau_j)<1$ ensures that the valuations have the correct range. Therefore the coset
+\[
+\beta_j\mathcal P_j\in G(R'((t_j)))/\mathcal P_j(R')
+\]
+is independent of the chosen adapted trivialization.
+
+Thus, étale locally on $\Spec R$, we get a point
+\[
+(\beta_1\mathcal P_1,\dots,\beta_s\mathcal P_s)
+\in
+\prod_{j=1}^s \overline X_G(P_j)(R').
+\]
+Because the original object was defined over $R$, these points agree on overlaps $\Spec R'\times_{\Spec R}\Spec R'$, and hence descend to a point of $\overline X_{\vec P}(R)$. This gives the map $\mathfrak S$.
+
+\medskip
+
+\noindent\textbf{Injectivity.}
+Suppose two objects
+\[
+(\widehat E_R,\widehat\sigma_R),
+\qquad
+(\widehat E'_R,\widehat\sigma'_R)
+\]
+have the same image in $\overline X_{\vec P}(R)$. After an étale base change $\Spec R'\to \Spec R$, choose adapted local trivializations for both objects. Let the corresponding local loops be $\beta_j$ and $\beta_j'$. Equality of the images in the affine flag variety means that
+\[
+\beta_j' \in \beta_j\mathcal P_j(R')
+\]
+for every $j$. Equivalently, there exists $f_j\in \mathcal P_j(R')$ such that
+\[
+\beta_j'=\beta_j f_j.
+\]
+One then lifts this parahoric correction to a holomorphic gauge transformation $\widehat f_j\in G(R'[[\widehat t_j]])$ compatible with the local $A_{\widehat p_j}$-action. This uses the same root-theoretic valuation estimates as in the construction of $\mathfrak S$.
+
+Thus the two bundles have the same framing on $\widehat\Sigma^*$ and compatible local identifications on the formal discs. By the Beauville--Laszlo gluing principle, these data glue to an isomorphism
+\[
+\widehat E_{R'}\cong \widehat E'_{R'}
+\]
+carrying $\widehat\sigma_{R'}$ to $\widehat\sigma'_{R'}$. Since the construction is unique on overlaps, this isomorphism descends from $R'$ to $R$. Therefore the original objects are isomorphic. This proves injectivity of $\mathfrak S$.
+
+\medskip
+
+\noindent\textbf{Surjectivity.}
+Now start with a point
+\[
+\delta\in \overline X_{\vec P}(R).
+\]
+After an fppf cover $\Spec R'\to \Spec R$, lift $\delta$ to actual loops
+\[
+\beta_j\in G(R'((t_j))).
+\]
+Define upstairs loops by undoing the local-type correction:
+\[
+\widehat\beta_j:=\beta_j\cdot \widehat t_j^{-\overline\tau_j}
+\in G(R'((\widehat t_j))).
+\]
+
+We now construct an $A$-equivariant bundle by gluing. On the punctured curve $(\widehat\Sigma^*)_{R'}$, take the trivial $G$-bundle with trivial $A$-action:
+\[
+(\widehat\Sigma^*)_{R'}\times G.
+\]
+On each formal disc $(\widehat{\mathbb D}_j)_{R'}$, take the trivial $G$-bundle with $A_{\widehat p_j}$-action of type $\tau_j$:
+\[
+\gamma_j\cdot(x,g)
+=
+(\gamma_jx,\exp(2\pi i\tau_j)g).
+\]
+Extend this local $A_{\widehat p_j}$-equivariant bundle over the whole $A$-orbit of the disc by induction from $A_{\widehat p_j}$ to $A$.
+
+On the punctured formal disc, glue the trivial bundle on the punctured curve to the local equivariant bundle using the transition function $\widehat\beta_j$:
+\[
+(x,g)\longmapsto (x,\widehat\beta_j(x)g).
+\]
+The definition
+\[
+\widehat\beta_j=\beta_j\widehat t_j^{-\overline\tau_j}
+\]
+ensures that this gluing is equivariant. Indeed, $\beta_j$ is defined downstairs, hence invariant under the stabilizer, while $\widehat t_j^{-\tau_j}$ transforms exactly so as to match the prescribed local $A_{\widehat p_j}$-action.
+
+By Beauville--Laszlo gluing, these pieces glue to an $A$-equivariant $G$-bundle $\widehat E_{R'}$ over $\widehat\Sigma_{R'}$, equipped with a framing $\widehat\sigma_{R'}$ over $(\widehat\Sigma^*)_{R'}$. By construction, the local type is $\vec\tau$ and
+\[
+\mathfrak S([\widehat E_{R'},\widehat\sigma_{R'}])=\delta_{R'}.
+\]
+
+Finally, because $\delta$ was originally defined over $R$, the two pullbacks to $R'\otimes_R R'$ have the same image under $\mathfrak S$. By injectivity, the corresponding objects are uniquely isomorphic. These unique isomorphisms satisfy the descent cocycle condition, so $(\widehat E_{R'},\widehat\sigma_{R'})$ descends to an object $(\widehat E_R,\widehat\sigma_R)$ over $R$. This proves surjectivity.
+
+Therefore $\mathfrak S$ is a bijection for all $R$, and hence the functor $\mathcal F^{A,\vec\tau}_{G,\widehat\Sigma^*}$ is represented by
+\[
+\overline X_{\vec P}
+=
+\prod_{j=1}^s \overline X_G(P_j) \qedhere
+\]
+\end{proof}
+There is also the framed version of the theorem where we divide out by choice of trivialization. Let $\Gamma = \Hom(\Sigma^*,G)$ where $\Sigma^* = \Sigma\setminus \{p_1,\dots,p_s\}$. We pass to an ind-completion of $\Gamma$ \begin{definition}[Ind-scheme structure on \(\overline\Gamma\)]
+Let \(G\) be an affine algebraic group of finite type over \(\C\). Let \(\Sigma^*=\Sigma\setminus \vec q\), where \(\vec q=\{q_1,\dots,q_s\}\) is a finite set of points with \(s\ge 1\), and set
+\[
+\Gamma=\Gamma_{\vec q}:=\Hom(\Sigma^*,G).
+\]
+We define an ind-scheme \(\overline\Gamma=\overline\Gamma_{\vec q}\) with \(\C\)-points \(\overline\Gamma(\C)=\Gamma\).
+
+Fix an embedding \(G\hookrightarrow \SL_N\subset M_N\), and let \(I_G\subset \C[M_N]\) be the radical ideal defining \(G\) inside \(M_N\). For \(n\ge 0\), let \(\Hom_{\le n}(\Sigma^*,M_N)\) be the set of morphisms \(f:\Sigma^*\to M_N\), \(f=(f_{ij})_{1\le i,j\le N}\), such that each \(f_{ij}\) has poles of order at most \(n\) at each point of \(\vec q\). Equivalently, \(\Hom_{\le n}(\Sigma^*,M_N)\simeq H^0(\Sigma,\mathcal L_n)\otimes M_N\) for a suitable line bundle \(\mathcal L_n\) on \(\Sigma\), and hence is a finite-dimensional \(\C\)-vector space. Choose basis \(\{f_k\}_{1\le k\le d_n}\) of \(\Hom_{\le n}(\Sigma^*,M_N)\) inductively so that \(\{f_k\}_{1\le k\le d_{n-1}}\) is basis of \(\Hom_{\le n-1}(\Sigma^*,M_N)\). Set
+\[
+\Hom_{\le n}(\Sigma^*,G):=\Hom(\Sigma^*,G)\cap \Hom_{\le n}(\Sigma^*,M_N).
+\]
+Using the coordinates \(z=(z_1,\dots,z_{d_n})\) on \(\Hom_{\le n}(\Sigma^*,M_N)\) determined by the basis \(\{f_k\}\), and using the ideal \(I_G\), define an ideal \(I_G^{\Sigma^*}(n)\subset \C[z]\) generated by the functions \(Q_{P,w}(z)\), for \(P\in I_G\) and \(w\in \Sigma^*\), where
+\[
+Q_{P,w}(z):=P\left(\sum_{k=1}^{d_n}z_k f_k(w)\right).
+\]
+Define the affine scheme of finite type
+\[
+\overline\Gamma^{(n)}
+=
+\overline\Gamma_{\vec q}^{(n)}
+:=
+\Spec\left(\C[z]/I_G^{\Sigma^*}(n)\right).
+\]
+The inclusions \(\Hom_{\le n}(\Sigma^*,M_N)\subset \Hom_{\le n+1}(\Sigma^*,M_N)\) induce closed embeddings
+$
+\overline\Gamma^{(n)}\hookrightarrow \overline\Gamma^{(n+1)}$
+and 
+\[
+\overline\Gamma:=\varinjlim_n \overline\Gamma^{(n)}.
+\]
+\end{definition}
+\begin{theorem}\label{thm:equivariant-uniformization-stack}
+There is an equivalence of categories over \(\mathfrak S\)
+\[
+\Bun^{A,\vec\tau}_G(\widehat\Sigma)
+\simeq
+[\overline \Gamma\backslash \overline X_{\vec P}],
+\]
+where \(\Bun^{A,\vec\tau}_G(\widehat\Sigma)\) is the groupoid fibration over \(\mathfrak S\) of \(A\)-equivariant \(G\)-bundles on \(\widehat\Sigma\) of local type \(\vec\tau\), and
+\[
+\overline X_{\vec P}
+=
+\prod_{j=1}^s \overline X_G(P_j)
+\]
+is the product of partial affine flag varieties associated to $\vec P=(P_1,\dots,P_s)$ and $P_j=P(\tau_j)$.
+
+In particular,
+\[
+\Bun^{A,\vec\tau}_G(\widehat\Sigma) \cong \Parbun_G(\Sigma,\vec P)\]
+of quasi-parabolic \(G\)-bundles over \((\Sigma,\vec p)\) of type \(\vec P\).
+\end{theorem}
+Even though \(\Parbun_G(\Sigma,\vec P)\) only depends on \(\vec P\), the isomorphism
+\[
+\Bun^{A,\vec\tau}_G(\widehat\Sigma)
+\simeq
+\Parbun_G(\Sigma,\vec P)
+\]
+depends on the choice of \(\vec\tau\). One further thing we can do is introduce a notion of semistability for equivariant bundles on a cover, and then show that it coincides with the usual notion of semistability for parabolic bundles downstairs. 
+
+\begin{definition}
+Let $G$ be a connected reductive group. An $A$-equivariant $G$-bundle $\widehat E$ over $\widehat\Sigma$ is called $A$-semistable (resp.\ $A$-stable) if for any standard maximal parabolic subgroup $Q_k$ of $G$ and any $A$-equivariant section $\mu$ of $\widehat E/Q_k \to \widehat\Sigma$ \begin{align*}
+\deg \mu^*\bigl(\mathcal L_{Q_k}(-\omega_k)\bigr) \leq 0
+\qquad\left(\text{resp.\ } < 0\right).
+\end{align*}
+
+$\widehat E$ is called $A$-polystable if it has an $A$-equivariant reduction $\widehat E_L$ to a Levi subgroup $L$ such that the $L$-bundle $\widehat E_L$ is $A$-stable and for any character $\chi$ of $L$ which is trivial when restricted to the center of $G$, we have
+\[
+\deg\!\bigl(\widehat E_L \times^L \C_\chi\bigr)=0.
+\]
+\end{definition}
+
+\section{Harder-Narasimhan filtration}
+In this section we assume that \(\Sigma\) is a smooth irreducible projective curve over \(\C\), and that \(G\) is a connected reductive group with a fixed Borel subgroup \(B\) and maximal torus
+\[
+H\subset B,
+\]
+with Lie algebras \(\mathfrak g\), \(\mathfrak b\), and \(\mathfrak h\), respectively. Let
+\[
+Z(\mathfrak g)\subset \mathfrak h
+\]
+be the center of \(\mathfrak g\). By simple roots \(\{\alpha_1,\dots,\alpha_\ell\}\) and fundamental weights \(\{\omega_1,\dots,\omega_\ell\}\), we mean the corresponding objects for the semisimple Lie algebra
+\[
+\mathfrak g/Z(\mathfrak g).
+\]
+In particular,
+\[
+\omega_i,\alpha_i\in \bigl(\mathfrak h/Z(\mathfrak g)\bigr)^*.
+\]
+
+\begin{definition}[Harder--Narasimhan reduction]\label{def:HN-reduction-G-bundle}
+Let
+\[
+\pi:E\to \Sigma
+\]
+be a \(G\)-bundle. A \(P\)-subbundle $E_P\subset E$
+for a standard parabolic subgroup \(P\subset G\) is called a \emph{Harder--Narasimhan reduction}, also called an \emph{HN reduction} or \emph{canonical reduction}, if it satisfies the following two conditions.
+
+\begin{enumerate}[(a)]
+\item The associated \(L\)-bundle \(E_P(L)\), obtained from the \(P\)-bundle \(E_P\) by extension of structure group
+\[
+P\to P/U\simeq L,
+\]
+is semistable, where \(L\) is the Levi subgroup of \(P\) containing \(H\), and \(U\) is the unipotent radical of \(P\).
+
+\item For any nontrivial character \(\lambda\) of \(P\) such that
+\[
+\lambda\in \bigoplus_{i=1}^{\ell}\mathbb Z_+\alpha_i,
+\qquad
+\mathbb Z_+:=\mathbb Z_{\ge 0},
+\]
+in particular, \(\lambda\) is trivial when restricted to the identity component of the center of \(G\), we have
+\[
+\deg\bigl(E_P(\lambda)\bigr)>0,
+\]
+where
+\[
+E_P(\lambda):=E_P\times^P \C_\lambda.
+\]
+\end{enumerate}
+If we realize \(E_P\subset E\) via a section
+\[
+\mu:\Sigma\to E/P
+\]
+of the bundle \(E/P\to \Sigma\), then the line bundle associated to the character \(\lambda\) is
+\[
+E_P\times^P \C_\lambda
+\simeq
+\mu^*\bigl(\mathcal L_P(-\lambda)\bigr).
+\]
+\end{definition}
+
+\begin{definition}\label{def:d_E}
+For any \(G\)-bundle \(E\to \Sigma\), define the integer
+\[
+d_E
+=
+\min\left\{
+\deg \mu^*\bigl(T_v(E/Q)\bigr)
+\right\},
+\]
+where \(Q\) runs over all standard parabolic subgroups of \(G\), and \(\mu\) runs over all sections
+\[
+\mu:\Sigma\to E/Q.
+\]
+Here \(T_v(E/Q)\) is the relative tangent bundle as in Definition~6.1.3(c).
+
+Since any \(\mu^*\bigl(T_v(E/Q)\bigr)\) is a quotient of the adjoint bundle
+\[
+\operatorname{ad}E:=E\times^G\mathfrak g,
+\]
+where \(G\) acts on \(\mathfrak g\) via the adjoint action, the degrees
+\[
+\deg \mu^*\bigl(T_v(E/Q)\bigr)
+\]
+are bounded from below by the Riemann--Roch theorem for smooth curves. Thus \(d_E\) is indeed an integer.
+\end{definition}
+
+\section{Appendix}
+
+\begin{exercise}
+Show that over a smooth affine curve any $N$-bundle is trivial, where $N$ is a unipotent group.
+\end{exercise}
+
+\begin{solution}Choose a central filtration
+\[
+1=N_0\subset N_1\subset \cdots \subset N_r=N
+\]
+by normal subgroup schemes such that
+\[
+N_i/N_{i-1}\cong \mathbb G_a.
+\]
+We prove by induction on \(r\) that every \(N\)-torsor on \(U\) is trivial. Let \(P\) be an \(N\)-torsor. Pushing out along the quotient map
+\[
+N\to N/N_{r-1}\cong \mathbb G_a
+\]
+gives a \(\mathbb G_a\)-torsor $P/N_{r-1}$. Since \(U\) is affine,
+\[
+H^1(U,\mathbb G_a)=H^1(U,\mathcal O_U)=0,
+\]
+so \(P/N_{r-1}\) is trivial. A trivialization of \(P/N_{r-1}\) is exactly a reduction of the structure group of \(P\) from \(N\) to \(N_{r-1}\). Hence \(P\) is induced from an \(N_{r-1}\)-torsor. By the induction hypothesis, this \(N_{r-1}\)-torsor is trivial. Therefore \(P\) is trivial.
+\end{solution}
+
+\begin{theorem}[Steinberg]
+    Let $K$ be a perfect field with $\operatorname{cd}(K)\le 1 $and $G$ a connected linear algebraic group over $K$. Then $H^1(K,G)=1$. In particular, every $G$-bundle over $\Spec K$ is trivial.
+\end{theorem}
+
+\begin{exercise}
+    Let $H$ be a connected affine algebraic group and $\Sigma$ be a smooth projective curve. Show that any $H$ bundle $E$ over $\Sigma$ is Zariski locally trivial. Conclude that if $H$ is reductive, then any $H$-bundle over $\Sigma$ is Zariski locally trivial.
+\end{exercise}
+
+\begin{proof}
+    Let $K = k(\Sigma)$ be the function field of $\Sigma$. The restriction of the $H$-bundle $E$ to the generic point of $\Sigma$ is a $H$-bundle $E_K$ over $\Spec K$. By Steinberg's theorem, $E_K$ is trivial. Now consider the associated bundle $E(G/B):=E\times^G (G/B)\to \Sigma$. A section of $E(G/B)\to \Sigma$ is exactly a reduction of structure group of $E$ from $G$ to $B$. Over the generic point, we get
+\[
+E_K(G/B)\to \Spec K.
+\]
+The map $E(G/B) \to \Sigma$ is proper because $G/B$ is projective. $E_K$ being trivial, we have \[E_K(G/B)\cong G_K/B_K\] which has a $K$-point, namely the basepoint $eB$. Hence $E(G/B)$ has a rational section over $\Sigma$. A rational section of a proper morphism over a smooth curve extends across codimension-one points. Since $\Sigma$ is a smooth curve, the missing points are codimension $1$ and so the rational section extends to a global section. This gives a global $B$ reduction $E_B$ so it suffices to show that every $B$-bundle on $X$ is Zariski locally trivial. The short exact sequence \begin{align*}
+    1 \to R_u(B) \to B \to T \to 1
+\end{align*} allows us to push forward a $B$-bundle $F$ to a $T$-bundle $F/R_u(B)$, which is Zariski locally trivial since a $T$-bundle is a sum of line bundles and line bundles are Zariski locally trivial. Therefore, on an affine open set $A$ we may assume that $F/R_u(B)\vert_A$ is trivial. The obstruction to lifting the trivial T-bundle back to a trivial B-bundle lies in a twisted $U$-torsor. Since $A$ is affine and $U$ is unipotent, this torsor is trivial. Hence $F\vert_A$ is trivial.
+\end{proof}
+\end{document}

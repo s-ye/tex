@@ -18,7 +18,6 @@
 \usepackage{fancyhdr}
 
 \DeclareMathOperator{\St}{St}
-\DeclareMathOperator{\Spin}{Spin}
 \DeclareMathOperator{\Sq}{Sq}
 
 \usepackage{parskip} % Automatically respects blank lines
@@ -32,7 +31,7 @@
 \rhead{\today}
 \cfoot{\thepage}
 
-\title{Complex Manifolds}
+\title{Algebraic Topology}
 
 \author{Songyu Ye}
 \date{\today}
@@ -846,4 +845,1272 @@ $n$ odd is similar but Constantin doesn't want to do it. $BO$ is similar but the
     \Sq = \Sq^0 + \Sq^1 + \Sq^2 + \dots
 \end{align*} which is an algebra homomorphism. The Wu relation gives a formula for the action of $\Sq$ on the Stiefel Whitney classes, in particular we can write it as quadratics in the Stiefel Whitney classes. "So only the $w_{2^k}$ are algebraically independent."
 \end{remark}
+
+\section{Missed classes}
+\subsection{Homotopy groups}
+\begin{definition}
+    The $n$-th homotopy group of a pointed space $(X,x)$ is the set of homotopy classes of maps $S^n \to X$ sending the base point to $x$. We denote it by $\pi_n(X,x)$ or simply $\pi_n(X)$ if $X$ is path connected.
+\end{definition}
+The group law is given by writing $S^n \to S^n \vee S^n$ as the pinch map and then composing with the wedge of two maps $S^n \to X$. $\pi_n(X,x)$ can also be modeled by the set of homotopy classes of maps $I^n \to X$ sending the boundary to $x$. In this model, the group law can be defined by concatenating along the $1$st coordinate. 
+The homotopy groups are abelian for $n\geq 2$.
+
+There is an action of $\pi_1(X)$ on $\pi_n(X)$ for $n\geq 2$ by dragging the base point around loops. We say that $X$ is \textbf{$n$-simple} if the action of $\pi_1(X)$ on $\pi_n(X)$ is trivial, and $X$ is \textbf{simple} if it is $n$-simple for all $n$. 
+
+\begin{proposition}
+    A covering space projection $p: \tilde X \to X$ induces an isomorphism on $\pi_n$ for $n\geq 2$.
+\end{proposition}
+
+\begin{proof}
+    The map is surjective because we can lift maps $S^n \to X$ to $\tilde X$ because $S^n$ is simply connected. The map is injective because if a map $S^n \to \tilde X$ becomes nullhomotopic in $X$, then we can lift the nullhomotopy to $\tilde X$ and get a nullhomotopy there.
+\end{proof}
+
+Moreover, if $\tilde X$ is the universal cover of $X$, then $\pi_1(X)$ acts on $\tilde X$ by deck transformations and this action induces the action of $\pi_1(X)$ on $\pi_n(\tilde X) \cong \pi_n(X)$. 
+
+\begin{proposition}
+    A product of path connected spaces $X_\alpha$ has homotopy groups given by the product of the homotopy groups of the factors, i.e. $\pi_n(\prod X_\alpha) \cong \prod \pi_n(X_\alpha)$.
+\end{proposition}
+
+\begin{proof}
+This follows immediately from the universal property of products. 
+\end{proof}
+
+Another useful notion is the relative homotopy groups $\pi_n(X,A,x)$ for a pair of spaces $A \subset X$. \begin{definition}
+Let $x\in A \subset X$ be a pointed pair of spaces. The $n$-th relative homotopy group $\pi_n(X,A,x)$ is the set
+    of homotopy classes of maps $(I^n, \partial I^n,J^{n-1}) \to (X,A,x)$ where \[J^{n-1}=\overline{\partial I^n\setminus (I^{n-1}\times\{1\})}\] with homotopies through such maps. Equivalently, it is homotopy classes of maps $(D^n, S^{n-1}, *) \to (X,A,x)$ modulo homotopies through such maps. 
+\end{definition}
+
+\begin{theorem}
+    There is a long exact sequence of homotopy groups \begin{align*}
+    \dots \to \pi_n(A) \to \pi_n(X) \to \pi_n(X,A) \to \pi_{n-1}(A) \to \dots
+    \end{align*} coming from the inclusion of pairs. The boundary map is the restriction of a map $D^n \to X$ to the boundary $S^{n-1} \to A$.
+\end{theorem}
+
+\subsection{Whitehead's theorem}
+\begin{theorem}
+    A map $f: X \to Y$ between CW complexes is a homotopy equivalence if and only if it induces isomorphisms on all homotopy groups.
+\end{theorem}
+
+Note that two CW complexes may have the same homotopy groups but not be homotopy equivalent. In particular, having a map inducing isomorphisms on homotopy groups is a much stronger condition than just having isomorphic homotopy groups. One situation where the latter implies the former is when all homotopy groups vanish, in which case the inclusion of a point is a homotopy equivalence.
+
+\begin{example}
+    Consider \(X=\mathbb{R}P^2\) and \(Y=S^2\times \mathbb{R}P^\infty\). These both have fundamental group \(\mathbb{Z}/2\Z\). Their higher homotopy groups are isomorphic since their universal covers \(S^2\) and \(S^2\times S^\infty\) are homotopy equivalent, \(S^\infty\) being contractible. But \(\mathbb{R}P^2\) and \(S^2\times \mathbb{R}P^\infty\) are not homotopy equivalent since their homology groups are vastly different, \(S^2\times \mathbb{R}P^\infty\) having nonvanishing homology in infinitely many dimensions since it retracts onto \(\mathbb{R}P^\infty\).
+\end{example}
+
+\begin{example}
+Another pair of CW complexes that are not homotopy equivalent but have isomorphic homotopy groups is \(S^2\) and \(S^3\times \mathbb{C}P^\infty\). Indeed, \(\mathbb{C}P^\infty\) is an Eilenberg--MacLane space \(K(\mathbb{Z},2)\), so
+\[
+\pi_n(\mathbb{C}P^\infty)=
+\begin{cases}
+\mathbb{Z}, & n=2,\\
+0, & n\neq 2.
+\end{cases}
+\]
+Therefore
+\[
+\pi_n(S^3\times \mathbb{C}P^\infty)
+\cong
+\pi_n(S^3)\oplus \pi_n(\mathbb{C}P^\infty)
+\]
+for all \(n\ge 1\), and hence
+\[
+\pi_n(S^3\times \mathbb{C}P^\infty)\cong
+\begin{cases}
+\mathbb{Z}, & n=2,\\
+\pi_n(S^3), & n\ge 3.
+\end{cases}
+\]
+
+Now consider the Hopf fibration
+\[
+S^1 \longrightarrow S^3 \longrightarrow S^2.
+\]
+Its long exact sequence in homotopy implies that
+\[
+\pi_n(S^3)\cong \pi_n(S^2)
+\qquad\text{for all } n\ge 3,
+\]
+since \(\pi_n(S^1)=0\) for \(n\ge 2\). Also,
+\[
+\pi_2(S^2)\cong \mathbb{Z},
+\qquad
+\pi_1(S^2)=0.
+\]
+Since \(S^3\times \mathbb{C}P^\infty\) is simply connected as well, it follows that
+\[
+\pi_n(S^3\times \mathbb{C}P^\infty)\cong \pi_n(S^2)
+\qquad\text{for all } n\ge 1.
+\]
+
+However, these spaces are not homotopy equivalent. For example,
+\[
+H_4(S^2)=0,
+\]
+while
+\[
+H_4(S^3\times \mathbb{C}P^\infty)
+\cong
+H_4(\mathbb{C}P^\infty)
+\cong
+\mathbb{Z},
+\]
+so their homology groups are not isomorphic. Therefore \(S^2\) and \(S^3\times \mathbb{C}P^\infty\) cannot be homotopy equivalent.
+\end{example}
+
+\subsection{Cellular approximation and CW approximation}
+A map $f: X \to Y$ is \textbf{cellular} if it sends the $n$-skeleton of $X$ to the $n$-skeleton of $Y$ for all $n$. \begin{theorem}
+    Any map $f:X\to Y$ between CW complexes is homotopic to a cellular map. If $f$ is already cellular on a subcomplex $A\subset X$, then the homotopy can be taken to be relative to $A$.
+\end{theorem}
+It immediately follows that $\pi_k(S^n) = 0$ for $k < n$ because the $k$-skeleton of $S^n$ is a point.
+
+\begin{definition}
+    A map $f: X \to Y$ is a weak homotopy equivalence if it induces isomorphisms on all homotopy groups. 
+\end{definition}
+Whitehead's theorem reformaulated says that a weak homotopy equivalence between CW complexes is a homotopy equivalence. However, a weak homotopy equivalence between general spaces need not be a homotopy equivalence. For example, there exist spaces which have trivial homotopy groups but are not contractible. For these spaces, the constant map to a point is a weak homotopy equivalence but not a homotopy equivalence.
+
+\begin{example}
+    Consider the quasi-circle $Y$ which is a closed subspace of $\R^2$ obtained by taking a portion of the graph of $y = \sin(1/x)$, the segment $[-1,1]$ in the $y$-axis, and connecting them with a curve. This space comes with a map $p: Y \to S^1$ which collapses the sine curve and the interval to a point. Then this space has trivial homotopy groups. Any map from $S^n$ to this space is nullhomotopic because the image is compact, so it must meet the sine-curve in finitely many oscillations. This will clearly be nullhomotopic.  However, the quasi-circle is not contractible because if it were, then $p$ would be nullhomotopic and we could lift $p$ to the universal cover $\R$ of $S^1$. The lifted map $\tilde p: Y \to \R$ in fact factors through $Y/I = S^1$ because the quotient map collapses $I$ to a point. Then this gives a section of the universal cover $\R \to S^1$, which is impossible.
+\end{example}
+
+\begin{definition}
+    Let $Y$ be a topological space. A \textit{CW--approximation} of $Y$ is a CW complex $X$ together with a map $f:X\to Y$ such that for every CW complex $Z$, the induced map $f_*:[Z,X]\to [Z,Y]$ is a bijection, where $[-,-]$ denotes the set of homotopy classes of maps.
+\end{definition}
+Taking $Z = S^n$ for all $n$ shows that a CW approximation is a weak homotopy equivalence. Conversely, if $f:X\to Y$ is a weak homotopy equivalence and $X$ is a CW complex, then $f$ is a CW approximation by Whitehead's theorem. 
+
+\begin{theorem}
+    Every topological space $Y$ admits a CW approximation $X\to Y$. If $X$ is pathconnected, $X$ can be chosen to have a single 0 cell, with all other cells attached by basepoint-preserving maps. 
+\end{theorem}
+
+There is also a relative version of CW approximation.  
+
+\begin{theorem}[Relative CW approximation]
+Let $(X,A)$ be a pair of spaces with $A$ a CW complex (or more generally a
+subspace). Then there exists a relative CW complex $(Z,A)$ and a map of pairs
+\[
+f:(Z,A)\longrightarrow (X,A)
+\]
+such that:
+\begin{enumerate}
+    \item $f|_A = \mathrm{id}_A$,
+    \item $f$ is a weak homotopy equivalence of pairs, i.e.
+    \[
+    \pi_k(Z,A) \xrightarrow{\;\cong\;} \pi_k(X,A)
+    \quad \text{for all } k.
+    \]
+\end{enumerate}
+If $(X,A)$ is $n$-connected,
+i.e.
+\[
+\pi_k(X,A)=0 \quad \text{for all } k\le n,
+\]
+then there exists a relative CW complex $(Z,A)$ and a weak equivalence of
+pairs
+\[
+(Z,A)\xrightarrow{\;\simeq\;} (X,A)
+\]
+such that $(Z,A)$ is obtained from $A$ by attaching no cells in dimensions $\le n$. Equivalently, the first relative cells occur in dimension $n+1$.
+\end{theorem}
+
+\section{Apr 7}
+Linking numbers and Hopf invariant. Proof of excision in homotopy. Freudenthal suspension theorem. Stable homotopy theory is linear in homotopy. The nonlinear structure in homotopy is the Whitehead bracket \begin{align*}
+    [,]: \pi_k(X) \otimes \pi_l(X) \to \pi_{k+l-1}(X)
+\end{align*} if $k,l > N$ disappears upon $2N$-trunction. Nonlinear structure disappears as $N\to\infty$.
+
+\subsection{Linking numbers in $S^N$}
+Let $M^p$ and $N^q$ be closed oriented disjoint submanifolds of $S^N$ with $p+q < N$. The interesting case is when $p+q = N-1$ because if not, we can move them far apart so that they do not cross via ambient isotopy. This is the same as saying that we can enclose them in manifolds homeomorphic to disjoint balls. The argument is we can shift $M$ to infinity in a general direction, and then a generic pertubation of a half-cylinder avoids $N$ for dimension reasons. Dragging space along gets an isotopy.
+
+This fails exactly when $p+q = N-1$. In this case, we can define the linking number $\ell(M^p, N^q)$ as the intersection number of a cylinder on $M$ with $N$. Independent because the difference of two cylinders will be nullhomologous, i.e. a boundary. It can also be defined as the cup product of $PD(Cyl(M),M_\infty \cup M_0)$ and $PD(N)$ inside $H^{top}(S^N, \partial Cyl(M))$. Another way is to define a map $M\times N \to S^{N-1}$ by sending $(m,n)$ to the intersection point of the ray through $m$ and $n$ with the sphere at infinty. Then the linking number is the degree of this map. Mind orientations, since in some dimensions, switching $M$ and $N$ changes the ray direction and thus the sign of the linking number.
+
+\begin{example}
+    $N$ odd so then $N-1$ is even. The antipodal map on $S^{N-1}$ changes orientation. $M^p \times N^q \to N^q \times M^p$ has degree $(-1)^{pq}$ so if $p,q$ odd there is no sign change. The example here is two circles in $\R^3$.
+\end{example}
+
+
+\subsection{The Hopf invariant of $S^{4n-1} \to S^{2n}$}
+It is defined as the linking number of two generic fibers. It is also the self linking number of a single fiber, given a trivialization of the normal bundle, i.e. a framing. At a submersive point $x$, the map $df: N(f^{-1}(f(x))) \to T_{f(x)} S^{2n}$ is an isomorphism, so we can use it to trivialize the normal bundle. 
+
+In 3D TQFT, one can define invariants of three manifolds with embedded colored links. Physicists call them Wilson lines, and there are finite group reps living over these knots known as colors. Need trivialization of normal bundle to the link. The simplest example is abelian chern cimons theory (abelian means for the torus). Linking numbers and self linking numbers are involved.
+
+
+\begin{theorem}
+    The map $S^{4n-1} \to S^{2n}$ given by the Whitehead square of the identity map $S^{2n} \to S^{2n}$ has Hopf invariant $2$.
+\end{theorem}
+
+Question: Hopf invariant one problem. For which $n$ do we have a Hopf invariant one map $S^{4n-1} \to S^{2n}$? The answer is $n=1,2,4$ and this is related to the existence of $H$-space structures on the big spheres. The solution is more interesting than the problem and uses Adams spectral sequence and the Steenrod algebra. Later, Atiyah proved the nonexistence of Hopf invariant one maps using $K$-theory and demonstrated the might of exotic cohomology theories.
+
+Easy to show that $2n$ must be a power of $2$ because it follows from $Sq^i$ for $0 \leq i \leq p$ is $0$ on $H^*(-;\Z/2)$ then the first nonzero $\Sq^j$ has $j$ a power of $2$. The Hopf invariant one map: define $X = e^0 \cup e^{2n} \cup e^{4n}$ with $(e^{2n})^2 = e^{4n}$. 
+\subsection{Homotopy excision}
+
+Let $X$ and $Y$ be subcomplexes of a CW complex $Z=X\cup Y$, and let
+\[
+A=X\cap Y.
+\]
+Assume that the pairs $(X,A)$ and $(Y,A)$ are $m$-connected and
+$n$-connected respectively. Then inclusion of pairs induces a map
+\[
+\pi_k(X,A)\longrightarrow \pi_k(X\cup Y,\,Y).
+\]
+
+\begin{theorem}[Homotopy excision]
+The map
+\[
+\pi_k(X,A)\longrightarrow \pi_k(X\cup Y,\,Y)
+\]
+is an isomorphism for $k<m+n$ and a surjection for $k=m+n$.
+\end{theorem}
+
+
+\begin{remark}
+A useful special case is when $Y=CA$ is the cone on $A$. Then
+\[
+X\cup_A CA \simeq X/A,
+\]
+and since $CA$ is contractible, we get
+\[
+\pi_k(X\cup_A CA,\,CA)\cong \pi_k(X/A).
+\]
+Thus homotopy excision gives a comparison map
+\[
+\pi_k(X,A)\longrightarrow \pi_k(X/A)
+\]
+which is an isomorphism for $k<m+n$ and a surjection for $k=m+n$.
+\end{remark}
+
+\begin{example}
+Suppose
+\[
+X=A\cup_f e^{m+1},
+\qquad
+Y=A\cup_g e^{n+1}.
+\]
+Then $(X,A)$ is $m$-connected and $(Y,A)$ is $n$-connected. In this case the theorem implies that
+\[
+\pi_k(X,A)\oplus \pi_k(Y,A)\longrightarrow \pi_k(X\cup Y,\,A)
+\]
+is an isomorphism for $k<m+n$ and a surjection for $k=m+n$.
+\end{example}
+
+
+In low degrees the relative homotopy of $X\cup Y$ is just the sum of the
+two pieces. Beyond this range, interaction terms can appear; the first such
+new classes are related to Whitehead products.
+\begin{theorem}[Freudenthal suspension theorem]
+Let $X$ be an $(n-1)$-connected CW complex, with $n\ge 1$. Then the suspension map
+\[
+\Sigma \colon \pi_k(X)\longrightarrow \pi_{k+1}(\Sigma X)
+\]
+is an isomorphism for $k<2n-1$ and a surjection for $k=2n-1$.
+\end{theorem}
+
+\begin{example}
+Take $X=S^2$. Since $S^2$ is $1$-connected, we may take $n=2$. The theorem then says that
+\[
+\pi_2(S^2)\xrightarrow{\;\cong\;} \pi_3(S^3),
+\]
+which is indeed the isomorphism
+\[
+\mathbb Z \xrightarrow{\;\cong\;} \mathbb Z.
+\]
+It also says that the suspension map
+\[
+\pi_3(S^2)\twoheadrightarrow \pi_4(S^3)
+\]
+is surjective. In fact,
+\[
+\pi_3(S^2)\cong \mathbb Z,
+\qquad
+\pi_4(S^3)\cong \mathbb Z/2.
+\]
+\end{example}
+
+\begin{proof}[Idea of proof]
+Apply the homotopy excision theorem to the decomposition
+\[
+\Sigma X = CX_+ \cup_X CX_-,
+\]
+where $CX_+$ and $CX_-$ are two copies of the cone on $X$, glued along their common base $X$.
+
+Since each cone is contractible, the pair $(CX_\pm,X)$ is $n$-connected when $X$ is $(n-1)$-connected. Thus Blakers--Massey gives that the natural map
+\[
+\pi_k(CX_+,X)\longrightarrow \pi_k(\Sigma X,CX_-)
+\]
+is an isomorphism for $k<2n$ and a surjection for $k=2n$.
+
+Now use the identifications
+\[
+\pi_k(CX_+,X)\cong \pi_{k-1}(X),
+\qquad
+\pi_k(\Sigma X,CX_-)\cong \pi_k(\Sigma X),
+\]
+the second because $CX_-$ is contractible. Under these identifications, the map above becomes exactly the suspension map
+\[
+\pi_{k-1}(X)\longrightarrow \pi_k(\Sigma X).
+\]
+\end{proof}
+
+\subsection{Whitehead brackets}
+\begin{example}[Whitehead products]
+Let us compute
+$\pi_3\!\left(\bigvee_\alpha S^2_\alpha\right)$,
+showing that it is free abelian with basis consisting of the Hopf maps
+$S^3 \to S^2_\alpha \subset \bigvee_\alpha S^2_\alpha$
+together with the attaching maps
+$S^3 \to S^2_\alpha \vee S^2_\beta \subset \bigvee_\alpha S^2_\alpha$
+of the cells $e^2_\alpha \times e^2_\beta$ in the products
+$S^2_\alpha \times S^2_\beta$, for all unordered pairs $\alpha \neq \beta$.
+
+Suppose first that there are only finitely many summands $S^2_\alpha$. For a finite product
+$\prod_\alpha X_\alpha$
+of path-connected spaces, the map
+$\pi_n\!\left(\bigvee_\alpha X_\alpha\right)\longrightarrow \pi_n\!\left(\prod_\alpha X_\alpha\right)$
+induced by inclusion is surjective, since
+$\pi_n\!\left(\prod_\alpha X_\alpha\right)\cong \bigoplus_\alpha \pi_n(X_\alpha)$
+is generated by the subgroups $\pi_n(X_\alpha)$. Thus the long exact sequence of homotopy groups for the pair
+$\left(\prod_\alpha X_\alpha,\ \bigvee_\alpha X_\alpha\right)$
+breaks up into short exact sequences
+\[
+0 \longrightarrow \pi_{n+1}\!\left(\prod_\alpha X_\alpha,\ \bigvee_\alpha X_\alpha\right)
+\longrightarrow \pi_n\!\left(\bigvee_\alpha X_\alpha\right)
+\longrightarrow \pi_n\!\left(\prod_\alpha X_\alpha\right)
+\longrightarrow 0.
+\]
+
+These short exact sequences split, since the inclusions
+$X_\alpha \hookrightarrow \bigvee_\alpha X_\alpha$
+induce maps
+$\pi_n(X_\alpha)\to \pi_n\!\left(\bigvee_\alpha X_\alpha\right)$,
+and hence a splitting homomorphism
+$\bigoplus_\alpha \pi_n(X_\alpha)\to \pi_n\!\left(\bigvee_\alpha X_\alpha\right)$.
+
+Taking $X_\alpha=S^2_\alpha$ and $n=3$, we get an isomorphism
+\[
+\pi_3\!\left(\bigvee_\alpha S^2_\alpha\right)
+\cong
+\pi_4\!\left(\prod_\alpha S^2_\alpha,\ \bigvee_\alpha S^2_\alpha\right)
+\oplus
+\left(\bigoplus_\alpha \pi_3(S^2_\alpha)\right).
+\]
+
+The factor
+$\bigoplus_\alpha \pi_3(S^2_\alpha)$
+is free with basis the Hopf maps $S^3\to S^2_\alpha$. For the other factor, we have
+\[
+\pi_4\!\left(\prod_\alpha S^2_\alpha,\ \bigvee_\alpha S^2_\alpha\right)
+\cong
+\pi_4\!\left(\prod_\alpha S^2_\alpha \Big/ \bigvee_\alpha S^2_\alpha\right).
+\]
+The quotient
+$\prod_\alpha S^2_\alpha \Big/ \bigvee_\alpha S^2_\alpha$
+has $5$-skeleton a wedge of spheres
+$\bigvee_{\alpha\beta} S^4_{\alpha\beta}$
+for $\alpha\neq\beta$, so
+\[
+\pi_4\!\left(\prod_\alpha S^2_\alpha \Big/ \bigvee_\alpha S^2_\alpha\right)
+\cong
+\pi_4\!\left(\bigvee_{\alpha\beta} S^4_{\alpha\beta}\right),
+\]
+which is free with basis the inclusions
+$S^4_{\alpha\beta}\hookrightarrow \bigvee_{\alpha\beta} S^4_{\alpha\beta}$.
+Hence
+$\pi_4\!\left(\prod_\alpha S^2_\alpha,\ \bigvee_\alpha S^2_\alpha\right)$
+is free with basis the characteristic maps of the $4$-cells
+$e^2_\alpha\times e^2_\beta$.
+Via the injection
+\[
+\partial:\pi_4\!\left(\prod_\alpha S^2_\alpha,\ \bigvee_\alpha S^2_\alpha\right)
+\to
+\pi_3\!\left(\bigvee_\alpha S^2_\alpha\right),
+\]
+this means that the attaching maps of the cells
+$e^2_\alpha\times e^2_\beta$
+form a basis for the summand
+$\operatorname{Im}\partial \subset \pi_3\!\left(\bigvee_\alpha S^2_\alpha\right)$.
+This finishes the proof for the case of finitely many summands $S^2_\alpha$. The case of infinitely many summands follows immediately since any map
+$S^3\to \bigvee_\alpha S^2_\alpha$
+has compact image, hence lands in a finite subwedge, and similarly for any homotopy between such maps.
+\end{example}
+The maps
+$S^3\to S^2_\alpha \vee S^2_\beta$
+in this example are expressible in terms of a product in homotopy groups called the \textbf{Whitehead product}, defined as follows.
+\begin{definition}
+ Given basepoint-preserving maps
+$f:S^k\to X$
+and
+$g:S^\ell\to X$,
+let
+$[f,g]:S^{k+\ell-1}\to X$
+be the composite
+\[
+S^{k+\ell-1}\longrightarrow S^k\vee S^\ell
+\xrightarrow{\,f\vee g\,} X,
+\]
+where the first map is the attaching map of the $(k+\ell)$-cell of
+$S^k\times S^\ell$
+with its usual CW structure. Since homotopies of $f$ or $g$ give rise to homotopies of $[f,g]$, we obtain a well-defined product
+$\pi_k(X)\times \pi_\ell(X)\to \pi_{k+\ell-1}(X)$.
+\end{definition}
+
+The Whitehead bracket is graded skew-symmetric for $k,\ell\ge 2$, i.e.
+\[[f,g]=(-1)^{k\ell}[g,f].
+\]
+When $\ell = 1$, the Whitehead bracket $[f,g]$ is the difference between the action of $g$ on $f$ and the trivial action. If $k = \ell = 1$, the Whitehead bracket is the commutator of $f$ and $g$ in $\pi_1(X)$.
+
+\begin{example}
+    
+\end{example}
+\section{Apr 9}
+Fibrations (see Mitchell Serre fibrations), definitions and basic properties, LES in homotopy, examples, Path fibration, homotopy fiber products, homotpopy fibers, Serre fibration, topological groups and group like monoids, action of $\Omega B$ on the fibers, principal fibrations and Puppe sequence ("derived" LES)
+
+\subsection{}
+Recall that $F\hookrightarrow E \to B$ is a fiber bundle if it is locally trivial over $B$.
+
+\begin{theorem}
+    A fiber bundle over a paracompact base has the homotopy lifting property.
+\end{theorem}
+A related statement is that if $B$ is paracompact and $E$ extends to a fiber bundle over $B\times I$, then $E^{ext}$ is isomorphic as a fiber bundle to $E\times I \to B\times I$. We proved this when $F$ is a compact manifold. In partiular if the bundle was trivial at time $0$, then it is trivial at time $1$ and also all times in between. This is precisely the notion of a fibration.
+
+\begin{definition}
+    A map $F \hookrightarrow E \to B$ is a fibration if it has the homotopy lifting property, i.e. for any space $X$ and any homotopy $H: X\times I \to B$ and any lift $H_0: X\times \{0\} \to E$ of $H|_{X\times \{0\}}$, there exists a lift $H^{ext}: X\times I \to E$ of $H$ extending $H_0$.
+\end{definition}
+
+\begin{theorem}
+    Let $B$ be path connected. Pick $*\in E$ a base point and $F$ the fiber containing $*$. A fibration induces a long exact sequence in homotopy \begin{align*}
+    \dots \to \pi_k(F) \to \pi_k(E) \to \pi_k(B) \to \pi_{k-1}(F) \to \dots \pi_1(E) \to \pi_1(B) \to \pi_0(F) \to \pi_0(E) \to \pi_0(B)
+    \end{align*}
+\end{theorem}
+
+Need to say some things about what is happening at the end. 
+\begin{proof}
+    We need to define the map $\partial: \pi_k(B) \to \pi_{k-1}(F)$. Everything basically hinges on the fact that the pair $(I^k, \partial I^k \setminus \text{face})$ is homeomorphic to $(I^k, \text{face})$ The homotopy lifting property is so cleverly chosen that everything works.
+\end{proof}
+Serre adopted the definition to CW $X$.
+\begin{definition}
+    $p: E \to B$ is a Serre fibration if it has the homotopy lifting property for cubes of all dimenisons.
+\end{definition}
+
+\begin{theorem}
+    A Serre fibration has the HLP for all CW pairs. 
+\end{theorem}
+\begin{proof}
+    Lift the homotopy to all cells in $X \backslash A$. Run into the homotopy lifting problem for a cube by the same trick as before.
+    \end{proof}
+
+    \begin{theorem}
+        Any fiber bundle is a Serre fibration.
+    \end{theorem}
+
+    \begin{proof}
+        Induct on the dimension of a cube. Given a cube, subdivide to trivialize bundle locally. Surely a product is a Serre fibration. The faces of the subdivision are smaller cubes. By inductive assumption, can extend the lifting to the smaller cubes moving from left to right. Can extend over interiors by the same trick.
+    \end{proof}
+
+    \subsection{Geometric examples}
+
+    \begin{example}
+        $G \hookrightarrow EG \to BG$ is a fiber bundle whose total space is contractible. Therefore from the LES we see that \begin{align*}
+            \pi_k(G) \cong \pi_{k+1}(BG)
+        \end{align*}
+        For example \begin{align*}
+            \pi_k(S^1) \cong \pi_{k+1}(\C\P^\infty)
+        \end{align*} is isomorphic to $\Z$ for $k=1$ and $0$ for $k>1$. Another example is $\pi_k(SU(n)) \cong \pi_{k+1}(\H\P^\infty)$ which is $0$ for $k<3$, $\Z$ for $k=3$ and $\Z/2$ for $k=4$ (the same as $\pi_4(S^3)$).
+    \end{example}
+
+    \begin{example}
+        $S^1 \hookrightarrow S^{2n+1} \to \C\P^n$. We have the homotopy groups $\pi_k \C\P^n$ is $\Z$ for $k=2$ and $\Z$ for $k=2n+1$ and equal to $\pi_k S^{2n+1}$ after that.
+    \end{example}
+
+    \begin{example}
+        $U(n) \hookrightarrow U(n+1) \to S^{2n+1}$. If $k < 2n$ then $\pi_k U(n) \cong \pi_k U(n+1)$ so we get stabilization of homotopy groups of unitary groups. In particular $\pi_k U = \lim \pi_k U(n)$ is $0$ for $k$ even and $\Z$ for $k$ odd. This is Bott periodicity.
+    \end{example}
+
+    \subsection{The path fibration}
+    Let $X$ be a pointed space. Consider \begin{align*}
+        P^X_*(X) &= \{\gamma: I \to X | \gamma(0) = *\}\\
+        P^A_*(X) &= \{\gamma: I \to X | \gamma(0) = *, \gamma(1) \in A\}
+    \end{align*}
+
+    \begin{proposition}
+        The endpoint evaluation map $P^A_*(X) \to A$ is a fibration maybe. It is surely a Serre fibration.
+    \end{proposition}
+    The path fibration $P_*^X(X) \to X$ is a fibration with total space contractible and the fiber over $*$ is the based loop space $\Omega X$. Therefore we get $\pi_k(\Omega X) \cong \pi_{k+1}(X)$. Should remind you of $EG \to BG$.
+
+    \begin{proposition}
+        The long exact sequence for the path fibration $P^X_*(X) \to X$ induces isomorphisms $\pi_k(\Omega X) \cong \pi_{k+1}(X)$ for all $k$. These are the usual isomorphisms given by adjunction.
+        The long exact sequence for the path fibration $P^A_*(X) \to A$ is the LES of the pair $(X,A)$.
+    \end{proposition}
+
+    \subsection{Basic homotopy calculus with fibrations}
+
+    \begin{definition}
+        If $E' \to B'$ is a fibration and $f: B \to B'$ is a map, we can form the pullback $E' \times_{B'} B$ and get a fibration $E' \times_{B'} B \to B$ called the pullback of $E'$ along $f$.
+    \end{definition} 
+    If $E,E'\to B$ are fibrations, a fibration map $E \to E'$ is a map over $B$. A fiber homotopy equivalence $f: E \to E'$ is a fibration map which admits a fiber homotopy inverse, i.e. a fibration map $g: E' \to E$ such that $f\circ g$ and $g\circ f$ are fiber homotopic to the identity.
+
+    \begin{proposition}
+        If $f$ is fiber preserving and a homotopy equivalence, then it is a fiber homotopy equivalence.
+    \end{proposition}
+
+    Two out of three lemma, also known as the 5-lemma in homotopy. It follows form the LES and the 5-lemma.
+    \begin{lemma}
+        Given a map $f$ of fibrations $E'\to B'$ to $E\to B$ and $B,B'$ are path connected, if any two of the three maps $E' \to E$, $B' \to B$ and the induced map on fibers are weak homotopy equivalences, then so is the third.
+    \end{lemma}
+
+    \subsection{Homotopy fibers, homotopy fiber products, converting maps to fibrations}
+    Given a map $f: X \to Y$, we can factor it as $X \to E \to Y$ with maps $g:X \to E$ and $p: E \to Y$ with $g$ a homotopy equivalence and $p$ a fibration. Recall the codual result that any map can be factored as a cofibration followed by a homotopy equivalence, the intermediary being the mapping cylinder. In general there is Eckmann Hilton duality between fibrations and cofibrations, homotopy and homology. 
+
+    How do we construct $E\to Y$? Consider free paths in $Y$ \begin{align*}
+        P_Y^Y(Y) = \{\gamma: I \to Y \}
+    \end{align*} comes with two evaluation maps. Now let \begin{align*}
+        E = X \times_Y P_Y^Y(Y) \to Y
+    \end{align*} where we use $\ev_0$ for the fiber product and $\ev_1$ for the map to $Y$. $E$ recieves an obvious map from $X \times_Y Y$. 
+
+    \begin{definition}
+        Let $X,Z \to Y$ be maps. The homotopy fiber product $X \times^h_Y Z$ is the space \begin{align*}
+            X \times_Y P_Y^Y(Y) \times_Y Z 
+        \end{align*} where we use $\ev_0$ for the fiber product with $X$ and $\ev_1$ for the fiber product with $Z$. 
+    \end{definition}
+    It is characterized in the homotopy category by: a map $W \to X \times^h_Y Z$ up to homotopy is the same as a pair of maps $W \to X$ and $W \to Z$ such that the two compositions to $Y$ are homotopic.
+
+    \subsection{$H$-spaces, James space, and loops on a suspension}
+
+\section{Apr 16}
+Homotopy replacement of fiber bundles (principal fibrations, Puppe sequence). Moore and Eilenberg--MacLane spaces.
+Principal fibration theorem for Eilenberg--MacLane fibrations.
+Postnikov towers, Moore--cell decomposition of a space, Eckmann--Hilton duality in $H^*$ and $\pi_*$.
+
+\subsection{Singular complex and functorial CW approximation}
+Last time we considered the adjunction
+\begin{align*}
+    \operatorname{Sing} : \mathbf{Top} \rightleftarrows \mathbf{sSet} : |{-}|,
+\end{align*}
+with $\operatorname{Sing}$ the right adjoint and geometric realization the left adjoint.
+Thus there are natural transformations $L\circ R \to \mathrm{Id}$ and $\mathrm{Id} \to R\circ L$.
+In particular, for every space $X$ there is a natural map
+\begin{align*}
+    |\operatorname{Sing}(X)| \to X,
+\end{align*}
+which gives a functorial CW approximation. Moreover, $\operatorname{Sing}$ and $|{-}|$ become inverse equivalences on the homotopy category.
+
+\subsection{Group-like monoids and the bar construction}
+\textbf{Recall the slogan from last time: in homotopy theory, group-like monoids are as good as groups.}
+An $A_\infty$-space is the homotopy-theoretic replacement for a strictly associative topological monoid, and one can build its bar construction via the geometric realization of the simplicial bar construction.
+
+There is an algebraic analog. Suppose $A$ is an associative algebra and $M,N$ are right and left $A$-modules. If one wants to compute the tensor product correctly, in the derived sense, one resolves and forms a bar complex. A universal way to think about this is:
+\begin{align*}
+    M \otimes_A N
+    \simeq (M \otimes_k N) \otimes_{A \otimes A^{\mathrm{op}}} A,
+\end{align*}
+so one resolves $A$ functorially as an $A \otimes A^{\mathrm{op}}$-module. This leads to the bar resolution
+\begin{align*}
+    A \longleftarrow A^{\otimes 2} \longleftarrow A^{\otimes 3} \longleftarrow A^{\otimes 4} \longleftarrow \cdots,
+\end{align*}
+where the face maps are given by multiplying adjacent factors, and the differential is the alternating sum of the face maps.
+
+For example, if $M=N=k$ with augmentation $A \to k$, one gets the complex
+\begin{align*}
+    k \longleftarrow A \longleftarrow A^{\otimes 2} \longleftarrow \cdots,
+\end{align*}
+whose homology computes
+\begin{align*}
+    \Tor_*^A(k,k) \cong k \otimes_A^{\mathbf{L}} k.
+\end{align*}
+Any two such resolutions are quasi-isomorphic.
+
+Topologically, if $M$ is a monoid, one considers
+\begin{align*}
+    * \longleftarrow M \longleftarrow M^2 \longleftarrow M^3 \longleftarrow \cdots,
+\end{align*}
+and fills in the simplices by homotopies. If $M$ acts trivially on a point, replacing all copies of $M$ by $*$ gives $BM$; replacing only one component gives $EM$.
+
+More generally, if $M$ acts on the right on $X$ and on the left on $Y$, the \textbf{homotopy quotient / two-sided bar construction} is
+\begin{align*}
+    X \times_M^h Y.
+\end{align*}
+modeled by the simplicial space
+\begin{align*}
+    X \times Y \Longleftarrow X \times M \times Y \Longleftarrow X \times M^2 \times Y \Longleftarrow \cdots.
+\end{align*}
+A homotopy-associative action is the same as filling in the simplices in this bar construction.
+
+There is also the stricter simplicial replacement: a simplicial diagram
+\begin{align*}
+    * \Longleftarrow M \Longleftarrow M^2 \Longleftarrow M^3 \Longleftarrow \cdots
+\end{align*}
+whose vertical maps to the corresponding powers are homotopy equivalences.
+Thus:
+\begin{align*}
+    \{\text{topological groups}\}
+    &\longleftrightarrow \{A_\infty\text{-group-like monoids}\}, \\
+    \{\text{topological actions}\}
+    &\longleftrightarrow \{A_\infty\text{-actions}\}.
+\end{align*}
+Likewise, ordinary quotients are replaced by homotopy quotients:
+\begin{align*}
+    (X \times Y)/G \qquad \leadsto \qquad X \times_G^h Y \simeq \operatorname{Bar}(X,G,Y).
+\end{align*}
+If the action is free and $X \times Y \to (X \times Y)/G$ is a fiber bundle, then the comparison map from the homotopy quotient to the ordinary quotient is a homotopy equivalence.
+
+\subsection{Principal fibrations and homotopy fibers}
+By this definition, any fibration
+\begin{align*}
+    F \hookrightarrow E \to B
+\end{align*}
+is associated to a principal homotopy-group fibration.
+For a path-connected base, one has the path-loop fibration
+\begin{align*}
+    \Omega B \hookrightarrow P_bB \to B
+\end{align*}
+and the loop space $\Omega B$ acts on the fiber $F_b$.
+
+A principal fibration is a fibration equipped with a translation action by a loop space. In particular, since principal bundles are classified, one has the usual picture
+\begin{center}
+\begin{tikzcd}
+E \arrow[r] \arrow[d] & EG \arrow[d] \\
+B \arrow[r] & BG
+\end{tikzcd}
+\end{center}
+for a principal $G$-bundle.
+
+If $B \to X$ is a map and $b \in B$ maps to the base point $x \in X$, then one gets a strict homomorphism
+\begin{align*}
+    \Omega_b B \to \Omega_x X,
+\end{align*}
+and hence an action of $\Omega X$ on the homotopy fiber.
+The total space $E$ is the homotopy fiber of the classifying map $B \to X$.
+
+Consequently, for any fibration $F \to E \to B$ one obtains a Puppe sequence
+\begin{align*}
+    \Omega E \to \Omega B \to F \to E \to B,
+\end{align*}
+and by continuing to the left and right one gets a sequence of spaces in which the composite of any two consecutive maps is null-homotopic, with a specified null-homotopy, and any three consecutive terms exhibit the leftmost one as the homotopy fiber of the right-hand map.
+Taking $\pi_0$ gives the long exact sequence in homotopy. Moreover, the original fibration is principal if and only if this sequence can be continued one more step to the right.
+
+\subsection{Eilenberg--MacLane spaces}
+Let $\pi$ be a group, with $\pi$ abelian if $n>1$. A space $K(\pi,n)$ is a connected space with
+\begin{align*}
+    \pi_i(K(\pi,n)) =
+    \begin{cases}
+        \pi & i=n, \\
+        0 & i\neq n.
+    \end{cases}
+\end{align*}
+It is unique up to weak homotopy equivalence.
+
+For $n \ge 2$, the Hurewicz theorem gives
+\begin{align*}
+    H_n(K(\pi,n);\Z) \cong \pi,
+    \qquad
+    H_i(K(\pi,n);\Z)=0 \quad (i<n).
+\end{align*}
+Hence the universal class in degree $n$ gives
+\begin{align*}
+    H^n(K(\pi,n);\pi) \cong \Hom(\pi,\pi),
+\end{align*}
+and in particular a distinguished class corresponding to the identity map.
+
+The main representability statement is
+\begin{align*}
+    [X,K(\pi,n)] \cong H^n(X;\pi).
+\end{align*}
+For $n=1$ and $\pi$ abelian this agrees with the classification of principal $\pi$-bundles:
+\begin{align*}
+    [X,B\pi]
+    = \{\text{isomorphism classes of principal } \pi\text{-bundles on }X\}
+    = H^1(X;\pi)
+\end{align*}
+
+
+The Yoneda lemma implies that $K(\pi,n)$ is unique up to isomorphism in the homotopy category.
+A sketch with CW complexes is as follows: if $K(\pi,n)$ has no cells below dimension $n$, then any map $X \to K(\pi,n)$ factors through $X/X_{n-1}$, and one gets a homomorphism
+\begin{align*}
+    C_n(X) \to \pi
+\end{align*}
+which vanishes on boundaries exactly when the map extends.
+
+Also note that if $\pi$ is abelian, then $B\pi$ is an abelian topological group up to homotopy, and so is $\Omega B\pi \simeq \pi$ in the appropriate range.
+
+\subsection{Principal fibration theorem and Postnikov towers}
+\begin{theorem}[Principal fibration theorem]
+Let $B$ be simply connected, and let
+\[
+K(\pi,n)\simeq F \hookrightarrow E \xrightarrow{p} B
+\]
+be a fibration with $n>1$. Then the monodromy action of $\pi_1(B)$ on
+$\pi_n(F)\cong \pi$ is trivial, and $p$ is a principal $K(\pi,n)$-fibration
+up to fiber homotopy equivalence. Consequently there is a classifying map
+\[
+c_E : B \to BK(\pi,n)\simeq K(\pi,n+1)
+\]
+such that $E$ is the homotopy fiber of $c_E$. Hence fiber homotopy equivalence
+classes of such fibrations are in bijection with
+\[
+[B,BK(\pi,n)] \cong [B,K(\pi,n+1)] \cong H^{n+1}(B;\pi).
+\]
+The corresponding class
+\[
+k(E)\in H^{n+1}(B;\pi)
+\]
+is called the $n$th Postnikov-invariant of the fibration.
+\end{theorem}
+
+If $B$ is not simply connected, then the monodromy action $\rho$ of $\pi_1(B)$ on $\pi_n(F) = \pi$ may be nontrivial. In this case, one has the $n$th Postnikov invariant $k(E) \in H^{n+1}(B;\pi_\rho)$, where $\pi_\rho$ is the local system on $B$ associated to the representation $\rho$.
+
+\begin{remark}
+    Suppose $X$ is a connected CW complex and $\mathcal L$ corresponds to a $\pi_1(X)$-module $A$ is a local coefficient system. Then the universal cover $\widetilde X$ has a cellular chain complex $C_*(\widetilde X)$
+and this is naturally a module over $\mathbb Z[\pi_1(X)]$, because deck transformations act on $\widetilde X$.
+
+Then homology with local coefficients is
+\[H_*(X;\mathcal L)=H_*\big(C_*(\widetilde X)\otimes_{\mathbb Z[\pi_1(X)]} A\big)\] and cohomology with local coefficients is
+\[
+H^*(X;\mathcal L)=H^*\big(\Hom_{\mathbb Z[\pi_1(X)]}(C_*(\widetilde X),A)\big).
+\]
+
+\end{remark}
+
+\begin{theorem}[Postnikov tower]
+For a simply connected space $X$ with homotopy groups $\pi_2,\pi_3,\dots$, there are spaces $X_{\le n}$ and maps
+\begin{align*}
+    X \to X_{\le n}
+\end{align*}
+such that
+\begin{enumerate}
+    \item the induced map $\pi_k(X) \to \pi_k(X_{\le n})$
+    is an isomorphism for $k \le n$;
+    \item $\pi_k(X_{\le n}) = 0$ for $k > n$;
+    \item there are fibrations
+    \begin{align*}
+        K(\pi_{n+1}(X),n+1) \to X_{\le n+1} \to X_{\le n},
+    \end{align*}
+    classified by classes $k_{n+1} \in H^{n+2}(X_{\le n};\pi_{n+1}(X))$
+    the $(n+1)$st Postnikov $k$-invariants.
+    \item The natural map $X \to \varprojlim_n X_{\le n}$
+is a weak homotopy equivalence.
+\end{enumerate}
+\end{theorem}
+
+
+
+The Postnikov tower is thus built from Eilenberg--MacLane fibers step by step, and is dual to building a space by attaching cells or, homologically, by Moore spaces.
+
+\subsection{Dold--Thom and Moore spaces}
+The Dold--Thom theorem says that the infinite symmetric product detects homology. For a based space $X$, define
+\begin{align*}
+    \operatorname{SP}^\infty(X)
+    = \varinjlim_m X^m/S_m.
+\end{align*} $\operatorname{SP}^\infty(X)$ is a connected topological abelian group
+\begin{theorem}[Dold--Thom]
+For a based connected CW complex $X$,
+\[\pi_n(\operatorname{SP}^\infty(X)) \cong \widetilde H_n(X;\mathbb Z)
+\qquad (n\ge 1)\]
+Since $\operatorname{SP}^\infty(X)$ is a connected topological abelian group, all Postnikov invariants vanish, and we have a homotopy equivalence \[
+\operatorname{SP}^\infty(X)\simeq \prod_{n\ge 1} K(\widetilde H_n(X;\mathbb Z),n)
+\]
+\end{theorem}
+In particular, topological abelian groups decompose as products of Eilenberg--MacLane spaces. 
+
+\begin{example}
+A point of $\operatorname{SP}^m(\mathbb CP^1)$ is an unordered m-tuple of points on $\mathbb CP^1$, i.e. an effective divisor of degree $m$ on $\mathbb CP^1$. Such a divisor corresponds to a homogeneous polynomial of degree m up to scale, namely the polynomial whose zeros are those points with multiplicity. So
+$\operatorname{SP}^m(\mathbb CP^1)\cong \mathbb CP^m$.
+Passing to the colimit over $m$ gives
+\begin{align*}
+    \C P^\infty \simeq \operatorname{SP}^\infty(\C P^1).
+\end{align*}
+In particular, the group structure on $BS^1 \simeq
+\C P^\infty$ which is only defined up to homotopy can be made into a strict group structure by identifying it with $\operatorname{SP}^\infty(\C P^1)$.
+\end{example}
+
+Dually, a Moore space $M(\pi,n)$ is a space with one prescribed reduced homology group:
+\begin{align*}
+    \widetilde H_n(M(\pi,n)) \cong \pi,
+    \qquad
+    \widetilde H_i(M(\pi,n)) = 0 \text{ for } i\neq n.
+\end{align*}
+The Postnikov tower is in this sense dual to a cell decomposition / Moore-space decomposition of a space.
+
+\section{Apr 21}
+Proof of principal fibration theorem, self maps of Eilenberg--MacLane spaces, construction of postnikov towers, postnikov factorization of a map, postnikov towers in families, obstruction theorem, functoriality of postnikov towers, examples, spectral sequences
+
+\subsection{Construction of Postnikov tower}
+Let $X$ be simply connected. Then there is a tower of fibrations $X_i \to X_{i-1}$ with fiber $K(\pi_i(X),i)$, and $X$ maps to all of them.
+
+\begin{theorem}
+    This exists for every simply connected space $X$. It is homotopy functorial in the sense that a map $X \to Y$ induces a map between the towers. Moreover, $\pi_k(X)\to \pi_k(X_i)$ is an isomorphism for $k \le i$. The map $X \to \varprojlim X_i$ is a weak homotopy equivalence because the fiber of $X_{\leq m} \to X_{\leq n}$ are $n$-connected, so no lifting problem for $\leq n$-spheres.
+\end{theorem}
+
+The construction of $X_{\leq n}$ is by killing homotopy groups above $n$ by attaching $n+2$-cells and higher. We claim that attaching an $n+2$-cell to $X$ by $\phi:S^{n+1}\to X$ kills the class of $[\phi]$ in $\pi_{n+1}(X)$ and does not change $\pi_{\leq n}(X)$. It does change things higher up, but then you can inductively kill.
+
+This claim follows from the excision theorem. If $X' = X \cup_\phi e^{n+2}$ and $X$ is connected, then the long exact sequence of the pair $(X',X)$ gives 
+\begin{align*}
+    \dots \to \pi_{k+1}(X) \to \pi_{k+1}(X') \to \pi_{k+1}(X',X) \to \pi_k(X) \to \pi_k(X') \to \dots
+\end{align*} By the excision theorem \begin{align*}
+    \pi_k(X',X) \cong \pi_k(X'/X) \cong \pi_k(S^{n+2})
+\end{align*} for $k \leq n+1$. Note that $X$ connected implies that $(X',X)$ is $n+1$-connected. Hence $\pi_k(X) \to \pi_k(X')$ is an isomorphism for $k \leq n$ and the map $\pi_{n+2}(X',X) \to \pi_{n+2}(S^{n+2})$ is surjective, i.e. the connecting map kills $[\phi] \in \pi_{n+1}(X)$.
+
+\subsection{Postnikov factorization of a map}
+Let $f:X \to Y$ be a map with $X$ simply connected.\begin{theorem}
+    For each $n$, there exists a space $P_n(f)$ and a diagram which commutes up to homotopy
+    \[ X \to P_n(f) \to Y \]
+    so that $\pi_k(X) \to \pi_k(P_n(f))$ is an isomorphism for $k \leq n$ and $\pi_k(P_n(f)) \to \pi_k(Y)$ is an isomorphism for $k > n+1$, and \begin{align*}
+        \pi_{n+1}(X) \twoheadrightarrow \pi_{n+1}(P_n(f)) \hookrightarrow \pi_{n+1}(Y)
+    \end{align*} 
+\end{theorem}
+If $Y = *$, then $P_n(f) = X_{\leq n}$ is the $n$-th Postnikov truncation of $X$. The construction first requires us to kill $\ker f_*: \pi_{n+1}(X) \to \pi_{n+1}(Y)$ and then kill $\pi_{>n+1}(X)$ by attaching cells. Then \begin{align*}
+    X &\to Y \to Y_{\leq n+1}\\
+&\downarrow \\
+X'_{\leq n+1}
+\end{align*} I claim that there exists a map $X'_{\leq n+1} \to Y_{\leq n+1}$ making the diagram commute up to homotopy. This is because $X'_{\leq n+1}$ is obtained from $X$ by attaching cells of dimension $n+2$ and higher, the attaching maps are null-homotopic in $Y_{\leq n+1}$.
+Then $P_n(f)$ is the homotopy pullback of $X'_{\leq n+1} \to Y_{\leq n+1}$ and $Y \to Y_{\leq n+1}$.
+
+\subsection{Families version of Postnikov tower}
+\begin{proposition}
+Let
+\[
+F \longrightarrow E \xrightarrow{p} B
+\]
+be a Serre fibration of connected CW complexes, and assume that \(B\) and \(F\) are simply connected. Then one can choose Postnikov towers for \(E\) and \(F\),
+\[
+\cdots \longrightarrow E_{\le n} \longrightarrow E_{\le n-1} \longrightarrow \cdots \longrightarrow E_{\le 1},
+\qquad
+\cdots \longrightarrow F_{\le n} \longrightarrow F_{\le n-1} \longrightarrow \cdots \longrightarrow F_{\le 1},
+\]
+together with maps
+\[
+p_{\le n}\colon E_{\le n}\longrightarrow B
+\]
+and maps
+\[
+F_{\le n}\longrightarrow E_{\le n},
+\]
+such that for every \(n\ge 1\) the following hold:
+\begin{enumerate}
+    \item The maps
+    \[
+    E\longrightarrow E_{\le n},
+    \qquad
+    F\longrightarrow F_{\le n}
+    \]
+    are the \(n\)-th Postnikov truncation maps.
+    \item The diagram
+    \[
+    \begin{tikzcd}
+    E \arrow[r] \arrow[d,"p"'] & E_{\le n} \arrow[d,"p_{\le n}"] \\
+    B \arrow[r,equal] & B
+    \end{tikzcd}
+    \]
+    commutes up to homotopy.
+
+    \item The homotopy fiber of
+    \[
+    p_{\le n}\colon E_{\le n}\longrightarrow B
+    \]
+    is \(F_{\le n}\).
+    \item These fit into maps of fibration sequences
+    \[
+    \begin{tikzcd}
+    F_{\le n} \arrow[r] \arrow[d] & E_{\le n} \arrow[r,"p_{\le n}"] \arrow[d] & B \arrow[d,equal] \\
+    F_{\le n-1} \arrow[r] & E_{\le n-1} \arrow[r,"p_{\le n-1}"] & B,
+    \end{tikzcd}
+    \]
+    where the vertical maps are the Postnikov structure maps.
+\end{enumerate}
+\end{proposition}
+We can deduce this from the Postnikov factorization of a cleverly chosen map. In particular, just take the factorization $E \to P_n(p) \to B$. We are now ready to state the obstruction theorem, which is the reason we are able to do anything in homotopy theory at all.
+
+\subsection{Obstruction theorem}
+Suppose that we have a strictly commuting square of a cofibration $A \hookrightarrow X$ and a fibration $E \to B$:
+\begin{center}
+\begin{tikzcd}
+A \arrow[r] \arrow[d,hook] & E \arrow[d] \\
+X \arrow[r] & B
+\end{tikzcd}
+\end{center}
+The question is does there exist a lift $X \to E$ making the diagram commute? Note that if we omit the cofibration/fibration condition, then we can only ask for commutation up to homotopy. If $B = *$ we are asking for an extension of a map $A \to E$ to $X$. If $A = *$, we are asking for a lift of a map $X \to B$ to $E$.  
+
+\begin{theorem}
+    Assume that one of the following holds.
+    \begin{enumerate}
+        \item $X$ is obtained from $A$ by sttaching only $n+1$ cells.
+        \item $E$ is a principal $K(\pi,n)$-fibration over $B$ simply connected.
+    \end{enumerate} Then the square defines an obstruction class $\omega^{n+1} \in H^{n+1}(X,A;\pi_n(F))$ whose vanishing is necessary and sufficient for the existence of a lift $X \to E$ making the diagram commute. 
+    
+    Moreover, if $\omega^{n+1} = 0$ and $X$ is obtained from $A$ by attaching only $n+1$ cells, then the set of lifts up to homotopy form a torsor under $H^{n+1}(X,A;\pi_{n+1}(F))$. If $\omega^{n+1} = 0$ and $E$ is a principal $K(\pi,n)$-fibration, then the set of lifts up to homotopy form a torsor under $H^n(X,A;\pi)$.
+\end{theorem}
+
+
+
+Remark that this criterion can be used iteratively. Check for a relative cell decomposition of $X$ relative to $A$ and go one dimension at a time, or check for the relative Postnikov tower of $E$ relative to $B$ and go one Postnikov stage at a time.
+
+\begin{corollary}
+    If either $A \subset X$ or $E\to B$ is a weak homotopy equivalence, then the lift exists and is unique up to homotopy.
+\end{corollary}
+This is clear for fibrations since $\pi_* F = 0$. For cofibrations, while $H^*(X,A;\pi_n(F)) = 0$ an extra check is needed because we have to go one step at a time.
+
+\begin{example}
+Consider the path-space fibration
+\[
+K(\pi,n)\simeq \Omega K(\pi,n+1)\longrightarrow PK(\pi,n+1)\longrightarrow K(\pi,n+1),
+\]
+whose total space is contractible. Up to homotopy this is the universal principal \(K(\pi,n)\)-fibration
+\[
+K(\pi,n)\to *\to K(\pi,n+1).
+\]
+Given a map \(f:X\to K(\pi,n+1)\), a lift to \(*\) exists if and only if \(f\) is nullhomotopic. Under the natural bijection
+\[
+[X,K(\pi,n+1)]\cong H^{n+1}(X;\pi),
+\]
+the homotopy class of \(f\) corresponds to the pullback \(f^*(u)\) of the universal class
+\[
+u\in H^{n+1}(K(\pi,n+1);\pi).
+\]
+Hence the obstruction to lifting \(f\) is precisely \(f^*(u)\).\end{example}
+
+Application is the functoriality of Postnikov towers. Assume $X$ and $Y$ are simply connected and $f:X \to Y$ is a map. We want to show that there is a map $X_{\leq n} \to Y_{\leq n}$. The point is that $X_{\leq n}$ is obtained from $X$ by attaching cells of dimension $n+2$ and higher, and the attaching maps are null-homotopic in $Y_{\leq n}$, so we can extend the map $X \to Y_{\leq n}$ to $X_{\leq n}$.
+
+This statement is analagous to the cellular approximation theorem, which says that if $X$ is a CW complex and $Y$ is a space, then any map $X \to Y$ is homotopic to a cellular map. 
+
+\begin{proof}
+    [Proof of the obstruction theorem]  Consider the case of extending across cells. A lifting on each cell exists if and only if $[f \circ \phi_\alpha] \in \pi_n(E)$ is $0$ for each attaching map $\phi_\alpha: S^n \to X$, and $f$ is the map $A\to E$. We know that $[p \circ f \circ \phi_\alpha] = 0$ as classes in $\pi_n(B)$ which means that $[f \circ \phi_\alpha]$ came from $\pi_n(F)$. We have defined the class in $H^{n+1}(X,A;\pi_n(F))$. This class cannot be killed unless it was $0$ since there are no higher cells.
+
+As for the case of the principal fibration, the fibration $E\to B$ is classified by a map $B \to K(\pi,n+1)$, and the composition $X \to B \to K(\pi,n+1)$ defines a class in $(X,A)$, and a nullhomotopy of the map to $K(\pi,n+1)$ corresponds precisely to a relative lifting to $E$.
+\end{proof}
+
+\section{Apr 23}
+Compute $k$ invariant of a postnikov tower. Spectral sequences and examples. $BU(n), EU(n), K(\Z,3),\Omega S^2, \Omega S^3$. The homotopy groups of $S^3$. Serre's theorem about separating torsion and $\Q$ parts. This says that localization of $\pi_*$ agrees with the localization of $H^*$ for coefficients $\Z\subset R\subset \Q$. Computation of $K(\Q,n)$ and rational homotopy theory.
+
+\subsection{}
+Recall the Hopf fibration $S^1 \to S^3 \to S^2$ whose long exact sequence has isomorphisms $\pi_k S^3 = \pi_k S^2$ for $k\geq 3$. Moreover $\pi_2(S^3) = 0$. The Postnikov tower has $S^3 \to S^2 \to K(\Z,2) = \C\P^\infty$ and living over $\C\P^\infty$ has $S^2_{\leq 4} = S^3_{\leq 4}$ with fiber $K(\pi_4 S^3,4)$
+towering over $S^2_{\leq 3} = S^3_{\leq 3}$ with fiber $K(\Z,3)$.
+
+We need to find the $k$-invariant $k_4 \in H^4(\C\P^\infty,\Z)$.
+
+Consider $SU(2) \to S^2 = SU(2)/S^1$ whose next terms in the Puppe sequence are $K(\Z,2) = BU(1) \to BSU(2) \to K(\Z,4)$. 
+\begin{align*}
+    S^1 \to S^3 \to S^2 \to BU(1) \to BSU(2) \\
+    S^1 \to K(\Z,3) \to S^2_{\leq 3} \to K(\Z,2) \to K(\Z,4)
+\end{align*} and the rows are Puppe sequences and there are vertical arrows which identify with the functoriality of Postnikov towers, in particular we are taking the third truncation of the first row to get the second row. Then $c_2$ of the standard bundle over $BSU(2)$ maps to $-c_1^2$ of the standard bundle over $BU(1)$, so $k^4 = -c_1^2$.
+
+\subsection{Spectral sequences and examples}
+The main example is the Leray spectral sequence. It computes the cohomology of the total space of a fibration $F \to E \to B$ from the cohomology of the base and the fiber. We will assume $B$ is simply connected. The starting idea is to use a cell decomposition of $B$ and over each cell, the fibration is fiber homotopy equivalent to a product.
+
+Know how to build a complex by filtering by the skeleta $B_n$ and $E_n = p^{-1}(B_n)$. We can keep increasing $n$ by the long exact sequence \begin{align*}
+    \cdots \to H^*(E_n,E_{n-1};\Z) \to H^*(E_n;\Z) \to H^*(E_{n-1};\Z) \to \cdots
+\end{align*} and we actually know how to describe $H^*(E_n,E_{n-1};\Z)$. It is the product \begin{align*}
+    \prod_{n+1 cells in B} H^{* - (n+1)}(F;\Z)
+\end{align*}
+This is not an efficient method because one runs into trouble inductively. It also fails to exploit the algebraic ring structure on $H^*(E;\Z)$ and the module structure of $H^*(E;\Z)$ over $H^*(B;\Z)$. The better thing to do is to carry out an order by order computation of cohomology of a filtered complex. The analogy is to use Taylor series to compute solutions of ODEs. Each step is computing $H^*$ of a complex.
+
+\begin{theorem}
+    [Spectral sequence of a filtered complex] Consider a cohomologically graded complex \begin{align*}
+    \cdots \to C^{n-1} \to C^n \to C^{n+1} \to \cdots
+    \end{align*} with a decreasing filtration
+\begin{align*}
+    \cdots \supset F^p C^* \supset F^{p+1} C^* \supset \cdots
+\end{align*} satisfing the Hausdorff condition $\bigcap_p F^p C^* = 0$ and completeness condition $C^* \cong \bigcup_p F^p C^*$. Then there exist a sequence of pages $E_r^{p,q}$ bigraded abelian groups with differentials $d_r: E_r^{p,q} \to E_r^{p+r,q-r+1}$ so that $E_{r+1}^{p,q} \cong H^{p,q}(E_r,d_r)$ and $d_r$ are the successive terms of $\delta$ in $F$. Moreover, $E_1^{p,q} \cong H^{p+q}(F^p C^*/F^{p+1} C^*)$. 
+
+We also have a short exact sequence \begin{align*}
+    0\to \lim^1 \bigoplus_{p+q=n-1} E^{p,q}_\infty 
+    \to \Gr^F H^*(C^\bullet) \to \bigoplus_{p+q = *} E_\infty^{p,q} \to 0
+\end{align*}
+The spectral sequence converges if $\lim^1 \bigoplus_{p+q=n-1} E^{p,q}_\infty = 0$. A sufficient condition for convergence is for each $\bullet$, $F_n C^\bullet = 0$ for $n$ sufficiently large. One really hopes that the $\lim^1$ term vanishes. If it doesn't you probably set the problem up wrong.
+\end{theorem}
+
+\begin{example}
+    Consider $k[z]$ filtered by $F^n k[z] = z^n k[z]$. Then $\lim^1 = k[[z]]/k[z]$.
+\end{example}
+An aside. Let $F_n\to F_{n-1} \to \cdots \to$ be a system of maps of abelian groups. Then $\lim^0$ and $\lim^1$ are the cohomologies of \begin{align*}
+    0 \to \lim^0 \to \prod F_n \rightrightarrows \prod F_n \to \lim^1 \to 0
+\end{align*} where the two maps are the identity and the shift map. One has the Mittag Leffler condition which says that if for each $n$ the image of $F_{n+k} \to F_n$ stabilizes for $k$ sufficiently large, then $\lim^1 F_n = 0$. In particular, if the maps are surjective, then $\lim^1 = 0$.
+
+\begin{example}
+    The Leray spectral sequence of a fibration $F \to E \to B$. Filter $C^\bullet E$ by the kernels of $C^\bullet E \to C^\bullet E_{n-1}$, that is \begin{align*}
+    F^n C^\bullet E = \ker(C^\bullet E \to C^\bullet E_{n-1})
+    \end{align*} Then the filtered pieces fit into a short exact sequence \begin{align*}
+        0 \to F^n C^\bullet E \to F^{n-1} C^\bullet E \to C^\bullet E_n / C^\bullet E_{n-1} \to 0
+    \end{align*} 
+    Thus $\Gr^n C^\bullet E \cong C^\bullet E_n / C^\bullet E_{n-1}$. Then \begin{align*}
+                H^*(\Gr^p C^\bullet E) \cong \prod_{n cells in B} H^{* - n}(F;\Z)
+    \end{align*} In particular
+    \begin{align*}
+        E_1^{p,q} \cong C^p(B;H^q(F;\Z))
+    \end{align*}
+    Assume we don't need twisted coefficients. Then the differential $d_1$ is just the differential in $C^*(B)$. Thus we get the Leray spectral sequence with $E_2$ page \begin{align*}
+    E_2^{p,q} \cong H^p(B;H^q(F;\Z))
+    \end{align*} and converging to $H^*(E;\Z)$. This is equivalent to saying that $\gr H^{p+q}(E) = E_\infty^{p,q}$. Note that for spaces $p,q\geq 0$ and so the filtration in cohomological degree $n$ has $\leq n$ steps.
+\end{example}
+
+This is an example of a first quadrant spectral sequence.
+\begin{theorem}
+    The Leray sequence is compatible with cup products and stable cohomology operations. 
+\end{theorem}
+\section{Examples}
+Consider the fibration $U(n-1) \to U(n) \to S^{2n-1}$. Assume inductively that $H^*(U(n-1);\Z) \cong \Z{v_1, v_3, \dots, v_{2n-3}}$ with $|v_i| = i$ with relations $v_i^2 = 0$ and skew commutativity. The spectral sequence is a grid with the $v_i$'s on the $q$-axis and the volume form on the $p$-axis. Looking at the numerics, there is nowhere for the differential to go, so all of the $v_i$'s survive to $E_\infty$. 
+
+So we see that \begin{align*}
+    H^*(U(n);\Z) \cong H^*(U(n-1);\Z)[v_{2n-1}]
+\end{align*} which skew squares to $0$. Here there is no ambiguity in lifting. Get free exterior algebra.
+
+In this example, nothing interesting happens because of numerical reasons. Another example where nothing happens is $U(n)/U(n-1) \to BU(n-1) \to BU(n)$. If you know $BU(n-1)$ has cohomology $\Z[c_1,\dots,c_{n-1}]$ with $|c_i| = 2i$, then the spectral sequence has a nontrivial differential $d_{2n-1}$ which kills the volume form on $S^{2n-1}$. In this case, Leray becomes the Gysin sequence of the sphere bundle $S^{2n-1} \to BU(n-1) \to BU(n)$.
+
+Another example is $U(n) \to EU(n) \to BU(n)$. The claim is that the differenitals take $v_{2i-1}$ to $c_i \in H^{2i}$. The is an example of the Koszul complex which says that there is a complex $\Lambda^\bullet V \otimes S^\bullet V$ resolving $k$ with differential taking the odd generators to the even generators. 
+
+\section{Apr 28}
+
+\begin{example}[The Hopf fibration]
+Consider the Hopf fibration
+\[
+S^1 \longrightarrow S^{2n+1} \longrightarrow \mathbb CP^n.
+\]
+This is a principal $K(\mathbb Z,1)$-fibration. The Leray--Serre spectral sequence has
+\[
+E_2^{p,q}
+=
+H^p(\mathbb CP^n;H^q(S^1;\mathbb Z)).
+\]
+Writing
+\[
+H^*(\mathbb CP^n;\mathbb Z)\cong \mathbb Z[\omega]/(\omega^{n+1}),
+\qquad
+|\omega|=2,
+\]
+and writing $\theta$ for the generator of $H^1(S^1;\mathbb Z)$, the $E_2$-page is
+\[
+\begin{array}{c|cccccc}
+q=1 & \mathbb Z\theta & 0 & \mathbb Z\theta\omega & 0 & \cdots & \mathbb Z\theta\omega^n \\
+q=0 & \mathbb Z & 0 & \mathbb Z\omega & 0 & \cdots & \mathbb Z\omega^n \\
+\hline
+& p=0 & 1 & 2 & 3 & \cdots & 2n
+\end{array}
+\]
+The only possible nonzero differential is $d_2\colon E_2^{p,1}\longrightarrow E_2^{p+2,0}$
+Since the total space is $S^{2n+1}$, the classes in the bottom row except $1$ must be killed. Thus
+\[
+d_2(\theta)=\omega.
+\]
+By multiplicativity,
+\[
+d_2(\theta\omega^i)=\omega^{i+1}.
+\]
+Thus the spectral sequence kills all intermediate cohomology and leaves exactly
+\[
+H^0(S^{2n+1};\mathbb Z)\cong \mathbb Z,
+\qquad
+H^{2n+1}(S^{2n+1};\mathbb Z)\cong \mathbb Z.
+\]
+For a principal $K(\pi,n)$-fibration $K(\pi,n)\to E\to X$ classified by a map $X\to K(\pi,n+1)$ the fundamental class $\iota\in H^n(K(\pi,n);\pi)$
+transgresses to the corresponding characteristic class in $H^{n+1}(X;\pi)$
+Equivalently, the Leray--Serre differential satisfies $d_{n+1}(\iota)=k$
+where $k\in H^{n+1}(X;\pi)$ is the classifying $k$-invariant of the fibration.
+\end{example}
+
+\begin{example}[The path fibration of $K(\mathbb Z,3)$]
+Consider the path fibration
+\[
+K(\mathbb Z,2)\simeq \Omega K(\mathbb Z,3)
+\longrightarrow
+PK(\mathbb Z,3)
+\longrightarrow
+K(\mathbb Z,3).
+\]
+The total space is contractible. Let $\omega\in H^2(K(\mathbb Z,2);\mathbb Z)$
+be the fundamental class of the fiber, and let $x\in H^3(K(\mathbb Z,3);\mathbb Z)$
+be the fundamental class of the base. Since
+\[
+H^*(K(\mathbb Z,2);\mathbb Z)\cong \mathbb Z[\omega]
+\]
+the $E_2$-page begins as
+\[
+\begin{array}{c|ccccccc}
+q=6 & \mathbb Z\omega^3 & 0 & 0 & \mathbb Zx\omega^3 & 0 & 0 & \cdots \\
+q=5 & 0 & 0 & 0 & 0 & 0 & 0 & \cdots \\
+q=4 & \mathbb Z\omega^2 & 0 & 0 & \mathbb Zx\omega^2 & 0 & 0 & \cdots \\
+q=3 & 0 & 0 & 0 & 0 & 0 & 0 & \cdots \\
+q=2 & \mathbb Z\omega & 0 & 0 & \mathbb Zx\omega & 0 & 0 & \cdots \\
+q=1 & 0 & 0 & 0 & 0 & 0 & 0 & \cdots \\
+q=0 & \mathbb Z & 0 & 0 & \mathbb Zx & 0 & 0 & \cdots \\
+\hline
+& p=0 & 1 & 2 & 3 & 4 & 5 & \cdots
+\end{array}
+\]
+The first interesting differential is
+\[
+d_3:E_3^{p,q}\to E_3^{p+3,q-2}.
+\]
+The transgression of the fundamental class is
+\[
+d_3(\omega)=x.
+\]
+By multiplicativity, $d_3$ is a derivation, so
+\[
+d_3(\omega^m)=m\omega^{m-1}x.
+\]
+In particular,
+\[
+d_3(\omega^2)=2\omega x,
+\qquad
+d_3(\omega^3)=3\omega^2x.
+\]
+
+Thus the $d_3$-differential kills the multiples $2\omega x,\qquad 3\omega^2x,\qquad \dots$ and give rise to torsion residues on the next page, that is $\mathbb Z/2$ represented by $\omega x$, a $\mathbb Z/3$ represented by $\omega^2x$, and so on.
+
+Since the total space $PK(\mathbb Z,3)$ is contractible, none of these classes can survive to $E_\infty$. They must be killed by later differentials. This forces the base $K(\mathbb Z,3)$
+to have higher torsion cohomology classes. 
+\end{example}
+
+    $\pi_4(S^3)$ look at $S^3_{<3} \to S^3 \to somethings $. There is a spectral sequence.
+
+    $\Omega X$ have a path fibration \begin{align*}
+        \Omega X \to P^*_*X \to X
+    \end{align*}
+    Caution if $\pi_1(X)$ is nontrivial, then it acts on $H^*(\Omega X)$ nontrivially by translation. In particular $H^0(\Omega X) = (\Z[\pi_1(X)])^\vee$ is the dual of the group ring of $\pi_1(X)$. So we can't invoke Leray yet. We will do a runaround. First let $X = S^2$.
+
+    \begin{align*}
+        \eta^2/2 & 0 & \\
+        u\eta & 0 & u \eta v \\
+        \eta & 0 & \eta v \\
+        u & 0 & uv \\
+        \Z & 0 & v
+    \end{align*}
+    Note that $u^2 = -u^2$ is 2 torsion so it cannot be hte class that kills $uv$. So we conclude the existence of some $\eta$. We also have the calcuation $d_2(u\eta) = v\eta - u d\eta = v\eta - uuv = v\eta$ so we conclude that $u\eta$ is the class living there. Also $\eta^2 = 2u\eta v$ but all the cohomology of the fibration must die so we conclude that $\eta^2/2$ is the class living there. In general \begin{align*}
+        H^*(\Omega S^2) \cong \Z[\eta, \eta^2/2!, \eta^3/3!, \dots][u]
+    \end{align*} subject to $u^2 = 0$. Think of $\Z[u] = H^*(S^1)$. Remark that the $\Omega S^3 \to \Omega S^2 \to S^1 \to S^3 \to S^2 \to \C\P^\infty$ and the claim is $\Omega S^3 \to \Omega S^2 \to S^1$ splits as a space. However, it does not split as a group because you could deloop and that would imply that $S^3 \to S^2$ splits as a space which is not true. 
+
+    Homology of $\Omega S^2$. The ring structure from the Pontryagin product. $\Omega S^2$ acts on the fibers of the path fibration. Then the spectral sequence gives us $\Z[U]$ with no divided powers, the generator coming from $\pi_1(\Omega S^2) = \pi_2(S^2)$. If you looked at $S^3$, then the generator would be in even degree and so you wouldn't see any 2 torsion.
+
+    \begin{definition}
+        A connected space is abelian if $\pi_1(X)$ is abelian and acts trivially on $\pi_n(X)$ for $n\geq 2$.
+    \end{definition}
+    Caution that $S^2$ is abelian by this definition but $[S^2,S^2]$ is not trivial, it is twice the generator of $\pi_3$.
+    \begin{definition}
+        Let $P$ be a set of primes, finite or not. An abelian group $M$ is called $P$-primary torsion if $M[P^{-1}] = 0$. 
+    \end{definition}
+    \begin{theorem}
+        Let $X$ be a connected abelian space. Then $\pi_*(X)$ is $P$-primary torsion if and only if $H_*(X;\Z)$ is $P$-primary torsion. Equivalently, $\pi_*(X)[P^{-1}] = 0$ if and only if $H_*(X;\Z[P^{-1}]) = 0$.
+    \end{theorem}
+Note that if $P$ is all primes, then $\Z[P^{-1}] = \Q$. Taking all but $1$ is the same as localizing at $P$.
+
+Sullivan's arithmetic square says that if $X$ is an abelian space, then there is a homotopy pullback square \begin{align*}
+    X \to X_\Q \\
+    \downarrow \downarrow \\
+    \prod \hat{X}_p \to \prod \hat{X}_{\Q_p}
+\end{align*} where $X_\Q$ is the rationalization of $X$ and the hat means $p$ completion. This relies on Serre's theorem to even make sense of the rationalization adn to push a $p$-localization to a completion.
+
+\begin{proof}
+   First we check that $\pi_*$ implies $H_*$. induction on degree for all spaces. Hurewicz gives the base case. Look at the path fibration $\Omega X \to P^*_* X \to X$. Consider the spectral sequence with rows $H_{<n}(X)$ and columns $H_{<n-1}(\Omega X)$. Note that if $\pi_*(X)$ is $P$-primary torsion, then $\pi_*(\Omega X)$ is also $P$-primary torsion because they have the same homotopy groups. Then by induction, $H_{<n-1}(\Omega X)$ is $P$-primary torsion which implies that $H_n(X)$ is $P$-primary torsion.
+    The catch is that Leray may not apply because $\pi_1(X)$ may be nontrivial. We pass to the universal cover $\tilde{X}$ which has a free $\pi_1(X)$ action. The cochains on $X$ are simply the $\pi_1(X)$-invariants of the cochains on $\tilde{X}$. The claim is that if $\pi_1(X)$ is $P$-torsion, then $H_*(X,\Z[P^{-1}]) = H_*(\tilde{X},\Z[P^{-1}])^{\pi_1(X)}$. This is simply an exercise in group cohomology. 
+
+    Next we check the other direction. Proof for EM spaces by induction. Have the fibration $K(\pi,n) \to * \to K(\pi,n+1)$. \begin{align*}
+        \text{stuff which is p primary torsion by assumption} \\
+        \Z & H_*K(\pi,n+1)
+    \end{align*}  imlies that $H_* K(\pi,n)$ is $P$-primary torsion. Iterate Leray, get the same thing for any truncation of Postnikov tower, inductively. Thus it is true for all $H_*$.
+\end{proof}
+
+Have to be careful homology/cohomology of infinite CW complexes like CW complexes. For example for $\R\P^\infty$ the cohomology is simply $\Z/2$ in each degree but the $K$ cohomology is \begin{align*}
+    \Z \oplus_{\Z/2} \Z_2
+\end{align*} in particular the inverse limit of torsion guys is not torsion.
+\begin{theorem}
+    The rational homotopy of spheres is given by $\pi_*(S^{2n+1}) \otimes \Q = \Q$ in degree $2n+1$ and  $\pi_*(S^{2n}) \otimes \Q = 0$ in degree $2n$ and $\Q$ in degree $4n-1$.
+\end{theorem}
+Use the path fibration of the spheres. $\Omega S^n \to * \to S^n$. For even spheres $\Q[x,y]$ with $\deg x = 2n$ and $\deg y = 4n-1$ and $d y = x^2$. Need a generator of $\pi_{2n-1}(\Omega S^{2n})$ odd to kill $x$ another in $\pi_{4n-2}(\Omega S^{2n})$ to kill $y$.
+
+\begin{theorem}
+    The rational cohoomology of $K(\Z,n)$ is \begin{align*}
+        H^*(K(\Z,n);\Q) \cong \Q[[v_n]]
+    \end{align*} where $v_n^2 = 0$ if $n$ is odd.
+\end{theorem}
+
+\begin{proof}
+    Induction on $n$. Look at $K(\Z,n-1) \to * \to K(\Z,n)$. Get a Koszul sequence. If the base is a symmetric alg (exterior alg), fiber is an exterior alg (symmetric alg) there is no torsion left in differentials.
+\end{proof}
+A good reference is Bott and Tu where he actually does exact couples. The point is that there are spectral sequences which are not from complexes, for example any spectral sequence involving homotopy groups. 
+
+\section{April 30}
+Let $P$ be a collection of primes in $\Z$. Let $R = \Z[P^{-1}]$ be the localization of $\Z$ at $P$. We said that a $\Z$-module $M$ is $P$-primary torsion if $M \otimes_\Z R = 0$. 
+
+Last time we did Serre's theorem which says that if $X$ is an abelian space, then $\pi_*(X)$ is $P$-primary torsion if and only if $H_*(X;\Z)$ is $P$-primary torsion. A complimentary result is the following.
+\begin{theorem}
+    If $f:X\to Y$ is a map of abelian spaces then $f_*:\pi_*(X)\otimes_\Z R \to \pi_*(Y)\otimes_\Z R$ is an isomorphism if and only if $f_*:H_*(X;R) \to H_*(Y;R)$ is an isomorphism.
+\end{theorem}
+The group $H_*(X;R)$ can be identified with $H_*(X;\Z)\otimes_\Z R$ because $R$ is flat over $\Z$, in particular $\Tor_1^{\Z}(R,A) = 0$ for any abelian group $A$.
+\begin{proof}
+    We show that $\pi_*$ implies $H_*$. Let $F \to X \to Y$ be the homotopy fiber. The assumption on $\pi_*$ implies that $F$ has all $P$-primary torsion homotopy groups which implies that $H_*(F;\Z) = 0$ by Serre's theorem. The Leray seqeunce comparing $H_*(X;R)$ and $H_*(Y;R)$ implies that $H_*(F,\Z) \otimes_\Z R = 0$. 
+    
+    Caution that $\otimes$ commutes with all colimits but does not commute with inverse limits. In general\begin{align*}
+        H^*(X;R) \not\cong H^*(X;\Z)\otimes_\Z R
+    \end{align*} Instead, in the special case when $R = \Q$, we get \begin{align*}
+        H^*(X;\Q) \cong \Hom_\Z(H_*(X;\Z),\Q) 
+    \end{align*} whence there is no Ext term here.
+
+We show that $H_*$ implies $\pi_*$. Take the same fibration $F \to X \to Y$. The Leray sequence in $H_*$ wil show that $H_*(F)$ is all $P$-primary torsion. 
+By Serre this would imply that $\pi_F$ is all $P$-primary torsion. The LES implies that $\pi_*(X)\otimes_\Z R \to \pi_*(Y)\otimes_\Z R$ is an isomorphism.
+
+Now an analysis of the $E_2$ page. All zero rows from $1,\dots,n-1$. If $H_n(F) \otimes_\Z R = 0$, then either there is a differential from $H_{n+1}(Y,R)$ to $H_n(F,R)$ (in which acse the map from $H_{n+1}(Y,R)$ to $H_{n+1}(X,R)$ is not an isomorphism) or there is no differential but then $H_n(F,R)$ survives to $E_\infty$ and gives a class in the kernel of $H_n(X,R) \to H_n(Y,R)$ which is not an isomorphism. Thus $H_*(F,R) = 0$.
+\end{proof}
+
+
+
+\begin{definition}[The $R$-local homotopy category of connectedabelian spaces]
+    Let $X,Y$ be connected abelian spaces. Let $R = \Z[P^{-1}]$ be a localization of $\Z$. A map $f:X\to Y$ is an $R$-local homotopy if either of the following equivalent conditions hold:
+    \begin{itemize}
+        \item $f_*:\pi_*(X)\otimes_\Z R \to \pi_*(Y)\otimes_\Z R$ is an isomorphism.
+        \item $f_*:H_*(X;R) \to H_*(Y;R)$ is an isomorphism.
+    \end{itemize}
+Let $\operatorname{Ho}(R)$ be the localization of the homotopy category at the class of $R$-local homotopy equivalences. 
+\end{definition}
+
+Note that for an $\Z$-module $M$, being an $R$-module is a property, not a structure. 
+\begin{theorem}
+    There is a functorial $R$-localization of abelian spaces $X\mapsto X^R$ with the property that for any space $Y$ with $\pi_*(Y)$ an $R$-module (equivalently for abelian spaces $H_*(Y;R)$ is an $R$-module) and map $f:X\to Y$, there is a unique map (up to homotopy) $X^R \to Y$ such that the 
+obvious diagram commutes (up to homotopy).
+\end{theorem}
+The equivalence of the two conditions in the definition of $R$-local homotopy equivalence will quickly follow from the theorem because the homotopy fiber of $X \to X^R$ will have $R$-primary torsion homotopy groups and homology groups.
+
+We give the construction of $X^\Q$ from rational cells. What is a rational cell? Well an ordinary cell is a cone on a sphere, so a rational cell is a cone on a rational sphere. 
+
+\begin{definition}
+    A rational $n$-cell for $n\geq 2$ is a cone over a rational $(n-1)$-sphere $S^{n-1}_\Q$.
+\end{definition}
+Building $S^{n-1}_\Q$: 
+\begin{align*}
+    S^{n-1} \to S^{n-1} \to S^{n-1} \to \cdots
+\end{align*} take the colimit \begin{align*}
+    \varinjlim S^{n-1} 
+\end{align*} with maps $k!$. The colimit is over integers $k$ ordered by divisibility. This is the mapping telescope.
+
+\begin{proposition}
+    $\tilde{H}_*(S^n_\Q;\Z) \cong \Q$ in degree $n$ and $0$ otherwise. If $n$ odd, then $S^n_\Q \to K(\Q,n)$ induces an isomorphism on rational homology, which implies that $\pi_*(S^n_\Q) = H_*(S^n_\Q)$. If $n$ is even we have a sequence \begin{align*}
+        F\hookrightarrow S^n_\Q \to K(\Q,n) \to K(\Q,2n)
+    \end{align*} where the last map is the square map. From the spectral sequence for $H_*$, $H^*$, we can see that $F = K(\Q,2n-1)$ principal fibration classified by a nonzero multiple of the square map.
+\end{proposition}
+Localizing a cell complex $X$ with skeleta $X_n$. For abelian spaces, there is no distinction between based and free homotopy classes of maps $S^n\to X$. To rationalize $X_1$ we replace all circles with $S^1_\Q$. Will kill all torsion in $\pi_1$ next. Inducitvely, \begin{align*}
+    \coprod S^n_{\Q,\alpha} \hookrightarrow \coprod D^{n+1}_{\Q,\alpha} \\
+    f_{\Q,\alpha}:\coprod S^n_{\Q,\alpha} \to X_{n,\Q}
+\end{align*} $f_{\Q,\alpha}$ represent clasases in $\pi_n(X_{n,\Q})$ which by inductive assumption $\pi_n(X_{n,\Q}) = \pi_n(X_n)\otimes_\Z \Q$. This ipmlies that $f_\alpha$ extends to define unique maps $f_{\Q,\alpha}:S^{n}_{\Q,\alpha} \to X_{n,\Q}$ which we use to attach rational cells. 
+
+$X_{n+1}^\Q$ ahving rational homology implies that it has rational homotopy. The map $X_{n+1} \to X_{n+1}^\Q$ will be a $\Q$-homology equivlaence and therefore a $\Q$-homotopy equivalence, so we can continue the next attahement.
+
+\begin{remark}
+    If $X$ is abelian, we can build a $\Q$-cell model for $X^\Q$ with one cell for each basis element of $H_*(X;\Q)$.
+\end{remark}
+
+\begin{remark}
+    The construction fo $X^\Q$ is not functorial as it is but there is a strictly functorial replacement.
+\end{remark}
+
+\subsection{Rationalization from the Postnikov tower}
+Recall the tower \begin{align*}
+    X_{\leq 3} \to X_{\leq 2} \to X_{\leq 1} \to X_{\leq 0}
+\end{align*} with homotopy fibers $K(\pi_n(X),n)$, classified by $k$-invariants $k^{n+1} \in H^{n+1}(X_{\leq n};\pi_n(X))$. Assume all of the homotopy groups are finitely generated. Then $H^*(K(\pi_n(X)\otimes \Q,n);\Q) = H^*(K(\pi_n(X),n);\Z) \otimes \Q$ idunctively from the specrtal sequence. Can proceed idncutvely. Rationalize all $|pi_1$ up to $n$. The leray sequence means that inductively, we have rationalized up to $H^*(X_{< n};\Z)$. This implies that the rational $k$-invariant $k^{n+2}_\Q \in H^{n+2}(X_{<n}^\Q,\pi_{n+1}^\Q)$ is uniquely defined, and then you can continue.
+
+CAUTION! When computing the integral cohomology of rational EM spaces, the ansewr is not what you think it is. Work out $\Hom(\Q,\Z)$ and $\Ext^1_\Z(\Q,\Z)$. This does not come up in the construction above.
+
+\begin{theorem}[Quillen, Sullivan]
+    There is a triangle of equivalences of categories \begin{align*}
+    \operatorname{Ho}_{\text{simply connected}}(\Q) \cong \operatorname{Ho}(\text{rational commutative dg algebras})\cong \operatorname{Ho}(\text{rational simply connected dg Lie algebras})
+\end{align*} The map from (3) to (2) is given by the Chevalley--Eilenberg complex. The map from (1) to (2) is a version of the cochain complex. The map from (1) to (3) is a dgla version of $L_\infty$-algebras, namely $(\pi_*^{\Q},\text{whitehead})$.
+\end{theorem}
+
+Some remarks about DGLAs. A DGLA is a chain complex $L$ with a Lie bracket $[-,-]$ satisfying the skew and graded Jacobi. It can be thought of as the Lie algebra of $\Omega X$. The example to keep in the mind is the Whitehead bracket. The $L_\infty$ generalizatino allows higher brackets $b_n:L^{\otimes n} \to L$ satisfying some higher Jacobi identities. The relations allows one to define a differential on the DGCA $(\Sym^\bullet L^\vee[1],d)$ which is the Chevalley--Eilenberg complex. 
+
+\subsection{Two minimal models}
+Quillen minimal model. Let $L = \operatorname{Free}(\text{$\Q$-cells in a minimal construction of $X^\Q$})$ where $\partial$ is the attaching map and $\partial$ sends new generators in dimension $n+1$ to $h_*(\text{free Lie algebra building the $n$-skeleton})$. This is a DGLA model for $X^\Q$. The differnetial has no linear part. The Sullivan minimal model $\C[\oplus \pi^\Q_k(X)]$ differential on $\pi_k$ comes from the $k$-invariants of the attaching map $k^{n+2} \in H^{n+2}(X_{<n}^\Q,\pi_{n+1}^\Q)$. and dualizes to a differential on $\C[\oplus \pi^\Q_k(X)]$. 
+
+Sullivan says that knowledge of a strictly commutative model for $C^*(X;\Q)$ and the $\Q$-lattice in $H^*(X;\R)$ determines a rational model uniquely up to quasi-isomorphism. For example $(\Omega^*(X),d)$.
 \end{document}

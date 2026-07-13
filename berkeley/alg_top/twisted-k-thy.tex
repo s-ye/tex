@@ -1,0 +1,657 @@
+%%% template.tex
+%%% This is a template for making up an AMS-LaTeX file
+%%% Version of February 12, 2011
+%%%---------------------------------------------------------
+%%% The following command chooses the default 10 point type.
+%%% To choose 12 point, change it to
+%%% \documentclass[12pt]{amsart}
+\documentclass{amsart}
+\usepackage{cite}
+%%% The following command loads the amsrefs package, which will be
+%%% used to create the bibliography:
+\usepackage[lite]{amsrefs}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+
+\DeclareMathOperator{\End}{End}
+\usepackage{../../style/macros}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+%%% The following command defines the standard names for all of the
+%%% special symbols in the AMSfonts package, listed in
+%%% http://www.ctan.org/tex-archive/info/symbols/math/symbols.pdf
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{float}
+\usepackage{mathtools}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+%%% The following commands allow you to use \Xy-pic to draw
+%%% commutative diagrams.  (You can omit the second line if you want
+%%% the default style of the nodes to be \textstyle.)
+\usepackage[all,cmtip]{xy}
+\let\objectstyle=\displaystyle
+
+%%% If you'll be importing any graphics, uncomment the following
+%%% line.  (Note: The spelling is correct; the package graphicx.sty is
+%%% the updated version of the older graphics.sty.)
+% \usepackage{graphicx}
+
+
+
+%%% This part of the file (after the \documentclass command,
+%%% but before the \begin{document}) is called the ``preamble''.
+%%% This is where we put our macro definitions.
+
+%%% Comment out (or delete) any of these that you don't want to use.
+
+
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%% The Theorem environments:
+%%%
+%%%
+%%% The following commands set it up so that:
+%%% 
+%%% All Theorems, Corollaries, Lemmas, Propositions, Definitions,
+%%% Remarks, Examples, Notations, and Terminologies  will be numbered
+%%% in a single sequence, and the numbering will be within each
+%%% section.  Displayed equations will be numbered in the same
+%%% sequence. 
+%%% 
+%%% 
+%%% Theorems, Propositions, Lemmas, and Corollaries will have the most
+%%% formal typesetting.
+%%% 
+%%% Definitions will have the next level of formality.
+%%% 
+%%% Remarks, Examples, Notations, and Terminologies will be the least
+%%% formal.
+%%% 
+%%% Theorem:
+%%% \begin{thm}
+%%% 
+%%% \end{thm}
+%%% 
+%%% Corollary:
+%%% \begin{cor}
+%%% 
+%%% \end{cor}
+%%% 
+%%% Lemma:
+%%% \begin{lem}
+%%% 
+%%% \end{lem}
+%%% 
+%%% Proposition:
+%%% \begin{prop}
+%%% 
+%%% \end{prop}
+%%% 
+%%% Definition:
+%%% \begin{defn}
+%%% 
+%%% \end{defn}
+%%% 
+%%% Remark:
+%%% \begin{rem}
+%%% 
+%%% \end{rem}
+%%% 
+%%% Example:
+%%% \begin{ex}
+%%% 
+%%% \end{ex}
+%%% 
+%%% Notation:
+%%% \begin{notation}
+%%% 
+%%% \end{notation}
+%%% 
+%%% Terminology:
+%%% \begin{terminology}
+%%% 
+%%% \end{terminology}
+%%% 
+%%%       Theorem environments
+
+% The following causes equations to be numbered within sections
+\numberwithin{equation}{section}
+
+% We'll use the equation counter for all our theorem environments, so
+% that everything will be numbered in the same sequence.
+
+%       Theorem environments
+
+\theoremstyle{plain} %% This is the default, anyway
+\newtheorem{theorem}[equation]{Theorem}
+\newtheorem{cor}[equation]{Corollary}
+\newtheorem{lemma}[equation]{Lemma}
+\newtheorem{proposition}[equation]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[equation]{Definition}
+
+\theoremstyle{remark}
+\newtheorem{remark}[equation]{Remark}
+\newtheorem{example}[equation]{Example}
+\newtheorem{notation}[equation]{Notation}
+\newtheorem{terminology}[equation]{Terminology}
+
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+%%%-------------------------------------------------------------------
+\begin{document}
+
+%%% In the title, use a double backslash "\\" to show a linebreak:
+%%% Use one of the following two forms:
+%%% \title{Text of the title}
+%%% or
+%%% \title[Short form for the running head]{Text of the title}
+\title{Twisted K-theory and the Thom isomorphism}
+
+
+%%% If there are multiple authors, they're described one at a time:
+%%% First author: \author{} \address{} \curraddr{} \email{} \thanks{}
+%%% Second author: \author{} \address{} \curraddr{} \email{} \thanks{}
+%%% Third author: \author{} \address{} \curraddr{} \email{} \thanks{}
+\author{Songyu Ye} \email{songyuye@berkeley.edu}
+
+%%% In the address, show linebreaks with double backslashes:
+\address{}
+
+%%% Current address is optional.
+% \curraddr{}
+
+%%% Email address is optional.
+% \email{}
+
+
+%%% If there's a second author:
+% \author{}
+% \address{}
+% \curraddr{}
+% \email{}
+
+
+%%% To have the current date inserted, use \date{\today}:
+\date{\today}
+
+%%% To include an abstract, uncomment the following two lines and type
+%%% the abstract in between them:
+\begin{abstract}
+These notes explain the role of the orthogonal graded Brauer group in the
+Thom isomorphism for real twisted $K$-theory. We begin by recalling the
+ordinary Thom isomorphism and the fact that a real vector bundle is
+$KO$-orientable precisely when it is spin. For non-spin bundles, the ordinary
+$KO$-theoretic Thom isomorphism must be replaced by a twisted version. The
+relevant twists are classified by bundles of graded central simple real
+algebras modulo negligible bundles.
+
+We review Wall's classification of graded central simple algebras and the
+result of Donovan--Karoubi identifying the orthogonal graded Brauer group with $\mathbb Z/8 \times H^1(X;\mathbb Z/2)\times H^2(X;\mathbb Z/2)$.
+\end{abstract}
+
+
+\maketitle
+
+\section{Introduction}
+We have the celebrated Thom isomorphism theorem for integral cohomology.
+
+\begin{theorem}
+Let $E$ be an oriented vector bundle of rank $n$ over a paracompact space $X$. Then there is a unique class $u \in H^n(E, E\setminus X; \mathbb{Z})$ such that for each $x \in X$, the restriction of $u$ to the fiber $E_x$ is a generator of $H^n(E_x, E_x\setminus \{0\}; \mathbb{Z})$. Moreover, the map $H^*(X; \mathbb{Z}) \to H^{*+n}(E, E\setminus X; \mathbb{Z})$ given by $a \mapsto \pi^*(a) \cup u$ is an isomorphism.
+\end{theorem}
+
+The key word is oriented. If we drop the orientation condition, the Thom isomorphism fails. There is the more general notion of vector bundles being oriented with respect to a generalized cohomology theory. 
+
+\begin{definition}
+Let $E$ be a vector bundle of rank $n$ over a paracompact space $X$. We say that $E$ is oriented with respect to a generalized cohomology theory $h^*$ if there exists a class $u \in h^n(E, E\setminus X)$ such that for each $x \in X$, the restriction of $u$ to the fiber $E_x$ is a generator of $h^n(E_x, E_x\setminus \{0\})$. In this case, we call $u$ an orientation of $E$ with respect to $h^*$.
+\end{definition}
+If $E$ is oriented with respect to $h^*$, then for formal reasons, the map \[h^*(X) \to h^{*+n}(E, E\setminus X)\] given by cupping with $u$ is an isomorphism. 
+
+A real vector bundle $E$ is oriented in the usual sense if and only if it is oriented with respect to $H \Z$, the Eilenberg-MacLane spectrum representing integral cohomology, if and only if the first Stiefel-Whitney class $w_1(E) \in H^1(X; \Z/2)$ vanishes.
+Now recall that the real reduced K-theory $\widetilde{KO}$ is a generalized cohomology theory. It is $8$ periodic by Bott periodicity. We have the following result.
+
+\begin{theorem}
+Let $E$ be a real vector bundle of rank $n$ over a paracompact space $X$. Then $E$ is oriented with respect to $\widetilde{KO}$ if and only if $E$ is a spin bundle, i.e., the second Stiefel-Whitney class $w_2(E) \in H^2(X; \Z/2)$ vanishes.
+\end{theorem}
+
+Thus we have the isomorphism \begin{align*}
+    \widetilde{KO}^*(\Th(E)) \cong \widetilde{KO}^{*-n}(X)
+\end{align*} for spin bundles. However, for non-spin bundles, the Thom isomorphism fails. The idea of twisted K-theory is to introduce a twist to the K-theory so that we can recover the Thom isomorphism for non-spin bundles.
+
+\begin{theorem}
+    Let $E$ be a real vector bundle of rank $n$ over a paracompact space $X$. Then there exists a twisting $\alpha \in \Z/8 \times H^1(X; \Z/2) \times H^2(X; \Z/2)$ such that we have the isomorphism \begin{align*}
+    \widetilde{KO}^*(\Th(E)) \cong \widetilde{KO}^{*-\alpha}(X).
+\end{align*}
+\end{theorem}
+
+The remainder of the notes will be devoted to a discussion of what the right hand side means.
+
+\section{Graded algebras}
+\begin{definition}
+    A graded algebra over $\R$ is an associative algebra $A$ over $\R$ together with a decomposition $A = A_0 \oplus A_1$ such that the multiplication respects the grading. A bundle of graded algebras $A$ over a paracompact space $X$ is a fiber bundle with fiber $A$ and structure group $\Aut(A)$, the group of automorphisms of $A$ as a graded algebra.
+\end{definition}
+
+
+Another class of assocative algebras that will be important for us is central simple algebras.
+\begin{definition}
+    A central simple algebra over $\R$ is a finite-dimensional associative algebra $A$ over $\R$ such that the center of $A$ is exactly $\R$ and $A$ has no nontrivial two-sided ideals.
+\end{definition}
+Two central simple algebras $A$ and $B$ are said to be Morita equivalent if their categories of modules are equivalent. The Morita equivalence classes of central simple algebras over $\R$ form a group under the tensor product, called the Brauer group of $\R$. For ungraded central simple algebras over $\R$, we have the following classification result.
+\begin{theorem}
+    The Brauer group of $\R$ is isomorphic to $\Z/2$, generated by the class of the quaternions $\mathbb{H}$. Thus every central simple algebra over $\R$ is Morita equivalent to either $\R$ or $\mathbb{H}$.
+\end{theorem}
+The graded case refines the ungraded case and gives rise to the $\Z/8$-periodicity in K-theory. We will introduce a structure theorem for graded central simple algebras.
+Let $A = A_0 \oplus A_1$ be a graded central simple algebra. We have the following lemma due to Wall \cite{Wall}.
+\begin{lemma}
+    Let $A = A_0 \oplus A_1$ be a graded central simple algebra. Then either $A$ or $A_0$ is a central simple algebra but not both
+\end{lemma}
+
+
+We now introduce Wall's invariants for graded central simple algebras. The \textbf{type} of a graded central simple algebra is an ordered triple $(\varepsilon,a,D)$
+Here $\varepsilon=\pm$ is $+$ if $A$ is a central simple algebra and $-$ if $A_0$ is a central simple algebra. 
+
+The invariant $D$ is the central division algebra for which we can identify $A = M_n(D)$ as a ungraded central simple algebra. 
+
+The invariant $a\in k^*/(k^*)^2$ is defined as follows. If $A$ is of type $(+)$, then $a=1$. If $A$ is of type $(-)$, then $a$ is the square class of the odd central element $u$ appearing in the structure theorem.
+Namely, in case $(-)$, Wall shows that there is an odd central element $u\in A_1$ such that
+\[
+    A_1=A_0u,
+    \qquad
+    u^2=a\in k^*.
+\]
+Changing $u$ by a nonzero scalar $\lambda\in k^*$ replaces $a$ by $\lambda^2 a$, so only the class of $a$ modulo squares is intrinsic. This is the same kind of invariant that appears in Clifford algebras: an odd Clifford generator may square to $+1$ or to $-1$, and over $\mathbb R$ this distinction is exactly a square class in $\mathbb R^*/(\mathbb R^*)^2\cong \{\pm 1\}$
+
+Wall proves that the type of the graded tensor product of two graded central simple algebras depends only on the types of the factors. Thus the collection of types itself becomes a group under the multiplication induced by graded tensor product. 
+
+
+ 
+\begin{theorem}
+    The type of the graded tensor product of two graded central simple algebras depends only on the types of the algebras. Multiplication of types is given by the formulae
+    \begin{align*}
+        (+,a,D)\otimes (+,a',D')
+        &= (+,aa',D\otimes D'\otimes (a,a')), \\
+        (+,a,D)\otimes (-,a',D')
+        &= (-,aa',D\otimes D'\otimes (a,-a')), \\
+        (-,a,D)\otimes (-,a',D')
+        &= (+,-aa',D\otimes D'\otimes (a,a')).
+    \end{align*}
+    With this product, the types form a group.
+\end{theorem}
+
+
+Simple central graded algebras over $\R$ are classified by the following result. Let $Z(u)$ denotes the centralizer of $u$, and $Z^*(u)$ denotes the anti-centralizer of $u$.
+\begin{theorem}[Classification of simple central graded real algebras]
+Up to graded Morita equivalence, the simple central graded algebras over $\mathbb R$ are represented by the following eight families. 
+\begin{enumerate}
+    \item Type $[1;n]$
+    \[
+        A=M_n(\mathbb C),
+        \qquad
+        A_0=M_n(\mathbb R),
+        \qquad
+        A_1=iM_n(\mathbb R).
+    \]
+
+        \item Type $[2;n]$
+    \[
+        A=M_n(\mathbb H),
+        \qquad
+        A_0=M_n(\mathbb C)=Z(u),
+        \qquad
+        A_1=Z^*(u),
+        \qquad
+        u=iI_n.
+    \]
+
+        \item Type $[3;n]$
+    \[
+        A=M_n(\mathbb H)\oplus M_n(\mathbb H),
+        \qquad
+        A_0=M_n(\mathbb H),
+        \qquad
+        A_1=uM_n(\mathbb H),
+    \]
+    where $u\in Z(A)\cap A_1$ satisfies $u^2=1$.
+
+        \item Type $[4;p,q]$
+    \[
+        A=M_{p+q}(\mathbb H),
+        \qquad
+        A_0=Z(u),
+        \qquad
+        A_1=Z^*(u),
+    \]
+    where $u$ is the diagonal matrix whose first $p$ diagonal entries are $1$ and whose last $q$ diagonal entries are $-1$. We write
+    \[
+        [4;n]=[4;n,n],
+        \qquad
+        [4;n,0]=M_n(\mathbb H).
+    \]
+
+        \item Type $[5;n]$
+    \[
+        A=M_{2n}(\mathbb C),
+        \qquad
+        A_0=M_n(\mathbb H),
+        \qquad
+        A_1=uM_n(\mathbb H),
+        \qquad
+        u=iI_{2n}.
+    \]
+    The embedding $A_0\hookrightarrow A$ is specified as follows. For each $M\in M_n(\mathbb R)\subset M_n(\mathbb H)$,
+    \[
+        M\longmapsto
+        \begin{pmatrix}
+            M & 0\\
+            0 & M
+        \end{pmatrix},
+        \qquad
+        iM\longmapsto
+        \begin{pmatrix}
+            iM & 0\\
+            0 & -iM
+        \end{pmatrix},
+    \]
+    \[
+        jM\longmapsto
+        \begin{pmatrix}
+            0 & M\\
+            -M & 0
+        \end{pmatrix},
+        \qquad
+        kM\longmapsto
+        \begin{pmatrix}
+            0 & iM\\
+            iM & 0
+        \end{pmatrix}.
+    \]
+
+        \item Type $[6;n]$
+    \[
+        A=M_{2n}(\mathbb R),
+        \qquad
+        A_0=Z(u),
+        \qquad
+        A_1=Z^*(u),
+    \]
+    where
+    \[
+        u=\begin{pmatrix}
+            0 & I\\
+            I & 0
+        \end{pmatrix},
+        \qquad I=I_n.
+    \]
+
+        \item Type $[7;n]$
+    \[
+        A=M_n(\mathbb R)\oplus M_n(\mathbb R),
+        \qquad
+        A_0=M_n(\mathbb R),
+        \qquad
+        A_1=uM_n(\mathbb R),
+    \]
+    where $u\in Z(A)\cap A_1$ satisfies $u^2=1$.
+
+        \item Type $[8;p,q]$
+    \[
+        A=M_{p+q}(\mathbb R),
+        \qquad
+        A_0=Z(u),
+        \qquad
+        A_1=Z^*(u),
+    \]
+    where $u$ is the diagonal matrix whose first $p$ diagonal entries are $1$ and whose last $q$ diagonal entries are $-1$. We write
+    \[
+        [8;n]=[8;n,n],
+        \qquad
+        [8;n,0]=M_n(\mathbb R).
+    \]
+\end{enumerate}
+\end{theorem}
+This classification result is as stated in the paper of Donovan and Karoubi \cite{DK}. Although the list looks somewhat ad hoc at first sight, there is a conceptual way to understand it using Clifford algebras. Namely, the graded Morita classes of simple central graded real algebras is generated by Clifford algebras.
+
+Let $(V,q)$ be a finite-dimensional real quadratic space. The Clifford algebra
+\[
+    \Cl(V,q)=T(V)/\langle v\otimes v-q(v)\cdot 1 : v\in V\rangle
+\]
+is naturally a $\mathbb Z/2$-graded algebra, where $V$ is placed in odd degree. If $(V,q)$ and $(W,r)$ are quadratic spaces, then there is a canonical isomorphism of graded algebras
+\[
+    \Cl(V\oplus W,q\oplus r)
+    \cong
+    \Cl(V,q)\widehat\otimes \Cl(W,r),
+\]
+where $\widehat\otimes$ denotes the graded tensor product. Thus Clifford algebras are compatible with the group law in the graded Brauer group.
+
+Over $\mathbb R$, every nondegenerate quadratic form is classified by its signature. If $\Cl_{p,q}$ denotes the Clifford algebra of $\mathbb R^{p+q}$ with quadratic form of signature $(p,q)$, then its graded Morita class depends only on $p-q \pmod 8$
+up to the sign convention used in defining Clifford algebras.
+
+We can make this relation between Clifford algebras and the
+graded Brauer group precise. Let $q$ be a nondegenerate quadratic form on a
+finite-dimensional $k$-vector space $V$, and let $C(q)$ denote its Clifford
+algebra.
+
+\begin{proposition}
+    $C(q)$ is a graded central simple algebra. 
+\end{proposition}
+
+We now spell out Wall's invariants for the Clifford algebra $C(q)$. Suppose
+that $q=\langle a_1,\ldots,a_n\rangle$
+so that $V$ has an orthogonal basis $e_1,\ldots,e_n$ with $q(e_i,e_i)=a_i$
+The type of $C(q)$ is an ordered triple $(\varepsilon,D,a)$ where $\varepsilon$ is the sign, $D$ is the Brauer class of the relevant central simple algebra, and $a$ is the square-class invariant. We now explain how to compute these invariants in terms of the coefficients $a_i$.
+
+First, the sign $\varepsilon$ is determined by the parity of $n=\dim V$. To see this, consider the Clifford volume element
+\[
+    \omega=e_1e_2\cdots e_n.
+\]
+Since each $e_i$ is odd, the degree of $\omega$ is $|\omega|\equiv n \pmod 2$
+Moreover, moving $e_i$ past the other $n-1$ generators gives $e_i\omega=(-1)^{n-1}\omega e_i$
+Thus, if $n$ is odd, then $n-1$ is even, so $e_i\omega=\omega e_i$
+for every $i$. Since the $e_i$ generate $C(q)$, it follows that $\omega$ is
+central. In this case $\omega$ is an odd central element, so $\varepsilon=-$.On the other hand, if $n$ is even, then $n-1$ is odd, so $e_i\omega=-\omega e_i$
+Thus the volume element is not central in the whole Clifford algebra. 
+
+Second, the square-class invariant $a$ is given by
+\[
+    a=
+    (-1)^{\frac{n(n-1)}{2}}\prod_{i=1}^n a_i
+    \in k^*/(k^*)^2.
+\]
+Equivalently, if $b$ denotes the symmetric bilinear form associated to $q$ by
+\[
+    b(x,y)=q(x+y)-q(x)-q(y),
+\]
+then, in the diagonal basis above, the Gram matrix of $b$ has diagonal entries
+$2a_i$. Hence
+\[
+    \det b=2^n\prod_{i=1}^n a_i,
+\]
+Finally, the invariant $D$ can be computed from the diagonal coefficients
+$a_i$. In the Brauer group, one has
+\[
+    D
+    =
+    \prod_{i<j}(a_i,a_j)
+    \cdot
+    \left(\prod_i(-1,a_i)\right)^{\frac{(n-1)(n-2)}{2}}
+    \cdot
+    (-1,-1)^{\frac{(n-1)(n-2)(n-3)(n-4)}{24}}.
+\]
+Here $(a,b)$ denotes the quaternion algebra over $k$ generated by elements
+$x$ and $y$ satisfying
+\[
+    x^2=a,
+    \qquad
+    y^2=b,
+    \qquad
+    xy=-yx.
+\]
+Over $\mathbb R$, the three invariants become three binary choices, that is $\varepsilon=\pm$, $D=\R$ or $\mathbb{H}$, and $a=\pm 1$. Thus there are $8$ possible real types.
+\section{The ungraded case}
+
+Consider bundles of algebras over $X$ with fiber $M_n(\R)$ or $M_n(\mathbb{H})$ for all $n$. We focus on the case of $M_n(\R)$, since the case of $M_n(\mathbb{H})$ is similar. Such bundles are classified by $H^1(X; \underline{\PGL_n(\R)})$. There is a short exact sequence of sheaves \[1 \to \underline{\R^\times} \to \underline{\GL_n(\R)} \to \underline{\PGL_n(\R)} \to 1\] which gives rise to a long exact sequence in cohomology. There is a connecting map $w_2: H^1(X; \underline{\PGL_n(\R)}) \to H^2(X; \underline{\R^\times}) \cong H^2(X; \Z/2)$.
+
+\begin{definition}
+    We say that a bundle of $M_n(\R)$-algebras or $M_n(\mathbb{H})$-algebras $A$ over $X$ is \textbf{negligible} if there exists a real vector bundle $E$ over $X$ so that $A$ is isomorphic to the bundle of endomorphisms $\End(E)$.
+\end{definition}
+
+The isomorphism classes of bundles of $M_n(\R)$-algebras or $M_n(\mathbb{H})$-algebras over $X$ form a commutative monoid under the tensor product. The negligible bundles form a submonoid. The quotient monoid is called the orthogonal Brauer group of $X$, denoted $\mathrm{BrO}(X)$. Let $\varepsilon: \mathrm{BrO}(X) \to \Z/2$ be the homomorphism given by sending the class of a bundle of $M_n(\R)$-algebras to $0$ and the class of a bundle of $M_n(\mathbb{H})$-algebras to $1$. When $X$ has multiple connected components, we recast $\varepsilon$ as a homomorphism $\mathrm{BrO}(X) \to H^0(X; \Z/2)$.
+
+\begin{theorem}
+    Let $X$ be a finite CW complex. Then the map \[\varepsilon \times w_2: \mathrm{BrO}(X) \to H^0(X; \Z/2) \times H^2(X; \Z/2)\] is an isomorphism.
+\end{theorem}
+
+\subsection{The graded case}
+We now examine the automorphism group of the graded algebra
+\[
+    A=[8;n]=M_{2n}(\mathbb R).
+\]
+Recall that in this case
+\[
+    A_0=Z(u),
+    \qquad
+    A_1=Z^*(u),
+    \qquad
+    u=
+    \begin{pmatrix}
+        I_n & 0\\
+        0 & -I_n
+    \end{pmatrix}.
+\]
+The automorphism group of the underlying algebra $M_{2n}(\mathbb R)$ is
+\[
+    \Aut(M_{2n}(\mathbb R))
+    \cong \GL_{2n}(\mathbb R)/\mathbb R^\times
+\]
+by the Skolem--Noether theorem. The automorphism group of the graded algebra
+$[8;n]$ is the subgroup preserving the two graded pieces $A_0$ and $A_1$.
+Denote this group by $E_n$.
+
+Let
+\[
+    F_n=
+    \left\{
+    \begin{pmatrix}
+        a & 0\\
+        0 & b
+    \end{pmatrix}
+    : a,b\in \GL_n(\mathbb R)
+    \right\}
+\]
+and
+\[
+    F_n'=
+    \left\{
+    \begin{pmatrix}
+        0 & a\\
+        b & 0
+    \end{pmatrix}
+    : a,b\in \GL_n(\mathbb R)
+    \right\}.
+\]
+Set
+\[
+    E_n'=F_n\cup F_n'\subset \GL_{2n}(\mathbb R).
+\]
+Then
+\[
+    E_n=E_n'/\mathbb R^\times.
+\]
+The subgroup $F_n$ consists of the elements preserving the two eigenspaces of
+$u$, while $F_n'$ consists of the elements interchanging them.
+
+Finally, define $G_n$ by the exactness and commutativity of the diagram
+\[
+\begin{tikzcd}
+1 \arrow[r] &
+\mathbb R^\times \arrow[r] \arrow[d,equal] &
+F_n \arrow[r] \arrow[d,hook] &
+G_n \arrow[r] \arrow[d] &
+1 \\
+1 \arrow[r] &
+\mathbb R^\times \arrow[r] &
+E_n' \arrow[r] \arrow[d] &
+E_n \arrow[r] \arrow[d] &
+1 \\
+&& \mathbb Z/2 \arrow[r,equal] &
+\mathbb Z/2
+\end{tikzcd}
+\]
+where the map $E_n'\to \mathbb Z/2$ records whether an element lies in
+$F_n$ or in $F_n'$. Thus $F_n$ is the identity component of this
+$\mathbb Z/2$-grading, and $F_n'$ is the nontrivial component.
+
+Hence, if $\mathcal A$ is a bundle of graded algebras locally isomorphic to
+$[8;n]$, then its transition functions define a principal $E_n$-bundle.
+The above diagram gives characteristic classes
+\[
+    w_1(\mathcal A)\in H^1(X;\mathbb Z/2)
+\]
+and
+\[
+    w_2(\mathcal A)\in H^2(X;\mathbb R^\times)
+    \cong H^2(X;\mathbb Z/2).
+\]
+A bundle of $[8;n]$-algebras $\cA$ is said to be \textbf{negligible} if $\cA_0 \cong \Hom(V,V) \oplus \Hom(W,W)$ and $\cA_1 \cong \Hom(V,W) \oplus \Hom(W,V)$ for some real vector bundles $V$ and $W$ over $X$. Exact sequences in cohomology show that $\cA$ is negligible if and only if $w_1(\cA)=0$ and $w_2(\cA)=0$. 
+
+\begin{definition}
+    Let $\mathrm{HO}(X)$ be the set $H^1(X;\mathbb Z/2) \times H^2(X;\mathbb Z/2)$ with the abelian group structure given by the formula
+\[
+    (w_1,w_2)+(w_1',w_2')=(w_1+w_1',w_2+w_2'+w_1\cup w_1').
+\]
+Let $w(\cA)=(w_1(\cA),w_2(\cA))$ be the characteristic class of a bundle of $[8;n]$-algebras $\cA$.
+\end{definition}
+
+Recall that the tensor product of two graded algebras $A$ and $B$ has the multiplication given by \[(a\otimes b)(a'\otimes b')=(-1)^{|b||a'|}aa'\otimes bb'\] for homogeneous elements $a,a',b,b'$. The tensor product of two bundles of graded algebras is defined fiberwise.
+\begin{lemma}
+    If $\cA$ and $\cB$ are bundles of $[8;n]$ and $[8;m]$-algebras on $X$, then \begin{align*}
+    w(\cA \otimes \cB) = w(\cA)w(\cB) 
+    \end{align*} 
+\end{lemma}
+The above lemma shows that if $\cA$ is a bundle of $[t;n]$-algebras and $\cB$ is a bundle of $[8-t;m]$-algebras, then $w(\cA \otimes \cB)$ does not depend on $m$. Thus we define $w(\cA)=w(\cA \otimes \cB)$ for any bundle of $[8-t;m]$-algebras $\cB$.
+
+\begin{definition}
+    Let the orthogonal graded Brauer group $\mathrm{GBrO}(X)$ be the set of isomorphism classes of bundles of graded central simple algebras over $X$, modulo the negligible bundles, with the group structure given by the tensor product. 
+\end{definition}
+If $X$ is connected, let $\tau: \mathrm{GBrO}(X) \to \Z/8$ be the homomorphism given by sending the class of a bundle of $[t;n]$-algebras to $t$. 
+
+\begin{theorem}
+    The map $\tau \times w: \mathrm{GBrO}(X) \to \Z/8 \times H^1(X;\mathbb Z/2) \times H^2(X;\mathbb Z/2)$ is an isomorphism.
+\end{theorem}
+
+\begin{example}
+    Let $V$ be a real vector bundle over paracompact space $X$ with a fiberwise negative-definite quadratic form. Then we can form the bundle of Clifford algebras $\Cl(V)$ over $X$. Then $w_i(\Cl(V))=w_i(V)$ for $i=1,2$.
+\end{example}
+
+The orthogonal graded Brauer group $\mathrm{GBrO}(X)$ is the right object to classify the twists of K-theory. Given a twist $\alpha \in \mathrm{GBrO}(X)$, we can define the $\alpha$-twisted K-theory $\widetilde{KO}^{*-\alpha}(X)$ as the Grothendieck group of the category of projective modules over a bundle of graded algebras representing $\alpha$. 
+
+
+\bibliography{refs}{}
+% need refs.bib file
+\bibliographystyle{plain}
+
+\end{document}

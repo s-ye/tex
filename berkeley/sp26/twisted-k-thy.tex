@@ -1,0 +1,498 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{bookmark}
+\usepackage{tikz}
+
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/quiver}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/scribe}
+\usepackage{fancyhdr}
+
+\usepackage{parskip} % Automatically respects blank lines
+\setlength{\parskip}{1em} % Adds more space between paragraphs
+\setlength{\parindent}{0pt} % Removes paragraph indentation
+
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\Fred}{Fred}
+\begin{document}
+
+
+\lhead{Songyu Ye}
+\rhead{\today}
+\cfoot{\thepage}
+
+\title{Twisted K-theory}
+
+\author{Songyu Ye}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+
+\end{abstract}
+
+\tableofcontents
+
+\section{K-theory}
+\subsection{The basics}
+
+\subsection{Basic definitions in complex \(K\)-theory}
+
+Throughout, let \(X\) be a compact Hausdorff space.
+
+\begin{definition}
+Let \(\Vect_{\mathbb C}(X)\) denote the set of isomorphism classes of finite-rank complex vector bundles on \(X\). It is a semiring under
+\[
+[E] + [F] := [E \oplus F],
+\qquad
+[E]\cdot [F] := [E\otimes F].
+\]
+The complex \(K\)-group of \(X\) is the group completion
+\[
+K^0(X) := \mathrm{Groth}(\Vect_{\mathbb C}(X)).
+\]
+Thus every class in \(K^0(X)\) may be written formally as
+\[
+[E] - [F].
+\]
+\end{definition}
+
+\begin{example}
+Since every complex vector bundle over a point is trivial, $\Vect_{\mathbb C}(*) \cong \mathbb N$
+with addition given by rank. Therefore
+\[
+K^0(*) \cong \mathbb Z.
+\]
+\end{example}
+
+\begin{definition}
+Let \(X_*\) be a based compact Hausdorff space with basepoint inclusion $i:* \hookrightarrow X_*$
+The reduced \(K\)-group is
+\[
+\widetilde K^0(X_*) :=
+\ker\left(i^*:K^0(X_*) \to K^0(*)\right).
+\]
+Equivalently, \(\widetilde K^0(X_*)\) consists of virtual vector bundles of virtual rank \(0\) at the basepoint.
+\end{definition}
+
+If \(X\) is unbased and \(X^+ := X \sqcup \{*\}\) denotes \(X\) with a disjoint basepoint, then $K^0(X) \cong \widetilde K^0(X^+)$.
+
+\begin{proposition}
+Two vector bundles \(E\) and \(F\) define the same element of \(K^0(X)\) if and only if there exists a trivial bundle \(\epsilon^n\) such that
+\[
+E\oplus \epsilon^n \cong F\oplus \epsilon^n.
+\]
+\end{proposition}
+
+\begin{proposition}
+Every class in \(K^0(X)\) can be written as
+\[
+[E]-[\epsilon^n]
+\]
+for some vector bundle \(E\) over \(X\) and some \(n\geq 0\).
+\end{proposition}
+
+\begin{proposition}
+A vector bundle \(E\) represents zero in \(\widetilde K^0(X_*)\) if and only if \(E\) is stably isomorphic to a trivial bundle, i.e. if and only if there exist \(m,n\) such that
+\[
+E\oplus \epsilon^m \cong \epsilon^n.
+\]
+\end{proposition}
+
+\begin{definition}
+For \(n\geq 0\), define the negative reduced \(K\)-groups by suspension:
+\[
+\widetilde K^{-n}(X_*) := \widetilde K^0(\Sigma^n X_*),
+\]
+where \(\Sigma^n X_*\) denotes the \(n\)-fold reduced suspension. For an unbased compact Hausdorff space \(X\), define
+\[
+K^{-n}(X) := \widetilde K^{-n}(X^+)
+= \widetilde K^0(\Sigma^n X^+).
+\]
+More generally, for a pair \((X,Y)\), define
+\[
+K^{-n}(X,Y) := \widetilde K^0(\Sigma^n(X/Y)).
+\]
+\end{definition}
+\begin{theorem}[Bott periodicity]
+For every compact Hausdorff based space \(X_*\), multiplication by the Bott class induces an isomorphism
+\[
+\widetilde K^0(X_*) \xrightarrow{\sim}
+\widetilde K^0(\Sigma^2 X_*),
+\]
+given by
+\[
+[E] \longmapsto ([H]-1)*[E].
+\] where \(H\) is the class of the canonical line bundle over \(S^2\cong \mathbb CP^1\).
+Equivalently,
+\[
+\widetilde K^0(X_*) \cong \widetilde K^{-2}(X_*).
+\]
+\end{theorem}
+
+Thus complex \(K\)-theory is \(2\)-periodic $K^{-n}(X) \cong K^{-n-2}(X)$. Let $U := \varinjlim U(n)$ and $BU := \varinjlim BU(n)$.
+Then \(BU\) classifies stable complex vector bundles, while \(U\) classifies odd \(K\)-theory.
+
+\begin{theorem}
+For compact Hausdorff \(X\),
+\begin{align*}
+    K^0(X) &\cong [X,\Omega U] \cong [X,\mathbb Z\times BU] \\
+    \widetilde K^0(X_*) &\cong [X_*,\Omega U]_* \cong [X_*,\mathbb Z\times BU]_*.
+\end{align*}
+\end{theorem}
+
+The factor \(\mathbb Z\) records the virtual rank. Passing to reduced \(K\)-theory kills this rank, leaving only \(BU\). In particular, if $X$ is connected, then the basepoint must be sent to the component of $BU$ corresponding to virtual rank $0$.
+
+More generally,
+\[
+\widetilde K^{-n}(X_*) \cong [X_*,\Omega^n(\mathbb Z\times BU)]_*.
+\]
+
+Using Bott periodicity,
+\[
+\Omega^2(\mathbb Z\times BU) \simeq \mathbb Z\times BU,
+\]
+and also
+\[
+\Omega(\mathbb Z\times BU)\simeq U.
+\]
+Therefore
+\[
+\widetilde K^{-n}(X_*) \cong
+\begin{cases}
+[X_*,BU]_* & n \text{ even},\\
+[X_*,U]_* & n \text{ odd}.
+\end{cases}
+\]
+
+\begin{theorem}
+For a pair \((X,Y)\), complex \(K\)-theory has a long exact sequence
+\[
+\cdots \to K^n(X,Y)
+\to K^n(X)
+\to K^n(Y)
+\to K^{n+1}(X,Y)
+\to \cdots
+\]
+\end{theorem}
+Using the definition
+\[
+K^n(X,Y) := \widetilde K^n(X/Y),
+\]
+this is the usual long exact sequence associated to the cofiber sequence
+\[
+Y_+ \to X_+ \to X/Y.
+\] 
+
+\subsection{K-theory of operators}
+Let $V$ be a vector bundle over $X$.
+\begin{definition}
+The compactly supported \(K\)-theory of \(V\) is defined by
+\[K^*_c(V) := \widetilde K^*(\overline{V},\partial \overline{V}),\]
+where \(\overline{V}\) is the fiberwise one-point compactification of \(V\).
+\end{definition} 
+In particular, classes of $K^0_c(V)$ can be represented by vector bundles $E,F$ over $X$ together with an isomorphism of $\pi^*E$ and $\pi^*F$ away from the zero section, where $\pi:V \to X$ is the projection.
+
+Let $H$ be a separable infinite-dimensional Hilbert space.
+
+\begin{definition} Let $F$ be a bounded operator on $H$. We say $F$ is a \textit{Fredholm operator} if its kernel and cokernel are finite-dimensional. Equivalently, $F$ is Fredholm if there exists a bounded operator $G$ such that $FG - \Id$ and $GF - \Id$ are compact operators.
+    The space of Fredholm operators on $H$ is denoted $\mathrm{Fred}(H)$.
+\end{definition}
+
+\begin{theorem}[Atiyah]
+The space $\mathrm{Fred}(H)$ is homotopy equivalent to $\mathbb Z \times BU$. In particular \begin{align*}
+    [X,\mathrm{Fred}(H)] &\cong K^0(X)
+\end{align*}
+\end{theorem}
+\subsection{Differential operators and symbols}
+
+Let \(X\) be a smooth compact manifold and \(V,W\to X\) complex vector bundles. A differential operator of order \(\le k\)
+\[
+P:C^\infty(X,V)\to C^\infty(X,W)
+\]
+is locally
+\[
+P=\sum_{|\alpha|\le k} a_\alpha(x)\partial_x^\alpha,
+\quad a_\alpha(x)\in \Hom(V_x,W_x).
+\]
+The principal symbol is
+\[
+\sigma_k(P)(x,\xi)=\sum_{|\alpha|=k} a_\alpha(x)\xi^\alpha\in \Hom(V_x,W_x),
+\]
+which defines a global section
+\[
+\sigma_k(P)\in \Gamma\bigl(T^*X,\Hom(\pi^*V,\pi^*W)\bigr),
+\quad \pi:T^*X\to X.
+\]
+We say \(P\) is \textbf{elliptic} if \(\sigma_k(P)(x,\xi)\) is invertible for all \(\xi\ne 0\), i.e. over \(T^*X\setminus X\) (the complement of the zero section).
+
+An elliptic \(P\) determines a class
+\[
+[\sigma(P)]=[\pi^*V,\pi^*W,\sigma_k(P)]\in K_c^0(T^*X),
+\]
+since \(\sigma_k(P):\pi^*V\to\pi^*W\) is an isomorphism away from the zero section, which is compact.
+
+\begin{example}[The exterior derivative is not elliptic]
+Consider the exterior derivative
+\[
+d:\Omega^k(M)\to \Omega^{k+1}(M).
+\]
+Its principal symbol is
+\[
+\sigma(d,\xi)=\xi\wedge -:\Lambda^k T_x^*M\to \Lambda^{k+1}T_x^*M.
+\]
+which we can compute by choosing a smooth function f with $f(x)=0$ and $df_x=\xi$ and setting $\sigma(d,\xi)(v)=P(f\widetilde v)(x)$ where $\widetilde v$ is any local extension of v.
+
+This works because the highest-order part of P is exactly what detects the first derivative of $f$. Lower-order terms vanish because f$(x)=0$.
+For \(P=d\), take \(\omega\in \Lambda^kT_x^*M\), extend it to a local \(k\)-form \(\widetilde\omega\), and choose \(f\in C^\infty(M)\) with \(f(x)=0\) and \(df_x=\xi\). Then \(d(f\widetilde\omega)=df\wedge \widetilde\omega+f\,d\widetilde\omega\). 
+
+Evaluating at \(x\), the second term vanishes because \(f(x)=0\), so \(d(f\widetilde\omega)(x)=df_x\wedge \omega=\xi\wedge\omega\). Therefore \(\sigma(d,\xi)(\omega)=\xi\wedge\omega\).
+This map is not invertible for $\xi\neq 0$. Indeed, if $\omega=\xi\wedge\eta$, then
+\[
+\sigma(d,\xi)(\omega)=\xi\wedge(\xi\wedge\eta)=0,
+\]
+so $\sigma(d,\xi)$ has nontrivial kernel. Therefore $d$ is not elliptic.
+
+However, the operator
+\[
+D=d+d^*:\Omega^{\mathrm{even}}(M)\to \Omega^{\mathrm{odd}}(M)
+\]
+is elliptic. Its symbol is
+\[
+\sigma(D,\xi)=\xi\wedge - \;-\; \iota_{\xi^\sharp},
+\]
+and one checks that
+\[
+\sigma(D,\xi)^2=-|\xi|^2\,\mathrm{Id},
+\]
+so $\sigma(D,\xi)$ is invertible for all $\xi\neq 0$.The analytic index is
+\[
+\operatorname{ind}(D)=\dim H^{\mathrm{even}}_{\mathrm{dR}}(X)-\dim H^{\mathrm{odd}}_{\mathrm{dR}}(X)=\chi(X).
+\]
+\end{example}
+
+\begin{example}[The Dolbeault operator]
+Let \(X\) be a compact complex manifold and \(E\to X\) a holomorphic vector bundle. The Dolbeault operator
+\[
+\overline\partial_E+\overline\partial_E^*:
+\Omega^{0,\mathrm{even}}(X,E)\to \Omega^{0,\mathrm{odd}}(X,E)
+\]
+is elliptic. Its index is
+\[
+\operatorname{ind}(\overline\partial_E)
+=
+\sum_i (-1)^i \dim H^i(X,E)
+=
+\chi(X,E).
+\]
+\end{example}
+
+\begin{example}[The signature operator]
+If \(X\) is an oriented compact manifold of dimension \(4k\), the signature operator is an elliptic operator whose index is $\operatorname{sign}(X)$
+the signature of the cup product pairing on \(H^{2k}(X;\mathbb R)\).
+\end{example}
+
+\subsection{Families of differential operators}
+
+Let $Y\to X\xrightarrow{p} Z$ be a smooth fiber bundle of compact manifolds. Thus for each $z\in Z$, the fiber $X_z:=p^{-1}(z)$ is a compact smooth manifold diffeomorphic to $Y$. Let $V,W\to X$ be complex vector bundles on the total space $X$. Their restrictions to the fiber $X_z$ are denoted $V_z:=V|_{X_z}$ and $W_z:=W|_{X_z}$.
+
+\begin{definition}
+    A \textbf{family of differential operators} along the fibers is a smoothly varying collection of operators $P_z:C^\infty(X_z,V_z)\to C^\infty(X_z,W_z)$. 
+\end{definition}
+
+Let $T(X/Z):=\ker(dp)\subset TX$ be the vertical tangent bundle, and let $T^*(X/Z):=T(X/Z)^\vee$ be the vertical cotangent bundle. If $\pi:T^*(X/Z)\to X$ is the projection, then the principal symbol of $P$ is a bundle map $\sigma(P):\pi^*V\to \pi^*W$ over $T^*(X/Z)$.
+
+Locally, if $x_1,\dots,x_n$ are coordinates along the fiber and $z_1,\dots,z_m$ are coordinates on the base, then $P$ has the form \[P=\sum_{|\alpha|\le k}a_\alpha(x,z)\partial_x^\alpha\] There are no derivatives in the $z$-directions. The principal symbol is \[\sigma_k(P)(x,z,\xi)=\sum_{|\alpha|=k}a_\alpha(x,z)\xi^\alpha\] where $\xi\in T_x^*(X_z)$. The family $P$ is called \textbf{elliptic} if $\sigma_k(P)(x,z,\xi):V_{(x,z)}\to W_{(x,z)}$ is an isomorphism for every nonzero vertical covector $\xi\neq 0$. Equivalently, $\sigma(P)$ is an isomorphism on $T^*(X/Z)\setminus X$, where $X\subset T^*(X/Z)$ is the zero section.
+
+\begin{proposition}
+    An elliptic family determines a compactly supported $K$-theory class \[[\sigma(P)]\in K_c^0(T^*(X/Z))\] Explicitly, $[\sigma(P)]=[\pi^*V,\pi^*W,\sigma(P)]$.
+\end{proposition}
+
+\begin{example}[A simple family on circles]
+Let $X=S^1\times Z\to Z$ be the trivial fibration, with fiber coordinate $\theta$ on $S^1$. Let $V=W=\mathbb C$ be the trivial line bundle. Define
+\[
+P_z:C^\infty(S^1)\to C^\infty(S^1)
+\]
+by
+\[
+P_z=\frac{1}{i}\frac{d}{d\theta}+f(z),
+\]
+where $f:Z\to \mathbb R$ is a smooth function. This is a family of differential operators along the fibers.
+
+The principal symbol only sees the highest-order part, so
+\[
+\sigma(P)(\theta,z,\xi)=\xi:\mathbb C\to \mathbb C.
+\]
+For $\xi\neq 0$, multiplication by $\xi$ is invertible. Hence $P$ is elliptic, and it defines a class
+\[
+[\sigma(P)]\in K_c^0(T^*(S^1\times Z/Z)).
+\]
+Since $T^*(S^1\times Z/Z)\cong T^*S^1\times Z$, this is a class in
+\[
+K_c^0(T^*S^1\times Z).
+\]
+\end{example}
+
+\subsection{The analytic index of a family}
+
+\begin{theorem}
+    For each $z\in Z$, ellipticity implies that $P_z:C^\infty(X_z,V_z)\to C^\infty(X_z,W_z)$ is Fredholm. Hence each $P_z$ has finite-dimensional kernel and cokernel.
+\end{theorem}
+
+If the dimensions of $\ker P_z$ and $\operatorname{coker}P_z$ are locally constant in $z$, then these form vector bundles $\ker P\to Z$ and $\operatorname{coker}P\to Z$, and one defines $\operatorname{Ind}_{\mathrm{an}}(P):=[\ker P]-[\operatorname{coker}P]\in K^0(Z)$.
+
+In general, the dimensions may jump, so $\ker P$ and $\operatorname{coker}P$ need not be vector bundles. 
+
+\begin{example}[Jumping kernels in a family]
+Consider the family of elliptic operators on \(S^1\)
+\[
+P_t=\frac{1}{i}\frac{d}{d\theta}+t,
+\]
+where \(t\in \mathbb R\). Acting on Fourier modes, we have
+\[
+P_t(e^{in\theta})=(n+t)e^{in\theta}.
+\]
+Therefore \(P_t\) has kernel precisely when \(n+t=0\) for some \(n\in \mathbb Z\). Equivalently,
+\[
+\dim\ker P_t=
+\begin{cases}
+1 & t\in \mathbb Z,\\
+0 & t\notin \mathbb Z.
+\end{cases}
+\]
+Thus the dimensions of the kernels jump as \(t\) varies. Consequently the kernels do not form a vector bundle over the parameter space.
+\end{example}
+
+For a smooth family of elliptic operators \(P_z:C^\infty(X_z,V_z)\to C^\infty(X_z,W_z)\), choose Sobolev completions. For \(s\gg 0\), each \(P_z\) extends to a bounded Fredholm operator
+\[
+P_z:H^s(X_z,V_z)\to H^{s-k}(X_z,W_z)
+\] where $H^s(X_z,V_z)=\text{sections of }V_z\text{ with }s\text{ weak derivatives in }L^2.$
+As \(z\) varies, the spaces \(H^s(X_z,V_z)\) and \(H^{s-k}(X_z,W_z)\) form Hilbert bundles over \(Z\). In fact being infinite dimensional, the fibers are all abstractly modeled on the same Hilbert space. 
+
+The family \(P\) is therefore a bundle map between Hilbert bundles
+\[
+\mathcal H^s_V\longrightarrow \mathcal H^{s-k}_W.
+\]
+
+
+\begin{theorem}[Kuiper's theorem]
+Let \(H\) be an infinite-dimensional separable Hilbert space. Then the unitary group \(U(H)\), equipped with the norm topology, is contractible.
+\end{theorem}
+
+\begin{corollary}
+Let \(Z\) be paracompact, and let \(\mathcal H\to Z\) be a Hilbert bundle whose fibers are infinite-dimensional separable Hilbert spaces and whose structure group is \(U(H)\) with the norm topology. Then \(\mathcal H\) is globally trivial:
+\[
+\mathcal H\cong Z\times H.
+\]
+\end{corollary}
+Therefore, after choosing trivializations of the Hilbert bundles, the
+family \(P\) becomes a continuous map
+\[
+Z\to \Fred(H).
+\]
+By Atiyah's theorem, the homotopy class of this map defines a class in
+\[
+[Z,\Fred(H)]\cong K^0(Z).
+\]
+The corresponding class is called the analytic index of the family and is denoted
+\[
+\operatorname{Ind}_{\mathrm{an}}(P)\in K^0(Z).
+\]
+
+\subsection{The Thom isomorphism in $K$ theory}
+
+Let \(X\) be a finite CW complex, and let \(E\to X\) be a real vector bundle of rank \(n\). Let \(D(E)\) and \(S(E)\) denote its disk and sphere bundles. The Thom space of \(E\) is
+\[
+\operatorname{Th}(E):=D(E)/S(E).
+\]
+Equivalently,
+\[
+K_c^*(E):=K^*(D(E),S(E))\cong \widetilde K^*(\operatorname{Th}(E)).
+\]
+
+For each \(x\in X\), the fiber pair is \((D(E_x),S(E_x))\cong (D^n,S^{n-1})\). Therefore
+\[
+K^*(D(E_x),S(E_x))\cong \widetilde K^*(S^n).
+\]
+By Bott periodicity,
+\[
+\widetilde K^i(S^n)\cong
+\begin{cases}
+\mathbb Z & i\equiv n \pmod 2,\\
+0 & i\not\equiv n \pmod 2.
+\end{cases}
+\]
+A generator of this copy of \(\mathbb Z\) is called the Bott generator of the fiber.
+
+\begin{definition}[\(K\)-orientation]
+A \(K\)-orientation of \(E\to X\) is a class
+\[
+u_E\in K^n(D(E),S(E))
+\]
+whose restriction to every fiber pair \((D(E_x),S(E_x))\) is the Bott generator
+\[
+u_E|_{(D(E_x),S(E_x))}\in K^n(D(E_x),S(E_x))\cong \mathbb Z.
+\]
+The class \(u_E\) is called the \(K\)-theoretic Thom class of \(E\).
+\end{definition}
+
+Here \(K^n\) is understood modulo Bott periodicity, so only the parity of \(n\) matters.
+
+\begin{theorem}[Thom isomorphism in complex \(K\)-theory]
+Let \(E\to X\) be a \(K\)-oriented real vector bundle of rank \(n\), with Thom class
+\[
+u_E\in K^n(D(E),S(E)).
+\]
+Then cupping with \(u_E\) gives an isomorphism
+\[
+K^i(X)\xrightarrow{\sim}K^{i+n}(D(E),S(E)),
+\qquad
+\alpha\mapsto \pi^*\alpha\smile u_E.
+\]
+Equivalently,
+\[
+K^i(X)\xrightarrow{\sim}K_c^{i+n}(E).
+\]
+\end{theorem}
+In particular, every complex vector bundle is canonically \(K\)-oriented, because a complex vector bundle has a canonical \(\mathrm{Spin}^c\)-structure.
+
+\subsection{The topological index}
+
+Let \(p:X\to Z\) be a smooth fiber bundle with compact fibers. Let \(T(X/Z):=\ker(dp)\) and \(T^*(X/Z):=T(X/Z)^\vee\). An elliptic family \(P\) gives a symbol class \([\sigma(P)]\in K_c^0(T^*(X/Z))\). The topological index is a pushforward map \(\operatorname{Ind}_{\mathrm{top}}:K_c^0(T^*(X/Z))\to K^0(Z)\).
+
+Choose a fiberwise embedding \(i:X\hookrightarrow Z\times \mathbb R^N\), and let \(\nu\to X\) be its normal bundle. Since \(i\) is an embedding over \(Z\), there is an isomorphism \(T(X/Z)\oplus \nu\cong X\times \mathbb R^N\). This induces, after passing to cotangent directions, an embedding \(T^*(X/Z)\hookrightarrow Z\times \mathbb R^{2N}\). The normal bundle of this embedding has a canonical complex structure after stabilization, so the embedding is \(K\)-oriented.
+
+\begin{theorem}[Pushforward for a \(K\)-oriented embedding]
+Let \(j:M\hookrightarrow N\) be a smooth embedding, and let \(\nu\to M\) be its normal bundle. Suppose that \(\nu\) is equipped with a complex structure, or more generally a \(K\)-orientation. Then there is a pushforward map \(j_!:K_c^0(M)\to K_c^0(N)\).
+\end{theorem}
+
+It is defined as follows. Choose a tubular neighborhood \(U\subset N\) of \(M\), so that \(U\cong \nu\). The Thom isomorphism for the complex vector bundle \(\nu\to M\) gives an isomorphism \(K_c^0(M)\xrightarrow{\sim}K_c^0(\nu)\). Under the identification \(U\cong \nu\), this gives a class in \(K_c^0(U)\). Extending by zero outside \(U\subset N\) gives a class in \(K_c^0(N)\). Thus \(j_!\) is the composite \(K_c^0(M)\xrightarrow{\mathrm{Thom}}K_c^0(\nu)\cong K_c^0(U)\to K_c^0(N)\).
+Finally, Bott periodicity identifies \(K_c^0(Z\times \mathbb R^{2N})\cong K^0(Z)\). The topological index is the composite
+\[
+K_c^0(T^*(X/Z))
+\xrightarrow{i_!}
+K_c^0(Z\times \mathbb R^{2N})
+\cong K^0(Z).
+\]
+
+\begin{theorem}[Atiyah-Singer index theorem for families]
+The analytic index and the topological index coincide:
+\[
+\operatorname{Ind}_{\mathrm{an}}(P)=\operatorname{Ind}_{\mathrm{top}}([\sigma(P)])\in K^0(Z).
+\]
+\end{theorem}
+
+\subsection{Clifford algebras}
+
+\end{document}

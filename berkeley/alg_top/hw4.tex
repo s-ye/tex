@@ -1,0 +1,545 @@
+\documentclass[12pt]{article}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/psetconfig}
+\title{Homework 4}
+\author{Songyu Ye}
+\date{\today}
+
+\begin{document}
+\psettitle
+
+\begin{problem}[1]
+Prove that the map
+\[
+S^{4n-1}\to S^{2n}
+\]
+defined by the Whitehead square of the generator has Hopf invariant \(2\).
+\end{problem}
+
+\begin{solution}
+    The mapping cone of the Whitehead bracket $S^{2n-1} \to S^n$ is $C_{[\iota,\iota]}=S^n\cup_{[\iota,\iota]} e^{2n}$ the space obtained by folding $S^n \vee S^n \subset S^n \times S^n$ to a single $S^n$. We have
+\[
+H^n(S^n\times S^n) = \mathbb{Z}a \oplus \mathbb{Z}b,
+\]
+and
+\[
+H^{2n}(S^n\times S^n) = \mathbb{Z}\,ab.
+\]
+Observe that the class of the folded sphere \(x \in H^n(C_{[\iota,\iota]},\mathbb{Z}) \cong \Z\) pulls back to \(a+b\) in \(S^n\times S^n\),
+and consequently \(x^2\) goes to \((a+b)^2\). Now,
+\[
+(a+b)^2 = a^2 + b^2 + ab + ba = ab + ba = \bigl(1 + (-1)^n\bigr)ab.
+\]
+
+In particular, the Hopf invariant is
+\[
+H([\iota,\iota]) =
+\begin{cases}
+2 & \text{if \(n\) is even},\\
+0 & \text{if \(n\) is odd}.
+\end{cases}
+\]
+\end{solution}
+
+\begin{problem}[2 (Hatcher AT, 4.2.34)]
+Let \(p:S^3\to S^2\) be the Hopf bundle and \(q:T^3\to S^3\) be the quotient map collapsing the complement of a ball in the \(3\)-dimensional torus \(T^3=S^1\times S^1\times S^1\) to a point. Show that \(pq:T^3\to S^2\) induces the zero map on homotopy and reduced homology, but is \emph{not} homotopic to a constant map.
+\end{problem}
+
+\begin{solution}
+Let \(p:S^3\to S^2\) be the Hopf fibration and let
+\[
+q:T^3\to S^3
+\]
+be the quotient collapsing the complement of an embedded \(3\)-ball in \(T^3=S^1\times S^1\times S^1\) to a point. Set \(f:=p\circ q\).
+
+The cellular approximation theorem allows us to homotope \(q\) to a cellular map, which we also denote by \(q\). This $q$ must collapse the \(2\)-skeleton of \(T^3\) a point and so $q_*=0$ for $i<3$. Also $q_*$ is an isomorphism in degree $3$ since it sends the fundamental class of the chosen ball to the fundamental class of $S^3$. On the other hand, $p_*$ is $0$ in degree $3$ since $H_3(S^2)=0$. Therefore, the composition \(f=p\circ q\) induces the zero map on reduced homology.
+
+The universal cover of $T^3$ is $\R^3$, which is contractible, so $\pi_i(T^3)=0$ for $i>1$. Also $\pi_1(T^3)=\Z^3$ and $\pi_1(S^2) = 0$ so $f_*$ is the zero map on all homotopy groups.
+
+Suppose for contradiction that \(f\) is homotopic to a constant map. Then there exists a homotopy
+\[
+H:T^3\times I\to S^2
+\]
+with \(H(-,0)=f\) and \(H(-,1)=c\) constant.
+
+Since \(p:S^3\to S^2\) is a fibration and \(q\) is a lift of \(f\), the homotopy lifting property produces a lift
+\[
+\widetilde H:T^3\times I\to S^3
+\]
+such that
+\[
+\widetilde H(-,0)=q
+\qquad\text{and}\qquad
+p\circ \widetilde H = H.
+\]
+
+At time \(t=1\), since \(H(-,1)=c\) is constant, the map \(\widetilde H(-,1)\) must land in a single fiber of \(p\), which is a circle \(S^1\subset S^3\). Thus \(\widetilde H(-,1)\) factors as
+\[
+T^3 \longrightarrow S^1 \hookrightarrow S^3.
+\]
+
+Therefore \(q\) is homotopic (as a map into \(S^3\)) to a map factoring through \(S^1\). But this is impossible: the map \(q\) has degree \(1\), so
+\[
+q_*:H_3(T^3)\to H_3(S^3)
+\]
+is an isomorphism, whereas any map \(T^3\to S^1\subset S^3\) induces the zero map on \(H_3\) since \(H_3(S^1)=0\).
+\end{solution}
+
+\begin{problem}[3]
+For a relatively finite CW pair \((X,A)\) (meaning that \(X\) is built by attaching finitely many cells to \(A\)) and any space \(Y\), show that the restriction map
+\[
+\operatorname{Map}(X,Y)\to \operatorname{Map}(A,Y)
+\]
+is a fibration.
+\end{problem}
+
+\begin{solution}
+Let
+\[
+r:\operatorname{Map}(X,Y)\to \operatorname{Map}(A,Y)
+\]
+be the restriction map. We show that \(r\) is a fibration.
+
+It suffices to verify the homotopy lifting property with respect to disks. So suppose we are given a commutative diagram
+\[
+\begin{array}{ccc}
+D^n & \xrightarrow{\,g\,} & \operatorname{Map}(X,Y) \\
+\big\downarrow && \big\downarrow r \\
+D^n\times I & \xrightarrow{\,H\,} & \operatorname{Map}(A,Y)
+\end{array}
+\]
+where \(H(u,0)=r(g(u))\) for all \(u\in D^n\). We must construct a lift
+\[
+\widetilde H:D^n\times I\to \operatorname{Map}(X,Y)
+\]
+such that \(\widetilde H(u,0)=g(u)\) and \(r\circ \widetilde H=H\).
+
+By adjunction, \(g\) corresponds to a map
+\[
+\widehat g:D^n\times X\to Y,
+\]
+and \(H\) corresponds to a map
+\[
+\widehat H:D^n\times I\times A\to Y.
+\]
+The condition \(H(u,0)=r(g(u))\) says exactly that
+\[
+\widehat H(u,0,a)=\widehat g(u,a)
+\qquad
+\text{for all }u\in D^n,\ a\in A.
+\]
+
+Hence \(\widehat g\) and \(\widehat H\) together define a map
+\[
+F:(D^n\times X\times\{0\})\cup(D^n\times A\times I)\to Y.
+\]
+So it remains to extend \(F\) to all of \(D^n\times X\times I\).
+
+Now \((X,A)\) is a relatively finite CW pair, so \(X\) is obtained from \(A\) by attaching finitely many cells. Therefore \((D^n\times X,D^n\times A)\) is again a relative CW pair, hence the inclusion
+\[
+D^n\times A\hookrightarrow D^n\times X
+\]
+is a cofibration. It follows that the inclusion
+\[
+(D^n\times X\times\{0\})\cup(D^n\times A\times I)
+\hookrightarrow
+D^n\times X\times I
+\]
+is also a cofibration, so the homotopy extension property applies. Thus \(F\) extends to a map
+\[
+\widetilde F:D^n\times X\times I\to Y.
+\]
+
+Adjointing back, \(\widetilde F\) corresponds to a map
+\[
+\widetilde H:D^n\times I\to \operatorname{Map}(X,Y)
+\]
+with
+\[
+\widetilde H(u,0)=g(u)
+\qquad\text{and}\qquad
+r(\widetilde H(u,t))=H(u,t).
+\]
+Thus \(r\) has the homotopy lifting property for disks, hence is a fibration.
+\end{solution}
+\begin{problem}[4]
+Given fibrations \(E,E'\to B\), show that any fiber-preserving map
+\[
+f:E\to E'
+\]
+which is a homotopy equivalence (on total spaces) is a \emph{fiber homotopy equivalence}, meaning there exists a fiber-preserving map
+\[
+g:E'\to E
+\]
+such that \(g\circ f\) and \(f\circ g\) are both homotopic to the identities via fiber-preserving maps.
+\end{problem}
+
+\begin{solution}
+We first record a standard lemma.
+
+\medskip
+
+\noindent\textbf{Lemma.}
+Let \(p:E\to B\) be a fibration, and let \(u:X\to B\) be a map. If
+\[
+f_0,f_1:X\to E
+\]
+satisfy
+\[
+p\circ f_0=p\circ f_1=u,
+\]
+and if \(f_0\simeq f_1\) as ordinary maps \(X\to E\), then in fact \(f_0\) and \(f_1\) are homotopic through fiber-preserving maps, i.e. there exists
+\[
+\widetilde H:X\times I\to E
+\]
+with
+\[
+\widetilde H(-,0)=f_0,\qquad \widetilde H(-,1)=f_1,
+\qquad p\widetilde H(x,t)=u(x).
+\]
+
+\begin{proof}
+Let
+\[
+H:X\times I\to E
+\]
+be a homotopy from \(f_0\) to \(f_1\). Its projection
+\[
+pH:X\times I\to B
+\]
+is a homotopy from \(u\) to \(u\). Define
+\[
+G:X\times I\times I\to B,\qquad G(x,s,t)=pH(x,(1-s)t).
+\]
+Then
+\[
+G(x,0,t)=pH(x,t),\qquad G(x,1,t)=u(x).
+\]
+So \(G\) is a homotopy, relative \(X\times\{0,1\}\), from \(pH\) to the constant homotopy at \(u\).
+
+Now define
+\[
+\Phi:X\times I\times\{0\}\;\cup\;X\times\{0\}\times I\;\cup\;X\times\{1\}\times I \to E
+\]
+by
+\[
+\Phi(x,s,0)=f_0(x),\qquad
+\Phi(x,0,t)=H(x,t),\qquad
+\Phi(x,1,t)=f_1(x).
+\]
+These formulas agree on overlaps, and one checks that $p\Phi=G$
+on this subspace. Since
+\[
+(X\times I\times\{0\})\cup(X\times\{0,1\}\times I)\hookrightarrow X\times I\times I
+\]
+is a cofibration and \(p\) is a fibration, the homotopy lifting property yields an extension
+\[
+\widetilde\Phi:X\times I\times I\to E
+\]
+with
+$p\widetilde\Phi=G$.
+Set $\widetilde H(x,t):=\widetilde\Phi(x,1,t)$.
+Then $\widetilde H(-,0)=f_0$, $\widetilde H(-,1)=f_1$
+and \[p\widetilde H(x,t)=G(x,1,t)=u(x)\]
+for all \((x,t)\). Thus \(\widetilde H\) is a fiber-preserving homotopy.
+\end{proof}
+
+\medskip
+
+Now let
+\[
+p:E\to B,\qquad p':E'\to B
+\]
+be fibrations, and let
+\[
+f:E\to E'
+\]
+be fiber-preserving, so \(p'f=p\). Assume \(f\) is a homotopy equivalence of total spaces. Choose an ordinary homotopy inverse
+\[
+h:E'\to E
+\]
+with
+\[
+hf\simeq \mathrm{id}_E,\qquad fh\simeq \mathrm{id}_{E'}.
+\]
+
+We first deform \(h\) to a fiber-preserving map. Since \(p'f\simeq p' \circ \mathrm{id}_{E'}\) and \(fh\simeq \mathrm{id}_{E'}\), we have
+\[
+ph = p'fh \simeq p'.
+\]
+Apply the homotopy lifting property to the homotopy \(ph\simeq p'\), starting with the map \(h\). This gives a homotopy from \(h\) to a map
+\[
+g:E'\to E
+\]
+such that
+\[
+pg=p'.
+\]
+So \(g\) is fiber-preserving.
+
+Now \(g\simeq h\), hence
+\[
+gf\simeq hf\simeq \mathrm{id}_E
+\]
+and
+\[
+fg\simeq fh\simeq \mathrm{id}_{E'}.
+\]
+Moreover both pairs of maps are fiber-preserving:
+\[
+p(gf)=p'f=p=p(\mathrm{id}_E),
+\]
+\[
+p'(fg)=p'g=p'=p'(\mathrm{id}_{E'}).
+\]
+Therefore, by the lemma, these ordinary homotopies can be replaced by fiber-preserving homotopies. Thus
+\[
+gf\simeq_B \mathrm{id}_E,\qquad fg\simeq_B \mathrm{id}_{E'}.
+\]
+
+Hence \(g\) is a fiber-preserving homotopy inverse to \(f\), so \(f\) is a fiber homotopy equivalence.
+\end{solution}
+
+
+\begin{problem}[5]
+Show that a fibration over a \emph{contractible} base is fiber homotopy equivalent to a product space. Show the same for a fibration with contractible fiber with CW base. Assuming that a fiber bundle over a paracompact base is a fibration (for example when the fibers are smooth manifolds), conclude that every fiber bundle over a contractible paracompact base is a product bundle.
+\end{problem}
+
+\begin{solution}
+First suppose \(p:E\to B\) is a fibration and \(B\) is contractible. Choose a basepoint \(b_0\in B\), let
+\[
+F=p^{-1}(b_0),
+\]
+and let
+\[
+H:B\times I\to B
+\]
+be a contraction of \(B\) to \(b_0\), so \(H(b,0)=b\) and \(H(b,1)=b_0\).
+
+Now \(H\) is a homotopy from \(\mathrm{id}_B\) to the constant map \(c:B\to B\), \(c(b)=b_0\). Pulling back the fibration \(p\) along these two maps gives:
+\[
+(\mathrm{id}_B)^*E \cong E,
+\qquad
+c^*E \cong B\times F.
+\]
+Since pullbacks of a fibration along homotopic maps are fiber homotopy equivalent, it follows that
+\[
+E \simeq_B B\times F.
+\]
+Thus a fibration over a contractible base is fiber homotopy equivalent to a product.
+
+Now suppose instead that \(p:E\to B\) has contractible fiber \(F\). We claim that \(p\) is a fiber homotopy equivalence with inverse given by a section \(s:B\to E\). Indeed, over a CW decomposition of \(B\), the obstruction to extending a section over an \(n\)-cell lies in \(\pi_{n-1}(F)\), and these groups vanish since \(F\) is contractible. Hence a section \(s\) exists. Then
+\[
+p\circ s=\mathrm{id}_B.
+\]
+Also \(s\circ p:E\to E\) is fiber-preserving, and on each fiber \(E_b\) it is the constant map to \(s(b)\). Since each fiber is contractible, \(s\circ p\) is fiberwise homotopic to the identity. Therefore
+\[
+s\circ p \simeq_B \mathrm{id}_E,
+\]
+so \(p\) is a fiber homotopy equivalence. Hence \(E\) is fiber homotopy equivalent to \(B\).
+
+
+Finally, let \(p:E\to B\) be a fiber bundle over a contractible paracompact base \(B\), and choose \(b_0\in B\). Let \(c:B\to B\) be the constant map \(c(b)=b_0\). Since \(B\) is contractible, \(\mathrm{id}_B\) is homotopic to \(c\). By the bundle homotopy theorem for bundles over paracompact bases, pullbacks along homotopic maps are isomorphic. Hence
+\[
+E \cong \mathrm{id}_B^*E \cong c^*E.
+\]
+If \(F=p^{-1}(b_0)\), then \(c^*E\cong B\times F\). Therefore
+\[
+E\cong B\times F
+\]
+as bundles over \(B\). Thus every fiber bundle over a contractible paracompact base is a product bundle.
+
+\end{solution}
+
+\begin{problem}[6 (Hatcher AT, 4.2.17)]
+Show that the map
+\[
+[X,Y]\to \operatorname{Hom}(\pi_n X,\pi_n Y)
+\]
+sending \([f]\mapsto f_*\) is a bijection, if \(X\) is an \((n-1)\)-connected CW complex and \(Y\) is a path-connected space with \(\pi_i Y=0\) for \(i>n\). Deduce that CW models for \(K(G,n)\) are unique up to homotopy equivalence.
+\end{problem}
+
+\begin{solution}
+Since \(X\) is \((n-1)\)-connected, we may choose a CW structure on \(X\) with
+\[
+X^{n-1}=*.
+\]
+Then \(X^n\) is a wedge of \(n\)-spheres,
+\[
+X^n \cong \bigvee_\alpha S^n_\alpha,
+\]
+and the quotient \(X^n/X^{n-1}\) is the same wedge.
+
+A based map
+\[
+f_n:X^n\to Y
+\]
+is therefore determined up to homotopy by its restrictions to the \(n\)-cells, hence by a cellular \(n\)-cochain with values in \(\pi_n(Y)\). More concretely, such a map determines a homomorphism
+\[
+C_n(X)\to \pi_n(Y),
+\]
+and two such maps are homotopic rel \(X^{n-1}\) exactly when they induce the same homomorphism
+\[
+H_n(X)\to \pi_n(Y).
+\]
+Thus homotopy classes of maps \(X^n\to Y\) correspond naturally to
+\[
+\operatorname{Hom}(H_n(X),\pi_n(Y)).
+\]
+
+Now we claim that every map \(X^n\to Y\) extends over all higher skeleta of \(X\), and that any two such extensions are homotopic. Indeed, the obstruction to extending from \(X^k\) to \(X^{k+1}\) lies in
+\[
+H^{k+1}(X;\pi_k(Y)).
+\]
+But for \(k\ge n\), we have \(\pi_k(Y)=0\) unless \(k=n\), and for \(k=n\) the map is already defined on \(X^n\). Hence all higher obstructions vanish. Similarly, the obstruction groups controlling uniqueness of extension involve \(\pi_k(Y)\) for \(k>n\), so they also vanish. Therefore restriction induces a bijection
+\[
+[X,Y]\xrightarrow{\;\cong\;} [X^n,Y].
+\]
+
+Combining this with the previous paragraph gives
+\[
+[X,Y]\cong \operatorname{Hom}(H_n(X),\pi_n(Y)).
+\]
+Since \(X\) is \((n-1)\)-connected, the Hurewicz theorem gives
+\[
+\pi_n(X)\cong H_n(X),
+\]
+so we obtain a natural bijection
+\[
+[X,Y]\cong \operatorname{Hom}(\pi_n(X),\pi_n(Y)).
+\]
+
+It remains to note that this bijection is exactly the map \([f]\mapsto f_*\). Indeed, if \(f:X\to Y\), then its restriction to \(X^n\) determines the induced homomorphism
+\[
+H_n(X)\to \pi_n(Y),
+\]
+and under the Hurewicz isomorphism \(H_n(X)\cong \pi_n(X)\), this is precisely the induced map
+\[
+f_*:\pi_n(X)\to \pi_n(Y).
+\]
+Thus the stated map is a bijection.
+
+\medskip
+
+Now let \(X\) and \(Y\) be CW models for \(K(G,n)\). Then \(X\) is \((n-1)\)-connected and \(Y\) is path-connected with \(\pi_i(Y)=0\) for \(i>n\), so the first part applies:
+\[
+[X,Y]\cong \operatorname{Hom}(\pi_n(X),\pi_n(Y)).
+\]
+Since
+\[
+\pi_n(X)\cong G\cong \pi_n(Y),
+\]
+the identity map on \(G\) is induced by some map
+\[
+f:X\to Y.
+\]
+Similarly there is a map
+\[
+g:Y\to X
+\]
+inducing the identity on \(\pi_n\). Then
+\[
+(g\circ f)_*=\mathrm{id}_{\pi_n(X)},
+\qquad
+(f\circ g)_*=\mathrm{id}_{\pi_n(Y)}.
+\]
+Applying the bijection again, we conclude that
+\[
+g\circ f\simeq \mathrm{id}_X,
+\qquad
+f\circ g\simeq \mathrm{id}_Y.
+\]
+Hence \(f\) and \(g\) are homotopy inverses. Therefore CW models for \(K(G,n)\) are unique up to homotopy equivalence.
+\end{solution}
+
+\begin{problem}[7 (var.\ of Hatcher AT, 4.3.6 \& 4.3.7)]
+For an Abelian group \(G\), Question 6 gives a map
+\[
+\mu:K(G,n)\times K(G,n)\to K(G,n)
+\]
+corresponding to the addition on \(G\). Show that \(\mu\) defines an \(H\)-space structure on \(K(G,n)\) that is commutative and associative up to homotopy.
+
+For any CW space \(X\), use \(\mu\) to define an addition on \([X,K(G,n)]\) by
+\[
+[f]+[g]:=\mu(f\times g)
+\]
+and show that under the bijection
+\[
+[X,K(G,n)]\cong H^n(X;G)
+\]
+this corresponds to the usual addition in cohomology.
+\end{problem}
+
+\begin{solution} Let \(Y=K(G,n)\). Let \(0\in G\) denote the identity element, and let \(*\in Y\) be the basepoint. The constant map
+\[
+e:* \to Y
+\]
+corresponds to \(0\in \pi_n(Y)=G\). Consider the maps
+\[
+\mu\circ(\mathrm{id},e),\qquad \mu\circ(e,\mathrm{id}):Y\to Y.
+\]
+On \(\pi_n(Y)\cong G\), both induce the homomorphism
+\[
+a\longmapsto a+0=a.
+\]
+By Question 6, these maps are homotopic to \(\mathrm{id}_Y\). Thus \(*\) is a homotopy identity for \(\mu\), so \((Y,\mu)\) is an \(H\)-space. To show commutativity, let
+\[
+\tau:Y\times Y\to Y\times Y,\qquad \tau(x,y)=(y,x).
+\]
+Then the two maps
+\[
+\mu,\qquad \mu\circ\tau : Y\times Y\to Y
+\]
+induce on \(\pi_n(Y\times Y)\cong G\oplus G\) the homomorphisms
+\[
+(a,b)\mapsto a+b,\qquad (a,b)\mapsto b+a.
+\]
+Since \(G\) is Abelian, these are equal. Hence by Question 6,
+\[
+\mu\circ\tau \simeq \mu.
+\]
+So \(\mu\) is commutative up to homotopy. To show associativity, consider the two maps
+\[
+\mu\circ(\mu\times \mathrm{id}),\qquad \mu\circ(\mathrm{id}\times \mu):
+Y\times Y\times Y\to Y.
+\]
+Since
+\[
+\pi_n(Y\times Y\times Y)\cong G\oplus G\oplus G,
+\]
+the first induces
+\[
+(a,b,c)\longmapsto (a+b)+c,
+\]
+while the second induces
+\[
+(a,b,c)\longmapsto a+(b+c).
+\]
+These are equal because addition in \(G\) is associative. Therefore, again by Question 6,
+\[
+\mu\circ(\mu\times \mathrm{id}) \simeq \mu\circ(\mathrm{id}\times \mu).
+\]
+So \(\mu\) is associative up to homotopy. Now let \(X\) be any CW complex. For maps \(f,g:X\to Y\), define
+\[
+[f]+[g]:=[\,\mu\circ (f,g)\,],
+\]
+where
+\[
+(f,g):X\to Y\times Y,\qquad x\mapsto (f(x),g(x)).
+\]
+This gives an addition on \([X,Y]\).
+
+We now show that under the canonical bijection
+\[
+[X,K(G,n)]\cong H^n(X;G),
+\]
+this addition agrees with the usual addition in cohomology. Let $\alpha,\beta\in H^n(X;G)$ correspond to $f,g:X\to K(G,n)$
+By naturality of the representing-space correspondence, the product map $(f,g):X\to K(G,n)\times K(G,n)$
+corresponds to the pair $(\alpha,\beta)\in H^n(X;G)\oplus H^n(X;G)$
+The map $\mu:K(G,n)\times K(G,n)\to K(G,n)$
+was chosen to represent the addition map $G\oplus G\to G$, so $\mu\circ(f,g)$ corresponds to the sum $\alpha+\beta\in H^n(X;G)$.
+\end{solution}
+\end{document}

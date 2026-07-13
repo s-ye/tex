@@ -2440,7 +2440,7 @@ Any automorphism of $L$ must now restrict to the identity on $\{r\}\times J$, fo
 which violates the chosen trivialization unless $M\cong\mathcal{O}_J$ with its chosen trivialization. Thus the $\Pic(J)$-torsor ambiguity also disappears.
 \end{remark}
 
-It turns out that these individual line bundles on $R$
+It turns out once you trivialize at a point $r \in R$, that these individual line bundles on $R$
 assemble to a holomorphic line bundle
 \[
 \mathcal P \;\to\; R \times J,
@@ -2448,10 +2448,18 @@ assemble to a holomorphic line bundle
 the \textbf{universal} or \textbf{Poincaré} line bundle (of degree zero). These objects $\mathcal P$ and $J$ can be characterized by a universal property:
 
 \begin{proposition}
-For any complex space $B$ and holomorphic line bundle $L \to R \times B$,
-equipped with a trivialization on $\{r\} \times B$,
-there is a unique holomorphic map $f_L : B \to J$
-and isomorphism $f_L^* \mathcal P \cong L$.
+Fix $r\in R$. There exists a line bundle $\mathcal P$ on $R\times J$
+together with a trivialization
+\[
+\mathcal P|_{\{r\}\times J} \cong \mathcal O_J
+\]
+such that for any complex space $B$ and line bundle $L$ on $R\times B$
+equipped with a trivialization along $\{r\}\times B$, there exists a unique
+morphism $f_L:B\to J$ and a unique isomorphism
+\[
+(\mathrm{id}_R\times f_L)^*\mathcal P \cong L
+\]
+compatible with the given trivializations.
 \end{proposition}
 
 \begin{remark}
@@ -2573,7 +2581,7 @@ is isomorphic to the projective space $\mathbb{P}H^0(R;L)$.
 and a local embedding in $J_d$.
 \item For $d = g$, it is also surjective,
 and therefore a generic isomorphism.
-\item For $g \ge 2g - 1$, the map $AJ_d$ realizes $\Sym^d(R)$
+\item For $d \ge 2g - 1$, the map $AJ_d$ realizes $\Sym^d(R)$
 as a holomorphic projective bundle over $J_d$.
 \end{enumerate}
 \end{theorem}

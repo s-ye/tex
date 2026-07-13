@@ -1,0 +1,206 @@
+\documentclass[12pt]{article}
+\makeatletter
+\def\input@path{{../../style/}}
+\makeatother
+
+\usepackage{../../style/psetconfig}
+\title{Homework 4}
+\author{Songyu Ye}
+\date{\today}
+
+\begin{document}
+\psettitle
+
+\begin{problem}[1]
+Recall Q2 of Homework 4:
+Let $p:S^3\to S^2$ be the Hopf bundle and let $q:T^3\to S^3$ be the quotient map collapsing the complement of a ball in the $3$-dimensional torus $T^3=S^1\times S^1\times S^1$ to a point. Show that $pq:T^3\to S^2$ induces the zero map on homotopy and reduced homology, but is not homotopic to a constant map.
+
+Reprove this as follows. The Hopf map $S^3\to S^2$ becomes null-homotopic when continued to $\C\P^\infty$ since it induces zero on $H^2$. So the composition to $\C\P^\infty$ is null-homotopic. Choose a null-homotopy, and lift that to the $2$-stage Postnikov tower, to get a map from $T^3\to K(\Z,3)$. Show that the map is non-zero, and in fact the generator of $H^3(T^3;\Z)$, independently of the null-homotopy chosen; whereas, obviously, a constant map to $S^2$ could be lifted to a constant map.
+
+\emph{Note:} Use the fact that the first $k$-invariant for $S^2$ is the generator of $H^4(K(\Z,2);\Z)$.
+\end{problem}
+
+\begin{solution}
+    $S^2$ has only reduced homology in degree $2$ so the only nonzero reduced homology map is $(pq)_*: \tilde{H}_2(T^3)\to \tilde{H}_2(S^2)$ but this map factors through $\tilde{H}^2(S^3)$ which is zero, so it is zero. Let $i:S^2\to K(\Z,2)$ classify the generator of $H^2(S^2)$, since $(pq)^*i = 0$ the composite $T^3\xrightarrow{pq} S^2\xrightarrow{i} K(\Z,2)$ is null-homotopic. 
+
+    Since $\pi_2(S^2) = \Z$ and $\pi_3(S^2) = \Z$, the third stage of the Postnikov tower for $S^2$ is a fibration $K(\Z,3)\to P_3(S^2)\to K(\Z,2)$ with $k$-invariant the generator of $H^4(K(\Z,2);\Z)$. 
+
+    Choose a nullhomotopy of the map $T^3 \to K(\Z,2)$. This gives a map $T^3\times I\to K(\Z,2)$ which restricts to $T^3\times \{0\}$ as the nullhomotopy and to $T^3\times \{1\}$ as the original map. Since $P_3(S^2)$ is a fibration over $K(\Z,2)$ we can lift this homotopy to get a map $T^3\times I\to P_3(S^2)$ which restricts to $T^3\times \{0\}$ as some map $f:T^3\to P_3(S^2)$ and to $T^3\times \{1\}$ as a lift of the original map. Since the original map is nullhomotopic, the lift of the original map must factor through $K(\Z,3)$ so we get a map $T^3\to K(\Z,3)$.
+
+    Such maps are classified by $[T^3,K(\mathbb Z,3)]\cong H^3(T^3;\mathbb Z)\cong \mathbb Z$. Let $\alpha\in H^3(T^3;\Z)$ be the class corresponding to the map $T^3\to K(\Z,3)$ we just constructed. The claim is that $\alpha$ is a generator. It suffices to show that the class $\beta\in H^3(S^3;\Z)$ corresponding to the Hopf map is a generator, since $\alpha$ is the pullback of $\beta$ along $q$ and $q^*:H^3(S^3;\Z)\to H^3(T^3;\Z)$ is an isomorphism.
+
+    The Hopf map $p:S^3\to S^2$ represents the generator of $\pi_3(S^2)\cong \mathbb Z$. Since $P_3S^2$ agrees with $S^2$ through homotopy degree $3$, the induced map $S^2\to P_3S^2$ also identifies $\pi_3(S^2)\cong \pi_3(P_3S^2)$. The long exact sequence in homotopy for the fibration $K(\Z,3)\to P_3(S^2)\to K(\Z,2)$ gives an isomorphism $\pi_3(P_3(S^2))\cong \pi_3(K(\Z,3))\cong \Z$. Under this isomorphism, the class $\beta$ corresponds to the generator of $\pi_3(K(\Z,3))$, so $\beta$ is a generator of $H^3(S^3;\Z)$ as claimed.
+
+    Different choices of nullhomotopy of the map $T^3\to K(\mathbb Z,2)$ differ by a map \[T^3\to \Omega K(\mathbb Z,2)\simeq K(\mathbb Z,1)\] by gluing the two nullhomotopies together along their common boundary. Such maps are classified by $[T^3,K(\mathbb Z,1)]\cong H^1(T^3;\mathbb Z)$. The glued map
+\[X\times S^1\to K(\mathbb Z,2)\]has associated cohomology class $a+b\,t\in H^2(X\times S^1;\mathbb Z)$ where $a\in H^2(X;\mathbb Z)$ is the class of the original map $X\to K(\mathbb Z,2)$, $b\in H^1(X;\mathbb Z)$ is the class of the change in nullhomotopy, and $t$ is the generator of $H^1(S^1;\mathbb Z)$. Since the first $k$-invariant for $S^2$ is $\pm u^2$ where $u$ is the generator of $H^2(K(\Z,2);\Z)$, we compute \begin{align*}
+        (a+b\,t)^2&=a^2+2abt + t^2 = 0
+    \end{align*}
+Thus the change in nullhomotopy does not change the resulting map $T^3\to K(\Z,3)$, so $\alpha$ is independent of the choice of nullhomotopy as claimed.
+\end{solution}
+
+\begin{problem}[2]
+For a finitely generated Abelian group $G$ and a simply connected space $X$, show that there is a short exact sequence
+\[
+\Ext^1(G;\pi_{n+1}X)\longrightarrow [M(G;n),X]\longrightarrow \Hom(G;\pi_n X).
+\]
+If $\pi_1X\neq \{1\}$, one should also take its action on $\pi_n$ into account.
+\end{problem}
+
+
+\begin{solution}
+    Assume $n\geq 2$, so that the Moore space $M(G,n)$ is simply connected. Since $G$ is finitely generated, choose a presentation
+    \[
+        0\to R\to F\to G\to 0
+    \]
+    with $F$ and $R$ finitely generated free abelian groups. The Moore space $M(G,n)$ may be constructed as the cofiber of a map
+    \[
+        \bigvee_R S^n \longrightarrow \bigvee_F S^n,
+    \]
+    so it has cells only in dimensions $n$ and $n+1$, and
+    \[
+        \widetilde H_i(M(G,n);\Z)=
+        \begin{cases}
+            G,& i=n,\\
+            0,& i\neq n.
+        \end{cases}
+    \]
+
+    Because $M(G,n)$ has dimension $n+1$, any map $M(G,n)\to X$ only sees the $(n+1)$st Postnikov stage of $X$. Thus we may replace $X$ by $P_{n+1}X$. Since $X$ is simply connected, this Postnikov stage fits into a fibration
+    \[
+        K(\pi_{n+1}X,n+1)\longrightarrow P_{n+1}X\longrightarrow K(\pi_nX,n),
+    \]
+    up to the lower Postnikov data, which is invisible to $M(G,n)$ because $M(G,n)$ is $(n-1)$-connected. Therefore a map $M(G,n)\to X$ has a primary invariant obtained by composing with
+    \[
+        X\to K(\pi_nX,n).
+    \]
+    This gives a natural map
+    \[
+        [M(G,n),X]\longrightarrow H^n(M(G,n);\pi_nX).
+    \]
+    By the universal coefficient theorem,
+    \[
+        H^n(M(G,n);\pi_nX)
+        \cong \Hom(H_n(M(G,n)),\pi_nX)
+        \cong \Hom(G,\pi_nX),
+    \]
+    since $H_{n-1}(M(G,n))=0$. This is the right-hand map in the desired sequence.
+
+    Now consider the kernel of this map. If the primary invariant is zero, then after choosing a nullhomotopy of the composite
+    \[
+        M(G,n)\to X\to K(\pi_nX,n),
+    \]
+    the map lifts to the homotopy fiber $K(\pi_{n+1}X,n+1)$
+    Hence the kernel is identified with $H^{n+1}(M(G,n);\pi_{n+1}X)$
+    Applying the universal coefficient theorem again gives
+    \[
+        0\to \Ext^1(H_n(M(G,n)),\pi_{n+1}X)
+        \to H^{n+1}(M(G,n);\pi_{n+1}X)
+        \to \Hom(H_{n+1}(M(G,n)),\pi_{n+1}X)\to 0.
+    \]
+    Since $H_n(M(G,n))=G$ and $H_{n+1}(M(G,n))=0$, this reduces to
+    \[
+        H^{n+1}(M(G,n);\pi_{n+1}X)
+        \cong \Ext^1(G,\pi_{n+1}X).
+    \]
+    Therefore the kernel of $[M(G,n),X]\longrightarrow \Hom(G,\pi_nX)$
+    is naturally \(\Ext^1(G,\pi_{n+1}X)\).
+
+    We obtain the short exact sequence
+    \[
+        0\to \Ext^1(G,\pi_{n+1}X)
+        \to [M(G,n),X]
+        \to \Hom(G,\pi_nX)
+        \to 0.
+    \]
+\end{solution}
+
+\begin{problem}[3]
+The Bott periodicity theorem asserts that the stable, large $n$, values of $\pi_k U(n)$ are $0$ and $\Z$, for $k$ even/odd, with isomorphisms induced by the natural inclusions. Consider the fiber bundles
+\[
+SU(n)\longrightarrow SU(n+1)\longrightarrow S^{2n+1},
+\]
+and recall that we showed in class that the projection to $S^{2n+1}$ induces an isomorphism on integral $H_{2n+1}$.
+
+\begin{enumerate}
+    \item Check that $\pi_k SU(n)\to \pi_k SU(n+1)$ is an isomorphism for $k<2n$ and onto for $k=2n$, with cyclic kernel.
+    \item Use $\pi_4(S^3)=\Z/2$ to conclude that the generator of $H_5(SU(3);\Z)$ is not spherical, not in the image of the Hurewicz map, and hence that $SU(3)$ is not homotopy equivalent to $S^3\times S^5$, even though its homology could suggest that.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+        We use the fibration
+    \[
+        SU(n)\longrightarrow SU(n+1)\longrightarrow S^{2n+1}.
+    \]
+    The associated long exact sequence in homotopy contains
+    \[
+        \pi_{k+1}(S^{2n+1})\to \pi_k(SU(n))
+        \to \pi_k(SU(n+1))\to \pi_k(S^{2n+1}).
+    \]
+    If $k<2n$, then $\pi_k(S^{2n+1})=0$ and $\pi_{k+1}(S^{2n+1})=0$ and so
+    \[
+        \pi_k(SU(n))\xrightarrow{\sim}\pi_k(SU(n+1))
+    \]
+    is an isomorphism for $k<2n$. If $k=2n$, the relevant part of the long exact sequence is
+    \[
+        \pi_{2n+1}(S^{2n+1})\to \pi_{2n}(SU(n))
+        \to \pi_{2n}(SU(n+1))\to \pi_{2n}(S^{2n+1}).
+    \]
+    Since $\pi_{2n}(S^{2n+1})=0$ the map $\pi_{2n}(SU(n))\to \pi_{2n}(SU(n+1))$
+    is surjective. Its kernel is the image of $\pi_{2n+1}(S^{2n+1})\cong \Z$ and is therefore cyclic. This proves (1).
+
+    Now specialize to $n=2$. We have the fibration
+    \[
+        SU(2)\longrightarrow SU(3)\longrightarrow S^5.
+    \]
+    Since $SU(2)\cong S^3$, this is
+    \[
+        S^3\longrightarrow SU(3)\longrightarrow S^5.
+    \]
+    By the hypothesis recalled in the problem, the projection $SU(3)\to S^5$
+    induces an isomorphism
+    \[
+        H_5(SU(3);\Z)\xrightarrow{\sim}H_5(S^5;\Z).
+    \]
+
+    Suppose, for contradiction, that the generator of $H_5(SU(3);\Z)$ is spherical. Then there is a map
+    \[
+        f:S^5\to SU(3)
+    \]
+    such that $f_*[S^5]$ is a generator of $H_5(SU(3);\Z)$. Composing with the projection gives a map
+    \[
+        S^5\xrightarrow{f}SU(3)\to S^5
+    \]
+    of degree $\pm 1$. Therefore this composite is a homotopy equivalence of $S^5$. After composing $f$ with a homotopy inverse of this degree $\pm 1$ map if necessary, we get a homotopy section of
+    \[
+        SU(3)\to S^5.
+    \]
+
+    But a homotopy section would force the connecting homomorphism
+    \[
+        \partial:\pi_5(S^5)\to \pi_4(S^3)
+    \]
+    in the long exact sequence of the fibration to be zero. Indeed, exactness gives $\partial\circ p_*=0$, and if $p$ has a section, then $p_*:\pi_5(SU(3))\to \pi_5(S^5)$ is surjective, forcing $\partial=0$.
+
+    We will show that $\partial$ is not zero. The relevant part of the long exact sequence is
+    \[
+        \pi_5(SU(3))\to \pi_5(S^5)\xrightarrow{\partial}\pi_4(S^3) \to \pi_4(SU(3))
+    \]
+    By the first part, applied to $SU(3)\to SU(4)$, the group $\pi_4(SU(3))$ is already stable, because $4<6$. Bott periodicity gives $\pi_4(SU) = 0$
+    hence $\pi_4(SU(3))=0$.
+    Therefore exactness implies that
+    \[
+        \partial:\pi_5(S^5)\to \pi_4(S^3)
+    \]
+    is surjective. Since $\pi_5(S^5)\cong \Z$ and $\pi_4(S^3)\cong \Z/2$, this connecting homomorphism is nonzero. Thus the fibration cannot have a homotopy section.
+
+    This contradicts the conclusion obtained from assuming that the generator of $H_5(SU(3);\Z)$ was spherical. Hence the generator of $H_5(SU(3);\Z)$ is not spherical, i.e. it is not in the image of the Hurewicz map
+    \[
+        \pi_5(SU(3))\to H_5(SU(3);\Z).
+    \] Finally, if $SU(3)$ were homotopy equivalent to $S^3\times S^5$, then the generator of $H_5(SU(3);\Z)$ would correspond to the fundamental class of the $S^5$ factor, hence would be spherical. This contradicts what we just proved. Therefore
+    \[
+        SU(3)\not\simeq S^3\times S^5.
+    \]
+\end{solution}
+
+\end{document}

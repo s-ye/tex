@@ -1,0 +1,120 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.75em}
+
+\titleformat{\section}
+  {\large\bfseries}
+  {}
+  {0pt}
+  {}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Feedback on Supplementary Technical Note}
+\rhead{Songyu Ye}
+\cfoot{\thepage}
+
+\begin{document}
+
+\begin{center}
+    {\Large \textbf{Feedback on the Supplementary Technical Note}}\\[0.5em]
+    {\normalsize Songyu Ye}\\
+    {\normalsize \today}
+\end{center}
+
+\vspace{1em}
+
+\section{General assessment}
+
+Overall, I found the report mathematically sound. The theorems are clearly stated, and the proofs are rigorous. In particular, the assumptions are laid out clearly and are sufficient for the stated conclusions. The notation is also clear, and the sections are well organized.
+
+The places where I think the supplement would benefit most from revision are not usually gaps in the formal arguments. Rather, I think more care is needed in the setup, interpretation, statistical connection to data, and references. In several places, the biological or statistical assumptions needed to setup the theorem seem to be doing most of the substantive work. 
+\section{Reduced-form fitness decomposition}
+
+\textbf{Relevant location:} pp. 2–3 and p. 8.
+
+The general model introduces abundances $n_i(t)$, total burden $N(t)=\sum_i n_i(t)$, frequencies $x_i=n_i/N$, and net per-capita fitnesses $F_i$. Later, the decomposition of $F_i$ includes baseline growth, frequency-dependent ecological interactions, public-good terms, intrinsic costs, and other terms.
+
+This decomposition is helpful for reading and interpretation, but it is not completely clear which pieces are mathematically necessary and which are primarily biological interpretation. It would help to add a paragraph explicitly saying that most of the theorems do not require separately identifying all summands in $F_i$. For example, the resistance-tax results require a sign or margin condition on $F_R-F_S$, not necessarily independent measurement of each contribution to $F_R$ and $F_S$.
+
+In particular, I would recommend emphasizing that the decomposition of $F_i$ should be read as an interpretive bookkeeping device, and that the formal results typically require only quantitative conditions on the resulting reduced-form quantities, not independent conditions on every biological summand.
+
+\section{Extension at $N=0$ and well-posedness of frequency-dependent dynamics}
+
+\textbf{Relevant location:} pp. 8–9.
+
+The model uses frequency-dependent terms $x_i=n_i/N$ when $N>0$. The supplement states that at extinction $N=0$, such expressions are either unused because of the prefactor $n_i$, or extended to a locally Lipschitz function of $n$ near the origin. I think this point deserves a little more justification.
+
+Many functions of $x=n/N$ do not extend continuously, much less locally Lipschitzly, to the origin. For instance, if $F_i$ depends nontrivially on $x$, then the value of $x$ as $n\to 0$ depends on the direction of approach. The prefactor $n_i$ sometimes removes the singularity in the equation for $\dot n_i$, but this should be stated as a separate sufficient condition.
+
+I would recommend adding a short paragraph explaining that if the vector field $n_iF_i(n/N,t)$ admits a locally Lipschitz extension to $n=0$, then the standard well-posedness theorem applies. This is an assumption on the reduced-form model, not an automatic consequence of frequency dependence.
+
+Standard references on Carathéodory ODEs and comparison principles would also be useful here. I would recommend citing Smith (1995) \emph{Monotone Dynamical Systems} and Hirsch and Smith (2005) \emph{Monotone Dynamical Systems}.
+
+\section{Mutation/switching floor modeling assumption}
+
+\textbf{Relevant location:} pp. 10–11.
+
+The mutation-limited result is useful, but I think the modeling convention should be made more prominent. I had a hard time understanding why the biological assumption that resistant cells are supplied by mutation or plasticity from the sensitive compartment, in a one-sided source convention, leads exactly to the model
+\[
+\dot S= SF_S(t), \qquad \dot R\leq RF_R(t) + \mu(t)S.
+\]
+Modulo this modeling assumption, the proof correctly establishes the mutation floor.
+
+\section{Uncertainty-aware pulse criterion}
+
+\textbf{Relevant location:} pp. 13–14.
+
+In the section on the aggregate-calibrated prostate surrogate, the text proposes a criterion of the form
+\[
+\Pr(\Delta^a_{R,S}(t)\leq -\varepsilon\mid D_t)\geq 1-\alpha
+\]
+together with an approximately Gaussian error model
+\[
+\widehat\Delta^a_{R,S}(t)+c_\alpha\widehat{\mathrm{SE}}(t)\leq -\varepsilon.
+\]
+I think this needs more statistical explanation.
+
+\begin{itemize}[leftmargin=*]
+\item What is the source of randomness in $\Delta^a_{R,S}(t)$? In particular, $\Delta^a_{R,S}(t)$ is not automatically a random variable. Earlier in the text, $\Delta_{R,S}=F_R-F_S$ is a deterministic invasion margin once the model, state, parameters, and action are fixed.
+
+\item What type of data is $D_t$? The decision criterion depends on conditioning on $D_t$, but the supplement should specify more explicitly what $D_t$ contains and how it enters the model. For example, is $D_t$ intended to denote patient-specific data?
+
+\item How does one pass from the probability statement to the Gaussian approximation? The supplement gives both the criterion
+\[
+\Pr{\Delta^a_{R,S}(t)\leq -\varepsilon\mid D_t}\geq 1-\alpha
+\]
+and the different condition
+\[
+\widehat\Delta^a_{R,S}(t)+c_\alpha\widehat{\mathrm{SE}}(t)\leq -\varepsilon.
+\]
+It would be helpful to explain the statistical approximation connecting these two expressions.
+\end{itemize}
+
+\section{Cyclic-dominance/Floquet section}
+
+\textbf{Relevant location:} pp. 24–25.
+
+The cyclic-dominance section invokes standard periodic linear stability theory. The monodromy matrix and leading Floquet exponent are the right mathematical objects, and the conclusion $\rho(M)<1$ implies decay is standard. The proofs are correct.
+
+I think the supplement would benefit from more discussion of the biological interpretation of the Floquet analysis. In particular, the text should explain what the entries of the monodromy matrix $M$ represent biologically, and how they might be estimated from data.
+
+Relatedly, the text should explain what determines the entries of the matrices $B^{a_\ell}$, how they might be estimated, and what is excluded from the modeled escape vector. The supplement already warns that omitted resistant phenotypes are not controlled by $\rho(M)<1$. I think that warning is interesting and worth expanding upon.
+
+\end{document}
